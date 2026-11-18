@@ -2274,14 +2274,14 @@ void _glTranslate_Exec(int glContext,float x,float y,float z)
   float *currentMatrix;
   float *currentInverseMatrix;
   uint glContextWord50b0;
-  uint uVar3;
-  float dVar4;
-  float dVar5;
-  float dVar6;
-  float dVar7;
+  uint matrixDirtyBits;
+  float inverseColumn3X;
+  float inverseColumn3Y;
+  float inverseColumn3Z;
+  float inverseColumn3W;
   
   currentMatrix = *(float **)(glContext + 0x4fec);
-  uVar3 = *(uint *)(glContext + 0x50a8);
+  matrixDirtyBits = *(uint *)(glContext + 0x50a8);
   if ((*(short *)(glContext + 0x4a10) < 0) && (*(int *)(glContext + 0x4ff4) < 0x18)) {
     currentMatrix[0xc] = currentMatrix[0xc] +
                   (currentMatrix[8] * z + (*currentMatrix * x + (currentMatrix[4] * y)));
@@ -2292,29 +2292,29 @@ void _glTranslate_Exec(int glContext,float x,float y,float z)
     currentMatrix[0xf] = currentMatrix[0xf] +
                   (currentMatrix[0xb] * z + (currentMatrix[3] * x + (currentMatrix[7] * y)));
     glContextWord50b0 = *(uint *)(glContext + 0x50b0);
-    *(uint *)(glContext + 0x50ac) = *(uint *)(glContext + 0x50ac) | uVar3;
-    if ((uVar3 & ~glContextWord50b0 & *(uint *)(glContext + 0x505c) & 0xfffffc) != 0) {
+    *(uint *)(glContext + 0x50ac) = *(uint *)(glContext + 0x50ac) | matrixDirtyBits;
+    if ((matrixDirtyBits & ~glContextWord50b0 & *(uint *)(glContext + 0x505c) & 0xfffffc) != 0) {
       currentInverseMatrix = *(float **)(glContext + 0x4ff0);
-      uVar3 = uVar3 & 0xff000003;
-      dVar4 = (double)currentInverseMatrix[0xc];
-      dVar5 = (double)currentInverseMatrix[0xd];
-      dVar6 = (double)currentInverseMatrix[0xe];
-      dVar7 = (double)currentInverseMatrix[0xf];
-      *currentInverseMatrix = -(x * dVar4 - *currentInverseMatrix);
-      currentInverseMatrix[4] = -(y * dVar4 - currentInverseMatrix[4]);
-      currentInverseMatrix[8] = -(z * dVar4 - currentInverseMatrix[8]);
-      currentInverseMatrix[1] = -(x * dVar5 - currentInverseMatrix[1]);
-      currentInverseMatrix[5] = -(y * dVar5 - currentInverseMatrix[5]);
-      currentInverseMatrix[0xb] = -(z * dVar7 - currentInverseMatrix[0xb]);
-      currentInverseMatrix[9] = -(z * dVar5 - currentInverseMatrix[9]);
-      currentInverseMatrix[2] = -(x * dVar6 - currentInverseMatrix[2]);
-      currentInverseMatrix[6] = -(y * dVar6 - currentInverseMatrix[6]);
-      currentInverseMatrix[10] = -(z * dVar6 - currentInverseMatrix[10]);
-      currentInverseMatrix[3] = -(x * dVar7 - currentInverseMatrix[3]);
-      currentInverseMatrix[7] = -(y * dVar7 - currentInverseMatrix[7]);
+      matrixDirtyBits = matrixDirtyBits & 0xff000003;
+      inverseColumn3X = (double)currentInverseMatrix[0xc];
+      inverseColumn3Y = (double)currentInverseMatrix[0xd];
+      inverseColumn3Z = (double)currentInverseMatrix[0xe];
+      inverseColumn3W = (double)currentInverseMatrix[0xf];
+      *currentInverseMatrix = -(x * inverseColumn3X - *currentInverseMatrix);
+      currentInverseMatrix[4] = -(y * inverseColumn3X - currentInverseMatrix[4]);
+      currentInverseMatrix[8] = -(z * inverseColumn3X - currentInverseMatrix[8]);
+      currentInverseMatrix[1] = -(x * inverseColumn3Y - currentInverseMatrix[1]);
+      currentInverseMatrix[5] = -(y * inverseColumn3Y - currentInverseMatrix[5]);
+      currentInverseMatrix[0xb] = -(z * inverseColumn3W - currentInverseMatrix[0xb]);
+      currentInverseMatrix[9] = -(z * inverseColumn3Y - currentInverseMatrix[9]);
+      currentInverseMatrix[2] = -(x * inverseColumn3Z - currentInverseMatrix[2]);
+      currentInverseMatrix[6] = -(y * inverseColumn3Z - currentInverseMatrix[6]);
+      currentInverseMatrix[10] = -(z * inverseColumn3Z - currentInverseMatrix[10]);
+      currentInverseMatrix[3] = -(x * inverseColumn3W - currentInverseMatrix[3]);
+      currentInverseMatrix[7] = -(y * inverseColumn3W - currentInverseMatrix[7]);
       glContextWord50b0 = *(uint *)(glContext + 0x50b0);
     }
-    *(uint *)(glContext + 0x50b0) = glContextWord50b0 | uVar3;
+    *(uint *)(glContext + 0x50b0) = glContextWord50b0 | matrixDirtyBits;
   }
   else if (*(int *)(glContext + 0x7574) == 0) {
     *(undefined4 *)(glContext + 0x7574) = 0x502;

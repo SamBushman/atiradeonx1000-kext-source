@@ -265,15 +265,15 @@ int _glSecondaryColor3us_Comp(glContext, red, green, blue)
   uint green;
   uint blue;
 {
-  float fVar1;
+  float channelScale;
   float *listRecord;
   
   listRecord = (float *)_gleAddListItem(glContext,PTR__glSecondaryColor3_ListExec_00110064,0xc);
-  fVar1 = FLOAT_00108e74;
+  channelScale = FLOAT_00108e74;
   if (listRecord != (float *)0x0) {
     *listRecord = (GH_U2F((unsigned int)((red | 0x4b000000))) - 8388608.0) * FLOAT_00108e74;
-    listRecord[1] = (GH_U2F((unsigned int)((green | 0x4b000000))) - 8388608.0) * fVar1;
-    listRecord[2] = (GH_U2F((unsigned int)((blue | 0x4b000000))) - 8388608.0) * fVar1;
+    listRecord[1] = (GH_U2F((unsigned int)((green | 0x4b000000))) - 8388608.0) * channelScale;
+    listRecord[2] = (GH_U2F((unsigned int)((blue | 0x4b000000))) - 8388608.0) * channelScale;
   }
   return listRecord;
 }
@@ -295,14 +295,14 @@ double _glSecondaryColor3usv_Exec(glContext, v)
   int glContext;
   ushort *v;
 {
-  float fVar1;
-  float fVar2;
+  float blueConverted;
+  float greenConverted;
   
-  fVar1 = (GH_U2F((unsigned int)((v[2] | 0x4b000000))) - 8388608.0) * FLOAT_00108e74;
-  fVar2 = (GH_U2F((unsigned int)((v[1] | 0x4b000000))) - 8388608.0) * FLOAT_00108e74;
+  blueConverted = (GH_U2F((unsigned int)((v[2] | 0x4b000000))) - 8388608.0) * FLOAT_00108e74;
+  greenConverted = (GH_U2F((unsigned int)((v[1] | 0x4b000000))) - 8388608.0) * FLOAT_00108e74;
   *(float *)(glContext + 0x2c0) = (GH_U2F((unsigned int)((*v | 0x4b000000))) - 8388608.0) * FLOAT_00108e74;
-  *(float *)(glContext + 0x2c8) = fVar1;
-  *(float *)(glContext + 0x2c4) = fVar2;
+  *(float *)(glContext + 0x2c8) = blueConverted;
+  *(float *)(glContext + 0x2c4) = greenConverted;
   return;
 }
 
@@ -341,15 +341,15 @@ void _glSecondaryColor3ui_Exec(glContext, red, green, blue)
   undefined4 green;
   undefined4 blue;
 {
-  float fVar1;
-  float fVar2;
+  float blueConverted;
+  float greenConverted;
   
-  fVar1 = (float)((double)CONCAT44(0x43300000,blue) - DOUBLE_00108d70) * FLOAT_00108e6c;
-  fVar2 = (float)((double)CONCAT44(0x43300000,green) - DOUBLE_00108d70) * FLOAT_00108e6c;
+  blueConverted = (float)((double)CONCAT44(0x43300000,blue) - DOUBLE_00108d70) * FLOAT_00108e6c;
+  greenConverted = (float)((double)CONCAT44(0x43300000,green) - DOUBLE_00108d70) * FLOAT_00108e6c;
   *(float *)(glContext + 0x2c0) =
        (float)((double)CONCAT44(0x43300000,red) - DOUBLE_00108d70) * FLOAT_00108e6c;
-  *(float *)(glContext + 0x2c8) = fVar1;
-  *(float *)(glContext + 0x2c4) = fVar2;
+  *(float *)(glContext + 0x2c8) = blueConverted;
+  *(float *)(glContext + 0x2c4) = greenConverted;
   return;
 }
 

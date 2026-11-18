@@ -1,0 +1,26 @@
+local	_glTranslate_Exec	uVar3	matrixDirtyBits	INFERRED	ctx+0x50a8 (matrix dirty bits of the current matrix mode, see _gleUpdateMatrixMode), ORed into ctx+0x50ac; later masked with 0xff000003 and ORed into ctx+0x50b0, still the matrix dirty bits
+local	_glTranslate_Exec	dVar4	inverseColumn3X	INFERRED	currentInverseMatrix[12] (column-major translation column, element x)
+local	_glTranslate_Exec	dVar5	inverseColumn3Y	INFERRED	currentInverseMatrix[13]
+local	_glTranslate_Exec	dVar6	inverseColumn3Z	INFERRED	currentInverseMatrix[14]
+local	_glTranslate_Exec	dVar7	inverseColumn3W	INFERRED	currentInverseMatrix[15]
+local	_glStencilOpSeparateATI_Exec	iVar2	stencilOpRecord	INFERRED	ctx + (byte at ctx+0x7583) * 0x10: record whose shorts at +0x3502/+0x3504/+0x3506 receive sfail/dpfail/dppass
+local	_glStencilOpSeparateATI_Exec	uVar3	sfailShort	CONFIRMED	(short)sfail stored at +0x3502 / +0x351a
+local	_glStencilOpSeparateATI_Exec	uVar4	dpfailShort	CONFIRMED	(short)dpfail stored at +0x3504 / +0x351c
+local	_glStencilOpSeparateATI_Exec	uVar5	dppassShort	CONFIRMED	(short)dppass stored at +0x3506 / +0x351e
+use	_glDrawBuffer_Exec	iVar6	framebufferObject	CONFIRMED	always the value of ctx+0x744c (0 for the default framebuffer, else the framebuffer object whose draw buffer state at +0xc0/+0xec is written)	^\s*iVar6\ =\ 0;$	+1
+use	_glDrawBuffer_Exec	iVar6	framebufferObject	CONFIRMED	always the value of ctx+0x744c (0 for the default framebuffer, else the framebuffer object whose draw buffer state at +0xc0/+0xec is written)	^\s*iVar6\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x744c\);$	+1
+use	_glDrawBuffer_Exec	iVar6	framebufferObject	CONFIRMED	always the value of ctx+0x744c (0 for the default framebuffer, else the framebuffer object whose draw buffer state at +0xc0/+0xec is written)	^\s*iVar6\ =\ 0;$@2	+1
+use	_glDrawBuffer_Exec	iVar6	framebufferObject	CONFIRMED	always the value of ctx+0x744c (0 for the default framebuffer, else the framebuffer object whose draw buffer state at +0xc0/+0xec is written)	^\s*iVar6\ =\ 0;$@3	+1
+use	_glDrawBuffer_Exec	iVar6	framebufferObject	CONFIRMED	always the value of ctx+0x744c (0 for the default framebuffer, else the framebuffer object whose draw buffer state at +0xc0/+0xec is written)	^\s*iVar6\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x744c\);$@2	+2
+use	_glDrawBuffer_Exec	iVar6	framebufferObject	CONFIRMED	always the value of ctx+0x744c (0 for the default framebuffer, else the framebuffer object whose draw buffer state at +0xc0/+0xec is written)	^\s*if\ \(iVar6\ ==\ 0\)\ \{$	+1
+use	_glDrawBuffer_Exec	iVar6	framebufferObject	CONFIRMED	always the value of ctx+0x744c (0 for the default framebuffer, else the framebuffer object whose draw buffer state at +0xc0/+0xec is written)	^\s*\*\(short\ \*\)\(iVar6\ \+\ 0xc0\)\ =\ \(short\)param_2;$	+1
+local	_glLockArraysEXT_Exec	iVar4	lockedArrayCapacity	INFERRED	word at +0x88 of the renderer information record (ctx+0x468c): the lock buffer holds capacity * 5 + 0x48 bytes (_malloc) and count must be below capacity - 0x12
+local	_glLockArraysEXT_Exec	iVar3	lockBuffer	CONFIRMED	ctx+0x49ac lock buffer pointer, freshly _malloc'ed when it was null
+local	_glLockArraysEXT_Exec	bVar1	lockBufferIsNull	CONFIRMED	lockBuffer == 0, selects the fresh-allocation setup of ctx+0x49a0 / ctx+0x499c
+local	_glPrioritizeTextures_Exec	iVar5	sharedStateThenTextureObject	CONFIRMED	ctx+0x5148 shared state (mutex +0x8028, texture hash +0x2008), replaced by the texture object found by _gleLookupHashObject; the shared state is reloaded after each name
+local	_glPrioritizeTextures_Exec	iVar6	textureName	CONFIRMED	textures[loopIndex]
+local	_glPrioritizeTextures_Exec	fVar4	priority	CONFIRMED	priorities[loopIndex], clamped to [0,1] and stored at textureObject+0x38
+local	_glLightModeliv_Exec	bVar1	dirtyBitIndex	CONFIRMED	bit number read from the record at ctx+0x5420 / ctx+0x5424 (+0x324) and set in the dirty bit arrays at ctx+0x324 / ctx+0x348
+local	_glLightModeliv_Exec	iVar5	dirtyWordAddress324	CONFIRMED	ctx + ((dirtyBitIndex >> 3) & 0x1c): the dirty array word at ctx+0x324
+use	_glLightModeliv_Exec	iVar4	dirtyWordAddress348	CONFIRMED	ctx + ((dirtyBitIndex >> 3) & 0x1c): the dirty array word at ctx+0x348	^\s*iVar4\ =\ \(bVar1\ >>\ 3\ \&\ 0x1c\)\ \+\ param_1;$	+2
+local	_glLightModeliv_Exec	dVar2	intToDoubleBias	CONFIRMED	DOUBLE_00108d58, the 2^52 + 2^31 magic subtracted in the int-to-double conversion of params[i]

@@ -370,18 +370,18 @@ double _glNormal3bv_Exec(glContext, v)
   int glContext;
   char *v;
 {
-  float fVar1;
-  float fVar2;
+  float xConverted;
+  float zConverted;
   
-  fVar1 = (float)((double)CONCAT44(0x43300000,(int)*v ^ 0x80000000) - DOUBLE_00108d58) *
+  xConverted = (float)((double)CONCAT44(0x43300000,(int)*v ^ 0x80000000) - DOUBLE_00108d58) *
           FLOAT_00108e98;
-  fVar2 = (float)((double)CONCAT44(0x43300000,(int)v[2] ^ 0x80000000) - DOUBLE_00108d58) *
+  zConverted = (float)((double)CONCAT44(0x43300000,(int)v[2] ^ 0x80000000) - DOUBLE_00108d58) *
           FLOAT_00108e98;
   *(float *)(glContext + 0x2b4) =
        (float)((double)CONCAT44(0x43300000,(int)v[1] ^ 0x80000000) - DOUBLE_00108d58) *
        FLOAT_00108e98;
-  *(float *)(glContext + 0x2b0) = fVar1;
-  *(float *)(glContext + 0x2b8) = fVar2;
+  *(float *)(glContext + 0x2b0) = xConverted;
+  *(float *)(glContext + 0x2b8) = zConverted;
   return;
 }
 
@@ -511,19 +511,19 @@ void _glNormal3i_Comp(glContext, nx, ny, nz)
   uint nz;
 {
   double intToDoubleBias;
-  double dVar2;
+  double channelScale;
   float *listRecord;
   
   listRecord = (float *)_gleAddListItem(glContext,PTR__glNormal_ListExec_00110224,0xc);
-  dVar2 = DOUBLE_00108d88;
+  channelScale = DOUBLE_00108d88;
   intToDoubleBias = DOUBLE_00108d58;
   if (listRecord != (float *)0x0) {
     *listRecord = (float)((double)(float)((double)CONCAT44(0x43300000,nx ^ 0x80000000) -
                                      DOUBLE_00108d58) * DOUBLE_00108d88);
     listRecord[1] = (float)((double)(float)((double)CONCAT44(0x43300000,ny ^ 0x80000000) - intToDoubleBias) *
-                       dVar2);
+                       channelScale);
     listRecord[2] = (float)((double)(float)((double)CONCAT44(0x43300000,nz ^ 0x80000000) - intToDoubleBias) *
-                       dVar2);
+                       channelScale);
   }
   return;
 }
@@ -653,18 +653,18 @@ void _glNormal3s_Exec(glContext, nx, ny, nz)
   uint ny;
   uint nz;
 {
-  float fVar1;
-  float fVar2;
+  float xConverted;
+  float zConverted;
   
-  fVar1 = (float)((double)CONCAT44(0x43300000,nx ^ 0x80000000) - DOUBLE_00108d58) *
+  xConverted = (float)((double)CONCAT44(0x43300000,nx ^ 0x80000000) - DOUBLE_00108d58) *
           FLOAT_00108e9c;
-  fVar2 = (float)((double)CONCAT44(0x43300000,nz ^ 0x80000000) - DOUBLE_00108d58) *
+  zConverted = (float)((double)CONCAT44(0x43300000,nz ^ 0x80000000) - DOUBLE_00108d58) *
           FLOAT_00108e9c;
   *(float *)(glContext + 0x2b4) =
        (float)((double)CONCAT44(0x43300000,ny ^ 0x80000000) - DOUBLE_00108d58) * FLOAT_00108e9c
   ;
-  *(float *)(glContext + 0x2b0) = fVar1;
-  *(float *)(glContext + 0x2b8) = fVar2;
+  *(float *)(glContext + 0x2b0) = xConverted;
+  *(float *)(glContext + 0x2b8) = zConverted;
   return;
 }
 

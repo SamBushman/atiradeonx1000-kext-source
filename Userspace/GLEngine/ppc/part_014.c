@@ -189,9 +189,10 @@ double * _glDepthRange_Comp(undefined4 glContext,double zNear,double zFar)
 void _glDepthRange_Exec(int glContext,double zNear,double zFar,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8,double forwardedFloatArg9,double forwardedFloatArg10,double forwardedFloatArg11,double forwardedFloatArg12,double forwardedFloatArg13)
 {
   double doubleZero;
-  byte bVar1;
-  uint uVar2;
-  int iVar3;
+  byte dirtyBitIndex;
+  uint clampedZNearHighWord;
+  int dirtyWordAddress324;
+  int dirtyWordAddress348;
   int glContextPtr5424;
   double dVar5;
   
@@ -203,14 +204,14 @@ void _glDepthRange_Exec(int glContext,double zNear,double zFar,double forwardedF
     return;
   }
   if (zNear < DOUBLE_00108d60) {
-    uVar2 = 0;
+    clampedZNearHighWord = 0;
   }
   else {
     dVar5 = zNear;
     if (!(DOUBLE_00108d68 < zNear)) goto LAB_000626d0;
-    uVar2 = 0x3ff00000;
+    clampedZNearHighWord = 0x3ff00000;
   }
-  dVar5 = GH_U2D((unsigned long long)uVar2 << 0x20);
+  dVar5 = GH_U2D((unsigned long long)clampedZNearHighWord << 0x20);
 LAB_000626d0:
   *(double *)(glContext + 0x1b90) = dVar5;
   doubleZero = DOUBLE_00108d60;
@@ -222,17 +223,17 @@ LAB_000626d0:
   *(float *)(glContext + 0x1bb0) = (float)*(double *)(glContext + 0x1b90);
   *(float *)(glContext + 0x1bb8) = (float)zFar - (float)*(double *)(glContext + 0x1b90);
   if (*(int *)(glContext + 0x5434) == 0) {
-    bVar1 = *(byte *)(*(int *)(glContext + 0x5420) + 0x327);
+    dirtyBitIndex = *(byte *)(*(int *)(glContext + 0x5420) + 0x327);
   }
   else {
-    bVar1 = *(byte *)(*(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x35b);
+    dirtyBitIndex = *(byte *)(*(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x35b);
   }
-  iVar3 = (bVar1 >> 3 & 0x1c) + glContext;
+  dirtyWordAddress324 = (dirtyBitIndex >> 3 & 0x1c) + glContext;
   glContextPtr5424 = *(int *)(glContext + 0x5424);
-  *(uint *)(iVar3 + 0x324) = *(uint *)(iVar3 + 0x324) | 1 << (bVar1 & 0x1f);
-  bVar1 = *(byte *)(glContextPtr5424 + 0x327);
-  iVar3 = (bVar1 >> 3 & 0x1c) + glContext;
-  *(uint *)(iVar3 + 0x348) = *(uint *)(iVar3 + 0x348) | 1 << (bVar1 & 0x1f);
+  *(uint *)(dirtyWordAddress324 + 0x324) = *(uint *)(dirtyWordAddress324 + 0x324) | 1 << (dirtyBitIndex & 0x1f);
+  dirtyBitIndex = *(byte *)(glContextPtr5424 + 0x327);
+  dirtyWordAddress348 = (dirtyBitIndex >> 3 & 0x1c) + glContext;
+  *(uint *)(dirtyWordAddress348 + 0x348) = *(uint *)(dirtyWordAddress348 + 0x348) | 1 << (dirtyBitIndex & 0x1f);
   *(uint *)(glContext + 0x318) = *(uint *)(glContext + 0x318) | 1;
   ((void (*)())_gleUpdateDepthRangeData)(glContext,zNear,zFar,forwardedFloatArg3,forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8,
              forwardedFloatArg9,forwardedFloatArg10,forwardedFloatArg11,forwardedFloatArg12,forwardedFloatArg13);
@@ -660,14 +661,14 @@ void _glDrawBuffer_Exec(glContext, mode, unusedArg3, unusedArg4, unusedArg5, unu
   int iVar3;
   undefined4 glErrorCode;
   undefined2 *dstCursor;
-  int iVar6;
+  int framebufferObject;
   int remaining2;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
     if (mode == 0x404) {
 LAB_000630bc:
       if (*(int *)(glContext + 0x744c) == 0) {
-        iVar6 = 0;
+        framebufferObject = 0;
         goto LAB_00063184;
       }
     }
@@ -676,7 +677,7 @@ LAB_000630bc:
         if (mode == 0x401) goto LAB_000630e0;
         if (mode < 0x402) {
           if (mode == 0) {
-            iVar6 = *(int *)(glContext + 0x744c);
+            framebufferObject = *(int *)(glContext + 0x744c);
             goto LAB_00063184;
           }
           bVar1 = mode == 0x400;
@@ -691,7 +692,7 @@ LAB_000630a0:
 LAB_000630ec:
         cVar2 = *(char *)(*(int *)(glContext + 0x468c) + 0x26);
 LAB_000630f4:
-        iVar6 = 0;
+        framebufferObject = 0;
         bVar1 = cVar2 == '\0';
       }
       else {
@@ -714,7 +715,7 @@ LAB_000630cc:
         if (mode < 0x40d) {
           if ((*(int *)(glContext + 0x744c) == 0) &&
              (mode < *(int *)(*(int *)(glContext + 0x468c) + 0x54) + 0x409U)) {
-            iVar6 = 0;
+            framebufferObject = 0;
             goto LAB_00063184;
           }
           goto LAB_000631f8;
@@ -728,12 +729,12 @@ LAB_0006313c:
           glErrorCode = 0x500;
           goto LAB_00063168;
         }
-        iVar6 = *(int *)(glContext + 0x744c);
-        bVar1 = iVar6 == 0;
+        framebufferObject = *(int *)(glContext + 0x744c);
+        bVar1 = framebufferObject == 0;
       }
       if (!bVar1) {
 LAB_00063184:
-        if (iVar6 == 0) {
+        if (framebufferObject == 0) {
           *(short *)(glContext + 0x311a) = (short)mode;
           remaining = 3;
           dstCursor = (undefined2 *)(glContext + 0x311c);
@@ -744,7 +745,7 @@ LAB_00063184:
           } while (remaining != 0);
         }
         else {
-          *(short *)(iVar6 + 0xc0) = (short)mode;
+          *(short *)(framebufferObject + 0xc0) = (short)mode;
           remaining2 = 3;
           loopIndex = 1;
           do {

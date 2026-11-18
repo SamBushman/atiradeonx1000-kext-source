@@ -224,40 +224,40 @@ void _glLightModeliv_Exec(glContext, pname, params)
   uint pname;
   uint *params;
 {
-  byte bVar1;
-  double dVar2;
+  byte dirtyBitIndex;
+  double intToDoubleBias;
   undefined4 glErrorCode;
-  int iVar4;
+  int dirtyWordAddress348;
   int glContextPtr5424;
-  int iVar5;
+  int dirtyWordAddress324;
   
-  dVar2 = DOUBLE_00108d58;
+  intToDoubleBias = DOUBLE_00108d58;
   if (*(short *)(glContext + 0x4a10) < 0) {
     if (pname == 0xb53) {
       *(float *)(glContext + 0x2810) =
            (float)((double)CONCAT44(0x43300000,*params ^ 0x80000000) - DOUBLE_00108d58);
       *(float *)(glContext + 0x2814) =
-           (float)((double)CONCAT44(0x43300000,params[1] ^ 0x80000000) - dVar2);
+           (float)((double)CONCAT44(0x43300000,params[1] ^ 0x80000000) - intToDoubleBias);
       *(float *)(glContext + 0x2818) =
-           (float)((double)CONCAT44(0x43300000,params[2] ^ 0x80000000) - dVar2);
+           (float)((double)CONCAT44(0x43300000,params[2] ^ 0x80000000) - intToDoubleBias);
       *(float *)(glContext + 0x281c) =
-           (float)((double)CONCAT44(0x43300000,params[3] ^ 0x80000000) - dVar2);
+           (float)((double)CONCAT44(0x43300000,params[3] ^ 0x80000000) - intToDoubleBias);
       *(byte *)(*(int *)(glContext + 0x4dd0) + 0x234) =
            *(byte *)(*(int *)(glContext + 0x4dd0) + 0x234) | 0x1e;
       *(byte *)(*(int *)(glContext + 0x4dd4) + 0x234) =
            *(byte *)(*(int *)(glContext + 0x4dd4) + 0x234) | 0x1e;
       if (*(int *)(glContext + 0x5434) == 0) {
-        bVar1 = *(byte *)(*(int *)(glContext + 0x5420) + 0x324);
+        dirtyBitIndex = *(byte *)(*(int *)(glContext + 0x5420) + 0x324);
       }
       else {
-        bVar1 = *(byte *)(*(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x358);
+        dirtyBitIndex = *(byte *)(*(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x358);
       }
-      iVar5 = (bVar1 >> 3 & 0x1c) + glContext;
+      dirtyWordAddress324 = (dirtyBitIndex >> 3 & 0x1c) + glContext;
       glContextPtr5424 = *(int *)(glContext + 0x5424);
-      *(uint *)(iVar5 + 0x324) = *(uint *)(iVar5 + 0x324) | 1 << (bVar1 & 0x1f);
-      bVar1 = *(byte *)(glContextPtr5424 + 0x324);
-      iVar4 = (bVar1 >> 3 & 0x1c) + glContext;
-      *(uint *)(iVar4 + 0x348) = *(uint *)(iVar4 + 0x348) | 1 << (bVar1 & 0x1f);
+      *(uint *)(dirtyWordAddress324 + 0x324) = *(uint *)(dirtyWordAddress324 + 0x324) | 1 << (dirtyBitIndex & 0x1f);
+      dirtyBitIndex = *(byte *)(glContextPtr5424 + 0x324);
+      dirtyWordAddress348 = (dirtyBitIndex >> 3 & 0x1c) + glContext;
+      *(uint *)(dirtyWordAddress348 + 0x348) = *(uint *)(dirtyWordAddress348 + 0x348) | 1 << (dirtyBitIndex & 0x1f);
     }
     else if (pname < 0xb54) {
       if (pname == 0xb51) {
@@ -321,30 +321,30 @@ void _glLockArraysEXT_Exec(glContext, first, count)
   int first;
   int count;
 {
-  bool bVar1;
+  bool lockBufferIsNull;
   undefined4 glErrorCode;
-  int iVar3;
-  int iVar4;
+  int lockBuffer;
+  int lockedArrayCapacity;
   
   if ((*(short *)(glContext + 0x4a10) < 0) && (*(int *)(glContext + 0x4988) == 0)) {
     if ((-1 < first) && (0 < count)) {
-      iVar4 = *(int *)(*(int *)(glContext + 0x468c) + 0x88);
-      if (count < iVar4 + -0x12) {
-        iVar3 = *(int *)(glContext + 0x49ac);
-        bVar1 = iVar3 == 0;
-        if (bVar1) {
-          iVar3 = _malloc(iVar4 * 5 + 0x48);
-          *(int *)(glContext + 0x49ac) = iVar3;
-          *(int *)(glContext + 0x49a0) = iVar3 + iVar4;
-          *(int *)(glContext + 0x499c) = iVar3 + iVar4 + iVar4 * 4;
-          bVar1 = iVar3 == 0;
+      lockedArrayCapacity = *(int *)(*(int *)(glContext + 0x468c) + 0x88);
+      if (count < lockedArrayCapacity + -0x12) {
+        lockBuffer = *(int *)(glContext + 0x49ac);
+        lockBufferIsNull = lockBuffer == 0;
+        if (lockBufferIsNull) {
+          lockBuffer = _malloc(lockedArrayCapacity * 5 + 0x48);
+          *(int *)(glContext + 0x49ac) = lockBuffer;
+          *(int *)(glContext + 0x49a0) = lockBuffer + lockedArrayCapacity;
+          *(int *)(glContext + 0x499c) = lockBuffer + lockedArrayCapacity + lockedArrayCapacity * 4;
+          lockBufferIsNull = lockBuffer == 0;
         }
         else if (first != *(int *)(glContext + 0x4984)) {
-          *(int *)(glContext + 0x499c) = *(int *)(glContext + 0x49a0) + iVar4 * 4;
+          *(int *)(glContext + 0x499c) = *(int *)(glContext + 0x49a0) + lockedArrayCapacity * 4;
         }
-        if (bVar1) {
-          *(int *)(glContext + 0x499c) = iVar3;
-          *(int *)(glContext + 0x49a0) = iVar3;
+        if (lockBufferIsNull) {
+          *(int *)(glContext + 0x499c) = lockBuffer;
+          *(int *)(glContext + 0x49a0) = lockBuffer;
         }
         else {
           *(undefined4 *)(glContext + 0x497c) = 0x1f;

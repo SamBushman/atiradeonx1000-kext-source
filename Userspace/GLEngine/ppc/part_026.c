@@ -2538,10 +2538,10 @@ void _glStencilOpSeparateATI_Exec(glContext, face, sfail, dpfail, dppass)
   uint dppass;
 {
   undefined4 glErrorCode;
-  int iVar2;
-  undefined2 uVar3;
-  undefined2 uVar4;
-  undefined2 uVar5;
+  int stencilOpRecord;
+  undefined2 sfailShort;
+  undefined2 dpfailShort;
+  undefined2 dppassShort;
   
   if (-1 < *(short *)(glContext + 0x4a10)) {
     if (*(int *)(glContext + 0x7574) != 0) {
@@ -2559,32 +2559,32 @@ LAB_000906f8:
           if (dppass < 0x1e04) {
             if (((0x1dff < dppass) || (dppass == 0)) || (dppass == 0x150a)) {
 LAB_0009072c:
-              uVar3 = (undefined2)sfail;
-              uVar4 = (undefined2)dpfail;
-              uVar5 = (undefined2)dppass;
+              sfailShort = (undefined2)sfail;
+              dpfailShort = (undefined2)dpfail;
+              dppassShort = (undefined2)dppass;
               if (face == 0x405) {
 LAB_0009078c:
-                *(undefined2 *)(glContext + 0x351a) = uVar3;
-                *(undefined2 *)(glContext + 0x351c) = uVar4;
-                *(undefined2 *)(glContext + 0x351e) = uVar5;
+                *(undefined2 *)(glContext + 0x351a) = sfailShort;
+                *(undefined2 *)(glContext + 0x351c) = dpfailShort;
+                *(undefined2 *)(glContext + 0x351e) = dppassShort;
 LAB_00090798:
                 *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x10000000;
                 return;
               }
               if (face < 0x406) {
                 if (face == 0x404) {
-                  iVar2 = (uint)*(byte *)(glContext + 0x7583) * 0x10 + glContext;
-                  *(undefined2 *)(iVar2 + 0x3506) = uVar5;
-                  *(undefined2 *)(iVar2 + 0x3502) = uVar3;
-                  *(undefined2 *)(iVar2 + 0x3504) = uVar4;
+                  stencilOpRecord = (uint)*(byte *)(glContext + 0x7583) * 0x10 + glContext;
+                  *(undefined2 *)(stencilOpRecord + 0x3506) = dppassShort;
+                  *(undefined2 *)(stencilOpRecord + 0x3502) = sfailShort;
+                  *(undefined2 *)(stencilOpRecord + 0x3504) = dpfailShort;
                   goto LAB_00090798;
                 }
               }
               else if (face == 0x408) {
-                iVar2 = (uint)*(byte *)(glContext + 0x7583) * 0x10 + glContext;
-                *(undefined2 *)(iVar2 + 0x3506) = uVar5;
-                *(undefined2 *)(iVar2 + 0x3502) = uVar3;
-                *(undefined2 *)(iVar2 + 0x3504) = uVar4;
+                stencilOpRecord = (uint)*(byte *)(glContext + 0x7583) * 0x10 + glContext;
+                *(undefined2 *)(stencilOpRecord + 0x3506) = dppassShort;
+                *(undefined2 *)(stencilOpRecord + 0x3502) = sfailShort;
+                *(undefined2 *)(stencilOpRecord + 0x3504) = dpfailShort;
                 goto LAB_0009078c;
               }
             }

@@ -835,9 +835,9 @@ void _glPrioritizeTextures_Exec(glContext, n, textures, priorities)
   float floatZero;
   float floatOne;
   undefined4 glErrorCode;
-  float fVar4;
-  int iVar5;
-  int iVar6;
+  float priority;
+  int sharedStateThenTextureObject;
+  int textureName;
   int loopIndex;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
@@ -845,38 +845,38 @@ void _glPrioritizeTextures_Exec(glContext, n, textures, priorities)
       if (n == 0) {
         return;
       }
-      iVar5 = *(int *)(glContext + 0x5148);
-      if (*(char *)(iVar5 + 0x8024) != '\0') {
-        _pthread_mutex_lock(iVar5 + 0x8028);
-        iVar5 = *(int *)(glContext + 0x5148);
+      sharedStateThenTextureObject = *(int *)(glContext + 0x5148);
+      if (*(char *)(sharedStateThenTextureObject + 0x8024) != '\0') {
+        _pthread_mutex_lock(sharedStateThenTextureObject + 0x8028);
+        sharedStateThenTextureObject = *(int *)(glContext + 0x5148);
       }
       floatOne = FLOAT_00108e54;
       floatZero = FLOAT_00108e50;
       loopIndex = 0;
       if (0 < n) {
         do {
-          iVar6 = *(int *)(loopIndex * 4 + textures);
-          if (iVar6 != 0) {
-            iVar5 = _gleLookupHashObject(iVar5 + 0x2008,iVar6);
-            if (iVar5 != 0) {
-              fVar4 = *(float *)(loopIndex * 4 + priorities);
-              if (fVar4 < floatZero) {
-                fVar4 = 0.0;
+          textureName = *(int *)(loopIndex * 4 + textures);
+          if (textureName != 0) {
+            sharedStateThenTextureObject = _gleLookupHashObject(sharedStateThenTextureObject + 0x2008,textureName);
+            if (sharedStateThenTextureObject != 0) {
+              priority = *(float *)(loopIndex * 4 + priorities);
+              if (priority < floatZero) {
+                priority = 0.0;
               }
-              else if (floatOne < fVar4) {
-                fVar4 = 1.0;
+              else if (floatOne < priority) {
+                priority = 1.0;
               }
-              *(float *)(iVar5 + 0x38) = fVar4;
+              *(float *)(sharedStateThenTextureObject + 0x38) = priority;
             }
-            iVar5 = *(int *)(glContext + 0x5148);
+            sharedStateThenTextureObject = *(int *)(glContext + 0x5148);
           }
           loopIndex = loopIndex + 1;
         } while (loopIndex < n);
       }
-      if (*(char *)(iVar5 + 0x8024) == '\0') {
+      if (*(char *)(sharedStateThenTextureObject + 0x8024) == '\0') {
         return;
       }
-      _pthread_mutex_unlock(iVar5 + 0x8028);
+      _pthread_mutex_unlock(sharedStateThenTextureObject + 0x8028);
       return;
     }
     if (*(int *)(glContext + 0x7574) != 0) {
