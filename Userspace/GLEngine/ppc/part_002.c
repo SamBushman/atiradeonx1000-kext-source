@@ -6013,52 +6013,52 @@ switchD_0001e254_caseD_0:
 }
 
 /* _gleLoadDataElementFromCtxNO @ 0x1ebf0 (200 bytes) */
-int _gleLoadDataElementFromCtxNO(param_1, param_2, param_3, param_4)
-  uint *param_1;
-  int param_2;
-  int param_3;
-  uint param_4;
+int _gleLoadDataElementFromCtxNO(instrCursor, componentCount, doubleFlag, ctxOffset)
+  uint *instrCursor;
+  int componentCount;
+  int doubleFlag;
+  uint ctxOffset;
 {
-  uint uVar1;
+  uint instrWord;
   
-  if (param_3 == 4) {
-    if (param_2 == 1) {
-      uVar1 = param_4 & 0xffff | 0xc0230000;
+  if (doubleFlag == 4) {
+    if (componentCount == 1) {
+      instrWord = ctxOffset & 0xffff | 0xc0230000;
     }
     else {
-      if (param_2 < 2) {
-        return param_1;
+      if (componentCount < 2) {
+        return instrCursor;
       }
-      *param_1 = param_4 & 0xffff | 0xc8230000;
-      param_1 = param_1 + 1;
-      if (param_2 == 3) {
-        uVar1 = param_4 + 8 & 0xffff | 0xc0630000;
+      *instrCursor = ctxOffset & 0xffff | 0xc8230000;
+      instrCursor = instrCursor + 1;
+      if (componentCount == 3) {
+        instrWord = ctxOffset + 8 & 0xffff | 0xc0630000;
       }
       else {
-        if (param_2 != 4) {
-          return param_1;
+        if (componentCount != 4) {
+          return instrCursor;
         }
-        uVar1 = param_4 + 8 & 0xffff | 0xc8630000;
+        instrWord = ctxOffset + 8 & 0xffff | 0xc8630000;
       }
     }
   }
   else {
-    *param_1 = param_4 & 0xffff | 0xc0230000;
-    if (param_2 < 2) {
-      return param_1 + 1;
+    *instrCursor = ctxOffset & 0xffff | 0xc0230000;
+    if (componentCount < 2) {
+      return instrCursor + 1;
     }
-    param_1[1] = param_4 + 4 & 0xffff | 0xc0430000;
-    if (param_2 < 3) {
-      return param_1 + 2;
+    instrCursor[1] = ctxOffset + 4 & 0xffff | 0xc0430000;
+    if (componentCount < 3) {
+      return instrCursor + 2;
     }
-    param_1[2] = param_4 + 8 & 0xffff | 0xc0630000;
-    param_1 = param_1 + 3;
-    if (param_2 != 4) {
-      return param_1;
+    instrCursor[2] = ctxOffset + 8 & 0xffff | 0xc0630000;
+    instrCursor = instrCursor + 3;
+    if (componentCount != 4) {
+      return instrCursor;
     }
-    uVar1 = param_4 + 0xc & 0xffff | 0xc0830000;
+    instrWord = ctxOffset + 0xc & 0xffff | 0xc0830000;
   }
-  *param_1 = uVar1;
-  return param_1 + 1;
+  *instrCursor = instrWord;
+  return instrCursor + 1;
 }
 

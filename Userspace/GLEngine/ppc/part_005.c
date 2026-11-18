@@ -40,48 +40,48 @@ void _gleLightMaterialRGBAChange_FB_A(glContext, rgba)
 }
 
 /* _glePushMaterial @ 0x32fdc (260 bytes) */
-int _glePushMaterial(glContext, param_2)
+int _glePushMaterial(glContext, faceIndex)
   int glContext;
-  int param_2;
+  int faceIndex;
 {
-  undefined4 uVar1;
-  undefined8 *puVar2;
-  undefined8 *puVar3;
-  undefined8 uVar4;
+  undefined4 copiedWord;
+  undefined8 *newMaterialRecord;
+  undefined8 *currentMaterialRecord;
+  undefined8 copiedQword;
   
-  puVar3 = *(undefined8 **)(param_2 * 4 + glContext + 0x4dd0);
-  if (((*(ushort *)(glContext + 0x4a10) & 0x8000) == 0) && (*(int *)(puVar3 + 0x3c) != 0)) {
-    puVar2 = *(undefined8 **)(glContext + 0x4dd8);
-    if (puVar2 == (undefined8 *)0x0) {
-      puVar2 = (undefined8 *)_gleVecAlloc(0x240);
-      *(undefined4 *)((int)puVar2 + 500) = 0xbf800000;
+  currentMaterialRecord = *(undefined8 **)(faceIndex * 4 + glContext + 0x4dd0);
+  if (((*(ushort *)(glContext + 0x4a10) & 0x8000) == 0) && (*(int *)(currentMaterialRecord + 0x3c) != 0)) {
+    newMaterialRecord = *(undefined8 **)(glContext + 0x4dd8);
+    if (newMaterialRecord == (undefined8 *)0x0) {
+      newMaterialRecord = (undefined8 *)_gleVecAlloc(0x240);
+      *(undefined4 *)((int)newMaterialRecord + 500) = 0xbf800000;
     }
     else {
-      *(undefined4 *)(glContext + 0x4dd8) = *(undefined4 *)((int)puVar2 + 0x23c);
+      *(undefined4 *)(glContext + 0x4dd8) = *(undefined4 *)((int)newMaterialRecord + 0x23c);
     }
-    *puVar2 = *puVar3;
-    puVar2[1] = puVar3[1];
-    puVar2[2] = puVar3[2];
-    puVar2[3] = puVar3[3];
-    puVar2[4] = puVar3[4];
-    puVar2[5] = puVar3[5];
-    puVar2[6] = puVar3[6];
-    uVar4 = puVar3[7];
-    *(undefined4 *)(puVar2 + 0x47) = 0;
-    puVar2[7] = uVar4;
-    uVar1 = *(undefined4 *)(puVar3 + 8);
-    *(undefined4 *)(puVar2 + 0x3c) = 0;
-    *(undefined8 **)(puVar3 + 0x47) = puVar2;
-    *(undefined4 *)(puVar2 + 8) = uVar1;
-    *(undefined8 **)((int)puVar2 + 0x23c) = puVar3;
-    *(undefined8 **)(param_2 * 4 + glContext + 0x4dd0) = puVar2;
-    *(undefined4 *)((int)puVar2 + 0x234) = 0x1f000000;
-    puVar3 = puVar2;
+    *newMaterialRecord = *currentMaterialRecord;
+    newMaterialRecord[1] = currentMaterialRecord[1];
+    newMaterialRecord[2] = currentMaterialRecord[2];
+    newMaterialRecord[3] = currentMaterialRecord[3];
+    newMaterialRecord[4] = currentMaterialRecord[4];
+    newMaterialRecord[5] = currentMaterialRecord[5];
+    newMaterialRecord[6] = currentMaterialRecord[6];
+    copiedQword = currentMaterialRecord[7];
+    *(undefined4 *)(newMaterialRecord + 0x47) = 0;
+    newMaterialRecord[7] = copiedQword;
+    copiedWord = *(undefined4 *)(currentMaterialRecord + 8);
+    *(undefined4 *)(newMaterialRecord + 0x3c) = 0;
+    *(undefined8 **)(currentMaterialRecord + 0x47) = newMaterialRecord;
+    *(undefined4 *)(newMaterialRecord + 8) = copiedWord;
+    *(undefined8 **)((int)newMaterialRecord + 0x23c) = currentMaterialRecord;
+    *(undefined8 **)(faceIndex * 4 + glContext + 0x4dd0) = newMaterialRecord;
+    *(undefined4 *)((int)newMaterialRecord + 0x234) = 0x1f000000;
+    currentMaterialRecord = newMaterialRecord;
   }
   else if ((*(ushort *)(glContext + 0x4a10) & 0x8000) != 0) {
     *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 1;
   }
-  return puVar3;
+  return currentMaterialRecord;
 }
 
 /* _gleLightMaterialRGBAChange_FB_D @ 0x330e0 (224 bytes) */

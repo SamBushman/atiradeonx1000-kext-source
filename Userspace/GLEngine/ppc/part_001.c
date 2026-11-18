@@ -636,37 +636,37 @@ double _gleUpdateLightPosition(int glContext,int lightIndex,double unusedFloatAr
 /* _gleVectorNormalizeNO @ 0x76c0 (204 bytes) */
 double _gleVectorNormalizeNO(undefined4 unusedArg1,float *inVector,float *outVector,double unusedFloatArg1)
 {
-  float fVar1;
-  float dVar2;
-  float dVar3;
-  float dVar4;
-  float dVar5;
+  float lengthSquaredThenOutputZ;
+  float lengthSquaredThenNewtonTermThenInverseLength;
+  float yThenNormalizedY;
+  float xThenNormalizedX;
+  float z;
   float newtonCorrection;
   double reciprocalSqrtEstimate;
   
-  dVar3 = (double)inVector[1];
-  dVar4 = (double)*inVector;
-  dVar5 = (double)inVector[2];
-  fVar1 = (dVar5 * dVar5 + (dVar4 * dVar4 + (dVar3 * dVar3)));
-  dVar2 = (double)fVar1;
-  if ((double)dVar2 <= DOUBLE_00108de8) {
-    dVar2 = (double)FLOAT_00108eb4;
-    fVar1 = FLOAT_00108e58;
+  yThenNormalizedY = (double)inVector[1];
+  xThenNormalizedX = (double)*inVector;
+  z = (double)inVector[2];
+  lengthSquaredThenOutputZ = (z * z + (xThenNormalizedX * xThenNormalizedX + (yThenNormalizedY * yThenNormalizedY)));
+  lengthSquaredThenNewtonTermThenInverseLength = (double)lengthSquaredThenOutputZ;
+  if ((double)lengthSquaredThenNewtonTermThenInverseLength <= DOUBLE_00108de8) {
+    lengthSquaredThenNewtonTermThenInverseLength = (double)FLOAT_00108eb4;
+    lengthSquaredThenOutputZ = FLOAT_00108e58;
   }
   else {
-    reciprocalSqrtEstimate = (double)GH_U2F((unsigned int)((0x5f375a00 - ((uint)GH_F2U(fVar1) >> 1))));
-    dVar2 = (double)(float)((double)(float)((double)dVar2 * reciprocalSqrtEstimate) * reciprocalSqrtEstimate);
-    newtonCorrection = (double)(FLOAT_00108f38 - dVar2);
-    dVar2 = (double)(float)(reciprocalSqrtEstimate * DOUBLE_00108df0 * (double)newtonCorrection *
-                           -(double)((dVar2 * newtonCorrection) * newtonCorrection - FLOAT_00108f48));
-    dVar4 = (double)(dVar4 * dVar2);
-    dVar3 = (double)(dVar3 * dVar2);
-    fVar1 = (dVar5 * dVar2);
+    reciprocalSqrtEstimate = (double)GH_U2F((unsigned int)((0x5f375a00 - ((uint)GH_F2U(lengthSquaredThenOutputZ) >> 1))));
+    lengthSquaredThenNewtonTermThenInverseLength = (double)(float)((double)(float)((double)lengthSquaredThenNewtonTermThenInverseLength * reciprocalSqrtEstimate) * reciprocalSqrtEstimate);
+    newtonCorrection = (double)(FLOAT_00108f38 - lengthSquaredThenNewtonTermThenInverseLength);
+    lengthSquaredThenNewtonTermThenInverseLength = (double)(float)(reciprocalSqrtEstimate * DOUBLE_00108df0 * (double)newtonCorrection *
+                           -(double)((lengthSquaredThenNewtonTermThenInverseLength * newtonCorrection) * newtonCorrection - FLOAT_00108f48));
+    xThenNormalizedX = (double)(xThenNormalizedX * lengthSquaredThenNewtonTermThenInverseLength);
+    yThenNormalizedY = (double)(yThenNormalizedY * lengthSquaredThenNewtonTermThenInverseLength);
+    lengthSquaredThenOutputZ = (z * lengthSquaredThenNewtonTermThenInverseLength);
   }
-  outVector[2] = fVar1;
-  *outVector = (float)(double)dVar4;
-  outVector[1] = (float)(double)dVar3;
-  return (double)dVar2;
+  outVector[2] = lengthSquaredThenOutputZ;
+  *outVector = (float)(double)xThenNormalizedX;
+  outVector[1] = (float)(double)yThenNormalizedY;
+  return (double)lengthSquaredThenNewtonTermThenInverseLength;
 }
 
 /* _gleUpdateLightFast @ 0x778c (152 bytes) */

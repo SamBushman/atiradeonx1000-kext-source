@@ -1905,41 +1905,41 @@ LAB_000d43fc:
 void _glePopMaterials(glContext)
   int glContext;
 {
-  int iVar1;
-  int iVar2;
-  int iVar3;
-  int *piVar4;
-  int iVar5;
-  int iVar6;
-  int iVar7;
+  int freeListHead;
+  int remainingFaces;
+  int baseNewerRecord;
+  int *currentMaterialCursor;
+  int currentMaterialRecord;
+  int baseMaterialRecord;
+  int olderMaterialRecord;
   
-  iVar6 = glContext + 0x2c20;
-  piVar4 = (int *)(glContext + 0x4dd0);
-  iVar2 = 1;
+  baseMaterialRecord = glContext + 0x2c20;
+  currentMaterialCursor = (int *)(glContext + 0x4dd0);
+  remainingFaces = 1;
   do {
-    iVar5 = *piVar4;
-    piVar4 = piVar4 + 1;
-    iVar7 = *(int *)(iVar5 + 0x23c);
-    if (iVar7 != 0) {
-      if (*(int *)(iVar7 + 0x23c) != 0) {
-        iVar1 = *(int *)(glContext + 0x4dd8);
-        iVar3 = *(int *)(iVar6 + 0x238);
-        *(int *)(iVar3 + 0x23c) = iVar1;
-        if (iVar1 != 0) {
-          *(int *)(iVar1 + 0x238) = iVar3;
+    currentMaterialRecord = *currentMaterialCursor;
+    currentMaterialCursor = currentMaterialCursor + 1;
+    olderMaterialRecord = *(int *)(currentMaterialRecord + 0x23c);
+    if (olderMaterialRecord != 0) {
+      if (*(int *)(olderMaterialRecord + 0x23c) != 0) {
+        freeListHead = *(int *)(glContext + 0x4dd8);
+        baseNewerRecord = *(int *)(baseMaterialRecord + 0x238);
+        *(int *)(baseNewerRecord + 0x23c) = freeListHead;
+        if (freeListHead != 0) {
+          *(int *)(freeListHead + 0x238) = baseNewerRecord;
         }
-        *(int *)(glContext + 0x4dd8) = iVar7;
-        *(int *)(iVar6 + 0x238) = iVar5;
-        *(int *)(iVar5 + 0x23c) = iVar6;
+        *(int *)(glContext + 0x4dd8) = olderMaterialRecord;
+        *(int *)(baseMaterialRecord + 0x238) = currentMaterialRecord;
+        *(int *)(currentMaterialRecord + 0x23c) = baseMaterialRecord;
       }
-      *(undefined1 *)(iVar6 + 0x236) = 1;
+      *(undefined1 *)(baseMaterialRecord + 0x236) = 1;
     }
-    iVar2 = iVar2 + -1;
-    *(undefined1 *)(iVar5 + 0x236) = 0;
-    *(undefined4 *)(iVar5 + 0x1e0) = 0;
-    iVar6 = iVar6 + 0x240;
-    *(undefined1 *)(iVar5 + 0x235) = 0;
-  } while (-1 < iVar2);
+    remainingFaces = remainingFaces + -1;
+    *(undefined1 *)(currentMaterialRecord + 0x236) = 0;
+    *(undefined4 *)(currentMaterialRecord + 0x1e0) = 0;
+    baseMaterialRecord = baseMaterialRecord + 0x240;
+    *(undefined1 *)(currentMaterialRecord + 0x235) = 0;
+  } while (-1 < remainingFaces);
   return;
 }
 

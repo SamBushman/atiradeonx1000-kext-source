@@ -435,37 +435,37 @@ int _gleFreeOrphans(glContext)
   int *piVar1;
   undefined4 *puVar2;
   int iVar3;
-  int extraout_r3;
+  int r3AfterCall;
   int iVar4;
   int *glContextPtr7470;
-  int *piVar6;
+  int *orphanNode;
   int iVar7;
   
   iVar3 = glContext;
   if (*(int *)(glContext + 0x7484) != 0) {
     while( true ) {
       glContextPtr7470 = *(int **)(glContext + 0x7470);
-      piVar6 = (int *)0x0;
+      orphanNode = (int *)0x0;
       if (glContextPtr7470 != (int *)(glContext + 0x7468)) {
         iVar7 = glContextPtr7470[3];
-        piVar6 = (int *)glContextPtr7470[1];
+        orphanNode = (int *)glContextPtr7470[1];
         iVar3 = glContextPtr7470[2];
-        *piVar6 = *glContextPtr7470;
+        *orphanNode = *glContextPtr7470;
         *(int *)(iVar7 + 8) = iVar3;
         iVar3 = *glContextPtr7470;
         *(int *)(glContextPtr7470[2] + 0xc) = iVar7;
-        *(int **)(iVar3 + 4) = piVar6;
+        *(int **)(iVar3 + 4) = orphanNode;
         glContextPtr7470[2] = (int)glContextPtr7470;
         glContextPtr7470[3] = (int)glContextPtr7470;
         *glContextPtr7470 = (int)glContextPtr7470;
         glContextPtr7470[1] = (int)glContextPtr7470;
-        piVar6 = glContextPtr7470;
+        orphanNode = glContextPtr7470;
       }
-      if (piVar6 == (int *)0x0) break;
+      if (orphanNode == (int *)0x0) break;
       iVar3 = glContext + 0x10000;
       loopIndex = 0;
       if (*(char *)(glContext + 0x85a4) != '\0') {
-        cursor = piVar6 + 7;
+        cursor = orphanNode + 7;
         do {
           piVar1 = (int *)(iVar3 + -0x777c);
           loopIndex = loopIndex + 1;
@@ -476,7 +476,7 @@ int _gleFreeOrphans(glContext)
           (**(code **)(*piVar1 + 0x1f8))(*puVar2,iVar4);
         } while (loopIndex < (int)(uint)*(byte *)(glContext + 0x85a4));
       }
-      _gleVecFree(piVar6);
+      _gleVecFree(orphanNode);
     }
     _gleVecFree(*(undefined4 *)(glContext + 0x7484));
     *(undefined4 *)(glContext + 0x7484) = 0;
@@ -484,7 +484,7 @@ int _gleFreeOrphans(glContext)
     if (*(int *)(glContext + 0x7464) != 0) {
       _gleVecFree(*(int *)(glContext + 0x7464));
       *(undefined4 *)(glContext + 0x7464) = 0;
-      iVar3 = extraout_r3;
+      iVar3 = r3AfterCall;
     }
   }
   return iVar3;

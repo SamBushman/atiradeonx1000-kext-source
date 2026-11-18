@@ -1646,12 +1646,14 @@ undefined4 * _glLightf_Comp(undefined4 glContext,undefined4 light,undefined4 pna
 /* _glLightf_Exec @ 0x6b4b0 (724 bytes) */
 void _glLightf_Exec(int glContext,int light,undefined4 pname,double param)
 {
-  byte bVar1;
+  byte dirtyBitIndex;
+  byte dirtyBitIndex2;
   undefined4 glErrorCode;
-  int iVar3;
+  int lightRecord;
+  int dirtyWord348Ptr;
   int glContextWord5424;
-  int iVar4;
-  uint uVar5;
+  int dirtyWordPtr;
+  uint lightIndex;
   double cosValue;
   
   if (-1 < *(short *)(glContext + 0x4a10)) {
@@ -1661,75 +1663,75 @@ void _glLightf_Exec(int glContext,int light,undefined4 pname,double param)
     glErrorCode = 0x502;
     goto LAB_0006b764;
   }
-  uVar5 = light - 0x4000;
-  if (uVar5 < 8) {
-    iVar3 = glContext + uVar5 * 0x80;
+  lightIndex = light - 0x4000;
+  if (lightIndex < 8) {
+    lightRecord = glContext + lightIndex * 0x80;
     switch(pname) {
     case 0x1205:
       if ((!(param < (double)FLOAT_00108e50)) &&
          (!((double)(float)((double)CONCAT44(0x43300000,
                                              *(uint *)(*(int *)(glContext + 0x468c) + 0xa4) ^
                                              0x80000000) - DOUBLE_00108d58) < param))) {
-        *(float *)(iVar3 + 0x287c) = (float)param;
-        _gleUpdateLightExponents(glContext,uVar5);
+        *(float *)(lightRecord + 0x287c) = (float)param;
+        _gleUpdateLightExponents(glContext,lightIndex);
         if (*(int *)(glContext + 0x5434) == 0) {
-          bVar1 = *(byte *)(uVar5 * 7 + *(int *)(glContext + 0x5420) + 0x25d);
+          dirtyBitIndex = *(byte *)(lightIndex * 7 + *(int *)(glContext + 0x5420) + 0x25d);
         }
         else {
-          bVar1 = *(byte *)(uVar5 * 7 + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x291);
+          dirtyBitIndex = *(byte *)(lightIndex * 7 + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x291);
         }
-        iVar4 = (bVar1 >> 3 & 0x1c) + glContext;
+        dirtyWordPtr = (dirtyBitIndex >> 3 & 0x1c) + glContext;
         glContextWord5424 = *(int *)(glContext + 0x5424);
-        *(uint *)(iVar4 + 0x324) = *(uint *)(iVar4 + 0x324) | 1 << (bVar1 & 0x1f);
-        bVar1 = *(byte *)(uVar5 * 7 + glContextWord5424 + 0x25d);
+        *(uint *)(dirtyWordPtr + 0x324) = *(uint *)(dirtyWordPtr + 0x324) | 1 << (dirtyBitIndex & 0x1f);
+        dirtyBitIndex2 = *(byte *)(lightIndex * 7 + glContextWord5424 + 0x25d);
         goto LAB_0006b6cc;
       }
       break;
     case 0x1206:
       if (((double)FLOAT_00108e50 <= param) && (param <= (double)FLOAT_00108e88)) {
-        *(float *)(iVar3 + 0x2890) = (float)param;
+        *(float *)(lightRecord + 0x2890) = (float)param;
         cosValue = _cos((double)(float)(param * (double)FLOAT_00108e84));
-        *(float *)(iVar3 + 0x286c) = (float)cosValue;
+        *(float *)(lightRecord + 0x286c) = (float)cosValue;
       }
       else {
         if (param != (double)FLOAT_00108e8c) break;
-        *(undefined4 *)(iVar3 + 0x286c) = 0xbf800000;
-        *(undefined4 *)(iVar3 + 0x2890) = 0;
+        *(undefined4 *)(lightRecord + 0x286c) = 0xbf800000;
+        *(undefined4 *)(lightRecord + 0x2890) = 0;
       }
-      _gleUpdateLightExponents(glContext,uVar5);
+      _gleUpdateLightExponents(glContext,lightIndex);
       if (*(int *)(glContext + 0x5434) == 0) {
-        bVar1 = *(byte *)(uVar5 * 7 + *(int *)(glContext + 0x5420) + 0x25c);
+        dirtyBitIndex = *(byte *)(lightIndex * 7 + *(int *)(glContext + 0x5420) + 0x25c);
       }
       else {
-        bVar1 = *(byte *)(uVar5 * 7 + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x290);
+        dirtyBitIndex = *(byte *)(lightIndex * 7 + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x290);
       }
-      iVar4 = (bVar1 >> 3 & 0x1c) + glContext;
+      dirtyWordPtr = (dirtyBitIndex >> 3 & 0x1c) + glContext;
       glContextWord5424 = *(int *)(glContext + 0x5424);
-      *(uint *)(iVar4 + 0x324) = *(uint *)(iVar4 + 0x324) | 1 << (bVar1 & 0x1f);
-      bVar1 = *(byte *)(uVar5 * 7 + glContextWord5424 + 0x25c);
+      *(uint *)(dirtyWordPtr + 0x324) = *(uint *)(dirtyWordPtr + 0x324) | 1 << (dirtyBitIndex & 0x1f);
+      dirtyBitIndex2 = *(byte *)(lightIndex * 7 + glContextWord5424 + 0x25c);
 LAB_0006b6cc:
-      iVar3 = (bVar1 >> 3 & 0x1c) + glContext;
-      *(uint *)(iVar3 + 0x348) = *(uint *)(iVar3 + 0x348) | 1 << (bVar1 & 0x1f);
+      dirtyWord348Ptr = (dirtyBitIndex2 >> 3 & 0x1c) + glContext;
+      *(uint *)(dirtyWord348Ptr + 0x348) = *(uint *)(dirtyWord348Ptr + 0x348) | 1 << (dirtyBitIndex2 & 0x1f);
 LAB_0006b76c:
-      *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 4 << (uVar5 * 2 & 0x3e);
+      *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 4 << (lightIndex * 2 & 0x3e);
       return;
     case 0x1207:
       if (!(param < (double)FLOAT_00108e50)) {
-        *(float *)(iVar3 + 0x2870) = (float)param;
+        *(float *)(lightRecord + 0x2870) = (float)param;
 LAB_0006b744:
-        _gleUpdateLightAttenuation(glContext,uVar5);
+        _gleUpdateLightAttenuation(glContext,lightIndex);
         goto LAB_0006b76c;
       }
       break;
     case 0x1208:
       if (!(param < (double)FLOAT_00108e50)) {
-        *(float *)(iVar3 + 0x2874) = (float)param;
+        *(float *)(lightRecord + 0x2874) = (float)param;
         goto LAB_0006b744;
       }
       break;
     case 0x1209:
       if (!(param < (double)FLOAT_00108e50)) {
-        *(float *)(iVar3 + 0x2878) = (float)param;
+        *(float *)(lightRecord + 0x2878) = (float)param;
         goto LAB_0006b744;
       }
       break;

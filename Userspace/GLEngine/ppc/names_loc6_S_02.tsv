@@ -1,0 +1,30 @@
+local	_glePreInitTOC	puVar3	rtcTocStruct	CONFIRMED	initialised from PTR__gle_rtc_toc_struct; every use stores a constant into one of its fields
+local	_glePreInitTOC	fVar1	stagedFloatConstant	INFERRED	float constant loaded from a FLOAT_ rodata word, held for one store into the TOC struct; every use is such a staging copy
+local	_glePreInitTOC	fVar2	stagedFloatConstant2	INFERRED	float constant loaded from FLOAT_00108f14 and stored into the TOC struct at +0xdc (second staging temporary)
+local	_glePreInitTOC	uVar4	processorFeatureBits	CONFIRMED	loaded from *PTR__gle_processor (the CPU feature word set by _gliGetVersion); tested with & 0x10 (AltiVec) before _glePreInitVectorTOC is called
+local	_glePreInitTOC	in_r3	returnValueR3	INFERRED	the function's return value: the caller's stale r3 when _glePreInitVectorTOC is not called, else r3 left by that call
+local	_glePreInitTOC	extraout_r3	r3AfterCall	INFERRED	Ghidra pseudo-register: r3 as left by the call to _glePreInitVectorTOC
+local	_gleCreatePipelineProgramObject	param_2	pipelineStageIndex	CONFIRMED	selects the parameter-array size (0 -> 0x100 entries, 1 -> 0x80) and is stored as a short at +0x4ca; the caller _gleBindPipelineProgram passes its pipelineStageIndex
+local	_gleCreatePipelineProgramObject	iVar1	vec4Offset	CONFIRMED	loopIndex*0x10: byte offset of one 16-byte entry of the parameter array in the init loop
+local	_gleCreatePipelineProgramObject	iVar5	vec4Entry	CONFIRMED	address of one 16-byte entry (array base + vec4Offset) whose four words are set to 0, 0, 0 and 0x3f800000 (1.0f)
+local	_gleCreatePipelineProgramObject	uVar2	headerSizeAligned16	CONFIRMED	(header size + 0xf) & ~0xf: size of the object header; the 16-byte entry array starts at block + uVar2 and the allocation is uVar2 + count*0x10
+local	_gleCreatePipelineProgramObject	puVar3	freeObjectFunc	CONFIRMED	PTR__gleFreePipelineProgramObject, stored in the object's word 3 (destructor)
+local	_gleCreatePipelineProgramObject	puVar4	fillCursor	CONFIRMED	byte cursor of the 0x450-byte fill loop that stores uVar9 into every byte starting at word 0x16
+local	_gleCreatePipelineProgramObject	uVar9	fillByte	CONFIRMED	0 for stage 0, 0x80 for stage 1, otherwise 0; the byte stored by the 0x450-byte fill loop
+local	_gleCreatePipelineProgramObject	iVar8	headerSizeThenVec4Array	CONFIRMED	first the object header size (0x4e4, 0x4e8 or 0x4f4 chosen by pipelineStageIndex, input of the 16-aligned size), then the address block + headerSizeAligned16 of the 16-byte entry array (stored at word 0x138 and indexed in the init loop)
+local	_gleCreateVertexArrayObject	param_2	vertexArrayId	CONFIRMED	stored at word 1 of the new object; the caller _gleBindVertexArray passes its id (vertex array name)
+local	_gleCreateVertexArrayObject	puVar1	freeObjectFunc	CONFIRMED	PTR__gleFreeVertexArrayObject, stored in the object's word 3 (destructor)
+local	_gleCreateVertexArrayObject	puVar4	objectBaseThenCursor	CONFIRMED	the new object (= vertexArrayObject) until the last loop, where it is advanced by 0x23 words per iteration (0x8c-byte per-unit records) while cursor4 walks along
+local	_gleVectorNormalizeNO	dVar5	z	CONFIRMED	inVector[2], only read (squared into the length and multiplied by the inverse length)
+local	_gleVectorNormalizeNO	dVar4	xThenNormalizedX	CONFIRMED	inVector[0], then x*inverseLength which is stored to outVector[0]
+local	_gleVectorNormalizeNO	dVar3	yThenNormalizedY	CONFIRMED	inVector[1], then y*inverseLength which is stored to outVector[1]
+local	_gleVectorNormalizeNO	fVar1	lengthSquaredThenOutputZ	CONFIRMED	x*x+y*y+z*z first; then the value stored to outVector[2] (z*inverseLength, or the FLOAT_00108e58 constant when the length is too small)
+local	_gleVectorNormalizeNO	dVar2	lengthSquaredThenNewtonTermThenInverseLength	CONFIRMED	the length squared (double copy of fVar1), then temporaries of the reciprocal-square-root Newton step, finally the inverse length (returned and multiplied into x, y, z)
+local	_gleGetEnabled	uVar1	stateWord	CONFIRMED	state word or byte read for the queried capability; the answer is a bit of it (>> n & 1)
+local	_gleGetEnabled	uVar2	shiftAmount	CONFIRMED	bit position used in uVar1 >> (uVar2 & 0x3f): the byte at +0x7583 for cap 0xb90, cap - 0x3000 (clip plane 0..5), cap - 0x4000 (light 0..7)
+local	_gleGetEnabled	lVar4	texCoordArrayEnableMask	INFERRED	___ashldi3(0, 0x1000000, *(ctx+0x53d8)): 64-bit mask (bit 24 shifted by a unit index) tested against the client-state words +0x330/+0x334 for cap 0x8078 (GL_TEXTURE_COORD_ARRAY)
+local	_gleLoadDataElementFromCtxNO	param_1	instrCursor	CONFIRMED	the caller (the _gleBuildVertexFuncNO emitter) passes its instrCursor; the function stores PPC instruction words (lfs/lfd rN,off(r3)) there and returns the advanced pointer
+local	_gleLoadDataElementFromCtxNO	param_2	componentCount	CONFIRMED	caller passes the element's component count (size field + 1); 1..4 loads are emitted (f1..f4)
+local	_gleLoadDataElementFromCtxNO	param_3	doubleFlag	INFERRED	value 4 selects lfd (opcode word 0xc8xxxxxx, 8-byte stride, +8 displacements) instead of lfs (0xc0xxxxxx, 4-byte stride); caller passes (function id word >> 0x13) & 4
+local	_gleLoadDataElementFromCtxNO	param_4	ctxOffset	CONFIRMED	ored into the 16-bit displacement of the lfs/lfd instruction (base register r3 = glContext); caller passes the ctx offset 0x2a0.. of the data element
+local	_gleLoadDataElementFromCtxNO	uVar1	instrWord	CONFIRMED	the last PPC instruction word built (lfs/lfd), stored at *param_1

@@ -2001,10 +2001,10 @@ int _gleGetEnabled(glContext, cap)
   int glContext;
   uint cap;
 {
-  uint uVar1;
-  uint uVar2;
+  uint stateWord;
+  uint shiftAmount;
   int clientState;
-  longlong lVar4;
+  longlong texCoordArrayEnableMask;
   
   if (cap < 0x4008) {
     if (cap < 0x4000) {
@@ -2108,8 +2108,8 @@ LAB_000223a8:
           return (uint)*(byte *)(glContext + 0x3128);
         }
         if (cap != 0xb90) goto LAB_000223a8;
-        uVar1 = *(uint *)(glContext + 0x3520);
-        uVar2 = (uint)*(byte *)(glContext + 0x7583);
+        stateWord = *(uint *)(glContext + 0x3520);
+        shiftAmount = (uint)*(byte *)(glContext + 0x7583);
       }
       else {
         if (cap == 0xdb3) {
@@ -2164,9 +2164,9 @@ LAB_000223a8:
           goto LAB_000223a8;
         }
         if (cap == 0xde0) {
-          uVar1 = *(uint *)(*(int *)(glContext + 0x53d4) * 0x7c + glContext + 0x3534);
+          stateWord = *(uint *)(*(int *)(glContext + 0x53d4) * 0x7c + glContext + 0x3534);
 LAB_00022360:
-          return uVar1 >> 4 & 1;
+          return stateWord >> 4 & 1;
         }
         if (cap < 0xde1) {
           if (cap == 0xdb6) {
@@ -2195,7 +2195,7 @@ LAB_00022360:
         }
         if (cap < 0x2a03) {
           if (cap == 0xde1) {
-            uVar1 = *(uint *)(*(int *)(glContext + 0x53d4) * 0x7c + glContext + 0x3534);
+            stateWord = *(uint *)(*(int *)(glContext + 0x53d4) * 0x7c + glContext + 0x3534);
             goto LAB_0002236c;
           }
           if (cap == 0x2a01) {
@@ -2203,18 +2203,18 @@ LAB_00022360:
           }
           goto LAB_000223a8;
         }
-        uVar2 = cap - 0x3000;
-        if (5 < uVar2) goto LAB_000223a8;
-        uVar1 = *(uint *)(glContext + 0x4188);
+        shiftAmount = cap - 0x3000;
+        if (5 < shiftAmount) goto LAB_000223a8;
+        stateWord = *(uint *)(glContext + 0x4188);
       }
     }
     else {
-      uVar1 = *(uint *)(glContext + 0x30a0);
-      uVar2 = cap - 0x4000;
+      stateWord = *(uint *)(glContext + 0x30a0);
+      shiftAmount = cap - 0x4000;
     }
-    uVar1 = uVar1 >> (uVar2 & 0x3f);
+    stateWord = stateWord >> (shiftAmount & 0x3f);
 LAB_00022378:
-    return uVar1 & 1;
+    return stateWord & 1;
   }
   if (cap == 0x8200) {
 LAB_00022328:
@@ -2222,7 +2222,7 @@ LAB_00022328:
   }
   if (cap < 0x8201) {
     if (cap == 0x8076) {
-      uVar1 = *(uint *)(*(int *)(glContext + 0x4a60) + 0x334) >> 0x12;
+      stateWord = *(uint *)(*(int *)(glContext + 0x4a60) + 0x334) >> 0x12;
       goto LAB_0002227c;
     }
     if (0x8076 < cap) {
@@ -2231,7 +2231,7 @@ LAB_00022328:
       }
       if (cap < 0x80a0) {
         if (cap == 0x8079) {
-          uVar1 = *(uint *)(*(int *)(glContext + 0x4a60) + 0x334) >> 0x16;
+          stateWord = *(uint *)(*(int *)(glContext + 0x4a60) + 0x334) >> 0x16;
           goto LAB_0002227c;
         }
         if (cap < 0x807a) {
@@ -2240,9 +2240,9 @@ LAB_00022328:
           }
           if (cap == 0x8078) {
             clientState = *(int *)(glContext + 0x4a60);
-            lVar4 = ___ashldi3(0,0x1000000,*(undefined4 *)(glContext + 0x53d8));
-            if ((*(uint *)(clientState + 0x330) & (uint)((ulonglong)lVar4 >> 0x20)) == 0 &&
-                (*(uint *)(clientState + 0x334) & (uint)lVar4) == 0) {
+            texCoordArrayEnableMask = ___ashldi3(0,0x1000000,*(undefined4 *)(glContext + 0x53d8));
+            if ((*(uint *)(clientState + 0x330) & (uint)((ulonglong)texCoordArrayEnableMask >> 0x20)) == 0 &&
+                (*(uint *)(clientState + 0x334) & (uint)texCoordArrayEnableMask) == 0) {
               return 0;
             }
             return 1;
@@ -2281,9 +2281,9 @@ LAB_00022328:
       goto LAB_000223a8;
     }
     if (cap == 0x802e) {
-      uVar1 = *(uint *)(glContext + 0x3410);
+      stateWord = *(uint *)(glContext + 0x3410);
 LAB_0002236c:
-      return uVar1 >> 3 & 1;
+      return stateWord >> 3 & 1;
     }
     if (cap < 0x802f) {
       if (cap != 0x8011) {
@@ -2292,33 +2292,33 @@ LAB_0002236c:
             return (uint)*(byte *)(glContext + 0x280c);
           }
           if (cap == 0x8010) {
-            uVar1 = (uint)*(byte *)(glContext + 0x3413);
+            stateWord = (uint)*(byte *)(glContext + 0x3413);
             goto LAB_00022378;
           }
         }
         else {
           if (cap == 0x8012) {
-            uVar1 = *(uint *)(glContext + 0x3410);
+            stateWord = *(uint *)(glContext + 0x3410);
             goto LAB_00022398;
           }
           if (cap == 0x8024) {
-            uVar1 = *(uint *)(glContext + 0x3410);
+            stateWord = *(uint *)(glContext + 0x3410);
             goto LAB_00022360;
           }
         }
         goto LAB_000223a8;
       }
-      uVar1 = *(uint *)(glContext + 0x3410);
+      stateWord = *(uint *)(glContext + 0x3410);
     }
     else {
       if (cap != 0x806f) {
         if (0x806f < cap) {
           if (cap == 0x8074) {
-            uVar1 = *(uint *)(*(int *)(glContext + 0x4a60) + 0x334) >> 0x10;
+            stateWord = *(uint *)(*(int *)(glContext + 0x4a60) + 0x334) >> 0x10;
           }
           else {
             if (cap != 0x8075) goto LAB_000223a8;
-            uVar1 = *(uint *)(*(int *)(glContext + 0x4a60) + 0x334) >> 0x11;
+            stateWord = *(uint *)(*(int *)(glContext + 0x4a60) + 0x334) >> 0x11;
           }
           goto LAB_0002227c;
         }
@@ -2330,9 +2330,9 @@ LAB_0002236c:
         }
         goto LAB_000223a8;
       }
-      uVar1 = *(uint *)(*(int *)(glContext + 0x53d4) * 0x7c + glContext + 0x3534);
+      stateWord = *(uint *)(*(int *)(glContext + 0x53d4) * 0x7c + glContext + 0x3534);
     }
-    return uVar1 >> 1 & 1;
+    return stateWord >> 1 & 1;
   }
   if (cap == 0x8643) {
     return (uint)*(byte *)(glContext + 0x4666);
@@ -2343,9 +2343,9 @@ LAB_0002236c:
     }
     if (cap < 0x851e) {
       if (cap == 0x845e) {
-        uVar1 = *(uint *)(*(int *)(glContext + 0x4a60) + 0x334) >> 0x14;
+        stateWord = *(uint *)(*(int *)(glContext + 0x4a60) + 0x334) >> 0x14;
 LAB_0002227c:
-        return uVar1 & 1;
+        return stateWord & 1;
       }
       if (cap < 0x845f) {
         if (cap != 0x8457) {
@@ -2354,12 +2354,12 @@ LAB_0002227c:
           }
           goto LAB_000223a8;
         }
-        uVar1 = *(uint *)(*(int *)(glContext + 0x4a60) + 0x334) >> 0x13;
+        stateWord = *(uint *)(*(int *)(glContext + 0x4a60) + 0x334) >> 0x13;
         goto LAB_0002227c;
       }
       if (cap != 0x84f5) {
         if (cap != 0x8513) goto LAB_000223a8;
-        uVar1 = (uint)*(byte *)(*(int *)(glContext + 0x53d4) * 0x7c + glContext + 0x3537);
+        stateWord = (uint)*(byte *)(*(int *)(glContext + 0x53d4) * 0x7c + glContext + 0x3537);
         goto LAB_00022378;
       }
     }
@@ -2382,7 +2382,7 @@ LAB_0002227c:
       }
       goto LAB_000223a8;
     }
-    uVar1 = *(uint *)(*(int *)(glContext + 0x53d4) * 0x7c + glContext + 0x3534);
+    stateWord = *(uint *)(*(int *)(glContext + 0x53d4) * 0x7c + glContext + 0x3534);
   }
   else {
     if (cap == 0x8804) goto LAB_00022328;
@@ -2400,7 +2400,7 @@ LAB_0002227c:
       }
       else {
         if (cap == 0x86ad) {
-          uVar1 = *(uint *)(*(int *)(glContext + 0x4a60) + 0x334) >> 0x15;
+          stateWord = *(uint *)(*(int *)(glContext + 0x4a60) + 0x334) >> 0x15;
           goto LAB_0002227c;
         }
         if (cap == 0x86de) {
@@ -2420,7 +2420,7 @@ LAB_0002227c:
       }
       else {
         if (cap == 0x8a0c) {
-          uVar1 = *(uint *)(*(int *)(glContext + 0x4a60) + 0x334) >> 0x17;
+          stateWord = *(uint *)(*(int *)(glContext + 0x4a60) + 0x334) >> 0x17;
           goto LAB_0002227c;
         }
         if (cap == 0x19262) {
@@ -2429,10 +2429,10 @@ LAB_0002227c:
       }
       goto LAB_000223a8;
     }
-    uVar1 = *(uint *)(glContext + 0x3520);
+    stateWord = *(uint *)(glContext + 0x3520);
   }
 LAB_00022398:
-  return uVar1 >> 2 & 1;
+  return stateWord >> 2 & 1;
 }
 
 /* _gleShareSharedState @ 0x223d4 (88 bytes) */
@@ -4011,11 +4011,14 @@ int _glePPLogParam(glContext, paramLogState, bankIndex, paramWord, paramWord2, s
   int lastSlot;
 {
   bool slotIsUnused;
-  int iVar2;
+  int slotRecord;
+  int slotRecordThenSlotWord2;
+  int slotWordIndex;
+  int slotScanCursor;
   undefined4 matchKind;
-  int iVar4;
-  int iVar5;
-  int iVar6;
+  int slotWord2ThenSlotRecordThenPriorityRowOffset;
+  int freeBitsWordThenDirtyBitsWordThenSlotRecord;
+  int freeBitsWordCase4;
   uint paramKind;
   uint slotWord1;
   uint slotPriority;
@@ -4043,15 +4046,15 @@ int _glePPLogParam(glContext, paramLogState, bankIndex, paramWord, paramWord2, s
         return 0xffffffff;
       }
       matchKind = 1;
-      iVar2 = (bankIndex * 0x146 + requestedSlot) * 8 + paramLogState;
-      slotIsUnused = *(int *)(iVar2 + 0x8074) == 0 && *(int *)(iVar2 + 0x8078) == 0;
+      slotRecord = (bankIndex * 0x146 + requestedSlot) * 8 + paramLogState;
+      slotIsUnused = *(int *)(slotRecord + 0x8074) == 0 && *(int *)(slotRecord + 0x8078) == 0;
       goto LAB_00024ea0;
     }
     freeSlot = 0;
     if (lastSlot - slotSpan == -1) {
       return 0xffffffff;
     }
-    iVar2 = bankIndex * 0xa30 + paramLogState + 0x8070;
+    slotScanCursor = bankIndex * 0xa30 + paramLogState + 0x8070;
     do {
       for (spanEnd = freeSlot;
           ((int)spanEnd < (int)(freeSlot + slotSpan) &&
@@ -4059,8 +4062,8 @@ int _glePPLogParam(glContext, paramLogState, bankIndex, paramWord, paramWord2, s
           spanEnd = spanEnd + 1) {
       }
       if (spanEnd == freeSlot + slotSpan) {
-        if ((*(int *)(iVar2 + 4) == -1) && (*(int *)(iVar2 + 8) == -1)) goto LAB_00024ff0;
-        if (*(int *)(iVar2 + 4) == 0 && *(int *)(iVar2 + 8) == 0) {
+        if ((*(int *)(slotScanCursor + 4) == -1) && (*(int *)(slotScanCursor + 8) == -1)) goto LAB_00024ff0;
+        if (*(int *)(slotScanCursor + 4) == 0 && *(int *)(slotScanCursor + 8) == 0) {
           if (unusedSlot == 0xffffffff) {
             unusedSlot = freeSlot;
           }
@@ -4074,7 +4077,7 @@ int _glePPLogParam(glContext, paramLogState, bankIndex, paramWord, paramWord2, s
         }
       }
       freeSlot = freeSlot + 1;
-      iVar2 = iVar2 + 8;
+      slotScanCursor = slotScanCursor + 8;
     } while (freeSlot < (lastSlot - slotSpan) + 1U);
     requestedSlot = evictionSlot;
     if (unusedSlot != 0xffffffff) {
@@ -4093,7 +4096,7 @@ LAB_00024fd4:
       if (lastSlot - slotSpan == -1) {
         return 0xffffffff;
       }
-      iVar2 = bankIndex * 0xa30 + paramLogState + 0x8070;
+      slotScanCursor = bankIndex * 0xa30 + paramLogState + 0x8070;
       do {
         for (spanEnd = requestedSlot;
             ((int)spanEnd < (int)(requestedSlot + slotSpan) &&
@@ -4101,18 +4104,18 @@ LAB_00024fd4:
             spanEnd = spanEnd + 1) {
         }
         if (spanEnd == requestedSlot + slotSpan) {
-          slotWord1 = *(uint *)(iVar2 + 4);
-          iVar4 = *(int *)(iVar2 + 8);
-          if ((slotWord1 == paramWord) && (iVar4 == paramWord2)) {
+          slotWord1 = *(uint *)(slotScanCursor + 4);
+          slotWord2ThenSlotRecordThenPriorityRowOffset = *(int *)(slotScanCursor + 8);
+          if ((slotWord1 == paramWord) && (slotWord2ThenSlotRecordThenPriorityRowOffset == paramWord2)) {
             matchKind = 5;
             goto LAB_00025008;
           }
-          if ((slotWord1 == 0xffffffff) && (iVar4 == -1)) {
+          if ((slotWord1 == 0xffffffff) && (slotWord2ThenSlotRecordThenPriorityRowOffset == -1)) {
             if (freeSlot == 0xffffffff) {
               freeSlot = requestedSlot;
             }
           }
-          else if (slotWord1 == 0 && iVar4 == 0) {
+          else if (slotWord1 == 0 && slotWord2ThenSlotRecordThenPriorityRowOffset == 0) {
             if (unusedSlot == 0xffffffff) {
               unusedSlot = requestedSlot;
             }
@@ -4126,7 +4129,7 @@ LAB_00024fd4:
           }
         }
         requestedSlot = requestedSlot + 1;
-        iVar2 = iVar2 + 8;
+        slotScanCursor = slotScanCursor + 8;
       } while (requestedSlot < (lastSlot - slotSpan) + 1U);
       if (unusedSlot != 0xffffffff) {
         matchKind = 2;
@@ -4145,70 +4148,70 @@ LAB_00024ff0:
     if ((*(uint *)(blockedSlotBits + ((int)requestedSlot >> 5) * 4) >> (requestedSlot & 0x1f) & 1) != 0) {
       return 0xffffffff;
     }
-    iVar2 = (bankIndex * 0x146 + requestedSlot) * 8 + paramLogState;
-    slotValue1 = *(uint *)(iVar2 + 0x8074);
-    iVar2 = *(int *)(iVar2 + 0x8078);
-    if (((slotValue1 == paramWord) && (matchKind = 5, iVar2 == paramWord2)) ||
-       ((slotValue1 == 0xffffffff && (matchKind = 3, iVar2 == -1)))) goto LAB_00025008;
-    slotIsUnused = slotValue1 == 0 && iVar2 == 0;
+    slotRecordThenSlotWord2 = (bankIndex * 0x146 + requestedSlot) * 8 + paramLogState;
+    slotValue1 = *(uint *)(slotRecordThenSlotWord2 + 0x8074);
+    slotRecordThenSlotWord2 = *(int *)(slotRecordThenSlotWord2 + 0x8078);
+    if (((slotValue1 == paramWord) && (matchKind = 5, slotRecordThenSlotWord2 == paramWord2)) ||
+       ((slotValue1 == 0xffffffff && (matchKind = 3, slotRecordThenSlotWord2 == -1)))) goto LAB_00025008;
+    slotIsUnused = slotValue1 == 0 && slotRecordThenSlotWord2 == 0;
     matchKind = 2;
 LAB_00024ea0:
     if (slotIsUnused) goto LAB_00025008;
   }
   matchKind = 4;
 LAB_00025008:
-  iVar2 = (int)requestedSlot >> 5;
+  slotWordIndex = (int)requestedSlot >> 5;
                     
   switch(matchKind) {
   case 0:
-    iVar4 = bankIndex * 0x518;
+    slotWord2ThenSlotRecordThenPriorityRowOffset = bankIndex * 0x518;
     oldPriority = 0;
     break;
   case 1:
-    iVar4 = (bankIndex * 0x146 + requestedSlot) * 8 + paramLogState;
-    iVar5 = (bankIndex * 0x28c + iVar2) * 4 + paramLogState;
-    *(undefined4 *)(iVar4 + 0x8074) = 0xffffffff;
-    *(undefined4 *)(iVar4 + 0x8078) = 0xffffffff;
-    iVar4 = bankIndex * 0x518;
+    slotWord2ThenSlotRecordThenPriorityRowOffset = (bankIndex * 0x146 + requestedSlot) * 8 + paramLogState;
+    freeBitsWordThenDirtyBitsWordThenSlotRecord = (bankIndex * 0x28c + slotWordIndex) * 4 + paramLogState;
+    *(undefined4 *)(slotWord2ThenSlotRecordThenPriorityRowOffset + 0x8074) = 0xffffffff;
+    *(undefined4 *)(slotWord2ThenSlotRecordThenPriorityRowOffset + 0x8078) = 0xffffffff;
+    slotWord2ThenSlotRecordThenPriorityRowOffset = bankIndex * 0x518;
     oldPriority = 0;
-    *(uint *)(iVar5 + 0x8a74) = *(uint *)(iVar5 + 0x8a74) | 1 << (requestedSlot & 0x1f);
+    *(uint *)(freeBitsWordThenDirtyBitsWordThenSlotRecord + 0x8a74) = *(uint *)(freeBitsWordThenDirtyBitsWordThenSlotRecord + 0x8a74) | 1 << (requestedSlot & 0x1f);
     break;
   case 2:
-    iVar5 = (bankIndex * 0x28c + iVar2) * 4 + paramLogState;
-    oldSlotBits = *(uint *)(iVar5 + 0x8a74);
-    iVar4 = (bankIndex * 0x146 + requestedSlot) * 8 + paramLogState;
+    freeBitsWordThenDirtyBitsWordThenSlotRecord = (bankIndex * 0x28c + slotWordIndex) * 4 + paramLogState;
+    oldSlotBits = *(uint *)(freeBitsWordThenDirtyBitsWordThenSlotRecord + 0x8a74);
+    slotWord2ThenSlotRecordThenPriorityRowOffset = (bankIndex * 0x146 + requestedSlot) * 8 + paramLogState;
     slotBit = 1 << (requestedSlot & 0x1f);
-    *(uint *)(iVar4 + 0x8074) = paramWord;
-    *(int *)(iVar4 + 0x8078) = paramWord2;
+    *(uint *)(slotWord2ThenSlotRecordThenPriorityRowOffset + 0x8074) = paramWord;
+    *(int *)(slotWord2ThenSlotRecordThenPriorityRowOffset + 0x8078) = paramWord2;
     oldPriority = 0;
-    *(uint *)(iVar5 + 0x8a74) = oldSlotBits & ~slotBit;
+    *(uint *)(freeBitsWordThenDirtyBitsWordThenSlotRecord + 0x8a74) = oldSlotBits & ~slotBit;
     if (bankIndex == 0) {
-      iVar4 = 0;
-      iVar5 = iVar2 * 4 + glContext;
-      *(uint *)(iVar5 + 0x324) = *(uint *)(iVar5 + 0x324) | slotBit;
+      slotWord2ThenSlotRecordThenPriorityRowOffset = 0;
+      freeBitsWordThenDirtyBitsWordThenSlotRecord = slotWordIndex * 4 + glContext;
+      *(uint *)(freeBitsWordThenDirtyBitsWordThenSlotRecord + 0x324) = *(uint *)(freeBitsWordThenDirtyBitsWordThenSlotRecord + 0x324) | slotBit;
     }
     else {
-      iVar4 = bankIndex * 0x518;
-      iVar5 = iVar2 * 4 + glContext;
-      *(uint *)(iVar5 + 0x348) = *(uint *)(iVar5 + 0x348) | slotBit;
+      slotWord2ThenSlotRecordThenPriorityRowOffset = bankIndex * 0x518;
+      freeBitsWordThenDirtyBitsWordThenSlotRecord = slotWordIndex * 4 + glContext;
+      *(uint *)(freeBitsWordThenDirtyBitsWordThenSlotRecord + 0x348) = *(uint *)(freeBitsWordThenDirtyBitsWordThenSlotRecord + 0x348) | slotBit;
     }
     break;
   case 5:
   case 3:
-    iVar4 = bankIndex * 0x518;
-    oldPriority = *(short *)((iVar4 + requestedSlot) * 2 + paramLogState + 0x8874);
+    slotWord2ThenSlotRecordThenPriorityRowOffset = bankIndex * 0x518;
+    oldPriority = *(short *)((slotWord2ThenSlotRecordThenPriorityRowOffset + requestedSlot) * 2 + paramLogState + 0x8874);
     break;
   case 4:
-    iVar4 = bankIndex * 0x518;
-    iVar5 = (bankIndex * 0x146 + requestedSlot) * 8 + paramLogState;
-    iVar6 = (bankIndex * 0x28c + iVar2) * 4 + paramLogState;
-    oldPriority = *(short *)((iVar4 + requestedSlot) * 2 + paramLogState + 0x8874);
-    *(undefined4 *)(iVar5 + 0x8074) = 0xffffffff;
-    *(undefined4 *)(iVar5 + 0x8078) = 0xffffffff;
-    *(uint *)(iVar6 + 0x8a74) = *(uint *)(iVar6 + 0x8a74) | 1 << (requestedSlot & 0x1f);
+    slotWord2ThenSlotRecordThenPriorityRowOffset = bankIndex * 0x518;
+    freeBitsWordThenDirtyBitsWordThenSlotRecord = (bankIndex * 0x146 + requestedSlot) * 8 + paramLogState;
+    freeBitsWordCase4 = (bankIndex * 0x28c + slotWordIndex) * 4 + paramLogState;
+    oldPriority = *(short *)((slotWord2ThenSlotRecordThenPriorityRowOffset + requestedSlot) * 2 + paramLogState + 0x8874);
+    *(undefined4 *)(freeBitsWordThenDirtyBitsWordThenSlotRecord + 0x8074) = 0xffffffff;
+    *(undefined4 *)(freeBitsWordThenDirtyBitsWordThenSlotRecord + 0x8078) = 0xffffffff;
+    *(uint *)(freeBitsWordCase4 + 0x8a74) = *(uint *)(freeBitsWordCase4 + 0x8a74) | 1 << (requestedSlot & 0x1f);
   }
-  *(uint *)(iVar2 * 4 + blockedSlotBits) = *(uint *)(iVar2 * 4 + blockedSlotBits) | 1 << (requestedSlot & 0x1f);
-  *(short *)((iVar4 + requestedSlot) * 2 + paramLogState + 0x8874) = oldPriority + 1;
+  *(uint *)(slotWordIndex * 4 + blockedSlotBits) = *(uint *)(slotWordIndex * 4 + blockedSlotBits) | 1 << (requestedSlot & 0x1f);
+  *(short *)((slotWord2ThenSlotRecordThenPriorityRowOffset + requestedSlot) * 2 + paramLogState + 0x8874) = oldPriority + 1;
   return requestedSlot;
 }
 

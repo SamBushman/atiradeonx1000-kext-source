@@ -276,45 +276,45 @@ void _glePPRelocateLocal(param_1, param_2, param_3)
 }
 
 /* _glePPRelocateParam @ 0x4f598 (264 bytes) */
-void _glePPRelocateParam(param_1, param_2, param_3, param_4)
-  uint param_1;
-  undefined4 param_2;
-  int *param_3;
-  int *param_4;
+void _glePPRelocateParam(oldParamIndex, newParamIndex, instructionList, paramArrayList)
+  uint oldParamIndex;
+  undefined4 newParamIndex;
+  int *instructionList;
+  int *paramArrayList;
 {
-  int iVar1;
-  uint uVar2;
+  int instructionNodeThenParamArrayNode;
+  uint instructionHeader;
   
-  for (iVar1 = *param_3; iVar1 != 0; iVar1 = *(int *)(iVar1 + 8)) {
-    if ((((*(uint *)(iVar1 + 0xc) >> 0x1d != 0) && ((*(uint *)(iVar1 + 0xc) >> 0x12 & 0xff) != 0x4a)
-         ) && ((*(uint *)(iVar1 + 0x1c) >> 0x17 & 7) == 2)) &&
-       (*(ushort *)(iVar1 + 0x22) == param_1)) {
-      *(short *)(iVar1 + 0x22) = (*(unsigned short *)((unsigned char *)&(param_2) + 2));
+  for (instructionNodeThenParamArrayNode = *instructionList; instructionNodeThenParamArrayNode != 0; instructionNodeThenParamArrayNode = *(int *)(instructionNodeThenParamArrayNode + 8)) {
+    if ((((*(uint *)(instructionNodeThenParamArrayNode + 0xc) >> 0x1d != 0) && ((*(uint *)(instructionNodeThenParamArrayNode + 0xc) >> 0x12 & 0xff) != 0x4a)
+         ) && ((*(uint *)(instructionNodeThenParamArrayNode + 0x1c) >> 0x17 & 7) == 2)) &&
+       (*(ushort *)(instructionNodeThenParamArrayNode + 0x22) == oldParamIndex)) {
+      *(short *)(instructionNodeThenParamArrayNode + 0x22) = (*(unsigned short *)((unsigned char *)&(newParamIndex) + 2));
     }
-    uVar2 = *(uint *)(iVar1 + 0xc);
-    if (((1 < uVar2 >> 0x1d) && (3 < (uVar2 >> 0x12 & 0xff) - 0x41)) &&
-       (((*(uint *)(iVar1 + 0x24) >> 0x17 & 7) == 2 && (*(ushort *)(iVar1 + 0x2a) == param_1)))) {
-      *(short *)(iVar1 + 0x2a) = (*(unsigned short *)((unsigned char *)&(param_2) + 2));
+    instructionHeader = *(uint *)(instructionNodeThenParamArrayNode + 0xc);
+    if (((1 < instructionHeader >> 0x1d) && (3 < (instructionHeader >> 0x12 & 0xff) - 0x41)) &&
+       (((*(uint *)(instructionNodeThenParamArrayNode + 0x24) >> 0x17 & 7) == 2 && (*(ushort *)(instructionNodeThenParamArrayNode + 0x2a) == oldParamIndex)))) {
+      *(short *)(instructionNodeThenParamArrayNode + 0x2a) = (*(unsigned short *)((unsigned char *)&(newParamIndex) + 2));
     }
-    if (((2 < uVar2 >> 0x1d) && ((*(uint *)(iVar1 + 0x2c) >> 0x17 & 7) == 2)) &&
-       (*(ushort *)(iVar1 + 0x32) == param_1)) {
-      *(short *)(iVar1 + 0x32) = (*(unsigned short *)((unsigned char *)&(param_2) + 2));
+    if (((2 < instructionHeader >> 0x1d) && ((*(uint *)(instructionNodeThenParamArrayNode + 0x2c) >> 0x17 & 7) == 2)) &&
+       (*(ushort *)(instructionNodeThenParamArrayNode + 0x32) == oldParamIndex)) {
+      *(short *)(instructionNodeThenParamArrayNode + 0x32) = (*(unsigned short *)((unsigned char *)&(newParamIndex) + 2));
     }
   }
-  if (param_4 == (int *)0x0) {
+  if (paramArrayList == (int *)0x0) {
     return;
   }
-  iVar1 = *param_4;
-  if (iVar1 == 0) {
+  instructionNodeThenParamArrayNode = *paramArrayList;
+  if (instructionNodeThenParamArrayNode == 0) {
     return;
   }
   do {
-    if (*(ushort *)(iVar1 + 0xe) == param_1) {
-      *(short *)(iVar1 + 0xe) = (*(unsigned short *)((unsigned char *)&(param_2) + 2));
-      *(short *)(iVar1 + 0x12) = (*(short *)(iVar1 + 0x12) + (*(unsigned short *)((unsigned char *)&(param_2) + 2))) - (short)param_1;
+    if (*(ushort *)(instructionNodeThenParamArrayNode + 0xe) == oldParamIndex) {
+      *(short *)(instructionNodeThenParamArrayNode + 0xe) = (*(unsigned short *)((unsigned char *)&(newParamIndex) + 2));
+      *(short *)(instructionNodeThenParamArrayNode + 0x12) = (*(short *)(instructionNodeThenParamArrayNode + 0x12) + (*(unsigned short *)((unsigned char *)&(newParamIndex) + 2))) - (short)oldParamIndex;
     }
-    iVar1 = *(int *)(iVar1 + 8);
-  } while (iVar1 != 0);
+    instructionNodeThenParamArrayNode = *(int *)(instructionNodeThenParamArrayNode + 8);
+  } while (instructionNodeThenParamArrayNode != 0);
   return;
 }
 

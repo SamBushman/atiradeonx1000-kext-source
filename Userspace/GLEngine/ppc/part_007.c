@@ -5346,18 +5346,18 @@ void _glColorPointer_Exec(glContext, size, type, stride, pointer)
   int loopIndex2;
   int loopIndex;
   undefined4 glErrorCode;
-  undefined4 uVar1;
-  int iVar2;
-  int iVar3;
+  undefined4 copiedWord;
+  int newRefCount;
+  int previousBufferObjectThenTypeByteSize;
   int clientState;
   undefined4 *dstCursor;
   undefined4 *srcCursor;
   undefined4 *dstCursor2;
-  uint uVar7;
-  int iVar8;
+  uint arrayFormatKeyThenDispatchSelectMaskThenTypeFormatBits;
+  int boundBufferObjectThenTypeIndex;
   
   clientState = *(int *)(glContext + 0x4a60);
-  uVar7 = stride << 7 | (uint)type & 0xf | (size & 3) << 4;
+  arrayFormatKeyThenDispatchSelectMaskThenTypeFormatBits = stride << 7 | (uint)type & 0xf | (size & 3) << 4;
   if (-1 < *(short *)(glContext + 0x4a10)) {
     if (*(int *)(glContext + 0x7574) != 0) {
       return;
@@ -5374,14 +5374,14 @@ LAB_0004cda8:
     *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x100000;
   }
   *(int *)(clientState + 0x60) = pointer;
-  iVar8 = *(int *)(clientState + 0x358);
-  iVar3 = *(int *)(clientState + 0x368);
-  if (iVar8 != iVar3) {
-    if ((iVar3 != 0) && (iVar2 = *(int *)(iVar3 + 8) + -1, *(int *)(iVar3 + 8) = iVar2, iVar2 == 0))
+  boundBufferObjectThenTypeIndex = *(int *)(clientState + 0x358);
+  previousBufferObjectThenTypeByteSize = *(int *)(clientState + 0x368);
+  if (boundBufferObjectThenTypeIndex != previousBufferObjectThenTypeByteSize) {
+    if ((previousBufferObjectThenTypeByteSize != 0) && (newRefCount = *(int *)(previousBufferObjectThenTypeByteSize + 8) + -1, *(int *)(previousBufferObjectThenTypeByteSize + 8) = newRefCount, newRefCount == 0))
     {
-      _gleFreeBufferObject(glContext,iVar3);
+      _gleFreeBufferObject(glContext,previousBufferObjectThenTypeByteSize);
     }
-    if (iVar8 == 0) {
+    if (boundBufferObjectThenTypeIndex == 0) {
       loopIndex = 0;
       *(undefined4 *)(clientState + 0x338) = *(undefined4 *)(clientState + 0x338);
       *(uint *)(clientState + 0x33c) = *(uint *)(clientState + 0x33c) & 0xfffbffff;
@@ -5395,31 +5395,31 @@ LAB_0004cda8:
       }
     }
     else {
-      *(int *)(iVar8 + 8) = *(int *)(iVar8 + 8) + 1;
+      *(int *)(boundBufferObjectThenTypeIndex + 8) = *(int *)(boundBufferObjectThenTypeIndex + 8) + 1;
       *(undefined4 *)(clientState + 0x338) = *(undefined4 *)(clientState + 0x338);
       *(uint *)(clientState + 0x33c) = *(uint *)(clientState + 0x33c) | 0x40000;
       loopIndex2 = 0;
       if (*(char *)(glContext + 0x85a4) != '\0') {
         dstCursor2 = (undefined4 *)(clientState + 1000);
-        srcCursor = (undefined4 *)(iVar8 + 0x10);
+        srcCursor = (undefined4 *)(boundBufferObjectThenTypeIndex + 0x10);
         do {
-          uVar1 = *srcCursor;
+          copiedWord = *srcCursor;
           loopIndex2 = loopIndex2 + 1;
           srcCursor = srcCursor + 1;
-          *dstCursor2 = uVar1;
+          *dstCursor2 = copiedWord;
           dstCursor2 = dstCursor2 + 0x23;
         } while (loopIndex2 < (int)(uint)*(byte *)(glContext + 0x85a4));
       }
     }
-    *(int *)(clientState + 0x368) = iVar8;
+    *(int *)(clientState + 0x368) = boundBufferObjectThenTypeIndex;
     *(undefined4 *)(clientState + 0x350) = *(undefined4 *)(clientState + 0x350);
     *(uint *)(clientState + 0x354) = *(uint *)(clientState + 0x354) | 0x10;
   }
-  if (iVar8 != 0) {
-    pointer = pointer + *(int *)(iVar8 + 0x30);
+  if (boundBufferObjectThenTypeIndex != 0) {
+    pointer = pointer + *(int *)(boundBufferObjectThenTypeIndex + 0x30);
   }
   *(int *)(glContext + 0x4900) = pointer;
-  if (*(uint *)(clientState + 0x74) == uVar7) {
+  if (*(uint *)(clientState + 0x74) == arrayFormatKeyThenDispatchSelectMaskThenTypeFormatBits) {
     return;
   }
   if ((1 < size - 3) || (stride < 0)) {
@@ -5431,35 +5431,35 @@ LAB_0004cda8:
   }
   switch((int)type) {
   case 0x1400:
-    iVar8 = 0;
+    boundBufferObjectThenTypeIndex = 0;
     type = (code *)0x9400;
     goto LAB_0004cd3c;
   case 0x1401:
-    iVar8 = 1;
+    boundBufferObjectThenTypeIndex = 1;
     type = (code *)0x9401;
 LAB_0004cd3c:
-    iVar3 = 1;
+    previousBufferObjectThenTypeByteSize = 1;
     goto LAB_0004cdb0;
   case 0x1402:
-    iVar8 = 2;
+    boundBufferObjectThenTypeIndex = 2;
     type = (code *)0x9402;
     goto LAB_0004cd60;
   case 0x1403:
-    iVar8 = 3;
+    boundBufferObjectThenTypeIndex = 3;
     type = (code *)0x9403;
 LAB_0004cd60:
-    iVar3 = 2;
+    previousBufferObjectThenTypeByteSize = 2;
     goto LAB_0004cdb0;
   case 0x1404:
-    iVar8 = 4;
+    boundBufferObjectThenTypeIndex = 4;
     type = (code *)0x9404;
     break;
   case 0x1405:
-    iVar8 = 5;
+    boundBufferObjectThenTypeIndex = 5;
     type = (code *)0x9404;
     break;
   case 0x1406:
-    iVar8 = 6;
+    boundBufferObjectThenTypeIndex = 6;
     break;
   default:
     if (*(int *)(glContext + 0x7574) != 0) {
@@ -5468,37 +5468,37 @@ LAB_0004cd60:
     glErrorCode = 0x500;
     goto LAB_0004cda8;
   case 0x140a:
-    iVar8 = 7;
-    iVar3 = 8;
+    boundBufferObjectThenTypeIndex = 7;
+    previousBufferObjectThenTypeByteSize = 8;
     goto LAB_0004cdb0;
   }
-  iVar3 = 4;
+  previousBufferObjectThenTypeByteSize = 4;
 LAB_0004cdb0:
   *(short *)(clientState + 0x68) = (short)type;
-  *(char *)(clientState + 0x6c) = (char)iVar3;
+  *(char *)(clientState + 0x6c) = (char)previousBufferObjectThenTypeByteSize;
   *(short *)(clientState + 0x6a) = (short)size;
   if (stride < 1) {
-    stride = size * iVar3;
+    stride = size * previousBufferObjectThenTypeByteSize;
   }
   *(int *)(clientState + 100) = stride;
-  *(uint *)(clientState + 0x74) = uVar7;
+  *(uint *)(clientState + 0x74) = arrayFormatKeyThenDispatchSelectMaskThenTypeFormatBits;
   *(undefined4 *)(glContext + 0x488c) = 0;
   *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x100000;
   *(undefined4 *)(glContext + 0x4890) = 0;
   *(undefined4 *)(glContext + 0x4894) = 0;
   if (*(int *)(glContext + 0x5408) == 0) {
-    uVar7 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0xc) == 0);
+    arrayFormatKeyThenDispatchSelectMaskThenTypeFormatBits = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0xc) == 0);
     *(undefined **)
-     ((*(uint *)(glContext + 0x4680) & uVar7 | *(uint *)(glContext + 0x4684) & ~uVar7) + 0xc) =
+     ((*(uint *)(glContext + 0x4680) & arrayFormatKeyThenDispatchSelectMaskThenTypeFormatBits | *(uint *)(glContext + 0x4684) & ~arrayFormatKeyThenDispatchSelectMaskThenTypeFormatBits) + 0xc) =
          PTR__glArrayElement_Exec_00110454;
   }
-  *(char *)(clientState + 0x6d) = (char)iVar8;
-  uVar7 = iVar8 << 8;
+  *(char *)(clientState + 0x6d) = (char)boundBufferObjectThenTypeIndex;
+  arrayFormatKeyThenDispatchSelectMaskThenTypeFormatBits = boundBufferObjectThenTypeIndex << 8;
   if (size != 3) {
-    uVar7 = (iVar8 + 8) * 0x100;
+    arrayFormatKeyThenDispatchSelectMaskThenTypeFormatBits = (boundBufferObjectThenTypeIndex + 8) * 0x100;
   }
-  *(uint *)(clientState + 0x70) = uVar7;
-  *(uint *)(glContext + 0x49b0) = *(uint *)(glContext + 0x49b0) & 0xfffff0ff | uVar7;
+  *(uint *)(clientState + 0x70) = arrayFormatKeyThenDispatchSelectMaskThenTypeFormatBits;
+  *(uint *)(glContext + 0x49b0) = *(uint *)(glContext + 0x49b0) & 0xfffff0ff | arrayFormatKeyThenDispatchSelectMaskThenTypeFormatBits;
   return;
 }
 
@@ -5513,18 +5513,18 @@ void _glVertexPointer_Exec(glContext, size, type, stride, pointer)
   int loopIndex2;
   int loopIndex;
   undefined4 glErrorCode;
-  undefined4 uVar1;
-  int iVar2;
-  int iVar3;
+  undefined4 copiedWord;
+  int newRefCount;
+  int previousBufferObjectThenTypeIndex;
   undefined4 *dstCursor;
   undefined4 *srcCursor;
   int clientState;
   undefined4 *dstCursor2;
-  uint uVar7;
-  int iVar8;
+  uint arrayFormatKeyThenDispatchSelectMask;
+  int boundBufferObjectThenElementByteSizeThenTypeFormatBits;
   
   clientState = *(int *)(glContext + 0x4a60);
-  uVar7 = stride << 7 | type & 0xf | (size & 3) << 4;
+  arrayFormatKeyThenDispatchSelectMask = stride << 7 | type & 0xf | (size & 3) << 4;
   if (-1 < *(short *)(glContext + 0x4a10)) {
     if (*(int *)(glContext + 0x7574) != 0) {
       return;
@@ -5538,14 +5538,14 @@ void _glVertexPointer_Exec(glContext, size, type, stride, pointer)
     *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x100000;
   }
   *(int *)(clientState + 0x30) = pointer;
-  iVar8 = *(int *)(clientState + 0x358);
-  iVar3 = *(int *)(clientState + 0x360);
-  if (iVar8 != iVar3) {
-    if ((iVar3 != 0) && (iVar2 = *(int *)(iVar3 + 8) + -1, *(int *)(iVar3 + 8) = iVar2, iVar2 == 0))
+  boundBufferObjectThenElementByteSizeThenTypeFormatBits = *(int *)(clientState + 0x358);
+  previousBufferObjectThenTypeIndex = *(int *)(clientState + 0x360);
+  if (boundBufferObjectThenElementByteSizeThenTypeFormatBits != previousBufferObjectThenTypeIndex) {
+    if ((previousBufferObjectThenTypeIndex != 0) && (newRefCount = *(int *)(previousBufferObjectThenTypeIndex + 8) + -1, *(int *)(previousBufferObjectThenTypeIndex + 8) = newRefCount, newRefCount == 0))
     {
-      _gleFreeBufferObject(glContext,iVar3);
+      _gleFreeBufferObject(glContext,previousBufferObjectThenTypeIndex);
     }
-    if (iVar8 == 0) {
+    if (boundBufferObjectThenElementByteSizeThenTypeFormatBits == 0) {
       loopIndex = 0;
       *(undefined4 *)(clientState + 0x338) = *(undefined4 *)(clientState + 0x338);
       *(uint *)(clientState + 0x33c) = *(uint *)(clientState + 0x33c) & 0xfffeffff;
@@ -5559,31 +5559,31 @@ void _glVertexPointer_Exec(glContext, size, type, stride, pointer)
       }
     }
     else {
-      *(int *)(iVar8 + 8) = *(int *)(iVar8 + 8) + 1;
+      *(int *)(boundBufferObjectThenElementByteSizeThenTypeFormatBits + 8) = *(int *)(boundBufferObjectThenElementByteSizeThenTypeFormatBits + 8) + 1;
       *(undefined4 *)(clientState + 0x338) = *(undefined4 *)(clientState + 0x338);
       *(uint *)(clientState + 0x33c) = *(uint *)(clientState + 0x33c) | 0x10000;
       loopIndex2 = 0;
       if (*(char *)(glContext + 0x85a4) != '\0') {
         dstCursor2 = (undefined4 *)(clientState + 0x3e0);
-        srcCursor = (undefined4 *)(iVar8 + 0x10);
+        srcCursor = (undefined4 *)(boundBufferObjectThenElementByteSizeThenTypeFormatBits + 0x10);
         do {
-          uVar1 = *srcCursor;
+          copiedWord = *srcCursor;
           loopIndex2 = loopIndex2 + 1;
           srcCursor = srcCursor + 1;
-          *dstCursor2 = uVar1;
+          *dstCursor2 = copiedWord;
           dstCursor2 = dstCursor2 + 0x23;
         } while (loopIndex2 < (int)(uint)*(byte *)(glContext + 0x85a4));
       }
     }
-    *(int *)(clientState + 0x360) = iVar8;
+    *(int *)(clientState + 0x360) = boundBufferObjectThenElementByteSizeThenTypeFormatBits;
     *(undefined4 *)(clientState + 0x350) = *(undefined4 *)(clientState + 0x350);
     *(uint *)(clientState + 0x354) = *(uint *)(clientState + 0x354) | 0x10;
   }
-  if (iVar8 != 0) {
-    pointer = pointer + *(int *)(iVar8 + 0x30);
+  if (boundBufferObjectThenElementByteSizeThenTypeFormatBits != 0) {
+    pointer = pointer + *(int *)(boundBufferObjectThenElementByteSizeThenTypeFormatBits + 0x30);
   }
   *(int *)(glContext + 0x48f8) = pointer;
-  if (*(uint *)(clientState + 0x44) == uVar7) {
+  if (*(uint *)(clientState + 0x44) == arrayFormatKeyThenDispatchSelectMask) {
     return;
   }
   if ((2 < size - 2) || (stride < 0)) {
@@ -5596,19 +5596,19 @@ void _glVertexPointer_Exec(glContext, size, type, stride, pointer)
   if (type != 0x1404) {
     if (type < 0x1405) {
       if (type == 0x1402) {
-        iVar3 = 0;
-        iVar8 = 2;
+        previousBufferObjectThenTypeIndex = 0;
+        boundBufferObjectThenElementByteSizeThenTypeFormatBits = 2;
         goto LAB_0004d0b8;
       }
     }
     else {
       if (type == 0x1406) {
-        iVar3 = 2;
+        previousBufferObjectThenTypeIndex = 2;
         goto LAB_0004d08c;
       }
       if (type == 0x140a) {
-        iVar3 = 3;
-        iVar8 = 8;
+        previousBufferObjectThenTypeIndex = 3;
+        boundBufferObjectThenElementByteSizeThenTypeFormatBits = 8;
         goto LAB_0004d0b8;
       }
     }
@@ -5620,34 +5620,34 @@ LAB_0004d0b0:
     *(undefined4 *)(glContext + 0x7574) = glErrorCode;
     return;
   }
-  iVar3 = 1;
+  previousBufferObjectThenTypeIndex = 1;
 LAB_0004d08c:
-  iVar8 = 4;
+  boundBufferObjectThenElementByteSizeThenTypeFormatBits = 4;
 LAB_0004d0b8:
   *(short *)(clientState + 0x38) = (short)type;
-  *(char *)(clientState + 0x3c) = (char)iVar8;
+  *(char *)(clientState + 0x3c) = (char)boundBufferObjectThenElementByteSizeThenTypeFormatBits;
   *(short *)(clientState + 0x3a) = (short)size;
   if (stride < 1) {
-    stride = size * iVar8;
+    stride = size * boundBufferObjectThenElementByteSizeThenTypeFormatBits;
   }
   *(int *)(clientState + 0x34) = stride;
-  *(uint *)(clientState + 0x44) = uVar7;
+  *(uint *)(clientState + 0x44) = arrayFormatKeyThenDispatchSelectMask;
   *(undefined4 *)(glContext + 0x488c) = 0;
   *(undefined4 *)(glContext + 0x4890) = 0;
   *(undefined4 *)(glContext + 0x4894) = 0;
   if (*(int *)(glContext + 0x5408) == 0) {
-    uVar7 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0xc) == 0);
+    arrayFormatKeyThenDispatchSelectMask = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0xc) == 0);
     *(undefined **)
-     ((*(uint *)(glContext + 0x4680) & uVar7 | *(uint *)(glContext + 0x4684) & ~uVar7) + 0xc) =
+     ((*(uint *)(glContext + 0x4680) & arrayFormatKeyThenDispatchSelectMask | *(uint *)(glContext + 0x4684) & ~arrayFormatKeyThenDispatchSelectMask) + 0xc) =
          PTR__glArrayElement_Exec_00110454;
   }
-  *(char *)(clientState + 0x3d) = (char)iVar3;
-  iVar8 = iVar3;
-  if ((size != 2) && (iVar8 = iVar3 + 4, size != 3)) {
-    iVar8 = iVar3 + 8;
+  *(char *)(clientState + 0x3d) = (char)previousBufferObjectThenTypeIndex;
+  boundBufferObjectThenElementByteSizeThenTypeFormatBits = previousBufferObjectThenTypeIndex;
+  if ((size != 2) && (boundBufferObjectThenElementByteSizeThenTypeFormatBits = previousBufferObjectThenTypeIndex + 4, size != 3)) {
+    boundBufferObjectThenElementByteSizeThenTypeFormatBits = previousBufferObjectThenTypeIndex + 8;
   }
-  *(int *)(clientState + 0x40) = iVar8 << 0xc;
-  *(uint *)(glContext + 0x49b0) = *(uint *)(glContext + 0x49b0) & 0xffff0fff | iVar8 << 0xc;
+  *(int *)(clientState + 0x40) = boundBufferObjectThenElementByteSizeThenTypeFormatBits << 0xc;
+  *(uint *)(glContext + 0x49b0) = *(uint *)(glContext + 0x49b0) & 0xffff0fff | boundBufferObjectThenElementByteSizeThenTypeFormatBits << 0xc;
   return;
 }
 
@@ -5936,21 +5936,21 @@ void _gleEvalDrawArraysOrElements_Entires_Exec(int glContext,undefined4 mode,und
 }
 
 /* _gleDrawArraysOrElements_IMM_Exec @ 0x4d89c (1024 bytes) */
-void _gleDrawArraysOrElements_IMM_Exec(int glContext,uint mode,undefined4 first,int count,undefined4 forwardedArg5,int param_6,double fparam_1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
+void _gleDrawArraysOrElements_IMM_Exec(int glContext,uint mode,undefined4 first,int count,undefined4 forwardedArg5,int arrayStateRecord,double forwardedFloatArg1ThenF1AfterCall,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
 {
   int remaining;
   int loopIndex;
   undefined4 glErrorCode;
-  bool bVar1;
+  bool rendererInfoByte79Zero;
   bool noStateChangePending;
   char rendererInfoByte79;
-  undefined4 uVar3;
-  int iVar4;
-  uint uVar5;
+  undefined4 firstArgCopy;
+  int arrayStateRecordCopyThenDirtyWord;
+  uint shiftedEnabledBits;
   int *srcCursor;
   int framebufferObject;
   int matrixChangeBits;
-  int iVar9;
+  int countArgCopyThenVertexArrayFunc;
   uint uVar10;
   uint dispatchFlags;
   uint changeWord3;
@@ -5958,7 +5958,7 @@ void _gleDrawArraysOrElements_IMM_Exec(int glContext,uint mode,undefined4 first,
   uint loopIndex2;
   int *changeWordCursor;
   short *srcCursor2;
-  double extraout_f1;
+  double f1AfterCall;
   longlong lVar15;
   
   if (-1 < *(short *)(glContext + 0x4a10)) {
@@ -5985,26 +5985,26 @@ LAB_0004d920:
   }
   if ((*(char *)(glContext + 0x4664) != '\0') && (*(int *)(*(int *)(glContext + 0x5420) + 0x4cc) == 0))
   goto LAB_0004d920;
-  if ((*(uint *)(param_6 + 800) & 1) == 0 && (*(uint *)(param_6 + 0x324) & 0x10000) == 0) {
+  if ((*(uint *)(arrayStateRecord + 800) & 1) == 0 && (*(uint *)(arrayStateRecord + 0x324) & 0x10000) == 0) {
     return;
   }
   if (count == 0) {
     return;
   }
   matrixChangeBits = *(int *)(glContext + 0x50ac);
-  uVar3 = first;
-  iVar9 = count;
-  iVar4 = param_6;
+  firstArgCopy = first;
+  countArgCopyThenVertexArrayFunc = count;
+  arrayStateRecordCopyThenDirtyWord = arrayStateRecord;
   if (matrixChangeBits != 0 || (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
     _gleUpdateMatrixFunc(glContext);
-    fparam_1 = extraout_f1;
+    forwardedFloatArg1ThenF1AfterCall = f1AfterCall;
   }
   if (*(char *)(glContext + 0x4691) == '\0') goto LAB_0004db78;
   framebufferObject = *(int *)(glContext + 0x744c);
   changeWordCursor = (int *)(glContext + 0x310);
   rendererInfoByte79 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
   if ((framebufferObject != 0) && (*(int *)(framebufferObject + 0xec) != 0)) {
-    ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,uVar3,iVar9,forwardedArg5,iVar4,matrixChangeBits,fparam_1,forwardedFloatArg2,forwardedFloatArg3,
+    ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,firstArgCopy,countArgCopyThenVertexArrayFunc,forwardedArg5,arrayStateRecordCopyThenDirtyWord,matrixChangeBits,forwardedFloatArg1ThenF1AfterCall,forwardedFloatArg2,forwardedFloatArg3,
                forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
     *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000000;
   }
@@ -6016,9 +6016,9 @@ LAB_0004da50:
     loopIndex = 0;
     srcCursor = (int *)(glContext + 0x324);
     do {
-      iVar4 = *srcCursor;
+      arrayStateRecordCopyThenDirtyWord = *srcCursor;
       srcCursor = srcCursor + 1;
-      if (iVar4 != 0) {
+      if (arrayStateRecordCopyThenDirtyWord != 0) {
         *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x800000;
         break;
       }
@@ -6035,14 +6035,14 @@ LAB_0004da50:
       goto LAB_0004da50;
     }
   }
-  bVar1 = rendererInfoByte79 == '\0';
-  if (bVar1) {
+  rendererInfoByte79Zero = rendererInfoByte79 == '\0';
+  if (rendererInfoByte79Zero) {
     changeWord3 = changeWord3 & 0x17000000;
   }
   else {
     changeWord3 = changeWord3 & 0x17ffffff;
   }
-  if (bVar1) {
+  if (rendererInfoByte79Zero) {
     noStateChangePending = ((*changeWordCursor == 0 && *(int *)(glContext + 0x314) == 0) && changeWord3 == 0) &&
             *(int *)(glContext + 800) == 0;
   }
@@ -6088,16 +6088,16 @@ LAB_0004db78:
   uVar10 = 0;
   if (*(char *)(glContext + 0x7580) != '\0') {
 LAB_0004dc00:
-    iVar9 = *(int *)(glContext + 0x4890);
-    if (iVar9 == 0) {
-      iVar9 = ((int (*)())_gleGetVertexArrayFunc)(glContext);
-      *(int *)(glContext + 0x4890) = iVar9;
+    countArgCopyThenVertexArrayFunc = *(int *)(glContext + 0x4890);
+    if (countArgCopyThenVertexArrayFunc == 0) {
+      countArgCopyThenVertexArrayFunc = ((int (*)())_gleGetVertexArrayFunc)(glContext);
+      *(int *)(glContext + 0x4890) = countArgCopyThenVertexArrayFunc;
     }
     *(int *)(glContext + 0x4a14) = count;
-    ((void (*)())_gleDrawArraysOrElements_Core)(glContext,mode,first,count,uVar10,*(uint *)(param_6 + 0x324) >> 0x12 & 1,
-               param_6 + 0x20,iVar9);
+    ((void (*)())_gleDrawArraysOrElements_Core)(glContext,mode,first,count,uVar10,*(uint *)(arrayStateRecord + 0x324) >> 0x12 & 1,
+               arrayStateRecord + 0x20,countArgCopyThenVertexArrayFunc);
     *(undefined4 *)(glContext + 0x4a14) = 0;
-    if (*(int *)(param_6 + 0x328) == 0 && *(int *)(param_6 + 0x32c) == 0) {
+    if (*(int *)(arrayStateRecord + 0x328) == 0 && *(int *)(arrayStateRecord + 0x32c) == 0) {
       return;
     }
     _gleUpdateDrawArraysFuncs(glContext);
@@ -6105,16 +6105,16 @@ LAB_0004dc00:
   }
   glContextWord514c = *(uint *)(glContext + 0x514c);
   loopIndex2 = 0;
-  srcCursor2 = (short *)(param_6 + 0xea);
+  srcCursor2 = (short *)(arrayStateRecord + 0xea);
   do {
-    uVar5 = glContextWord514c >> (loopIndex2 & 0x3f);
-    if ((uVar5 & 1) == 0) {
-      if (uVar5 == 0) goto LAB_0004dc00;
+    shiftedEnabledBits = glContextWord514c >> (loopIndex2 & 0x3f);
+    if ((shiftedEnabledBits & 1) == 0) {
+      if (shiftedEnabledBits == 0) goto LAB_0004dc00;
     }
     else {
       lVar15 = ___ashldi3(0,0x1000000,loopIndex2);
-      if ((*(uint *)(param_6 + 800) & (uint)((ulonglong)lVar15 >> 0x20)) != 0 ||
-          (*(uint *)(param_6 + 0x324) & (uint)lVar15) != 0) {
+      if ((*(uint *)(arrayStateRecord + 800) & (uint)((ulonglong)lVar15 >> 0x20)) != 0 ||
+          (*(uint *)(arrayStateRecord + 0x324) & (uint)lVar15) != 0) {
         if (*srcCursor2 == 4) {
           uVar10 = 3;
         }
