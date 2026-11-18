@@ -1549,49 +1549,49 @@ int _gleRemoveHashName(param_1, param_2)
 }
 
 /* _glePPUnlogParameters @ 0x31064 (248 bytes) */
-void _glePPUnlogParameters(param_1, param_2, param_3, param_4)
+void _glePPUnlogParameters(param_1, program, paramCount, paramEntries)
   int param_1;
-  int param_2;
-  int param_3;
-  int param_4;
+  int program;
+  int paramCount;
+  int paramEntries;
 {
-  ushort uVar1;
-  uint uVar2;
-  uint uVar3;
+  ushort slotPriority;
+  uint slotIndex;
+  uint bankIndex;
   int iVar4;
-  int iVar5;
+  int slotRecord;
   int sharedState;
   int loopIndex;
-  uint uVar8;
-  int iVar9;
+  uint paramWord2;
+  int slotBitmapWord;
   
   loopIndex = 0;
-  uVar3 = (uint)*(ushort *)(param_2 + 0x4ba);
+  bankIndex = (uint)*(ushort *)(program + 0x4ba);
   sharedState = *(int *)(param_1 + 0x5148);
-  iVar4 = uVar3 * 0xa30 + sharedState;
+  iVar4 = bankIndex * 0xa30 + sharedState;
   *(int *)(iVar4 + 0x8a98) = *(int *)(iVar4 + 0x8a98) + 1;
-  if (param_3 != 0) {
+  if (paramCount != 0) {
     do {
-      uVar8 = *(uint *)(loopIndex * 8 + param_4 + 4);
-      if ((*(uint *)(loopIndex * 8 + param_4) & 0x1f0000) != 0) {
-        uVar2 = uVar8 & 0xffff;
-        iVar4 = (uVar3 * 0x518 + uVar2) * 2 + sharedState;
-        uVar1 = *(ushort *)(iVar4 + 0x8874);
-        if (uVar1 == 1) {
-          iVar5 = (uVar3 * 0x146 + uVar2) * 8 + sharedState;
-          iVar9 = (uVar3 * 0x28c + (uVar2 >> 5)) * 4 + sharedState;
+      paramWord2 = *(uint *)(loopIndex * 8 + paramEntries + 4);
+      if ((*(uint *)(loopIndex * 8 + paramEntries) & 0x1f0000) != 0) {
+        slotIndex = paramWord2 & 0xffff;
+        iVar4 = (bankIndex * 0x518 + slotIndex) * 2 + sharedState;
+        slotPriority = *(ushort *)(iVar4 + 0x8874);
+        if (slotPriority == 1) {
+          slotRecord = (bankIndex * 0x146 + slotIndex) * 8 + sharedState;
+          slotBitmapWord = (bankIndex * 0x28c + (slotIndex >> 5)) * 4 + sharedState;
           *(undefined2 *)(iVar4 + 0x8874) = 0;
-          *(undefined4 *)(iVar5 + 0x8074) = 0;
-          *(undefined4 *)(iVar5 + 0x8078) = 0;
-          *(uint *)(iVar9 + 0x8a74) = *(uint *)(iVar9 + 0x8a74) | 1 << (uVar8 & 0x1f);
+          *(undefined4 *)(slotRecord + 0x8074) = 0;
+          *(undefined4 *)(slotRecord + 0x8078) = 0;
+          *(uint *)(slotBitmapWord + 0x8a74) = *(uint *)(slotBitmapWord + 0x8a74) | 1 << (paramWord2 & 0x1f);
         }
-        else if (1 < uVar1) {
-          *(ushort *)(iVar4 + 0x8874) = uVar1 - 1;
+        else if (1 < slotPriority) {
+          *(ushort *)(iVar4 + 0x8874) = slotPriority - 1;
         }
       }
       loopIndex = loopIndex + 1;
-      param_3 = param_3 + -1;
-    } while (param_3 != 0);
+      paramCount = paramCount + -1;
+    } while (paramCount != 0);
   }
   return;
 }

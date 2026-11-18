@@ -3868,9 +3868,9 @@ code_r0x000248f4:
 }
 
 /* _glePPLogParameters @ 0x2496c (728 bytes) */
-void _glePPLogParameters(glContext, param_2, paramCount, paramEntries, paramArrayCount, paramArrays)
+void _glePPLogParameters(glContext, program, paramCount, paramEntries, paramArrayCount, paramArrays)
   int glContext;
-  int param_2;
+  int program;
   uint paramCount;
   int paramEntries;
   uint paramArrayCount;
@@ -3901,12 +3901,12 @@ void _glePPLogParameters(glContext, param_2, paramCount, paramEntries, paramArra
   uint arrayEndWord;
   
   loopIndex2 = 0;
-  bankIndex = (uint)*(ushort *)(param_2 + 0x4ba);
+  bankIndex = (uint)*(ushort *)(program + 0x4ba);
   sharedState = *(int *)(glContext + 0x5148);
   iVar5 = bankIndex * 0xa30 + sharedState;
   iVar2 = *(int *)(iVar5 + 0x8a98) + 1;
   *(int *)(iVar5 + 0x8a98) = iVar2;
-  *(int *)(param_2 + 0x14) = iVar2;
+  *(int *)(program + 0x14) = iVar2;
   lastSlot = 0;
   if (*(uint *)(iVar5 + 0x8a9c) != 0) {
     srcCursor = *(uint **)(iVar5 + 0x8aa0);
@@ -5266,14 +5266,14 @@ int _glTexImage3D_Exec(glContext, target, level, internalformat, width, height, 
   undefined4 type;
   int pixels;
 {
-  byte bVar1;
-  ushort uVar2;
+  byte levelFlags;
+  ushort textureTargetBits;
   undefined4 glErrorCode;
   int iVar4;
   int iVar5;
   int iVar6;
   int pixelUnpackBuffer;
-  int iVar7;
+  int bufferSize;
   double bytesPerElement;
   
   if (-1 < *(short *)(glContext + 0x4a10)) goto LAB_000270fc;
@@ -5292,23 +5292,23 @@ LAB_00027098:
     if (iVar6 == 0) {
       return;
     }
-    uVar2 = *(ushort *)(iVar6 + 0x24);
-    if ((uVar2 & 0x3c00) == 0x1000) {
+    textureTargetBits = *(ushort *)(iVar6 + 0x24);
+    if ((textureTargetBits & 0x3c00) == 0x1000) {
 LAB_00027114:
       iVar5 = iVar6 + level * 0x18;
       iVar4 = iVar5 + 0xc4;
       if ((*(byte *)(iVar5 + 0xcf) & 0x20) != 0) {
         _gleDeletePluginTextureLevel(glContext,iVar6,iVar4,0,level);
         if (*(int *)(iVar5 + 0xd8) != 0) {
-          bVar1 = *(byte *)(iVar5 + 0xcf);
-          if ((bVar1 & 1) == 0) {
+          levelFlags = *(byte *)(iVar5 + 0xcf);
+          if ((levelFlags & 1) == 0) {
             _gleFreeTextureLevel(glContext,iVar6,iVar4);
-            bVar1 = *(byte *)(iVar5 + 0xcf);
+            levelFlags = *(byte *)(iVar5 + 0xcf);
           }
           else {
             *(undefined4 *)(iVar5 + 0xd8) = 0;
           }
-          *(byte *)(iVar5 + 0xcf) = bVar1 & 0xef;
+          *(byte *)(iVar5 + 0xcf) = levelFlags & 0xef;
         }
         *(byte *)(iVar5 + 0xcf) = *(byte *)(iVar5 + 0xcf) & 0xdf;
       }
@@ -5329,19 +5329,19 @@ LAB_00027114:
            *(uint *)(glContext + 0x314) | 1 << (*(uint *)(glContext + 0x53d4) & 0x3f);
       return;
     }
-    if ((uVar2 & 0x3c00) == 0) {
-      *(ushort *)(iVar6 + 0x24) = uVar2 | 0x1000;
+    if ((textureTargetBits & 0x3c00) == 0) {
+      *(ushort *)(iVar6 + 0x24) = textureTargetBits | 0x1000;
       goto LAB_00027114;
     }
-    if ((uVar2 & 0xc00) == 0) goto LAB_00027114;
+    if ((textureTargetBits & 0xc00) == 0) goto LAB_00027114;
   }
   else {
     iVar4 = _gleOffsetLimitImage3D
                       (glContext + 0x31cc,width,height,depth,format,type,pixels);
-    iVar7 = *(int *)(pixelUnpackBuffer + 0x38);
+    bufferSize = *(int *)(pixelUnpackBuffer + 0x38);
     bytesPerElement = (double)((double (*)())_gleBytesPerElement)(type);
     iVar5 = (int)bytesPerElement;
-    if (iVar4 <= iVar7) {
+    if (iVar4 <= bufferSize) {
       if (iVar5 == 0) {
         iVar5 = _glePixelBytes(format,type);
       }

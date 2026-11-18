@@ -1021,7 +1021,9 @@ int _glCompressedTexImage2D_Exec(glContext, target, level, internalformat, width
   undefined4 glErrorCode;
   uint faceIndex;
   int iVar5;
-  int iVar6;
+  int levelSlot;
+  int unpackBuffer;
+  int textureObject;
   int textureLevel;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
@@ -1032,52 +1034,52 @@ int _glCompressedTexImage2D_Exec(glContext, target, level, internalformat, width
       glErrorCode = 0x501;
       goto LAB_00091f94;
     }
-    iVar6 = *(int *)(glContext + 0x4a6c);
-    if (iVar6 != 0) {
-      if (*(int *)(iVar6 + 0x38) < imageSize + data) goto LAB_00091f84;
-      if (*(int *)(iVar6 + 0x40) != 0) {
-        _gleSynchronizePluginBuffer(glContext,iVar6 + 0x10);
+    unpackBuffer = *(int *)(glContext + 0x4a6c);
+    if (unpackBuffer != 0) {
+      if (*(int *)(unpackBuffer + 0x38) < imageSize + data) goto LAB_00091f84;
+      if (*(int *)(unpackBuffer + 0x40) != 0) {
+        _gleSynchronizePluginBuffer(glContext,unpackBuffer + 0x10);
       }
-      data = data + *(int *)(iVar6 + 0x30);
+      data = data + *(int *)(unpackBuffer + 0x30);
     }
-    iVar6 = _gleCheckCompressedTexImage2DArgs
+    textureObject = _gleCheckCompressedTexImage2DArgs
                       (glContext,target,level,internalformat,width,height,border,imageSize);
-    if (iVar6 == 0) {
+    if (textureObject == 0) {
       return;
     }
-    textureTargetBits = *(ushort *)(iVar6 + 0x24);
+    textureTargetBits = *(ushort *)(textureObject + 0x24);
     if ((textureTargetBits & 0x3c00) == 0x1000) {
 LAB_00091f9c:
       faceIndex = target - 0x8515;
       if (5 < faceIndex) {
         faceIndex = 0;
       }
-      iVar5 = iVar6 + faceIndex * 0x168 + level * 0x18;
-      textureLevel = iVar5 + 0xc4;
-      if ((*(byte *)(iVar5 + 0xcf) & 0x20) != 0) {
-        _gleDeletePluginTextureLevel(glContext,iVar6,textureLevel,faceIndex,level);
-        if (*(int *)(iVar5 + 0xd8) != 0) {
-          levelFlags = *(byte *)(iVar5 + 0xcf);
+      levelSlot = textureObject + faceIndex * 0x168 + level * 0x18;
+      textureLevel = levelSlot + 0xc4;
+      if ((*(byte *)(levelSlot + 0xcf) & 0x20) != 0) {
+        _gleDeletePluginTextureLevel(glContext,textureObject,textureLevel,faceIndex,level);
+        if (*(int *)(levelSlot + 0xd8) != 0) {
+          levelFlags = *(byte *)(levelSlot + 0xcf);
           if ((levelFlags & 1) == 0) {
-            _gleFreeTextureLevel(glContext,iVar6,textureLevel);
-            levelFlags = *(byte *)(iVar5 + 0xcf);
+            _gleFreeTextureLevel(glContext,textureObject,textureLevel);
+            levelFlags = *(byte *)(levelSlot + 0xcf);
           }
           else {
-            *(undefined4 *)(iVar5 + 0xd8) = 0;
+            *(undefined4 *)(levelSlot + 0xd8) = 0;
           }
-          *(byte *)(iVar5 + 0xcf) = levelFlags & 0xef;
+          *(byte *)(levelSlot + 0xcf) = levelFlags & 0xef;
         }
-        *(byte *)(iVar5 + 0xcf) = *(byte *)(iVar5 + 0xcf) & 0xdf;
+        *(byte *)(levelSlot + 0xcf) = *(byte *)(levelSlot + 0xcf) & 0xdf;
       }
       iVar5 = _gleCreateTextureLevel
-                        (glContext,iVar6,textureLevel,internalformat,width,height,1,border,internalformat,0,1,data);
+                        (glContext,textureObject,textureLevel,internalformat,width,height,1,border,internalformat,0,1,data);
       if ((iVar5 != 0) && (data != 0)) {
         _gleCompressedTextureImagePut(glContext,textureLevel,0,0,0,width,height,1,internalformat,imageSize,data)
         ;
       }
-      _gleCreatePluginTextureLevel(glContext,iVar6,textureLevel,faceIndex,level,internalformat);
-      if ((((*(uint *)(iVar6 + 0x6c) & 0x8000) != 0) && (*(short *)(iVar6 + 0x60) == level)) &&
-         (iVar6 = _gleGenMipmapsToLevel(glContext,iVar6,faceIndex,level,0xf,1), iVar6 != 0)) {
+      _gleCreatePluginTextureLevel(glContext,textureObject,textureLevel,faceIndex,level,internalformat);
+      if ((((*(uint *)(textureObject + 0x6c) & 0x8000) != 0) && (*(short *)(textureObject + 0x60) == level)) &&
+         (textureObject = _gleGenMipmapsToLevel(glContext,textureObject,faceIndex,level,0xf,1), textureObject != 0)) {
         return;
       }
       *(uint *)(glContext + 0x314) =
@@ -1085,7 +1087,7 @@ LAB_00091f9c:
       return;
     }
     if ((textureTargetBits & 0x3c00) == 0) {
-      *(ushort *)(iVar6 + 0x24) = textureTargetBits | 0x1000;
+      *(ushort *)(textureObject + 0x24) = textureTargetBits | 0x1000;
       goto LAB_00091f9c;
     }
     if ((textureTargetBits & 0xc00) == 0) goto LAB_00091f9c;

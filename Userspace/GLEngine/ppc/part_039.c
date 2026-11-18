@@ -806,56 +806,56 @@ int _gleGetVertexToListFunc(forwardedArg1)
 }
 
 /* _gleLoadDataElementFromMatNO @ 0xb5290 (256 bytes) */
-int _gleLoadDataElementFromMatNO(param_1, param_2, param_3, param_4, param_5)
-  uint *param_1;
-  int param_2;
-  int param_3;
-  uint param_4;
-  int param_5;
+int _gleLoadDataElementFromMatNO(instrCursor, componentCount, doubleFlag, sourceOffset, baseRegisterSelect)
+  uint *instrCursor;
+  int componentCount;
+  int doubleFlag;
+  uint sourceOffset;
+  int baseRegisterSelect;
 {
-  uint uVar1;
+  uint instrWord;
   
-  if (param_3 == 4) {
-    if (param_2 == 1) {
-      uVar1 = (param_5 + 0xb) * 0x10000 | param_4 & 0xffff | 0xc0200000;
+  if (doubleFlag == 4) {
+    if (componentCount == 1) {
+      instrWord = (baseRegisterSelect + 0xb) * 0x10000 | sourceOffset & 0xffff | 0xc0200000;
     }
     else {
-      if (param_2 < 2) {
-        return param_1;
+      if (componentCount < 2) {
+        return instrCursor;
       }
-      uVar1 = (param_5 + 0xb) * 0x10000;
-      *param_1 = uVar1 | param_4 & 0xffff | 0xc8200000;
-      param_1 = param_1 + 1;
-      if (param_2 == 3) {
-        uVar1 = uVar1 | param_4 + 8 & 0xffff | 0xc0600000;
+      instrWord = (baseRegisterSelect + 0xb) * 0x10000;
+      *instrCursor = instrWord | sourceOffset & 0xffff | 0xc8200000;
+      instrCursor = instrCursor + 1;
+      if (componentCount == 3) {
+        instrWord = instrWord | sourceOffset + 8 & 0xffff | 0xc0600000;
       }
       else {
-        if (param_2 != 4) {
-          return param_1;
+        if (componentCount != 4) {
+          return instrCursor;
         }
-        uVar1 = uVar1 | param_4 + 8 & 0xffff | 0xc8600000;
+        instrWord = instrWord | sourceOffset + 8 & 0xffff | 0xc8600000;
       }
     }
   }
   else {
-    uVar1 = (param_5 + 0xb) * 0x10000;
-    *param_1 = uVar1 | param_4 & 0xffff | 0xc0200000;
-    if (param_2 < 2) {
-      return param_1 + 1;
+    instrWord = (baseRegisterSelect + 0xb) * 0x10000;
+    *instrCursor = instrWord | sourceOffset & 0xffff | 0xc0200000;
+    if (componentCount < 2) {
+      return instrCursor + 1;
     }
-    param_1[1] = uVar1 | param_4 + 4 & 0xffff | 0xc0400000;
-    if (param_2 < 3) {
-      return param_1 + 2;
+    instrCursor[1] = instrWord | sourceOffset + 4 & 0xffff | 0xc0400000;
+    if (componentCount < 3) {
+      return instrCursor + 2;
     }
-    param_1[2] = uVar1 | param_4 + 8 & 0xffff | 0xc0600000;
-    param_1 = param_1 + 3;
-    if (param_2 != 4) {
-      return param_1;
+    instrCursor[2] = instrWord | sourceOffset + 8 & 0xffff | 0xc0600000;
+    instrCursor = instrCursor + 3;
+    if (componentCount != 4) {
+      return instrCursor;
     }
-    uVar1 = uVar1 | param_4 + 0xc & 0xffff | 0xc0800000;
+    instrWord = instrWord | sourceOffset + 0xc & 0xffff | 0xc0800000;
   }
-  *param_1 = uVar1;
-  return param_1 + 1;
+  *instrCursor = instrWord;
+  return instrCursor + 1;
 }
 
 /* _gleInterpolEyeNO0000 @ 0xb5390 (448 bytes) */

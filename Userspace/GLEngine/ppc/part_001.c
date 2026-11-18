@@ -630,19 +630,19 @@ double _gleUpdateLightPosition(int glContext,int param_2,double unusedFloatArg1)
 }
 
 /* _gleVectorNormalizeNO @ 0x76c0 (204 bytes) */
-double _gleVectorNormalizeNO(undefined4 unusedArg1,float *param_2,float *param_3,double unusedFloatArg1)
+double _gleVectorNormalizeNO(undefined4 unusedArg1,float *inVector,float *outVector,double unusedFloatArg1)
 {
   float fVar1;
   float dVar2;
   float dVar3;
   float dVar4;
   float dVar5;
-  float dVar6;
-  double dVar7;
+  float newtonCorrection;
+  double reciprocalSqrtEstimate;
   
-  dVar3 = (double)param_2[1];
-  dVar4 = (double)*param_2;
-  dVar5 = (double)param_2[2];
+  dVar3 = (double)inVector[1];
+  dVar4 = (double)*inVector;
+  dVar5 = (double)inVector[2];
   fVar1 = (dVar5 * dVar5 + (dVar4 * dVar4 + (dVar3 * dVar3)));
   dVar2 = (double)fVar1;
   if ((double)dVar2 <= DOUBLE_00108de8) {
@@ -650,18 +650,18 @@ double _gleVectorNormalizeNO(undefined4 unusedArg1,float *param_2,float *param_3
     fVar1 = FLOAT_00108e58;
   }
   else {
-    dVar7 = (double)GH_U2F((unsigned int)((0x5f375a00 - ((uint)GH_F2U(fVar1) >> 1))));
-    dVar2 = (double)(float)((double)(float)((double)dVar2 * dVar7) * dVar7);
-    dVar6 = (double)(FLOAT_00108f38 - dVar2);
-    dVar2 = (double)(float)(dVar7 * DOUBLE_00108df0 * (double)dVar6 *
-                           -(double)((dVar2 * dVar6) * dVar6 - FLOAT_00108f48));
+    reciprocalSqrtEstimate = (double)GH_U2F((unsigned int)((0x5f375a00 - ((uint)GH_F2U(fVar1) >> 1))));
+    dVar2 = (double)(float)((double)(float)((double)dVar2 * reciprocalSqrtEstimate) * reciprocalSqrtEstimate);
+    newtonCorrection = (double)(FLOAT_00108f38 - dVar2);
+    dVar2 = (double)(float)(reciprocalSqrtEstimate * DOUBLE_00108df0 * (double)newtonCorrection *
+                           -(double)((dVar2 * newtonCorrection) * newtonCorrection - FLOAT_00108f48));
     dVar4 = (double)(dVar4 * dVar2);
     dVar3 = (double)(dVar3 * dVar2);
     fVar1 = (dVar5 * dVar2);
   }
-  param_3[2] = fVar1;
-  *param_3 = (float)(double)dVar4;
-  param_3[1] = (float)(double)dVar3;
+  outVector[2] = fVar1;
+  *outVector = (float)(double)dVar4;
+  outVector[1] = (float)(double)dVar3;
   return (double)dVar2;
 }
 

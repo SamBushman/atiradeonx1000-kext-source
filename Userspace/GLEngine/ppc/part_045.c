@@ -2244,71 +2244,71 @@ double _gleCompileVertexArray(glContext)
 }
 
 /* _gleExecuteTCLVertexArray @ 0xdad38 (352 bytes) */
-void _gleExecuteTCLVertexArray(glContext, param_2, param_3, param_4, param_5, param_6)
+void _gleExecuteTCLVertexArray(glContext, mode, firstThenNextSequentialIndex, count, indexType, indices)
   int glContext;
-  undefined4 param_2;
-  int param_3;
-  int param_4;
-  uint param_5;
-  int param_6;
+  undefined4 mode;
+  int firstThenNextSequentialIndex;
+  int count;
+  uint indexType;
+  int indices;
 {
-  int iVar1;
-  undefined4 uVar2;
-  int *piVar3;
-  int *piVar4;
+  int indicesLeft;
+  undefined4 errorCode;
+  int *indexWriteCursor;
+  int *sequentialIndices;
   
-  if (param_5 == 0x1403) {
+  if (indexType == 0x1403) {
 LAB_000dad94:
-    param_6 = param_6 + param_3;
+    indices = indices + firstThenNextSequentialIndex;
 LAB_000dad98:
                     
                     
     (**(code **)(glContext + 0x46e4))
-              (*(undefined4 *)(glContext + 0x4688),*(undefined4 *)(glContext + 0x49a8),param_2,
-               *(int *)(glContext + 0x4984) - *(int *)(glContext + 0x4994),param_4,param_5,
-               param_6 + param_3);
+              (*(undefined4 *)(glContext + 0x4688),*(undefined4 *)(glContext + 0x49a8),mode,
+               *(int *)(glContext + 0x4984) - *(int *)(glContext + 0x4994),count,indexType,
+               indices + firstThenNextSequentialIndex);
     return;
   }
-  if (param_5 < 0x1404) {
-    if (param_5 == 0x1401) goto LAB_000dad98;
+  if (indexType < 0x1404) {
+    if (indexType == 0x1401) goto LAB_000dad98;
   }
   else {
-    if (param_5 == 0x1405) {
-      param_6 = param_6 + param_3 * 2;
+    if (indexType == 0x1405) {
+      indices = indices + firstThenNextSequentialIndex * 2;
       goto LAB_000dad94;
     }
-    if (param_5 == 0x14ff) {
-      piVar4 = (int *)_malloc(param_4 << 2);
-      if (piVar4 != (int *)0x0) {
-        if (param_3 < param_3 + param_4) {
-          iVar1 = (param_3 + param_4) - param_3;
-          piVar3 = piVar4;
+    if (indexType == 0x14ff) {
+      sequentialIndices = (int *)_malloc(count << 2);
+      if (sequentialIndices != (int *)0x0) {
+        if (firstThenNextSequentialIndex < firstThenNextSequentialIndex + count) {
+          indicesLeft = (firstThenNextSequentialIndex + count) - firstThenNextSequentialIndex;
+          indexWriteCursor = sequentialIndices;
           do {
-            *piVar3 = param_3;
-            piVar3 = piVar3 + 1;
-            param_3 = param_3 + 1;
-            iVar1 = iVar1 + -1;
-          } while (iVar1 != 0);
+            *indexWriteCursor = firstThenNextSequentialIndex;
+            indexWriteCursor = indexWriteCursor + 1;
+            firstThenNextSequentialIndex = firstThenNextSequentialIndex + 1;
+            indicesLeft = indicesLeft + -1;
+          } while (indicesLeft != 0);
         }
         (**(code **)(glContext + 0x46e4))
-                  (*(undefined4 *)(glContext + 0x4688),*(undefined4 *)(glContext + 0x49a8),param_2,
-                   *(int *)(glContext + 0x4984) - *(int *)(glContext + 0x4994),param_4,0x1405,piVar4);
-        _free(piVar4);
+                  (*(undefined4 *)(glContext + 0x4688),*(undefined4 *)(glContext + 0x49a8),mode,
+                   *(int *)(glContext + 0x4984) - *(int *)(glContext + 0x4994),count,0x1405,sequentialIndices);
+        _free(sequentialIndices);
         return;
       }
       if (*(int *)(glContext + 0x7574) != 0) {
         return;
       }
-      uVar2 = 0x505;
+      errorCode = 0x505;
       goto LAB_000dae80;
     }
   }
   if (*(int *)(glContext + 0x7574) != 0) {
     return;
   }
-  uVar2 = 0x500;
+  errorCode = 0x500;
 LAB_000dae80:
-  *(undefined4 *)(glContext + 0x7574) = uVar2;
+  *(undefined4 *)(glContext + 0x7574) = errorCode;
   return;
 }
 

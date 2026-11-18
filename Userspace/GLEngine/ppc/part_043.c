@@ -2120,50 +2120,50 @@ LAB_000cf37c:
 }
 
 /* _LFSParserAttachString @ 0xcf3a8 (252 bytes) */
-int _LFSParserAttachString(param_1, param_2, param_3)
-  int *param_1;
-  int param_2;
-  int param_3;
+int _LFSParserAttachString(parser, sourceString, preprocessFlag)
+  int *parser;
+  int sourceString;
+  int preprocessFlag;
 {
   int iVar1;
-  int iVar2;
-  uint uVar3;
-  uint uVar4;
-  int local_20 [4];
+  int textCopy;
+  uint textLength;
+  uint scanPosition;
+  int stepLength [4];
   
-  if (*param_1 == 0) {
-    if (param_2 != 0) {
-      if (param_3 == 0) {
-        iVar1 = _strlen(param_2);
-        iVar2 = _calloc(iVar1 + 1,1);
-        *param_1 = iVar2;
-        _memmove(iVar2,param_2,iVar1);
+  if (*parser == 0) {
+    if (sourceString != 0) {
+      if (preprocessFlag == 0) {
+        iVar1 = _strlen(sourceString);
+        textCopy = _calloc(iVar1 + 1,1);
+        *parser = textCopy;
+        _memmove(textCopy,sourceString,iVar1);
       }
       else {
-        iVar1 = ((int (*)())_LFSParserPreprocessString)(param_1,param_2);
-        *param_1 = iVar1;
+        iVar1 = ((int (*)())_LFSParserPreprocessString)(parser,sourceString);
+        *parser = iVar1;
       }
-      uVar4 = 0;
-      uVar3 = _strlen(*param_1);
-      param_1[2] = 0;
-      param_1[1] = uVar3;
-      if (uVar3 != 0) {
+      scanPosition = 0;
+      textLength = _strlen(*parser);
+      parser[2] = 0;
+      parser[1] = textLength;
+      if (textLength != 0) {
         do {
-          local_20[0] = 1;
-          iVar1 = ((int (*)())_LFSParserCheckForNewline)(param_1,*param_1,uVar4,uVar3,local_20);
+          stepLength[0] = 1;
+          iVar1 = ((int (*)())_LFSParserCheckForNewline)(parser,*parser,scanPosition,textLength,stepLength);
           if (iVar1 != 0) {
-            param_1[2] = param_1[2] + 1;
+            parser[2] = parser[2] + 1;
           }
-          uVar3 = param_1[1];
-          uVar4 = uVar4 + local_20[0];
-        } while (uVar4 < uVar3);
+          textLength = parser[1];
+          scanPosition = scanPosition + stepLength[0];
+        } while (scanPosition < textLength);
       }
     }
   }
   else {
-    _free(*param_1);
-    param_1[1] = 0;
-    *param_1 = 0;
+    _free(*parser);
+    parser[1] = 0;
+    *parser = 0;
   }
   return;
 }
