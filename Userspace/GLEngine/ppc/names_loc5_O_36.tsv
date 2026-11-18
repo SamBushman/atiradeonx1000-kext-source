@@ -1,0 +1,5 @@
+local	_gleImagingPackData	puVar5	pixelBytesOutPtr	CONFIRMED	address of auStack_40, passed as the pixelBytesOut output argument of _glePixelPackSettings (7th argument)
+local	_gleImagingPackData	auStack_40	pixelBytesOut	CONFIRMED	7th argument of _glePixelPackSettings, whose parameter is named pixelBytesOut
+local	_gleImagingPackData	auStack_4c	rowPaddingOut	CONFIRMED	10th argument of _glePixelPackSettings, whose parameter is named rowPaddingOut
+local	_gleImagingPackData	auStack_48	imageBytesOut	CONFIRMED	11th argument of _glePixelPackSettings, whose parameter is named imageBytesOut
+local	_gleImagingPackData	auStack_44	imagePaddingOut	CONFIRMED	12th argument of _glePixelPackSettings, whose parameter is named imagePaddingOut
