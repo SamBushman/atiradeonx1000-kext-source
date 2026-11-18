@@ -1049,26 +1049,26 @@ void _gleClearPipelineProgram(glContext, param_2)
 }
 
 /* _gleDestroyPluginPipelineProgram @ 0x3071c (120 bytes) */
-void _gleDestroyPluginPipelineProgram(glContext, param_2)
+void _gleDestroyPluginPipelineProgram(glContext, pipelineProgramThenSlotCursor)
   int glContext;
-  int param_2;
+  int pipelineProgramThenSlotCursor;
 {
-  int *piVar1;
-  undefined4 *puVar2;
-  int iVar3;
+  int *rendererCallbacks;
+  undefined4 *rendererHandlePtr;
+  int rendererRecordCursor;
   int loopIndex;
   
-  iVar3 = glContext + 0x10000;
+  rendererRecordCursor = glContext + 0x10000;
   loopIndex = 0;
   if (*(char *)(glContext + 0x85a4) != '\0') {
     do {
-      piVar1 = (int *)(iVar3 + -0x777c);
+      rendererCallbacks = (int *)(rendererRecordCursor + -0x777c);
       loopIndex = loopIndex + 1;
-      puVar2 = (undefined4 *)(iVar3 + -0x7a54);
-      iVar3 = iVar3 + 0x2e0;
-      (**(code **)(*piVar1 + 0x1a0))(*puVar2,*(undefined4 *)(param_2 + 0x498));
-      *(undefined4 *)(param_2 + 0x498) = 0;
-      param_2 = param_2 + 4;
+      rendererHandlePtr = (undefined4 *)(rendererRecordCursor + -0x7a54);
+      rendererRecordCursor = rendererRecordCursor + 0x2e0;
+      (**(code **)(*rendererCallbacks + 0x1a0))(*rendererHandlePtr,*(undefined4 *)(pipelineProgramThenSlotCursor + 0x498));
+      *(undefined4 *)(pipelineProgramThenSlotCursor + 0x498) = 0;
+      pipelineProgramThenSlotCursor = pipelineProgramThenSlotCursor + 4;
     } while (loopIndex < (int)(uint)*(byte *)(glContext + 0x85a4));
   }
   return;

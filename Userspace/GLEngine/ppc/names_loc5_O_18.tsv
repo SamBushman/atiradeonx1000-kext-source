@@ -1,0 +1,48 @@
+local	_glFinishRender_Exec	iVar3	rendererRecordCursor	CONFIRMED	cursor over the per-renderer records that follow glContext+0x10000: advanced by 0x2e0 per iteration of the loop bounded by the byte at glContext+0x85a4; the callbacks are read at -0x777c and -0x7a54 from it
+local	_glFinishRender_Exec	piVar1	rendererCallbacks	CONFIRMED	pointer at rendererRecordCursor - 0x777c: object whose slot +0x178 is called with the renderer handle for each renderer (finish)
+local	_glFinishRender_Exec	puVar2	rendererHandlePtr	CONFIRMED	pointer at rendererRecordCursor - 0x7a54: the renderer handle passed as the argument of the callback
+local	_gleDestroyPluginPipelineProgram	param_2	pipelineProgramThenSlotCursor	CONFIRMED	the pipeline program record, advanced by 4 per renderer so that +0x498 is its per-renderer handle slot (passed to the callback and cleared)
+local	_gleDestroyPluginPipelineProgram	iVar3	rendererRecordCursor	CONFIRMED	cursor over the per-renderer records that follow glContext+0x10000: advanced by 0x2e0 per iteration of the loop bounded by the byte at glContext+0x85a4; the callbacks are read at -0x777c and -0x7a54 from it
+local	_gleDestroyPluginPipelineProgram	piVar1	rendererCallbacks	CONFIRMED	pointer at rendererRecordCursor - 0x777c: object whose slot +0x1a0 is called with (renderer handle, per-renderer program handle) for each renderer
+local	_gleDestroyPluginPipelineProgram	puVar2	rendererHandlePtr	CONFIRMED	pointer at rendererRecordCursor - 0x7a54: the renderer handle passed as the first argument of the callback
+local	_gleCreatePluginBuffer	param_2	bufferRecord	INFERRED	the buffer record: per-renderer 4-byte slots from its start, with +0x20 and +0x38 passed to the creation callback
+local	_gleCreatePluginBuffer	iVar3	rendererRecordCursor	CONFIRMED	cursor over the per-renderer records that follow glContext+0x10000: advanced by 0x2e0 per iteration of the loop bounded by the byte at glContext+0x85a4; the callbacks are read at -0x777c and -0x7a54 from it
+local	_gleCreatePluginBuffer	piVar1	rendererCallbacks	CONFIRMED	pointer at rendererRecordCursor - 0x777c: object whose slot +0x1d4 is called for each renderer with (renderer handle, slot, bufferRecord + 0x20, slot + 0x38)
+local	_gleCreatePluginBuffer	puVar2	rendererHandlePtr	CONFIRMED	pointer at rendererRecordCursor - 0x7a54: the renderer handle passed as the first argument of the callback
+local	_gleCreatePluginBuffer	iVar5	rendererSlot	CONFIRMED	param_2 + 4*i: the per-renderer 4-byte slot passed as the second callback argument
+local	_gleDeletePluginTexture	param_2	rendererHandles	INFERRED	array of per-renderer texture handles (one word per renderer): each is passed to the delete callback and then cleared
+local	_gleDeletePluginTexture	iVar4	rendererRecordCursor	CONFIRMED	cursor over the per-renderer records that follow glContext+0x10000: advanced by 0x2e0 per iteration of the loop bounded by the byte at glContext+0x85a4; the callbacks are read at -0x777c and -0x7a54 from it
+local	_gleDeletePluginTexture	iVar3	slotByteOffset	CONFIRMED	loopIndex * 4: byte offset of the renderer's handle in rendererHandles
+local	_gleDeletePluginTexture	piVar1	rendererCallbacks	CONFIRMED	pointer at rendererRecordCursor - 0x777c: object whose slot +0x168 is called with (renderer handle, per-renderer texture handle) for each renderer
+local	_gleDeletePluginTexture	puVar2	rendererHandlePtr	CONFIRMED	pointer at rendererRecordCursor - 0x7a54: the renderer handle passed as the first argument of the callback
+local	_gleSelectLineStrip	param_2	vertexCursor	INFERRED	pointer to the 0x100-byte vertex record being processed: starts at the first vertex and advances by 0x100 (the depth float at +8 is passed to _gleSelectHitRecord)
+local	_gleSelectLineStrip	param_3	vertexCount	INFERRED	number of vertex records (the end address is vertexCursor + vertexCount * 0x100)
+local	_gleSelectLineStrip	iVar1	vertexEnd	CONFIRMED	first vertex address + vertexCount * 0x100: the loop stops one record before it (the last vertex has no following segment)
+local	_gleSelectTriangleFan	param_2	hubVertex	INFERRED	the fan centre vertex record, hit together with every triangle
+local	_gleSelectTriangleFan	param_3	vertexCursor	INFERRED	pointer to the first rim vertex record of the current triangle: starts at the first rim vertex and advances by 0x100 per triangle
+local	_gleSelectTriangleFan	param_4	vertexCount	INFERRED	number of vertices of the fan (vertexCount - 2 triangles)
+local	_gleSelectTriangleFan	iVar1	trianglesRemaining	CONFIRMED	vertexCount - 1 counted down by one per triangle
+local	_gleSelectTriangleFan	uVar2	triangleVertexCursor	CONFIRMED	walks the two rim vertex records (0x200 bytes) of the current triangle
+local	_gleSelectTriangleStrip	param_2	vertexCursor	INFERRED	pointer to the first vertex record of the current triangle: starts at the first vertex and advances by 0x100 per triangle
+local	_gleSelectTriangleStrip	param_3	vertexCount	INFERRED	number of vertices of the strip (vertexCount - 2 triangles)
+local	_gleSelectTriangleStrip	iVar1	trianglesRemaining	CONFIRMED	vertexCount - 2 counted down by one per triangle
+local	_gleSelectTriangleStrip	uVar2	triangleVertexCursor	CONFIRMED	walks the three vertex records (0x300 bytes) of the current triangle
+local	_gleSelectLineLoop_body	param_1	glContext	INFERRED	first argument, passed on to _gleSelectHitRecord
+local	_gleSelectLineLoop_body	param_2	firstVertex	INFERRED	the first vertex record, hit again to close the loop
+local	_gleSelectLineLoop_body	param_3	vertexEnd	INFERRED	address one record past the last vertex: the main loop stops at vertexEnd - 0x100
+local	_gleSelectLineLoop_body	uVar1	vertexCursor	CONFIRMED	vertex record being processed: starts at firstVertex, advances by 0x100, ends on the last vertex
+local	_gleSelectPointsPtr	param_2	pointerCursor	INFERRED	walks the array of vertex record pointers; each pointed record's depth float (+8) is passed to _gleSelectHitRecord
+local	_gleSelectPointsPtr	param_3	pointCount	INFERRED	number of vertex pointers in the array
+local	_gleSelectPointsPtr	piVar1	pointerEnd	CONFIRMED	param_2 + pointCount: end of the pointer array
+local	_gleFeedbackPoints	param_2	vertexCursor	INFERRED	pointer to the 0x100-byte vertex record being processed: starts at the first vertex and advances by 0x100
+local	_gleFeedbackPoints	param_3	vertexCount	INFERRED	number of vertex records
+local	_gleFeedbackPoints	uVar1	vertexEnd	CONFIRMED	first vertex address + vertexCount * 0x100
+use	_gleFeedbackTriangleFan	iVar2	lastTriangleIndex	CONFIRMED	vertexCount - 2: the last triangle index, loop bound of the line (polygonModeBits == 1) and point (== 0) loops, and the emptiness test of all three modes	^\s*iVar2\ =\ param_4\ \+\ \-2;$	+1
+use	_gleFeedbackTriangleFan	iVar2	lastTriangleIndex	CONFIRMED	vertexCount - 2: the last triangle index, loop bound of the line (polygonModeBits == 1) and point (== 0) loops, and the emptiness test of all three modes	^\s*if\ \(\-1\ <\ iVar2\)\ \{$	+1
+use	_gleFeedbackTriangleFan	iVar2	lastTriangleIndex	CONFIRMED	vertexCount - 2: the last triangle index, loop bound of the line (polygonModeBits == 1) and point (== 0) loops, and the emptiness test of all three modes	^\s*\}\ while\ \(iVar3\ <=\ iVar2\);$	+1
+use	_gleFeedbackTriangleFan	iVar2	lastTriangleIndex	CONFIRMED	vertexCount - 2: the last triangle index, loop bound of the line (polygonModeBits == 1) and point (== 0) loops, and the emptiness test of all three modes	^\s*if\ \(\-1\ <\ iVar2\)\ \{$@2	+1
+use	_gleFeedbackTriangleFan	iVar2	lastTriangleIndex	CONFIRMED	vertexCount - 2: the last triangle index, loop bound of the line (polygonModeBits == 1) and point (== 0) loops, and the emptiness test of all three modes	^\s*\}\ while\ \(iVar3\ <=\ iVar2\);$@2	+1
+use	_gleFeedbackTriangleFan	iVar2	lastTriangleIndex	CONFIRMED	vertexCount - 2: the last triangle index, loop bound of the line (polygonModeBits == 1) and point (== 0) loops, and the emptiness test of all three modes	^\s*else\ if\ \(\(uVar1\ ==\ 2\)\ \&\&\ \(\-1\ <\ iVar2\)\)\ \{$	+1
+use	_gleFeedbackTriangleFan	iVar2	trianglesRemaining	CONFIRMED	vertexCount - 1 counted down by one per triangle in the polygon (polygonModeBits == 2) loop	^\s*iVar2\ =\ param_4\ \+\ \-1;$	+1
+use	_gleFeedbackTriangleFan	iVar2	trianglesRemaining	CONFIRMED	vertexCount - 1 counted down by one per triangle in the polygon (polygonModeBits == 2) loop	^\s*iVar2\ =\ iVar2\ \+\ \-1;$	+1
+use	_gleFeedbackTriangleFan	iVar2	trianglesRemaining	CONFIRMED	vertexCount - 1 counted down by one per triangle in the polygon (polygonModeBits == 2) loop	^\s*\}\ while\ \(iVar2\ !=\ 0\);$	+1

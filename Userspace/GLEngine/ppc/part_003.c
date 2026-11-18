@@ -1027,27 +1027,27 @@ void _gleFreeTextureObject(glContext, textureObject)
 }
 
 /* _gleDeletePluginTexture @ 0x204a0 (120 bytes) */
-void _gleDeletePluginTexture(glContext, param_2)
+void _gleDeletePluginTexture(glContext, rendererHandles)
   int glContext;
-  int param_2;
+  int rendererHandles;
 {
-  int *piVar1;
-  undefined4 *puVar2;
-  int iVar3;
-  int iVar4;
+  int *rendererCallbacks;
+  undefined4 *rendererHandlePtr;
+  int slotByteOffset;
+  int rendererRecordCursor;
   int loopIndex;
   
-  iVar4 = glContext + 0x10000;
+  rendererRecordCursor = glContext + 0x10000;
   loopIndex = 0;
   if (*(char *)(glContext + 0x85a4) != '\0') {
     do {
-      piVar1 = (int *)(iVar4 + -0x777c);
-      iVar3 = loopIndex * 4;
-      puVar2 = (undefined4 *)(iVar4 + -0x7a54);
-      iVar4 = iVar4 + 0x2e0;
+      rendererCallbacks = (int *)(rendererRecordCursor + -0x777c);
+      slotByteOffset = loopIndex * 4;
+      rendererHandlePtr = (undefined4 *)(rendererRecordCursor + -0x7a54);
+      rendererRecordCursor = rendererRecordCursor + 0x2e0;
       loopIndex = loopIndex + 1;
-      (**(code **)(*piVar1 + 0x168))(*puVar2,*(undefined4 *)(iVar3 + param_2));
-      *(undefined4 *)(iVar3 + param_2) = 0;
+      (**(code **)(*rendererCallbacks + 0x168))(*rendererHandlePtr,*(undefined4 *)(slotByteOffset + rendererHandles));
+      *(undefined4 *)(slotByteOffset + rendererHandles) = 0;
     } while (loopIndex < (int)(uint)*(byte *)(glContext + 0x85a4));
   }
   return;

@@ -1350,27 +1350,27 @@ void _gleRemoveClientAttribElem(param_1, param_2)
 }
 
 /* _gleCreatePluginBuffer @ 0xc70e4 (124 bytes) */
-void _gleCreatePluginBuffer(glContext, param_2)
+void _gleCreatePluginBuffer(glContext, bufferRecord)
   int glContext;
-  int param_2;
+  int bufferRecord;
 {
-  int *piVar1;
-  undefined4 *puVar2;
-  int iVar3;
+  int *rendererCallbacks;
+  undefined4 *rendererHandlePtr;
+  int rendererRecordCursor;
   int loopIndex;
-  int iVar5;
+  int rendererSlot;
   
-  iVar3 = glContext + 0x10000;
+  rendererRecordCursor = glContext + 0x10000;
   loopIndex = 0;
   if (*(char *)(glContext + 0x85a4) != '\0') {
-    iVar5 = param_2;
+    rendererSlot = bufferRecord;
     do {
-      piVar1 = (int *)(iVar3 + -0x777c);
-      puVar2 = (undefined4 *)(iVar3 + -0x7a54);
-      iVar3 = iVar3 + 0x2e0;
+      rendererCallbacks = (int *)(rendererRecordCursor + -0x777c);
+      rendererHandlePtr = (undefined4 *)(rendererRecordCursor + -0x7a54);
+      rendererRecordCursor = rendererRecordCursor + 0x2e0;
       loopIndex = loopIndex + 1;
-      (**(code **)(*piVar1 + 0x1d4))(*puVar2,iVar5,param_2 + 0x20,iVar5 + 0x38);
-      iVar5 = iVar5 + 4;
+      (**(code **)(*rendererCallbacks + 0x1d4))(*rendererHandlePtr,rendererSlot,bufferRecord + 0x20,rendererSlot + 0x38);
+      rendererSlot = rendererSlot + 4;
     } while (loopIndex < (int)(uint)*(byte *)(glContext + 0x85a4));
   }
   return;

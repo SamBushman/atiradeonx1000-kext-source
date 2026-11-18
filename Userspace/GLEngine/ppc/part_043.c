@@ -287,16 +287,17 @@ double _gleFeedbackTriangleFan(glContext, centerVertex, vertexCursor, vertexCoun
   uint polygonModeIndex;
 {
   uint polygonModeBits;
-  int iVar2;
+  int lastTriangleIndex;
+  int trianglesRemaining;
   int triangleIndex;
   int nextVertex;
   float tokenValue;
   
   polygonModeBits = polygonModeIndex & 3;
-  iVar2 = vertexCount + -2;
+  lastTriangleIndex = vertexCount + -2;
   triangleIndex = 0;
   if (polygonModeBits == 1) {
-    if (-1 < iVar2) {
+    if (-1 < lastTriangleIndex) {
       tokenValue = (double)FLOAT_00108f34;
       do {
         nextVertex = vertexCursor + 0x100;
@@ -311,11 +312,11 @@ double _gleFeedbackTriangleFan(glContext, centerVertex, vertexCursor, vertexCoun
         _gleFeedbackHitRecord(glContext,nextVertex);
         _gleFeedbackHitRecord(glContext,centerVertex);
         vertexCursor = nextVertex;
-      } while (triangleIndex <= iVar2);
+      } while (triangleIndex <= lastTriangleIndex);
     }
   }
   else if (polygonModeBits == 0) {
-    if (-1 < iVar2) {
+    if (-1 < lastTriangleIndex) {
       tokenValue = (double)FLOAT_00108f28;
       do {
         triangleIndex = triangleIndex + 1;
@@ -326,20 +327,20 @@ double _gleFeedbackTriangleFan(glContext, centerVertex, vertexCursor, vertexCoun
         ((void (*)())_gleFeedbackToken)(glContext,(double)tokenValue);
         _gleFeedbackHitRecord(glContext,vertexCursor + 0x100);
         vertexCursor = vertexCursor + 0x100;
-      } while (triangleIndex <= iVar2);
+      } while (triangleIndex <= lastTriangleIndex);
     }
   }
-  else if ((polygonModeBits == 2) && (-1 < iVar2)) {
-    iVar2 = vertexCount + -1;
+  else if ((polygonModeBits == 2) && (-1 < lastTriangleIndex)) {
+    trianglesRemaining = vertexCount + -1;
     do {
       ((void (*)())_gleFeedbackToken)(glContext,(double)FLOAT_00108f30);
       ((void (*)())_gleFeedbackToken)(glContext,(double)FLOAT_00108f38);
       _gleFeedbackHitRecord(glContext,centerVertex);
       _gleFeedbackHitRecord(glContext,vertexCursor);
       _gleFeedbackHitRecord(glContext,vertexCursor + 0x100);
-      iVar2 = iVar2 + -1;
+      trianglesRemaining = trianglesRemaining + -1;
       vertexCursor = vertexCursor + 0x100;
-    } while (iVar2 != 0);
+    } while (trianglesRemaining != 0);
   }
   return;
 }

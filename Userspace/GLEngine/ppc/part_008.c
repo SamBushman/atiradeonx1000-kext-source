@@ -319,21 +319,21 @@ void _glePPRelocateParam(param_1, param_2, param_3, param_4)
 void _glFinishRender_Exec(glContext)
   int glContext;
 {
-  int *piVar1;
-  undefined4 *puVar2;
-  int iVar3;
+  int *rendererCallbacks;
+  undefined4 *rendererHandlePtr;
+  int rendererRecordCursor;
   int loopIndex;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
-    iVar3 = glContext + 0x10000;
+    rendererRecordCursor = glContext + 0x10000;
     loopIndex = 0;
     if (*(char *)(glContext + 0x85a4) != '\0') {
       do {
-        piVar1 = (int *)(iVar3 + -0x777c);
+        rendererCallbacks = (int *)(rendererRecordCursor + -0x777c);
         loopIndex = loopIndex + 1;
-        puVar2 = (undefined4 *)(iVar3 + -0x7a54);
-        iVar3 = iVar3 + 0x2e0;
-        (**(code **)(*piVar1 + 0x178))(*puVar2);
+        rendererHandlePtr = (undefined4 *)(rendererRecordCursor + -0x7a54);
+        rendererRecordCursor = rendererRecordCursor + 0x2e0;
+        (**(code **)(*rendererCallbacks + 0x178))(*rendererHandlePtr);
       } while (loopIndex < (int)(uint)*(byte *)(glContext + 0x85a4));
     }
   }
