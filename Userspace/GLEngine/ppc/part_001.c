@@ -5905,14 +5905,14 @@ void _glGetIntegerv_Exec(glContext, pname, params)
   int remaining;
   double dVar5;
   double dVar6;
-  char local_b0 [16];
-  double local_a0 [16];
-  longlong local_20;
+  char stateFlagBytes [16];
+  double stateValueBuffer [16];
+  longlong doubleToIntScratch;
   int valueType [2];
   
   if (*(short *)(glContext + 0x4a10) < 0) {
-    cursor = local_a0;
-    remaining = ((int (*)())_gleGetState)(glContext,pname,cursor,valueType,local_b0);
+    cursor = stateValueBuffer;
+    remaining = ((int (*)())_gleGetState)(glContext,pname,cursor,valueType,stateFlagBytes);
     dVar6 = DOUBLE_00108d90;
     if (remaining == 0) {
       if (*(int *)(glContext + 0x7574) != 0) {
@@ -5935,14 +5935,14 @@ void _glGetIntegerv_Exec(glContext, pname, params)
         } while (remaining != 0);
         return;
       }
-      if (local_b0[0] == '\0') {
+      if (stateFlagBytes[0] == '\0') {
         if (remaining < 1) {
           return;
         }
         do {
           dVar6 = *cursor;
           cursor = cursor + 1;
-          local_20 = (longlong)(int)dVar6;
+          doubleToIntScratch = (longlong)(int)dVar6;
           *params = (int)dVar6;
           params = params + 1;
           remaining = remaining + -1;
@@ -5955,7 +5955,7 @@ void _glGetIntegerv_Exec(glContext, pname, params)
       do {
         dVar5 = *cursor;
         cursor = cursor + 1;
-        local_20 = (longlong)(int)(dVar5 * dVar6);
+        doubleToIntScratch = (longlong)(int)(dVar5 * dVar6);
         *params = (int)(dVar5 * dVar6);
         params = params + 1;
         remaining = remaining + -1;

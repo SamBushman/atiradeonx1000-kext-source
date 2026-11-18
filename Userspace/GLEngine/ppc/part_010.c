@@ -733,33 +733,33 @@ void _glGetBufferParameteriv_Exec(glContext, target, pname, params)
   uint *params;
 {
   undefined4 glErrorCode;
-  uint uVar2;
-  int iVar3;
+  uint parameterValue;
+  int bufferObject;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
     if (target == 0x8893) {
-      iVar3 = *(int *)(*(int *)(glContext + 0x4a60) + 0x35c);
+      bufferObject = *(int *)(*(int *)(glContext + 0x4a60) + 0x35c);
 LAB_0005964c:
-      if (iVar3 == 0) goto LAB_00059654;
+      if (bufferObject == 0) goto LAB_00059654;
       if (pname == 0x8765) {
-        uVar2 = (uint)*(ushort *)(iVar3 + 0x3c);
+        parameterValue = (uint)*(ushort *)(bufferObject + 0x3c);
         goto LAB_000596c4;
       }
       if (pname < 0x8766) {
         if (pname == 0x8764) {
-          uVar2 = *(uint *)(iVar3 + 0x38);
+          parameterValue = *(uint *)(bufferObject + 0x38);
           goto LAB_000596c4;
         }
       }
       else {
         if (pname == 0x88bb) {
-          uVar2 = (uint)*(ushort *)(iVar3 + 0x3e);
+          parameterValue = (uint)*(ushort *)(bufferObject + 0x3e);
 LAB_000596c4:
-          *params = uVar2;
+          *params = parameterValue;
           return;
         }
         if (pname == 0x88bc) {
-          uVar2 = (uint)*(byte *)(iVar3 + 0x44);
+          parameterValue = (uint)*(byte *)(bufferObject + 0x44);
           goto LAB_000596c4;
         }
       }
@@ -767,16 +767,16 @@ LAB_000596c4:
     else {
       if (0x8893 < target) {
         if (target == 0x88eb) {
-          iVar3 = *(int *)(glContext + 0x4a68);
+          bufferObject = *(int *)(glContext + 0x4a68);
         }
         else {
           if (target != 0x88ec) goto LAB_00059634;
-          iVar3 = *(int *)(glContext + 0x4a6c);
+          bufferObject = *(int *)(glContext + 0x4a6c);
         }
         goto LAB_0005964c;
       }
       if (target == 0x8892) {
-        iVar3 = *(int *)(*(int *)(glContext + 0x4a60) + 0x358);
+        bufferObject = *(int *)(*(int *)(glContext + 0x4a60) + 0x358);
         goto LAB_0005964c;
       }
     }

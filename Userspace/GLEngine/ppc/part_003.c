@@ -1592,15 +1592,15 @@ void _glGetFloatv_Exec(glContext, pname, params)
   double *cursor;
   int remaining;
   double dVar5;
-  undefined1 auStack_b0 [16];
-  double local_a0 [16];
-  undefined4 local_20;
-  uint uStack_1c;
+  undefined1 stateFlagBytes [16];
+  double stateValueBuffer [16];
+  undefined4 intToDoubleHighWord;
+  uint intToDoubleLowWord;
   int valueType [2];
   
   if (*(short *)(glContext + 0x4a10) < 0) {
-    cursor = local_a0;
-    remaining = _gleGetState(glContext,pname,cursor,valueType,auStack_b0);
+    cursor = stateValueBuffer;
+    remaining = _gleGetState(glContext,pname,cursor,valueType,stateFlagBytes);
     intToDoubleMagic = DOUBLE_00108d58;
     if (remaining == 0) {
       if (*(int *)(glContext + 0x7574) != 0) {
@@ -1629,8 +1629,8 @@ void _glGetFloatv_Exec(glContext, pname, params)
       do {
         uVar2 = *(uint *)cursor;
         cursor = cursor + 1;
-        local_20 = 0x43300000;
-        uStack_1c = uVar2 ^ 0x80000000;
+        intToDoubleHighWord = 0x43300000;
+        intToDoubleLowWord = uVar2 ^ 0x80000000;
         *params = (float)((double)CONCAT44(0x43300000,uVar2 ^ 0x80000000) - intToDoubleMagic);
         params = params + 1;
         remaining = remaining + -1;
