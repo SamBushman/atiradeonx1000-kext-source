@@ -1,0 +1,33 @@
+local	_glRasterPos4sv_Exec	cVar2	rendererInfoByte79	CONFIRMED	byte at +0x79 of the record at ctx+0x468c (convention of the _NoopExec family)
+local	_glRasterPos4sv_Exec	bVar1	rendererInfoByte79IsZero	CONFIRMED	rendererInfoByte79 == 0, selects the 0x17000000 / 0x17ffffff change-word mask and the all-clean test
+local	_glRasterPos4sv_Exec	iVar5	dirtyBitArrayWord	CONFIRMED	word *srcCursor of the dirty bit array at ctx+0x324 (9 words), nonzero sets 0x800000 in change word 3
+local	_glRasterPos4sv_Exec	fparam_1	forwardedF1	CONFIRMED	FPR argument f1 forwarded to the callees; reloaded from the f1 result of the calls it follows
+local	_glRasterPos4sv_Exec	extraout_f1	f1AfterCall	CONFIRMED	f1 left behind by a call (Ghidra extraout), forwarded unchanged
+local	_glRasterPos4dv_Exec	cVar2	rendererInfoByte79	CONFIRMED	byte at +0x79 of the record at ctx+0x468c (convention of the _NoopExec family)
+local	_glRasterPos4dv_Exec	bVar1	rendererInfoByte79IsZero	CONFIRMED	rendererInfoByte79 == 0, selects the 0x17000000 / 0x17ffffff change-word mask and the all-clean test
+local	_glRasterPos4dv_Exec	iVar5	dirtyBitArrayWord	CONFIRMED	word *srcCursor of the dirty bit array at ctx+0x324 (9 words), nonzero sets 0x800000 in change word 3
+local	_glRasterPos4dv_Exec	fparam_1	forwardedF1	CONFIRMED	FPR argument f1 forwarded to the callees; reloaded from the f1 result of the calls it follows
+local	_glRasterPos4dv_Exec	extraout_f1	f1AfterCall	CONFIRMED	f1 left behind by a call (Ghidra extraout), forwarded unchanged
+local	_glRasterPos3fv_Exec	cVar2	rendererInfoByte79	CONFIRMED	byte at +0x79 of the record at ctx+0x468c (convention of the _NoopExec family)
+local	_glRasterPos3fv_Exec	bVar1	rendererInfoByte79IsZero	CONFIRMED	rendererInfoByte79 == 0, selects the 0x17000000 / 0x17ffffff change-word mask and the all-clean test
+local	_glRasterPos3fv_Exec	iVar5	dirtyBitArrayWord	CONFIRMED	word *srcCursor of the dirty bit array at ctx+0x324 (9 words), nonzero sets 0x800000 in change word 3
+local	_glRasterPos3fv_Exec	fparam_1	forwardedF1	CONFIRMED	FPR argument f1 forwarded to the callees; reloaded from the f1 result of the calls it follows
+local	_glRasterPos3fv_Exec	extraout_f1	f1AfterCall	CONFIRMED	f1 left behind by a call (Ghidra extraout), forwarded unchanged
+local	_glRasterPos2iv_Exec	cVar2	rendererInfoByte79	CONFIRMED	byte at +0x79 of the record at ctx+0x468c (convention of the _NoopExec family)
+local	_glRasterPos2iv_Exec	bVar1	rendererInfoByte79IsZero	CONFIRMED	rendererInfoByte79 == 0, selects the 0x17000000 / 0x17ffffff change-word mask and the all-clean test
+local	_glRasterPos2iv_Exec	iVar5	dirtyBitArrayWord	CONFIRMED	word *srcCursor of the dirty bit array at ctx+0x324 (9 words), nonzero sets 0x800000 in change word 3
+local	_glRasterPos2iv_Exec	fparam_1	forwardedF1	CONFIRMED	FPR argument f1 forwarded to the callees; reloaded from the f1 result of the calls it follows
+local	_glRasterPos2iv_Exec	extraout_f1	f1AfterCall	CONFIRMED	f1 left behind by a call (Ghidra extraout), forwarded unchanged
+local	_glRasterPos2dv_Exec	cVar2	rendererInfoByte79	CONFIRMED	byte at +0x79 of the record at ctx+0x468c (convention of the _NoopExec family)
+local	_glRasterPos2dv_Exec	bVar1	rendererInfoByte79IsZero	CONFIRMED	rendererInfoByte79 == 0, selects the 0x17000000 / 0x17ffffff change-word mask and the all-clean test
+local	_glRasterPos2dv_Exec	iVar5	dirtyBitArrayWord	CONFIRMED	word *srcCursor of the dirty bit array at ctx+0x324 (9 words), nonzero sets 0x800000 in change word 3
+local	_glRasterPos2dv_Exec	fparam_1	forwardedF1	CONFIRMED	FPR argument f1 forwarded to the callees; reloaded from the f1 result of the calls it follows
+local	_glRasterPos2dv_Exec	extraout_f1	f1AfterCall	CONFIRMED	f1 left behind by a call (Ghidra extraout), forwarded unchanged
+local	_glRasterPos4f_Exec	cVar2	rendererInfoByte79	CONFIRMED	byte at +0x79 of the record at ctx+0x468c (convention of the _NoopExec family)
+local	_glRasterPos4f_Exec	bVar1	rendererInfoByte79IsZero	CONFIRMED	rendererInfoByte79 == 0, selects the 0x17000000 / 0x17ffffff change-word mask and the all-clean test
+local	_glRasterPos4f_Exec	iVar5	dirtyBitArrayWord	CONFIRMED	word *srcCursor of the dirty bit array at ctx+0x324 (9 words), nonzero sets 0x800000 in change word 3
+local	_glRasterPos4f_Exec	extraout_f1	f1AfterCall	CONFIRMED	f1 left behind by a call (Ghidra extraout), forwarded unchanged
+local	_glRasterPos3d_Exec	cVar2	rendererInfoByte79	CONFIRMED	byte at +0x79 of the record at ctx+0x468c (convention of the _NoopExec family)
+local	_glRasterPos3d_Exec	bVar1	rendererInfoByte79IsZero	CONFIRMED	rendererInfoByte79 == 0, selects the 0x17000000 / 0x17ffffff change-word mask and the all-clean test
+local	_glRasterPos3d_Exec	iVar5	dirtyBitArrayWord	CONFIRMED	word *srcCursor of the dirty bit array at ctx+0x324 (9 words), nonzero sets 0x800000 in change word 3
+local	_glRasterPos3d_Exec	extraout_f1	f1AfterCall	CONFIRMED	f1 left behind by a call (Ghidra extraout), forwarded unchanged
