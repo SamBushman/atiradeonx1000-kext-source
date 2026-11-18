@@ -2076,8 +2076,8 @@ void _glLightiv_Exec(int glContext,int light,undefined4 pname,uint *params,doubl
   int dirtyWordBase;
   uint lightIndex;
   double cosValue;
-  double incomingStack_ffffffa8;
-  double incomingStack_ffffffb0;
+  double incomingStackWord_ffffffa8;
+  double incomingStackWord_ffffffb0;
   
   colorScale = DOUBLE_00108d88;
   intToDoubleMagic = DOUBLE_00108d58;
@@ -2221,7 +2221,7 @@ switchD_0006bed0_default:
     *(float *)(lightState + 0x2868) =
          (float)((double)CONCAT44(0x43300000,params[2] ^ 0x80000000) - intToDoubleMagic);
     ((void (*)())_gleTransformLightDirection)(glContext,lightIndex,forwardedFloatArg1,forwardedFloatArg2,forwardedFloatArg3,forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,
-               forwardedFloatArg8,incomingStack_ffffffa8,incomingStack_ffffffb0);
+               forwardedFloatArg8,incomingStackWord_ffffffa8,incomingStackWord_ffffffb0);
     goto LAB_0006c730;
   case 0x1205:
     paramValue = (float)((double)CONCAT44(0x43300000,*params ^ 0x80000000) - DOUBLE_00108d58);

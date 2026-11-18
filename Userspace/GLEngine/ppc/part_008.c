@@ -1095,11 +1095,11 @@ int _glRenderMode_Exec(glContext, mode)
   double incomingFpr6;
   double incomingFpr7;
   double incomingFpr8;
-  double incomingStack_ffffffb8;
-  double incomingStack_ffffffc0;
-  double incomingStack_ffffffc8;
-  double incomingStack_ffffffd0;
-  double incomingStack_ffffffd8;
+  double incomingStackWord_ffffffb8;
+  double incomingStackWord_ffffffc0;
+  double incomingStackWord_ffffffc8;
+  double incomingStackWord_ffffffd0;
+  double incomingStackWord_ffffffd8;
   
   renderModeResult = 0;
   if (*(short *)(glContext + 0x4a10) < 0) {
@@ -1156,8 +1156,8 @@ LAB_000507ac:
       _gleSelectVertexAddMaterialFunc(glContext);
       _gleUpdatePrimitiveData(glContext);
       ((void (*)())_gleUpdateViewScissorData)(glContext,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
-      ((void (*)())_gleUpdateDepthRangeData)(glContext,fparam_1_00,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffffb8,
-                 incomingStack_ffffffc0,incomingStack_ffffffc8,incomingStack_ffffffd0,incomingStack_ffffffd8);
+      ((void (*)())_gleUpdateDepthRangeData)(glContext,fparam_1_00,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStackWord_ffffffb8,
+                 incomingStackWord_ffffffc0,incomingStackWord_ffffffc8,incomingStackWord_ffffffd0,incomingStackWord_ffffffd8);
       _gleUpdateTextureTransform(glContext);
       _gleUpdatePolyMode(glContext);
       return renderModeResult;
@@ -1248,9 +1248,9 @@ void _gleFeedbackQuadsFunc_body(glContext)
   double incomingFpr6;
   double incomingFpr7;
   double incomingFpr8;
-  double incomingStack_ffffff78;
-  double incomingStack_ffffff80;
-  double incomingStack_ffffff88;
+  double incomingStackWord_ffffff78;
+  double incomingStackWord_ffffff80;
+  double incomingStackWord_ffffff88;
   int backFacing;
   int clipCount [4];
   
@@ -1316,7 +1316,7 @@ void _gleFeedbackQuadsFunc_body(glContext)
               do {
                 cullResultThenBackFacing = ((undefined4 (*)())_gleCullQuad)(glContext,vertexCursor,vertexCursor + 0x100,vertexCursor + 0x200,vertexCursor + 0x300,
                                       &backFacing,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
-                                      incomingStack_ffffff78,incomingStack_ffffff80,incomingStack_ffffff88);
+                                      incomingStackWord_ffffff78,incomingStackWord_ffffff80,incomingStackWord_ffffff88);
                 forwardedFloatArg1 = forwardedFloatArg1;
                 if (cullResultThenBackFacing == 0) {
                   if (previousBackFacingThenVertexArrayEnd != backFacing) {
@@ -1385,7 +1385,7 @@ LAB_00050bc0:
           if ((*(char *)(glContext + 0x4e18) == '\0') ||
              (forwardedFloatArg1 = (double)((double (*)())_gleClipPolyPlane)(glContext,polygonList,4,spareList,clipCount,forwardedFloatArg1,incomingFpr2,
                                                  incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
-                                                 incomingStack_ffffff78,incomingStack_ffffff80),
+                                                 incomingStackWord_ffffff78,incomingStackWord_ffffff80),
              puVar14 = polygonList, iVar20 = clipCount[0], newPolygonList = spareList, clipCount[0] != 0)) {
             polygonList = newPolygonList;
             spareList = puVar14;

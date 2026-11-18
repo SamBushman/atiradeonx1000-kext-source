@@ -1159,8 +1159,8 @@ void _gleVPRenderTriangles_body(glContext)
   double incomingFpr6;
   double incomingFpr7;
   double incomingFpr8;
-  double incomingStack_ffffff78;
-  double incomingStack_ffffff80;
+  double incomingStackWord_ffffff78;
+  double incomingStackWord_ffffff80;
   int backFacing;
   int clippedVertexCount [5];
   
@@ -1194,7 +1194,7 @@ void _gleVPRenderTriangles_body(glContext)
             do {
               cullResult = ((undefined4 (*)())_gleCullTriangle)(glContext,vertexCursor,vertexCursor + 0x100,vertexCursor + 0x200,0,&backFacing,
                                        dVar17,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
-                                       incomingStack_ffffff78,incomingStack_ffffff80);
+                                       incomingStackWord_ffffff78,incomingStackWord_ffffff80);
               dVar17 = dVar17;
               if (cullResult == 0) {
                 if (iVar11 != backFacing) {
@@ -1252,7 +1252,7 @@ void _gleVPRenderTriangles_body(glContext)
           if ((*(char *)(glContext + 0x4e18) == '\0') ||
              (dVar17 = (double)((double (*)())_gleClipPolyPlane)(glContext,polygonList,3,spareList,clippedVertexCount,dVar17,incomingFpr2,
                                                  incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
-                                                 incomingStack_ffffff78,incomingStack_ffffff80),
+                                                 incomingStackWord_ffffff78,incomingStackWord_ffffff80),
              nextSpareList = polygonList, nextPolygonList = spareList, polygonVertexCount = clippedVertexCount[0], clippedVertexCount[0] != 0)) {
             polygonList = nextPolygonList;
             spareList = nextSpareList;
@@ -1708,9 +1708,9 @@ void _gleVPRenderQuads_body(glContext)
   double incomingFpr6;
   double incomingFpr7;
   double incomingFpr8;
-  double incomingStack_ffffff78;
-  double incomingStack_ffffff80;
-  double incomingStack_ffffff88;
+  double incomingStackWord_ffffff78;
+  double incomingStackWord_ffffff80;
+  double incomingStackWord_ffffff88;
   int backFacing;
   int clipCount [5];
   
@@ -1744,7 +1744,7 @@ void _gleVPRenderQuads_body(glContext)
             do {
               cullResultThenFlipCount = ((undefined4 (*)())_gleCullQuad)(glContext,vertexCursor,vertexCursor + 0x100,vertexCursor + 0x200,vertexCursor + 0x300,
                                    &backFacing,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
-                                   incomingStack_ffffff78,incomingStack_ffffff80,incomingStack_ffffff88);
+                                   incomingStackWord_ffffff78,incomingStackWord_ffffff80,incomingStackWord_ffffff88);
               forwardedFloatArg1 = forwardedFloatArg1;
               if (cullResultThenFlipCount == 0) {
                 if (iVar11 != backFacing) {
@@ -1803,7 +1803,7 @@ void _gleVPRenderQuads_body(glContext)
           if ((*(char *)(glContext + 0x4e18) == '\0') ||
              (forwardedFloatArg1 = (double)((double (*)())_gleClipPolyPlane)(glContext,polygonList,4,spareList,clipCount,forwardedFloatArg1,incomingFpr2,
                                                  incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
-                                                 incomingStack_ffffff78,incomingStack_ffffff80),
+                                                 incomingStackWord_ffffff78,incomingStackWord_ffffff80),
              oldPolygonListThenVertexPtrCursor = polygonList, newPolygonList = spareList, polygonVertexCount = clipCount[0], clipCount[0] != 0)) {
             polygonList = newPolygonList;
             spareList = oldPolygonListThenVertexPtrCursor;
@@ -1882,9 +1882,9 @@ void _gleVPRenderQuadStrip_body(glContext)
   double incomingFpr6;
   double incomingFpr7;
   double incomingFpr8;
-  double incomingStack_ffffff78;
-  double incomingStack_ffffff80;
-  double incomingStack_ffffff88;
+  double incomingStackWord_ffffff78;
+  double incomingStackWord_ffffff80;
+  double incomingStackWord_ffffff88;
   int backFacing;
   int clippedVertexCount [6];
   
@@ -1920,7 +1920,7 @@ void _gleVPRenderQuadStrip_body(glContext)
               uVar7 = vertexCursor + 0x200;
               cullResult = ((undefined4 (*)())_gleCullQuad)(glContext,vertexCursor,vertexCursor + 0x100,vertexCursor + 0x300,uVar7,&backFacing,
                                    dVar16,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
-                                   incomingStack_ffffff78,incomingStack_ffffff80,incomingStack_ffffff88);
+                                   incomingStackWord_ffffff78,incomingStackWord_ffffff80,incomingStackWord_ffffff88);
               dVar16 = f1AfterCall1;
               if (cullResult != 0) break;
               if (iVar11 != backFacing) {
@@ -1974,7 +1974,7 @@ LAB_00105bf4:
           if ((*(char *)(glContext + 0x4e18) == '\0') ||
              (dVar16 = (double)((double (*)())_gleClipPolyPlane)(glContext,polygonList,4,spareList,clippedVertexCount,dVar16,incomingFpr2,
                                                  incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
-                                                 incomingStack_ffffff78,incomingStack_ffffff80),
+                                                 incomingStackWord_ffffff78,incomingStackWord_ffffff80),
              nextSpareList = polygonList, nextPolygonList = spareList, polygonVertexCount = clippedVertexCount[0], clippedVertexCount[0] != 0)) {
             polygonList = nextPolygonList;
             spareList = nextSpareList;
@@ -2044,8 +2044,8 @@ void _gleVPRenderPolygon(glContext)
   double incomingFpr6;
   double incomingFpr7;
   double incomingFpr8;
-  double incomingStack_ffffff88;
-  double incomingStack_ffffff90;
+  double incomingStackWord_ffffff88;
+  double incomingStackWord_ffffff90;
   uint clippedCount;
   int backFacing [4];
   
@@ -2103,7 +2103,7 @@ void _gleVPRenderPolygon(glContext)
       vertexArrayThenPolygonList = polygonList;
       if (*(char *)(glContext + 0x4e18) != '\0') {
         ((double (*)())_gleClipPolyPlane)(glContext,polygonList,vertexCountThenClippedCount,spareList,&clippedCount,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,
-                          incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffff88,incomingStack_ffffff90);
+                          incomingFpr6,incomingFpr7,incomingFpr8,incomingStackWord_ffffff88,incomingStackWord_ffffff90);
         if (clippedCount == 0) {
           return;
         }

@@ -5659,11 +5659,11 @@ int _gliAttachDrawableWithOptions(glContext, param_2, param_3, param_4, forwarde
   double incomingFpr6;
   double incomingFpr7;
   double incomingFpr8;
-  double incomingStack_ffffff98;
-  double incomingStack_ffffffa0;
-  double incomingStack_ffffffa8;
-  double incomingStack_ffffffb0;
-  double incomingStack_ffffffb8;
+  double incomingStackWord_ffffff98;
+  double incomingStackWord_ffffffa0;
+  double incomingStackWord_ffffffa8;
+  double incomingStackWord_ffffffb0;
+  double incomingStackWord_ffffffb8;
   
   iVar2 = -(uint)(*(byte *)(glContext + 0x85a8) ^ *(byte *)(glContext + 0x85a6));
   bVar1 = false;
@@ -5688,8 +5688,8 @@ int _gliAttachDrawableWithOptions(glContext, param_2, param_3, param_4, forwarde
     uVar6 = 2;
   }
   if (uVar6 == 2) {
-    ((void (*)())_gliUpdatePluginConfig)(glContext,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffff98,
-               incomingStack_ffffffa0,incomingStack_ffffffa8,incomingStack_ffffffb0,incomingStack_ffffffb8);
+    ((void (*)())_gliUpdatePluginConfig)(glContext,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStackWord_ffffff98,
+               incomingStackWord_ffffffa0,incomingStackWord_ffffffa8,incomingStackWord_ffffffb0,incomingStackWord_ffffffb8);
 LAB_00012634:
     bVar1 = true;
 LAB_00012638:

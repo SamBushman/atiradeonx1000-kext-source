@@ -4175,26 +4175,26 @@ void _gleEvalDomain2Coord(undefined4 glContext,int points,int uorder,int vorder,
   float *pointPtr;
   int vRemaining;
   float vCopy;
-  double incomingStack_ffffff88;
-  double incomingStack_ffffff90;
-  double incomingStack_ffffff98;
-  double incomingStack_ffffffa0;
-  double incomingStack_ffffffa8;
+  double incomingStackWord_ffffff88;
+  double incomingStackWord_ffffff90;
+  double incomingStackWord_ffffff98;
+  double incomingStackWord_ffffffa0;
+  double incomingStackWord_ffffffa8;
   
   uorderThenComponentIndex = uorder;
   vCopy = v;
   if (((double)GH_U2F((unsigned int)_uvalue_c) != u) || (_uorder_c != uorder)) {
     ((void (*)())_glePreEvaluate)(glContext,uorder,uorder,&_ucoeff_c,u,v,floatArg3,floatArg4,floatArg5,
-                    floatArg6,floatArg7,floatArg8,incomingStack_ffffff88,incomingStack_ffffff90,incomingStack_ffffff98
-                    ,incomingStack_ffffffa0,incomingStack_ffffffa8);
+                    floatArg6,floatArg7,floatArg8,incomingStackWord_ffffff88,incomingStackWord_ffffff90,incomingStackWord_ffffff98
+                    ,incomingStackWord_ffffffa0,incomingStackWord_ffffffa8);
     _uvalue_c = GH_F2U((float)u);
     _utype_c = 2;
     _uorder_c = uorder;
   }
   if (((double)GH_U2F((unsigned int)_vvalue_c) != v) || (_vorder_c != vorder)) {
     ((void (*)())_glePreEvaluate)(glContext,vorder,uorderThenComponentIndex,&_vcoeff_c,v,(double)vCopy,floatArg3,floatArg4,floatArg5,
-                    floatArg6,floatArg7,floatArg8,incomingStack_ffffff88,incomingStack_ffffff90,incomingStack_ffffff98
-                    ,incomingStack_ffffffa0,incomingStack_ffffffa8);
+                    floatArg6,floatArg7,floatArg8,incomingStackWord_ffffff88,incomingStackWord_ffffff90,incomingStackWord_ffffff98
+                    ,incomingStackWord_ffffffa0,incomingStackWord_ffffffa8);
     _vvalue_c = GH_F2U((float)v);
     _vtype_c = 2;
     _vorder_c = vorder;
