@@ -775,11 +775,11 @@ void _gleSetVertexEval2Func(glContext, forwardedArg2, forwardedArg3)
   undefined4 forwardedArg2;
   undefined4 forwardedArg3;
 {
-  undefined4 *puVar1;
+  undefined4 *vertexFuncSlot;
   code *UNRECOVERED_JUMPTABLE;
   
-  puVar1 = (undefined4 *)(*_gleBuildVertexFunc)(glContext,2,forwardedArg3);
-  UNRECOVERED_JUMPTABLE = (code *)*puVar1;
+  vertexFuncSlot = (undefined4 *)(*_gleBuildVertexFunc)(glContext,2,forwardedArg3);
+  UNRECOVERED_JUMPTABLE = (code *)*vertexFuncSlot;
   *(code **)(glContext + 0x489c) = UNRECOVERED_JUMPTABLE;
                     
                     

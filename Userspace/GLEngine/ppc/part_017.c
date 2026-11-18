@@ -1290,10 +1290,10 @@ void _glGetMinmaxParameterfv_Exec(glContext, target, pname, params)
   undefined4 pname;
   float *params;
 {
-  uint local_18 [3];
+  uint intParams [3];
   
-  ((void (*)())_glGetMinmaxParameteriv_Exec)(glContext,target,pname,local_18);
-  *params = (float)((double)CONCAT44(0x43300000,local_18[0] ^ 0x80000000) - DOUBLE_00108d58);
+  ((void (*)())_glGetMinmaxParameteriv_Exec)(glContext,target,pname,intParams);
+  *params = (float)((double)CONCAT44(0x43300000,intParams[0] ^ 0x80000000) - DOUBLE_00108d58);
   return;
 }
 

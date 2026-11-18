@@ -146,15 +146,15 @@ float * _glTranslatef_Comp(undefined4 glContext,float x,float y,float z)
 void _gleBeginLineLoopRenderTCL(glContext)
   int glContext;
 {
-  undefined *puVar1;
-  undefined *puVar2;
+  undefined *renderLineLoopFunc;
+  undefined *flushLineLoopFunc;
   
   *(undefined1 *)(glContext + 0x4a18) = 0;
-  puVar2 = PTR__gleFlushLineLoopTCLFunc_001121d8;
-  puVar1 = PTR__gleRenderLineLoopTCLFunc_001121d4;
+  flushLineLoopFunc = PTR__gleFlushLineLoopTCLFunc_001121d8;
+  renderLineLoopFunc = PTR__gleRenderLineLoopTCLFunc_001121d4;
   *(undefined4 *)(glContext + 0x4858) = *(undefined4 *)(glContext + 0x4854);
-  *(undefined **)(glContext + 0x4a0c) = puVar2;
-  *(undefined **)(glContext + 0x4a08) = puVar1;
+  *(undefined **)(glContext + 0x4a0c) = flushLineLoopFunc;
+  *(undefined **)(glContext + 0x4a08) = renderLineLoopFunc;
   return;
 }
 

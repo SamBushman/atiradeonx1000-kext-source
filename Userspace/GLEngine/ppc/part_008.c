@@ -1195,14 +1195,14 @@ void _gleFeedbackToken(int glContext,float fparam_1)
 void _gleBeginQuadsSelectFeedback(glContext)
   int glContext;
 {
-  undefined *puVar1;
+  undefined *quadsFunc;
   
   *(undefined **)(glContext + 0x4a0c) = PTR__gleFlushAtomicFunc_00112224;
-  puVar1 = PTR__gleFeedbackQuadsFunc_00112278;
+  quadsFunc = PTR__gleFeedbackQuadsFunc_00112278;
   if (*(int *)(glContext + 0x4e1c) == 0x1c02) {
-    puVar1 = PTR__gleSelectQuadsFunc_0011227c;
+    quadsFunc = PTR__gleSelectQuadsFunc_0011227c;
   }
-  *(undefined **)(glContext + 0x4a08) = puVar1;
+  *(undefined **)(glContext + 0x4a08) = quadsFunc;
   *(undefined4 *)(glContext + 0x4858) = *(undefined4 *)(glContext + 0x4854);
   return;
 }
@@ -2285,16 +2285,16 @@ void _gleMultiTextureMatTransPtr(glContext, forwardedArg2, forwardedArg3)
   undefined4 forwardedArg2;
   undefined4 forwardedArg3;
 {
-  uint uVar1;
-  uint uVar2;
+  uint shiftedEnableBits;
+  uint texEnableBits;
   uint loopIndex;
   
-  uVar2 = _gleTexEnableBits(glContext);
+  texEnableBits = _gleTexEnableBits(glContext);
   loopIndex = 0;
   do {
-    uVar1 = uVar2 >> (loopIndex & 0x3f);
-    if ((uVar1 & 1) == 0) {
-      if (uVar1 == 0) {
+    shiftedEnableBits = texEnableBits >> (loopIndex & 0x3f);
+    if ((shiftedEnableBits & 1) == 0) {
+      if (shiftedEnableBits == 0) {
         return;
       }
     }

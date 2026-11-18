@@ -3881,10 +3881,10 @@ void _gleInitBufferState(glContext)
 void _glePPEmulatorInitialize(glContext)
   int glContext;
 {
-  undefined4 uVar1;
+  undefined4 emulator;
   
-  uVar1 = _PPEmulatorCreate();
-  *(undefined4 *)(glContext + 0x4a5c) = uVar1;
+  emulator = _PPEmulatorCreate();
+  *(undefined4 *)(glContext + 0x4a5c) = emulator;
   return;
 }
 

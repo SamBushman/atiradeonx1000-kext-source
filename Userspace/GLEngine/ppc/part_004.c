@@ -968,13 +968,13 @@ void _gleFreePipelineProgramState(glContext)
 }
 
 /* _gleFreePipelineProgramObject @ 0x30568 (72 bytes) */
-void _gleFreePipelineProgramObject(glContext, param_2)
+void _gleFreePipelineProgramObject(glContext, programObject)
   undefined4 glContext;
-  int param_2;
+  int programObject;
 {
-  ((void (*)())_gleClearPipelineProgram)(glContext,param_2 + 0x10);
-  ((void (*)())_gleDestroyPluginPipelineProgram)(glContext,param_2 + 0x10);
-  _gleVecFree(param_2);
+  ((void (*)())_gleClearPipelineProgram)(glContext,programObject + 0x10);
+  ((void (*)())_gleDestroyPluginPipelineProgram)(glContext,programObject + 0x10);
+  _gleVecFree(programObject);
   return;
 }
 
@@ -1290,8 +1290,8 @@ void _gleDetachShaderObjects(glContext)
 void _gleDestroySharedState(glContext)
   int glContext;
 {
-  int iVar1;
-  undefined4 uVar2;
+  int rendererDispatchTable;
+  undefined4 rendererSharedHandle;
   int sharedState;
   int loopIndex;
   undefined4 *srcCursor2;
@@ -1303,12 +1303,12 @@ void _gleDestroySharedState(glContext)
     srcCursor = (int *)(glContext + 0x8884);
     srcCursor2 = (undefined4 *)(sharedState + 0x8054);
     do {
-      iVar1 = *srcCursor;
+      rendererDispatchTable = *srcCursor;
       srcCursor = srcCursor + 0xb8;
-      uVar2 = *srcCursor2;
+      rendererSharedHandle = *srcCursor2;
       loopIndex = loopIndex + 1;
       srcCursor2 = srcCursor2 + 1;
-      (**(code **)(iVar1 + 0x128))(uVar2);
+      (**(code **)(rendererDispatchTable + 0x128))(rendererSharedHandle);
     } while (loopIndex < (int)(uint)*(byte *)(glContext + 0x85a4));
   }
   _pthread_mutex_destroy(sharedState + 0x8028);

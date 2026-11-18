@@ -5306,15 +5306,15 @@ void _glRectd_Exec(int glContext,double x1,double y1,double x2,double y2,double 
 void _gleBeginPolygonRenderTCL(glContext)
   int glContext;
 {
-  undefined *puVar1;
-  undefined *puVar2;
+  undefined *renderPolygonFunc;
+  undefined *flushPolygonFunc;
   
   *(undefined1 *)(glContext + 0x4a18) = 0;
-  puVar2 = PTR__gleFlushPolygonTCLFunc_00112254;
-  puVar1 = PTR__gleRenderPolygonTCLFunc_00112250;
+  flushPolygonFunc = PTR__gleFlushPolygonTCLFunc_00112254;
+  renderPolygonFunc = PTR__gleRenderPolygonTCLFunc_00112250;
   *(undefined4 *)(glContext + 0x4858) = *(undefined4 *)(glContext + 0x4854);
-  *(undefined **)(glContext + 0x4a0c) = puVar2;
-  *(undefined **)(glContext + 0x4a08) = puVar1;
+  *(undefined **)(glContext + 0x4a0c) = flushPolygonFunc;
+  *(undefined **)(glContext + 0x4a08) = renderPolygonFunc;
   return;
 }
 
@@ -6131,10 +6131,10 @@ LAB_0004dc00:
 int _gleGetVertexArrayFunc(glContext)
   undefined4 glContext;
 {
-  undefined4 *puVar1;
+  undefined4 *vertexFuncSlot;
   
-  puVar1 = (undefined4 *)(*_gleBuildVertexFunc)(glContext,1);
-  return *puVar1;
+  vertexFuncSlot = (undefined4 *)(*_gleBuildVertexFunc)(glContext,1);
+  return *vertexFuncSlot;
 }
 
 /* _gleSetFunctionIDFromArray @ 0x4dd18 (532 bytes) */
