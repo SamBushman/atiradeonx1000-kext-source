@@ -799,9 +799,9 @@ void _gleEmptyImage(glContext, width, height, format, type, source, image)
 }
 
 /* _gleModifyPixelStencil @ 0xe6448 (196 bytes) */
-void _gleModifyPixelStencil(param_1, param_2, unusedArg3, unusedArg4, unusedArg5, unusedArg6, unusedArg7, unusedArg8)
-  int param_1;
-  int param_2;
+void _gleModifyPixelStencil(glContext, pixel, unusedArg3, unusedArg4, unusedArg5, unusedArg6, unusedArg7, unusedArg8)
+  int glContext;
+  int pixel;
   undefined4 unusedArg3;
   undefined4 unusedArg4;
   undefined4 unusedArg5;
@@ -811,47 +811,47 @@ void _gleModifyPixelStencil(param_1, param_2, unusedArg3, unusedArg4, unusedArg5
 {
   uint uVar1;
   uint uVar2;
-  uint uVar3;
-  int iVar4;
-  uint uVar5;
+  uint indexInteger;
+  int stencilValue;
+  uint indexFraction;
   
-  uVar2 = *(uint *)(param_1 + 0x3214);
-  uVar5 = *(uint *)(param_2 + 0x1c);
-  uVar3 = *(uint *)(param_2 + 0x18);
+  uVar2 = *(uint *)(glContext + 0x3214);
+  indexFraction = *(uint *)(pixel + 0x1c);
+  indexInteger = *(uint *)(pixel + 0x18);
   if ((int)uVar2 < 1) {
     if ((int)uVar2 < 0) {
       uVar1 = -uVar2;
       if ((int)uVar1 < 0xf) {
-        uVar2 = uVar3 << (uVar2 + 0xf & 0x3f);
+        uVar2 = indexInteger << (uVar2 + 0xf & 0x3f);
       }
       else {
-        uVar2 = (int)uVar3 >> (uVar1 - 0xf & 0x3f);
+        uVar2 = (int)indexInteger >> (uVar1 - 0xf & 0x3f);
       }
-      uVar3 = (int)uVar3 >> (uVar1 & 0x3f);
-      uVar5 = ((int)uVar5 >> (uVar1 & 0x3f) | uVar2) & 0x7fff;
+      indexInteger = (int)indexInteger >> (uVar1 & 0x3f);
+      indexFraction = ((int)indexFraction >> (uVar1 & 0x3f) | uVar2) & 0x7fff;
     }
   }
   else {
     if ((int)uVar2 < 0xf) {
-      uVar1 = (int)uVar5 >> (0xf - uVar2 & 0x3f);
+      uVar1 = (int)indexFraction >> (0xf - uVar2 & 0x3f);
     }
     else {
-      uVar1 = uVar5 << (uVar2 - 0xf & 0x3f);
+      uVar1 = indexFraction << (uVar2 - 0xf & 0x3f);
     }
-    uVar3 = uVar3 << (uVar2 & 0x3f) | uVar1;
-    uVar5 = uVar5 << (uVar2 & 0x3f);
+    indexInteger = indexInteger << (uVar2 & 0x3f) | uVar1;
+    indexFraction = indexFraction << (uVar2 & 0x3f);
   }
-  iVar4 = uVar3 + *(int *)(param_1 + 0x3210);
-  if ((*(uint *)(param_1 + 0x3414) & 2) != 0) {
-    if (iVar4 < *(int *)(param_1 + 0x3274)) {
-      iVar4 = *(int *)(iVar4 * 4 + *(int *)(param_1 + 0x326c));
+  stencilValue = indexInteger + *(int *)(glContext + 0x3210);
+  if ((*(uint *)(glContext + 0x3414) & 2) != 0) {
+    if (stencilValue < *(int *)(glContext + 0x3274)) {
+      stencilValue = *(int *)(stencilValue * 4 + *(int *)(glContext + 0x326c));
     }
     else {
-      iVar4 = *(int *)(*(int *)(param_1 + 0x3274) * 4 + *(int *)(param_1 + 0x326c) + -4);
+      stencilValue = *(int *)(*(int *)(glContext + 0x3274) * 4 + *(int *)(glContext + 0x326c) + -4);
     }
   }
-  *(uint *)(param_2 + 0x1c) = uVar5;
-  *(int *)(param_2 + 0x18) = iVar4;
+  *(uint *)(pixel + 0x1c) = indexFraction;
+  *(int *)(pixel + 0x18) = stencilValue;
   return;
 }
 
@@ -1125,54 +1125,54 @@ void _gleModifyPixelRGBA(glContext, pixel)
 }
 
 /* _gleModifyPixelRGBAIndex @ 0xe6ce4 (248 bytes) */
-void _gleModifyPixelRGBAIndex(param_1, param_2)
-  int param_1;
-  int param_2;
+void _gleModifyPixelRGBAIndex(glContext, pixel)
+  int glContext;
+  int pixel;
 {
-  undefined4 uVar1;
+  undefined4 mappedAlpha;
   uint uVar2;
   uint uVar3;
-  uint uVar4;
-  uint uVar5;
+  uint indexFraction;
+  uint indexInteger;
   
-  uVar3 = *(uint *)(param_1 + 0x3214);
-  uVar5 = *(uint *)(param_2 + 0x18);
-  uVar4 = *(uint *)(param_2 + 0x1c);
+  uVar3 = *(uint *)(glContext + 0x3214);
+  indexInteger = *(uint *)(pixel + 0x18);
+  indexFraction = *(uint *)(pixel + 0x1c);
   if ((int)uVar3 < 1) {
     if ((int)uVar3 < 0) {
       uVar2 = -uVar3;
       if ((int)uVar2 < 0xf) {
-        uVar3 = uVar5 << (uVar3 + 0xf & 0x3f);
+        uVar3 = indexInteger << (uVar3 + 0xf & 0x3f);
       }
       else {
-        uVar3 = (int)uVar5 >> (uVar2 - 0xf & 0x3f);
+        uVar3 = (int)indexInteger >> (uVar2 - 0xf & 0x3f);
       }
-      uVar5 = (int)uVar5 >> (uVar2 & 0x3f);
-      uVar4 = ((int)uVar4 >> (uVar2 & 0x3f) | uVar3) & 0x7fff;
+      indexInteger = (int)indexInteger >> (uVar2 & 0x3f);
+      indexFraction = ((int)indexFraction >> (uVar2 & 0x3f) | uVar3) & 0x7fff;
     }
   }
   else {
     if ((int)uVar3 < 0xf) {
-      uVar2 = (int)uVar4 >> (0xf - uVar3 & 0x3f);
+      uVar2 = (int)indexFraction >> (0xf - uVar3 & 0x3f);
     }
     else {
-      uVar2 = uVar4 << (uVar3 - 0xf & 0x3f);
+      uVar2 = indexFraction << (uVar3 - 0xf & 0x3f);
     }
-    uVar5 = uVar5 << (uVar3 & 0x3f) | uVar2;
-    uVar4 = uVar4 << (uVar3 & 0x3f);
+    indexInteger = indexInteger << (uVar3 & 0x3f) | uVar2;
+    indexFraction = indexFraction << (uVar3 & 0x3f);
   }
-  uVar5 = uVar5 + *(int *)(param_1 + 0x3210);
-  *(undefined4 *)(param_2 + 4) =
-       *(undefined4 *)((uVar5 & *(int *)(param_1 + 0x3278) - 1U) * 4 + *(int *)(param_1 + 0x324c));
-  *(undefined4 *)(param_2 + 8) =
-       *(undefined4 *)((uVar5 & *(int *)(param_1 + 0x327c) - 1U) * 4 + *(int *)(param_1 + 0x3250));
-  *(undefined4 *)(param_2 + 0xc) =
-       *(undefined4 *)((uVar5 & *(int *)(param_1 + 0x3280) - 1U) * 4 + *(int *)(param_1 + 0x3254));
-  uVar1 = *(undefined4 *)
-           ((uVar5 & *(int *)(param_1 + 0x3284) - 1U) * 4 + *(int *)(param_1 + 0x3258));
-  *(uint *)(param_2 + 0x1c) = uVar4;
-  *(undefined4 *)(param_2 + 0x10) = uVar1;
-  *(uint *)(param_2 + 0x18) = uVar5;
+  indexInteger = indexInteger + *(int *)(glContext + 0x3210);
+  *(undefined4 *)(pixel + 4) =
+       *(undefined4 *)((indexInteger & *(int *)(glContext + 0x3278) - 1U) * 4 + *(int *)(glContext + 0x324c));
+  *(undefined4 *)(pixel + 8) =
+       *(undefined4 *)((indexInteger & *(int *)(glContext + 0x327c) - 1U) * 4 + *(int *)(glContext + 0x3250));
+  *(undefined4 *)(pixel + 0xc) =
+       *(undefined4 *)((indexInteger & *(int *)(glContext + 0x3280) - 1U) * 4 + *(int *)(glContext + 0x3254));
+  mappedAlpha = *(undefined4 *)
+           ((indexInteger & *(int *)(glContext + 0x3284) - 1U) * 4 + *(int *)(glContext + 0x3258));
+  *(uint *)(pixel + 0x1c) = indexFraction;
+  *(undefined4 *)(pixel + 0x10) = mappedAlpha;
+  *(uint *)(pixel + 0x18) = indexInteger;
   return;
 }
 

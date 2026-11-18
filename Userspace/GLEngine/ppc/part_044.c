@@ -3217,16 +3217,16 @@ void _gleVtxLightFastRGBABack(int glContext,int vertex,int vertexCount,double un
   uint enabledLightMask;
   uint lightIndex;
   int lightParams;
-  int iVar7;
+  int lightProducts;
   int material;
-  int iVar9;
+  int lightRecord;
   double fparam_1_00;
   double dVar10;
   double fparam_8_00;
-  float dVar11;
-  float dVar12;
-  float dVar13;
-  float dVar14;
+  float normalDotLight;
+  float colorB;
+  float colorG;
+  float colorR;
   double incomingStack_ffffff78;
   double incomingStack_ffffff80;
   double incomingStack_ffffff88;
@@ -3247,14 +3247,14 @@ LAB_000d5da0:
     if (*(char *)(material + 0x234) != '\0') {
       _gleUpdateLightRGBASums(glContext,material,1);
     }
-    dVar14 = (double)*(float *)(material + 0x1e8);
-    iVar7 = material + 0x50;
-    dVar13 = (double)*(float *)(material + 0x1ec);
-    dVar12 = (double)*(float *)(material + 0x1f0);
+    colorR = (double)*(float *)(material + 0x1e8);
+    lightProducts = material + 0x50;
+    colorG = (double)*(float *)(material + 0x1ec);
+    colorB = (double)*(float *)(material + 0x1f0);
     lightIndex = 0;
     colorAlpha = *(undefined4 *)(material + 0x1dc);
     lightParams = glContext + 0x2820;
-    iVar9 = glContext + 0x4a70;
+    lightRecord = glContext + 0x4a70;
     do {
       if ((enabledLightMask & 1 << (lightIndex & 0x3f)) == 0) {
         if (enabledLightMask >> (lightIndex & 0x3f) == 0) goto LAB_000d5eb8;
@@ -3262,40 +3262,40 @@ LAB_000d5da0:
       else {
         fparam_8_00 = (double)*(float *)(vertex + 0x48);
         dVar10 = (double)FLOAT_00108e50;
-        dVar11 = (double)(float)(fparam_8_00 * (double)*(float *)(iVar9 + 0x14) +
-                                (double)(*(float *)(vertex + 0x40) * *(float *)(iVar9 + 0xc) +
-                                        *(float *)(vertex + 0x44) * *(float *)(iVar9 + 0x10)));
-        if (dVar10 < -(double)dVar11) {
-          dVar14 = -(double)(dVar11 * *(float *)(iVar7 + 0x10) - dVar14);
-          dVar13 = -(double)(dVar11 * *(float *)(iVar7 + 0x14) - dVar13);
+        normalDotLight = (double)(float)(fparam_8_00 * (double)*(float *)(lightRecord + 0x14) +
+                                (double)(*(float *)(vertex + 0x40) * *(float *)(lightRecord + 0xc) +
+                                        *(float *)(vertex + 0x44) * *(float *)(lightRecord + 0x10)));
+        if (dVar10 < -(double)normalDotLight) {
+          colorR = -(double)(normalDotLight * *(float *)(lightProducts + 0x10) - colorR);
+          colorG = -(double)(normalDotLight * *(float *)(lightProducts + 0x14) - colorG);
           fparam_1_00 = -(double)(float)(fparam_8_00 * (double)*(float *)(lightParams + 0x68) +
                                         (double)(*(float *)(vertex + 0x40) *
                                                  *(float *)(lightParams + 0x60) +
                                                 *(float *)(vertex + 0x44) * *(float *)(lightParams + 100)
                                                 ));
-          dVar12 = -(double)(dVar11 * *(float *)(iVar7 + 0x18) - dVar12);
+          colorB = -(double)(normalDotLight * *(float *)(lightProducts + 0x18) - colorB);
           if (dVar10 < fparam_1_00) {
             dVar10 = ((double (*)())_gleMaterialShinePow)(iVar2,material + 0x1e8,fparam_1_00,floatArg2,floatArg3,floatArg4,floatArg5,
                                 floatArg6,dVar10,fparam_8_00,incomingStack_ffffff78,incomingStack_ffffff80,
                                 incomingStack_ffffff88,incomingStack_ffffff90,incomingStack_ffffff98);
-            dVar14 = (double)(float)(dVar10 * (double)*(float *)(iVar7 + 0x20) + (double)dVar14);
-            dVar13 = (double)(float)(dVar10 * (double)*(float *)(iVar7 + 0x24) + (double)dVar13);
-            dVar12 = (double)(float)(dVar10 * (double)*(float *)(iVar7 + 0x28) + (double)dVar12);
+            colorR = (double)(float)(dVar10 * (double)*(float *)(lightProducts + 0x20) + (double)colorR);
+            colorG = (double)(float)(dVar10 * (double)*(float *)(lightProducts + 0x24) + (double)colorG);
+            colorB = (double)(float)(dVar10 * (double)*(float *)(lightProducts + 0x28) + (double)colorB);
             iVar2 = iVar2;
           }
         }
       }
       lightIndex = lightIndex + 1;
-      iVar9 = iVar9 + 0x6c;
-      iVar7 = iVar7 + 0x30;
+      lightRecord = lightRecord + 0x6c;
+      lightProducts = lightProducts + 0x30;
       lightParams = lightParams + 0x80;
     } while( true );
   }
   goto LAB_000d5ec8;
 LAB_000d5eb8:
-  *(float *)(vertex + 0x30) = (float)(double)dVar14;
-  *(float *)(vertex + 0x34) = (float)(double)dVar13;
-  *(float *)(vertex + 0x38) = (float)(double)dVar12;
+  *(float *)(vertex + 0x30) = (float)(double)colorR;
+  *(float *)(vertex + 0x34) = (float)(double)colorG;
+  *(float *)(vertex + 0x38) = (float)(double)colorB;
   *(undefined4 *)(vertex + 0x3c) = colorAlpha;
 LAB_000d5ec8:
   vertexIndex = vertexIndex + 1;

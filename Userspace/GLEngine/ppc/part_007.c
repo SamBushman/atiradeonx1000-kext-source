@@ -2354,73 +2354,73 @@ LAB_00048458:
 }
 
 /* _gleDeletePluginTextureLevel @ 0x48478 (348 bytes) */
-int _gleDeletePluginTextureLevel(glContext, param_2, unusedArg3, param_4, level)
+int _gleDeletePluginTextureLevel(glContext, param_2, unusedArg3, faceIndex, level)
   int glContext;
   undefined4 *param_2;
   undefined4 unusedArg3;
-  int param_4;
+  int faceIndex;
   uint level;
 {
-  int *piVar1;
-  undefined4 *puVar2;
+  int *rendererFuncs;
+  undefined4 *rendererContext;
   byte bVar3;
-  ushort uVar4;
-  ushort uVar5;
-  undefined4 uVar6;
-  uint uVar7;
+  ushort minFilter;
+  ushort newMinFilter;
+  undefined4 rendererHandle;
+  uint levelBit;
   uint uVar8;
-  int iVar9;
+  int rendererBase;
   int loopIndex;
   
   bVar3 = *(byte *)((int)param_2 + 0x82);
-  uVar7 = 1 << (level & 0x3f);
+  levelBit = 1 << (level & 0x3f);
   uVar8 = 0x1f - *(byte *)((int)param_2 + 0x83);
-  *(ushort *)((int)param_2 + param_4 * 2 + 0xa0) =
-       *(ushort *)((int)param_2 + param_4 * 2 + 0xa0) & ~(ushort)uVar7;
-  *(ushort *)((int)param_2 + param_4 * 2 + 0x94) =
-       *(ushort *)((int)param_2 + param_4 * 2 + 0x94) & ~(ushort)uVar7;
-  uVar4 = *(ushort *)(param_2 + 0x20);
-  if (((uVar7 & (1 << (bVar3 & 0x3f) | 1U)) == 0) || (uVar4 == 0)) {
-    if (((uVar7 & ((uint)(-1 << (uVar8 + bVar3 & 0x3f)) >> (uVar8 & 0x3f) | 1)) == 0) ||
-       (uVar4 < 0x2602)) goto LAB_0004856c;
-    uVar5 = 0;
+  *(ushort *)((int)param_2 + faceIndex * 2 + 0xa0) =
+       *(ushort *)((int)param_2 + faceIndex * 2 + 0xa0) & ~(ushort)levelBit;
+  *(ushort *)((int)param_2 + faceIndex * 2 + 0x94) =
+       *(ushort *)((int)param_2 + faceIndex * 2 + 0x94) & ~(ushort)levelBit;
+  minFilter = *(ushort *)(param_2 + 0x20);
+  if (((levelBit & (1 << (bVar3 & 0x3f) | 1U)) == 0) || (minFilter == 0)) {
+    if (((levelBit & ((uint)(-1 << (uVar8 + bVar3 & 0x3f)) >> (uVar8 & 0x3f) | 1)) == 0) ||
+       (minFilter < 0x2602)) goto LAB_0004856c;
+    newMinFilter = 0;
     if (*(char *)(glContext + 0x53e7) != '\0') {
-      if (uVar4 == 0x2701) {
+      if (minFilter == 0x2701) {
 LAB_00048550:
-        uVar5 = 0x2601;
+        newMinFilter = 0x2601;
       }
       else {
-        uVar5 = uVar4;
-        if (uVar4 < 0x2702) {
-          if (uVar4 == 0x2700) {
+        newMinFilter = minFilter;
+        if (minFilter < 0x2702) {
+          if (minFilter == 0x2700) {
 LAB_00048558:
-            uVar5 = 0x2600;
+            newMinFilter = 0x2600;
           }
         }
         else {
-          if (uVar4 == 0x2702) goto LAB_00048558;
-          if (uVar4 == 0x2703) goto LAB_00048550;
+          if (minFilter == 0x2702) goto LAB_00048558;
+          if (minFilter == 0x2703) goto LAB_00048550;
         }
       }
     }
   }
   else {
-    uVar5 = 0;
+    newMinFilter = 0;
   }
-  *(ushort *)(param_2 + 0x20) = uVar5;
+  *(ushort *)(param_2 + 0x20) = newMinFilter;
   *(byte *)((int)param_2 + 0x83) = bVar3;
 LAB_0004856c:
-  iVar9 = glContext + 0x10000;
+  rendererBase = glContext + 0x10000;
   loopIndex = 0;
   if (*(char *)(glContext + 0x85a4) != '\0') {
     do {
-      piVar1 = (int *)(iVar9 + -0x777c);
-      uVar6 = *param_2;
+      rendererFuncs = (int *)(rendererBase + -0x777c);
+      rendererHandle = *param_2;
       loopIndex = loopIndex + 1;
-      puVar2 = (undefined4 *)(iVar9 + -0x7a54);
-      iVar9 = iVar9 + 0x2e0;
+      rendererContext = (undefined4 *)(rendererBase + -0x7a54);
+      rendererBase = rendererBase + 0x2e0;
       param_2 = param_2 + 1;
-      (**(code **)(*piVar1 + 0x164))(*puVar2,uVar6,param_4,level);
+      (**(code **)(*rendererFuncs + 0x164))(*rendererContext,rendererHandle,faceIndex,level);
     } while (loopIndex < (int)(uint)*(byte *)(glContext + 0x85a4));
   }
   return;
