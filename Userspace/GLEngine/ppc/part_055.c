@@ -76,28 +76,28 @@ void _gleSynchronizePluginTextureLevels(glContext, param_2)
 void _gleSynchronizePluginTextures(glContext)
   int glContext;
 {
-  int iVar1;
-  int iVar2;
-  int iVar3;
-  int iVar4;
-  int *piVar5;
+  int textureObject;
+  int unitIndex;
+  int unitBase;
+  int remaining;
+  int *targetCursor;
   
-  iVar2 = 0;
-  iVar3 = glContext;
+  unitIndex = 0;
+  unitBase = glContext;
   do {
-    piVar5 = (int *)(iVar3 + 0x5154);
-    iVar4 = 4;
+    targetCursor = (int *)(unitBase + 0x5154);
+    remaining = 4;
     do {
-      iVar1 = *piVar5;
-      piVar5 = piVar5 + 1;
-      if (iVar1 != 0) {
-        ((void (*)())_gleSynchronizePluginTextureLevels)(glContext,iVar1 + 0x10);
+      textureObject = *targetCursor;
+      targetCursor = targetCursor + 1;
+      if (textureObject != 0) {
+        ((void (*)())_gleSynchronizePluginTextureLevels)(glContext,textureObject + 0x10);
       }
-      iVar4 = iVar4 + -1;
-    } while (-1 < iVar4);
-    iVar2 = iVar2 + 1;
-    iVar3 = iVar3 + 0x14;
-  } while (iVar2 < 0x10);
+      remaining = remaining + -1;
+    } while (-1 < remaining);
+    unitIndex = unitIndex + 1;
+    unitBase = unitBase + 0x14;
+  } while (unitIndex < 0x10);
   return;
 }
 

@@ -238,18 +238,18 @@ int _glPushMatrix_Exec(glContext)
 }
 
 /* _gleCopyMatrix @ 0x33470 (68 bytes) */
-int _gleCopyMatrix(param_1, param_2)
-  undefined8 *param_1;
-  undefined8 *param_2;
+int _gleCopyMatrix(srcMatrix, dstMatrix)
+  undefined8 *srcMatrix;
+  undefined8 *dstMatrix;
 {
-  *param_2 = *param_1;
-  param_2[1] = param_1[1];
-  param_2[2] = param_1[2];
-  param_2[3] = param_1[3];
-  param_2[4] = param_1[4];
-  param_2[5] = param_1[5];
-  param_2[6] = param_1[6];
-  param_2[7] = param_1[7];
+  *dstMatrix = *srcMatrix;
+  dstMatrix[1] = srcMatrix[1];
+  dstMatrix[2] = srcMatrix[2];
+  dstMatrix[3] = srcMatrix[3];
+  dstMatrix[4] = srcMatrix[4];
+  dstMatrix[5] = srcMatrix[5];
+  dstMatrix[6] = srcMatrix[6];
+  dstMatrix[7] = srcMatrix[7];
   return;
 }
 

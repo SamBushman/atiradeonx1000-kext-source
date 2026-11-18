@@ -1994,29 +1994,29 @@ int _OffsetLimitImage3D(pixelStore, width, height, depth, format, type, baseOffs
 }
 
 /* _gleOffsetLimitImage3D @ 0xc7e10 (8 bytes) */
-int _gleOffsetLimitImage3D(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  int param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+int _gleOffsetLimitImage3D(pixelStore, width, height, depth, format, type, offset)
+  int pixelStore;
+  undefined4 width;
+  undefined4 height;
+  undefined4 depth;
+  undefined4 format;
+  undefined4 type;
+  undefined4 offset;
 {
-  return ((int (*)())_OffsetLimitImage3D)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,
-                      *(undefined4 *)(param_1 + 0x10));
+  return ((int (*)())_OffsetLimitImage3D)(pixelStore,width,height,depth,format,type,offset,
+                      *(undefined4 *)(pixelStore + 0x10));
 }
 
 /* _gleOffsetLimitImage @ 0xc7e18 (28 bytes) */
-int _gleOffsetLimitImage(param_1, param_2, param_3, param_4, param_5, param_6)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
+int _gleOffsetLimitImage(pixelStore, width, height, format, type, offset)
+  undefined4 pixelStore;
+  undefined4 width;
+  undefined4 height;
+  undefined4 format;
+  undefined4 type;
+  undefined4 offset;
 {
-  return ((int (*)())_OffsetLimitImage3D)(param_1,param_2,param_3,1,param_4,param_5,param_6,0);
+  return ((int (*)())_OffsetLimitImage3D)(pixelStore,width,height,1,format,type,offset,0);
 }
 
 /* _gleFreeCopyContextData @ 0xc7e38 (104 bytes) */

@@ -858,28 +858,28 @@ void _gleCreatePluginFramebuffer(glContext, pluginHandleArray)
 }
 
 /* _gleDestroyPluginFramebuffer @ 0xcd8b0 (120 bytes) */
-void _gleDestroyPluginFramebuffer(glContext, param_2)
+void _gleDestroyPluginFramebuffer(glContext, pluginHandleArray)
   int glContext;
-  int param_2;
+  int pluginHandleArray;
 {
-  int *piVar1;
-  undefined4 *puVar2;
-  int iVar3;
-  int iVar4;
-  int iVar5;
+  int *rendererDispatch;
+  undefined4 *rendererContextPtr;
+  int handleOffset;
+  int rendererRecord;
+  int loopIndex;
   
-  iVar4 = glContext + 0x10000;
-  iVar5 = 0;
+  rendererRecord = glContext + 0x10000;
+  loopIndex = 0;
   if (*(char *)(glContext + 0x85a4) != '\0') {
     do {
-      piVar1 = (int *)(iVar4 + -0x777c);
-      iVar3 = iVar5 * 4;
-      puVar2 = (undefined4 *)(iVar4 + -0x7a54);
-      iVar4 = iVar4 + 0x2e0;
-      iVar5 = iVar5 + 1;
-      (**(code **)(*piVar1 + 0x204))(*puVar2,*(undefined4 *)(iVar3 + param_2));
-      *(undefined4 *)(iVar3 + param_2) = 0;
-    } while (iVar5 < (int)(uint)*(byte *)(glContext + 0x85a4));
+      rendererDispatch = (int *)(rendererRecord + -0x777c);
+      handleOffset = loopIndex * 4;
+      rendererContextPtr = (undefined4 *)(rendererRecord + -0x7a54);
+      rendererRecord = rendererRecord + 0x2e0;
+      loopIndex = loopIndex + 1;
+      (**(code **)(*rendererDispatch + 0x204))(*rendererContextPtr,*(undefined4 *)(handleOffset + pluginHandleArray));
+      *(undefined4 *)(handleOffset + pluginHandleArray) = 0;
+    } while (loopIndex < (int)(uint)*(byte *)(glContext + 0x85a4));
   }
   return;
 }
@@ -971,28 +971,28 @@ int _gleCreateFramebufferObject(glContext, framebuffer)
 }
 
 /* _gleFreeFramebufferObject @ 0xcda80 (116 bytes) */
-void _gleFreeFramebufferObject(glContext, param_2)
+void _gleFreeFramebufferObject(glContext, framebufferObject)
   undefined4 glContext;
-  int param_2;
+  int framebufferObject;
 {
-  int iVar1;
-  int iVar2;
-  int iVar3;
-  int *piVar4;
+  int newRefCount;
+  int attachedObject;
+  int remaining;
+  int *attachmentCursor;
   
-  iVar3 = 5;
-  ((void (*)())_gleDestroyPluginFramebuffer)(glContext,param_2 + 0x10);
-  piVar4 = (int *)(param_2 + 0xd4);
+  remaining = 5;
+  ((void (*)())_gleDestroyPluginFramebuffer)(glContext,framebufferObject + 0x10);
+  attachmentCursor = (int *)(framebufferObject + 0xd4);
   do {
-    iVar2 = *piVar4;
-    piVar4 = piVar4 + 1;
-    if ((iVar2 != 0) && (iVar1 = *(int *)(iVar2 + 8) + -1, *(int *)(iVar2 + 8) = iVar1, iVar1 == 0))
+    attachedObject = *attachmentCursor;
+    attachmentCursor = attachmentCursor + 1;
+    if ((attachedObject != 0) && (newRefCount = *(int *)(attachedObject + 8) + -1, *(int *)(attachedObject + 8) = newRefCount, newRefCount == 0))
     {
-      _gleFreeTextureObject(glContext,iVar2);
+      _gleFreeTextureObject(glContext,attachedObject);
     }
-    iVar3 = iVar3 + -1;
-  } while (-1 < iVar3);
-  _gleVecFree(param_2);
+    remaining = remaining + -1;
+  } while (-1 < remaining);
+  _gleVecFree(framebufferObject);
   return;
 }
 
@@ -1699,32 +1699,34 @@ LAB_000cead8:
 int _gleSynchronizePluginFramebuffer(glContext)
   int glContext;
 {
-  int iVar1;
+  int attachedObject;
+  int rendererHandleSlot;
   undefined4 incomingR7;
   undefined4 incomingR8;
-  int iVar2;
-  int *piVar3;
+  int glContextThenRendererRecordThenResult;
+  int remaining;
+  int *attachmentCursor;
   
-  iVar2 = glContext;
+  glContextThenRendererRecordThenResult = glContext;
   if (*(int *)(glContext + 0x744c) != 0) {
-    piVar3 = (int *)(*(int *)(glContext + 0x744c) + 0xd4);
-    iVar2 = 5;
+    attachmentCursor = (int *)(*(int *)(glContext + 0x744c) + 0xd4);
+    remaining = 5;
     do {
-      iVar1 = *piVar3;
-      piVar3 = piVar3 + 1;
-      if (iVar1 != 0) {
-        _gleSynchronizePluginTextureLevels(glContext,iVar1 + 0x10);
+      attachedObject = *attachmentCursor;
+      attachmentCursor = attachmentCursor + 1;
+      if (attachedObject != 0) {
+        _gleSynchronizePluginTextureLevels(glContext,attachedObject + 0x10);
       }
-      iVar2 = iVar2 + -1;
-    } while (-1 < iVar2);
-    iVar1 = (uint)*(byte *)(glContext + 0x85a6) * 4 + *(int *)(glContext + 0x744c);
-    iVar2 = (uint)*(byte *)(glContext + 0x85a6) * 0x2e0 + glContext;
-    iVar2 = (**(code **)(*(int *)(iVar2 + 0x8884) + 0x138))
-                      (*(undefined4 *)(iVar2 + 0x85ac),0x5b,*(undefined4 *)(iVar1 + 0x10),0,incomingR7,
-                       incomingR8,iVar1);
+      remaining = remaining + -1;
+    } while (-1 < remaining);
+    rendererHandleSlot = (uint)*(byte *)(glContext + 0x85a6) * 4 + *(int *)(glContext + 0x744c);
+    glContextThenRendererRecordThenResult = (uint)*(byte *)(glContext + 0x85a6) * 0x2e0 + glContext;
+    glContextThenRendererRecordThenResult = (**(code **)(*(int *)(glContextThenRendererRecordThenResult + 0x8884) + 0x138))
+                      (*(undefined4 *)(glContextThenRendererRecordThenResult + 0x85ac),0x5b,*(undefined4 *)(rendererHandleSlot + 0x10),0,incomingR7,
+                       incomingR8,rendererHandleSlot);
   }
   *(undefined1 *)(glContext + 0x7582) = *(undefined1 *)(*(int *)(glContext + 0x468c) + 0x25);
-  return iVar2;
+  return glContextThenRendererRecordThenResult;
 }
 
 /* _gleFreeFramebufferState @ 0xcebc0 (256 bytes) */

@@ -67,16 +67,16 @@ double _glDisable_Exec(glContext, cap)
 }
 
 /* _gleSetEnable_BLEND @ 0x16568 (32 bytes) */
-void _gleSetEnable_BLEND(param_1, unusedArg2, param_3)
-  int param_1;
+void _gleSetEnable_BLEND(glContext, unusedArg2, enable)
+  int glContext;
   undefined4 unusedArg2;
-  uint param_3;
+  uint enable;
 {
-  if (*(byte *)(param_1 + 0x30e4) == param_3) {
+  if (*(byte *)(glContext + 0x30e4) == enable) {
     return;
   }
-  *(char *)(param_1 + 0x30e4) = (char)param_3;
-  *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 2;
+  *(char *)(glContext + 0x30e4) = (char)enable;
+  *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 2;
   return;
 }
 
@@ -4462,25 +4462,25 @@ LAB_0001ca64:
 }
 
 /* _gleSetEnable_TEXTURE_RECTANGLE_EXT @ 0x1ca7c (80 bytes) */
-void _gleSetEnable_TEXTURE_RECTANGLE_EXT(glContext, unusedArg2, param_3)
+void _gleSetEnable_TEXTURE_RECTANGLE_EXT(glContext, unusedArg2, enable)
   int glContext;
   undefined4 unusedArg2;
-  int param_3;
+  int enable;
 {
-  uint uVar1;
-  int iVar2;
+  uint newBits;
+  int texUnitState;
   uint texUnit;
-  uint uVar4;
+  uint oldBits;
   
   texUnit = *(uint *)(glContext + 0x53d4);
   if (texUnit < 8) {
-    iVar2 = texUnit * 0x7c + glContext;
-    uVar4 = *(uint *)(iVar2 + 0x3534);
-    uVar1 = uVar4 & 0xfffffffb | param_3 << 2;
-    if (uVar4 == uVar1) {
+    texUnitState = texUnit * 0x7c + glContext;
+    oldBits = *(uint *)(texUnitState + 0x3534);
+    newBits = oldBits & 0xfffffffb | enable << 2;
+    if (oldBits == newBits) {
       return;
     }
-    *(uint *)(iVar2 + 0x3534) = uVar1;
+    *(uint *)(texUnitState + 0x3534) = newBits;
     _gleUpdateTextureParams(glContext,texUnit);
     return;
   }

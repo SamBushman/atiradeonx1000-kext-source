@@ -289,16 +289,16 @@ LAB_000f3a4c:
 }
 
 /* _gleSelectPoints @ 0xf3ae0 (84 bytes) */
-void _gleSelectPoints(glContext, param_2, param_3)
+void _gleSelectPoints(glContext, vertexCursor, vertexCount)
   undefined4 glContext;
-  uint param_2;
-  int param_3;
+  uint vertexCursor;
+  int vertexCount;
 {
-  uint uVar1;
+  uint vertexEnd;
   
-  uVar1 = param_2 + param_3 * 0x100;
-  for (; param_2 < uVar1; param_2 = param_2 + 0x100) {
-    ((void (*)())_gleSelectHitRecord)(glContext,(double)*(float *)(param_2 + 8));
+  vertexEnd = vertexCursor + vertexCount * 0x100;
+  for (; vertexCursor < vertexEnd; vertexCursor = vertexCursor + 0x100) {
+    ((void (*)())_gleSelectHitRecord)(glContext,(double)*(float *)(vertexCursor + 8));
   }
   return;
 }
@@ -368,17 +368,17 @@ void _gleSelectLineLoop_body(param_1, param_2, param_3)
 }
 
 /* _gleSelectLinesPtr @ 0xf3cd0 (108 bytes) */
-void _gleSelectLinesPtr(glContext, param_2, param_3)
+void _gleSelectLinesPtr(glContext, listCursor, listCount)
   undefined4 glContext;
-  int *param_2;
-  int param_3;
+  int *listCursor;
+  int listCount;
 {
-  int *piVar1;
+  int *lastEntry;
   
-  piVar1 = param_2 + param_3 + -1;
-  for (; param_2 < piVar1; param_2 = param_2 + 2) {
-    ((void (*)())_gleSelectHitRecord)(glContext,(double)*(float *)(*param_2 + 8));
-    ((void (*)())_gleSelectHitRecord)(glContext,(double)*(float *)(param_2[1] + 8));
+  lastEntry = listCursor + listCount + -1;
+  for (; listCursor < lastEntry; listCursor = listCursor + 2) {
+    ((void (*)())_gleSelectHitRecord)(glContext,(double)*(float *)(*listCursor + 8));
+    ((void (*)())_gleSelectHitRecord)(glContext,(double)*(float *)(listCursor[1] + 8));
   }
   return;
 }
@@ -399,16 +399,16 @@ void _gleSelectPolygon(glContext, param_2, param_3)
 }
 
 /* _gleSelectPolygonPtr @ 0xf3d90 (88 bytes) */
-double _gleSelectPolygonPtr(glContext, param_2, param_3)
+double _gleSelectPolygonPtr(glContext, listCursor, listCount)
   undefined4 glContext;
-  int *param_2;
-  int param_3;
+  int *listCursor;
+  int listCount;
 {
-  int *piVar1;
+  int *listEnd;
   
-  piVar1 = param_2 + param_3;
-  for (; param_2 < piVar1; param_2 = param_2 + 1) {
-    ((void (*)())_gleSelectHitRecord)(glContext,(double)*(float *)(*param_2 + 8));
+  listEnd = listCursor + listCount;
+  for (; listCursor < listEnd; listCursor = listCursor + 1) {
+    ((void (*)())_gleSelectHitRecord)(glContext,(double)*(float *)(*listCursor + 8));
   }
   return;
 }
@@ -482,23 +482,23 @@ double _gleSelectTriangleStrip(glContext, param_2, param_3)
 }
 
 /* _gleSelectQuads @ 0xf3f44 (116 bytes) */
-double _gleSelectQuads(glContext, param_2, param_3)
+double _gleSelectQuads(glContext, vertexCursor, vertexCount)
   undefined4 glContext;
-  uint param_2;
-  int param_3;
+  uint vertexCursor;
+  int vertexCount;
 {
-  int iVar1;
-  uint uVar2;
+  int quadVertexIndex;
+  uint quadVertex;
   
-  iVar1 = 0;
-  if (-1 < param_3 + -4) {
+  quadVertexIndex = 0;
+  if (-1 < vertexCount + -4) {
     do {
-      for (uVar2 = param_2; uVar2 < param_2 + 0x400; uVar2 = uVar2 + 0x100) {
-        ((void (*)())_gleSelectHitRecord)(glContext,(double)*(float *)(uVar2 + 8));
+      for (quadVertex = vertexCursor; quadVertex < vertexCursor + 0x400; quadVertex = quadVertex + 0x100) {
+        ((void (*)())_gleSelectHitRecord)(glContext,(double)*(float *)(quadVertex + 8));
       }
-      iVar1 = iVar1 + 4;
-      param_2 = param_2 + 0x400;
-    } while (iVar1 <= param_3 + -4);
+      quadVertexIndex = quadVertexIndex + 4;
+      vertexCursor = vertexCursor + 0x400;
+    } while (quadVertexIndex <= vertexCount + -4);
   }
   return;
 }

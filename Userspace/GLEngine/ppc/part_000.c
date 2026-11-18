@@ -1986,25 +1986,25 @@ int _gleAllocVertexArrays(glContext)
 /* _gleInitFuncCache @ 0x4234 (140 bytes) */
 int _gleInitFuncCache()
 {
-  int iVar1;
-  int iVar2;
+  int funcCache;
+  int returnedCache;
   
-  iVar1 = ((int (*)())_gleDCBAlloc)(0x24);
-  iVar2 = 0;
-  if (iVar1 != 0) {
-    *(undefined4 *)(iVar1 + 0x1c) = 0xffffffff;
-    *(undefined4 *)(iVar1 + 0x20) = 0x4e800020;
-    *(int *)(iVar1 + 4) = iVar1;
-    *(int *)iVar1 = iVar1;
-    *(undefined4 *)(iVar1 + 8) = 0xffffffff;
-    *(undefined4 *)(iVar1 + 0xc) = 0xffffffff;
-    *(undefined4 *)(iVar1 + 0x10) = 0xffffffff;
-    *(undefined4 *)(iVar1 + 0x14) = 0xffffffff;
-    *(undefined4 *)(iVar1 + 0x18) = 0xffffffff;
-    (*(code *)_glePushInstructions)(1,iVar1 + 0x20);
-    iVar2 = iVar1;
+  funcCache = ((int (*)())_gleDCBAlloc)(0x24);
+  returnedCache = 0;
+  if (funcCache != 0) {
+    *(undefined4 *)(funcCache + 0x1c) = 0xffffffff;
+    *(undefined4 *)(funcCache + 0x20) = 0x4e800020;
+    *(int *)(funcCache + 4) = funcCache;
+    *(int *)funcCache = funcCache;
+    *(undefined4 *)(funcCache + 8) = 0xffffffff;
+    *(undefined4 *)(funcCache + 0xc) = 0xffffffff;
+    *(undefined4 *)(funcCache + 0x10) = 0xffffffff;
+    *(undefined4 *)(funcCache + 0x14) = 0xffffffff;
+    *(undefined4 *)(funcCache + 0x18) = 0xffffffff;
+    (*(code *)_glePushInstructions)(1,funcCache + 0x20);
+    returnedCache = funcCache;
   }
-  return iVar2;
+  return returnedCache;
 }
 
 /* _gleAllocFunctions @ 0x42c0 (452 bytes) */
@@ -2172,7 +2172,7 @@ void _gleInitGLDState(glContext)
   int portionRecord;
   undefined4 *dstCursor2;
   int matrixArrayCursorB;
-  int iVar9;
+  int initRecordCursor;
   int materialCursor;
   int lightCursor;
   int clipPlaneCursor;
@@ -2715,14 +2715,14 @@ void _gleInitGLDState(glContext)
   *(undefined1 *)(glContext + 0x3e99) = 0;
   *(undefined1 *)(glContext + 0x3984) = 0;
   *(undefined1 *)(glContext + 0x3e98) = 0;
-  iVar9 = glContext;
+  initRecordCursor = glContext;
   do {
-    *(undefined4 *)(iVar9 + 0x3ea0) = 0;
-    *(undefined4 *)(iVar9 + 0x3ea4) = 0;
-    *(undefined4 *)(iVar9 + 0x3ea8) = 0;
-    *(undefined4 *)(iVar9 + 0x3eac) = 0;
-    iVar9 = iVar9 + 0x10;
-  } while (iVar9 <= glContext + 0x10);
+    *(undefined4 *)(initRecordCursor + 0x3ea0) = 0;
+    *(undefined4 *)(initRecordCursor + 0x3ea4) = 0;
+    *(undefined4 *)(initRecordCursor + 0x3ea8) = 0;
+    *(undefined4 *)(initRecordCursor + 0x3eac) = 0;
+    initRecordCursor = initRecordCursor + 0x10;
+  } while (initRecordCursor <= glContext + 0x10);
   loopIndex2 = 0;
   do {
     loopIndex = 0;
@@ -2763,11 +2763,11 @@ void _gleInitGLDState(glContext)
     loopIndex2 = loopIndex2 + 1;
   } while (loopIndex2 < 8);
   remaining6 = 7;
-  iVar9 = glContext + 0x42b0;
+  initRecordCursor = glContext + 0x42b0;
   do {
-    *(undefined2 *)(iVar9 + 0x16) = 0x1907;
-    *(undefined2 *)(iVar9 + 0x18) = 0x8536;
-    iVar9 = iVar9 + 8;
+    *(undefined2 *)(initRecordCursor + 0x16) = 0x1907;
+    *(undefined2 *)(initRecordCursor + 0x18) = 0x8536;
+    initRecordCursor = initRecordCursor + 8;
     remaining6 = remaining6 + -1;
   } while (remaining6 != 0);
   *(undefined2 *)(glContext + 0x42cc) = 0x8532;
@@ -2792,24 +2792,24 @@ void _gleInitGLDState(glContext)
   *(undefined1 *)(glContext + 0x4306) = 0;
   *(int *)(glContext + 0x4308) = glContext + 0x10;
   *(undefined1 *)(glContext + 0x4305) = 0;
-  iVar9 = glContext;
+  initRecordCursor = glContext;
   do {
-    *(undefined4 *)(iVar9 + 0x10) = 0;
-    *(undefined4 *)(iVar9 + 0x14) = 0;
-    *(undefined4 *)(iVar9 + 0x18) = 0;
-    *(undefined4 *)(iVar9 + 0x1c) = 0x3f800000;
-    iVar9 = iVar9 + 0x10;
+    *(undefined4 *)(initRecordCursor + 0x10) = 0;
+    *(undefined4 *)(initRecordCursor + 0x14) = 0;
+    *(undefined4 *)(initRecordCursor + 0x18) = 0;
+    *(undefined4 *)(initRecordCursor + 0x1c) = 0x3f800000;
+    initRecordCursor = initRecordCursor + 0x10;
     remaining7 = remaining7 + -1;
   } while (remaining7 != 0);
   remaining8 = 0x80;
   *(undefined **)(glContext + 0x4310) = ((unsigned char *)0x00001010) + glContext;
-  iVar9 = glContext;
+  initRecordCursor = glContext;
   do {
-    *(undefined4 *)(((unsigned char *)0x00001010) + iVar9) = 0;
-    *(undefined4 *)(((unsigned char *)0x00001014) + iVar9) = 0;
-    *(undefined4 *)(((unsigned char *)0x00001018) + iVar9) = 0;
-    *(undefined4 *)(((unsigned char *)0x0000101c) + iVar9) = 0x3f800000;
-    iVar9 = iVar9 + 0x10;
+    *(undefined4 *)(((unsigned char *)0x00001010) + initRecordCursor) = 0;
+    *(undefined4 *)(((unsigned char *)0x00001014) + initRecordCursor) = 0;
+    *(undefined4 *)(((unsigned char *)0x00001018) + initRecordCursor) = 0;
+    *(undefined4 *)(((unsigned char *)0x0000101c) + initRecordCursor) = 0x3f800000;
+    initRecordCursor = initRecordCursor + 0x10;
     remaining8 = remaining8 + -1;
   } while (remaining8 != 0);
   *(undefined1 *)(glContext + 0x4302) = 0;

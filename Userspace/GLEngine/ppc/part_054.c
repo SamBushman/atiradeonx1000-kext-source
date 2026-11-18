@@ -2449,102 +2449,102 @@ int _gleLookUpColorTable(glContext, target)
   int glContext;
   uint target;
 {
-  int iVar1;
+  int activeUnitThenTargetObject;
   
-  iVar1 = *(int *)(glContext + 0x53d4);
+  activeUnitThenTargetObject = *(int *)(glContext + 0x53d4);
   if (target == 0x80d2) {
-    iVar1 = *(int *)(glContext + 0x52c4);
+    activeUnitThenTargetObject = *(int *)(glContext + 0x52c4);
     goto LAB_000fc364;
   }
   if (target < 0x80d3) {
     if (target == 0x8064) {
-      iVar1 = *(int *)(glContext + 0x52b4);
+      activeUnitThenTargetObject = *(int *)(glContext + 0x52b4);
     }
     else {
       if (target < 0x8065) {
         if (target != 0xde1) {
           if (target < 0xde2) {
             if (target == 0xde0) {
-              iVar1 = *(int *)(iVar1 * 0x14 + glContext + 0x5164);
+              activeUnitThenTargetObject = *(int *)(activeUnitThenTargetObject * 0x14 + glContext + 0x5164);
               goto LAB_000fc320;
             }
           }
           else if (target == 0x8063) {
-            iVar1 = *(int *)(glContext + 0x52b8);
+            activeUnitThenTargetObject = *(int *)(glContext + 0x52b8);
             goto LAB_000fc364;
           }
           return 0;
         }
-        iVar1 = *(int *)(iVar1 * 0x14 + glContext + 0x5160);
+        activeUnitThenTargetObject = *(int *)(activeUnitThenTargetObject * 0x14 + glContext + 0x5160);
         goto LAB_000fc320;
       }
       if (target == 0x8070) {
-        iVar1 = *(int *)(glContext + 0x52ac);
+        activeUnitThenTargetObject = *(int *)(glContext + 0x52ac);
       }
       else {
         if (target < 0x8071) {
           if (target != 0x806f) {
             return 0;
           }
-          iVar1 = *(int *)(iVar1 * 0x14 + glContext + 0x5158);
+          activeUnitThenTargetObject = *(int *)(activeUnitThenTargetObject * 0x14 + glContext + 0x5158);
           goto LAB_000fc320;
         }
         if (target == 0x80d0) {
-          iVar1 = *(int *)(glContext + 0x52bc);
+          activeUnitThenTargetObject = *(int *)(glContext + 0x52bc);
         }
         else {
           if (target != 0x80d1) {
             return 0;
           }
-          iVar1 = *(int *)(glContext + 0x52c0);
+          activeUnitThenTargetObject = *(int *)(glContext + 0x52c0);
         }
       }
     }
 LAB_000fc364:
-    return iVar1 + 0x10;
+    return activeUnitThenTargetObject + 0x10;
   }
   if (target != 0x84f5) {
     if (target < 0x84f6) {
       if (target == 0x80d4) {
-        iVar1 = *(int *)(glContext + 0x52cc);
+        activeUnitThenTargetObject = *(int *)(glContext + 0x52cc);
       }
       else if (target < 0x80d4) {
-        iVar1 = *(int *)(glContext + 0x52c8);
+        activeUnitThenTargetObject = *(int *)(glContext + 0x52c8);
       }
       else {
         if (target != 0x80d5) {
           if (target != 0x81fb) {
             return 0;
           }
-          iVar1 = *(int *)(iVar1 * 4 + glContext + 0x52d4);
+          activeUnitThenTargetObject = *(int *)(activeUnitThenTargetObject * 4 + glContext + 0x52d4);
           goto LAB_000fc320;
         }
-        iVar1 = *(int *)(glContext + 0x52d0);
+        activeUnitThenTargetObject = *(int *)(glContext + 0x52d0);
       }
       goto LAB_000fc364;
     }
     if (target == 0x8513) {
-      iVar1 = *(int *)(iVar1 * 0x14 + glContext + 0x5154);
+      activeUnitThenTargetObject = *(int *)(activeUnitThenTargetObject * 0x14 + glContext + 0x5154);
       goto LAB_000fc320;
     }
     if (target < 0x8514) {
       if (target != 0x84f7) {
         return 0;
       }
-      iVar1 = *(int *)(glContext + 0x52b0);
+      activeUnitThenTargetObject = *(int *)(glContext + 0x52b0);
       goto LAB_000fc364;
     }
     if (target == 0x851b) {
-      iVar1 = *(int *)(glContext + 0x52a8);
+      activeUnitThenTargetObject = *(int *)(glContext + 0x52a8);
       goto LAB_000fc364;
     }
     if (target != 0x85b3) {
       return 0;
     }
   }
-  iVar1 = *(int *)(iVar1 * 0x14 + glContext + 0x515c);
+  activeUnitThenTargetObject = *(int *)(activeUnitThenTargetObject * 0x14 + glContext + 0x515c);
 LAB_000fc320:
-  return iVar1 + 0x10;
+  return activeUnitThenTargetObject + 0x10;
 }
 
 /* _gleLookUpNonProxyColorTable @ 0xfc3cc (324 bytes) */

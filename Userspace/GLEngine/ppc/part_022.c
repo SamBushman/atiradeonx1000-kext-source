@@ -493,13 +493,15 @@ void _glPointParameteriARB_Exec(glContext, pname, param)
   uint pname;
   uint param;
 {
-  bool bVar1;
-  byte bVar2;
-  int iVar3;
-  int iVar4;
+  bool word5434IsZero;
+  bool rModeValid;
+  byte dirtyBitIndex;
+  int glContextWord5424;
+  int dirtyWord348;
+  int dirtyWord324;
   
   if (pname == 0x8127) {
-    bVar1 = *(int *)(glContext + 0x5434) == 0;
+    word5434IsZero = *(int *)(glContext + 0x5434) == 0;
     *(float *)(glContext + 0x3424) =
          (float)((double)CONCAT44(0x43300000,param ^ 0x80000000) - DOUBLE_00108d58);
   }
@@ -523,7 +525,7 @@ LAB_0007ec2c:
       }
       return;
     }
-    bVar1 = *(int *)(glContext + 0x5434) == 0;
+    word5434IsZero = *(int *)(glContext + 0x5434) == 0;
     *(float *)(glContext + 0x3420) =
          (float)((double)CONCAT44(0x43300000,param ^ 0x80000000) - DOUBLE_00108d58);
   }
@@ -532,32 +534,32 @@ LAB_0007ec2c:
       if (pname != 0x8863) goto LAB_0007ec2c;
       if (param != 0x2000) {
         if (param < 0x2001) {
-          bVar1 = param == 0;
+          rModeValid = param == 0;
         }
         else {
-          bVar1 = param == 0x2002;
+          rModeValid = param == 0x2002;
         }
-        if (!bVar1) goto LAB_0007ec14;
+        if (!rModeValid) goto LAB_0007ec14;
       }
       *(short *)(glContext + 0x3440) = (short)param;
       goto LAB_0007ec44;
     }
-    bVar1 = *(int *)(glContext + 0x5434) == 0;
+    word5434IsZero = *(int *)(glContext + 0x5434) == 0;
     *(float *)(glContext + 0x3428) =
          (float)((double)CONCAT44(0x43300000,param ^ 0x80000000) - DOUBLE_00108d58);
   }
-  if (bVar1) {
-    bVar2 = *(byte *)(*(int *)(glContext + 0x5420) + 0x325);
+  if (word5434IsZero) {
+    dirtyBitIndex = *(byte *)(*(int *)(glContext + 0x5420) + 0x325);
   }
   else {
-    bVar2 = *(byte *)(*(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x359);
+    dirtyBitIndex = *(byte *)(*(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x359);
   }
-  iVar4 = (bVar2 >> 3 & 0x1c) + glContext;
-  iVar3 = *(int *)(glContext + 0x5424);
-  *(uint *)(iVar4 + 0x324) = *(uint *)(iVar4 + 0x324) | 1 << (bVar2 & 0x1f);
-  bVar2 = *(byte *)(iVar3 + 0x325);
-  iVar3 = (bVar2 >> 3 & 0x1c) + glContext;
-  *(uint *)(iVar3 + 0x348) = *(uint *)(iVar3 + 0x348) | 1 << (bVar2 & 0x1f);
+  dirtyWord324 = (dirtyBitIndex >> 3 & 0x1c) + glContext;
+  glContextWord5424 = *(int *)(glContext + 0x5424);
+  *(uint *)(dirtyWord324 + 0x324) = *(uint *)(dirtyWord324 + 0x324) | 1 << (dirtyBitIndex & 0x1f);
+  dirtyBitIndex = *(byte *)(glContextWord5424 + 0x325);
+  dirtyWord348 = (dirtyBitIndex >> 3 & 0x1c) + glContext;
+  *(uint *)(dirtyWord348 + 0x348) = *(uint *)(dirtyWord348 + 0x348) | 1 << (dirtyBitIndex & 0x1f);
 LAB_0007ec44:
   *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x400000;
   return;

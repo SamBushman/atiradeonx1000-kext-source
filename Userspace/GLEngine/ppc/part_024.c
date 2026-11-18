@@ -1627,11 +1627,11 @@ int _glCreateShaderObjectARB_Exec(glContext, shaderType)
   int glContext;
   code *shaderType;
 {
-  undefined *puVar1;
-  undefined4 uVar2;
+  undefined *freeShaderObjectPtr;
+  undefined4 shaderName;
   undefined4 glErrorCode;
-  int iVar3;
-  undefined4 *puVar4;
+  int objectSize;
+  undefined4 *shaderObject;
   
   if (-1 < *(short *)(glContext + 0x4a10)) {
     if (*(int *)(glContext + 0x7574) != 0) {
@@ -1643,10 +1643,10 @@ LAB_00086e94:
     return 0;
   }
   if (shaderType == (code *)0x8b30) {
-    iVar3 = 0x38;
+    objectSize = 0x38;
   }
   else {
-    iVar3 = 0x3c;
+    objectSize = 0x3c;
     if (shaderType != (code *)0x8b31) {
       if (*(int *)(glContext + 0x7574) != 0) {
         return 0;
@@ -1655,41 +1655,41 @@ LAB_00086e94:
       goto LAB_00086e94;
     }
   }
-  puVar4 = (undefined4 *)_gleVecAlloc(iVar3 + 0xfU & 0xfffffff0);
-  uVar2 = _gleGenHashNames(*(int *)(glContext + 0x5148) + 0x6018,1);
-  puVar1 = PTR__gleFreeShaderObject_00112048;
-  puVar4[2] = 2;
-  puVar4[3] = puVar1;
-  puVar4[4] = 0x8b48;
-  puVar4[1] = uVar2;
-  *puVar4 = 0;
-  *(undefined1 *)(puVar4 + 5) = 0;
-  puVar4[7] = 0;
-  puVar4[6] = 0;
-  puVar4[8] = shaderType;
-  *(undefined1 *)((int)puVar4 + 0x25) = 0;
-  puVar4[0xb] = 0;
-  puVar4[10] = 0;
-  *(undefined1 *)(puVar4 + 9) = 0;
-  puVar4[0xc] = 0;
+  shaderObject = (undefined4 *)_gleVecAlloc(objectSize + 0xfU & 0xfffffff0);
+  shaderName = _gleGenHashNames(*(int *)(glContext + 0x5148) + 0x6018,1);
+  freeShaderObjectPtr = PTR__gleFreeShaderObject_00112048;
+  shaderObject[2] = 2;
+  shaderObject[3] = freeShaderObjectPtr;
+  shaderObject[4] = 0x8b48;
+  shaderObject[1] = shaderName;
+  *shaderObject = 0;
+  *(undefined1 *)(shaderObject + 5) = 0;
+  shaderObject[7] = 0;
+  shaderObject[6] = 0;
+  shaderObject[8] = shaderType;
+  *(undefined1 *)((int)shaderObject + 0x25) = 0;
+  shaderObject[0xb] = 0;
+  shaderObject[10] = 0;
+  *(undefined1 *)(shaderObject + 9) = 0;
+  shaderObject[0xc] = 0;
   if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
     _pthread_mutex_lock(*(int *)(glContext + 0x5148) + 0x8028);
   }
   _ShInitialize();
   if (shaderType == (code *)0x8b30) {
-    if (puVar4 == (undefined4 *)0xffffffcc) goto LAB_00086f70;
+    if (shaderObject == (undefined4 *)0xffffffcc) goto LAB_00086f70;
   }
   else {
-    if ((shaderType != (code *)0x8b31) || (puVar4 == (undefined4 *)0xffffffcc)) goto LAB_00086f70;
-    puVar4[0xe] = 0;
+    if ((shaderType != (code *)0x8b31) || (shaderObject == (undefined4 *)0xffffffcc)) goto LAB_00086f70;
+    shaderObject[0xe] = 0;
   }
-  puVar4[0xd] = 0;
+  shaderObject[0xd] = 0;
 LAB_00086f70:
-  _gleAddHashNameAndObject(glContext,*(int *)(glContext + 0x5148) + 0x6018,puVar4);
+  _gleAddHashNameAndObject(glContext,*(int *)(glContext + 0x5148) + 0x6018,shaderObject);
   if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
     _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);
   }
-  return uVar2;
+  return shaderName;
 }
 
 /* _glCreateProgramObjectARB_Exec @ 0x86fb8 (484 bytes) */
