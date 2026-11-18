@@ -935,26 +935,26 @@ void _gleModifyPixelG(int glContext,int pixel,double unusedFloatArg1,double unus
 /* _gleModifyPixelB @ 0xe66f0 (200 bytes) */
 void _gleModifyPixelB(int glContext,int pixel,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11)
 {
-  uint uVar1;
+  uint blueScaledIndex;
   float blue;
-  float fVar3;
-  uint uVar4;
+  float clampedBlue;
+  uint blueMapIndex;
   
   blue = *(float *)(pixel + 0xc) * *(float *)(glContext + 0x31fc) + *(float *)(glContext + 0x31f8);
   if ((*(uint *)(glContext + 0x3414) & 1) == 0) {
-    fVar3 = FLOAT_00108e50;
-    if ((blue < FLOAT_00108e50) || (fVar3 = FLOAT_00108e54, FLOAT_00108e54 < blue)) {
-      blue = fVar3;
+    clampedBlue = FLOAT_00108e50;
+    if ((blue < FLOAT_00108e50) || (clampedBlue = FLOAT_00108e54, FLOAT_00108e54 < blue)) {
+      blue = clampedBlue;
     }
   }
   else {
-    uVar4 = *(int *)(glContext + 0x3290) - 1;
-    uVar1 = (uint)(int)(blue * (float)((double)CONCAT44(0x43300000,uVar4 ^ 0x80000000) - DOUBLE_00108d58
+    blueMapIndex = *(int *)(glContext + 0x3290) - 1;
+    blueScaledIndex = (uint)(int)(blue * (float)((double)CONCAT44(0x43300000,blueMapIndex ^ 0x80000000) - DOUBLE_00108d58
                                   ) + FLOAT_00108e90);
-    if (((int)uVar1 <= (int)uVar4) && (uVar4 = uVar1, (int)uVar1 < 0)) {
-      uVar4 = 0;
+    if (((int)blueScaledIndex <= (int)blueMapIndex) && (blueMapIndex = blueScaledIndex, (int)blueScaledIndex < 0)) {
+      blueMapIndex = 0;
     }
-    blue = *(float *)(uVar4 * 4 + *(int *)(glContext + 0x3264));
+    blue = *(float *)(blueMapIndex * 4 + *(int *)(glContext + 0x3264));
   }
   *(float *)(pixel + 0xc) = blue;
   return;
@@ -1063,7 +1063,7 @@ void _gleModifyPixelRGBA(glContext, pixel)
   float green;
   float blue;
   float alpha;
-  float fVar9;
+  float clampedComponent;
   uint alphaMapIndex;
   uint blueMapIndex;
   uint greenMapIndex;
@@ -1074,21 +1074,21 @@ void _gleModifyPixelRGBA(glContext, pixel)
   blue = *(float *)(pixel + 0xc) * *(float *)(glContext + 0x31fc) + *(float *)(glContext + 0x31f8);
   alpha = *(float *)(pixel + 0x10) * *(float *)(glContext + 0x3204) + *(float *)(glContext + 0x3200);
   if ((*(uint *)(glContext + 0x3414) & 1) == 0) {
-    fVar9 = FLOAT_00108e50;
-    if ((red < FLOAT_00108e50) || (fVar9 = FLOAT_00108e54, FLOAT_00108e54 < red)) {
-      red = fVar9;
+    clampedComponent = FLOAT_00108e50;
+    if ((red < FLOAT_00108e50) || (clampedComponent = FLOAT_00108e54, FLOAT_00108e54 < red)) {
+      red = clampedComponent;
     }
-    fVar9 = FLOAT_00108e50;
-    if ((green < FLOAT_00108e50) || (fVar9 = FLOAT_00108e54, FLOAT_00108e54 < green)) {
-      green = fVar9;
+    clampedComponent = FLOAT_00108e50;
+    if ((green < FLOAT_00108e50) || (clampedComponent = FLOAT_00108e54, FLOAT_00108e54 < green)) {
+      green = clampedComponent;
     }
-    fVar9 = FLOAT_00108e50;
-    if ((blue < FLOAT_00108e50) || (fVar9 = FLOAT_00108e54, FLOAT_00108e54 < blue)) {
-      blue = fVar9;
+    clampedComponent = FLOAT_00108e50;
+    if ((blue < FLOAT_00108e50) || (clampedComponent = FLOAT_00108e54, FLOAT_00108e54 < blue)) {
+      blue = clampedComponent;
     }
-    fVar9 = FLOAT_00108e50;
-    if ((alpha < FLOAT_00108e50) || (fVar9 = FLOAT_00108e54, FLOAT_00108e54 < alpha)) {
-      alpha = fVar9;
+    clampedComponent = FLOAT_00108e50;
+    if ((alpha < FLOAT_00108e50) || (clampedComponent = FLOAT_00108e54, FLOAT_00108e54 < alpha)) {
+      alpha = clampedComponent;
     }
   }
   else {
@@ -1134,36 +1134,37 @@ void _gleModifyPixelRGBAIndex(glContext, pixel)
   int pixel;
 {
   undefined4 mappedAlpha;
-  uint uVar2;
-  uint uVar3;
+  uint shiftMagnitude;
+  uint carryBits;
+  uint indexShiftThenCarryBits;
   uint indexFraction;
   uint indexInteger;
   
-  uVar3 = *(uint *)(glContext + 0x3214);
+  indexShiftThenCarryBits = *(uint *)(glContext + 0x3214);
   indexInteger = *(uint *)(pixel + 0x18);
   indexFraction = *(uint *)(pixel + 0x1c);
-  if ((int)uVar3 < 1) {
-    if ((int)uVar3 < 0) {
-      uVar2 = -uVar3;
-      if ((int)uVar2 < 0xf) {
-        uVar3 = indexInteger << (uVar3 + 0xf & 0x3f);
+  if ((int)indexShiftThenCarryBits < 1) {
+    if ((int)indexShiftThenCarryBits < 0) {
+      shiftMagnitude = -indexShiftThenCarryBits;
+      if ((int)shiftMagnitude < 0xf) {
+        indexShiftThenCarryBits = indexInteger << (indexShiftThenCarryBits + 0xf & 0x3f);
       }
       else {
-        uVar3 = (int)indexInteger >> (uVar2 - 0xf & 0x3f);
+        indexShiftThenCarryBits = (int)indexInteger >> (shiftMagnitude - 0xf & 0x3f);
       }
-      indexInteger = (int)indexInteger >> (uVar2 & 0x3f);
-      indexFraction = ((int)indexFraction >> (uVar2 & 0x3f) | uVar3) & 0x7fff;
+      indexInteger = (int)indexInteger >> (shiftMagnitude & 0x3f);
+      indexFraction = ((int)indexFraction >> (shiftMagnitude & 0x3f) | indexShiftThenCarryBits) & 0x7fff;
     }
   }
   else {
-    if ((int)uVar3 < 0xf) {
-      uVar2 = (int)indexFraction >> (0xf - uVar3 & 0x3f);
+    if ((int)indexShiftThenCarryBits < 0xf) {
+      carryBits = (int)indexFraction >> (0xf - indexShiftThenCarryBits & 0x3f);
     }
     else {
-      uVar2 = indexFraction << (uVar3 - 0xf & 0x3f);
+      carryBits = indexFraction << (indexShiftThenCarryBits - 0xf & 0x3f);
     }
-    indexInteger = indexInteger << (uVar3 & 0x3f) | uVar2;
-    indexFraction = indexFraction << (uVar3 & 0x3f);
+    indexInteger = indexInteger << (indexShiftThenCarryBits & 0x3f) | carryBits;
+    indexFraction = indexFraction << (indexShiftThenCarryBits & 0x3f);
   }
   indexInteger = indexInteger + *(int *)(glContext + 0x3210);
   *(undefined4 *)(pixel + 4) =
@@ -1185,17 +1186,17 @@ void _gleModifyPixelHILO(int glContext,int pixel,double unusedFloatArg1,double u
 {
   float hi;
   float lo;
-  float fVar3;
+  float clampedValue;
   
   hi = *(float *)(pixel + 0x20) * *(float *)(glContext + 0x321c) + *(float *)(glContext + 0x3218);
   lo = *(float *)(pixel + 0x24) * *(float *)(glContext + 0x3224) + *(float *)(glContext + 0x3220);
-  fVar3 = FLOAT_00108e54;
-  if ((FLOAT_00108e54 < hi) || (fVar3 = FLOAT_00108e58, hi < FLOAT_00108e58)) {
-    hi = fVar3;
+  clampedValue = FLOAT_00108e54;
+  if ((FLOAT_00108e54 < hi) || (clampedValue = FLOAT_00108e58, hi < FLOAT_00108e58)) {
+    hi = clampedValue;
   }
-  fVar3 = FLOAT_00108e54;
-  if ((FLOAT_00108e54 < lo) || (fVar3 = FLOAT_00108e58, lo < FLOAT_00108e58)) {
-    lo = fVar3;
+  clampedValue = FLOAT_00108e54;
+  if ((FLOAT_00108e54 < lo) || (clampedValue = FLOAT_00108e58, lo < FLOAT_00108e58)) {
+    lo = clampedValue;
   }
   *(float *)(pixel + 0x24) = lo;
   *(float *)(pixel + 0x20) = hi;
@@ -1205,34 +1206,34 @@ void _gleModifyPixelHILO(int glContext,int pixel,double unusedFloatArg1,double u
 /* _gleModifyPixelDSDTMagVib @ 0xe6e60 (252 bytes) */
 void _gleModifyPixelDSDTMagVib(int glContext,int pixel,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5)
 {
-  float fVar1;
+  float scaledDsThenClampResult;
   float red;
-  float fVar3;
+  float clampedDs;
   float mag;
   float dt;
   
-  fVar1 = *(float *)(pixel + 0x28) * *(float *)(glContext + 0x322c) + *(float *)(glContext + 0x3228);
+  scaledDsThenClampResult = *(float *)(pixel + 0x28) * *(float *)(glContext + 0x322c) + *(float *)(glContext + 0x3228);
   dt = *(float *)(pixel + 0x2c) * *(float *)(glContext + 0x3234) + *(float *)(glContext + 0x3230);
   mag = *(float *)(pixel + 0x30) * *(float *)(glContext + 0x323c) + *(float *)(glContext + 0x3238);
   red = *(float *)(pixel + 4) * *(float *)(glContext + 0x3244) + *(float *)(glContext + 0x3240);
-  fVar3 = FLOAT_00108e54;
-  if ((!(FLOAT_00108e54 < fVar1)) && (fVar3 = fVar1, fVar1 < FLOAT_00108e58)) {
-    fVar3 = FLOAT_00108e58;
+  clampedDs = FLOAT_00108e54;
+  if ((!(FLOAT_00108e54 < scaledDsThenClampResult)) && (clampedDs = scaledDsThenClampResult, scaledDsThenClampResult < FLOAT_00108e58)) {
+    clampedDs = FLOAT_00108e58;
   }
-  fVar1 = FLOAT_00108e54;
-  if ((FLOAT_00108e54 < dt) || (fVar1 = FLOAT_00108e58, dt < FLOAT_00108e58)) {
-    dt = fVar1;
+  scaledDsThenClampResult = FLOAT_00108e54;
+  if ((FLOAT_00108e54 < dt) || (scaledDsThenClampResult = FLOAT_00108e58, dt < FLOAT_00108e58)) {
+    dt = scaledDsThenClampResult;
   }
-  fVar1 = FLOAT_00108e54;
-  if ((FLOAT_00108e54 < mag) || (fVar1 = FLOAT_00108e50, mag < FLOAT_00108e50)) {
-    mag = fVar1;
+  scaledDsThenClampResult = FLOAT_00108e54;
+  if ((FLOAT_00108e54 < mag) || (scaledDsThenClampResult = FLOAT_00108e50, mag < FLOAT_00108e50)) {
+    mag = scaledDsThenClampResult;
   }
-  fVar1 = FLOAT_00108e54;
-  if ((FLOAT_00108e54 < red) || (fVar1 = FLOAT_00108e50, red < FLOAT_00108e50)) {
-    red = fVar1;
+  scaledDsThenClampResult = FLOAT_00108e54;
+  if ((FLOAT_00108e54 < red) || (scaledDsThenClampResult = FLOAT_00108e50, red < FLOAT_00108e50)) {
+    red = scaledDsThenClampResult;
   }
   *(float *)(pixel + 4) = red;
-  *(float *)(pixel + 0x28) = fVar3;
+  *(float *)(pixel + 0x28) = clampedDs;
   *(float *)(pixel + 0x2c) = dt;
   *(float *)(pixel + 0x30) = mag;
   return;
@@ -1805,15 +1806,15 @@ void _gleInsertPixel_RGBA_Ushort(pixel, dst)
 }
 
 /* _gleInsertPixel_RGBA_Int @ 0xe80d4 (124 bytes) */
-void _gleInsertPixel_RGBA_Int(int param_1,int *param_2,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
+void _gleInsertPixel_RGBA_Int(int pixel,int *dst,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
   double scaledChannel;
   
   scaledChannel = DOUBLE_00108d90;
-  *param_2 = (int)((double)*(float *)(param_1 + 4) * DOUBLE_00108d90);
-  param_2[1] = (int)((double)*(float *)(param_1 + 8) * scaledChannel);
-  param_2[2] = (int)((double)*(float *)(param_1 + 0xc) * scaledChannel);
-  param_2[3] = (int)((double)*(float *)(param_1 + 0x10) * scaledChannel);
+  *dst = (int)((double)*(float *)(pixel + 4) * DOUBLE_00108d90);
+  dst[1] = (int)((double)*(float *)(pixel + 8) * scaledChannel);
+  dst[2] = (int)((double)*(float *)(pixel + 0xc) * scaledChannel);
+  dst[3] = (int)((double)*(float *)(pixel + 0x10) * scaledChannel);
   return;
 }
 

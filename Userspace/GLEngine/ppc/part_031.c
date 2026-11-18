@@ -221,7 +221,7 @@ void _glCopyTexSubImage1D_CompExec(glContext, target, level, xoffset, x, y, widt
   undefined4 y;
   undefined4 width;
 {
-  double fparam_1;
+  double forwardedFloatArg1;
   double incomingFpr2;
   double incomingFpr3;
   double incomingFpr4;
@@ -231,7 +231,7 @@ void _glCopyTexSubImage1D_CompExec(glContext, target, level, xoffset, x, y, widt
   double incomingFpr8;
   
   _glCopyTexSubImage1D_Comp(glContext,target,level,xoffset,x,y,width);
-  ((void (*)())_glCopyTexSubImage1D_Exec)(glContext,target,level,xoffset,x,y,width,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,
+  ((void (*)())_glCopyTexSubImage1D_Exec)(glContext,target,level,xoffset,x,y,width,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,
              incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
   return;
 }
@@ -2624,10 +2624,10 @@ LAB_0009c10c:
 /* _glTexGend_Comp @ 0x9c150 (40 bytes) */
 void _glTexGend_Comp(undefined4 glContext,undefined4 coord,undefined4 pname,double param)
 {
-  double fparam_2;
+  double zeroComponent;
   
-  fparam_2 = (double)FLOAT_00108e50;
-  ((double (*)())_glTexGen_Comp)(glContext,coord,pname,(double)(float)param,fparam_2,fparam_2,fparam_2);
+  zeroComponent = (double)FLOAT_00108e50;
+  ((double (*)())_glTexGen_Comp)(glContext,coord,pname,(double)(float)param,zeroComponent,zeroComponent,zeroComponent);
   return;
 }
 
@@ -2687,10 +2687,10 @@ void _glTexGenf_Comp(undefined4 glContext,undefined4 coord,undefined4 pname,floa
 /* _glTexGenf_Exec @ 0x9c2a4 (36 bytes) */
 void _glTexGenf_Exec(undefined4 glContext,undefined4 coord,undefined4 pname,float param)
 {
-  double fparam_2;
+  double zeroComponent;
   
-  fparam_2 = (double)FLOAT_00108e50;
-  ((void (*)())_glTexGen_Exec)(glContext,coord,pname,param,fparam_2,fparam_2,fparam_2);
+  zeroComponent = (double)FLOAT_00108e50;
+  ((void (*)())_glTexGen_Exec)(glContext,coord,pname,param,zeroComponent,zeroComponent,zeroComponent);
   return;
 }
 

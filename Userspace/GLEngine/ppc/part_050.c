@@ -546,14 +546,14 @@ void _gleInsertPixel_RGB_Ushort(pixel, dst)
 }
 
 /* _gleInsertPixel_RGB_Int @ 0xe9a3c (100 bytes) */
-void _gleInsertPixel_RGB_Int(int param_1,int *param_2,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
+void _gleInsertPixel_RGB_Int(int pixel,int *dst,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
   double scaledChannel;
   
   scaledChannel = DOUBLE_00108d90;
-  *param_2 = (int)((double)*(float *)(param_1 + 4) * DOUBLE_00108d90);
-  param_2[1] = (int)((double)*(float *)(param_1 + 8) * scaledChannel);
-  param_2[2] = (int)((double)*(float *)(param_1 + 0xc) * scaledChannel);
+  *dst = (int)((double)*(float *)(pixel + 4) * DOUBLE_00108d90);
+  dst[1] = (int)((double)*(float *)(pixel + 8) * scaledChannel);
+  dst[2] = (int)((double)*(float *)(pixel + 0xc) * scaledChannel);
   return;
 }
 

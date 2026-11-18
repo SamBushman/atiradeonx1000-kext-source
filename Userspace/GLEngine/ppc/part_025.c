@@ -1600,7 +1600,7 @@ void _glUniform2fARB_Exec(int glContext,int location,float v0,float v1)
   undefined4 *rendererHandlePtr;
   undefined4 uniformWord1;
   int currentProgram;
-  int iVar5;
+  int uniformValueTable;
   int rendererSlotOffset;
   int registerIndexThenOffset;
   int typeInfoFound;
@@ -1629,14 +1629,14 @@ void _glUniform2fARB_Exec(int glContext,int location,float v0,float v1)
                            (*(undefined4 *)(currentProgram + 0x40),location,&uniformSize,&uniformType,uniformStageUse),
         typeInfoFound != 0 && ((uniformType == 0x8b50 || (uniformType == 0x8b57)))))) {
       if (uniformType == 0x8b50) {
-        iVar5 = *(int *)(currentProgram + 0x4c);
-        *(float *)(iVar5 + location * 0x10) = (float)v0;
-        *(float *)(iVar5 + location * 0x10 + 4) = (float)v1;
+        uniformValueTable = *(int *)(currentProgram + 0x4c);
+        *(float *)(uniformValueTable + location * 0x10) = (float)v0;
+        *(float *)(uniformValueTable + location * 0x10 + 4) = (float)v1;
       }
       else {
-        iVar5 = *(int *)(currentProgram + 0x4c);
-        *(uint *)(iVar5 + location * 0x10) = (uint)(v0 != (double)FLOAT_00108e50);
-        *(uint *)(iVar5 + location * 0x10 + 4) = (uint)(v1 != (double)FLOAT_00108e50);
+        uniformValueTable = *(int *)(currentProgram + 0x4c);
+        *(uint *)(uniformValueTable + location * 0x10) = (uint)(v0 != (double)FLOAT_00108e50);
+        *(uint *)(uniformValueTable + location * 0x10 + 4) = (uint)(v1 != (double)FLOAT_00108e50);
       }
       locationValueOffset = location * 0x10;
       *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x4000000;
@@ -2514,7 +2514,7 @@ void _glUniform4iARB_Exec(glContext, location, v0, v1, v2, v3)
   undefined4 *rendererHandlePtr;
   undefined4 uniformWord1;
   int currentProgram;
-  int iVar5;
+  int uniformValueTable;
   int rendererSlotOffset;
   int registerIndexThenOffset;
   int typeInfoFound;
@@ -2544,20 +2544,20 @@ void _glUniform4iARB_Exec(glContext, location, v0, v1, v2, v3)
                            (*(undefined4 *)(currentProgram + 0x40),location,&uniformSize,&uniformType,uniformStageUse),
         typeInfoFound != 0 && ((uniformType == 0x8b55 || (uniformType == 0x8b59)))))) {
       locationValueOffset = location * 0x10;
-      iVar5 = *(int *)(currentProgram + 0x4c);
-      constantRegister = iVar5 + locationValueOffset;
+      uniformValueTable = *(int *)(currentProgram + 0x4c);
+      constantRegister = uniformValueTable + locationValueOffset;
       if (uniformType == 0x8b55) {
-        *(int *)(iVar5 + locationValueOffset) = v0;
+        *(int *)(uniformValueTable + locationValueOffset) = v0;
         *(int *)(constantRegister + 0xc) = v3;
         *(int *)(constantRegister + 4) = v1;
         *(int *)(constantRegister + 8) = v2;
       }
       else {
         if (v0 == 0) {
-          *(undefined4 *)(iVar5 + locationValueOffset) = 0;
+          *(undefined4 *)(uniformValueTable + locationValueOffset) = 0;
         }
         else {
-          *(undefined4 *)(iVar5 + locationValueOffset) = 1;
+          *(undefined4 *)(uniformValueTable + locationValueOffset) = 1;
         }
         if (v1 == 0) {
           *(undefined4 *)(constantRegister + 4) = 0;
@@ -3575,15 +3575,15 @@ void _glUniform1ivARB_Exec(glContext, location, count, value)
   bool stage0Updated;
   bool stage0Updated2;
   bool stage1Updated;
-  int iVar5;
+  int newValue;
   int rendererSlotOffset;
   int elementValueOffset;
   undefined4 uniformWord1;
-  int iVar7;
+  int elementCount;
   int elementMapOffset;
   int typeInfoFound;
   int loopIndex;
-  int iVar8;
+  int oldValue;
   int registerIndexThenOffset;
   undefined4 uniformWord3;
   int constantRegisterFile;
@@ -3596,8 +3596,8 @@ void _glUniform1ivARB_Exec(glContext, location, count, value)
   int currentProgram;
   int *dstCursor;
   int *rendererCallbacks;
-  double extraout_f1;
-  double fparam_1;
+  double f1AfterCall;
+  double forwardedFloatArg1;
   double incomingFpr2;
   double incomingFpr3;
   double incomingFpr4;
@@ -3632,38 +3632,38 @@ void _glUniform1ivARB_Exec(glContext, location, count, value)
         }
         loopIndex2 = 0;
         dstCursor = (int *)(*(int *)(currentProgram + 0x4c) + location * 0x10);
-        iVar7 = uniformSize;
-        fparam_1 = extraout_f1;
+        elementCount = uniformSize;
+        forwardedFloatArg1 = f1AfterCall;
         if (0 < uniformSize) {
           do {
-            iVar8 = *dstCursor;
-            iVar5 = *value;
-            if (iVar8 != iVar5) {
+            oldValue = *dstCursor;
+            newValue = *value;
+            if (oldValue != newValue) {
               stage0Updated = true;
-              iVar7 = uniformSize;
+              elementCount = uniformSize;
               if (uniformType == 0x1404) {
 LAB_0008bc7c:
-                *dstCursor = iVar5;
+                *dstCursor = newValue;
               }
               else if (uniformType - 0x8b5dU < 8) {
-                *dstCursor = iVar5;
-                fparam_1 = (double)((double (*)())_setImageUnit)(glContext,currentProgram,*value,iVar8,uniformStageUse,uniformType,
-                                                 fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8)
+                *dstCursor = newValue;
+                forwardedFloatArg1 = (double)((double (*)())_setImageUnit)(glContext,currentProgram,*value,oldValue,uniformStageUse,uniformType,
+                                                 forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8)
                 ;
-                iVar7 = uniformSize;
+                elementCount = uniformSize;
               }
               else {
-                if (iVar5 == 0) goto LAB_0008bc7c;
+                if (newValue == 0) goto LAB_0008bc7c;
                 *dstCursor = 1;
               }
             }
             loopIndex2 = loopIndex2 + 1;
             dstCursor = dstCursor + 4;
             value = value + 1;
-          } while (loopIndex2 < iVar7);
+          } while (loopIndex2 < elementCount);
           if (stage0Updated) {
             loopIndex2 = 0;
-            if (0 < iVar7) {
+            if (0 < elementCount) {
               elementMapOffset = location << 2;
               elementValueOffset = location << 4;
               do {
@@ -3813,27 +3813,27 @@ int _glUniform4fvARB_Comp(glContext, location, count, value)
   undefined4 *value;
 {
   int loopIndex;
-  undefined4 *puVar2;
+  undefined4 *listRecordThenWriteCursor;
   
-  puVar2 = (undefined4 *)
+  listRecordThenWriteCursor = (undefined4 *)
            _gleAddListItem(glContext,PTR__glUniform4fvARB_ListExec_001102f0,count * 0x10 + 8);
-  if (puVar2 != (undefined4 *)0x0) {
-    puVar2[1] = count;
+  if (listRecordThenWriteCursor != (undefined4 *)0x0) {
+    listRecordThenWriteCursor[1] = count;
     loopIndex = 0;
-    *puVar2 = location;
-    puVar2 = puVar2 + 2;
+    *listRecordThenWriteCursor = location;
+    listRecordThenWriteCursor = listRecordThenWriteCursor + 2;
     while( true ) {
-      *puVar2 = *value;
-      puVar2[1] = value[1];
-      puVar2[2] = value[2];
-      puVar2[3] = value[3];
+      *listRecordThenWriteCursor = *value;
+      listRecordThenWriteCursor[1] = value[1];
+      listRecordThenWriteCursor[2] = value[2];
+      listRecordThenWriteCursor[3] = value[3];
       if (loopIndex == count + -1) break;
-      puVar2 = puVar2 + 4;
+      listRecordThenWriteCursor = listRecordThenWriteCursor + 4;
       value = value + 4;
       loopIndex = loopIndex + 1;
     }
   }
-  return puVar2;
+  return listRecordThenWriteCursor;
 }
 
 /* _glUniform3fvARB_Comp @ 0x8c08c (152 bytes) */
@@ -3874,27 +3874,27 @@ int _glUniform2fvARB_Comp(glContext, location, count, value)
   undefined4 *value;
 {
   int loopIndex;
-  undefined4 *puVar2;
-  undefined4 *puVar3;
+  undefined4 *listRecordThenPreviousSlot;
+  undefined4 *vectorSlot;
   
-  puVar2 = (undefined4 *)
+  listRecordThenPreviousSlot = (undefined4 *)
            _gleAddListItem(glContext,PTR__glUniform2fvARB_ListExec_001102e8,count * 8 + 8);
-  puVar3 = (undefined4 *)0x0;
-  if (puVar2 != (undefined4 *)0x0) {
-    puVar2[1] = count;
+  vectorSlot = (undefined4 *)0x0;
+  if (listRecordThenPreviousSlot != (undefined4 *)0x0) {
+    listRecordThenPreviousSlot[1] = count;
     loopIndex = 0;
-    *puVar2 = location;
+    *listRecordThenPreviousSlot = location;
     while( true ) {
-      puVar3 = puVar2 + 2;
-      *puVar3 = *value;
-      puVar2[3] = value[1];
+      vectorSlot = listRecordThenPreviousSlot + 2;
+      *vectorSlot = *value;
+      listRecordThenPreviousSlot[3] = value[1];
       if (loopIndex == count + -1) break;
       value = value + 2;
       loopIndex = loopIndex + 1;
-      puVar2 = puVar3;
+      listRecordThenPreviousSlot = vectorSlot;
     }
   }
-  return puVar3;
+  return vectorSlot;
 }
 
 /* _glUniform1fvARB_Comp @ 0x8c1b4 (136 bytes) */
@@ -4035,27 +4035,27 @@ int _glUniform3ivARB_Comp(glContext, location, count, value)
   int count;
   undefined4 *value;
 {
-  undefined4 *puVar1;
+  undefined4 *listRecordThenWriteCursor;
   int loopIndex;
   
-  puVar1 = (undefined4 *)
+  listRecordThenWriteCursor = (undefined4 *)
            _gleAddListItem(glContext,PTR__glUniform3ivARB_ListExec_001102cc,count * 0xc + 8);
-  if (puVar1 != (undefined4 *)0x0) {
-    puVar1[1] = count;
+  if (listRecordThenWriteCursor != (undefined4 *)0x0) {
+    listRecordThenWriteCursor[1] = count;
     loopIndex = 0;
-    *puVar1 = location;
-    puVar1 = puVar1 + 2;
+    *listRecordThenWriteCursor = location;
+    listRecordThenWriteCursor = listRecordThenWriteCursor + 2;
     while( true ) {
-      *puVar1 = *value;
-      puVar1[1] = value[1];
-      puVar1[2] = value[2];
+      *listRecordThenWriteCursor = *value;
+      listRecordThenWriteCursor[1] = value[1];
+      listRecordThenWriteCursor[2] = value[2];
       if (loopIndex == count + -1) break;
-      puVar1 = puVar1 + 3;
+      listRecordThenWriteCursor = listRecordThenWriteCursor + 3;
       value = value + 3;
       loopIndex = loopIndex + 1;
     }
   }
-  return puVar1;
+  return listRecordThenWriteCursor;
 }
 
 /* _glUniform2ivARB_Comp @ 0x8c4f4 (144 bytes) */

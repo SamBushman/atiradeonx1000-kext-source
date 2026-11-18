@@ -428,29 +428,29 @@ void _gleBeginPointsSelectFeedback(glContext)
 }
 
 /* _gleClipPoints @ 0xea9e4 (76 bytes) */
-int _gleClipPoints(unusedArg1, param_2, param_3, param_4)
+int _gleClipPoints(unusedArg1, vertexCursor, vertexCount, pointList)
   undefined4 unusedArg1;
-  uint param_2;
-  int param_3;
-  uint *param_4;
+  uint vertexCursor;
+  int vertexCount;
+  uint *pointList;
 {
-  uint uVar1;
-  uint *puVar2;
+  uint vertexEndThenRemaining;
+  uint *listCursor;
   
-  uVar1 = param_2 + param_3 * 0x100;
-  puVar2 = param_4;
-  if (param_2 < uVar1) {
-    uVar1 = (uVar1 - param_2) + 0xff >> 8;
+  vertexEndThenRemaining = vertexCursor + vertexCount * 0x100;
+  listCursor = pointList;
+  if (vertexCursor < vertexEndThenRemaining) {
+    vertexEndThenRemaining = (vertexEndThenRemaining - vertexCursor) + 0xff >> 8;
     do {
-      if (*(char *)(param_2 + 0x7f) == '\0') {
-        *puVar2 = param_2;
-        puVar2 = puVar2 + 1;
+      if (*(char *)(vertexCursor + 0x7f) == '\0') {
+        *listCursor = vertexCursor;
+        listCursor = listCursor + 1;
       }
-      param_2 = param_2 + 0x100;
-      uVar1 = uVar1 - 1;
-    } while (uVar1 != 0);
+      vertexCursor = vertexCursor + 0x100;
+      vertexEndThenRemaining = vertexEndThenRemaining - 1;
+    } while (vertexEndThenRemaining != 0);
   }
-  return (int)puVar2 - (int)param_4 >> 2;
+  return (int)listCursor - (int)pointList >> 2;
 }
 
 /* _gleClipPointsPlane @ 0xeaa30 (244 bytes) */
@@ -597,70 +597,70 @@ void _gleRenderPointsFunc_body(glContext)
   int glContext;
 {
   bool texturingEnabled;
-  int iVar2;
+  int renderPoints;
   int texEnableBits;
   uint batchClipCodes;
-  undefined4 uVar4;
+  undefined4 rendererHandle;
   code *UNRECOVERED_JUMPTABLE;
   int vertexCursor;
-  int iVar6;
+  int pointCount;
   
   texEnableBits = _gleTexEnableBits(glContext);
   vertexCursor = *(int *)(glContext + 0x4854);
-  iVar6 = *(int *)(glContext + 0x4858) - vertexCursor >> 8;
-  if ((iVar6 < 1) ||
-     (batchClipCodes = (**(code **)(glContext + 0x5060))(glContext,vertexCursor,iVar6), (batchClipCodes & 0xff00) != 0)) {
+  pointCount = *(int *)(glContext + 0x4858) - vertexCursor >> 8;
+  if ((pointCount < 1) ||
+     (batchClipCodes = (**(code **)(glContext + 0x5060))(glContext,vertexCursor,pointCount), (batchClipCodes & 0xff00) != 0)) {
     return;
   }
   texturingEnabled = texEnableBits != 0;
   if ((texturingEnabled) && (*(char *)(glContext + 0x53e4) != '\0')) {
-    (**(code **)(glContext + 0x53dc))(glContext,vertexCursor,iVar6);
+    (**(code **)(glContext + 0x53dc))(glContext,vertexCursor,pointCount);
   }
   if (*(char *)(glContext + 0x50b4) != '\0') {
-    (**(code **)(glContext + 0x5064))(glContext,vertexCursor,iVar6);
+    (**(code **)(glContext + 0x5064))(glContext,vertexCursor,pointCount);
   }
   if ((*(char *)(glContext + 0x30aa) != '\0') || (*(char *)(glContext + 0x53e6) != '\0')) {
-    (**(code **)(glContext + 0x5068))(glContext,vertexCursor,iVar6);
+    (**(code **)(glContext + 0x5068))(glContext,vertexCursor,pointCount);
   }
   if (((batchClipCodes & 0xff) == 0) && (*(char *)(glContext + 0x4e18) == '\0')) {
     if (texturingEnabled) {
       if (*(char *)(glContext + 0x53e5) != '\0') {
-        (**(code **)(glContext + 0x53e0))(glContext,vertexCursor,iVar6);
+        (**(code **)(glContext + 0x53e0))(glContext,vertexCursor,pointCount);
       }
-      (**(code **)(glContext + 0x506c))(glContext,vertexCursor,iVar6,0);
+      (**(code **)(glContext + 0x506c))(glContext,vertexCursor,pointCount,0);
     }
     if (*(char *)(glContext + 0x30aa) != '\0') {
-      (**(code **)(glContext + 0x4de8))(glContext,vertexCursor,iVar6);
+      (**(code **)(glContext + 0x4de8))(glContext,vertexCursor,pointCount);
     }
     UNRECOVERED_JUMPTABLE = *(code **)(glContext + 0x46b0);
-    uVar4 = *(undefined4 *)(glContext + 0x4688);
-    iVar2 = vertexCursor;
+    rendererHandle = *(undefined4 *)(glContext + 0x4688);
+    renderPoints = vertexCursor;
   }
   else {
     if (texturingEnabled) {
       if (*(char *)(glContext + 0x53e5) != '\0') {
-        (**(code **)(glContext + 0x53e0))(glContext,vertexCursor,iVar6);
+        (**(code **)(glContext + 0x53e0))(glContext,vertexCursor,pointCount);
       }
-      (**(code **)(glContext + 0x5074))(glContext,vertexCursor,iVar6,0);
+      (**(code **)(glContext + 0x5074))(glContext,vertexCursor,pointCount,0);
     }
-    iVar2 = *(int *)(glContext + 0x4870);
-    iVar6 = ((int (*)())_gleClipPoints)(glContext,vertexCursor,iVar6,iVar2);
-    if (iVar6 == 0) {
+    renderPoints = *(int *)(glContext + 0x4870);
+    pointCount = ((int (*)())_gleClipPoints)(glContext,vertexCursor,pointCount,renderPoints);
+    if (pointCount == 0) {
       return;
     }
     if ((*(char *)(glContext + 0x4e18) != '\0') &&
-       (iVar6 = ((int (*)())_gleClipPointsPlane)(glContext,iVar2,iVar6), iVar6 == 0)) {
+       (pointCount = ((int (*)())_gleClipPointsPlane)(glContext,renderPoints,pointCount), pointCount == 0)) {
       return;
     }
     if (*(char *)(glContext + 0x30aa) != '\0') {
-      (**(code **)(glContext + 0x4df0))(glContext,iVar2,iVar6);
+      (**(code **)(glContext + 0x4df0))(glContext,renderPoints,pointCount);
     }
     UNRECOVERED_JUMPTABLE = *(code **)(glContext + 0x46d8);
-    uVar4 = *(undefined4 *)(glContext + 0x4688);
+    rendererHandle = *(undefined4 *)(glContext + 0x4688);
   }
                     
                     
-  (*UNRECOVERED_JUMPTABLE)(uVar4,iVar2,iVar6);
+  (*UNRECOVERED_JUMPTABLE)(rendererHandle,renderPoints,pointCount);
   return;
 }
 
@@ -668,38 +668,38 @@ void _gleRenderPointsFunc_body(glContext)
 void _gleSelectPointsFunc(glContext)
   int glContext;
 {
-  bool bVar1;
-  uint uVar2;
-  undefined4 uVar3;
-  int iVar4;
-  uint uVar5;
+  bool vertexProgramPath;
+  uint batchClipCodes;
+  undefined4 pointList;
+  int vertexCursorThenPointCount;
+  uint vertexCount;
   
-  bVar1 = false;
+  vertexProgramPath = false;
   if ((*(char *)(glContext + 0x4664) != '\0') || (*(int *)(glContext + 0x5434) != 0)) {
-    bVar1 = true;
+    vertexProgramPath = true;
   }
-  iVar4 = *(int *)(glContext + 0x4854);
+  vertexCursorThenPointCount = *(int *)(glContext + 0x4854);
   if (((int)*(short *)(glContext + 0x487c) != 0) &&
-     (uVar5 = (uint)(*(int *)(glContext + 0x4858) - iVar4) / (uint)(int)*(short *)(glContext + 0x487c),
-     0 < (int)uVar5)) {
-    uVar2 = (**(code **)(glContext + 0x5060))(glContext,iVar4,uVar5);
-    if ((uVar2 & 0xff00) == 0) {
-      if (bVar1) {
-        iVar4 = *(int *)(glContext + 0x4864);
+     (vertexCount = (uint)(*(int *)(glContext + 0x4858) - vertexCursorThenPointCount) / (uint)(int)*(short *)(glContext + 0x487c),
+     0 < (int)vertexCount)) {
+    batchClipCodes = (**(code **)(glContext + 0x5060))(glContext,vertexCursorThenPointCount,vertexCount);
+    if ((batchClipCodes & 0xff00) == 0) {
+      if (vertexProgramPath) {
+        vertexCursorThenPointCount = *(int *)(glContext + 0x4864);
       }
       else if (*(char *)(glContext + 0x4e18) != '\0') {
-        (**(code **)(glContext + 0x5064))(glContext,iVar4,uVar5);
+        (**(code **)(glContext + 0x5064))(glContext,vertexCursorThenPointCount,vertexCount);
       }
-      if (((uVar2 & 0xff) == 0) && (*(char *)(glContext + 0x4e18) == '\0')) {
-        _gleSelectPoints(glContext,iVar4,uVar5);
+      if (((batchClipCodes & 0xff) == 0) && (*(char *)(glContext + 0x4e18) == '\0')) {
+        _gleSelectPoints(glContext,vertexCursorThenPointCount,vertexCount);
         return;
       }
-      uVar3 = *(undefined4 *)(glContext + 0x4870);
-      iVar4 = ((int (*)())_gleClipPoints)(glContext,iVar4,uVar5,uVar3);
-      if ((iVar4 != 0) &&
+      pointList = *(undefined4 *)(glContext + 0x4870);
+      vertexCursorThenPointCount = ((int (*)())_gleClipPoints)(glContext,vertexCursorThenPointCount,vertexCount,pointList);
+      if ((vertexCursorThenPointCount != 0) &&
          ((*(char *)(glContext + 0x4e18) == '\0' ||
-          (iVar4 = ((int (*)())_gleClipPointsPlane)(glContext,uVar3,iVar4), iVar4 != 0)))) {
-        _gleSelectPointsPtr(glContext,uVar3,iVar4);
+          (vertexCursorThenPointCount = ((int (*)())_gleClipPointsPlane)(glContext,pointList,vertexCursorThenPointCount), vertexCursorThenPointCount != 0)))) {
+        _gleSelectPointsPtr(glContext,pointList,vertexCursorThenPointCount);
         return;
       }
     }
@@ -909,14 +909,14 @@ void _gleBeginTriangleStripRenderTCLRDirty(glContext)
 void _gleBeginTriangleStripSelectFeedback(glContext)
   int glContext;
 {
-  undefined *puVar1;
+  undefined *renderFunc;
   
   *(undefined **)(glContext + 0x4a0c) = PTR__gleFlushTriQuadStripFunc_001122c8;
-  puVar1 = PTR__gleFeedbackTriangleStripFunc_001122ac;
+  renderFunc = PTR__gleFeedbackTriangleStripFunc_001122ac;
   if (*(int *)(glContext + 0x4e1c) == 0x1c02) {
-    puVar1 = PTR__gleSelectTriangleStripFunc_001122b0;
+    renderFunc = PTR__gleSelectTriangleStripFunc_001122b0;
   }
-  *(undefined **)(glContext + 0x4a08) = puVar1;
+  *(undefined **)(glContext + 0x4a08) = renderFunc;
   *(undefined4 *)(glContext + 0x4858) = *(undefined4 *)(glContext + 0x4854);
   return;
 }

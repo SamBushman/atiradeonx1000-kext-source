@@ -1,10 +1,10 @@
 #include "decls.h"
 
 /* _gleIsIndex @ 0x2f1ac (20 bytes) */
-int _gleIsIndex(param_1)
-  int param_1;
+int _gleIsIndex(format)
+  int format;
 {
-  return param_1 - 0x1900U < 2;
+  return format - 0x1900U < 2;
 }
 
 /* _gleExtractPixel_RGBA_Ubyte @ 0x2f1c0 (176 bytes) */
@@ -525,49 +525,50 @@ void _gleDCBFree(glContext)
 void _gleFreePixelMap(glContext)
   int glContext;
 {
-  undefined *puVar1;
+  undefined *defaultIntPixMap;
+  undefined *defaultFloatPixMap;
   
-  puVar1 = PTR__gle_default_pix_map_i_00112044;
+  defaultIntPixMap = PTR__gle_default_pix_map_i_00112044;
   if (*(undefined **)(glContext + 0x3248) != PTR__gle_default_pix_map_i_00112044) {
     _free(*(undefined **)(glContext + 0x3248));
-    *(undefined **)(glContext + 0x3248) = puVar1;
+    *(undefined **)(glContext + 0x3248) = defaultIntPixMap;
   }
-  if (*(undefined **)(glContext + 0x326c) != puVar1) {
+  if (*(undefined **)(glContext + 0x326c) != defaultIntPixMap) {
     _free(*(undefined **)(glContext + 0x326c));
-    *(undefined **)(glContext + 0x326c) = puVar1;
+    *(undefined **)(glContext + 0x326c) = defaultIntPixMap;
   }
-  puVar1 = PTR__gle_default_pix_map_f_00112040;
+  defaultFloatPixMap = PTR__gle_default_pix_map_f_00112040;
   if (*(undefined **)(glContext + 0x324c) != PTR__gle_default_pix_map_f_00112040) {
     _free(*(undefined **)(glContext + 0x324c));
-    *(undefined **)(glContext + 0x324c) = puVar1;
+    *(undefined **)(glContext + 0x324c) = defaultFloatPixMap;
   }
-  if (*(undefined **)(glContext + 0x3250) != puVar1) {
+  if (*(undefined **)(glContext + 0x3250) != defaultFloatPixMap) {
     _free(*(undefined **)(glContext + 0x3250));
-    *(undefined **)(glContext + 0x3250) = puVar1;
+    *(undefined **)(glContext + 0x3250) = defaultFloatPixMap;
   }
-  if (*(undefined **)(glContext + 0x3254) != puVar1) {
+  if (*(undefined **)(glContext + 0x3254) != defaultFloatPixMap) {
     _free(*(undefined **)(glContext + 0x3254));
-    *(undefined **)(glContext + 0x3254) = puVar1;
+    *(undefined **)(glContext + 0x3254) = defaultFloatPixMap;
   }
-  if (*(undefined **)(glContext + 0x3258) != puVar1) {
+  if (*(undefined **)(glContext + 0x3258) != defaultFloatPixMap) {
     _free(*(undefined **)(glContext + 0x3258));
-    *(undefined **)(glContext + 0x3258) = puVar1;
+    *(undefined **)(glContext + 0x3258) = defaultFloatPixMap;
   }
-  if (*(undefined **)(glContext + 0x325c) != puVar1) {
+  if (*(undefined **)(glContext + 0x325c) != defaultFloatPixMap) {
     _free(*(undefined **)(glContext + 0x325c));
-    *(undefined **)(glContext + 0x325c) = puVar1;
+    *(undefined **)(glContext + 0x325c) = defaultFloatPixMap;
   }
-  if (*(undefined **)(glContext + 0x3260) != puVar1) {
+  if (*(undefined **)(glContext + 0x3260) != defaultFloatPixMap) {
     _free(*(undefined **)(glContext + 0x3260));
-    *(undefined **)(glContext + 0x3260) = puVar1;
+    *(undefined **)(glContext + 0x3260) = defaultFloatPixMap;
   }
-  if (*(undefined **)(glContext + 0x3264) != puVar1) {
+  if (*(undefined **)(glContext + 0x3264) != defaultFloatPixMap) {
     _free(*(undefined **)(glContext + 0x3264));
-    *(undefined **)(glContext + 0x3264) = puVar1;
+    *(undefined **)(glContext + 0x3264) = defaultFloatPixMap;
   }
-  if (*(undefined **)(glContext + 0x3268) != puVar1) {
+  if (*(undefined **)(glContext + 0x3268) != defaultFloatPixMap) {
     _free(*(undefined **)(glContext + 0x3268));
-    *(undefined **)(glContext + 0x3268) = puVar1;
+    *(undefined **)(glContext + 0x3268) = defaultFloatPixMap;
   }
   return;
 }
@@ -577,28 +578,29 @@ void _gleFreeMaterials(glContext)
   int glContext;
 {
   int remaining;
-  int iVar1;
-  int iVar2;
-  int *piVar3;
-  int iVar4;
+  int nextMaterial;
+  int freeMaterial;
+  int *materialSlot;
+  int material;
+  int freeMaterialNext;
   
-  piVar3 = (int *)(glContext + 0x4dd0);
+  materialSlot = (int *)(glContext + 0x4dd0);
   remaining = 1;
   do {
-    iVar4 = *piVar3;
-    for (iVar1 = *(int *)(*piVar3 + 0x23c); iVar1 != 0; iVar1 = *(int *)(iVar1 + 0x23c)) {
-      _gleVecFree(iVar4);
-      iVar4 = iVar1;
+    material = *materialSlot;
+    for (nextMaterial = *(int *)(*materialSlot + 0x23c); nextMaterial != 0; nextMaterial = *(int *)(nextMaterial + 0x23c)) {
+      _gleVecFree(material);
+      material = nextMaterial;
     }
     remaining = remaining + -1;
-    *piVar3 = iVar4;
-    piVar3 = piVar3 + 1;
+    *materialSlot = material;
+    materialSlot = materialSlot + 1;
   } while (-1 < remaining);
-  iVar2 = *(int *)(glContext + 0x4dd8);
-  while (iVar2 != 0) {
-    iVar4 = *(int *)(iVar2 + 0x23c);
-    _gleVecFree(iVar2);
-    iVar2 = iVar4;
+  freeMaterial = *(int *)(glContext + 0x4dd8);
+  while (freeMaterial != 0) {
+    freeMaterialNext = *(int *)(freeMaterial + 0x23c);
+    _gleVecFree(freeMaterial);
+    freeMaterial = freeMaterialNext;
   }
   *(undefined4 *)(glContext + 0x4dd8) = 0;
   return;
@@ -713,29 +715,29 @@ void _gleFreeQueryMachine(glContext)
   int glContext;
 {
   int remaining;
-  int iVar1;
-  int *piVar2;
+  int nextFreeListNode;
+  int *freeListNode;
   int *srcCursor;
-  int *piVar3;
-  int iVar4;
+  int *hashNode;
+  int nextHashNode;
   
   srcCursor = (int *)(glContext + 0x6440);
   remaining = 0x3ff;
   do {
-    piVar3 = (int *)*srcCursor;
+    hashNode = (int *)*srcCursor;
     srcCursor = srcCursor + 1;
-    while (piVar3 != (int *)0x0) {
-      iVar4 = *piVar3;
-      (*(code *)piVar3[3])(glContext,piVar3);
-      piVar3 = (int *)iVar4;
+    while (hashNode != (int *)0x0) {
+      nextHashNode = *hashNode;
+      (*(code *)hashNode[3])(glContext,hashNode);
+      hashNode = (int *)nextHashNode;
     }
     remaining = remaining + -1;
   } while (-1 < remaining);
-  piVar2 = (int *)*(int *)(glContext + 0x7440);
-  while (piVar2 != (int *)0x0) {
-    iVar1 = *piVar2;
-    _free(piVar2);
-    piVar2 = (int *)iVar1;
+  freeListNode = (int *)*(int *)(glContext + 0x7440);
+  while (freeListNode != (int *)0x0) {
+    nextFreeListNode = *freeListNode;
+    _free(freeListNode);
+    freeListNode = (int *)nextFreeListNode;
   }
   return;
 }
@@ -801,62 +803,64 @@ void _gleFreeVertexArrayState(glContext)
 }
 
 /* _gleFreeVertexArrayObject @ 0x30200 (196 bytes) */
-int _gleFreeVertexArrayObject(glContext, param_2)
+int _gleFreeVertexArrayObject(glContext, vertexArrayObject)
   undefined4 glContext;
-  int param_2;
+  int vertexArrayObject;
 {
   int remaining;
-  int iVar1;
-  int iVar2;
-  int iVar3;
+  int newRefCount;
+  int attribBuffer;
+  int attribNewRefCount;
+  int arrayBuffer;
+  int elementArrayBuffer;
   int *srcCursor;
   
-  ((void (*)())_gleDestroyPluginVertexArray)(glContext,param_2 + 0x10);
-  iVar3 = *(int *)(param_2 + 0x358);
-  if ((iVar3 != 0) && (iVar1 = *(int *)(iVar3 + 8) + -1, *(int *)(iVar3 + 8) = iVar1, iVar1 == 0)) {
-    _gleFreeBufferObject(glContext,iVar3);
+  ((void (*)())_gleDestroyPluginVertexArray)(glContext,vertexArrayObject + 0x10);
+  arrayBuffer = *(int *)(vertexArrayObject + 0x358);
+  if ((arrayBuffer != 0) && (newRefCount = *(int *)(arrayBuffer + 8) + -1, *(int *)(arrayBuffer + 8) = newRefCount, newRefCount == 0)) {
+    _gleFreeBufferObject(glContext,arrayBuffer);
   }
-  iVar3 = *(int *)(param_2 + 0x35c);
-  if ((iVar3 != 0) && (iVar1 = *(int *)(iVar3 + 8) + -1, *(int *)(iVar3 + 8) = iVar1, iVar1 == 0)) {
-    _gleFreeBufferObject(glContext,iVar3);
+  elementArrayBuffer = *(int *)(vertexArrayObject + 0x35c);
+  if ((elementArrayBuffer != 0) && (newRefCount = *(int *)(elementArrayBuffer + 8) + -1, *(int *)(elementArrayBuffer + 8) = newRefCount, newRefCount == 0)) {
+    _gleFreeBufferObject(glContext,elementArrayBuffer);
   }
-  srcCursor = (int *)(param_2 + 0x360);
+  srcCursor = (int *)(vertexArrayObject + 0x360);
   remaining = 0x1f;
   do {
-    iVar1 = *srcCursor;
+    attribBuffer = *srcCursor;
     srcCursor = srcCursor + 1;
-    if ((iVar1 != 0) && (iVar2 = *(int *)(iVar1 + 8) + -1, *(int *)(iVar1 + 8) = iVar2, iVar2 == 0))
+    if ((attribBuffer != 0) && (attribNewRefCount = *(int *)(attribBuffer + 8) + -1, *(int *)(attribBuffer + 8) = attribNewRefCount, attribNewRefCount == 0))
     {
-      _gleFreeBufferObject(glContext,iVar1);
+      _gleFreeBufferObject(glContext,attribBuffer);
     }
     remaining = remaining + -1;
   } while (-1 < remaining);
-  _gleVecFree(param_2);
+  _gleVecFree(vertexArrayObject);
   return;
 }
 
 /* _gleDestroyPluginVertexArray @ 0x302c4 (120 bytes) */
-void _gleDestroyPluginVertexArray(glContext, param_2)
+void _gleDestroyPluginVertexArray(glContext, pluginHandleArray)
   int glContext;
-  int param_2;
+  int pluginHandleArray;
 {
-  int *piVar1;
-  undefined4 *puVar2;
-  int iVar3;
-  int iVar4;
+  int *rendererDispatch;
+  undefined4 *rendererContextPtr;
+  int handleOffset;
+  int rendererRecord;
   int loopIndex;
   
-  iVar4 = glContext + 0x10000;
+  rendererRecord = glContext + 0x10000;
   loopIndex = 0;
   if (*(char *)(glContext + 0x85a4) != '\0') {
     do {
-      piVar1 = (int *)(iVar4 + -0x777c);
-      iVar3 = loopIndex * 4;
-      puVar2 = (undefined4 *)(iVar4 + -0x7a54);
-      iVar4 = iVar4 + 0x2e0;
+      rendererDispatch = (int *)(rendererRecord + -0x777c);
+      handleOffset = loopIndex * 4;
+      rendererContextPtr = (undefined4 *)(rendererRecord + -0x7a54);
+      rendererRecord = rendererRecord + 0x2e0;
       loopIndex = loopIndex + 1;
-      (**(code **)(*piVar1 + 0x1b0))(*puVar2,*(undefined4 *)(iVar3 + param_2));
-      *(undefined4 *)(iVar3 + param_2) = 0;
+      (**(code **)(*rendererDispatch + 0x1b0))(*rendererContextPtr,*(undefined4 *)(handleOffset + pluginHandleArray));
+      *(undefined4 *)(handleOffset + pluginHandleArray) = 0;
     } while (loopIndex < (int)(uint)*(byte *)(glContext + 0x85a4));
   }
   return;
@@ -874,27 +878,27 @@ void _glePPEmulatorTerminate(glContext)
 void _gleFreeBufferState(glContext)
   int glContext;
 {
-  int iVar1;
+  int newRefCount;
   int glContextPtr48f4;
   int pixelUnpackBuffer;
   int pixelPackBuffer;
   
   glContextPtr48f4 = *(int *)(glContext + 0x48f4);
   if (glContextPtr48f4 != 0) {
-    iVar1 = *(int *)(glContextPtr48f4 + 8) + -1;
-    *(int *)(glContextPtr48f4 + 8) = iVar1;
-    if (iVar1 == 0) {
+    newRefCount = *(int *)(glContextPtr48f4 + 8) + -1;
+    *(int *)(glContextPtr48f4 + 8) = newRefCount;
+    if (newRefCount == 0) {
       _gleFreeBufferObject(glContext,glContextPtr48f4);
     }
     *(undefined4 *)(glContext + 0x48f4) = 0;
   }
   pixelPackBuffer = *(int *)(glContext + 0x4a68);
-  if ((pixelPackBuffer != 0) && (iVar1 = *(int *)(pixelPackBuffer + 8) + -1, *(int *)(pixelPackBuffer + 8) = iVar1, iVar1 == 0)) {
+  if ((pixelPackBuffer != 0) && (newRefCount = *(int *)(pixelPackBuffer + 8) + -1, *(int *)(pixelPackBuffer + 8) = newRefCount, newRefCount == 0)) {
     _gleFreeBufferObject(glContext,pixelPackBuffer);
   }
   pixelUnpackBuffer = *(int *)(glContext + 0x4a6c);
   *(undefined4 *)(glContext + 0x4a68) = 0;
-  if ((pixelUnpackBuffer != 0) && (iVar1 = *(int *)(pixelUnpackBuffer + 8) + -1, *(int *)(pixelUnpackBuffer + 8) = iVar1, iVar1 == 0)) {
+  if ((pixelUnpackBuffer != 0) && (newRefCount = *(int *)(pixelUnpackBuffer + 8) + -1, *(int *)(pixelUnpackBuffer + 8) = newRefCount, newRefCount == 0)) {
     _gleFreeBufferObject(glContext,pixelUnpackBuffer);
   }
   *(undefined4 *)(glContext + 0x4a6c) = 0;
@@ -905,7 +909,7 @@ void _gleFreeBufferState(glContext)
 void _gleFreeShaderState(glContext)
   int glContext;
 {
-  int iVar1;
+  int newRefCount;
   int currentProgram;
   
   currentProgram = *(int *)(glContext + 0x5430);
@@ -913,9 +917,9 @@ void _gleFreeShaderState(glContext)
     if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
       _pthread_mutex_lock(*(int *)(glContext + 0x5148) + 0x8028);
     }
-    iVar1 = *(int *)(currentProgram + 8) + -1;
-    *(int *)(currentProgram + 8) = iVar1;
-    if (iVar1 == 1) {
+    newRefCount = *(int *)(currentProgram + 8) + -1;
+    *(int *)(currentProgram + 8) = newRefCount;
+    if (newRefCount == 1) {
       ((int (*)())_gleDeleteHashNameAndObject)(glContext,*(int *)(glContext + 0x5148) + 0x6018,*(undefined4 *)(currentProgram + 4));
     }
     if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
@@ -1266,21 +1270,21 @@ int _gleReleaseSharedState(glContext)
 void _gleDetachShaderObjects(glContext)
   int glContext;
 {
-  undefined *puVar1;
+  undefined *detachIterFunc;
   int sharedState;
-  int *piVar3;
-  int *piVar4;
+  int *nextBucket;
+  int *bucketSlotThenObject;
   
-  puVar1 = PTR__gleDetachShaderObjectIterFunc_001113e8;
+  detachIterFunc = PTR__gleDetachShaderObjectIterFunc_001113e8;
   sharedState = *(int *)(glContext + 0x5148);
-  piVar4 = (int *)(sharedState + 0x6018);
+  bucketSlotThenObject = (int *)(sharedState + 0x6018);
   do {
-    piVar3 = piVar4 + 1;
-    for (piVar4 = (int *)*piVar4; piVar4 != (int *)0x0; piVar4 = (int *)*piVar4) {
-      (*(code *)puVar1)(glContext,piVar4);
+    nextBucket = bucketSlotThenObject + 1;
+    for (bucketSlotThenObject = (int *)*bucketSlotThenObject; bucketSlotThenObject != (int *)0x0; bucketSlotThenObject = (int *)*bucketSlotThenObject) {
+      (*(code *)detachIterFunc)(glContext,bucketSlotThenObject);
     }
-    piVar4 = piVar3;
-  } while ((int)piVar3 <= sharedState + 0x7014);
+    bucketSlotThenObject = nextBucket;
+  } while ((int)nextBucket <= sharedState + 0x7014);
   return;
 }
 
@@ -1422,9 +1426,9 @@ void _glDeleteProgramsARB_Exec(glContext, n, programs)
   int *programs;
 {
   undefined4 glErrorCode;
-  int iVar2;
+  int boundProgram;
   uint loopIndex;
-  int iVar4;
+  int programName;
   int *srcCursor;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
@@ -1434,20 +1438,20 @@ void _glDeleteProgramsARB_Exec(glContext, n, programs)
       }
       if (0 < n) {
         do {
-          iVar4 = *programs;
+          programName = *programs;
           programs = programs + 1;
-          if (iVar4 != 0) {
+          if (programName != 0) {
             loopIndex = 0;
             srcCursor = (int *)(glContext + 0x5420);
             do {
-              iVar2 = *srcCursor;
+              boundProgram = *srcCursor;
               srcCursor = srcCursor + 1;
-              if (iVar4 == *(int *)(iVar2 + 4)) {
+              if (programName == *(int *)(boundProgram + 4)) {
                 _gleBindPipelineProgram(glContext,loopIndex,0);
               }
               loopIndex = loopIndex + 1;
             } while (loopIndex < 2);
-            ((int (*)())_gleDeleteHashNameAndObject)(glContext,*(int *)(glContext + 0x5148) + 0x4010,iVar4);
+            ((int (*)())_gleDeleteHashNameAndObject)(glContext,*(int *)(glContext + 0x5148) + 0x4010,programName);
           }
           n = n + -1;
         } while (n != 0);
@@ -1479,21 +1483,21 @@ int _gleDeleteHashNameAndObject(glContext, forwardedArg2, forwardedArg3)
   undefined4 forwardedArg2;
   undefined4 forwardedArg3;
 {
-  int iVar1;
-  int iVar2;
-  undefined4 uVar3;
+  int newRefCount;
+  int removeNameResultThenObject;
+  undefined4 wasDeleted;
   
-  iVar2 = ((int (*)())_gleRemoveHashName)(forwardedArg2,forwardedArg3);
-  uVar3 = 0;
-  if (iVar2 != 0) {
-    iVar2 = _gleRemoveHashObject(forwardedArg2,forwardedArg3);
-    if ((iVar2 != 0) && (iVar1 = *(int *)(iVar2 + 8) + -1, *(int *)(iVar2 + 8) = iVar1, iVar1 == 0))
+  removeNameResultThenObject = ((int (*)())_gleRemoveHashName)(forwardedArg2,forwardedArg3);
+  wasDeleted = 0;
+  if (removeNameResultThenObject != 0) {
+    removeNameResultThenObject = _gleRemoveHashObject(forwardedArg2,forwardedArg3);
+    if ((removeNameResultThenObject != 0) && (newRefCount = *(int *)(removeNameResultThenObject + 8) + -1, *(int *)(removeNameResultThenObject + 8) = newRefCount, newRefCount == 0))
     {
-      (**(code **)(iVar2 + 0xc))(glContext);
+      (**(code **)(removeNameResultThenObject + 0xc))(glContext);
     }
-    uVar3 = 1;
+    wasDeleted = 1;
   }
-  return uVar3;
+  return wasDeleted;
 }
 
 /* _gleRemoveHashName @ 0x30f80 (228 bytes) */
@@ -1551,8 +1555,8 @@ int _gleRemoveHashName(nameTable, name)
 }
 
 /* _glePPUnlogParameters @ 0x31064 (248 bytes) */
-void _glePPUnlogParameters(param_1, program, paramCount, paramEntries)
-  int param_1;
+void _glePPUnlogParameters(glContext, program, paramCount, paramEntries)
+  int glContext;
   int program;
   int paramCount;
   int paramEntries;
@@ -1560,7 +1564,7 @@ void _glePPUnlogParameters(param_1, program, paramCount, paramEntries)
   ushort slotPriority;
   uint slotIndex;
   uint bankIndex;
-  int iVar4;
+  int bankStateThenSlotPriorityAddress;
   int slotRecord;
   int sharedState;
   int loopIndex;
@@ -1569,26 +1573,26 @@ void _glePPUnlogParameters(param_1, program, paramCount, paramEntries)
   
   loopIndex = 0;
   bankIndex = (uint)*(ushort *)(program + 0x4ba);
-  sharedState = *(int *)(param_1 + 0x5148);
-  iVar4 = bankIndex * 0xa30 + sharedState;
-  *(int *)(iVar4 + 0x8a98) = *(int *)(iVar4 + 0x8a98) + 1;
+  sharedState = *(int *)(glContext + 0x5148);
+  bankStateThenSlotPriorityAddress = bankIndex * 0xa30 + sharedState;
+  *(int *)(bankStateThenSlotPriorityAddress + 0x8a98) = *(int *)(bankStateThenSlotPriorityAddress + 0x8a98) + 1;
   if (paramCount != 0) {
     do {
       paramWord2 = *(uint *)(loopIndex * 8 + paramEntries + 4);
       if ((*(uint *)(loopIndex * 8 + paramEntries) & 0x1f0000) != 0) {
         slotIndex = paramWord2 & 0xffff;
-        iVar4 = (bankIndex * 0x518 + slotIndex) * 2 + sharedState;
-        slotPriority = *(ushort *)(iVar4 + 0x8874);
+        bankStateThenSlotPriorityAddress = (bankIndex * 0x518 + slotIndex) * 2 + sharedState;
+        slotPriority = *(ushort *)(bankStateThenSlotPriorityAddress + 0x8874);
         if (slotPriority == 1) {
           slotRecord = (bankIndex * 0x146 + slotIndex) * 8 + sharedState;
           slotBitmapWord = (bankIndex * 0x28c + (slotIndex >> 5)) * 4 + sharedState;
-          *(undefined2 *)(iVar4 + 0x8874) = 0;
+          *(undefined2 *)(bankStateThenSlotPriorityAddress + 0x8874) = 0;
           *(undefined4 *)(slotRecord + 0x8074) = 0;
           *(undefined4 *)(slotRecord + 0x8078) = 0;
           *(uint *)(slotBitmapWord + 0x8a74) = *(uint *)(slotBitmapWord + 0x8a74) | 1 << (paramWord2 & 0x1f);
         }
         else if (1 < slotPriority) {
-          *(ushort *)(iVar4 + 0x8874) = slotPriority - 1;
+          *(ushort *)(bankStateThenSlotPriorityAddress + 0x8874) = slotPriority - 1;
         }
       }
       loopIndex = loopIndex + 1;
@@ -1601,35 +1605,35 @@ void _glePPUnlogParameters(param_1, program, paramCount, paramEntries)
 /* _gleDestroyEnableHashTable @ 0x3115c (104 bytes) */
 void _gleDestroyEnableHashTable()
 {
-  int iVar1;
-  int iVar2;
+  int hashTable;
+  int bucketObject;
   int remaining;
   int *srcCursor;
   
-  iVar1 = _gle_enable_hash_table;
+  hashTable = _gle_enable_hash_table;
   remaining = 0x3ff;
   srcCursor = (int *)(_gle_enable_hash_table + 8);
   do {
-    iVar2 = *srcCursor;
+    bucketObject = *srcCursor;
     srcCursor = srcCursor + 4;
-    if (iVar2 != 0) {
-      ((void (*)())_gleFreeEnableHashObject)(iVar2);
+    if (bucketObject != 0) {
+      ((void (*)())_gleFreeEnableHashObject)(bucketObject);
     }
     remaining = remaining + -1;
   } while (-1 < remaining);
-  _free(iVar1);
+  _free(hashTable);
   _gle_enable_hash_table = 0;
   return;
 }
 
 /* _gleFreeEnableHashObject @ 0x311c4 (60 bytes) */
-void _gleFreeEnableHashObject(param_1)
-  int param_1;
+void _gleFreeEnableHashObject(chainNode)
+  int chainNode;
 {
-  if (*(int *)(param_1 + 8) != 0) {
-    ((void (*)())_gleFreeEnableHashObject)(*(int *)(param_1 + 8));
+  if (*(int *)(chainNode + 8) != 0) {
+    ((void (*)())_gleFreeEnableHashObject)(*(int *)(chainNode + 8));
   }
-  _free(param_1);
+  _free(chainNode);
   return;
 }
 
@@ -1822,16 +1826,16 @@ void _glDepthFunc_Exec(glContext, func)
 }
 
 /* _gleSetEnable_LINE_SMOOTH @ 0x31638 (32 bytes) */
-void _gleSetEnable_LINE_SMOOTH(param_1, unusedArg2, param_3)
-  int param_1;
+void _gleSetEnable_LINE_SMOOTH(glContext, unusedArg2, enable)
+  int glContext;
   undefined4 unusedArg2;
-  uint param_3;
+  uint enable;
 {
-  if (*(byte *)(param_1 + 0x318d) == param_3) {
+  if (*(byte *)(glContext + 0x318d) == enable) {
     return;
   }
-  *(char *)(param_1 + 0x318d) = (char)param_3;
-  *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x4000;
+  *(char *)(glContext + 0x318d) = (char)enable;
+  *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x4000;
   return;
 }
 
@@ -2107,15 +2111,15 @@ void _gleSetEnable_LIGHTING(glContext, unusedArg2, param_3)
 }
 
 /* _gleSetEnable_RESCALE_NORMAL_EXT @ 0x31da0 (44 bytes) */
-void _gleSetEnable_RESCALE_NORMAL_EXT(glContext, unusedArg2, param_3)
+void _gleSetEnable_RESCALE_NORMAL_EXT(glContext, unusedArg2, enable)
   int glContext;
   undefined4 unusedArg2;
-  uint param_3;
+  uint enable;
 {
-  if (*(byte *)(glContext + 0x280e) == param_3) {
+  if (*(byte *)(glContext + 0x280e) == enable) {
     return;
   }
-  *(char *)(glContext + 0x280e) = (char)param_3;
+  *(char *)(glContext + 0x280e) = (char)enable;
   *(uint *)(glContext + 0x50b0) = *(uint *)(glContext + 0x50b0) | 0x10;
   *(uint *)(glContext + 0x318) = *(uint *)(glContext + 0x318) | 0x80000000;
   return;

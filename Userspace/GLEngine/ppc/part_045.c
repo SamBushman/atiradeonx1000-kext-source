@@ -20,14 +20,14 @@ void _gleBeginLinesRenderTCLRDirty(glContext)
 void _gleBeginLinesSelectFeedback(glContext)
   int glContext;
 {
-  undefined *puVar1;
+  undefined *renderFunc;
   
   *(undefined **)(glContext + 0x4a0c) = PTR__gleFlushAtomicFunc_00112224;
-  puVar1 = PTR__gleFeedbackLinesFunc_00112208;
+  renderFunc = PTR__gleFeedbackLinesFunc_00112208;
   if (*(int *)(glContext + 0x4e1c) == 0x1c02) {
-    puVar1 = PTR__gleSelectLinesFunc_0011220c;
+    renderFunc = PTR__gleSelectLinesFunc_0011220c;
   }
-  *(undefined **)(glContext + 0x4a08) = puVar1;
+  *(undefined **)(glContext + 0x4a08) = renderFunc;
   *(undefined4 *)(glContext + 0x4858) = *(undefined4 *)(glContext + 0x4854);
   return;
 }
@@ -1350,14 +1350,14 @@ void _gleSelectLinesFunc(glContext)
   int glContext;
 {
   bool vertexProgramActive;
-  uint uVar2;
+  uint vertexEndThenRemaining;
   uint batchClipCodes;
   uint *listCursor;
   uint vertexCount;
   uint vertexCursor;
   uint *polygonList;
   double f1AfterCall;
-  double dVar8;
+  double f1AfterHookCall;
   
   vertexProgramActive = false;
   if ((*(char *)(glContext + 0x4664) != '\0') || (*(int *)(glContext + 0x5434) != 0)) {
@@ -1368,31 +1368,31 @@ void _gleSelectLinesFunc(glContext)
       (vertexCount = (*(int *)(glContext + 0x4858) - vertexCursor) / (uint)(int)*(short *)(glContext + 0x487c),
       1 < (int)vertexCount)) &&
      (batchClipCodes = (**(code **)(glContext + 0x5060))(glContext,vertexCursor,vertexCount), (batchClipCodes & 0xff00) == 0)) {
-    dVar8 = f1AfterCall;
+    f1AfterHookCall = f1AfterCall;
     if (vertexProgramActive) {
       vertexCursor = *(uint *)(glContext + 0x4864);
     }
     else if (*(char *)(glContext + 0x4e18) != '\0') {
-      dVar8 = (double)(**(double ( **)(int,int,int))(glContext + 0x5064))(glContext, vertexCursor, vertexCount);
+      f1AfterHookCall = (double)(**(double ( **)(int,int,int))(glContext + 0x5064))(glContext, vertexCursor, vertexCount);
     }
     if (((batchClipCodes & 0xff) == 0) && (*(char *)(glContext + 0x4e18) == '\0')) {
       _gleSelectLines(glContext,vertexCursor,vertexCount);
       return;
     }
-    uVar2 = vertexCursor + vertexCount * 0x100;
+    vertexEndThenRemaining = vertexCursor + vertexCount * 0x100;
     polygonList = *(uint **)(glContext + 0x4870);
-    if (vertexCursor < uVar2) {
-      uVar2 = (uVar2 - vertexCursor) + 0xff >> 8;
+    if (vertexCursor < vertexEndThenRemaining) {
+      vertexEndThenRemaining = (vertexEndThenRemaining - vertexCursor) + 0xff >> 8;
       listCursor = polygonList;
       do {
         *listCursor = vertexCursor;
         vertexCursor = vertexCursor + 0x100;
         listCursor = listCursor + 1;
-        uVar2 = uVar2 - 1;
-      } while (uVar2 != 0);
+        vertexEndThenRemaining = vertexEndThenRemaining - 1;
+      } while (vertexEndThenRemaining != 0);
     }
     if ((*(char *)(glContext + 0x4e18) != '\0') &&
-       (vertexCount = ((int (*)())_gleClipLinesPlane)(glContext,polygonList,vertexCount,dVar8), vertexCount == 0)) {
+       (vertexCount = ((int (*)())_gleClipLinesPlane)(glContext,polygonList,vertexCount,f1AfterHookCall), vertexCount == 0)) {
       return;
     }
     if (((batchClipCodes & 0xff) == 0) ||
@@ -1408,62 +1408,62 @@ void _gleSelectLinesFunc(glContext)
 void _gleSelectLineStripFunc_body(glContext)
   int glContext;
 {
-  bool bVar1;
-  uint *puVar2;
-  int iVar3;
+  bool vertexProgramPath;
+  uint *listCursor;
+  int vertexEndThenListCount;
   uint batchClipCodes;
   uint *polygonList;
-  uint uVar6;
+  uint copyDestination;
   uint vertexCount;
   uint vertexCursor;
   double f1AfterCall;
-  double dVar8;
+  double forwardedFloatArg1;
   double f1AfterCall1;
   
-  bVar1 = false;
+  vertexProgramPath = false;
   if ((*(char *)(glContext + 0x4664) != '\0') || (*(int *)(glContext + 0x5434) != 0)) {
-    bVar1 = true;
+    vertexProgramPath = true;
   }
   vertexCursor = *(uint *)(glContext + 0x4854);
   if ((((int)*(short *)(glContext + 0x487c) != 0) &&
       (vertexCount = (*(int *)(glContext + 0x4858) - vertexCursor) / (uint)(int)*(short *)(glContext + 0x487c),
       1 < (int)vertexCount)) &&
      (batchClipCodes = (**(code **)(glContext + 0x5060))(glContext,vertexCursor,vertexCount), (batchClipCodes & 0xff00) == 0)) {
-    dVar8 = f1AfterCall;
-    if (bVar1) {
+    forwardedFloatArg1 = f1AfterCall;
+    if (vertexProgramPath) {
       vertexCursor = *(uint *)(glContext + 0x4864);
     }
     else if (*(char *)(glContext + 0x4e18) != '\0') {
-      dVar8 = (double)(**(double ( **)(int,int,int))(glContext + 0x5064))(glContext, vertexCursor, vertexCount);
+      forwardedFloatArg1 = (double)(**(double ( **)(int,int,int))(glContext + 0x5064))(glContext, vertexCursor, vertexCount);
     }
     if (((batchClipCodes & 0xff) == 0) && (*(char *)(glContext + 0x4e18) == '\0')) {
       _gleSelectLineStrip(glContext,vertexCursor,vertexCount);
       return;
     }
     polygonList = *(uint **)(glContext + 0x4870);
-    iVar3 = vertexCursor + vertexCount * 0x100;
-    puVar2 = polygonList;
-    if (bVar1) {
-      uVar6 = *(uint *)(glContext + 0x4854);
+    vertexEndThenListCount = vertexCursor + vertexCount * 0x100;
+    listCursor = polygonList;
+    if (vertexProgramPath) {
+      copyDestination = *(uint *)(glContext + 0x4854);
     }
     else {
-      uVar6 = *(uint *)(glContext + 0x4858);
+      copyDestination = *(uint *)(glContext + 0x4858);
     }
-    while (vertexCursor < iVar3 - 0x100U) {
-      *puVar2 = vertexCursor;
-      _memcpy(uVar6,vertexCursor + 0x100,0x100);
-      puVar2[1] = uVar6;
-      uVar6 = uVar6 + 0x100;
-      puVar2 = puVar2 + 2;
+    while (vertexCursor < vertexEndThenListCount - 0x100U) {
+      *listCursor = vertexCursor;
+      _memcpy(copyDestination,vertexCursor + 0x100,0x100);
+      listCursor[1] = copyDestination;
+      copyDestination = copyDestination + 0x100;
+      listCursor = listCursor + 2;
       vertexCursor = vertexCursor + 0x100;
-      dVar8 = f1AfterCall1;
+      forwardedFloatArg1 = f1AfterCall1;
     }
-    iVar3 = (int)puVar2 - (int)polygonList >> 2;
+    vertexEndThenListCount = (int)listCursor - (int)polygonList >> 2;
     if (((*(char *)(glContext + 0x4e18) == '\0') ||
-        (iVar3 = ((int (*)())_gleClipLinesPlane)(glContext,polygonList,iVar3,dVar8), iVar3 != 0)) &&
+        (vertexEndThenListCount = ((int (*)())_gleClipLinesPlane)(glContext,polygonList,vertexEndThenListCount,forwardedFloatArg1), vertexEndThenListCount != 0)) &&
        (((batchClipCodes & 0xff) == 0 ||
-        (iVar3 = ((int (*)())_gleClipLines)(glContext,polygonList,iVar3,batchClipCodes & 0xff), iVar3 != 0)))) {
-      _gleSelectLinesPtr(glContext,polygonList,iVar3);
+        (vertexEndThenListCount = ((int (*)())_gleClipLines)(glContext,polygonList,vertexEndThenListCount,batchClipCodes & 0xff), vertexEndThenListCount != 0)))) {
+      _gleSelectLinesPtr(glContext,polygonList,vertexEndThenListCount);
       return;
     }
   }
@@ -3184,32 +3184,34 @@ void _gleLightMaterialShineChange_B(int glContext,float floatArg1)
 }
 
 /* _gleLightMaterialRGBAChange_B_E @ 0xdc2c4 (184 bytes) */
-void _gleLightMaterialRGBAChange_B_E(glContext, param_2)
+void _gleLightMaterialRGBAChange_B_E(glContext, rgba)
   int glContext;
-  undefined8 *param_2;
+  undefined8 *rgba;
 {
-  byte bVar1;
-  int iVar2;
-  int iVar3;
-  undefined8 uVar4;
+  byte dirtyBitIndex;
+  int material;
+  int dirtyWord348;
+  int glContextWord5424;
+  int dirtyWord324;
+  undefined8 rgbaBlueAlpha;
   
-  iVar2 = _glePushMaterial(glContext,1);
-  *(undefined8 *)(iVar2 + 0x30) = *param_2;
-  uVar4 = param_2[1];
-  *(ushort *)(iVar2 + 0x234) = *(ushort *)(iVar2 + 0x234) | 0x202;
-  *(undefined8 *)(iVar2 + 0x38) = uVar4;
+  material = _glePushMaterial(glContext,1);
+  *(undefined8 *)(material + 0x30) = *rgba;
+  rgbaBlueAlpha = rgba[1];
+  *(ushort *)(material + 0x234) = *(ushort *)(material + 0x234) | 0x202;
+  *(undefined8 *)(material + 0x38) = rgbaBlueAlpha;
   if (*(int *)(glContext + 0x5434) == 0) {
-    bVar1 = *(byte *)(*(int *)(glContext + 0x5420) + 0x2c9);
+    dirtyBitIndex = *(byte *)(*(int *)(glContext + 0x5420) + 0x2c9);
   }
   else {
-    bVar1 = *(byte *)(*(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x2fd);
+    dirtyBitIndex = *(byte *)(*(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x2fd);
   }
-  iVar3 = (bVar1 >> 3 & 0x1c) + glContext;
-  iVar2 = *(int *)(glContext + 0x5424);
-  *(uint *)(iVar3 + 0x324) = *(uint *)(iVar3 + 0x324) | 1 << (bVar1 & 0x1f);
-  bVar1 = *(byte *)(iVar2 + 0x2c9);
-  iVar2 = (bVar1 >> 3 & 0x1c) + glContext;
-  *(uint *)(iVar2 + 0x348) = *(uint *)(iVar2 + 0x348) | 1 << (bVar1 & 0x1f);
+  dirtyWord324 = (dirtyBitIndex >> 3 & 0x1c) + glContext;
+  glContextWord5424 = *(int *)(glContext + 0x5424);
+  *(uint *)(dirtyWord324 + 0x324) = *(uint *)(dirtyWord324 + 0x324) | 1 << (dirtyBitIndex & 0x1f);
+  dirtyBitIndex = *(byte *)(glContextWord5424 + 0x2c9);
+  dirtyWord348 = (dirtyBitIndex >> 3 & 0x1c) + glContext;
+  *(uint *)(dirtyWord348 + 0x348) = *(uint *)(dirtyWord348 + 0x348) | 1 << (dirtyBitIndex & 0x1f);
   return;
 }
 

@@ -170,30 +170,30 @@ switchD_000f37d0_caseD_0:
 void _gleBeginPrimitiveTCLRDirtyFunc(glContext)
   int glContext;
 {
-  short sVar1;
+  short vertexStride;
   undefined *renderPrimitiveTCLFunc;
-  int iVar3;
-  int local_20 [5];
+  int vertexBuffer;
+  int vertexCountArg [5];
   
-  local_20[0] = *(int *)(glContext + 0x4a14);
+  vertexCountArg[0] = *(int *)(glContext + 0x4a14);
   *(undefined1 *)(glContext + 0x4a18) = 0;
-  if (local_20[0] == 0) {
-    sVar1 = *(short *)(glContext + 0x4880);
+  if (vertexCountArg[0] == 0) {
+    vertexStride = *(short *)(glContext + 0x4880);
   }
   else {
-    sVar1 = *(short *)(glContext + 0x4882);
+    vertexStride = *(short *)(glContext + 0x4882);
   }
-  iVar3 = (**(code **)(glContext + 0x46e8))
-                    (*(undefined4 *)(glContext + 0x4688),(int)*(short *)(glContext + 0x4a10),local_20);
+  vertexBuffer = (**(code **)(glContext + 0x46e8))
+                    (*(undefined4 *)(glContext + 0x4688),(int)*(short *)(glContext + 0x4a10),vertexCountArg);
   *(undefined4 *)(glContext + 0x486c) = 0;
   renderPrimitiveTCLFunc = PTR__gleRenderPrimitiveTCLFunc_001113cc;
   *(undefined **)(glContext + 0x4a0c) = PTR__gleFlushPrimitiveTCLRDirtyFunc_001113c8;
-  *(int *)(glContext + 0x485c) = iVar3 + sVar1 * local_20[0];
+  *(int *)(glContext + 0x485c) = vertexBuffer + vertexStride * vertexCountArg[0];
   *(undefined **)(glContext + 0x4a08) = renderPrimitiveTCLFunc;
   *(undefined2 *)(glContext + 0x4a12) = *(undefined2 *)(glContext + 0x4a10);
-  *(short *)(glContext + 0x487c) = sVar1;
-  *(int *)(glContext + 0x4868) = iVar3;
-  *(int *)(glContext + 0x4858) = iVar3;
+  *(short *)(glContext + 0x487c) = vertexStride;
+  *(int *)(glContext + 0x4868) = vertexBuffer;
+  *(int *)(glContext + 0x4858) = vertexBuffer;
   return;
 }
 
@@ -289,16 +289,16 @@ LAB_000f3a4c:
 }
 
 /* _gleSelectPoints @ 0xf3ae0 (84 bytes) */
-void _gleSelectPoints(glContext, param_2, param_3)
+void _gleSelectPoints(glContext, vertexCursor, vertexCount)
   undefined4 glContext;
-  uint param_2;
-  int param_3;
+  uint vertexCursor;
+  int vertexCount;
 {
-  uint uVar1;
+  uint vertexEnd;
   
-  uVar1 = param_2 + param_3 * 0x100;
-  for (; param_2 < uVar1; param_2 = param_2 + 0x100) {
-    ((void (*)())_gleSelectHitRecord)(glContext,(double)*(float *)(param_2 + 8));
+  vertexEnd = vertexCursor + vertexCount * 0x100;
+  for (; vertexCursor < vertexEnd; vertexCursor = vertexCursor + 0x100) {
+    ((void (*)())_gleSelectHitRecord)(glContext,(double)*(float *)(vertexCursor + 8));
   }
   return;
 }
@@ -368,17 +368,17 @@ void _gleSelectLineLoop_body(param_1, param_2, param_3)
 }
 
 /* _gleSelectLinesPtr @ 0xf3cd0 (108 bytes) */
-void _gleSelectLinesPtr(glContext, param_2, param_3)
+void _gleSelectLinesPtr(glContext, listCursor, listCount)
   undefined4 glContext;
-  int *param_2;
-  int param_3;
+  int *listCursor;
+  int listCount;
 {
-  int *piVar1;
+  int *lastEntry;
   
-  piVar1 = param_2 + param_3 + -1;
-  for (; param_2 < piVar1; param_2 = param_2 + 2) {
-    ((void (*)())_gleSelectHitRecord)(glContext,(double)*(float *)(*param_2 + 8));
-    ((void (*)())_gleSelectHitRecord)(glContext,(double)*(float *)(param_2[1] + 8));
+  lastEntry = listCursor + listCount + -1;
+  for (; listCursor < lastEntry; listCursor = listCursor + 2) {
+    ((void (*)())_gleSelectHitRecord)(glContext,(double)*(float *)(*listCursor + 8));
+    ((void (*)())_gleSelectHitRecord)(glContext,(double)*(float *)(listCursor[1] + 8));
   }
   return;
 }
@@ -399,16 +399,16 @@ void _gleSelectPolygon(glContext, vertexCursor, vertexCount)
 }
 
 /* _gleSelectPolygonPtr @ 0xf3d90 (88 bytes) */
-double _gleSelectPolygonPtr(glContext, param_2, param_3)
+double _gleSelectPolygonPtr(glContext, listCursor, listCount)
   undefined4 glContext;
-  int *param_2;
-  int param_3;
+  int *listCursor;
+  int listCount;
 {
-  int *piVar1;
+  int *listEnd;
   
-  piVar1 = param_2 + param_3;
-  for (; param_2 < piVar1; param_2 = param_2 + 1) {
-    ((void (*)())_gleSelectHitRecord)(glContext,(double)*(float *)(*param_2 + 8));
+  listEnd = listCursor + listCount;
+  for (; listCursor < listEnd; listCursor = listCursor + 1) {
+    ((void (*)())_gleSelectHitRecord)(glContext,(double)*(float *)(*listCursor + 8));
   }
   return;
 }
@@ -482,23 +482,23 @@ double _gleSelectTriangleStrip(glContext, param_2, param_3)
 }
 
 /* _gleSelectQuads @ 0xf3f44 (116 bytes) */
-double _gleSelectQuads(glContext, param_2, param_3)
+double _gleSelectQuads(glContext, vertexCursor, vertexCount)
   undefined4 glContext;
-  uint param_2;
-  int param_3;
+  uint vertexCursor;
+  int vertexCount;
 {
-  int iVar1;
-  uint uVar2;
+  int quadVertexIndex;
+  uint quadVertex;
   
-  iVar1 = 0;
-  if (-1 < param_3 + -4) {
+  quadVertexIndex = 0;
+  if (-1 < vertexCount + -4) {
     do {
-      for (uVar2 = param_2; uVar2 < param_2 + 0x400; uVar2 = uVar2 + 0x100) {
-        ((void (*)())_gleSelectHitRecord)(glContext,(double)*(float *)(uVar2 + 8));
+      for (quadVertex = vertexCursor; quadVertex < vertexCursor + 0x400; quadVertex = quadVertex + 0x100) {
+        ((void (*)())_gleSelectHitRecord)(glContext,(double)*(float *)(quadVertex + 8));
       }
-      iVar1 = iVar1 + 4;
-      param_2 = param_2 + 0x400;
-    } while (iVar1 <= param_3 + -4);
+      quadVertexIndex = quadVertexIndex + 4;
+      vertexCursor = vertexCursor + 0x400;
+    } while (quadVertexIndex <= vertexCount + -4);
   }
   return;
 }
@@ -1023,9 +1023,10 @@ int _gleCheckTexImage1DArgs(glContext, target, level, internalformat, width, bor
   undefined4 type;
 {
   undefined4 errorCode;
-  int iVar2;
+  int rendererInfo;
+  int imageCheckResult;
   int texture;
-  uint uVar4;
+  uint innerWidth;
   
   texture = _gleLookUpTexture1D(glContext,target);
   if (texture == 0) {
@@ -1038,18 +1039,18 @@ int _gleCheckTexImage1DArgs(glContext, target, level, internalformat, width, bor
   if (((*(uint *)(glContext + 0x3410) & 1) != 0) && (*(short *)(glContext + 13000) == -0x7fea)) {
     width = (width - *(int *)(glContext + 0x32d0)) + 1;
   }
-  uVar4 = width + border * -2;
-  if (-1 < (int)uVar4) {
-    if ((uVar4 & uVar4 - 1) == 0) {
-      iVar2 = *(int *)(glContext + 0x468c);
+  innerWidth = width + border * -2;
+  if (-1 < (int)innerWidth) {
+    if ((innerWidth & innerWidth - 1) == 0) {
+      rendererInfo = *(int *)(glContext + 0x468c);
     }
     else {
-      iVar2 = *(int *)(glContext + 0x468c);
-      if ((*(uint *)(iVar2 + 0x124) & 0x80000) == 0) goto LAB_000f4b58;
+      rendererInfo = *(int *)(glContext + 0x468c);
+      if ((*(uint *)(rendererInfo + 0x124) & 0x80000) == 0) goto LAB_000f4b58;
     }
-    if ((int)uVar4 <= (int)(uint)*(ushort *)(iVar2 + 0xbc)) {
-      iVar2 = _gleCheckTexImageArgs(glContext,level,format,type,internalformat,border,1,1);
-      if (iVar2 != 0) {
+    if ((int)innerWidth <= (int)(uint)*(ushort *)(rendererInfo + 0xbc)) {
+      imageCheckResult = _gleCheckTexImageArgs(glContext,level,format,type,internalformat,border,1,1);
+      if (imageCheckResult != 0) {
         return texture;
       }
       return 0;
@@ -1172,27 +1173,27 @@ int _gleCheckCopyColorTableArgs(glContext, target, internalformat, width)
   undefined4 internalformat;
   uint width;
 {
-  undefined4 uVar1;
+  undefined4 glErrorCode;
   int colorTable;
-  int iVar3;
+  int texArgsResult;
   
   colorTable = _gleLookUpNonProxyColorTable(glContext,target);
   if (colorTable == 0) {
     if (*(int *)(glContext + 0x7574) != 0) {
       return 0;
     }
-    uVar1 = 0x500;
+    glErrorCode = 0x500;
   }
   else {
-    iVar3 = _gleCheckCopyTexImageArgs(glContext,0,internalformat,0,0,0);
-    if (iVar3 == 0) {
+    texArgsResult = _gleCheckCopyTexImageArgs(glContext,0,internalformat,0,0,0);
+    if (texArgsResult == 0) {
       return 0;
     }
     if (((int)width < 0) || ((width & width - 1) != 0)) {
       if (*(int *)(glContext + 0x7574) != 0) {
         return 0;
       }
-      uVar1 = 0x501;
+      glErrorCode = 0x501;
     }
     else {
       if ((int)width < 0x4001) {
@@ -1204,10 +1205,10 @@ int _gleCheckCopyColorTableArgs(glContext, target, internalformat, width)
       if (*(int *)(glContext + 0x7574) != 0) {
         return 0;
       }
-      uVar1 = 0x8031;
+      glErrorCode = 0x8031;
     }
   }
-  *(undefined4 *)(glContext + 0x7574) = uVar1;
+  *(undefined4 *)(glContext + 0x7574) = glErrorCode;
   return 0;
 }
 
@@ -1463,12 +1464,13 @@ int _gleCheckCopyTexSubImage2DArgs(glContext, target, level, xoffset, yoffset, w
   uint width;
   uint height;
 {
-  bool bVar1;
+  bool levelInRange;
   undefined4 errorCode;
-  int iVar3;
+  int readBufferExtentX;
+  int xRangeValid;
   int texture;
-  int iVar5;
-  int iVar6;
+  int readBufferExtentY;
+  int levelImageThenYRangeValid;
   
   texture = _gleLookUpNonProxyTexture2D(glContext,target);
   if (texture == 0) {
@@ -1480,24 +1482,24 @@ LAB_000f549c:
     *(undefined4 *)(glContext + 0x7574) = errorCode;
     return 0;
   }
-  bVar1 = true;
+  levelInRange = true;
   if (0xe < level) {
     if (*(int *)(glContext + 0x7574) == 0) {
       *(undefined4 *)(glContext + 0x7574) = 0x501;
     }
-    bVar1 = false;
+    levelInRange = false;
   }
-  if (!bVar1) {
+  if (!levelInRange) {
     return 0;
   }
-  iVar6 = texture + 0xc4 + level * 0x18;
+  levelImageThenYRangeValid = texture + 0xc4 + level * 0x18;
   if (target - 0x8515U < 6) {
-    iVar6 = texture + 0xc4 + target * 0x168 + level * 0x18 + -0xbb2588;
+    levelImageThenYRangeValid = texture + 0xc4 + target * 0x168 + level * 0x18 + -0xbb2588;
   }
-  if (((*(byte *)(iVar6 + 0xb) & 0x20) == 0) ||
-     ((*(short *)(iVar6 + 0x12) == 0 &&
-      (((((width & 3) != 0 && (width != *(ushort *)(iVar6 + 4))) ||
-        (((height & 3) != 0 && (height != *(ushort *)(iVar6 + 6))))) ||
+  if (((*(byte *)(levelImageThenYRangeValid + 0xb) & 0x20) == 0) ||
+     ((*(short *)(levelImageThenYRangeValid + 0x12) == 0 &&
+      (((((width & 3) != 0 && (width != *(ushort *)(levelImageThenYRangeValid + 4))) ||
+        (((height & 3) != 0 && (height != *(ushort *)(levelImageThenYRangeValid + 6))))) ||
        (((xoffset & 3) != 0 || ((yoffset & 3) != 0)))))))) {
     if (*(int *)(glContext + 0x7574) != 0) {
       return 0;
@@ -1508,23 +1510,23 @@ LAB_000f549c:
   if ((*(uint *)(glContext + 0x3410) & 2) == 0) {
     if (((*(uint *)(glContext + 0x3410) & 4) == 0) || (*(short *)(glContext + 0x3348) != -0x7fea))
     goto LAB_000f550c;
-    iVar5 = *(int *)(glContext + 0x3354);
-    iVar3 = *(int *)(glContext + 0x3350);
+    readBufferExtentY = *(int *)(glContext + 0x3354);
+    readBufferExtentX = *(int *)(glContext + 0x3350);
   }
   else {
     if (*(short *)(glContext + 0x3308) != -0x7fea) goto LAB_000f550c;
-    iVar5 = *(int *)(glContext + 0x3314);
-    iVar3 = *(int *)(glContext + 0x3310);
+    readBufferExtentY = *(int *)(glContext + 0x3314);
+    readBufferExtentX = *(int *)(glContext + 0x3310);
   }
-  width = (width - iVar3) + 1;
-  height = (height - iVar5) + 1;
+  width = (width - readBufferExtentX) + 1;
+  height = (height - readBufferExtentY) + 1;
 LAB_000f550c:
-  iVar3 = _gleCheckTexSubImageRange(glContext,iVar6,xoffset,width,(uint)*(ushort *)(iVar6 + 4));
-  if (iVar3 == 0) {
+  xRangeValid = _gleCheckTexSubImageRange(glContext,levelImageThenYRangeValid,xoffset,width,(uint)*(ushort *)(levelImageThenYRangeValid + 4));
+  if (xRangeValid == 0) {
     return 0;
   }
-  iVar6 = _gleCheckTexSubImageRange(glContext,iVar6,yoffset,height,(uint)*(ushort *)(iVar6 + 6));
-  if (iVar6 != 0) {
+  levelImageThenYRangeValid = _gleCheckTexSubImageRange(glContext,levelImageThenYRangeValid,yoffset,height,(uint)*(ushort *)(levelImageThenYRangeValid + 6));
+  if (levelImageThenYRangeValid != 0) {
     return texture;
   }
   return 0;
@@ -1782,7 +1784,7 @@ int _gleCheckColorSubTableArgs(glContext, target, start, count, format, type)
 {
   undefined4 errorCode;
   int colorTable;
-  int iVar3;
+  int checkResult;
   
   colorTable = _gleLookUpNonProxyColorTable(glContext,target);
   if (colorTable == 0) {
@@ -1792,14 +1794,14 @@ int _gleCheckColorSubTableArgs(glContext, target, start, count, format, type)
     errorCode = 0x500;
   }
   else {
-    iVar3 = _gleCheckTexSubImageArgs(glContext,0,format,type);
-    if (iVar3 == 0) {
+    checkResult = _gleCheckTexSubImageArgs(glContext,0,format,type);
+    if (checkResult == 0) {
       return 0;
     }
     if (*(int *)(colorTable + 0xc0) != 0) {
-      iVar3 = _gleCheckTexSubImageRange
+      checkResult = _gleCheckTexSubImageRange
                         (glContext,colorTable + 0xac,start,count,(uint)*(ushort *)(colorTable + 0xb0));
-      if (iVar3 != 0) {
+      if (checkResult != 0) {
         return colorTable;
       }
       return 0;
@@ -2362,19 +2364,19 @@ void _gleVtxTextureCoordGenNormalST(unusedArg1, vertexCursor, vertexCount)
   uint vertexCursor;
   int vertexCount;
 {
-  uint uVar1;
+  uint vertexEndThenRemaining;
   
-  uVar1 = vertexCursor + vertexCount * 0x100;
-  if (uVar1 <= vertexCursor) {
+  vertexEndThenRemaining = vertexCursor + vertexCount * 0x100;
+  if (vertexEndThenRemaining <= vertexCursor) {
     return;
   }
-  uVar1 = (uVar1 - vertexCursor) + 0xff >> 8;
+  vertexEndThenRemaining = (vertexEndThenRemaining - vertexCursor) + 0xff >> 8;
   do {
     *(undefined4 *)(vertexCursor + 0x80) = *(undefined4 *)(vertexCursor + 0x40);
     *(undefined4 *)(vertexCursor + 0x84) = *(undefined4 *)(vertexCursor + 0x44);
     vertexCursor = vertexCursor + 0x100;
-    uVar1 = uVar1 - 1;
-  } while (uVar1 != 0);
+    vertexEndThenRemaining = vertexEndThenRemaining - 1;
+  } while (vertexEndThenRemaining != 0);
   return;
 }
 
@@ -2428,18 +2430,18 @@ void _gleMultiVtxTextureCoordGenWrapEye(glContext, vertices, vertexCount)
   undefined4 vertices;
   undefined4 vertexCount;
 {
-  uint uVar1;
-  int iVar2;
+  uint textureUnit;
+  int texGenRecord;
   
-  uVar1 = 0;
-  iVar2 = glContext + 0x5300;
+  textureUnit = 0;
+  texGenRecord = glContext + 0x5300;
   do {
-    if (*(char *)(iVar2 + 0x1c) != '\0') {
-      (**(code **)(iVar2 + 0x18))(glContext,vertices,vertexCount,uVar1);
+    if (*(char *)(texGenRecord + 0x1c) != '\0') {
+      (**(code **)(texGenRecord + 0x18))(glContext,vertices,vertexCount,textureUnit);
     }
-    uVar1 = uVar1 + 1;
-    iVar2 = iVar2 + 0xc;
-  } while (uVar1 < 8);
+    textureUnit = textureUnit + 1;
+    texGenRecord = texGenRecord + 0xc;
+  } while (textureUnit < 8);
   return;
 }
 
@@ -3022,29 +3024,29 @@ void _gleMultiVtxTextureCoordGenReflectSTR(int param_1,uint vertexCursor,int ver
 }
 
 /* _gleMultiVtxTextureCoordGenNormalST @ 0xf7370 (68 bytes) */
-void _gleMultiVtxTextureCoordGenNormalST(unusedArg1, vertexCursor, vertexCount, param_4)
+void _gleMultiVtxTextureCoordGenNormalST(unusedArg1, vertexCursor, vertexCount, textureUnit)
   undefined4 unusedArg1;
   uint vertexCursor;
   int vertexCount;
-  int param_4;
+  int textureUnit;
 {
-  undefined4 *puVar1;
-  uint uVar2;
+  undefined4 *normalYPtr;
+  uint vertexEndThenRemaining;
   int texCoordSlot;
   
-  uVar2 = vertexCursor + vertexCount * 0x100;
-  if (uVar2 <= vertexCursor) {
+  vertexEndThenRemaining = vertexCursor + vertexCount * 0x100;
+  if (vertexEndThenRemaining <= vertexCursor) {
     return;
   }
-  uVar2 = (uVar2 - vertexCursor) + 0xff >> 8;
+  vertexEndThenRemaining = (vertexEndThenRemaining - vertexCursor) + 0xff >> 8;
   do {
-    texCoordSlot = param_4 * 0x10 + vertexCursor;
+    texCoordSlot = textureUnit * 0x10 + vertexCursor;
     *(undefined4 *)(texCoordSlot + 0x80) = *(undefined4 *)(vertexCursor + 0x40);
-    puVar1 = (undefined4 *)(vertexCursor + 0x44);
+    normalYPtr = (undefined4 *)(vertexCursor + 0x44);
     vertexCursor = vertexCursor + 0x100;
-    *(undefined4 *)(texCoordSlot + 0x84) = *puVar1;
-    uVar2 = uVar2 - 1;
-  } while (uVar2 != 0);
+    *(undefined4 *)(texCoordSlot + 0x84) = *normalYPtr;
+    vertexEndThenRemaining = vertexEndThenRemaining - 1;
+  } while (vertexEndThenRemaining != 0);
   return;
 }
 

@@ -282,7 +282,7 @@ double * _glDepthBoundsEXT_Comp(undefined4 glContext,double zNear,double zFar)
 /* _glDepthBoundsEXT_Exec @ 0x62878 (212 bytes) */
 void _glDepthBoundsEXT_Exec(int glContext,double zNear,double zFar)
 {
-  uint uVar1;
+  uint clampHighWord;
   
   if (-1 < *(short *)(glContext + 0x4a10)) {
     if (*(int *)(glContext + 0x7574) == 0) {
@@ -292,23 +292,23 @@ void _glDepthBoundsEXT_Exec(int glContext,double zNear,double zFar)
     return;
   }
   if (zNear < DOUBLE_00108d60) {
-    uVar1 = 0;
+    clampHighWord = 0;
 LAB_000628d8:
-    zNear = GH_U2D((unsigned long long)uVar1 << 0x20);
+    zNear = GH_U2D((unsigned long long)clampHighWord << 0x20);
   }
   else if (DOUBLE_00108d68 < zNear) {
-    uVar1 = 0x3ff00000;
+    clampHighWord = 0x3ff00000;
     goto LAB_000628d8;
   }
   *(double *)(glContext + 0x312c) = zNear;
   if (zFar < DOUBLE_00108d60) {
-    uVar1 = 0;
+    clampHighWord = 0;
   }
   else {
     if (!(DOUBLE_00108d68 < zFar)) goto LAB_00062934;
-    uVar1 = 0x3ff00000;
+    clampHighWord = 0x3ff00000;
   }
-  zFar = GH_U2D((unsigned long long)uVar1 << 0x20);
+  zFar = GH_U2D((unsigned long long)clampHighWord << 0x20);
 LAB_00062934:
   *(double *)(glContext + 0x3134) = zFar;
   *(uint *)(glContext + 0x318) = *(uint *)(glContext + 0x318) | 1;
@@ -552,18 +552,18 @@ int _glIsList_Exec(glContext, list)
   int glContext;
   undefined4 list;
 {
-  undefined4 uVar1;
+  undefined4 isList;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
-    uVar1 = _gleIsHashName(*(int *)(glContext + 0x5148) + 0x300c,list);
+    isList = _gleIsHashName(*(int *)(glContext + 0x5148) + 0x300c,list);
   }
   else {
     if (*(int *)(glContext + 0x7574) == 0) {
       *(undefined4 *)(glContext + 0x7574) = 0x502;
     }
-    uVar1 = 0;
+    isList = 0;
   }
-  return uVar1;
+  return isList;
 }
 
 /* _glListBase_ListExec @ 0x62ee8 (40 bytes) */
@@ -1643,46 +1643,46 @@ void _glDrawPixels_CompExec(glContext, width, height, format, type, pixels)
 }
 
 /* _glDrawPixels_NoopExec @ 0x643d4 (672 bytes) */
-void _glDrawPixels_NoopExec(int glContext,undefined4 width,undefined4 height,undefined4 format,undefined4 type,undefined4 pixels,double fparam_1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
+void _glDrawPixels_NoopExec(int glContext,undefined4 width,undefined4 height,undefined4 format,undefined4 type,undefined4 pixels,double forwardedFloatArg1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
 {
   int remaining;
   int loopIndex;
-  bool bVar1;
+  bool rendererInfoByte79Zero;
   bool noStateChangePending;
   char rendererInfoByte79;
   int *srcCursor;
-  int iVar4;
+  int dirtyWord;
   int framebufferObject;
-  undefined4 uVar5;
-  undefined4 uVar6;
-  undefined4 uVar7;
-  undefined4 uVar8;
+  undefined4 forwardedHeight;
+  undefined4 forwardedFormat;
+  undefined4 forwardedType;
+  undefined4 forwardedPixels;
   int matrixChangeBits;
   uint dispatchFlags;
   uint changeWord3;
   int *changeWordCursor;
-  double extraout_f1;
-  double extraout_f1_00;
-  double extraout_f1_01;
+  double f1AfterCall;
+  double f1AfterCall1;
+  double f1AfterCall2;
   
   matrixChangeBits = *(int *)(glContext + 0x50ac);
-  uVar5 = height;
-  uVar6 = format;
-  uVar7 = type;
-  uVar8 = pixels;
+  forwardedHeight = height;
+  forwardedFormat = format;
+  forwardedType = type;
+  forwardedPixels = pixels;
   if (matrixChangeBits != 0 || (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
     _gleUpdateMatrixFunc(glContext);
-    fparam_1 = extraout_f1;
+    forwardedFloatArg1 = f1AfterCall;
   }
   if (*(char *)(glContext + 0x4691) != '\0') {
     framebufferObject = *(int *)(glContext + 0x744c);
     changeWordCursor = (int *)(glContext + 0x310);
     rendererInfoByte79 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
     if ((framebufferObject != 0) && (*(int *)(framebufferObject + 0xec) != 0)) {
-      ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,uVar5,uVar6,uVar7,uVar8,matrixChangeBits,fparam_1,forwardedFloatArg2,forwardedFloatArg3,
+      ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,forwardedHeight,forwardedFormat,forwardedType,forwardedPixels,matrixChangeBits,forwardedFloatArg1,forwardedFloatArg2,forwardedFloatArg3,
                  forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
       *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000000;
-      fparam_1 = fparam_1;
+      forwardedFloatArg1 = forwardedFloatArg1;
     }
     if ((*(char *)(glContext + 0x4664) == '\0') && (*(int *)(glContext + 0x5430) == 0)) {
 LAB_000644fc:
@@ -1692,9 +1692,9 @@ LAB_000644fc:
       loopIndex = 0;
       srcCursor = (int *)(glContext + 0x324);
       do {
-        iVar4 = *srcCursor;
+        dirtyWord = *srcCursor;
         srcCursor = srcCursor + 1;
-        if (iVar4 != 0) {
+        if (dirtyWord != 0) {
           *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x800000;
           break;
         }
@@ -1703,22 +1703,22 @@ LAB_000644fc:
       changeWord3 = *(uint *)(glContext + 0x31c);
       if ((changeWord3 & 0x15555) != 0) {
         if (*(char *)(glContext + 0x2e54) != '\0') {
-          fparam_1 = (double)_gleUpdateLightRGBASums(glContext,glContext + 0x2c20,0);
+          forwardedFloatArg1 = (double)_gleUpdateLightRGBASums(glContext,glContext + 0x2c20,0);
         }
         if (*(char *)(glContext + 0x3094) != '\0') {
-          fparam_1 = (double)_gleUpdateLightRGBASums(glContext,glContext + 0x2e60,1);
+          forwardedFloatArg1 = (double)_gleUpdateLightRGBASums(glContext,glContext + 0x2e60,1);
         }
         goto LAB_000644fc;
       }
     }
-    bVar1 = rendererInfoByte79 == '\0';
-    if (bVar1) {
+    rendererInfoByte79Zero = rendererInfoByte79 == '\0';
+    if (rendererInfoByte79Zero) {
       changeWord3 = changeWord3 & 0x17000000;
     }
     else {
       changeWord3 = changeWord3 & 0x17ffffff;
     }
-    if (bVar1) {
+    if (rendererInfoByte79Zero) {
       noStateChangePending = ((*changeWordCursor == 0 && *(int *)(glContext + 0x314) == 0) && changeWord3 == 0) &&
               *(int *)(glContext + 800) == 0;
     }
@@ -1733,18 +1733,18 @@ LAB_000644fc:
                            (*(undefined4 *)(glContext + 0x4688),glContext + 0x4698,changeWordCursor);
         if ((((dispatchFlags & 3) != (uint)*(byte *)(glContext + 0x7580)) ||
             ((dispatchFlags & 4) != (uint)*(byte *)(glContext + 0x7581))) ||
-           (fparam_1 = extraout_f1_01, (dispatchFlags & 8) != (uint)(*(char *)(glContext + 0x759d) == '\0')))
+           (forwardedFloatArg1 = f1AfterCall2, (dispatchFlags & 8) != (uint)(*(char *)(glContext + 0x759d) == '\0')))
         {
           if ((dispatchFlags & 4) == 0) {
             dispatchFlags = dispatchFlags & 0xfffffffe;
             *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x10000000;
           }
-          fparam_1 = (double)_gleUpdateDispatchCodeChange(glContext,dispatchFlags);
+          forwardedFloatArg1 = (double)_gleUpdateDispatchCodeChange(glContext,dispatchFlags);
           if (*(char *)(glContext + 0x759d) == '\0') goto LAB_0006461c;
         }
       }
       else {
-        fparam_1 = (double)_gleSwitchToNonRevertRenderer(glContext);
+        forwardedFloatArg1 = (double)_gleSwitchToNonRevertRenderer(glContext);
       }
       remaining = 0x13;
       do {
@@ -1755,7 +1755,7 @@ LAB_000644fc:
     }
   }
   if (*(char *)(glContext + 0x759d) != '\0') {
-    ((void (*)())_glDrawPixels_Exec)(glContext,width,height,format,type,pixels,fparam_1,forwardedFloatArg2,forwardedFloatArg3,
+    ((void (*)())_glDrawPixels_Exec)(glContext,width,height,format,type,pixels,forwardedFloatArg1,forwardedFloatArg2,forwardedFloatArg3,
                        forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
     return;
   }
@@ -1842,9 +1842,9 @@ void _glEdgeFlagv_CompExec(glContext, flag)
 }
 
 /* _glEvalCoord1d_ListExec_body @ 0x647d0 (40 bytes) */
-undefined4 _glEvalCoord1d_ListExec_body(undefined4 glContext,double fparam_1)
+undefined4 _glEvalCoord1d_ListExec_body(undefined4 glContext,double u)
 {
-  ((void (*)())_gleEvalMap1)(glContext,(double)(float)fparam_1);
+  ((void (*)())_gleEvalMap1)(glContext,(double)(float)u);
   return 8;
 }
 

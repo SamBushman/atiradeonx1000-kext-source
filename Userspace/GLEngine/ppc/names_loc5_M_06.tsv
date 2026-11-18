@@ -1,0 +1,108 @@
+local	_glMap1VertexAttrib4ARB_ListExec	iVar2	pointIndex	CONFIRMED	index of the control point being copied: starts at 0, incremented once per point; selects the 4-word record listRecord[index*4 + 5..8]
+local	_glMap1VertexAttrib4ARB_ListExec	iVar3	attribMapBase	CONFIRMED	mapData + attribIndex * 0xb0: the 1-D vertex-attribute map record of this attribute (order at +0x2ca8, u1/u2/invUDelta, then the 4-float points from +0x2cb8)
+local	_glMap1VertexAttrib4ARB_ListExec	iVar8	pointDest	CONFIRMED	attribMapBase + 0x2ca8 + pointIndex * 0x10: destination of the current 4-float control point
+local	_glMap1Vertex4_ListExec	iVar1	pointIndex	CONFIRMED	index of the control point being copied: starts at 0, incremented once per point; selects the 4-word record listRecord[index*4 + 4..7]
+local	_glMap1Vertex4_ListExec	iVar7	pointDest	CONFIRMED	mapData + pointIndex * 0x10: destination (at +0x98..+0xa4) of the current 4-float control point
+local	_glMap1Normal_ListExec	piVar1	pointComponent0Ptr	CONFIRMED	address of the first component of the current control point in the list record (listRecord + 4); read once per point
+local	_glMap1Normal_ListExec	iVar5	mapDataCursor	CONFIRMED	map data pointer from _gleGetMapData, advanced by 0xc per control point: the destination of the current 3-float point is mapDataCursor + 0x148
+local	_glMap2Vertex4_ListExec	iVar5	pointIndex	CONFIRMED	index of the control point being copied: starts at 0, incremented once per point; selects the 4-word record listRecord[index*4 + 8..0xb]
+local	_glMap2Vertex4_ListExec	iVar8	pointDest	CONFIRMED	mapData + pointIndex * 0x10: destination (at +0x968..+0x974) of the current 4-float control point
+local	_glMap2Texture3_ListExec	piVar1	pointComponent0Ptr	CONFIRMED	address of the first component of the current control point in the list record (listRecord + 8); read once per point
+local	_glMap2Texture3_ListExec	iVar8	mapDataCursor	CONFIRMED	map data pointer from _gleGetMapData, advanced by 0xc per control point: the destination of the current 3-float point is mapDataCursor + 0x2198
+local	_glMap1VertexAttrib2ARB_ListExec	piVar1	pointComponent0Ptr	CONFIRMED	address of the first component of the current control point in the list record (srcCursor + 4); read once per point
+local	_glMap1VertexAttrib2ARB_ListExec	iVar3	pointComponent1	CONFIRMED	second component of the current control point (srcCursor[5])
+local	_glMap1VertexAttrib2ARB_ListExec	iVar4	attribMapBase	CONFIRMED	mapData + attribIndex * 0xb0: the 1-D vertex-attribute map record of this attribute (order at +0x2ca8)
+local	_glMap1VertexAttrib2ARB_ListExec	iVar5	pointDestCursor	CONFIRMED	attribMapBase + 0x2ca8, advanced by 8 per control point: destination of the current 2-float point at +0x10 / +0x14
+local	_glLightiv_CompExec	fparam_1	forwardedFloatArg1	INFERRED	stale floating-point argument register f1 (the signature's first FP parameter) only forwarded unchanged to the _Exec call; the convention of the other _CompExec siblings
+local	_glLightiv_CompExec	in_f2	incomingFpr2	INFERRED	Ghidra pseudo-register in_f2: the value f2 held on entry (read without being written in this function), forwarded unchanged to the _Exec call
+local	_glLightiv_CompExec	in_f3	incomingFpr3	INFERRED	Ghidra pseudo-register in_f3: the value f3 held on entry (read without being written in this function), forwarded unchanged to the _Exec call
+local	_glLightiv_CompExec	in_f4	incomingFpr4	INFERRED	Ghidra pseudo-register in_f4: the value f4 held on entry (read without being written in this function), forwarded unchanged to the _Exec call
+local	_glLightiv_CompExec	in_f5	incomingFpr5	INFERRED	Ghidra pseudo-register in_f5: the value f5 held on entry (read without being written in this function), forwarded unchanged to the _Exec call
+local	_glLightiv_CompExec	in_f6	incomingFpr6	INFERRED	Ghidra pseudo-register in_f6: the value f6 held on entry (read without being written in this function), forwarded unchanged to the _Exec call
+local	_glLightiv_CompExec	in_f7	incomingFpr7	INFERRED	Ghidra pseudo-register in_f7: the value f7 held on entry (read without being written in this function), forwarded unchanged to the _Exec call
+local	_glLightiv_CompExec	in_f8	incomingFpr8	INFERRED	Ghidra pseudo-register in_f8: the value f8 held on entry (read without being written in this function), forwarded unchanged to the _Exec call
+local	_glEvalCoord2dv_CompExec	fparam_1	forwardedFloatArg1	INFERRED	stale floating-point argument register f1 (the signature's first FP parameter) only forwarded unchanged to the _Exec call; the convention of the other _CompExec siblings
+local	_glEvalCoord2dv_CompExec	in_f2	incomingFpr2	INFERRED	Ghidra pseudo-register in_f2: the value f2 held on entry (read without being written in this function), forwarded unchanged to the _Exec call
+local	_glEvalCoord2dv_CompExec	in_f3	incomingFpr3	INFERRED	Ghidra pseudo-register in_f3: the value f3 held on entry (read without being written in this function), forwarded unchanged to the _Exec call
+local	_glEvalCoord2dv_CompExec	in_f4	incomingFpr4	INFERRED	Ghidra pseudo-register in_f4: the value f4 held on entry (read without being written in this function), forwarded unchanged to the _Exec call
+local	_glEvalCoord2dv_CompExec	in_f5	incomingFpr5	INFERRED	Ghidra pseudo-register in_f5: the value f5 held on entry (read without being written in this function), forwarded unchanged to the _Exec call
+local	_glEvalCoord2dv_CompExec	in_f6	incomingFpr6	INFERRED	Ghidra pseudo-register in_f6: the value f6 held on entry (read without being written in this function), forwarded unchanged to the _Exec call
+local	_glEvalCoord2dv_CompExec	in_f7	incomingFpr7	INFERRED	Ghidra pseudo-register in_f7: the value f7 held on entry (read without being written in this function), forwarded unchanged to the _Exec call
+local	_glEvalCoord2dv_CompExec	in_f8	incomingFpr8	INFERRED	Ghidra pseudo-register in_f8: the value f8 held on entry (read without being written in this function), forwarded unchanged to the _Exec call
+local	_glColor3usv_CompExec	fparam_1	forwardedFloatArg1	INFERRED	stale floating-point argument register f1 (the signature's first FP parameter) only forwarded unchanged to the _Exec call; the convention of the other _CompExec siblings
+local	_glColor3usv_CompExec	in_f2	incomingFpr2	INFERRED	Ghidra pseudo-register in_f2: the value f2 held on entry (read without being written in this function), forwarded unchanged to the _Exec call
+local	_glColor3usv_CompExec	in_f3	incomingFpr3	INFERRED	Ghidra pseudo-register in_f3: the value f3 held on entry (read without being written in this function), forwarded unchanged to the _Exec call
+local	_glColor3usv_CompExec	in_f4	incomingFpr4	INFERRED	Ghidra pseudo-register in_f4: the value f4 held on entry (read without being written in this function), forwarded unchanged to the _Exec call
+local	_glColor3usv_CompExec	in_f5	incomingFpr5	INFERRED	Ghidra pseudo-register in_f5: the value f5 held on entry (read without being written in this function), forwarded unchanged to the _Exec call
+local	_glColor3usv_CompExec	in_f6	incomingFpr6	INFERRED	Ghidra pseudo-register in_f6: the value f6 held on entry (read without being written in this function), forwarded unchanged to the _Exec call
+local	_glColor3usv_CompExec	in_f7	incomingFpr7	INFERRED	Ghidra pseudo-register in_f7: the value f7 held on entry (read without being written in this function), forwarded unchanged to the _Exec call
+local	_glColor3usv_CompExec	in_f8	incomingFpr8	INFERRED	Ghidra pseudo-register in_f8: the value f8 held on entry (read without being written in this function), forwarded unchanged to the _Exec call
+local	_glVertexAttrib4ubvARB_CompExec	fparam_1	forwardedFloatArg1	INFERRED	stale floating-point argument register f1 (the signature's first FP parameter) only forwarded unchanged to the _Exec call; the convention of the other _CompExec siblings
+local	_glVertexAttrib4NubARB_CompExec	fparam_1	forwardedFloatArg1	INFERRED	stale floating-point argument register f1 (the signature's first FP parameter) only forwarded unchanged to the _Exec call; the convention of the other _CompExec siblings
+local	_glRectsv_CompExec	fparam_1	forwardedFloatArg1	INFERRED	stale floating-point argument register f1 (the signature's first FP parameter) only forwarded unchanged to the _Exec call; the convention of the other _CompExec siblings
+local	_glRecti_CompExec	fparam_1	forwardedFloatArg1	INFERRED	stale floating-point argument register f1 (the signature's first FP parameter) only forwarded unchanged to the _Exec call; the convention of the other _CompExec siblings
+local	_glRasterPos4i_CompExec	fparam_1	forwardedFloatArg1	INFERRED	stale floating-point argument register f1 (the signature's first FP parameter) only forwarded unchanged to the _Exec call; the convention of the other _CompExec siblings
+local	_glRasterPos3i_CompExec	fparam_1	forwardedFloatArg1	INFERRED	stale floating-point argument register f1 (the signature's first FP parameter) only forwarded unchanged to the _Exec call; the convention of the other _CompExec siblings
+local	_glRasterPos2sv_CompExec	fparam_1	forwardedFloatArg1	INFERRED	stale floating-point argument register f1 (the signature's first FP parameter) only forwarded unchanged to the _Exec call; the convention of the other _CompExec siblings
+local	_glRasterPos2i_CompExec	fparam_1	forwardedFloatArg1	INFERRED	stale floating-point argument register f1 (the signature's first FP parameter) only forwarded unchanged to the _Exec call; the convention of the other _CompExec siblings
+local	_glNormal3iv_CompExec	fparam_1	forwardedFloatArg1	INFERRED	stale floating-point argument register f1 (the signature's first FP parameter) only forwarded unchanged to the _Exec call; the convention of the other _CompExec siblings
+local	_glMultiDrawArrays_CompExec	fparam_1	forwardedFloatArg1	INFERRED	stale floating-point argument register f1 (the signature's first FP parameter) only forwarded unchanged to the _Exec call; the convention of the other _CompExec siblings
+local	_glDrawRangeElementArrayAPPLE_CompExec	fparam_1	forwardedFloatArg1	INFERRED	stale floating-point argument register f1 (the signature's first FP parameter) only forwarded unchanged to the _Exec call; the convention of the other _CompExec siblings
+local	_glDrawArrays_CompExec	fparam_1	forwardedFloatArg1	INFERRED	stale floating-point argument register f1 (the signature's first FP parameter) only forwarded unchanged to the _Exec call; the convention of the other _CompExec siblings
+local	_glCopyTexSubImage1D_CompExec	fparam_1	forwardedFloatArg1	INFERRED	stale floating-point argument register f1 (the signature's first FP parameter) only forwarded unchanged to the _Exec call; the convention of the other _CompExec siblings
+local	_glCombinerParameterivNV_CompExec	fparam_1	forwardedFloatArg1	INFERRED	stale floating-point argument register f1 (the signature's first FP parameter) only forwarded unchanged to the _Exec call; the convention of the other _CompExec siblings
+local	_glGetProgramLocalParameterfvARB_Exec	bVar1	indexOutOfRange	CONFIRMED	index above the limit of the target: > 0xff for GL_VERTEX_PROGRAM_ARB (0x8620), > 0x7f for the fragment program target; true raises GL_INVALID_VALUE
+local	_glGetProgramLocalParameterfvARB_Exec	uVar3	expectedTarget	INFERRED	0x8200 if target < 0x8621, else 0x8804: target must equal it, i.e. only GL_FRAGMENT_PROGRAM_ARB (0x8804) passes; any other target raises GL_INVALID_ENUM
+local	_glGetProgramLocalParameterfvARB_Exec	iVar4	targetSlotThenLocalParams	CONFIRMED	0 for the vertex program target, 1 for the fragment program target (index into the program table at ctx+0x5420), then reassigned the local parameter array pointer *(program + 0x4e0) of that target's current program
+local	_glGetProgramLocalParameterfvARB_Exec	iVar5	localParam	CONFIRMED	localParams + index * 0x10: the x/y/z/w record copied to params
+local	_glGetProgramEnvParameterdvARB_Exec	bVar1	indexOutOfRange	CONFIRMED	index above the limit of the target: > 0xff for GL_VERTEX_PROGRAM_ARB (0x8620), > 0x7f for the fragment program target; true raises GL_INVALID_VALUE
+local	_glGetProgramEnvParameterdvARB_Exec	uVar3	expectedTarget	INFERRED	0x8200 if target < 0x8621, else 0x8804: target must equal it, i.e. only GL_FRAGMENT_PROGRAM_ARB (0x8804) passes; any other target raises GL_INVALID_ENUM
+local	_glGetProgramEnvParameterdvARB_Exec	iVar4	targetSlotThenEnvParams	CONFIRMED	0 for the vertex program target, 1 for the fragment program target (slot of the table at ctx+0x4668), then reassigned the environment parameter array pointer read from that table
+local	_glGetProgramEnvParameterdvARB_Exec	iVar5	envParam	CONFIRMED	envParams + index * 0x10: the x/y/z/w record converted to doubles into params
+local	_glVertexAttrib2svARB_Exec	uVar1	zeroComponent	CONFIRMED	word at ctx+0x20, initialised to 0 (_gleInitGLDState): stored as the z component of the attribute
+local	_glVertexAttrib2svARB_Exec	uVar2	oneComponent	CONFIRMED	word at ctx+0x24, initialised to 0x3f800000 (1.0f): stored as the w component of the attribute
+local	_glVertexAttrib2svARB_Exec	sVar3	secondComponent	CONFIRMED	v[1], the y component read from the short vector
+local	_glVertexAttrib2svARB_Exec	iVar5	attribRecord	CONFIRMED	glContext + index * 0x10: current-value record of generic attribute index (x +0x1a0, y +0x1a4, z +0x1a8, w +0x1ac)
+local	_glVertexAttrib2svARB_Exec	pcVar6	vertexFunc	INFERRED	vertex submit callback glContext+0x4884 (or _gleFlushAndSubmit when the vertex buffer is empty), as in _glArrayElement_ListExec
+local	_glVertexAttrib2sARB_Exec	fVar1	zeroComponent	CONFIRMED	word at ctx+0x20, initialised to 0 (_gleInitGLDState): passed / stored as the z component of the attribute
+local	_glVertexAttrib2sARB_Exec	fVar2	oneComponent	CONFIRMED	word at ctx+0x24, initialised to 0x3f800000 (1.0f): passed / stored as the w component of the attribute
+local	_glVertexAttrib2sARB_Exec	iVar4	attribRecord	CONFIRMED	glContext + index * 0x10: current-value record of generic attribute index (x +0x1a0, y +0x1a4, z +0x1a8, w +0x1ac)
+local	_glVertexAttrib2sARB_Exec	pcVar5	vertexFunc	INFERRED	vertex submit callback glContext+0x4884 (or _gleFlushAndSubmit when the vertex buffer is empty), as in _glArrayElement_ListExec
+local	_glVertexAttrib2dvARB_Exec	fVar1	zeroComponent	CONFIRMED	word at ctx+0x20, initialised to 0 (_gleInitGLDState): passed / stored as the z component of the attribute
+local	_glVertexAttrib2dvARB_Exec	fVar2	oneComponent	CONFIRMED	word at ctx+0x24, initialised to 0x3f800000 (1.0f): passed / stored as the w component of the attribute
+local	_glVertexAttrib2dvARB_Exec	iVar3	attribRecord	CONFIRMED	glContext + index * 0x10: current-value record of generic attribute index (x +0x1a0, y +0x1a4, z +0x1a8, w +0x1ac)
+local	_glVertexAttrib2dvARB_Exec	dVar4	secondComponent	CONFIRMED	v[1], the y component read from the double vector
+local	_glVertexAttrib1fARB_Exec	fVar1	zeroComponent	CONFIRMED	word at ctx+0x20, initialised to 0 (_gleInitGLDState): used for the y and z components of the attribute
+local	_glVertexAttrib1fARB_Exec	fVar2	oneComponent	CONFIRMED	word at ctx+0x24, initialised to 0x3f800000 (1.0f): used for the w component of the attribute
+local	_glVertexAttrib1fARB_Exec	iVar3	attribRecord	CONFIRMED	glContext + index * 0x10: current-value record of generic attribute index (x +0x1a0, y +0x1a4, z +0x1a8, w +0x1ac)
+local	_glVertexAttrib4NivARB_Exec	fVar3	channelBias	INFERRED	holds FLOAT_00108e6c = 2.3283064e-10 (half of the scale FLOAT_00108e68 in channelScale): added after the multiplication when converting a signed 32-bit component to the [-1,1] range
+local	_glVertexAttrib4NivARB_Exec	iVar4	attribRecord	CONFIRMED	glContext + index * 0x10: current-value record of generic attribute index (x +0x1a0, y +0x1a4, z +0x1a8, w +0x1ac)
+local	_glVertexAttrib4NivARB_Exec	pcVar5	vertexFunc	INFERRED	vertex submit callback glContext+0x4884 (or _gleFlushAndSubmit when the vertex buffer is empty), as in _glArrayElement_ListExec
+use	_glVertexAttrib4usvARB_Exec	iVar1	vertexWriteCursor	CONFIRMED	vertex buffer write cursor ctx+0x4858, compared with the end ctx+0x485c to choose between the vertex callback and _gleFlushAndSubmit; passed on in the stale argument registers	^\s*iVar1\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x4858\);$	+1
+use	_glVertexAttrib4usvARB_Exec	iVar1	vertexWriteCursor	CONFIRMED	vertex buffer write cursor ctx+0x4858, compared with the end ctx+0x485c to choose between the vertex callback and _gleFlushAndSubmit; passed on in the stale argument registers	^\s*if\ \(iVar1\ ==\ \*\(int\ \*\)\(param_1\ \+\ 0x485c\)\)\ \{$	+1
+use	_glVertexAttrib4usvARB_Exec	iVar1	vertexWriteCursor	CONFIRMED	vertex buffer write cursor ctx+0x4858, compared with the end ctx+0x485c to choose between the vertex callback and _gleFlushAndSubmit; passed on in the stale argument registers	^\s*\(\*pcVar2\)\(param_1,0,param_3,in_r6,iVar1,iVar1,\(uint\)param_3\[2\],param_3\[1\]\ \|\ 0x4b000000,$	+5
+use	_glVertexAttrib4usvARB_Exec	iVar1	attribRecord	CONFIRMED	glContext + index * 0x10: current-value record of generic attribute index (x +0x1a0 .. w +0x1ac)	^\s*iVar1\ =\ param_1\ \+\ param_2\ \*\ 0x10;$	+5
+local	_glVertexAttrib4usvARB_Exec	pcVar2	vertexFunc	INFERRED	vertex submit callback glContext+0x4884 (or _gleFlushAndSubmit when the vertex buffer is empty), as in _glArrayElement_ListExec
+use	_glVertexAttrib4NubvARB_Exec	iVar2	vertexWriteCursor	CONFIRMED	vertex buffer write cursor ctx+0x4858, compared with the end ctx+0x485c to choose between the vertex callback and _gleFlushAndSubmit; passed on in the stale argument registers	^\s*iVar2\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x4858\);$	+1
+use	_glVertexAttrib4NubvARB_Exec	iVar2	vertexWriteCursor	CONFIRMED	vertex buffer write cursor ctx+0x4858, compared with the end ctx+0x485c to choose between the vertex callback and _gleFlushAndSubmit; passed on in the stale argument registers	^\s*if\ \(iVar2\ ==\ \*\(int\ \*\)\(param_1\ \+\ 0x485c\)\)\ \{$	+1
+use	_glVertexAttrib4NubvARB_Exec	iVar2	vertexWriteCursor	CONFIRMED	vertex buffer write cursor ctx+0x4858, compared with the end ctx+0x485c to choose between the vertex callback and _gleFlushAndSubmit; passed on in the stale argument registers	^\s*\(\*pcVar3\)\(param_1,0,param_3,in_r6,iVar2,iVar2,\(uint\)param_3\[2\],param_3\[1\]\ \|\ 0x4b000000,$	+5
+use	_glVertexAttrib4NubvARB_Exec	iVar2	attribRecord	CONFIRMED	glContext + index * 0x10: current-value record of generic attribute index (x +0x1a0 .. w +0x1ac)	^\s*iVar2\ =\ param_1\ \+\ param_2\ \*\ 0x10;$	+5
+local	_glVertexAttrib4NubvARB_Exec	pcVar3	vertexFunc	INFERRED	vertex submit callback glContext+0x4884 (or _gleFlushAndSubmit when the vertex buffer is empty), as in _glArrayElement_ListExec
+local	_glWeightsvARB_Exec	sVar1	weight	CONFIRMED	short weight read from the weights array in the conversion loop, converted to (2w+1)/65535 into the current weights at ctx+0x2d0
+local	_glWeightsvARB_Exec	iVar2	zeroFillOffset	CONFIRMED	byte offset iVar7 * 4 of the weight slot being cleared by the final loop (missing weights up to four are set to 0)
+local	_glWeightsvARB_Exec	fVar5	channelBias	INFERRED	holds FLOAT_00108e74 = 1.5259022e-05 (1/65535), added after the multiplication by channelScale (FLOAT_00108e70): signed 16-bit to [-1,1] conversion
+local	_glWeightsvARB_Exec	iVar7	weightIndex	CONFIRMED	index of the next weight slot: starts at 0, becomes size after the conversion loop, then indexes the zero-fill loop up to 4
+local	_glColor3s_Exec	fVar1	redValue	CONFIRMED	converted red component ((2r+1)/65535 for the signed short argument), stored to the current color red at ctx+0x2a0
+local	_glColor3s_Exec	fVar2	channelScale	INFERRED	holds FLOAT_00108e70 = 3.0518044e-05 (2/65535): multiplier of the converted green and blue components
+local	_glColor3s_Exec	fVar3	channelBias	INFERRED	holds FLOAT_00108e74 = 1.5259022e-05 (1/65535): added after the multiplication by channelScale
+local	_glColor3s_Exec	dVar4	greenConverted	CONFIRMED	green argument as a double (integer-to-double conversion with the 0x43300000 magic), converted and stored at ctx+0x2a4
+local	_glColor3s_Exec	dVar5	blueConverted	CONFIRMED	blue argument as a double (integer-to-double conversion with the 0x43300000 magic), converted and stored at ctx+0x2a8
+local	_glColor3iv_Exec	fVar1	redValue	CONFIRMED	converted red component (v[0] * channelScale + channelBias), stored to the current color red at ctx+0x2a0
+local	_glColor3iv_Exec	fVar2	blueValue	CONFIRMED	converted blue component (v[2] * channelScale + channelBias), stored to the current color blue at ctx+0x2a8
+local	_glColor3iv_Exec	fVar3	channelScale	INFERRED	holds FLOAT_00108e68 (twice the bias FLOAT_00108e6c): multiplier of the converted green component
+local	_glColor3iv_Exec	fVar4	channelBias	INFERRED	holds FLOAT_00108e6c = 2.3283064e-10: added after the multiplication by channelScale
+local	_glColor3iv_Exec	dVar5	greenConverted	CONFIRMED	green component v[1] as a double (integer-to-double conversion with the 0x43300000 magic), scaled and stored at ctx+0x2a4
+local	_glColor3uiv_Exec	fVar1	channelScale	INFERRED	holds FLOAT_00108e6c = 2.3283064e-10 (1/(2^32-1)): multiplier of the converted unsigned components
+local	_glColor3uiv_Exec	dVar2	redConverted	CONFIRMED	v[0] as an unsigned integer converted to double (0x43300000 magic, DOUBLE_00108d70), scaled and stored at ctx+0x2a0
+local	_glColor3uiv_Exec	dVar3	greenConverted	CONFIRMED	v[1] as an unsigned integer converted to double, scaled and stored at ctx+0x2a4
+local	_glColor3uiv_Exec	dVar4	blueConverted	CONFIRMED	v[2] as an unsigned integer converted to double, scaled and stored at ctx+0x2a8

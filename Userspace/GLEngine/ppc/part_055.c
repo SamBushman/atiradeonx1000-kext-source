@@ -76,28 +76,28 @@ void _gleSynchronizePluginTextureLevels(glContext, param_2)
 void _gleSynchronizePluginTextures(glContext)
   int glContext;
 {
-  int iVar1;
-  int iVar2;
-  int iVar3;
-  int iVar4;
-  int *piVar5;
+  int textureObject;
+  int unitIndex;
+  int unitBase;
+  int remaining;
+  int *targetCursor;
   
-  iVar2 = 0;
-  iVar3 = glContext;
+  unitIndex = 0;
+  unitBase = glContext;
   do {
-    piVar5 = (int *)(iVar3 + 0x5154);
-    iVar4 = 4;
+    targetCursor = (int *)(unitBase + 0x5154);
+    remaining = 4;
     do {
-      iVar1 = *piVar5;
-      piVar5 = piVar5 + 1;
-      if (iVar1 != 0) {
-        ((void (*)())_gleSynchronizePluginTextureLevels)(glContext,iVar1 + 0x10);
+      textureObject = *targetCursor;
+      targetCursor = targetCursor + 1;
+      if (textureObject != 0) {
+        ((void (*)())_gleSynchronizePluginTextureLevels)(glContext,textureObject + 0x10);
       }
-      iVar4 = iVar4 + -1;
-    } while (-1 < iVar4);
-    iVar2 = iVar2 + 1;
-    iVar3 = iVar3 + 0x14;
-  } while (iVar2 < 0x10);
+      remaining = remaining + -1;
+    } while (-1 < remaining);
+    unitIndex = unitIndex + 1;
+    unitBase = unitBase + 0x14;
+  } while (unitIndex < 0x10);
   return;
 }
 
@@ -126,39 +126,39 @@ int _gleTextureTargetExtractor(unusedArg1, param_2)
 int _gleTexEnableBits(glContext)
   int glContext;
 {
-  bool bVar1;
-  int iVar2;
-  uint *puVar3;
-  uint uVar4;
+  bool programActive;
+  int programRecordThenEntryCount;
+  uint *inputEntry;
+  uint texEnableBits;
   
-  uVar4 = 0;
-  bVar1 = *(char *)(glContext + 0x466c) != '\0';
-  if ((bVar1) || (*(int *)(glContext + 0x5438) != 0)) {
-    iVar2 = 0;
-    if (bVar1) {
-      iVar2 = *(int *)(glContext + 0x5424);
-      if (*(short *)(iVar2 + 0x4c8) == -0x7e00) {
-        return (uint)*(byte *)(iVar2 + 0x4eb);
+  texEnableBits = 0;
+  programActive = *(char *)(glContext + 0x466c) != '\0';
+  if ((programActive) || (*(int *)(glContext + 0x5438) != 0)) {
+    programRecordThenEntryCount = 0;
+    if (programActive) {
+      programRecordThenEntryCount = *(int *)(glContext + 0x5424);
+      if (*(short *)(programRecordThenEntryCount + 0x4c8) == -0x7e00) {
+        return (uint)*(byte *)(programRecordThenEntryCount + 0x4eb);
       }
-      iVar2 = *(int *)(iVar2 + 0x4cc);
+      programRecordThenEntryCount = *(int *)(programRecordThenEntryCount + 0x4cc);
     }
     if (*(int *)(glContext + 0x5438) != 0) {
-      iVar2 = *(int *)(*(int *)(*(int *)(glContext + 0x5430) + 0x24) + 0x508);
+      programRecordThenEntryCount = *(int *)(*(int *)(*(int *)(glContext + 0x5430) + 0x24) + 0x508);
     }
-    if (iVar2 != 0) {
-      puVar3 = (uint *)(iVar2 + *(int *)(iVar2 + 0x24) * 8);
-      for (iVar2 = *(int *)(iVar2 + 0x20); iVar2 != 0; iVar2 = iVar2 + -1) {
-        if ((*puVar3 >> 0x10 & 0xf) == 7) {
-          uVar4 = uVar4 | 1 << (*puVar3 & 0x1f);
+    if (programRecordThenEntryCount != 0) {
+      inputEntry = (uint *)(programRecordThenEntryCount + *(int *)(programRecordThenEntryCount + 0x24) * 8);
+      for (programRecordThenEntryCount = *(int *)(programRecordThenEntryCount + 0x20); programRecordThenEntryCount != 0; programRecordThenEntryCount = programRecordThenEntryCount + -1) {
+        if ((*inputEntry >> 0x10 & 0xf) == 7) {
+          texEnableBits = texEnableBits | 1 << (*inputEntry & 0x1f);
         }
-        puVar3 = puVar3 + 2;
+        inputEntry = inputEntry + 2;
       }
     }
   }
   else {
-    uVar4 = *(uint *)(glContext + 0x514c);
+    texEnableBits = *(uint *)(glContext + 0x514c);
   }
-  return uVar4;
+  return texEnableBits;
 }
 
 /* _gleTextureMatTransDivW_body @ 0x103860 (252 bytes) */
@@ -965,7 +965,7 @@ void _gleVPRenderLineStrip(glContext)
   uint endVertexCopy;
   uint *vertexArrayStart;
   double f1AfterCall;
-  double fparam_1;
+  double f1AfterHookCall;
   double f1AfterCall1;
   
   texEnableBits = ((int (*)())_gleTexEnableBits)(glContext);
@@ -985,9 +985,9 @@ void _gleVPRenderLineStrip(glContext)
     drawVertices = vertexArrayStart;
   }
   else {
-    fparam_1 = f1AfterCall;
+    f1AfterHookCall = f1AfterCall;
     if (texEnableBits != 0) {
-      fparam_1 = (double)(**(double ( **)(int,int,int,int))(glContext + 0x5074))(glContext, vertexArrayStart, drawVertexCount, 0);
+      f1AfterHookCall = (double)(**(double ( **)(int,int,int,int))(glContext + 0x5074))(glContext, vertexArrayStart, drawVertexCount, 0);
     }
     drawVertices = *(uint **)(glContext + 0x4870);
     endVertexCopy = *(uint *)(glContext + 0x4854);
@@ -1000,11 +1000,11 @@ void _gleVPRenderLineStrip(glContext)
       endVertexCopy = endVertexCopy + 0x100;
       lineListCursor = lineListCursor + 2;
       lineStart = lineStart + 0x40;
-      fparam_1 = f1AfterCall1;
+      f1AfterHookCall = f1AfterCall1;
     }
     drawVertexCount = (int)lineListCursor - (int)drawVertices >> 2;
     if ((*(char *)(glContext + 0x4e18) != '\0') &&
-       (drawVertexCount = ((int (*)())_gleClipLinesPlane)(glContext,drawVertices,drawVertexCount,fparam_1), drawVertexCount == 0)) {
+       (drawVertexCount = ((int (*)())_gleClipLinesPlane)(glContext,drawVertices,drawVertexCount,f1AfterHookCall), drawVertexCount == 0)) {
       return;
     }
     if (((batchClipCodes & 0xff) != 0) &&
@@ -2303,30 +2303,31 @@ void _gleVPFlushLineLoopTCLRDirty(int glContext,double floatArg1,double floatArg
 void _gleVPFlushLineStrip(glContext)
   int glContext;
 {
-  int iVar1;
-  int iVar2;
-  int iVar3;
-  int iVar4;
-  int iVar5;
-  undefined8 local_110 [32];
+  int vertexStrideBytes;
+  int copyIndex;
+  int writeCursor;
+  int strideDwordsThenRemaining;
+  int remaining;
+  int bufferStart;
+  undefined8 savedLastVertex [32];
   
-  iVar4 = (int)*(short *)(glContext + 0x487c) >> 3;
-  iVar3 = *(int *)(glContext + 0x4858);
-  iVar1 = iVar4 * 8;
-  iVar2 = 0;
-  for (iVar5 = iVar4; iVar5 != 0; iVar5 = iVar5 + -1) {
-    local_110[iVar2] = *(undefined8 *)(iVar3 + iVar4 * -8 + iVar2 * 8);
-    iVar2 = iVar2 + 1;
+  strideDwordsThenRemaining = (int)*(short *)(glContext + 0x487c) >> 3;
+  writeCursor = *(int *)(glContext + 0x4858);
+  vertexStrideBytes = strideDwordsThenRemaining * 8;
+  copyIndex = 0;
+  for (remaining = strideDwordsThenRemaining; remaining != 0; remaining = remaining + -1) {
+    savedLastVertex[copyIndex] = *(undefined8 *)(writeCursor + strideDwordsThenRemaining * -8 + copyIndex * 8);
+    copyIndex = copyIndex + 1;
   }
   (**(code **)(glContext + 0x4a08))(glContext);
   *(undefined1 *)(glContext + 0x4a18) = 1;
-  iVar5 = *(int *)(glContext + 0x4854);
-  iVar2 = 0;
-  for (; iVar4 != 0; iVar4 = iVar4 + -1) {
-    *(undefined8 *)(iVar5 + iVar2 * 8) = local_110[iVar2];
-    iVar2 = iVar2 + 1;
+  bufferStart = *(int *)(glContext + 0x4854);
+  copyIndex = 0;
+  for (; strideDwordsThenRemaining != 0; strideDwordsThenRemaining = strideDwordsThenRemaining + -1) {
+    *(undefined8 *)(bufferStart + copyIndex * 8) = savedLastVertex[copyIndex];
+    copyIndex = copyIndex + 1;
   }
-  *(int *)(glContext + 0x4858) = iVar5 + iVar1;
+  *(int *)(glContext + 0x4858) = bufferStart + vertexStrideBytes;
   return;
 }
 
@@ -2362,13 +2363,13 @@ void _gleVPFlushLineStripTCL(glContext)
 /* _gleVPFlushLineStripTCLRDirty @ 0x106594 (200 bytes) */
 void _gleVPFlushLineStripTCLRDirty(int glContext,double floatArg1,double floatArg2,double floatArg3,double floatArg4,double floatArg5,double floatArg6,double floatArg7,double floatArg8)
 {
-  int iVar1;
-  int iVar2;
-  int iVar3;
-  int iVar4;
-  int iVar5;
-  int iVar6;
-  int iVar7;
+  int vertexStrideBytes;
+  int copyByteOffset;
+  int lastVertexDelta;
+  int writeCursor;
+  int copyIndex;
+  int strideDwordsThenRemaining;
+  int bufferStart;
   
   if ((((*(char *)(glContext + 0x7580) != '\0') && ((*(uint *)(glContext + 0x486c) & 1) != 0)) &&
       (*(char *)(*(int *)(glContext + 0x468c) + 0x7a) == '\0')) &&
@@ -2376,19 +2377,19 @@ void _gleVPFlushLineStripTCLRDirty(int glContext,double floatArg1,double floatAr
     ((undefined4 (*)())_gleForceToSoftwareTCL)(glContext,floatArg1,floatArg2,floatArg3,floatArg4,floatArg5,floatArg6,floatArg7,floatArg8);
   }
   (**(code **)(glContext + 0x4a08))(glContext);
-  iVar5 = 0;
-  iVar4 = *(int *)(glContext + 0x4858);
-  iVar6 = (int)*(short *)(glContext + 0x487c) >> 3;
-  iVar1 = iVar6 * 8;
+  copyIndex = 0;
+  writeCursor = *(int *)(glContext + 0x4858);
+  strideDwordsThenRemaining = (int)*(short *)(glContext + 0x487c) >> 3;
+  vertexStrideBytes = strideDwordsThenRemaining * 8;
   *(undefined1 *)(glContext + 0x4a18) = 1;
-  iVar3 = iVar6 * -8;
-  iVar7 = *(int *)(glContext + 0x4854);
-  for (; iVar6 != 0; iVar6 = iVar6 + -1) {
-    iVar2 = iVar5 * 8;
-    iVar5 = iVar5 + 1;
-    *(undefined8 *)(iVar7 + iVar2) = *(undefined8 *)(iVar4 + iVar3 + iVar2);
+  lastVertexDelta = strideDwordsThenRemaining * -8;
+  bufferStart = *(int *)(glContext + 0x4854);
+  for (; strideDwordsThenRemaining != 0; strideDwordsThenRemaining = strideDwordsThenRemaining + -1) {
+    copyByteOffset = copyIndex * 8;
+    copyIndex = copyIndex + 1;
+    *(undefined8 *)(bufferStart + copyByteOffset) = *(undefined8 *)(writeCursor + lastVertexDelta + copyByteOffset);
   }
-  *(int *)(glContext + 0x4858) = iVar7 + iVar1;
+  *(int *)(glContext + 0x4858) = bufferStart + vertexStrideBytes;
   return;
 }
 

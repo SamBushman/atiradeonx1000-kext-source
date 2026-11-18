@@ -8645,26 +8645,26 @@ void _gleSetModelviewFuncZ0W1(glContext, forwardedArg2, forwardedArg3)
 }
 
 /* _gleTransformModelviewBlend @ 0xc4614 (76 bytes) */
-void _gleTransformModelviewBlend(unusedArg1, param_2, param_3)
+void _gleTransformModelviewBlend(unusedArg1, vertexCursor, vertexCount)
   undefined4 unusedArg1;
-  uint param_2;
-  int param_3;
+  uint vertexCursor;
+  int vertexCount;
 {
-  uint uVar1;
+  uint vertexEndThenRemaining;
   
-  uVar1 = param_2 + param_3 * 0x100;
-  if (uVar1 <= param_2) {
+  vertexEndThenRemaining = vertexCursor + vertexCount * 0x100;
+  if (vertexEndThenRemaining <= vertexCursor) {
     return;
   }
-  uVar1 = (uVar1 - param_2) + 0xff >> 8;
+  vertexEndThenRemaining = (vertexEndThenRemaining - vertexCursor) + 0xff >> 8;
   do {
-    *(undefined4 *)(param_2 + 0x20) = *(undefined4 *)(param_2 + 0xf0);
-    *(undefined4 *)(param_2 + 0x24) = *(undefined4 *)(param_2 + 0xf4);
-    *(undefined4 *)(param_2 + 0x28) = *(undefined4 *)(param_2 + 0xf8);
-    *(undefined4 *)(param_2 + 0x2c) = *(undefined4 *)(param_2 + 0xfc);
-    param_2 = param_2 + 0x100;
-    uVar1 = uVar1 - 1;
-  } while (uVar1 != 0);
+    *(undefined4 *)(vertexCursor + 0x20) = *(undefined4 *)(vertexCursor + 0xf0);
+    *(undefined4 *)(vertexCursor + 0x24) = *(undefined4 *)(vertexCursor + 0xf4);
+    *(undefined4 *)(vertexCursor + 0x28) = *(undefined4 *)(vertexCursor + 0xf8);
+    *(undefined4 *)(vertexCursor + 0x2c) = *(undefined4 *)(vertexCursor + 0xfc);
+    vertexCursor = vertexCursor + 0x100;
+    vertexEndThenRemaining = vertexEndThenRemaining - 1;
+  } while (vertexEndThenRemaining != 0);
   return;
 }
 

@@ -7,7 +7,7 @@ void _glDrawArrays_CompExec(glContext, mode, first, count)
   undefined4 first;
   undefined4 count;
 {
-  double fparam_1;
+  double forwardedFloatArg1;
   double incomingFpr2;
   double incomingFpr3;
   double incomingFpr4;
@@ -17,7 +17,7 @@ void _glDrawArrays_CompExec(glContext, mode, first, count)
   double incomingFpr8;
   
   _glDrawArrays_Comp(glContext,mode,first,count);
-  ((void (*)())_glDrawArrays_Exec)(glContext,mode,first,count,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,
+  ((void (*)())_glDrawArrays_Exec)(glContext,mode,first,count,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,
                      incomingFpr8);
   return;
 }
@@ -200,17 +200,17 @@ int _glDrawElements_Comp(glContext, mode, count, type, indices)
 /* _glDrawElements_IMM_Exec @ 0xa899c (136 bytes) */
 void _glDrawElements_IMM_Exec(int glContext,undefined4 forwardedArg2,undefined4 forwardedArg3,uint type,int indices,double forwardedFloatArg1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
 {
-  bool bVar1;
-  int iVar2;
+  bool typeAllowed;
+  int elementBuffer;
   
   if (type != 0x1403) {
     if (type < 0x1404) {
-      bVar1 = type == 0x1401;
+      typeAllowed = type == 0x1401;
     }
     else {
-      bVar1 = type == 0x1405;
+      typeAllowed = type == 0x1405;
     }
-    if (!bVar1) {
+    if (!typeAllowed) {
       if (*(int *)(glContext + 0x7574) != 0) {
         return;
       }
@@ -223,9 +223,9 @@ void _glDrawElements_IMM_Exec(int glContext,undefined4 forwardedArg2,undefined4 
     *(undefined4 *)(glContext + 0x488c) = 0;
     *(undefined4 *)(glContext + 0x4890) = 0;
   }
-  iVar2 = *(int *)(*(int *)(glContext + 0x4a60) + 0x35c);
-  if (iVar2 != 0) {
-    indices = indices + *(int *)(iVar2 + 0x30);
+  elementBuffer = *(int *)(*(int *)(glContext + 0x4a60) + 0x35c);
+  if (elementBuffer != 0) {
+    indices = indices + *(int *)(elementBuffer + 0x30);
   }
   *(int *)(glContext + 0x48d8) = indices;
   *(int *)(glContext + 0x4978) = indices;
@@ -272,19 +272,19 @@ void _glDrawElements_VBO_Exec(int glContext,undefined4 forwardedArg2,undefined4 
 }
 
 /* _glDrawElements_VAR_Exec @ 0xa8aac (136 bytes) */
-void _glDrawElements_VAR_Exec(int glContext,undefined4 forwardedArg2,undefined4 forwardedArg3,uint param_4,int param_5,undefined4 unusedArg6,undefined4 forwardedArg7,double forwardedFloatArg1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
+void _glDrawElements_VAR_Exec(int glContext,undefined4 forwardedArg2,undefined4 forwardedArg3,uint type,int indices,undefined4 unusedArg6,undefined4 forwardedArg7,double forwardedFloatArg1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
 {
-  bool bVar1;
-  int iVar2;
+  bool isAllowedIndexType;
+  int boundElementBuffer;
   
-  if (param_4 != 0x1403) {
-    if (param_4 < 0x1404) {
-      bVar1 = param_4 == 0x1401;
+  if (type != 0x1403) {
+    if (type < 0x1404) {
+      isAllowedIndexType = type == 0x1401;
     }
     else {
-      bVar1 = param_4 == 0x1405;
+      isAllowedIndexType = type == 0x1405;
     }
-    if (!bVar1) {
+    if (!isAllowedIndexType) {
       if (*(int *)(glContext + 0x7574) != 0) {
         return;
       }
@@ -292,17 +292,17 @@ void _glDrawElements_VAR_Exec(int glContext,undefined4 forwardedArg2,undefined4 
       return;
     }
   }
-  if (param_4 != *(uint *)(glContext + 0x48dc)) {
-    *(uint *)(glContext + 0x48dc) = param_4;
+  if (type != *(uint *)(glContext + 0x48dc)) {
+    *(uint *)(glContext + 0x48dc) = type;
     *(undefined4 *)(glContext + 0x488c) = 0;
     *(undefined4 *)(glContext + 0x4890) = 0;
   }
-  iVar2 = *(int *)(*(int *)(glContext + 0x4a60) + 0x35c);
-  if (iVar2 != 0) {
-    param_5 = param_5 + *(int *)(iVar2 + 0x30);
+  boundElementBuffer = *(int *)(*(int *)(glContext + 0x4a60) + 0x35c);
+  if (boundElementBuffer != 0) {
+    indices = indices + *(int *)(boundElementBuffer + 0x30);
   }
-  *(int *)(glContext + 0x48d8) = param_5;
-  *(int *)(glContext + 0x4978) = param_5;
+  *(int *)(glContext + 0x48d8) = indices;
+  *(int *)(glContext + 0x4978) = indices;
   ((void (*)())_gleDrawArraysOrElements_VAR_Exec)(glContext,forwardedArg2,0,forwardedArg3,1,*(int *)(glContext + 0x4a60) + 0x10,forwardedArg7,forwardedFloatArg1,forwardedFloatArg2
              ,forwardedFloatArg3,forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
   return;
@@ -696,9 +696,9 @@ LAB_000a9100:
 /* _glDrawRangeElements_VAR_Exec @ 0xa9150 (168 bytes) */
 void _glDrawRangeElements_VAR_Exec(int glContext,undefined4 forwardedArg2,uint start,uint end,undefined4 forwardedArg5,uint type,int indices,double forwardedFloatArg1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
 {
-  bool bVar1;
+  bool typeAllowed;
   undefined4 glErrorCode;
-  int iVar3;
+  int elementBuffer;
   
   if (end < start) {
     if (*(int *)(glContext + 0x7574) != 0) {
@@ -711,12 +711,12 @@ LAB_000a91a8:
   }
   if (type != 0x1403) {
     if (type < 0x1404) {
-      bVar1 = type == 0x1401;
+      typeAllowed = type == 0x1401;
     }
     else {
-      bVar1 = type == 0x1405;
+      typeAllowed = type == 0x1405;
     }
-    if (!bVar1) {
+    if (!typeAllowed) {
       if (*(int *)(glContext + 0x7574) != 0) {
         return;
       }
@@ -729,9 +729,9 @@ LAB_000a91a8:
     *(undefined4 *)(glContext + 0x488c) = 0;
     *(undefined4 *)(glContext + 0x4890) = 0;
   }
-  iVar3 = *(int *)(*(int *)(glContext + 0x4a60) + 0x35c);
-  if (iVar3 != 0) {
-    indices = indices + *(int *)(iVar3 + 0x30);
+  elementBuffer = *(int *)(*(int *)(glContext + 0x4a60) + 0x35c);
+  if (elementBuffer != 0) {
+    indices = indices + *(int *)(elementBuffer + 0x30);
   }
   *(int *)(glContext + 0x4978) = indices;
   *(int *)(glContext + 0x48d8) = indices;
@@ -743,9 +743,9 @@ LAB_000a91a8:
 /* _glDrawRangeElements_CVA_Exec @ 0xa91f8 (168 bytes) */
 void _glDrawRangeElements_CVA_Exec(int glContext,undefined4 forwardedArg2,uint start,uint end,undefined4 forwardedArg5,uint type,int indices,double forwardedFloatArg1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
 {
-  bool bVar1;
+  bool typeAllowed;
   undefined4 glErrorCode;
-  int iVar3;
+  int elementBuffer;
   
   if (end < start) {
     if (*(int *)(glContext + 0x7574) != 0) {
@@ -758,12 +758,12 @@ LAB_000a9250:
   }
   if (type != 0x1403) {
     if (type < 0x1404) {
-      bVar1 = type == 0x1401;
+      typeAllowed = type == 0x1401;
     }
     else {
-      bVar1 = type == 0x1405;
+      typeAllowed = type == 0x1405;
     }
-    if (!bVar1) {
+    if (!typeAllowed) {
       if (*(int *)(glContext + 0x7574) != 0) {
         return;
       }
@@ -776,9 +776,9 @@ LAB_000a9250:
     *(undefined4 *)(glContext + 0x488c) = 0;
     *(undefined4 *)(glContext + 0x4890) = 0;
   }
-  iVar3 = *(int *)(*(int *)(glContext + 0x4a60) + 0x35c);
-  if (iVar3 != 0) {
-    indices = indices + *(int *)(iVar3 + 0x30);
+  elementBuffer = *(int *)(*(int *)(glContext + 0x4a60) + 0x35c);
+  if (elementBuffer != 0) {
+    indices = indices + *(int *)(elementBuffer + 0x30);
   }
   *(int *)(glContext + 0x4978) = indices;
   *(int *)(glContext + 0x48d8) = indices;
@@ -1003,11 +1003,11 @@ int _glDrawRangeElementArrayAPPLE_Comp(glContext, mode, start, end, first, count
   undefined4 first;
   undefined4 count;
 {
-  undefined4 uVar1;
+  undefined4 drawResult;
   
   if (start <= end) {
-    uVar1 = ((int (*)())_glDrawElementArrayAPPLE_Comp)(glContext,mode,first,count);
-    return uVar1;
+    drawResult = ((int (*)())_glDrawElementArrayAPPLE_Comp)(glContext,mode,first,count);
+    return drawResult;
   }
   if (*(int *)(glContext + 0x7574) != 0) {
     return glContext;
@@ -1040,7 +1040,7 @@ void _glDrawRangeElementArrayAPPLE_CompExec(glContext, mode, start, end, first, 
   undefined4 first;
   undefined4 count;
 {
-  double fparam_1;
+  double forwardedFloatArg1;
   double incomingFpr2;
   double incomingFpr3;
   double incomingFpr4;
@@ -1050,7 +1050,7 @@ void _glDrawRangeElementArrayAPPLE_CompExec(glContext, mode, start, end, first, 
   double incomingFpr8;
   
   ((int (*)())_glDrawRangeElementArrayAPPLE_Comp)(glContext,mode,start,end,first,count);
-  ((void (*)())_glDrawRangeElementArrayAPPLE_Exec)(glContext,mode,start,end,first,count,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,
+  ((void (*)())_glDrawRangeElementArrayAPPLE_Exec)(glContext,mode,start,end,first,count,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,
              incomingFpr7,incomingFpr8);
   return;
 }
@@ -1919,7 +1919,7 @@ void _glMultiDrawArrays_CompExec(glContext, mode, first, count, primcount)
   undefined4 count;
   undefined4 primcount;
 {
-  double fparam_1;
+  double forwardedFloatArg1;
   double incomingFpr2;
   double incomingFpr3;
   double incomingFpr4;
@@ -1929,24 +1929,24 @@ void _glMultiDrawArrays_CompExec(glContext, mode, first, count, primcount)
   double incomingFpr8;
   
   ((int (*)())_glMultiDrawArrays_Comp)(glContext,mode,first,count,primcount);
-  ((void (*)())_glMultiDrawArrays_Exec)(glContext,mode,first,count,primcount,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,
+  ((void (*)())_glMultiDrawArrays_Exec)(glContext,mode,first,count,primcount,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,
              incomingFpr8);
   return;
 }
 
 /* _glMultiDrawArrays_NoopExec @ 0xaa740 (692 bytes) */
-void _glMultiDrawArrays_NoopExec(int glContext,undefined4 forwardedArg2,undefined4 first,undefined4 count,undefined4 primcount,double fparam_1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
+void _glMultiDrawArrays_NoopExec(int glContext,undefined4 forwardedArg2,undefined4 first,undefined4 count,undefined4 primcount,double forwardedFloatArg1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
 {
-  bool bVar1;
+  bool rendererInfoByte79Zero;
   bool stateClean;
-  char cVar2;
-  undefined4 uVar3;
+  char rendererInfoByte79;
+  undefined4 forwardedFirst;
   undefined4 glErrorCode;
   int *srcCursor;
-  int iVar5;
+  int dirtyWord;
   int framebufferObject;
-  undefined4 uVar6;
-  undefined4 uVar7;
+  undefined4 forwardedCount;
+  undefined4 forwardedPrimcount;
   undefined4 incomingR8;
   int matrixFuncDirty;
   int remaining;
@@ -1954,9 +1954,9 @@ void _glMultiDrawArrays_NoopExec(int glContext,undefined4 forwardedArg2,undefine
   uint dirtyWord3ThenMasked;
   uint dispatchFlags;
   int *dirtyFlagWords;
-  double extraout_f1;
-  double extraout_f1_00;
-  double extraout_f1_01;
+  double f1AfterCall;
+  double f1AfterCall1;
+  double f1AfterCall2;
   
   if (*(char *)(glContext + 0x759c) == '\0') {
     if (*(int *)(glContext + 0x7574) != 0) {
@@ -1966,17 +1966,17 @@ void _glMultiDrawArrays_NoopExec(int glContext,undefined4 forwardedArg2,undefine
     goto LAB_000aa9b0;
   }
   matrixFuncDirty = *(int *)(glContext + 0x50ac);
-  uVar3 = first;
-  uVar6 = count;
-  uVar7 = primcount;
+  forwardedFirst = first;
+  forwardedCount = count;
+  forwardedPrimcount = primcount;
   if (matrixFuncDirty != 0 || (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
     _gleUpdateMatrixFunc(glContext);
-    fparam_1 = extraout_f1;
+    forwardedFloatArg1 = f1AfterCall;
   }
   if (*(char *)(glContext + 0x4691) == '\0') {
 LAB_000aa994:
     if (*(char *)(glContext + 0x759d) != '\0') {
-      ((void (*)())_glMultiDrawArrays_Exec)(glContext,forwardedArg2,first,count,primcount,fparam_1,forwardedFloatArg2,forwardedFloatArg3,forwardedFloatArg4,
+      ((void (*)())_glMultiDrawArrays_Exec)(glContext,forwardedArg2,first,count,primcount,forwardedFloatArg1,forwardedFloatArg2,forwardedFloatArg3,forwardedFloatArg4,
                  forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
       return;
     }
@@ -1984,12 +1984,12 @@ LAB_000aa994:
   else {
     framebufferObject = *(int *)(glContext + 0x744c);
     dirtyFlagWords = (int *)(glContext + 0x310);
-    cVar2 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
+    rendererInfoByte79 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
     if ((framebufferObject != 0) && (*(int *)(framebufferObject + 0xec) != 0)) {
-      ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,uVar3,uVar6,uVar7,incomingR8,matrixFuncDirty,fparam_1,forwardedFloatArg2,forwardedFloatArg3,
+      ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,forwardedFirst,forwardedCount,forwardedPrimcount,incomingR8,matrixFuncDirty,forwardedFloatArg1,forwardedFloatArg2,forwardedFloatArg3,
                  forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
       *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000000;
-      fparam_1 = fparam_1;
+      forwardedFloatArg1 = forwardedFloatArg1;
     }
     if ((*(char *)(glContext + 0x4664) == '\0') && (*(int *)(glContext + 0x5430) == 0)) {
 LAB_000aa880:
@@ -1999,9 +1999,9 @@ LAB_000aa880:
       loopIndex = 0;
       srcCursor = (int *)(glContext + 0x324);
       do {
-        iVar5 = *srcCursor;
+        dirtyWord = *srcCursor;
         srcCursor = srcCursor + 1;
-        if (iVar5 != 0) {
+        if (dirtyWord != 0) {
           *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x800000;
           break;
         }
@@ -2010,22 +2010,22 @@ LAB_000aa880:
       dirtyWord3ThenMasked = *(uint *)(glContext + 0x31c);
       if ((dirtyWord3ThenMasked & 0x15555) != 0) {
         if (*(char *)(glContext + 0x2e54) != '\0') {
-          fparam_1 = (double)_gleUpdateLightRGBASums(glContext,glContext + 0x2c20,0);
+          forwardedFloatArg1 = (double)_gleUpdateLightRGBASums(glContext,glContext + 0x2c20,0);
         }
         if (*(char *)(glContext + 0x3094) != '\0') {
-          fparam_1 = (double)_gleUpdateLightRGBASums(glContext,glContext + 0x2e60,1);
+          forwardedFloatArg1 = (double)_gleUpdateLightRGBASums(glContext,glContext + 0x2e60,1);
         }
         goto LAB_000aa880;
       }
     }
-    bVar1 = cVar2 == '\0';
-    if (bVar1) {
+    rendererInfoByte79Zero = rendererInfoByte79 == '\0';
+    if (rendererInfoByte79Zero) {
       dirtyWord3ThenMasked = dirtyWord3ThenMasked & 0x17000000;
     }
     else {
       dirtyWord3ThenMasked = dirtyWord3ThenMasked & 0x17ffffff;
     }
-    if (bVar1) {
+    if (rendererInfoByte79Zero) {
       stateClean = ((*dirtyFlagWords == 0 && *(int *)(glContext + 0x314) == 0) && dirtyWord3ThenMasked == 0) &&
               *(int *)(glContext + 800) == 0;
     }
@@ -2036,7 +2036,7 @@ LAB_000aa880:
     }
     if (stateClean) goto LAB_000aa994;
     if (*(char *)(glContext + 0x85a8) != *(char *)(glContext + 0x85a6)) {
-      fparam_1 = (double)_gleSwitchToNonRevertRenderer(glContext);
+      forwardedFloatArg1 = (double)_gleSwitchToNonRevertRenderer(glContext);
 LAB_000aa978:
       remaining = 0x13;
       do {
@@ -2050,13 +2050,13 @@ LAB_000aa978:
                       (*(undefined4 *)(glContext + 0x4688),glContext + 0x4698,dirtyFlagWords);
     if ((((dispatchFlags & 3) == (uint)*(byte *)(glContext + 0x7580)) &&
         ((dispatchFlags & 4) == (uint)*(byte *)(glContext + 0x7581))) &&
-       (fparam_1 = extraout_f1_01, (dispatchFlags & 8) == (uint)(*(char *)(glContext + 0x759d) == '\0')))
+       (forwardedFloatArg1 = f1AfterCall2, (dispatchFlags & 8) == (uint)(*(char *)(glContext + 0x759d) == '\0')))
     goto LAB_000aa978;
     if ((dispatchFlags & 4) == 0) {
       dispatchFlags = dispatchFlags & 0xfffffffe;
       *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x10000000;
     }
-    fparam_1 = (double)_gleUpdateDispatchCodeChange(glContext,dispatchFlags);
+    forwardedFloatArg1 = (double)_gleUpdateDispatchCodeChange(glContext,dispatchFlags);
     if (*(char *)(glContext + 0x759d) != '\0') goto LAB_000aa978;
   }
   if (*(int *)(glContext + 0x7574) != 0) {
@@ -2077,10 +2077,10 @@ int _glMultiDrawElements_Comp(glContext, mode, count, type, indices, primcount)
   int indices;
   int primcount;
 {
-  int iVar1;
+  int contextThenByteOffsetThenDrawResult;
   int loopIndex;
   
-  iVar1 = glContext;
+  contextThenByteOffsetThenDrawResult = glContext;
   if (primcount < 0) {
     if (*(int *)(glContext + 0x7574) == 0) {
       *(undefined4 *)(glContext + 0x7574) = 0x501;
@@ -2090,21 +2090,21 @@ int _glMultiDrawElements_Comp(glContext, mode, count, type, indices, primcount)
     loopIndex = 0;
     if (0 < primcount) {
       do {
-        iVar1 = loopIndex * 4;
+        contextThenByteOffsetThenDrawResult = loopIndex * 4;
         loopIndex = loopIndex + 1;
-        iVar1 = ((int (*)())_glDrawElements_Comp)(glContext,mode,*(undefined4 *)(count + iVar1),type,
-                           *(undefined4 *)(indices + iVar1));
+        contextThenByteOffsetThenDrawResult = ((int (*)())_glDrawElements_Comp)(glContext,mode,*(undefined4 *)(count + contextThenByteOffsetThenDrawResult),type,
+                           *(undefined4 *)(indices + contextThenByteOffsetThenDrawResult));
       } while (loopIndex < primcount);
     }
   }
-  return iVar1;
+  return contextThenByteOffsetThenDrawResult;
 }
 
 /* _glMultiDrawElements_Exec @ 0xaaa80 (136 bytes) */
-void _glMultiDrawElements_Exec(int glContext,undefined4 mode,undefined4 *count,undefined4 type,undefined4 indices,int primcount,double fparam_1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
+void _glMultiDrawElements_Exec(int glContext,undefined4 mode,undefined4 *count,undefined4 type,undefined4 indices,int primcount,double forwardedFloatArg1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
 {
-  undefined4 uVar1;
-  double extraout_f1;
+  undefined4 elementCount;
+  double f1AfterCall;
   
   if (primcount < 0) {
     if (*(int *)(glContext + 0x7574) == 0) {
@@ -2113,12 +2113,12 @@ void _glMultiDrawElements_Exec(int glContext,undefined4 mode,undefined4 *count,u
   }
   else if (0 < primcount) {
     do {
-      uVar1 = *count;
+      elementCount = *count;
       count = count + 1;
-      ((void (*)())_glDrawElements_STD_Exec)(glContext,mode,uVar1,type,indices,fparam_1,forwardedFloatArg2,forwardedFloatArg3,forwardedFloatArg4,forwardedFloatArg5,
+      ((void (*)())_glDrawElements_STD_Exec)(glContext,mode,elementCount,type,indices,forwardedFloatArg1,forwardedFloatArg2,forwardedFloatArg3,forwardedFloatArg4,forwardedFloatArg5,
                  forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
       primcount = primcount + -1;
-      fparam_1 = extraout_f1;
+      forwardedFloatArg1 = f1AfterCall;
     } while (primcount != 0);
   }
   return;
@@ -2370,28 +2370,28 @@ int _glWeightbvARB_Comp(glContext, size, weights)
   uint size;
   uint weights;
 {
-  char *pcVar1;
+  char *weightBytePtr;
   double intToDoubleBias;
   float channelScale;
-  float fVar4;
-  int iVar5;
+  float channelBias;
+  int weightIndex;
   
   if ((int)size < 5) {
     glContext = _gleAddListItem(glContext,PTR__glWeightARB_ListExec_0011045c,size * 4 + 4);
     if ((float *)glContext != (float *)0x0) {
-      iVar5 = 0;
+      weightIndex = 0;
       *(uint *)glContext = size;
-      fVar4 = FLOAT_00108e64;
+      channelBias = FLOAT_00108e64;
       channelScale = FLOAT_00108e60;
       intToDoubleBias = DOUBLE_00108d58;
       if (0 < (int)size) {
         glContext = glContext + 4;
         do {
-          pcVar1 = (char *)(weights + iVar5);
-          iVar5 = iVar5 + 1;
+          weightBytePtr = (char *)(weights + weightIndex);
+          weightIndex = weightIndex + 1;
           *(float *)glContext =
-               (float)((double)CONCAT44(0x43300000,(int)*pcVar1 ^ 0x80000000) - intToDoubleBias) * channelScale +
-               fVar4;
+               (float)((double)CONCAT44(0x43300000,(int)*weightBytePtr ^ 0x80000000) - intToDoubleBias) * channelScale +
+               channelBias;
           glContext = glContext + 4;
           size = size - 1;
         } while (size != 0);
@@ -2421,16 +2421,16 @@ double _glWeightsvARB_Exec(glContext, size, weights)
   int size;
   short *weights;
 {
-  short sVar1;
-  int iVar2;
+  short weight;
+  int zeroFillOffset;
   double intToDoubleBias;
   float channelScale;
-  float fVar5;
+  float channelBias;
   float *dstCursor;
-  int iVar7;
+  int weightIndex;
   int remaining;
   
-  fVar5 = FLOAT_00108e74;
+  channelBias = FLOAT_00108e74;
   channelScale = FLOAT_00108e70;
   intToDoubleBias = DOUBLE_00108d58;
   if (4 < size) {
@@ -2440,28 +2440,28 @@ double _glWeightsvARB_Exec(glContext, size, weights)
     }
     return;
   }
-  iVar7 = 0;
+  weightIndex = 0;
   if (0 < size) {
     dstCursor = (float *)(glContext + 0x2d0);
     remaining = size;
     do {
-      sVar1 = *weights;
+      weight = *weights;
       weights = weights + 1;
-      *dstCursor = (float)((double)CONCAT44(0x43300000,(int)sVar1 ^ 0x80000000) - intToDoubleBias) * channelScale +
-                fVar5;
+      *dstCursor = (float)((double)CONCAT44(0x43300000,(int)weight ^ 0x80000000) - intToDoubleBias) * channelScale +
+                channelBias;
       dstCursor = dstCursor + 1;
       remaining = remaining + -1;
     } while (remaining != 0);
-    iVar7 = size;
+    weightIndex = size;
     if (3 < size) {
       return;
     }
   }
   do {
-    iVar2 = iVar7 * 4;
-    iVar7 = iVar7 + 1;
-    *(undefined4 *)(iVar2 + glContext + 0x2d0) = 0;
-  } while (iVar7 < 4);
+    zeroFillOffset = weightIndex * 4;
+    weightIndex = weightIndex + 1;
+    *(undefined4 *)(zeroFillOffset + glContext + 0x2d0) = 0;
+  } while (weightIndex < 4);
   return;
 }
 
@@ -2562,22 +2562,22 @@ int _glWeightivARB_Comp(glContext, size, weights)
   uint size;
   uint weights;
 {
-  double dVar1;
-  float fVar2;
-  float fVar3;
-  uint uVar4;
+  double intToDoubleBias;
+  float channelScale;
+  float channelBias;
+  uint weightValue;
   
   if ((int)size < 5) {
     glContext = _gleAddListItem(glContext,PTR__glWeightARB_ListExec_0011045c,size * 4 + 4);
     if (((float *)glContext != (float *)0x0) &&
-       (*(uint *)glContext = size, fVar3 = FLOAT_00108e6c, fVar2 = FLOAT_00108e68,
-       dVar1 = DOUBLE_00108d58, 0 < (int)size)) {
+       (*(uint *)glContext = size, channelBias = FLOAT_00108e6c, channelScale = FLOAT_00108e68,
+       intToDoubleBias = DOUBLE_00108d58, 0 < (int)size)) {
       glContext = glContext + 4;
       do {
-        uVar4 = *(uint *)weights;
+        weightValue = *(uint *)weights;
         weights = weights + 4;
         *(float *)glContext =
-             (float)((double)CONCAT44(0x43300000,uVar4 ^ 0x80000000) - dVar1) * fVar2 + fVar3;
+             (float)((double)CONCAT44(0x43300000,weightValue ^ 0x80000000) - intToDoubleBias) * channelScale + channelBias;
         glContext = glContext + 4;
         size = size - 1;
       } while (size != 0);
@@ -2606,8 +2606,8 @@ double _glWeightfvARB_Exec(glContext, size, weights)
   int size;
   undefined4 *weights;
 {
-  undefined4 uVar1;
-  int iVar2;
+  undefined4 weightValue;
+  int weightByteOffset;
   undefined4 *dstCursor;
   int loopIndex;
   
@@ -2622,10 +2622,10 @@ double _glWeightfvARB_Exec(glContext, size, weights)
   if (0 < size) {
     dstCursor = (undefined4 *)(glContext + 0x2d0);
     do {
-      uVar1 = *weights;
+      weightValue = *weights;
       loopIndex = loopIndex + 1;
       weights = weights + 1;
-      *dstCursor = uVar1;
+      *dstCursor = weightValue;
       dstCursor = dstCursor + 1;
       size = size + -1;
     } while (size != 0);
@@ -2634,9 +2634,9 @@ double _glWeightfvARB_Exec(glContext, size, weights)
     }
   }
   do {
-    iVar2 = loopIndex * 4;
+    weightByteOffset = loopIndex * 4;
     loopIndex = loopIndex + 1;
-    *(undefined4 *)(iVar2 + glContext + 0x2d0) = 0;
+    *(undefined4 *)(weightByteOffset + glContext + 0x2d0) = 0;
   } while (loopIndex < 4);
   return;
 }
@@ -2685,11 +2685,11 @@ double _glWeightdvARB_Exec(glContext, size, weights)
   int size;
   double *weights;
 {
-  int iVar1;
+  int weightByteOffset;
   float *dstCursor;
-  int iVar3;
+  int weightIndex;
   int remaining;
-  double dVar4;
+  double weightValue;
   
   if (4 < size) {
     if (*(int *)(glContext + 0x7574) == 0) {
@@ -2698,27 +2698,27 @@ double _glWeightdvARB_Exec(glContext, size, weights)
     }
     return;
   }
-  iVar3 = 0;
+  weightIndex = 0;
   if (0 < size) {
     dstCursor = (float *)(glContext + 0x2d0);
     remaining = size;
     do {
-      dVar4 = *weights;
+      weightValue = *weights;
       weights = weights + 1;
-      *dstCursor = (float)dVar4;
+      *dstCursor = (float)weightValue;
       dstCursor = dstCursor + 1;
       remaining = remaining + -1;
     } while (remaining != 0);
-    iVar3 = size;
+    weightIndex = size;
     if (3 < size) {
       return;
     }
   }
   do {
-    iVar1 = iVar3 * 4;
-    iVar3 = iVar3 + 1;
-    *(undefined4 *)(iVar1 + glContext + 0x2d0) = 0;
-  } while (iVar3 < 4);
+    weightByteOffset = weightIndex * 4;
+    weightIndex = weightIndex + 1;
+    *(undefined4 *)(weightByteOffset + glContext + 0x2d0) = 0;
+  } while (weightIndex < 4);
   return;
 }
 
@@ -2728,16 +2728,16 @@ int _glWeightdvARB_Comp(glContext, size, weights)
   uint size;
   uint weights;
 {
-  double dVar1;
+  double weightValue;
   
   if ((int)size < 5) {
     glContext = _gleAddListItem(glContext,PTR__glWeightARB_ListExec_0011045c,size * 4 + 4);
     if (((float *)glContext != (float *)0x0) && (*(uint *)glContext = size, 0 < (int)size)) {
       glContext = glContext + 4;
       do {
-        dVar1 = *(double *)weights;
+        weightValue = *(double *)weights;
         weights = weights + 8;
-        *(float *)glContext = (float)dVar1;
+        *(float *)glContext = (float)weightValue;
         glContext = glContext + 4;
         size = size - 1;
       } while (size != 0);

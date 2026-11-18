@@ -66,21 +66,21 @@ void _gleMap1ColordLoad(undefined4 unusedArg1,undefined4 unusedArg2,undefined4 u
 void _gleMap1IndexdLoad(undefined4 unusedArg1,undefined4 unusedArg2,undefined4 unusedArg3,undefined4 unusedArg4,undefined4 unusedArg5,int stride,int order,double *points,int *mapData,double u1,double u2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
   float *destPtr;
-  double dVar2;
+  double invUDeltaThenPointValue;
   
-  dVar2 = DOUBLE_00108d68 / (u2 - u1);
+  invUDeltaThenPointValue = DOUBLE_00108d68 / (u2 - u1);
   mapData[1] = (int)GH_F2U((float)u1);
   *mapData = order;
   mapData[2] = (int)GH_F2U((float)u2);
-  mapData[3] = (int)GH_F2U((float)dVar2);
+  mapData[3] = (int)GH_F2U((float)invUDeltaThenPointValue);
   if (order < 1) {
     return;
   }
   destPtr = (float *)(mapData + 4);
   do {
-    dVar2 = *points;
+    invUDeltaThenPointValue = *points;
     points = points + stride;
-    *destPtr = (float)dVar2;
+    *destPtr = (float)invUDeltaThenPointValue;
     destPtr = destPtr + 1;
     order = order + -1;
   } while (order != 0);
@@ -1540,23 +1540,23 @@ void _gleMap2Texture4dLoad(undefined4 unusedArg1,undefined4 unusedArg2,undefined
 /* _gleMap2VertexAttrib1dLoad @ 0xdffb0 (224 bytes) */
 void _gleMap2VertexAttrib1dLoad(undefined4 unusedArg1,undefined4 unusedArg2,undefined4 unusedArg3,undefined4 unusedArg4,undefined4 unusedArg5,int ustride,int uorder,undefined4 unusedArg8,undefined4 unusedArg9,undefined4 unusedArg10,undefined4 unusedArg11,int vstride,int vorder,int points,int *mapData,double u1,double u2,double v1,double v2,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  float *pfVar1;
+  float *destPoint;
   int uIndex;
   int uElementOffset;
   int destRecord;
   double *pointPtr;
   int vRemaining;
-  double dVar7;
+  double oneThenPointValue;
   double invUDelta;
   
-  dVar7 = DOUBLE_00108d68;
+  oneThenPointValue = DOUBLE_00108d68;
   uIndex = 0;
   invUDelta = DOUBLE_00108d68 / (u2 - u1);
   *mapData = uorder;
   uElementOffset = 0;
   mapData[1] = vorder;
   mapData[6] = (int)GH_F2U((float)invUDelta);
-  mapData[7] = (int)GH_F2U((float)(dVar7 / (v2 - v1)));
+  mapData[7] = (int)GH_F2U((float)(oneThenPointValue / (v2 - v1)));
   mapData[2] = (int)GH_F2U((float)u1);
   mapData[3] = (int)GH_F2U((float)u2);
   mapData[4] = (int)GH_F2U((float)v1);
@@ -1566,13 +1566,13 @@ void _gleMap2VertexAttrib1dLoad(undefined4 unusedArg1,undefined4 unusedArg2,unde
     do {
       if (0 < vorder) {
         pointPtr = (double *)(uElementOffset * 8 + points);
-        pfVar1 = (float *)(mapData + destRecord + 8);
+        destPoint = (float *)(mapData + destRecord + 8);
         vRemaining = vorder;
         do {
-          dVar7 = *pointPtr;
+          oneThenPointValue = *pointPtr;
           pointPtr = pointPtr + vstride;
-          *pfVar1 = (float)dVar7;
-          pfVar1 = pfVar1 + 1;
+          *destPoint = (float)oneThenPointValue;
+          destPoint = destPoint + 1;
           vRemaining = vRemaining + -1;
         } while (vRemaining != 0);
       }
@@ -2200,10 +2200,10 @@ void _gleMap2Texture4fLoad(undefined4 unusedArg1,undefined4 unusedArg2,undefined
 /* _gleMap2VertexAttrib1fLoad @ 0xe0ab8 (192 bytes) */
 void _gleMap2VertexAttrib1fLoad(undefined4 unusedArg1,undefined4 unusedArg2,undefined4 unusedArg3,int ustride,int uorder,undefined4 unusedArg6,undefined4 unusedArg7,int vstride,int vorder,int points,int *mapData,float u1,float u2,float v1,float v2,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  int iVar1;
+  int pointBits;
   float invUDelta;
   float one;
-  int *piVar4;
+  int *destPoint;
   int uIndex;
   int uElementOffset;
   int *pointPtr;
@@ -2227,13 +2227,13 @@ void _gleMap2VertexAttrib1fLoad(undefined4 unusedArg1,undefined4 unusedArg2,unde
     do {
       if (0 < vorder) {
         pointPtr = (int *)(uElementOffset * 4 + points);
-        piVar4 = mapData + destRecord + 8;
+        destPoint = mapData + destRecord + 8;
         vRemaining = vorder;
         do {
-          iVar1 = *pointPtr;
+          pointBits = *pointPtr;
           pointPtr = pointPtr + vstride;
-          *piVar4 = iVar1;
-          piVar4 = piVar4 + 1;
+          *destPoint = pointBits;
+          destPoint = destPoint + 1;
           vRemaining = vRemaining + -1;
         } while (vRemaining != 0);
       }
@@ -2248,17 +2248,17 @@ void _gleMap2VertexAttrib1fLoad(undefined4 unusedArg1,undefined4 unusedArg2,unde
 /* _gleMap2VertexAttrib2fLoad @ 0xe0b78 (216 bytes) */
 void _gleMap2VertexAttrib2fLoad(undefined4 unusedArg1,undefined4 unusedArg2,undefined4 unusedArg3,int ustride,int uorder,undefined4 unusedArg6,undefined4 unusedArg7,int vstride,int vorder,int points,int *mapData,float u1,float u2,float v1,float v2,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  int iVar1;
-  int *piVar2;
+  int pointComponent1;
+  int *pointComponent0Ptr;
   float invUDelta;
   float one;
-  int iVar5;
+  int pointByteOffset;
   int *destPtr;
   int uElementOffset;
   int destRecord;
   int uIndex;
-  int iVar10;
-  int *piVar11;
+  int rowPoints;
+  int *pointComponent1Ptr;
   int vRemaining;
   
   one = FLOAT_00108e54;
@@ -2275,26 +2275,26 @@ void _gleMap2VertexAttrib2fLoad(undefined4 unusedArg1,undefined4 unusedArg2,unde
   mapData[7] = (int)GH_F2U((one / (v2 - v1)));
   if (0 < uorder) {
     destRecord = 0;
-    iVar10 = points;
+    rowPoints = points;
     do {
       if (0 < vorder) {
         destPtr = mapData + destRecord * 2;
-        piVar11 = (int *)(iVar10 + 4);
-        iVar5 = uElementOffset << 2;
+        pointComponent1Ptr = (int *)(rowPoints + 4);
+        pointByteOffset = uElementOffset << 2;
         vRemaining = vorder;
         do {
-          piVar2 = (int *)(points + iVar5);
-          iVar5 = iVar5 + vstride * 4;
-          destPtr[8] = *piVar2;
-          iVar1 = *piVar11;
-          piVar11 = piVar11 + vstride;
-          destPtr[9] = iVar1;
+          pointComponent0Ptr = (int *)(points + pointByteOffset);
+          pointByteOffset = pointByteOffset + vstride * 4;
+          destPtr[8] = *pointComponent0Ptr;
+          pointComponent1 = *pointComponent1Ptr;
+          pointComponent1Ptr = pointComponent1Ptr + vstride;
+          destPtr[9] = pointComponent1;
           destPtr = destPtr + 2;
           vRemaining = vRemaining + -1;
         } while (vRemaining != 0);
       }
       uIndex = uIndex + 1;
-      iVar10 = iVar10 + ustride * 4;
+      rowPoints = rowPoints + ustride * 4;
       destRecord = destRecord + vorder;
       uElementOffset = uElementOffset + ustride;
     } while (uIndex < uorder);
@@ -2755,28 +2755,28 @@ int _gleCreateQueryObject(glContext, id)
 }
 
 /* _pow_10 @ 0xe1518 (156 bytes) */
-double _pow_10(int param_1)
+double _pow_10(int exponent)
 {
-  undefined *puVar1;
-  double dVar2;
+  undefined *tableEntryEnd;
+  double scale;
   
-  dVar2 = DOUBLE_00108d68;
-  if (param_1 < 1) {
-    if (-1 < param_1) {
+  scale = DOUBLE_00108d68;
+  if (exponent < 1) {
+    if (-1 < exponent) {
       return DOUBLE_00108d68;
     }
-    for (; param_1 < -0x20; param_1 = param_1 + 0x20) {
-      dVar2 = dVar2 * DOUBLE_00108df8;
+    for (; exponent < -0x20; exponent = exponent + 0x20) {
+      scale = scale * DOUBLE_00108df8;
     }
-    puVar1 = &_down_1 + param_1 * -8;
+    tableEntryEnd = &_down_1 + exponent * -8;
   }
   else {
-    for (; 0x20 < param_1; param_1 = param_1 + -0x20) {
-      dVar2 = dVar2 * DOUBLE_00108e00;
+    for (; 0x20 < exponent; exponent = exponent + -0x20) {
+      scale = scale * DOUBLE_00108e00;
     }
-    puVar1 = &_up_0 + param_1 * 8;
+    tableEntryEnd = &_up_0 + exponent * 8;
   }
-  return dVar2 * *(double *)(puVar1 + -8);
+  return scale * *(double *)(tableEntryEnd + -8);
 }
 
 /* _gle_strtod @ 0xe15b4 (824 bytes) */

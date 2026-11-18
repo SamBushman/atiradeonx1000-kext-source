@@ -15,31 +15,31 @@ void _glEvalCoord2dv_CompExec(glContext, u)
 {
   unsigned int ghidra_home[8] = { glContext, u, 0, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   undefined4 in_LR;
-  double fparam_1;
-  double in_f2;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
+  double forwardedFloatArg1;
+  double incomingFpr2;
+  double incomingFpr3;
+  double incomingFpr4;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
   
   _glEvalCoord2dv_Comp(glContext,u);
-  ((void (*)())_glEvalCoord2dv_Exec)(glContext,u,fparam_1,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
+  ((void (*)())_glEvalCoord2dv_Exec)(glContext,u,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
              (double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),(*(double *)((unsigned char *)ghidra_home + 0)),
              (*(double *)((unsigned char *)ghidra_home + 8)));
   return;
 }
 
 /* _glEvalCoord2f_ListExec_body @ 0x64c1c (48 bytes) */
-undefined4 _glEvalCoord2f_ListExec_body(undefined4 glContext,double *recordedArgs,double unusedFloatArg1,double fparam_2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12)
+undefined4 _glEvalCoord2f_ListExec_body(undefined4 glContext,double *recordedArgs,double unusedFloatArg1,double v,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12)
 {
   double incomingStack_ffffffb8;
   double incomingStack_ffffffc0;
   double incomingStack_ffffffc8;
   double incomingStack_ffffffd0;
   
-  ((void (*)())_gleEvalMap2)(glContext,(double)(float)(*recordedArgs),(double)(float)fparam_2,forwardedFloatArg3,forwardedFloatArg4,forwardedFloatArg5,
+  ((void (*)())_gleEvalMap2)(glContext,(double)(float)(*recordedArgs),(double)(float)v,forwardedFloatArg3,forwardedFloatArg4,forwardedFloatArg5,
                forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8,incomingStack_ffffffb8,incomingStack_ffffffc0,incomingStack_ffffffc8,
                incomingStack_ffffffd0);
   return 0x10;
@@ -700,18 +700,18 @@ int _glTestFenceAPPLE_Exec(glContext, fence)
   int glContext;
   undefined4 fence;
 {
-  undefined4 uVar1;
+  undefined4 testResult;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
-    uVar1 = _gleTestFence(glContext,0,fence);
+    testResult = _gleTestFence(glContext,0,fence);
   }
   else {
     if (*(int *)(glContext + 0x7574) == 0) {
       *(undefined4 *)(glContext + 0x7574) = 0x502;
     }
-    uVar1 = 1;
+    testResult = 1;
   }
-  return uVar1;
+  return testResult;
 }
 
 /* _glFinishFenceAPPLE_Exec @ 0x659ec (48 bytes) */
@@ -963,22 +963,22 @@ void _glGenRenderbuffersEXT_Exec(glContext, n, renderbuffers)
   int *renderbuffers;
 {
   undefined4 glErrorCode;
-  int iVar2;
+  int nameValue;
   int loopIndex;
-  int iVar4;
+  int sharedStateThenFirstName;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
     if (-1 < n) {
-      iVar4 = *(int *)(glContext + 0x5148);
-      if (*(char *)(iVar4 + 0x8024) != '\0') {
-        _pthread_mutex_lock(iVar4 + 0x8028);
-        iVar4 = *(int *)(glContext + 0x5148);
+      sharedStateThenFirstName = *(int *)(glContext + 0x5148);
+      if (*(char *)(sharedStateThenFirstName + 0x8024) != '\0') {
+        _pthread_mutex_lock(sharedStateThenFirstName + 0x8028);
+        sharedStateThenFirstName = *(int *)(glContext + 0x5148);
       }
-      iVar4 = _gleGenHashNames(((unsigned char *)0x00001004) + iVar4,n);
+      sharedStateThenFirstName = _gleGenHashNames(((unsigned char *)0x00001004) + sharedStateThenFirstName,n);
       if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
         _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);
       }
-      if (iVar4 == 0) {
+      if (sharedStateThenFirstName == 0) {
         return;
       }
       loopIndex = 0;
@@ -986,9 +986,9 @@ void _glGenRenderbuffersEXT_Exec(glContext, n, renderbuffers)
         return;
       }
       do {
-        iVar2 = loopIndex + iVar4;
+        nameValue = loopIndex + sharedStateThenFirstName;
         loopIndex = loopIndex + 1;
-        *renderbuffers = iVar2;
+        *renderbuffers = nameValue;
         renderbuffers = renderbuffers + 1;
         n = n + -1;
       } while (n != 0);
@@ -1095,15 +1095,15 @@ void _glBindRenderbufferEXT_Exec(glContext, target, renderbuffer)
   undefined4 renderbuffer;
 {
   undefined4 glErrorCode;
-  int iVar2;
+  int sharedMutex;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
     if (target == 0x8d41) {
       if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
-        iVar2 = *(int *)(glContext + 0x5148) + 0x8028;
-        _pthread_mutex_lock(iVar2);
+        sharedMutex = *(int *)(glContext + 0x5148) + 0x8028;
+        _pthread_mutex_lock(sharedMutex);
         _gleBindRenderbuffer(glContext,renderbuffer);
-        _pthread_mutex_unlock(iVar2);
+        _pthread_mutex_unlock(sharedMutex);
         return;
       }
       _gleBindRenderbuffer(glContext,renderbuffer);
@@ -1203,28 +1203,28 @@ int _glIsRenderbufferEXT_Exec(glContext, renderbuffer)
   int glContext;
   undefined4 renderbuffer;
 {
-  int iVar1;
-  bool bVar2;
+  int sharedStateThenRenderbufferObject;
+  bool isRenderbuffer;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
-    iVar1 = *(int *)(glContext + 0x5148);
-    if (*(char *)(iVar1 + 0x8024) != '\0') {
-      _pthread_mutex_lock(iVar1 + 0x8028);
-      iVar1 = *(int *)(glContext + 0x5148);
+    sharedStateThenRenderbufferObject = *(int *)(glContext + 0x5148);
+    if (*(char *)(sharedStateThenRenderbufferObject + 0x8024) != '\0') {
+      _pthread_mutex_lock(sharedStateThenRenderbufferObject + 0x8028);
+      sharedStateThenRenderbufferObject = *(int *)(glContext + 0x5148);
     }
-    iVar1 = _gleLookupHashObject(((unsigned char *)0x00001004) + iVar1,renderbuffer);
+    sharedStateThenRenderbufferObject = _gleLookupHashObject(((unsigned char *)0x00001004) + sharedStateThenRenderbufferObject,renderbuffer);
     if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
       _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);
     }
-    bVar2 = iVar1 != 0;
+    isRenderbuffer = sharedStateThenRenderbufferObject != 0;
   }
   else {
     if (*(int *)(glContext + 0x7574) == 0) {
       *(undefined4 *)(glContext + 0x7574) = 0x502;
     }
-    bVar2 = false;
+    isRenderbuffer = false;
   }
-  return bVar2;
+  return isRenderbuffer;
 }
 
 /* _glGetRenderbufferParameterivEXT_Exec @ 0x66480 (516 bytes) */
@@ -1333,22 +1333,22 @@ void _glGenFramebuffersEXT_Exec(glContext, n, framebuffers)
   int *framebuffers;
 {
   undefined4 glErrorCode;
-  int iVar2;
+  int nameValue;
   int loopIndex;
-  int iVar4;
+  int sharedStateThenFirstName;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
     if (-1 < n) {
-      iVar4 = *(int *)(glContext + 0x5148);
-      if (*(char *)(iVar4 + 0x8024) != '\0') {
-        _pthread_mutex_lock(iVar4 + 0x8028);
-        iVar4 = *(int *)(glContext + 0x5148);
+      sharedStateThenFirstName = *(int *)(glContext + 0x5148);
+      if (*(char *)(sharedStateThenFirstName + 0x8024) != '\0') {
+        _pthread_mutex_lock(sharedStateThenFirstName + 0x8028);
+        sharedStateThenFirstName = *(int *)(glContext + 0x5148);
       }
-      iVar4 = _gleGenHashNames(iVar4,n);
+      sharedStateThenFirstName = _gleGenHashNames(sharedStateThenFirstName,n);
       if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
         _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);
       }
-      if (iVar4 == 0) {
+      if (sharedStateThenFirstName == 0) {
         return;
       }
       loopIndex = 0;
@@ -1356,9 +1356,9 @@ void _glGenFramebuffersEXT_Exec(glContext, n, framebuffers)
         return;
       }
       do {
-        iVar2 = loopIndex + iVar4;
+        nameValue = loopIndex + sharedStateThenFirstName;
         loopIndex = loopIndex + 1;
-        *framebuffers = iVar2;
+        *framebuffers = nameValue;
         framebuffers = framebuffers + 1;
         n = n + -1;
       } while (n != 0);
@@ -1386,27 +1386,27 @@ void _glDeleteFramebuffersEXT_Exec(glContext, n, framebuffers)
   int *framebuffers;
 {
   undefined4 glErrorCode;
-  int iVar2;
-  int iVar3;
+  int boundFramebufferName;
+  int framebufferName;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
     if (-1 < n) {
       if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
         _pthread_mutex_lock(*(int *)(glContext + 0x5148) + 0x8028);
       }
-      iVar2 = 0;
+      boundFramebufferName = 0;
       if (*(int *)(glContext + 0x744c) != 0) {
-        iVar2 = *(int *)(*(int *)(glContext + 0x744c) + 4);
+        boundFramebufferName = *(int *)(*(int *)(glContext + 0x744c) + 4);
       }
       if (0 < n) {
         do {
-          iVar3 = *framebuffers;
+          framebufferName = *framebuffers;
           framebuffers = framebuffers + 1;
-          if (iVar3 != 0) {
-            if (iVar3 == iVar2) {
+          if (framebufferName != 0) {
+            if (framebufferName == boundFramebufferName) {
               _gleBindFramebuffer(glContext,0);
             }
-            _gleDeleteHashNameAndObject(glContext,*(undefined4 *)(glContext + 0x5148),iVar3);
+            _gleDeleteHashNameAndObject(glContext,*(undefined4 *)(glContext + 0x5148),framebufferName);
           }
           n = n + -1;
         } while (n != 0);
@@ -1480,10 +1480,10 @@ void _glFramebufferTexture1DEXT_Exec(glContext, target, attachment, textarget, t
   undefined4 glErrorCode;
   uint attachmentIndex;
   int textureObject;
-  undefined4 uVar3;
+  undefined4 attachmentType;
   
   textureObject = 0;
-  uVar3 = 0;
+  attachmentType = 0;
   if (*(short *)(glContext + 0x4a10) < 0) {
     if (target != 0x8d40) {
 LAB_00066a74:
@@ -1518,7 +1518,7 @@ LAB_00066a74:
       }
       if (texture == 0) {
 LAB_00066afc:
-        _gleFramebufferTexture(glContext,attachmentIndex,uVar3,textureObject,0,level,0);
+        _gleFramebufferTexture(glContext,attachmentIndex,attachmentType,textureObject,0,level,0);
         if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) == '\0') {
           return;
         }
@@ -1527,7 +1527,7 @@ LAB_00066afc:
       }
       textureObject = _gleLookupHashObject(*(int *)(glContext + 0x5148) + 0x2008,texture);
       if (textureObject != 0) {
-        uVar3 = 4;
+        attachmentType = 4;
         goto LAB_00066afc;
       }
       if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
@@ -1815,12 +1815,12 @@ int _glIsFramebufferEXT_Exec(glContext, framebuffer)
 }
 
 /* _glCheckFramebufferStatusEXT_Exec @ 0x67194 (216 bytes) */
-undefined4 _glCheckFramebufferStatusEXT_Exec(int glContext,int target,undefined4 forwardedArg3,undefined4 forwardedArg4,undefined4 forwardedArg5,undefined4 forwardedArg6,undefined4 forwardedArg7,double fparam_1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
+undefined4 _glCheckFramebufferStatusEXT_Exec(int glContext,int target,undefined4 forwardedArg3,undefined4 forwardedArg4,undefined4 forwardedArg5,undefined4 forwardedArg6,undefined4 forwardedArg7,double forwardedFloatArg1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
 {
   undefined4 glErrorCode;
-  undefined4 uVar1;
+  undefined4 framebufferStatus;
   int framebufferObject;
-  double extraout_f1;
+  double f1AfterCall;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
     if (target == 0x8d40) {
@@ -1831,15 +1831,15 @@ undefined4 _glCheckFramebufferStatusEXT_Exec(int glContext,int target,undefined4
       if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
         _pthread_mutex_lock(*(int *)(glContext + 0x5148) + 0x8028);
         framebufferObject = *(int *)(glContext + 0x744c);
-        fparam_1 = extraout_f1;
+        forwardedFloatArg1 = f1AfterCall;
       }
-      uVar1 = ((int (*)())_gleCheckFramebufferStatus)(glContext,framebufferObject + 0x10,forwardedArg3,forwardedArg4,forwardedArg5,forwardedArg6,forwardedArg7,fparam_1,
+      framebufferStatus = ((int (*)())_gleCheckFramebufferStatus)(glContext,framebufferObject + 0x10,forwardedArg3,forwardedArg4,forwardedArg5,forwardedArg6,forwardedArg7,forwardedFloatArg1,
                          forwardedFloatArg2,forwardedFloatArg3,forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
       if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
         _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);
-        return uVar1;
+        return framebufferStatus;
       }
-      return uVar1;
+      return framebufferStatus;
     }
     if (*(int *)(glContext + 0x7574) != 0) {
       return 0;
@@ -1865,64 +1865,64 @@ void _glGetFramebufferAttachmentParameterivEXT_Exec(glContext, target, attachmen
   int *params;
 {
   undefined4 glErrorCode;
-  int iVar2;
-  uint uVar3;
-  int iVar4;
+  int attachedObject;
+  uint attachmentIndex;
+  int framebufferStateThenParamValue;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
     if (target == 0x8d40) {
       if (*(int *)(glContext + 0x744c) == 0) goto LAB_00067294;
-      iVar4 = *(int *)(glContext + 0x744c) + 0x10;
+      framebufferStateThenParamValue = *(int *)(glContext + 0x744c) + 0x10;
       if (attachment == 0x8d00) {
-        uVar3 = 4;
+        attachmentIndex = 4;
       }
       else if (attachment == 0x8d20) {
-        uVar3 = 5;
+        attachmentIndex = 5;
       }
       else {
-        uVar3 = attachment - 0x8ce0;
-        if (*(uint *)(*(int *)(glContext + 0x468c) + 0x18) <= uVar3) goto LAB_00067418;
+        attachmentIndex = attachment - 0x8ce0;
+        if (*(uint *)(*(int *)(glContext + 0x468c) + 0x18) <= attachmentIndex) goto LAB_00067418;
       }
-      iVar2 = *(int *)(uVar3 * 4 + iVar4 + 0xc4);
+      attachedObject = *(int *)(attachmentIndex * 4 + framebufferStateThenParamValue + 0xc4);
       if (pname == 0x8cd0) {
-        if (iVar2 == 0) {
+        if (attachedObject == 0) {
           *params = 0;
           return;
         }
-        if ((*(ushort *)(iVar2 + 0x34) & 0x3c00) == 0x2000) {
-          iVar4 = 0x8d41;
+        if ((*(ushort *)(attachedObject + 0x34) & 0x3c00) == 0x2000) {
+          framebufferStateThenParamValue = 0x8d41;
         }
         else {
-          iVar4 = 0x1702;
+          framebufferStateThenParamValue = 0x1702;
         }
 LAB_00067358:
-        *params = iVar4;
+        *params = framebufferStateThenParamValue;
         return;
       }
       if (pname == 0x8cd1) {
-        iVar4 = 0;
-        if (iVar2 != 0) {
-          iVar4 = *(int *)(iVar2 + 4);
+        framebufferStateThenParamValue = 0;
+        if (attachedObject != 0) {
+          framebufferStateThenParamValue = *(int *)(attachedObject + 4);
         }
         goto LAB_00067358;
       }
-      if ((iVar2 != 0) && ((*(ushort *)(iVar2 + 0x34) & 0x3c00) != 0x2000)) {
+      if ((attachedObject != 0) && ((*(ushort *)(attachedObject + 0x34) & 0x3c00) != 0x2000)) {
         if (pname == 0x8cd3) {
-          if ((*(ushort *)(iVar2 + 0x34) & 0xf) == 0) {
-            *params = *(int *)(uVar3 * 0x18 + iVar4 + 0x24) + 0x8515;
+          if ((*(ushort *)(attachedObject + 0x34) & 0xf) == 0) {
+            *params = *(int *)(attachmentIndex * 0x18 + framebufferStateThenParamValue + 0x24) + 0x8515;
             return;
           }
-          iVar4 = 0;
+          framebufferStateThenParamValue = 0;
           goto LAB_00067358;
         }
         if (pname < 0x8cd4) {
           if (pname == 0x8cd2) {
-            iVar4 = *(int *)(uVar3 * 0x18 + iVar4 + 0x28);
+            framebufferStateThenParamValue = *(int *)(attachmentIndex * 0x18 + framebufferStateThenParamValue + 0x28);
             goto LAB_00067358;
           }
         }
         else if (pname == 0x8cd4) {
-          iVar4 = *(int *)(uVar3 * 0x18 + iVar4 + 0x2c);
+          framebufferStateThenParamValue = *(int *)(attachmentIndex * 0x18 + framebufferStateThenParamValue + 0x2c);
           goto LAB_00067358;
         }
       }

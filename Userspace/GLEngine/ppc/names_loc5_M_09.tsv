@@ -1,0 +1,93 @@
+local	_glConvolutionParameterfv_Exec	pfVar2	convolutionState	CONFIRMED	per-target convolution state selected by target: ctx+0x3298 (GL_CONVOLUTION_1D 0x8010), +0x32d8 (2D 0x8011) or +0x3318 (SEPARABLE_2D 0x8012); words 0-3 border color, even words 4.. filter scale, odd words 5.. filter bias
+local	_glColorTableParameteriv_Exec	pfVar3	colorTableScaleBias	CONFIRMED	per-table scale/bias record selected by target (ctx+0x33b0, +0x33d0, +0x33f0 for the color table, post-convolution and post-color-matrix tables and their proxies): scale in the even words, bias in the odd words, converted from the integer params
+local	_glConvolutionParameterI_Comp	puVar1	listRecord	CONFIRMED	list record returned by _gleAddListItem (0x18 bytes) holding target, pname and the parameter values
+local	_glTexImage3D_Exec	iVar6	textureObjectThenMipmapResult	CONFIRMED	texture object returned by _gleCheckTexImage3DArgs (0 = error already recorded), then reassigned the result of _gleGenMipmapsToLevel
+local	_glGetActiveAttribARB_Exec	iVar2	sharedStateThenProgramObjThenQueryResult	CONFIRMED	ctx+0x5148 shared state (mutex flag +0x8024 / mutex +0x8028, hash table +0x6018), then the program object found by _gleLookupHashObject (kind +0x10 must be 0x8b40), then the result of _ShGetActiveAttrib (nonzero = success)
+local	_glGetBufferSubData_Exec	iVar2	boundBufferObject	CONFIRMED	buffer object bound for target: array (+0x358) or element array (+0x35c) from the vertex-array client state at ctx+0x4a60, or the pixel pack (ctx+0x4a68) / unpack (ctx+0x4a6c) buffer
+local	_gleGenHashNames	uVar1	resultThenRangeStart	CONFIRMED	the returned first name (0 for an empty request, 1 for a new first range), and the first name of the current free range (rangeNode[1]) while walking the range list
+local	_gleFreeBufferState	iVar1	newRefCount	CONFIRMED	reference count (+8) of a buffer object after being decremented; the object is freed with _gleFreeBufferObject when it reaches 0
+local	_glePPUnlogParameters	param_1	glContext	CONFIRMED	OpenGL context: the caller passes glContext; its shared state is read at +0x5148
+local	_glePPUnlogParameters	iVar4	bankStateThenSlotPriorityAddress	CONFIRMED	shared state + bankIndex * 0xa30 (its counter at +0x8a98 is incremented), later the address of the slot's priority halfword (+0x8874 in the shared state)
+local	_gleMap2VertexAttrib1dLoad	pfVar1	destPoint	CONFIRMED	cursor into the destination control points (mapData + 8 words onward), advanced one float per v step
+local	_gleMap2VertexAttrib1dLoad	dVar7	oneThenPointValue	CONFIRMED	DOUBLE_00108d68 (1.0) used as the numerator of the 1/(u2-u1), 1/(v2-v1) factors, then the double control point value read from the source
+local	_glWeightdvARB_Exec	iVar3	weightIndex	CONFIRMED	index of the next weight slot (ctx+0x2d0 + index * 4): starts at 0, set to size after the copy, then counts up to 4 while zero-filling the unused slots
+local	_glWeightdvARB_Exec	iVar1	weightByteOffset	CONFIRMED	weightIndex * 4: byte offset of the zero-filled weight slot
+local	_glWeightdvARB_Exec	dVar4	weightValue	CONFIRMED	the double weight read from weights[] before being narrowed to float and stored
+local	_glVertexAttrib3dvARB_Exec	fVar1	oneComponent	CONFIRMED	ctx+0x24 (1.0f): the implicit w of the three-component attribute, stored at attribRecord+0xc or passed as the fourth component to the vertex hook
+local	_glVertexAttrib3dvARB_Exec	iVar2	attribRecord	CONFIRMED	glContext + index * 0x10: the 4-float current-attribute record at +0x1a0 for generic attribute index
+local	_glVertexAttrib3dvARB_Exec	dVar3	zValue	CONFIRMED	v[2], the third component (stored at attribRecord+0x8)
+local	_glIsShader_Exec	bVar1	isShaderObject	CONFIRMED	true when the looked-up hash object's kind (+0x10) is 0x8b48 (GL_SHADER_OBJECT_ARB); the function result
+local	_glIsShader_Exec	iVar2	sharedStateThenShaderObject	CONFIRMED	ctx+0x5148 shared state (mutex flag +0x8024 / mutex +0x8028, hash table +0x6018), then the object found by _gleLookupHashObject for shader
+local	_glGetDoublev_Exec	uVar6	copiedValue	CONFIRMED	the 8-byte double value copied from the state buffer to *params in the double path
+local	_glGetDoublev_Exec	local_a0	stateValues	CONFIRMED	buffer of up to 16 8-byte values filled by _gleGetState (cursor starts at its first word); integer values (type 0x1404) are read from every second word
+local	_glGetDoublev_Exec	local_20	intToDoubleHigh	CONFIRMED	high word 0x43300000 of the int-to-double conversion temporary
+local	_glGetDoublev_Exec	uStack_1c	intToDoubleLow	CONFIRMED	low word of the int-to-double conversion temporary: value ^ 0x80000000
+local	_glIsBuffer_Exec	iVar1	sharedStateThenBufferObject	CONFIRMED	ctx+0x5148 shared state (mutex flag +0x8024 / mutex +0x8028), then the buffer object found by _gleLookupHashObject(state + 0x701c, buffer) (0 = not a buffer)
+local	_glIsBuffer_Exec	bVar2	isBuffer	CONFIRMED	true when the buffer name is in the buffer hash table; the function result (false after recording GL_INVALID_OPERATION inside Begin/End)
+local	_glIsRenderbufferEXT_Exec	iVar1	sharedStateThenRenderbufferObject	CONFIRMED	ctx+0x5148 shared state (mutex flag +0x8024 / mutex +0x8028), then the renderbuffer object found by _gleLookupHashObject (0 = not a renderbuffer)
+local	_glIsRenderbufferEXT_Exec	bVar2	isRenderbuffer	CONFIRMED	true when the renderbuffer name is in the hash table; the function result (false after recording GL_INVALID_OPERATION inside Begin/End)
+local	_glGenRenderbuffersEXT_Exec	iVar4	sharedStateThenFirstName	CONFIRMED	ctx+0x5148 shared state (mutex flag +0x8024 / mutex +0x8028), then reassigned the first name returned by _gleGenHashNames for n names (0 = failure)
+local	_glGenRenderbuffersEXT_Exec	iVar2	nameValue	CONFIRMED	firstName + loopIndex: the name stored into renderbuffers
+local	_glGenFramebuffersEXT_Exec	iVar4	sharedStateThenFirstName	CONFIRMED	ctx+0x5148 shared state (mutex flag +0x8024 / mutex +0x8028), then reassigned the first name returned by _gleGenHashNames for n names (0 = failure)
+local	_glGenFramebuffersEXT_Exec	iVar2	nameValue	CONFIRMED	firstName + loopIndex: the name stored into framebuffers
+local	_gleBindRenderbuffer	iVar2	sharedStateThenOldRenderbuffer	CONFIRMED	ctx+0x5148 shared state (hash table of renderbuffers at state+0x1004), then the previously bound renderbuffer object at ctx+0x7448 whose refcount (+8) is decremented
+local	_gleBindRenderbuffer	iVar3	newRefCount	CONFIRMED	reference count (+8) of the previously bound renderbuffer after the decrement; freed with _gleFreeTextureObject at 0
+local	_glPopAttrib_Exec	iVar2	stackCursorThenAttribElement	CONFIRMED	attribute stack cursor ctx+0x50f8 (moved back one word), then the saved attribute element popped from it, then each element of the chain linked through +0x2c44 passed to _gleRemoveAttribElem
+local	_glPopAttrib_Exec	iVar3	nextAttribElement	CONFIRMED	link (+0x2c44) of the attribute element being removed, read before _gleRemoveAttribElem
+local	_glIsVertexAttribEnabledARB_Exec	param_2	attribIndex	CONFIRMED	generic vertex attribute index (must be below 0x10): selects the bit tested in the enable mask
+local	_glIsVertexAttribEnabledARB_Exec	param_3	mapTarget	INFERRED	0x8a00 or 0x8a01 (GL_VERTEX_ATTRIB_MAP1_APPLE / MAP2_APPLE of APPLE_vertex_program_evaluators): selects the enable mask at ctx+0x74d8 or ctx+0x74dc; anything else is GL_INVALID_ENUM
+local	_glIsVertexAttribEnabledARB_Exec	uVar2	enabledMask	CONFIRMED	per-map enable bit mask read from ctx+0x74d8 (0x8a00) or ctx+0x74dc (0x8a01)
+local	_glEnableVertexAttribARB_Exec	param_2	attribIndex	CONFIRMED	generic vertex attribute index (must be below 0x10): its bit is set in the enable mask and its per-attribute byte at ctx+0x7524/0x7564 is written
+local	_glEnableVertexAttribARB_Exec	param_3	mapTarget	INFERRED	0x8a00 or 0x8a01 (GL_VERTEX_ATTRIB_MAP1_APPLE / MAP2_APPLE of APPLE_vertex_program_evaluators): selects the enable mask at ctx+0x74d8 or ctx+0x74dc; anything else is GL_INVALID_ENUM
+local	_glWeightivARB_Comp	dVar1	intToDoubleBias	CONFIRMED	DOUBLE_00108d58, the int-to-double conversion bias subtracted from the CONCAT44(0x43300000, value ^ 0x80000000) temporary
+local	_glWeightivARB_Comp	fVar2	channelScale	CONFIRMED	FLOAT_00108e68, the multiplier applied to the converted integer weight
+local	_glWeightivARB_Comp	fVar3	channelBias	CONFIRMED	FLOAT_00108e6c, the offset added to the scaled weight
+local	_glWeightivARB_Comp	uVar4	weightValue	CONFIRMED	the integer weight word read from weights before conversion
+local	_glWeightbvARB_Comp	pcVar1	weightBytePtr	CONFIRMED	address of the current signed byte weight (weights + weightIndex)
+local	_glWeightbvARB_Comp	fVar4	channelBias	CONFIRMED	FLOAT_00108e64, the offset added to the scaled weight
+local	_glWeightbvARB_Comp	iVar5	weightIndex	CONFIRMED	index of the current byte weight: starts at 0, incremented once per weight
+local	_glClearColor_Exec	dVar3	clampLowDouble	CONFIRMED	FLOAT_00108e50 widened to double: lower bound of the clamp applied to each clear color component
+local	_glClearColor_Exec	dVar4	clampHighDouble	CONFIRMED	FLOAT_00108e54 widened to double: upper bound of the clamp applied to each clear color component
+local	_glColor4us_Exec	fVar1	alphaComponent	CONFIRMED	alpha converted to float and scaled by FLOAT_00108e74, stored at ctx+0x2ac
+local	_glColor4us_Exec	fVar2	greenComponent	CONFIRMED	green converted to float and scaled by FLOAT_00108e74, stored at ctx+0x2a4
+local	_glColor4us_Exec	fVar3	blueComponent	CONFIRMED	blue converted to float and scaled by FLOAT_00108e74, stored at ctx+0x2a8
+local	_glColor4us_Exec	fparam_1	f1ThenHookF1Result	INFERRED	incoming floating-point register f1 (not used by this function), reassigned the f1 value left by the color hook at ctx+0x4de0 and returned
+local	_glRasterPos4iv_Exec	bVar1	rendererInfoByte79Zero	CONFIRMED	byte 0x79 of the object at ctx+0x468c compared with zero: selects the 0x17000000 / 0x17ffffff mask of word 3 and the shape of the all-clean test of the state-validation block
+local	_glRasterPos4iv_Exec	cVar2	rendererInfoByte79	CONFIRMED	byte 0x79 of the object at ctx+0x468c (same name in _glMultiDrawArrays_NoopExec): compared with zero for the mask selection
+local	_glRasterPos3dv_Exec	bVar1	rendererInfoByte79Zero	CONFIRMED	byte 0x79 of the object at ctx+0x468c compared with zero: selects the 0x17000000 / 0x17ffffff mask of word 3 and the shape of the all-clean test of the state-validation block
+local	_glRasterPos3dv_Exec	cVar2	rendererInfoByte79	CONFIRMED	byte 0x79 of the object at ctx+0x468c (same name in _glMultiDrawArrays_NoopExec): compared with zero for the mask selection
+local	_glRasterPos4d_Exec	bVar1	rendererInfoByte79Zero	CONFIRMED	byte 0x79 of the object at ctx+0x468c compared with zero: selects the 0x17000000 / 0x17ffffff mask of word 3 and the shape of the all-clean test of the state-validation block
+local	_glRasterPos4d_Exec	cVar2	rendererInfoByte79	CONFIRMED	byte 0x79 of the object at ctx+0x468c (same name in _glMultiDrawArrays_NoopExec): compared with zero for the mask selection
+local	_glRasterPos4d_Exec	extraout_f1	f1AfterCall	INFERRED	Ghidra pseudo-register: extraout_f1 (a register the function reads without having written it, or the value a call left behind; no source-level role)
+local	_glRasterPos2f_Exec	bVar1	rendererInfoByte79Zero	CONFIRMED	byte 0x79 of the object at ctx+0x468c compared with zero: selects the 0x17000000 / 0x17ffffff mask of word 3 and the shape of the all-clean test of the state-validation block
+local	_glRasterPos2f_Exec	cVar2	rendererInfoByte79	CONFIRMED	byte 0x79 of the object at ctx+0x468c (same name in _glMultiDrawArrays_NoopExec): compared with zero for the mask selection
+local	_glRasterPos2f_Exec	extraout_f1	f1AfterCall	INFERRED	Ghidra pseudo-register: extraout_f1 (a register the function reads without having written it, or the value a call left behind; no source-level role)
+local	_glRasterPos2i_Exec	uVar7	forwardedY	CONFIRMED	copy of the parameter y taken at entry and passed on unchanged (argument register of _gleUpdateFramebufferCompleteness); never otherwise read
+local	_glRotatef_CompExec	fVar1	signedRadiansPerDegree	CONFIRMED	angle multiplier: FLOAT_00108e84, or FLOAT_00108eb0 when the single nonzero axis component is negative; angle * multiplier is passed to _sin and _cos
+local	_gleDeleteHashNameAndObject	iVar1	newRefCount	CONFIRMED	reference count (+8) of the removed object after the decrement; at 0 the object's free callback (+0xc) is called with glContext
+local	_gleDeleteHashNameAndObject	iVar2	removeNameResultThenObject	CONFIRMED	first the nonzero result of _gleRemoveHashName (the name was in the table), then the object returned by _gleRemoveHashObject (0 = none)
+local	_gleDeleteHashNameAndObject	uVar3	wasDeleted	CONFIRMED	function result: 0, set to 1 once the name has been removed from the table
+local	_gleIsHashName	param_1	hashTable	CONFIRMED	hash table whose free-name range list head is at +0x1000 (the same list _gleGenHashNames walks with its hashTable parameter)
+local	_gleIsHashName	param_2	name	CONFIRMED	the name tested for membership: below the first range start means not found, below start + count means found
+local	_gleIsHashName	piVar1	rangeNode	CONFIRMED	current node of the range list (next link word 0, first name word 1, count word 2); 0 ends the walk
+local	_gleSelectLinesFunc	uVar2	vertexEndThenRemaining	CONFIRMED	end address vertexCursor + vertexCount * 0x100 of the vertex records, then reassigned the number of records still to copy into the polygon list (the loop counter)
+local	_gleSelectLinesFunc	dVar8	f1AfterHookCall	INFERRED	Ghidra models the value left in f1 by the clip-code hook at ctx+0x5064 as a double; only forwarded as the floating-point argument of _gleClipLinesPlane
+local	_gleMultiVtxTextureCoordGenWrapEye	uVar1	textureUnit	CONFIRMED	texture unit index 0..7 passed as the fourth argument of the per-unit callback
+local	_gleMultiVtxTextureCoordGenWrapEye	iVar2	texGenRecord	CONFIRMED	cursor into the per-unit records at ctx+0x5300 (0xc bytes each): enable byte at +0x1c, callback at +0x18
+local	_glepLoadRenderers	iVar7	registryEntryThenBundleNameString	CONFIRMED	first the IORegistry entry of the renderer (array at gle_io_data+4, indexed by loopIndex2), then reassigned the CFString property IOGLBundleName read from it (CFRelease'd at the end of the iteration)
+local	_gleBeginPrimitiveTCLRDirtyFunc	sVar1	vertexStride	CONFIRMED	per-vertex record stride, ctx+0x4880 or ctx+0x4882 depending on whether ctx+0x4a14 is zero; stored at ctx+0x487c and multiplied by the vertex count for the buffer end (ctx+0x485c)
+local	_gleBeginPrimitiveTCLRDirtyFunc	iVar3	vertexBuffer	CONFIRMED	buffer address returned by the allocation hook at ctx+0x46e8: stored as the buffer start (ctx+0x4868) and the write cursor (ctx+0x4858); the end (ctx+0x485c) is vertexBuffer + stride * count
+local	_gleBeginPrimitiveTCLRDirtyFunc	local_20	vertexCountArg	INFERRED	vertex count ctx+0x4a14 passed by address to the allocation hook at ctx+0x46e8 (which may update it); its first word multiplied by the stride gives the buffer end
+local	_gliCopyAttributes	uVar2	attribBit	CONFIRMED	attribute group bit passed to _gleGetAttrib / _gleSetAttrib: starts at 1 and doubles each iteration until 0xfffff is reached
+local	_gliCopyAttributes	uVar1	nextAttribBit	CONFIRMED	attribBit << 1: the next group bit, also the loop-end test (< 0xfffff)
+local	_gliCopyAttributes	auStack_2c60	attribBuffer	CONFIRMED	11340-byte buffer filled by _gleGetAttrib from the source context and applied to the destination with _gleSetAttrib
+local	_glUniform1ivARB_Exec	iVar5	newValue	CONFIRMED	the integer element read from value[] (*value) for the current uniform element: compared with the stored word, then stored
+local	_glUniform1ivARB_Exec	iVar8	oldValue	CONFIRMED	the uniform's current stored word (*dstCursor) read before it is overwritten; an update happens only when it differs from newValue
+local	_glUniform1ivARB_Exec	iVar7	elementCount	CONFIRMED	copy of the clamped uniformSize (number of elements written): every assignment re-sets it to uniformSize, used as the loop bound
+local	_glUniform1ivARB_Exec	fparam_1	forwardedFloatArg1	INFERRED	stale floating-point argument register f1: set to the value left in f1 by the previous call (f1AfterCall), reassigned the value _setImageUnit leaves in f1, and only forwarded as the first FP argument of _setImageUnit
+local	_glUniform1ivARB_Exec	extraout_f1	f1AfterCall	INFERRED	Ghidra pseudo-register: the value left in f1 after the _ShGetUniformTypeInfo call; only copied into fparam_1 and forwarded
+local	_glBitmap_Exec	param_5	yorigShadowThenFormatArg	INFERRED	incoming argument register r7 (shadow of the float parameter yorig in the PPC parameter area), overwritten with 0x1a00 (GL_BITMAP) as the format argument of _gleOffsetLimitImage when a pixel unpack buffer is bound, and forwarded to _gleUpdateFramebufferCompleteness
+local	_glBitmap_Exec	param_6	xmoveShadowThenBitmapArg	INFERRED	incoming argument register r8 (shadow of the float parameter xmove), overwritten with the bitmap offset as the pixels argument of _gleOffsetLimitImage when a pixel unpack buffer is bound, and forwarded to _gleUpdateFramebufferCompleteness
+local	_glBitmap_Exec	iVar7	forwardedHeight	CONFIRMED	copy of the parameter height taken at entry and passed on unchanged (argument register of _gleUpdateFramebufferCompleteness); never otherwise read
+local	_glBitmap_Exec	extraout_f1	f1AfterOffsetLimitImage	INFERRED	Ghidra pseudo-register: the value left in f1 by _gleOffsetLimitImage, copied into fparam_1_00 when no buffer synchronisation call follows
+local	_glBitmap_Exec	extraout_f1_00	f1AfterUpdateMatrixFunc	INFERRED	Ghidra pseudo-register: the value left in f1 by _gleUpdateMatrixFunc, copied into fparam_1_00 and forwarded to _gleUpdateFramebufferCompleteness

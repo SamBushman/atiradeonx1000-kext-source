@@ -189,42 +189,42 @@ int _glPolygonStipple_Comp(glContext, mask)
   int glContext;
   int mask;
 {
-  uint uVar1;
-  undefined4 uVar2;
-  int iVar3;
+  uint skipPixels;
+  undefined4 fillResult;
+  int skipRows;
   int byteOffset;
-  int iVar5;
+  int pixelUnpackBuffer;
   int listRecord;
   int remaining;
   
-  iVar5 = *(int *)(glContext + 0x4a6c);
-  if (iVar5 != 0) {
-    if (*(int *)(iVar5 + 0x38) < mask + 0x20) {
+  pixelUnpackBuffer = *(int *)(glContext + 0x4a6c);
+  if (pixelUnpackBuffer != 0) {
+    if (*(int *)(pixelUnpackBuffer + 0x38) < mask + 0x20) {
       if (*(int *)(glContext + 0x7574) != 0) {
         return glContext;
       }
       *(undefined4 *)(glContext + 0x7574) = 0x502;
       return glContext;
     }
-    if (*(int *)(iVar5 + 0x40) != 0) {
-      _gleSynchronizePluginBuffer(glContext,iVar5 + 0x10);
+    if (*(int *)(pixelUnpackBuffer + 0x40) != 0) {
+      _gleSynchronizePluginBuffer(glContext,pixelUnpackBuffer + 0x10);
     }
-    mask = mask + *(int *)(iVar5 + 0x30);
+    mask = mask + *(int *)(pixelUnpackBuffer + 0x30);
   }
   listRecord = _gleAddListItem(glContext,PTR__glPolygonStipple_ListExec_00110320,0x80);
   if (listRecord != 0) {
-    uVar1 = *(uint *)(glContext + 0x31d8);
-    iVar3 = *(int *)(glContext + 0x31d4);
+    skipPixels = *(uint *)(glContext + 0x31d8);
+    skipRows = *(int *)(glContext + 0x31d4);
     if ((((*(char *)(glContext + 0x31e5) != '\0') || (*(int *)(glContext + 0x31cc) != 0)) ||
-        (4 < *(int *)(glContext + 0x31e0))) || ((uVar1 & 7) != 0)) {
-      uVar2 = _gleFillImage(glContext,0x20,0x20,1,0x1900,0x1a00,mask,listRecord);
-      return uVar2;
+        (4 < *(int *)(glContext + 0x31e0))) || ((skipPixels & 7) != 0)) {
+      fillResult = _gleFillImage(glContext,0x20,0x20,1,0x1900,0x1a00,mask,listRecord);
+      return fillResult;
     }
     byteOffset = 0;
     remaining = 0x10;
     do {
       *(undefined8 *)(byteOffset + listRecord) =
-           *(undefined8 *)(byteOffset + mask + iVar3 * 4 + ((int)uVar1 >> 3));
+           *(undefined8 *)(byteOffset + mask + skipRows * 4 + ((int)skipPixels >> 3));
       byteOffset = byteOffset + 8;
       remaining = remaining + -1;
     } while (remaining != 0);
@@ -385,15 +385,15 @@ int _glAreTexturesResident_Exec(glContext, n, textures, residences)
   undefined4 *textures;
   int residences;
 {
-  undefined4 uVar1;
+  undefined4 textureName;
   undefined4 glErrorCode;
-  int iVar2;
-  int iVar3;
+  int residenceBuffer;
+  int isResident;
   int hashObject;
-  int iVar4;
+  int allResident;
   int loopIndex;
   
-  iVar4 = 1;
+  allResident = 1;
   if (*(short *)(glContext + 0x4a10) < 0) {
     if (n < 0) {
       if (*(int *)(glContext + 0x7574) != 0) {
@@ -405,51 +405,51 @@ int _glAreTexturesResident_Exec(glContext, n, textures, residences)
       if (n == 0) {
         return 0;
       }
-      iVar2 = _malloc(n);
-      if (iVar2 != 0) {
+      residenceBuffer = _malloc(n);
+      if (residenceBuffer != 0) {
         if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
           _pthread_mutex_lock(*(int *)(glContext + 0x5148) + 0x8028);
         }
         loopIndex = 0;
         if (0 < n) {
           do {
-            uVar1 = *textures;
+            textureName = *textures;
             textures = textures + 1;
-            hashObject = _gleLookupHashObject(*(int *)(glContext + 0x5148) + 0x2008,uVar1);
+            hashObject = _gleLookupHashObject(*(int *)(glContext + 0x5148) + 0x2008,textureName);
             if (hashObject == 0) {
               if (*(int *)(glContext + 0x7574) == 0) {
                 *(undefined4 *)(glContext + 0x7574) = 0x501;
               }
-              iVar4 = 0;
+              allResident = 0;
               goto LAB_000910e0;
             }
-            iVar3 = (**(code **)(glContext + 0x47ac))
+            isResident = (**(code **)(glContext + 0x47ac))
                               (*(undefined4 *)(glContext + 0x4688),
-                               *(undefined4 *)((uint)*(byte *)(glContext + 0x85a8) * 4 + iVar3 + 0x10)
+                               *(undefined4 *)((uint)*(byte *)(glContext + 0x85a8) * 4 + hashObject + 0x10)
                               );
-            if (iVar3 == 0) {
-              iVar4 = 0;
-              *(undefined1 *)(iVar2 + loopIndex) = 0;
+            if (isResident == 0) {
+              allResident = 0;
+              *(undefined1 *)(residenceBuffer + loopIndex) = 0;
             }
             else {
-              *(undefined1 *)(iVar2 + loopIndex) = 1;
+              *(undefined1 *)(residenceBuffer + loopIndex) = 1;
             }
             loopIndex = loopIndex + 1;
           } while (loopIndex < n);
-          if ((iVar4 == 0) && (loopIndex = 0, 0 < n)) {
+          if ((allResident == 0) && (loopIndex = 0, 0 < n)) {
             do {
-              *(undefined1 *)(residences + loopIndex) = *(undefined1 *)(iVar2 + loopIndex);
+              *(undefined1 *)(residences + loopIndex) = *(undefined1 *)(residenceBuffer + loopIndex);
               loopIndex = loopIndex + 1;
             } while (loopIndex < n);
           }
         }
 LAB_000910e0:
-        _free(iVar2);
+        _free(residenceBuffer);
         if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
           _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);
-          return iVar4;
+          return allResident;
         }
-        return iVar4;
+        return allResident;
       }
       if (*(int *)(glContext + 0x7574) != 0) {
         return 0;
@@ -537,11 +537,11 @@ int _glPrioritizeTextures_ListExec(glContext, listRecord)
   undefined4 glContext;
   int *listRecord;
 {
-  int iVar1;
+  int textureCount;
   
-  iVar1 = *listRecord;
-  _glPrioritizeTextures_Exec(glContext,iVar1,listRecord + 1,listRecord + iVar1 + 1);
-  return iVar1 * 8 + 4;
+  textureCount = *listRecord;
+  _glPrioritizeTextures_Exec(glContext,textureCount,listRecord + 1,listRecord + textureCount + 1);
+  return textureCount * 8 + 4;
 }
 
 /* _glPrioritizeTextures_Comp @ 0x912cc (144 bytes) */
@@ -832,13 +832,13 @@ int _glCompressedTexSubImage2D_Comp(glContext, target, level, xoffset, yoffset, 
   int imageSize;
   int data;
 {
-  undefined4 uVar1;
-  int iVar2;
+  undefined4 execResultThenMemcpyResult;
+  int pixelUnpackBuffer;
   
   if (((target == 0x8064) || (target == 0x851b)) || (target == 0x84f7)) {
-    uVar1 = ((int (*)())_glCompressedTexSubImage2D_Exec)(glContext,target,level,xoffset,yoffset,width,height,format,imageSize,
+    execResultThenMemcpyResult = ((int (*)())_glCompressedTexSubImage2D_Exec)(glContext,target,level,xoffset,yoffset,width,height,format,imageSize,
                        data);
-    return uVar1;
+    return execResultThenMemcpyResult;
   }
   if (((format < 0x83f0) || ((0x83f3 < format && (format != 0x8837)))) || (imageSize < 1)) {
 LAB_00091acc:
@@ -847,13 +847,13 @@ LAB_00091acc:
     }
   }
   else {
-    iVar2 = glContext[0x129b];
-    if (iVar2 != 0) {
-      if (*(int *)(iVar2 + 0x38) < imageSize + data) goto LAB_00091acc;
-      if (*(int *)(iVar2 + 0x40) != 0) {
-        _gleSynchronizePluginBuffer(glContext,iVar2 + 0x10);
+    pixelUnpackBuffer = glContext[0x129b];
+    if (pixelUnpackBuffer != 0) {
+      if (*(int *)(pixelUnpackBuffer + 0x38) < imageSize + data) goto LAB_00091acc;
+      if (*(int *)(pixelUnpackBuffer + 0x40) != 0) {
+        _gleSynchronizePluginBuffer(glContext,pixelUnpackBuffer + 0x10);
       }
-      data = data + *(int *)(iVar2 + 0x30);
+      data = data + *(int *)(pixelUnpackBuffer + 0x30);
     }
     glContext = (int *)_gleAddListItem(glContext,PTR__glCompressedTexSubImage2D_ListExec_00110394,
                                      imageSize + 0x20);
@@ -867,8 +867,8 @@ LAB_00091acc:
       glContext[5] = height;
       glContext[7] = imageSize;
       if (data != 0) {
-        uVar1 = _memcpy(glContext + 8,data,imageSize);
-        return uVar1;
+        execResultThenMemcpyResult = _memcpy(glContext + 8,data,imageSize);
+        return execResultThenMemcpyResult;
       }
     }
   }
@@ -1323,18 +1323,18 @@ int _glCompressedTexSubImage2D_Exec(glContext, target, level, xoffset, yoffset, 
   int levelImageCursor2;
   int textureObject;
   int pluginResult;
-  int iVar5;
+  int faceMaskOffsetThenPluginResult;
   byte levelFlags;
   int faceOffset;
   int textureLevel;
-  int iVar9;
+  int unpackBufferThenFaceMaskOffsetThenMipmapResult;
   int levelImageCursor;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
-    iVar9 = *(int *)(glContext + 0x4a6c);
-    if (iVar9 != 0) {
-      if (*(int *)(iVar9 + 0x38) < imageSize + data) goto LAB_000927a4;
-      data = data + *(int *)(iVar9 + 0x30);
+    unpackBufferThenFaceMaskOffsetThenMipmapResult = *(int *)(glContext + 0x4a6c);
+    if (unpackBufferThenFaceMaskOffsetThenMipmapResult != 0) {
+      if (*(int *)(unpackBufferThenFaceMaskOffsetThenMipmapResult + 0x38) < imageSize + data) goto LAB_000927a4;
+      data = data + *(int *)(unpackBufferThenFaceMaskOffsetThenMipmapResult + 0x30);
     }
     if (((width != 0) && (height != 0)) &&
        (textureObject = _gleCheckCompressedTexSubImage2DArgs
@@ -1347,10 +1347,10 @@ int _glCompressedTexSubImage2D_Exec(glContext, target, level, xoffset, yoffset, 
       faceOffset = faceIndex * 0x168;
       levelRecord = textureObject + faceOffset + level * 0x18;
       textureLevel = levelRecord + 0xc4;
-      if (iVar9 != 0) {
+      if (unpackBufferThenFaceMaskOffsetThenMipmapResult != 0) {
         if ((((int)(uint)*(byte *)(textureObject + 0x8d) <= (int)level) &&
             ((int)level <= (int)(uint)*(byte *)(textureObject + 0x8f))) &&
-           ((iVar5 = faceIndex * 2, (*(ushort *)(iVar5 + textureObject + 0x94) >> (level & 0x3f) & 1) != 0 &&
+           ((faceMaskOffsetThenPluginResult = faceIndex * 2, (*(ushort *)(faceMaskOffsetThenPluginResult + textureObject + 0x94) >> (level & 0x3f) & 1) != 0 &&
             (pluginResult = (**(code **)(glContext + 0x4710))
                                (*(undefined4 *)(glContext + 0x4688),
                                 *(undefined4 *)(textureObject + (uint)*(byte *)(glContext + 0x85a8) * 4),faceIndex
@@ -1365,8 +1365,8 @@ int _glCompressedTexSubImage2D_Exec(glContext, target, level, xoffset, yoffset, 
               levelFlags = *(byte *)(levelRecord + 0xcf);
             }
             *(byte *)(levelRecord + 0xcf) = levelFlags & 0xef;
-            *(ushort *)(iVar5 + textureObject + 0xa0) =
-                 *(ushort *)(iVar5 + textureObject + 0xa0) &
+            *(ushort *)(faceMaskOffsetThenPluginResult + textureObject + 0xa0) =
+                 *(ushort *)(faceMaskOffsetThenPluginResult + textureObject + 0xa0) &
                  ((ushort)(-2 << (level & 0x1f)) | (ushort)(0xfffffffe >> 0x20 - (level & 0x1f))
                  );
           }
@@ -1388,8 +1388,8 @@ int _glCompressedTexSubImage2D_Exec(glContext, target, level, xoffset, yoffset, 
                 _gleFreeTextureLevel(glContext,textureObject,levelImageCursor);
               }
               *(byte *)(levelImageCursor + 0xb) = *(byte *)(levelImageCursor + 0xb) & 0xef;
-              *(ushort *)(iVar5 + textureObject + 0xa0) =
-                   *(ushort *)(iVar5 + textureObject + 0xa0) & ~(ushort)(1 << (nextLevel & 0x3f));
+              *(ushort *)(faceMaskOffsetThenPluginResult + textureObject + 0xa0) =
+                   *(ushort *)(faceMaskOffsetThenPluginResult + textureObject + 0xa0) & ~(ushort)(1 << (nextLevel & 0x3f));
             }
             nextLevel = nextLevel + 1;
             *(byte *)(levelImageCursor + 0xb) = *(byte *)(levelImageCursor + 0xb) | 0x40;
@@ -1397,17 +1397,17 @@ int _glCompressedTexSubImage2D_Exec(glContext, target, level, xoffset, yoffset, 
           } while ((int)nextLevel <= (int)(uint)*(byte *)(textureObject + 0x83));
           return;
         }
-        if (*(int *)(iVar9 + 0x40) != 0) {
-          _gleSynchronizePluginBuffer(glContext,iVar9 + 0x10);
+        if (*(int *)(unpackBufferThenFaceMaskOffsetThenMipmapResult + 0x40) != 0) {
+          _gleSynchronizePluginBuffer(glContext,unpackBufferThenFaceMaskOffsetThenMipmapResult + 0x10);
         }
       }
       if (((((int)level < (int)(uint)*(byte *)(textureObject + 0x8d)) ||
            ((int)(uint)*(byte *)(textureObject + 0x8f) < (int)level)) ||
-          (iVar9 = faceIndex * 2, (*(ushort *)(iVar9 + textureObject + 0x94) >> (level & 0x3f) & 1) == 0)) ||
-         (iVar5 = (**(code **)(glContext + 0x4710))
+          (unpackBufferThenFaceMaskOffsetThenMipmapResult = faceIndex * 2, (*(ushort *)(unpackBufferThenFaceMaskOffsetThenMipmapResult + textureObject + 0x94) >> (level & 0x3f) & 1) == 0)) ||
+         (faceMaskOffsetThenPluginResult = (**(code **)(glContext + 0x4710))
                             (*(undefined4 *)(glContext + 0x4688),
                              *(undefined4 *)(textureObject + (uint)*(byte *)(glContext + 0x85a8) * 4),faceIndex,
-                             level,xoffset,yoffset,0,width), iVar5 == 0)) {
+                             level,xoffset,yoffset,0,width), faceMaskOffsetThenPluginResult == 0)) {
         levelFlags = *(byte *)(levelRecord + 0xcf);
         if ((levelFlags & 0x10) == 0) {
           if ((levelFlags & 0x40) == 0) {
@@ -1429,7 +1429,7 @@ int _glCompressedTexSubImage2D_Exec(glContext, target, level, xoffset, yoffset, 
                     (glContext,textureLevel,xoffset,yoffset,0,width,height,1,format,imageSize,data);
         }
         if ((((*(uint *)(textureObject + 0x6c) & 0x8000) == 0) || ((int)*(short *)(textureObject + 0x60) != level)
-            ) || (iVar9 = _gleGenMipmapsToLevel(glContext,textureObject,faceIndex,level,0xf,1), iVar9 == 0)) {
+            ) || (unpackBufferThenFaceMaskOffsetThenMipmapResult = _gleGenMipmapsToLevel(glContext,textureObject,faceIndex,level,0xf,1), unpackBufferThenFaceMaskOffsetThenMipmapResult == 0)) {
           *(uint *)(glContext + 0x314) =
                *(uint *)(glContext + 0x314) | 1 << (*(uint *)(glContext + 0x53d4) & 0x3f);
         }
@@ -1445,8 +1445,8 @@ int _glCompressedTexSubImage2D_Exec(glContext, target, level, xoffset, yoffset, 
             levelFlags = *(byte *)(levelRecord + 0xcf);
           }
           *(byte *)(levelRecord + 0xcf) = levelFlags & 0xef;
-          *(ushort *)(iVar9 + textureObject + 0xa0) =
-               *(ushort *)(iVar9 + textureObject + 0xa0) &
+          *(ushort *)(unpackBufferThenFaceMaskOffsetThenMipmapResult + textureObject + 0xa0) =
+               *(ushort *)(unpackBufferThenFaceMaskOffsetThenMipmapResult + textureObject + 0xa0) &
                ((ushort)(-2 << (level & 0x1f)) | (ushort)(0xfffffffe >> 0x20 - (level & 0x1f)));
         }
         *(byte *)(levelRecord + 0xcf) = *(byte *)(levelRecord + 0xcf) | 0x40;
@@ -1459,8 +1459,8 @@ int _glCompressedTexSubImage2D_Exec(glContext, target, level, xoffset, yoffset, 
                 _gleFreeTextureLevel(glContext,textureObject,levelImageCursor2);
               }
               *(byte *)(levelImageCursor2 + 0xb) = *(byte *)(levelImageCursor2 + 0xb) & 0xef;
-              *(ushort *)(iVar9 + textureObject + 0xa0) =
-                   *(ushort *)(iVar9 + textureObject + 0xa0) & ~(ushort)(1 << (faceIndex & 0x3f));
+              *(ushort *)(unpackBufferThenFaceMaskOffsetThenMipmapResult + textureObject + 0xa0) =
+                   *(ushort *)(unpackBufferThenFaceMaskOffsetThenMipmapResult + textureObject + 0xa0) & ~(ushort)(1 << (faceIndex & 0x3f));
             }
             faceIndex = faceIndex + 1;
             *(byte *)(levelImageCursor2 + 0xb) = *(byte *)(levelImageCursor2 + 0xb) | 0x40;

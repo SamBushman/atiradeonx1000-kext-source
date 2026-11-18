@@ -344,20 +344,20 @@ void _gleShortFilter1(dst, src, count, offsetA)
   int offsetA;
 {
   int byteOffset;
-  uint uVar2;
+  uint remaining;
   
   byteOffset = 0;
   if ((int)(count << 1) < 1) {
     return;
   }
-  uVar2 = count & 0x7fffffff;
+  remaining = count & 0x7fffffff;
   do {
     *(short *)(dst + byteOffset) =
          (short)((int)*(short *)(src + byteOffset) + (int)*(short *)(src + byteOffset + offsetA) >> 1)
     ;
     byteOffset = byteOffset + 2;
-    uVar2 = uVar2 - 1;
-  } while (uVar2 != 0);
+    remaining = remaining - 1;
+  } while (remaining != 0);
   return;
 }
 
@@ -499,28 +499,28 @@ void _gleFloatFilter3(dst, src, count, offsetA, offsetB, offsetC, unusedArg7, un
   undefined4 unusedArg7;
   undefined4 unusedArg8;
 {
-  float fVar1;
-  float *pfVar2;
+  float texelBC;
+  float *sourceABC;
   float weight;
-  int iVar4;
+  int sourceSample;
   int byteOffset;
-  float *pfVar6;
+  float *sourceBCCursor;
   uint remaining;
   
   weight = FLOAT_00108f4c;
   byteOffset = 0;
   if (0 < (int)(count << 2)) {
     remaining = count & 0x3fffffff;
-    pfVar6 = (float *)(src + offsetB + offsetC);
+    sourceBCCursor = (float *)(src + offsetB + offsetC);
     do {
-      iVar4 = src + byteOffset;
-      fVar1 = *pfVar6;
-      pfVar2 = (float *)((int)pfVar6 + offsetA);
-      pfVar6 = pfVar6 + 1;
+      sourceSample = src + byteOffset;
+      texelBC = *sourceBCCursor;
+      sourceABC = (float *)((int)sourceBCCursor + offsetA);
+      sourceBCCursor = sourceBCCursor + 1;
       *(float *)(dst + byteOffset) =
-           (*(float *)(src + byteOffset) + *(float *)(iVar4 + offsetA) + *(float *)(iVar4 + offsetB)
-            + *(float *)(iVar4 + offsetA + offsetB) + *(float *)(iVar4 + offsetC) +
-            *(float *)(iVar4 + offsetA + offsetC) + fVar1 + *pfVar2) * weight;
+           (*(float *)(src + byteOffset) + *(float *)(sourceSample + offsetA) + *(float *)(sourceSample + offsetB)
+            + *(float *)(sourceSample + offsetA + offsetB) + *(float *)(sourceSample + offsetC) +
+            *(float *)(sourceSample + offsetA + offsetC) + texelBC + *sourceABC) * weight;
       byteOffset = byteOffset + 4;
       remaining = remaining - 1;
     } while (remaining != 0);
@@ -705,14 +705,14 @@ void _gle332Filter1(dst, src, unusedArg3, offsetA)
   undefined4 unusedArg3;
   int offsetA;
 {
-  byte bVar1;
-  byte bVar2;
+  byte texel0;
+  byte texelA;
   
-  bVar1 = *src;
-  bVar2 = src[offsetA];
-  *dst = (byte)((bVar1 & 0xe0) + (bVar2 & 0xe0) >> 1) & 0xe0 |
-             (byte)((bVar1 & 0x1c) + (bVar2 & 0x1c) >> 1) & 0x1c |
-             (byte)((bVar1 & 3) + (bVar2 & 3) >> 1);
+  texel0 = *src;
+  texelA = src[offsetA];
+  *dst = (byte)((texel0 & 0xe0) + (texelA & 0xe0) >> 1) & 0xe0 |
+             (byte)((texel0 & 0x1c) + (texelA & 0x1c) >> 1) & 0x1c |
+             (byte)((texel0 & 3) + (texelA & 3) >> 1);
   return;
 }
 
@@ -724,18 +724,18 @@ void _gle332Filter2(dst, src, unusedArg3, offsetA, offsetB)
   int offsetA;
   int offsetB;
 {
-  byte bVar1;
-  byte bVar2;
-  byte bVar3;
-  byte bVar4;
+  byte texel0;
+  byte texelA;
+  byte texelB;
+  byte texelAB;
   
-  bVar1 = *src;
-  bVar2 = src[offsetA];
-  bVar3 = src[offsetB];
-  bVar4 = src[offsetB + offsetA];
-  *dst = (byte)((bVar1 & 0xe0) + (bVar2 & 0xe0) + (bVar3 & 0xe0) + (bVar4 & 0xe0) >> 2) & 0xe0 |
-             (byte)((bVar1 & 0x1c) + (bVar2 & 0x1c) + (bVar3 & 0x1c) + (bVar4 & 0x1c) >> 2) & 0x1c |
-             (byte)((bVar1 & 3) + (bVar2 & 3) + (bVar3 & 3) + (bVar4 & 3) >> 2) & 3;
+  texel0 = *src;
+  texelA = src[offsetA];
+  texelB = src[offsetB];
+  texelAB = src[offsetB + offsetA];
+  *dst = (byte)((texel0 & 0xe0) + (texelA & 0xe0) + (texelB & 0xe0) + (texelAB & 0xe0) >> 2) & 0xe0 |
+             (byte)((texel0 & 0x1c) + (texelA & 0x1c) + (texelB & 0x1c) + (texelAB & 0x1c) >> 2) & 0x1c |
+             (byte)((texel0 & 3) + (texelA & 3) + (texelB & 3) + (texelAB & 3) >> 2) & 3;
   return;
 }
 
@@ -957,21 +957,21 @@ void _gle4444Filter2(dst, src, unusedArg3, offsetA, offsetB)
   int offsetA;
   int offsetB;
 {
-  ushort uVar1;
-  ushort uVar2;
-  ushort uVar3;
-  ushort uVar4;
+  ushort texel0;
+  ushort texelA;
+  ushort texelB;
+  ushort texelAB;
   
-  uVar1 = *src;
-  uVar2 = *(ushort *)((int)src + offsetA);
-  uVar3 = *(ushort *)((int)src + offsetB);
-  uVar4 = *(ushort *)((int)src + offsetB + offsetA);
-  *dst = (ushort)((uVar1 & 0xf000) + (uVar2 & 0xf000) + (uVar3 & 0xf000) + (uVar4 & 0xf000) >> 2
+  texel0 = *src;
+  texelA = *(ushort *)((int)src + offsetA);
+  texelB = *(ushort *)((int)src + offsetB);
+  texelAB = *(ushort *)((int)src + offsetB + offsetA);
+  *dst = (ushort)((texel0 & 0xf000) + (texelA & 0xf000) + (texelB & 0xf000) + (texelAB & 0xf000) >> 2
                      ) & 0xf000 |
-             (ushort)((uVar1 & 0xf00) + (uVar2 & 0xf00) + (uVar3 & 0xf00) + (uVar4 & 0xf00) >> 2) &
-             0xf00 | (ushort)((uVar1 & 0xf0) + (uVar2 & 0xf0) + (uVar3 & 0xf0) + (uVar4 & 0xf0) >> 2
+             (ushort)((texel0 & 0xf00) + (texelA & 0xf00) + (texelB & 0xf00) + (texelAB & 0xf00) >> 2) &
+             0xf00 | (ushort)((texel0 & 0xf0) + (texelA & 0xf0) + (texelB & 0xf0) + (texelAB & 0xf0) >> 2
                              ) & 0xf0 |
-             (ushort)((uVar1 & 0xf) + (uVar2 & 0xf) + (uVar3 & 0xf) + (uVar4 & 0xf) >> 2) & 0xf;
+             (ushort)((texel0 & 0xf) + (texelA & 0xf) + (texelB & 0xf) + (texelAB & 0xf) >> 2) & 0xf;
   return;
 }
 
@@ -1036,16 +1036,16 @@ void _gles8s8Filter2(dst, src, unusedArg3, offsetA, offsetB)
   int offsetA;
   int offsetB;
 {
-  undefined2 uVar1;
+  undefined2 texelAB;
   
-  uVar1 = *(undefined2 *)((int)src + offsetB + offsetA);
+  texelAB = *(undefined2 *)((int)src + offsetB + offsetA);
   *dst = ((short)(char)((ushort)*src >> 8) +
               (short)(char)((ushort)*(undefined2 *)((int)src + offsetA) >> 8) +
               (short)(char)((ushort)*(undefined2 *)((int)src + offsetB) >> 8) +
-             (short)(char)((ushort)uVar1 >> 8)) * 0x80 & 0xff00U |
+             (short)(char)((ushort)texelAB >> 8)) * 0x80 & 0xff00U |
              (ushort)((uint)((int)(char)*src +
                              (int)(char)*(undefined2 *)((int)src + offsetA) +
-                             (int)(char)*(undefined2 *)((int)src + offsetB) + (int)(char)uVar1)
+                             (int)(char)*(undefined2 *)((int)src + offsetB) + (int)(char)texelAB)
                      >> 1) & 0xff;
   return;
 }
@@ -1124,23 +1124,23 @@ void _gles16s16Filter3(dst, src, unusedArg3, offsetA, offsetB, offsetC)
   int offsetB;
   int offsetC;
 {
-  int iVar1;
-  int iVar2;
-  int iVar3;
-  int iVar4;
+  int texelAB;
+  int texelAC;
+  int texelBC;
+  int texelABC;
   
-  iVar1 = *(int *)((int)src + offsetB + offsetA);
-  iVar2 = *(int *)((int)src + offsetC + offsetA);
-  iVar3 = *(int *)((int)src + offsetC + offsetB);
-  iVar4 = *(int *)((int)src + offsetC + offsetB + offsetA);
+  texelAB = *(int *)((int)src + offsetB + offsetA);
+  texelAC = *(int *)((int)src + offsetC + offsetA);
+  texelBC = *(int *)((int)src + offsetC + offsetB);
+  texelABC = *(int *)((int)src + offsetC + offsetB + offsetA);
   *dst = ((*src >> 0x10) + (*(int *)((int)src + offsetA) >> 0x10) +
-              (*(int *)((int)src + offsetB) >> 0x10) + (iVar1 >> 0x10) +
-              (*(int *)((int)src + offsetC) >> 0x10) + (iVar2 >> 0x10) + (iVar3 >> 0x10) +
-             (iVar4 >> 0x10)) * 0x8000 & 0xffff0000U |
+              (*(int *)((int)src + offsetB) >> 0x10) + (texelAB >> 0x10) +
+              (*(int *)((int)src + offsetC) >> 0x10) + (texelAC >> 0x10) + (texelBC >> 0x10) +
+             (texelABC >> 0x10)) * 0x8000 & 0xffff0000U |
              (uint)((int)(short)*src + (int)(short)*(int *)((int)src + offsetA) +
-                    (int)(short)*(int *)((int)src + offsetB) + (int)(short)iVar1 +
-                    (int)(short)*(int *)((int)src + offsetC) + (int)(short)iVar2 +
-                    (int)(short)iVar3 + (int)(short)iVar4) >> 1 & 0xffff;
+                    (int)(short)*(int *)((int)src + offsetB) + (int)(short)texelAB +
+                    (int)(short)*(int *)((int)src + offsetC) + (int)(short)texelAC +
+                    (int)(short)texelBC + (int)(short)texelABC) >> 1 & 0xffff;
   return;
 }
 
@@ -2373,39 +2373,39 @@ int _gleGenSurfaceMipmaps(glContext, param_2, param_3, param_4, param_5)
 }
 
 /* _gleHalfFloatToFloat @ 0xfc084 (136 bytes) */
-double _gleHalfFloatToFloat(uint param_1)
+double _gleHalfFloatToFloat(uint halfBits)
 {
-  float fVar1;
-  uint uVar2;
-  uint uVar3;
-  uint uVar4;
+  float floatValue;
+  uint mantissa;
+  uint exponentFieldThenFloatExponentBits;
+  uint signBit;
   
-  uVar3 = param_1 & 0x7c00;
-  uVar2 = param_1 & 0x3ff;
-  uVar4 = (param_1 & 0x8000) << 0x10;
-  if (uVar3 == 0x7c00) {
-    fVar1 = GH_U2F((unsigned int)((uVar4 | 0x7f800000)));
-    if (uVar2 != 0) {
-      fVar1 = GH_U2F((unsigned int)((uVar4 | 0x7fffffff)));
+  exponentFieldThenFloatExponentBits = halfBits & 0x7c00;
+  mantissa = halfBits & 0x3ff;
+  signBit = (halfBits & 0x8000) << 0x10;
+  if (exponentFieldThenFloatExponentBits == 0x7c00) {
+    floatValue = GH_U2F((unsigned int)((signBit | 0x7f800000)));
+    if (mantissa != 0) {
+      floatValue = GH_U2F((unsigned int)((signBit | 0x7fffffff)));
     }
   }
   else {
-    if (uVar3 == 0) {
-      uVar3 = 0;
-      if (uVar2 != 0) {
-        uVar3 = 0x38000000;
-        while (uVar2 = uVar2 << 1, (uVar2 & 0x400) == 0) {
-          uVar3 = uVar3 - 0x800000;
+    if (exponentFieldThenFloatExponentBits == 0) {
+      exponentFieldThenFloatExponentBits = 0;
+      if (mantissa != 0) {
+        exponentFieldThenFloatExponentBits = 0x38000000;
+        while (mantissa = mantissa << 1, (mantissa & 0x400) == 0) {
+          exponentFieldThenFloatExponentBits = exponentFieldThenFloatExponentBits - 0x800000;
         }
-        uVar2 = uVar2 & 0x3ff;
+        mantissa = mantissa & 0x3ff;
       }
     }
     else {
-      uVar3 = uVar3 * 0x2000 + 0x38000000;
+      exponentFieldThenFloatExponentBits = exponentFieldThenFloatExponentBits * 0x2000 + 0x38000000;
     }
-    fVar1 = GH_U2F((unsigned int)((uVar4 | uVar3 | uVar2 << 0xd)));
+    floatValue = GH_U2F((unsigned int)((signBit | exponentFieldThenFloatExponentBits | mantissa << 0xd)));
   }
-  return (double)fVar1;
+  return (double)floatValue;
 }
 
 /* _gleLookUpTexture1D @ 0xfc10c (72 bytes) */
@@ -2449,102 +2449,102 @@ int _gleLookUpColorTable(glContext, target)
   int glContext;
   uint target;
 {
-  int iVar1;
+  int activeUnitThenTargetObject;
   
-  iVar1 = *(int *)(glContext + 0x53d4);
+  activeUnitThenTargetObject = *(int *)(glContext + 0x53d4);
   if (target == 0x80d2) {
-    iVar1 = *(int *)(glContext + 0x52c4);
+    activeUnitThenTargetObject = *(int *)(glContext + 0x52c4);
     goto LAB_000fc364;
   }
   if (target < 0x80d3) {
     if (target == 0x8064) {
-      iVar1 = *(int *)(glContext + 0x52b4);
+      activeUnitThenTargetObject = *(int *)(glContext + 0x52b4);
     }
     else {
       if (target < 0x8065) {
         if (target != 0xde1) {
           if (target < 0xde2) {
             if (target == 0xde0) {
-              iVar1 = *(int *)(iVar1 * 0x14 + glContext + 0x5164);
+              activeUnitThenTargetObject = *(int *)(activeUnitThenTargetObject * 0x14 + glContext + 0x5164);
               goto LAB_000fc320;
             }
           }
           else if (target == 0x8063) {
-            iVar1 = *(int *)(glContext + 0x52b8);
+            activeUnitThenTargetObject = *(int *)(glContext + 0x52b8);
             goto LAB_000fc364;
           }
           return 0;
         }
-        iVar1 = *(int *)(iVar1 * 0x14 + glContext + 0x5160);
+        activeUnitThenTargetObject = *(int *)(activeUnitThenTargetObject * 0x14 + glContext + 0x5160);
         goto LAB_000fc320;
       }
       if (target == 0x8070) {
-        iVar1 = *(int *)(glContext + 0x52ac);
+        activeUnitThenTargetObject = *(int *)(glContext + 0x52ac);
       }
       else {
         if (target < 0x8071) {
           if (target != 0x806f) {
             return 0;
           }
-          iVar1 = *(int *)(iVar1 * 0x14 + glContext + 0x5158);
+          activeUnitThenTargetObject = *(int *)(activeUnitThenTargetObject * 0x14 + glContext + 0x5158);
           goto LAB_000fc320;
         }
         if (target == 0x80d0) {
-          iVar1 = *(int *)(glContext + 0x52bc);
+          activeUnitThenTargetObject = *(int *)(glContext + 0x52bc);
         }
         else {
           if (target != 0x80d1) {
             return 0;
           }
-          iVar1 = *(int *)(glContext + 0x52c0);
+          activeUnitThenTargetObject = *(int *)(glContext + 0x52c0);
         }
       }
     }
 LAB_000fc364:
-    return iVar1 + 0x10;
+    return activeUnitThenTargetObject + 0x10;
   }
   if (target != 0x84f5) {
     if (target < 0x84f6) {
       if (target == 0x80d4) {
-        iVar1 = *(int *)(glContext + 0x52cc);
+        activeUnitThenTargetObject = *(int *)(glContext + 0x52cc);
       }
       else if (target < 0x80d4) {
-        iVar1 = *(int *)(glContext + 0x52c8);
+        activeUnitThenTargetObject = *(int *)(glContext + 0x52c8);
       }
       else {
         if (target != 0x80d5) {
           if (target != 0x81fb) {
             return 0;
           }
-          iVar1 = *(int *)(iVar1 * 4 + glContext + 0x52d4);
+          activeUnitThenTargetObject = *(int *)(activeUnitThenTargetObject * 4 + glContext + 0x52d4);
           goto LAB_000fc320;
         }
-        iVar1 = *(int *)(glContext + 0x52d0);
+        activeUnitThenTargetObject = *(int *)(glContext + 0x52d0);
       }
       goto LAB_000fc364;
     }
     if (target == 0x8513) {
-      iVar1 = *(int *)(iVar1 * 0x14 + glContext + 0x5154);
+      activeUnitThenTargetObject = *(int *)(activeUnitThenTargetObject * 0x14 + glContext + 0x5154);
       goto LAB_000fc320;
     }
     if (target < 0x8514) {
       if (target != 0x84f7) {
         return 0;
       }
-      iVar1 = *(int *)(glContext + 0x52b0);
+      activeUnitThenTargetObject = *(int *)(glContext + 0x52b0);
       goto LAB_000fc364;
     }
     if (target == 0x851b) {
-      iVar1 = *(int *)(glContext + 0x52a8);
+      activeUnitThenTargetObject = *(int *)(glContext + 0x52a8);
       goto LAB_000fc364;
     }
     if (target != 0x85b3) {
       return 0;
     }
   }
-  iVar1 = *(int *)(iVar1 * 0x14 + glContext + 0x515c);
+  activeUnitThenTargetObject = *(int *)(activeUnitThenTargetObject * 0x14 + glContext + 0x515c);
 LAB_000fc320:
-  return iVar1 + 0x10;
+  return activeUnitThenTargetObject + 0x10;
 }
 
 /* _gleLookUpNonProxyColorTable @ 0xfc3cc (324 bytes) */

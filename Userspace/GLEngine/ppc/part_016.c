@@ -503,43 +503,43 @@ undefined4 _glFrustum_ListExec(int glContext,float *recordedArgs,double unusedFl
 /* _glFrustum_Comp @ 0x68198 (408 bytes) */
 int _glFrustum_Comp(int glContext,double left,double right,double bottom,double top,double zNear,double zFar,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  float fVar1;
-  float fVar2;
-  float fVar3;
-  float fVar4;
+  float rightMinusLeft;
+  float topMinusBottom;
+  float nearMinusFar;
+  float deltaMagnitude;
   float *listRecord;
-  float dVar6;
+  float twoNear;
   
   if ((!(zNear <= DOUBLE_00108d60)) && (!(zFar <= DOUBLE_00108d60))) {
-    fVar1 = (float)(right - left);
-    fVar2 = (float)(top - bottom);
-    fVar3 = (float)(zNear - zFar);
-    fVar4 = fVar1;
-    if (!(0.0 <= fVar1)) {
-      fVar4 = -fVar1;
+    rightMinusLeft = (float)(right - left);
+    topMinusBottom = (float)(top - bottom);
+    nearMinusFar = (float)(zNear - zFar);
+    deltaMagnitude = rightMinusLeft;
+    if (!(0.0 <= rightMinusLeft)) {
+      deltaMagnitude = -rightMinusLeft;
     }
-    if (!(fVar4 < FLOAT_00108e80)) {
-      fVar4 = fVar2;
-      if (!(FLOAT_00108e50 <= fVar2)) {
-        fVar4 = -fVar2;
+    if (!(deltaMagnitude < FLOAT_00108e80)) {
+      deltaMagnitude = topMinusBottom;
+      if (!(FLOAT_00108e50 <= topMinusBottom)) {
+        deltaMagnitude = -topMinusBottom;
       }
-      if (!(fVar4 < FLOAT_00108e80)) {
-        fVar4 = fVar3;
-        if (!(FLOAT_00108e50 <= fVar3)) {
-          fVar4 = -fVar3;
+      if (!(deltaMagnitude < FLOAT_00108e80)) {
+        deltaMagnitude = nearMinusFar;
+        if (!(FLOAT_00108e50 <= nearMinusFar)) {
+          deltaMagnitude = -nearMinusFar;
         }
-        if (!(fVar4 < FLOAT_00108e80)) {
+        if (!(deltaMagnitude < FLOAT_00108e80)) {
           listRecord = (float *)_gleAddListItem(glContext,PTR__glFrustum_ListExec_00110104,0x18);
           if (listRecord == (float *)0x0) {
             return 0;
           }
-          dVar6 = (double)(float)(zNear + zNear);
-          *listRecord = (float)((double)dVar6 * (double)(1.0 / fVar1));
-          listRecord[2] = (float)((right + left) * (double)(1.0 / fVar1));
-          listRecord[3] = (float)((top + bottom) * (double)(1.0 / fVar2));
-          listRecord[4] = (float)((zFar + zNear) * (double)(1.0 / fVar3));
-          listRecord[5] = (float)(zFar * (double)dVar6 * (double)(1.0 / fVar3));
-          listRecord[1] = (float)((double)dVar6 * (double)(1.0 / fVar2));
+          twoNear = (double)(float)(zNear + zNear);
+          *listRecord = (float)((double)twoNear * (double)(1.0 / rightMinusLeft));
+          listRecord[2] = (float)((right + left) * (double)(1.0 / rightMinusLeft));
+          listRecord[3] = (float)((top + bottom) * (double)(1.0 / topMinusBottom));
+          listRecord[4] = (float)((zFar + zNear) * (double)(1.0 / nearMinusFar));
+          listRecord[5] = (float)(zFar * (double)twoNear * (double)(1.0 / nearMinusFar));
+          listRecord[1] = (float)((double)twoNear * (double)(1.0 / topMinusBottom));
           return (int)listRecord;
         }
       }
@@ -620,57 +620,57 @@ int _CheckInternalFormat(internalformat)
 }
 
 /* _CheckTypeFormat @ 0x684b4 (184 bytes) */
-int _CheckTypeFormat(param_1, param_2)
-  uint param_1;
-  uint param_2;
+int _CheckTypeFormat(type, format)
+  uint type;
+  uint format;
 {
-  bool bVar1;
+  bool formatAllowed;
   
-  if (param_1 < 0x8037) {
-    if (0x8032 < param_1) {
+  if (type < 0x8037) {
+    if (0x8032 < type) {
 LAB_00068548:
-      if (param_2 == 0x1908) {
+      if (format == 0x1908) {
         return 1;
       }
-      bVar1 = param_2 == 0x80e1;
+      formatAllowed = format == 0x80e1;
       goto LAB_0006855c;
     }
-    if (param_1 < 0x1400) {
+    if (type < 0x1400) {
       return 1;
     }
-    if (param_1 < 0x1407) {
-      if (param_2 == 0x8000) {
+    if (type < 0x1407) {
+      if (format == 0x8000) {
         return 1;
       }
-      if (param_2 < 0x8001) {
-        bVar1 = 7 < param_2 - 0x1903;
+      if (format < 0x8001) {
+        formatAllowed = 7 < format - 0x1903;
       }
       else {
-        bVar1 = 1 < param_2 - 0x80e0;
+        formatAllowed = 1 < format - 0x80e0;
       }
-      if (!bVar1) {
+      if (!formatAllowed) {
         return 1;
       }
       return 0;
     }
-    if (param_1 != 0x8032) {
+    if (type != 0x8032) {
       return 1;
     }
   }
   else {
-    if (param_1 < 0x8362) {
+    if (type < 0x8362) {
       return 1;
     }
-    if (0x8364 < param_1) {
-      if (0x8368 < param_1) {
+    if (0x8364 < type) {
+      if (0x8368 < type) {
         return 1;
       }
       goto LAB_00068548;
     }
   }
-  bVar1 = param_2 == 0x1907;
+  formatAllowed = format == 0x1907;
 LAB_0006855c:
-  if (bVar1) {
+  if (formatAllowed) {
     return 1;
   }
   return 0;
@@ -943,15 +943,15 @@ int _glSeparableFilter2D_Comp(glContext, target, internalformat, width, height, 
   int row;
   int column;
 {
-  uint uVar1;
+  uint paddedRowBytes;
   int imageEndOffset;
   int recordSize;
   int rowBytes;
   int rowBytes2;
   int imageEndOffset2;
-  undefined4 *puVar5;
+  undefined4 *elementBytesThenListRecord;
   int pixelUnpackBuffer;
-  int iVar7;
+  int bufferSize;
   double bytesPerElement;
   
   rowBytes = _gleRowBytes(format,type,width);
@@ -963,24 +963,24 @@ int _glSeparableFilter2D_Comp(glContext, target, internalformat, width, height, 
     return (undefined4 *)rowBytes2;
   }
   pixelUnpackBuffer = *(int *)(glContext + 0x4a6c);
-  uVar1 = rowBytes + 3U & 0xfffffffc;
+  paddedRowBytes = rowBytes + 3U & 0xfffffffc;
   if (pixelUnpackBuffer == 0) {
 LAB_00068cdc:
-    recordSize = uVar1 + (rowBytes2 + 3U & 0xfffffffc) + 0x1c;
-    puVar5 = (undefined4 *)_gleAddListItem(glContext,PTR__glSeparableFilter2D_ListExec_0011012c,recordSize)
+    recordSize = paddedRowBytes + (rowBytes2 + 3U & 0xfffffffc) + 0x1c;
+    elementBytesThenListRecord = (undefined4 *)_gleAddListItem(glContext,PTR__glSeparableFilter2D_ListExec_0011012c,recordSize)
     ;
-    if (puVar5 != (undefined4 *)0x0) {
-      *puVar5 = target;
-      puVar5[1] = internalformat;
-      puVar5[6] = recordSize;
-      puVar5[2] = width;
-      puVar5[3] = height;
-      puVar5[4] = format;
-      puVar5[5] = type;
+    if (elementBytesThenListRecord != (undefined4 *)0x0) {
+      *elementBytesThenListRecord = target;
+      elementBytesThenListRecord[1] = internalformat;
+      elementBytesThenListRecord[6] = recordSize;
+      elementBytesThenListRecord[2] = width;
+      elementBytesThenListRecord[3] = height;
+      elementBytesThenListRecord[4] = format;
+      elementBytesThenListRecord[5] = type;
       if ((row != 0) && (column != 0)) {
-        _gleFillImage(glContext,width,1,1,format,type,row,puVar5 + 7);
-        puVar5 = (undefined4 *)
-                 _gleFillImage(glContext,height,1,1,format,type,column,(int)(puVar5 + 7) + uVar1
+        _gleFillImage(glContext,width,1,1,format,type,row,elementBytesThenListRecord + 7);
+        elementBytesThenListRecord = (undefined4 *)
+                 _gleFillImage(glContext,height,1,1,format,type,column,(int)(elementBytesThenListRecord + 7) + paddedRowBytes
                               );
       }
     }
@@ -988,15 +988,15 @@ LAB_00068cdc:
   else {
     imageEndOffset = _gleOffsetLimitImage(glContext + 0x31cc,width,1,format,type,row);
     imageEndOffset2 = _gleOffsetLimitImage(glContext + 0x31cc,height,1,format,type,column);
-    iVar7 = *(int *)(pixelUnpackBuffer + 0x38);
+    bufferSize = *(int *)(pixelUnpackBuffer + 0x38);
     bytesPerElement = (double)((double (*)())_gleBytesPerElement)(type);
-    puVar5 = (undefined4 *)(int)bytesPerElement;
-    if ((imageEndOffset <= iVar7) && (imageEndOffset2 <= iVar7)) {
-      if (puVar5 == (undefined4 *)0x0) {
-        puVar5 = (undefined4 *)_glePixelBytes(format,type);
+    elementBytesThenListRecord = (undefined4 *)(int)bytesPerElement;
+    if ((imageEndOffset <= bufferSize) && (imageEndOffset2 <= bufferSize)) {
+      if (elementBytesThenListRecord == (undefined4 *)0x0) {
+        elementBytesThenListRecord = (undefined4 *)_glePixelBytes(format,type);
       }
-      if ((row == (row / (int)puVar5) * (int)puVar5) &&
-         (column == (column / (int)puVar5) * (int)puVar5)) {
+      if ((row == (row / (int)elementBytesThenListRecord) * (int)elementBytesThenListRecord) &&
+         (column == (column / (int)elementBytesThenListRecord) * (int)elementBytesThenListRecord)) {
         if (*(int *)(pixelUnpackBuffer + 0x40) != 0) {
           _gleSynchronizePluginBuffer(glContext,pixelUnpackBuffer + 0x10);
         }
@@ -1009,7 +1009,7 @@ LAB_00068cdc:
       *(undefined4 *)(glContext + 0x7574) = 0x502;
     }
   }
-  return puVar5;
+  return elementBytesThenListRecord;
 }
 
 /* _glConvolutionParameterF_Comp @ 0x68d8c (188 bytes) */
@@ -1064,26 +1064,26 @@ int _glConvolutionParameterI_Comp(glContext, target, pname, params)
   uint pname;
   undefined4 *params;
 {
-  undefined4 *puVar1;
+  undefined4 *listRecord;
   
-  puVar1 = (undefined4 *)
+  listRecord = (undefined4 *)
            _gleAddListItem(glContext,PTR__glConvolutionParameteri_ListExec_00110124,0x18);
-  if (puVar1 != (undefined4 *)0x0) {
-    *puVar1 = target;
-    puVar1[1] = pname;
+  if (listRecord != (undefined4 *)0x0) {
+    *listRecord = target;
+    listRecord[1] = pname;
     if (0x8012 < pname) {
       if (pname < 0x8016) {
-        puVar1[2] = *params;
+        listRecord[2] = *params;
       }
       else if (pname == 0x8154) {
-        puVar1[2] = *params;
-        puVar1[3] = params[1];
-        puVar1[4] = params[2];
-        puVar1[5] = params[3];
+        listRecord[2] = *params;
+        listRecord[3] = params[1];
+        listRecord[4] = params[2];
+        listRecord[5] = params[3];
       }
     }
   }
-  return puVar1;
+  return listRecord;
 }
 
 /* _glConvolutionParameteri_Comp @ 0x68f1c (40 bytes) */
@@ -1094,11 +1094,11 @@ int _glConvolutionParameteri_Comp(glContext, target, pname, params)
   undefined4 params;
 {
   unsigned int ghidra_home[8] = { glContext, target, pname, params, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
-  undefined4 uVar1;
+  undefined4 listRecord;
   
   (*(unsigned int *)((unsigned char *)ghidra_home + 12)) = params;
-  uVar1 = ((int (*)())_glConvolutionParameterI_Comp)(glContext,target,pname,&(*(unsigned int *)((unsigned char *)ghidra_home + 12)));
-  return uVar1;
+  listRecord = ((int (*)())_glConvolutionParameterI_Comp)(glContext,target,pname,&(*(unsigned int *)((unsigned char *)ghidra_home + 12)));
+  return listRecord;
 }
 
 /* _glCopyConvolutionFilter1D_Comp @ 0x68f48 (116 bytes) */
@@ -1110,19 +1110,19 @@ int _glCopyConvolutionFilter1D_Comp(glContext, target, internalformat, x, y, wid
   undefined4 y;
   undefined4 width;
 {
-  undefined4 *puVar1;
+  undefined4 *listRecord;
   
-  puVar1 = (undefined4 *)
+  listRecord = (undefined4 *)
            _gleAddListItem(glContext,PTR__glCopyConvolutionFilter1D_ListExec_00110120,0x18);
-  if (puVar1 != (undefined4 *)0x0) {
-    *puVar1 = target;
-    puVar1[5] = 1;
-    puVar1[1] = internalformat;
-    puVar1[2] = x;
-    puVar1[3] = y;
-    puVar1[4] = width;
+  if (listRecord != (undefined4 *)0x0) {
+    *listRecord = target;
+    listRecord[5] = 1;
+    listRecord[1] = internalformat;
+    listRecord[2] = x;
+    listRecord[3] = y;
+    listRecord[4] = width;
   }
-  return puVar1;
+  return listRecord;
 }
 
 /* _glCopyConvolutionFilter2D_Comp @ 0x68fbc (116 bytes) */

@@ -195,22 +195,22 @@ int _glMultTransposeMatrixd_Exec(glContext, m)
   int glContext;
   undefined4 m;
 {
-  int iVar1;
-  undefined1 auStack_50 [72];
+  int copyResultThenContext;
+  undefined1 productMatrix [72];
   
   if ((*(short *)(glContext + 0x4a10) < 0) && (*(int *)(glContext + 0x4ff4) < 0x18)) {
-    _gleMultTransposeMatrixd(*(undefined4 *)(glContext + 0x4fec),m,auStack_50);
-    iVar1 = _gleCopyMatrix(auStack_50,*(undefined4 *)(glContext + 0x4fec));
+    _gleMultTransposeMatrixd(*(undefined4 *)(glContext + 0x4fec),m,productMatrix);
+    copyResultThenContext = _gleCopyMatrix(productMatrix,*(undefined4 *)(glContext + 0x4fec));
     *(uint *)(glContext + 0x50ac) = *(uint *)(glContext + 0x50ac) | *(uint *)(glContext + 0x50a8);
     *(uint *)(glContext + 0x50b0) = *(uint *)(glContext + 0x50b0) | *(uint *)(glContext + 0x50a8);
   }
   else {
-    iVar1 = glContext;
+    copyResultThenContext = glContext;
     if (*(int *)(glContext + 0x7574) == 0) {
       *(undefined4 *)(glContext + 0x7574) = 0x502;
     }
   }
-  return iVar1;
+  return copyResultThenContext;
 }
 
 /* _glMultTransposeMatrixd_CompExec @ 0x77b2c (56 bytes) */
@@ -317,18 +317,18 @@ void _glNormal3b_Exec(glContext, nx, ny, nz)
   uint ny;
   uint nz;
 {
-  float fVar1;
-  float fVar2;
+  float normalX;
+  float normalZ;
   
-  fVar1 = (float)((double)CONCAT44(0x43300000,nx ^ 0x80000000) - DOUBLE_00108d58) *
+  normalX = (float)((double)CONCAT44(0x43300000,nx ^ 0x80000000) - DOUBLE_00108d58) *
           FLOAT_00108e98;
-  fVar2 = (float)((double)CONCAT44(0x43300000,nz ^ 0x80000000) - DOUBLE_00108d58) *
+  normalZ = (float)((double)CONCAT44(0x43300000,nz ^ 0x80000000) - DOUBLE_00108d58) *
           FLOAT_00108e98;
   *(float *)(glContext + 0x2b4) =
        (float)((double)CONCAT44(0x43300000,ny ^ 0x80000000) - DOUBLE_00108d58) * FLOAT_00108e98
   ;
-  *(float *)(glContext + 0x2b0) = fVar1;
-  *(float *)(glContext + 0x2b8) = fVar2;
+  *(float *)(glContext + 0x2b0) = normalX;
+  *(float *)(glContext + 0x2b8) = normalZ;
   return;
 }
 
@@ -482,14 +482,14 @@ double _glNormal3fv_Exec(glContext, v)
   int glContext;
   undefined4 *v;
 {
-  undefined4 uVar1;
-  undefined4 uVar2;
+  undefined4 normalY;
+  undefined4 normalZ;
   
-  uVar1 = v[1];
-  uVar2 = v[2];
+  normalY = v[1];
+  normalZ = v[2];
   *(undefined4 *)(glContext + 0x2b0) = *v;
-  *(undefined4 *)(glContext + 0x2b4) = uVar1;
-  *(undefined4 *)(glContext + 0x2b8) = uVar2;
+  *(undefined4 *)(glContext + 0x2b4) = normalY;
+  *(undefined4 *)(glContext + 0x2b8) = normalZ;
   return;
 }
 
@@ -586,18 +586,18 @@ int _glNormal3iv_Comp(glContext, v)
 /* _glNormal3iv_Exec @ 0x784d8 (156 bytes) */
 double _glNormal3iv_Exec(int glContext,uint *v,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11)
 {
-  double dVar1;
-  double dVar2;
+  double normalX;
+  double normalZ;
   
-  dVar2 = (double)(float)((double)CONCAT44(0x43300000,v[2] ^ 0x80000000) - DOUBLE_00108d58) *
+  normalZ = (double)(float)((double)CONCAT44(0x43300000,v[2] ^ 0x80000000) - DOUBLE_00108d58) *
           DOUBLE_00108d88;
-  dVar1 = (double)(float)((double)CONCAT44(0x43300000,*v ^ 0x80000000) - DOUBLE_00108d58) *
+  normalX = (double)(float)((double)CONCAT44(0x43300000,*v ^ 0x80000000) - DOUBLE_00108d58) *
           DOUBLE_00108d88;
   *(float *)(glContext + 0x2b4) =
        (float)((double)(float)((double)CONCAT44(0x43300000,v[1] ^ 0x80000000) -
                               DOUBLE_00108d58) * DOUBLE_00108d88);
-  *(float *)(glContext + 0x2b8) = (float)dVar2;
-  *(float *)(glContext + 0x2b0) = (float)dVar1;
+  *(float *)(glContext + 0x2b8) = (float)normalZ;
+  *(float *)(glContext + 0x2b0) = (float)normalX;
   return;
 }
 
@@ -608,7 +608,7 @@ void _glNormal3iv_CompExec(glContext, v)
 {
   unsigned int ghidra_home[8] = { glContext, v, 0, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   undefined4 in_LR;
-  double fparam_1;
+  double forwardedFloatArg1;
   double incomingFpr2;
   double incomingFpr3;
   double incomingFpr4;
@@ -618,7 +618,7 @@ void _glNormal3iv_CompExec(glContext, v)
   double incomingFpr8;
   
   ((int (*)())_glNormal3iv_Comp)(glContext,v);
-  ((double (*)())_glNormal3iv_Exec)(glContext,v,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
+  ((double (*)())_glNormal3iv_Exec)(glContext,v,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
                     (double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),(*(double *)((unsigned char *)ghidra_home + 0)));
   return;
 }
@@ -782,7 +782,7 @@ void _glDeleteQueries_Exec(glContext, n, ids)
   int n;
   undefined4 *ids;
 {
-  undefined4 uVar1;
+  undefined4 queryName;
   undefined4 glErrorCode;
   
   if ((*(short *)(glContext + 0x4a10) < 0) && (*(int *)(glContext + 0x7444) == 0)) {
@@ -791,9 +791,9 @@ void _glDeleteQueries_Exec(glContext, n, ids)
         return;
       }
       do {
-        uVar1 = *ids;
+        queryName = *ids;
         ids = ids + 1;
-        _gleDeleteHashNameAndObject(glContext,glContext + 0x6440,uVar1);
+        _gleDeleteHashNameAndObject(glContext,glContext + 0x6440,queryName);
         n = n + -1;
       } while (n != 0);
       return;

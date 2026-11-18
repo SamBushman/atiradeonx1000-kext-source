@@ -26,16 +26,16 @@ double _glVertexAttrib4dvARB_Exec(glContext, index, v)
   uint index;
   double *v;
 {
-  int iVar1;
+  int attribRecord;
   code *UNRECOVERED_JUMPTABLE;
   
   if (index < 0x10) {
     if (index != 0) {
-      iVar1 = glContext + index * 0x10;
-      *(float *)(iVar1 + 0x1a0) = (float)*v;
-      *(float *)(iVar1 + 0x1a4) = (float)v[1];
-      *(float *)(iVar1 + 0x1a8) = (float)v[2];
-      *(float *)(iVar1 + 0x1ac) = (float)v[3];
+      attribRecord = glContext + index * 0x10;
+      *(float *)(attribRecord + 0x1a0) = (float)*v;
+      *(float *)(attribRecord + 0x1a4) = (float)v[1];
+      *(float *)(attribRecord + 0x1a8) = (float)v[2];
+      *(float *)(attribRecord + 0x1ac) = (float)v[3];
       return;
     }
     UNRECOVERED_JUMPTABLE = *(code **)(glContext + 0x4884);
@@ -290,22 +290,22 @@ double _glVertexAttrib4NivARB_Exec(glContext, index, v)
 {
   double intToDoubleBias;
   float channelScale;
-  float fVar3;
-  int iVar4;
+  float channelBias;
+  int attribRecord;
   undefined4 incomingR6;
   undefined4 incomingR7;
-  code *pcVar5;
+  code *vertexFunc;
   
-  fVar3 = FLOAT_00108e6c;
+  channelBias = FLOAT_00108e6c;
   channelScale = FLOAT_00108e68;
   intToDoubleBias = DOUBLE_00108d58;
   if (index < 0x10) {
     if (index == 0) {
-      pcVar5 = *(code **)(glContext + 0x4884);
+      vertexFunc = *(code **)(glContext + 0x4884);
       if (*(int *)(glContext + 0x4858) == *(int *)(glContext + 0x485c)) {
-        pcVar5 = (code *)PTR__gleFlushAndSubmit_00112050;
+        vertexFunc = (code *)PTR__gleFlushAndSubmit_00112050;
       }
-      (*pcVar5)(glContext,0,v,incomingR6,incomingR7,*(int *)(glContext + 0x4858),v[2] ^ 0x80000000,
+      (*vertexFunc)(glContext,0,v,incomingR6,incomingR7,*(int *)(glContext + 0x4858),v[2] ^ 0x80000000,
                 (double)((float)((double)CONCAT44(0x43300000,*v ^ 0x80000000) -
                                 DOUBLE_00108d58) * FLOAT_00108e68 + FLOAT_00108e6c),
                 (double)((float)((double)CONCAT44(0x43300000,v[1] ^ 0x80000000) -
@@ -316,16 +316,16 @@ double _glVertexAttrib4NivARB_Exec(glContext, index, v)
                                 DOUBLE_00108d58) * FLOAT_00108e68 + FLOAT_00108e6c));
     }
     else {
-      iVar4 = glContext + index * 0x10;
-      *(float *)(iVar4 + 0x1a0) =
+      attribRecord = glContext + index * 0x10;
+      *(float *)(attribRecord + 0x1a0) =
            (float)((double)CONCAT44(0x43300000,*v ^ 0x80000000) - DOUBLE_00108d58) *
            FLOAT_00108e68 + FLOAT_00108e6c;
-      *(float *)(iVar4 + 0x1a4) =
-           (float)((double)CONCAT44(0x43300000,v[1] ^ 0x80000000) - intToDoubleBias) * channelScale + fVar3;
-      *(float *)(iVar4 + 0x1a8) =
-           (float)((double)CONCAT44(0x43300000,v[2] ^ 0x80000000) - intToDoubleBias) * channelScale + fVar3;
-      *(float *)(iVar4 + 0x1ac) =
-           (float)((double)CONCAT44(0x43300000,v[3] ^ 0x80000000) - intToDoubleBias) * channelScale + fVar3;
+      *(float *)(attribRecord + 0x1a4) =
+           (float)((double)CONCAT44(0x43300000,v[1] ^ 0x80000000) - intToDoubleBias) * channelScale + channelBias;
+      *(float *)(attribRecord + 0x1a8) =
+           (float)((double)CONCAT44(0x43300000,v[2] ^ 0x80000000) - intToDoubleBias) * channelScale + channelBias;
+      *(float *)(attribRecord + 0x1ac) =
+           (float)((double)CONCAT44(0x43300000,v[3] ^ 0x80000000) - intToDoubleBias) * channelScale + channelBias;
     }
   }
   else if (*(int *)(glContext + 0x7574) == 0) {
@@ -378,29 +378,30 @@ double _glVertexAttrib4NubvARB_Exec(int glContext,uint index,byte *v,double unus
 {
   float channelScale;
   undefined4 incomingR6;
-  int iVar2;
-  code *pcVar3;
+  int vertexWriteCursor;
+  int attribRecord;
+  code *vertexFunc;
   
   channelScale = FLOAT_00108e78;
   if (index < 0x10) {
     if (index == 0) {
-      iVar2 = *(int *)(glContext + 0x4858);
-      pcVar3 = *(code **)(glContext + 0x4884);
-      if (iVar2 == *(int *)(glContext + 0x485c)) {
-        pcVar3 = (code *)PTR__gleFlushAndSubmit_00112050;
+      vertexWriteCursor = *(int *)(glContext + 0x4858);
+      vertexFunc = *(code **)(glContext + 0x4884);
+      if (vertexWriteCursor == *(int *)(glContext + 0x485c)) {
+        vertexFunc = (code *)PTR__gleFlushAndSubmit_00112050;
       }
-      (*pcVar3)(glContext,0,v,incomingR6,iVar2,iVar2,(uint)v[2],v[1] | 0x4b000000,
+      (*vertexFunc)(glContext,0,v,incomingR6,vertexWriteCursor,vertexWriteCursor,(uint)v[2],v[1] | 0x4b000000,
                 (double)((GH_U2F((unsigned int)((*v | 0x4b000000))) - 8388608.0) * FLOAT_00108e78),
                 (double)((GH_U2F((unsigned int)((v[1] | 0x4b000000))) - 8388608.0) * FLOAT_00108e78),
                 (double)((GH_U2F((unsigned int)((v[2] | 0x4b000000))) - 8388608.0) * FLOAT_00108e78),
                 (double)((GH_U2F((unsigned int)((v[3] | 0x4b000000))) - 8388608.0) * FLOAT_00108e78));
     }
     else {
-      iVar2 = glContext + index * 0x10;
-      *(float *)(iVar2 + 0x1a0) = (GH_U2F((unsigned int)((*v | 0x4b000000))) - 8388608.0) * FLOAT_00108e78;
-      *(float *)(iVar2 + 0x1a4) = (GH_U2F((unsigned int)((v[1] | 0x4b000000))) - 8388608.0) * channelScale;
-      *(float *)(iVar2 + 0x1a8) = (GH_U2F((unsigned int)((v[2] | 0x4b000000))) - 8388608.0) * channelScale;
-      *(float *)(iVar2 + 0x1ac) = (GH_U2F((unsigned int)((v[3] | 0x4b000000))) - 8388608.0) * channelScale;
+      attribRecord = glContext + index * 0x10;
+      *(float *)(attribRecord + 0x1a0) = (GH_U2F((unsigned int)((*v | 0x4b000000))) - 8388608.0) * FLOAT_00108e78;
+      *(float *)(attribRecord + 0x1a4) = (GH_U2F((unsigned int)((v[1] | 0x4b000000))) - 8388608.0) * channelScale;
+      *(float *)(attribRecord + 0x1a8) = (GH_U2F((unsigned int)((v[2] | 0x4b000000))) - 8388608.0) * channelScale;
+      *(float *)(attribRecord + 0x1ac) = (GH_U2F((unsigned int)((v[3] | 0x4b000000))) - 8388608.0) * channelScale;
     }
   }
   else if (*(int *)(glContext + 0x7574) == 0) {
@@ -622,20 +623,20 @@ void _glEnableVertexAttribArrayARB_Exec(glContext, index)
 {
   undefined4 glErrorCode;
   int clientState;
-  uint uVar3;
-  longlong lVar4;
+  uint attribMaskHigh;
+  longlong attribMask;
   
   clientState = *(int *)(glContext + 0x4a60);
   if (*(short *)(glContext + 0x4a10) < 0) {
     if (index < 0x10) {
-      lVar4 = ___ashldi3(1,0,index);
-      uVar3 = (uint)((ulonglong)lVar4 >> 0x20);
-      *(uint *)(clientState + 0x330) = *(uint *)(clientState + 0x330) | uVar3;
-      *(uint *)(clientState + 0x334) = *(uint *)(clientState + 0x334) | (uint)lVar4;
+      attribMask = ___ashldi3(1,0,index);
+      attribMaskHigh = (uint)((ulonglong)attribMask >> 0x20);
+      *(uint *)(clientState + 0x330) = *(uint *)(clientState + 0x330) | attribMaskHigh;
+      *(uint *)(clientState + 0x334) = *(uint *)(clientState + 0x334) | (uint)attribMask;
       *(undefined4 *)(glContext + 0x488c) = 0;
       *(undefined4 *)(glContext + 0x4890) = 0;
-      *(uint *)(clientState + 0x350) = *(uint *)(clientState + 0x350) | uVar3;
-      *(uint *)(clientState + 0x354) = *(uint *)(clientState + 0x354) | (uint)lVar4;
+      *(uint *)(clientState + 0x350) = *(uint *)(clientState + 0x350) | attribMaskHigh;
+      *(uint *)(clientState + 0x354) = *(uint *)(clientState + 0x354) | (uint)attribMask;
       if (((*(int *)(clientState + 0x344) == 0) && (*(int *)(clientState + 0x358) == 0)) &&
          (*(int *)(glContext + 0x49a0) == 0)) {
         return;
@@ -702,27 +703,27 @@ void _glDisableVertexAttribArrayARB_Exec(glContext, index)
 }
 
 /* _glEnableVertexAttribARB_Exec @ 0xb06b8 (264 bytes) */
-void _glEnableVertexAttribARB_Exec(glContext, param_2, param_3)
+void _glEnableVertexAttribARB_Exec(glContext, attribIndex, mapTarget)
   int glContext;
-  uint param_2;
-  int param_3;
+  uint attribIndex;
+  int mapTarget;
 {
   undefined4 glErrorCode;
   int mapData;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
-    if (param_2 < 0x10) {
-      if (param_3 == 0x8a00) {
+    if (attribIndex < 0x10) {
+      if (mapTarget == 0x8a00) {
         mapData = _gleGetMapData(glContext);
-        *(uint *)(glContext + 0x74d8) = *(uint *)(glContext + 0x74d8) | 1 << (param_2 & 0x3f);
-        *(char *)(param_2 + glContext + 0x7524) =
-             (char)((unsigned char *)0x9da8)[param_2 + mapData]<< 2;
+        *(uint *)(glContext + 0x74d8) = *(uint *)(glContext + 0x74d8) | 1 << (attribIndex & 0x3f);
+        *(char *)(attribIndex + glContext + 0x7524) =
+             (char)((unsigned char *)0x9da8)[attribIndex + mapData]<< 2;
         return;
       }
-      if (param_3 == 0x8a01) {
+      if (mapTarget == 0x8a01) {
         mapData = _gleGetMapData(glContext);
-        *(uint *)(glContext + 0x74dc) = *(uint *)(glContext + 0x74dc) | 1 << (param_2 & 0x3f);
-        *(char *)(param_2 + glContext + 0x7564) = *(char *)(param_2 + mapData + 0x9db8) << 2;
+        *(uint *)(glContext + 0x74dc) = *(uint *)(glContext + 0x74dc) | 1 << (attribIndex & 0x3f);
+        *(char *)(attribIndex + glContext + 0x7564) = *(char *)(attribIndex + mapData + 0x9db8) << 2;
         return;
       }
       if (*(int *)(glContext + 0x7574) != 0) {
@@ -831,17 +832,17 @@ void _glDisableVertexAttribARB_Exec(glContext, param_2, param_3)
 }
 
 /* _glDisableVertexAttribARB_Comp @ 0xb0940 (84 bytes) */
-int _glDisableVertexAttribARB_Comp(glContext, param_2, param_3)
+int _glDisableVertexAttribARB_Comp(glContext, attribIndex, mapTarget)
   undefined4 glContext;
-  undefined4 param_2;
-  undefined4 param_3;
+  undefined4 attribIndex;
+  undefined4 mapTarget;
 {
   undefined4 *listRecord;
   
   listRecord = (undefined4 *)_gleAddListItem(glContext,PTR__glDisableVertexAttribARB_ListExec_00110464,8);
   if (listRecord != (undefined4 *)0x0) {
-    listRecord[1] = param_3;
-    *listRecord = param_2;
+    listRecord[1] = mapTarget;
+    *listRecord = attribIndex;
   }
   return listRecord;
 }
@@ -867,30 +868,30 @@ int _glDisableVertexAttribARB_ListExec(glContext, listRecord)
 }
 
 /* _glIsVertexAttribEnabledARB_Exec @ 0xb0a00 (160 bytes) */
-int _glIsVertexAttribEnabledARB_Exec(glContext, param_2, param_3)
+int _glIsVertexAttribEnabledARB_Exec(glContext, attribIndex, mapTarget)
   int glContext;
-  uint param_2;
-  int param_3;
+  uint attribIndex;
+  int mapTarget;
 {
   undefined4 glErrorCode;
-  uint uVar2;
+  uint enabledMask;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
-    if (param_2 < 0x10) {
-      if (param_3 == 0x8a00) {
-        uVar2 = *(uint *)(glContext + 0x74d8);
+    if (attribIndex < 0x10) {
+      if (mapTarget == 0x8a00) {
+        enabledMask = *(uint *)(glContext + 0x74d8);
       }
       else {
-        if (param_3 != 0x8a01) {
+        if (mapTarget != 0x8a01) {
           if (*(int *)(glContext + 0x7574) != 0) {
             return false;
           }
           glErrorCode = 0x500;
           goto LAB_000b0a94;
         }
-        uVar2 = *(uint *)(glContext + 0x74dc);
+        enabledMask = *(uint *)(glContext + 0x74dc);
       }
-      return (uVar2 & 1 << (param_2 & 0x3f)) != 0;
+      return (enabledMask & 1 << (attribIndex & 0x3f)) != 0;
     }
     if (*(int *)(glContext + 0x7574) != 0) {
       return false;

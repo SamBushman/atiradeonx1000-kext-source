@@ -719,51 +719,51 @@ int _glUniformMatrix3fvARB_Comp(glContext, location, count, transpose, value)
   undefined4 *value;
 {
   int loopIndex;
-  undefined4 *puVar2;
+  undefined4 *listRecordThenWriteCursor;
   
-  puVar2 = (undefined4 *)
+  listRecordThenWriteCursor = (undefined4 *)
            _gleAddListItem(glContext,PTR__glUniformMatrix3fvARB_ListExec_001102bc,count * 0x24 + 8);
-  if (puVar2 != (undefined4 *)0x0) {
-    puVar2[1] = count;
-    *puVar2 = location;
-    puVar2 = puVar2 + 2;
+  if (listRecordThenWriteCursor != (undefined4 *)0x0) {
+    listRecordThenWriteCursor[1] = count;
+    *listRecordThenWriteCursor = location;
+    listRecordThenWriteCursor = listRecordThenWriteCursor + 2;
     loopIndex = 0;
     if (transpose == 0) {
       while( true ) {
-        *puVar2 = *value;
-        puVar2[1] = value[1];
-        puVar2[2] = value[2];
-        puVar2[3] = value[3];
-        puVar2[4] = value[4];
-        puVar2[5] = value[5];
-        puVar2[6] = value[6];
-        puVar2[7] = value[7];
-        puVar2[8] = value[8];
+        *listRecordThenWriteCursor = *value;
+        listRecordThenWriteCursor[1] = value[1];
+        listRecordThenWriteCursor[2] = value[2];
+        listRecordThenWriteCursor[3] = value[3];
+        listRecordThenWriteCursor[4] = value[4];
+        listRecordThenWriteCursor[5] = value[5];
+        listRecordThenWriteCursor[6] = value[6];
+        listRecordThenWriteCursor[7] = value[7];
+        listRecordThenWriteCursor[8] = value[8];
         if (loopIndex == count + -1) break;
-        puVar2 = puVar2 + 9;
+        listRecordThenWriteCursor = listRecordThenWriteCursor + 9;
         value = value + 9;
         loopIndex = loopIndex + 1;
       }
     }
     else {
       while( true ) {
-        *puVar2 = *value;
-        puVar2[3] = value[1];
-        puVar2[6] = value[2];
-        puVar2[1] = value[3];
-        puVar2[4] = value[4];
-        puVar2[7] = value[5];
-        puVar2[2] = value[6];
-        puVar2[5] = value[7];
-        puVar2[8] = value[8];
+        *listRecordThenWriteCursor = *value;
+        listRecordThenWriteCursor[3] = value[1];
+        listRecordThenWriteCursor[6] = value[2];
+        listRecordThenWriteCursor[1] = value[3];
+        listRecordThenWriteCursor[4] = value[4];
+        listRecordThenWriteCursor[7] = value[5];
+        listRecordThenWriteCursor[2] = value[6];
+        listRecordThenWriteCursor[5] = value[7];
+        listRecordThenWriteCursor[8] = value[8];
         if (loopIndex == count + -1) break;
-        puVar2 = puVar2 + 9;
+        listRecordThenWriteCursor = listRecordThenWriteCursor + 9;
         value = value + 9;
         loopIndex = loopIndex + 1;
       }
     }
   }
-  return puVar2;
+  return listRecordThenWriteCursor;
 }
 
 /* _glUniformMatrix4fvARB_Comp @ 0x8db6c (420 bytes) */
@@ -1013,29 +1013,29 @@ void _glGetObjectParameterfvARB_Exec(glContext, obj, pname, params)
   undefined4 pname;
   float *params;
 {
-  int iVar1;
-  uint local_28 [5];
+  int sharedStateThenObjectThenParamError;
+  uint paramValues [5];
   
   if (*(short *)(glContext + 0x4a10) < 0) {
-    iVar1 = *(int *)(glContext + 0x5148);
-    if (*(char *)(iVar1 + 0x8024) != '\0') {
-      _pthread_mutex_lock(iVar1 + 0x8028);
-      iVar1 = *(int *)(glContext + 0x5148);
+    sharedStateThenObjectThenParamError = *(int *)(glContext + 0x5148);
+    if (*(char *)(sharedStateThenObjectThenParamError + 0x8024) != '\0') {
+      _pthread_mutex_lock(sharedStateThenObjectThenParamError + 0x8028);
+      sharedStateThenObjectThenParamError = *(int *)(glContext + 0x5148);
     }
-    iVar1 = _gleLookupHashObject(iVar1 + 0x6018,obj);
-    if (iVar1 != 0) {
-      iVar1 = ((int (*)())_gleGetObjectParameter)(glContext,iVar1,pname,local_28);
+    sharedStateThenObjectThenParamError = _gleLookupHashObject(sharedStateThenObjectThenParamError + 0x6018,obj);
+    if (sharedStateThenObjectThenParamError != 0) {
+      sharedStateThenObjectThenParamError = ((int (*)())_gleGetObjectParameter)(glContext,sharedStateThenObjectThenParamError,pname,paramValues);
       if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
         _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);
       }
-      if (iVar1 != 0) {
+      if (sharedStateThenObjectThenParamError != 0) {
         if (*(int *)(glContext + 0x7574) != 0) {
           return;
         }
-        *(int *)(glContext + 0x7574) = iVar1;
+        *(int *)(glContext + 0x7574) = sharedStateThenObjectThenParamError;
         return;
       }
-      *params = (float)((double)CONCAT44(0x43300000,local_28[0] ^ 0x80000000) - DOUBLE_00108d58);
+      *params = (float)((double)CONCAT44(0x43300000,paramValues[0] ^ 0x80000000) - DOUBLE_00108d58);
       return;
     }
     if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
@@ -1157,17 +1157,17 @@ void _glGetProgramiv_Exec(glContext, program, pname, params)
   undefined4 *params;
 {
   undefined4 glErrorCode;
-  int iVar2;
-  undefined4 local_30 [7];
+  int sharedStateThenProgramObjThenParamError;
+  undefined4 paramValues [7];
   
   if (*(short *)(glContext + 0x4a10) < 0) {
-    iVar2 = *(int *)(glContext + 0x5148);
-    if (*(char *)(iVar2 + 0x8024) != '\0') {
-      _pthread_mutex_lock(iVar2 + 0x8028);
-      iVar2 = *(int *)(glContext + 0x5148);
+    sharedStateThenProgramObjThenParamError = *(int *)(glContext + 0x5148);
+    if (*(char *)(sharedStateThenProgramObjThenParamError + 0x8024) != '\0') {
+      _pthread_mutex_lock(sharedStateThenProgramObjThenParamError + 0x8028);
+      sharedStateThenProgramObjThenParamError = *(int *)(glContext + 0x5148);
     }
-    iVar2 = _gleLookupHashObject(iVar2 + 0x6018,program);
-    if (iVar2 == 0) {
+    sharedStateThenProgramObjThenParamError = _gleLookupHashObject(sharedStateThenProgramObjThenParamError + 0x6018,program);
+    if (sharedStateThenProgramObjThenParamError == 0) {
       if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
         _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);
       }
@@ -1177,19 +1177,19 @@ void _glGetProgramiv_Exec(glContext, program, pname, params)
       glErrorCode = 0x501;
       goto LAB_0008e620;
     }
-    if (*(int *)(iVar2 + 0x10) == 0x8b40) {
-      iVar2 = ((int (*)())_gleGetObjectParameter)(glContext,iVar2,pname,local_30);
+    if (*(int *)(sharedStateThenProgramObjThenParamError + 0x10) == 0x8b40) {
+      sharedStateThenProgramObjThenParamError = ((int (*)())_gleGetObjectParameter)(glContext,sharedStateThenProgramObjThenParamError,pname,paramValues);
       if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
         _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);
       }
-      if (iVar2 != 0) {
+      if (sharedStateThenProgramObjThenParamError != 0) {
         if (*(int *)(glContext + 0x7574) != 0) {
           return;
         }
-        *(int *)(glContext + 0x7574) = iVar2;
+        *(int *)(glContext + 0x7574) = sharedStateThenProgramObjThenParamError;
         return;
       }
-      *params = local_30[0];
+      *params = paramValues[0];
       return;
     }
     if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
@@ -1384,23 +1384,23 @@ int _glIsShader_Exec(glContext, shader)
   int glContext;
   undefined4 shader;
 {
-  bool bVar1;
-  int iVar2;
+  bool isShaderObject;
+  int sharedStateThenShaderObject;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
-    iVar2 = *(int *)(glContext + 0x5148);
-    if (*(char *)(iVar2 + 0x8024) != '\0') {
-      _pthread_mutex_lock(iVar2 + 0x8028);
-      iVar2 = *(int *)(glContext + 0x5148);
+    sharedStateThenShaderObject = *(int *)(glContext + 0x5148);
+    if (*(char *)(sharedStateThenShaderObject + 0x8024) != '\0') {
+      _pthread_mutex_lock(sharedStateThenShaderObject + 0x8028);
+      sharedStateThenShaderObject = *(int *)(glContext + 0x5148);
     }
-    iVar2 = _gleLookupHashObject(iVar2 + 0x6018,shader);
-    if (iVar2 != 0) {
-      bVar1 = *(int *)(iVar2 + 0x10) == 0x8b48;
+    sharedStateThenShaderObject = _gleLookupHashObject(sharedStateThenShaderObject + 0x6018,shader);
+    if (sharedStateThenShaderObject != 0) {
+      isShaderObject = *(int *)(sharedStateThenShaderObject + 0x10) == 0x8b48;
       if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) == '\0') {
-        return bVar1;
+        return isShaderObject;
       }
       _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);
-      return bVar1;
+      return isShaderObject;
     }
     if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
       _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);
@@ -1453,20 +1453,20 @@ void _glGetAttachedObjectsARB_Exec(glContext, containerObj, maxCount, count, obj
   int *count;
   int obj;
 {
-  int iVar1;
+  int byteOffset;
   undefined4 glErrorCode;
-  int iVar3;
+  int sharedStateThenContainerObject;
   int loopIndex;
   
   loopIndex = 0;
   if (*(short *)(glContext + 0x4a10) < 0) {
-    iVar3 = *(int *)(glContext + 0x5148);
-    if (*(char *)(iVar3 + 0x8024) != '\0') {
-      _pthread_mutex_lock(iVar3 + 0x8028);
-      iVar3 = *(int *)(glContext + 0x5148);
+    sharedStateThenContainerObject = *(int *)(glContext + 0x5148);
+    if (*(char *)(sharedStateThenContainerObject + 0x8024) != '\0') {
+      _pthread_mutex_lock(sharedStateThenContainerObject + 0x8028);
+      sharedStateThenContainerObject = *(int *)(glContext + 0x5148);
     }
-    iVar3 = _gleLookupHashObject(iVar3 + 0x6018,containerObj);
-    if (iVar3 == 0) {
+    sharedStateThenContainerObject = _gleLookupHashObject(sharedStateThenContainerObject + 0x6018,containerObj);
+    if (sharedStateThenContainerObject == 0) {
       if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
         _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);
       }
@@ -1476,14 +1476,14 @@ void _glGetAttachedObjectsARB_Exec(glContext, containerObj, maxCount, count, obj
       glErrorCode = 0x501;
       goto LAB_0008ed28;
     }
-    if (*(int *)(iVar3 + 0x10) == 0x8b40) {
-      if ((0 < *(int *)(iVar3 + 0x48)) && (0 < maxCount)) {
+    if (*(int *)(sharedStateThenContainerObject + 0x10) == 0x8b40) {
+      if ((0 < *(int *)(sharedStateThenContainerObject + 0x48)) && (0 < maxCount)) {
         do {
-          iVar1 = loopIndex * 4;
+          byteOffset = loopIndex * 4;
           loopIndex = loopIndex + 1;
-          *(undefined4 *)(iVar1 + obj) =
-               *(undefined4 *)(*(int *)(iVar1 + *(int *)(iVar3 + 0x44)) + 4);
-          if (*(int *)(iVar3 + 0x48) <= loopIndex) break;
+          *(undefined4 *)(byteOffset + obj) =
+               *(undefined4 *)(*(int *)(byteOffset + *(int *)(sharedStateThenContainerObject + 0x44)) + 4);
+          if (*(int *)(sharedStateThenContainerObject + 0x48) <= loopIndex) break;
         } while (loopIndex < maxCount);
       }
       if (count != (int *)0x0) {
@@ -1514,18 +1514,18 @@ int _glGetUniformLocationARB_Exec(glContext, programObj, name)
   undefined4 programObj;
   undefined4 name;
 {
-  undefined4 uVar1;
+  undefined4 location;
   undefined4 glErrorCode;
-  int iVar2;
+  int sharedStateThenProgramObj;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
-    iVar2 = *(int *)(glContext + 0x5148);
-    if (*(char *)(iVar2 + 0x8024) != '\0') {
-      _pthread_mutex_lock(iVar2 + 0x8028);
-      iVar2 = *(int *)(glContext + 0x5148);
+    sharedStateThenProgramObj = *(int *)(glContext + 0x5148);
+    if (*(char *)(sharedStateThenProgramObj + 0x8024) != '\0') {
+      _pthread_mutex_lock(sharedStateThenProgramObj + 0x8028);
+      sharedStateThenProgramObj = *(int *)(glContext + 0x5148);
     }
-    iVar2 = _gleLookupHashObject(iVar2 + 0x6018,programObj);
-    if (iVar2 == 0) {
+    sharedStateThenProgramObj = _gleLookupHashObject(sharedStateThenProgramObj + 0x6018,programObj);
+    if (sharedStateThenProgramObj == 0) {
       if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
         _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);
       }
@@ -1535,13 +1535,13 @@ int _glGetUniformLocationARB_Exec(glContext, programObj, name)
       glErrorCode = 0x501;
       goto LAB_0008ee94;
     }
-    if ((*(int *)(iVar2 + 0x10) == 0x8b40) && (*(char *)(iVar2 + 0x3c) == '\x01')) {
-      uVar1 = _ShGetUniformLocation(*(undefined4 *)(iVar2 + 0x40),name);
+    if ((*(int *)(sharedStateThenProgramObj + 0x10) == 0x8b40) && (*(char *)(sharedStateThenProgramObj + 0x3c) == '\x01')) {
+      location = _ShGetUniformLocation(*(undefined4 *)(sharedStateThenProgramObj + 0x40),name);
       if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
         _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);
-        return uVar1;
+        return location;
       }
-      return uVar1;
+      return location;
     }
     if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
       _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);
@@ -2015,17 +2015,17 @@ void _glGetShaderSourceARB_Exec(glContext, obj, maxLength, length, source)
   char *source;
 {
   undefined4 glErrorCode;
-  int iVar2;
-  uint uVar3;
+  int sharedStateThenShaderObject;
+  uint copyLength;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
-    iVar2 = *(int *)(glContext + 0x5148);
-    if (*(char *)(iVar2 + 0x8024) != '\0') {
-      _pthread_mutex_lock(iVar2 + 0x8028);
-      iVar2 = *(int *)(glContext + 0x5148);
+    sharedStateThenShaderObject = *(int *)(glContext + 0x5148);
+    if (*(char *)(sharedStateThenShaderObject + 0x8024) != '\0') {
+      _pthread_mutex_lock(sharedStateThenShaderObject + 0x8028);
+      sharedStateThenShaderObject = *(int *)(glContext + 0x5148);
     }
-    iVar2 = _gleLookupHashObject(iVar2 + 0x6018,obj);
-    if (iVar2 == 0) {
+    sharedStateThenShaderObject = _gleLookupHashObject(sharedStateThenShaderObject + 0x6018,obj);
+    if (sharedStateThenShaderObject == 0) {
       if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
         _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);
       }
@@ -2035,15 +2035,15 @@ void _glGetShaderSourceARB_Exec(glContext, obj, maxLength, length, source)
       glErrorCode = 0x501;
       goto LAB_0008fc94;
     }
-    if (*(int *)(iVar2 + 0x10) == 0x8b48) {
-      uVar3 = *(uint *)(iVar2 + 0x28);
-      if (maxLength - 1U < *(uint *)(iVar2 + 0x28)) {
-        uVar3 = maxLength - 1U;
+    if (*(int *)(sharedStateThenShaderObject + 0x10) == 0x8b48) {
+      copyLength = *(uint *)(sharedStateThenShaderObject + 0x28);
+      if (maxLength - 1U < *(uint *)(sharedStateThenShaderObject + 0x28)) {
+        copyLength = maxLength - 1U;
       }
-      _strncpy(source,*(char **)(iVar2 + 0x2c),uVar3);
-      source[uVar3] = '\0';
+      _strncpy(source,*(char **)(sharedStateThenShaderObject + 0x2c),copyLength);
+      source[copyLength] = '\0';
       if (length != (size_t *)0x0) {
-        *length = uVar3;
+        *length = copyLength;
       }
       if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) == '\0') {
         return;
@@ -2072,17 +2072,17 @@ void _glBindAttribLocationARB_Exec(glContext, programObj, index, name)
   char *name;
 {
   undefined4 glErrorCode;
-  int iVar2;
+  int sharedStateThenProgramObj;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
-    iVar2 = *(int *)(glContext + 0x5148);
-    if (*(char *)(iVar2 + 0x8024) != '\0') {
-      _pthread_mutex_lock(iVar2 + 0x8028);
-      iVar2 = *(int *)(glContext + 0x5148);
+    sharedStateThenProgramObj = *(int *)(glContext + 0x5148);
+    if (*(char *)(sharedStateThenProgramObj + 0x8024) != '\0') {
+      _pthread_mutex_lock(sharedStateThenProgramObj + 0x8028);
+      sharedStateThenProgramObj = *(int *)(glContext + 0x5148);
     }
-    iVar2 = _gleLookupHashObject(iVar2 + 0x6018,programObj);
-    if (iVar2 != 0) {
-      if ((*(int *)(iVar2 + 0x10) != 0x8b40) ||
+    sharedStateThenProgramObj = _gleLookupHashObject(sharedStateThenProgramObj + 0x6018,programObj);
+    if (sharedStateThenProgramObj != 0) {
+      if ((*(int *)(sharedStateThenProgramObj + 0x10) != 0x8b40) ||
          ((((name != (char *)0x0 && (*name == 'g')) && (name[1] == 'l')) &&
           (name[2] == '_')))) {
         if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
@@ -2091,7 +2091,7 @@ void _glBindAttribLocationARB_Exec(glContext, programObj, index, name)
         goto LAB_0008fddc;
       }
       if (index < 0x10) {
-        _ShAttributeBindingRequest(*(undefined4 *)(iVar2 + 0x40),index,name);
+        _ShAttributeBindingRequest(*(undefined4 *)(sharedStateThenProgramObj + 0x40),index,name);
         if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) == '\0') {
           return;
         }
@@ -2124,18 +2124,18 @@ int _glGetAttribLocationARB_Exec(glContext, programObj, name)
   undefined4 programObj;
   undefined4 name;
 {
-  undefined4 uVar1;
+  undefined4 location;
   undefined4 glErrorCode;
-  int iVar2;
+  int sharedStateThenProgramObj;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
-    iVar2 = *(int *)(glContext + 0x5148);
-    if (*(char *)(iVar2 + 0x8024) != '\0') {
-      _pthread_mutex_lock(iVar2 + 0x8028);
-      iVar2 = *(int *)(glContext + 0x5148);
+    sharedStateThenProgramObj = *(int *)(glContext + 0x5148);
+    if (*(char *)(sharedStateThenProgramObj + 0x8024) != '\0') {
+      _pthread_mutex_lock(sharedStateThenProgramObj + 0x8028);
+      sharedStateThenProgramObj = *(int *)(glContext + 0x5148);
     }
-    iVar2 = _gleLookupHashObject(iVar2 + 0x6018,programObj);
-    if (iVar2 == 0) {
+    sharedStateThenProgramObj = _gleLookupHashObject(sharedStateThenProgramObj + 0x6018,programObj);
+    if (sharedStateThenProgramObj == 0) {
       if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
         _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);
       }
@@ -2145,13 +2145,13 @@ int _glGetAttribLocationARB_Exec(glContext, programObj, name)
       glErrorCode = 0x501;
       goto LAB_0008ff54;
     }
-    if ((*(int *)(iVar2 + 0x10) == 0x8b40) && (*(char *)(iVar2 + 0x3c) == '\x01')) {
-      uVar1 = _ShGetAttribLocation(*(undefined4 *)(iVar2 + 0x40),name);
+    if ((*(int *)(sharedStateThenProgramObj + 0x10) == 0x8b40) && (*(char *)(sharedStateThenProgramObj + 0x3c) == '\x01')) {
+      location = _ShGetAttribLocation(*(undefined4 *)(sharedStateThenProgramObj + 0x40),name);
       if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
         _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);
-        return uVar1;
+        return location;
       }
-      return uVar1;
+      return location;
     }
     if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
       _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);
@@ -2178,16 +2178,16 @@ void _glGetActiveAttribARB_Exec(glContext, programObj, index, maxLength, length,
   undefined4 name;
 {
   undefined4 glErrorCode;
-  int iVar2;
+  int sharedStateThenProgramObjThenQueryResult;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
-    iVar2 = *(int *)(glContext + 0x5148);
-    if (*(char *)(iVar2 + 0x8024) != '\0') {
-      _pthread_mutex_lock(iVar2 + 0x8028);
-      iVar2 = *(int *)(glContext + 0x5148);
+    sharedStateThenProgramObjThenQueryResult = *(int *)(glContext + 0x5148);
+    if (*(char *)(sharedStateThenProgramObjThenQueryResult + 0x8024) != '\0') {
+      _pthread_mutex_lock(sharedStateThenProgramObjThenQueryResult + 0x8028);
+      sharedStateThenProgramObjThenQueryResult = *(int *)(glContext + 0x5148);
     }
-    iVar2 = _gleLookupHashObject(iVar2 + 0x6018,programObj);
-    if (iVar2 == 0) {
+    sharedStateThenProgramObjThenQueryResult = _gleLookupHashObject(sharedStateThenProgramObjThenQueryResult + 0x6018,programObj);
+    if (sharedStateThenProgramObjThenQueryResult == 0) {
 LAB_00090034:
       if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
         _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);
@@ -2198,11 +2198,11 @@ LAB_00090034:
       glErrorCode = 0x501;
       goto LAB_000900b8;
     }
-    if (*(int *)(iVar2 + 0x10) == 0x8b40) {
-      if (*(uint *)(iVar2 + 0x34) <= index) goto LAB_00090034;
-      iVar2 = _ShGetActiveAttrib(*(undefined4 *)(iVar2 + 0x40),index,maxLength,length,size,
+    if (*(int *)(sharedStateThenProgramObjThenQueryResult + 0x10) == 0x8b40) {
+      if (*(uint *)(sharedStateThenProgramObjThenQueryResult + 0x34) <= index) goto LAB_00090034;
+      sharedStateThenProgramObjThenQueryResult = _ShGetActiveAttrib(*(undefined4 *)(sharedStateThenProgramObjThenQueryResult + 0x40),index,maxLength,length,size,
                                  type,name);
-      if (iVar2 != 0) {
+      if (sharedStateThenProgramObjThenQueryResult != 0) {
         if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) == '\0') {
           return;
         }
@@ -2449,8 +2449,8 @@ void _glStencilFuncSeparateATI_Exec(glContext, frontfunc, backfunc, ref, mask)
   undefined4 mask;
 {
   undefined4 glErrorCode;
-  uint uVar2;
-  int iVar3;
+  uint maxReference;
+  int stencilFaceRecord;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
     if ((frontfunc - 0x200U < 8) && (backfunc - 0x200U < 8)) {
@@ -2458,15 +2458,15 @@ void _glStencilFuncSeparateATI_Exec(glContext, frontfunc, backfunc, ref, mask)
         ref = 0;
       }
       else {
-        uVar2 = 0xffffffff >> (0x20U - *(int *)(*(int *)(glContext + 0x468c) + 0x40) & 0x3f);
-        if (uVar2 < ref) {
-          ref = uVar2;
+        maxReference = 0xffffffff >> (0x20U - *(int *)(*(int *)(glContext + 0x468c) + 0x40) & 0x3f);
+        if (maxReference < ref) {
+          ref = maxReference;
         }
       }
-      iVar3 = (uint)*(byte *)(glContext + 0x7583) * 0x10 + glContext;
-      *(undefined4 *)(iVar3 + 0x34f8) = mask;
-      *(short *)(iVar3 + 0x3500) = (short)frontfunc;
-      *(uint *)(iVar3 + 0x34fc) = ref;
+      stencilFaceRecord = (uint)*(byte *)(glContext + 0x7583) * 0x10 + glContext;
+      *(undefined4 *)(stencilFaceRecord + 0x34f8) = mask;
+      *(short *)(stencilFaceRecord + 0x3500) = (short)frontfunc;
+      *(uint *)(stencilFaceRecord + 0x34fc) = ref;
       *(short *)(glContext + 0x3518) = (short)backfunc;
       *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x10000000;
       return;

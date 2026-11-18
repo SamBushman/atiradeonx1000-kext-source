@@ -477,14 +477,14 @@ int _glPointParameterfv_ListExec(glContext, listRecord)
   undefined4 glContext;
   int *listRecord;
 {
-  int iVar1;
+  int valueCount;
   
-  iVar1 = 3;
+  valueCount = 3;
   if (*listRecord != 0x8129) {
-    iVar1 = 1;
+    valueCount = 1;
   }
   ((void (*)())_glPointParameterfv_Exec)(glContext,*listRecord,listRecord + 1);
-  return iVar1 * 4 + 4;
+  return valueCount * 4 + 4;
 }
 
 /* _glPointParameteriARB_Exec @ 0x7ea74 (480 bytes) */
@@ -493,13 +493,15 @@ void _glPointParameteriARB_Exec(glContext, pname, param)
   uint pname;
   uint param;
 {
-  bool bVar1;
-  byte bVar2;
-  int iVar3;
-  int iVar4;
+  bool word5434IsZero;
+  bool rModeValid;
+  byte dirtyBitIndex;
+  int glContextWord5424;
+  int dirtyWord348;
+  int dirtyWord324;
   
   if (pname == 0x8127) {
-    bVar1 = *(int *)(glContext + 0x5434) == 0;
+    word5434IsZero = *(int *)(glContext + 0x5434) == 0;
     *(float *)(glContext + 0x3424) =
          (float)((double)CONCAT44(0x43300000,param ^ 0x80000000) - DOUBLE_00108d58);
   }
@@ -523,7 +525,7 @@ LAB_0007ec2c:
       }
       return;
     }
-    bVar1 = *(int *)(glContext + 0x5434) == 0;
+    word5434IsZero = *(int *)(glContext + 0x5434) == 0;
     *(float *)(glContext + 0x3420) =
          (float)((double)CONCAT44(0x43300000,param ^ 0x80000000) - DOUBLE_00108d58);
   }
@@ -532,32 +534,32 @@ LAB_0007ec2c:
       if (pname != 0x8863) goto LAB_0007ec2c;
       if (param != 0x2000) {
         if (param < 0x2001) {
-          bVar1 = param == 0;
+          rModeValid = param == 0;
         }
         else {
-          bVar1 = param == 0x2002;
+          rModeValid = param == 0x2002;
         }
-        if (!bVar1) goto LAB_0007ec14;
+        if (!rModeValid) goto LAB_0007ec14;
       }
       *(short *)(glContext + 0x3440) = (short)param;
       goto LAB_0007ec44;
     }
-    bVar1 = *(int *)(glContext + 0x5434) == 0;
+    word5434IsZero = *(int *)(glContext + 0x5434) == 0;
     *(float *)(glContext + 0x3428) =
          (float)((double)CONCAT44(0x43300000,param ^ 0x80000000) - DOUBLE_00108d58);
   }
-  if (bVar1) {
-    bVar2 = *(byte *)(*(int *)(glContext + 0x5420) + 0x325);
+  if (word5434IsZero) {
+    dirtyBitIndex = *(byte *)(*(int *)(glContext + 0x5420) + 0x325);
   }
   else {
-    bVar2 = *(byte *)(*(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x359);
+    dirtyBitIndex = *(byte *)(*(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x359);
   }
-  iVar4 = (bVar2 >> 3 & 0x1c) + glContext;
-  iVar3 = *(int *)(glContext + 0x5424);
-  *(uint *)(iVar4 + 0x324) = *(uint *)(iVar4 + 0x324) | 1 << (bVar2 & 0x1f);
-  bVar2 = *(byte *)(iVar3 + 0x325);
-  iVar3 = (bVar2 >> 3 & 0x1c) + glContext;
-  *(uint *)(iVar3 + 0x348) = *(uint *)(iVar3 + 0x348) | 1 << (bVar2 & 0x1f);
+  dirtyWord324 = (dirtyBitIndex >> 3 & 0x1c) + glContext;
+  glContextWord5424 = *(int *)(glContext + 0x5424);
+  *(uint *)(dirtyWord324 + 0x324) = *(uint *)(dirtyWord324 + 0x324) | 1 << (dirtyBitIndex & 0x1f);
+  dirtyBitIndex = *(byte *)(glContextWord5424 + 0x325);
+  dirtyWord348 = (dirtyBitIndex >> 3 & 0x1c) + glContext;
+  *(uint *)(dirtyWord348 + 0x348) = *(uint *)(dirtyWord348 + 0x348) | 1 << (dirtyBitIndex & 0x1f);
 LAB_0007ec44:
   *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x400000;
   return;
@@ -706,7 +708,7 @@ int _glPointParameterivARB_Comp(glContext, pname, params)
   int pname;
   int *params;
 {
-  int iVar1;
+  int paramValue;
   int *dstCursor;
   int remaining;
   
@@ -719,9 +721,9 @@ int _glPointParameterivARB_Comp(glContext, pname, params)
   if ((dstCursor != (int *)0x0) && (*dstCursor = pname, remaining != 0)) {
     dstCursor = dstCursor + 1;
     do {
-      iVar1 = *params;
+      paramValue = *params;
       params = params + 1;
-      *dstCursor = iVar1;
+      *dstCursor = paramValue;
       dstCursor = dstCursor + 1;
       remaining = remaining + -1;
     } while (remaining != 0);
@@ -1214,12 +1216,12 @@ void _glRasterPos2f_Comp(undefined4 glContext,float x,float y)
 /* _glRasterPos2f_Exec @ 0x7faec (732 bytes) */
 void _glRasterPos2f_Exec(int glContext,float x,float y,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
 {
-  bool bVar1;
+  bool rendererInfoByte79Zero;
   bool stateClean;
-  char cVar2;
+  char rendererInfoByte79;
   undefined4 glErrorCode;
   int *srcCursor;
-  int iVar5;
+  int dirtyWord;
   int framebufferObject;
   undefined4 incomingR5;
   undefined4 incomingR6;
@@ -1231,7 +1233,7 @@ void _glRasterPos2f_Exec(int glContext,float x,float y,double forwardedFloatArg3
   uint dirtyWord3ThenMasked;
   uint dispatchFlags;
   int *dirtyFlagWords;
-  double extraout_f1;
+  double f1AfterCall;
   double fparam_1_00;
   double fparam_2_00;
   
@@ -1248,12 +1250,12 @@ void _glRasterPos2f_Exec(int glContext,float x,float y,double forwardedFloatArg3
   fparam_2_00 = y;
   if (matrixFuncDirty != 0 || (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
     _gleUpdateMatrixFunc(glContext);
-    fparam_1_00 = extraout_f1;
+    fparam_1_00 = f1AfterCall;
   }
   if (*(char *)(glContext + 0x4691) == '\0') goto LAB_0007fd74;
   framebufferObject = *(int *)(glContext + 0x744c);
   dirtyFlagWords = (int *)(glContext + 0x310);
-  cVar2 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
+  rendererInfoByte79 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
   if ((framebufferObject != 0) && (*(int *)(framebufferObject + 0xec) != 0)) {
     ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,incomingR5,incomingR6,incomingR7,incomingR8,matrixFuncDirty,fparam_1_00,fparam_2_00,forwardedFloatArg3,
                forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
@@ -1267,9 +1269,9 @@ LAB_0007fc4c:
     loopIndex = 0;
     srcCursor = (int *)(glContext + 0x324);
     do {
-      iVar5 = *srcCursor;
+      dirtyWord = *srcCursor;
       srcCursor = srcCursor + 1;
-      if (iVar5 != 0) {
+      if (dirtyWord != 0) {
         *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x800000;
         break;
       }
@@ -1286,14 +1288,14 @@ LAB_0007fc4c:
       goto LAB_0007fc4c;
     }
   }
-  bVar1 = cVar2 == '\0';
-  if (bVar1) {
+  rendererInfoByte79Zero = rendererInfoByte79 == '\0';
+  if (rendererInfoByte79Zero) {
     dirtyWord3ThenMasked = dirtyWord3ThenMasked & 0x17000000;
   }
   else {
     dirtyWord3ThenMasked = dirtyWord3ThenMasked & 0x17ffffff;
   }
-  if (bVar1) {
+  if (rendererInfoByte79Zero) {
     stateClean = ((*dirtyFlagWords == 0 && *(int *)(glContext + 0x314) == 0) && dirtyWord3ThenMasked == 0) &&
             *(int *)(glContext + 800) == 0;
   }
@@ -1529,7 +1531,7 @@ void _glRasterPos2i_CompExec(glContext, x, y)
   undefined4 x;
   undefined4 y;
 {
-  double fparam_1;
+  double forwardedFloatArg1;
   double incomingFpr2;
   double incomingFpr3;
   double incomingFpr4;
@@ -1539,7 +1541,7 @@ void _glRasterPos2i_CompExec(glContext, x, y)
   double incomingFpr8;
   
   ((void (*)())_glRasterPos2i_Comp)(glContext,x,y);
-  ((void (*)())_glRasterPos2i_Exec)(glContext,x,y,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
+  ((void (*)())_glRasterPos2i_Exec)(glContext,x,y,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
   return;
 }
 

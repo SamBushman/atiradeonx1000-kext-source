@@ -138,29 +138,29 @@ void _LFSStreamChunkListGetStream(chunkList, outStream, outCount, forwardedArg4)
 }
 
 /* _LFSStreamChunkListCompare @ 0xd1b0c (132 bytes) */
-int _LFSStreamChunkListCompare(param_1, param_2)
-  int *param_1;
-  int *param_2;
+int _LFSStreamChunkListCompare(listA, listB)
+  int *listA;
+  int *listB;
 {
-  undefined4 uVar1;
-  int iVar2;
-  int iVar3;
-  int iVar4;
+  undefined4 differs;
+  int chunkCompareResult;
+  int chunkA;
+  int chunkB;
   
-  iVar3 = *param_1;
-  uVar1 = 1;
-  iVar4 = *param_2;
-  if (param_1[2] == param_2[2]) {
-    for (; (iVar3 != 0 && (iVar4 != 0)); iVar4 = *(int *)(iVar4 + 0x4c)) {
-      iVar2 = _LFSStreamChunkCompare(iVar3,iVar4);
-      if (iVar2 != 0) {
+  chunkA = *listA;
+  differs = 1;
+  chunkB = *listB;
+  if (listA[2] == listB[2]) {
+    for (; (chunkA != 0 && (chunkB != 0)); chunkB = *(int *)(chunkB + 0x4c)) {
+      chunkCompareResult = _LFSStreamChunkCompare(chunkA,chunkB);
+      if (chunkCompareResult != 0) {
         return 1;
       }
-      iVar3 = *(int *)(iVar3 + 0x4c);
+      chunkA = *(int *)(chunkA + 0x4c);
     }
-    uVar1 = 0;
+    differs = 0;
   }
-  return uVar1;
+  return differs;
 }
 
 /* _LFSStreamChunkListOutputDebugInfo @ 0xd1b90 (68 bytes) */
@@ -198,40 +198,40 @@ int _LFSStreamCreate()
 }
 
 /* _LFSStreamFree @ 0xd1c3c (92 bytes) */
-void _LFSStreamFree(param_1)
-  undefined4 *param_1;
+void _LFSStreamFree(stream)
+  undefined4 *stream;
 {
-  ((void (*)())_LFSStreamChunkListFree)(*param_1);
-  ((void (*)())_LFSStreamChunkListFree)(param_1[1]);
-  ((void (*)())_LFSStreamChunkListFree)(param_1[2]);
-  ((void (*)())_LFSStreamChunkListFree)(param_1[3]);
-  ((void (*)())_LFSStreamChunkListFree)(param_1[4]);
-  ((void (*)())_LFSStreamChunkListFree)(param_1[5]);
-  _free(param_1);
+  ((void (*)())_LFSStreamChunkListFree)(*stream);
+  ((void (*)())_LFSStreamChunkListFree)(stream[1]);
+  ((void (*)())_LFSStreamChunkListFree)(stream[2]);
+  ((void (*)())_LFSStreamChunkListFree)(stream[3]);
+  ((void (*)())_LFSStreamChunkListFree)(stream[4]);
+  ((void (*)())_LFSStreamChunkListFree)(stream[5]);
+  _free(stream);
   return;
 }
 
 /* _LFSStreamAddConstantBinding @ 0xd1c98 (104 bytes) */
-void _LFSStreamAddConstantBinding(param_1, param_2)
-  undefined4 *param_1;
-  undefined4 *param_2;
+void _LFSStreamAddConstantBinding(stream, binding)
+  undefined4 *stream;
+  undefined4 *binding;
 {
-  undefined4 uVar1;
-  undefined1 *puVar2;
-  undefined4 uVar3;
-  undefined4 uVar4;
+  undefined4 constantIndex;
+  undefined1 *chunk;
+  undefined4 envParameterIndex;
+  undefined4 inlineConstantIndex;
   
-  puVar2 = (undefined1 *)_LFSStreamChunkCreate();
-  *puVar2 = 3;
-  uVar1 = param_2[1];
-  uVar3 = param_2[2];
-  uVar4 = param_2[3];
-  *(undefined4 *)(puVar2 + 4) = *param_2;
-  *(undefined4 *)(puVar2 + 8) = uVar1;
-  *(undefined4 *)(puVar2 + 0xc) = uVar3;
-  *(undefined4 *)(puVar2 + 0x10) = uVar4;
-  *(undefined4 *)(puVar2 + 0x14) = param_2[4];
-  ((void (*)())_LFSStreamChunkListAddChunk)(*param_1,puVar2);
+  chunk = (undefined1 *)_LFSStreamChunkCreate();
+  *chunk = 3;
+  constantIndex = binding[1];
+  envParameterIndex = binding[2];
+  inlineConstantIndex = binding[3];
+  *(undefined4 *)(chunk + 4) = *binding;
+  *(undefined4 *)(chunk + 8) = constantIndex;
+  *(undefined4 *)(chunk + 0xc) = envParameterIndex;
+  *(undefined4 *)(chunk + 0x10) = inlineConstantIndex;
+  *(undefined4 *)(chunk + 0x14) = binding[4];
+  ((void (*)())_LFSStreamChunkListAddChunk)(*stream,chunk);
   return;
 }
 
@@ -260,16 +260,16 @@ void _LFSStreamAddPreliminaryPassRegisterInit(stream, registerInit)
 }
 
 /* _LFSStreamAddPreliminaryPassOperation @ 0xd1d68 (84 bytes) */
-void _LFSStreamAddPreliminaryPassOperation(param_1, param_2)
-  int param_1;
-  undefined4 param_2;
+void _LFSStreamAddPreliminaryPassOperation(stream, operation)
+  int stream;
+  undefined4 operation;
 {
-  undefined1 *puVar1;
+  undefined1 *chunk;
   
-  puVar1 = (undefined1 *)_LFSStreamChunkCreate();
-  *puVar1 = 2;
-  _memcpy(puVar1 + 4,param_2,0x44);
-  ((void (*)())_LFSStreamChunkListAddChunk)(*(undefined4 *)(param_1 + 8),puVar1);
+  chunk = (undefined1 *)_LFSStreamChunkCreate();
+  *chunk = 2;
+  _memcpy(chunk + 4,operation,0x44);
+  ((void (*)())_LFSStreamChunkListAddChunk)(*(undefined4 *)(stream + 8),chunk);
   return;
 }
 
@@ -382,32 +382,32 @@ void _LFSStreamGetStream(chunkLists, streamOut, sizeOut)
 }
 
 /* _LFSStreamCompare @ 0xd2148 (164 bytes) */
-int _LFSStreamCompare(param_1, param_2)
-  int param_1;
-  int param_2;
+int _LFSStreamCompare(streamA, streamB)
+  int streamA;
+  int streamB;
 {
-  int iVar1;
-  bool bVar2;
+  int listCompareResult;
+  bool streamsDiffer;
   
-  iVar1 = ((int (*)())_LFSStreamChunkListCompare)(*(undefined4 *)(param_1 + 4),*(undefined4 *)(param_2 + 4));
-  bVar2 = true;
-  if (iVar1 == 0) {
-    iVar1 = ((int (*)())_LFSStreamChunkListCompare)(*(undefined4 *)(param_1 + 8),*(undefined4 *)(param_2 + 8));
-    bVar2 = true;
-    if (iVar1 == 0) {
-      iVar1 = ((int (*)())_LFSStreamChunkListCompare)(*(undefined4 *)(param_1 + 0xc),*(undefined4 *)(param_2 + 0xc));
-      bVar2 = true;
-      if (iVar1 == 0) {
-        iVar1 = ((int (*)())_LFSStreamChunkListCompare)(*(undefined4 *)(param_1 + 0x10),*(undefined4 *)(param_2 + 0x10));
-        bVar2 = true;
-        if (iVar1 == 0) {
-          iVar1 = ((int (*)())_LFSStreamChunkListCompare)(*(undefined4 *)(param_1 + 0x14),*(undefined4 *)(param_2 + 0x14));
-          bVar2 = iVar1 != 0;
+  listCompareResult = ((int (*)())_LFSStreamChunkListCompare)(*(undefined4 *)(streamA + 4),*(undefined4 *)(streamB + 4));
+  streamsDiffer = true;
+  if (listCompareResult == 0) {
+    listCompareResult = ((int (*)())_LFSStreamChunkListCompare)(*(undefined4 *)(streamA + 8),*(undefined4 *)(streamB + 8));
+    streamsDiffer = true;
+    if (listCompareResult == 0) {
+      listCompareResult = ((int (*)())_LFSStreamChunkListCompare)(*(undefined4 *)(streamA + 0xc),*(undefined4 *)(streamB + 0xc));
+      streamsDiffer = true;
+      if (listCompareResult == 0) {
+        listCompareResult = ((int (*)())_LFSStreamChunkListCompare)(*(undefined4 *)(streamA + 0x10),*(undefined4 *)(streamB + 0x10));
+        streamsDiffer = true;
+        if (listCompareResult == 0) {
+          listCompareResult = ((int (*)())_LFSStreamChunkListCompare)(*(undefined4 *)(streamA + 0x14),*(undefined4 *)(streamB + 0x14));
+          streamsDiffer = listCompareResult != 0;
         }
       }
     }
   }
-  return bVar2;
+  return streamsDiffer;
 }
 
 /* _LFSStreamOutputDebugInfo @ 0xd21ec (164 bytes) */
@@ -542,8 +542,8 @@ void _gleGetHashMachineObjectNameTargetPairs(glContext, hashBuckets, objectType,
 int _gleImagingTexFormatToInternal(internalformat)
   uint internalformat;
 {
-  bool bVar1;
-  uint uVar2;
+  bool formatMatches;
+  uint candidateFormat;
   
   if (internalformat < 0x805c) {
     if (0x8054 < internalformat) {
@@ -591,7 +591,7 @@ int _gleImagingTexFormatToInternal(internalformat)
     if (internalformat < 0x190b) {
       return internalformat;
     }
-    bVar1 = internalformat == 0x2a10;
+    formatMatches = internalformat == 0x2a10;
   }
   else {
     if (internalformat == 0x8817) {
@@ -614,7 +614,7 @@ int _gleImagingTexFormatToInternal(internalformat)
           }
           return 0x8049;
         }
-        uVar2 = 0x84e9;
+        candidateFormat = 0x84e9;
       }
       else {
         if (internalformat == 0x8814) {
@@ -629,9 +629,9 @@ int _gleImagingTexFormatToInternal(internalformat)
         if (internalformat == 0x8815) {
           return 0x1907;
         }
-        uVar2 = 0x8816;
+        candidateFormat = 0x8816;
       }
-      if (internalformat == uVar2) {
+      if (internalformat == candidateFormat) {
         return 0x1906;
       }
       return 0;
@@ -660,9 +660,9 @@ int _gleImagingTexFormatToInternal(internalformat)
     if (internalformat == 0x881a) {
       return 0x1908;
     }
-    bVar1 = internalformat == 0x881b;
+    formatMatches = internalformat == 0x881b;
   }
-  if (bVar1) {
+  if (formatMatches) {
     return 0x1907;
   }
   return 0;
@@ -1442,30 +1442,30 @@ void _gleGetMinmax(glContext, unusedArg2, reset, format, type, values)
   undefined4 type;
   int values;
 {
-  float fVar1;
-  double dVar2;
+  float zeroValue;
+  double intToDoubleBias;
   int pixelBytes;
   code *insertFunc;
   undefined4 *minmaxTable;
-  undefined1 auStack_80 [4];
-  undefined4 local_7c;
-  undefined4 local_78;
-  undefined4 local_74;
-  undefined4 local_70;
+  undefined1 pixelRecordHeader [4];
+  undefined4 pixelRed;
+  undefined4 pixelGreen;
+  undefined4 pixelBlue;
+  undefined4 pixelAlpha;
   
   minmaxTable = *(undefined4 **)(glContext + 0x337c);
   pixelBytes = _glePixelBytes(format,type);
   insertFunc = (code *)_gleSelectPixelInsertFunc(format,type);
-  local_7c = *minmaxTable;
-  local_78 = minmaxTable[1];
-  local_74 = minmaxTable[2];
-  local_70 = minmaxTable[3];
-  (*insertFunc)(auStack_80,values);
-  local_7c = minmaxTable[4];
-  local_78 = minmaxTable[5];
-  local_74 = minmaxTable[6];
-  local_70 = minmaxTable[7];
-  (*insertFunc)(auStack_80,values + pixelBytes);
+  pixelRed = *minmaxTable;
+  pixelGreen = minmaxTable[1];
+  pixelBlue = minmaxTable[2];
+  pixelAlpha = minmaxTable[3];
+  (*insertFunc)(pixelRecordHeader,values);
+  pixelRed = minmaxTable[4];
+  pixelGreen = minmaxTable[5];
+  pixelBlue = minmaxTable[6];
+  pixelAlpha = minmaxTable[7];
+  (*insertFunc)(pixelRecordHeader,values + pixelBytes);
   if (reset == 0) {
     return;
   }
@@ -1533,13 +1533,13 @@ LAB_000d3af4:
   minmaxTable[7] = (float)(4503601774854144.0 - DOUBLE_00108d58);
 LAB_000d3b98:
   *minmaxTable = 0x3f800000;
-  dVar2 = DOUBLE_00108d58;
+  intToDoubleBias = DOUBLE_00108d58;
   minmaxTable[2] = 0x3f800000;
   minmaxTable[1] = 0x3f800000;
-  fVar1 = (float)(4503601774854144.0 - dVar2);
-  minmaxTable[6] = fVar1;
-  minmaxTable[4] = fVar1;
-  minmaxTable[5] = fVar1;
+  zeroValue = (float)(4503601774854144.0 - intToDoubleBias);
+  minmaxTable[6] = zeroValue;
+  minmaxTable[4] = zeroValue;
+  minmaxTable[5] = zeroValue;
   return;
 }
 
@@ -1694,19 +1694,19 @@ void _gleGetSeparableFilter(glContext, unusedArg2, format, type, row, column)
 }
 
 /* _gleColorTable @ 0xd4014 (128 bytes) */
-void _gleColorTable(glContext, scaleBias, param_3, param_4, format, type, table)
+void _gleColorTable(glContext, scaleBias, levelRecord, width, format, type, table)
   undefined4 glContext;
   undefined4 scaleBias;
-  int param_3;
-  undefined4 param_4;
+  int levelRecord;
+  undefined4 width;
   undefined4 format;
   undefined4 type;
   undefined4 table;
 {
-  ((void (*)())_gleImagingUnpackData)(glContext,param_4,1,format,type,(uint)*(ushort *)(param_3 + 0x10),
-             (uint)*(ushort *)(param_3 + 0x12),table,*(undefined4 *)(param_3 + 0x14));
-  ((void (*)())_gleImagingScaleAndBias)(glContext,scaleBias,*(undefined4 *)(param_3 + 0x14),(uint)*(ushort *)(param_3 + 0x10),0,
-             param_4,1);
+  ((void (*)())_gleImagingUnpackData)(glContext,width,1,format,type,(uint)*(ushort *)(levelRecord + 0x10),
+             (uint)*(ushort *)(levelRecord + 0x12),table,*(undefined4 *)(levelRecord + 0x14));
+  ((void (*)())_gleImagingScaleAndBias)(glContext,scaleBias,*(undefined4 *)(levelRecord + 0x14),(uint)*(ushort *)(levelRecord + 0x10),0,
+             width,1);
   return;
 }
 
@@ -1967,28 +1967,28 @@ double _gleMaterialShinePow(undefined4 unusedArg1,int param_2,float floatArg1,do
 }
 
 /* _gleLightExponentPow @ 0xd4538 (176 bytes) */
-double _gleLightExponentPow(undefined4 unusedArg1,int param_2,float floatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
+double _gleLightExponentPow(undefined4 unusedArg1,int exponentTable,float floatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  uint uVar1;
-  float fVar2;
-  int iVar3;
-  float dVar4;
-  float dVar5;
+  uint tableIndex;
+  float scaledIndex;
+  int tableEntry;
+  float one;
+  float fraction;
   
-  dVar4 = (double)FLOAT_00108e54;
-  if ((double)dVar4 < floatArg1) {
-    return (double)((floatArg1 - dVar4) * *(float *)(param_2 + 0x34) + dVar4);
+  one = (double)FLOAT_00108e54;
+  if ((double)one < floatArg1) {
+    return (double)((floatArg1 - one) * *(float *)(exponentTable + 0x34) + one);
   }
-  if (floatArg1 <= (double)*(float *)(param_2 + 0x28)) {
-    return (double)(floatArg1 * *(float *)(param_2 + 0x30));
+  if (floatArg1 <= (double)*(float *)(exponentTable + 0x28)) {
+    return (double)(floatArg1 * *(float *)(exponentTable + 0x30));
   }
-  fVar2 = (floatArg1 - *(float *)(param_2 + 0x28)) * *(float *)(param_2 + 0x2c);
-  uVar1 = (uint)(int)fVar2;
-  iVar3 = uVar1 * 4 + param_2;
-  dVar5 = (double)(fVar2 - (float)((double)CONCAT44(0x43300000,uVar1 ^ 0x80000000) - DOUBLE_00108d58
+  scaledIndex = (floatArg1 - *(float *)(exponentTable + 0x28)) * *(float *)(exponentTable + 0x2c);
+  tableIndex = (uint)(int)scaledIndex;
+  tableEntry = tableIndex * 4 + exponentTable;
+  fraction = (double)(scaledIndex - (float)((double)CONCAT44(0x43300000,tableIndex ^ 0x80000000) - DOUBLE_00108d58
                                   ));
-  return (double)((dVar4 - dVar5) * *(float *)(iVar3 + 0x38) +
-                 (dVar5 * *(float *)(iVar3 + 0x3c)));
+  return (double)((one - fraction) * *(float *)(tableEntry + 0x38) +
+                 (fraction * *(float *)(tableEntry + 0x3c)));
 }
 
 /* _gleVtxLightRGBAFront_body @ 0xd45ec (1180 bytes) */

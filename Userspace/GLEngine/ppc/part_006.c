@@ -162,22 +162,22 @@ void _gleBeginLineLoopRenderTCL(glContext)
 void _gleRenderLineLoopTCLFunc(glContext)
   int glContext;
 {
-  int iVar1;
+  int byteOffset;
   int remaining;
   undefined4 glContextWord4688;
   int glContextWord4854;
-  uint uVar5;
-  undefined4 uVar6;
+  uint vertexCount;
+  undefined4 renderAsLoop;
   int loopIndex;
   short glContextShort487c;
-  int iVar9;
+  int vertexStart;
   int glContextWord4858;
   code *UNRECOVERED_JUMPTABLE;
   
   glContextWord4854 = *(int *)(glContext + 0x4854);
   glContextWord4858 = *(int *)(glContext + 0x4858);
   glContextShort487c = *(short *)(glContext + 0x487c);
-  uVar5 = (uint)(glContextWord4858 - glContextWord4854) / (uint)(int)glContextShort487c;
+  vertexCount = (uint)(glContextWord4858 - glContextWord4854) / (uint)(int)glContextShort487c;
   if (*(char *)(glContext + 0x4a18) == '\0') {
     if (*(short *)(glContext + 0x4a10) < 0) {
       UNRECOVERED_JUMPTABLE = *(code **)(glContext + 0x46bc);
@@ -186,34 +186,34 @@ void _gleRenderLineLoopTCLFunc(glContext)
       UNRECOVERED_JUMPTABLE = *(code **)(glContext + 0x46b8);
     }
     glContextWord4688 = *(undefined4 *)(glContext + 0x4688);
-    uVar6 = 1;
+    renderAsLoop = 1;
   }
   else {
     if (*(short *)(glContext + 0x4a10) < 0) {
       remaining = (int)glContextShort487c >> 3;
       loopIndex = 0;
-      iVar9 = glContextWord4854;
+      vertexStart = glContextWord4854;
       if (0 < remaining) {
         while( true ) {
-          iVar1 = loopIndex * 8;
+          byteOffset = loopIndex * 8;
           loopIndex = loopIndex + 1;
-          *(undefined8 *)(iVar1 + glContextWord4858) = *(undefined8 *)(iVar1 + iVar9 + -0x100);
+          *(undefined8 *)(byteOffset + glContextWord4858) = *(undefined8 *)(byteOffset + vertexStart + -0x100);
           remaining = remaining + -1;
           if (remaining == 0) break;
-          iVar9 = *(int *)(glContext + 0x4854);
+          vertexStart = *(int *)(glContext + 0x4854);
         }
         glContextShort487c = *(short *)(glContext + 0x487c);
       }
-      uVar5 = uVar5 + 1;
+      vertexCount = vertexCount + 1;
       *(int *)(glContext + 0x4858) = glContextWord4858 + glContextShort487c;
     }
     UNRECOVERED_JUMPTABLE = *(code **)(glContext + 0x46b8);
-    uVar6 = 0;
+    renderAsLoop = 0;
     glContextWord4688 = *(undefined4 *)(glContext + 0x4688);
   }
                     
                     
-  (*UNRECOVERED_JUMPTABLE)(glContextWord4688,glContextWord4854,uVar5,uVar6);
+  (*UNRECOVERED_JUMPTABLE)(glContextWord4688,glContextWord4854,vertexCount,renderAsLoop);
   return;
 }
 
@@ -296,22 +296,22 @@ void _gleEndList(glContext)
 }
 
 /* _gleIsHashName @ 0x3af50 (68 bytes) */
-int _gleIsHashName(param_1, param_2)
-  int param_1;
-  uint param_2;
+int _gleIsHashName(hashTable, name)
+  int hashTable;
+  uint name;
 {
-  int *piVar1;
+  int *rangeNode;
   
-  piVar1 = *(int **)(param_1 + 0x1000);
+  rangeNode = *(int **)(hashTable + 0x1000);
   while( true ) {
-    if (piVar1 == (int *)0x0) {
+    if (rangeNode == (int *)0x0) {
       return 0;
     }
-    if (param_2 < (uint)piVar1[1]) break;
-    if (param_2 < (uint)(piVar1[1] + piVar1[2])) {
+    if (name < (uint)rangeNode[1]) break;
+    if (name < (uint)(rangeNode[1] + rangeNode[2])) {
       return 1;
     }
-    piVar1 = (int *)*piVar1;
+    rangeNode = (int *)*rangeNode;
   }
   return 0;
 }
@@ -4176,16 +4176,16 @@ switchD_00042f34_default:
 }
 
 /* _glSwap_Exec @ 0x4335c (652 bytes) */
-void _glSwap_Exec(int glContext,double fparam_1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
+void _glSwap_Exec(int glContext,double forwardedFloatArg1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
 {
   int remaining;
   int loopIndex;
-  bool bVar1;
+  bool rendererInfoByte79Zero;
   bool noStateChangePending;
   char rendererInfoByte79;
   undefined4 glErrorCode;
   int *srcCursor;
-  int iVar5;
+  int dirtyWord;
   int framebufferObject;
   undefined4 incomingR5;
   undefined4 incomingR6;
@@ -4195,7 +4195,7 @@ void _glSwap_Exec(int glContext,double fparam_1,double forwardedFloatArg2,double
   uint dispatchFlags;
   uint changeWord3;
   int *changeWordCursor;
-  double extraout_f1;
+  double f1AfterCall;
   
   if (-1 < *(short *)(glContext + 0x4a10)) {
     if (*(int *)(glContext + 0x7574) != 0) {
@@ -4207,14 +4207,14 @@ void _glSwap_Exec(int glContext,double fparam_1,double forwardedFloatArg2,double
   matrixChangeBits = *(int *)(glContext + 0x50ac);
   if (matrixChangeBits != 0 || (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
     _gleUpdateMatrixFunc(glContext);
-    fparam_1 = extraout_f1;
+    forwardedFloatArg1 = f1AfterCall;
   }
   if (*(char *)(glContext + 0x4691) == '\0') goto LAB_000435b4;
   framebufferObject = *(int *)(glContext + 0x744c);
   changeWordCursor = (int *)(glContext + 0x310);
   rendererInfoByte79 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
   if ((framebufferObject != 0) && (*(int *)(framebufferObject + 0xec) != 0)) {
-    ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,incomingR5,incomingR6,incomingR7,incomingR8,matrixChangeBits,fparam_1,forwardedFloatArg2,forwardedFloatArg3,
+    ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,incomingR5,incomingR6,incomingR7,incomingR8,matrixChangeBits,forwardedFloatArg1,forwardedFloatArg2,forwardedFloatArg3,
                forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
     *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000000;
   }
@@ -4226,9 +4226,9 @@ LAB_0004348c:
     loopIndex = 0;
     srcCursor = (int *)(glContext + 0x324);
     do {
-      iVar5 = *srcCursor;
+      dirtyWord = *srcCursor;
       srcCursor = srcCursor + 1;
-      if (iVar5 != 0) {
+      if (dirtyWord != 0) {
         *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x800000;
         break;
       }
@@ -4245,14 +4245,14 @@ LAB_0004348c:
       goto LAB_0004348c;
     }
   }
-  bVar1 = rendererInfoByte79 == '\0';
-  if (bVar1) {
+  rendererInfoByte79Zero = rendererInfoByte79 == '\0';
+  if (rendererInfoByte79Zero) {
     changeWord3 = changeWord3 & 0x17000000;
   }
   else {
     changeWord3 = changeWord3 & 0x17ffffff;
   }
-  if (bVar1) {
+  if (rendererInfoByte79Zero) {
     noStateChangePending = ((*changeWordCursor == 0 && *(int *)(glContext + 0x314) == 0) && changeWord3 == 0) &&
             *(int *)(glContext + 800) == 0;
   }
@@ -4451,14 +4451,14 @@ void _glRotated_CompExec(int glContext,double angle,double x,double y,double z)
 }
 
 /* _glRotateY_Comp @ 0x43a6c (100 bytes) */
-void _glRotateY_Comp(undefined4 glContext,float fparam_1,float fparam_2)
+void _glRotateY_Comp(undefined4 glContext,float sinAngle,float cosAngle)
 {
   float *listRecord;
   
   listRecord = (float *)_gleAddListItem(glContext,PTR__glRotateY_ListExec_0011028c,8);
   if (listRecord != (float *)0x0) {
-    listRecord[1] = (float)fparam_2;
-    *listRecord = (float)fparam_1;
+    listRecord[1] = (float)cosAngle;
+    *listRecord = (float)sinAngle;
   }
   return;
 }
@@ -4479,64 +4479,70 @@ void _glRotateX_Comp(undefined4 glContext,float sinValue,float cosValue)
 /* _glRotateX_Exec @ 0x43b34 (372 bytes) */
 void _glRotateX_Exec(int glContext,float sinAngle,float cosAngle,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  float fVar1;
-  float fVar2;
+  float oldMatrixElement8;
+  float oldInverseElement10;
+  float oldInverseElement8;
+  float oldMatrixElement10;
+  float oldMatrixElement5;
+  float oldInverseElement7;
+  float oldInverseElement5;
+  float oldMatrixElement7;
   int currentMatrix;
   int currentInverseMatrix;
   uint glContextWord50b0;
-  uint uVar5;
+  uint currentMatrixDirtyBits;
   
-  uVar5 = *(uint *)(glContext + 0x50a8);
+  currentMatrixDirtyBits = *(uint *)(glContext + 0x50a8);
   currentMatrix = *(int *)(glContext + 0x4fec);
   if ((*(short *)(glContext + 0x4a10) < 0) && (*(int *)(glContext + 0x4ff4) < 0x18)) {
-    fVar1 = *(float *)(currentMatrix + 0x20);
-    fVar2 = *(float *)(currentMatrix + 0x14);
+    oldMatrixElement8 = *(float *)(currentMatrix + 0x20);
+    oldMatrixElement5 = *(float *)(currentMatrix + 0x14);
     *(float *)(currentMatrix + 0x20) =
-         (fVar1 * cosAngle - (*(float *)(currentMatrix + 0x10) * sinAngle));
+         (oldMatrixElement8 * cosAngle - (*(float *)(currentMatrix + 0x10) * sinAngle));
     *(float *)(currentMatrix + 0x10) =
-         (*(float *)(currentMatrix + 0x10) * cosAngle + (fVar1 * sinAngle));
-    fVar1 = *(float *)(currentMatrix + 0x28);
+         (*(float *)(currentMatrix + 0x10) * cosAngle + (oldMatrixElement8 * sinAngle));
+    oldMatrixElement10 = *(float *)(currentMatrix + 0x28);
     *(float *)(currentMatrix + 0x14) =
-         (fVar2 * cosAngle + (*(float *)(currentMatrix + 0x24) * sinAngle));
+         (oldMatrixElement5 * cosAngle + (*(float *)(currentMatrix + 0x24) * sinAngle));
     *(float *)(currentMatrix + 0x24) =
-         (*(float *)(currentMatrix + 0x24) * cosAngle - (fVar2 * sinAngle));
-    fVar2 = *(float *)(currentMatrix + 0x1c);
+         (*(float *)(currentMatrix + 0x24) * cosAngle - (oldMatrixElement5 * sinAngle));
+    oldMatrixElement7 = *(float *)(currentMatrix + 0x1c);
     *(float *)(currentMatrix + 0x28) =
-         (fVar1 * cosAngle - (*(float *)(currentMatrix + 0x18) * sinAngle));
+         (oldMatrixElement10 * cosAngle - (*(float *)(currentMatrix + 0x18) * sinAngle));
     *(float *)(currentMatrix + 0x18) =
-         (*(float *)(currentMatrix + 0x18) * cosAngle + (fVar1 * sinAngle));
+         (*(float *)(currentMatrix + 0x18) * cosAngle + (oldMatrixElement10 * sinAngle));
     *(float *)(currentMatrix + 0x1c) =
-         (fVar2 * cosAngle + (*(float *)(currentMatrix + 0x2c) * sinAngle));
+         (oldMatrixElement7 * cosAngle + (*(float *)(currentMatrix + 0x2c) * sinAngle));
     *(float *)(currentMatrix + 0x2c) =
-         (*(float *)(currentMatrix + 0x2c) * cosAngle - (fVar2 * sinAngle));
+         (*(float *)(currentMatrix + 0x2c) * cosAngle - (oldMatrixElement7 * sinAngle));
     glContextWord50b0 = *(uint *)(glContext + 0x50b0);
-    *(uint *)(glContext + 0x50ac) = *(uint *)(glContext + 0x50ac) | uVar5;
-    if ((uVar5 & ~glContextWord50b0 & *(uint *)(glContext + 0x505c) & 0xfffffc) != 0) {
+    *(uint *)(glContext + 0x50ac) = *(uint *)(glContext + 0x50ac) | currentMatrixDirtyBits;
+    if ((currentMatrixDirtyBits & ~glContextWord50b0 & *(uint *)(glContext + 0x505c) & 0xfffffc) != 0) {
       currentInverseMatrix = *(int *)(glContext + 0x4ff0);
-      uVar5 = uVar5 & 0xff000003;
-      fVar1 = *(float *)(currentInverseMatrix + 0x20);
-      fVar2 = *(float *)(currentInverseMatrix + 0x14);
+      currentMatrixDirtyBits = currentMatrixDirtyBits & 0xff000003;
+      oldInverseElement8 = *(float *)(currentInverseMatrix + 0x20);
+      oldInverseElement5 = *(float *)(currentInverseMatrix + 0x14);
       *(float *)(currentInverseMatrix + 0x20) =
-           (fVar1 * cosAngle - (*(float *)(currentInverseMatrix + 0x10) * sinAngle));
+           (oldInverseElement8 * cosAngle - (*(float *)(currentInverseMatrix + 0x10) * sinAngle));
       *(float *)(currentInverseMatrix + 0x10) =
-           (*(float *)(currentInverseMatrix + 0x10) * cosAngle + (fVar1 * sinAngle));
-      fVar1 = *(float *)(currentInverseMatrix + 0x28);
+           (*(float *)(currentInverseMatrix + 0x10) * cosAngle + (oldInverseElement8 * sinAngle));
+      oldInverseElement10 = *(float *)(currentInverseMatrix + 0x28);
       *(float *)(currentInverseMatrix + 0x14) =
-           (fVar2 * cosAngle + (*(float *)(currentInverseMatrix + 0x24) * sinAngle));
+           (oldInverseElement5 * cosAngle + (*(float *)(currentInverseMatrix + 0x24) * sinAngle));
       *(float *)(currentInverseMatrix + 0x24) =
-           (*(float *)(currentInverseMatrix + 0x24) * cosAngle - (fVar2 * sinAngle));
-      fVar2 = *(float *)(currentInverseMatrix + 0x1c);
+           (*(float *)(currentInverseMatrix + 0x24) * cosAngle - (oldInverseElement5 * sinAngle));
+      oldInverseElement7 = *(float *)(currentInverseMatrix + 0x1c);
       *(float *)(currentInverseMatrix + 0x28) =
-           (fVar1 * cosAngle - (*(float *)(currentInverseMatrix + 0x18) * sinAngle));
+           (oldInverseElement10 * cosAngle - (*(float *)(currentInverseMatrix + 0x18) * sinAngle));
       *(float *)(currentInverseMatrix + 0x18) =
-           (*(float *)(currentInverseMatrix + 0x18) * cosAngle + (fVar1 * sinAngle));
+           (*(float *)(currentInverseMatrix + 0x18) * cosAngle + (oldInverseElement10 * sinAngle));
       *(float *)(currentInverseMatrix + 0x1c) =
-           (fVar2 * cosAngle + (*(float *)(currentInverseMatrix + 0x2c) * sinAngle));
+           (oldInverseElement7 * cosAngle + (*(float *)(currentInverseMatrix + 0x2c) * sinAngle));
       *(float *)(currentInverseMatrix + 0x2c) =
-           (*(float *)(currentInverseMatrix + 0x2c) * cosAngle - (fVar2 * sinAngle));
+           (*(float *)(currentInverseMatrix + 0x2c) * cosAngle - (oldInverseElement7 * sinAngle));
       glContextWord50b0 = *(uint *)(glContext + 0x50b0);
     }
-    *(uint *)(glContext + 0x50b0) = glContextWord50b0 | uVar5;
+    *(uint *)(glContext + 0x50b0) = glContextWord50b0 | currentMatrixDirtyBits;
     return;
   }
   if (*(int *)(glContext + 0x7574) != 0) {
@@ -4744,13 +4750,13 @@ int _glVertex3_ListExec(glContext, recordedArgs)
   int glContext;
   float *recordedArgs;
 {
-  code *pcVar1;
+  code *vertexFunc;
   
-  pcVar1 = *(code **)(glContext + 0x4884);
+  vertexFunc = *(code **)(glContext + 0x4884);
   if (*(int *)(glContext + 0x4858) == *(int *)(glContext + 0x485c)) {
-    pcVar1 = *(code **)(glContext + 0x28);
+    vertexFunc = *(code **)(glContext + 0x28);
   }
-  (*pcVar1)(glContext,(double)*recordedArgs,(double)recordedArgs[1],(double)recordedArgs[2],
+  (*vertexFunc)(glContext,(double)*recordedArgs,(double)recordedArgs[1],(double)recordedArgs[2],
             (double)*(float *)(glContext + 0x24));
   return 0xc;
 }
@@ -5681,14 +5687,14 @@ int _glNormal_ListExec(glContext, recordedArgs)
   int glContext;
   undefined4 *recordedArgs;
 {
-  undefined4 uVar1;
-  undefined4 uVar2;
+  undefined4 normalY;
+  undefined4 normalZ;
   
-  uVar1 = recordedArgs[1];
-  uVar2 = recordedArgs[2];
+  normalY = recordedArgs[1];
+  normalZ = recordedArgs[2];
   *(undefined4 *)(glContext + 0x2b0) = *recordedArgs;
-  *(undefined4 *)(glContext + 0x2b4) = uVar1;
-  *(undefined4 *)(glContext + 0x2b8) = uVar2;
+  *(undefined4 *)(glContext + 0x2b4) = normalY;
+  *(undefined4 *)(glContext + 0x2b8) = normalZ;
   return 0xc;
 }
 
