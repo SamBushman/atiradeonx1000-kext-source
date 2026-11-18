@@ -1,0 +1,13 @@
+local	_gleRenderFlatTriangleStripFunc_body	dVar26	lastCalleeF1	CONFIRMED	f1 left by the most recent call (f1AfterCall, f1AfterCall1/2 or a callee's returned double), forwarded to _gleCullTriangle/_gleClipPolyPlane
+local	_gleRenderFlatQuadsFunc_body	dVar20	lastCalleeF1	CONFIRMED	f1 left by the most recent call (f1AfterCall, f1AfterCall2 or a callee's returned double), forwarded to _gleCullQuad/_gleClipPolyPlane
+local	_gleSelectPolygonFunc_body	dVar13	lastCalleeF1	CONFIRMED	f1 left by the most recent call (f1AfterCall or the ctx+0x5064 callee's returned double), forwarded to _gleClipPolyPlane
+local	_gleSelectPolygonFunc_body	uVar7	computeClipCodes	CONFIRMED	0, or 1 after _gleClipPolyPlane produced the list; passed as the computeClipCodes argument of _gleClipPoly
+local	_gleSelectPolygonFunc_body	iVar11	vertexCursorThenCullResultThenFlippedVertex	CONFIRMED	vertex start/cursor (ctx+0x4854, ctx+0x4864, advanced by 0x100 while building the list), then the _gleCullPolygonPtrStack result, then the vertex read from polygonVertexCursor for _gleVPFlipColors
+local	_glePPPruneOutputs	param_1	ppProgram	INFERRED	program record whose sub-record at +0x1c holds the output chunk list (+0x1c) and the instruction list (+0x20)
+local	_glePPPruneOutputs	iVar2	instructionThenOutputChunkCursor	CONFIRMED	instruction list cursor in the scan of instructions, then output chunk cursor (duplicate scan, next chunk after removal, renumbering loop)
+local	_gleCheckTexImageArgs	iVar5	subImageArgsCheck	CONFIRMED	result of _gleCheckTexSubImageArgs; zero returns 0
+local	_gleCheckTexImageArgs	uVar4	internalformatOffset	CONFIRMED	internalformat minus a range base (0x804f or 0x8701), compared with the range size
+local	_gleCheckTexImageArgs	bVar6	depthInternalFormat	CONFIRMED	true for internalformat 0x1902 and 0x81a5-0x81a7 (depth component formats); must equal (format == 0x1902)
+local	_gleCheckTexImageArgs	bVar2	colorIndexInternalFormat	CONFIRMED	true for internalformat 0x80e2-0x80e7 (colour-index formats)
+local	_gleCheckTexImageArgs	param_7	allowDepthFormat	INFERRED	when zero a depth internalformat raises GL_INVALID_OPERATION; callers such as _gleCheckColorTableArgs pass 0
+local	_gleCheckTexImageArgs	param_8	allowColorIndex	INFERRED	when non-zero colour-index internalformat/format combinations are accepted; otherwise they raise GL_INVALID_ENUM

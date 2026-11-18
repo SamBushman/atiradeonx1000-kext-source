@@ -1,14 +1,14 @@
 #include "decls.h"
 
 /* _glePipelineProgramTargetExtactor @ 0xe1d34 (52 bytes) */
-int _glePipelineProgramTargetExtactor(unusedArg1, param_2)
+int _glePipelineProgramTargetExtactor(unusedArg1, pipelineProgram)
   undefined4 unusedArg1;
-  int param_2;
+  int pipelineProgram;
 {
-  if (*(short *)(param_2 + 0x4ca) == 0) {
+  if (*(short *)(pipelineProgram + 0x4ca) == 0) {
     return 0x8620;
   }
-  if (*(short *)(param_2 + 0x4ca) != 1) {
+  if (*(short *)(pipelineProgram + 0x4ca) != 1) {
     return 0;
   }
   return 0x8804;

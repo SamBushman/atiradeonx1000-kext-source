@@ -2677,10 +2677,10 @@ void _glTexGendv_CompExec(glContext, coord, pname, params)
 /* _glTexGenf_Comp @ 0x9c280 (36 bytes) */
 void _glTexGenf_Comp(undefined4 glContext,undefined4 coord,undefined4 pname,float param)
 {
-  double fparam_2;
+  double zeroFloat;
   
-  fparam_2 = (double)FLOAT_00108e50;
-  ((double (*)())_glTexGen_Comp)(glContext,coord,pname,param,fparam_2,fparam_2,fparam_2);
+  zeroFloat = (double)FLOAT_00108e50;
+  ((double (*)())_glTexGen_Comp)(glContext,coord,pname,param,zeroFloat,zeroFloat,zeroFloat);
   return;
 }
 
@@ -2770,9 +2770,9 @@ void _glTexGeni_CompExec(glContext, coord, pname, param)
 /* _glTexGeniv_Comp @ 0x9c498 (160 bytes) */
 double _glTexGeniv_Comp(undefined4 glContext,undefined4 coord,undefined4 pname,uint *params)
 {
-  double dVar1;
+  double texGenResult;
   
-  dVar1 = (double)((double (*)())_glTexGen_Comp)(glContext,coord,pname,
+  texGenResult = (double)((double (*)())_glTexGen_Comp)(glContext,coord,pname,
                                  (double)(float)((double)CONCAT44(0x43300000,*params ^ 0x80000000)
                                                 - DOUBLE_00108d58),
                                  (double)(float)((double)CONCAT44(0x43300000,params[1] ^ 0x80000000
@@ -2781,7 +2781,7 @@ double _glTexGeniv_Comp(undefined4 glContext,undefined4 coord,undefined4 pname,u
                                                                  ) - DOUBLE_00108d58),
                                  (double)(float)((double)CONCAT44(0x43300000,params[3] ^ 0x80000000
                                                                  ) - DOUBLE_00108d58));
-  return dVar1;
+  return texGenResult;
 }
 
 /* _glTexGeniv_Exec @ 0x9c538 (160 bytes) */

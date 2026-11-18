@@ -1858,7 +1858,7 @@ int _glArrayElement_ListExec(glContext, listRecord)
   byte secondaryColorSize;
   char edgeFlagValue;
   char positionSize;
-  float fVar4;
+  float copiedComponent;
   float positionW;
   undefined4 missingComponentFill;
   float positionZ;
@@ -1903,9 +1903,9 @@ int _glArrayElement_ListExec(glContext, listRecord)
     attribDataCursor = (float *)((int)attribDataCursor + colorSize);
   }
   if ((byte)listRecord[3] != 0) {
-    fVar4 = *attribDataCursor;
+    copiedComponent = *attribDataCursor;
     attribDataCursor = (float *)((int)attribDataCursor + (uint)(byte)listRecord[3]);
-    *(float *)(glContext + 0x2cc) = fVar4;
+    *(float *)(glContext + 0x2cc) = copiedComponent;
   }
   secondaryColorSize = listRecord[4];
   if (secondaryColorSize != 0) {
@@ -1918,16 +1918,16 @@ int _glArrayElement_ListExec(glContext, listRecord)
   weightSize = (uint)(byte)listRecord[5];
   if (weightSize != 0) {
     if (weightSize == 0x10) {
-      fVar4 = attribDataCursor[3];
+      copiedComponent = attribDataCursor[3];
 LAB_000a51f4:
-      *(float *)(glContext + 0x2dc) = fVar4;
+      *(float *)(glContext + 0x2dc) = copiedComponent;
       *(float *)(glContext + 0x2d8) = attribDataCursor[2];
 LAB_000a5218:
       *(float *)(glContext + 0x2d4) = attribDataCursor[1];
     }
     else {
       if (weightSize == 0xc) {
-        fVar4 = *(float *)(glContext + 0x20);
+        copiedComponent = *(float *)(glContext + 0x20);
         goto LAB_000a51f4;
       }
       if (weightSize == 8) {
@@ -1940,9 +1940,9 @@ LAB_000a5218:
       *(undefined4 *)(glContext + 0x2dc) = missingComponentFill;
       *(undefined4 *)(glContext + 0x2d8) = missingComponentFill;
     }
-    fVar4 = *attribDataCursor;
+    copiedComponent = *attribDataCursor;
     attribDataCursor = (float *)((int)attribDataCursor + weightSize);
-    *(float *)(glContext + 0x2d0) = fVar4;
+    *(float *)(glContext + 0x2d0) = copiedComponent;
   }
   if ((byte)listRecord[6] != 0) {
     edgeFlagValue = *(char *)attribDataCursor;
@@ -1958,36 +1958,36 @@ LAB_000a5218:
     if (texCoordSize != 0) {
       if (texCoordSize == 0x10) {
         *(uint *)(glContext + 0x486c) = *(uint *)(glContext + 0x486c) | 3;
-        fVar4 = attribDataCursor[3];
+        copiedComponent = attribDataCursor[3];
 LAB_000a52c4:
         texCoordCurrent = texUnitIndex * 0x10 + glContext;
-        *(float *)(texCoordCurrent + 300) = fVar4;
-        fVar4 = attribDataCursor[2];
+        *(float *)(texCoordCurrent + 300) = copiedComponent;
+        copiedComponent = attribDataCursor[2];
 LAB_000a52cc:
-        *(float *)(texCoordCurrent + 0x128) = fVar4;
-        fVar4 = attribDataCursor[1];
+        *(float *)(texCoordCurrent + 0x128) = copiedComponent;
+        copiedComponent = attribDataCursor[1];
       }
       else {
         if (texCoordSize == 0xc) {
-          fVar4 = *(float *)(glContext + 0x24);
+          copiedComponent = *(float *)(glContext + 0x24);
           *(uint *)(glContext + 0x486c) = *(uint *)(glContext + 0x486c) | 1;
           goto LAB_000a52c4;
         }
         if (texCoordSize == 8) {
           texCoordCurrent = texUnitIndex * 0x10 + glContext;
           *(undefined4 *)(texCoordCurrent + 300) = *(undefined4 *)(glContext + 0x24);
-          fVar4 = *(float *)(glContext + 0x20);
+          copiedComponent = *(float *)(glContext + 0x20);
           goto LAB_000a52cc;
         }
         texCoordCurrent = texUnitIndex * 0x10 + glContext;
         *(undefined4 *)(texCoordCurrent + 300) = *(undefined4 *)(glContext + 0x24);
         *(undefined4 *)(texCoordCurrent + 0x128) = *(undefined4 *)(glContext + 0x20);
-        fVar4 = *(float *)(glContext + 0x20);
+        copiedComponent = *(float *)(glContext + 0x20);
       }
-      *(float *)(texCoordCurrent + 0x124) = fVar4;
-      fVar4 = *attribDataCursor;
+      *(float *)(texCoordCurrent + 0x124) = copiedComponent;
+      copiedComponent = *attribDataCursor;
       attribDataCursor = (float *)((int)attribDataCursor + texCoordSize);
-      *(float *)(texUnitIndex * 0x10 + glContext + 0x120) = fVar4;
+      *(float *)(texUnitIndex * 0x10 + glContext + 0x120) = copiedComponent;
     }
     texUnitIndex = texUnitIndex + 1;
     remaining = remaining + -1;

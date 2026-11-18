@@ -1926,27 +1926,27 @@ LAB_00018f6c:
 }
 
 /* _gleCheckTexImageArgs @ 0x18fa8 (648 bytes) */
-int _gleCheckTexImageArgs(glContext, level, format, type, internalformat, border, param_7, param_8)
+int _gleCheckTexImageArgs(glContext, level, format, type, internalformat, border, allowDepthFormat, allowColorIndex)
   int glContext;
   undefined4 level;
   int format;
   undefined4 type;
   int internalformat;
   uint border;
-  int param_7;
-  int param_8;
+  int allowDepthFormat;
+  int allowColorIndex;
 {
   bool bVar1;
-  bool bVar2;
+  bool colorIndexInternalFormat;
   undefined4 glErrorCode;
-  uint uVar4;
-  int iVar5;
-  bool bVar6;
+  uint internalformatOffset;
+  int subImageArgsCheck;
+  bool depthInternalFormat;
   
-  iVar5 = ((int (*)())_gleCheckTexSubImageArgs)(glContext,level,format,type);
-  bVar6 = false;
-  bVar2 = false;
-  if (iVar5 == 0) {
+  subImageArgsCheck = ((int (*)())_gleCheckTexSubImageArgs)(glContext,level,format,type);
+  depthInternalFormat = false;
+  colorIndexInternalFormat = false;
+  if (subImageArgsCheck == 0) {
     return 0;
   }
   if (internalformat < 0x83f4) {
@@ -1968,21 +1968,21 @@ int _gleCheckTexImageArgs(glContext, level, format, type, internalformat, border
       }
       if (internalformat < 33000) {
         if (internalformat < 0x80e2) {
-          uVar4 = internalformat - 0x804f;
+          internalformatOffset = internalformat - 0x804f;
           goto LAB_00019144;
         }
-        bVar2 = true;
+        colorIndexInternalFormat = true;
         goto LAB_00019188;
       }
       if (2 < internalformat - 0x81a5U) goto LAB_000191c8;
 LAB_0001917c:
-      bVar6 = true;
-      if (param_7 != 0) goto LAB_00019188;
+      depthInternalFormat = true;
+      if (allowDepthFormat != 0) goto LAB_00019188;
     }
     else {
 LAB_00019188:
-      if (bVar6 == (format == 0x1902)) {
-        if ((param_8 != 0) || ((!bVar2 && (format != 0x1900)))) {
+      if (depthInternalFormat == (format == 0x1902)) {
+        if ((allowColorIndex != 0) || ((!colorIndexInternalFormat && (format != 0x1900)))) {
           if (((border & 0xfffffffe) == 0) && ((border == 0 || (format != 0x85b9)))) {
             return 1;
           }
@@ -2027,9 +2027,9 @@ LAB_00019104:
       goto LAB_00019188;
     }
     if (0x8813 < internalformat) goto LAB_00019188;
-    uVar4 = internalformat - 0x8701;
+    internalformatOffset = internalformat - 0x8701;
 LAB_00019144:
-    bVar1 = 0xc < uVar4;
+    bVar1 = 0xc < internalformatOffset;
 LAB_0001916c:
     if (!bVar1) goto LAB_00019188;
 LAB_000191c8:

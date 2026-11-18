@@ -902,7 +902,7 @@ void _gleVPRenderLines(glContext)
   uint vertexCursor;
   uint *lineList;
   double f1AfterCall;
-  double fparam_1;
+  double lastCalleeF1;
   
   texEnableBits = ((int (*)())_gleTexEnableBits)(glContext);
   if ((((int)*(short *)(glContext + 0x487c) != 0) &&
@@ -919,9 +919,9 @@ void _gleVPRenderLines(glContext)
       (**(code **)(glContext + 0x46b4))(*(undefined4 *)(glContext + 0x4688),vertexCursor,drawVertexCount);
       return;
     }
-    fparam_1 = f1AfterCall;
+    lastCalleeF1 = f1AfterCall;
     if (texEnableBits != 0) {
-      fparam_1 = (double)(**(double ( **)(int,int,int,int))(glContext + 0x5074))(glContext, vertexCursor, drawVertexCount, 0);
+      lastCalleeF1 = (double)(**(double ( **)(int,int,int,int))(glContext + 0x5074))(glContext, vertexCursor, drawVertexCount, 0);
     }
     vertexEndThenRemaining = vertexCursor + drawVertexCount * 0x100;
     lineList = *(uint **)(glContext + 0x4870);
@@ -936,7 +936,7 @@ void _gleVPRenderLines(glContext)
       } while (vertexEndThenRemaining != 0);
     }
     if ((*(char *)(glContext + 0x4e18) != '\0') &&
-       (drawVertexCount = ((int (*)())_gleClipLinesPlane)(glContext,lineList,drawVertexCount,fparam_1), drawVertexCount == 0)) {
+       (drawVertexCount = ((int (*)())_gleClipLinesPlane)(glContext,lineList,drawVertexCount,lastCalleeF1), drawVertexCount == 0)) {
       return;
     }
     if (((batchClipCodes & 0xff) == 0) ||
@@ -1042,7 +1042,7 @@ void _gleVPRenderLineLoop(glContext)
   uint *vertexArrayStart;
   uint endVertexCopy;
   double f1AfterCall;
-  double fparam_1;
+  double lastCalleeF1;
   double f1AfterCall1;
   
   texEnableBits = ((int (*)())_gleTexEnableBits)(glContext);
@@ -1085,9 +1085,9 @@ void _gleVPRenderLineLoop(glContext)
         drawVertices = vertexArrayStart;
       }
       else {
-        fparam_1 = f1AfterCall;
+        lastCalleeF1 = f1AfterCall;
         if (texEnableBits != 0) {
-          fparam_1 = (double)(**(double ( **)(int,int,int,int))(glContext + 0x5074))(glContext, vertexArrayStart, drawVertexCount, 0);
+          lastCalleeF1 = (double)(**(double ( **)(int,int,int,int))(glContext + 0x5074))(glContext, vertexArrayStart, drawVertexCount, 0);
         }
         drawVertices = *(uint **)(glContext + 0x4870);
         endVertexCopy = *(uint *)(glContext + 0x4854);
@@ -1100,11 +1100,11 @@ void _gleVPRenderLineLoop(glContext)
           endVertexCopy = endVertexCopy + 0x100;
           lineListCursor = lineListCursor + 2;
           lineStart = lineStart + 0x40;
-          fparam_1 = f1AfterCall1;
+          lastCalleeF1 = f1AfterCall1;
         }
         drawVertexCount = (int)lineListCursor - (int)drawVertices >> 2;
         if ((*(char *)(glContext + 0x4e18) != '\0') &&
-           (drawVertexCount = ((int (*)())_gleClipLinesPlane)(glContext,drawVertices,drawVertexCount,fparam_1), drawVertexCount == 0)) {
+           (drawVertexCount = ((int (*)())_gleClipLinesPlane)(glContext,drawVertices,drawVertexCount,lastCalleeF1), drawVertexCount == 0)) {
           return;
         }
         if (((batchClipCodes & 0xff) != 0) &&

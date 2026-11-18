@@ -3654,62 +3654,62 @@ joined_r0x0002431c:
 }
 
 /* _glePPPruneOutputs @ 0x243f0 (344 bytes) */
-int _glePPPruneOutputs(param_1)
-  int param_1;
+int _glePPPruneOutputs(ppProgram)
+  int ppProgram;
 {
   int bindingEqual;
-  int iVar2;
+  int instructionThenOutputChunkCursor;
   int *instructionList;
   int *outputList;
   uint loopIndex;
   int outputChunk;
   
-  outputList = *(int **)(*(int *)(param_1 + 0x1c) + 0x1c);
-  instructionList = *(int **)(*(int *)(param_1 + 0x1c) + 0x20);
-  iVar2 = 0;
+  outputList = *(int **)(*(int *)(ppProgram + 0x1c) + 0x1c);
+  instructionList = *(int **)(*(int *)(ppProgram + 0x1c) + 0x20);
+  instructionThenOutputChunkCursor = 0;
   outputChunk = *outputList;
   if (*outputList != 0) {
 LAB_00024424:
-    for (iVar2 = *instructionList; iVar2 != 0; iVar2 = *(int *)(iVar2 + 8)) {
-      if ((((*(uint *)(iVar2 + 0xc) >> 0x12 & 0xff) < 0x4b) &&
-          ((*(uint *)(iVar2 + 0x14) >> 0x11 & 7) == 3)) &&
-         (*(short *)(iVar2 + 0x1a) == *(short *)(outputChunk + 0x12))) {
-        iVar2 = *outputList;
+    for (instructionThenOutputChunkCursor = *instructionList; instructionThenOutputChunkCursor != 0; instructionThenOutputChunkCursor = *(int *)(instructionThenOutputChunkCursor + 8)) {
+      if ((((*(uint *)(instructionThenOutputChunkCursor + 0xc) >> 0x12 & 0xff) < 0x4b) &&
+          ((*(uint *)(instructionThenOutputChunkCursor + 0x14) >> 0x11 & 7) == 3)) &&
+         (*(short *)(instructionThenOutputChunkCursor + 0x1a) == *(short *)(outputChunk + 0x12))) {
+        instructionThenOutputChunkCursor = *outputList;
         goto joined_r0x00024488;
       }
     }
 LAB_000244c8:
-    iVar2 = *(int *)(outputChunk + 8);
+    instructionThenOutputChunkCursor = *(int *)(outputChunk + 8);
     _PPStreamChunkListRemoveChunk(outputList,outputChunk);
     goto LAB_000244e0;
   }
 LAB_000244ec:
   loopIndex = 0;
-  for (; iVar2 != 0; iVar2 = *(int *)(iVar2 + 8)) {
-    if (loopIndex != *(ushort *)(iVar2 + 0x12)) {
-      _glePPRelocateOutput((uint)*(ushort *)(iVar2 + 0x12),loopIndex,instructionList);
-      *(short *)(iVar2 + 0x12) = (short)loopIndex;
+  for (; instructionThenOutputChunkCursor != 0; instructionThenOutputChunkCursor = *(int *)(instructionThenOutputChunkCursor + 8)) {
+    if (loopIndex != *(ushort *)(instructionThenOutputChunkCursor + 0x12)) {
+      _glePPRelocateOutput((uint)*(ushort *)(instructionThenOutputChunkCursor + 0x12),loopIndex,instructionList);
+      *(short *)(instructionThenOutputChunkCursor + 0x12) = (short)loopIndex;
     }
     loopIndex = loopIndex + 1;
   }
   return 0;
 joined_r0x00024488:
-  if (iVar2 == outputChunk) goto LAB_000244dc;
-  bindingEqual = _PPStreamOutputBindingIsEqual(outputChunk + 0xc,iVar2 + 0xc);
+  if (instructionThenOutputChunkCursor == outputChunk) goto LAB_000244dc;
+  bindingEqual = _PPStreamOutputBindingIsEqual(outputChunk + 0xc,instructionThenOutputChunkCursor + 0xc);
   if (bindingEqual != 0) {
-    _glePPRelocateOutput((uint)*(ushort *)(outputChunk + 0x12),(uint)*(ushort *)(iVar2 + 0x12),instructionList);
+    _glePPRelocateOutput((uint)*(ushort *)(outputChunk + 0x12),(uint)*(ushort *)(instructionThenOutputChunkCursor + 0x12),instructionList);
     goto LAB_000244c8;
   }
-  iVar2 = *(int *)(iVar2 + 8);
+  instructionThenOutputChunkCursor = *(int *)(instructionThenOutputChunkCursor + 8);
   goto joined_r0x00024488;
 LAB_000244dc:
-  iVar2 = *(int *)(outputChunk + 8);
+  instructionThenOutputChunkCursor = *(int *)(outputChunk + 8);
 LAB_000244e0:
-  outputChunk = iVar2;
-  if (iVar2 == 0) goto code_r0x000244e8;
+  outputChunk = instructionThenOutputChunkCursor;
+  if (instructionThenOutputChunkCursor == 0) goto code_r0x000244e8;
   goto LAB_00024424;
 code_r0x000244e8:
-  iVar2 = *outputList;
+  instructionThenOutputChunkCursor = *outputList;
   goto LAB_000244ec;
 }
 

@@ -1,0 +1,10 @@
+local	_gleVtxTextureCoordGenReflectSTR	fparam_1	forwardedFloatArg1ThenCalleeResult	CONFIRMED	incoming f1 forwarded to _gleVectorNormalize, then overwritten by its returned f1
+local	_gleMultiVtxTextureCoordGenSphereST	fparam_1	forwardedFloatArg1ThenCalleeResult	CONFIRMED	incoming f1 forwarded to _gleSphereGenST, then overwritten by its returned f1
+local	_gleVtxTextureCoordGenEyeSlow	fparam_1	forwardedFloatArg1ThenCalleeResult	CONFIRMED	incoming f1 forwarded to _gleSphereGenST, then overwritten by returned f1 of _gleSphereGenST/_gleVectorNormalize
+local	_gleRecoveryRestoreState	fparam_1	forwardedFloatArg1ThenCalleeResult	CONFIRMED	incoming f1, overwritten by the f1 returned from _glEnable_Exec/_glDisable_Exec, forwarded to _glUseProgramObjectARB_Exec
+local	_gleTransformLightDirection	fparam_1	unusedFloatArg1ThenCalleeResult	CONFIRMED	incoming f1 is never read; overwritten by the f1 returned from _gleModelMatInvert and forwarded to _gleUpdateLightDirection
+local	_gleVPRenderLines	fparam_1	lastCalleeF1	CONFIRMED	f1 left by the most recent call (f1AfterCall, or the ctx+0x5074 callee's return), forwarded to _gleClipLinesPlane
+local	_gleVPRenderLineLoop	fparam_1	lastCalleeF1	CONFIRMED	f1 left by the most recent call (f1AfterCall, the ctx+0x5074 callee's return, or f1AfterCall1), forwarded to _gleClipLinesPlane
+local	_gleRenderFlatLineStripFunc_body	fparam_1	lastCalleeF1	CONFIRMED	f1 left by the most recent call (f1AfterCall, the ctx+0x53dc/5064/5068/5074 callees' returns, or f1AfterCall1), forwarded to _gleClipLinesPlane
+local	_gleRenderFlatPolygonFunc_body	fparam_1	lastCalleeF1	CONFIRMED	f1 left by the most recent call (f1AfterCall or the ctx+0x53dc/5064/5068/53e0/5074 callees' returns), forwarded to _gleClipPolyPlane
+local	_gleRenderSmoothLineLoopFunc_body	fparam_1	lastCalleeF1	CONFIRMED	f1 left by the most recent call (f1AfterCall, the ctx+0x53dc/5064/5068/5074 callees' returns, or f1AfterCall1), forwarded to _gleClipLinesPlane

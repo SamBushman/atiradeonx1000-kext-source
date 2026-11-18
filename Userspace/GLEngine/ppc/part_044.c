@@ -1732,7 +1732,7 @@ void _gleColorSubTable(glContext, scaleBias, tableLevel, start, pixelCount, form
 }
 
 /* _gleTransformLightDirection @ 0xd4134 (296 bytes) */
-void _gleTransformLightDirection(int glContext,int lightIndex,double fparam_1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10)
+void _gleTransformLightDirection(int glContext,int lightIndex,double unusedFloatArg1ThenCalleeResult,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10)
 {
   float lightVectorXThenPositionalOffset;
   float lightVectorY;
@@ -1748,7 +1748,7 @@ void _gleTransformLightDirection(int glContext,int lightIndex,double fparam_1,do
   lightVectorY = *(float *)(lightRecord + 0x2864);
   lightVectorZ = *(float *)(lightRecord + 0x2868);
   if ((*(uint *)(glContext + 0x50b0) & 0x10) != 0) {
-    fparam_1 = ((double (*)())_gleModelMatInvert)(glContext);
+    unusedFloatArg1ThenCalleeResult = ((double (*)())_gleModelMatInvert)(glContext);
   }
   positionalLight = *(float *)(lightRecord + 0x285c) != FLOAT_00108e50;
   transformedX = lightVectorZ * *(float *)(glContext + 0x22e0) +
@@ -1768,7 +1768,7 @@ void _gleTransformLightDirection(int glContext,int lightIndex,double fparam_1,do
     *(float *)(lightRecord + 0x2864) = lightVectorXThenPositionalOffset * *(float *)(glContext + 0x22f4) + transformedY;
     *(float *)(lightRecord + 0x2868) = lightVectorXThenPositionalOffset * *(float *)(glContext + 0x22f8) + transformedZ;
   }
-  ((void (*)())_gleUpdateLightDirection)(glContext,lightIndex,fparam_1);
+  ((void (*)())_gleUpdateLightDirection)(glContext,lightIndex,unusedFloatArg1ThenCalleeResult);
   return;
 }
 
@@ -1874,25 +1874,25 @@ void _gleAddVertexMaterial2Sided(glContext, vertex)
 void _gleSetAddVertexMaterialFunc(glContext)
   int glContext;
 {
-  char cVar1;
-  undefined *puVar2;
+  char useTwoSidedFlag;
+  undefined *materialFunc;
   
-  puVar2 = PTR__gleAddVertexMaterialNoop_00110e40;
+  materialFunc = PTR__gleAddVertexMaterialNoop_00110e40;
   if (*(int *)(glContext + 0x4e1c) == 0x1c00) {
     if ((*(char *)(glContext + 0x30aa) == '\0') || (*(char *)(glContext + 0x7580) != '\0'))
     goto LAB_000d43fc;
-    cVar1 = *(char *)(glContext + 0x30ac);
-    puVar2 = PTR__gleAddVertexMaterial_00110e3c;
+    useTwoSidedFlag = *(char *)(glContext + 0x30ac);
+    materialFunc = PTR__gleAddVertexMaterial_00110e3c;
   }
   else {
     if (*(int *)(glContext + 0x4e1c) != 0x1c01) goto LAB_000d43fc;
-    cVar1 = *(char *)(glContext + 0x30aa);
+    useTwoSidedFlag = *(char *)(glContext + 0x30aa);
   }
-  if (cVar1 != '\0') {
-    puVar2 = PTR__gleAddVertexMaterial2Sided_00110e38;
+  if (useTwoSidedFlag != '\0') {
+    materialFunc = PTR__gleAddVertexMaterial2Sided_00110e38;
   }
 LAB_000d43fc:
-  *(undefined **)(glContext + 0x4de4) = puVar2;
+  *(undefined **)(glContext + 0x4de4) = materialFunc;
                     
                     
   (**(int ( **)(int))(glContext + 0x4de4))(glContext);

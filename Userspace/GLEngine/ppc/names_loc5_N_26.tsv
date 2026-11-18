@@ -1,0 +1,15 @@
+local	_glArrayElement_ListExec	fVar4	copiedComponent	CONFIRMED	attribute component read from the array data (or the 0.0/1.0 constants at ctx+0x20/+0x24 when the array has fewer components) and stored to the current fog coord, weight or texture coordinate slot
+local	_gleVtxTextureCoordGenNormalSTR	param_1	glContext	CONFIRMED	context pointer; only ctx+0x486c is updated
+local	_gleVtxTextureCoordGenNormalSTR	uVar1	vertexEndThenRemaining	CONFIRMED	end address of the vertex range, then the remaining vertex count of the copy loop
+local	_gleSetAddVertexMaterialFunc	cVar1	useTwoSidedFlag	CONFIRMED	ctx+0x30ac (two-sided lighting) in render mode or ctx+0x30aa in feedback mode; non-zero selects the two-sided material function
+local	_gleSetAddVertexMaterialFunc	puVar2	materialFunc	CONFIRMED	selected add-vertex-material function, stored at ctx+0x4de4 and then called
+local	_pixelBoundaryBottomLeft	uVar1	integerPart	CONFIRMED	floatArg1 truncated to an integer; returned as is, or plus one when the fraction exceeds FLOAT_00108e90
+local	_glTexGenf_Comp	fparam_2	zeroFloat	INFERRED	FLOAT_00108e50 (neutral/zero constant) forwarded as the three extra float arguments of _glTexGen_Comp
+local	_glTexGeniv_Comp	dVar1	texGenResult	CONFIRMED	result of _glTexGen_Comp; only returned
+local	_glePipelineProgramTargetExtactor	param_2	pipelineProgram	INFERRED	program object whose short at +0x4ca selects the target: 0 gives 0x8620, 1 gives 0x8804
+local	_gleMultiVtxTextureCoordGenReflectST	pfVar1	normalYPtr	CONFIRMED	pointer to the vertex normal y component (vertexCursor+0x44)
+local	_gleCheckCopyColorSubTableArgs	iVar3	rangeCheckResult	CONFIRMED	result of _gleCheckTexSubImageRange; non-zero returns the colour table
+local	_gleUpdateLightModelFunc	puVar1	backPtrFuncThenFastBackFunc	CONFIRMED	_gleVtxLightRGBABackPtr (stored at ctx+0x4df4 on the slow path), replaced by _gleVtxLightFastRGBABack (stored at ctx+0x4dec) on the fast path
+local	_gleUpdateLightModelFunc	puVar3	lightFuncThenFrontPtrFunc	CONFIRMED	a light function chosen per path (fast back-ptr, spec back) stored to ctx+0x4df4/+0x4dec, then replaced by the matching front-ptr function stored at ctx+0x4df0
+local	_gliSetCurrentPluginDispatchTable	puVar1	noopFunc	CONFIRMED	PTR__gliDispatchNoop written into the 0x21 dispatch slots at ctx+0x4698
+local	_gliSetCurrentPluginDispatchTable	uVar3	dispatchFlagsThenSelectMask	CONFIRMED	flags returned by the ctx+0x4784 callback (tested with 4 and passed to _gleUpdateDispatchCodeChange), then the all-ones/zero mask that selects between ctx+0x4680 and ctx+0x4684

@@ -1822,7 +1822,7 @@ int _gleCheckCopyColorSubTableArgs(glContext, target, start, count)
 {
   undefined4 errorCode;
   int colorTable;
-  int iVar3;
+  int rangeCheckResult;
   
   colorTable = _gleLookUpNonProxyColorTable(glContext,target);
   if (colorTable == 0) {
@@ -1833,9 +1833,9 @@ int _gleCheckCopyColorSubTableArgs(glContext, target, start, count)
   }
   else {
     if (*(int *)(colorTable + 0xc0) != 0) {
-      iVar3 = _gleCheckTexSubImageRange
+      rangeCheckResult = _gleCheckTexSubImageRange
                         (glContext,colorTable + 0xac,start,count,(uint)*(ushort *)(colorTable + 0xb0));
-      if (iVar3 != 0) {
+      if (rangeCheckResult != 0) {
         return colorTable;
       }
       return 0;
@@ -2001,7 +2001,7 @@ void _gleVtxTextureCoordGenObjectSlow(param_1, vertexStartThenCursor, vertexCoun
 }
 
 /* _gleVtxTextureCoordGenEyeSlow @ 0xf5f48 (1288 bytes) */
-void _gleVtxTextureCoordGenEyeSlow(int glContext,uint vertexStartThenCursor,int vertexCount,double fparam_1)
+void _gleVtxTextureCoordGenEyeSlow(int glContext,uint vertexStartThenCursor,int vertexCount,double forwardedFloatArg1ThenCalleeResult)
 {
   float normalDotEyeDirection;
   float eyePlaneQD;
@@ -2039,7 +2039,7 @@ void _gleVtxTextureCoordGenEyeSlow(int glContext,uint vertexStartThenCursor,int 
     vertexCursor2 = vertexStartThenCursor;
     if (texGenMode == 0x2402) {
       for (; vertexCursor2 < vertexEndThenRemaining; vertexCursor2 = vertexCursor2 + 0x100) {
-        fparam_1 = (double)((double (*)())_gleSphereGenST)(glContext,vertexCursor2 + 0x20,vertexCursor2 + 0x40,&sphereMapS,fparam_1);
+        forwardedFloatArg1ThenCalleeResult = (double)((double (*)())_gleSphereGenST)(glContext,vertexCursor2 + 0x20,vertexCursor2 + 0x40,&sphereMapS,forwardedFloatArg1ThenCalleeResult);
         *(undefined4 *)(vertexCursor2 + 0x80) = sphereMapS;
       }
     }
@@ -2076,7 +2076,7 @@ void _gleVtxTextureCoordGenEyeSlow(int glContext,uint vertexStartThenCursor,int 
     }
     else if ((texGenMode == 0x8512) && (vertexStartThenCursor < vertexEndThenRemaining)) {
       do {
-        fparam_1 = (double)(**(double ( **)(int,int,int))vectorNormalize)(glContext, vertexCursor2 + 0x20, &eyeDirectionX);
+        forwardedFloatArg1ThenCalleeResult = (double)(**(double ( **)(int,int,int))vectorNormalize)(glContext, vertexCursor2 + 0x20, &eyeDirectionX);
         normalDotEyeDirection = *(float *)(vertexCursor2 + 0x48) * eyeDirectionZ +
                 (*(float *)(vertexCursor2 + 0x40) * eyeDirectionX + *(float *)(vertexCursor2 + 0x44) * eyeDirectionY);
         *(float *)(vertexCursor2 + 0x80) = -(*(float *)(vertexCursor2 + 0x40) * (normalDotEyeDirection + normalDotEyeDirection) - eyeDirectionX);
@@ -2090,7 +2090,7 @@ void _gleVtxTextureCoordGenEyeSlow(int glContext,uint vertexStartThenCursor,int 
     vertexCursor2 = vertexStartThenCursor;
     if (texGenMode == 0x2402) {
       for (; vertexCursor2 < vertexEndThenRemaining; vertexCursor2 = vertexCursor2 + 0x100) {
-        fparam_1 = (double)((double (*)())_gleSphereGenST)(glContext,vertexCursor2 + 0x20,vertexCursor2 + 0x40,&sphereMapS,fparam_1);
+        forwardedFloatArg1ThenCalleeResult = (double)((double (*)())_gleSphereGenST)(glContext,vertexCursor2 + 0x20,vertexCursor2 + 0x40,&sphereMapS,forwardedFloatArg1ThenCalleeResult);
         *(undefined4 *)(vertexCursor2 + 0x84) = sphereMapT;
       }
     }
@@ -2332,7 +2332,7 @@ void _gleVtxTextureCoordGenReflectST(glContext, vertexCursor, vertexCount)
 }
 
 /* _gleVtxTextureCoordGenReflectSTR @ 0xf666c (188 bytes) */
-void _gleVtxTextureCoordGenReflectSTR(int glContext,uint vertexCursor,int vertexCount,double fparam_1)
+void _gleVtxTextureCoordGenReflectSTR(int glContext,uint vertexCursor,int vertexCount,double forwardedFloatArg1ThenCalleeResult)
 {
   float dotThenTwiceDot;
   undefined *vectorNormalize;
@@ -2344,7 +2344,7 @@ void _gleVtxTextureCoordGenReflectSTR(int glContext,uint vertexCursor,int vertex
   vectorNormalize = PTR__gleVectorNormalize_00112064;
   vertexEnd = vertexCursor + vertexCount * 0x100;
   for (; vertexCursor < vertexEnd; vertexCursor = vertexCursor + 0x100) {
-    fparam_1 = (double)(**(double ( **)(int,int,int,double))vectorNormalize)(glContext, vertexCursor + 0x20, &normalizedEyeX, fparam_1);
+    forwardedFloatArg1ThenCalleeResult = (double)(**(double ( **)(int,int,int,double))vectorNormalize)(glContext, vertexCursor + 0x20, &normalizedEyeX, forwardedFloatArg1ThenCalleeResult);
     dotThenTwiceDot = *(float *)(vertexCursor + 0x48) * normalizedEyeZ +
             (*(float *)(vertexCursor + 0x40) * normalizedEyeX + *(float *)(vertexCursor + 0x44) * normalizedEyeY);
     dotThenTwiceDot = dotThenTwiceDot + dotThenTwiceDot;
@@ -2379,25 +2379,25 @@ void _gleVtxTextureCoordGenNormalST(unusedArg1, vertexCursor, vertexCount)
 }
 
 /* _gleVtxTextureCoordGenNormalSTR @ 0xf6764 (80 bytes) */
-void _gleVtxTextureCoordGenNormalSTR(param_1, vertexCursor, vertexCount)
-  int param_1;
+void _gleVtxTextureCoordGenNormalSTR(glContext, vertexCursor, vertexCount)
+  int glContext;
   uint vertexCursor;
   int vertexCount;
 {
-  uint uVar1;
+  uint vertexEndThenRemaining;
   
-  uVar1 = vertexCursor + vertexCount * 0x100;
-  if (vertexCursor < uVar1) {
-    uVar1 = (uVar1 - vertexCursor) + 0xff >> 8;
+  vertexEndThenRemaining = vertexCursor + vertexCount * 0x100;
+  if (vertexCursor < vertexEndThenRemaining) {
+    vertexEndThenRemaining = (vertexEndThenRemaining - vertexCursor) + 0xff >> 8;
     do {
       *(undefined4 *)(vertexCursor + 0x80) = *(undefined4 *)(vertexCursor + 0x40);
       *(undefined4 *)(vertexCursor + 0x84) = *(undefined4 *)(vertexCursor + 0x44);
       *(undefined4 *)(vertexCursor + 0x88) = *(undefined4 *)(vertexCursor + 0x48);
       vertexCursor = vertexCursor + 0x100;
-      uVar1 = uVar1 - 1;
-    } while (uVar1 != 0);
+      vertexEndThenRemaining = vertexEndThenRemaining - 1;
+    } while (vertexEndThenRemaining != 0);
   }
-  *(uint *)(param_1 + 0x486c) = *(uint *)(param_1 + 0x486c) | 1;
+  *(uint *)(glContext + 0x486c) = *(uint *)(glContext + 0x486c) | 1;
   return;
 }
 
@@ -2934,7 +2934,7 @@ void _gleMultiVtxTextureCoordGenObjectST(param_1, vertexCursor, vertexCount, tex
 }
 
 /* _gleMultiVtxTextureCoordGenSphereST @ 0xf7178 (108 bytes) */
-void _gleMultiVtxTextureCoordGenSphereST(undefined4 glContext,uint vertexCursor,int vertexCount,int textureUnit,double fparam_1)
+void _gleMultiVtxTextureCoordGenSphereST(undefined4 glContext,uint vertexCursor,int vertexCount,int textureUnit,double forwardedFloatArg1ThenCalleeResult)
 {
   int eyePosition;
   int normal;
@@ -2948,7 +2948,7 @@ void _gleMultiVtxTextureCoordGenSphereST(undefined4 glContext,uint vertexCursor,
       eyePosition = vertexCursor + 0x20;
       normal = vertexCursor + 0x40;
       vertexCursor = vertexCursor + 0x100;
-      fparam_1 = (double)((double (*)())_gleSphereGenST)(glContext,eyePosition,normal,stOut,fparam_1);
+      forwardedFloatArg1ThenCalleeResult = (double)((double (*)())_gleSphereGenST)(glContext,eyePosition,normal,stOut,forwardedFloatArg1ThenCalleeResult);
       stOut = stOut + 0x100;
     } while (vertexCursor < vertexEnd);
   }
@@ -2962,7 +2962,7 @@ void _gleMultiVtxTextureCoordGenReflectST(glContext, vertexCursor, vertexCount, 
   int vertexCount;
   int textureUnit;
 {
-  float *pfVar1;
+  float *normalYPtr;
   float dotThenTwiceDot;
   undefined *vectorNormalize;
   int texCoordSlot;
@@ -2981,9 +2981,9 @@ void _gleMultiVtxTextureCoordGenReflectST(glContext, vertexCursor, vertexCount, 
               (*(float *)(vertexCursor + 0x40) * normalizedEyeX + *(float *)(vertexCursor + 0x44) * normalizedEyeY);
       dotThenTwiceDot = dotThenTwiceDot + dotThenTwiceDot;
       *(float *)(texCoordSlot + 0x80) = -(*(float *)(vertexCursor + 0x40) * dotThenTwiceDot - normalizedEyeX);
-      pfVar1 = (float *)(vertexCursor + 0x44);
+      normalYPtr = (float *)(vertexCursor + 0x44);
       vertexCursor = vertexCursor + 0x100;
-      *(float *)(texCoordSlot + 0x84) = -(*pfVar1 * dotThenTwiceDot - normalizedEyeY);
+      *(float *)(texCoordSlot + 0x84) = -(*normalYPtr * dotThenTwiceDot - normalizedEyeY);
     } while (vertexCursor < vertexEnd);
   }
   return;

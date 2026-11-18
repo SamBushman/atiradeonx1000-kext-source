@@ -703,36 +703,36 @@ void _gleUpdateLightFast(glContext, lightIndex)
 void _gleUpdateLightModelFunc(glContext)
   int glContext;
 {
-  undefined *puVar1;
+  undefined *backPtrFuncThenFastBackFunc;
   undefined *vtxLightSpecRGBABackPtrFunc;
-  undefined *puVar3;
+  undefined *lightFuncThenFrontPtrFunc;
   
   vtxLightSpecRGBABackPtrFunc = PTR__gleVtxLightSpecRGBABackPtr_00110e64;
-  puVar1 = PTR__gleVtxLightRGBABackPtr_00110e54;
-  puVar3 = PTR__gleVtxLightFastRGBABackPtr_00110e44;
+  backPtrFuncThenFastBackFunc = PTR__gleVtxLightRGBABackPtr_00110e54;
+  lightFuncThenFrontPtrFunc = PTR__gleVtxLightFastRGBABackPtr_00110e44;
   if ((*(char *)(glContext + 0x30ae) == '\0') && (*(short *)(glContext + 0x30a8) != -0x7e06)) {
     if (*(int *)(glContext + 0x4ddc) == 0) {
       *(undefined **)(glContext + 0x4de8) = PTR__gleVtxLightFastRGBAFront_00110e50;
-      puVar1 = PTR__gleVtxLightFastRGBABack_00110e4c;
-      *(undefined **)(glContext + 0x4df4) = puVar3;
-      *(undefined **)(glContext + 0x4dec) = puVar1;
-      puVar3 = PTR__gleVtxLightFastRGBAFrontPtr_00110e48;
+      backPtrFuncThenFastBackFunc = PTR__gleVtxLightFastRGBABack_00110e4c;
+      *(undefined **)(glContext + 0x4df4) = lightFuncThenFrontPtrFunc;
+      *(undefined **)(glContext + 0x4dec) = backPtrFuncThenFastBackFunc;
+      lightFuncThenFrontPtrFunc = PTR__gleVtxLightFastRGBAFrontPtr_00110e48;
     }
     else {
       *(undefined **)(glContext + 0x4de8) = PTR__gleVtxLightRGBAFront_00110e60;
-      *(undefined **)(glContext + 0x4df4) = puVar1;
-      puVar3 = PTR__gleVtxLightRGBAFrontPtr_00110e58;
+      *(undefined **)(glContext + 0x4df4) = backPtrFuncThenFastBackFunc;
+      lightFuncThenFrontPtrFunc = PTR__gleVtxLightRGBAFrontPtr_00110e58;
       *(undefined **)(glContext + 0x4dec) = PTR__gleVtxLightRGBABack_00110e5c;
     }
   }
   else {
     *(undefined **)(glContext + 0x4de8) = PTR__gleVtxLightSpecRGBAFront_00110e70;
-    puVar3 = PTR__gleVtxLightSpecRGBABack_00110e6c;
+    lightFuncThenFrontPtrFunc = PTR__gleVtxLightSpecRGBABack_00110e6c;
     *(undefined **)(glContext + 0x4df4) = vtxLightSpecRGBABackPtrFunc;
-    *(undefined **)(glContext + 0x4dec) = puVar3;
-    puVar3 = PTR__gleVtxLightSpecRGBAFrontPtr_00110e68;
+    *(undefined **)(glContext + 0x4dec) = lightFuncThenFrontPtrFunc;
+    lightFuncThenFrontPtrFunc = PTR__gleVtxLightSpecRGBAFrontPtr_00110e68;
   }
-  *(undefined **)(glContext + 0x4df0) = puVar3;
+  *(undefined **)(glContext + 0x4df0) = lightFuncThenFrontPtrFunc;
   return;
 }
 
@@ -2210,9 +2210,9 @@ void _gleSelectVertexSubmitFunc(glContext)
 void _gliSetCurrentPluginDispatchTable(glContext)
   int glContext;
 {
-  undefined *puVar1;
+  undefined *noopFunc;
   undefined4 *dstCursor;
-  uint uVar3;
+  uint dispatchFlagsThenSelectMask;
   int remaining;
   double forwardedFloatArg1;
   double incomingFpr2;
@@ -2223,21 +2223,21 @@ void _gliSetCurrentPluginDispatchTable(glContext)
   double incomingFpr7;
   double incomingFpr8;
   
-  puVar1 = PTR__gliDispatchNoop_00111e14;
+  noopFunc = PTR__gliDispatchNoop_00111e14;
   if (*(char *)(glContext + 0x4692) == '\0') {
-    uVar3 = (**(code **)(glContext + 0x4784))
+    dispatchFlagsThenSelectMask = (**(code **)(glContext + 0x4784))
                       (*(undefined4 *)(glContext + 0x4688),glContext + 0x4698,glContext + 0x471c);
     ((void (*)())_gleUpdateViewScissorData)(glContext,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
-    if ((uVar3 & 4) == 0) {
+    if ((dispatchFlagsThenSelectMask & 4) == 0) {
       *(undefined1 *)(glContext + 0x7581) = 4;
     }
-    _gleUpdateDispatchCodeChange(glContext,uVar3);
+    _gleUpdateDispatchCodeChange(glContext,dispatchFlagsThenSelectMask);
     return;
   }
   remaining = 0x21;
   dstCursor = (undefined4 *)(glContext + 0x4698);
   do {
-    *dstCursor = puVar1;
+    *dstCursor = noopFunc;
     dstCursor = dstCursor + 1;
     remaining = remaining + -1;
   } while (remaining != 0);
@@ -2245,9 +2245,9 @@ void _gliSetCurrentPluginDispatchTable(glContext)
     *(undefined4 *)(glContext + 0x48d0) = 0;
     *(undefined4 *)(glContext + 0x48d4) = 0;
     ((void (*)())_gleUpdatePrimitiveData)(glContext);
-    uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0xc) == 0);
+    dispatchFlagsThenSelectMask = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0xc) == 0);
     *(undefined **)
-     ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0xc) =
+     ((*(uint *)(glContext + 0x4680) & dispatchFlagsThenSelectMask | *(uint *)(glContext + 0x4684) & ~dispatchFlagsThenSelectMask) + 0xc) =
          PTR__glArrayElement_Exec_001120e8;
     _gleUpdateDrawArraysFuncs(glContext);
     ((void (*)())_gleSelectVertexSubmitFunc)(glContext);

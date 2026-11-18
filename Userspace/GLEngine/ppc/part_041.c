@@ -2175,7 +2175,7 @@ double _gleRecoverySaveState(glContext, param_2)
 }
 
 /* _gleRecoveryRestoreState @ 0xc81ec (276 bytes) */
-void _gleRecoveryRestoreState(int glContext,int *savedState,double fparam_1,double floatArg2,double floatArg3,double floatArg4,double floatArg5,double floatArg6,double floatArg7,double floatArg8)
+void _gleRecoveryRestoreState(int glContext,int *savedState,double forwardedFloatArg1ThenCalleeResult,double floatArg2,double floatArg3,double floatArg4,double floatArg5,double floatArg6,double floatArg7,double floatArg8)
 {
   int savedUnitValue;
   int rendererInfo;
@@ -2185,10 +2185,10 @@ void _gleRecoveryRestoreState(int glContext,int *savedState,double fparam_1,doub
   double f1AfterCall;
   
   if (*(char *)(savedState + 0x12) != '\0') {
-    fparam_1 = (double)_glEnable_Exec(glContext,0xb71);
+    forwardedFloatArg1ThenCalleeResult = (double)_glEnable_Exec(glContext,0xb71);
   }
   if (*(char *)((int)savedState + 0x4a) != '\0') {
-    fparam_1 = (double)_glEnable_Exec(glContext,0xbc0);
+    forwardedFloatArg1ThenCalleeResult = (double)_glEnable_Exec(glContext,0xbc0);
   }
   rendererInfo = *(int *)(glContext + 0x468c);
   loopIndex = 0;
@@ -2202,7 +2202,7 @@ void _gleRecoveryRestoreState(int glContext,int *savedState,double fparam_1,doub
         *(int *)(unitStateCursor + 4) = savedUnitValue;
         _gleUpdateTextureParams(glContext,loopIndex);
         rendererInfo = *(int *)(glContext + 0x468c);
-        fparam_1 = f1AfterCall;
+        forwardedFloatArg1ThenCalleeResult = f1AfterCall;
       }
       loopIndex = loopIndex + 1;
       unitStateCursor = unitStateCursor + 0x7c;
@@ -2210,14 +2210,14 @@ void _gleRecoveryRestoreState(int glContext,int *savedState,double fparam_1,doub
   }
   if (savedState[0x10] != (uint)*(byte *)(glContext + 0x466c)) {
     if (savedState[0x10] == 0) {
-      fparam_1 = (double)_glDisable_Exec(glContext,0x8804);
+      forwardedFloatArg1ThenCalleeResult = (double)_glDisable_Exec(glContext,0x8804);
     }
     else {
-      fparam_1 = (double)_glEnable_Exec(glContext,0x8804);
+      forwardedFloatArg1ThenCalleeResult = (double)_glEnable_Exec(glContext,0x8804);
     }
   }
   if (savedState[0x11] != 0) {
-    ((void (*)())_glUseProgramObjectARB_Exec)(glContext,savedState[0x11],fparam_1,floatArg2,floatArg3,floatArg4,floatArg5,floatArg6,floatArg7,
+    ((void (*)())_glUseProgramObjectARB_Exec)(glContext,savedState[0x11],forwardedFloatArg1ThenCalleeResult,floatArg2,floatArg3,floatArg4,floatArg5,floatArg6,floatArg7,
                floatArg8);
   }
                     
@@ -3563,14 +3563,14 @@ void _gleDrawPixelsRestoreState(glContext, param_2, param_3)
 /* _pixelBoundaryBottomLeft @ 0xca274 (100 bytes) */
 uint _pixelBoundaryBottomLeft(float floatArg1)
 {
-  uint uVar1;
+  uint integerPart;
   
-  uVar1 = (uint)(int)floatArg1;
-  if ((floatArg1 - (float)((double)CONCAT44(0x43300000,uVar1 ^ 0x80000000) - DOUBLE_00108d58)) <=
+  integerPart = (uint)(int)floatArg1;
+  if ((floatArg1 - (float)((double)CONCAT44(0x43300000,integerPart ^ 0x80000000) - DOUBLE_00108d58)) <=
       FLOAT_00108e90) {
-    return uVar1;
+    return integerPart;
   }
-  return uVar1 + 1;
+  return integerPart + 1;
 }
 
 /* _pixelBoundaryTopRight @ 0xca2d8 (92 bytes) */
