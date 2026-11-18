@@ -3346,55 +3346,55 @@ LAB_000538c8:
 }
 
 /* _gleLightMaterialRGBAChange_FB_AD @ 0x538f0 (344 bytes) */
-void _gleLightMaterialRGBAChange_FB_AD(glContext, param_2)
+void _gleLightMaterialRGBAChange_FB_AD(glContext, colorPtr)
   int glContext;
-  undefined8 *param_2;
+  undefined8 *colorPtr;
 {
-  byte bVar1;
-  undefined8 *puVar2;
+  byte dirtyBitNumber;
+  undefined8 *material;
   int glContextWord5424;
-  int iVar4;
+  int secondDirtyWordBase;
   int glContextWord5434;
-  int iVar5;
-  int iVar6;
+  int slotTableOffset;
+  int firstDirtyWordBase;
   int loopIndex;
-  undefined8 uVar8;
+  undefined8 colorQword1;
   
   loopIndex = 0;
   do {
-    puVar2 = (undefined8 *)_glePushMaterial(glContext,loopIndex);
-    *puVar2 = *param_2;
-    puVar2[1] = param_2[1];
-    puVar2[2] = *param_2;
-    uVar8 = param_2[1];
-    *(ushort *)((int)puVar2 + 0x234) = *(ushort *)((int)puVar2 + 0x234) | 0xc0c;
-    puVar2[3] = uVar8;
+    material = (undefined8 *)_glePushMaterial(glContext,loopIndex);
+    *material = *colorPtr;
+    material[1] = colorPtr[1];
+    material[2] = *colorPtr;
+    colorQword1 = colorPtr[1];
+    *(ushort *)((int)material + 0x234) = *(ushort *)((int)material + 0x234) | 0xc0c;
+    material[3] = colorQword1;
     glContextWord5434 = *(int *)(glContext + 0x5434);
     if (glContextWord5434 == 0) {
-      bVar1 = *(byte *)(loopIndex * 6 + *(int *)(glContext + 0x5420) + 0x2c0);
+      dirtyBitNumber = *(byte *)(loopIndex * 6 + *(int *)(glContext + 0x5420) + 0x2c0);
     }
     else {
-      bVar1 = *(byte *)(loopIndex * 6 + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x2f4);
+      dirtyBitNumber = *(byte *)(loopIndex * 6 + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x2f4);
     }
-    iVar5 = loopIndex * 6;
-    iVar6 = (bVar1 >> 3 & 0x1c) + glContext;
+    slotTableOffset = loopIndex * 6;
+    firstDirtyWordBase = (dirtyBitNumber >> 3 & 0x1c) + glContext;
     glContextWord5424 = *(int *)(glContext + 0x5424);
-    *(uint *)(iVar6 + 0x324) = *(uint *)(iVar6 + 0x324) | 1 << (bVar1 & 0x1f);
-    bVar1 = *(byte *)(iVar5 + glContextWord5424 + 0x2c0);
-    iVar6 = (bVar1 >> 3 & 0x1c) + glContext;
-    *(uint *)(iVar6 + 0x348) = *(uint *)(iVar6 + 0x348) | 1 << (bVar1 & 0x1f);
+    *(uint *)(firstDirtyWordBase + 0x324) = *(uint *)(firstDirtyWordBase + 0x324) | 1 << (dirtyBitNumber & 0x1f);
+    dirtyBitNumber = *(byte *)(slotTableOffset + glContextWord5424 + 0x2c0);
+    firstDirtyWordBase = (dirtyBitNumber >> 3 & 0x1c) + glContext;
+    *(uint *)(firstDirtyWordBase + 0x348) = *(uint *)(firstDirtyWordBase + 0x348) | 1 << (dirtyBitNumber & 0x1f);
     if (glContextWord5434 == 0) {
-      bVar1 = *(byte *)(iVar5 + *(int *)(glContext + 0x5420) + 0x2c1);
+      dirtyBitNumber = *(byte *)(slotTableOffset + *(int *)(glContext + 0x5420) + 0x2c1);
     }
     else {
-      bVar1 = *(byte *)(iVar5 + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x2f5);
+      dirtyBitNumber = *(byte *)(slotTableOffset + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x2f5);
     }
-    iVar4 = (bVar1 >> 3 & 0x1c) + glContext;
+    secondDirtyWordBase = (dirtyBitNumber >> 3 & 0x1c) + glContext;
     loopIndex = loopIndex + 1;
-    *(uint *)(iVar4 + 0x324) = *(uint *)(iVar4 + 0x324) | 1 << (bVar1 & 0x1f);
-    bVar1 = *(byte *)(iVar5 + glContextWord5424 + 0x2c1);
-    iVar4 = (bVar1 >> 3 & 0x1c) + glContext;
-    *(uint *)(iVar4 + 0x348) = *(uint *)(iVar4 + 0x348) | 1 << (bVar1 & 0x1f);
+    *(uint *)(secondDirtyWordBase + 0x324) = *(uint *)(secondDirtyWordBase + 0x324) | 1 << (dirtyBitNumber & 0x1f);
+    dirtyBitNumber = *(byte *)(slotTableOffset + glContextWord5424 + 0x2c1);
+    secondDirtyWordBase = (dirtyBitNumber >> 3 & 0x1c) + glContext;
+    *(uint *)(secondDirtyWordBase + 0x348) = *(uint *)(secondDirtyWordBase + 0x348) | 1 << (dirtyBitNumber & 0x1f);
   } while (loopIndex < 2);
   return;
 }
@@ -3671,16 +3671,16 @@ int _gleCheckCopyTexImage2DArgs(glContext, target, level, internalformat, width,
   int border;
 {
   undefined4 glErrorCode;
-  ushort uVar1;
-  int iVar2;
+  ushort textureTargetKind;
+  int readOffsetXThenResultObject;
   int glContextPtr468c;
   int textureObject;
   undefined4 uVar4;
-  uint uVar5;
-  int iVar6;
+  uint maxTextureDimension;
+  int readOffsetYThenCheckResult;
   undefined4 uVar7;
-  uint uVar8;
-  uint uVar9;
+  uint innerHeight;
+  uint innerWidth;
   
   textureObject = _gleLookUpNonProxyTexture2D(glContext,target);
   uVar4 = 1;
@@ -3692,33 +3692,33 @@ LAB_000542e0:
       *(undefined4 *)(glContext + 0x7574) = glErrorCode;
     }
 LAB_000542e4:
-    iVar2 = 0;
+    readOffsetXThenResultObject = 0;
   }
   else {
     if ((*(uint *)(glContext + 0x3410) & 2) == 0) {
       if (((*(uint *)(glContext + 0x3410) & 4) != 0) && (*(short *)(glContext + 0x3348) == -0x7fea)) {
-        iVar6 = *(int *)(glContext + 0x3354);
-        iVar2 = *(int *)(glContext + 0x3350);
+        readOffsetYThenCheckResult = *(int *)(glContext + 0x3354);
+        readOffsetXThenResultObject = *(int *)(glContext + 0x3350);
         goto LAB_000541e0;
       }
     }
     else if (*(short *)(glContext + 0x3308) == -0x7fea) {
-      iVar6 = *(int *)(glContext + 0x3314);
-      iVar2 = *(int *)(glContext + 0x3310);
+      readOffsetYThenCheckResult = *(int *)(glContext + 0x3314);
+      readOffsetXThenResultObject = *(int *)(glContext + 0x3310);
 LAB_000541e0:
-      width = (width - iVar2) + 1;
-      height = (height - iVar6) + 1;
+      width = (width - readOffsetXThenResultObject) + 1;
+      height = (height - readOffsetYThenCheckResult) + 1;
     }
-    uVar8 = height + border * -2;
-    uVar9 = width + border * -2;
-    uVar1 = *(ushort *)(textureObject + 0x24) & 0xf;
-    if (uVar1 == 2) {
+    innerHeight = height + border * -2;
+    innerWidth = width + border * -2;
+    textureTargetKind = *(ushort *)(textureObject + 0x24) & 0xf;
+    if (textureTargetKind == 2) {
       uVar7 = 0;
-      if ((((int)uVar9 < 0) ||
-          (uVar5 = (uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0xc0), (int)uVar5 < (int)uVar9))
-         || ((int)uVar8 < 0)) goto LAB_000542d0;
+      if ((((int)innerWidth < 0) ||
+          (maxTextureDimension = (uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0xc0), (int)maxTextureDimension < (int)innerWidth))
+         || ((int)innerHeight < 0)) goto LAB_000542d0;
 LAB_000542cc:
-      if ((int)uVar5 < (int)uVar8) {
+      if ((int)maxTextureDimension < (int)innerHeight) {
 LAB_000542d0:
         if (*(int *)(glContext + 0x7574) == 0) {
           glErrorCode = 0x501;
@@ -3727,37 +3727,37 @@ LAB_000542d0:
         goto LAB_000542e4;
       }
     }
-    else if (uVar1 < 3) {
+    else if (textureTargetKind < 3) {
       if ((*(ushort *)(textureObject + 0x24) & 0xf) == 0) {
         uVar4 = 0;
-        if ((uVar9 != uVar8) ||
-           ((int)(uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0xc2) < (int)uVar8))
+        if ((innerWidth != innerHeight) ||
+           ((int)(uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0xc2) < (int)innerHeight))
         goto LAB_000542d0;
 LAB_00054244:
-        if (-1 < (int)uVar9) {
-          if ((uVar9 & uVar9 - 1) == 0) {
+        if (-1 < (int)innerWidth) {
+          if ((innerWidth & innerWidth - 1) == 0) {
             glContextPtr468c = *(int *)(glContext + 0x468c);
           }
           else {
             glContextPtr468c = *(int *)(glContext + 0x468c);
             if ((*(uint *)(glContextPtr468c + 0x124) & 0x80000) == 0) goto LAB_000542d0;
           }
-          uVar5 = (uint)*(ushort *)(glContextPtr468c + 0xbc);
-          if ((((int)uVar9 <= (int)uVar5) && (-1 < (int)uVar8)) &&
-             (((uVar8 & uVar8 - 1) == 0 || ((*(uint *)(glContextPtr468c + 0x124) & 0x80000) != 0))))
+          maxTextureDimension = (uint)*(ushort *)(glContextPtr468c + 0xbc);
+          if ((((int)innerWidth <= (int)maxTextureDimension) && (-1 < (int)innerHeight)) &&
+             (((innerHeight & innerHeight - 1) == 0 || ((*(uint *)(glContextPtr468c + 0x124) & 0x80000) != 0))))
           goto LAB_000542cc;
         }
         goto LAB_000542d0;
       }
     }
-    else if (uVar1 == 3) goto LAB_00054244;
-    iVar6 = ((int (*)())_gleCheckCopyTexImageArgs)(glContext,level,internalformat,border,uVar4,uVar7);
-    iVar2 = 0;
-    if (iVar6 != 0) {
-      iVar2 = textureObject;
+    else if (textureTargetKind == 3) goto LAB_00054244;
+    readOffsetYThenCheckResult = ((int (*)())_gleCheckCopyTexImageArgs)(glContext,level,internalformat,border,uVar4,uVar7);
+    readOffsetXThenResultObject = 0;
+    if (readOffsetYThenCheckResult != 0) {
+      readOffsetXThenResultObject = textureObject;
     }
   }
-  return iVar2;
+  return readOffsetXThenResultObject;
 }
 
 /* _gleCheckCopyTexImageArgs @ 0x54328 (552 bytes) */

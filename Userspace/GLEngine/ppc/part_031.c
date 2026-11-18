@@ -6,19 +6,19 @@ void _glCopyTexSubImage1D_Exec(int glContext,undefined4 target,uint level,undefi
   bool bVar1;
   bool stateClean;
   char rendererInfoByte79;
-  undefined4 uVar3;
+  undefined4 forwardedXoffset;
   undefined4 glErrorCode;
   int *srcCursor;
-  int iVar5;
-  int iVar6;
+  int pluginHandled;
+  int dirtyWordThenLevelRecordCursor;
   int framebufferObject;
-  undefined4 uVar7;
-  undefined4 uVar8;
+  undefined4 forwardedX;
+  undefined4 forwardedY;
   int textureObject;
   int matrixFuncDirty;
   int remaining;
   int loopIndex;
-  uint uVar10;
+  uint levelCopyThenNextLevel;
   uint dispatchFlags;
   uint dirtyWord3ThenMasked;
   byte levelFlags;
@@ -28,10 +28,10 @@ void _glCopyTexSubImage1D_Exec(int glContext,undefined4 target,uint level,undefi
   
   if ((*(int *)(glContext + 0x744c) != 0) || (*(int *)(glContext + 0x310) < 0)) {
     matrixFuncDirty = *(int *)(glContext + 0x50ac);
-    uVar10 = level;
-    uVar3 = xoffset;
-    uVar7 = x;
-    uVar8 = y;
+    levelCopyThenNextLevel = level;
+    forwardedXoffset = xoffset;
+    forwardedX = x;
+    forwardedY = y;
     if (matrixFuncDirty != 0 || (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
       _gleUpdateMatrixFunc(glContext);
       fparam_1 = extraout_f1;
@@ -41,7 +41,7 @@ void _glCopyTexSubImage1D_Exec(int glContext,undefined4 target,uint level,undefi
       dirtyFlagWords = (int *)(glContext + 0x310);
       rendererInfoByte79 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
       if ((framebufferObject != 0) && (*(int *)(framebufferObject + 0xec) != 0)) {
-        ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,uVar10,uVar3,uVar7,uVar8,matrixFuncDirty,fparam_1,forwardedFloatArg2,forwardedFloatArg3,
+        ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,levelCopyThenNextLevel,forwardedXoffset,forwardedX,forwardedY,matrixFuncDirty,fparam_1,forwardedFloatArg2,forwardedFloatArg3,
                    forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
         *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000000;
       }
@@ -53,9 +53,9 @@ LAB_00097e7c:
         loopIndex = 0;
         srcCursor = (int *)(glContext + 0x324);
         do {
-          iVar6 = *srcCursor;
+          dirtyWordThenLevelRecordCursor = *srcCursor;
           srcCursor = srcCursor + 1;
-          if (iVar6 != 0) {
+          if (dirtyWordThenLevelRecordCursor != 0) {
             *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x800000;
             break;
           }
@@ -129,23 +129,23 @@ LAB_00097e7c:
     if (textureObject == 0) {
       return;
     }
-    iVar6 = textureObject + level * 0x18;
-    textureLevel = iVar6 + 0xc4;
+    dirtyWordThenLevelRecordCursor = textureObject + level * 0x18;
+    textureLevel = dirtyWordThenLevelRecordCursor + 0xc4;
     if ((((int)level < (int)(uint)*(byte *)(textureObject + 0x8d)) ||
         ((int)(uint)*(byte *)(textureObject + 0x8f) < (int)level)) ||
        (((*(ushort *)(textureObject + 0x94) >> (level & 0x3f) & 1) == 0 ||
-        (iVar5 = (**(code **)(glContext + 0x470c))
+        (pluginHandled = (**(code **)(glContext + 0x470c))
                            (*(undefined4 *)(glContext + 0x4688),
                             *(undefined4 *)(textureObject + (uint)*(byte *)(glContext + 0x85a8) * 4),0,level
-                            ,xoffset,0,0,x), iVar5 == 0)))) {
-      levelFlags = *(byte *)(iVar6 + 0xcf);
+                            ,xoffset,0,0,x), pluginHandled == 0)))) {
+      levelFlags = *(byte *)(dirtyWordThenLevelRecordCursor + 0xcf);
       if ((levelFlags & 0x10) == 0) {
         if ((levelFlags & 0x40) == 0) {
-          if (*(int *)(iVar6 + 0xd8) == 0) {
+          if (*(int *)(dirtyWordThenLevelRecordCursor + 0xd8) == 0) {
             _gleAllocateTextureLevel(glContext,textureObject,textureLevel);
-            levelFlags = *(byte *)(iVar6 + 0xcf);
+            levelFlags = *(byte *)(dirtyWordThenLevelRecordCursor + 0xcf);
           }
-          *(byte *)(iVar6 + 0xcf) = levelFlags | 0x10;
+          *(byte *)(dirtyWordThenLevelRecordCursor + 0xcf) = levelFlags | 0x10;
         }
         else {
           _gleUploadPluginTextureLevel
@@ -165,41 +165,41 @@ LAB_00097e7c:
     *(undefined4 *)(textureObject + 0x20) =
          *(undefined4 *)
           ((uint)*(byte *)(glContext + 0x85a8) * 4 + *(int *)(glContext + 0x5148) + 0x8054);
-    if (*(int *)(iVar6 + 0xd8) != 0) {
-      levelFlags = *(byte *)(iVar6 + 0xcf);
+    if (*(int *)(dirtyWordThenLevelRecordCursor + 0xd8) != 0) {
+      levelFlags = *(byte *)(dirtyWordThenLevelRecordCursor + 0xcf);
       if (((levelFlags & 1) == 0) && (*(short *)(textureObject + 0x3e) == -0x7a43)) {
         _gleFreeTextureLevel(glContext,textureObject,textureLevel);
-        levelFlags = *(byte *)(iVar6 + 0xcf);
+        levelFlags = *(byte *)(dirtyWordThenLevelRecordCursor + 0xcf);
       }
-      *(byte *)(iVar6 + 0xcf) = levelFlags & 0xef;
+      *(byte *)(dirtyWordThenLevelRecordCursor + 0xcf) = levelFlags & 0xef;
       *(ushort *)(textureObject + 0xa0) =
            *(ushort *)(textureObject + 0xa0) &
            ((ushort)(-2 << (level & 0x1f)) | (ushort)(0xfffffffe >> 0x20 - (level & 0x1f)));
     }
-    *(byte *)(iVar6 + 0xcf) = *(byte *)(iVar6 + 0xcf) | 0x40;
+    *(byte *)(dirtyWordThenLevelRecordCursor + 0xcf) = *(byte *)(dirtyWordThenLevelRecordCursor + 0xcf) | 0x40;
     if ((*(uint *)(textureObject + 0x6c) & 0x8000) == 0) {
       return;
     }
     if ((int)*(short *)(textureObject + 0x60) != level) {
       return;
     }
-    uVar10 = level + 1;
-    if ((int)(uint)*(byte *)(textureObject + 0x83) < (int)uVar10) {
+    levelCopyThenNextLevel = level + 1;
+    if ((int)(uint)*(byte *)(textureObject + 0x83) < (int)levelCopyThenNextLevel) {
       return;
     }
-    iVar6 = uVar10 * 0x18 + textureObject + 0xc4;
+    dirtyWordThenLevelRecordCursor = levelCopyThenNextLevel * 0x18 + textureObject + 0xc4;
     do {
-      if (*(int *)(iVar6 + 0x14) != 0) {
-        if (((*(byte *)(iVar6 + 0xb) & 1) == 0) && (*(short *)(textureObject + 0x3e) == -0x7a43)) {
-          _gleFreeTextureLevel(glContext,textureObject,iVar6);
+      if (*(int *)(dirtyWordThenLevelRecordCursor + 0x14) != 0) {
+        if (((*(byte *)(dirtyWordThenLevelRecordCursor + 0xb) & 1) == 0) && (*(short *)(textureObject + 0x3e) == -0x7a43)) {
+          _gleFreeTextureLevel(glContext,textureObject,dirtyWordThenLevelRecordCursor);
         }
-        *(byte *)(iVar6 + 0xb) = *(byte *)(iVar6 + 0xb) & 0xef;
-        *(ushort *)(textureObject + 0xa0) = *(ushort *)(textureObject + 0xa0) & ~(ushort)(1 << (uVar10 & 0x3f));
+        *(byte *)(dirtyWordThenLevelRecordCursor + 0xb) = *(byte *)(dirtyWordThenLevelRecordCursor + 0xb) & 0xef;
+        *(ushort *)(textureObject + 0xa0) = *(ushort *)(textureObject + 0xa0) & ~(ushort)(1 << (levelCopyThenNextLevel & 0x3f));
       }
-      uVar10 = uVar10 + 1;
-      *(byte *)(iVar6 + 0xb) = *(byte *)(iVar6 + 0xb) | 0x40;
-      iVar6 = iVar6 + 0x18;
-    } while ((int)uVar10 <= (int)(uint)*(byte *)(textureObject + 0x83));
+      levelCopyThenNextLevel = levelCopyThenNextLevel + 1;
+      *(byte *)(dirtyWordThenLevelRecordCursor + 0xb) = *(byte *)(dirtyWordThenLevelRecordCursor + 0xb) | 0x40;
+      dirtyWordThenLevelRecordCursor = dirtyWordThenLevelRecordCursor + 0x18;
+    } while ((int)levelCopyThenNextLevel <= (int)(uint)*(byte *)(textureObject + 0x83));
     return;
   }
   if (*(int *)(glContext + 0x7574) != 0) {

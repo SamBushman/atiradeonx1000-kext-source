@@ -1,0 +1,56 @@
+local	_gleComputeFirstPartial	param_2	evaluatedPoint	INFERRED	the caller passes `out`, the 4-component evaluation result (x,y,z,w read from it); w scales the two derivative vectors
+local	_gleComputeFirstPartial	param_3	deriv1	INFERRED	the caller passes &deriv1X (first derivative vector, 4 floats); updated in place as d*w - dw*point
+local	_gleComputeFirstPartial	param_4	deriv2	INFERRED	the caller passes &deriv2X (second derivative vector); updated in place like param_3
+local	_gleComputeFirstPartial	fVar2	pointX	INFERRED	param_2[0], the x component of the evaluated point
+local	_gleComputeFirstPartial	fVar1	pointY	INFERRED	param_2[1], the y component of the evaluated point
+local	_gleComputeFirstPartial	fVar3	pointZ	INFERRED	param_2[2], the z component of the evaluated point
+local	_gleComputeFirstPartial	fVar5	pointW	INFERRED	param_2[3], the w component of the evaluated point
+local	_gleComputeFirstPartial	fVar4	deriv1W	INFERRED	param_3[3], the w component of the first derivative (used for both derivative vectors)
+local	_gleForcePushMaterial	param_1	glContext	CONFIRMED	every access is a glContext field (+0x4dd0/+0x4dd8 material list, +0x24); the callers pass glContext
+local	_gleForcePushMaterial	param_2	materialIndex	INFERRED	index (x4) into the two current-material pointers at glContext+0x4dd0
+local	_gleForcePushMaterial	puVar2	newMaterial	INFERRED	the record taken from the free list at glContext+0x4dd8 (or _gleVecAlloc(0x240)) that becomes the current material
+local	_gleForcePushMaterial	puVar3	currentMaterial	INFERRED	the current material record (glContext+0x4dd0+index*4) whose first 0x40 bytes are copied into newMaterial and which is linked behind it
+local	_gleLightMaterialRGBAChange_FB_AD	param_2	colorPtr	INFERRED	the callers pass &colorRed / &materialRed (4 floats = two qwords copied into the pushed material)
+local	_gleLightMaterialRGBAChange_FB_AD	puVar2	material	CONFIRMED	result of _glePushMaterial(glContext, face), the material record written
+local	_gleLightMaterialRGBAChange_FB_AD	uVar8	colorQword1	INFERRED	param_2[1], the second 8 bytes of the color (copied to material qword 3)
+local	_gleLightMaterialRGBAChange_FB_AD	bVar1	dirtyBitNumber	INFERRED	every use is (bit >> 3 & 0x1c) word offset and (bit & 0x1f) bit into the dirty bit arrays at glContext+0x324 / +0x348
+local	_gleLightMaterialRGBAChange_FB_AD	iVar5	slotTableOffset	INFERRED	loopIndex * 6, the byte offset of the per-face entry in the tables read at +0x2c0/+0x2c1
+local	_gleLightMaterialRGBAChange_FB_AD	iVar6	firstDirtyWordBase	INFERRED	glContext plus the word offset of the first dirty bit of the entry (byte +0x2c0)
+local	_gleLightMaterialRGBAChange_FB_AD	iVar4	secondDirtyWordBase	INFERRED	glContext plus the word offset of the second dirty bit of the entry (byte +0x2c1)
+local	_gleLightMaterialRGBAChange_F_AD	param_2	colorPtr	INFERRED	the callers pass &colorRed / &materialRed (4 floats = two qwords copied into the pushed material)
+local	_gleLightMaterialRGBAChange_F_AD	puVar2	material	CONFIRMED	result of _glePushMaterial(glContext, 0), the material record written
+local	_gleLightMaterialRGBAChange_F_AD	uVar6	colorQword1	INFERRED	param_2[1], the second 8 bytes of the color (copied to material qword 3)
+local	_gleLightMaterialRGBAChange_F_AD	bVar1	dirtyBitNumber	INFERRED	every use is (bit >> 3 & 0x1c) word offset and (bit & 0x1f) bit into the dirty bit arrays at glContext+0x324 / +0x348
+local	_gleLightMaterialRGBAChange_F_AD	iVar5	firstDirtyWordBase	INFERRED	glContext plus the word offset of the first dirty bit of the entry (byte +0x2c0)
+local	_gleLightMaterialRGBAChange_F_AD	iVar4	secondDirtyWordBase	INFERRED	glContext plus the word offset of the second dirty bit of the entry (byte +0x2c1)
+local	_gleSelectArrayInterpFunc	param_2	clipSpaceFlag	CONFIRMED	the caller passes `clipSpaceFlag`; 0 selects the Eye* function variants, nonzero the Clip* ones
+local	_gleSelectArrayInterpFunc	puVar1	allSmoothWFunc	INFERRED	the AllSmoothw interpolation function (Clip or Eye variant by clipSpaceFlag)
+local	_gleSelectArrayInterpFunc	puVar2	allFlatWFunc	INFERRED	the AllFlatw interpolation function (Clip or Eye variant by clipSpaceFlag)
+local	_gleSelectArrayInterpFunc	puVar3	allSmoothFunc	INFERRED	the AllSmooth interpolation function (Clip or Eye variant by clipSpaceFlag)
+local	_gleSelectArrayInterpFunc	puVar4	allFlatFunc	INFERRED	the AllFlat interpolation function (Clip or Eye variant by clipSpaceFlag)
+local	_gleSelectArrayInterpFunc	ppuVar5	interpFuncTable	INFERRED	&_eye_interp_funcs or &_clip_interp_funcs, indexed by uVar8
+local	_gleSelectArrayInterpFunc	uVar7	indexAfterShadeModel	INFERRED	the index so far after adding 0xc (+1) when the shade model word ctx+0x34f4 is 0x1d01 (GL_SMOOTH)
+local	_gleSelectArrayInterpFunc	uVar6	renderModeIndexThenTexEnableBits	INFERRED	first 0 or 0x18 from the render-mode / renderer flags, then reused for _gleTexEnableBits() (also stored at ctx+0x5150)
+local	_gleSelectArrayInterpFunc	uVar8	interpFuncIndex	INFERRED	the final variant index: sum of the flag terms, divided by 0xc in the AllSmooth/AllFlat special case, then used to pick the function
+local	_glFogiv_Exec	bVar1	glContextWord5434IsZero	INFERRED	ctx+0x5434 == 0 selects which state record (ctx+0x5420 or ctx+0x5430+0x20) supplies the dirty bit byte
+local	_glFogiv_Exec	bVar2	dirtyBitNumber	INFERRED	every use is (bit >> 3 & 0x1c) word offset and (bit & 0x1f) bit into the dirty bit arrays at glContext+0x324 / +0x348
+local	_glFogiv_Exec	iVar8	dirtyWordBase324	INFERRED	glContext plus the word offset used for the dirty bit array at +0x324
+local	_glFogiv_Exec	iVar7	dirtyWordBase348	INFERRED	glContext plus the word offset used for the dirty bit array at +0x348
+local	_glFogiv_Exec	fVar3	fogColorComponent	CONFIRMED	pname 0xb66 (GL_FOG_COLOR): each params[i] converted int -> float with the signed-integer scale and clamped at 0, stored at ctx+0x3140..0x314c
+local	_glFogiv_Exec	uVar6	paramValue	CONFIRMED	*params read for pname GL_FOG_MODE (0xb65) and 0x855a and validated against enum values
+local	_glePPPruneParamArrays	param_1	parser	INFERRED	the program parse state; its +0x1c record holds the chunk lists; the caller passes it (oldStreamThenParser) to the sibling _glePPPruneAttribs the same way
+local	_glePPPruneParamArrays	piVar5	paramList	INFERRED	list head at (+0x1c)->+0x14, the parameter-array chunk list (cf. attribList = +0x18 in _glePPPruneAttribs); chunks are removed with _PPStreamChunkListRemoveChunk
+local	_glePPPruneParamArrays	piVar6	instructionList	INFERRED	list head at (+0x1c)->+0x20, the instruction list (same slot _glePPPruneAttribs names instructionList)
+local	_glePPPruneParamArrays	iVar7	nextParamChunk	INFERRED	successor (+8) of the current parameter-array chunk, fetched before the chunk may be removed
+local	_glePPPruneParamArrays	iVar2	paramChunk	INFERRED	the current parameter-array chunk; removed when no instruction refers to its index
+local	_glePPPruneParamArrays	sVar1	paramIndex	INFERRED	chunk +0xe, compared with the operand index fields (+0x22/+0x2a/+0x32) of every instruction
+local	_glePPPruneParamArrays	iVar4	instructionCursor	INFERRED	walks the instruction list (+8 = next); a nonzero exit means the chunk is still referenced
+local	_glePPPruneParamArrays	uVar3	instructionHeader	INFERRED	*(iVar4+0xc), the instruction header word (operand count in the top 3 bits); same role as instructionHeader in _glePPPruneAttribs
+local	_glePPPruneAttribs	param_1	parser	INFERRED	the program parse state; its +0x1c record holds the chunk lists; callers pass the same object to _glePPPruneParamArrays
+local	_glePPPruneAttribs	iVar4	instructionCursorThenAttribCursor	INFERRED	first the instruction list cursor of the reference scan (and the duplicate-attribute probe cursor), later the attribute chunk list cursor of the renumbering loop
+local	_gleCheckCopyTexImage2DArgs	uVar8	innerHeight	INFERRED	height - 2*border: the copied rectangle's size without the border
+local	_gleCheckCopyTexImage2DArgs	uVar9	innerWidth	INFERRED	width - 2*border: the copied rectangle's size without the border
+local	_gleCheckCopyTexImage2DArgs	uVar1	textureTargetKind	INFERRED	texture object +0x24 & 0xf: selects the size rules (2 = limit +0xc0; 0 square/limit +0xc2; 3 power-of-two checks)
+local	_gleCheckCopyTexImage2DArgs	uVar5	maxTextureDimension	INFERRED	the renderer limit (renderer info +0xbc or +0xc0) the inner size is compared with
+local	_gleCheckCopyTexImage2DArgs	iVar2	readOffsetXThenResultObject	INFERRED	first the x origin of the read buffer/scissor window (ctx+0x3310/0x3350) subtracted from width, finally the return value (0 or the texture object)
+local	_gleCheckCopyTexImage2DArgs	iVar6	readOffsetYThenCheckResult	INFERRED	first the y origin (ctx+0x3314/0x3354) subtracted from height, then the result of _gleCheckCopyTexImageArgs

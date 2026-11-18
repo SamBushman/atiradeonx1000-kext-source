@@ -686,8 +686,8 @@ void _gleImagingUnpackData(glContext, width, height, format, sourceType, interna
   undefined1 *puVar2;
   undefined4 uVar3;
   int unpackStore;
-  undefined1 *puVar5;
-  int *piVar6;
+  undefined1 *pixelBytesOutPtr;
+  int *startOffsetOutPtr;
   int local_c0;
   undefined4 local_bc;
   undefined1 auStack_b8 [4];
@@ -702,27 +702,27 @@ void _gleImagingUnpackData(glContext, width, height, format, sourceType, interna
   int local_94;
   undefined4 local_90;
   undefined1 local_54;
-  undefined4 local_50;
-  undefined1 auStack_4c [4];
-  undefined1 auStack_48 [4];
-  undefined1 auStack_44 [4];
-  undefined1 auStack_40 [4];
-  int local_3c [6];
+  undefined4 rowBytes;
+  undefined1 rowPadding [4];
+  undefined1 imageBytes [4];
+  undefined1 imagePadding [4];
+  undefined1 pixelBytes [4];
+  int startOffset [6];
   
   unpackStore = glContext + 0x31cc;
-  puVar5 = auStack_40;
-  piVar6 = local_3c;
+  pixelBytesOutPtr = pixelBytes;
+  startOffsetOutPtr = startOffset;
   uVar3 = height;
   _glePixelPackSettings
-            (glContext,internalformat,type,width,height,unpackStore,puVar5,piVar6,&local_50,auStack_4c,
-             auStack_48,auStack_44);
-  _glgConvertType(format,sourceType,auStack_b8,auStack_b4,uVar3,unpackStore,puVar5,piVar6);
+            (glContext,internalformat,type,width,height,unpackStore,pixelBytesOutPtr,startOffsetOutPtr,&rowBytes,rowPadding,
+             imageBytes,imagePadding);
+  _glgConvertType(format,sourceType,auStack_b8,auStack_b4,uVar3,unpackStore,pixelBytesOutPtr,startOffsetOutPtr);
   puVar1 = auStack_a8;
   puVar2 = auStack_a4;
-  _glgConvertType(internalformat,type,puVar1,puVar2,uVar3,unpackStore,puVar5,piVar6);
-  local_c0 = image + local_3c[0];
+  _glgConvertType(internalformat,type,puVar1,puVar2,uVar3,unpackStore,pixelBytesOutPtr,startOffsetOutPtr);
+  local_c0 = image + startOffset[0];
   local_98 = 5;
-  local_bc = local_50;
+  local_bc = rowBytes;
   local_a0 = 2;
   local_b0 = filterData;
   local_9c = 0;
@@ -737,7 +737,7 @@ void _gleImagingUnpackData(glContext, width, height, format, sourceType, interna
   if (*(char *)(glContext + 0x31e5) != '\0') {
     local_9c = local_9c | 4;
   }
-  _glgProcessPixels(glContext + 0x31a8,&local_c0,puVar1,puVar2,uVar3,unpackStore,puVar5,piVar6);
+  _glgProcessPixels(glContext + 0x31a8,&local_c0,puVar1,puVar2,uVar3,unpackStore,pixelBytesOutPtr,startOffsetOutPtr);
   return;
 }
 

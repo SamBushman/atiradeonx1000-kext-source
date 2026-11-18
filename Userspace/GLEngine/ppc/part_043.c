@@ -2321,75 +2321,75 @@ int _LFSParserGetPart(param_1, param_2)
 }
 
 /* _LFSParserGetScalars @ 0xcf704 (400 bytes) */
-int _LFSParserGetScalars(param_1, param_2, param_3)
-  int param_1;
-  float *param_2;
-  int *param_3;
+int _LFSParserGetScalars(parser, outScalars, scalarCount)
+  int parser;
+  float *outScalars;
+  int *scalarCount;
 {
-  undefined4 uVar1;
-  int iVar2;
-  int iVar3;
-  double dVar4;
-  char local_350 [256];
-  char local_250 [256];
-  undefined1 auStack_150 [256];
-  undefined4 local_50;
-  undefined4 local_4c;
-  char *local_40 [7];
+  undefined4 status;
+  int partLength;
+  int parsedCount;
+  double scalarValue;
+  char numberText [256];
+  char separatorToken [256];
+  undefined1 fractionToken [256];
+  undefined4 savedParserWord0c;
+  undefined4 savedParserWord10;
+  char *strtodEnd [7];
   
-  uVar1 = 0;
-  if (*param_3 != 0) {
-    local_50 = *(undefined4 *)(param_1 + 0xc);
-    local_4c = *(undefined4 *)(param_1 + 0x10);
-    iVar3 = 0;
+  status = 0;
+  if (*scalarCount != 0) {
+    savedParserWord0c = *(undefined4 *)(parser + 0xc);
+    savedParserWord10 = *(undefined4 *)(parser + 0x10);
+    parsedCount = 0;
     do {
-      iVar2 = ((int (*)())_LFSParserGetPart)(param_1,local_350);
-      if (iVar2 == 0) {
+      partLength = ((int (*)())_LFSParserGetPart)(parser,numberText);
+      if (partLength == 0) {
         return 8;
       }
-      local_50 = *(undefined4 *)(param_1 + 0xc);
-      local_4c = *(undefined4 *)(param_1 + 0x10);
-      iVar2 = ((int (*)())_LFSParserGetPart)(param_1,local_250);
-      if (iVar2 == 0) {
+      savedParserWord0c = *(undefined4 *)(parser + 0xc);
+      savedParserWord10 = *(undefined4 *)(parser + 0x10);
+      partLength = ((int (*)())_LFSParserGetPart)(parser,separatorToken);
+      if (partLength == 0) {
         return 8;
       }
-      if (local_250[0] == '.') {
-        iVar2 = ((int (*)())_LFSParserGetPart)(param_1,auStack_150);
-        if (iVar2 == 0) {
+      if (separatorToken[0] == '.') {
+        partLength = ((int (*)())_LFSParserGetPart)(parser,fractionToken);
+        if (partLength == 0) {
           return 8;
         }
-        _strcat(local_350,local_250);
-        _strcat(local_350,auStack_150);
+        _strcat(numberText,separatorToken);
+        _strcat(numberText,fractionToken);
       }
       else {
-        *(undefined4 *)(param_1 + 0x10) = local_4c;
-        *(undefined4 *)(param_1 + 0xc) = local_50;
+        *(undefined4 *)(parser + 0x10) = savedParserWord10;
+        *(undefined4 *)(parser + 0xc) = savedParserWord0c;
       }
-      dVar4 = (double)((double (*)())_gle_strtod)(local_350,local_40);
-      *param_2 = (float)dVar4;
-      if (local_40[0] == local_350) {
-        uVar1 = 9;
+      scalarValue = (double)((double (*)())_gle_strtod)(numberText,strtodEnd);
+      *outScalars = (float)scalarValue;
+      if (strtodEnd[0] == numberText) {
+        status = 9;
         goto LAB_000cf86c;
       }
-      iVar3 = iVar3 + 1;
-      param_2 = param_2 + 1;
-      uVar1 = 0;
-      if (iVar3 == *param_3) goto LAB_000cf878;
-      local_50 = *(undefined4 *)(param_1 + 0xc);
-      local_4c = *(undefined4 *)(param_1 + 0x10);
-      iVar2 = ((int (*)())_LFSParserGetPart)(param_1,local_350);
-      if (iVar2 == 0) {
+      parsedCount = parsedCount + 1;
+      outScalars = outScalars + 1;
+      status = 0;
+      if (parsedCount == *scalarCount) goto LAB_000cf878;
+      savedParserWord0c = *(undefined4 *)(parser + 0xc);
+      savedParserWord10 = *(undefined4 *)(parser + 0x10);
+      partLength = ((int (*)())_LFSParserGetPart)(parser,numberText);
+      if (partLength == 0) {
         return 8;
       }
-    } while (local_350[0] == ',');
-    uVar1 = 10;
+    } while (numberText[0] == ',');
+    status = 10;
 LAB_000cf86c:
-    *(undefined4 *)(param_1 + 0x10) = local_4c;
-    *(undefined4 *)(param_1 + 0xc) = local_50;
+    *(undefined4 *)(parser + 0x10) = savedParserWord10;
+    *(undefined4 *)(parser + 0xc) = savedParserWord0c;
 LAB_000cf878:
-    *param_3 = iVar3;
+    *scalarCount = parsedCount;
   }
-  return uVar1;
+  return status;
 }
 
 /* _LFSParserParseArray @ 0xcf894 (188 bytes) */
@@ -2498,59 +2498,59 @@ LAB_000cfa8c:
 }
 
 /* _LFSParserParseDestinationMask @ 0xcfab4 (244 bytes) */
-int _LFSParserParseDestinationMask(param_1, param_2)
-  undefined4 param_1;
-  int param_2;
+int _LFSParserParseDestinationMask(parser, destination)
+  undefined4 parser;
+  int destination;
 {
-  char cVar1;
-  uint uVar2;
-  uint uVar3;
-  uint uVar4;
-  int iVar5;
-  char local_110 [264];
+  char maskChar;
+  uint maskBits;
+  uint charIndex;
+  uint partLength;
+  int status;
+  char tokenBuffer [264];
   
-  uVar4 = ((int (*)())_LFSParserGetPart)(param_1,local_110);
-  iVar5 = 8;
-  if (uVar4 != 0) {
-    *(undefined4 *)(param_2 + 8) = 0;
-    uVar3 = 0;
-    iVar5 = 0;
-    if (uVar4 != 0) {
+  partLength = ((int (*)())_LFSParserGetPart)(parser,tokenBuffer);
+  status = 8;
+  if (partLength != 0) {
+    *(undefined4 *)(destination + 8) = 0;
+    charIndex = 0;
+    status = 0;
+    if (partLength != 0) {
       do {
-        cVar1 = local_110[uVar3];
-        if (cVar1 == 'b') {
-          if ((*(uint *)(param_2 + 8) & 0x40000) == 0) {
-            uVar2 = *(uint *)(param_2 + 8) | 0x40000;
+        maskChar = tokenBuffer[charIndex];
+        if (maskChar == 'b') {
+          if ((*(uint *)(destination + 8) & 0x40000) == 0) {
+            maskBits = *(uint *)(destination + 8) | 0x40000;
             goto LAB_000cfb70;
           }
 LAB_000cfb78:
-          iVar5 = 6;
+          status = 6;
         }
         else {
-          if (cVar1 < 'c') {
-            if ((cVar1 == 'a') && ((*(uint *)(param_2 + 8) & 0x80000) == 0)) {
-              uVar2 = *(uint *)(param_2 + 8) | 0x80000;
+          if (maskChar < 'c') {
+            if ((maskChar == 'a') && ((*(uint *)(destination + 8) & 0x80000) == 0)) {
+              maskBits = *(uint *)(destination + 8) | 0x80000;
               goto LAB_000cfb70;
             }
             goto LAB_000cfb78;
           }
-          if (cVar1 != 'g') {
-            if ((cVar1 == 'r') && ((*(uint *)(param_2 + 8) & 0x10000) == 0)) {
-              uVar2 = *(uint *)(param_2 + 8) | 0x10000;
+          if (maskChar != 'g') {
+            if ((maskChar == 'r') && ((*(uint *)(destination + 8) & 0x10000) == 0)) {
+              maskBits = *(uint *)(destination + 8) | 0x10000;
               goto LAB_000cfb70;
             }
             goto LAB_000cfb78;
           }
-          if ((*(uint *)(param_2 + 8) & 0x20000) != 0) goto LAB_000cfb78;
-          uVar2 = *(uint *)(param_2 + 8) | 0x20000;
+          if ((*(uint *)(destination + 8) & 0x20000) != 0) goto LAB_000cfb78;
+          maskBits = *(uint *)(destination + 8) | 0x20000;
 LAB_000cfb70:
-          *(uint *)(param_2 + 8) = uVar2;
+          *(uint *)(destination + 8) = maskBits;
         }
-        uVar3 = uVar3 + 1;
-      } while ((uVar3 < uVar4) && (iVar5 == 0));
+        charIndex = charIndex + 1;
+      } while ((charIndex < partLength) && (status == 0));
     }
   }
-  return iVar5;
+  return status;
 }
 
 /* _LFSParserParseDestinationModifiers @ 0xcfba8 (460 bytes) */

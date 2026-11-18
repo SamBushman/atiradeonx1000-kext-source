@@ -3545,112 +3545,112 @@ LAB_000240b0:
 }
 
 /* _glePPPruneParamArrays @ 0x240d4 (300 bytes) */
-int _glePPPruneParamArrays(param_1)
-  int param_1;
+int _glePPPruneParamArrays(parser)
+  int parser;
 {
-  short sVar1;
-  int iVar2;
-  uint uVar3;
-  int iVar4;
-  int *piVar5;
-  int *piVar6;
-  int iVar7;
+  short paramIndex;
+  int paramChunk;
+  uint instructionHeader;
+  int instructionCursor;
+  int *paramList;
+  int *instructionList;
+  int nextParamChunk;
   
-  piVar5 = *(int **)(*(int *)(param_1 + 0x1c) + 0x14);
-  piVar6 = *(int **)(*(int *)(param_1 + 0x1c) + 0x20);
-  iVar7 = *piVar5;
+  paramList = *(int **)(*(int *)(parser + 0x1c) + 0x14);
+  instructionList = *(int **)(*(int *)(parser + 0x1c) + 0x20);
+  nextParamChunk = *paramList;
   do {
-    iVar2 = iVar7;
-    if (iVar2 == 0) {
+    paramChunk = nextParamChunk;
+    if (paramChunk == 0) {
       return 0;
     }
-    sVar1 = *(short *)(iVar2 + 0xe);
-    for (iVar4 = *piVar6; iVar4 != 0; iVar4 = *(int *)(iVar4 + 8)) {
-      if (((((*(uint *)(iVar4 + 0xc) >> 0x1d != 0) &&
-            ((*(uint *)(iVar4 + 0xc) >> 0x12 & 0xff) != 0x4a)) &&
-           ((*(uint *)(iVar4 + 0x1c) >> 0x17 & 7) == 2)) &&
-          ((*(short *)(iVar4 + 0x22) == sVar1 && ((int)*(uint *)(iVar4 + 0x1c) < 0)))) ||
-         ((((uVar3 = *(uint *)(iVar4 + 0xc), 1 < uVar3 >> 0x1d &&
-            ((3 < (uVar3 >> 0x12 & 0xff) - 0x41 && ((*(uint *)(iVar4 + 0x24) >> 0x17 & 7) == 2))))
-           && ((*(short *)(iVar4 + 0x2a) == sVar1 && ((int)*(uint *)(iVar4 + 0x24) < 0)))) ||
-          ((((2 < uVar3 >> 0x1d && ((*(uint *)(iVar4 + 0x2c) >> 0x17 & 7) == 2)) &&
-            (*(short *)(iVar4 + 0x32) == sVar1)) && ((int)*(uint *)(iVar4 + 0x2c) < 0)))))) break;
+    paramIndex = *(short *)(paramChunk + 0xe);
+    for (instructionCursor = *instructionList; instructionCursor != 0; instructionCursor = *(int *)(instructionCursor + 8)) {
+      if (((((*(uint *)(instructionCursor + 0xc) >> 0x1d != 0) &&
+            ((*(uint *)(instructionCursor + 0xc) >> 0x12 & 0xff) != 0x4a)) &&
+           ((*(uint *)(instructionCursor + 0x1c) >> 0x17 & 7) == 2)) &&
+          ((*(short *)(instructionCursor + 0x22) == paramIndex && ((int)*(uint *)(instructionCursor + 0x1c) < 0)))) ||
+         ((((instructionHeader = *(uint *)(instructionCursor + 0xc), 1 < instructionHeader >> 0x1d &&
+            ((3 < (instructionHeader >> 0x12 & 0xff) - 0x41 && ((*(uint *)(instructionCursor + 0x24) >> 0x17 & 7) == 2))))
+           && ((*(short *)(instructionCursor + 0x2a) == paramIndex && ((int)*(uint *)(instructionCursor + 0x24) < 0)))) ||
+          ((((2 < instructionHeader >> 0x1d && ((*(uint *)(instructionCursor + 0x2c) >> 0x17 & 7) == 2)) &&
+            (*(short *)(instructionCursor + 0x32) == paramIndex)) && ((int)*(uint *)(instructionCursor + 0x2c) < 0)))))) break;
     }
-    iVar7 = *(int *)(iVar2 + 8);
-    if (iVar4 == 0) {
-      _PPStreamChunkListRemoveChunk(piVar5,iVar2);
+    nextParamChunk = *(int *)(paramChunk + 8);
+    if (instructionCursor == 0) {
+      _PPStreamChunkListRemoveChunk(paramList,paramChunk);
     }
   } while( true );
 }
 
 /* _glePPPruneAttribs @ 0x24200 (496 bytes) */
-int _glePPPruneAttribs(param_1)
-  int param_1;
+int _glePPPruneAttribs(parser)
+  int parser;
 {
   uint loopIndex;
   int bindingEqual;
   undefined4 statusCode;
   uint instructionHeader;
-  int iVar4;
+  int instructionCursorThenAttribCursor;
   int *instructionList;
   int *attribList;
   int attribChunk;
   
-  attribList = *(int **)(*(int *)(param_1 + 0x1c) + 0x18);
-  instructionList = *(int **)(*(int *)(param_1 + 0x1c) + 0x20);
-  iVar4 = 0;
+  attribList = *(int **)(*(int *)(parser + 0x1c) + 0x18);
+  instructionList = *(int **)(*(int *)(parser + 0x1c) + 0x20);
+  instructionCursorThenAttribCursor = 0;
   attribChunk = *attribList;
   if (*attribList != 0) {
     do {
-      if (((*(byte *)(param_1 + 0x442) & 1) == 0) || (attribChunk != *attribList)) {
-        for (iVar4 = *instructionList; iVar4 != 0; iVar4 = *(int *)(iVar4 + 8)) {
-          if ((((((*(uint *)(iVar4 + 0xc) >> 0x1d != 0) &&
-                 ((*(uint *)(iVar4 + 0xc) >> 0x12 & 0xff) != 0x4a)) &&
-                ((*(uint *)(iVar4 + 0x1c) & 0x3800000) == 0)) &&
-               (*(short *)(iVar4 + 0x22) == *(short *)(attribChunk + 0x12))) ||
-              (((instructionHeader = *(uint *)(iVar4 + 0xc), 1 < instructionHeader >> 0x1d &&
+      if (((*(byte *)(parser + 0x442) & 1) == 0) || (attribChunk != *attribList)) {
+        for (instructionCursorThenAttribCursor = *instructionList; instructionCursorThenAttribCursor != 0; instructionCursorThenAttribCursor = *(int *)(instructionCursorThenAttribCursor + 8)) {
+          if ((((((*(uint *)(instructionCursorThenAttribCursor + 0xc) >> 0x1d != 0) &&
+                 ((*(uint *)(instructionCursorThenAttribCursor + 0xc) >> 0x12 & 0xff) != 0x4a)) &&
+                ((*(uint *)(instructionCursorThenAttribCursor + 0x1c) & 0x3800000) == 0)) &&
+               (*(short *)(instructionCursorThenAttribCursor + 0x22) == *(short *)(attribChunk + 0x12))) ||
+              (((instructionHeader = *(uint *)(instructionCursorThenAttribCursor + 0xc), 1 < instructionHeader >> 0x1d &&
                 (3 < (instructionHeader >> 0x12 & 0xff) - 0x41)) &&
-               (((*(uint *)(iVar4 + 0x24) & 0x3800000) == 0 &&
-                (*(short *)(iVar4 + 0x2a) == *(short *)(attribChunk + 0x12))))))) ||
-             (((2 < instructionHeader >> 0x1d && ((*(uint *)(iVar4 + 0x2c) & 0x3800000) == 0)) &&
-              (*(short *)(iVar4 + 0x32) == *(short *)(attribChunk + 0x12))))) {
-            iVar4 = *attribList;
+               (((*(uint *)(instructionCursorThenAttribCursor + 0x24) & 0x3800000) == 0 &&
+                (*(short *)(instructionCursorThenAttribCursor + 0x2a) == *(short *)(attribChunk + 0x12))))))) ||
+             (((2 < instructionHeader >> 0x1d && ((*(uint *)(instructionCursorThenAttribCursor + 0x2c) & 0x3800000) == 0)) &&
+              (*(short *)(instructionCursorThenAttribCursor + 0x32) == *(short *)(attribChunk + 0x12))))) {
+            instructionCursorThenAttribCursor = *attribList;
             goto joined_r0x0002431c;
           }
         }
 LAB_0002435c:
-        iVar4 = *(int *)(attribChunk + 8);
+        instructionCursorThenAttribCursor = *(int *)(attribChunk + 8);
         _PPStreamChunkListRemoveChunk(attribList,attribChunk);
       }
       else {
 LAB_00024370:
-        iVar4 = *(int *)(attribChunk + 8);
+        instructionCursorThenAttribCursor = *(int *)(attribChunk + 8);
       }
-      attribChunk = iVar4;
-    } while (iVar4 != 0);
-    iVar4 = *attribList;
+      attribChunk = instructionCursorThenAttribCursor;
+    } while (instructionCursorThenAttribCursor != 0);
+    instructionCursorThenAttribCursor = *attribList;
   }
   loopIndex = 0;
-  for (; iVar4 != 0; iVar4 = *(int *)(iVar4 + 8)) {
-    if (loopIndex != *(ushort *)(iVar4 + 0x12)) {
-      _glePPRelocateAttrib((uint)*(ushort *)(iVar4 + 0x12),loopIndex,instructionList);
-      *(short *)(iVar4 + 0x12) = (short)loopIndex;
+  for (; instructionCursorThenAttribCursor != 0; instructionCursorThenAttribCursor = *(int *)(instructionCursorThenAttribCursor + 8)) {
+    if (loopIndex != *(ushort *)(instructionCursorThenAttribCursor + 0x12)) {
+      _glePPRelocateAttrib((uint)*(ushort *)(instructionCursorThenAttribCursor + 0x12),loopIndex,instructionList);
+      *(short *)(instructionCursorThenAttribCursor + 0x12) = (short)loopIndex;
     }
     loopIndex = loopIndex + 1;
   }
   statusCode = 0x35;
-  if ((uint)attribList[2] <= *(uint *)(param_1 + 0x468)) {
+  if ((uint)attribList[2] <= *(uint *)(parser + 0x468)) {
     statusCode = 0;
   }
   return statusCode;
 joined_r0x0002431c:
-  if (iVar4 == attribChunk) goto LAB_00024370;
-  bindingEqual = _PPStreamAttribBindingIsEqual(attribChunk + 0xc,iVar4 + 0xc);
+  if (instructionCursorThenAttribCursor == attribChunk) goto LAB_00024370;
+  bindingEqual = _PPStreamAttribBindingIsEqual(attribChunk + 0xc,instructionCursorThenAttribCursor + 0xc);
   if (bindingEqual != 0) {
-    _glePPRelocateAttrib((uint)*(ushort *)(attribChunk + 0x12),(uint)*(ushort *)(iVar4 + 0x12),instructionList);
+    _glePPRelocateAttrib((uint)*(ushort *)(attribChunk + 0x12),(uint)*(ushort *)(instructionCursorThenAttribCursor + 0x12),instructionList);
     goto LAB_0002435c;
   }
-  iVar4 = *(int *)(iVar4 + 8);
+  instructionCursorThenAttribCursor = *(int *)(instructionCursorThenAttribCursor + 8);
   goto joined_r0x0002431c;
 }
 

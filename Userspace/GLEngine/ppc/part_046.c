@@ -929,29 +929,29 @@ LAB_000df478:
 }
 
 /* _gleComputeFirstPartial @ 0xdf4bc (108 bytes) */
-void _gleComputeFirstPartial(unusedArg1, param_2, param_3, param_4)
+void _gleComputeFirstPartial(unusedArg1, evaluatedPoint, deriv1, deriv2)
   undefined4 unusedArg1;
-  float *param_2;
-  float *param_3;
-  float *param_4;
+  float *evaluatedPoint;
+  float *deriv1;
+  float *deriv2;
 {
-  float fVar1;
-  float fVar2;
-  float fVar3;
-  float fVar4;
-  float fVar5;
+  float pointY;
+  float pointX;
+  float pointZ;
+  float deriv1W;
+  float pointW;
   
-  fVar1 = param_2[1];
-  fVar2 = *param_2;
-  fVar3 = param_2[2];
-  fVar4 = param_3[3];
-  fVar5 = param_2[3];
-  param_3[2] = param_3[2] * fVar5 - fVar4 * fVar3;
-  *param_3 = *param_3 * fVar5 - fVar4 * fVar2;
-  param_3[1] = param_3[1] * fVar5 - fVar4 * fVar1;
-  param_4[1] = param_4[1] * fVar5 - fVar4 * fVar1;
-  *param_4 = *param_4 * fVar5 - fVar4 * fVar2;
-  param_4[2] = param_4[2] * fVar5 - fVar4 * fVar3;
+  pointY = evaluatedPoint[1];
+  pointX = *evaluatedPoint;
+  pointZ = evaluatedPoint[2];
+  deriv1W = deriv1[3];
+  pointW = evaluatedPoint[3];
+  deriv1[2] = deriv1[2] * pointW - deriv1W * pointZ;
+  *deriv1 = *deriv1 * pointW - deriv1W * pointX;
+  deriv1[1] = deriv1[1] * pointW - deriv1W * pointY;
+  deriv2[1] = deriv2[1] * pointW - deriv1W * pointY;
+  *deriv2 = *deriv2 * pointW - deriv1W * pointX;
+  deriv2[2] = deriv2[2] * pointW - deriv1W * pointZ;
   return;
 }
 

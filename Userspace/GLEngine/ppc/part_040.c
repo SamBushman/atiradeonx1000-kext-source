@@ -6840,78 +6840,78 @@ LAB_000c1b58:
 }
 
 /* _gleSelectArrayInterpFunc @ 0xc1dc8 (544 bytes) */
-int _gleSelectArrayInterpFunc(glContext, param_2)
+int _gleSelectArrayInterpFunc(glContext, clipSpaceFlag)
   int glContext;
-  int param_2;
+  int clipSpaceFlag;
 {
-  undefined *puVar1;
-  undefined *puVar2;
-  undefined *puVar3;
-  undefined *puVar4;
-  undefined **ppuVar5;
-  uint uVar6;
-  uint uVar7;
-  uint uVar8;
+  undefined *allSmoothWFunc;
+  undefined *allFlatWFunc;
+  undefined *allSmoothFunc;
+  undefined *allFlatFunc;
+  undefined **interpFuncTable;
+  uint renderModeIndexThenTexEnableBits;
+  uint indexAfterShadeModel;
+  uint interpFuncIndex;
   
-  uVar6 = 0;
+  renderModeIndexThenTexEnableBits = 0;
   if ((*(int *)(glContext + 0x4e1c) != 0x1c00) ||
      ((*(uint *)(*(int *)(glContext + 0x468c) + 0x94) & 4) != 0)) {
-    uVar6 = 0x18;
+    renderModeIndexThenTexEnableBits = 0x18;
   }
-  uVar7 = uVar6;
+  indexAfterShadeModel = renderModeIndexThenTexEnableBits;
   if ((((*(int *)(glContext + 0x34f4) == 0x1d01) &&
-       (uVar7 = uVar6 + 0xc, *(char *)(glContext + 0x30aa) != '\0')) &&
+       (indexAfterShadeModel = renderModeIndexThenTexEnableBits + 0xc, *(char *)(glContext + 0x30aa) != '\0')) &&
       (*(char *)(glContext + 0x4664) == '\0')) && (*(int *)(glContext + 0x5434) == 0)) {
-    uVar7 = uVar6 + 0xd;
+    indexAfterShadeModel = renderModeIndexThenTexEnableBits + 0xd;
   }
-  uVar6 = _gleTexEnableBits(glContext);
-  *(uint *)(glContext + 0x5150) = uVar6;
-  if (((uVar6 != 0) || (uVar8 = uVar7, *(int *)(glContext + 0x4e1c) == 0x1c01)) &&
-     ((uVar8 = uVar7 + 4, (uVar6 & 0xfffffffe) != 0 && (*(int *)(glContext + 0x4e1c) == 0x1c00)))) {
-    uVar8 = uVar7 + 8;
+  renderModeIndexThenTexEnableBits = _gleTexEnableBits(glContext);
+  *(uint *)(glContext + 0x5150) = renderModeIndexThenTexEnableBits;
+  if (((renderModeIndexThenTexEnableBits != 0) || (interpFuncIndex = indexAfterShadeModel, *(int *)(glContext + 0x4e1c) == 0x1c01)) &&
+     ((interpFuncIndex = indexAfterShadeModel + 4, (renderModeIndexThenTexEnableBits & 0xfffffffe) != 0 && (*(int *)(glContext + 0x4e1c) == 0x1c00)))) {
+    interpFuncIndex = indexAfterShadeModel + 8;
   }
   if ((*(char *)(glContext + 0x316a) != '\0') && (*(int *)(glContext + 0x4e1c) == 0x1c00)) {
-    uVar8 = uVar8 + 2;
+    interpFuncIndex = interpFuncIndex + 2;
   }
   if ((*(short *)(0x3170 + glContext + 4) == 0x1102) ||
      ((*(char *)(glContext + 0x4fea) != '\0' &&
       (((*(char *)(glContext + 0x30aa) == '\0' || (*(char *)(glContext + 0x4664) != '\0')) ||
        (*(int *)(glContext + 0x5434) != 0)))))) {
-    uVar8 = uVar8 / 0xc;
-    puVar1 = PTR__gleInterpolClipAllSmoothw_00110678;
-    puVar2 = PTR__gleInterpolClipAllFlatw_0011067c;
-    puVar3 = PTR__gleInterpolClipAllSmooth_00110680;
-    puVar4 = PTR__gleInterpolClipAllFlat_00110684;
-    if (param_2 == 0) {
-      puVar1 = PTR__gleInterpolEyeAllSmoothw_00110688;
-      puVar2 = PTR__gleInterpolEyeAllFlatw_0011068c;
-      puVar3 = PTR__gleInterpolEyeAllSmooth_00110690;
-      puVar4 = PTR__gleInterpolEyeAllFlat_00110694;
+    interpFuncIndex = interpFuncIndex / 0xc;
+    allSmoothWFunc = PTR__gleInterpolClipAllSmoothw_00110678;
+    allFlatWFunc = PTR__gleInterpolClipAllFlatw_0011067c;
+    allSmoothFunc = PTR__gleInterpolClipAllSmooth_00110680;
+    allFlatFunc = PTR__gleInterpolClipAllFlat_00110684;
+    if (clipSpaceFlag == 0) {
+      allSmoothWFunc = PTR__gleInterpolEyeAllSmoothw_00110688;
+      allFlatWFunc = PTR__gleInterpolEyeAllFlatw_0011068c;
+      allSmoothFunc = PTR__gleInterpolEyeAllSmooth_00110690;
+      allFlatFunc = PTR__gleInterpolEyeAllFlat_00110694;
     }
-    if (uVar8 == 1) {
-      return puVar3;
+    if (interpFuncIndex == 1) {
+      return allSmoothFunc;
     }
-    if (uVar8 < 2) {
-      if (uVar8 == 0) {
-        return puVar4;
+    if (interpFuncIndex < 2) {
+      if (interpFuncIndex == 0) {
+        return allFlatFunc;
       }
     }
     else {
-      if (uVar8 == 2) {
-        return puVar2;
+      if (interpFuncIndex == 2) {
+        return allFlatWFunc;
       }
-      if (uVar8 == 3) {
-        return puVar1;
+      if (interpFuncIndex == 3) {
+        return allSmoothWFunc;
       }
     }
   }
-  if (param_2 == 0) {
-    ppuVar5 = &_eye_interp_funcs;
+  if (clipSpaceFlag == 0) {
+    interpFuncTable = &_eye_interp_funcs;
   }
   else {
-    ppuVar5 = &_clip_interp_funcs;
+    interpFuncTable = &_clip_interp_funcs;
   }
-  return ppuVar5[uVar8];
+  return interpFuncTable[interpFuncIndex];
 }
 
 /* _gleSetEyeInterpFunc @ 0xc1fe8 (104 bytes) */
@@ -8354,8 +8354,8 @@ LAB_000c3f50:
 }
 
 /* _gleEmitTransformInstructions @ 0xc4060 (1100 bytes) */
-int _gleEmitTransformInstructions(param_1, param_2, param_3, param_4, param_5, param_6)
-  uint *param_1;
+int _gleEmitTransformInstructions(codeCursor, param_2, param_3, param_4, param_5, param_6)
+  uint *codeCursor;
   uint param_2;
   int param_3;
   int param_4;
@@ -8414,9 +8414,9 @@ int _gleEmitTransformInstructions(param_1, param_2, param_3, param_4, param_5, p
       do {
         if ((param_2 << (uVar1 & 0x3e) & uVar6) == 0) {
           param_2 = param_2 | uVar6 >> (uVar1 & 0x3e);
-          *param_1 = uVar4 | (param_4 + remaining) * 0x10000 |
+          *codeCursor = uVar4 | (param_4 + remaining) * 0x10000 |
                      *(int *)((remaining * 4 + iVar15) * 4 + param_3) << 6 | 0xec000032;
-          param_1 = param_1 + 1;
+          codeCursor = codeCursor + 1;
           break;
         }
         remaining = remaining + -1;
@@ -8442,18 +8442,18 @@ int _gleEmitTransformInstructions(param_1, param_2, param_3, param_4, param_5, p
 LAB_000c42a8:
               uVar7 = uVar7 | 0xec000028;
             }
-            *param_1 = uVar7;
+            *codeCursor = uVar7;
           }
           else {
             if (uVar8 == 2) {
               uVar7 = uVar4 | (param_4 + remaining) * 0x10000 | iVar14 << 0xb;
               goto LAB_000c42a8;
             }
-            *param_1 = uVar4 | uVar2 | iVar14 << 0xb | 0xec00002a;
-            param_1 = param_1 + 1;
-            *param_1 = uVar4 | iVar13 << 0xb | 0xfc000050;
+            *codeCursor = uVar4 | uVar2 | iVar14 << 0xb | 0xec00002a;
+            codeCursor = codeCursor + 1;
+            *codeCursor = uVar4 | iVar13 << 0xb | 0xfc000050;
           }
-          param_1 = param_1 + 1;
+          codeCursor = codeCursor + 1;
           break;
         }
         remaining = remaining + -1;
@@ -8477,8 +8477,8 @@ LAB_000c42a8:
             else {
               uVar1 = uVar4 | uVar7 | iVar14 << 0xb | *srcCursor << 6 | 0xec000038;
             }
-            *param_1 = uVar1;
-            param_1 = param_1 + 1;
+            *codeCursor = uVar1;
+            codeCursor = codeCursor + 1;
             break;
           }
           remaining = remaining + -1;
@@ -8493,8 +8493,8 @@ LAB_000c42a8:
           else {
             uVar1 = uVar4 | iVar14 << 0xb | 0xfc000050;
           }
-          *param_1 = uVar1;
-          param_1 = param_1 + 1;
+          *codeCursor = uVar1;
+          codeCursor = codeCursor + 1;
         }
       }
     }
@@ -8527,8 +8527,8 @@ LAB_000c42a8:
               else {
                 uVar1 = uVar5 | uVar2 | 0xec000028;
               }
-              *param_1 = uVar1;
-              param_1 = param_1 + 1;
+              *codeCursor = uVar1;
+              codeCursor = codeCursor + 1;
               break;
             }
             remaining2 = remaining2 + -1;
@@ -8545,8 +8545,8 @@ LAB_000c42a8:
             do {
               if ((param_2 << (uVar4 & 0x3e) & uVar1) == 0) {
                 param_2 = param_2 | uVar1 >> (uVar4 & 0x3e);
-                *param_1 = iVar15 << 0x15 | uVar6 | iVar15 << 0xb | *srcCursor2 << 6 | 0xec00003a;
-                param_1 = param_1 + 1;
+                *codeCursor = iVar15 << 0x15 | uVar6 | iVar15 << 0xb | *srcCursor2 << 6 | 0xec00003a;
+                codeCursor = codeCursor + 1;
                 break;
               }
               remaining2 = remaining2 + -1;
@@ -8561,7 +8561,7 @@ LAB_000c42a8:
         } while (-1 < remaining);
         iVar12 = iVar12 + 1;
         if (2 < iVar12) {
-          return param_1;
+          return codeCursor;
         }
       } while( true );
     }

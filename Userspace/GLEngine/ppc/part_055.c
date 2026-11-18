@@ -2606,73 +2606,73 @@ void _gleVPFlushPolygon(glContext)
   int glContext;
 {
   uint flagWordOffset;
-  undefined8 *puVar2;
+  undefined8 *srcCursorThenDstCursor;
   undefined4 incomingR4;
   undefined4 incomingR5;
   undefined4 incomingR6;
   undefined4 incomingR7;
   undefined4 incomingR8;
-  uint uVar3;
-  undefined8 *puVar4;
-  undefined8 *puVar5;
+  uint lastVertexIndexThenBitIndex;
+  undefined8 *dstCursorThenSrcCursor;
+  undefined8 *lastVertexThenSecondVertexPtr;
   int vertexQwordCount;
   uint *vertexFlagBits;
   uint oldFlagWord;
   int batchStart;
-  int iVar10;
-  int iVar11;
+  int copyRemainingThenCopyIndex;
+  int copyIndexThenRemaining;
   undefined8 copyWord;
   undefined8 firstVertexCopy [32];
   undefined8 lastVertexCopy [32];
   
   batchStart = *(int *)(glContext + 0x4854);
   vertexQwordCount = (int)*(short *)(glContext + 0x487c) >> 3;
-  puVar5 = (undefined8 *)(*(int *)(glContext + 0x4858) + vertexQwordCount * -8);
-  iVar11 = 0;
-  for (iVar10 = vertexQwordCount; iVar10 != 0; iVar10 = iVar10 + -1) {
-    firstVertexCopy[iVar11] = *(undefined8 *)(batchStart + iVar11 * 8);
-    iVar11 = iVar11 + 1;
+  lastVertexThenSecondVertexPtr = (undefined8 *)(*(int *)(glContext + 0x4858) + vertexQwordCount * -8);
+  copyIndexThenRemaining = 0;
+  for (copyRemainingThenCopyIndex = vertexQwordCount; copyRemainingThenCopyIndex != 0; copyRemainingThenCopyIndex = copyRemainingThenCopyIndex + -1) {
+    firstVertexCopy[copyIndexThenRemaining] = *(undefined8 *)(batchStart + copyIndexThenRemaining * 8);
+    copyIndexThenRemaining = copyIndexThenRemaining + 1;
   }
   if (vertexQwordCount != 0) {
-    puVar4 = lastVertexCopy;
-    puVar2 = puVar5;
-    iVar11 = vertexQwordCount;
+    dstCursorThenSrcCursor = lastVertexCopy;
+    srcCursorThenDstCursor = lastVertexThenSecondVertexPtr;
+    copyIndexThenRemaining = vertexQwordCount;
     do {
-      copyWord = *puVar2;
-      puVar2 = puVar2 + 1;
-      *puVar4 = copyWord;
-      puVar4 = puVar4 + 1;
-      iVar11 = iVar11 + -1;
-    } while (iVar11 != 0);
+      copyWord = *srcCursorThenDstCursor;
+      srcCursorThenDstCursor = srcCursorThenDstCursor + 1;
+      *dstCursorThenSrcCursor = copyWord;
+      dstCursorThenSrcCursor = dstCursorThenSrcCursor + 1;
+      copyIndexThenRemaining = copyIndexThenRemaining + -1;
+    } while (copyIndexThenRemaining != 0);
   }
   vertexFlagBits = *(uint **)(glContext + 0x30b0);
-  uVar3 = (uint)((int)puVar5 - batchStart) / (uint)(vertexQwordCount * 8);
-  flagWordOffset = uVar3 >> 3 & 0x1ffffffc;
-  uVar3 = uVar3 & 0x1f;
+  lastVertexIndexThenBitIndex = (uint)((int)lastVertexThenSecondVertexPtr - batchStart) / (uint)(vertexQwordCount * 8);
+  flagWordOffset = lastVertexIndexThenBitIndex >> 3 & 0x1ffffffc;
+  lastVertexIndexThenBitIndex = lastVertexIndexThenBitIndex & 0x1f;
   oldFlagWord = *(uint *)(flagWordOffset + (int)vertexFlagBits);
-  *(uint *)(flagWordOffset + (int)vertexFlagBits) = oldFlagWord & ~(1 << uVar3);
-  (**(code **)(glContext + 0x4a08))(glContext,incomingR4,incomingR5,incomingR6,incomingR7,incomingR8,uVar3);
+  *(uint *)(flagWordOffset + (int)vertexFlagBits) = oldFlagWord & ~(1 << lastVertexIndexThenBitIndex);
+  (**(code **)(glContext + 0x4a08))(glContext,incomingR4,incomingR5,incomingR6,incomingR7,incomingR8,lastVertexIndexThenBitIndex);
   *(undefined1 *)(glContext + 0x4a18) = 1;
-  *vertexFlagBits = *vertexFlagBits & 0xfffffffc | (oldFlagWord >> uVar3 & 1) << 1;
-  iVar10 = 0;
-  for (iVar11 = vertexQwordCount; iVar11 != 0; iVar11 = iVar11 + -1) {
-    *(undefined8 *)(batchStart + iVar10 * 8) = firstVertexCopy[iVar10];
-    iVar10 = iVar10 + 1;
+  *vertexFlagBits = *vertexFlagBits & 0xfffffffc | (oldFlagWord >> lastVertexIndexThenBitIndex & 1) << 1;
+  copyRemainingThenCopyIndex = 0;
+  for (copyIndexThenRemaining = vertexQwordCount; copyIndexThenRemaining != 0; copyIndexThenRemaining = copyIndexThenRemaining + -1) {
+    *(undefined8 *)(batchStart + copyRemainingThenCopyIndex * 8) = firstVertexCopy[copyRemainingThenCopyIndex];
+    copyRemainingThenCopyIndex = copyRemainingThenCopyIndex + 1;
   }
-  puVar5 = (undefined8 *)(batchStart + vertexQwordCount * 8);
+  lastVertexThenSecondVertexPtr = (undefined8 *)(batchStart + vertexQwordCount * 8);
   if (vertexQwordCount != 0) {
-    puVar4 = lastVertexCopy;
-    puVar2 = puVar5;
-    iVar11 = vertexQwordCount;
+    dstCursorThenSrcCursor = lastVertexCopy;
+    srcCursorThenDstCursor = lastVertexThenSecondVertexPtr;
+    copyIndexThenRemaining = vertexQwordCount;
     do {
-      copyWord = *puVar4;
-      puVar4 = puVar4 + 1;
-      *puVar2 = copyWord;
-      puVar2 = puVar2 + 1;
-      iVar11 = iVar11 + -1;
-    } while (iVar11 != 0);
+      copyWord = *dstCursorThenSrcCursor;
+      dstCursorThenSrcCursor = dstCursorThenSrcCursor + 1;
+      *srcCursorThenDstCursor = copyWord;
+      srcCursorThenDstCursor = srcCursorThenDstCursor + 1;
+      copyIndexThenRemaining = copyIndexThenRemaining + -1;
+    } while (copyIndexThenRemaining != 0);
   }
-  *(undefined8 **)(glContext + 0x4858) = puVar5 + vertexQwordCount;
+  *(undefined8 **)(glContext + 0x4858) = lastVertexThenSecondVertexPtr + vertexQwordCount;
   return;
 }
 

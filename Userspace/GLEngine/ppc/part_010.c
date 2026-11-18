@@ -389,21 +389,21 @@ void _glBufferSubData_Exec(glContext, target, offset, bufferSize, data)
   undefined4 data;
 {
   int loopIndex;
-  int *piVar1;
-  undefined4 *puVar2;
+  int *rendererFunctionTablePtr;
+  undefined4 *rendererHandlePtr;
   undefined4 glErrorCode;
-  int iVar4;
+  int pluginResultThenBufferEntryCursor;
   int clientState;
-  int iVar5;
+  int rendererRecordCursor;
   int loopIndex2;
-  int iVar7;
+  int bufferObjectThenPluginFlagCursor;
   int clientState2;
   vm_size_t size;
-  vm_address_t local_40 [5];
+  vm_address_t dataAddress [5];
   
   if (*(short *)(glContext + 0x4a10) < 0) {
     if (target == 0x8893) {
-      iVar7 = *(int *)(*(int *)(glContext + 0x4a60) + 0x35c);
+      bufferObjectThenPluginFlagCursor = *(int *)(*(int *)(glContext + 0x4a60) + 0x35c);
     }
     else if (target < 0x8894) {
       if (target != 0x8892) {
@@ -414,55 +414,55 @@ LAB_00058e24:
         glErrorCode = 0x500;
         goto LAB_00058eb4;
       }
-      iVar7 = *(int *)(*(int *)(glContext + 0x4a60) + 0x358);
+      bufferObjectThenPluginFlagCursor = *(int *)(*(int *)(glContext + 0x4a60) + 0x358);
     }
     else if (target == 0x88eb) {
-      iVar7 = *(int *)(glContext + 0x4a68);
+      bufferObjectThenPluginFlagCursor = *(int *)(glContext + 0x4a68);
     }
     else {
       if (target != 0x88ec) goto LAB_00058e24;
-      iVar7 = *(int *)(glContext + 0x4a6c);
+      bufferObjectThenPluginFlagCursor = *(int *)(glContext + 0x4a6c);
     }
-    if ((iVar7 != 0) && (*(char *)(iVar7 + 0x44) == '\0')) {
-      size = *(vm_size_t *)(iVar7 + 0x34);
+    if ((bufferObjectThenPluginFlagCursor != 0) && (*(char *)(bufferObjectThenPluginFlagCursor + 0x44) == '\0')) {
+      size = *(vm_size_t *)(bufferObjectThenPluginFlagCursor + 0x34);
       if (size == 0) {
         return;
       }
-      local_40[0] = *(vm_address_t *)(iVar7 + 0x30);
-      if (local_40[0] != 0) {
-        iVar5 = glContext + 0x10000;
-        iVar4 = (**(code **)(glContext + 0x4718))
+      dataAddress[0] = *(vm_address_t *)(bufferObjectThenPluginFlagCursor + 0x30);
+      if (dataAddress[0] != 0) {
+        rendererRecordCursor = glContext + 0x10000;
+        pluginResultThenBufferEntryCursor = (**(code **)(glContext + 0x4718))
                           (*(undefined4 *)(glContext + 0x4688),
-                           *(undefined4 *)((uint)*(byte *)(glContext + 0x85a8) * 4 + iVar7 + 0x10),
+                           *(undefined4 *)((uint)*(byte *)(glContext + 0x85a8) * 4 + bufferObjectThenPluginFlagCursor + 0x10),
                            offset,bufferSize,data);
-        if (iVar4 != 0) {
-          *(undefined4 *)(iVar7 + 0x40) =
+        if (pluginResultThenBufferEntryCursor != 0) {
+          *(undefined4 *)(bufferObjectThenPluginFlagCursor + 0x40) =
                *(undefined4 *)
                 ((uint)*(byte *)(glContext + 0x85a8) * 4 + *(int *)(glContext + 0x5148) + 0x8054);
           return;
         }
         loopIndex2 = 0;
-        iVar4 = iVar7;
+        pluginResultThenBufferEntryCursor = bufferObjectThenPluginFlagCursor;
         if (*(char *)(glContext + 0x85a4) != '\0') {
           do {
-            piVar1 = (int *)(iVar5 + -0x777c);
-            puVar2 = (undefined4 *)(iVar5 + -0x7a54);
+            rendererFunctionTablePtr = (int *)(rendererRecordCursor + -0x777c);
+            rendererHandlePtr = (undefined4 *)(rendererRecordCursor + -0x7a54);
             loopIndex2 = loopIndex2 + 1;
-            iVar5 = iVar5 + 0x2e0;
-            (**(code **)(*piVar1 + 0x1c4))(*puVar2,3,*(undefined4 *)(iVar4 + 0x10));
-            *(uint *)(iVar4 + 0x48) = *(uint *)(iVar4 + 0x48) | 2;
-            iVar4 = iVar4 + 4;
+            rendererRecordCursor = rendererRecordCursor + 0x2e0;
+            (**(code **)(*rendererFunctionTablePtr + 0x1c4))(*rendererHandlePtr,3,*(undefined4 *)(pluginResultThenBufferEntryCursor + 0x10));
+            *(uint *)(pluginResultThenBufferEntryCursor + 0x48) = *(uint *)(pluginResultThenBufferEntryCursor + 0x48) | 2;
+            pluginResultThenBufferEntryCursor = pluginResultThenBufferEntryCursor + 4;
           } while (loopIndex2 < (int)(uint)*(byte *)(glContext + 0x85a4));
         }
-        _memcpy(local_40[0] + offset,data,bufferSize);
-        if (*(int *)(iVar7 + 8) < 2) {
+        _memcpy(dataAddress[0] + offset,data,bufferSize);
+        if (*(int *)(bufferObjectThenPluginFlagCursor + 8) < 2) {
           return;
         }
         (**(code **)(glContext + 0x481c))
                   (*(undefined4 *)(glContext + 0x4688),
-                   *(undefined4 *)((uint)*(byte *)(glContext + 0x85a8) * 4 + iVar7 + 0x10),
-                   local_40[0] + offset,bufferSize);
-        if (*(int *)((uint)*(byte *)(glContext + 0x85a8) * 4 + iVar7 + 0x48) == 0) {
+                   *(undefined4 *)((uint)*(byte *)(glContext + 0x85a8) * 4 + bufferObjectThenPluginFlagCursor + 0x10),
+                   dataAddress[0] + offset,bufferSize);
+        if (*(int *)((uint)*(byte *)(glContext + 0x85a8) * 4 + bufferObjectThenPluginFlagCursor + 0x48) == 0) {
           return;
         }
         if (1 < target - 0x8892) {
@@ -474,11 +474,11 @@ LAB_00058e24:
         *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x100000;
         return;
       }
-      _vm_allocate(*(vm_map_t *)PTR_00112034,local_40,size,1);
-      if (local_40[0] != 0) {
-        *(vm_address_t *)(iVar7 + 0x30) = local_40[0];
-        *(vm_size_t *)(iVar7 + 0x34) = size;
-        if ((target - 0x8892 < 2) && (1 < *(int *)(iVar7 + 8))) {
+      _vm_allocate(*(vm_map_t *)PTR_00112034,dataAddress,size,1);
+      if (dataAddress[0] != 0) {
+        *(vm_address_t *)(bufferObjectThenPluginFlagCursor + 0x30) = dataAddress[0];
+        *(vm_size_t *)(bufferObjectThenPluginFlagCursor + 0x34) = size;
+        if ((target - 0x8892 < 2) && (1 < *(int *)(bufferObjectThenPluginFlagCursor + 8))) {
           _gleResetVACachePointers(glContext);
           clientState = *(int *)(glContext + 0x4a60);
           *(undefined4 *)(clientState + 0x350) = *(undefined4 *)(clientState + 0x350);
@@ -489,11 +489,11 @@ LAB_00058e24:
         if (*(char *)(glContext + 0x85a4) != '\0') {
           do {
             loopIndex = loopIndex + 1;
-            *(uint *)(iVar7 + 0x48) = *(uint *)(iVar7 + 0x48) | 3;
-            iVar7 = iVar7 + 4;
+            *(uint *)(bufferObjectThenPluginFlagCursor + 0x48) = *(uint *)(bufferObjectThenPluginFlagCursor + 0x48) | 3;
+            bufferObjectThenPluginFlagCursor = bufferObjectThenPluginFlagCursor + 4;
           } while (loopIndex < (int)(uint)*(byte *)(glContext + 0x85a4));
         }
-        _memcpy(local_40[0] + offset,data,bufferSize);
+        _memcpy(dataAddress[0] + offset,data,bufferSize);
         return;
       }
       if (*(int *)(glContext + 0x7574) != 0) {

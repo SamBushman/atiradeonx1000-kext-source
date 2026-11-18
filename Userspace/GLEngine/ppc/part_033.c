@@ -2827,41 +2827,41 @@ void _glArrayElement_CompExec(glContext, i)
 }
 
 /* _gleForcePushMaterial @ 0xa6628 (204 bytes) */
-void _gleForcePushMaterial(param_1, param_2)
-  int param_1;
-  int param_2;
+void _gleForcePushMaterial(glContext, materialIndex)
+  int glContext;
+  int materialIndex;
 {
   undefined4 uVar1;
-  undefined8 *puVar2;
-  undefined8 *puVar3;
+  undefined8 *newMaterial;
+  undefined8 *currentMaterial;
   undefined8 uVar4;
   
-  puVar2 = *(undefined8 **)(param_1 + 0x4dd8);
-  puVar3 = *(undefined8 **)(param_2 * 4 + param_1 + 0x4dd0);
-  if (puVar2 == (undefined8 *)0x0) {
-    puVar2 = (undefined8 *)_gleVecAlloc(0x240);
-    *(float *)((int)puVar2 + 500) = -*(float *)(param_1 + 0x24);
+  newMaterial = *(undefined8 **)(glContext + 0x4dd8);
+  currentMaterial = *(undefined8 **)(materialIndex * 4 + glContext + 0x4dd0);
+  if (newMaterial == (undefined8 *)0x0) {
+    newMaterial = (undefined8 *)_gleVecAlloc(0x240);
+    *(float *)((int)newMaterial + 500) = -*(float *)(glContext + 0x24);
   }
   else {
-    *(undefined4 *)(param_1 + 0x4dd8) = *(undefined4 *)((int)puVar2 + 0x23c);
+    *(undefined4 *)(glContext + 0x4dd8) = *(undefined4 *)((int)newMaterial + 0x23c);
   }
-  *puVar2 = *puVar3;
-  puVar2[1] = puVar3[1];
-  puVar2[2] = puVar3[2];
-  puVar2[3] = puVar3[3];
-  puVar2[4] = puVar3[4];
-  puVar2[5] = puVar3[5];
-  puVar2[6] = puVar3[6];
-  uVar4 = puVar3[7];
-  *(undefined4 *)(puVar2 + 0x47) = 0;
-  puVar2[7] = uVar4;
-  uVar1 = *(undefined4 *)(puVar3 + 8);
-  *(undefined4 *)(puVar2 + 0x3c) = 0;
-  *(undefined8 **)(puVar3 + 0x47) = puVar2;
-  *(undefined4 *)(puVar2 + 8) = uVar1;
-  *(undefined8 **)((int)puVar2 + 0x23c) = puVar3;
-  *(undefined8 **)(param_2 * 4 + param_1 + 0x4dd0) = puVar2;
-  *(undefined4 *)((int)puVar2 + 0x234) = 0x1f000000;
+  *newMaterial = *currentMaterial;
+  newMaterial[1] = currentMaterial[1];
+  newMaterial[2] = currentMaterial[2];
+  newMaterial[3] = currentMaterial[3];
+  newMaterial[4] = currentMaterial[4];
+  newMaterial[5] = currentMaterial[5];
+  newMaterial[6] = currentMaterial[6];
+  uVar4 = currentMaterial[7];
+  *(undefined4 *)(newMaterial + 0x47) = 0;
+  newMaterial[7] = uVar4;
+  uVar1 = *(undefined4 *)(currentMaterial + 8);
+  *(undefined4 *)(newMaterial + 0x3c) = 0;
+  *(undefined8 **)(currentMaterial + 0x47) = newMaterial;
+  *(undefined4 *)(newMaterial + 8) = uVar1;
+  *(undefined8 **)((int)newMaterial + 0x23c) = currentMaterial;
+  *(undefined8 **)(materialIndex * 4 + glContext + 0x4dd0) = newMaterial;
+  *(undefined4 *)((int)newMaterial + 0x234) = 0x1f000000;
   return;
 }
 

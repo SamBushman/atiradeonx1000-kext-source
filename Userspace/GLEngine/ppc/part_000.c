@@ -644,7 +644,7 @@ int _gliGetInteger(glContext, stateId, valuePtr)
   uint *valuePtr;
 {
   uint stateValue;
-  int iVar2;
+  int sharedStateThenProgramOrShaderObject;
   int textureObject;
   undefined4 driverResult;
   undefined4 objectKind;
@@ -828,53 +828,53 @@ LAB_0000272c:
         goto LAB_0000272c;
       }
       if (stateId == 0x6a6) {
-        iVar2 = *(int *)(glContext + 0x5148);
-        if (*(char *)(iVar2 + 0x8024) != '\0') {
-          _pthread_mutex_lock(iVar2 + 0x8028);
-          iVar2 = *(int *)(glContext + 0x5148);
+        sharedStateThenProgramOrShaderObject = *(int *)(glContext + 0x5148);
+        if (*(char *)(sharedStateThenProgramOrShaderObject + 0x8024) != '\0') {
+          _pthread_mutex_lock(sharedStateThenProgramOrShaderObject + 0x8028);
+          sharedStateThenProgramOrShaderObject = *(int *)(glContext + 0x5148);
         }
-        iVar2 = _gleLookupHashObject(iVar2 + 0x6018,*valuePtr);
-        if (iVar2 == 0) goto LAB_000028f4;
-        if (*(int *)(iVar2 + 0x10) == 0x8b40) {
-          stateValue = _ShGetLinkerStats(*(undefined4 *)(iVar2 + 0x40));
+        sharedStateThenProgramOrShaderObject = _gleLookupHashObject(sharedStateThenProgramOrShaderObject + 0x6018,*valuePtr);
+        if (sharedStateThenProgramOrShaderObject == 0) goto LAB_000028f4;
+        if (*(int *)(sharedStateThenProgramOrShaderObject + 0x10) == 0x8b40) {
+          stateValue = _ShGetLinkerStats(*(undefined4 *)(sharedStateThenProgramOrShaderObject + 0x40));
         }
         else {
-          if (*(int *)(iVar2 + 0x10) != 0x8b48) goto LAB_000028f4;
-          stateValue = _ShGetCompilerStats(*(undefined4 *)(iVar2 + 0x30));
+          if (*(int *)(sharedStateThenProgramOrShaderObject + 0x10) != 0x8b48) goto LAB_000028f4;
+          stateValue = _ShGetCompilerStats(*(undefined4 *)(sharedStateThenProgramOrShaderObject + 0x30));
         }
       }
       else if (stateId < 0x6a7) {
         if (stateId == 0x6a4) {
-          iVar2 = *(int *)(glContext + 0x5148);
-          if (*(char *)(iVar2 + 0x8024) != '\0') {
-            _pthread_mutex_lock(iVar2 + 0x8028);
-            iVar2 = *(int *)(glContext + 0x5148);
+          sharedStateThenProgramOrShaderObject = *(int *)(glContext + 0x5148);
+          if (*(char *)(sharedStateThenProgramOrShaderObject + 0x8024) != '\0') {
+            _pthread_mutex_lock(sharedStateThenProgramOrShaderObject + 0x8028);
+            sharedStateThenProgramOrShaderObject = *(int *)(glContext + 0x5148);
           }
-          iVar2 = _gleLookupHashObject(iVar2 + 0x6018,*valuePtr);
-          if (iVar2 == 0) goto LAB_000028f4;
-          if (*(int *)(iVar2 + 0x10) == 0x8b40) {
-            stateValue = _ShGetLinkerPPStream(*(undefined4 *)(iVar2 + 0x40));
+          sharedStateThenProgramOrShaderObject = _gleLookupHashObject(sharedStateThenProgramOrShaderObject + 0x6018,*valuePtr);
+          if (sharedStateThenProgramOrShaderObject == 0) goto LAB_000028f4;
+          if (*(int *)(sharedStateThenProgramOrShaderObject + 0x10) == 0x8b40) {
+            stateValue = _ShGetLinkerPPStream(*(undefined4 *)(sharedStateThenProgramOrShaderObject + 0x40));
           }
           else {
-            if (*(int *)(iVar2 + 0x10) != 0x8b48) goto LAB_000028f4;
-            stateValue = _ShGetCompilerPPStream(*(undefined4 *)(iVar2 + 0x30));
+            if (*(int *)(sharedStateThenProgramOrShaderObject + 0x10) != 0x8b48) goto LAB_000028f4;
+            stateValue = _ShGetCompilerPPStream(*(undefined4 *)(sharedStateThenProgramOrShaderObject + 0x30));
           }
         }
         else {
           if (stateId != 0x6a5) goto LAB_00002978;
-          iVar2 = *(int *)(glContext + 0x5148);
-          if (*(char *)(iVar2 + 0x8024) != '\0') {
-            _pthread_mutex_lock(iVar2 + 0x8028);
-            iVar2 = *(int *)(glContext + 0x5148);
+          sharedStateThenProgramOrShaderObject = *(int *)(glContext + 0x5148);
+          if (*(char *)(sharedStateThenProgramOrShaderObject + 0x8024) != '\0') {
+            _pthread_mutex_lock(sharedStateThenProgramOrShaderObject + 0x8028);
+            sharedStateThenProgramOrShaderObject = *(int *)(glContext + 0x5148);
           }
-          iVar2 = _gleLookupHashObject(iVar2 + 0x6018,*valuePtr);
-          if (iVar2 == 0) goto LAB_000028f4;
-          if (*(int *)(iVar2 + 0x10) == 0x8b40) {
-            stateValue = _ShGetLinkerBindingTable(*(undefined4 *)(iVar2 + 0x40));
+          sharedStateThenProgramOrShaderObject = _gleLookupHashObject(sharedStateThenProgramOrShaderObject + 0x6018,*valuePtr);
+          if (sharedStateThenProgramOrShaderObject == 0) goto LAB_000028f4;
+          if (*(int *)(sharedStateThenProgramOrShaderObject + 0x10) == 0x8b40) {
+            stateValue = _ShGetLinkerBindingTable(*(undefined4 *)(sharedStateThenProgramOrShaderObject + 0x40));
           }
           else {
-            if (*(int *)(iVar2 + 0x10) != 0x8b48) goto LAB_000028f4;
-            stateValue = _ShGetCompilerSymbolTable(*(undefined4 *)(iVar2 + 0x30));
+            if (*(int *)(sharedStateThenProgramOrShaderObject + 0x10) != 0x8b48) goto LAB_000028f4;
+            stateValue = _ShGetCompilerSymbolTable(*(undefined4 *)(sharedStateThenProgramOrShaderObject + 0x30));
           }
         }
       }
@@ -888,19 +888,19 @@ LAB_0000272c:
           goto LAB_00002638;
         }
         if (stateId != 0x6a9) goto LAB_00002978;
-        iVar2 = *(int *)(glContext + 0x5148);
-        if (*(char *)(iVar2 + 0x8024) != '\0') {
-          _pthread_mutex_lock(iVar2 + 0x8028);
-          iVar2 = *(int *)(glContext + 0x5148);
+        sharedStateThenProgramOrShaderObject = *(int *)(glContext + 0x5148);
+        if (*(char *)(sharedStateThenProgramOrShaderObject + 0x8024) != '\0') {
+          _pthread_mutex_lock(sharedStateThenProgramOrShaderObject + 0x8028);
+          sharedStateThenProgramOrShaderObject = *(int *)(glContext + 0x5148);
         }
-        iVar2 = _gleLookupHashObject(iVar2 + 0x6018,*valuePtr);
-        if (iVar2 == 0) goto LAB_000028f4;
-        if (*(int *)(iVar2 + 0x10) == 0x8b40) {
-          stateValue = _ShGetLinkerShaderToProgramString(*(undefined4 *)(iVar2 + 0x40));
+        sharedStateThenProgramOrShaderObject = _gleLookupHashObject(sharedStateThenProgramOrShaderObject + 0x6018,*valuePtr);
+        if (sharedStateThenProgramOrShaderObject == 0) goto LAB_000028f4;
+        if (*(int *)(sharedStateThenProgramOrShaderObject + 0x10) == 0x8b40) {
+          stateValue = _ShGetLinkerShaderToProgramString(*(undefined4 *)(sharedStateThenProgramOrShaderObject + 0x40));
         }
         else {
-          if (*(int *)(iVar2 + 0x10) != 0x8b48) goto LAB_000028f4;
-          stateValue = _ShGetCompilerShaderToProgramString(*(undefined4 *)(iVar2 + 0x30));
+          if (*(int *)(sharedStateThenProgramOrShaderObject + 0x10) != 0x8b48) goto LAB_000028f4;
+          stateValue = _ShGetCompilerShaderToProgramString(*(undefined4 *)(sharedStateThenProgramOrShaderObject + 0x30));
         }
       }
       *valuePtr = stateValue;

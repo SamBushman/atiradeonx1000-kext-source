@@ -1,0 +1,57 @@
+local	_LFSParserGetScalars	param_1	parser	CONFIRMED	the caller _LFSParserParseArray passes its `parser` here; every use is a field access (+0xc/+0x10 cursor words) or a forward to _LFSParserGetPart
+local	_LFSParserGetScalars	param_2	outScalars	CONFIRMED	float output array: `*param_2 = (float)strtod(...)` then advanced; callers pass `scalars` / `literalValue`
+local	_LFSParserGetScalars	param_3	scalarCount	CONFIRMED	in/out count: the loop stops at *param_3 values and the parsed count is written back (`*param_3 = iVar3`); callers pass `scalarCount`
+local	_LFSParserGetScalars	uVar1	status	INFERRED	return code: 0 ok, 9 (strtod parsed nothing), 10 (no ',' after a value); the other error return is the literal 8 (_LFSParserGetPart returned 0)
+local	_LFSParserGetScalars	iVar2	partLength	CONFIRMED	result of _LFSParserGetPart (token length, 0 = no token); callers name it partLength
+local	_LFSParserGetScalars	iVar3	parsedCount	INFERRED	counts the scalars converted so far; compared with *param_3 and stored back to it
+local	_LFSParserGetScalars	dVar4	scalarValue	CONFIRMED	result of _gle_strtod stored into the float output
+local	_LFSParserGetScalars	local_350	numberText	CONFIRMED	token buffer filled by _LFSParserGetPart, passed to _gle_strtod; the ".fraction" tokens are appended to it with strcat
+local	_LFSParserGetScalars	local_250	separatorToken	INFERRED	second token read by _LFSParserGetPart, compared with '.' and strcat'd to numberText
+local	_LFSParserGetScalars	auStack_150	fractionToken	INFERRED	third token (after a '.') read by _LFSParserGetPart and strcat'd to numberText
+local	_LFSParserGetScalars	local_40	strtodEnd	CONFIRMED	end pointer written by _gle_strtod (second argument); compared with numberText to detect "nothing parsed"
+local	_LFSParserGetScalars	local_50	savedParserWord0c	INFERRED	copy of parser+0xc taken before each token read and written back to parser+0xc to rewind
+local	_LFSParserGetScalars	local_4c	savedParserWord10	INFERRED	copy of parser+0x10 taken before each token read and written back to parser+0x10 to rewind
+local	_LFSParserParseDestinationMask	param_1	parser	CONFIRMED	passed unchanged to _LFSParserGetPart; callers (_LFSParserParseDestination) pass `parser`
+local	_LFSParserParseDestinationMask	param_2	destination	CONFIRMED	the destination record whose +8 mask word is built; the caller _LFSParserParseDestination passes `destination`
+local	_LFSParserParseDestinationMask	uVar4	partLength	CONFIRMED	result of _LFSParserGetPart (token length, 0 = failure); loop bound
+local	_LFSParserParseDestinationMask	uVar3	charIndex	INFERRED	index of the mask character being examined in the token buffer
+local	_LFSParserParseDestinationMask	iVar5	status	INFERRED	return code: 8 (no token), 0 ok, 6 (repeated or unknown mask letter)
+local	_LFSParserParseDestinationMask	cVar1	maskChar	INFERRED	current character of the token ('r','g','b','a' select the 0x10000/0x20000/0x40000/0x80000 mask bits)
+local	_LFSParserParseDestinationMask	uVar2	maskBits	INFERRED	new value of the destination mask word (+8) = old | bit for the letter
+local	_LFSParserParseDestinationMask	local_110	tokenBuffer	CONFIRMED	buffer filled by _LFSParserGetPart and scanned character by character
+local	_gliGetInteger	iVar2	sharedStateThenProgramOrShaderObject	INFERRED	every web starts as the shared state (glContext+0x5148; +0x8024 lock flag, +0x8028 mutex, +0x6018 hash table) and is then replaced by the _gleLookupHashObject result, an object whose type word (+0x10) is compared with 0x8b40 (program) / 0x8b48 (shader) and whose +0x40/+0x30 handle goes to the _ShGet* statistics calls
+local	_gleEmitTransformInstructions	param_1	codeCursor	CONFIRMED	every store is `*param_1 = <PPC instruction word>; param_1 = param_1 + 1` and the final cursor is returned (callers pass their code cursor)
+local	_gleImagingUnpackData	local_50	rowBytes	CONFIRMED	passed as the rowBytesOut argument of _glePixelPackSettings (parameter named rowBytesOut) and then stored into the pixel descriptor
+local	_gleImagingUnpackData	auStack_4c	rowPadding	CONFIRMED	passed as the rowPaddingOut argument of _glePixelPackSettings, never read
+local	_gleImagingUnpackData	auStack_48	imageBytes	CONFIRMED	passed as the imageBytesOut argument of _glePixelPackSettings, never read
+local	_gleImagingUnpackData	auStack_44	imagePadding	CONFIRMED	passed as the imagePaddingOut argument of _glePixelPackSettings, never read
+local	_gleImagingUnpackData	auStack_40	pixelBytes	CONFIRMED	passed as the pixelBytesOut argument of _glePixelPackSettings, never read
+local	_gleImagingUnpackData	local_3c	startOffset	CONFIRMED	passed as the startOffsetOut argument of _glePixelPackSettings; local_3c[0] is added to the image pointer
+local	_gleImagingUnpackData	puVar5	pixelBytesOutPtr	INFERRED	= &pixelBytes (auStack_40), the pixelBytesOut argument, forwarded again as a stale extra argument to the later calls
+local	_gleImagingUnpackData	piVar6	startOffsetOutPtr	INFERRED	= &startOffset (local_3c), the startOffsetOut argument, forwarded again as a stale extra argument to the later calls
+local	_gleVPFlushPolygon	puVar2	srcCursorThenDstCursor	INFERRED	first walks the last-vertex source (read through it, copied into lastVertexCopy), later the destination of the copy back (written through it)
+local	_gleVPFlushPolygon	puVar4	dstCursorThenSrcCursor	INFERRED	first the destination cursor into lastVertexCopy (written), later the source cursor out of lastVertexCopy (read)
+local	_gleVPFlushPolygon	puVar5	lastVertexThenSecondVertexPtr	INFERRED	first the start of the last vertex (ctx+0x4858 minus one vertex), later batchStart + one vertex (the position the saved last vertex is written back to)
+local	_gleVPFlushPolygon	uVar3	lastVertexIndexThenBitIndex	INFERRED	first the vertex index of the last vertex ((lastVertex - batchStart) / vertex size), then masked with 0x1f to the bit index inside its flag word
+local	_gleVPFlushPolygon	iVar10	copyRemainingThenCopyIndex	INFERRED	first the qword count of the first copy loop, later the index of the write-back loop
+local	_gleVPFlushPolygon	iVar11	copyIndexThenRemaining	INFERRED	first the index of the first copy loop, later the remaining count of the later loops
+local	_gleVPEmulate	param_2	vertexCountThenRemaining	CONFIRMED	callers pass the vertex count (drawVertexCount etc.); passed to _PPEmulatorRun, later decremented as the loop counter of the flag copy
+local	_gleVPEmulate	uVar3	batchClipCodes	CONFIRMED	result of _PPEmulatorRun returned to the callers, which name it batchClipCodes and test (& 0xff00)
+local	_gleVPEmulate	iVar4	emulatedProgram	INFERRED	the program record (from ctx+0x5420/+0x5430) attached with _PPEmulatorAttachProgram(emulator, program)
+local	_gleVPEmulate	iVar8	emulatorThenRemainingThenWordIndex	INFERRED	first the emulator state (ctx+0x4a5c) given to _PPEmulatorAttachProgram/_PPEmulatorRun, then the remaining count of the +0x4c loop, finally the flag word index (bitIndex >> 5)
+local	_gleVPEmulate	iVar7	vertexBaseThenCursorThenFlagBits	INFERRED	first the vertex array base (ctx+0x4864), advanced by 0x100 per vertex in the +0x4c loop, finally the flag bit array (ctx+0x30b0)
+local	_gleVPEmulate	pbVar6	vertexFlagByteCursor	INFERRED	walks the byte at vertex+0x7c of every vertex (stride 0x100) writing one flag bit
+local	_gleVPEmulate	uVar9	vertexBitIndex	INFERRED	running vertex index; >>5 = flag word, &0x1f = bit
+local	_gleVPEmulate	uVar1	bitInWord	INFERRED	uVar9 & 0x1f, the shift of the flag word read
+local	_glBufferSubData_Exec	iVar7	bufferObjectThenPluginFlagCursor	INFERRED	the bound buffer object chosen by target (+0x30 data, +0x34 size, +0x44, +0x48 per-renderer flags); in the final loops it is advanced by 4 over the per-renderer flag words
+local	_glBufferSubData_Exec	iVar5	rendererRecordCursor	INFERRED	glContext+0x10000 advanced by 0x2e0 per renderer (the per-renderer records at ctx+0x8884.. are 0x2e0 apart)
+local	_glBufferSubData_Exec	piVar1	rendererFunctionTablePtr	INFERRED	points at the per-renderer function table pointer (rendererRecord - 0x777c), whose +0x1c4 entry is called
+local	_glBufferSubData_Exec	puVar2	rendererHandlePtr	INFERRED	points at the per-renderer handle (rendererRecord - 0x7a54) passed as first argument of that call
+local	_glBufferSubData_Exec	iVar4	pluginResultThenBufferEntryCursor	INFERRED	first the result of the plugin callback ctx+0x4718 (nonzero = handled), then a cursor over the buffer's per-renderer handles (+0x10) and flags (+0x48)
+local	_glBufferSubData_Exec	local_40	dataAddress	INFERRED	vm_address_t array: element 0 is the buffer's data pointer (buffer+0x30), allocated with _vm_allocate when null
+local	_glCopyTexSubImage1D_Exec	uVar3	forwardedXoffset	INFERRED	copy of the xoffset parameter taken for the _gleUpdateFramebufferCompleteness call (its only use)
+local	_glCopyTexSubImage1D_Exec	uVar7	forwardedX	INFERRED	copy of the x parameter taken for the _gleUpdateFramebufferCompleteness call (its only use)
+local	_glCopyTexSubImage1D_Exec	uVar8	forwardedY	INFERRED	copy of the y parameter taken for the _gleUpdateFramebufferCompleteness call (its only use)
+local	_glCopyTexSubImage1D_Exec	uVar10	levelCopyThenNextLevel	INFERRED	first a copy of level forwarded to _gleUpdateFramebufferCompleteness, later level+1 and the level counter of the mipmap-invalidation loop
+local	_glCopyTexSubImage1D_Exec	iVar6	dirtyWordThenLevelRecordCursor	INFERRED	first the dirty word read in the +0x324 loop, later textureObject + level*0x18 (the level record) and in the final loop the cursor over the following level records
+local	_glCopyTexSubImage1D_Exec	iVar5	pluginHandled	INFERRED	result of the plugin callback ctx+0x470c; nonzero means the copy was done by the renderer

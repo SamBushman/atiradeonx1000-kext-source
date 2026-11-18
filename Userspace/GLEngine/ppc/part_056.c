@@ -169,69 +169,69 @@ void _gleVPBeginPolygonTCLRDirty(glContext)
 }
 
 /* _gleVPEmulate @ 0x10743c (340 bytes) */
-int _gleVPEmulate(glContext, param_2)
+int _gleVPEmulate(glContext, vertexCountThenRemaining)
   int glContext;
-  int param_2;
+  int vertexCountThenRemaining;
 {
-  uint uVar1;
+  uint bitInWord;
   undefined4 uVar2;
-  undefined2 uVar3;
-  int iVar4;
+  undefined2 batchClipCodes;
+  int emulatedProgram;
   undefined4 uVar5;
-  byte *pbVar6;
-  int iVar7;
-  int iVar8;
-  uint uVar9;
+  byte *vertexFlagByteCursor;
+  int vertexBaseThenCursorThenFlagBits;
+  int emulatorThenRemainingThenWordIndex;
+  uint vertexBitIndex;
   double dVar10;
   
-  iVar8 = *(int *)(glContext + 0x4a5c);
-  iVar7 = *(int *)(glContext + 0x4864);
+  emulatorThenRemainingThenWordIndex = *(int *)(glContext + 0x4a5c);
+  vertexBaseThenCursorThenFlagBits = *(int *)(glContext + 0x4864);
   if (*(int *)(glContext + 0x5434) == 0) {
     uVar5 = *(undefined4 *)(*(int *)(glContext + 0x5420) + 0x4e0);
-    iVar4 = *(int *)(*(int *)(glContext + 0x5420) + 0x4e4);
+    emulatedProgram = *(int *)(*(int *)(glContext + 0x5420) + 0x4e4);
   }
   else {
-    iVar4 = *(int *)(*(int *)(glContext + 0x5430) + 0x20);
-    uVar5 = *(undefined4 *)(iVar4 + 0x51c);
-    iVar4 = *(int *)(iVar4 + 0x4dc);
+    emulatedProgram = *(int *)(*(int *)(glContext + 0x5430) + 0x20);
+    uVar5 = *(undefined4 *)(emulatedProgram + 0x51c);
+    emulatedProgram = *(int *)(emulatedProgram + 0x4dc);
   }
-  uVar3 = 0;
-  if (iVar4 != 0) {
-    *(undefined4 *)(iVar8 + 0xd8c) = *(undefined4 *)(glContext + 0x4854);
-    *(int *)(iVar8 + 0xd9c) = glContext;
-    *(int *)(iVar8 + 0xd88) = iVar7;
-    uVar2 = *(undefined4 *)(iVar4 + 0xb0);
-    *(undefined4 *)(iVar8 + 0xd98) = uVar5;
-    *(undefined4 *)(iVar8 + 0xd90) = uVar2;
-    *(int *)(iVar8 + 0xd94) = glContext + 0x360;
-    _PPEmulatorAttachProgram(iVar8,iVar4);
-    *(undefined4 *)(iVar4 + 0xb8) = 0x100;
-    uVar3 = _PPEmulatorRun(iVar8,param_2);
-    iVar8 = param_2;
+  batchClipCodes = 0;
+  if (emulatedProgram != 0) {
+    *(undefined4 *)(emulatorThenRemainingThenWordIndex + 0xd8c) = *(undefined4 *)(glContext + 0x4854);
+    *(int *)(emulatorThenRemainingThenWordIndex + 0xd9c) = glContext;
+    *(int *)(emulatorThenRemainingThenWordIndex + 0xd88) = vertexBaseThenCursorThenFlagBits;
+    uVar2 = *(undefined4 *)(emulatedProgram + 0xb0);
+    *(undefined4 *)(emulatorThenRemainingThenWordIndex + 0xd98) = uVar5;
+    *(undefined4 *)(emulatorThenRemainingThenWordIndex + 0xd90) = uVar2;
+    *(int *)(emulatorThenRemainingThenWordIndex + 0xd94) = glContext + 0x360;
+    _PPEmulatorAttachProgram(emulatorThenRemainingThenWordIndex,emulatedProgram);
+    *(undefined4 *)(emulatedProgram + 0xb8) = 0x100;
+    batchClipCodes = _PPEmulatorRun(emulatorThenRemainingThenWordIndex,vertexCountThenRemaining);
+    emulatorThenRemainingThenWordIndex = vertexCountThenRemaining;
     if (*(char *)(glContext + 0x316a) != '\0') {
-      for (; iVar8 != 0; iVar8 = iVar8 + -1) {
-        dVar10 = (double)(**(double ( **)(int,double))(glContext + 0x4fe4))(glContext, (double)*(float *)(iVar7 + 0x5c));
-        *(float *)(iVar7 + 0x4c) = (float)dVar10;
-        iVar7 = iVar7 + 0x100;
+      for (; emulatorThenRemainingThenWordIndex != 0; emulatorThenRemainingThenWordIndex = emulatorThenRemainingThenWordIndex + -1) {
+        dVar10 = (double)(**(double ( **)(int,double))(glContext + 0x4fe4))(glContext, (double)*(float *)(vertexBaseThenCursorThenFlagBits + 0x5c));
+        *(float *)(vertexBaseThenCursorThenFlagBits + 0x4c) = (float)dVar10;
+        vertexBaseThenCursorThenFlagBits = vertexBaseThenCursorThenFlagBits + 0x100;
       }
     }
     if (*(int *)(glContext + 0x34d0) != 0x1b021b02) {
-      uVar9 = 0;
-      iVar7 = *(int *)(glContext + 0x30b0);
-      if (0 < param_2) {
-        pbVar6 = (byte *)(*(int *)(glContext + 0x4864) + 0x7c);
+      vertexBitIndex = 0;
+      vertexBaseThenCursorThenFlagBits = *(int *)(glContext + 0x30b0);
+      if (0 < vertexCountThenRemaining) {
+        vertexFlagByteCursor = (byte *)(*(int *)(glContext + 0x4864) + 0x7c);
         do {
-          iVar8 = (int)uVar9 >> 5;
-          uVar1 = uVar9 & 0x1f;
-          uVar9 = uVar9 + 1;
-          *pbVar6 = (byte)(*(uint *)(iVar7 + iVar8 * 4) >> uVar1) & 1;
-          pbVar6 = pbVar6 + 0x100;
-          param_2 = param_2 + -1;
-        } while (param_2 != 0);
+          emulatorThenRemainingThenWordIndex = (int)vertexBitIndex >> 5;
+          bitInWord = vertexBitIndex & 0x1f;
+          vertexBitIndex = vertexBitIndex + 1;
+          *vertexFlagByteCursor = (byte)(*(uint *)(vertexBaseThenCursorThenFlagBits + emulatorThenRemainingThenWordIndex * 4) >> bitInWord) & 1;
+          vertexFlagByteCursor = vertexFlagByteCursor + 0x100;
+          vertexCountThenRemaining = vertexCountThenRemaining + -1;
+        } while (vertexCountThenRemaining != 0);
       }
     }
   }
-  return uVar3;
+  return batchClipCodes;
 }
 
 /* _gleSetWindowPos @ 0x107590 (424 bytes) */
