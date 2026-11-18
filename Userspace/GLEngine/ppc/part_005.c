@@ -198,28 +198,28 @@ int _glPushMatrix_Exec(glContext)
   int glContext;
 {
   undefined4 glErrorCode;
-  int iVar1;
-  undefined4 uVar2;
-  int iVar3;
-  int iVar4;
+  int modeOffset;
+  undefined4 copyResult;
+  int stackBase;
+  int stackDepth;
   int matrixModeIndex;
   
   matrixModeIndex = *(int *)(glContext + 0x4ff4);
   if ((*(short *)(glContext + 0x4a10) < 0) && (matrixModeIndex < 0x18)) {
-    iVar1 = matrixModeIndex * 4;
-    iVar3 = *(int *)(iVar1 + *(int *)(glContext + 0x4ff8));
-    iVar4 = *(int *)(iVar1 + glContext + 0x4ffc);
-    if (iVar4 < *(int *)(iVar1 + *(int *)(glContext + 0x4ff8) + 4) - iVar3) {
-      uVar2 = ((int (*)())_gleCopyMatrix)(glContext + matrixModeIndex * 0x40 + 0x1bc0,
-                             *(int *)(glContext + 0x4678) + (iVar3 + iVar4) * 0x40);
+    modeOffset = matrixModeIndex * 4;
+    stackBase = *(int *)(modeOffset + *(int *)(glContext + 0x4ff8));
+    stackDepth = *(int *)(modeOffset + glContext + 0x4ffc);
+    if (stackDepth < *(int *)(modeOffset + *(int *)(glContext + 0x4ff8) + 4) - stackBase) {
+      copyResult = ((int (*)())_gleCopyMatrix)(glContext + matrixModeIndex * 0x40 + 0x1bc0,
+                             *(int *)(glContext + 0x4678) + (stackBase + stackDepth) * 0x40);
       if (matrixModeIndex == 4) {
         if ((*(uint *)(glContext + 0x50b0) & 0x10) != 0) {
           ((double (*)())_gleModelMatInvert)(glContext);
         }
-        uVar2 = ((int (*)())_gleCopyMatrix)(glContext + 0x22c0,*(int *)(glContext + 0x4678) + iVar4 * 0x40 + 0x2b00);
+        copyResult = ((int (*)())_gleCopyMatrix)(glContext + 0x22c0,*(int *)(glContext + 0x4678) + stackDepth * 0x40 + 0x2b00);
       }
-      *(int *)(iVar1 + glContext + 0x4ffc) = iVar4 + 1;
-      return uVar2;
+      *(int *)(modeOffset + glContext + 0x4ffc) = stackDepth + 1;
+      return copyResult;
     }
     if (*(int *)(glContext + 0x7574) != 0) {
       return glContext;

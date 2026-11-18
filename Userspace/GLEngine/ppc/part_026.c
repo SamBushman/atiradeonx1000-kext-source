@@ -1214,17 +1214,17 @@ void _glGetInfoLogARB_Exec(glContext, obj, maxLength, length, infoLog)
   char *infoLog;
 {
   undefined4 glErrorCode;
-  int iVar2;
-  uint uVar3;
+  int sharedStateThenHandleObject;
+  uint copyLength;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
-    iVar2 = *(int *)(glContext + 0x5148);
-    if (*(char *)(iVar2 + 0x8024) != '\0') {
-      _pthread_mutex_lock(iVar2 + 0x8028);
-      iVar2 = *(int *)(glContext + 0x5148);
+    sharedStateThenHandleObject = *(int *)(glContext + 0x5148);
+    if (*(char *)(sharedStateThenHandleObject + 0x8024) != '\0') {
+      _pthread_mutex_lock(sharedStateThenHandleObject + 0x8028);
+      sharedStateThenHandleObject = *(int *)(glContext + 0x5148);
     }
-    iVar2 = _gleLookupHashObject(iVar2 + 0x6018,obj);
-    if (iVar2 == 0) {
+    sharedStateThenHandleObject = _gleLookupHashObject(sharedStateThenHandleObject + 0x6018,obj);
+    if (sharedStateThenHandleObject == 0) {
       if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
         _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);
       }
@@ -1234,15 +1234,15 @@ void _glGetInfoLogARB_Exec(glContext, obj, maxLength, length, infoLog)
       glErrorCode = 0x501;
       goto LAB_0008e778;
     }
-    if ((*(int *)(iVar2 + 0x10) == 0x8b40) || (*(int *)(iVar2 + 0x10) == 0x8b48)) {
-      uVar3 = *(uint *)(iVar2 + 0x1c);
-      if (maxLength - 1U < *(uint *)(iVar2 + 0x1c)) {
-        uVar3 = maxLength - 1U;
+    if ((*(int *)(sharedStateThenHandleObject + 0x10) == 0x8b40) || (*(int *)(sharedStateThenHandleObject + 0x10) == 0x8b48)) {
+      copyLength = *(uint *)(sharedStateThenHandleObject + 0x1c);
+      if (maxLength - 1U < *(uint *)(sharedStateThenHandleObject + 0x1c)) {
+        copyLength = maxLength - 1U;
       }
-      _strncpy(infoLog,*(char **)(iVar2 + 0x18),uVar3);
-      infoLog[uVar3] = '\0';
+      _strncpy(infoLog,*(char **)(sharedStateThenHandleObject + 0x18),copyLength);
+      infoLog[copyLength] = '\0';
       if (length != (size_t *)0x0) {
-        *length = uVar3;
+        *length = copyLength;
       }
       if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) == '\0') {
         return;
@@ -1272,17 +1272,17 @@ void _glGetShaderInfoLog_Exec(glContext, shader, bufSize, length, infoLog)
   char *infoLog;
 {
   undefined4 glErrorCode;
-  int iVar2;
-  uint uVar3;
+  int sharedStateThenShaderObject;
+  uint copyLength;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
-    iVar2 = *(int *)(glContext + 0x5148);
-    if (*(char *)(iVar2 + 0x8024) != '\0') {
-      _pthread_mutex_lock(iVar2 + 0x8028);
-      iVar2 = *(int *)(glContext + 0x5148);
+    sharedStateThenShaderObject = *(int *)(glContext + 0x5148);
+    if (*(char *)(sharedStateThenShaderObject + 0x8024) != '\0') {
+      _pthread_mutex_lock(sharedStateThenShaderObject + 0x8028);
+      sharedStateThenShaderObject = *(int *)(glContext + 0x5148);
     }
-    iVar2 = _gleLookupHashObject(iVar2 + 0x6018,shader);
-    if (iVar2 == 0) {
+    sharedStateThenShaderObject = _gleLookupHashObject(sharedStateThenShaderObject + 0x6018,shader);
+    if (sharedStateThenShaderObject == 0) {
       if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
         _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);
       }
@@ -1292,15 +1292,15 @@ void _glGetShaderInfoLog_Exec(glContext, shader, bufSize, length, infoLog)
       glErrorCode = 0x501;
       goto LAB_0008e8cc;
     }
-    if (*(int *)(iVar2 + 0x10) == 0x8b48) {
-      uVar3 = *(uint *)(iVar2 + 0x1c);
-      if (bufSize - 1U < *(uint *)(iVar2 + 0x1c)) {
-        uVar3 = bufSize - 1U;
+    if (*(int *)(sharedStateThenShaderObject + 0x10) == 0x8b48) {
+      copyLength = *(uint *)(sharedStateThenShaderObject + 0x1c);
+      if (bufSize - 1U < *(uint *)(sharedStateThenShaderObject + 0x1c)) {
+        copyLength = bufSize - 1U;
       }
-      _strncpy(infoLog,*(char **)(iVar2 + 0x18),uVar3);
-      infoLog[uVar3] = '\0';
+      _strncpy(infoLog,*(char **)(sharedStateThenShaderObject + 0x18),copyLength);
+      infoLog[copyLength] = '\0';
       if (length != (size_t *)0x0) {
-        *length = uVar3;
+        *length = copyLength;
       }
       if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) == '\0') {
         return;
@@ -1417,23 +1417,23 @@ int _glIsProgram_Exec(glContext, program)
   int glContext;
   undefined4 program;
 {
-  bool bVar1;
-  int iVar2;
+  bool isProgram;
+  int sharedStateThenProgramObject;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
-    iVar2 = *(int *)(glContext + 0x5148);
-    if (*(char *)(iVar2 + 0x8024) != '\0') {
-      _pthread_mutex_lock(iVar2 + 0x8028);
-      iVar2 = *(int *)(glContext + 0x5148);
+    sharedStateThenProgramObject = *(int *)(glContext + 0x5148);
+    if (*(char *)(sharedStateThenProgramObject + 0x8024) != '\0') {
+      _pthread_mutex_lock(sharedStateThenProgramObject + 0x8028);
+      sharedStateThenProgramObject = *(int *)(glContext + 0x5148);
     }
-    iVar2 = _gleLookupHashObject(iVar2 + 0x6018,program);
-    if (iVar2 != 0) {
-      bVar1 = *(int *)(iVar2 + 0x10) == 0x8b40;
+    sharedStateThenProgramObject = _gleLookupHashObject(sharedStateThenProgramObject + 0x6018,program);
+    if (sharedStateThenProgramObject != 0) {
+      isProgram = *(int *)(sharedStateThenProgramObject + 0x10) == 0x8b40;
       if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) == '\0') {
-        return bVar1;
+        return isProgram;
       }
       _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);
-      return bVar1;
+      return isProgram;
     }
     if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
       _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);
@@ -2229,72 +2229,72 @@ void _glGetPointerv_Exec(glContext, pname, params)
   uint pname;
   undefined4 *params;
 {
-  undefined4 uVar1;
+  undefined4 pointerValue;
   undefined4 glErrorCode;
   int clientState;
   
   clientState = *(int *)(glContext + 0x4a60);
   if (*(short *)(glContext + 0x4a10) < 0) {
     if (pname == 0x8092) {
-      uVar1 = *(undefined4 *)(*(int *)(glContext + 0x53d8) * 0x18 + clientState + 0xf0);
+      pointerValue = *(undefined4 *)(*(int *)(glContext + 0x53d8) * 0x18 + clientState + 0xf0);
       goto LAB_00090210;
     }
     if (pname < 0x8093) {
       if (pname == 0x808e) {
-        uVar1 = *(undefined4 *)(clientState + 0x30);
+        pointerValue = *(undefined4 *)(clientState + 0x30);
 LAB_00090210:
-        *params = uVar1;
+        *params = pointerValue;
         return;
       }
       if (0x808e < pname) {
         if (pname == 0x8090) {
-          uVar1 = *(undefined4 *)(clientState + 0x60);
+          pointerValue = *(undefined4 *)(clientState + 0x60);
         }
         else if (pname < 0x8091) {
-          uVar1 = *(undefined4 *)(clientState + 0x48);
+          pointerValue = *(undefined4 *)(clientState + 0x48);
         }
         else {
-          uVar1 = *(undefined4 *)(glContext + 0x48e0);
+          pointerValue = *(undefined4 *)(glContext + 0x48e0);
         }
         goto LAB_00090210;
       }
       if (pname == 0xdf0) {
-        uVar1 = *(undefined4 *)(glContext + 0x4fcc);
+        pointerValue = *(undefined4 *)(glContext + 0x4fcc);
         goto LAB_00090210;
       }
       if (pname == 0xdf3) {
-        uVar1 = *(undefined4 *)(glContext + 20000);
+        pointerValue = *(undefined4 *)(glContext + 20000);
         goto LAB_00090210;
       }
     }
     else {
       if (pname == 0x845d) {
-        uVar1 = *(undefined4 *)(clientState + 0x90);
+        pointerValue = *(undefined4 *)(clientState + 0x90);
         goto LAB_00090210;
       }
       if (pname < 0x845e) {
         if (pname == 0x8093) {
-          uVar1 = *(undefined4 *)(clientState + 0xc0);
+          pointerValue = *(undefined4 *)(clientState + 0xc0);
           goto LAB_00090210;
         }
         if (pname == 0x8456) {
-          uVar1 = *(undefined4 *)(clientState + 0x78);
+          pointerValue = *(undefined4 *)(clientState + 0x78);
           goto LAB_00090210;
         }
       }
       else {
         if (pname == 0x86ac) {
-          uVar1 = *(undefined4 *)(clientState + 0xa8);
+          pointerValue = *(undefined4 *)(clientState + 0xa8);
           goto LAB_00090210;
         }
         if (pname < 0x86ad) {
           if (pname == 0x8521) {
-            uVar1 = *(undefined4 *)(clientState + 0x344);
+            pointerValue = *(undefined4 *)(clientState + 0x344);
             goto LAB_00090210;
           }
         }
         else if (pname == 0x8a0e) {
-          uVar1 = *(undefined4 *)(clientState + 0xd8);
+          pointerValue = *(undefined4 *)(clientState + 0xd8);
           goto LAB_00090210;
         }
       }

@@ -1292,11 +1292,11 @@ int _gleCheckCompressedTexImage3DArgs(glContext, target, level, internalformat, 
   undefined4 imageSize;
 {
   undefined4 errorCode;
-  uint uVar2;
+  uint maxTexture3DSize;
   int texture;
-  int iVar4;
-  uint uVar5;
-  uint uVar6;
+  int argsCheckResult;
+  uint innerHeight;
+  uint innerWidth;
   
   texture = _gleLookUpTexture3D(glContext,target);
   if (texture == 0) {
@@ -1306,16 +1306,16 @@ int _gleCheckCompressedTexImage3DArgs(glContext, target, level, internalformat, 
     errorCode = 0x500;
   }
   else {
-    uVar5 = height + border * -2;
-    uVar6 = width + border * -2;
+    innerHeight = height + border * -2;
+    innerWidth = width + border * -2;
     if (((*(ushort *)(texture + 0x24) & 0xf) != 1) ||
-       ((((((-1 < (int)uVar6 && ((uVar6 & uVar6 - 1) == 0)) &&
-           (uVar2 = (uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0xbe), (int)uVar6 <= (int)uVar2))
-          && ((-1 < (int)uVar5 && ((uVar5 & uVar5 - 1) == 0)))) &&
-         (((int)uVar5 <= (int)uVar2 && ((-1 < (int)depth && ((depth & depth - 1) == 0)))))) &&
-        ((int)depth <= (int)uVar2)))) {
-      iVar4 = ((int (*)())_gleCheckCompressedTexImageArgs)(glContext,level,internalformat,border,uVar6,uVar5,depth,imageSize);
-      if (iVar4 != 0) {
+       ((((((-1 < (int)innerWidth && ((innerWidth & innerWidth - 1) == 0)) &&
+           (maxTexture3DSize = (uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0xbe), (int)innerWidth <= (int)maxTexture3DSize))
+          && ((-1 < (int)innerHeight && ((innerHeight & innerHeight - 1) == 0)))) &&
+         (((int)innerHeight <= (int)maxTexture3DSize && ((-1 < (int)depth && ((depth & depth - 1) == 0)))))) &&
+        ((int)depth <= (int)maxTexture3DSize)))) {
+      argsCheckResult = ((int (*)())_gleCheckCompressedTexImageArgs)(glContext,level,internalformat,border,innerWidth,innerHeight,depth,imageSize);
+      if (argsCheckResult != 0) {
         return texture;
       }
       return 0;
@@ -1546,9 +1546,9 @@ int _gleCheckTexSubImage3DArgs(glContext, target, level, xoffset, yoffset, zoffs
 {
   undefined4 errorCode;
   int texture;
-  int iVar3;
-  int iVar4;
-  int iVar5;
+  int argsCheckThenLevelSlotThenZRangeResult;
+  int rangeCheckResult;
+  int textureLevel;
   
   texture = _gleLookUpNonProxyTexture3D(glContext,target);
   if (texture == 0) {
@@ -1559,24 +1559,24 @@ int _gleCheckTexSubImage3DArgs(glContext, target, level, xoffset, yoffset, zoffs
   }
   else {
     if ((format != 0x1902) || (*(short *)(texture + 0x26) == 0x1902)) {
-      iVar3 = _gleCheckTexSubImageArgs(glContext,level,format,type);
-      if (iVar3 == 0) {
+      argsCheckThenLevelSlotThenZRangeResult = _gleCheckTexSubImageArgs(glContext,level,format,type);
+      if (argsCheckThenLevelSlotThenZRangeResult == 0) {
         return 0;
       }
-      iVar3 = texture + level * 0x18;
-      iVar5 = iVar3 + 0xc4;
-      if ((*(byte *)(iVar3 + 0xcf) & 0x20) != 0) {
-        iVar4 = _gleCheckTexSubImageRange
-                          (glContext,iVar5,xoffset,width,(uint)*(ushort *)(iVar3 + 200));
-        if (iVar4 == 0) {
+      argsCheckThenLevelSlotThenZRangeResult = texture + level * 0x18;
+      textureLevel = argsCheckThenLevelSlotThenZRangeResult + 0xc4;
+      if ((*(byte *)(argsCheckThenLevelSlotThenZRangeResult + 0xcf) & 0x20) != 0) {
+        rangeCheckResult = _gleCheckTexSubImageRange
+                          (glContext,textureLevel,xoffset,width,(uint)*(ushort *)(argsCheckThenLevelSlotThenZRangeResult + 200));
+        if (rangeCheckResult == 0) {
           return 0;
         }
-        iVar4 = _gleCheckTexSubImageRange
-                          (glContext,iVar5,yoffset,height,(uint)*(ushort *)(iVar3 + 0xca));
-        if (iVar4 != 0) {
-          iVar3 = _gleCheckTexSubImageRange
-                            (glContext,iVar5,zoffset,depth,(uint)*(ushort *)(iVar3 + 0xcc));
-          if (iVar3 != 0) {
+        rangeCheckResult = _gleCheckTexSubImageRange
+                          (glContext,textureLevel,yoffset,height,(uint)*(ushort *)(argsCheckThenLevelSlotThenZRangeResult + 0xca));
+        if (rangeCheckResult != 0) {
+          argsCheckThenLevelSlotThenZRangeResult = _gleCheckTexSubImageRange
+                            (glContext,textureLevel,zoffset,depth,(uint)*(ushort *)(argsCheckThenLevelSlotThenZRangeResult + 0xcc));
+          if (argsCheckThenLevelSlotThenZRangeResult != 0) {
             return texture;
           }
           return 0;
@@ -1605,12 +1605,12 @@ int _gleCheckCopyTexSubImage3DArgs(glContext, target, level, xoffset, yoffset, z
   undefined4 height;
   undefined4 depth;
 {
-  bool bVar1;
+  bool levelInRange;
   undefined4 errorCode;
-  int iVar3;
+  int levelSlotThenZRangeResult;
   int texture;
-  int iVar5;
-  int iVar6;
+  int rangeCheckResult;
+  int textureLevel;
   
   texture = _gleLookUpNonProxyTexture3D(glContext,target);
   if (texture == 0) {
@@ -1620,30 +1620,30 @@ int _gleCheckCopyTexSubImage3DArgs(glContext, target, level, xoffset, yoffset, z
     errorCode = 0x500;
   }
   else {
-    bVar1 = true;
+    levelInRange = true;
     if (0xe < level) {
       if (*(int *)(glContext + 0x7574) == 0) {
         *(undefined4 *)(glContext + 0x7574) = 0x501;
       }
-      bVar1 = false;
+      levelInRange = false;
     }
-    if (!bVar1) {
+    if (!levelInRange) {
       return 0;
     }
-    iVar3 = texture + level * 0x18;
-    iVar6 = iVar3 + 0xc4;
-    if ((*(byte *)(iVar3 + 0xcf) & 0x20) != 0) {
-      iVar5 = _gleCheckTexSubImageRange
-                        (glContext,iVar6,xoffset,width,(uint)*(ushort *)(iVar3 + 200));
-      if (iVar5 == 0) {
+    levelSlotThenZRangeResult = texture + level * 0x18;
+    textureLevel = levelSlotThenZRangeResult + 0xc4;
+    if ((*(byte *)(levelSlotThenZRangeResult + 0xcf) & 0x20) != 0) {
+      rangeCheckResult = _gleCheckTexSubImageRange
+                        (glContext,textureLevel,xoffset,width,(uint)*(ushort *)(levelSlotThenZRangeResult + 200));
+      if (rangeCheckResult == 0) {
         return 0;
       }
-      iVar5 = _gleCheckTexSubImageRange
-                        (glContext,iVar6,yoffset,height,(uint)*(ushort *)(iVar3 + 0xca));
-      if (iVar5 != 0) {
-        iVar3 = _gleCheckTexSubImageRange
-                          (glContext,iVar6,zoffset,depth,(uint)*(ushort *)(iVar3 + 0xcc));
-        if (iVar3 != 0) {
+      rangeCheckResult = _gleCheckTexSubImageRange
+                        (glContext,textureLevel,yoffset,height,(uint)*(ushort *)(levelSlotThenZRangeResult + 0xca));
+      if (rangeCheckResult != 0) {
+        levelSlotThenZRangeResult = _gleCheckTexSubImageRange
+                          (glContext,textureLevel,zoffset,depth,(uint)*(ushort *)(levelSlotThenZRangeResult + 0xcc));
+        if (levelSlotThenZRangeResult != 0) {
           return texture;
         }
         return 0;
@@ -1728,8 +1728,8 @@ int _gleCheckCompressedTexSubImage3DArgs(glContext, target, level, xoffset, yoff
 {
   undefined4 errorCode;
   int texture;
-  int iVar3;
-  int iVar4;
+  int argsCheckThenTextureLevelThenZRangeResult;
+  int rangeCheckResult;
   
   texture = _gleLookUpNonProxyTexture3D(glContext,target);
   if (texture == 0) {
@@ -1739,23 +1739,23 @@ int _gleCheckCompressedTexSubImage3DArgs(glContext, target, level, xoffset, yoff
     errorCode = 0x500;
   }
   else {
-    iVar3 = ((int (*)())_gleCheckCompressedTexImageArgs)(glContext,level,format,0,width,height,depth,imageSize);
-    if (iVar3 == 0) {
+    argsCheckThenTextureLevelThenZRangeResult = ((int (*)())_gleCheckCompressedTexImageArgs)(glContext,level,format,0,width,height,depth,imageSize);
+    if (argsCheckThenTextureLevelThenZRangeResult == 0) {
       return 0;
     }
-    iVar3 = texture + 0xc4 + level * 0x18;
+    argsCheckThenTextureLevelThenZRangeResult = texture + 0xc4 + level * 0x18;
     if (target - 0x8515U < 6) {
-      iVar3 = texture + 0xc4 + target * 0x168 + level * 0x18 + -0xbb2588;
+      argsCheckThenTextureLevelThenZRangeResult = texture + 0xc4 + target * 0x168 + level * 0x18 + -0xbb2588;
     }
-    if (*(int *)(iVar3 + 0x14) != 0) {
-      iVar4 = ((int (*)())_gleCheckCompressedTexSubImageRange)(glContext,iVar3,xoffset,width,(uint)*(ushort *)(iVar3 + 4),3);
-      if (iVar4 == 0) {
+    if (*(int *)(argsCheckThenTextureLevelThenZRangeResult + 0x14) != 0) {
+      rangeCheckResult = ((int (*)())_gleCheckCompressedTexSubImageRange)(glContext,argsCheckThenTextureLevelThenZRangeResult,xoffset,width,(uint)*(ushort *)(argsCheckThenTextureLevelThenZRangeResult + 4),3);
+      if (rangeCheckResult == 0) {
         return 0;
       }
-      iVar4 = ((int (*)())_gleCheckCompressedTexSubImageRange)(glContext,iVar3,yoffset,height,(uint)*(ushort *)(iVar3 + 6),3);
-      if (iVar4 != 0) {
-        iVar3 = ((int (*)())_gleCheckCompressedTexSubImageRange)(glContext,iVar3,zoffset,depth,(uint)*(ushort *)(iVar3 + 8),0);
-        if (iVar3 != 0) {
+      rangeCheckResult = ((int (*)())_gleCheckCompressedTexSubImageRange)(glContext,argsCheckThenTextureLevelThenZRangeResult,yoffset,height,(uint)*(ushort *)(argsCheckThenTextureLevelThenZRangeResult + 6),3);
+      if (rangeCheckResult != 0) {
+        argsCheckThenTextureLevelThenZRangeResult = ((int (*)())_gleCheckCompressedTexSubImageRange)(glContext,argsCheckThenTextureLevelThenZRangeResult,zoffset,depth,(uint)*(ushort *)(argsCheckThenTextureLevelThenZRangeResult + 8),0);
+        if (argsCheckThenTextureLevelThenZRangeResult != 0) {
           return texture;
         }
         return 0;

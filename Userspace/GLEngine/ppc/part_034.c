@@ -2518,12 +2518,12 @@ double _glWeightivARB_Exec(glContext, size, weights)
   int iVar1;
   double intToDoubleBias;
   float channelScale;
-  float fVar4;
+  float channelBias;
   uint uVar5;
   float *dstCursor;
   int loopIndex;
   
-  fVar4 = FLOAT_00108e6c;
+  channelBias = FLOAT_00108e6c;
   channelScale = FLOAT_00108e68;
   intToDoubleBias = DOUBLE_00108d58;
   if (4 < size) {
@@ -2540,7 +2540,7 @@ double _glWeightivARB_Exec(glContext, size, weights)
       uVar5 = *weights;
       loopIndex = loopIndex + 1;
       weights = weights + 1;
-      *dstCursor = (float)((double)CONCAT44(0x43300000,uVar5 ^ 0x80000000) - intToDoubleBias) * channelScale + fVar4;
+      *dstCursor = (float)((double)CONCAT44(0x43300000,uVar5 ^ 0x80000000) - intToDoubleBias) * channelScale + channelBias;
       dstCursor = dstCursor + 1;
       size = size + -1;
     } while (size != 0);

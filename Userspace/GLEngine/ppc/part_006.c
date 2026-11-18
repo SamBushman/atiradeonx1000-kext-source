@@ -237,11 +237,11 @@ void _gleEndList(glContext)
   int glContext;
 {
   int reallocatedBlock;
-  int iVar1;
-  int iVar2;
+  int newRefCount;
+  int hashNameCheckThenOldListThenExtraBuffer;
   int sharedState;
   undefined4 glContextWord53e8;
-  int iVar4;
+  int displayListTable;
   int glContextPtr53e8;
   uint glContextWord5400;
   int glContextPtr53e82;
@@ -262,22 +262,22 @@ void _gleEndList(glContext)
     *(uint *)(glContext + 0x53fc) = glContextWord5400;
   }
   sharedState = *(int *)(glContext + 0x5148);
-  iVar4 = sharedState + 0x300c;
+  displayListTable = sharedState + 0x300c;
   if (*(char *)(sharedState + 0x8024) != '\0') {
     _pthread_mutex_lock(sharedState + 0x8028);
   }
   glContextPtr53e82 = *(int *)(glContext + 0x53e8);
-  iVar2 = ((int (*)())_gleIsHashName)(iVar4,*(undefined4 *)(glContextPtr53e82 + 4));
-  if (iVar2 == 0) {
-    _gleAddHashNameAndObject(glContext,iVar4,glContextPtr53e82);
+  hashNameCheckThenOldListThenExtraBuffer = ((int (*)())_gleIsHashName)(displayListTable,*(undefined4 *)(glContextPtr53e82 + 4));
+  if (hashNameCheckThenOldListThenExtraBuffer == 0) {
+    _gleAddHashNameAndObject(glContext,displayListTable,glContextPtr53e82);
   }
   else {
-    iVar2 = _gleRemoveHashObject(iVar4,*(undefined4 *)(glContextPtr53e82 + 4));
-    if ((iVar2 != 0) && (iVar1 = *(int *)(iVar2 + 8) + -1, *(int *)(iVar2 + 8) = iVar1, iVar1 == 0))
+    hashNameCheckThenOldListThenExtraBuffer = _gleRemoveHashObject(displayListTable,*(undefined4 *)(glContextPtr53e82 + 4));
+    if ((hashNameCheckThenOldListThenExtraBuffer != 0) && (newRefCount = *(int *)(hashNameCheckThenOldListThenExtraBuffer + 8) + -1, *(int *)(hashNameCheckThenOldListThenExtraBuffer + 8) = newRefCount, newRefCount == 0))
     {
-      ((void (*)())_gleFreeDisplayListObject)(glContext,iVar2);
+      ((void (*)())_gleFreeDisplayListObject)(glContext,hashNameCheckThenOldListThenExtraBuffer);
     }
-    _gleAddHashObject(iVar4,glContextPtr53e82);
+    _gleAddHashObject(displayListTable,glContextPtr53e82);
   }
   if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
     _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);
@@ -286,9 +286,9 @@ void _gleEndList(glContext)
     ((void (*)())_gleOptimizeDisplayList)(glContext,*(undefined4 *)(glContextPtr53e82 + 4));
   }
   glContextPtr53e8 = *(int *)(glContext + 0x53e8);
-  iVar2 = *(int *)(glContextPtr53e8 + 0x14);
-  if (iVar2 != 0) {
-    _free(iVar2);
+  hashNameCheckThenOldListThenExtraBuffer = *(int *)(glContextPtr53e8 + 0x14);
+  if (hashNameCheckThenOldListThenExtraBuffer != 0) {
+    _free(hashNameCheckThenOldListThenExtraBuffer);
     *(undefined4 *)(glContextPtr53e8 + 0x14) = 0;
   }
   _gliExecDispatchTable(glContext);

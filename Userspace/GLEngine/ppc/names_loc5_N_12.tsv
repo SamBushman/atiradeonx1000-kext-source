@@ -1,0 +1,18 @@
+local	_glArrayElement_ListExec	uVar12	weightSize	CONFIRMED	listRecord[5]: byte size of the weight vector (4 slots at ctx+0x2d0) in the recorded element; advances attribDataCursor and selects how many weights are copied (0x10, 0xc, 8, else) with the missing slots filled from ctx+0x20
+local	_gleEvalDomain2Coord	iVar6	uorderThenComponentIndex	CONFIRMED	copy of uorder passed on to the second _glePreEvaluate call, then reset to 0 and counted up as the component loop index
+local	_gleEvalDomain2Coord	dVar10	vCopy	CONFIRMED	copy of the v argument forwarded unchanged to the second _glePreEvaluate call
+local	_gleMap2VertexAttrib2dLoad	pdVar1	firstComponentPtr	CONFIRMED	double pointer to the first component of the control point at the current v index (points + elementByteOffset)
+local	_gleMap2VertexAttrib2dLoad	iVar2	elementByteOffset	CONFIRMED	uElementOffset*8 advanced by vstride*8 per v step: byte offset of the control point
+local	_gleMap2VertexAttrib2dLoad	iVar6	pointsRowAddress	CONFIRMED	points advanced by ustride*8 per u row: the row whose second components (+8) are read
+local	_gleMap2VertexAttrib2dLoad	pdVar7	secondComponentPtr	CONFIRMED	double pointer to the second component of the current control point, advanced by vstride
+local	_gleMap2VertexAttrib2dLoad	dVar11	oneThenSecondComponent	CONFIRMED	DOUBLE_00108d68 (1.0) used for the 1/(v2-v1) reciprocal, then reassigned the second component read from the control point
+local	_gleMap2Texture2fLoad	iVar1	secondComponentBits	CONFIRMED	bits of the second component of the control point, stored to destPtr[9]
+local	_gleMap2Texture2fLoad	piVar2	firstComponentPtr	CONFIRMED	pointer to the first component of the control point at the current v index (points + elementByteOffset)
+local	_gleMap2Texture2fLoad	iVar5	elementByteOffset	CONFIRMED	uElementOffset*4 advanced by vstride*4 per v step: byte offset of the control point
+local	_gleMap2Texture2fLoad	iVar10	pointsRowAddress	CONFIRMED	points advanced by ustride*4 per u row: the row whose second components (+4) are read
+local	_gleMap2Texture2fLoad	piVar11	secondComponentPtr	CONFIRMED	pointer to the second component of the current control point, advanced by vstride
+local	_gleMap2Texture1dLoad	pfVar1	dstCursor	CONFIRMED	pointer into the map data advanced by one float per control point and only written through
+local	_gleMap2Texture1dLoad	dVar7	oneThenPointValue	CONFIRMED	DOUBLE_00108d68 (1.0) used for the 1/(v2-v1) reciprocal, then reassigned the control point value read
+local	_gleMap2Texture1fLoad	iVar1	pointBits	CONFIRMED	bits of the control point value, stored to the map data
+local	_gleMap2Texture1fLoad	piVar4	dstCursor	CONFIRMED	pointer into the map data advanced by one word per control point and only written through
+local	_gleMap1VertexAttrib1dLoad	dVar2	invUDeltaThenPointValue	CONFIRMED	DOUBLE_00108d68 / (u2 - u1) stored at mapData[3], then reassigned each control point value read

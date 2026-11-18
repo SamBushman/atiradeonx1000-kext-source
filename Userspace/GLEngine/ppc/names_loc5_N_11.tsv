@@ -1,0 +1,72 @@
+local	_glGetConvolutionParameterfv_Exec	fVar1	alphaComponent	CONFIRMED	fourth component (stored to params[3]) of the scale, bias or border colour vector being returned
+local	_glGetConvolutionParameterfv_Exec	pfVar3	convolutionState	CONFIRMED	per-target convolution state block (ctx+0x3298 target 0x8010, +0x32d8 target 0x8011, +0x3318 target 0x8012) whose scale/bias/border floats are copied to params
+local	_glGetConvolutionParameterfv_Exec	local_18	intParams	CONFIRMED	out array filled by _glGetConvolutionParameteriv_Exec and converted to the float result
+local	_glGetColorTableParameteriv_Exec	fVar1	alphaComponent	CONFIRMED	fourth component (stored to params[3]) of the colour table scale or bias vector being returned
+local	_glGetColorTableParameteriv_Exec	uVar3	colorTableParameterValue	CONFIRMED	value of the queried pname (width 0xbc, format 0xb0 and the other table properties) stored to params[0] after the switch
+local	_glGetColorTableParameteriv_Exec	pfVar5	targetColorTable	CONFIRMED	state block of the colour table selected by target (ctx+0x33b0, +0x33d0, +0x33f0)
+local	_glGetColorTableParameterfv_Exec	fVar1	alphaComponent	CONFIRMED	fourth component (stored to params[3]) of the colour table scale or bias vector being returned
+local	_glGetColorTableParameterfv_Exec	uVar2	colorTableParameterValue	CONFIRMED	ushort property of the table (width at +0xbc, format at +0xb0) converted to float and stored to params[0]
+local	_glGetColorTableParameterfv_Exec	pfVar5	targetColorTable	CONFIRMED	state block of the colour table selected by target (ctx+0x33b0, +0x33d0, +0x33f0)
+local	_glGetCombinerInputParameterfvNV_Exec	iVar1	portionIndex	CONFIRMED	0 for portion GL_ALPHA (0x1906), 1 for portion GL_RGB (0x1907): selects the input record of the stage
+local	_glGetCombinerInputParameterfvNV_Exec	iVar2	stageIndex	CONFIRMED	stage - 0x8550 (GL_COMBINER0_NV), checked against the combiner count at rendererInfo+0x98
+local	_glGetCombinerInputParameterfvNV_Exec	uVar3	variableIndexThenFieldValue	CONFIRMED	variable - 0x8523 (GL_VARIABLE_A_NV, must be < 4), then reassigned the ushort field of the selected input record that is converted to the float result
+local	_glGetProgramLocalParameterdvARB_Exec	bVar1	indexOutOfRange	CONFIRMED	true when index exceeds the maximum local parameter index of the target (0xff for 0x8620, 0x7f otherwise)
+local	_glGetProgramLocalParameterdvARB_Exec	iVar4	programSlotThenLocalParamBase	CONFIRMED	0 for target 0x8620 or 1 for the other program target (selects ctx+0x5420 + slot*4), then reassigned the program's local parameter array (state+0x4e0)
+local	_glGetProgramLocalParameterdvARB_Exec	iVar5	localParamAddress	CONFIRMED	localParamBase + index*0x10: the four floats of local parameter index
+local	_glGetProgramLocalParameterdvARB_Exec	uVar3	expectedTarget	CONFIRMED	0x8200 or 0x8804, the program target accepted besides 0x8620; target must equal it
+local	_glGetInfoLogARB_Exec	iVar2	sharedStateThenHandleObject	CONFIRMED	ctx+0x5148 (shared state, mutex at +0x8028, hash table at +0x6018), then reassigned to _gleLookupHashObject(table, obj): the program or shader object whose log is copied
+local	_glGetInfoLogARB_Exec	uVar3	copyLength	CONFIRMED	min(info log length at object+0x1c, maxLength - 1): characters copied and stored to *length
+local	_glGetShaderInfoLog_Exec	iVar2	sharedStateThenShaderObject	CONFIRMED	ctx+0x5148 (shared state, mutex at +0x8028, hash table at +0x6018), then reassigned to _gleLookupHashObject(table, shader): the shader object (kind 0x8b48) whose log is copied
+local	_glGetShaderInfoLog_Exec	uVar3	copyLength	CONFIRMED	min(info log length at object+0x1c, bufSize - 1): characters copied and stored to *length
+local	_glGetPointerv_Exec	uVar1	pointerValue	CONFIRMED	the pointer selected by pname (client array pointers in the client state, feedback and selection buffers) stored to *params
+local	_glGetBufferPointerv_Exec	uVar1	mapPointer	CONFIRMED	buffer+0x30 (data pointer) when the buffer is mapped (+0x44 flag set), else 0: the GL_BUFFER_MAP_POINTER result
+local	_glGetBufferPointerv_Exec	iVar2	boundBuffer	CONFIRMED	buffer object bound for target (client state +0x35c/+0x358, ctx+0x4a68, ctx+0x4a6c); 0 raises GL_INVALID_OPERATION
+local	_glGetConvolutionFilter_Exec	iVar4	elementSize	CONFIRMED	int of _gleBytesPerElement(type), or _glePixelBytes(format,type) when that is 0; the pack offset must be a multiple of it
+local	_gleGetConvolutionFilter	iVar1	convolutionState	CONFIRMED	convolution state of the target (ctx+0x3298 for 0x8010, ctx+0x32d8 otherwise)
+local	_glGetHistogram_Exec	iVar2	typeFormatCheck	CONFIRMED	result of _CheckTypeFormat(type,format); 0 raises GL_INVALID_OPERATION
+local	_glGetHistogram_Exec	iVar3	imageEndOffset	CONFIRMED	_gleOffsetLimitImage end offset of the histogram data (ctx+0x3388 entries) compared with the pack buffer size
+local	_glGetHistogram_Exec	iVar4	elementSize	CONFIRMED	int of _gleBytesPerElement(type), or _glePixelBytes(format,type) when that is 0; the pack offset must be a multiple of it
+local	_glGetHistogram_Exec	iVar5	packBufferSize	CONFIRMED	pixelPackBuffer+0x38 (buffer size) compared with the image end offset
+local	_glDeleteObjectARB_Exec	iVar2	remainingRefCount	CONFIRMED	object+8 reference count after decrement; the object is destroyed when it reaches 1, otherwise flagged for deletion (+0x14)
+local	_glDeleteObjectARB_Exec	iVar3	sharedStateThenHandleObject	CONFIRMED	ctx+0x5148 (shared state, mutex at +0x8028, hash table at +0x6018), then reassigned to _gleLookupHashObject(table, obj): the object being deleted
+local	_glIsProgram_Exec	bVar1	isProgram	CONFIRMED	object kind (+0x10) equals 0x8b40, the value returned
+local	_glIsProgram_Exec	iVar2	sharedStateThenProgramObject	CONFIRMED	ctx+0x5148 (shared state, mutex at +0x8028, hash table at +0x6018), then reassigned to _gleLookupHashObject(table, program)
+local	_glIsVertexArrayEXT_Exec	iVar1	sharedStateThenVertexArrayObject	CONFIRMED	ctx+0x5148 (shared state, mutex at +0x8028), then reassigned to _gleLookupHashObject(vertex array table at +0x5014, id)
+local	_glIsVertexArrayEXT_Exec	bVar2	isVertexArray	CONFIRMED	true when the id names a vertex array object (lookup result nonzero), the value returned
+local	_glGenQueries_Exec	iVar2	generatedName	CONFIRMED	firstName + index: the name stored to ids[index]
+local	_glGenQueries_Exec	iVar3	loopIndex	CONFIRMED	offset of the next generated name from firstName
+local	_glGenQueries_Exec	iVar4	firstName	CONFIRMED	first of the n consecutive names from _gleGenHashNames(ctx+0x6440, n)
+local	_glIsProgramARB_Exec	iVar1	sharedStateThenProgramObject	CONFIRMED	ctx+0x5148 (shared state, mutex at +0x8028), then reassigned to _gleLookupHashObject(program table at +0x4010, program)
+local	_glIsProgramARB_Exec	bVar2	isProgram	CONFIRMED	true when the lookup found an object (false after a GL_INVALID_OPERATION), the value returned
+local	_glGenFencesAPPLE_Exec	iVar2	generatedName	CONFIRMED	firstName + index: the name stored to fences[index]
+local	_glGenFencesAPPLE_Exec	iVar4	firstName	CONFIRMED	first of the n consecutive names from _gleGenHashNames(ctx+0x543c, n)
+local	_glTestObjectAPPLE_Exec	uVar1	objectKindThenTestResult	CONFIRMED	small object kind index (0..5) derived from the object enum and passed to _gleTestObject, then reassigned its result which is returned
+local	_glDeleteFencesAPPLE_Exec	uVar1	fenceName	CONFIRMED	fences[index] passed to _gleDeleteHashNameAndObject
+local	_glIsFenceAPPLE_Exec	uVar1	isFence	CONFIRMED	_gleIsHashName(ctx+0x543c, fence), or 0 after a GL_INVALID_OPERATION: the value returned
+local	_gleCreateGlobalLevel	param_2	textureLevel	CONFIRMED	level record initialised in place: width/height/depth ushorts at +4/+6/+8, internal format 0x1908 at +0x10, type 0x1401 at +0x12, flags 0x34 at +0xb
+local	_gleCreateGlobalLevel	param_3	width	CONFIRMED	low 16 bits stored at textureLevel+4 (level width field, see _gleCheckTexSubImage2DArgs)
+local	_gleCreateGlobalLevel	param_4	height	CONFIRMED	low 16 bits stored at textureLevel+6 (level height field)
+local	_gleCreateGlobalLevel	param_5	depth	CONFIRMED	low 16 bits stored at textureLevel+8 (level depth field)
+local	_gleCreateGlobalLevel	param_6	border	INFERRED	byte stored at textureLevel+10, which _gleCheckTexSubImageRange uses as the border width
+local	_gleFreeTextureState	iVar2	textureObjectThenSlotBase	INFERRED	texture object loaded from the 3-entry slot array at ctx+0x52d4 and freed when nonzero, then reassigned ctx+0x52b0 and advanced by 4 per iteration as the base of the slots at +0xc and +0x18
+local	_gleFreeTextureState	iVar3	unitSlotBaseThenSlotCursor	INFERRED	glContext advanced by 0x14 per texture unit (16 units) addressing the per-unit slot arrays at +0x5154, then reset to glContext and advanced by 4 addressing the slots at +0x5294 and +0x52a8
+local	_glGenerateMipmapEXT_Exec	uVar1	validLevelBits	CONFIRMED	ushort at textureObject+0x94 per cube face: bit mask of the levels that exist (see _glTexSubImage1D_ListExec), compared with requiredLevelBits
+local	_glGenerateMipmapEXT_Exec	uVar4	baseLevelThenRequiredLevelBits	1: the level bits every cube face must have	min(base level at +0x60, last level byte at +0x87), then reassigned (1 << that)
+local	_glGenerateMipmapEXT_Exec	iVar5	sharedStateMutex	CONFIRMED	shared state (ctx+0x5148) + 0x8028: the mutex held around _gleGenerateMipmap
+local	_glFinish_RevertExec	puVar2	clipInterpFuncPtr	CONFIRMED	PTR__gleSetClipInterpFunc_00112038, stored to ctx+0x49cc after ctx+0x49c8 is set to the eye interp function pointer
+local	_glFinish_RevertExec	iVar4	rendererRecordCursorThenCurrentRendererRecord	CONFIRMED	ctx+0x10000 stepped by 0x2e0 per renderer (record fields at -0x777c / -0x7a54) while the other renderers are finished, then reassigned to the record of the current renderer (index ctx+0x85a5, stride 0x2e0 from ctx)
+local	_glFinish_RevertExec	fparam_1	f1AfterCall	CONFIRMED	(double) result of _gleSwitchToRenderer: the value the callee left in f1, forwarded to _gleUpdateDepthRangeData
+local	_glFinish_RevertExec	fparam_1_00	incomingFpr1	CONFIRMED	stale FPR value (never written in this function) read as an argument of the forwarded call: the established incomingFprN convention
+local	_glSwap_RevertExec	bVar1	glContextByte85a5	CONFIRMED	byte at ctx+0x85a5 (renderer index to switch back to), read before the calls
+local	_glSwap_RevertExec	puVar2	clipInterpFuncPtr	CONFIRMED	PTR__gleSetClipInterpFunc_00112038, stored to ctx+0x49cc after ctx+0x49c8 is set to the eye interp function pointer
+local	_glSwap_RevertExec	iVar3	rendererRecord	CONFIRMED	record of renderer glContextByte85a5 (stride 0x2e0 from ctx; fields at +0x8884 and +0x85ac)
+local	_glSwap_RevertExec	fparam_1	f1AfterCall	CONFIRMED	(double) result of _gleSwitchToRenderer: the value the callee left in f1, forwarded to _gleUpdateDepthRangeData
+local	_glSwap_RevertExec	fparam_1_00	incomingFpr1	CONFIRMED	stale FPR value (never written in this function) read as an argument of the forwarded call: the established incomingFprN convention
+local	_glBeginQuery_Exec	iVar5	queryObject	CONFIRMED	object found by _gleLookupHashObject(ctx+0x6440, id) or created by _gleCreateQueryObject; stored to ctx+0x7444 (current query) and its handle at +0x10 is passed to the renderer callback
+local	_glBeginQuery_Exec	iVar7	dirtyBitArrayWord	CONFIRMED	word of the dirty-bit array at ctx+0x324 loaded by the scan loop; any nonzero word sets bit 0x800000 of ctx+0x31c
+local	_glBeginQuery_Exec	iVar8	idThenQueryObject	INFERRED	id parameter, reassigned the newly created query object; forwarded as a stale register argument to _gleUpdateFramebufferCompleteness
+local	_glBeginQuery_Exec	fparam_1	f1AfterCall	INFERRED	f1 left by the previous call (extraout_f1, then the cast result of _gleAddHashNameAndObject, then extraout_f1_00): forwarded as a stale float argument
+local	_glPushMatrix_Exec	iVar1	modeOffset	CONFIRMED	matrixModeIndex * 4: offset of the current matrix mode in the stack base and depth tables
+local	_glPushMatrix_Exec	iVar3	stackBase	CONFIRMED	first slot of the current mode's stack in the matrix storage (table at ctx+0x4ff8)
+local	_glPushMatrix_Exec	iVar4	stackDepth	CONFIRMED	current depth of the mode's stack (ctx+0x4ffc table), compared with the stack capacity and incremented
+local	_glPushMatrix_Exec	uVar2	copyResult	CONFIRMED	result of the last _gleCopyMatrix call, returned

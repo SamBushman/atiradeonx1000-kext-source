@@ -1127,16 +1127,16 @@ void _gleFreeTextureState(glContext)
   int remaining;
   int loopIndex;
   int refCount;
-  int iVar2;
-  int iVar3;
+  int textureObjectThenSlotBase;
+  int unitSlotBaseThenSlotCursor;
   int remaining3;
   int *srcCursor;
   int textureObject;
   
   loopIndex = 0;
-  iVar3 = glContext;
+  unitSlotBaseThenSlotCursor = glContext;
   do {
-    srcCursor = (int *)(iVar3 + 0x5154);
+    srcCursor = (int *)(unitSlotBaseThenSlotCursor + 0x5154);
     remaining3 = 4;
     do {
       textureObject = *srcCursor;
@@ -1157,40 +1157,40 @@ void _gleFreeTextureState(glContext)
       remaining3 = remaining3 + -1;
     } while (-1 < remaining3);
     loopIndex = loopIndex + 1;
-    iVar3 = iVar3 + 0x14;
+    unitSlotBaseThenSlotCursor = unitSlotBaseThenSlotCursor + 0x14;
   } while (loopIndex < 0x10);
   srcCursor = (int *)(glContext + 0x52d4);
   remaining = 0xf;
   do {
-    iVar2 = *srcCursor;
+    textureObjectThenSlotBase = *srcCursor;
     srcCursor = srcCursor + 1;
-    if (iVar2 != 0) {
-      _gleFreeTextureObject(glContext,iVar2);
+    if (textureObjectThenSlotBase != 0) {
+      _gleFreeTextureObject(glContext,textureObjectThenSlotBase);
     }
     remaining = remaining + -1;
   } while (-1 < remaining);
-  iVar2 = glContext + 0x52b0;
+  textureObjectThenSlotBase = glContext + 0x52b0;
   remaining2 = 2;
   do {
-    if (*(int *)(iVar2 + 0xc) != 0) {
-      _gleFreeTextureObject(glContext,*(int *)(iVar2 + 0xc));
+    if (*(int *)(textureObjectThenSlotBase + 0xc) != 0) {
+      _gleFreeTextureObject(glContext,*(int *)(textureObjectThenSlotBase + 0xc));
     }
-    if (*(int *)(iVar2 + 0x18) != 0) {
-      _gleFreeTextureObject(glContext,*(int *)(iVar2 + 0x18));
+    if (*(int *)(textureObjectThenSlotBase + 0x18) != 0) {
+      _gleFreeTextureObject(glContext,*(int *)(textureObjectThenSlotBase + 0x18));
     }
     remaining2 = remaining2 + -1;
-    iVar2 = iVar2 + 4;
+    textureObjectThenSlotBase = textureObjectThenSlotBase + 4;
   } while (-1 < remaining2);
-  iVar3 = glContext;
+  unitSlotBaseThenSlotCursor = glContext;
   do {
-    if (*(int *)(iVar3 + 0x5294) != 0) {
-      _gleFreeTextureObject(glContext,*(int *)(iVar3 + 0x5294));
+    if (*(int *)(unitSlotBaseThenSlotCursor + 0x5294) != 0) {
+      _gleFreeTextureObject(glContext,*(int *)(unitSlotBaseThenSlotCursor + 0x5294));
     }
-    if (*(int *)(iVar3 + 0x52a8) != 0) {
-      _gleFreeTextureObject(glContext,*(int *)(iVar3 + 0x52a8));
+    if (*(int *)(unitSlotBaseThenSlotCursor + 0x52a8) != 0) {
+      _gleFreeTextureObject(glContext,*(int *)(unitSlotBaseThenSlotCursor + 0x52a8));
     }
-    iVar3 = iVar3 + 4;
-  } while (iVar3 <= glContext + 0x10);
+    unitSlotBaseThenSlotCursor = unitSlotBaseThenSlotCursor + 4;
+  } while (unitSlotBaseThenSlotCursor <= glContext + 0x10);
   return;
 }
 

@@ -1,0 +1,59 @@
+local	_glPixelMapuiv_Exec	dVar2	intToDoubleBias	CONFIRMED	holds DOUBLE_00108d70 = 4503599627370496.0 (the 0x43300000xxxxxxxx magic) subtracted after CONCAT44(0x43300000,x) to convert an integer to double
+local	_gleFeedbackPolygon	dVar2	intToDoubleBias	CONFIRMED	holds DOUBLE_00108d70 = 4503599627370496.0 (the 0x43300000xxxxxxxx magic) subtracted after CONCAT44(0x43300000,x) to convert an integer to double
+local	_glColor4uiv_Comp	dVar1	intToDoubleBias	CONFIRMED	holds DOUBLE_00108d70 = 4503599627370496.0 (the 0x43300000xxxxxxxx magic) subtracted after CONCAT44(0x43300000,x) to convert an integer to double
+local	_glSecondaryColor3ui_Comp	dVar1	intToDoubleBias	CONFIRMED	holds DOUBLE_00108d70 = 4503599627370496.0 (the 0x43300000xxxxxxxx magic) subtracted after CONCAT44(0x43300000,x) to convert an integer to double
+local	_glColor3ui_Comp	dVar1	intToDoubleBias	CONFIRMED	holds DOUBLE_00108d70 = 4503599627370496.0 (the 0x43300000xxxxxxxx magic) subtracted after CONCAT44(0x43300000,x) to convert an integer to double
+local	_glColor4uiv_Comp	fVar2	channelScale	CONFIRMED	holds FLOAT_00108e6c = 2.3283064e-10 and is only used as the multiplier of the converted unsigned integer components
+local	_glSecondaryColor3ui_Comp	fVar2	channelScale	CONFIRMED	holds FLOAT_00108e6c = 2.3283064e-10 and is only used as the multiplier of the converted unsigned integer components
+local	_glColor3ui_Comp	fVar2	channelScale	CONFIRMED	holds FLOAT_00108e6c = 2.3283064e-10 and is only used as the multiplier of the converted unsigned integer components
+local	_glColor4s_Comp	fVar2	channelScale	CONFIRMED	holds FLOAT_00108e70 = 3.0518044e-05 and is only used as the multiplier of the converted signed short components (c*scale + bias)
+local	_glColor4s_Comp	fVar3	channelBias	CONFIRMED	holds FLOAT_00108e74 = 1.5259022e-05 and is only added after the scale multiply of the converted signed short components
+local	_glColor4bv_Comp	fVar2	channelScale	CONFIRMED	holds FLOAT_00108e60 = 0.0078431377: multiplier of the converted signed byte components
+local	_glColor4bv_Comp	fVar3	channelBias	CONFIRMED	holds FLOAT_00108e64: addend of the converted signed byte components (c*scale + bias)
+local	_glSecondaryColor3b_Comp	fVar2	channelScale	CONFIRMED	holds FLOAT_00108e60 = 0.0078431377: multiplier of the converted signed byte components
+local	_glSecondaryColor3b_Comp	fVar3	channelBias	CONFIRMED	holds FLOAT_00108e64: addend of the converted signed byte components (c*scale + bias)
+local	_glColor3b_Comp	fVar2	channelScale	CONFIRMED	holds FLOAT_00108e60 = 0.0078431377: multiplier of the converted signed byte components
+local	_glColor3b_Comp	fVar3	channelBias	CONFIRMED	holds FLOAT_00108e64: addend of the converted signed byte components (c*scale + bias)
+local	_glColor3iv_Comp	fVar2	channelScale	CONFIRMED	holds FLOAT_00108e68 = 4.6566129e-10: multiplier of the converted signed int components (c*scale + bias)
+local	_glColor3iv_Comp	fVar3	channelBias	CONFIRMED	holds FLOAT_00108e6c: addend of the converted signed int components (c*scale + bias)
+local	_glWeightivARB_Exec	fVar4	channelBias	CONFIRMED	holds FLOAT_00108e6c: addend after the channelScale multiply of the converted signed int weight
+local	_glColor3us_Exec	fVar3	channelScale	CONFIRMED	holds FLOAT_00108e74 = 1.5259022e-05 and is only used as the multiplier of the converted unsigned short components
+local	_glColor4usv_Comp	fVar1	channelScale	CONFIRMED	holds FLOAT_00108e74 = 1.5259022e-05 and is only used as the multiplier of the converted unsigned short components
+local	_glSecondaryColor3usv_Comp	fVar1	channelScale	CONFIRMED	holds FLOAT_00108e74 = 1.5259022e-05 and is only used as the multiplier of the converted unsigned short components
+local	_glSecondaryColor3ub_Comp	fVar1	channelScale	CONFIRMED	holds FLOAT_00108e78 = 0.0039215689 and is only used as the multiplier of the converted unsigned byte components
+local	_glColorSubTable_Exec	uVar1	expectedTarget	CONFIRMED	0x80d0 or 0x80d2 selected together with the colour table slot: the slot is used only when target equals it (target 0x80d1 handled first)
+local	_glColorSubTable_Exec	bVar2	levelFlags	CONFIRMED	byte at colorTable+0xb7 (level flags, bits 0x10/0x40 tested and 0x10 set), reloaded after _gleAllocateTextureLevel
+local	_glColorSubTable_Exec	iVar4	elementSizeThenTextureLevel	CONFIRMED	bytes per element (int of _gleBytesPerElement, or _glePixelBytes) in the pixel-unpack-buffer validation, then reassigned colorTable+0xac the texture level passed to the level calls
+local	_glColorSubTable_Exec	iVar5	targetColorTable	CONFIRMED	state block of the colour table selected by target (ctx+0x33b0, +0x33d0, +0x33f0) or 0 when no table matches; passed to _gleColorSubTable
+local	_glColorSubTable_Exec	iVar6	unpackBufferSize	CONFIRMED	pixelUnpackBuffer+0x38 (buffer size) compared with the image end offset
+local	_glColorSubTable_ListExec	uVar1	expectedTarget	CONFIRMED	0x80d0 or 0x80d2 selected together with the colour table slot: the slot is used only when target equals it (target 0x80d1 handled first)
+local	_glColorSubTable_ListExec	uVar2	dataSize	CONFIRMED	recordedArgs[5]: padded byte count of the image data stored after the 6 header words (written by _glColorSubTable_Comp as listRecord[5]); the record length is dataSize + 0x18
+local	_glColorSubTable_ListExec	uVar3	target	CONFIRMED	recordedArgs[0], the colour table target compared with the 0x80d0..0x80d2 slots
+local	_glColorSubTable_ListExec	bVar4	levelFlags	CONFIRMED	byte at colorTable+0xb7 (level flags, bits 0x10/0x40 tested and 0x10 set), reloaded after _gleAllocateTextureLevel
+local	_glColorSubTable_ListExec	iVar5	targetColorTable	CONFIRMED	state block of the colour table selected by target (ctx+0x33b0, +0x33d0, +0x33f0) or 0 when no table matches
+local	_glConvolutionFilter1D_Comp	iVar1	rowBytesThenRecordSize	CONFIRMED	_gleRowBytes(format,type,width) (the image data size), then reassigned the padded list record size (rowBytes+3 & ~3) + 0x18 stored at record[5]
+local	_glConvolutionFilter1D_Comp	iVar5	unpackBufferSize	CONFIRMED	pixelUnpackBuffer+0x38 (buffer size) compared with the image end offset
+local	_glConvolutionFilter1D_Comp	puVar3	elementSizeThenListRecordThenFillResult	CONFIRMED	bytes per element in the unpack-buffer validation, then the list record from _gleAddListItem, then the result of _gleFillImage returned to the caller
+local	_glConvolutionFilter2D_Comp	iVar1	imageSizeThenRecordSize	CONFIRMED	_gleImageSize(format,type,width,height), then reassigned the padded list record size (imageSize+3 & ~3) + 0x1c stored at record[6]
+local	_glConvolutionFilter2D_Comp	iVar5	unpackBufferSize	CONFIRMED	pixelUnpackBuffer+0x38 (buffer size) compared with the image end offset
+local	_glConvolutionFilter2D_Comp	puVar3	elementSizeThenListRecordThenFillResult	CONFIRMED	bytes per element in the unpack-buffer validation, then the list record from _gleAddListItem, then the result of _gleFillImage returned to the caller
+local	_glPixelMapuiv_Comp	iVar2	valueBytes	CONFIRMED	mapsize * 4: byte size of the values, list record size is valueBytes + 8
+local	_glPixelMapuiv_Comp	iVar3	pixelUnpackBufferThenLoopIndex	CONFIRMED	ctx+0x4a6c (pixel unpack buffer), then reset to 0 as the value copy loop index
+local	_glPixelMapuiv_Comp	puVar1	listRecordThenDstCursor	CONFIRMED	list record from _gleAddListItem, then advanced by 2 words to the value destination written by the copy loop
+local	_glTexSubImage1D_ListExec	iVar3	textureObjectThenMipmapResult	CONFIRMED	texture object returned by _gleCheckTexSubImage1DArgs and used for every level call, then overwritten by the _gleGenMipmapsToLevel result only tested against 0
+local	_gleCheckTexSubImage2DArgs	iVar2	regionOffsetXThenXRangeResult	CONFIRMED	pixel-store region x offset (ctx+0x3310 or +0x3350) used to reduce width, then reassigned the result of the x _gleCheckTexSubImageRange
+local	_gleCheckTexSubImage2DArgs	iVar4	argsCheckThenTextureLevelThenYRangeResult	CONFIRMED	result of _gleCheckTexSubImageArgs, then the level record textureObject+0xc4+level*0x18, then the result of the y _gleCheckTexSubImageRange
+local	_gleCheckTexSubImage2DArgs	iVar5	regionOffsetY	CONFIRMED	pixel-store region y offset (ctx+0x3314 or +0x3354) used to reduce height
+local	_gleCheckTexSubImage3DArgs	iVar3	argsCheckThenLevelSlotThenZRangeResult	CONFIRMED	result of _gleCheckTexSubImageArgs, then texture+level*0x18 (level slot), then the result of the z _gleCheckTexSubImageRange
+local	_gleCheckTexSubImage3DArgs	iVar4	rangeCheckResult	CONFIRMED	result of _gleCheckTexSubImageRange (x then y)
+local	_gleCheckTexSubImage3DArgs	iVar5	textureLevel	CONFIRMED	levelSlot+0xc4: the level record passed to _gleCheckTexSubImageRange
+local	_gleCheckCopyTexSubImage3DArgs	bVar1	levelInRange	CONFIRMED	true unless level > 0xe, in which case GL_INVALID_VALUE is set and the function returns 0
+local	_gleCheckCopyTexSubImage3DArgs	iVar3	levelSlotThenZRangeResult	CONFIRMED	texture+level*0x18 (level slot), then the result of the z _gleCheckTexSubImageRange
+local	_gleCheckCopyTexSubImage3DArgs	iVar5	rangeCheckResult	CONFIRMED	result of _gleCheckTexSubImageRange (x then y)
+local	_gleCheckCopyTexSubImage3DArgs	iVar6	textureLevel	CONFIRMED	levelSlot+0xc4: the level record passed to _gleCheckTexSubImageRange
+local	_gleCheckCompressedTexImage3DArgs	uVar2	maxTexture3DSize	CONFIRMED	rendererInfo (ctx+0x468c) +0xbe is the value _glGetIntegerv returns for pname 0x8073 (GL_MAX_3D_TEXTURE_SIZE); width, height and depth are compared with it
+local	_gleCheckCompressedTexImage3DArgs	iVar4	argsCheckResult	CONFIRMED	result of _gleCheckCompressedTexImageArgs, tested against 0
+local	_gleCheckCompressedTexImage3DArgs	uVar5	innerHeight	CONFIRMED	height - 2*border
+local	_gleCheckCompressedTexImage3DArgs	uVar6	innerWidth	CONFIRMED	width - 2*border
+local	_gleCheckCompressedTexSubImage3DArgs	iVar3	argsCheckThenTextureLevelThenZRangeResult	CONFIRMED	result of _gleCheckCompressedTexImageArgs, then the level record texture+0xc4+level*0x18, then the result of the z _gleCheckCompressedTexSubImageRange
+local	_gleCheckCompressedTexSubImage3DArgs	iVar4	rangeCheckResult	CONFIRMED	result of _gleCheckCompressedTexSubImageRange (x then y)

@@ -1,0 +1,37 @@
+local	_gle233RevFilter1	bVar1	sampleAt0	CONFIRMED	first of the 2 texels averaged (offset 0)
+local	_gle233RevFilter1	bVar2	sampleAtA	CONFIRMED	texel at offsetA
+local	_gle233RevFilter2	bVar1	sampleAt0	CONFIRMED	texel at offset 0
+local	_gle233RevFilter2	bVar2	sampleAtA	CONFIRMED	texel at offsetA
+local	_gle233RevFilter2	bVar3	sampleAtB	CONFIRMED	texel at offsetB
+local	_gle233RevFilter2	bVar4	sampleAtAB	CONFIRMED	texel at offsetA + offsetB
+local	_gle4444Filter1	uVar1	sampleAt0	CONFIRMED	first of the 2 texels averaged (offset 0)
+local	_gle4444Filter1	uVar2	sampleAtA	CONFIRMED	texel at offsetA
+local	_gleUbyteFilter1	bVar1	sampleAt0	CONFIRMED	first of the 2 texels averaged (offset 0)
+local	_gleUbyteFilter1	pbVar2	sampleAtAPtr	CONFIRMED	pointer to the texel at offsetA from the current src position
+local	_gleByteFilter1	cVar1	sampleAt0	CONFIRMED	first of the 2 texels averaged (offset 0)
+local	_gleByteFilter1	pcVar2	sampleAtAPtr	CONFIRMED	pointer to the texel at offsetA from the current src position
+local	_gleUbyteFilter2	bVar1	sampleAtAB	CONFIRMED	texel at offsetA + offsetB at the current position
+local	_gleUbyteFilter2	pbVar3	sampleAtABCursor	CONFIRMED	cursor starting at src + offsetA + offsetB and advanced one texel per iteration
+local	_gleUbyteFilter3	bVar1	sampleAtBC	CONFIRMED	texel at offsetB + offsetC at the current position
+local	_gleUbyteFilter3	pbVar2	sampleAtABCPtr	CONFIRMED	pointer to the texel at offsetA + offsetB + offsetC
+local	_gleUbyteFilter3	iVar3	sampleBase	CONFIRMED	src + byteOffset: base address of the 8 texels averaged at this position
+local	_gleUbyteFilter3	pbVar5	sampleAtBCCursor	CONFIRMED	cursor starting at src + offsetB + offsetC and advanced one texel per iteration
+local	_gleShortFilter2	iVar1	sampleBase	CONFIRMED	src + byteOffset: base address of the 4 texels averaged at this position
+local	_gleShortFilter2	uVar3	remaining	CONFIRMED	count (low 31 bits) counted down to 0 by the loop
+local	_gleShortFilter3	sVar1	sampleAtBC	CONFIRMED	texel at offsetB + offsetC at the current position
+local	_gleShortFilter3	psVar2	sampleAtABCPtr	CONFIRMED	pointer to the texel at offsetA + offsetB + offsetC
+local	_gleShortFilter3	iVar3	sampleBase	CONFIRMED	src + byteOffset: base address of the 8 texels averaged at this position
+local	_gleShortFilter3	psVar5	sampleAtBCCursor	CONFIRMED	cursor starting at src + offsetB + offsetC and advanced one texel per iteration
+local	_gleShortFilter3	uVar6	remaining	CONFIRMED	count (low 31 bits) counted down to 0 by the loop
+local	_gleFloatFilter2	iVar2	sampleBase	CONFIRMED	src + byteOffset: base address of the 4 texels averaged at this position
+local	_gles16s16Filter2	iVar1	sampleAtAB	CONFIRMED	texel at offsetA + offsetB, read once and used for both 16-bit halves
+local	_gleEndList	iVar1	newRefCount	CONFIRMED	object+8 reference count after decrement; the old list object is freed when it reaches 0
+local	_gleEndList	iVar2	hashNameCheckThenOldListThenExtraBuffer	CONFIRMED	_gleIsHashName result, then the _gleRemoveHashObject result (the replaced display list object), then the extra buffer pointer at list+0x14 that is freed
+local	_gleEndList	iVar4	displayListTable	CONFIRMED	sharedState + 0x300c: the display list hash table (the table passed to _gleIsHashName, _gleAddHashNameAndObject, _gleRemoveHashObject and _gleAddHashObject)
+local	_gleUpdateLightFast	param_2	lightIndex	CONFIRMED	index of the light: 1 << lightIndex is its bit in the light masks and lightIndex*0x6c indexes its record
+local	_gleUpdateLightFast	iVar1	lightRecord	CONFIRMED	glContext + lightIndex*0x6c: per-light record (flags at +0x4ad8..+0x4ada)
+local	_gleUpdateLightFast	uVar2	lightBitThenNewActiveMask	CONFIRMED	1 << lightIndex, then reassigned the new active-light mask (old mask at ctx+0x4ddc with the light bit cleared or set) stored back to ctx+0x4ddc
+local	_gleUpdateLightModelFunc	puVar2	vtxLightSpecRGBABackPtrFunc	CONFIRMED	PTR__gleVtxLightSpecRGBABackPtr_00110e64, stored to ctx+0x4df4 in the specular branch
+local	_gleInitConstants	fVar1	float34ThenFloat38	CONFIRMED	FLOAT_00108ebc stored to ctx+0x34, then FLOAT_00108ec0 stored to ctx+0x38
+local	_gleInitConstants	puVar2	flushAndSubmitFuncThenNoopFunc	CONFIRMED	PTR__gleFlushAndSubmit_00112050 stored to ctx+0x28, then PTR__gleNoop_00110a20 stored to ctx+0xd8 and ctx+0xdc
+local	_gleInitConstants	puVar3	rtcTocStructPtr	CONFIRMED	PTR__gle_rtc_toc_struct_0011205c stored to ctx+0x2c

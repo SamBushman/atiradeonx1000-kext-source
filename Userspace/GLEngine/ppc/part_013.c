@@ -171,15 +171,15 @@ int _glSecondaryColor3ub_Comp(glContext, red, green, blue)
   uint green;
   uint blue;
 {
-  float fVar1;
+  float channelScale;
   float *listRecord;
   
   listRecord = (float *)_gleAddListItem(glContext,PTR__glSecondaryColor3_ListExec_00110064,0xc);
-  fVar1 = FLOAT_00108e78;
+  channelScale = FLOAT_00108e78;
   if (listRecord != (float *)0x0) {
     *listRecord = (GH_U2F((unsigned int)((red | 0x4b000000))) - 8388608.0) * FLOAT_00108e78;
-    listRecord[1] = (GH_U2F((unsigned int)((green | 0x4b000000))) - 8388608.0) * fVar1;
-    listRecord[2] = (GH_U2F((unsigned int)((blue | 0x4b000000))) - 8388608.0) * fVar1;
+    listRecord[1] = (GH_U2F((unsigned int)((green | 0x4b000000))) - 8388608.0) * channelScale;
+    listRecord[2] = (GH_U2F((unsigned int)((blue | 0x4b000000))) - 8388608.0) * channelScale;
   }
   return listRecord;
 }
@@ -311,15 +311,15 @@ int _glSecondaryColor3usv_Comp(glContext, v)
   undefined4 glContext;
   ushort *v;
 {
-  float fVar1;
+  float channelScale;
   float *listRecord;
   
   listRecord = (float *)_gleAddListItem(glContext,PTR__glSecondaryColor3_ListExec_00110064,0xc);
-  fVar1 = FLOAT_00108e74;
+  channelScale = FLOAT_00108e74;
   if (listRecord != (float *)0x0) {
     *listRecord = (GH_U2F((unsigned int)((*v | 0x4b000000))) - 8388608.0) * FLOAT_00108e74;
-    listRecord[1] = (GH_U2F((unsigned int)((v[1] | 0x4b000000))) - 8388608.0) * fVar1;
-    listRecord[2] = (GH_U2F((unsigned int)((v[2] | 0x4b000000))) - 8388608.0) * fVar1;
+    listRecord[1] = (GH_U2F((unsigned int)((v[1] | 0x4b000000))) - 8388608.0) * channelScale;
+    listRecord[2] = (GH_U2F((unsigned int)((v[2] | 0x4b000000))) - 8388608.0) * channelScale;
   }
   return listRecord;
 }
@@ -360,17 +360,17 @@ int _glSecondaryColor3ui_Comp(glContext, red, green, blue)
   undefined4 green;
   undefined4 blue;
 {
-  double dVar1;
-  float fVar2;
+  double intToDoubleBias;
+  float channelScale;
   float *listRecord;
   
   listRecord = (float *)_gleAddListItem(glContext,PTR__glSecondaryColor3_ListExec_00110064,0xc);
-  fVar2 = FLOAT_00108e6c;
-  dVar1 = DOUBLE_00108d70;
+  channelScale = FLOAT_00108e6c;
+  intToDoubleBias = DOUBLE_00108d70;
   if (listRecord != (float *)0x0) {
     *listRecord = (float)((double)CONCAT44(0x43300000,red) - DOUBLE_00108d70) * FLOAT_00108e6c;
-    listRecord[1] = (float)((double)CONCAT44(0x43300000,green) - dVar1) * fVar2;
-    listRecord[2] = (float)((double)CONCAT44(0x43300000,blue) - dVar1) * fVar2;
+    listRecord[1] = (float)((double)CONCAT44(0x43300000,green) - intToDoubleBias) * channelScale;
+    listRecord[2] = (float)((double)CONCAT44(0x43300000,blue) - intToDoubleBias) * channelScale;
   }
   return listRecord;
 }
@@ -832,28 +832,28 @@ int _glColorSubTable_ListExec(glContext, recordedArgs)
   int glContext;
   uint *recordedArgs;
 {
-  uint uVar1;
-  uint uVar2;
-  byte bVar4;
-  uint uVar3;
-  int iVar5;
+  uint expectedTarget;
+  uint dataSize;
+  byte levelFlags;
+  uint target;
+  int targetColorTable;
   int colorTable;
   int textureLevel;
   
-  uVar2 = recordedArgs[5];
+  dataSize = recordedArgs[5];
   if (*(short *)(glContext + 0x4a10) < 0) {
     colorTable = _gleCheckColorSubTableArgs(glContext,*recordedArgs,recordedArgs[1],recordedArgs[2],recordedArgs[3],recordedArgs[4])
     ;
     if (colorTable != 0) {
       textureLevel = colorTable + 0xac;
-      bVar4 = *(byte *)(colorTable + 0xb7);
-      if ((bVar4 & 0x10) == 0) {
-        if ((bVar4 & 0x40) == 0) {
+      levelFlags = *(byte *)(colorTable + 0xb7);
+      if ((levelFlags & 0x10) == 0) {
+        if ((levelFlags & 0x40) == 0) {
           if (*(int *)(colorTable + 0xc0) == 0) {
             _gleAllocateTextureLevel(glContext,colorTable,textureLevel);
-            bVar4 = *(byte *)(colorTable + 0xb7);
+            levelFlags = *(byte *)(colorTable + 0xb7);
           }
-          *(byte *)(colorTable + 0xb7) = bVar4 | 0x10;
+          *(byte *)(colorTable + 0xb7) = levelFlags | 0x10;
         }
         else {
           _gleUploadPluginTextureLevel
@@ -861,29 +861,29 @@ int _glColorSubTable_ListExec(glContext, recordedArgs)
         }
       }
       _gleModifyPluginTextureLevel(glContext,colorTable,textureLevel,0,0xffffffff,recordedArgs[1],0,0,recordedArgs[2],1,1);
-      uVar3 = *recordedArgs;
-      iVar5 = glContext + 0x33d0;
-      if (uVar3 != 0x80d1) {
-        if (uVar3 < 0x80d2) {
-          iVar5 = glContext + 0x33b0;
-          uVar1 = 0x80d0;
+      target = *recordedArgs;
+      targetColorTable = glContext + 0x33d0;
+      if (target != 0x80d1) {
+        if (target < 0x80d2) {
+          targetColorTable = glContext + 0x33b0;
+          expectedTarget = 0x80d0;
         }
         else {
-          iVar5 = glContext + 0x33f0;
-          uVar1 = 0x80d2;
+          targetColorTable = glContext + 0x33f0;
+          expectedTarget = 0x80d2;
         }
-        if (uVar3 != uVar1) {
-          iVar5 = 0;
+        if (target != expectedTarget) {
+          targetColorTable = 0;
         }
       }
-      if (iVar5 == 0) {
+      if (targetColorTable == 0) {
         _gleTextureImagePut(glContext,textureLevel,recordedArgs[1],0,0,recordedArgs[2],1,1,recordedArgs[3],recordedArgs[4],0,0,
                             recordedArgs + 6);
         *(uint *)(glContext + 0x314) =
              *(uint *)(glContext + 0x314) | 1 << (*(uint *)(glContext + 0x53d4) & 0x3f);
       }
       else {
-        _gleColorSubTable(glContext,iVar5,textureLevel,recordedArgs[1],recordedArgs[2],recordedArgs[3],recordedArgs[4],
+        _gleColorSubTable(glContext,targetColorTable,textureLevel,recordedArgs[1],recordedArgs[2],recordedArgs[3],recordedArgs[4],
                           recordedArgs + 6);
         *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x40000000;
       }
@@ -892,7 +892,7 @@ int _glColorSubTable_ListExec(glContext, recordedArgs)
   else if (*(int *)(glContext + 0x7574) == 0) {
     *(undefined4 *)(glContext + 0x7574) = 0x502;
   }
-  return uVar2 + 0x18;
+  return dataSize + 0x18;
 }
 
 /* _glColorSubTable_Comp @ 0x60184 (656 bytes) */
@@ -1043,14 +1043,14 @@ void _glColorSubTable_Exec(glContext, target, start, count, format, type, data)
   undefined4 type;
   int data;
 {
-  uint uVar1;
-  byte bVar2;
+  uint expectedTarget;
+  byte levelFlags;
   int imageEndOffset;
-  int iVar4;
-  int iVar5;
+  int elementSizeThenTextureLevel;
+  int targetColorTable;
   int colorTable;
   int pixelUnpackBuffer;
-  int iVar6;
+  int unpackBufferSize;
   double bytesPerElement;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
@@ -1064,56 +1064,56 @@ LAB_000604f4:
       if (colorTable == 0) {
         return;
       }
-      iVar4 = colorTable + 0xac;
-      bVar2 = *(byte *)(colorTable + 0xb7);
-      if ((bVar2 & 0x10) == 0) {
-        if ((bVar2 & 0x40) == 0) {
+      elementSizeThenTextureLevel = colorTable + 0xac;
+      levelFlags = *(byte *)(colorTable + 0xb7);
+      if ((levelFlags & 0x10) == 0) {
+        if ((levelFlags & 0x40) == 0) {
           if (*(int *)(colorTable + 0xc0) == 0) {
-            _gleAllocateTextureLevel(glContext,colorTable,iVar4);
-            bVar2 = *(byte *)(colorTable + 0xb7);
+            _gleAllocateTextureLevel(glContext,colorTable,elementSizeThenTextureLevel);
+            levelFlags = *(byte *)(colorTable + 0xb7);
           }
-          *(byte *)(colorTable + 0xb7) = bVar2 | 0x10;
+          *(byte *)(colorTable + 0xb7) = levelFlags | 0x10;
         }
         else {
           _gleUploadPluginTextureLevel
-                    (glContext,colorTable,iVar4,0,0xffffffff,(uint)*(byte *)(glContext + 0x85a8));
+                    (glContext,colorTable,elementSizeThenTextureLevel,0,0xffffffff,(uint)*(byte *)(glContext + 0x85a8));
         }
       }
-      _gleModifyPluginTextureLevel(glContext,colorTable,iVar4,0,0xffffffff,start,0,0,count,1,1);
-      iVar5 = glContext + 0x33d0;
+      _gleModifyPluginTextureLevel(glContext,colorTable,elementSizeThenTextureLevel,0,0xffffffff,start,0,0,count,1,1);
+      targetColorTable = glContext + 0x33d0;
       if (target != 0x80d1) {
         if (target < 0x80d2) {
-          iVar5 = glContext + 0x33b0;
-          uVar1 = 0x80d0;
+          targetColorTable = glContext + 0x33b0;
+          expectedTarget = 0x80d0;
         }
         else {
-          iVar5 = glContext + 0x33f0;
-          uVar1 = 0x80d2;
+          targetColorTable = glContext + 0x33f0;
+          expectedTarget = 0x80d2;
         }
-        if (target != uVar1) {
-          iVar5 = 0;
+        if (target != expectedTarget) {
+          targetColorTable = 0;
         }
       }
-      if (iVar5 != 0) {
-        _gleColorSubTable(glContext,iVar5,iVar4,start,count,format,type,data);
+      if (targetColorTable != 0) {
+        _gleColorSubTable(glContext,targetColorTable,elementSizeThenTextureLevel,start,count,format,type,data);
         *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x40000000;
         return;
       }
-      _gleTextureImagePut(glContext,iVar4,start,0,0,count,1,1,format,type,0,glContext + 0x31cc,
+      _gleTextureImagePut(glContext,elementSizeThenTextureLevel,start,0,0,count,1,1,format,type,0,glContext + 0x31cc,
                           data);
       *(uint *)(glContext + 0x314) =
            *(uint *)(glContext + 0x314) | 1 << (*(uint *)(glContext + 0x53d4) & 0x3f);
       return;
     }
     imageEndOffset = _gleOffsetLimitImage(glContext + 0x31cc,count,1,format,type,data);
-    iVar6 = *(int *)(pixelUnpackBuffer + 0x38);
+    unpackBufferSize = *(int *)(pixelUnpackBuffer + 0x38);
     bytesPerElement = (double)((double (*)())_gleBytesPerElement)(type);
-    iVar4 = (int)bytesPerElement;
-    if (imageEndOffset <= iVar6) {
-      if (iVar4 == 0) {
-        iVar4 = _glePixelBytes(format,type);
+    elementSizeThenTextureLevel = (int)bytesPerElement;
+    if (imageEndOffset <= unpackBufferSize) {
+      if (elementSizeThenTextureLevel == 0) {
+        elementSizeThenTextureLevel = _glePixelBytes(format,type);
       }
-      if (data == (data / iVar4) * iVar4) {
+      if (data == (data / elementSizeThenTextureLevel) * elementSizeThenTextureLevel) {
         if (*(int *)(pixelUnpackBuffer + 0x40) != 0) {
           _gleSynchronizePluginBuffer(glContext,pixelUnpackBuffer + 0x10);
         }
@@ -2028,11 +2028,11 @@ void _glGetColorTableParameterfv_Exec(glContext, target, pname, params)
   undefined4 pname;
   float *params;
 {
-  float fVar1;
-  ushort uVar2;
+  float alphaComponent;
+  ushort colorTableParameterValue;
   undefined4 glErrorCode;
   int colorTable;
-  float *pfVar5;
+  float *targetColorTable;
   
   colorTable = _gleLookUpColorTable(glContext,target);
   if (-1 < *(short *)(glContext + 0x4a10)) {
@@ -2055,39 +2055,39 @@ LAB_00061be8:
   switch(target) {
   case 0x80d0:
   case 0x80d3:
-    pfVar5 = (float *)(glContext + 0x33b0);
+    targetColorTable = (float *)(glContext + 0x33b0);
     break;
   case 0x80d1:
   case 0x80d4:
-    pfVar5 = (float *)(glContext + 0x33d0);
+    targetColorTable = (float *)(glContext + 0x33d0);
     break;
   case 0x80d2:
   case 0x80d5:
-    pfVar5 = (float *)(glContext + 0x33f0);
+    targetColorTable = (float *)(glContext + 0x33f0);
     break;
   default:
     goto switchD_00061acc_default;
   }
   switch(pname) {
   case 0x80d6:
-    *params = *pfVar5;
-    params[1] = pfVar5[2];
-    params[2] = pfVar5[4];
-    fVar1 = pfVar5[6];
+    *params = *targetColorTable;
+    params[1] = targetColorTable[2];
+    params[2] = targetColorTable[4];
+    alphaComponent = targetColorTable[6];
     break;
   case 0x80d7:
-    *params = pfVar5[1];
-    params[1] = pfVar5[3];
-    params[2] = pfVar5[5];
-    fVar1 = pfVar5[7];
+    *params = targetColorTable[1];
+    params[1] = targetColorTable[3];
+    params[2] = targetColorTable[5];
+    alphaComponent = targetColorTable[7];
     break;
   case 0x80d8:
-    uVar2 = *(ushort *)(colorTable + 0xbc);
+    colorTableParameterValue = *(ushort *)(colorTable + 0xbc);
     goto LAB_00061ba4;
   case 0x80d9:
-    uVar2 = *(ushort *)(colorTable + 0xb0);
+    colorTableParameterValue = *(ushort *)(colorTable + 0xb0);
 LAB_00061ba4:
-    *params = GH_U2F((unsigned int)((uVar2 | 0x4b000000))) - 8388608.0;
+    *params = GH_U2F((unsigned int)((colorTableParameterValue | 0x4b000000))) - 8388608.0;
     return;
   case 0x80da:
   case 0x80db:
@@ -2100,7 +2100,7 @@ LAB_00061ba4:
   default:
     goto switchD_00061acc_default;
   }
-  params[3] = fVar1;
+  params[3] = alphaComponent;
   return;
 }
 
@@ -2111,11 +2111,11 @@ void _glGetColorTableParameteriv_Exec(glContext, target, pname, params)
   undefined4 pname;
   uint *params;
 {
-  float fVar1;
+  float alphaComponent;
   undefined4 glErrorCode;
-  uint uVar3;
+  uint colorTableParameterValue;
   int colorTable;
-  float *pfVar5;
+  float *targetColorTable;
   
   colorTable = _gleLookUpColorTable(glContext,target);
   if (-1 < *(short *)(glContext + 0x4a10)) {
@@ -2138,39 +2138,39 @@ LAB_00061dc8:
   switch(target) {
   case 0x80d0:
   case 0x80d3:
-    pfVar5 = (float *)(glContext + 0x33b0);
+    targetColorTable = (float *)(glContext + 0x33b0);
     break;
   case 0x80d1:
   case 0x80d4:
-    pfVar5 = (float *)(glContext + 0x33d0);
+    targetColorTable = (float *)(glContext + 0x33d0);
     break;
   case 0x80d2:
   case 0x80d5:
-    pfVar5 = (float *)(glContext + 0x33f0);
+    targetColorTable = (float *)(glContext + 0x33f0);
     break;
   default:
     goto switchD_00061c7c_default;
   }
   switch(pname) {
   case 0x80d6:
-    *params = (int)*pfVar5;
-    params[1] = (int)pfVar5[2];
-    params[2] = (int)pfVar5[4];
-    fVar1 = pfVar5[6];
+    *params = (int)*targetColorTable;
+    params[1] = (int)targetColorTable[2];
+    params[2] = (int)targetColorTable[4];
+    alphaComponent = targetColorTable[6];
     goto LAB_00061d88;
   case 0x80d7:
-    *params = (int)pfVar5[1];
-    params[1] = (int)pfVar5[3];
-    params[2] = (int)pfVar5[5];
-    fVar1 = pfVar5[7];
+    *params = (int)targetColorTable[1];
+    params[1] = (int)targetColorTable[3];
+    params[2] = (int)targetColorTable[5];
+    alphaComponent = targetColorTable[7];
 LAB_00061d88:
-    params[3] = (int)fVar1;
+    params[3] = (int)alphaComponent;
     return;
   case 0x80d8:
-    uVar3 = (uint)*(ushort *)(colorTable + 0xbc);
+    colorTableParameterValue = (uint)*(ushort *)(colorTable + 0xbc);
     break;
   case 0x80d9:
-    uVar3 = (uint)*(ushort *)(colorTable + 0xb0);
+    colorTableParameterValue = (uint)*(ushort *)(colorTable + 0xb0);
     break;
   case 0x80da:
   case 0x80db:
@@ -2178,12 +2178,12 @@ LAB_00061d88:
   case 0x80dd:
   case 0x80de:
   case 0x80df:
-    uVar3 = 8;
+    colorTableParameterValue = 8;
     break;
   default:
     goto switchD_00061c7c_default;
   }
-  *params = uVar3;
+  *params = colorTableParameterValue;
   return;
 }
 

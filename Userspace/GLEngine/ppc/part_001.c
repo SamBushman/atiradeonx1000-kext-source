@@ -670,28 +670,28 @@ double _gleVectorNormalizeNO(undefined4 unusedArg1,float *inVector,float *outVec
 }
 
 /* _gleUpdateLightFast @ 0x778c (152 bytes) */
-void _gleUpdateLightFast(glContext, param_2)
+void _gleUpdateLightFast(glContext, lightIndex)
   int glContext;
-  uint param_2;
+  uint lightIndex;
 {
-  int iVar1;
-  uint uVar2;
+  int lightRecord;
+  uint lightBitThenNewActiveMask;
   uint glContextWord4ddc;
   
-  uVar2 = 1 << (param_2 & 0x3f);
+  lightBitThenNewActiveMask = 1 << (lightIndex & 0x3f);
   glContextWord4ddc = *(uint *)(glContext + 0x4ddc);
-  iVar1 = glContext + param_2 * 0x6c;
-  if (((*(uint *)(glContext + 0x30a0) & uVar2) == 0) ||
-     (((*(char *)(iVar1 + 0x4ada) == '\0' && (*(char *)(glContext + 0x30ad) == '\0')) &&
-      (*(char *)(iVar1 + 0x4ad9) != '\0')))) {
-    uVar2 = glContextWord4ddc & ~uVar2;
-    *(undefined1 *)(iVar1 + 0x4ad8) = 1;
+  lightRecord = glContext + lightIndex * 0x6c;
+  if (((*(uint *)(glContext + 0x30a0) & lightBitThenNewActiveMask) == 0) ||
+     (((*(char *)(lightRecord + 0x4ada) == '\0' && (*(char *)(glContext + 0x30ad) == '\0')) &&
+      (*(char *)(lightRecord + 0x4ad9) != '\0')))) {
+    lightBitThenNewActiveMask = glContextWord4ddc & ~lightBitThenNewActiveMask;
+    *(undefined1 *)(lightRecord + 0x4ad8) = 1;
   }
   else {
-    *(undefined1 *)(iVar1 + 0x4ad8) = 0;
-    uVar2 = glContextWord4ddc | 1 << (param_2 & 0x3f);
+    *(undefined1 *)(lightRecord + 0x4ad8) = 0;
+    lightBitThenNewActiveMask = glContextWord4ddc | 1 << (lightIndex & 0x3f);
   }
-  *(uint *)(glContext + 0x4ddc) = uVar2;
+  *(uint *)(glContext + 0x4ddc) = lightBitThenNewActiveMask;
   if ((glContextWord4ddc != 0) == (*(int *)(glContext + 0x4ddc) != 0)) {
     return;
   }
@@ -704,10 +704,10 @@ void _gleUpdateLightModelFunc(glContext)
   int glContext;
 {
   undefined *puVar1;
-  undefined *puVar2;
+  undefined *vtxLightSpecRGBABackPtrFunc;
   undefined *puVar3;
   
-  puVar2 = PTR__gleVtxLightSpecRGBABackPtr_00110e64;
+  vtxLightSpecRGBABackPtrFunc = PTR__gleVtxLightSpecRGBABackPtr_00110e64;
   puVar1 = PTR__gleVtxLightRGBABackPtr_00110e54;
   puVar3 = PTR__gleVtxLightFastRGBABackPtr_00110e44;
   if ((*(char *)(glContext + 0x30ae) == '\0') && (*(short *)(glContext + 0x30a8) != -0x7e06)) {
@@ -728,7 +728,7 @@ void _gleUpdateLightModelFunc(glContext)
   else {
     *(undefined **)(glContext + 0x4de8) = PTR__gleVtxLightSpecRGBAFront_00110e70;
     puVar3 = PTR__gleVtxLightSpecRGBABack_00110e6c;
-    *(undefined **)(glContext + 0x4df4) = puVar2;
+    *(undefined **)(glContext + 0x4df4) = vtxLightSpecRGBABackPtrFunc;
     *(undefined **)(glContext + 0x4dec) = puVar3;
     puVar3 = PTR__gleVtxLightSpecRGBAFrontPtr_00110e68;
   }
@@ -5531,14 +5531,14 @@ void _glGenFencesAPPLE_Exec(glContext, n, fences)
   int *fences;
 {
   undefined4 glErrorCode;
-  int iVar2;
+  int generatedName;
   int loopIndex;
-  int iVar4;
+  int firstName;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
     if (-1 < n) {
-      iVar4 = ((int (*)())_gleGenHashNames)(glContext + 0x543c,n);
-      if (iVar4 == 0) {
+      firstName = ((int (*)())_gleGenHashNames)(glContext + 0x543c,n);
+      if (firstName == 0) {
         return;
       }
       loopIndex = 0;
@@ -5546,9 +5546,9 @@ void _glGenFencesAPPLE_Exec(glContext, n, fences)
         return;
       }
       do {
-        iVar2 = loopIndex + iVar4;
+        generatedName = loopIndex + firstName;
         loopIndex = loopIndex + 1;
-        *fences = iVar2;
+        *fences = generatedName;
         fences = fences + 1;
         n = n + -1;
       } while (n != 0);

@@ -4164,19 +4164,19 @@ void _gleEvalDomain2Coord(undefined4 glContext,int points,int uorder,int vorder,
   int componentByteOffset;
   int uRemaining;
   float *vCoeffPtr;
-  int iVar6;
+  int uorderThenComponentIndex;
   float *uCoeffPtr;
   float *pointPtr;
   int vRemaining;
-  float dVar10;
+  float vCopy;
   double incomingStack_ffffff88;
   double incomingStack_ffffff90;
   double incomingStack_ffffff98;
   double incomingStack_ffffffa0;
   double incomingStack_ffffffa8;
   
-  iVar6 = uorder;
-  dVar10 = v;
+  uorderThenComponentIndex = uorder;
+  vCopy = v;
   if (((double)GH_U2F((unsigned int)_uvalue_c) != u) || (_uorder_c != uorder)) {
     ((void (*)())_glePreEvaluate)(glContext,uorder,uorder,&_ucoeff_c,u,v,floatArg3,floatArg4,floatArg5,
                     floatArg6,floatArg7,floatArg8,incomingStack_ffffff88,incomingStack_ffffff90,incomingStack_ffffff98
@@ -4186,17 +4186,17 @@ void _gleEvalDomain2Coord(undefined4 glContext,int points,int uorder,int vorder,
     _uorder_c = uorder;
   }
   if (((double)GH_U2F((unsigned int)_vvalue_c) != v) || (_vorder_c != vorder)) {
-    ((void (*)())_glePreEvaluate)(glContext,vorder,iVar6,&_vcoeff_c,v,(double)dVar10,floatArg3,floatArg4,floatArg5,
+    ((void (*)())_glePreEvaluate)(glContext,vorder,uorderThenComponentIndex,&_vcoeff_c,v,(double)vCopy,floatArg3,floatArg4,floatArg5,
                     floatArg6,floatArg7,floatArg8,incomingStack_ffffff88,incomingStack_ffffff90,incomingStack_ffffff98
                     ,incomingStack_ffffffa0,incomingStack_ffffffa8);
     _vvalue_c = GH_F2U((float)v);
     _vtype_c = 2;
     _vorder_c = vorder;
   }
-  iVar6 = 0;
+  uorderThenComponentIndex = 0;
   if (0 < components) {
     do {
-      componentByteOffset = iVar6 * 4;
+      componentByteOffset = uorderThenComponentIndex * 4;
       *(undefined4 *)(componentByteOffset + out) = 0;
       pointPtr = (float *)(points + componentByteOffset);
       if (0 < uorder) {
@@ -4223,8 +4223,8 @@ void _gleEvalDomain2Coord(undefined4 glContext,int points,int uorder,int vorder,
           *(float *)(componentByteOffset + out) = controlValue * vSum + *(float *)(componentByteOffset + out);
         } while (uRemaining != 0);
       }
-      iVar6 = iVar6 + 1;
-    } while (iVar6 < components);
+      uorderThenComponentIndex = uorderThenComponentIndex + 1;
+    } while (uorderThenComponentIndex < components);
   }
   return;
 }

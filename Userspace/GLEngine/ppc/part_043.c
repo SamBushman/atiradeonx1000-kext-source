@@ -152,11 +152,11 @@ void _gleFeedbackPolygon(glContext, firstVertex, vertexCount, polygonModeIndex)
   uint polygonModeIndex;
 {
   uint edgeStart;
-  double dVar2;
+  double intToDoubleBias;
   undefined4 lineToken;
   uint uVar4;
   
-  dVar2 = DOUBLE_00108d70;
+  intToDoubleBias = DOUBLE_00108d70;
   uVar4 = polygonModeIndex & 3;
   lineToken = 0x707;
   if (uVar4 != 1) {
@@ -189,7 +189,7 @@ void _gleFeedbackPolygon(glContext, firstVertex, vertexCount, polygonModeIndex)
   while (edgeStart = uVar4, edgeStart < (firstVertex + vertexCount * 0x100) - 0x100) {
     uVar4 = edgeStart + 0x100;
     if (*(char *)(edgeStart + 0x7c) != '\0') {
-      ((void (*)())_gleFeedbackToken)(glContext,(double)(float)((double)CONCAT44(0x43300000,lineToken) - dVar2));
+      ((void (*)())_gleFeedbackToken)(glContext,(double)(float)((double)CONCAT44(0x43300000,lineToken) - intToDoubleBias));
       _gleFeedbackHitRecord(glContext,edgeStart);
       _gleFeedbackHitRecord(glContext,uVar4);
       lineToken = 0x702;

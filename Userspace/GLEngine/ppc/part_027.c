@@ -336,11 +336,11 @@ LAB_00090dc0:
 void _glSwap_RevertExec(glContext)
   int glContext;
 {
-  byte bVar1;
-  undefined *puVar2;
-  int iVar3;
-  double fparam_1;
-  double fparam_1_00;
+  byte glContextByte85a5;
+  undefined *clipInterpFuncPtr;
+  int rendererRecord;
+  double f1AfterCall;
+  double incomingFpr1;
   double incomingFpr2;
   double incomingFpr3;
   double incomingFpr4;
@@ -354,23 +354,23 @@ void _glSwap_RevertExec(glContext)
   double incomingStack_ffffffd0;
   double incomingStack_ffffffd8;
   
-  bVar1 = *(byte *)(glContext + 0x85a5);
+  glContextByte85a5 = *(byte *)(glContext + 0x85a5);
   if (*(short *)(glContext + 0x4a10) < 0) {
     _gleRevertSwapToPrimary(glContext);
     (**(code **)(glContext + 0x46f8))(*(undefined4 *)(glContext + 0x4688));
-    iVar3 = (uint)bVar1 * 0x2e0 + glContext;
-    (**(code **)(*(int *)(iVar3 + 0x8884) + 0x138))
-              (*(undefined4 *)(iVar3 + 0x85ac),*(undefined4 *)(glContext + 0x484c),
+    rendererRecord = (uint)glContextByte85a5 * 0x2e0 + glContext;
+    (**(code **)(*(int *)(rendererRecord + 0x8884) + 0x138))
+              (*(undefined4 *)(rendererRecord + 0x85ac),*(undefined4 *)(glContext + 0x484c),
                *(undefined4 *)(glContext + 0x4848),0);
-    fparam_1 = (double)_gleSwitchToRenderer(glContext,(uint)bVar1);
-    ((void (*)())_gleUpdateDepthRangeData)(glContext,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffffb8,
+    f1AfterCall = (double)_gleSwitchToRenderer(glContext,(uint)glContextByte85a5);
+    ((void (*)())_gleUpdateDepthRangeData)(glContext,f1AfterCall,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffffb8,
                incomingStack_ffffffc0,incomingStack_ffffffc8,incomingStack_ffffffd0,incomingStack_ffffffd8);
     _gleUpdatePolyMode(glContext);
-    ((void (*)())_gleUpdateViewScissorData)(glContext,fparam_1_00,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
+    ((void (*)())_gleUpdateViewScissorData)(glContext,incomingFpr1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
     _gleUpdateTextureTransform(glContext);
-    puVar2 = PTR__gleSetClipInterpFunc_00112038;
+    clipInterpFuncPtr = PTR__gleSetClipInterpFunc_00112038;
     *(undefined **)(glContext + 0x49c8) = PTR__gleSetEyeInterpFunc_0011203c;
-    *(undefined **)(glContext + 0x49cc) = puVar2;
+    *(undefined **)(glContext + 0x49cc) = clipInterpFuncPtr;
   }
   else if (*(int *)(glContext + 0x7574) == 0) {
     *(undefined4 *)(glContext + 0x7574) = 0x502;

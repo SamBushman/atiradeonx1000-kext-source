@@ -430,28 +430,28 @@ int _glIsVertexArrayEXT_Exec(glContext, id)
   int glContext;
   undefined4 id;
 {
-  int iVar1;
-  bool bVar2;
+  int sharedStateThenVertexArrayObject;
+  bool isVertexArray;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
-    iVar1 = *(int *)(glContext + 0x5148);
-    if (*(char *)(iVar1 + 0x8024) != '\0') {
-      _pthread_mutex_lock(iVar1 + 0x8028);
-      iVar1 = *(int *)(glContext + 0x5148);
+    sharedStateThenVertexArrayObject = *(int *)(glContext + 0x5148);
+    if (*(char *)(sharedStateThenVertexArrayObject + 0x8024) != '\0') {
+      _pthread_mutex_lock(sharedStateThenVertexArrayObject + 0x8028);
+      sharedStateThenVertexArrayObject = *(int *)(glContext + 0x5148);
     }
-    iVar1 = _gleLookupHashObject(iVar1 + 0x5014,id);
+    sharedStateThenVertexArrayObject = _gleLookupHashObject(sharedStateThenVertexArrayObject + 0x5014,id);
     if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
       _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);
     }
-    bVar2 = iVar1 != 0;
+    isVertexArray = sharedStateThenVertexArrayObject != 0;
   }
   else {
     if (*(int *)(glContext + 0x7574) == 0) {
       *(undefined4 *)(glContext + 0x7574) = 0x502;
     }
-    bVar2 = false;
+    isVertexArray = false;
   }
-  return bVar2;
+  return isVertexArray;
 }
 
 /* _glVertexAttrib1sARB_Exec @ 0xac0d4 (236 bytes) */

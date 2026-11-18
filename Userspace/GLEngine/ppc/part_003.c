@@ -337,10 +337,10 @@ int _gleCheckTexSubImage2DArgs(glContext, target, level, xoffset, yoffset, width
   undefined4 type;
 {
   undefined4 glErrorCode;
-  int iVar2;
+  int regionOffsetXThenXRangeResult;
   int textureObject;
-  int iVar4;
-  int iVar5;
+  int argsCheckThenTextureLevelThenYRangeResult;
+  int regionOffsetY;
   
   textureObject = ((int (*)())_gleLookUpNonProxyTexture2D)(glContext,target);
   if (textureObject == 0) {
@@ -351,39 +351,39 @@ int _gleCheckTexSubImage2DArgs(glContext, target, level, xoffset, yoffset, width
   }
   else {
     if ((format != 0x1902) || (*(short *)(textureObject + 0x26) == 0x1902)) {
-      iVar4 = _gleCheckTexSubImageArgs(glContext,level,format,type);
-      if (iVar4 == 0) {
+      argsCheckThenTextureLevelThenYRangeResult = _gleCheckTexSubImageArgs(glContext,level,format,type);
+      if (argsCheckThenTextureLevelThenYRangeResult == 0) {
         return 0;
       }
-      iVar4 = textureObject + 0xc4 + level * 0x18;
+      argsCheckThenTextureLevelThenYRangeResult = textureObject + 0xc4 + level * 0x18;
       if (target - 0x8515U < 6) {
-        iVar4 = textureObject + 0xc4 + target * 0x168 + level * 0x18 + -0xbb2588;
+        argsCheckThenTextureLevelThenYRangeResult = textureObject + 0xc4 + target * 0x168 + level * 0x18 + -0xbb2588;
       }
-      if (((*(byte *)(iVar4 + 0xb) & 0x20) != 0) &&
-         ((*(short *)(iVar4 + 0x12) != 0 ||
-          (((((width & 3) == 0 || (width == *(ushort *)(iVar4 + 4))) &&
-            (((height & 3) == 0 || (height == *(ushort *)(iVar4 + 6))))) &&
+      if (((*(byte *)(argsCheckThenTextureLevelThenYRangeResult + 0xb) & 0x20) != 0) &&
+         ((*(short *)(argsCheckThenTextureLevelThenYRangeResult + 0x12) != 0 ||
+          (((((width & 3) == 0 || (width == *(ushort *)(argsCheckThenTextureLevelThenYRangeResult + 4))) &&
+            (((height & 3) == 0 || (height == *(ushort *)(argsCheckThenTextureLevelThenYRangeResult + 6))))) &&
            (((xoffset & 3) == 0 && ((yoffset & 3) == 0)))))))) {
         if ((*(uint *)(glContext + 0x3410) & 2) == 0) {
           if (((*(uint *)(glContext + 0x3410) & 4) == 0) || (*(short *)(glContext + 0x3348) != -0x7fea))
           goto LAB_0001f79c;
-          iVar5 = *(int *)(glContext + 0x3354);
-          iVar2 = *(int *)(glContext + 0x3350);
+          regionOffsetY = *(int *)(glContext + 0x3354);
+          regionOffsetXThenXRangeResult = *(int *)(glContext + 0x3350);
         }
         else {
           if (*(short *)(glContext + 0x3308) != -0x7fea) goto LAB_0001f79c;
-          iVar5 = *(int *)(glContext + 0x3314);
-          iVar2 = *(int *)(glContext + 0x3310);
+          regionOffsetY = *(int *)(glContext + 0x3314);
+          regionOffsetXThenXRangeResult = *(int *)(glContext + 0x3310);
         }
-        width = (width - iVar2) + 1;
-        height = (height - iVar5) + 1;
+        width = (width - regionOffsetXThenXRangeResult) + 1;
+        height = (height - regionOffsetY) + 1;
 LAB_0001f79c:
-        iVar2 = ((int (*)())_gleCheckTexSubImageRange)(glContext,iVar4,xoffset,width,(uint)*(ushort *)(iVar4 + 4));
-        if (iVar2 == 0) {
+        regionOffsetXThenXRangeResult = ((int (*)())_gleCheckTexSubImageRange)(glContext,argsCheckThenTextureLevelThenYRangeResult,xoffset,width,(uint)*(ushort *)(argsCheckThenTextureLevelThenYRangeResult + 4));
+        if (regionOffsetXThenXRangeResult == 0) {
           return 0;
         }
-        iVar4 = ((int (*)())_gleCheckTexSubImageRange)(glContext,iVar4,yoffset,height,(uint)*(ushort *)(iVar4 + 6));
-        if (iVar4 != 0) {
+        argsCheckThenTextureLevelThenYRangeResult = ((int (*)())_gleCheckTexSubImageRange)(glContext,argsCheckThenTextureLevelThenYRangeResult,yoffset,height,(uint)*(ushort *)(argsCheckThenTextureLevelThenYRangeResult + 6));
+        if (argsCheckThenTextureLevelThenYRangeResult != 0) {
           return textureObject;
         }
         return 0;
@@ -566,7 +566,7 @@ int _glTestObjectAPPLE_Exec(glContext, object, name)
   uint object;
   undefined4 name;
 {
-  undefined4 uVar1;
+  undefined4 objectKindThenTestResult;
   
   if (-1 < *(short *)(glContext + 0x4a10)) {
     if (*(int *)(glContext + 0x7574) == 0) {
@@ -579,7 +579,7 @@ int _glTestObjectAPPLE_Exec(glContext, object, name)
   }
   if (object < 0x8a0b) {
     if (object == 0x8074) {
-      uVar1 = 2;
+      objectKindThenTestResult = 2;
     }
     else if (object < 0x8075) {
       if (object != 0x1702) {
@@ -589,26 +589,26 @@ LAB_0001fc50:
         }
         return 0;
       }
-      uVar1 = 1;
+      objectKindThenTestResult = 1;
     }
     else {
       if (object != 0x85b3) goto LAB_0001fc50;
-      uVar1 = 3;
+      objectKindThenTestResult = 3;
     }
   }
   else if (object == 0x8d40) {
-    uVar1 = 5;
+    objectKindThenTestResult = 5;
   }
   else if (object < 0x8d41) {
     if (object != 0x8a0b) goto LAB_0001fc50;
-    uVar1 = 0;
+    objectKindThenTestResult = 0;
   }
   else {
     if (object != 0x8d41) goto LAB_0001fc50;
-    uVar1 = 4;
+    objectKindThenTestResult = 4;
   }
-  uVar1 = ((int (*)())_gleTestObject)(glContext,uVar1,name);
-  return uVar1;
+  objectKindThenTestResult = ((int (*)())_gleTestObject)(glContext,objectKindThenTestResult,name);
+  return objectKindThenTestResult;
 }
 
 /* _gleTestObject @ 0x1fc84 (760 bytes) */

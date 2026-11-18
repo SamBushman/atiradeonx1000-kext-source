@@ -665,7 +665,7 @@ void _glDeleteFencesAPPLE_Exec(glContext, n, fences)
   undefined4 *fences;
 {
   undefined4 glErrorCode;
-  undefined4 uVar1;
+  undefined4 fenceName;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
     if (-1 < n) {
@@ -673,9 +673,9 @@ void _glDeleteFencesAPPLE_Exec(glContext, n, fences)
         return;
       }
       do {
-        uVar1 = *fences;
+        fenceName = *fences;
         fences = fences + 1;
-        _gleDeleteHashNameAndObject(glContext,glContext + 0x543c,uVar1);
+        _gleDeleteHashNameAndObject(glContext,glContext + 0x543c,fenceName);
         n = n + -1;
       } while (n != 0);
       return;
@@ -735,18 +735,18 @@ int _glIsFenceAPPLE_Exec(glContext, fence)
   int glContext;
   undefined4 fence;
 {
-  undefined4 uVar1;
+  undefined4 isFence;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
-    uVar1 = _gleIsHashName(glContext + 0x543c,fence);
+    isFence = _gleIsHashName(glContext + 0x543c,fence);
   }
   else {
     if (*(int *)(glContext + 0x7574) == 0) {
       *(undefined4 *)(glContext + 0x7574) = 0x502;
     }
-    uVar1 = 0;
+    isFence = 0;
   }
-  return uVar1;
+  return isFence;
 }
 
 /* _glSetFenceAPPLE_Comp @ 0x65a68 (76 bytes) */
@@ -856,11 +856,11 @@ void _glFinish_RevertExec(glContext)
   int glContext;
 {
   byte glContextByte85a5;
-  undefined *puVar2;
+  undefined *clipInterpFuncPtr;
   uint loopIndex;
-  int iVar4;
-  double fparam_1;
-  double fparam_1_00;
+  int rendererRecordCursorThenCurrentRendererRecord;
+  double f1AfterCall;
+  double incomingFpr1;
   double incomingFpr2;
   double incomingFpr3;
   double incomingFpr4;
@@ -874,7 +874,7 @@ void _glFinish_RevertExec(glContext)
   double incomingStack_ffffffc0;
   double incomingStack_ffffffc8;
   
-  iVar4 = glContext + 0x10000;
+  rendererRecordCursorThenCurrentRendererRecord = glContext + 0x10000;
   glContextByte85a5 = *(byte *)(glContext + 0x85a5);
   if (*(short *)(glContext + 0x4a10) < 0) {
     _gleRevertSwapToPrimary(glContext);
@@ -883,26 +883,26 @@ void _glFinish_RevertExec(glContext)
     if (*(char *)(glContext + 0x85a4) != '\0') {
       do {
         if (loopIndex != *(byte *)(glContext + 0x85a8)) {
-          (**(code **)(*(int *)(iVar4 + -0x777c) + 0x178))(*(undefined4 *)(iVar4 + -0x7a54));
+          (**(code **)(*(int *)(rendererRecordCursorThenCurrentRendererRecord + -0x777c) + 0x178))(*(undefined4 *)(rendererRecordCursorThenCurrentRendererRecord + -0x7a54));
         }
         loopIndex = loopIndex + 1;
-        iVar4 = iVar4 + 0x2e0;
+        rendererRecordCursorThenCurrentRendererRecord = rendererRecordCursorThenCurrentRendererRecord + 0x2e0;
       } while ((int)loopIndex < (int)(uint)*(byte *)(glContext + 0x85a4));
     }
     _gleSwitchToRenderer(glContext,(uint)*(byte *)(glContext + 0x85a5));
-    iVar4 = (uint)glContextByte85a5 * 0x2e0 + glContext;
-    (**(code **)(*(int *)(iVar4 + 0x8884) + 0x138))
-              (*(undefined4 *)(iVar4 + 0x85ac),*(undefined4 *)(glContext + 0x484c),
+    rendererRecordCursorThenCurrentRendererRecord = (uint)glContextByte85a5 * 0x2e0 + glContext;
+    (**(code **)(*(int *)(rendererRecordCursorThenCurrentRendererRecord + 0x8884) + 0x138))
+              (*(undefined4 *)(rendererRecordCursorThenCurrentRendererRecord + 0x85ac),*(undefined4 *)(glContext + 0x484c),
                *(undefined4 *)(glContext + 0x4848),0);
-    fparam_1 = (double)_gleSwitchToRenderer(glContext,(uint)glContextByte85a5);
-    ((void (*)())_gleUpdateDepthRangeData)(glContext,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffffa8,
+    f1AfterCall = (double)_gleSwitchToRenderer(glContext,(uint)glContextByte85a5);
+    ((void (*)())_gleUpdateDepthRangeData)(glContext,f1AfterCall,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffffa8,
                incomingStack_ffffffb0,incomingStack_ffffffb8,incomingStack_ffffffc0,incomingStack_ffffffc8);
     _gleUpdatePolyMode(glContext);
-    ((void (*)())_gleUpdateViewScissorData)(glContext,fparam_1_00,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
+    ((void (*)())_gleUpdateViewScissorData)(glContext,incomingFpr1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
     _gleUpdateTextureTransform(glContext);
-    puVar2 = PTR__gleSetClipInterpFunc_00112038;
+    clipInterpFuncPtr = PTR__gleSetClipInterpFunc_00112038;
     *(undefined **)(glContext + 0x49c8) = PTR__gleSetEyeInterpFunc_0011203c;
-    *(undefined **)(glContext + 0x49cc) = puVar2;
+    *(undefined **)(glContext + 0x49cc) = clipInterpFuncPtr;
   }
   else if (*(int *)(glContext + 0x7574) == 0) {
     *(undefined4 *)(glContext + 0x7574) = 0x502;
@@ -1950,11 +1950,11 @@ void _glGenerateMipmapEXT_Exec(glContext, target)
   uint target;
 {
   int loopIndex;
-  ushort uVar1;
+  ushort validLevelBits;
   undefined4 glErrorCode;
   ushort *srcCursor;
-  uint uVar4;
-  int iVar5;
+  uint baseLevelThenRequiredLevelBits;
+  int sharedStateMutex;
   int textureObject;
   
   if (target != 0x806f) {
@@ -1972,17 +1972,17 @@ LAB_00067554:
     else {
       if (target != 0x8513) goto LAB_000674d0;
       textureObject = _gleLookUpTexture2D(glContext,0x8513);
-      uVar4 = (int)*(short *)(textureObject + 0x60);
+      baseLevelThenRequiredLevelBits = (int)*(short *)(textureObject + 0x60);
       if ((int)(uint)*(byte *)(textureObject + 0x87) < (int)*(short *)(textureObject + 0x60)) {
-        uVar4 = (uint)*(byte *)(textureObject + 0x87);
+        baseLevelThenRequiredLevelBits = (uint)*(byte *)(textureObject + 0x87);
       }
       srcCursor = (ushort *)(textureObject + 0x94);
       loopIndex = 0;
-      uVar4 = 1 << (uVar4 & 0x3f) | 1;
+      baseLevelThenRequiredLevelBits = 1 << (baseLevelThenRequiredLevelBits & 0x3f) | 1;
       do {
-        uVar1 = *srcCursor;
+        validLevelBits = *srcCursor;
         srcCursor = srcCursor + 1;
-        if ((uVar1 & uVar4) != uVar4) {
+        if ((validLevelBits & baseLevelThenRequiredLevelBits) != baseLevelThenRequiredLevelBits) {
           if (*(int *)(glContext + 0x7574) != 0) {
             return;
           }
@@ -1997,10 +1997,10 @@ LAB_00067554:
     _gleGenerateMipmap(glContext,target);
     return;
   }
-  iVar5 = *(int *)(glContext + 0x5148) + 0x8028;
-  _pthread_mutex_lock(iVar5);
+  sharedStateMutex = *(int *)(glContext + 0x5148) + 0x8028;
+  _pthread_mutex_lock(sharedStateMutex);
   _gleGenerateMipmap(glContext,target);
-  _pthread_mutex_unlock(iVar5);
+  _pthread_mutex_unlock(sharedStateMutex);
   return;
 }
 

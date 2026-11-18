@@ -157,28 +157,28 @@ int _glIsProgramARB_Exec(glContext, program)
   int glContext;
   undefined4 program;
 {
-  int iVar1;
-  bool bVar2;
+  int sharedStateThenProgramObject;
+  bool isProgram;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
-    iVar1 = *(int *)(glContext + 0x5148);
-    if (*(char *)(iVar1 + 0x8024) != '\0') {
-      _pthread_mutex_lock(iVar1 + 0x8028);
-      iVar1 = *(int *)(glContext + 0x5148);
+    sharedStateThenProgramObject = *(int *)(glContext + 0x5148);
+    if (*(char *)(sharedStateThenProgramObject + 0x8024) != '\0') {
+      _pthread_mutex_lock(sharedStateThenProgramObject + 0x8028);
+      sharedStateThenProgramObject = *(int *)(glContext + 0x5148);
     }
-    iVar1 = _gleLookupHashObject(iVar1 + 0x4010,program);
+    sharedStateThenProgramObject = _gleLookupHashObject(sharedStateThenProgramObject + 0x4010,program);
     if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
       _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);
     }
-    bVar2 = iVar1 != 0;
+    isProgram = sharedStateThenProgramObject != 0;
   }
   else {
     if (*(int *)(glContext + 0x7574) == 0) {
       *(undefined4 *)(glContext + 0x7574) = 0x502;
     }
-    bVar2 = false;
+    isProgram = false;
   }
-  return bVar2;
+  return isProgram;
 }
 
 /* _glProgramEnvParameter4dARB_Exec @ 0x798a4 (324 bytes) */
@@ -1041,41 +1041,41 @@ void _glGetProgramLocalParameterdvARB_Exec(glContext, target, index, params)
   uint index;
   double *params;
 {
-  bool bVar1;
+  bool indexOutOfRange;
   undefined4 glErrorCode;
-  uint uVar3;
-  int iVar4;
-  int iVar5;
+  uint expectedTarget;
+  int programSlotThenLocalParamBase;
+  int localParamAddress;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
     if (target == 0x8620) {
-      bVar1 = 0xff < index;
-      iVar4 = 0;
+      indexOutOfRange = 0xff < index;
+      programSlotThenLocalParamBase = 0;
     }
     else {
       if (target < 0x8621) {
-        uVar3 = 0x8200;
+        expectedTarget = 0x8200;
       }
       else {
-        uVar3 = 0x8804;
+        expectedTarget = 0x8804;
       }
-      if (target != uVar3) {
+      if (target != expectedTarget) {
         if (*(int *)(glContext + 0x7574) != 0) {
           return;
         }
         glErrorCode = 0x500;
         goto LAB_0007aa60;
       }
-      bVar1 = 0x7f < index;
-      iVar4 = 1;
+      indexOutOfRange = 0x7f < index;
+      programSlotThenLocalParamBase = 1;
     }
-    if (!bVar1) {
-      iVar4 = *(int *)(*(int *)(iVar4 * 4 + glContext + 0x5420) + 0x4e0);
-      iVar5 = iVar4 + index * 0x10;
-      *params = (double)*(float *)(iVar4 + index * 0x10);
-      params[1] = (double)*(float *)(iVar5 + 4);
-      params[2] = (double)*(float *)(iVar5 + 8);
-      params[3] = (double)*(float *)(iVar5 + 0xc);
+    if (!indexOutOfRange) {
+      programSlotThenLocalParamBase = *(int *)(*(int *)(programSlotThenLocalParamBase * 4 + glContext + 0x5420) + 0x4e0);
+      localParamAddress = programSlotThenLocalParamBase + index * 0x10;
+      *params = (double)*(float *)(programSlotThenLocalParamBase + index * 0x10);
+      params[1] = (double)*(float *)(localParamAddress + 4);
+      params[2] = (double)*(float *)(localParamAddress + 8);
+      params[3] = (double)*(float *)(localParamAddress + 0xc);
       return;
     }
     if (*(int *)(glContext + 0x7574) != 0) {
@@ -1569,43 +1569,43 @@ int _glPixelMapuiv_Comp(glContext, map, mapsize, values)
   int mapsize;
   uint values;
 {
-  undefined4 *puVar1;
-  int iVar2;
-  int iVar3;
+  undefined4 *listRecordThenDstCursor;
+  int valueBytes;
+  int pixelUnpackBufferThenLoopIndex;
   
-  iVar3 = *(int *)(glContext + 0x4a6c);
-  if (iVar3 == 0) {
-    iVar2 = mapsize << 2;
+  pixelUnpackBufferThenLoopIndex = *(int *)(glContext + 0x4a6c);
+  if (pixelUnpackBufferThenLoopIndex == 0) {
+    valueBytes = mapsize << 2;
   }
   else {
-    iVar2 = mapsize * 4;
-    if ((*(int *)(iVar3 + 0x38) < (int)(iVar2 + values)) || ((values & 3) != 0)) {
+    valueBytes = mapsize * 4;
+    if ((*(int *)(pixelUnpackBufferThenLoopIndex + 0x38) < (int)(valueBytes + values)) || ((values & 3) != 0)) {
       if (*(int *)(glContext + 0x7574) != 0) {
         return (undefined4 *)glContext;
       }
       *(undefined4 *)(glContext + 0x7574) = 0x502;
       return (undefined4 *)glContext;
     }
-    if (*(int *)(iVar3 + 0x40) != 0) {
-      _gleSynchronizePluginBuffer(glContext,iVar3 + 0x10);
+    if (*(int *)(pixelUnpackBufferThenLoopIndex + 0x40) != 0) {
+      _gleSynchronizePluginBuffer(glContext,pixelUnpackBufferThenLoopIndex + 0x10);
     }
-    values = values + *(int *)(iVar3 + 0x30);
+    values = values + *(int *)(pixelUnpackBufferThenLoopIndex + 0x30);
   }
-  puVar1 = (undefined4 *)_gleAddListItem(glContext,PTR__glPixelMapuiv_ListExec_00110248,iVar2 + 8);
-  if (puVar1 != (undefined4 *)0x0) {
-    iVar3 = 0;
-    *puVar1 = map;
-    puVar1[1] = mapsize;
-    puVar1 = puVar1 + 2;
+  listRecordThenDstCursor = (undefined4 *)_gleAddListItem(glContext,PTR__glPixelMapuiv_ListExec_00110248,valueBytes + 8);
+  if (listRecordThenDstCursor != (undefined4 *)0x0) {
+    pixelUnpackBufferThenLoopIndex = 0;
+    *listRecordThenDstCursor = map;
+    listRecordThenDstCursor[1] = mapsize;
+    listRecordThenDstCursor = listRecordThenDstCursor + 2;
     if (0 < mapsize) {
       do {
-        puVar1[iVar3] = *(undefined4 *)(values + iVar3 * 4);
+        listRecordThenDstCursor[pixelUnpackBufferThenLoopIndex] = *(undefined4 *)(values + pixelUnpackBufferThenLoopIndex * 4);
         mapsize = mapsize + -1;
-        iVar3 = iVar3 + 1;
+        pixelUnpackBufferThenLoopIndex = pixelUnpackBufferThenLoopIndex + 1;
       } while (mapsize != 0);
     }
   }
-  return puVar1;
+  return listRecordThenDstCursor;
 }
 
 /* _glPixelMapuiv_Exec @ 0x7b54c (1640 bytes) */
@@ -1616,7 +1616,7 @@ void _glPixelMapuiv_Exec(glContext, map, mapsize, values)
   uint values;
 {
   int byteOffset;
-  double dVar2;
+  double intToDoubleBias;
   double channelScale;
   undefined4 glErrorCode;
   uint mapsizeMinusOne;
@@ -1697,14 +1697,14 @@ LAB_0007b5b4:
         loopIndex = 0;
         *(uint *)(glContext + 0x3278) = mapsize;
         channelScale = DOUBLE_00108da0;
-        dVar2 = DOUBLE_00108d70;
+        intToDoubleBias = DOUBLE_00108d70;
         if (0 < (int)mapsize) {
           do {
             byteOffset = loopIndex * 4;
             loopIndex = loopIndex + 1;
             *(float *)(byteOffset + *(int *)(glContext + 0x324c)) =
                  (float)((double)(float)((double)CONCAT44(0x43300000,
-                                                          *(undefined4 *)(byteOffset + values)) - dVar2)
+                                                          *(undefined4 *)(byteOffset + values)) - intToDoubleBias)
                         * channelScale);
             mapsize = mapsize - 1;
           } while (mapsize != 0);
@@ -1723,14 +1723,14 @@ LAB_0007b5b4:
         loopIndex = 0;
         *(uint *)(glContext + 0x327c) = mapsize;
         channelScale = DOUBLE_00108da0;
-        dVar2 = DOUBLE_00108d70;
+        intToDoubleBias = DOUBLE_00108d70;
         if (0 < (int)mapsize) {
           do {
             byteOffset = loopIndex * 4;
             loopIndex = loopIndex + 1;
             *(float *)(byteOffset + *(int *)(glContext + 0x3250)) =
                  (float)((double)(float)((double)CONCAT44(0x43300000,
-                                                          *(undefined4 *)(byteOffset + values)) - dVar2)
+                                                          *(undefined4 *)(byteOffset + values)) - intToDoubleBias)
                         * channelScale);
             mapsize = mapsize - 1;
           } while (mapsize != 0);
@@ -1749,14 +1749,14 @@ LAB_0007b5b4:
         loopIndex = 0;
         *(uint *)(glContext + 0x3280) = mapsize;
         channelScale = DOUBLE_00108da0;
-        dVar2 = DOUBLE_00108d70;
+        intToDoubleBias = DOUBLE_00108d70;
         if (0 < (int)mapsize) {
           do {
             byteOffset = loopIndex * 4;
             loopIndex = loopIndex + 1;
             *(float *)(byteOffset + *(int *)(glContext + 0x3254)) =
                  (float)((double)(float)((double)CONCAT44(0x43300000,
-                                                          *(undefined4 *)(byteOffset + values)) - dVar2)
+                                                          *(undefined4 *)(byteOffset + values)) - intToDoubleBias)
                         * channelScale);
             mapsize = mapsize - 1;
           } while (mapsize != 0);
@@ -1775,14 +1775,14 @@ LAB_0007b5b4:
         loopIndex = 0;
         *(uint *)(glContext + 0x3284) = mapsize;
         channelScale = DOUBLE_00108da0;
-        dVar2 = DOUBLE_00108d70;
+        intToDoubleBias = DOUBLE_00108d70;
         if (0 < (int)mapsize) {
           do {
             byteOffset = loopIndex * 4;
             loopIndex = loopIndex + 1;
             *(float *)(byteOffset + *(int *)(glContext + 0x3258)) =
                  (float)((double)(float)((double)CONCAT44(0x43300000,
-                                                          *(undefined4 *)(byteOffset + values)) - dVar2)
+                                                          *(undefined4 *)(byteOffset + values)) - intToDoubleBias)
                         * channelScale);
             mapsize = mapsize - 1;
           } while (mapsize != 0);
@@ -1800,14 +1800,14 @@ LAB_0007b5b4:
         loopIndex = 0;
         *(uint *)(glContext + 0x3288) = mapsize;
         channelScale = DOUBLE_00108da0;
-        dVar2 = DOUBLE_00108d70;
+        intToDoubleBias = DOUBLE_00108d70;
         if (0 < (int)mapsize) {
           do {
             byteOffset = loopIndex * 4;
             loopIndex = loopIndex + 1;
             *(float *)(byteOffset + *(int *)(glContext + 0x325c)) =
                  (float)((double)(float)((double)CONCAT44(0x43300000,
-                                                          *(undefined4 *)(byteOffset + values)) - dVar2)
+                                                          *(undefined4 *)(byteOffset + values)) - intToDoubleBias)
                         * channelScale);
             mapsize = mapsize - 1;
           } while (mapsize != 0);
@@ -1825,14 +1825,14 @@ LAB_0007b5b4:
         loopIndex = 0;
         *(uint *)(glContext + 0x328c) = mapsize;
         channelScale = DOUBLE_00108da0;
-        dVar2 = DOUBLE_00108d70;
+        intToDoubleBias = DOUBLE_00108d70;
         if (0 < (int)mapsize) {
           do {
             byteOffset = loopIndex * 4;
             loopIndex = loopIndex + 1;
             *(float *)(byteOffset + *(int *)(glContext + 0x3260)) =
                  (float)((double)(float)((double)CONCAT44(0x43300000,
-                                                          *(undefined4 *)(byteOffset + values)) - dVar2)
+                                                          *(undefined4 *)(byteOffset + values)) - intToDoubleBias)
                         * channelScale);
             mapsize = mapsize - 1;
           } while (mapsize != 0);
@@ -1850,14 +1850,14 @@ LAB_0007b5b4:
         loopIndex = 0;
         *(uint *)(glContext + 0x3290) = mapsize;
         channelScale = DOUBLE_00108da0;
-        dVar2 = DOUBLE_00108d70;
+        intToDoubleBias = DOUBLE_00108d70;
         if (0 < (int)mapsize) {
           do {
             byteOffset = loopIndex * 4;
             loopIndex = loopIndex + 1;
             *(float *)(byteOffset + *(int *)(glContext + 0x3264)) =
                  (float)((double)(float)((double)CONCAT44(0x43300000,
-                                                          *(undefined4 *)(byteOffset + values)) - dVar2)
+                                                          *(undefined4 *)(byteOffset + values)) - intToDoubleBias)
                         * channelScale);
             mapsize = mapsize - 1;
           } while (mapsize != 0);
@@ -1875,14 +1875,14 @@ LAB_0007b5b4:
         loopIndex = 0;
         *(uint *)(glContext + 0x3294) = mapsize;
         channelScale = DOUBLE_00108da0;
-        dVar2 = DOUBLE_00108d70;
+        intToDoubleBias = DOUBLE_00108d70;
         if (0 < (int)mapsize) {
           do {
             byteOffset = loopIndex * 4;
             loopIndex = loopIndex + 1;
             *(float *)(byteOffset + *(int *)(glContext + 0x3268)) =
                  (float)((double)(float)((double)CONCAT44(0x43300000,
-                                                          *(undefined4 *)(byteOffset + values)) - dVar2)
+                                                          *(undefined4 *)(byteOffset + values)) - intToDoubleBias)
                         * channelScale);
             mapsize = mapsize - 1;
           } while (mapsize != 0);

@@ -1616,16 +1616,16 @@ void _gleGetConvolutionFilter(glContext, target, format, type, image)
   undefined4 type;
   undefined4 image;
 {
-  int iVar1;
+  int convolutionState;
   
-  iVar1 = glContext + 0x3298;
+  convolutionState = glContext + 0x3298;
   if (target != 0x8010) {
-    iVar1 = glContext + 0x32d8;
+    convolutionState = glContext + 0x32d8;
   }
-  if (*(int *)(iVar1 + 0x34) != 0) {
-    ((void (*)())_gleImagingPackData)(glContext,*(undefined4 *)(iVar1 + 0x38),*(undefined4 *)(iVar1 + 0x3c),
-                        (uint)*(ushort *)(iVar1 + 0x32),0x1406,format,type,
-                        *(int *)(iVar1 + 0x34),image);
+  if (*(int *)(convolutionState + 0x34) != 0) {
+    ((void (*)())_gleImagingPackData)(glContext,*(undefined4 *)(convolutionState + 0x38),*(undefined4 *)(convolutionState + 0x3c),
+                        (uint)*(ushort *)(convolutionState + 0x32),0x1406,format,type,
+                        *(int *)(convolutionState + 0x34),image);
   }
   return;
 }

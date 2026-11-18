@@ -1,24 +1,24 @@
 #include "decls.h"
 
 /* _gleCreateGlobalLevel @ 0x103534 (64 bytes) */
-int _gleCreateGlobalLevel(unusedArg1, param_2, param_3, param_4, param_5, param_6)
+int _gleCreateGlobalLevel(unusedArg1, textureLevel, width, height, depth, border)
   undefined4 unusedArg1;
-  int param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
+  int textureLevel;
+  undefined4 width;
+  undefined4 height;
+  undefined4 depth;
+  undefined4 border;
 {
-  *(undefined2 *)(param_2 + 0x10) = 0x1908;
-  *(undefined2 *)(param_2 + 0xe) = 0;
-  *(undefined2 *)(param_2 + 4) = (*(unsigned short *)((unsigned char *)&(param_3) + 2));
-  *(undefined2 *)(param_2 + 6) = (*(unsigned short *)((unsigned char *)&(param_4) + 2));
-  *(undefined2 *)(param_2 + 8) = (*(unsigned short *)((unsigned char *)&(param_5) + 2));
-  *(undefined2 *)(param_2 + 0x12) = 0x1401;
-  *(undefined1 *)(param_2 + 0xb) = 0x34;
-  *(undefined1 *)(param_2 + 10) = (undefined1)param_6;
-  *(undefined4 *)(param_2 + 0x14) = 0;
-  *(undefined2 *)(param_2 + 0xc) = 0;
+  *(undefined2 *)(textureLevel + 0x10) = 0x1908;
+  *(undefined2 *)(textureLevel + 0xe) = 0;
+  *(undefined2 *)(textureLevel + 4) = (*(unsigned short *)((unsigned char *)&(width) + 2));
+  *(undefined2 *)(textureLevel + 6) = (*(unsigned short *)((unsigned char *)&(height) + 2));
+  *(undefined2 *)(textureLevel + 8) = (*(unsigned short *)((unsigned char *)&(depth) + 2));
+  *(undefined2 *)(textureLevel + 0x12) = 0x1401;
+  *(undefined1 *)(textureLevel + 0xb) = 0x34;
+  *(undefined1 *)(textureLevel + 10) = (undefined1)border;
+  *(undefined4 *)(textureLevel + 0x14) = 0;
+  *(undefined2 *)(textureLevel + 0xc) = 0;
   return 0;
 }
 

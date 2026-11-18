@@ -700,7 +700,7 @@ void _glGetConvolutionFilter_Exec(glContext, target, format, type, image)
   int iVar2;
   int iVar3;
   int pixelPackBuffer;
-  int iVar4;
+  int elementSize;
   double bytesPerElement;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
@@ -721,7 +721,7 @@ LAB_0006a124:
       }
       bytesPerElement = (double)((double (*)())_gleBytesPerElement)(type);
       iVar2 = glContext + 0x3298;
-      iVar4 = (int)bytesPerElement;
+      elementSize = (int)bytesPerElement;
       if (target != 0x8010) {
         iVar2 = glContext + 0x32d8;
       }
@@ -729,10 +729,10 @@ LAB_0006a124:
                         (glContext + 0x31b0,*(undefined4 *)(iVar2 + 0x38),
                          *(undefined4 *)(iVar2 + 0x3c),format,type,image);
       if (iVar2 <= *(int *)(pixelPackBuffer + 0x38)) {
-        if (iVar4 == 0) {
-          iVar4 = _glePixelBytes(format,type);
+        if (elementSize == 0) {
+          elementSize = _glePixelBytes(format,type);
         }
-        if (image == (image / iVar4) * iVar4) {
+        if (image == (image / elementSize) * elementSize) {
           if (*(int *)(pixelPackBuffer + 0x40) != 0) {
             _gleSynchronizePluginBuffer(glContext,pixelPackBuffer + 0x10);
           }
@@ -854,10 +854,10 @@ void _glGetConvolutionParameterfv_Exec(glContext, target, pname, params)
   uint pname;
   float *params;
 {
-  float fVar1;
+  float alphaComponent;
   undefined4 glErrorCode;
-  float *pfVar3;
-  uint local_18 [4];
+  float *convolutionState;
+  uint intParams [4];
   
   if (-1 < *(short *)(glContext + 0x4a10)) {
     if (*(int *)(glContext + 0x7574) != 0) {
@@ -869,12 +869,12 @@ void _glGetConvolutionParameterfv_Exec(glContext, target, pname, params)
   if (target != 0x8011) {
     if (target < 0x8012) {
       if (target == 0x8010) {
-        pfVar3 = (float *)(glContext + 0x3298);
+        convolutionState = (float *)(glContext + 0x3298);
         goto LAB_0006a434;
       }
     }
     else if (target == 0x8012) {
-      pfVar3 = (float *)(glContext + 0x3318);
+      convolutionState = (float *)(glContext + 0x3318);
       goto LAB_0006a434;
     }
     if (*(int *)(glContext + 0x7574) != 0) {
@@ -885,35 +885,35 @@ LAB_0006a42c:
     *(undefined4 *)(glContext + 0x7574) = glErrorCode;
     return;
   }
-  pfVar3 = (float *)(glContext + 0x32d8);
+  convolutionState = (float *)(glContext + 0x32d8);
 LAB_0006a434:
   if (pname != 0x8015) {
     if (pname < 0x8016) {
       if (pname == 0x8014) {
-        *params = pfVar3[4];
-        params[1] = pfVar3[6];
-        params[2] = pfVar3[8];
-        fVar1 = pfVar3[10];
+        *params = convolutionState[4];
+        params[1] = convolutionState[6];
+        params[2] = convolutionState[8];
+        alphaComponent = convolutionState[10];
         goto LAB_0006a4cc;
       }
     }
     else if (pname == 0x8154) {
-      *params = *pfVar3;
-      params[1] = pfVar3[1];
-      params[2] = pfVar3[2];
-      fVar1 = pfVar3[3];
+      *params = *convolutionState;
+      params[1] = convolutionState[1];
+      params[2] = convolutionState[2];
+      alphaComponent = convolutionState[3];
       goto LAB_0006a4cc;
     }
-    ((void (*)())_glGetConvolutionParameteriv_Exec)(glContext,target,pname,local_18);
-    *params = (float)((double)CONCAT44(0x43300000,local_18[0] ^ 0x80000000) - DOUBLE_00108d58);
+    ((void (*)())_glGetConvolutionParameteriv_Exec)(glContext,target,pname,intParams);
+    *params = (float)((double)CONCAT44(0x43300000,intParams[0] ^ 0x80000000) - DOUBLE_00108d58);
     return;
   }
-  *params = pfVar3[5];
-  params[1] = pfVar3[7];
-  params[2] = pfVar3[9];
-  fVar1 = pfVar3[0xb];
+  *params = convolutionState[5];
+  params[1] = convolutionState[7];
+  params[2] = convolutionState[9];
+  alphaComponent = convolutionState[0xb];
 LAB_0006a4cc:
-  params[3] = fVar1;
+  params[3] = alphaComponent;
   return;
 }
 
@@ -1070,11 +1070,11 @@ void _glGetHistogram_Exec(glContext, target, reset, format, type, values)
   int values;
 {
   undefined4 glErrorCode;
-  int iVar2;
+  int typeFormatCheck;
   int pixelPackBuffer;
-  int iVar3;
-  int iVar4;
-  int iVar5;
+  int imageEndOffset;
+  int elementSize;
+  int packBufferSize;
   double bytesPerElement;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
@@ -1085,8 +1085,8 @@ void _glGetHistogram_Exec(glContext, target, reset, format, type, values)
       glErrorCode = 0x500;
       goto LAB_0006a980;
     }
-    iVar2 = _CheckTypeFormat(type,format);
-    if (iVar2 != 0) {
+    typeFormatCheck = _CheckTypeFormat(type,format);
+    if (typeFormatCheck != 0) {
       if (*(int *)(glContext + 0x3388) < 1) {
         return;
       }
@@ -1096,16 +1096,16 @@ LAB_0006a9a8:
         _gleGetHistogram(glContext,0x8024,reset,format,type,values);
         return;
       }
-      iVar3 = _gleOffsetLimitImage
+      imageEndOffset = _gleOffsetLimitImage
                         (glContext + 0x31b0,*(int *)(glContext + 0x3388),1,format,type,values);
-      iVar5 = *(int *)(pixelPackBuffer + 0x38);
+      packBufferSize = *(int *)(pixelPackBuffer + 0x38);
       bytesPerElement = (double)((double (*)())_gleBytesPerElement)(type);
-      iVar4 = (int)bytesPerElement;
-      if (iVar3 <= iVar5) {
-        if (iVar4 == 0) {
-          iVar4 = _glePixelBytes(format,type);
+      elementSize = (int)bytesPerElement;
+      if (imageEndOffset <= packBufferSize) {
+        if (elementSize == 0) {
+          elementSize = _glePixelBytes(format,type);
         }
-        if (values == (values / iVar4) * iVar4) {
+        if (values == (values / elementSize) * elementSize) {
           if (*(int *)(pixelPackBuffer + 0x40) != 0) {
             _gleSynchronizePluginBuffer(glContext,pixelPackBuffer + 0x10);
           }

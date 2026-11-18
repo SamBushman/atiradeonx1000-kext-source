@@ -1295,7 +1295,7 @@ int _glTexSubImage1D_ListExec(glContext, listRecord)
   int recordSize;
   int levelSlot;
   int followingLevelRecord;
-  int iVar3;
+  int textureObjectThenMipmapResult;
   int pluginHookResult;
   byte levelFlags;
   uint levelIndex;
@@ -1304,73 +1304,73 @@ int _glTexSubImage1D_ListExec(glContext, listRecord)
   recordSize = listRecord[6];
   if (*(short *)(glContext + 0x4a10) < 0) {
     levelIndex = listRecord[1];
-    iVar3 = _gleCheckTexSubImage1DArgs
+    textureObjectThenMipmapResult = _gleCheckTexSubImage1DArgs
                       (glContext,*listRecord,levelIndex,listRecord[2],listRecord[3],listRecord[4],listRecord[5]);
-    if (iVar3 != 0) {
-      levelSlot = iVar3 + levelIndex * 0x18;
+    if (textureObjectThenMipmapResult != 0) {
+      levelSlot = textureObjectThenMipmapResult + levelIndex * 0x18;
       levelRecord = levelSlot + 0xc4;
-      if (((((int)levelIndex < (int)(uint)*(byte *)(iVar3 + 0x8d)) ||
-           ((int)(uint)*(byte *)(iVar3 + 0x8f) < (int)levelIndex)) ||
-          ((*(ushort *)(iVar3 + 0x94) >> (levelIndex & 0x3f) & 1) == 0)) ||
+      if (((((int)levelIndex < (int)(uint)*(byte *)(textureObjectThenMipmapResult + 0x8d)) ||
+           ((int)(uint)*(byte *)(textureObjectThenMipmapResult + 0x8f) < (int)levelIndex)) ||
+          ((*(ushort *)(textureObjectThenMipmapResult + 0x94) >> (levelIndex & 0x3f) & 1) == 0)) ||
          (pluginHookResult = (**(code **)(glContext + 0x4710))
                             (*(undefined4 *)(glContext + 0x4688),
-                             *(undefined4 *)(iVar3 + (uint)*(byte *)(glContext + 0x85a8) * 4),0,levelIndex,
+                             *(undefined4 *)(textureObjectThenMipmapResult + (uint)*(byte *)(glContext + 0x85a8) * 4),0,levelIndex,
                              listRecord[2],0,0,listRecord[3]), pluginHookResult == 0)) {
         levelFlags = *(byte *)(levelSlot + 0xcf);
         if ((levelFlags & 0x10) == 0) {
           if ((levelFlags & 0x40) == 0) {
             if (*(int *)(levelSlot + 0xd8) == 0) {
-              _gleAllocateTextureLevel(glContext,iVar3,levelRecord);
+              _gleAllocateTextureLevel(glContext,textureObjectThenMipmapResult,levelRecord);
               levelFlags = *(byte *)(levelSlot + 0xcf);
             }
             *(byte *)(levelSlot + 0xcf) = levelFlags | 0x10;
           }
           else {
             _gleUploadPluginTextureLevel
-                      (glContext,iVar3,levelRecord,0,levelIndex,(uint)*(byte *)(glContext + 0x85a8));
+                      (glContext,textureObjectThenMipmapResult,levelRecord,0,levelIndex,(uint)*(byte *)(glContext + 0x85a8));
           }
         }
-        _gleModifyPluginTextureLevel(glContext,iVar3,levelRecord,0,levelIndex,listRecord[2],0,0,listRecord[3],1,1);
+        _gleModifyPluginTextureLevel(glContext,textureObjectThenMipmapResult,levelRecord,0,levelIndex,listRecord[2],0,0,listRecord[3],1,1);
         _gleTextureImagePut(glContext,levelRecord,listRecord[2] + (uint)*(byte *)(levelSlot + 0xce),0,0,listRecord[3],
                             1,1,listRecord[4],listRecord[5],1,0,listRecord + 7);
-        if ((((*(uint *)(iVar3 + 0x6c) & 0x8000) == 0) || ((int)*(short *)(iVar3 + 0x60) != levelIndex))
-           || (iVar3 = _gleGenMipmapsToLevel(glContext,iVar3,0,levelIndex,0xf,1), iVar3 == 0)) {
+        if ((((*(uint *)(textureObjectThenMipmapResult + 0x6c) & 0x8000) == 0) || ((int)*(short *)(textureObjectThenMipmapResult + 0x60) != levelIndex))
+           || (textureObjectThenMipmapResult = _gleGenMipmapsToLevel(glContext,textureObjectThenMipmapResult,0,levelIndex,0xf,1), textureObjectThenMipmapResult == 0)) {
           *(uint *)(glContext + 0x314) =
                *(uint *)(glContext + 0x314) | 1 << (*(uint *)(glContext + 0x53d4) & 0x3f);
         }
       }
       else {
-        *(undefined4 *)(iVar3 + 0x20) =
+        *(undefined4 *)(textureObjectThenMipmapResult + 0x20) =
              *(undefined4 *)
               ((uint)*(byte *)(glContext + 0x85a8) * 4 + *(int *)(glContext + 0x5148) + 0x8054);
         if (*(int *)(levelSlot + 0xd8) != 0) {
           levelFlags = *(byte *)(levelSlot + 0xcf);
-          if (((levelFlags & 1) == 0) && (*(short *)(iVar3 + 0x3e) == -0x7a43)) {
-            _gleFreeTextureLevel(glContext,iVar3,levelRecord);
+          if (((levelFlags & 1) == 0) && (*(short *)(textureObjectThenMipmapResult + 0x3e) == -0x7a43)) {
+            _gleFreeTextureLevel(glContext,textureObjectThenMipmapResult,levelRecord);
             levelFlags = *(byte *)(levelSlot + 0xcf);
           }
           *(byte *)(levelSlot + 0xcf) = levelFlags & 0xef;
-          *(ushort *)(iVar3 + 0xa0) =
-               *(ushort *)(iVar3 + 0xa0) &
+          *(ushort *)(textureObjectThenMipmapResult + 0xa0) =
+               *(ushort *)(textureObjectThenMipmapResult + 0xa0) &
                ((ushort)(-2 << (levelIndex & 0x1f)) | (ushort)(0xfffffffe >> 0x20 - (levelIndex & 0x1f)));
         }
         *(byte *)(levelSlot + 0xcf) = *(byte *)(levelSlot + 0xcf) | 0x40;
-        if ((((*(uint *)(iVar3 + 0x6c) & 0x8000) != 0) && ((int)*(short *)(iVar3 + 0x60) == levelIndex))
-           && (levelIndex = levelIndex + 1, (int)levelIndex <= (int)(uint)*(byte *)(iVar3 + 0x83))) {
-          followingLevelRecord = levelIndex * 0x18 + iVar3 + 0xc4;
+        if ((((*(uint *)(textureObjectThenMipmapResult + 0x6c) & 0x8000) != 0) && ((int)*(short *)(textureObjectThenMipmapResult + 0x60) == levelIndex))
+           && (levelIndex = levelIndex + 1, (int)levelIndex <= (int)(uint)*(byte *)(textureObjectThenMipmapResult + 0x83))) {
+          followingLevelRecord = levelIndex * 0x18 + textureObjectThenMipmapResult + 0xc4;
           do {
             if (*(int *)(followingLevelRecord + 0x14) != 0) {
-              if (((*(byte *)(followingLevelRecord + 0xb) & 1) == 0) && (*(short *)(iVar3 + 0x3e) == -0x7a43)) {
-                _gleFreeTextureLevel(glContext,iVar3,followingLevelRecord);
+              if (((*(byte *)(followingLevelRecord + 0xb) & 1) == 0) && (*(short *)(textureObjectThenMipmapResult + 0x3e) == -0x7a43)) {
+                _gleFreeTextureLevel(glContext,textureObjectThenMipmapResult,followingLevelRecord);
               }
               *(byte *)(followingLevelRecord + 0xb) = *(byte *)(followingLevelRecord + 0xb) & 0xef;
-              *(ushort *)(iVar3 + 0xa0) = *(ushort *)(iVar3 + 0xa0) & ~(ushort)(1 << (levelIndex & 0x3f))
+              *(ushort *)(textureObjectThenMipmapResult + 0xa0) = *(ushort *)(textureObjectThenMipmapResult + 0xa0) & ~(ushort)(1 << (levelIndex & 0x3f))
               ;
             }
             levelIndex = levelIndex + 1;
             *(byte *)(followingLevelRecord + 0xb) = *(byte *)(followingLevelRecord + 0xb) | 0x40;
             followingLevelRecord = followingLevelRecord + 0x18;
-          } while ((int)levelIndex <= (int)(uint)*(byte *)(iVar3 + 0x83));
+          } while ((int)levelIndex <= (int)(uint)*(byte *)(textureObjectThenMipmapResult + 0x83));
         }
       }
     }

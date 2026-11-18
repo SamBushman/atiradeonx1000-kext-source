@@ -19,7 +19,7 @@ local	_gleMap1Texture3dLoad	iVar3	pointAddr	INFERRED	address of the current cont
 local	_gleMap1Texture4dLoad	iVar1	pointByteOffset	INFERRED	byte offset of the current control point: element offset * element size, source address is points + this
 local	_gleMap1Texture4dLoad	iVar2	pointElementOffset	INFERRED	element offset of the current control point; advanced by stride each iteration
 local	_gleMap1Texture4dLoad	iVar3	pointAddr	INFERRED	address of the current control point: points + pointByteOffset
-local	_gleMap1VertexAttrib1dLoad	pfVar1	destPtr	INFERRED	write cursor in the output record: starts at mapData + 4 (after the 4-word header) and advances one word per control point
+local	_gleMap1VertexAttrib1dLoad	pfVar1	dstCursor	INFERRED	write cursor in the output record: starts at mapData + 4 (after the 4-word header) and advances one word per control point
 local	_gleMap1VertexAttrib2dLoad	pdVar1	secondComponentPtr	INFERRED	pointer to the second component of the current control point (points + 1), read after points is advanced by stride
 local	_gleMap1VertexAttrib3dLoad	iVar1	pointByteOffset	INFERRED	byte offset of the current control point: element offset * element size, source address is points + this
 local	_gleMap1VertexAttrib3dLoad	iVar2	pointElementOffset	INFERRED	element offset of the current control point; advanced by stride each iteration

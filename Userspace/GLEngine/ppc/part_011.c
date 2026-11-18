@@ -236,17 +236,17 @@ int _glColor3ui_Comp(glContext, red, green, blue)
   undefined4 green;
   undefined4 blue;
 {
-  double dVar1;
-  float fVar2;
+  double intToDoubleBias;
+  float channelScale;
   float *listRecord;
   
   listRecord = (float *)_gleAddListItem(glContext,PTR__glColor3_ListExec_0011005c,0xc);
-  fVar2 = FLOAT_00108e6c;
-  dVar1 = DOUBLE_00108d70;
+  channelScale = FLOAT_00108e6c;
+  intToDoubleBias = DOUBLE_00108d70;
   if (listRecord != (float *)0x0) {
     *listRecord = (float)((double)CONCAT44(0x43300000,red) - DOUBLE_00108d70) * FLOAT_00108e6c;
-    listRecord[1] = (float)((double)CONCAT44(0x43300000,green) - dVar1) * fVar2;
-    listRecord[2] = (float)((double)CONCAT44(0x43300000,blue) - dVar1) * fVar2;
+    listRecord[1] = (float)((double)CONCAT44(0x43300000,green) - intToDoubleBias) * channelScale;
+    listRecord[2] = (float)((double)CONCAT44(0x43300000,blue) - intToDoubleBias) * channelScale;
   }
   return listRecord;
 }
@@ -368,15 +368,15 @@ double _glColor3us_Exec(int glContext,uint red,uint green,uint blue,double fpara
 {
   float fVar1;
   float fVar2;
-  float fVar3;
+  float channelScale;
   
-  fVar3 = FLOAT_00108e74;
+  channelScale = FLOAT_00108e74;
   fVar1 = (GH_U2F((unsigned int)((red | 0x4b000000))) - 8388608.0) * FLOAT_00108e74;
   fVar2 = (GH_U2F((unsigned int)((blue | 0x4b000000))) - 8388608.0) * FLOAT_00108e74;
   *(undefined4 *)(glContext + 0x2ac) = *(undefined4 *)(glContext + 0x24);
   *(float *)(glContext + 0x2a0) = fVar1;
   *(float *)(glContext + 0x2a8) = fVar2;
-  *(float *)(glContext + 0x2a4) = (GH_U2F((unsigned int)((green | 0x4b000000))) - 8388608.0) * fVar3;
+  *(float *)(glContext + 0x2a4) = (GH_U2F((unsigned int)((green | 0x4b000000))) - 8388608.0) * channelScale;
   if (*(char *)(glContext + 0x4df8) != '\0') {
     fparam_1 = (double)(**(double ( **)(int,int))(glContext + 0x4de0))(glContext, glContext + 0x2a0);
   }
@@ -547,23 +547,23 @@ int _glColor4bv_Comp(glContext, v)
   char *v;
 {
   double intToDoubleMagic;
-  float fVar2;
-  float fVar3;
+  float channelScale;
+  float channelBias;
   float *listRecord;
   
   listRecord = (float *)_gleAddListItem(glContext,PTR__glColor4_ListExec_00110058,0x10);
-  fVar3 = FLOAT_00108e64;
-  fVar2 = FLOAT_00108e60;
+  channelBias = FLOAT_00108e64;
+  channelScale = FLOAT_00108e60;
   intToDoubleMagic = DOUBLE_00108d58;
   if (listRecord != (float *)0x0) {
     *listRecord = (float)((double)CONCAT44(0x43300000,(int)*v ^ 0x80000000) - DOUBLE_00108d58) *
               FLOAT_00108e60 + FLOAT_00108e64;
-    listRecord[1] = (float)((double)CONCAT44(0x43300000,(int)v[1] ^ 0x80000000) - intToDoubleMagic) * fVar2 +
-                fVar3;
-    listRecord[2] = (float)((double)CONCAT44(0x43300000,(int)v[2] ^ 0x80000000) - intToDoubleMagic) * fVar2 +
-                fVar3;
-    listRecord[3] = (float)((double)CONCAT44(0x43300000,(int)v[3] ^ 0x80000000) - intToDoubleMagic) * fVar2 +
-                fVar3;
+    listRecord[1] = (float)((double)CONCAT44(0x43300000,(int)v[1] ^ 0x80000000) - intToDoubleMagic) * channelScale +
+                channelBias;
+    listRecord[2] = (float)((double)CONCAT44(0x43300000,(int)v[2] ^ 0x80000000) - intToDoubleMagic) * channelScale +
+                channelBias;
+    listRecord[3] = (float)((double)CONCAT44(0x43300000,(int)v[3] ^ 0x80000000) - intToDoubleMagic) * channelScale +
+                channelBias;
   }
   return listRecord;
 }
@@ -889,20 +889,20 @@ int _glColor4s_Comp(glContext, red, green, blue, alpha)
   uint alpha;
 {
   double intToDoubleMagic;
-  float fVar2;
-  float fVar3;
+  float channelScale;
+  float channelBias;
   float *listRecord;
   
   listRecord = (float *)_gleAddListItem(glContext,PTR__glColor4_ListExec_00110058,0x10);
-  fVar3 = FLOAT_00108e74;
-  fVar2 = FLOAT_00108e70;
+  channelBias = FLOAT_00108e74;
+  channelScale = FLOAT_00108e70;
   intToDoubleMagic = DOUBLE_00108d58;
   if (listRecord != (float *)0x0) {
     *listRecord = (float)((double)CONCAT44(0x43300000,red ^ 0x80000000) - DOUBLE_00108d58) *
               FLOAT_00108e70 + FLOAT_00108e74;
-    listRecord[1] = (float)((double)CONCAT44(0x43300000,green ^ 0x80000000) - intToDoubleMagic) * fVar2 + fVar3;
-    listRecord[2] = (float)((double)CONCAT44(0x43300000,blue ^ 0x80000000) - intToDoubleMagic) * fVar2 + fVar3;
-    listRecord[3] = (float)((double)CONCAT44(0x43300000,alpha ^ 0x80000000) - intToDoubleMagic) * fVar2 + fVar3;
+    listRecord[1] = (float)((double)CONCAT44(0x43300000,green ^ 0x80000000) - intToDoubleMagic) * channelScale + channelBias;
+    listRecord[2] = (float)((double)CONCAT44(0x43300000,blue ^ 0x80000000) - intToDoubleMagic) * channelScale + channelBias;
+    listRecord[3] = (float)((double)CONCAT44(0x43300000,alpha ^ 0x80000000) - intToDoubleMagic) * channelScale + channelBias;
   }
   return listRecord;
 }
@@ -1173,18 +1173,18 @@ int _glColor4uiv_Comp(glContext, v)
   undefined4 glContext;
   undefined4 *v;
 {
-  double dVar1;
-  float fVar2;
+  double intToDoubleBias;
+  float channelScale;
   float *listRecord;
   
   listRecord = (float *)_gleAddListItem(glContext,PTR__glColor4_ListExec_00110058,0x10);
-  fVar2 = FLOAT_00108e6c;
-  dVar1 = DOUBLE_00108d70;
+  channelScale = FLOAT_00108e6c;
+  intToDoubleBias = DOUBLE_00108d70;
   if (listRecord != (float *)0x0) {
     *listRecord = (float)((double)CONCAT44(0x43300000,*v) - DOUBLE_00108d70) * FLOAT_00108e6c;
-    listRecord[1] = (float)((double)CONCAT44(0x43300000,v[1]) - dVar1) * fVar2;
-    listRecord[2] = (float)((double)CONCAT44(0x43300000,v[2]) - dVar1) * fVar2;
-    listRecord[3] = (float)((double)CONCAT44(0x43300000,v[3]) - dVar1) * fVar2;
+    listRecord[1] = (float)((double)CONCAT44(0x43300000,v[1]) - intToDoubleBias) * channelScale;
+    listRecord[2] = (float)((double)CONCAT44(0x43300000,v[2]) - intToDoubleBias) * channelScale;
+    listRecord[3] = (float)((double)CONCAT44(0x43300000,v[3]) - intToDoubleBias) * channelScale;
   }
   return listRecord;
 }

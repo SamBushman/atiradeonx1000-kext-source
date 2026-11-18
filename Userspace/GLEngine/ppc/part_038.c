@@ -1088,35 +1088,35 @@ void _glGetCombinerStageParameterfvNV_Exec(glContext, stage, pname, params, unus
 /* _glGetCombinerInputParameterfvNV_Exec @ 0xb3858 (292 bytes) */
 void _glGetCombinerInputParameterfvNV_Exec(int glContext,int stage,int portion,int variable,uint pname,float *params,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  int iVar1;
-  int iVar2;
-  uint uVar3;
+  int portionIndex;
+  int stageIndex;
+  uint variableIndexThenFieldValue;
   
-  iVar2 = stage + -0x8550;
-  uVar3 = variable - 0x8523;
-  if ((-1 < iVar2) && (iVar2 < *(int *)(*(int *)(glContext + 0x468c) + 0x98))) {
+  stageIndex = stage + -0x8550;
+  variableIndexThenFieldValue = variable - 0x8523;
+  if ((-1 < stageIndex) && (stageIndex < *(int *)(*(int *)(glContext + 0x468c) + 0x98))) {
     if (portion == 0x1906) {
-      iVar1 = 0;
+      portionIndex = 0;
     }
     else {
-      iVar1 = 1;
+      portionIndex = 1;
       if (portion != 0x1907) goto LAB_000b3964;
     }
-    if (uVar3 < 4) {
+    if (variableIndexThenFieldValue < 4) {
       if (pname == 0x8543) {
-        uVar3 = (uint)*(ushort *)((iVar2 * 0x10 + iVar1 * 6 + uVar3) * 8 + glContext + 0x4224);
+        variableIndexThenFieldValue = (uint)*(ushort *)((stageIndex * 0x10 + portionIndex * 6 + variableIndexThenFieldValue) * 8 + glContext + 0x4224);
 LAB_000b391c:
-        *params = GH_U2F((unsigned int)((uVar3 | 0x4b000000))) - 8388608.0;
+        *params = GH_U2F((unsigned int)((variableIndexThenFieldValue | 0x4b000000))) - 8388608.0;
         return;
       }
       if (pname < 0x8544) {
         if (pname == 0x8542) {
-          uVar3 = (uint)*(ushort *)((iVar2 * 0x10 + iVar1 * 6 + uVar3) * 8 + glContext + 0x4220);
+          variableIndexThenFieldValue = (uint)*(ushort *)((stageIndex * 0x10 + portionIndex * 6 + variableIndexThenFieldValue) * 8 + glContext + 0x4220);
           goto LAB_000b391c;
         }
       }
       else if (pname == 0x8544) {
-        uVar3 = (uint)*(ushort *)((iVar2 * 0x10 + iVar1 * 6 + uVar3) * 8 + glContext + 0x4222);
+        variableIndexThenFieldValue = (uint)*(ushort *)((stageIndex * 0x10 + portionIndex * 6 + variableIndexThenFieldValue) * 8 + glContext + 0x4222);
         goto LAB_000b391c;
       }
     }

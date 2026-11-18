@@ -738,24 +738,24 @@ void _glGenQueries_Exec(glContext, n, ids)
   int *ids;
 {
   undefined4 glErrorCode;
-  int iVar2;
-  int iVar3;
-  int iVar4;
+  int generatedName;
+  int loopIndex;
+  int firstName;
   
   if ((*(short *)(glContext + 0x4a10) < 0) && (*(int *)(glContext + 0x7444) == 0)) {
     if (-1 < n) {
-      iVar4 = _gleGenHashNames(glContext + 0x6440,n);
-      if (iVar4 == 0) {
+      firstName = _gleGenHashNames(glContext + 0x6440,n);
+      if (firstName == 0) {
         return;
       }
-      iVar3 = 0;
+      loopIndex = 0;
       if (n < 1) {
         return;
       }
       do {
-        iVar2 = iVar3 + iVar4;
-        iVar3 = iVar3 + 1;
-        *ids = iVar2;
+        generatedName = loopIndex + firstName;
+        loopIndex = loopIndex + 1;
+        *ids = generatedName;
         ids = ids + 1;
         n = n + -1;
       } while (n != 0);
@@ -824,20 +824,20 @@ void _glBeginQuery_Exec(glContext, target, id)
   char rendererInfoByte79;
   undefined4 glErrorCode;
   int *srcCursor;
-  int iVar5;
+  int queryObject;
   int framebufferObject;
   undefined4 incomingR6;
   undefined4 incomingR7;
   undefined4 incomingR8;
-  int iVar7;
+  int dirtyBitArrayWord;
   int matrixFuncDirty;
-  int iVar8;
+  int idThenQueryObject;
   int loopIndex;
   uint dirtyWord3ThenMasked;
   uint dispatchFlags;
   int *dirtyFlagWords;
   double extraout_f1;
-  double fparam_1;
+  double f1AfterCall;
   double extraout_f1_00;
   double incomingFpr2;
   double incomingFpr3;
@@ -862,25 +862,25 @@ void _glBeginQuery_Exec(glContext, target, id)
     glErrorCode = 0x500;
     goto LAB_00078cc8;
   }
-  iVar8 = id;
-  iVar5 = _gleLookupHashObject(glContext + 0x6440,id);
-  fparam_1 = extraout_f1;
-  if (iVar5 == 0) {
-    iVar5 = _gleCreateQueryObject(glContext,id);
-    iVar8 = iVar5;
-    fparam_1 = (double)_gleAddHashNameAndObject(glContext,glContext + 0x6440,iVar5);
+  idThenQueryObject = id;
+  queryObject = _gleLookupHashObject(glContext + 0x6440,id);
+  f1AfterCall = extraout_f1;
+  if (queryObject == 0) {
+    queryObject = _gleCreateQueryObject(glContext,id);
+    idThenQueryObject = queryObject;
+    f1AfterCall = (double)_gleAddHashNameAndObject(glContext,glContext + 0x6440,queryObject);
   }
   matrixFuncDirty = *(int *)(glContext + 0x50ac);
   if (matrixFuncDirty != 0 || (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
     _gleUpdateMatrixFunc(glContext);
-    fparam_1 = extraout_f1_00;
+    f1AfterCall = extraout_f1_00;
   }
   if (*(char *)(glContext + 0x4691) == '\0') goto LAB_00078cf8;
   framebufferObject = *(int *)(glContext + 0x744c);
   dirtyFlagWords = (int *)(glContext + 0x310);
   rendererInfoByte79 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
   if ((framebufferObject != 0) && (*(int *)(framebufferObject + 0xec) != 0)) {
-    ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,iVar8,incomingR6,incomingR7,incomingR8,matrixFuncDirty,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,
+    ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,idThenQueryObject,incomingR6,incomingR7,incomingR8,matrixFuncDirty,f1AfterCall,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,
                incomingFpr6,incomingFpr7,incomingFpr8);
     *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000000;
   }
@@ -892,9 +892,9 @@ LAB_00078bc4:
     loopIndex = 0;
     srcCursor = (int *)(glContext + 0x324);
     do {
-      iVar7 = *srcCursor;
+      dirtyBitArrayWord = *srcCursor;
       srcCursor = srcCursor + 1;
-      if (iVar7 != 0) {
+      if (dirtyBitArrayWord != 0) {
         *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x800000;
         break;
       }
@@ -963,8 +963,8 @@ LAB_00078cc8:
 LAB_00078cf8:
   (**(code **)(glContext + 0x4700))
             (*(undefined4 *)(glContext + 0x4688),
-             *(undefined4 *)((uint)*(byte *)(glContext + 0x85a8) * 4 + iVar5 + 0x10));
-  *(int *)(glContext + 0x7444) = iVar5;
+             *(undefined4 *)((uint)*(byte *)(glContext + 0x85a8) * 4 + queryObject + 0x10));
+  *(int *)(glContext + 0x7444) = queryObject;
   return;
 }
 

@@ -1867,7 +1867,7 @@ int _glArrayElement_ListExec(glContext, listRecord)
   byte *srcCursor;
   code *vertexFunc;
   float *attribDataCursor;
-  uint uVar12;
+  uint weightSize;
   uint texCoordSize;
   uint colorSize;
   int remaining;
@@ -1915,9 +1915,9 @@ int _glArrayElement_ListExec(glContext, listRecord)
     attribDataCursor = (float *)((int)attribDataCursor + (uint)secondaryColorSize);
     *(float *)(glContext + 0x2c8) = *secondaryColorBluePtr;
   }
-  uVar12 = (uint)(byte)listRecord[5];
-  if (uVar12 != 0) {
-    if (uVar12 == 0x10) {
+  weightSize = (uint)(byte)listRecord[5];
+  if (weightSize != 0) {
+    if (weightSize == 0x10) {
       fVar4 = attribDataCursor[3];
 LAB_000a51f4:
       *(float *)(glContext + 0x2dc) = fVar4;
@@ -1926,11 +1926,11 @@ LAB_000a5218:
       *(float *)(glContext + 0x2d4) = attribDataCursor[1];
     }
     else {
-      if (uVar12 == 0xc) {
+      if (weightSize == 0xc) {
         fVar4 = *(float *)(glContext + 0x20);
         goto LAB_000a51f4;
       }
-      if (uVar12 == 8) {
+      if (weightSize == 8) {
         *(undefined4 *)(glContext + 0x2d8) = *(undefined4 *)(glContext + 0x20);
         *(undefined4 *)(glContext + 0x2dc) = *(undefined4 *)(glContext + 0x20);
         goto LAB_000a5218;
@@ -1941,7 +1941,7 @@ LAB_000a5218:
       *(undefined4 *)(glContext + 0x2d8) = missingComponentFill;
     }
     fVar4 = *attribDataCursor;
-    attribDataCursor = (float *)((int)attribDataCursor + uVar12);
+    attribDataCursor = (float *)((int)attribDataCursor + weightSize);
     *(float *)(glContext + 0x2d0) = fVar4;
   }
   if ((byte)listRecord[6] != 0) {

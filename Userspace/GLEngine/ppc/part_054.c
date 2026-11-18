@@ -161,17 +161,17 @@ void _gleByteFilter1(dst, src, count, offsetA)
   int count;
   int offsetA;
 {
-  char cVar1;
-  char *pcVar2;
+  char sampleAt0;
+  char *sampleAtAPtr;
   int byteOffset;
   
   byteOffset = 0;
   if (0 < count) {
     do {
-      cVar1 = *src;
-      pcVar2 = src + offsetA;
+      sampleAt0 = *src;
+      sampleAtAPtr = src + offsetA;
       src = src + 1;
-      *(char *)(dst + byteOffset) = (char)((int)cVar1 + (int)*pcVar2 >> 1);
+      *(char *)(dst + byteOffset) = (char)((int)sampleAt0 + (int)*sampleAtAPtr >> 1);
       byteOffset = byteOffset + 1;
       count = count + -1;
     } while (count != 0);
@@ -251,17 +251,17 @@ void _gleUbyteFilter1(dst, src, count, offsetA)
   int count;
   int offsetA;
 {
-  byte bVar1;
-  byte *pbVar2;
+  byte sampleAt0;
+  byte *sampleAtAPtr;
   int byteOffset;
   
   byteOffset = 0;
   if (0 < count) {
     do {
-      bVar1 = *src;
-      pbVar2 = src + offsetA;
+      sampleAt0 = *src;
+      sampleAtAPtr = src + offsetA;
       src = src + 1;
-      *(char *)(dst + byteOffset) = (char)((int)((uint)bVar1 + (uint)*pbVar2) >> 1);
+      *(char *)(dst + byteOffset) = (char)((int)((uint)sampleAt0 + (uint)*sampleAtAPtr) >> 1);
       byteOffset = byteOffset + 1;
       count = count + -1;
     } while (count != 0);
@@ -278,21 +278,21 @@ void _gleUbyteFilter2(dst, src, count, offsetA, offsetB)
   int offsetA;
   int offsetB;
 {
-  byte bVar1;
+  byte sampleAtAB;
   int byteOffset;
-  byte *pbVar3;
+  byte *sampleAtABCursor;
   
   byteOffset = 0;
   if (count < 1) {
     return;
   }
-  pbVar3 = (byte *)(src + offsetA + offsetB);
+  sampleAtABCursor = (byte *)(src + offsetA + offsetB);
   do {
-    bVar1 = *pbVar3;
-    pbVar3 = pbVar3 + 1;
+    sampleAtAB = *sampleAtABCursor;
+    sampleAtABCursor = sampleAtABCursor + 1;
     *(char *)(dst + byteOffset) =
          (char)((int)((uint)*(byte *)(src + byteOffset) + (uint)*(byte *)(src + byteOffset + offsetA)
-                      + (uint)*(byte *)(src + byteOffset + offsetB) + (uint)bVar1) >> 2);
+                      + (uint)*(byte *)(src + byteOffset + offsetB) + (uint)sampleAtAB) >> 2);
     byteOffset = byteOffset + 1;
     count = count + -1;
   } while (count != 0);
@@ -308,26 +308,26 @@ void _gleUbyteFilter3(dst, src, count, offsetA, offsetB, offsetC)
   int offsetB;
   int offsetC;
 {
-  byte bVar1;
-  byte *pbVar2;
-  int iVar3;
+  byte sampleAtBC;
+  byte *sampleAtABCPtr;
+  int sampleBase;
   int byteOffset;
-  byte *pbVar5;
+  byte *sampleAtBCCursor;
   
   byteOffset = 0;
   if (0 < count) {
-    pbVar5 = (byte *)(src + offsetB + offsetC);
+    sampleAtBCCursor = (byte *)(src + offsetB + offsetC);
     do {
-      iVar3 = src + byteOffset;
-      bVar1 = *pbVar5;
-      pbVar2 = pbVar5 + offsetA;
-      pbVar5 = pbVar5 + 1;
+      sampleBase = src + byteOffset;
+      sampleAtBC = *sampleAtBCCursor;
+      sampleAtABCPtr = sampleAtBCCursor + offsetA;
+      sampleAtBCCursor = sampleAtBCCursor + 1;
       *(char *)(dst + byteOffset) =
-           (char)((int)((uint)*(byte *)(src + byteOffset) + (uint)*(byte *)(iVar3 + offsetA) +
-                        (uint)*(byte *)(iVar3 + offsetB) +
-                        (uint)*(byte *)(iVar3 + offsetA + offsetB) +
-                        (uint)*(byte *)(iVar3 + offsetC) +
-                        (uint)*(byte *)(iVar3 + offsetA + offsetC) + (uint)bVar1 + (uint)*pbVar2) >>
+           (char)((int)((uint)*(byte *)(src + byteOffset) + (uint)*(byte *)(sampleBase + offsetA) +
+                        (uint)*(byte *)(sampleBase + offsetB) +
+                        (uint)*(byte *)(sampleBase + offsetA + offsetB) +
+                        (uint)*(byte *)(sampleBase + offsetC) +
+                        (uint)*(byte *)(sampleBase + offsetA + offsetC) + (uint)sampleAtBC + (uint)*sampleAtABCPtr) >>
                  3);
       byteOffset = byteOffset + 1;
       count = count + -1;
@@ -369,24 +369,24 @@ void _gleShortFilter2(dst, src, count, offsetA, offsetB)
   int offsetA;
   int offsetB;
 {
-  int iVar1;
+  int sampleBase;
   int byteOffset;
-  uint uVar3;
+  uint remaining;
   
   byteOffset = 0;
   if ((int)(count << 1) < 1) {
     return;
   }
-  uVar3 = count & 0x7fffffff;
+  remaining = count & 0x7fffffff;
   do {
-    iVar1 = src + byteOffset;
+    sampleBase = src + byteOffset;
     *(short *)(dst + byteOffset) =
-         (short)((int)*(short *)(src + byteOffset) + (int)*(short *)(iVar1 + offsetA) +
-                 (int)*(short *)(iVar1 + offsetB) + (int)*(short *)(iVar1 + offsetA + offsetB) >> 2)
+         (short)((int)*(short *)(src + byteOffset) + (int)*(short *)(sampleBase + offsetA) +
+                 (int)*(short *)(sampleBase + offsetB) + (int)*(short *)(sampleBase + offsetA + offsetB) >> 2)
     ;
     byteOffset = byteOffset + 2;
-    uVar3 = uVar3 - 1;
-  } while (uVar3 != 0);
+    remaining = remaining - 1;
+  } while (remaining != 0);
   return;
 }
 
@@ -399,30 +399,30 @@ void _gleShortFilter3(dst, src, count, offsetA, offsetB, offsetC)
   int offsetB;
   int offsetC;
 {
-  short sVar1;
-  short *psVar2;
-  int iVar3;
+  short sampleAtBC;
+  short *sampleAtABCPtr;
+  int sampleBase;
   int byteOffset;
-  short *psVar5;
-  uint uVar6;
+  short *sampleAtBCCursor;
+  uint remaining;
   
   byteOffset = 0;
   if (0 < (int)(count << 1)) {
-    uVar6 = count & 0x7fffffff;
-    psVar5 = (short *)(src + offsetB + offsetC);
+    remaining = count & 0x7fffffff;
+    sampleAtBCCursor = (short *)(src + offsetB + offsetC);
     do {
-      iVar3 = src + byteOffset;
-      sVar1 = *psVar5;
-      psVar2 = (short *)((int)psVar5 + offsetA);
-      psVar5 = psVar5 + 1;
+      sampleBase = src + byteOffset;
+      sampleAtBC = *sampleAtBCCursor;
+      sampleAtABCPtr = (short *)((int)sampleAtBCCursor + offsetA);
+      sampleAtBCCursor = sampleAtBCCursor + 1;
       *(short *)(dst + byteOffset) =
-           (short)((int)*(short *)(src + byteOffset) + (int)*(short *)(iVar3 + offsetA) +
-                   (int)*(short *)(iVar3 + offsetB) + (int)*(short *)(iVar3 + offsetA + offsetB) +
-                   (int)*(short *)(iVar3 + offsetC) + (int)*(short *)(iVar3 + offsetA + offsetC) +
-                   (int)sVar1 + (int)*psVar2 >> 3);
+           (short)((int)*(short *)(src + byteOffset) + (int)*(short *)(sampleBase + offsetA) +
+                   (int)*(short *)(sampleBase + offsetB) + (int)*(short *)(sampleBase + offsetA + offsetB) +
+                   (int)*(short *)(sampleBase + offsetC) + (int)*(short *)(sampleBase + offsetA + offsetC) +
+                   (int)sampleAtBC + (int)*sampleAtABCPtr >> 3);
       byteOffset = byteOffset + 2;
-      uVar6 = uVar6 - 1;
-    } while (uVar6 != 0);
+      remaining = remaining - 1;
+    } while (remaining != 0);
   }
   return;
 }
@@ -467,7 +467,7 @@ void _gleFloatFilter2(dst, src, count, offsetA, offsetB, unusedArg6, unusedArg7)
   undefined4 unusedArg7;
 {
   float weight;
-  int iVar2;
+  int sampleBase;
   int byteOffset;
   uint remaining;
   
@@ -478,10 +478,10 @@ void _gleFloatFilter2(dst, src, count, offsetA, offsetB, unusedArg6, unusedArg7)
   }
   remaining = count & 0x3fffffff;
   do {
-    iVar2 = src + byteOffset;
+    sampleBase = src + byteOffset;
     *(float *)(dst + byteOffset) =
-         (*(float *)(src + byteOffset) + *(float *)(iVar2 + offsetA) + *(float *)(iVar2 + offsetB) +
-         *(float *)(iVar2 + offsetA + offsetB)) * weight;
+         (*(float *)(src + byteOffset) + *(float *)(sampleBase + offsetA) + *(float *)(sampleBase + offsetB) +
+         *(float *)(sampleBase + offsetA + offsetB)) * weight;
     byteOffset = byteOffset + 4;
     remaining = remaining - 1;
   } while (remaining != 0);
@@ -781,14 +781,14 @@ void _gle233RevFilter1(dst, src, unusedArg3, offsetA)
   undefined4 unusedArg3;
   int offsetA;
 {
-  byte bVar1;
-  byte bVar2;
+  byte sampleAt0;
+  byte sampleAtA;
   
-  bVar1 = *src;
-  bVar2 = src[offsetA];
-  *dst = (byte)((bVar1 & 7) + (bVar2 & 7) >> 1) |
-             (byte)((bVar1 & 0x38) + (bVar2 & 0x38) >> 1) & 0x38 |
-             (byte)((bVar1 & 0xc0) + (bVar2 & 0xc0) >> 1) & 0xc0;
+  sampleAt0 = *src;
+  sampleAtA = src[offsetA];
+  *dst = (byte)((sampleAt0 & 7) + (sampleAtA & 7) >> 1) |
+             (byte)((sampleAt0 & 0x38) + (sampleAtA & 0x38) >> 1) & 0x38 |
+             (byte)((sampleAt0 & 0xc0) + (sampleAtA & 0xc0) >> 1) & 0xc0;
   return;
 }
 
@@ -800,18 +800,18 @@ void _gle233RevFilter2(dst, src, unusedArg3, offsetA, offsetB)
   int offsetA;
   int offsetB;
 {
-  byte bVar1;
-  byte bVar2;
-  byte bVar3;
-  byte bVar4;
+  byte sampleAt0;
+  byte sampleAtA;
+  byte sampleAtB;
+  byte sampleAtAB;
   
-  bVar1 = *src;
-  bVar2 = src[offsetA];
-  bVar3 = src[offsetB];
-  bVar4 = src[offsetB + offsetA];
-  *dst = (byte)((bVar1 & 7) + (bVar2 & 7) + (bVar3 & 7) + (bVar4 & 7) >> 2) & 7 |
-             (byte)((bVar1 & 0x38) + (bVar2 & 0x38) + (bVar3 & 0x38) + (bVar4 & 0x38) >> 2) & 0x38 |
-             (byte)((bVar1 & 0xc0) + (bVar2 & 0xc0) + (bVar3 & 0xc0) + (bVar4 & 0xc0) >> 2) & 0xc0;
+  sampleAt0 = *src;
+  sampleAtA = src[offsetA];
+  sampleAtB = src[offsetB];
+  sampleAtAB = src[offsetB + offsetA];
+  *dst = (byte)((sampleAt0 & 7) + (sampleAtA & 7) + (sampleAtB & 7) + (sampleAtAB & 7) >> 2) & 7 |
+             (byte)((sampleAt0 & 0x38) + (sampleAtA & 0x38) + (sampleAtB & 0x38) + (sampleAtAB & 0x38) >> 2) & 0x38 |
+             (byte)((sampleAt0 & 0xc0) + (sampleAtA & 0xc0) + (sampleAtB & 0xc0) + (sampleAtAB & 0xc0) >> 2) & 0xc0;
   return;
 }
 
@@ -937,15 +937,15 @@ void _gle4444Filter1(dst, src, unusedArg3, offsetA)
   undefined4 unusedArg3;
   int offsetA;
 {
-  ushort uVar1;
-  ushort uVar2;
+  ushort sampleAt0;
+  ushort sampleAtA;
   
-  uVar1 = *src;
-  uVar2 = *(ushort *)((int)src + offsetA);
-  *dst = (ushort)((uVar1 & 0xf000) + (uVar2 & 0xf000) >> 1) & 0xf000 |
-             (ushort)((uVar1 & 0xf00) + (uVar2 & 0xf00) >> 1) & 0xf00 |
-             (ushort)((uVar1 & 0xf0) + (uVar2 & 0xf0) >> 1) & 0xf0 |
-             (ushort)((uVar1 & 0xf) + (uVar2 & 0xf) >> 1);
+  sampleAt0 = *src;
+  sampleAtA = *(ushort *)((int)src + offsetA);
+  *dst = (ushort)((sampleAt0 & 0xf000) + (sampleAtA & 0xf000) >> 1) & 0xf000 |
+             (ushort)((sampleAt0 & 0xf00) + (sampleAtA & 0xf00) >> 1) & 0xf00 |
+             (ushort)((sampleAt0 & 0xf0) + (sampleAtA & 0xf0) >> 1) & 0xf0 |
+             (ushort)((sampleAt0 & 0xf) + (sampleAtA & 0xf) >> 1);
   return;
 }
 
@@ -1105,13 +1105,13 @@ void _gles16s16Filter2(dst, src, unusedArg3, offsetA, offsetB)
   int offsetA;
   int offsetB;
 {
-  int iVar1;
+  int sampleAtAB;
   
-  iVar1 = *(int *)((int)src + offsetB + offsetA);
+  sampleAtAB = *(int *)((int)src + offsetB + offsetA);
   *dst = ((*src >> 0x10) + (*(int *)((int)src + offsetA) >> 0x10) +
-              (*(int *)((int)src + offsetB) >> 0x10) + (iVar1 >> 0x10)) * 0x8000 & 0xffff0000U |
+              (*(int *)((int)src + offsetB) >> 0x10) + (sampleAtAB >> 0x10)) * 0x8000 & 0xffff0000U |
              (uint)((int)(short)*src + (int)(short)*(int *)((int)src + offsetA) +
-                    (int)(short)*(int *)((int)src + offsetB) + (int)(short)iVar1) >> 1 & 0xffff;
+                    (int)(short)*(int *)((int)src + offsetB) + (int)(short)sampleAtAB) >> 1 & 0xffff;
   return;
 }
 

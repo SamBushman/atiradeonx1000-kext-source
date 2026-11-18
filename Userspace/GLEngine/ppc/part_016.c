@@ -811,46 +811,46 @@ int _glConvolutionFilter1D_Comp(glContext, target, internalformat, width, format
   undefined4 type;
   int image;
 {
-  int iVar1;
+  int rowBytesThenRecordSize;
   int imageEndOffset;
-  undefined4 *puVar3;
+  undefined4 *elementSizeThenListRecordThenFillResult;
   int pixelUnpackBuffer;
-  int iVar5;
+  int unpackBufferSize;
   double bytesPerElement;
   
-  iVar1 = _gleRowBytes(format,type,width);
-  if (iVar1 < 1) {
-    return (undefined4 *)iVar1;
+  rowBytesThenRecordSize = _gleRowBytes(format,type,width);
+  if (rowBytesThenRecordSize < 1) {
+    return (undefined4 *)rowBytesThenRecordSize;
   }
   pixelUnpackBuffer = *(int *)(glContext + 0x4a6c);
   if (pixelUnpackBuffer == 0) {
 LAB_0006897c:
-    iVar1 = (iVar1 + 3U & 0xfffffffc) + 0x18;
-    puVar3 = (undefined4 *)
-             _gleAddListItem(glContext,PTR__glConvolutionFilter1D_ListExec_00110134,iVar1);
-    if (puVar3 != (undefined4 *)0x0) {
-      *puVar3 = target;
-      puVar3[1] = internalformat;
-      puVar3[5] = iVar1;
-      puVar3[2] = width;
-      puVar3[3] = format;
-      puVar3[4] = type;
+    rowBytesThenRecordSize = (rowBytesThenRecordSize + 3U & 0xfffffffc) + 0x18;
+    elementSizeThenListRecordThenFillResult = (undefined4 *)
+             _gleAddListItem(glContext,PTR__glConvolutionFilter1D_ListExec_00110134,rowBytesThenRecordSize);
+    if (elementSizeThenListRecordThenFillResult != (undefined4 *)0x0) {
+      *elementSizeThenListRecordThenFillResult = target;
+      elementSizeThenListRecordThenFillResult[1] = internalformat;
+      elementSizeThenListRecordThenFillResult[5] = rowBytesThenRecordSize;
+      elementSizeThenListRecordThenFillResult[2] = width;
+      elementSizeThenListRecordThenFillResult[3] = format;
+      elementSizeThenListRecordThenFillResult[4] = type;
       if (image != 0) {
-        puVar3 = (undefined4 *)_gleFillImage(glContext,width,1,1,format,type,image,puVar3 + 6)
+        elementSizeThenListRecordThenFillResult = (undefined4 *)_gleFillImage(glContext,width,1,1,format,type,image,elementSizeThenListRecordThenFillResult + 6)
         ;
       }
     }
   }
   else {
     imageEndOffset = _gleOffsetLimitImage(glContext + 0x31cc,width,1,format,type,image);
-    iVar5 = *(int *)(pixelUnpackBuffer + 0x38);
+    unpackBufferSize = *(int *)(pixelUnpackBuffer + 0x38);
     bytesPerElement = (double)((double (*)())_gleBytesPerElement)(type);
-    puVar3 = (undefined4 *)(int)bytesPerElement;
-    if (imageEndOffset <= iVar5) {
-      if (puVar3 == (undefined4 *)0x0) {
-        puVar3 = (undefined4 *)_glePixelBytes(format,type);
+    elementSizeThenListRecordThenFillResult = (undefined4 *)(int)bytesPerElement;
+    if (imageEndOffset <= unpackBufferSize) {
+      if (elementSizeThenListRecordThenFillResult == (undefined4 *)0x0) {
+        elementSizeThenListRecordThenFillResult = (undefined4 *)_glePixelBytes(format,type);
       }
-      if (image == (image / (int)puVar3) * (int)puVar3) {
+      if (image == (image / (int)elementSizeThenListRecordThenFillResult) * (int)elementSizeThenListRecordThenFillResult) {
         if (*(int *)(pixelUnpackBuffer + 0x40) != 0) {
           _gleSynchronizePluginBuffer(glContext,pixelUnpackBuffer + 0x10);
         }
@@ -862,7 +862,7 @@ LAB_0006897c:
       *(undefined4 *)(glContext + 0x7574) = 0x502;
     }
   }
-  return puVar3;
+  return elementSizeThenListRecordThenFillResult;
 }
 
 /* _glConvolutionFilter2D_Comp @ 0x689f4 (384 bytes) */
@@ -876,47 +876,47 @@ int _glConvolutionFilter2D_Comp(glContext, target, internalformat, width, height
   undefined4 type;
   int image;
 {
-  int iVar1;
+  int imageSizeThenRecordSize;
   int imageEndOffset;
-  undefined4 *puVar3;
+  undefined4 *elementSizeThenListRecordThenFillResult;
   int pixelUnpackBuffer;
-  int iVar5;
+  int unpackBufferSize;
   double bytesPerElement;
   
-  iVar1 = _gleImageSize(format,type,width,height);
-  if (iVar1 < 1) {
-    return (undefined4 *)iVar1;
+  imageSizeThenRecordSize = _gleImageSize(format,type,width,height);
+  if (imageSizeThenRecordSize < 1) {
+    return (undefined4 *)imageSizeThenRecordSize;
   }
   pixelUnpackBuffer = *(int *)(glContext + 0x4a6c);
   if (pixelUnpackBuffer == 0) {
 LAB_00068af8:
-    iVar1 = (iVar1 + 3U & 0xfffffffc) + 0x1c;
-    puVar3 = (undefined4 *)
-             _gleAddListItem(glContext,PTR__glConvolutionFilter2D_ListExec_00110130,iVar1);
-    if (puVar3 != (undefined4 *)0x0) {
-      *puVar3 = target;
-      puVar3[1] = internalformat;
-      puVar3[6] = iVar1;
-      puVar3[2] = width;
-      puVar3[3] = height;
-      puVar3[4] = format;
-      puVar3[5] = type;
+    imageSizeThenRecordSize = (imageSizeThenRecordSize + 3U & 0xfffffffc) + 0x1c;
+    elementSizeThenListRecordThenFillResult = (undefined4 *)
+             _gleAddListItem(glContext,PTR__glConvolutionFilter2D_ListExec_00110130,imageSizeThenRecordSize);
+    if (elementSizeThenListRecordThenFillResult != (undefined4 *)0x0) {
+      *elementSizeThenListRecordThenFillResult = target;
+      elementSizeThenListRecordThenFillResult[1] = internalformat;
+      elementSizeThenListRecordThenFillResult[6] = imageSizeThenRecordSize;
+      elementSizeThenListRecordThenFillResult[2] = width;
+      elementSizeThenListRecordThenFillResult[3] = height;
+      elementSizeThenListRecordThenFillResult[4] = format;
+      elementSizeThenListRecordThenFillResult[5] = type;
       if (image != 0) {
-        puVar3 = (undefined4 *)
-                 _gleFillImage(glContext,width,height,1,format,type,image,puVar3 + 7);
+        elementSizeThenListRecordThenFillResult = (undefined4 *)
+                 _gleFillImage(glContext,width,height,1,format,type,image,elementSizeThenListRecordThenFillResult + 7);
       }
     }
   }
   else {
     imageEndOffset = _gleOffsetLimitImage(glContext + 0x31cc,width,height,format,type,image);
-    iVar5 = *(int *)(pixelUnpackBuffer + 0x38);
+    unpackBufferSize = *(int *)(pixelUnpackBuffer + 0x38);
     bytesPerElement = (double)((double (*)())_gleBytesPerElement)(type);
-    puVar3 = (undefined4 *)(int)bytesPerElement;
-    if (imageEndOffset <= iVar5) {
-      if (puVar3 == (undefined4 *)0x0) {
-        puVar3 = (undefined4 *)_glePixelBytes(format,type);
+    elementSizeThenListRecordThenFillResult = (undefined4 *)(int)bytesPerElement;
+    if (imageEndOffset <= unpackBufferSize) {
+      if (elementSizeThenListRecordThenFillResult == (undefined4 *)0x0) {
+        elementSizeThenListRecordThenFillResult = (undefined4 *)_glePixelBytes(format,type);
       }
-      if (image == (image / (int)puVar3) * (int)puVar3) {
+      if (image == (image / (int)elementSizeThenListRecordThenFillResult) * (int)elementSizeThenListRecordThenFillResult) {
         if (*(int *)(pixelUnpackBuffer + 0x40) != 0) {
           _gleSynchronizePluginBuffer(glContext,pixelUnpackBuffer + 0x10);
         }
@@ -928,7 +928,7 @@ LAB_00068af8:
       *(undefined4 *)(glContext + 0x7574) = 0x502;
     }
   }
-  return puVar3;
+  return elementSizeThenListRecordThenFillResult;
 }
 
 /* _glSeparableFilter2D_Comp @ 0x68b74 (536 bytes) */

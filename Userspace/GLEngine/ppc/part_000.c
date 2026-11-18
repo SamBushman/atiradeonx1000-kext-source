@@ -2105,30 +2105,30 @@ int _gleAllocFunctions(glContext)
 void _gleInitConstants(glContext)
   int glContext;
 {
-  float fVar1;
-  undefined *puVar2;
-  undefined *puVar3;
+  float float34ThenFloat38;
+  undefined *flushAndSubmitFuncThenNoopFunc;
+  undefined *rtcTocStructPtr;
   
   if ((*(uint *)PTR__gle_processor_0011204c & 0x10) != 0) {
     ((void (*)())_gleInitVectorConstants)(glContext);
   }
-  puVar2 = PTR__gleFlushAndSubmit_00112050;
+  flushAndSubmitFuncThenNoopFunc = PTR__gleFlushAndSubmit_00112050;
   *(undefined4 *)(glContext + 0x24) = 0x3f800000;
-  *(undefined **)(glContext + 0x28) = puVar2;
-  fVar1 = FLOAT_00108ebc;
+  *(undefined **)(glContext + 0x28) = flushAndSubmitFuncThenNoopFunc;
+  float34ThenFloat38 = FLOAT_00108ebc;
   *(undefined4 *)(glContext + 0x20) = 0;
-  *(float *)(glContext + 0x34) = fVar1;
-  puVar3 = PTR__gle_rtc_toc_struct_0011205c;
-  puVar2 = PTR__gleNoop_00110a20;
-  fVar1 = FLOAT_00108ec0;
+  *(float *)(glContext + 0x34) = float34ThenFloat38;
+  rtcTocStructPtr = PTR__gle_rtc_toc_struct_0011205c;
+  flushAndSubmitFuncThenNoopFunc = PTR__gleNoop_00110a20;
+  float34ThenFloat38 = FLOAT_00108ec0;
   *(undefined4 *)(glContext + 0x30) = 0x3f000000;
   *(undefined4 *)(glContext + 0xec) = 0;
-  *(undefined **)(glContext + 0x2c) = puVar3;
-  *(float *)(glContext + 0x38) = fVar1;
+  *(undefined **)(glContext + 0x2c) = rtcTocStructPtr;
+  *(float *)(glContext + 0x38) = float34ThenFloat38;
   *(undefined4 *)(glContext + 0x3c) = 0xbf800000;
-  *(undefined **)(glContext + 0xdc) = puVar2;
+  *(undefined **)(glContext + 0xdc) = flushAndSubmitFuncThenNoopFunc;
   *(undefined4 *)(glContext + 0xe8) = 0x43300000;
-  *(undefined **)(glContext + 0xd8) = puVar2;
+  *(undefined **)(glContext + 0xd8) = flushAndSubmitFuncThenNoopFunc;
   *(undefined4 *)(glContext + 0xe0) = 0x43300000;
   *(undefined4 *)(glContext + 0xe4) = 0;
   return;

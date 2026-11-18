@@ -6,20 +6,20 @@ void _glDeleteObjectARB_Exec(glContext, obj)
   int obj;
 {
   undefined4 glErrorCode;
-  int iVar2;
-  int iVar3;
+  int remainingRefCount;
+  int sharedStateThenHandleObject;
   
   if (obj == 0) {
     return;
   }
   if (*(short *)(glContext + 0x4a10) < 0) {
-    iVar3 = *(int *)(glContext + 0x5148);
-    if (*(char *)(iVar3 + 0x8024) != '\0') {
-      _pthread_mutex_lock(iVar3 + 0x8028);
-      iVar3 = *(int *)(glContext + 0x5148);
+    sharedStateThenHandleObject = *(int *)(glContext + 0x5148);
+    if (*(char *)(sharedStateThenHandleObject + 0x8024) != '\0') {
+      _pthread_mutex_lock(sharedStateThenHandleObject + 0x8028);
+      sharedStateThenHandleObject = *(int *)(glContext + 0x5148);
     }
-    iVar3 = _gleLookupHashObject(iVar3 + 0x6018,obj);
-    if (iVar3 == 0) {
+    sharedStateThenHandleObject = _gleLookupHashObject(sharedStateThenHandleObject + 0x6018,obj);
+    if (sharedStateThenHandleObject == 0) {
       if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
         _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);
       }
@@ -29,14 +29,14 @@ void _glDeleteObjectARB_Exec(glContext, obj)
       glErrorCode = 0x501;
       goto LAB_00087260;
     }
-    if (*(char *)(iVar3 + 0x14) == '\0') {
-      iVar2 = *(int *)(iVar3 + 8) + -1;
-      *(int *)(iVar3 + 8) = iVar2;
-      if (iVar2 == 1) {
+    if (*(char *)(sharedStateThenHandleObject + 0x14) == '\0') {
+      remainingRefCount = *(int *)(sharedStateThenHandleObject + 8) + -1;
+      *(int *)(sharedStateThenHandleObject + 8) = remainingRefCount;
+      if (remainingRefCount == 1) {
         _gleDeleteHashNameAndObject(glContext,*(int *)(glContext + 0x5148) + 0x6018,obj);
       }
       else {
-        *(undefined1 *)(iVar3 + 0x14) = 1;
+        *(undefined1 *)(sharedStateThenHandleObject + 0x14) = 1;
       }
       if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) == '\0') {
         return;
