@@ -2990,34 +2990,35 @@ void _gleMultiVtxTextureCoordGenReflectST(glContext, vertexCursor, vertexCount, 
 }
 
 /* _gleMultiVtxTextureCoordGenReflectSTR @ 0xf729c (212 bytes) */
-void _gleMultiVtxTextureCoordGenReflectSTR(int param_1,uint vertexCursor,int vertexCount,int param_4,double fparam_1)
+void _gleMultiVtxTextureCoordGenReflectSTR(int glContext,uint vertexCursor,int vertexCount,int texUnit,double forwardedF1)
 {
-  float *pfVar1;
-  float fVar2;
+  float *normalZPtr;
+  float normalDotEyeDirection;
+  float doubledNormalDotEyeDirection;
   undefined *vectorNormalize;
   int texCoordSlot;
   uint vertexEnd;
-  float fStack_30;
-  float fStack_2c;
-  float fStack_28;
+  float eyeDirectionX;
+  float eyeDirectionY;
+  float eyeDirectionZ;
   
   vectorNormalize = PTR__gleVectorNormalize_00112064;
   vertexEnd = vertexCursor + vertexCount * 0x100;
   if (vertexCursor < vertexEnd) {
     do {
-      fparam_1 = (double)(**(double ( **)(int,int,int,double))vectorNormalize)(param_1, vertexCursor + 0x20, &fStack_30, fparam_1);
-      texCoordSlot = param_4 * 0x10 + vertexCursor;
-      fVar2 = *(float *)(vertexCursor + 0x48) * fStack_28 +
-              (*(float *)(vertexCursor + 0x40) * fStack_30 + *(float *)(vertexCursor + 0x44) * fStack_2c);
-      fVar2 = fVar2 + fVar2;
-      *(float *)(texCoordSlot + 0x80) = -(*(float *)(vertexCursor + 0x40) * fVar2 - fStack_30);
-      *(float *)(texCoordSlot + 0x84) = -(*(float *)(vertexCursor + 0x44) * fVar2 - fStack_2c);
-      pfVar1 = (float *)(vertexCursor + 0x48);
+      forwardedF1 = (double)(**(double ( **)(int,int,int,double))vectorNormalize)(glContext, vertexCursor + 0x20, &eyeDirectionX, forwardedF1);
+      texCoordSlot = texUnit * 0x10 + vertexCursor;
+      normalDotEyeDirection = *(float *)(vertexCursor + 0x48) * eyeDirectionZ +
+              (*(float *)(vertexCursor + 0x40) * eyeDirectionX + *(float *)(vertexCursor + 0x44) * eyeDirectionY);
+      doubledNormalDotEyeDirection = normalDotEyeDirection + normalDotEyeDirection;
+      *(float *)(texCoordSlot + 0x80) = -(*(float *)(vertexCursor + 0x40) * doubledNormalDotEyeDirection - eyeDirectionX);
+      *(float *)(texCoordSlot + 0x84) = -(*(float *)(vertexCursor + 0x44) * doubledNormalDotEyeDirection - eyeDirectionY);
+      normalZPtr = (float *)(vertexCursor + 0x48);
       vertexCursor = vertexCursor + 0x100;
-      *(float *)(texCoordSlot + 0x88) = -(*pfVar1 * fVar2 - fStack_28);
+      *(float *)(texCoordSlot + 0x88) = -(*normalZPtr * doubledNormalDotEyeDirection - eyeDirectionZ);
     } while (vertexCursor < vertexEnd);
   }
-  *(uint *)(param_1 + 0x486c) = *(uint *)(param_1 + 0x486c) | 1;
+  *(uint *)(glContext + 0x486c) = *(uint *)(glContext + 0x486c) | 1;
   return;
 }
 

@@ -2388,53 +2388,54 @@ int _glMap2VertexAttrib2ARB_ListExec(glContext, listRecord)
   undefined4 glContext;
   int *listRecord;
 {
-  int *piVar1;
+  int *pointComponent0Ptr;
   int v1Bits;
   int v2Bits;
   int invVDeltaBits;
   int attribIndex;
   int u2Bits;
   int remaining;
-  int iVar6;
+  int pointComponent1;
   int invUDeltaBits;
   int mapData;
-  int iVar7;
+  int vorder;
+  int pointCount;
   int *srcCursor;
-  int iVar9;
-  int iVar10;
+  int attribMap;
+  int controlPointDst;
   int uorder;
   
   mapData = _gleGetMapData(glContext);
   attribIndex = *listRecord;
   srcCursor = listRecord + 1;
   uorder = listRecord[1];
-  iVar7 = listRecord[2];
-  iVar9 = mapData + attribIndex * 0x660;
-  iVar10 = iVar9 + 0x37a8;
-  *(int *)(iVar9 + 0x37a8) = uorder;
-  *(int *)(iVar9 + 0x37ac) = iVar7;
+  vorder = listRecord[2];
+  attribMap = mapData + attribIndex * 0x660;
+  controlPointDst = attribMap + 0x37a8;
+  *(int *)(attribMap + 0x37a8) = uorder;
+  *(int *)(attribMap + 0x37ac) = vorder;
   *(undefined1 *)(attribIndex + mapData + 0x9db8) = 2;
   u2Bits = listRecord[4];
   invUDeltaBits = listRecord[7];
   v1Bits = listRecord[5];
   v2Bits = listRecord[6];
   invVDeltaBits = listRecord[8];
-  *(int *)(iVar9 + 0x37b0) = listRecord[3];
-  *(int *)(iVar9 + 0x37b4) = u2Bits;
-  *(int *)(iVar9 + 0x37c0) = invUDeltaBits;
-  *(int *)(iVar9 + 0x37b8) = v1Bits;
-  *(int *)(iVar9 + 0x37bc) = v2Bits;
-  *(int *)(iVar9 + 0x37c4) = invVDeltaBits;
-  iVar7 = iVar7 * uorder;
-  for (remaining = iVar7; remaining != 0; remaining = remaining + -1) {
-    piVar1 = srcCursor + 8;
-    iVar6 = srcCursor[9];
+  *(int *)(attribMap + 0x37b0) = listRecord[3];
+  *(int *)(attribMap + 0x37b4) = u2Bits;
+  *(int *)(attribMap + 0x37c0) = invUDeltaBits;
+  *(int *)(attribMap + 0x37b8) = v1Bits;
+  *(int *)(attribMap + 0x37bc) = v2Bits;
+  *(int *)(attribMap + 0x37c4) = invVDeltaBits;
+  pointCount = vorder * uorder;
+  for (remaining = pointCount; remaining != 0; remaining = remaining + -1) {
+    pointComponent0Ptr = srcCursor + 8;
+    pointComponent1 = srcCursor[9];
     srcCursor = srcCursor + 2;
-    *(int *)(iVar10 + 0x20) = *piVar1;
-    *(int *)(iVar10 + 0x24) = iVar6;
-    iVar10 = iVar10 + 8;
+    *(int *)(controlPointDst + 0x20) = *pointComponent0Ptr;
+    *(int *)(controlPointDst + 0x24) = pointComponent1;
+    controlPointDst = controlPointDst + 8;
   }
-  return (100 - iVar7) * -8 + 0x344;
+  return (100 - pointCount) * -8 + 0x344;
 }
 
 /* _glMap2VertexAttrib3ARB_ListExec @ 0x701a0 (216 bytes) */

@@ -622,18 +622,19 @@ int _gleTestObject(glContext, objectType, name)
   uint loopIndex3;
   uint loopIndex2;
   bool stillValid;
-  int iVar2;
+  int returnValue;
+  int hashObjectThenRendererTestResult;
   int rendererBase;
   int allValid;
   undefined4 *srcCursor;
   uint loopIndex;
   
   allValid = 1;
-  iVar2 = 1;
+  returnValue = 1;
   switch(objectType) {
   case 0:
-    iVar2 = _gleLookupHashObject(glContext + 0x543c,name);
-    if (iVar2 == 0) {
+    hashObjectThenRendererTestResult = _gleLookupHashObject(glContext + 0x543c,name);
+    if (hashObjectThenRendererTestResult == 0) {
 LAB_0001ff68:
       if (*(int *)(glContext + 0x7574) == 0) {
         *(undefined4 *)(glContext + 0x7574) = 0x502;
@@ -643,13 +644,13 @@ LAB_0001ff68:
       rendererBase = glContext + 0x10000;
       loopIndex = 0;
       if (*(char *)(glContext + 0x85a4) != '\0') {
-        srcCursor = (undefined4 *)(iVar2 + 0x10);
+        srcCursor = (undefined4 *)(hashObjectThenRendererTestResult + 0x10);
         do {
           stillValid = allValid != 0;
           allValid = 0;
           if ((stillValid) &&
-             (iVar2 = (**(code **)(*(int *)(rendererBase + -0x777c) + 0x1c0))
-                                (*(undefined4 *)(rendererBase + -0x7a54),objectType,*srcCursor), iVar2 != 0)) {
+             (hashObjectThenRendererTestResult = (**(code **)(*(int *)(rendererBase + -0x777c) + 0x1c0))
+                                (*(undefined4 *)(rendererBase + -0x7a54),objectType,*srcCursor), hashObjectThenRendererTestResult != 0)) {
             allValid = 1;
           }
           loopIndex = loopIndex + 1;
@@ -660,18 +661,18 @@ LAB_0001ff68:
     }
     break;
   case 1:
-    iVar2 = _gleLookupHashObject(*(int *)(glContext + 0x5148) + 0x2008,name);
-    if (iVar2 == 0) goto LAB_0001ff68;
+    hashObjectThenRendererTestResult = _gleLookupHashObject(*(int *)(glContext + 0x5148) + 0x2008,name);
+    if (hashObjectThenRendererTestResult == 0) goto LAB_0001ff68;
     rendererBase = glContext + 0x10000;
     loopIndex2 = 0;
     if (*(char *)(glContext + 0x85a4) != '\0') {
-      srcCursor = (undefined4 *)(iVar2 + 0x10);
+      srcCursor = (undefined4 *)(hashObjectThenRendererTestResult + 0x10);
       do {
         stillValid = allValid != 0;
         allValid = 0;
         if ((stillValid) &&
-           (iVar2 = (**(code **)(*(int *)(rendererBase + -0x777c) + 0x1c0))
-                              (*(undefined4 *)(rendererBase + -0x7a54),objectType,*srcCursor), iVar2 != 0)) {
+           (hashObjectThenRendererTestResult = (**(code **)(*(int *)(rendererBase + -0x777c) + 0x1c0))
+                              (*(undefined4 *)(rendererBase + -0x7a54),objectType,*srcCursor), hashObjectThenRendererTestResult != 0)) {
           allValid = 1;
         }
         loopIndex2 = loopIndex2 + 1;
@@ -681,18 +682,18 @@ LAB_0001ff68:
     }
     break;
   case 2:
-    iVar2 = _gleLookupHashObject(*(int *)(glContext + 0x5148) + 0x5014,name);
-    if (iVar2 == 0) goto LAB_0001ff68;
+    hashObjectThenRendererTestResult = _gleLookupHashObject(*(int *)(glContext + 0x5148) + 0x5014,name);
+    if (hashObjectThenRendererTestResult == 0) goto LAB_0001ff68;
     rendererBase = glContext + 0x10000;
     loopIndex3 = 0;
     if (*(char *)(glContext + 0x85a4) != '\0') {
-      srcCursor = (undefined4 *)(iVar2 + 0x10);
+      srcCursor = (undefined4 *)(hashObjectThenRendererTestResult + 0x10);
       do {
         stillValid = allValid != 0;
         allValid = 0;
         if ((stillValid) &&
-           (iVar2 = (**(code **)(*(int *)(rendererBase + -0x777c) + 0x1c0))
-                              (*(undefined4 *)(rendererBase + -0x7a54),objectType,*srcCursor), iVar2 != 0)) {
+           (hashObjectThenRendererTestResult = (**(code **)(*(int *)(rendererBase + -0x777c) + 0x1c0))
+                              (*(undefined4 *)(rendererBase + -0x7a54),objectType,*srcCursor), hashObjectThenRendererTestResult != 0)) {
           allValid = 1;
         }
         loopIndex3 = loopIndex3 + 1;
@@ -702,18 +703,18 @@ LAB_0001ff68:
     }
     break;
   case 3:
-    iVar2 = _gleLookupHashObject(*(int *)(glContext + 0x5148) + 0x701c,name);
-    if (iVar2 == 0) goto LAB_0001ff68;
+    hashObjectThenRendererTestResult = _gleLookupHashObject(*(int *)(glContext + 0x5148) + 0x701c,name);
+    if (hashObjectThenRendererTestResult == 0) goto LAB_0001ff68;
     rendererBase = glContext + 0x10000;
     loopIndex4 = 0;
     if (*(char *)(glContext + 0x85a4) != '\0') {
-      srcCursor = (undefined4 *)(iVar2 + 0x10);
+      srcCursor = (undefined4 *)(hashObjectThenRendererTestResult + 0x10);
       do {
         stillValid = allValid != 0;
         allValid = 0;
         if ((stillValid) &&
-           (iVar2 = (**(code **)(*(int *)(rendererBase + -0x777c) + 0x1c0))
-                              (*(undefined4 *)(rendererBase + -0x7a54),objectType,*srcCursor), iVar2 != 0)) {
+           (hashObjectThenRendererTestResult = (**(code **)(*(int *)(rendererBase + -0x777c) + 0x1c0))
+                              (*(undefined4 *)(rendererBase + -0x7a54),objectType,*srcCursor), hashObjectThenRendererTestResult != 0)) {
           allValid = 1;
         }
         loopIndex4 = loopIndex4 + 1;
@@ -723,18 +724,18 @@ LAB_0001ff68:
     }
     break;
   case 4:
-    iVar2 = _gleLookupHashObject(((unsigned char *)0x00001004) + *(int *)(glContext + 0x5148),name);
-    if (iVar2 == 0) goto LAB_0001ff68;
+    hashObjectThenRendererTestResult = _gleLookupHashObject(((unsigned char *)0x00001004) + *(int *)(glContext + 0x5148),name);
+    if (hashObjectThenRendererTestResult == 0) goto LAB_0001ff68;
     rendererBase = glContext + 0x10000;
     loopIndex5 = 0;
     if (*(char *)(glContext + 0x85a4) != '\0') {
-      srcCursor = (undefined4 *)(iVar2 + 0x10);
+      srcCursor = (undefined4 *)(hashObjectThenRendererTestResult + 0x10);
       do {
         stillValid = allValid != 0;
         allValid = 0;
         if ((stillValid) &&
-           (iVar2 = (**(code **)(*(int *)(rendererBase + -0x777c) + 0x1c0))
-                              (*(undefined4 *)(rendererBase + -0x7a54),objectType,*srcCursor), iVar2 != 0)) {
+           (hashObjectThenRendererTestResult = (**(code **)(*(int *)(rendererBase + -0x777c) + 0x1c0))
+                              (*(undefined4 *)(rendererBase + -0x7a54),objectType,*srcCursor), hashObjectThenRendererTestResult != 0)) {
           allValid = 1;
         }
         loopIndex5 = loopIndex5 + 1;
@@ -748,9 +749,9 @@ LAB_0001ff68:
   default:
     goto switchD_0001fcd0_default;
   }
-  iVar2 = allValid;
+  returnValue = allValid;
 switchD_0001fcd0_default:
-  return iVar2;
+  return returnValue;
 }
 
 /* _glDeleteTextures_Exec_body @ 0x1ff98 (572 bytes) */
@@ -2698,7 +2699,7 @@ int _gleBindPipelineProgram(glContext, pipelineStageIndex, program)
   undefined *setClipInterpFunc;
   undefined4 copiedWord;
   int sharedState;
-  uint uVar6;
+  uint newChangeWord;
   int programObject;
   undefined4 *srcCursor;
   int stageStateOffset;
@@ -2755,7 +2756,7 @@ int _gleBindPipelineProgram(glContext, pipelineStageIndex, program)
   if (pipelineStageIndex == 0) {
     remaining = 9;
     iVar12 = 5;
-    uVar6 = *(uint *)(glContext + 0x31c) | 0x400000;
+    newChangeWord = *(uint *)(glContext + 0x31c) | 0x400000;
   }
   else {
     if (pipelineStageIndex != 1) {
@@ -2765,9 +2766,9 @@ int _gleBindPipelineProgram(glContext, pipelineStageIndex, program)
     }
     remaining = 5;
     iVar12 = 0xe;
-    uVar6 = *(uint *)(glContext + 0x31c) | 0x1000000;
+    newChangeWord = *(uint *)(glContext + 0x31c) | 0x1000000;
   }
-  *(uint *)(glContext + 0x31c) = uVar6;
+  *(uint *)(glContext + 0x31c) = newChangeWord;
 LAB_0002299c:
   stageStateOffset = pipelineStageIndex * 0xa30;
   if (*(int *)(stageStateOffset + *(int *)(glContext + 0x5148) + 0x8a98) != *(int *)(programRecord + 0x14)) {
@@ -2782,11 +2783,11 @@ LAB_0002299c:
     do {
       wordOffset = loopIndex * 4;
       loopIndex = loopIndex + 1;
-      uVar6 = *(uint *)(iVar12 + 0x310) |
+      newChangeWord = *(uint *)(iVar12 + 0x310) |
               *(uint *)(wordOffset + programRecord + 0x18) &
               (*(uint *)(wordOffset + sharedState + stageStateOffset + 0x8a74) | ~*(uint *)(wordOffset + previousProgramObject + 0x28));
-      *(uint *)(iVar12 + 0x310) = uVar6;
-      *(uint *)(iVar12 + 0x310) = uVar6 & *(uint *)(wordOffset + programRecord + 0x18);
+      *(uint *)(iVar12 + 0x310) = newChangeWord;
+      *(uint *)(iVar12 + 0x310) = newChangeWord & *(uint *)(wordOffset + programRecord + 0x18);
       iVar12 = iVar12 + 4;
       remaining = remaining + -1;
     } while (remaining != 0);
@@ -5385,13 +5386,13 @@ int _gleCheckTexImage3DArgs(glContext, target, level, internalformat, width, hei
   undefined4 type;
 {
   undefined4 glErrorCode;
-  int iVar2;
+  int argsCheckResult;
   int glContextPtr468c;
   int textureObject;
-  uint uVar4;
-  uint uVar5;
-  uint uVar6;
-  uint uVar7;
+  uint maxDimension;
+  uint depthNoBorder;
+  uint heightNoBorder;
+  uint widthNoBorder;
   
   textureObject = ((int (*)())_gleLookUpTexture3D)(glContext,target);
   if (textureObject == 0) {
@@ -5401,25 +5402,25 @@ int _gleCheckTexImage3DArgs(glContext, target, level, internalformat, width, hei
     glErrorCode = 0x500;
     goto LAB_000273a4;
   }
-  uVar7 = width + border * -2;
-  uVar6 = height + border * -2;
-  uVar5 = depth + border * -2;
-  if (-1 < (int)uVar7) {
-    if ((uVar7 & uVar7 - 1) == 0) {
+  widthNoBorder = width + border * -2;
+  heightNoBorder = height + border * -2;
+  depthNoBorder = depth + border * -2;
+  if (-1 < (int)widthNoBorder) {
+    if ((widthNoBorder & widthNoBorder - 1) == 0) {
       glContextPtr468c = *(int *)(glContext + 0x468c);
     }
     else {
       glContextPtr468c = *(int *)(glContext + 0x468c);
       if ((*(uint *)(glContextPtr468c + 0x124) & 0x80000) == 0) goto LAB_00027394;
     }
-    uVar4 = (uint)*(ushort *)(glContextPtr468c + 0xbe);
-    if (((((((int)uVar7 <= (int)uVar4) && (-1 < (int)uVar6)) &&
-          (((uVar6 & uVar6 - 1) == 0 || ((*(uint *)(glContextPtr468c + 0x124) & 0x80000) != 0)))) &&
-         (((int)uVar6 <= (int)uVar4 && (-1 < (int)uVar5)))) &&
-        (((uVar5 & uVar5 - 1) == 0 || ((*(uint *)(glContextPtr468c + 0x124) & 0x80000) != 0)))) &&
-       ((int)uVar5 <= (int)uVar4)) {
-      iVar2 = _gleCheckTexImageArgs(glContext,level,format,type,internalformat,border,0,1);
-      if (iVar2 != 0) {
+    maxDimension = (uint)*(ushort *)(glContextPtr468c + 0xbe);
+    if (((((((int)widthNoBorder <= (int)maxDimension) && (-1 < (int)heightNoBorder)) &&
+          (((heightNoBorder & heightNoBorder - 1) == 0 || ((*(uint *)(glContextPtr468c + 0x124) & 0x80000) != 0)))) &&
+         (((int)heightNoBorder <= (int)maxDimension && (-1 < (int)depthNoBorder)))) &&
+        (((depthNoBorder & depthNoBorder - 1) == 0 || ((*(uint *)(glContextPtr468c + 0x124) & 0x80000) != 0)))) &&
+       ((int)depthNoBorder <= (int)maxDimension)) {
+      argsCheckResult = _gleCheckTexImageArgs(glContext,level,format,type,internalformat,border,0,1);
+      if (argsCheckResult != 0) {
         return textureObject;
       }
       return 0;

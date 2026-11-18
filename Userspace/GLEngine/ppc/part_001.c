@@ -973,22 +973,22 @@ void _gleUpdateClipPlane(glContext, unusedArg2, unusedArg3, unusedArg4)
 void _gleUpdateMatrixMode(glContext)
   int glContext;
 {
-  uint uVar1;
-  int iVar2;
+  uint matrixDirtyBits;
+  int matrixModeBase;
   uint matrixModeIndex;
   
   matrixModeIndex = *(uint *)(glContext + 0x4ff4);
   if (0x17 < (int)matrixModeIndex) {
     return;
   }
-  iVar2 = glContext + matrixModeIndex * 0x40;
-  *(int *)(glContext + 0x4ff0) = iVar2 + 0x21c0;
-  *(int *)(glContext + 0x4fec) = iVar2 + 0x1bc0;
-  uVar1 = 1 << (matrixModeIndex & 0x3f);
+  matrixModeBase = glContext + matrixModeIndex * 0x40;
+  *(int *)(glContext + 0x4ff0) = matrixModeBase + 0x21c0;
+  *(int *)(glContext + 0x4fec) = matrixModeBase + 0x1bc0;
+  matrixDirtyBits = 1 << (matrixModeIndex & 0x3f);
   if (matrixModeIndex - 3 < 2) {
-    uVar1 = uVar1 | 1;
+    matrixDirtyBits = matrixDirtyBits | 1;
   }
-  *(uint *)(glContext + 0x50a8) = uVar1;
+  *(uint *)(glContext + 0x50a8) = matrixDirtyBits;
   return;
 }
 
@@ -1678,43 +1678,43 @@ LAB_00008ef8:
 }
 
 /* _gleUpdateTextureParams @ 0x9190 (280 bytes) */
-int _gleUpdateTextureParams(glContext, param_2)
+int _gleUpdateTextureParams(glContext, texUnit)
   int glContext;
-  uint param_2;
+  uint texUnit;
 {
-  undefined *puVar1;
-  uint uVar2;
-  int extraout_r3;
-  int iVar3;
+  undefined *setClipInterpFunc;
+  uint unitEnableBits;
+  int r3AfterCall;
+  int glContextThenR3AfterCall;
   uint glContextWord514c;
   
   if (*(char *)(glContext + 0x3ce4) == '\0') {
-    uVar2 = *(uint *)(param_2 * 0x7c + glContext + 0x3534) & 0x1f;
+    unitEnableBits = *(uint *)(texUnit * 0x7c + glContext + 0x3534) & 0x1f;
   }
   else {
-    uVar2 = (uint)*(ushort *)(param_2 * 0x7c + glContext + 0x3564);
+    unitEnableBits = (uint)*(ushort *)(texUnit * 0x7c + glContext + 0x3564);
   }
   glContextWord514c = *(uint *)(glContext + 0x514c);
-  iVar3 = glContext;
-  if ((glContextWord514c >> (param_2 & 0x3f) & 1) != -((int)-uVar2 >> 0x1f)) {
-    if (-((int)-uVar2 >> 0x1f) == 0) {
+  glContextThenR3AfterCall = glContext;
+  if ((glContextWord514c >> (texUnit & 0x3f) & 1) != -((int)-unitEnableBits >> 0x1f)) {
+    if (-((int)-unitEnableBits >> 0x1f) == 0) {
       *(uint *)(glContext + 0x514c) =
-           glContextWord514c & (-2 << (param_2 & 0x1f) | 0xfffffffeU >> 0x20 - (param_2 & 0x1f));
-      *(uint *)(glContext + 0x4980) = *(uint *)(glContext + 0x4980) & ~(8 << (param_2 & 0x3f));
+           glContextWord514c & (-2 << (texUnit & 0x1f) | 0xfffffffeU >> 0x20 - (texUnit & 0x1f));
+      *(uint *)(glContext + 0x4980) = *(uint *)(glContext + 0x4980) & ~(8 << (texUnit & 0x3f));
     }
     else {
-      *(uint *)(glContext + 0x514c) = glContextWord514c | 1 << (param_2 & 0x3f);
-      *(uint *)(glContext + 0x4980) = *(uint *)(glContext + 0x4980) | 8 << (param_2 & 0x3f);
+      *(uint *)(glContext + 0x514c) = glContextWord514c | 1 << (texUnit & 0x3f);
+      *(uint *)(glContext + 0x4980) = *(uint *)(glContext + 0x4980) | 8 << (texUnit & 0x3f);
     }
-    *(uint *)(glContext + 0x50ac) = *(uint *)(glContext + 0x50ac) | 0x10000 << (param_2 & 0x3f);
+    *(uint *)(glContext + 0x50ac) = *(uint *)(glContext + 0x50ac) | 0x10000 << (texUnit & 0x3f);
     ((void (*)())_gleSelectVertexSubmitFunc)(glContext);
-    puVar1 = PTR__gleSetClipInterpFunc_00112038;
+    setClipInterpFunc = PTR__gleSetClipInterpFunc_00112038;
     *(undefined **)(glContext + 0x49c8) = PTR__gleSetEyeInterpFunc_0011203c;
-    *(undefined **)(glContext + 0x49cc) = puVar1;
-    iVar3 = extraout_r3;
+    *(undefined **)(glContext + 0x49cc) = setClipInterpFunc;
+    glContextThenR3AfterCall = r3AfterCall;
   }
-  *(uint *)(glContext + 0x314) = *(uint *)(glContext + 0x314) | 1 << (param_2 & 0x3f);
-  return iVar3;
+  *(uint *)(glContext + 0x314) = *(uint *)(glContext + 0x314) | 1 << (texUnit & 0x3f);
+  return glContextThenR3AfterCall;
 }
 
 /* _gleUpdateFogData @ 0x92a8 (348 bytes) */

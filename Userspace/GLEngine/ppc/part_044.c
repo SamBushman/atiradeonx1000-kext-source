@@ -1942,28 +1942,28 @@ void _glePopMaterials(glContext)
 }
 
 /* _gleMaterialShinePow @ 0xd4488 (176 bytes) */
-double _gleMaterialShinePow(undefined4 unusedArg1,int param_2,float floatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
+double _gleMaterialShinePow(undefined4 unusedArg1,int powerTable,float floatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  uint uVar1;
-  float fVar2;
-  int iVar3;
-  float dVar4;
-  float dVar5;
+  uint tableIndex;
+  float tablePosition;
+  int tableEntry;
+  float one;
+  float fraction;
   
-  dVar4 = (double)FLOAT_00108e54;
-  if ((double)dVar4 < floatArg1) {
-    return (double)((floatArg1 - dVar4) * *(float *)(param_2 + 0x1c) + dVar4);
+  one = (double)FLOAT_00108e54;
+  if ((double)one < floatArg1) {
+    return (double)((floatArg1 - one) * *(float *)(powerTable + 0x1c) + one);
   }
-  if (floatArg1 <= (double)*(float *)(param_2 + 0x10)) {
-    return (double)(floatArg1 * *(float *)(param_2 + 0x18));
+  if (floatArg1 <= (double)*(float *)(powerTable + 0x10)) {
+    return (double)(floatArg1 * *(float *)(powerTable + 0x18));
   }
-  fVar2 = (floatArg1 - *(float *)(param_2 + 0x10)) * *(float *)(param_2 + 0x14);
-  uVar1 = (uint)(int)fVar2;
-  iVar3 = uVar1 * 4 + param_2;
-  dVar5 = (double)(fVar2 - (float)((double)CONCAT44(0x43300000,uVar1 ^ 0x80000000) - DOUBLE_00108d58
+  tablePosition = (floatArg1 - *(float *)(powerTable + 0x10)) * *(float *)(powerTable + 0x14);
+  tableIndex = (uint)(int)tablePosition;
+  tableEntry = tableIndex * 4 + powerTable;
+  fraction = (double)(tablePosition - (float)((double)CONCAT44(0x43300000,tableIndex ^ 0x80000000) - DOUBLE_00108d58
                                   ));
-  return (double)((dVar4 - dVar5) * *(float *)(iVar3 + 0x20) +
-                 (dVar5 * *(float *)(iVar3 + 0x24)));
+  return (double)((one - fraction) * *(float *)(tableEntry + 0x20) +
+                 (fraction * *(float *)(tableEntry + 0x24)));
 }
 
 /* _gleLightExponentPow @ 0xd4538 (176 bytes) */

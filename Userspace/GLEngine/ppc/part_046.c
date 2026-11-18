@@ -2684,31 +2684,31 @@ LAB_000e1388:
 }
 
 /* _gleFreeQueryObject @ 0xe13d0 (128 bytes) */
-void _gleFreeQueryObject(glContext, param_2)
+void _gleFreeQueryObject(glContext, queryObject)
   int glContext;
-  int param_2;
+  int queryObject;
 {
-  int *piVar1;
-  undefined4 *puVar2;
-  int iVar3;
-  int iVar4;
-  int iVar5;
+  int *rendererCallbacks;
+  undefined4 *rendererHandlePtr;
+  int rendererRecordCursor;
+  int loopIndex;
+  int rendererQuerySlot;
   
-  iVar3 = glContext + 0x10000;
-  iVar4 = 0;
-  iVar5 = param_2;
+  rendererRecordCursor = glContext + 0x10000;
+  loopIndex = 0;
+  rendererQuerySlot = queryObject;
   if (*(char *)(glContext + 0x85a4) != '\0') {
     do {
-      piVar1 = (int *)(iVar3 + -0x777c);
-      iVar4 = iVar4 + 1;
-      puVar2 = (undefined4 *)(iVar3 + -0x7a54);
-      iVar3 = iVar3 + 0x2e0;
-      (**(code **)(*piVar1 + 0x1cc))(*puVar2,*(undefined4 *)(iVar5 + 0x10));
-      *(undefined4 *)(iVar5 + 0x10) = 0;
-      iVar5 = iVar5 + 4;
-    } while (iVar4 < (int)(uint)*(byte *)(glContext + 0x85a4));
+      rendererCallbacks = (int *)(rendererRecordCursor + -0x777c);
+      loopIndex = loopIndex + 1;
+      rendererHandlePtr = (undefined4 *)(rendererRecordCursor + -0x7a54);
+      rendererRecordCursor = rendererRecordCursor + 0x2e0;
+      (**(code **)(*rendererCallbacks + 0x1cc))(*rendererHandlePtr,*(undefined4 *)(rendererQuerySlot + 0x10));
+      *(undefined4 *)(rendererQuerySlot + 0x10) = 0;
+      rendererQuerySlot = rendererQuerySlot + 4;
+    } while (loopIndex < (int)(uint)*(byte *)(glContext + 0x85a4));
   }
-  _free(param_2);
+  _free(queryObject);
   return;
 }
 

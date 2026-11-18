@@ -349,43 +349,45 @@ int _gliDestroyContext(glContext)
   int glContext;
 {
   int loopIndex;
-  int iVar1;
-  int iVar2;
-  int iVar3;
-  int iVar4;
-  int iVar5;
+  int statusCode;
+  int sharedStateReleaseResult;
+  int nextContextNode;
+  int rendererResult;
+  int rendererRecordCursor;
+  int previousContextNode;
+  int contextNode;
   
   if ((glContext == 0) || (*(int *)(glContext + 0x467c) != 0x3463a223)) {
     return 0x2714;
   }
-  iVar1 = ((int (*)())_gleTerminateContext)(glContext);
-  iVar4 = glContext + 0x10000;
-  iVar2 = ((int (*)())_gleReleaseSharedState)(glContext);
+  statusCode = ((int (*)())_gleTerminateContext)(glContext);
+  rendererRecordCursor = glContext + 0x10000;
+  sharedStateReleaseResult = ((int (*)())_gleReleaseSharedState)(glContext);
   loopIndex = 0;
   if (*(char *)(glContext + 0x85a4) != '\0') {
     do {
-      iVar3 = (**(code **)(*(int *)(iVar4 + -0x777c) + 0x130))(*(undefined4 *)(iVar4 + -0x7a54));
-      if (iVar1 == 0) {
-        iVar1 = iVar3;
+      rendererResult = (**(code **)(*(int *)(rendererRecordCursor + -0x777c) + 0x130))(*(undefined4 *)(rendererRecordCursor + -0x7a54));
+      if (statusCode == 0) {
+        statusCode = rendererResult;
       }
       loopIndex = loopIndex + 1;
-      iVar4 = iVar4 + 0x2e0;
+      rendererRecordCursor = rendererRecordCursor + 0x2e0;
     } while (loopIndex < (int)(uint)*(byte *)(glContext + 0x85a4));
   }
-  if (iVar2 != 0) {
+  if (sharedStateReleaseResult != 0) {
     ((void (*)())_gleDestroySharedState)(glContext);
   }
-  iVar2 = _gl_list;
-  iVar4 = 0;
+  nextContextNode = _gl_list;
+  previousContextNode = 0;
   if (_gl_list != 0) {
     do {
-      iVar5 = iVar2;
-      if (iVar5 == glContext) break;
-      iVar2 = *(int *)(iVar5 + 0x85a0);
-      iVar4 = iVar5;
-    } while (*(int *)(iVar5 + 0x85a0) != 0);
-    if (iVar4 != 0) {
-      *(undefined4 *)(iVar4 + 0x85a0) = *(undefined4 *)(glContext + 0x85a0);
+      contextNode = nextContextNode;
+      if (contextNode == glContext) break;
+      nextContextNode = *(int *)(contextNode + 0x85a0);
+      previousContextNode = contextNode;
+    } while (*(int *)(contextNode + 0x85a0) != 0);
+    if (previousContextNode != 0) {
+      *(undefined4 *)(previousContextNode + 0x85a0) = *(undefined4 *)(glContext + 0x85a0);
       goto LAB_0002fa38;
     }
   }
@@ -395,7 +397,7 @@ LAB_0002fa38:
     ((void (*)())_gleDestroyEnableHashTable)();
   }
   ((void (*)())_gleDCBFree)(glContext);
-  return iVar1;
+  return statusCode;
 }
 
 /* _gleTerminateContext @ 0x2fa68 (192 bytes) */

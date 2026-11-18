@@ -1410,46 +1410,46 @@ void _gleFreeBufferObject(glContext, param_2)
 }
 
 /* _gleCreateBufferObject @ 0xc7208 (212 bytes) */
-int _gleCreateBufferObject(glContext, param_2)
+int _gleCreateBufferObject(glContext, name)
   int glContext;
-  undefined4 param_2;
+  undefined4 name;
 {
   undefined *freeBufferObject;
-  undefined4 *puVar2;
-  undefined4 *puVar3;
+  undefined4 *slotCursor;
+  undefined4 *bufferObject;
   int remaining;
   int loopIndex;
   
-  puVar3 = (undefined4 *)_gleVecAlloc((uint)*(byte *)(glContext + 0x85a4) * 4 + 0x48);
+  bufferObject = (undefined4 *)_gleVecAlloc((uint)*(byte *)(glContext + 0x85a4) * 4 + 0x48);
   freeBufferObject = PTR__gleFreeBufferObject_00110a1c;
-  puVar3[0xd] = 0;
-  puVar3[2] = 1;
-  puVar3[3] = freeBufferObject;
-  *puVar3 = 0;
-  *(undefined1 *)(puVar3 + 0x11) = 0;
-  puVar3[0x10] = 0;
-  puVar3[0xc] = 0;
-  puVar3[0xe] = 0;
-  *(undefined2 *)(puVar3 + 0xf) = 0x88e4;
+  bufferObject[0xd] = 0;
+  bufferObject[2] = 1;
+  bufferObject[3] = freeBufferObject;
+  *bufferObject = 0;
+  *(undefined1 *)(bufferObject + 0x11) = 0;
+  bufferObject[0x10] = 0;
+  bufferObject[0xc] = 0;
+  bufferObject[0xe] = 0;
+  *(undefined2 *)(bufferObject + 0xf) = 0x88e4;
   remaining = 8;
-  *(undefined2 *)((int)puVar3 + 0x3e) = 0x88ba;
-  puVar3[1] = param_2;
-  puVar2 = puVar3 + 4;
+  *(undefined2 *)((int)bufferObject + 0x3e) = 0x88ba;
+  bufferObject[1] = name;
+  slotCursor = bufferObject + 4;
   do {
-    *puVar2 = 0;
-    puVar2 = puVar2 + 1;
+    *slotCursor = 0;
+    slotCursor = slotCursor + 1;
     remaining = remaining + -1;
   } while (remaining != 0);
   loopIndex = 0;
   if (*(char *)(glContext + 0x85a4) != '\0') {
-    puVar2 = puVar3 + 0x12;
+    slotCursor = bufferObject + 0x12;
     do {
-      *puVar2 = 0xffffffff;
+      *slotCursor = 0xffffffff;
       loopIndex = loopIndex + 1;
-      puVar2 = puVar2 + 1;
+      slotCursor = slotCursor + 1;
     } while (loopIndex < (int)(uint)*(byte *)(glContext + 0x85a4));
   }
-  return (int)puVar3;
+  return (int)bufferObject;
 }
 
 /* _gleBindBufferObject @ 0xc72dc (460 bytes) */

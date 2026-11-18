@@ -2307,7 +2307,7 @@ void _glTexGen_Exec(int glContext,uint coord,uint pname,float paramElem0,float p
   float eyePlaneZ;
   float eyePlaneW;
   undefined4 glErrorCode;
-  int iVar7;
+  int glContextPtr5424;
   int dirtyWordPtr2;
   int texGenState;
   int texGenMode;
@@ -2368,9 +2368,9 @@ void _glTexGen_Exec(int glContext,uint coord,uint pname,float paramElem0,float p
           dirtyBitIndex = *(byte *)(texUnit * 4 + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x301);
         }
         dirtyWordPtr = (dirtyBitIndex >> 3 & 0x1c) + glContext;
-        iVar7 = *(int *)(glContext + 0x5424);
+        glContextPtr5424 = *(int *)(glContext + 0x5424);
         *(uint *)(dirtyWordPtr + 0x324) = *(uint *)(dirtyWordPtr + 0x324) | 1 << (dirtyBitIndex & 0x1f);
-        dirtyBitIndex2 = (uint)*(byte *)(texUnit * 4 + iVar7 + 0x2cd);
+        dirtyBitIndex2 = (uint)*(byte *)(texUnit * 4 + glContextPtr5424 + 0x2cd);
         goto LAB_0009c0b8;
       }
 LAB_0009c0dc:
@@ -2394,9 +2394,9 @@ LAB_0009c0ec:
       dirtyBitIndex = *(byte *)(texUnit * 4 + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x321);
     }
     dirtyWordPtr = (dirtyBitIndex >> 3 & 0x1c) + glContext;
-    iVar7 = *(int *)(glContext + 0x5424);
+    glContextPtr5424 = *(int *)(glContext + 0x5424);
     *(uint *)(dirtyWordPtr + 0x324) = *(uint *)(dirtyWordPtr + 0x324) | 1 << (dirtyBitIndex & 0x1f);
-    dirtyBitIndex2 = (uint)*(byte *)(texUnit * 4 + iVar7 + 0x2ed);
+    dirtyBitIndex2 = (uint)*(byte *)(texUnit * 4 + glContextPtr5424 + 0x2ed);
   }
   else if (coord < 0x2002) {
     if (coord != 0x2000) {
@@ -2450,9 +2450,9 @@ LAB_0009c0f4:
           dirtyBitIndex = *(byte *)(texUnit * 4 + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x300);
         }
         dirtyWordPtr = (dirtyBitIndex >> 3 & 0x1c) + glContext;
-        iVar7 = *(int *)(glContext + 0x5424);
+        glContextPtr5424 = *(int *)(glContext + 0x5424);
         *(uint *)(dirtyWordPtr + 0x324) = *(uint *)(dirtyWordPtr + 0x324) | 1 << (dirtyBitIndex & 0x1f);
-        dirtyBitIndex2 = (uint)*(byte *)(texUnit * 4 + iVar7 + 0x2cc);
+        dirtyBitIndex2 = (uint)*(byte *)(texUnit * 4 + glContextPtr5424 + 0x2cc);
         goto LAB_0009c0b8;
       }
       goto LAB_0009c0dc;
@@ -2469,9 +2469,9 @@ LAB_0009c0f4:
       dirtyBitIndex = *(byte *)(texUnit * 4 + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 800);
     }
     dirtyWordPtr = (dirtyBitIndex >> 3 & 0x1c) + glContext;
-    iVar7 = *(int *)(glContext + 0x5424);
+    glContextPtr5424 = *(int *)(glContext + 0x5424);
     *(uint *)(dirtyWordPtr + 0x324) = *(uint *)(dirtyWordPtr + 0x324) | 1 << (dirtyBitIndex & 0x1f);
-    dirtyBitIndex2 = (uint)*(byte *)(texUnit * 4 + iVar7 + 0x2ec);
+    dirtyBitIndex2 = (uint)*(byte *)(texUnit * 4 + glContextPtr5424 + 0x2ec);
   }
   else if (coord == 0x2002) {
     if (pname != 0x2501) {
@@ -2518,9 +2518,9 @@ LAB_0009c0f4:
           dirtyBitIndex = *(byte *)(texUnit * 4 + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x302);
         }
         dirtyWordPtr = (dirtyBitIndex >> 3 & 0x1c) + glContext;
-        iVar7 = *(int *)(glContext + 0x5424);
+        glContextPtr5424 = *(int *)(glContext + 0x5424);
         *(uint *)(dirtyWordPtr + 0x324) = *(uint *)(dirtyWordPtr + 0x324) | 1 << (dirtyBitIndex & 0x1f);
-        dirtyBitIndex2 = (uint)*(byte *)(texUnit * 4 + iVar7 + 0x2ce);
+        dirtyBitIndex2 = (uint)*(byte *)(texUnit * 4 + glContextPtr5424 + 0x2ce);
         goto LAB_0009c0b8;
       }
       goto LAB_0009c0dc;
@@ -2537,9 +2537,9 @@ LAB_0009c0f4:
       dirtyBitIndex = *(byte *)(texUnit * 4 + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x322);
     }
     dirtyWordPtr = (dirtyBitIndex >> 3 & 0x1c) + glContext;
-    iVar7 = *(int *)(glContext + 0x5424);
+    glContextPtr5424 = *(int *)(glContext + 0x5424);
     *(uint *)(dirtyWordPtr + 0x324) = *(uint *)(dirtyWordPtr + 0x324) | 1 << (dirtyBitIndex & 0x1f);
-    dirtyBitIndex2 = (uint)*(byte *)(texUnit * 4 + iVar7 + 0x2ee);
+    dirtyBitIndex2 = (uint)*(byte *)(texUnit * 4 + glContextPtr5424 + 0x2ee);
   }
   else {
     if (coord != 0x2003) goto LAB_0009c0f4;
@@ -2586,9 +2586,9 @@ LAB_0009c0f4:
           dirtyBitIndex = *(byte *)(texUnit * 4 + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x303);
         }
         dirtyWordPtr = (dirtyBitIndex >> 3 & 0x1c) + glContext;
-        iVar7 = *(int *)(glContext + 0x5424);
+        glContextPtr5424 = *(int *)(glContext + 0x5424);
         *(uint *)(dirtyWordPtr + 0x324) = *(uint *)(dirtyWordPtr + 0x324) | 1 << (dirtyBitIndex & 0x1f);
-        dirtyBitIndex2 = (uint)*(byte *)(texUnit * 4 + iVar7 + 0x2cf);
+        dirtyBitIndex2 = (uint)*(byte *)(texUnit * 4 + glContextPtr5424 + 0x2cf);
         goto LAB_0009c0b8;
       }
       goto LAB_0009c0dc;
@@ -2605,9 +2605,9 @@ LAB_0009c0f4:
       dirtyBitIndex = *(byte *)(texUnit * 4 + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x323);
     }
     dirtyWordPtr = (dirtyBitIndex >> 3 & 0x1c) + glContext;
-    iVar7 = *(int *)(glContext + 0x5424);
+    glContextPtr5424 = *(int *)(glContext + 0x5424);
     *(uint *)(dirtyWordPtr + 0x324) = *(uint *)(dirtyWordPtr + 0x324) | 1 << (dirtyBitIndex & 0x1f);
-    dirtyBitIndex2 = (uint)*(byte *)(texUnit * 4 + iVar7 + 0x2ef);
+    dirtyBitIndex2 = (uint)*(byte *)(texUnit * 4 + glContextPtr5424 + 0x2ef);
   }
 LAB_0009c0b8:
   dirtyWordPtr2 = (dirtyBitIndex2 >> 3 & 0x1c) + glContext;

@@ -2427,27 +2427,27 @@ void _gleVPFlushTriQuadStrip(glContext)
 void _gleVPFlushTriQuadStripTCL(glContext)
   int glContext;
 {
-  int iVar1;
-  int iVar2;
-  int iVar3;
-  int iVar4;
-  int iVar5;
-  int iVar6;
-  int iVar7;
+  int carriedBytes;
+  int byteOffset;
+  int negativeCarriedBytes;
+  int writeCursor;
+  int copyIndex;
+  int carriedWordCountThenRemaining;
+  int bufferStart;
   
   (**(code **)(glContext + 0x4a08))(glContext);
-  iVar5 = 0;
-  iVar7 = *(int *)(glContext + 0x4854);
-  iVar6 = (int)*(short *)(glContext + 0x487c) >> 2;
-  iVar4 = *(int *)(glContext + 0x4858);
-  iVar1 = iVar6 * 8;
-  iVar3 = iVar6 * -8;
-  for (; iVar6 != 0; iVar6 = iVar6 + -1) {
-    iVar2 = iVar5 * 8;
-    iVar5 = iVar5 + 1;
-    *(undefined8 *)(iVar7 + iVar2) = *(undefined8 *)(iVar4 + iVar3 + iVar2);
+  copyIndex = 0;
+  bufferStart = *(int *)(glContext + 0x4854);
+  carriedWordCountThenRemaining = (int)*(short *)(glContext + 0x487c) >> 2;
+  writeCursor = *(int *)(glContext + 0x4858);
+  carriedBytes = carriedWordCountThenRemaining * 8;
+  negativeCarriedBytes = carriedWordCountThenRemaining * -8;
+  for (; carriedWordCountThenRemaining != 0; carriedWordCountThenRemaining = carriedWordCountThenRemaining + -1) {
+    byteOffset = copyIndex * 8;
+    copyIndex = copyIndex + 1;
+    *(undefined8 *)(bufferStart + byteOffset) = *(undefined8 *)(writeCursor + negativeCarriedBytes + byteOffset);
   }
-  *(int *)(glContext + 0x4858) = iVar7 + iVar1;
+  *(int *)(glContext + 0x4858) = bufferStart + carriedBytes;
   return;
 }
 

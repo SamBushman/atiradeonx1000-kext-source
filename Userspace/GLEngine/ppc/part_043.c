@@ -1344,42 +1344,42 @@ void _gleFramebufferTexture(glContext, attachmentIndex, targetIndex, textureObje
 }
 
 /* _gleCheckFramebufferAttachmentCompleteness @ 0xce354 (196 bytes) */
-double _gleCheckFramebufferAttachmentCompleteness(unusedArg1, param_2, param_3, param_4)
+double _gleCheckFramebufferAttachmentCompleteness(unusedArg1, textureObject, attachmentRecord, attachmentSlot)
   undefined4 unusedArg1;
-  int param_2;
-  int *param_3;
-  int param_4;
+  int textureObject;
+  int *attachmentRecord;
+  int attachmentSlot;
 {
-  int iVar1;
+  int levelRecord;
   
-  param_3[5] = 1;
-  iVar1 = param_2 + param_3[1] * 0x168 + param_3[2] * 0x18;
-  param_3[4] = *(int *)(iVar1 + 0xc4);
-  if (*(short *)(iVar1 + 200) == 0) {
+  attachmentRecord[5] = 1;
+  levelRecord = textureObject + attachmentRecord[1] * 0x168 + attachmentRecord[2] * 0x18;
+  attachmentRecord[4] = *(int *)(levelRecord + 0xc4);
+  if (*(short *)(levelRecord + 200) == 0) {
     return;
   }
-  if (*(short *)(iVar1 + 0xca) == 0) {
+  if (*(short *)(levelRecord + 0xca) == 0) {
     return;
   }
-  if (*param_3 == 1) {
-    if ((int)((uint)*(ushort *)(iVar1 + 0xcc) + (uint)*(byte *)(iVar1 + 0xce)) <= param_3[3]) {
+  if (*attachmentRecord == 1) {
+    if ((int)((uint)*(ushort *)(levelRecord + 0xcc) + (uint)*(byte *)(levelRecord + 0xce)) <= attachmentRecord[3]) {
       return;
     }
-    if (param_3[3] < (int)-(uint)*(byte *)(iVar1 + 0xce)) {
+    if (attachmentRecord[3] < (int)-(uint)*(byte *)(levelRecord + 0xce)) {
       return;
     }
   }
-  if (((param_4 < 4) && (*(short *)(param_2 + 0x26) != 0x1907)) &&
-     (*(short *)(param_2 + 0x26) != 0x1908)) {
+  if (((attachmentSlot < 4) && (*(short *)(textureObject + 0x26) != 0x1907)) &&
+     (*(short *)(textureObject + 0x26) != 0x1908)) {
     return;
   }
-  if ((param_4 == 4) && (*(short *)(param_2 + 0x26) != 0x1902)) {
+  if ((attachmentSlot == 4) && (*(short *)(textureObject + 0x26) != 0x1902)) {
     return;
   }
-  if ((param_4 == 5) && (*(short *)(param_2 + 0x26) != 0x1901)) {
+  if ((attachmentSlot == 5) && (*(short *)(textureObject + 0x26) != 0x1901)) {
     return;
   }
-  param_3[5] = 0;
+  attachmentRecord[5] = 0;
   return;
 }
 

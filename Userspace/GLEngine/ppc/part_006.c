@@ -4341,31 +4341,31 @@ void _glDeleteLists_Exec(glContext, list, listRange)
 }
 
 /* _gleFreeDisplayListObject @ 0x436cc (164 bytes) */
-void _gleFreeDisplayListObject(glContext, param_2)
+void _gleFreeDisplayListObject(glContext, displayList)
   undefined4 glContext;
-  int param_2;
+  int displayList;
 {
-  undefined4 *puVar1;
-  int iVar2;
-  undefined4 *puVar3;
+  undefined4 *listItem;
+  int nextItemOffset;
+  undefined4 *nextListItem;
   
-  iVar2 = *(int *)(param_2 + 0x24);
-  puVar1 = (undefined4 *)(param_2 + 0x1c);
-  while (iVar2 != 0) {
-    puVar3 = (undefined4 *)(param_2 + iVar2);
-    if ((code *)*puVar1 != (code *)0x0) {
-      (*(code *)*puVar1)(glContext,param_2 + puVar1[1]);
+  nextItemOffset = *(int *)(displayList + 0x24);
+  listItem = (undefined4 *)(displayList + 0x1c);
+  while (nextItemOffset != 0) {
+    nextListItem = (undefined4 *)(displayList + nextItemOffset);
+    if ((code *)*listItem != (code *)0x0) {
+      (*(code *)*listItem)(glContext,displayList + listItem[1]);
     }
-    puVar1 = puVar3;
-    iVar2 = puVar3[2];
+    listItem = nextListItem;
+    nextItemOffset = nextListItem[2];
   }
-  if ((code *)*puVar1 != (code *)0x0) {
-    (*(code *)*puVar1)(glContext,param_2 + puVar1[1]);
+  if ((code *)*listItem != (code *)0x0) {
+    (*(code *)*listItem)(glContext,displayList + listItem[1]);
   }
-  if (*(int *)(param_2 + 0x14) != 0) {
-    _free(*(int *)(param_2 + 0x14));
+  if (*(int *)(displayList + 0x14) != 0) {
+    _free(*(int *)(displayList + 0x14));
   }
-  _free(param_2);
+  _free(displayList);
   return;
 }
 

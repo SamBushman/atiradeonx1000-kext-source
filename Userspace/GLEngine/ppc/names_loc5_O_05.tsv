@@ -1,0 +1,23 @@
+local	_gleCreatePluginVertexArray	param_2	vertexArrayState	INFERRED	object whose per-renderer words start at +0 (one 4-byte slot per renderer), with the state at +0x20 and per-renderer 0x8c-byte records from +0x3d0, passed to the renderer callback (slot +0x1a4)
+local	_gleCreatePluginVertexArray	piVar1	rendererCallbacks	CONFIRMED	pointer at rendererRecordCursor - 0x777c: object whose slot +0x1a4 is called for each renderer with (renderer handle, slot, state, record)
+local	_gleCreatePluginVertexArray	puVar2	rendererHandlePtr	CONFIRMED	pointer at rendererRecordCursor - 0x7a54: the renderer handle passed as the first argument of the per-renderer callback
+local	_gleCreatePluginVertexArray	iVar3	rendererRecordCursor	CONFIRMED	cursor over the per-renderer records that follow glContext+0x10000: advanced by 0x2e0 per iteration of the loop bounded by the byte at glContext+0x85a4; the callbacks are read at -0x777c and -0x7a54 from it
+local	_gleCreatePluginVertexArray	iVar5	rendererSlot	CONFIRMED	param_2 + 4*i: the per-renderer 4-byte slot passed as the second callback argument
+local	_gleCreatePluginVertexArray	iVar6	rendererRecord	CONFIRMED	param_2 + 0x3d0 + 0x8c*i: the per-renderer record passed as the fourth callback argument
+local	_gleFreeDisplayListObject	param_2	displayList	CONFIRMED	display list object: header chain of items at +0x1c/+0x24 with destructor callbacks, +0x14 a block freed here, itself freed last
+local	_gleFreeDisplayListObject	iVar2	nextItemOffset	CONFIRMED	offset (from displayList) of the next item, read from item +8; 0 ends the chain
+local	_gleFreeDisplayListObject	puVar1	listItem	CONFIRMED	current item of the chain: slot 0 destructor callback called with (glContext, displayList + item[1]), +8 offset of the next item
+local	_gleFreeDisplayListObject	puVar3	nextListItem	CONFIRMED	displayList + nextItemOffset: the item after listItem
+local	_gleCreateBufferObject	param_2	name	INFERRED	stored at +4 of the new buffer object (the buffer name given by the caller)
+local	_gleCreateBufferObject	puVar3	bufferObject	CONFIRMED	_gleVecAlloc block of 0x48 + 4 * renderer count bytes: the new buffer object (refcount +8 = 1, free function +0xc, data pointer +0x30 = 0)
+local	_gleCreateBufferObject	puVar2	slotCursor	CONFIRMED	walks the words of the new buffer object that are initialised in the two loops (zeroed +0x10..+0x2f, then set to 0xffffffff per renderer from +0x48)
+local	_gleFreeQueryObject	param_2	queryObject	CONFIRMED	query object whose per-renderer handles start at +0x10 (one 4-byte slot per renderer); freed at the end
+local	_gleFreeQueryObject	piVar1	rendererCallbacks	CONFIRMED	pointer at rendererRecordCursor - 0x777c: object whose slot +0x1cc is called for each renderer with (renderer handle, per-renderer query handle)
+local	_gleFreeQueryObject	puVar2	rendererHandlePtr	CONFIRMED	pointer at rendererRecordCursor - 0x7a54: the renderer handle passed as the first argument of the per-renderer callback
+local	_gleFreeQueryObject	iVar3	rendererRecordCursor	CONFIRMED	cursor over the per-renderer records that follow glContext+0x10000: advanced by 0x2e0 per iteration of the loop bounded by the byte at glContext+0x85a4; the callbacks are read at -0x777c and -0x7a54 from it
+local	_gleFreeQueryObject	iVar4	loopIndex	CONFIRMED	counter incremented per renderer and compared with the renderer count byte at ctx+0x85a4
+local	_gleFreeQueryObject	iVar5	rendererQuerySlot	CONFIRMED	queryObject + 4*i: slot holding the per-renderer query handle (at +0x10), cleared after the callback
+local	_gleCheckFramebufferAttachmentCompleteness	param_2	textureObject	INFERRED	texture object whose level records (face * 0x168 + level * 0x18 + 0xc4) are inspected, +0x26 is its internal format class compared with 0x1907/0x1908/0x1902/0x1901
+local	_gleCheckFramebufferAttachmentCompleteness	param_3	attachmentRecord	INFERRED	framebuffer attachment record: [1] face index, [2] mip level, [0] and [3] checked against the level depth, [4] receives the level's first word, [5] is set to 1 (incomplete) and cleared when the checks pass
+local	_gleCheckFramebufferAttachmentCompleteness	param_4	attachmentSlot	INFERRED	below 4 colour attachments (format 0x1907 GL_RGB / 0x1908 GL_RGBA required), 4 depth (0x1902 GL_DEPTH_COMPONENT), 5 stencil (0x1901 GL_STENCIL_INDEX)
+local	_gleCheckFramebufferAttachmentCompleteness	iVar1	levelRecord	CONFIRMED	textureObject + face * 0x168 + level * 0x18: the level record (+0xc4 first word, +0xc8/+0xca/+0xcc/+0xce width/height/depth fields tested)

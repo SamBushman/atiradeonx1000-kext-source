@@ -4094,19 +4094,20 @@ void _gleEvalDomain2Color(undefined4 glContext,int points,int uorder,int vorder,
   int componentByteOffset;
   int uRemaining;
   float *vCoeffPtr;
-  int iVar6;
+  int savedUOrder;
+  int componentIndex;
   float *uCoeffPtr;
   float *pointPtr;
   int vRemaining;
-  float dVar10;
+  float savedV;
   double incomingStack_ffffff88;
   double incomingStack_ffffff90;
   double incomingStack_ffffff98;
   double incomingStack_ffffffa0;
   double incomingStack_ffffffa8;
   
-  iVar6 = uorder;
-  dVar10 = v;
+  savedUOrder = uorder;
+  savedV = v;
   if (((double)GH_U2F((unsigned int)_uvalue_c) != u) || (_uorder_c != uorder)) {
     ((void (*)())_glePreEvaluate)(glContext,uorder,uorder,&_ucoeff_c,u,v,floatArg3,floatArg4,floatArg5,
                     floatArg6,floatArg7,floatArg8,incomingStack_ffffff88,incomingStack_ffffff90,incomingStack_ffffff98
@@ -4116,17 +4117,17 @@ void _gleEvalDomain2Color(undefined4 glContext,int points,int uorder,int vorder,
     _uorder_c = uorder;
   }
   if (((double)GH_U2F((unsigned int)_vvalue_c) != v) || (_vorder_c != vorder)) {
-    ((void (*)())_glePreEvaluate)(glContext,vorder,iVar6,&_vcoeff_c,v,(double)dVar10,floatArg3,floatArg4,floatArg5,
+    ((void (*)())_glePreEvaluate)(glContext,vorder,savedUOrder,&_vcoeff_c,v,(double)savedV,floatArg3,floatArg4,floatArg5,
                     floatArg6,floatArg7,floatArg8,incomingStack_ffffff88,incomingStack_ffffff90,incomingStack_ffffff98
                     ,incomingStack_ffffffa0,incomingStack_ffffffa8);
     _vvalue_c = GH_F2U((float)v);
     _vtype_c = 2;
     _vorder_c = vorder;
   }
-  iVar6 = 0;
+  componentIndex = 0;
   if (0 < components) {
     do {
-      componentByteOffset = iVar6 * 4;
+      componentByteOffset = componentIndex * 4;
       *(undefined4 *)(componentByteOffset + out) = 0;
       pointPtr = (float *)(points + componentByteOffset);
       if (0 < uorder) {
@@ -4153,8 +4154,8 @@ void _gleEvalDomain2Color(undefined4 glContext,int points,int uorder,int vorder,
           *(float *)(componentByteOffset + out) = controlValue * vSum + *(float *)(componentByteOffset + out);
         } while (uRemaining != 0);
       }
-      iVar6 = iVar6 + 1;
-    } while (iVar6 < components);
+      componentIndex = componentIndex + 1;
+    } while (componentIndex < components);
   }
   return;
 }
@@ -4235,7 +4236,8 @@ void _gleEvalDomain2Coord(undefined4 glContext,int points,int uorder,int vorder,
 /* _gleEvalDomainDeriv2Coord @ 0xde104 (572 bytes) */
 void _gleEvalDomainDeriv2Coord(undefined4 glContext,int controlPoints,int uOrder,int vOrder,undefined4 unusedArg5,undefined4 unusedArg6,int componentCount,int outDerivU,int outDerivV,int outValue,float floatArg1,float floatArg2,double floatArg3,double floatArg4,float floatArg5,float floatArg6,float floatArg7,float floatArg8,float unusedFloatArg9,float unusedFloatArg10,float unusedFloatArg11,float unusedFloatArg12,float unusedFloatArg13)
 {
-  float fVar1;
+  float firstControlPoint;
+  float valueRowSum;
   float controlPointValue;
   int componentByteOffset;
   float derivVSum;
@@ -4247,17 +4249,17 @@ void _gleEvalDomainDeriv2Coord(undefined4 glContext,int controlPoints,int uOrder
   int vIndex;
   int nextUIndex;
   int nextVIndex;
-  int iVar12;
+  int savedUOrder;
   int componentIndex;
-  float dVar13;
+  float savedFloatArg2;
   double incomingStack_ffffff78;
   double incomingStack_ffffff80;
   double incomingStack_ffffff88;
   double incomingStack_ffffff90;
   double incomingStack_ffffff98;
   
-  iVar12 = uOrder;
-  dVar13 = floatArg2;
+  savedUOrder = uOrder;
+  savedFloatArg2 = floatArg2;
   if ((((double)GH_U2F((unsigned int)_uvalue_c) != floatArg1) || (_utype_c != 1)) || (_uorder_c != uOrder)) {
     ((void (*)())_glePreEvaluateWithDeriv)(glContext,uOrder,uOrder,&_ucoeff_c,&_ucoeffDeriv_c,floatArg1,floatArg2,floatArg3,
                floatArg4,floatArg5,floatArg6,floatArg7,floatArg8,incomingStack_ffffff78,incomingStack_ffffff80,
@@ -4267,7 +4269,7 @@ void _gleEvalDomainDeriv2Coord(undefined4 glContext,int controlPoints,int uOrder
     _uorder_c = uOrder;
   }
   if ((((double)GH_U2F((unsigned int)_vvalue_c) != floatArg2) || (_vtype_c != 1)) || (_vorder_c != vOrder)) {
-    ((void (*)())_glePreEvaluateWithDeriv)(glContext,vOrder,iVar12,&_vcoeff_c,&_vcoeffDeriv_c,floatArg2,(double)dVar13,floatArg3,floatArg4,
+    ((void (*)())_glePreEvaluateWithDeriv)(glContext,vOrder,savedUOrder,&_vcoeff_c,&_vcoeffDeriv_c,floatArg2,(double)savedFloatArg2,floatArg3,floatArg4,
                floatArg5,floatArg6,floatArg7,floatArg8,incomingStack_ffffff78,incomingStack_ffffff80,
                incomingStack_ffffff88,incomingStack_ffffff90,incomingStack_ffffff98);
     _vtype_c = 1;
@@ -4286,24 +4288,24 @@ void _gleEvalDomainDeriv2Coord(undefined4 glContext,int controlPoints,int uOrder
       if (0 < uOrder) {
         do {
           vIndex = 1;
-          fVar1 = *controlPointCursor;
+          firstControlPoint = *controlPointCursor;
           controlPointCursor = controlPointCursor + componentCount;
-          vDerivRowSum = GH_U2F((unsigned int)_vcoeffDeriv_c) * fVar1;
-          fVar1 = GH_U2F((unsigned int)_vcoeff_c) * fVar1;
+          vDerivRowSum = GH_U2F((unsigned int)_vcoeffDeriv_c) * firstControlPoint;
+          valueRowSum = GH_U2F((unsigned int)_vcoeff_c) * firstControlPoint;
           if (1 < vOrder) {
             do {
               nextVIndex = vIndex + 1;
               controlPointValue = *controlPointCursor;
               controlPointCursor = controlPointCursor + componentCount;
               vDerivRowSum = GH_U2F((unsigned int)((&_vcoeffDeriv_c)[vIndex])) * controlPointValue + vDerivRowSum;
-              fVar1 = GH_U2F((unsigned int)((&_vcoeff_c)[vIndex])) * controlPointValue + fVar1;
+              valueRowSum = GH_U2F((unsigned int)((&_vcoeff_c)[vIndex])) * controlPointValue + valueRowSum;
               vIndex = nextVIndex;
             } while (nextVIndex < vOrder);
           }
           nextUIndex = uIndex + 1;
           derivVSum = GH_U2F((unsigned int)((&_ucoeff_c)[uIndex])) * vDerivRowSum + derivVSum;
-          derivUSum = GH_U2F((unsigned int)((&_ucoeffDeriv_c)[uIndex])) * fVar1 + derivUSum;
-          valueSum = GH_U2F((unsigned int)((&_ucoeff_c)[uIndex])) * fVar1 + valueSum;
+          derivUSum = GH_U2F((unsigned int)((&_ucoeffDeriv_c)[uIndex])) * valueRowSum + derivUSum;
+          valueSum = GH_U2F((unsigned int)((&_ucoeff_c)[uIndex])) * valueRowSum + valueSum;
           uIndex = nextUIndex;
         } while (nextUIndex < uOrder);
       }

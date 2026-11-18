@@ -341,43 +341,43 @@ int _glepValidatePlugin(plugin)
   int plugin;
 {
   int infoSymbol;
-  bool bVar1;
+  bool listEmpty;
   uint otherPluginId;
   int *otherPlugin;
   int initSymbol;
-  code *pcVar5;
+  code *symbolFunction;
   int local_20;
   int local_1c;
   int local_18;
-  uint local_14 [3];
+  uint pluginId [3];
   
   if (((*(int *)(plugin + 0x104) != 0xffff) &&
       (initSymbol = _NSLookupSymbolInModule(*(undefined4 *)(plugin + 0x10c),"_gldInitializeLibrary"),
-      initSymbol != 0)) && (pcVar5 = (code *)_NSAddressOfSymbol(initSymbol), pcVar5 != (code *)0x0)) {
-    (*pcVar5)(*(undefined4 *)(PTR__gle_io_data_00112434 + 4),
+      initSymbol != 0)) && (symbolFunction = (code *)_NSAddressOfSymbol(initSymbol), symbolFunction != (code *)0x0)) {
+    (*symbolFunction)(*(undefined4 *)(PTR__gle_io_data_00112434 + 4),
               *(undefined4 *)(PTR__gle_io_data_00112434 + 8),*(undefined4 *)(plugin + 0x110),
               *(undefined4 *)(PTR__gle_io_data_00112434 + 0xc),
               *(undefined4 *)(PTR__gle_io_data_00112434 + 0x10));
     infoSymbol = _NSLookupSymbolInModule(*(undefined4 *)(plugin + 0x10c),_glep_gld_names);
-    if (((infoSymbol != 0) && (pcVar5 = (code *)_NSAddressOfSymbol(infoSymbol), pcVar5 != (code *)0x0)) &&
-       (infoSymbol = (*pcVar5)(&local_20,&local_1c,&local_18,local_14), infoSymbol != 0)) {
+    if (((infoSymbol != 0) && (symbolFunction = (code *)_NSAddressOfSymbol(infoSymbol), symbolFunction != (code *)0x0)) &&
+       (infoSymbol = (*symbolFunction)(&local_20,&local_1c,&local_18,pluginId), infoSymbol != 0)) {
       if (*(int *)(plugin + 0x104) == 0) {
-        local_14[0] = local_14[0] & 0xff00;
+        pluginId[0] = pluginId[0] & 0xff00;
         if (((local_20 != 2) || (local_1c != 4)) || (local_18 != 0xb)) goto LAB_00001c9c;
-        bVar1 = _glep_plugin_head == (int *)0x0;
-        if (!bVar1) {
+        listEmpty = _glep_plugin_head == (int *)0x0;
+        if (!listEmpty) {
           otherPluginId = _glep_plugin_head[0x41];
           otherPlugin = _glep_plugin_head;
-          while (local_14[0] != otherPluginId) {
+          while (pluginId[0] != otherPluginId) {
             otherPlugin = (int *)*otherPlugin;
             if (otherPlugin == (int *)0x0) goto LAB_00001c90;
-            bVar1 = false;
+            listEmpty = false;
             otherPluginId = otherPlugin[0x41];
           }
-          if (!bVar1) goto LAB_00001c9c;
+          if (!listEmpty) goto LAB_00001c9c;
         }
 LAB_00001c90:
-        *(uint *)(plugin + 0x104) = local_14[0];
+        *(uint *)(plugin + 0x104) = pluginId[0];
       }
       return 1;
     }
@@ -3528,27 +3528,27 @@ LAB_00005c28:
 }
 
 /* _gleCreatePluginTexture @ 0x5de4 (120 bytes) */
-void _gleCreatePluginTexture(glContext, param_2)
+void _gleCreatePluginTexture(glContext, textureRecord)
   int glContext;
-  int param_2;
+  int textureRecord;
 {
-  int *piVar1;
-  undefined4 *puVar2;
-  int iVar3;
+  int *rendererCallbacks;
+  undefined4 *rendererHandlePtr;
+  int rendererRecordCursor;
   int loopIndex;
-  int iVar5;
+  int rendererSlot;
   
-  iVar3 = glContext + 0x10000;
+  rendererRecordCursor = glContext + 0x10000;
   loopIndex = 0;
   if (*(char *)(glContext + 0x85a4) != '\0') {
-    iVar5 = param_2;
+    rendererSlot = textureRecord;
     do {
-      piVar1 = (int *)(iVar3 + -0x777c);
-      puVar2 = (undefined4 *)(iVar3 + -0x7a54);
-      iVar3 = iVar3 + 0x2e0;
+      rendererCallbacks = (int *)(rendererRecordCursor + -0x777c);
+      rendererHandlePtr = (undefined4 *)(rendererRecordCursor + -0x7a54);
+      rendererRecordCursor = rendererRecordCursor + 0x2e0;
       loopIndex = loopIndex + 1;
-      (**(code **)(*piVar1 + 0x14c))(*puVar2,iVar5,param_2 + 0x24);
-      iVar5 = iVar5 + 4;
+      (**(code **)(*rendererCallbacks + 0x14c))(*rendererHandlePtr,rendererSlot,textureRecord + 0x24);
+      rendererSlot = rendererSlot + 4;
     } while (loopIndex < (int)(uint)*(byte *)(glContext + 0x85a4));
   }
   return;
@@ -4010,30 +4010,30 @@ int _gleCreateVertexArrayObject(glContext, param_2)
 }
 
 /* _gleCreatePluginVertexArray @ 0x65e0 (132 bytes) */
-void _gleCreatePluginVertexArray(glContext, param_2)
+void _gleCreatePluginVertexArray(glContext, vertexArrayState)
   int glContext;
-  int param_2;
+  int vertexArrayState;
 {
-  int *piVar1;
-  undefined4 *puVar2;
-  int iVar3;
+  int *rendererCallbacks;
+  undefined4 *rendererHandlePtr;
+  int rendererRecordCursor;
   int loopIndex;
-  int iVar5;
-  int iVar6;
+  int rendererSlot;
+  int rendererRecord;
   
-  iVar3 = glContext + 0x10000;
+  rendererRecordCursor = glContext + 0x10000;
   loopIndex = 0;
   if (*(char *)(glContext + 0x85a4) != '\0') {
-    iVar5 = param_2;
-    iVar6 = param_2 + 0x3d0;
+    rendererSlot = vertexArrayState;
+    rendererRecord = vertexArrayState + 0x3d0;
     do {
-      piVar1 = (int *)(iVar3 + -0x777c);
-      puVar2 = (undefined4 *)(iVar3 + -0x7a54);
-      iVar3 = iVar3 + 0x2e0;
+      rendererCallbacks = (int *)(rendererRecordCursor + -0x777c);
+      rendererHandlePtr = (undefined4 *)(rendererRecordCursor + -0x7a54);
+      rendererRecordCursor = rendererRecordCursor + 0x2e0;
       loopIndex = loopIndex + 1;
-      (**(code **)(*piVar1 + 0x1a4))(*puVar2,iVar5,param_2 + 0x20,iVar6);
-      iVar5 = iVar5 + 4;
-      iVar6 = iVar6 + 0x8c;
+      (**(code **)(*rendererCallbacks + 0x1a4))(*rendererHandlePtr,rendererSlot,vertexArrayState + 0x20,rendererRecord);
+      rendererSlot = rendererSlot + 4;
+      rendererRecord = rendererRecord + 0x8c;
     } while (loopIndex < (int)(uint)*(byte *)(glContext + 0x85a4));
   }
   return;
