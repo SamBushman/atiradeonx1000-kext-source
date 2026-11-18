@@ -2710,19 +2710,19 @@ void _glMapGrid2f_Exec(int glContext,uint un,undefined4 u1Shadow,undefined4 u2Sh
 {
   double intToDoubleBias;
   undefined4 glErrorCode;
-  double dVar3;
+  double unAsDouble;
   
   intToDoubleBias = DOUBLE_00108d58;
   if (*(short *)(glContext + 0x4a10) < 0) {
     if ((0 < (int)un) && (0 < (int)vn)) {
-      dVar3 = (double)CONCAT44(0x43300000,un ^ 0x80000000) - DOUBLE_00108d58;
+      unAsDouble = (double)CONCAT44(0x43300000,un ^ 0x80000000) - DOUBLE_00108d58;
       *(uint *)(glContext + 0x74b8) = un;
       *(float *)(glContext + 0x74bc) = (float)u1;
       *(float *)(glContext + 0x74c0) = (float)u2;
       *(uint *)(glContext + 0x74c8) = vn;
       *(float *)(glContext + 0x74cc) = (float)v1;
       *(float *)(glContext + 0x74d0) = (float)v2;
-      *(float *)(glContext + 0x74c4) = (u2 - u1) / (float)dVar3;
+      *(float *)(glContext + 0x74c4) = (u2 - u1) / (float)unAsDouble;
       *(float *)(glContext + 0x74d4) =
            (v2 - v1) /
            (float)((double)CONCAT44(0x43300000,vn ^ 0x80000000) - intToDoubleBias);

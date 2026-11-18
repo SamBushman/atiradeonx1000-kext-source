@@ -2684,7 +2684,7 @@ int _glMaterialfv_Comp(glContext, face, pname, params)
   undefined *pname;
   undefined4 *params;
 {
-  undefined *puVar1;
+  undefined *expectedPname;
   undefined4 *listRecord;
   
   listRecord = (undefined4 *)((int (*)())_gleAddListItem)(glContext,PTR__glMaterialfv_ListExec_001101ec,0x18);
@@ -2695,12 +2695,12 @@ int _glMaterialfv_Comp(glContext, face, pname, params)
     if (pname < (undefined *)0x1601) {
       if (pname != ((unsigned char *)0x00001201)) {
         if (((unsigned char *)0x00001201) < pname) {
-          puVar1 = ((unsigned char *)0x00001202);
+          expectedPname = ((unsigned char *)0x00001202);
         }
         else {
-          puVar1 = ((unsigned char *)0x00001200);
+          expectedPname = ((unsigned char *)0x00001200);
         }
-        if (pname != puVar1) goto LAB_00039740;
+        if (pname != expectedPname) goto LAB_00039740;
       }
     }
     else if (pname != (undefined *)0x1602) {

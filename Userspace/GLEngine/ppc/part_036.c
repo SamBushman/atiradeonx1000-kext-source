@@ -419,7 +419,7 @@ double _glVertexAttrib3svARB_Exec(glContext, index, v)
   short *v;
 {
   undefined4 oneBits;
-  short sVar2;
+  short thirdComponent;
   double intToDoubleBias;
   int attribRecord;
   undefined4 incomingR6;
@@ -449,10 +449,10 @@ double _glVertexAttrib3svARB_Exec(glContext, index, v)
            (float)((double)CONCAT44(0x43300000,(int)*v ^ 0x80000000) - DOUBLE_00108d58);
       *(float *)(attribRecord + 0x1a4) =
            (float)((double)CONCAT44(0x43300000,(int)v[1] ^ 0x80000000) - intToDoubleBias);
-      sVar2 = v[2];
+      thirdComponent = v[2];
       *(undefined4 *)(attribRecord + 0x1ac) = oneBits;
       *(float *)(attribRecord + 0x1a8) =
-           (float)((double)CONCAT44(0x43300000,(int)sVar2 ^ 0x80000000) - intToDoubleBias);
+           (float)((double)CONCAT44(0x43300000,(int)thirdComponent ^ 0x80000000) - intToDoubleBias);
     }
   }
   else if (*(int *)(glContext + 0x7574) == 0) {

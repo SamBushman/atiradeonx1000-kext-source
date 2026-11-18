@@ -170,13 +170,13 @@ void _gliTerminateLibrary()
 int _gliDestroyAllContexts()
 {
   int glContext;
-  int iVar2;
+  int nextContext;
   
   glContext = _gl_list;
   while (glContext != 0) {
-    iVar2 = *(int *)(glContext + 0x85a0);
+    nextContext = *(int *)(glContext + 0x85a0);
     _gliDestroyContext(glContext);
-    glContext = iVar2;
+    glContext = nextContext;
   }
   _gl_list = 0;
   return 0;

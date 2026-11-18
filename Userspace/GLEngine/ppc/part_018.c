@@ -46,7 +46,7 @@ void _glLightModelfv_Exec(glContext, pname, params)
   int dirtyWordAddress348;
   int glContextPtr5424;
   int dirtyWordAddress324;
-  float dVar8;
+  float paramValueAsDouble;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
     if (pname == 0xb53) {
@@ -85,16 +85,16 @@ void _glLightModelfv_Exec(glContext, pname, params)
     }
     else if (pname == 0x81f8) {
       paramValue = *params;
-      dVar8 = (double)paramValue;
-      if (DOUBLE_00108d80 <= (double)dVar8) {
-        paramEnum = (int)((double)dVar8 - DOUBLE_00108d80) ^ 0x80000000;
+      paramValueAsDouble = (double)paramValue;
+      if (DOUBLE_00108d80 <= (double)paramValueAsDouble) {
+        paramEnum = (int)((double)paramValueAsDouble - DOUBLE_00108d80) ^ 0x80000000;
       }
       else {
         paramEnum = (uint)(int)paramValue;
       }
       if (1 < paramEnum - 0x81f9) goto LAB_0006d214;
-      if (DOUBLE_00108d80 <= (double)dVar8) {
-        colorControl = (undefined2)(int)((double)dVar8 - DOUBLE_00108d80);
+      if (DOUBLE_00108d80 <= (double)paramValueAsDouble) {
+        colorControl = (undefined2)(int)((double)paramValueAsDouble - DOUBLE_00108d80);
       }
       else {
         colorControl = (undefined2)(int)paramValue;

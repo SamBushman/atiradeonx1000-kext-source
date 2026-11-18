@@ -803,11 +803,11 @@ int _glTexImage2D_ListExec(glContext, listRecord)
 {
   byte levelFlags;
   ushort objectFlags;
-  int iVar3;
+  int regionOffsetX;
   int levelRecord;
   uint faceIndex;
   int textureObject;
-  int iVar6;
+  int regionOffsetY;
   int textureLevel;
   int recordSize;
   int level;
@@ -840,16 +840,16 @@ int _glTexImage2D_ListExec(glContext, listRecord)
   if ((*(uint *)(glContext + 0x3410) & 2) == 0) {
     if (((*(uint *)(glContext + 0x3410) & 4) == 0) || (*(short *)(glContext + 0x3348) != -0x7fea))
     goto LAB_0009ef44;
-    iVar6 = *(int *)(glContext + 0x3354);
-    iVar3 = *(int *)(glContext + 0x3350);
+    regionOffsetY = *(int *)(glContext + 0x3354);
+    regionOffsetX = *(int *)(glContext + 0x3350);
   }
   else {
     if (*(short *)(glContext + 0x3308) != -0x7fea) goto LAB_0009ef44;
-    iVar6 = *(int *)(glContext + 0x3314);
-    iVar3 = *(int *)(glContext + 0x3310);
+    regionOffsetY = *(int *)(glContext + 0x3314);
+    regionOffsetX = *(int *)(glContext + 0x3310);
   }
-  widthThenCreateResult = (widthThenCreateResult - iVar3) + 1;
-  height = (height - iVar6) + 1;
+  widthThenCreateResult = (widthThenCreateResult - regionOffsetX) + 1;
+  height = (height - regionOffsetY) + 1;
 LAB_0009ef44:
   faceIndex = *listRecord - 0x8515;
   if (5 < faceIndex) {

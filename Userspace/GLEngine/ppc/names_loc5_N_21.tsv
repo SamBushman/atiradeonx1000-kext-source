@@ -1,0 +1,13 @@
+local	_glFramebufferRenderbufferEXT_Exec_body	uVar3	attachmentKind	INFERRED	kind code passed to _gleFramebufferTexture: 0 when detaching, 0x2000 when a renderbuffer object was found
+local	_glFramebufferTexture2DEXT_Exec	uVar1	attachmentKind	INFERRED	kind code passed to _gleFramebufferTexture: 2 for the 0x84f5 target, 3 for the 2D target, 0 for a cube-map face
+local	_glRenderbufferStorageEXT_Exec	bVar1	formatOutOfRange	CONFIRMED	true when internalformat falls outside the accepted ranges of the current sub-test; false jumps to the accept label
+local	_glUniform1fvARB_Exec	fVar2	uniformFloat	CONFIRMED	current float read from value and copied to the uniform slot
+local	_glUniform1iARB_Exec	uVar11	uniformUpdateKind	INFERRED	last argument of renderer callback +0x194: 2 by default, 6 after _setImageUnit for sampler/image uniforms
+local	_glVertexAttrib3svARB_Exec	sVar2	thirdComponent	CONFIRMED	v[2] converted to float for the attribute's third component
+local	_glVertexAttrib1svARB_Exec	dVar4	firstComponentAsDouble	CONFIRMED	(int)*v converted to double with the magic-bias trick, then narrowed to float and stored at attribRecord+0x1a0
+local	_gleCullQuad	uVar1	frontFacing	INFERRED	1 when the signed-area sign (compared to zero) equals the winding byte ctx+0x4fe1; its inverse is stored to *backFacingOut and it is compared with the cull byte ctx+0x4fe3
+local	_gleSetEnable_COLOR_SUM	cVar3	vertexProgramFlag	INFERRED	copy of byte ctx+0x4664, tested together with ctx+0x5434 to choose between reselecting the submit function and marking state dirty
+local	_gleAllocVertexArrays	uVar2	allocStatus	CONFIRMED	0x2720 when either _gleInitFuncCache fails, else 0 after the state is initialised; only returned
+local	_gliDestroyAllContexts	iVar2	nextContext	CONFIRMED	next context in the list (ctx+0x85a0), read before _gliDestroyContext frees the current one
+local	_gleInitVertexArrayState	uVar1	pluginVertexArray	INFERRED	per-renderer word read from the vertex array object's +0x10 table and stored at ctx+0x8874 + renderer*0x2e0
+local	_gleAddHashNameAndObject	uVar1	hashNameResult	CONFIRMED	result of _gleAddHashName; only returned

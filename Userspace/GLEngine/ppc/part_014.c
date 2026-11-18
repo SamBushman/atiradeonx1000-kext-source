@@ -801,16 +801,16 @@ int _glDrawBuffersARB_Comp(glContext, n, bufs)
   int n;
   int *bufs;
 {
-  int iVar1;
+  int bufEnum;
   
   if (n < 5) {
     glContext = (int *)_gleAddListItem(glContext,PTR__glDrawBuffersARB_ListExec_001100a0,0x14);
     if ((glContext != (int *)0x0) && (*glContext = n, 0 < n)) {
       glContext = glContext + 1;
       do {
-        iVar1 = *bufs;
+        bufEnum = *bufs;
         bufs = bufs + 1;
-        *glContext = iVar1;
+        *glContext = bufEnum;
         glContext = glContext + 1;
         n = n + -1;
       } while (n != 0);

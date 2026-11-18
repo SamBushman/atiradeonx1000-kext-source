@@ -2839,15 +2839,15 @@ int _glRecti_Comp(glContext, x1, y1, x2, y2)
   undefined4 x2;
   undefined4 y2;
 {
-  undefined4 uVar1;
+  undefined4 endResult;
   
   _glBegin_Comp(glContext,9);
   _glVertex2i_Comp(glContext,x1,y1);
   _glVertex2i_Comp(glContext,x2,y1);
   _glVertex2i_Comp(glContext,x2,y2);
   _glVertex2i_Comp(glContext,x1,y2);
-  uVar1 = _glEnd_Comp(glContext);
-  return uVar1;
+  endResult = _glEnd_Comp(glContext);
+  return endResult;
 }
 
 /* _glRecti_Exec @ 0x848d0 (188 bytes) */

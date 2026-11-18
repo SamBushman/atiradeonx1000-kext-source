@@ -439,7 +439,7 @@ int _glPointParameterfv_Comp(glContext, pname, params)
   int pname;
   int *params;
 {
-  int iVar1;
+  int paramWord;
   int *dstCursor;
   int remaining;
   
@@ -451,9 +451,9 @@ int _glPointParameterfv_Comp(glContext, pname, params)
   if ((dstCursor != (int *)0x0) && (*dstCursor = pname, remaining != 0)) {
     dstCursor = dstCursor + 1;
     do {
-      iVar1 = *params;
+      paramWord = *params;
       params = params + 1;
-      *dstCursor = iVar1;
+      *dstCursor = paramWord;
       dstCursor = dstCursor + 1;
       remaining = remaining + -1;
     } while (remaining != 0);

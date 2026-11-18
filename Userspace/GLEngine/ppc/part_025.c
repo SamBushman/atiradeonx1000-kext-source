@@ -2348,7 +2348,7 @@ void _glUniform1fvARB_Exec(glContext, location, count, value)
   float *value;
 {
   int *rendererCallbacks;
-  float fVar2;
+  float uniformFloat;
   float floatZero;
   bool stage0Updated;
   bool stage1Updated;
@@ -2395,10 +2395,10 @@ void _glUniform1fvARB_Exec(glContext, location, count, value)
           dstCursor = (float *)(*(int *)(currentProgram + 0x4c) + location * 0x10);
           if (0 < uniformSize) {
             do {
-              fVar2 = *value;
+              uniformFloat = *value;
               loopIndex = loopIndex + 1;
               value = value + 1;
-              *dstCursor = fVar2;
+              *dstCursor = uniformFloat;
               dstCursor = dstCursor + 4;
             } while (loopIndex < uniformSize);
           }
@@ -2924,7 +2924,7 @@ void _glUniform1iARB_Exec(glContext, location, v0)
   int stage0Record;
   int uniformValueSlot;
   undefined4 uniformWord2;
-  undefined4 uVar11;
+  undefined4 uniformUpdateKind;
   int currentProgram;
   int rendererRecordCursor;
   int loopIndex;
@@ -2944,7 +2944,7 @@ void _glUniform1iARB_Exec(glContext, location, v0)
   
   uniformStageUse[0] = 0;
   uniformType = 0;
-  uVar11 = 2;
+  uniformUpdateKind = 2;
   uniformSize = 0;
   if (location == -1) {
     return;
@@ -2974,7 +2974,7 @@ void _glUniform1iARB_Exec(glContext, location, v0)
   if (uniformType != 0x1404) {
     if (uniformType - 0x8b5dU < 8) {
       *(int *)(uniformValueBase + locationValueOffset) = v0;
-      uVar11 = 6;
+      uniformUpdateKind = 6;
       ((double (*)())_setImageUnit)(glContext,currentProgram,v0,previousValue,uniformStageUse,uniformType,incomingFpr1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,
                     incomingFpr6,incomingFpr7,incomingFpr8);
       goto LAB_0008af2c;
@@ -3011,7 +3011,7 @@ LAB_0008af2c:
         rendererHandlePtr = (undefined4 *)(rendererRecordCursor + -0x7a54);
         rendererRecordCursor = rendererRecordCursor + 0x2e0;
         (**(code **)(*rendererCallbacks + 0x194))
-                  (*rendererHandlePtr,*(undefined4 *)(rendererSlotOffset2 + *(int *)(currentProgram + 0x20) + 0x4e4),uVar11);
+                  (*rendererHandlePtr,*(undefined4 *)(rendererSlotOffset2 + *(int *)(currentProgram + 0x20) + 0x4e4),uniformUpdateKind);
       } while (loopIndex2 < (int)(uint)*(byte *)(glContext + 0x85a4));
     }
   }
@@ -3038,7 +3038,7 @@ LAB_0008af2c:
         rendererHandlePtr = (undefined4 *)(rendererRecordCursor2 + -0x7a54);
         rendererRecordCursor2 = rendererRecordCursor2 + 0x2e0;
         (**(code **)(*rendererCallbacks + 0x194))
-                  (*rendererHandlePtr,*(undefined4 *)(rendererSlotOffset + *(int *)(currentProgram + 0x24) + 0x4e4),uVar11);
+                  (*rendererHandlePtr,*(undefined4 *)(rendererSlotOffset + *(int *)(currentProgram + 0x24) + 0x4e4),uniformUpdateKind);
       } while (loopIndex < (int)(uint)*(byte *)(glContext + 0x85a4));
     }
   }

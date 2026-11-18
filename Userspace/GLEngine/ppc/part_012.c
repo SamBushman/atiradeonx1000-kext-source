@@ -544,14 +544,14 @@ int _glSecondaryColor3_ListExec(glContext, recordedArgs)
   int glContext;
   undefined4 *recordedArgs;
 {
-  undefined4 uVar1;
-  undefined4 uVar2;
+  undefined4 secondaryRed;
+  undefined4 secondaryGreen;
   
-  uVar1 = *recordedArgs;
-  uVar2 = recordedArgs[1];
+  secondaryRed = *recordedArgs;
+  secondaryGreen = recordedArgs[1];
   *(undefined4 *)(glContext + 0x2c8) = recordedArgs[2];
-  *(undefined4 *)(glContext + 0x2c0) = uVar1;
-  *(undefined4 *)(glContext + 0x2c4) = uVar2;
+  *(undefined4 *)(glContext + 0x2c0) = secondaryRed;
+  *(undefined4 *)(glContext + 0x2c4) = secondaryGreen;
   return 0xc;
 }
 

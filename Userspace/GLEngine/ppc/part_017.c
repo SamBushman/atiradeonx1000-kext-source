@@ -1253,18 +1253,18 @@ void _glGetMinmaxParameteriv_Exec(glContext, target, pname, params)
   uint *params;
 {
   undefined4 glErrorCode;
-  uint uVar2;
+  uint minmaxFormatOrSink;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
     if (target == 0x802e) {
       if (pname == 0x802f) {
-        uVar2 = (uint)*(ushort *)(glContext + 0x3380);
+        minmaxFormatOrSink = (uint)*(ushort *)(glContext + 0x3380);
 LAB_0006aca0:
-        *params = uVar2;
+        *params = minmaxFormatOrSink;
         return;
       }
       if (pname == 0x8030) {
-        uVar2 = (uint)*(byte *)(glContext + 0x3382);
+        minmaxFormatOrSink = (uint)*(byte *)(glContext + 0x3382);
         goto LAB_0006aca0;
       }
     }

@@ -1687,7 +1687,7 @@ void _glMultiDrawElementArrayAPPLE_CompExec(glContext, mode, first, count, primc
   int count;
   int primcount;
 {
-  int iVar1;
+  int byteOffset;
   int loopIndex;
   double incomingFpr1;
   double incomingFpr2;
@@ -1707,11 +1707,11 @@ void _glMultiDrawElementArrayAPPLE_CompExec(glContext, mode, first, count, primc
     loopIndex = 0;
     if (0 < primcount) {
       do {
-        iVar1 = loopIndex * 4;
-        ((int (*)())_glDrawElementArrayAPPLE_Comp)(glContext,mode,*(undefined4 *)(iVar1 + first),*(undefined4 *)(iVar1 + count)
+        byteOffset = loopIndex * 4;
+        ((int (*)())_glDrawElementArrayAPPLE_Comp)(glContext,mode,*(undefined4 *)(byteOffset + first),*(undefined4 *)(byteOffset + count)
                   );
         loopIndex = loopIndex + 1;
-        ((void (*)())_glDrawElementArrayAPPLE_Exec)(glContext,mode,*(undefined4 *)(iVar1 + first),*(undefined4 *)(iVar1 + count)
+        ((void (*)())_glDrawElementArrayAPPLE_Exec)(glContext,mode,*(undefined4 *)(byteOffset + first),*(undefined4 *)(byteOffset + count)
                    ,incomingFpr1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
       } while (loopIndex < primcount);
     }

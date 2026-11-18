@@ -1126,27 +1126,27 @@ int _gleCheckColorTableArgs(glContext, target, internalformat, width, format, ty
   undefined4 format;
   undefined4 type;
 {
-  undefined4 uVar1;
+  undefined4 glErrorCode;
   int colorTable;
-  int iVar3;
+  int texImageArgsCheck;
   
   colorTable = _gleLookUpColorTable(glContext,target);
   if (colorTable == 0) {
     if (*(int *)(glContext + 0x7574) != 0) {
       return 0;
     }
-    uVar1 = 0x500;
+    glErrorCode = 0x500;
   }
   else {
-    iVar3 = _gleCheckTexImageArgs(glContext,0,format,type,internalformat,0,0,0);
-    if (iVar3 == 0) {
+    texImageArgsCheck = _gleCheckTexImageArgs(glContext,0,format,type,internalformat,0,0,0);
+    if (texImageArgsCheck == 0) {
       return 0;
     }
     if (((int)width < 0) || ((width & width - 1) != 0)) {
       if (*(int *)(glContext + 0x7574) != 0) {
         return 0;
       }
-      uVar1 = 0x501;
+      glErrorCode = 0x501;
     }
     else {
       if ((int)width < 0x4001) {
@@ -1158,10 +1158,10 @@ int _gleCheckColorTableArgs(glContext, target, internalformat, width, format, ty
       if (*(int *)(glContext + 0x7574) != 0) {
         return 0;
       }
-      uVar1 = 0x8031;
+      glErrorCode = 0x8031;
     }
   }
-  *(undefined4 *)(glContext + 0x7574) = uVar1;
+  *(undefined4 *)(glContext + 0x7574) = glErrorCode;
   return 0;
 }
 

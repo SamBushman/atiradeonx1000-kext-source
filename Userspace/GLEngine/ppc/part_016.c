@@ -1049,12 +1049,12 @@ int _glConvolutionParameterF_Comp(glContext, target, pname, params)
 /* _glConvolutionParameterf_Comp @ 0x68e48 (40 bytes) */
 undefined4 _glConvolutionParameterf_Comp(undefined4 glContext,undefined4 target,undefined4 pname,float params)
 {
-  undefined4 uVar1;
+  undefined4 calleeResult;
   float fStack00000024;
   
   fStack00000024 = (float)params;
-  uVar1 = ((int (*)())_glConvolutionParameterF_Comp)(glContext,target,pname,&STACKARG(0x24));
-  return uVar1;
+  calleeResult = ((int (*)())_glConvolutionParameterF_Comp)(glContext,target,pname,&STACKARG(0x24));
+  return calleeResult;
 }
 
 /* _glConvolutionParameterI_Comp @ 0x68e74 (168 bytes) */

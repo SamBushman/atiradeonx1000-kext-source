@@ -1078,11 +1078,11 @@ int _gleAddHashNameAndObject(glContext, forwardedArg2, hashObject)
   undefined4 forwardedArg2;
   int hashObject;
 {
-  undefined4 uVar1;
+  undefined4 hashNameResult;
   
-  uVar1 = ((int (*)())_gleAddHashName)(forwardedArg2,*(undefined4 *)(hashObject + 4));
+  hashNameResult = ((int (*)())_gleAddHashName)(forwardedArg2,*(undefined4 *)(hashObject + 4));
   ((void (*)())_gleAddHashObject)(forwardedArg2,hashObject);
-  return uVar1;
+  return hashNameResult;
 }
 
 /* _gleAddHashName @ 0x17ca0 (320 bytes) */

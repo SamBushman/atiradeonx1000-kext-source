@@ -1012,7 +1012,7 @@ void _glClearAccum_Comp(undefined4 glContext,float red,float green,float blue,fl
 void _glClearAccum_Exec(int glContext,float red,float green,float blue,float alpha)
 {
   float floatMinusOne;
-  float dVar2;
+  float floatMinusOneAsDouble;
   
   floatMinusOne = FLOAT_00108e58;
   if (-1 < *(short *)(glContext + 0x4a10)) {
@@ -1022,9 +1022,9 @@ void _glClearAccum_Exec(int glContext,float red,float green,float blue,float alp
     *(undefined4 *)(glContext + 0x7574) = 0x502;
     return;
   }
-  dVar2 = (double)FLOAT_00108e58;
+  floatMinusOneAsDouble = (double)FLOAT_00108e58;
   *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x40;
-  if (red < (double)dVar2) {
+  if (red < (double)floatMinusOneAsDouble) {
     *(float *)(glContext + 0x30f0) = floatMinusOne;
   }
   else if (1.0 < red) {

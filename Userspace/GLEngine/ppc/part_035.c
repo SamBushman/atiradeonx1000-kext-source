@@ -1315,7 +1315,7 @@ double _glVertexAttrib1svARB_Exec(glContext, index, v)
   float zero;
   int attribRecord;
   code *vertexFunc;
-  double dVar4;
+  double firstComponentAsDouble;
   
   if (index < 0x10) {
     zero = *(float *)(glContext + 0x20);
@@ -1330,11 +1330,11 @@ double _glVertexAttrib1svARB_Exec(glContext, index, v)
     }
     else {
       attribRecord = glContext + index * 0x10;
-      dVar4 = (double)CONCAT44(0x43300000,(int)*v ^ 0x80000000) - DOUBLE_00108d58;
+      firstComponentAsDouble = (double)CONCAT44(0x43300000,(int)*v ^ 0x80000000) - DOUBLE_00108d58;
       *(float *)(attribRecord + 0x1ac) = *(float *)(glContext + 0x24);
       *(float *)(attribRecord + 0x1a8) = zero;
       *(float *)(attribRecord + 0x1a4) = zero;
-      *(float *)(attribRecord + 0x1a0) = (float)dVar4;
+      *(float *)(attribRecord + 0x1a0) = (float)firstComponentAsDouble;
     }
   }
   else if (*(int *)(glContext + 0x7574) == 0) {

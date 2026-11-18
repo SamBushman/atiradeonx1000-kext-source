@@ -1948,20 +1948,20 @@ int _gleAllocVertexArrays(glContext)
   int glContext;
 {
   int funcCache;
-  undefined4 uVar2;
+  undefined4 allocStatus;
   
   funcCache = ((int (*)())_gleInitFuncCache)();
   *(int *)(glContext + 0x49b4) = funcCache;
-  uVar2 = 0x2720;
+  allocStatus = 0x2720;
   if (funcCache != 0) {
     funcCache = ((int (*)())_gleInitFuncCache)();
     *(int *)(glContext + 0x49b8) = funcCache;
-    uVar2 = 0x2720;
+    allocStatus = 0x2720;
     if (funcCache != 0) {
       *(undefined4 *)(glContext + 0x497c) = 0x1f;
       *(undefined4 *)(glContext + 0x4980) = 3;
       *(undefined4 *)(glContext + 0x49c4) = 0;
-      uVar2 = 0;
+      allocStatus = 0;
       *(undefined4 *)(glContext + 0x49b0) = 0xaeee;
       *(undefined2 *)(glContext + 0x49bc) = 0x14;
       *(undefined2 *)(glContext + 0x49c0) = 6;
@@ -1980,7 +1980,7 @@ int _gleAllocVertexArrays(glContext)
       *(undefined2 *)(glContext + 0x49be) = 1;
     }
   }
-  return uVar2;
+  return allocStatus;
 }
 
 /* _gleInitFuncCache @ 0x4234 (140 bytes) */
@@ -3885,7 +3885,7 @@ void _glePPEmulatorInitialize(glContext)
 void _gleInitVertexArrayState(glContext)
   int glContext;
 {
-  undefined4 uVar1;
+  undefined4 pluginVertexArray;
   int vertexArrayObject;
   undefined4 *dstCursor;
   int loopIndex;
@@ -3900,10 +3900,10 @@ void _gleInitVertexArrayState(glContext)
   if (*(char *)(glContext + 0x85a4) != '\0') {
     dstCursor = (undefined4 *)(glContext + 0x8874);
     do {
-      uVar1 = *srcCursor;
+      pluginVertexArray = *srcCursor;
       loopIndex = loopIndex + 1;
       srcCursor = srcCursor + 1;
-      *dstCursor = uVar1;
+      *dstCursor = pluginVertexArray;
       dstCursor = dstCursor + 0xb8;
     } while (loopIndex < (int)(uint)*(byte *)(glContext + 0x85a4));
   }

@@ -385,18 +385,18 @@ undefined4 _gleCullTriangle(int glContext,float *param_2,float *param_3,float *p
 /* _gleCullQuad @ 0xebd58 (160 bytes) */
 undefined4 _gleCullQuad(int glContext,float *vertex0,float *vertex1,float *vertex2,float *vertex3,uint *backFacingOut,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11)
 {
-  uint uVar1;
+  uint frontFacing;
   
-  uVar1 = (uint)((bool)*(char *)(glContext + 0x4fe1) ==
+  frontFacing = (uint)((bool)*(char *)(glContext + 0x4fe1) ==
                 FLOAT_00108e50 <
                 (*vertex0 * vertex1[1] - *vertex1 * vertex0[1]) +
                 ((*vertex1 * vertex2[1] - *vertex2 * vertex1[1])) +
                 ((*vertex2 * vertex3[1] - *vertex3 * vertex2[1])) +
                 ((*vertex3 * vertex0[1] - *vertex0 * vertex3[1])));
-  if (*(byte *)(glContext + 0x4fe3) == uVar1) {
+  if (*(byte *)(glContext + 0x4fe3) == frontFacing) {
     return 1;
   }
-  *backFacingOut = uVar1 ^ 1;
+  *backFacingOut = frontFacing ^ 1;
   return 0;
 }
 

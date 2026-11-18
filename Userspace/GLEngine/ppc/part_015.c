@@ -1132,7 +1132,7 @@ void _glRenderbufferStorageEXT_Exec(glContext, target, internalformat, width, he
   uint width;
   uint height;
 {
-  bool bVar1;
+  bool formatOutOfRange;
   undefined4 glErrorCode;
   int sharedStateMutex;
   
@@ -1152,7 +1152,7 @@ void _glRenderbufferStorageEXT_Exec(glContext, target, internalformat, width, he
         if (0x804e < internalformat) goto LAB_0006634c;
         if (internalformat < 0x1903) {
           if (0x1900 < internalformat) goto LAB_0006634c;
-          bVar1 = 1 < internalformat - 3;
+          formatOutOfRange = 1 < internalformat - 3;
           goto LAB_00066330;
         }
         if ((0x1906 < internalformat) && ((internalformat < 0x1909 || (internalformat == 0x2a10)))) goto LAB_0006634c;
@@ -1160,15 +1160,15 @@ void _glRenderbufferStorageEXT_Exec(glContext, target, internalformat, width, he
       else {
         if (internalformat < 0x8816) {
           if (0x8813 < internalformat) goto LAB_0006634c;
-          bVar1 = 2 < internalformat - 0x81a5;
+          formatOutOfRange = 2 < internalformat - 0x81a5;
         }
         else {
           if (internalformat < 0x881a) goto LAB_00066334;
           if (internalformat < 0x881c) goto LAB_0006634c;
-          bVar1 = 3 < internalformat - 0x8d46;
+          formatOutOfRange = 3 < internalformat - 0x8d46;
         }
 LAB_00066330:
-        if (!bVar1) {
+        if (!formatOutOfRange) {
 LAB_0006634c:
           if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) == '\0') {
             _gleRenderbufferStorage(glContext,0x8d41,internalformat,width,height);
@@ -1439,15 +1439,15 @@ void _glBindFramebufferEXT_Exec(glContext, target, framebuffer)
   undefined4 framebuffer;
 {
   undefined4 glErrorCode;
-  int iVar2;
+  int sharedStateMutex;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
     if (target == 0x8d40) {
       if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
-        iVar2 = *(int *)(glContext + 0x5148) + 0x8028;
-        _pthread_mutex_lock(iVar2);
+        sharedStateMutex = *(int *)(glContext + 0x5148) + 0x8028;
+        _pthread_mutex_lock(sharedStateMutex);
         _gleBindFramebuffer(glContext,framebuffer);
-        _pthread_mutex_unlock(iVar2);
+        _pthread_mutex_unlock(sharedStateMutex);
         return;
       }
       _gleBindFramebuffer(glContext,framebuffer);
@@ -1554,7 +1554,7 @@ void _glFramebufferTexture2DEXT_Exec(glContext, target, attachment, textarget, t
   uint level;
 {
   undefined4 glErrorCode;
-  undefined4 uVar1;
+  undefined4 attachmentKind;
   uint attachmentIndex;
   int textureObject;
   int face;
@@ -1577,7 +1577,7 @@ void _glFramebufferTexture2DEXT_Exec(glContext, target, attachment, textarget, t
         }
         if (textarget == 0x84f5) {
           if (level == 0) {
-            uVar1 = 2;
+            attachmentKind = 2;
 LAB_00066cac:
             if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
               _pthread_mutex_lock(*(int *)(glContext + 0x5148) + 0x8028);
@@ -1585,7 +1585,7 @@ LAB_00066cac:
             if ((texture == 0) ||
                (textureObject = _gleLookupHashObject(*(int *)(glContext + 0x5148) + 0x2008,texture),
                textureObject != 0)) {
-              _gleFramebufferTexture(glContext,attachmentIndex,uVar1,textureObject,face,level,0);
+              _gleFramebufferTexture(glContext,attachmentIndex,attachmentKind,textureObject,face,level,0);
               if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) == '\0') {
                 return;
               }
@@ -1607,7 +1607,7 @@ LAB_00066c98:
             glErrorCode = 0x500;
             goto LAB_00066d14;
           }
-          uVar1 = 3;
+          attachmentKind = 3;
           if (level <= 0x1fU - LZCOUNT((uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0xbc)))
           goto LAB_00066cac;
         }
@@ -1615,7 +1615,7 @@ LAB_00066c98:
           if (5 < textarget - 0x8515) goto LAB_00066c98;
           if (level <= 0x1fU - LZCOUNT((uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0xc2))) {
             face = textarget - 0x8515;
-            uVar1 = 0;
+            attachmentKind = 0;
             goto LAB_00066cac;
           }
         }
@@ -1730,10 +1730,10 @@ void _glFramebufferRenderbufferEXT_Exec_body(glContext, target, attachment, rend
   undefined4 glErrorCode;
   uint attachmentIndex;
   int textureObject;
-  undefined4 uVar3;
+  undefined4 attachmentKind;
   
   textureObject = 0;
-  uVar3 = 0;
+  attachmentKind = 0;
   if (*(short *)(glContext + 0x4a10) < 0) {
     if ((target != 0x8d40) || ((renderbuffer != 0 && (renderbuffertarget != 0x8d41)))) {
 LAB_00066ffc:
@@ -1759,7 +1759,7 @@ LAB_00066ffc:
       }
       if (renderbuffer == 0) {
 LAB_00067080:
-        _gleFramebufferTexture(glContext,attachmentIndex,uVar3,textureObject,0,0,0);
+        _gleFramebufferTexture(glContext,attachmentIndex,attachmentKind,textureObject,0,0,0);
         if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) == '\0') {
           return;
         }
@@ -1768,7 +1768,7 @@ LAB_00067080:
       }
       textureObject = _gleLookupHashObject(((unsigned char *)0x00001004) + *(int *)(glContext + 0x5148),renderbuffer);
       if (textureObject != 0) {
-        uVar3 = 0x2000;
+        attachmentKind = 0x2000;
         goto LAB_00067080;
       }
       if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {

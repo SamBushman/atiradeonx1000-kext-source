@@ -66,15 +66,15 @@ int _glRectdv_Comp(glContext, v1, v2)
   double *v1;
   double *v2;
 {
-  undefined4 uVar1;
+  undefined4 endResult;
   
   _glBegin_Comp(glContext,9);
   ((float * (*)())_glVertex2d_Comp)(glContext,*v1,v1[1]);
   ((float * (*)())_glVertex2d_Comp)(glContext,*v2,v1[1]);
   ((float * (*)())_glVertex2d_Comp)(glContext,*v2,v2[1]);
   ((float * (*)())_glVertex2d_Comp)(glContext,*v1,v2[1]);
-  uVar1 = _glEnd_Comp(glContext);
-  return uVar1;
+  endResult = _glEnd_Comp(glContext);
+  return endResult;
 }
 
 /* _glRectdv_Exec @ 0x84be8 (180 bytes) */
@@ -231,15 +231,15 @@ int _glRectsv_Comp(glContext, v1, v2)
   short *v1;
   short *v2;
 {
-  undefined4 uVar1;
+  undefined4 endResult;
   
   _glBegin_Comp(glContext,9);
   _glVertex2s_Comp(glContext,(int)*v1,(int)v1[1]);
   _glVertex2s_Comp(glContext,(int)*v2,(int)v1[1]);
   _glVertex2s_Comp(glContext,(int)*v2,(int)v2[1]);
   _glVertex2s_Comp(glContext,(int)*v1,(int)v2[1]);
-  uVar1 = _glEnd_Comp(glContext);
-  return uVar1;
+  endResult = _glEnd_Comp(glContext);
+  return endResult;
 }
 
 /* _glRectsv_Exec @ 0x85038 (180 bytes) */

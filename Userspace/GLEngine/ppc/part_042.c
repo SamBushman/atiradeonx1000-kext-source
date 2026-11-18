@@ -711,21 +711,21 @@ void _gleSetEnable_COLOR_SUM(glContext, cap, enable)
 {
   undefined *clipInterpFunc;
   undefined *eyeInterpFunc;
-  char cVar3;
+  char vertexProgramFlag;
   
   if (*(byte *)(glContext + 0x4fea) != enable) {
     *(char *)(glContext + 0x4fea) = (char)enable;
     if (*(char *)(glContext + 0x30aa) == '\0') {
-      cVar3 = *(char *)(glContext + 0x4664);
+      vertexProgramFlag = *(char *)(glContext + 0x4664);
     }
     else {
-      cVar3 = *(char *)(glContext + 0x4664);
-      if ((cVar3 == '\0') && (*(int *)(glContext + 0x5434) == 0)) {
+      vertexProgramFlag = *(char *)(glContext + 0x4664);
+      if ((vertexProgramFlag == '\0') && (*(int *)(glContext + 0x5434) == 0)) {
         return;
       }
     }
     *(char *)(glContext + 0x316b) = (char)enable;
-    if ((cVar3 == '\0') && (*(int *)(glContext + 0x5434) == 0)) {
+    if ((vertexProgramFlag == '\0') && (*(int *)(glContext + 0x5434) == 0)) {
       _gleSelectVertexSubmitFunc(glContext);
     }
     else {

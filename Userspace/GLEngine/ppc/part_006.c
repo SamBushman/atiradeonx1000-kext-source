@@ -4766,7 +4766,7 @@ undefined4 _glEnd_ListExec(undefined4 glContext,double forwardedFloatArg1,double
 /* _glEndRDirty_Exec @ 0x440c8 (200 bytes) */
 int _glEndRDirty_Exec(int glContext,double forwardedFloatArg1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
 {
-  undefined4 uVar1;
+  undefined4 popMaterialsResult;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
     if (*(int *)(glContext + 0x7574) == 0) {
@@ -4782,8 +4782,8 @@ int _glEndRDirty_Exec(int glContext,double forwardedFloatArg1,double forwardedFl
   *(undefined2 *)(glContext + 0x4a10) = 0xffff;
   *(undefined4 *)(glContext + 0x4884) = *(undefined4 *)(glContext + 0xd8);
   (**(code **)(glContext + 0x4a08))(glContext);
-  uVar1 = _glePopAndCopyMaterials(glContext);
-  return uVar1;
+  popMaterialsResult = _glePopAndCopyMaterials(glContext);
+  return popMaterialsResult;
 }
 
 /* _glPushMatrix_ListExec @ 0x44190 (36 bytes) */

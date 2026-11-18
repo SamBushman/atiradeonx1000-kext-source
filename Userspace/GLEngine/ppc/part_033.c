@@ -1301,7 +1301,7 @@ void _glEdgeFlagPointer_Exec(glContext, stride, pointer)
   int stride;
   int pointer;
 {
-  uint uVar1;
+  uint selectFirstTableMask;
   undefined4 bufferWord;
   undefined4 glErrorCode;
   int clientState;
@@ -1381,9 +1381,9 @@ void _glEdgeFlagPointer_Exec(glContext, stride, pointer)
       if (*(int *)(glContext + 0x5408) != 0) {
         return;
       }
-      uVar1 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0xc) == 0);
+      selectFirstTableMask = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0xc) == 0);
       *(undefined **)
-       ((*(uint *)(glContext + 0x4680) & uVar1 | *(uint *)(glContext + 0x4684) & ~uVar1) + 0xc) =
+       ((*(uint *)(glContext + 0x4680) & selectFirstTableMask | *(uint *)(glContext + 0x4684) & ~selectFirstTableMask) + 0xc) =
            PTR__glArrayElement_Exec_00110454;
       return;
     }

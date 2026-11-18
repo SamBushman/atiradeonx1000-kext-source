@@ -748,17 +748,17 @@ void _glEnableVertexAttribARB_Exec(glContext, param_2, param_3)
 }
 
 /* _glEnableVertexAttribARB_Comp @ 0xb07c0 (84 bytes) */
-int _glEnableVertexAttribARB_Comp(glContext, param_2, param_3)
+int _glEnableVertexAttribARB_Comp(glContext, attribIndex, attribSelector)
   undefined4 glContext;
-  undefined4 param_2;
-  undefined4 param_3;
+  undefined4 attribIndex;
+  undefined4 attribSelector;
 {
   undefined4 *listRecord;
   
   listRecord = (undefined4 *)_gleAddListItem(glContext,PTR__glEnableVertexAttribARB_ListExec_00110468,8);
   if (listRecord != (undefined4 *)0x0) {
-    listRecord[1] = param_3;
-    *listRecord = param_2;
+    listRecord[1] = attribSelector;
+    *listRecord = attribIndex;
   }
   return listRecord;
 }

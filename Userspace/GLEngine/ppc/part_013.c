@@ -2201,7 +2201,7 @@ undefined4 _glCopyPixels_ListExec(int glContext,undefined4 *recordedArgs,double 
   undefined4 glErrorCode;
   int glContextPtr4854;
   int *srcCursor;
-  int iVar7;
+  int dirtyWord;
   int framebufferObject;
   undefined4 incomingR5;
   undefined4 incomingR6;
@@ -2209,11 +2209,11 @@ undefined4 _glCopyPixels_ListExec(int glContext,undefined4 *recordedArgs,double 
   undefined4 incomingR8;
   int matrixChangeBits;
   int *changeWordCursor;
-  float *pfVar10;
+  float *rasterPosRecord;
   double extraout_f1;
   
   glContextPtr4854 = *(int *)(glContext + 0x4854);
-  pfVar10 = (float *)(glContextPtr4854 + -0x200);
+  rasterPosRecord = (float *)(glContextPtr4854 + -0x200);
   if (*(char *)(glContext + 0x2ef) == '\0') {
     return 0x14;
   }
@@ -2222,7 +2222,7 @@ undefined4 _glCopyPixels_ListExec(int glContext,undefined4 *recordedArgs,double 
     *(undefined4 *)(glContextPtr4854 + -0x200) = *(undefined4 *)(glContext + 0x2e0);
     *(undefined4 *)(glContextPtr4854 + -0x1fc) = *(undefined4 *)(glContext + 0x2e4);
     *(undefined4 *)(glContextPtr4854 + -0x1f8) = *(undefined4 *)(glContext + 0x2e8);
-    _gleFeedbackCopyPixels(glContext,pfVar10);
+    _gleFeedbackCopyPixels(glContext,rasterPosRecord);
     return 0x14;
   }
   if (glContextWord4e1c < 0x1c02) {
@@ -2261,9 +2261,9 @@ LAB_00061f74:
         loopIndex = 0;
         srcCursor = (int *)(glContext + 0x324);
         do {
-          iVar7 = *srcCursor;
+          dirtyWord = *srcCursor;
           srcCursor = srcCursor + 1;
-          if (iVar7 != 0) {
+          if (dirtyWord != 0) {
             *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x800000;
             break;
           }
@@ -2328,14 +2328,14 @@ LAB_00061f74:
         } while (remaining != 0);
       }
 LAB_00062098:
-      *pfVar10 = *(float *)(glContext + 0x4a44) * *(float *)(glContext + 0x2e0) +
+      *rasterPosRecord = *(float *)(glContext + 0x4a44) * *(float *)(glContext + 0x2e0) +
                  *(float *)(glContext + 0x4a48);
       *(float *)(glContextPtr4854 + -0x1fc) =
            *(float *)(glContext + 0x4a4c) * *(float *)(glContext + 0x2e4) + *(float *)(glContext + 0x4a50)
       ;
       *(float *)(glContextPtr4854 + -0x1f8) = *(float *)(glContext + 0x4a54) * *(float *)(glContext + 0x2e8);
       (**(code **)(glContext + 0x46a8))
-                (*(undefined4 *)(glContext + 0x4688),pfVar10,*recordedArgs,recordedArgs[1],recordedArgs[2],recordedArgs[3]
+                (*(undefined4 *)(glContext + 0x4688),rasterPosRecord,*recordedArgs,recordedArgs[1],recordedArgs[2],recordedArgs[3]
                  ,recordedArgs[4]);
       return 0x14;
     }
