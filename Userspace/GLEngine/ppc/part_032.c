@@ -210,11 +210,11 @@ int _glTexParameterf_ListExec(glContext, listRecord)
 }
 
 /* _glTexParameterF_Comp @ 0x9e05c (388 bytes) */
-int _glTexParameterF_Comp(glContext, target, pname, param_4)
+int _glTexParameterF_Comp(glContext, target, pname, params)
   undefined4 glContext;
   undefined4 target;
   undefined *pname;
-  undefined4 *param_4;
+  undefined4 *params;
 {
   undefined *puVar1;
   undefined4 *listRecord;
@@ -231,10 +231,10 @@ int _glTexParameterF_Comp(glContext, target, pname, param_4)
     if (pname < (undefined *)0x8067) {
       if (pname == ((unsigned char *)0x00001004)) {
 LAB_0009e1ac:
-        listRecord[2] = *param_4;
-        listRecord[3] = param_4[1];
-        listRecord[4] = param_4[2];
-        listRecord[5] = param_4[3];
+        listRecord[2] = *params;
+        listRecord[3] = params[1];
+        listRecord[4] = params[2];
+        listRecord[5] = params[3];
         return listRecord;
       }
       if (pname < ((unsigned char *)0x00001004)) {
@@ -283,19 +283,19 @@ LAB_0009e198:
     }
   }
 LAB_0009e1a0:
-  listRecord[2] = *param_4;
+  listRecord[2] = *params;
   return listRecord;
 }
 
 /* _glTexParameterf_Comp @ 0x9e1e0 (40 bytes) */
 undefined4 _glTexParameterf_Comp(undefined4 glContext,undefined4 target,undefined4 pname,float param)
 {
-  undefined4 uVar1;
+  undefined4 listRecord;
   float fStack00000024;
   
   fStack00000024 = (float)param;
-  uVar1 = ((int (*)())_glTexParameterF_Comp)(glContext,target,pname,&STACKARG(0x24));
-  return uVar1;
+  listRecord = ((int (*)())_glTexParameterF_Comp)(glContext,target,pname,&STACKARG(0x24));
+  return listRecord;
 }
 
 /* _glTexParameterf_CompExec @ 0x9e208 (80 bytes) */
@@ -452,12 +452,12 @@ void _glGetTexParameterPointervAPPLE_Exec(glContext, target, pname, params)
   undefined4 *params;
 {
   undefined4 glErrorCode;
-  int iVar2;
+  int textureObject;
   
-  iVar2 = _gleLookUpNonProxyTexture(glContext,target);
+  textureObject = _gleLookUpNonProxyTexture(glContext,target);
   if (*(short *)(glContext + 0x4a10) < 0) {
-    if ((iVar2 != 0) && (pname == 0x85b8)) {
-      *params = *(undefined4 *)(iVar2 + 0x74);
+    if ((textureObject != 0) && (pname == 0x85b8)) {
+      *params = *(undefined4 *)(textureObject + 0x74);
       return;
     }
     if (*(int *)(glContext + 0x7574) != 0) {
@@ -1033,7 +1033,7 @@ void _glTexImage2D_FlushExec(forwardedArg1, forwardedArg2, forwardedArg3, forwar
   undefined4 forwardedArg9;
   undefined4 forwardedArg10;
 {
-  double fparam_1;
+  double forwardedFloatArg1;
   double incomingFpr2;
   double incomingFpr3;
   double incomingFpr4;
@@ -1044,7 +1044,7 @@ void _glTexImage2D_FlushExec(forwardedArg1, forwardedArg2, forwardedArg3, forwar
   
   _glTexImage2D_Exec(forwardedArg1,forwardedArg2,forwardedArg3,forwardedArg4,forwardedArg5,forwardedArg6,forwardedArg7,forwardedArg8,forwardedArg9,
                      forwardedArg10);
-  ((void (*)())_glFlush_Exec)(forwardedArg1,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
+  ((void (*)())_glFlush_Exec)(forwardedArg1,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
   return;
 }
 

@@ -2364,19 +2364,19 @@ void _gleVtxTextureCoordGenNormalST(unusedArg1, vertexCursor, vertexCount)
   uint vertexCursor;
   int vertexCount;
 {
-  uint uVar1;
+  uint vertexEndThenRemaining;
   
-  uVar1 = vertexCursor + vertexCount * 0x100;
-  if (uVar1 <= vertexCursor) {
+  vertexEndThenRemaining = vertexCursor + vertexCount * 0x100;
+  if (vertexEndThenRemaining <= vertexCursor) {
     return;
   }
-  uVar1 = (uVar1 - vertexCursor) + 0xff >> 8;
+  vertexEndThenRemaining = (vertexEndThenRemaining - vertexCursor) + 0xff >> 8;
   do {
     *(undefined4 *)(vertexCursor + 0x80) = *(undefined4 *)(vertexCursor + 0x40);
     *(undefined4 *)(vertexCursor + 0x84) = *(undefined4 *)(vertexCursor + 0x44);
     vertexCursor = vertexCursor + 0x100;
-    uVar1 = uVar1 - 1;
-  } while (uVar1 != 0);
+    vertexEndThenRemaining = vertexEndThenRemaining - 1;
+  } while (vertexEndThenRemaining != 0);
   return;
 }
 

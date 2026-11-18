@@ -1066,16 +1066,16 @@ void _glGetCombinerStageParameterfvNV_Exec(glContext, stage, pname, params, unus
   undefined4 unusedArg6;
   undefined4 unusedArg7;
 {
-  int iVar1;
+  int combinerIndexThenConstantRecord;
   
-  iVar1 = stage + -0x8550;
-  if (((-1 < iVar1) && (iVar1 < *(int *)(*(int *)(glContext + 0x468c) + 0x98))) &&
+  combinerIndexThenConstantRecord = stage + -0x8550;
+  if (((-1 < combinerIndexThenConstantRecord) && (combinerIndexThenConstantRecord < *(int *)(*(int *)(glContext + 0x468c) + 0x98))) &&
      (pname - 0x852aU < 2)) {
-    iVar1 = (iVar1 * 8 + (pname - 0x852aU)) * 0x10 + glContext;
-    *params = *(undefined4 *)(iVar1 + 0x4280);
-    params[1] = *(undefined4 *)(iVar1 + 0x4284);
-    params[2] = *(undefined4 *)(iVar1 + 0x4288);
-    params[3] = *(undefined4 *)(iVar1 + 0x428c);
+    combinerIndexThenConstantRecord = (combinerIndexThenConstantRecord * 8 + (pname - 0x852aU)) * 0x10 + glContext;
+    *params = *(undefined4 *)(combinerIndexThenConstantRecord + 0x4280);
+    params[1] = *(undefined4 *)(combinerIndexThenConstantRecord + 0x4284);
+    params[2] = *(undefined4 *)(combinerIndexThenConstantRecord + 0x4288);
+    params[3] = *(undefined4 *)(combinerIndexThenConstantRecord + 0x428c);
     return;
   }
   if (*(int *)(glContext + 0x7574) != 0) {
@@ -1138,35 +1138,35 @@ void _glGetCombinerInputParameterivNV_Exec(glContext, stage, portion, variable, 
   uint pname;
   uint *params;
 {
-  int iVar1;
-  int iVar2;
-  uint uVar3;
+  int portionIndex;
+  int combinerIndex;
+  uint variableIndexThenQueryValue;
   
-  iVar2 = stage + -0x8550;
-  uVar3 = variable - 0x8523;
-  if ((-1 < iVar2) && (iVar2 < *(int *)(*(int *)(glContext + 0x468c) + 0x98))) {
+  combinerIndex = stage + -0x8550;
+  variableIndexThenQueryValue = variable - 0x8523;
+  if ((-1 < combinerIndex) && (combinerIndex < *(int *)(*(int *)(glContext + 0x468c) + 0x98))) {
     if (portion == 0x1906) {
-      iVar1 = 0;
+      portionIndex = 0;
     }
     else {
-      iVar1 = 1;
+      portionIndex = 1;
       if (portion != 0x1907) goto LAB_000b3a68;
     }
-    if (uVar3 < 4) {
+    if (variableIndexThenQueryValue < 4) {
       if (pname == 0x8543) {
-        uVar3 = (uint)*(ushort *)((iVar2 * 0x10 + iVar1 * 6 + uVar3) * 8 + glContext + 0x4224);
+        variableIndexThenQueryValue = (uint)*(ushort *)((combinerIndex * 0x10 + portionIndex * 6 + variableIndexThenQueryValue) * 8 + glContext + 0x4224);
 LAB_000b3a40:
-        *params = uVar3;
+        *params = variableIndexThenQueryValue;
         return;
       }
       if (pname < 0x8544) {
         if (pname == 0x8542) {
-          uVar3 = (uint)*(ushort *)((iVar2 * 0x10 + iVar1 * 6 + uVar3) * 8 + glContext + 0x4220);
+          variableIndexThenQueryValue = (uint)*(ushort *)((combinerIndex * 0x10 + portionIndex * 6 + variableIndexThenQueryValue) * 8 + glContext + 0x4220);
           goto LAB_000b3a40;
         }
       }
       else if (pname == 0x8544) {
-        uVar3 = (uint)*(ushort *)((iVar2 * 0x10 + iVar1 * 6 + uVar3) * 8 + glContext + 0x4222);
+        variableIndexThenQueryValue = (uint)*(ushort *)((combinerIndex * 0x10 + portionIndex * 6 + variableIndexThenQueryValue) * 8 + glContext + 0x4222);
         goto LAB_000b3a40;
       }
     }

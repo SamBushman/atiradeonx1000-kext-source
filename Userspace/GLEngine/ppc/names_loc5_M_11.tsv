@@ -1,0 +1,58 @@
+local	_glGetCombinerStageParameterfvNV_Exec	iVar1	combinerIndexThenConstantRecord	CONFIRMED	stage - 0x8550 (GL_COMBINER0_NV): the combiner stage index, range checked against the renderer info (+0x98); then reassigned the address of the stage's 16-byte constant record ((index * 8 + pname - 0x852a) * 0x10 + ctx + 0x4280) whose four words are copied to params
+local	_glGetCombinerInputParameterivNV_Exec	iVar2	combinerIndex	CONFIRMED	stage - 0x8550 (GL_COMBINER0_NV): the combiner stage index, range checked against the renderer info (+0x98)
+local	_glGetCombinerInputParameterivNV_Exec	iVar1	portionIndex	CONFIRMED	0 for portion 0x1906 (GL_ALPHA), 1 for 0x1907 (GL_RGB): selects the alpha or rgb input record of the stage
+local	_glGetCombinerInputParameterivNV_Exec	uVar3	variableIndexThenQueryValue	CONFIRMED	variable - 0x8523 (GL_VARIABLE_A_NV): the input variable index (must be below 4), then reassigned the halfword read from the input record at +0x4220 / +0x4222 / +0x4224 that is stored to *params
+local	_glTexParameterF_Comp	param_4	params	CONFIRMED	pointer to the parameter values: one word is copied for most pnames, four words (border color 0x1004 and 0x871a) for the others
+local	_glCompressedTexSubImage2D_Comp	uVar1	execResultThenMemcpyResult	CONFIRMED	result of _glCompressedTexSubImage2D_Exec for the immediate-mode targets, or the value returned by _memcpy when the image data is copied into the list record; returned
+local	_glCompressedTexSubImage2D_Comp	iVar2	pixelUnpackBuffer	CONFIRMED	pixel unpack buffer object at ctx+0x4a6c (glContext[0x129b]): size (+0x38) is checked against imageSize + data, base (+0x30) added, plugin handle (+0x40) synchronised
+local	_glColorTableParameterfv_Comp	puVar1	listRecord	CONFIRMED	list record returned by _gleAddListItem (0x18 bytes) holding target, pname and the parameter values
+local	_glPointParameterfv_ListExec	iVar1	valueCount	CONFIRMED	number of float values recorded: 3 for pname 0x8129 (the distance attenuation vector), 1 otherwise; the record size returned is valueCount * 4 + 4
+local	_glPrioritizeTextures_ListExec	iVar1	textureCount	CONFIRMED	n, the number of textures in the record (listRecord[0]): names follow at +4 and priorities after them; the record size returned is n * 8 + 4
+local	_glTexParameterf_Comp	uVar1	listRecord	CONFIRMED	list record returned by _glTexParameterF_Comp (which allocates it with _gleAddListItem); returned
+local	_glTestFenceAPPLE_Exec	uVar1	testResult	CONFIRMED	result of _gleTestFence(glContext, 0, fence) returned, or 1 when called inside Begin/End (GL_INVALID_OPERATION recorded)
+local	_glIsList_Exec	uVar1	isList	CONFIRMED	result of _gleIsHashName for the display list name table (shared state + 0x300c), or 0 when called inside Begin/End
+local	_glGetTexParameterPointervAPPLE_Exec	iVar2	textureObject	CONFIRMED	texture object returned by _gleLookUpNonProxyTexture for target; its pointer at +0x74 is returned for pname 0x85b8
+local	_glDepthBoundsEXT_Exec	uVar1	clampHighWord	CONFIRMED	high word of the clamped bound as a double: 0 (0.0) when below DOUBLE_00108d60, 0x3ff00000 (1.0) when above DOUBLE_00108d68; shifted into the high half of the stored double
+local	_glBlendFunc_Exec	bVar1	factorInvalid	CONFIRMED	true when the blend factor is outside the valid enumerations (0, 1, 0x300-0x307 or 0x8001-0x8004 for the destination factor; the source factor also accepts 0x308); GL_INVALID_ENUM is recorded unless both factors are valid
+local	_glSetFenceAPPLE_Exec	extraout_f1	f1AfterLookupHashObject	INFERRED	Ghidra pseudo-register: the value left in f1 by _gleLookupHashObject, copied into fparam_1
+local	_glSetFenceAPPLE_Exec	fparam_1	forwardedFloatArg1	INFERRED	stale floating-point argument register f1: reassigned the values callees leave in f1 and only forwarded as the first FP argument of _gleUpdateFramebufferCompleteness (the convention of the sibling state-validation functions)
+local	_glSetFenceAPPLE_Exec	extraout_f1_00	f1AfterUpdateMatrixFunc	INFERRED	Ghidra pseudo-register: the value left in f1 by _gleUpdateMatrixFunc, copied into fparam_1
+local	_glEnable_Exec	puVar2	enableEntry	CONFIRMED	entry of the enable hash table (table at ctx+0x4850, bucket cap & 0x3ff, 0x10 bytes per entry): capability key at +0, enable function at +4, next entry at +8; walked until the key equals cap
+local	_gleModifyPixelHILO	fVar3	clampedValue	CONFIRMED	the hi or lo component clamped to [FLOAT_00108e54, FLOAT_00108e58]: the bound selected when the value lies outside the range
+local	_glUniform2fARB_Exec	iVar5	uniformValueTable	CONFIRMED	the program's uniform value array (currentProgram + 0x4c), 0x10 bytes per location: the new value words are stored at table + location * 0x10
+local	_glUniform4iARB_Exec	iVar5	uniformValueTable	CONFIRMED	the program's uniform value array (currentProgram + 0x4c), 0x10 bytes per location: the new value words are stored at table + locationValueOffset
+local	_glMultiDrawElements_Exec	uVar1	elementCount	CONFIRMED	count[i]: the number of indices of the current primitive, passed to _glDrawElements_STD_Exec
+local	_glMultiDrawElements_Comp	iVar1	contextThenByteOffsetThenDrawResult	CONFIRMED	initially glContext (returned unchanged when primcount is not positive), then loopIndex * 4 (the byte offset into the count and indices arrays), then the result of _glDrawElements_Comp; returned
+local	_glGetClipPlane_Exec	iVar2	clipPlaneRecord	CONFIRMED	glContext + (plane - 0x3000) * 0x10: the clip plane equation record whose four floats at +0x418c are stored to equation as doubles
+local	_glDrawElements_IMM_Exec	bVar1	typeAllowed	CONFIRMED	true when type is one of the allowed index types GL_UNSIGNED_BYTE (0x1401) or GL_UNSIGNED_INT (0x1405); GL_UNSIGNED_SHORT (0x1403) is tested first; otherwise GL_INVALID_ENUM is recorded
+local	_glDrawElements_IMM_Exec	iVar2	elementBuffer	CONFIRMED	element array buffer object (+0x35c of the vertex-array client state at ctx+0x4a60); its base (+0x30) is added to indices
+local	_glDrawRangeElements_VAR_Exec	bVar1	typeAllowed	CONFIRMED	true when type is one of the allowed index types GL_UNSIGNED_BYTE (0x1401) or GL_UNSIGNED_INT (0x1405); GL_UNSIGNED_SHORT (0x1403) is tested first; otherwise GL_INVALID_ENUM is recorded
+local	_glDrawRangeElements_VAR_Exec	iVar3	elementBuffer	CONFIRMED	element array buffer object (+0x35c of the vertex-array client state at ctx+0x4a60); its base (+0x30) is added to indices
+local	_glDrawRangeElements_CVA_Exec	bVar1	typeAllowed	CONFIRMED	true when type is one of the allowed index types GL_UNSIGNED_BYTE (0x1401) or GL_UNSIGNED_INT (0x1405); GL_UNSIGNED_SHORT (0x1403) is tested first; otherwise GL_INVALID_ENUM is recorded
+local	_glDrawRangeElements_CVA_Exec	iVar3	elementBuffer	CONFIRMED	element array buffer object (+0x35c of the vertex-array client state at ctx+0x4a60); its base (+0x30) is added to indices
+local	_gleVtxTextureCoordGenNormalST	uVar1	vertexEndThenRemaining	CONFIRMED	end address vertexCursor + vertexCount * 0x100 of the vertex records, then reassigned the number of records still to process (the loop counter)
+local	_gleUpdateEvalData	dVar2	evalDivisionsAt74c8	CONFIRMED	the integer at ctx+0x74c8 converted to double: the divisor of the delta stored at ctx+0x74d4 ((ctx+0x74d0 - ctx+0x74cc) / divisions)
+local	_gleUpdateEvalData	dVar1	evalDivisionsAt74b8	CONFIRMED	the integer at ctx+0x74b8 converted to double: the divisor of the delta stored at ctx+0x74c4 ((ctx+0x74c0 - ctx+0x74bc) / divisions)
+local	_glFramebufferTexture1DEXT_Exec	uVar3	attachmentType	INFERRED	0 (no attachment) until the texture object is found, then 4 (texture): the attachment type passed to _gleFramebufferTexture
+local	_gleSetEnable_CLIP_PLANE	param_4	forwardedArg4	CONFIRMED	fourth argument passed on unchanged to _gleUpdateClipPlane; never otherwise read
+local	_glMultTransposeMatrixd_Exec	iVar1	copyResultThenContext	CONFIRMED	result of _gleCopyMatrix (the copy of the product into the current matrix) on the normal path, glContext on the error path; returned
+local	_glMultTransposeMatrixd_Exec	auStack_50	productMatrix	CONFIRMED	scratch matrix receiving the product of the current matrix (ctx+0x4fec) and the transposed m from _gleMultTransposeMatrixd, then copied back with _gleCopyMatrix
+local	_glCheckFramebufferStatusEXT_Exec	uVar1	framebufferStatus	CONFIRMED	status returned by _gleCheckFramebufferStatus for the bound framebuffer object (+0x10); returned after the mutex is released
+local	_glTexCoord2_ListExec	uVar1	texCoordT	CONFIRMED	recordedArgs[1], the t coordinate stored at ctx+0x124 (s goes to ctx+0x120, r = 0.0 to +0x128 and q = 1.0 to +0x12c)
+local	_glRectiv_Comp	uVar1	endResult	CONFIRMED	result of _glEnd_Comp closing the quad of four _glVertex2i_Comp calls; returned
+local	_glRectf_Comp	uVar1	endResult	CONFIRMED	result of _glEnd_Comp closing the quad of four _glVertex2f_Comp calls; returned
+local	_glPointParameterivARB_Comp	iVar1	paramValue	CONFIRMED	the integer parameter read from params and copied into the list record
+local	_glMinmax_Exec	iVar1	formatValid	CONFIRMED	result of _CheckInternalFormat for internalformat; zero makes the call record GL_INVALID_ENUM
+local	_glMap1Texture1_ListExec	iVar1	pointValue	CONFIRMED	the control point word read from the list record, stored into the map's control point array at mapData+0x2b8
+local	_glGetHistogramParameterfv_Exec	local_18	intParams	CONFIRMED	integer result buffer filled by _glGetHistogramParameteriv_Exec; its first word is converted to float and stored in *params
+local	_glDrawRangeElementArrayAPPLE_Comp	uVar1	drawResult	CONFIRMED	result of _glDrawElementArrayAPPLE_Comp when start <= end; returned
+local	_glDeleteQueries_Exec	uVar1	queryName	CONFIRMED	the query name read from ids for the current iteration, deleted from the query hash table at ctx+0x6440
+local	_glConvolutionParameteri_Comp	uVar1	listRecord	CONFIRMED	list record returned by _glConvolutionParameterI_Comp; returned
+local	_glClearIndex_Exec	dVar1	indexScale	CONFIRMED	FLOAT_00108e5c widened to double: the multiplier applied to the clear index c before it is stored at ctx+0x3110
+local	_LFSStreamChunkCreate	uVar1	chunk	CONFIRMED	zeroed 0x50-byte chunk allocated with _calloc; returned
+local	_gliSwapBuffers	fparam_1	forwardedFloatArg1	INFERRED	stale floating-point argument register f1 (the signature's first FP parameter, reassigned from the value _gleUpdateMatrixFunc leaves in f1) only forwarded unchanged to _gleUpdateFramebufferCompleteness; the convention of the sibling state-validation functions
+local	_gleIsIndex	param_1	format	CONFIRMED	pixel format enum: GL_COLOR_INDEX (0x1900) or GL_STENCIL_INDEX (0x1901) make the function return true
+local	_gleBindFramebuffer	fparam_1	forwardedFloatArg1	INFERRED	stale floating-point argument register f1, reassigned from the values callees leave in f1 and only forwarded unchanged as the first FP argument of helper calls; the convention of the sibling functions
+local	_gleFeedbackToken	fparam_1	tokenValue	CONFIRMED	the float token written into the feedback buffer at the cursor ctx+0x4fd0, which is then advanced
+local	_glTexImage2D_FlushExec	fparam_1	forwardedFloatArg1	INFERRED	incoming floating-point register f1 (not used by this function) forwarded unchanged to _glFlush_Exec; the convention of the sibling functions
+local	_glEvalCoord1d_ListExec_body	fparam_1	u	INFERRED	the evaluation coordinate u (double) narrowed to float and passed to _gleEvalMap1

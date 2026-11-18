@@ -537,11 +537,11 @@ int _glPrioritizeTextures_ListExec(glContext, listRecord)
   undefined4 glContext;
   int *listRecord;
 {
-  int iVar1;
+  int textureCount;
   
-  iVar1 = *listRecord;
-  _glPrioritizeTextures_Exec(glContext,iVar1,listRecord + 1,listRecord + iVar1 + 1);
-  return iVar1 * 8 + 4;
+  textureCount = *listRecord;
+  _glPrioritizeTextures_Exec(glContext,textureCount,listRecord + 1,listRecord + textureCount + 1);
+  return textureCount * 8 + 4;
 }
 
 /* _glPrioritizeTextures_Comp @ 0x912cc (144 bytes) */
@@ -832,13 +832,13 @@ int _glCompressedTexSubImage2D_Comp(glContext, target, level, xoffset, yoffset, 
   int imageSize;
   int data;
 {
-  undefined4 uVar1;
-  int iVar2;
+  undefined4 execResultThenMemcpyResult;
+  int pixelUnpackBuffer;
   
   if (((target == 0x8064) || (target == 0x851b)) || (target == 0x84f7)) {
-    uVar1 = ((int (*)())_glCompressedTexSubImage2D_Exec)(glContext,target,level,xoffset,yoffset,width,height,format,imageSize,
+    execResultThenMemcpyResult = ((int (*)())_glCompressedTexSubImage2D_Exec)(glContext,target,level,xoffset,yoffset,width,height,format,imageSize,
                        data);
-    return uVar1;
+    return execResultThenMemcpyResult;
   }
   if (((format < 0x83f0) || ((0x83f3 < format && (format != 0x8837)))) || (imageSize < 1)) {
 LAB_00091acc:
@@ -847,13 +847,13 @@ LAB_00091acc:
     }
   }
   else {
-    iVar2 = glContext[0x129b];
-    if (iVar2 != 0) {
-      if (*(int *)(iVar2 + 0x38) < imageSize + data) goto LAB_00091acc;
-      if (*(int *)(iVar2 + 0x40) != 0) {
-        _gleSynchronizePluginBuffer(glContext,iVar2 + 0x10);
+    pixelUnpackBuffer = glContext[0x129b];
+    if (pixelUnpackBuffer != 0) {
+      if (*(int *)(pixelUnpackBuffer + 0x38) < imageSize + data) goto LAB_00091acc;
+      if (*(int *)(pixelUnpackBuffer + 0x40) != 0) {
+        _gleSynchronizePluginBuffer(glContext,pixelUnpackBuffer + 0x10);
       }
-      data = data + *(int *)(iVar2 + 0x30);
+      data = data + *(int *)(pixelUnpackBuffer + 0x30);
     }
     glContext = (int *)_gleAddListItem(glContext,PTR__glCompressedTexSubImage2D_ListExec_00110394,
                                      imageSize + 0x20);
@@ -867,8 +867,8 @@ LAB_00091acc:
       glContext[5] = height;
       glContext[7] = imageSize;
       if (data != 0) {
-        uVar1 = _memcpy(glContext + 8,data,imageSize);
-        return uVar1;
+        execResultThenMemcpyResult = _memcpy(glContext + 8,data,imageSize);
+        return execResultThenMemcpyResult;
       }
     }
   }

@@ -2789,15 +2789,15 @@ void _glRectd_CompExec(undefined4 glContext,double x1,double y1,double x2,double
 /* _glRectf_Comp @ 0x84694 (148 bytes) */
 undefined4 _glRectf_Comp(undefined4 glContext,float x1,float y1,float x2,float y2)
 {
-  undefined4 uVar1;
+  undefined4 endResult;
   
   _glBegin_Comp(glContext,9);
   ((float * (*)())_glVertex2f_Comp)(glContext,x1,y1);
   ((float * (*)())_glVertex2f_Comp)(glContext,x2,y1);
   ((float * (*)())_glVertex2f_Comp)(glContext,x2,y2);
   ((float * (*)())_glVertex2f_Comp)(glContext,x1,y2);
-  uVar1 = _glEnd_Comp(glContext);
-  return uVar1;
+  endResult = _glEnd_Comp(glContext);
+  return endResult;
 }
 
 /* _glRectf_Exec @ 0x84728 (196 bytes) */

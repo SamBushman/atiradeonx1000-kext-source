@@ -1094,11 +1094,11 @@ int _glConvolutionParameteri_Comp(glContext, target, pname, params)
   undefined4 params;
 {
   unsigned int ghidra_home[8] = { glContext, target, pname, params, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
-  undefined4 uVar1;
+  undefined4 listRecord;
   
   (*(unsigned int *)((unsigned char *)ghidra_home + 12)) = params;
-  uVar1 = ((int (*)())_glConvolutionParameterI_Comp)(glContext,target,pname,&(*(unsigned int *)((unsigned char *)ghidra_home + 12)));
-  return uVar1;
+  listRecord = ((int (*)())_glConvolutionParameterI_Comp)(glContext,target,pname,&(*(unsigned int *)((unsigned char *)ghidra_home + 12)));
+  return listRecord;
 }
 
 /* _glCopyConvolutionFilter1D_Comp @ 0x68f48 (116 bytes) */

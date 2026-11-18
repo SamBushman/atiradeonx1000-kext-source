@@ -195,22 +195,22 @@ int _glMultTransposeMatrixd_Exec(glContext, m)
   int glContext;
   undefined4 m;
 {
-  int iVar1;
-  undefined1 auStack_50 [72];
+  int copyResultThenContext;
+  undefined1 productMatrix [72];
   
   if ((*(short *)(glContext + 0x4a10) < 0) && (*(int *)(glContext + 0x4ff4) < 0x18)) {
-    _gleMultTransposeMatrixd(*(undefined4 *)(glContext + 0x4fec),m,auStack_50);
-    iVar1 = _gleCopyMatrix(auStack_50,*(undefined4 *)(glContext + 0x4fec));
+    _gleMultTransposeMatrixd(*(undefined4 *)(glContext + 0x4fec),m,productMatrix);
+    copyResultThenContext = _gleCopyMatrix(productMatrix,*(undefined4 *)(glContext + 0x4fec));
     *(uint *)(glContext + 0x50ac) = *(uint *)(glContext + 0x50ac) | *(uint *)(glContext + 0x50a8);
     *(uint *)(glContext + 0x50b0) = *(uint *)(glContext + 0x50b0) | *(uint *)(glContext + 0x50a8);
   }
   else {
-    iVar1 = glContext;
+    copyResultThenContext = glContext;
     if (*(int *)(glContext + 0x7574) == 0) {
       *(undefined4 *)(glContext + 0x7574) = 0x502;
     }
   }
-  return iVar1;
+  return copyResultThenContext;
 }
 
 /* _glMultTransposeMatrixd_CompExec @ 0x77b2c (56 bytes) */
@@ -782,7 +782,7 @@ void _glDeleteQueries_Exec(glContext, n, ids)
   int n;
   undefined4 *ids;
 {
-  undefined4 uVar1;
+  undefined4 queryName;
   undefined4 glErrorCode;
   
   if ((*(short *)(glContext + 0x4a10) < 0) && (*(int *)(glContext + 0x7444) == 0)) {
@@ -791,9 +791,9 @@ void _glDeleteQueries_Exec(glContext, n, ids)
         return;
       }
       do {
-        uVar1 = *ids;
+        queryName = *ids;
         ids = ids + 1;
-        _gleDeleteHashNameAndObject(glContext,glContext + 0x6440,uVar1);
+        _gleDeleteHashNameAndObject(glContext,glContext + 0x6440,queryName);
         n = n + -1;
       } while (n != 0);
       return;

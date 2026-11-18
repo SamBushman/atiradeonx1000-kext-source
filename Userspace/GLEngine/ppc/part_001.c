@@ -1847,20 +1847,20 @@ LAB_0000951c:
 double _gleUpdateEvalData(glContext)
   int glContext;
 {
-  double dVar1;
-  double dVar2;
+  double evalDivisionsAt74b8;
+  double evalDivisionsAt74c8;
   
-  dVar2 = (double)CONCAT44(0x43300000,*(uint *)(glContext + 0x74c8) ^ 0x80000000) - DOUBLE_00108d58;
-  dVar1 = (double)CONCAT44(0x43300000,*(uint *)(glContext + 0x74b8) ^ 0x80000000) - DOUBLE_00108d58;
+  evalDivisionsAt74c8 = (double)CONCAT44(0x43300000,*(uint *)(glContext + 0x74c8) ^ 0x80000000) - DOUBLE_00108d58;
+  evalDivisionsAt74b8 = (double)CONCAT44(0x43300000,*(uint *)(glContext + 0x74b8) ^ 0x80000000) - DOUBLE_00108d58;
   *(float *)(glContext + 0x74b4) =
        (*(float *)(glContext + 0x74b0) - *(float *)(glContext + 0x74ac)) /
        (float)((double)CONCAT44(0x43300000,
                                 *(uint *)(0x74a4 + glContext + 4) ^ 0x80000000) -
               DOUBLE_00108d58);
   *(float *)(glContext + 0x74c4) =
-       (*(float *)(glContext + 0x74c0) - *(float *)(glContext + 0x74bc)) / (float)dVar1;
+       (*(float *)(glContext + 0x74c0) - *(float *)(glContext + 0x74bc)) / (float)evalDivisionsAt74b8;
   *(float *)(glContext + 0x74d4) =
-       (*(float *)(glContext + 0x74d0) - *(float *)(glContext + 0x74cc)) / (float)dVar2;
+       (*(float *)(glContext + 0x74d0) - *(float *)(glContext + 0x74cc)) / (float)evalDivisionsAt74c8;
   return;
 }
 
@@ -8713,19 +8713,19 @@ double _glEnable_Exec(glContext, cap)
   uint cap;
 {
   undefined4 glErrorCode;
-  uint *puVar2;
+  uint *enableEntry;
   
-  puVar2 = (uint *)(*(int *)(glContext + 0x4850) + (cap & 0x3ff) * 0x10);
+  enableEntry = (uint *)(*(int *)(glContext + 0x4850) + (cap & 0x3ff) * 0x10);
   if (*(short *)(glContext + 0x4a10) < 0) {
     do {
-      if (*puVar2 == cap) {
+      if (*enableEntry == cap) {
                     
                     
-        (*(code *)puVar2[1])(glContext,cap,1);
+        (*(code *)enableEntry[1])(glContext,cap,1);
         return;
       }
-      puVar2 = (uint *)puVar2[2];
-    } while (puVar2 != (uint *)0x0);
+      enableEntry = (uint *)enableEntry[2];
+    } while (enableEntry != (uint *)0x0);
     if (*(int *)(glContext + 0x7574) != 0) {
       return;
     }

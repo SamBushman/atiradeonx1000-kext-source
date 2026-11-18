@@ -1157,12 +1157,12 @@ float * _glClearIndex_Comp(undefined4 glContext,float c)
 /* _glClearIndex_Exec @ 0x59e94 (84 bytes) */
 void _glClearIndex_Exec(int glContext,float c)
 {
-  float dVar1;
+  float indexScale;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
-    dVar1 = (double)FLOAT_00108e5c;
+    indexScale = (double)FLOAT_00108e5c;
     *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 8;
-    *(float *)(glContext + 0x3110) = (c * dVar1);
+    *(float *)(glContext + 0x3110) = (c * indexScale);
     return;
   }
   if (*(int *)(glContext + 0x7574) != 0) {
@@ -1355,15 +1355,15 @@ void _glGetClipPlane_Exec(glContext, plane, equation)
   double *equation;
 {
   undefined4 glErrorCode;
-  int iVar2;
+  int clipPlaneRecord;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
     if (plane - 0x3000U < 6) {
-      iVar2 = glContext + (plane - 0x3000U) * 0x10;
-      *equation = (double)*(float *)(iVar2 + 0x418c);
-      equation[1] = (double)*(float *)(iVar2 + 0x4190);
-      equation[2] = (double)*(float *)(iVar2 + 0x4194);
-      equation[3] = (double)*(float *)(iVar2 + 0x4198);
+      clipPlaneRecord = glContext + (plane - 0x3000U) * 0x10;
+      *equation = (double)*(float *)(clipPlaneRecord + 0x418c);
+      equation[1] = (double)*(float *)(clipPlaneRecord + 0x4190);
+      equation[2] = (double)*(float *)(clipPlaneRecord + 0x4194);
+      equation[3] = (double)*(float *)(clipPlaneRecord + 0x4198);
       return;
     }
     if (*(int *)(glContext + 0x7574) != 0) {

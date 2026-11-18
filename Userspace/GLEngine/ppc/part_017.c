@@ -1132,10 +1132,10 @@ void _glGetHistogramParameterfv_Exec(glContext, target, pname, params)
   undefined4 pname;
   float *params;
 {
-  uint local_18 [3];
+  uint intParams [3];
   
-  ((void (*)())_glGetHistogramParameteriv_Exec)(glContext,target,pname,local_18);
-  *params = (float)((double)CONCAT44(0x43300000,local_18[0] ^ 0x80000000) - DOUBLE_00108d58);
+  ((void (*)())_glGetHistogramParameteriv_Exec)(glContext,target,pname,intParams);
+  *params = (float)((double)CONCAT44(0x43300000,intParams[0] ^ 0x80000000) - DOUBLE_00108d58);
   return;
 }
 
@@ -1364,9 +1364,9 @@ void _glMinmax_Exec(glContext, target, internalformat, sink)
   undefined4 internalformat;
   int sink;
 {
-  int iVar1;
+  int formatValid;
   
-  if ((target == 0x802e) && (iVar1 = _CheckInternalFormat(internalformat), iVar1 != 0)) {
+  if ((target == 0x802e) && (formatValid = _CheckInternalFormat(internalformat), formatValid != 0)) {
     *(short *)(glContext + 0x3380) = (short)internalformat;
     *(byte *)(glContext + 0x3382) = (byte)((uint)-sink >> 0x1f);
   }

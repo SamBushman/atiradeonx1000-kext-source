@@ -5146,12 +5146,12 @@ int _glTexCoord2_ListExec(glContext, recordedArgs)
   int glContext;
   undefined4 *recordedArgs;
 {
-  undefined4 uVar1;
+  undefined4 texCoordT;
   
-  uVar1 = recordedArgs[1];
+  texCoordT = recordedArgs[1];
   *(undefined4 *)(glContext + 0x120) = *recordedArgs;
   *(undefined4 *)(glContext + 300) = *(undefined4 *)(glContext + 0x24);
-  *(undefined4 *)(glContext + 0x124) = uVar1;
+  *(undefined4 *)(glContext + 0x124) = texCoordT;
   *(undefined4 *)(glContext + 0x128) = *(undefined4 *)(glContext + 0x20);
   return 8;
 }

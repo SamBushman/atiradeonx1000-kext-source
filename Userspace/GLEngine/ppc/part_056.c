@@ -506,7 +506,7 @@ void _gliAttachDrawable(glContext, param_2, param_3, param_4)
 }
 
 /* _gliSwapBuffers @ 0x107ae0 (664 bytes) */
-void _gliSwapBuffers(int glContext,double fparam_1,double floatArg2,double floatArg3,double floatArg4,double floatArg5,double floatArg6,double floatArg7,double floatArg8)
+void _gliSwapBuffers(int glContext,double forwardedFloatArg1,double floatArg2,double floatArg3,double floatArg4,double floatArg5,double floatArg6,double floatArg7,double floatArg8)
 {
   bool stateIsCleanOrFlag;
   char rendererInfoByte79;
@@ -535,14 +535,14 @@ void _gliSwapBuffers(int glContext,double fparam_1,double floatArg2,double float
   matrixFuncDirtyThenCounter = *(int *)(glContext + 0x50ac);
   if (matrixFuncDirtyThenCounter != 0 || (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
     _gleUpdateMatrixFunc(glContext);
-    fparam_1 = f1AfterCall;
+    forwardedFloatArg1 = f1AfterCall;
   }
   if (*(char *)(glContext + 0x4691) == '\0') goto LAB_00107d44;
   framebufferObjectThenDirtyWord = *(int *)(glContext + 0x744c);
   dirtyFlagWords = (int *)(glContext + 0x310);
   rendererInfoByte79 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
   if ((framebufferObjectThenDirtyWord != 0) && (*(int *)(framebufferObjectThenDirtyWord + 0xec) != 0)) {
-    ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObjectThenDirtyWord + 0x10,incomingR5,incomingR6,incomingR7,incomingR8,matrixFuncDirtyThenCounter,fparam_1,floatArg2,floatArg3,
+    ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObjectThenDirtyWord + 0x10,incomingR5,incomingR6,incomingR7,incomingR8,matrixFuncDirtyThenCounter,forwardedFloatArg1,floatArg2,floatArg3,
                floatArg4,floatArg5,floatArg6,floatArg7,floatArg8);
     *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000000;
   }

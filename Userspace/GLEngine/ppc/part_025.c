@@ -1600,7 +1600,7 @@ void _glUniform2fARB_Exec(int glContext,int location,float v0,float v1)
   undefined4 *rendererHandlePtr;
   undefined4 uniformWord1;
   int currentProgram;
-  int iVar5;
+  int uniformValueTable;
   int rendererSlotOffset;
   int registerIndexThenOffset;
   int typeInfoFound;
@@ -1629,14 +1629,14 @@ void _glUniform2fARB_Exec(int glContext,int location,float v0,float v1)
                            (*(undefined4 *)(currentProgram + 0x40),location,&uniformSize,&uniformType,uniformStageUse),
         typeInfoFound != 0 && ((uniformType == 0x8b50 || (uniformType == 0x8b57)))))) {
       if (uniformType == 0x8b50) {
-        iVar5 = *(int *)(currentProgram + 0x4c);
-        *(float *)(iVar5 + location * 0x10) = (float)v0;
-        *(float *)(iVar5 + location * 0x10 + 4) = (float)v1;
+        uniformValueTable = *(int *)(currentProgram + 0x4c);
+        *(float *)(uniformValueTable + location * 0x10) = (float)v0;
+        *(float *)(uniformValueTable + location * 0x10 + 4) = (float)v1;
       }
       else {
-        iVar5 = *(int *)(currentProgram + 0x4c);
-        *(uint *)(iVar5 + location * 0x10) = (uint)(v0 != (double)FLOAT_00108e50);
-        *(uint *)(iVar5 + location * 0x10 + 4) = (uint)(v1 != (double)FLOAT_00108e50);
+        uniformValueTable = *(int *)(currentProgram + 0x4c);
+        *(uint *)(uniformValueTable + location * 0x10) = (uint)(v0 != (double)FLOAT_00108e50);
+        *(uint *)(uniformValueTable + location * 0x10 + 4) = (uint)(v1 != (double)FLOAT_00108e50);
       }
       locationValueOffset = location * 0x10;
       *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x4000000;
@@ -2514,7 +2514,7 @@ void _glUniform4iARB_Exec(glContext, location, v0, v1, v2, v3)
   undefined4 *rendererHandlePtr;
   undefined4 uniformWord1;
   int currentProgram;
-  int iVar5;
+  int uniformValueTable;
   int rendererSlotOffset;
   int registerIndexThenOffset;
   int typeInfoFound;
@@ -2544,20 +2544,20 @@ void _glUniform4iARB_Exec(glContext, location, v0, v1, v2, v3)
                            (*(undefined4 *)(currentProgram + 0x40),location,&uniformSize,&uniformType,uniformStageUse),
         typeInfoFound != 0 && ((uniformType == 0x8b55 || (uniformType == 0x8b59)))))) {
       locationValueOffset = location * 0x10;
-      iVar5 = *(int *)(currentProgram + 0x4c);
-      constantRegister = iVar5 + locationValueOffset;
+      uniformValueTable = *(int *)(currentProgram + 0x4c);
+      constantRegister = uniformValueTable + locationValueOffset;
       if (uniformType == 0x8b55) {
-        *(int *)(iVar5 + locationValueOffset) = v0;
+        *(int *)(uniformValueTable + locationValueOffset) = v0;
         *(int *)(constantRegister + 0xc) = v3;
         *(int *)(constantRegister + 4) = v1;
         *(int *)(constantRegister + 8) = v2;
       }
       else {
         if (v0 == 0) {
-          *(undefined4 *)(iVar5 + locationValueOffset) = 0;
+          *(undefined4 *)(uniformValueTable + locationValueOffset) = 0;
         }
         else {
-          *(undefined4 *)(iVar5 + locationValueOffset) = 1;
+          *(undefined4 *)(uniformValueTable + locationValueOffset) = 1;
         }
         if (v1 == 0) {
           *(undefined4 *)(constantRegister + 4) = 0;

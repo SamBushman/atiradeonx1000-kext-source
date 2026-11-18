@@ -477,14 +477,14 @@ int _glPointParameterfv_ListExec(glContext, listRecord)
   undefined4 glContext;
   int *listRecord;
 {
-  int iVar1;
+  int valueCount;
   
-  iVar1 = 3;
+  valueCount = 3;
   if (*listRecord != 0x8129) {
-    iVar1 = 1;
+    valueCount = 1;
   }
   ((void (*)())_glPointParameterfv_Exec)(glContext,*listRecord,listRecord + 1);
-  return iVar1 * 4 + 4;
+  return valueCount * 4 + 4;
 }
 
 /* _glPointParameteriARB_Exec @ 0x7ea74 (480 bytes) */
@@ -708,7 +708,7 @@ int _glPointParameterivARB_Comp(glContext, pname, params)
   int pname;
   int *params;
 {
-  int iVar1;
+  int paramValue;
   int *dstCursor;
   int remaining;
   
@@ -721,9 +721,9 @@ int _glPointParameterivARB_Comp(glContext, pname, params)
   if ((dstCursor != (int *)0x0) && (*dstCursor = pname, remaining != 0)) {
     dstCursor = dstCursor + 1;
     do {
-      iVar1 = *params;
+      paramValue = *params;
       params = params + 1;
-      *dstCursor = iVar1;
+      *dstCursor = paramValue;
       dstCursor = dstCursor + 1;
       remaining = remaining + -1;
     } while (remaining != 0);

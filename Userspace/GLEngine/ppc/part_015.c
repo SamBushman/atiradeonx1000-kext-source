@@ -700,18 +700,18 @@ int _glTestFenceAPPLE_Exec(glContext, fence)
   int glContext;
   undefined4 fence;
 {
-  undefined4 uVar1;
+  undefined4 testResult;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
-    uVar1 = _gleTestFence(glContext,0,fence);
+    testResult = _gleTestFence(glContext,0,fence);
   }
   else {
     if (*(int *)(glContext + 0x7574) == 0) {
       *(undefined4 *)(glContext + 0x7574) = 0x502;
     }
-    uVar1 = 1;
+    testResult = 1;
   }
-  return uVar1;
+  return testResult;
 }
 
 /* _glFinishFenceAPPLE_Exec @ 0x659ec (48 bytes) */
@@ -1480,10 +1480,10 @@ void _glFramebufferTexture1DEXT_Exec(glContext, target, attachment, textarget, t
   undefined4 glErrorCode;
   uint attachmentIndex;
   int textureObject;
-  undefined4 uVar3;
+  undefined4 attachmentType;
   
   textureObject = 0;
-  uVar3 = 0;
+  attachmentType = 0;
   if (*(short *)(glContext + 0x4a10) < 0) {
     if (target != 0x8d40) {
 LAB_00066a74:
@@ -1518,7 +1518,7 @@ LAB_00066a74:
       }
       if (texture == 0) {
 LAB_00066afc:
-        _gleFramebufferTexture(glContext,attachmentIndex,uVar3,textureObject,0,level,0);
+        _gleFramebufferTexture(glContext,attachmentIndex,attachmentType,textureObject,0,level,0);
         if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) == '\0') {
           return;
         }
@@ -1527,7 +1527,7 @@ LAB_00066afc:
       }
       textureObject = _gleLookupHashObject(*(int *)(glContext + 0x5148) + 0x2008,texture);
       if (textureObject != 0) {
-        uVar3 = 4;
+        attachmentType = 4;
         goto LAB_00066afc;
       }
       if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
@@ -1818,7 +1818,7 @@ int _glIsFramebufferEXT_Exec(glContext, framebuffer)
 undefined4 _glCheckFramebufferStatusEXT_Exec(int glContext,int target,undefined4 forwardedArg3,undefined4 forwardedArg4,undefined4 forwardedArg5,undefined4 forwardedArg6,undefined4 forwardedArg7,double forwardedFloatArg1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
 {
   undefined4 glErrorCode;
-  undefined4 uVar1;
+  undefined4 framebufferStatus;
   int framebufferObject;
   double f1AfterCall;
   
@@ -1833,13 +1833,13 @@ undefined4 _glCheckFramebufferStatusEXT_Exec(int glContext,int target,undefined4
         framebufferObject = *(int *)(glContext + 0x744c);
         forwardedFloatArg1 = f1AfterCall;
       }
-      uVar1 = ((int (*)())_gleCheckFramebufferStatus)(glContext,framebufferObject + 0x10,forwardedArg3,forwardedArg4,forwardedArg5,forwardedArg6,forwardedArg7,forwardedFloatArg1,
+      framebufferStatus = ((int (*)())_gleCheckFramebufferStatus)(glContext,framebufferObject + 0x10,forwardedArg3,forwardedArg4,forwardedArg5,forwardedArg6,forwardedArg7,forwardedFloatArg1,
                          forwardedFloatArg2,forwardedFloatArg3,forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
       if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
         _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);
-        return uVar1;
+        return framebufferStatus;
       }
-      return uVar1;
+      return framebufferStatus;
     }
     if (*(int *)(glContext + 0x7574) != 0) {
       return 0;

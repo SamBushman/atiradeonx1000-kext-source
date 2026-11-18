@@ -176,15 +176,15 @@ int _glRectiv_Comp(glContext, v1, v2)
   undefined4 *v1;
   undefined4 *v2;
 {
-  undefined4 uVar1;
+  undefined4 endResult;
   
   _glBegin_Comp(glContext,9);
   _glVertex2i_Comp(glContext,*v1,v1[1]);
   _glVertex2i_Comp(glContext,*v2,v1[1]);
   _glVertex2i_Comp(glContext,*v2,v2[1]);
   _glVertex2i_Comp(glContext,*v1,v2[1]);
-  uVar1 = _glEnd_Comp(glContext);
-  return uVar1;
+  endResult = _glEnd_Comp(glContext);
+  return endResult;
 }
 
 /* _glRectiv_Exec @ 0x84ec8 (180 bytes) */

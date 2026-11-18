@@ -550,9 +550,9 @@ void _glSetFenceAPPLE_Exec(glContext, fence)
   uint dispatchFlags;
   uint changeWord3;
   int *changeWordCursor;
-  double extraout_f1;
-  double fparam_1;
-  double extraout_f1_00;
+  double f1AfterLookupHashObject;
+  double forwardedFloatArg1;
+  double f1AfterUpdateMatrixFunc;
   double incomingFpr2;
   double incomingFpr3;
   double incomingFpr4;
@@ -569,24 +569,24 @@ void _glSetFenceAPPLE_Exec(glContext, fence)
     return;
   }
   fenceObject = _gleLookupHashObject(glContext + 0x543c,fence);
-  fparam_1 = extraout_f1;
+  forwardedFloatArg1 = f1AfterLookupHashObject;
   if (fenceObject == 0) {
     fenceObject = ((int (*)())_gleCreateFenceObject)(fence);
     ((void (*)())_gleCreatePluginFence)(glContext,fenceObject + 0x10);
     incomingR5 = fenceObject;
-    fparam_1 = (double)_gleAddHashNameAndObject(glContext,glContext + 0x543c,fenceObject);
+    forwardedFloatArg1 = (double)_gleAddHashNameAndObject(glContext,glContext + 0x543c,fenceObject);
   }
   matrixChangeBits = *(int *)(glContext + 0x50ac);
   if (matrixChangeBits != 0 || (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
     _gleUpdateMatrixFunc(glContext);
-    fparam_1 = extraout_f1_00;
+    forwardedFloatArg1 = f1AfterUpdateMatrixFunc;
   }
   if (*(char *)(glContext + 0x4691) == '\0') goto LAB_0004fe34;
   framebufferObject = *(int *)(glContext + 0x744c);
   changeWordCursor = (int *)(glContext + 0x310);
   rendererInfoByte79 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
   if ((framebufferObject != 0) && (*(int *)(framebufferObject + 0xec) != 0)) {
-    ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,incomingR5,incomingR6,incomingR7,incomingR8,matrixChangeBits,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,
+    ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,incomingR5,incomingR6,incomingR7,incomingR8,matrixChangeBits,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,
                incomingFpr6,incomingFpr7,incomingFpr8);
     *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000000;
   }
@@ -1178,7 +1178,7 @@ LAB_000507ac:
 }
 
 /* _gleFeedbackToken @ 0x5086c (68 bytes) */
-void _gleFeedbackToken(int glContext,float fparam_1)
+void _gleFeedbackToken(int glContext,float tokenValue)
 {
   float *glContextPtr4fd0;
   
@@ -1190,7 +1190,7 @@ void _gleFeedbackToken(int glContext,float fparam_1)
     *(undefined1 *)(glContext + 0x4fdc) = 1;
     return;
   }
-  *glContextPtr4fd0 = (float)fparam_1;
+  *glContextPtr4fd0 = (float)tokenValue;
   *(float **)(glContext + 0x4fd0) = glContextPtr4fd0 + 1;
   return;
 }

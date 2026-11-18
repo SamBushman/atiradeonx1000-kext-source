@@ -282,7 +282,7 @@ double * _glDepthBoundsEXT_Comp(undefined4 glContext,double zNear,double zFar)
 /* _glDepthBoundsEXT_Exec @ 0x62878 (212 bytes) */
 void _glDepthBoundsEXT_Exec(int glContext,double zNear,double zFar)
 {
-  uint uVar1;
+  uint clampHighWord;
   
   if (-1 < *(short *)(glContext + 0x4a10)) {
     if (*(int *)(glContext + 0x7574) == 0) {
@@ -292,23 +292,23 @@ void _glDepthBoundsEXT_Exec(int glContext,double zNear,double zFar)
     return;
   }
   if (zNear < DOUBLE_00108d60) {
-    uVar1 = 0;
+    clampHighWord = 0;
 LAB_000628d8:
-    zNear = GH_U2D((unsigned long long)uVar1 << 0x20);
+    zNear = GH_U2D((unsigned long long)clampHighWord << 0x20);
   }
   else if (DOUBLE_00108d68 < zNear) {
-    uVar1 = 0x3ff00000;
+    clampHighWord = 0x3ff00000;
     goto LAB_000628d8;
   }
   *(double *)(glContext + 0x312c) = zNear;
   if (zFar < DOUBLE_00108d60) {
-    uVar1 = 0;
+    clampHighWord = 0;
   }
   else {
     if (!(DOUBLE_00108d68 < zFar)) goto LAB_00062934;
-    uVar1 = 0x3ff00000;
+    clampHighWord = 0x3ff00000;
   }
-  zFar = GH_U2D((unsigned long long)uVar1 << 0x20);
+  zFar = GH_U2D((unsigned long long)clampHighWord << 0x20);
 LAB_00062934:
   *(double *)(glContext + 0x3134) = zFar;
   *(uint *)(glContext + 0x318) = *(uint *)(glContext + 0x318) | 1;
@@ -552,18 +552,18 @@ int _glIsList_Exec(glContext, list)
   int glContext;
   undefined4 list;
 {
-  undefined4 uVar1;
+  undefined4 isList;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
-    uVar1 = _gleIsHashName(*(int *)(glContext + 0x5148) + 0x300c,list);
+    isList = _gleIsHashName(*(int *)(glContext + 0x5148) + 0x300c,list);
   }
   else {
     if (*(int *)(glContext + 0x7574) == 0) {
       *(undefined4 *)(glContext + 0x7574) = 0x502;
     }
-    uVar1 = 0;
+    isList = 0;
   }
-  return uVar1;
+  return isList;
 }
 
 /* _glListBase_ListExec @ 0x62ee8 (40 bytes) */
@@ -1842,9 +1842,9 @@ void _glEdgeFlagv_CompExec(glContext, flag)
 }
 
 /* _glEvalCoord1d_ListExec_body @ 0x647d0 (40 bytes) */
-undefined4 _glEvalCoord1d_ListExec_body(undefined4 glContext,double fparam_1)
+undefined4 _glEvalCoord1d_ListExec_body(undefined4 glContext,double u)
 {
-  ((void (*)())_gleEvalMap1)(glContext,(double)(float)fparam_1);
+  ((void (*)())_gleEvalMap1)(glContext,(double)(float)u);
   return 8;
 }
 

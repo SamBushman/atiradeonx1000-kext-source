@@ -3765,7 +3765,7 @@ void _glBlendFunc_Exec(glContext, sfactor, dfactor)
   uint sfactor;
   uint dfactor;
 {
-  bool bVar1;
+  bool factorInvalid;
   undefined4 glErrorCode;
   
   if (-1 < *(short *)(glContext + 0x4a10)) {
@@ -3777,18 +3777,18 @@ void _glBlendFunc_Exec(glContext, sfactor, dfactor)
   }
   if (dfactor < 0x308) {
     if (dfactor < 0x300) {
-      bVar1 = 1 < dfactor;
+      factorInvalid = 1 < dfactor;
       goto LAB_0001b640;
     }
 LAB_0001b65c:
     if (sfactor < 0x309) {
       if (0x2ff < sfactor) goto LAB_0001b684;
-      bVar1 = 1 < sfactor;
+      factorInvalid = 1 < sfactor;
     }
     else {
-      bVar1 = 3 < sfactor - 0x8001;
+      factorInvalid = 3 < sfactor - 0x8001;
     }
-    if (!bVar1) {
+    if (!factorInvalid) {
 LAB_0001b684:
       *(short *)(glContext + 0x30ce) = (short)dfactor;
       *(short *)(glContext + 0x30cc) = (short)sfactor;
@@ -3799,9 +3799,9 @@ LAB_0001b684:
     }
   }
   else {
-    bVar1 = 3 < dfactor - 0x8001;
+    factorInvalid = 3 < dfactor - 0x8001;
 LAB_0001b640:
-    if (!bVar1) goto LAB_0001b65c;
+    if (!factorInvalid) goto LAB_0001b65c;
   }
   if (*(int *)(glContext + 0x7574) != 0) {
     return;

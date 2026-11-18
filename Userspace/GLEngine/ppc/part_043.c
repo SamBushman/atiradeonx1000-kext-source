@@ -1064,7 +1064,7 @@ void _gleBindFramebuffer(glContext, framebuffer)
   undefined4 boundPluginHandle;
   undefined4 pluginHandle;
   int textureBase;
-  double fparam_1;
+  double forwardedFloatArg1;
   double incomingFpr2;
   double incomingFpr3;
   double incomingFpr4;
@@ -1185,14 +1185,14 @@ LAB_000cdca4:
   else {
     boundPluginHandle = *(undefined4 *)((uint)*(byte *)(glContext + 0x85a8) * 4 + framebufferObject + 0x10);
   }
-  fparam_1 = (double)(**(double ( **)(int,int,int,int))(glContext + 0x4778))
+  forwardedFloatArg1 = (double)(**(double ( **)(int,int,int,int))(glContext + 0x4778))
                                (*(undefined4 *)(glContext + 0x4688), 0x5b, boundPluginHandle, 0);
   *(undefined1 *)(glContext + 0x7582) = *(undefined1 *)(*(int *)(glContext + 0x468c) + 0x25);
   if ((noFramebuffer) ||
      ((*(int *)(framebufferObject + 0xec) == 0 &&
       (((previousFramebuffer == 0 || (*(short *)(previousFramebuffer + 0xca) != *(short *)(framebufferObject + 0xca))) ||
        (*(short *)(previousFramebuffer + 0xcc) != *(short *)(framebufferObject + 0xcc))))))) {
-    ((void (*)())_gleUpdateViewScissorData)(glContext,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
+    ((void (*)())_gleUpdateViewScissorData)(glContext,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
   }
   *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000180;
   if (previousFramebuffer != 0) {
@@ -3523,10 +3523,10 @@ void _LFSParserBuildErrorString(param_1, param_2)
 /* _LFSStreamChunkCreate @ 0xd1344 (12 bytes) */
 int _LFSStreamChunkCreate()
 {
-  undefined4 uVar1;
+  undefined4 chunk;
   
-  uVar1 = _calloc(0x50,1);
-  return uVar1;
+  chunk = _calloc(0x50,1);
+  return chunk;
 }
 
 /* _LFSStreamChunkCreateFromChunk @ 0xd1350 (64 bytes) */

@@ -646,7 +646,7 @@ int _glMap1Texture1_ListExec(glContext, listRecord)
   undefined4 glContext;
   int *listRecord;
 {
-  int iVar1;
+  int pointValue;
   int invUDeltaBits;
   int order;
   int mapData;
@@ -668,9 +668,9 @@ int _glMap1Texture1_ListExec(glContext, listRecord)
     srcCursor = listRecord + 4;
     remaining = order;
     do {
-      iVar1 = *srcCursor;
+      pointValue = *srcCursor;
       srcCursor = srcCursor + 1;
-      *dstCursor = iVar1;
+      *dstCursor = pointValue;
       dstCursor = dstCursor + 1;
       remaining = remaining + -1;
     } while (remaining != 0);

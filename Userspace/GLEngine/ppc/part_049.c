@@ -1186,17 +1186,17 @@ void _gleModifyPixelHILO(int glContext,int pixel,double unusedFloatArg1,double u
 {
   float hi;
   float lo;
-  float fVar3;
+  float clampedValue;
   
   hi = *(float *)(pixel + 0x20) * *(float *)(glContext + 0x321c) + *(float *)(glContext + 0x3218);
   lo = *(float *)(pixel + 0x24) * *(float *)(glContext + 0x3224) + *(float *)(glContext + 0x3220);
-  fVar3 = FLOAT_00108e54;
-  if ((FLOAT_00108e54 < hi) || (fVar3 = FLOAT_00108e58, hi < FLOAT_00108e58)) {
-    hi = fVar3;
+  clampedValue = FLOAT_00108e54;
+  if ((FLOAT_00108e54 < hi) || (clampedValue = FLOAT_00108e58, hi < FLOAT_00108e58)) {
+    hi = clampedValue;
   }
-  fVar3 = FLOAT_00108e54;
-  if ((FLOAT_00108e54 < lo) || (fVar3 = FLOAT_00108e58, lo < FLOAT_00108e58)) {
-    lo = fVar3;
+  clampedValue = FLOAT_00108e54;
+  if ((FLOAT_00108e54 < lo) || (clampedValue = FLOAT_00108e58, lo < FLOAT_00108e58)) {
+    lo = clampedValue;
   }
   *(float *)(pixel + 0x24) = lo;
   *(float *)(pixel + 0x20) = hi;

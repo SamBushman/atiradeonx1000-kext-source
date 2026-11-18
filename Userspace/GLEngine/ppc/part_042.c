@@ -1,11 +1,11 @@
 #include "decls.h"
 
 /* _gleSetEnable_CLIP_PLANE @ 0xcb284 (108 bytes) */
-void _gleSetEnable_CLIP_PLANE(glContext, cap, enable, param_4)
+void _gleSetEnable_CLIP_PLANE(glContext, cap, enable, forwardedArg4)
   int glContext;
   int cap;
   int enable;
-  undefined4 param_4;
+  undefined4 forwardedArg4;
 {
   uint newClipPlaneBits;
   uint planeBit;
@@ -17,7 +17,7 @@ void _gleSetEnable_CLIP_PLANE(glContext, cap, enable, param_4)
           (-2 << (planeIndex & 0x1f) | 0xfffffffeU >> 0x20 - (planeIndex & 0x1f)) | planeBit;
   if (*(uint *)(glContext + 0x4188) != newClipPlaneBits) {
     *(uint *)(glContext + 0x4188) = newClipPlaneBits;
-    _gleUpdateClipPlane(glContext,cap,planeBit,param_4);
+    _gleUpdateClipPlane(glContext,cap,planeBit,forwardedArg4);
     *(uint *)(glContext + 0x318) = *(uint *)(glContext + 0x318) | 0x1000000 << (planeIndex & 0x3f);
   }
   return;

@@ -1,10 +1,10 @@
 #include "decls.h"
 
 /* _gleIsIndex @ 0x2f1ac (20 bytes) */
-int _gleIsIndex(param_1)
-  int param_1;
+int _gleIsIndex(format)
+  int format;
 {
-  return param_1 - 0x1900U < 2;
+  return format - 0x1900U < 2;
 }
 
 /* _gleExtractPixel_RGBA_Ubyte @ 0x2f1c0 (176 bytes) */
