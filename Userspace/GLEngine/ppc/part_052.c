@@ -2194,6 +2194,7 @@ void _gleRenderFlatTrianglesFunc_body(glContext)
   bool twoSidedLighting;
   uint *puVar6;
   int iVar7;
+  int lightVertex;
   int texEnableBits;
   uint uVar8;
   uint batchClipCodes;
@@ -2266,14 +2267,14 @@ void _gleRenderFlatTrianglesFunc_body(glContext)
         if (lightingEnabled) {
           lightedVertices = 0;
           if (-1 < vertexCount + -3) {
-            iVar7 = triangleCursor + 0x200;
+            lightVertex = triangleCursor + 0x200;
             do {
               if (lightingPending != '\0') {
-                (**(code **)(glContext + 0x5068))(glContext,iVar7,1);
+                (**(code **)(glContext + 0x5068))(glContext,lightVertex,1);
               }
               lightedVertices = lightedVertices + 3;
-              (**(code **)(glContext + 0x4de8))(glContext,iVar7,1);
-              iVar7 = iVar7 + 0x300;
+              (**(code **)(glContext + 0x4de8))(glContext,lightVertex,1);
+              lightVertex = lightVertex + 0x300;
             } while (lightedVertices <= vertexCount + -3);
           }
         }
@@ -4580,6 +4581,7 @@ void _gleSelectTriangleStripFunc_body(glContext)
   uint uVar8;
   uint batchClipCodes;
   int iVar9;
+  int remaining;
   int cullResult;
   int iVar10;
   int polygonVertexCount;
@@ -4749,12 +4751,12 @@ LAB_000f1c00: ;
                (iVar17 = ((int (*)())_gleCullPolygonPtrStack)(glContext,polygonVertexList,polygonVertexCount,&backFacing),
                dVar22 = f1AfterCall2, iVar17 == 0)) {
               iVar17 = backFacing;
-              if ((!noVertexProgram) && ((vertexProgramTwoSide && (iVar9 = polygonVertexCount, flipCursor = polygonVertexList, 0 < polygonVertexCount)))) {
+              if ((!noVertexProgram) && ((vertexProgramTwoSide && (remaining = polygonVertexCount, flipCursor = polygonVertexList, 0 < polygonVertexCount)))) {
                 do {
                   _gleVPFlipColors(glContext,*flipCursor,1,iVar17);
-                  iVar9 = iVar9 + -1;
+                  remaining = remaining + -1;
                   flipCursor = flipCursor + 1;
-                } while (iVar9 != 0);
+                } while (remaining != 0);
               }
               dVar22 = (double)_gleSelectPolygonPtr(glContext,polygonVertexList,polygonVertexCount);
             }
