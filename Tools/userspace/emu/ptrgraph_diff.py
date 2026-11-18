@@ -8,12 +8,13 @@ word is a valid arena pointer (to a 16-byte aligned place), a small count or zer
   3: 50% pointers, 40% small (0..3), 10% zero; argument 1 a pointer, the rest as the signature
   4: every word a pointer; all arguments pointers      5: 94% pointers, 6% small (1..2); all arguments pointers
 usage: same as trace_diff.py --out (census), plus env TD_REPAIR=12 TD_HEAP=1 TD_ENTRYARGS=1 as for the repaired census."""
-import sys, os, struct, random
+import sys, os, os, struct, random
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import trace_diff as t
 
 def _profile(seed): return (seed % 100003) % 6
 
+FNPCT = int(os.environ.get('PG_FNPCT', '0'))     # percent of arena words that hold a call-out (function) address
 class GGen(t.Gen):
     def __init__(self, seed): super().__init__(seed); self.prof = _profile(seed)
     def aptr(self): return t.ARENA + 0x1000 + (self.r.randrange(t.ARENA_SIZE - 0x3000) & ~0xf)
@@ -22,6 +23,7 @@ class GGen(t.Gen):
         for i in range(t.ARENA_SIZE // 4):
             k = r.randrange(100)
             w = self.aptr() if k < pp else r.randint(lo, hi) if k < pp + ps else 0
+            if FNPCT and r.randrange(100) < FNPCT: w = t.CALLOUT + 16 * t._G['sims']['A'][0].ids['_free']     # a hook slot: calls through it return to the caller (GLDriver/GLEngine dispatch tables hold engine entry points)
             out += struct.pack('>I', w)
         return bytes(out)
     def call(self, pc, valid=False):
