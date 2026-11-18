@@ -530,60 +530,66 @@ int _glProgramEnvParameter4fvARB_ListExec(glContext, listRecord)
 /* _glProgramLocalParameter4dARB_Exec @ 0x79ffc (344 bytes) */
 void _glProgramLocalParameter4dARB_Exec(int glContext,uint target,uint index,double x,double y,double z,double w,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  byte bVar1;
-  uint uVar2;
+  byte dirtyBitIndex;
+  byte dirtyBitIndex2;
+  uint changeWord3WithFlag;
+  uint alternateFragmentTarget;
   undefined4 glErrorCode;
-  int iVar4;
-  int iVar5;
-  int iVar6;
+  int glContextWord5424;
+  int boundProgramThenLocalParamArray;
+  int pipelineStageIndex;
+  int paramEntry;
+  int dirtyWord348Ptr;
+  int dirtyWordPtr;
+  int stageTableBase;
   
   if (target == 0x8620) {
-    iVar5 = 0;
+    pipelineStageIndex = 0;
     if (index < 0x100) {
-      uVar2 = *(uint *)(glContext + 0x31c) | 0x400000;
+      changeWord3WithFlag = *(uint *)(glContext + 0x31c) | 0x400000;
 LAB_0007a090:
-      *(uint *)(glContext + 0x31c) = uVar2;
+      *(uint *)(glContext + 0x31c) = changeWord3WithFlag;
       if (*(int *)(glContext + 0x5434) == 0) {
-        bVar1 = *(byte *)(index + *(int *)(glContext + 0x5420) + 0x58);
+        dirtyBitIndex = *(byte *)(index + *(int *)(glContext + 0x5420) + 0x58);
       }
       else {
-        bVar1 = *(byte *)(index + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x8c);
+        dirtyBitIndex = *(byte *)(index + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x8c);
       }
-      iVar6 = (bVar1 >> 3 & 0x1c) + glContext;
-      iVar4 = *(int *)(glContext + 0x5424);
-      *(uint *)(iVar6 + 0x324) = *(uint *)(iVar6 + 0x324) | 1 << (bVar1 & 0x1f);
-      bVar1 = *(byte *)(index + iVar4 + 0x58);
-      iVar6 = iVar5 * 4 + glContext;
-      iVar5 = (bVar1 >> 3 & 0x1c) + glContext;
-      iVar4 = *(int *)(iVar6 + 0x5420);
-      *(uint *)(iVar5 + 0x348) = *(uint *)(iVar5 + 0x348) | 1 << (bVar1 & 0x1f);
-      iVar4 = *(int *)(iVar4 + 0x4e0);
-      iVar5 = iVar4 + index * 0x10;
-      *(float *)(iVar4 + index * 0x10) = (float)x;
-      *(float *)(iVar5 + 0xc) = (float)w;
-      *(float *)(iVar5 + 4) = (float)y;
-      *(float *)(iVar5 + 8) = (float)z;
-      _gleModifyPluginPipelineProgram(glContext,*(int *)(iVar6 + 0x5420) + 0x10,2);
+      dirtyWordPtr = (dirtyBitIndex >> 3 & 0x1c) + glContext;
+      glContextWord5424 = *(int *)(glContext + 0x5424);
+      *(uint *)(dirtyWordPtr + 0x324) = *(uint *)(dirtyWordPtr + 0x324) | 1 << (dirtyBitIndex & 0x1f);
+      dirtyBitIndex2 = *(byte *)(index + glContextWord5424 + 0x58);
+      stageTableBase = pipelineStageIndex * 4 + glContext;
+      dirtyWord348Ptr = (dirtyBitIndex2 >> 3 & 0x1c) + glContext;
+      boundProgramThenLocalParamArray = *(int *)(stageTableBase + 0x5420);
+      *(uint *)(dirtyWord348Ptr + 0x348) = *(uint *)(dirtyWord348Ptr + 0x348) | 1 << (dirtyBitIndex2 & 0x1f);
+      boundProgramThenLocalParamArray = *(int *)(boundProgramThenLocalParamArray + 0x4e0);
+      paramEntry = boundProgramThenLocalParamArray + index * 0x10;
+      *(float *)(boundProgramThenLocalParamArray + index * 0x10) = (float)x;
+      *(float *)(paramEntry + 0xc) = (float)w;
+      *(float *)(paramEntry + 4) = (float)y;
+      *(float *)(paramEntry + 8) = (float)z;
+      _gleModifyPluginPipelineProgram(glContext,*(int *)(stageTableBase + 0x5420) + 0x10,2);
       return;
     }
   }
   else {
     if (target < 0x8621) {
-      uVar2 = 0x8200;
+      alternateFragmentTarget = 0x8200;
     }
     else {
-      uVar2 = 0x8804;
+      alternateFragmentTarget = 0x8804;
     }
-    if (target != uVar2) {
+    if (target != alternateFragmentTarget) {
       if (*(int *)(glContext + 0x7574) != 0) {
         return;
       }
       glErrorCode = 0x500;
       goto LAB_0007a088;
     }
-    iVar5 = 1;
+    pipelineStageIndex = 1;
     if (index < 0x80) {
-      uVar2 = *(uint *)(glContext + 0x31c) | 0x1000000;
+      changeWord3WithFlag = *(uint *)(glContext + 0x31c) | 0x1000000;
       goto LAB_0007a090;
     }
   }

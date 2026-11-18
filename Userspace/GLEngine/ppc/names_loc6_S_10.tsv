@@ -1,0 +1,7 @@
+local	_glGetCombinerOutputParameterivNV_Exec_body	param_2	stage	CONFIRMED	glGetCombinerOutputParameterivNV prototype: stage (GL_COMBINER0_NV + n, 0x8550..); range-checked after subtracting 0x8550 against the combiner limit at *(ctx+0x468c)+0x98
+local	_glGetCombinerOutputParameterivNV_Exec_body	param_3	portion	CONFIRMED	glGetCombinerOutputParameterivNV prototype: portion, compared with GL_ALPHA (0x1906) and GL_RGB (0x1907)
+local	_glGetCombinerOutputParameterivNV_Exec_body	param_4	pname	CONFIRMED	glGetCombinerOutputParameterivNV prototype: pname, switched on 0x8545..0x854c
+local	_glGetCombinerOutputParameterivNV_Exec_body	param_5	params	CONFIRMED	glGetCombinerOutputParameterivNV prototype: params, the result is stored at *params
+local	_glGetCombinerOutputParameterivNV_Exec_body	iVar2	stageIndex	CONFIRMED	stage - 0x8550 (written as + 0x7ab0): index of the combiner stage, scaled by 0x80 into the context record
+local	_glGetCombinerOutputParameterivNV_Exec_body	iVar3	portionIndex	CONFIRMED	0 for GL_ALPHA, 1 for GL_RGB: selects the 0x30-byte portion record within the stage record
+local	_glGetCombinerOutputParameterivNV_Exec_body	uVar1	queriedValue	CONFIRMED	the byte or halfword read for pname, stored at *params

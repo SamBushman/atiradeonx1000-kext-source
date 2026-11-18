@@ -1,0 +1,40 @@
+local	_gleEmptyImage	iVar6	rowLengthThenRowStrideThenBitmapRemainderThenSkipBytesThenBitsLeft	CONFIRMED	ctx+0x31cc (the pixel store row length, replaced by width when below 1) and, in the non-bitmap path, the row stride in bytes (rowLength * pixelBytes padded to the alignment); in the bitmap path the remainder of the row bytes modulo the alignment, then the whole bytes of the skip (skipPixels * components >> 3, signed-adjusted), then width * componentCount, the bits still to write in the row, reduced by 8 per byte
+local	_gleMultiVtxTextureCoordGenObjectST	param_1	glContext	CONFIRMED	the per-unit texgen planes are read at param_1 + texUnit*0x94 + 0x3cfc.. and the vertex texture coordinates are written to the vertex record: the context pointer (the siblings name it glContext)
+local	_gleMultiVtxTextureCoordGenObjectST	fVar9	objectY	INFERRED	vertex float +0x24, the second object-space coordinate, multiplied by the plane B coefficients (SB, TB)
+local	_gleMultiVtxTextureCoordGenObjectST	fVar10	objectX	INFERRED	vertex float +0x20, the first object-space coordinate, multiplied by the plane A coefficients (SA, TA)
+local	_gleMultiVtxTextureCoordGenObjectST	fVar11	objectZ	INFERRED	vertex float +0x28, the third object-space coordinate, multiplied by the plane C coefficients (SC, TC)
+local	_gleMultiVtxTextureCoordGenObjectST	fVar12	objectW	INFERRED	vertex float +0x2c, the fourth object-space coordinate, multiplied by the plane D coefficients (SD, TD)
+local	_gleMultiVtxTextureCoordGenObjectST	uVar13	vertexEndThenRemainingVertices	CONFIRMED	vertexCursor + vertexCount*0x100 (the loop is skipped when it is not above the cursor), then the number of vertices still to process, decremented per vertex
+local	_gleMultiVtxTextureCoordGenObjectST	iVar14	texUnitRecord	INFERRED	param_1 + texUnit*0x94: the texture unit's record, whose +0x3cfc.. words are the object linear texgen plane coefficients
+local	_gleFlushLineLoopTCLFunc	iVar1	copyByteOffset	CONFIRMED	byte offset (0, += 8) of the 8-byte copy loops that move one vertex record
+local	_gleFlushLineLoopTCLFunc	iVar2	vertexBufferEnd	CONFIRMED	ctx+0x4858, the end of the vertex records; the last vertex (iVar2 - vertexStride) is copied to the start of the buffer (same name as in the other TCL flush functions)
+local	_gleFlushLineLoopTCLFunc	iVar3	vertexStride	CONFIRMED	the short at ctx+0x487c: the size in bytes of one vertex record, which is also copied in vertexStride/8 chunks (same name as in the other functions)
+local	_gleFlushLineLoopTCLFunc	iVar4	vertexBufferStart	CONFIRMED	ctx+0x4854, the first vertex record; the last vertex is copied here and the end ctx+0x4858 becomes vertexBufferStart + vertexStride
+local	_gleFlushLineLoopTCLFunc	uVar5	doublewordsLeft	CONFIRMED	(vertexStride + 7) >> 3: the number of 8-byte chunks still to copy, decremented per chunk
+local	_gleVPFlushPolygonTCLRDirty	uVar1	vertexStrideBytes	CONFIRMED	(vertexStride >> 3) * 8: the vertex record size in bytes rounded down to a multiple of 8
+local	_gleVPFlushPolygonTCLRDirty	iVar2	copyByteOffset	CONFIRMED	byte offset (index * 8) of the 8-byte chunk being copied from the last vertex to the new first slot
+local	_gleVPFlushPolygonTCLRDirty	uVar3	bitArrayWordOffset	CONFIRMED	(lastVertexIndex >> 3) & 0x1ffffffc: the byte offset of the 32-bit word of the vertexFlagBits array that holds the last vertex's bit
+local	_gleVPFlushPolygonTCLRDirty	uVar4	lastVertexIndexThenBitInWord	CONFIRMED	(lastVertex - vertexBufferStart) / vertexStrideBytes, then that & 0x1f: the bit position of the last vertex in its word of the flag bit array
+local	_gleVPFlushPolygonTCLRDirty	iVar5	copyIndex	CONFIRMED	index of the 8-byte chunk being copied (0, += 1)
+local	_gleVPFlushPolygonTCLRDirty	iVar6	vertexStrideDoublewordsThenRemaining	CONFIRMED	vertexStride >> 3 (the 8-byte chunks of one vertex), then the number of chunks still to copy, decremented per chunk
+local	_gleVPFlushPolygonTCLRDirty	iVar7	lastVertex	CONFIRMED	ctx+0x4858 - vertexStrideBytes: the last vertex record, the source of the copy
+local	_gleVPFlushPolygonTCLRDirty	puVar8	vertexFlagBits	CONFIRMED	ctx+0x30b0, the per-vertex flag bit array (the same name other functions give it); bit 1 of its first word receives the last vertex's old bit
+local	_gleVPFlushPolygonTCLRDirty	uVar9	bitArrayWord	CONFIRMED	the word of the vertexFlagBits array holding the last vertex's bit, read before the bit is cleared
+local	_gleVPFlushPolygonTCLRDirty	iVar10	secondVertexSlot	CONFIRMED	ctx+0x4854 + vertexStrideBytes: the destination of the copied last vertex; the new vertex end ctx+0x4858 is this plus vertexStrideBytes
+local	_gleCompressedTextureImagePut	param_2	textureLevel	CONFIRMED	every caller passes its textureLevel record: +4 and +6 are the level's width and height (ushorts), +0x14 the level's pixel storage written by the memcpy
+local	_gleCompressedTextureImagePut	param_3	xoffset	CONFIRMED	the callers pass xoffset (0 for the create paths); >> 2 gives the block column of the destination
+local	_gleCompressedTextureImagePut	param_4	yoffset	CONFIRMED	the callers pass yoffset (0 for the create paths); >> 2 gives the first destination block row
+local	_gleCompressedTextureImagePut	param_8	depth	CONFIRMED	the callers pass depth (or 1); the number of slices copied by the outer loop
+local	_gleCompressedTextureImagePut	uVar1	levelWidth	CONFIRMED	textureLevel +4 ushort: (levelWidth + 3) >> 2 is the number of blocks per row of the destination level
+local	_gleCompressedTextureImagePut	uVar2	levelHeight	CONFIRMED	textureLevel +6 ushort: (levelHeight + 3) >> 2 block rows are skipped per slice of the destination
+local	_gleCompressedTextureImagePut	iVar3	destBlockRow	CONFIRMED	sliceBlockRow + blockRowIndex: the destination block row of the memcpy
+local	_gleCompressedTextureImagePut	iVar4	sliceBlockRow	CONFIRMED	yoffset >> 2, then += (levelHeight + 3) >> 2 per slice: the destination block row at which the current slice starts
+local	_gleCompressedTextureImagePut	iVar5	srcRowBytes	CONFIRMED	((width + 3) >> 2) << blockSizeShift: the bytes of one block row, the length of each memcpy and the source advance
+local	_gleCompressedTextureImagePut	iVar6	blockRowsPerSlice	CONFIRMED	(height + 3) >> 2: the block rows copied per slice
+local	_gleCompressedTextureImagePut	iVar7	sliceIndex	CONFIRMED	0.. counter of the outer slice loop, compared with depth
+local	_gleCompressedTextureImagePut	iVar8	blockSizeShift	CONFIRMED	3 (8-byte blocks) for internalformat 0x83f0 / 0x83f1 (DXT1 RGB / RGBA), otherwise 4 (16-byte blocks): log2 of the block size in bytes
+local	_gleCompressedTextureImagePut	iVar9	srcRowCursor	CONFIRMED	the source pointer of the row being copied (data advanced by srcRowBytes per block row)
+local	_gleCompressedTextureImagePut	iVar10	blockRowIndex	CONFIRMED	0.. counter of the inner loop over the block rows of a slice, compared with blockRowsPerSlice
+local	_gleSetAttrib	fVar9	copiedFloatThenLoopCountThenMaskWord74d8	INFERRED	a float-typed register (GH_F2U/GH_U2F reinterpret it as an integer) holding in turn: a copied attribute word, the clamped stack depth count (attribBuffer[7] limited to 8, or attribBuffer[0] limited to 6) decremented as the loop counter, and the mask word stored at ctx+0x74d8 (attribBuffer[3] / attribBuffer[0]) whose bits are tested per loop index
+local	_gleSetAttrib	fVar10	maskWord74dc	CONFIRMED	attribBuffer[0xd] (or attribBuffer[4]) stored to ctx+0x74dc and tested bit by bit against the loop index, beside the mask word stored at ctx+0x74d8
+local	_gleSetAttrib	iVar23	nextTextureTargetIndexThenTextureObject	INFERRED	textureTargetIndex + 1 (the loop counter compared with 5), then *srcCursor, the texture object of a target whose +0x38..+0x7c sampler state fields are restored from the attribute buffer

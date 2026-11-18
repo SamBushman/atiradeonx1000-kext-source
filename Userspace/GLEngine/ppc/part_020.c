@@ -549,12 +549,12 @@ void _glNormal3i_Exec(int glContext,uint nx,uint ny,uint nz,double unusedFloatAr
 /* _glNormal3i_CompExec @ 0x783bc (72 bytes) */
 void _glNormal3i_CompExec(undefined4 glContext,undefined4 nx,undefined4 ny,undefined4 nz,double forwardedFloatArg1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11)
 {
-  double incomingStack_ffffffa8;
-  double incomingStack_ffffffb0;
-  double incomingStack_ffffffb8;
+  double incomingStackWord_ffffffa8;
+  double incomingStackWord_ffffffb0;
+  double incomingStackWord_ffffffb8;
   
   ((void (*)())_glNormal3i_Exec)(glContext,nx,ny,nz,forwardedFloatArg1,forwardedFloatArg2,forwardedFloatArg3,forwardedFloatArg4,forwardedFloatArg5,
-                   forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8,incomingStack_ffffffa8,incomingStack_ffffffb0,incomingStack_ffffffb8)
+                   forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8,incomingStackWord_ffffffa8,incomingStackWord_ffffffb0,incomingStackWord_ffffffb8)
   ;
   ((void (*)())_glNormal3i_Comp)(glContext,nx,ny,nz);
   return;

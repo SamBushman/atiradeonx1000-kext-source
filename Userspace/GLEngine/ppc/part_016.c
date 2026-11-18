@@ -451,46 +451,46 @@ void _glFrontFace_CompExec(glContext, mode)
 /* _glFrustum_ListExec @ 0x68030 (360 bytes) */
 undefined4 _glFrustum_ListExec(int glContext,float *recordedArgs,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11)
 {
-  float fVar1;
-  float fVar2;
-  float fVar3;
-  float fVar4;
-  float fVar5;
-  float fVar6;
-  float fVar7;
-  float fVar8;
-  float fVar9;
-  float fVar10;
+  float frustumB;
+  float frustumA;
+  float frustumC;
+  float oldColumn2X;
+  float oldColumn2Y;
+  float oldColumn2Z;
+  float frustumD;
+  float frustumXScale;
+  float frustumYScale;
+  float oldColumn3W;
   float *currentMatrix;
   
   currentMatrix = *(float **)(glContext + 0x4fec);
   if ((*(short *)(glContext + 0x4a10) < 0) && (*(int *)(glContext + 0x4ff4) < 0x18)) {
-    fVar1 = recordedArgs[3];
-    fVar2 = recordedArgs[2];
-    fVar3 = recordedArgs[4];
-    fVar4 = currentMatrix[8];
-    fVar5 = currentMatrix[9];
-    fVar6 = currentMatrix[10];
-    fVar7 = recordedArgs[5];
-    fVar8 = *recordedArgs;
-    fVar9 = recordedArgs[1];
-    fVar10 = currentMatrix[0xf];
-    currentMatrix[8] = (fVar4 * fVar3 + (*currentMatrix * fVar2 + currentMatrix[4] * fVar1)) - currentMatrix[0xc];
-    currentMatrix[9] = (fVar5 * fVar3 + (currentMatrix[1] * fVar2 + currentMatrix[5] * fVar1)) - currentMatrix[0xd];
-    currentMatrix[10] = (fVar6 * fVar3 + (currentMatrix[2] * fVar2 + currentMatrix[6] * fVar1)) - currentMatrix[0xe];
-    currentMatrix[4] = currentMatrix[4] * fVar9;
-    *currentMatrix = *currentMatrix * fVar8;
-    currentMatrix[5] = currentMatrix[5] * fVar9;
-    currentMatrix[1] = currentMatrix[1] * fVar8;
-    currentMatrix[6] = currentMatrix[6] * fVar9;
-    currentMatrix[0xc] = fVar4 * fVar7;
-    currentMatrix[0xd] = fVar5 * fVar7;
-    currentMatrix[0xe] = fVar6 * fVar7;
-    currentMatrix[2] = currentMatrix[2] * fVar8;
-    currentMatrix[0xf] = currentMatrix[0xb] * fVar7;
-    currentMatrix[0xb] = (currentMatrix[0xb] * fVar3 + (currentMatrix[3] * fVar2 + currentMatrix[7] * fVar1)) - fVar10;
-    currentMatrix[3] = currentMatrix[3] * fVar8;
-    currentMatrix[7] = currentMatrix[7] * fVar9;
+    frustumB = recordedArgs[3];
+    frustumA = recordedArgs[2];
+    frustumC = recordedArgs[4];
+    oldColumn2X = currentMatrix[8];
+    oldColumn2Y = currentMatrix[9];
+    oldColumn2Z = currentMatrix[10];
+    frustumD = recordedArgs[5];
+    frustumXScale = *recordedArgs;
+    frustumYScale = recordedArgs[1];
+    oldColumn3W = currentMatrix[0xf];
+    currentMatrix[8] = (oldColumn2X * frustumC + (*currentMatrix * frustumA + currentMatrix[4] * frustumB)) - currentMatrix[0xc];
+    currentMatrix[9] = (oldColumn2Y * frustumC + (currentMatrix[1] * frustumA + currentMatrix[5] * frustumB)) - currentMatrix[0xd];
+    currentMatrix[10] = (oldColumn2Z * frustumC + (currentMatrix[2] * frustumA + currentMatrix[6] * frustumB)) - currentMatrix[0xe];
+    currentMatrix[4] = currentMatrix[4] * frustumYScale;
+    *currentMatrix = *currentMatrix * frustumXScale;
+    currentMatrix[5] = currentMatrix[5] * frustumYScale;
+    currentMatrix[1] = currentMatrix[1] * frustumXScale;
+    currentMatrix[6] = currentMatrix[6] * frustumYScale;
+    currentMatrix[0xc] = oldColumn2X * frustumD;
+    currentMatrix[0xd] = oldColumn2Y * frustumD;
+    currentMatrix[0xe] = oldColumn2Z * frustumD;
+    currentMatrix[2] = currentMatrix[2] * frustumXScale;
+    currentMatrix[0xf] = currentMatrix[0xb] * frustumD;
+    currentMatrix[0xb] = (currentMatrix[0xb] * frustumC + (currentMatrix[3] * frustumA + currentMatrix[7] * frustumB)) - oldColumn3W;
+    currentMatrix[3] = currentMatrix[3] * frustumXScale;
+    currentMatrix[7] = currentMatrix[7] * frustumYScale;
     *(uint *)(glContext + 0x50ac) = *(uint *)(glContext + 0x50ac) | *(uint *)(glContext + 0x50a8);
     *(uint *)(glContext + 0x50b0) = *(uint *)(glContext + 0x50b0) | *(uint *)(glContext + 0x50a8);
   }
@@ -554,15 +554,15 @@ int _glFrustum_Comp(int glContext,double left,double right,double bottom,double 
 /* _glFrustum_CompExec @ 0x68330 (120 bytes) */
 void _glFrustum_CompExec(undefined4 glContext,double left,double right,double bottom,double top,float zNear,double zFar,double forwardedFloatArg7,double forwardedFloatArg8,double forwardedFloatArg9,double forwardedFloatArg10,double forwardedFloatArg11,double forwardedFloatArg12,double forwardedFloatArg13)
 {
-  double incomingStack_ffffff68;
-  double incomingStack_ffffff70;
-  double incomingStack_ffffff78;
-  double incomingStack_ffffff80;
-  double incomingStack_ffffff88;
+  double incomingStackWord_ffffff68;
+  double incomingStackWord_ffffff70;
+  double incomingStackWord_ffffff78;
+  double incomingStackWord_ffffff80;
+  double incomingStackWord_ffffff88;
   
   ((int (*)())_glFrustum_Comp)(glContext,left,right,bottom,top,zNear,zFar,forwardedFloatArg7,forwardedFloatArg8,
-                  incomingStack_ffffff68,incomingStack_ffffff70,incomingStack_ffffff78,incomingStack_ffffff80,
-                  incomingStack_ffffff88);
+                  incomingStackWord_ffffff68,incomingStackWord_ffffff70,incomingStackWord_ffffff78,incomingStackWord_ffffff80,
+                  incomingStackWord_ffffff88);
   ((void (*)())_glFrustum_Exec)(glContext,left,right,bottom,top,zNear,zFar,forwardedFloatArg7,forwardedFloatArg8,
                   forwardedFloatArg9,forwardedFloatArg10,forwardedFloatArg11,forwardedFloatArg12,forwardedFloatArg13);
   return;

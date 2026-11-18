@@ -5290,31 +5290,31 @@ void _gleResetVACachePointers(glContext)
 }
 
 /* _gleSetClientEnableFlag @ 0x44b18 (684 bytes) */
-double _gleSetClientEnableFlag(glContext, array, param_3)
+double _gleSetClientEnableFlag(glContext, array, enable)
   int glContext;
   uint array;
-  uint param_3;
+  uint enable;
 {
   int clientState;
-  uint uVar2;
-  uint uVar3;
-  uint uVar4;
-  uint uVar5;
-  longlong lVar6;
+  uint newEnableWord330;
+  uint newEnableWord334;
+  uint enableBitsWord330;
+  uint enableBitsWord334;
+  longlong arrayBits64;
   
   clientState = *(int *)(glContext + 0x4a60);
   if (array == 0x8079) {
-    uVar5 = 0x400000;
+    enableBitsWord334 = 0x400000;
   }
   else if (array < 0x807a) {
     if (array == 0x8076) {
-      uVar5 = 0x40000;
-      lVar6 = 2;
+      enableBitsWord334 = 0x40000;
+      arrayBits64 = 2;
       goto LAB_00044cf0;
     }
     if (0x8076 < array) {
       if (array == 0x8077) {
-        *(ushort *)(glContext + 0x48ea) = (ushort)(-param_3 >> 0x1f);
+        *(ushort *)(glContext + 0x48ea) = (ushort)(-enable >> 0x1f);
         return;
       }
       if (array != 0x8078) {
@@ -5325,70 +5325,70 @@ LAB_00044cd8:
         *(undefined4 *)(glContext + 0x7574) = 0x500;
         return;
       }
-      lVar6 = ___ashldi3(0,0x1000000,*(undefined4 *)(glContext + 0x53d8));
-      uVar5 = (uint)lVar6;
+      arrayBits64 = ___ashldi3(0,0x1000000,*(undefined4 *)(glContext + 0x53d8));
+      enableBitsWord334 = (uint)arrayBits64;
       goto LAB_00044cf0;
     }
     if (array == 0x8074) {
-      uVar5 = 0x10000;
-      lVar6 = 0x1d;
+      enableBitsWord334 = 0x10000;
+      arrayBits64 = 0x1d;
       goto LAB_00044cf0;
     }
     if (array != 0x8075) goto LAB_00044cd8;
-    uVar5 = 0x20000;
+    enableBitsWord334 = 0x20000;
   }
   else {
     if (array == 0x851d) {
-      if (*(byte *)(glContext + 0x465c) == param_3) {
+      if (*(byte *)(glContext + 0x465c) == enable) {
         return;
       }
       _gleUpdateDrawArraysFuncs(glContext);
       *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x100000;
-      *(byte *)(glContext + 0x465c) = (byte)(-param_3 >> 0x1f);
+      *(byte *)(glContext + 0x465c) = (byte)(-enable >> 0x1f);
       return;
     }
     if (array < 0x851e) {
       if (array == 0x8457) {
-        uVar5 = 0x80000;
+        enableBitsWord334 = 0x80000;
       }
       else {
         if (array != 0x845e) goto LAB_00044cd8;
-        uVar5 = 0x100000;
+        enableBitsWord334 = 0x100000;
       }
     }
     else if (array == 0x86ad) {
-      uVar5 = 0x200000;
+      enableBitsWord334 = 0x200000;
     }
     else {
       if (array != 0x8a0c) goto LAB_00044cd8;
-      uVar5 = 0x800000;
+      enableBitsWord334 = 0x800000;
     }
   }
-  lVar6 = 0;
+  arrayBits64 = 0;
 LAB_00044cf0:
-  uVar4 = (uint)((ulonglong)lVar6 >> 0x20);
-  if (param_3 == 0) {
-    if ((*(uint *)(clientState + 0x330) == 0 && uVar4 == 0) &&
-        (*(uint *)(clientState + 0x334) == 0 && uVar5 == 0)) {
+  enableBitsWord330 = (uint)((ulonglong)arrayBits64 >> 0x20);
+  if (enable == 0) {
+    if ((*(uint *)(clientState + 0x330) == 0 && enableBitsWord330 == 0) &&
+        (*(uint *)(clientState + 0x334) == 0 && enableBitsWord334 == 0)) {
       return;
     }
-    uVar2 = *(uint *)(clientState + 0x330) & ~uVar4;
-    uVar3 = *(uint *)(clientState + 0x334) & ~uVar5;
+    newEnableWord330 = *(uint *)(clientState + 0x330) & ~enableBitsWord330;
+    newEnableWord334 = *(uint *)(clientState + 0x334) & ~enableBitsWord334;
   }
   else {
-    if ((*(uint *)(clientState + 0x330) & uVar4) != 0 || (*(uint *)(clientState + 0x334) & uVar5) != 0) {
+    if ((*(uint *)(clientState + 0x330) & enableBitsWord330) != 0 || (*(uint *)(clientState + 0x334) & enableBitsWord334) != 0) {
       return;
     }
-    uVar2 = *(uint *)(clientState + 0x330) | uVar4;
-    uVar3 = *(uint *)(clientState + 0x334) | uVar5;
+    newEnableWord330 = *(uint *)(clientState + 0x330) | enableBitsWord330;
+    newEnableWord334 = *(uint *)(clientState + 0x334) | enableBitsWord334;
   }
-  *(uint *)(clientState + 0x330) = uVar2;
-  *(uint *)(clientState + 0x334) = uVar3;
-  *(uint *)(clientState + 0x350) = *(uint *)(clientState + 0x350) | uVar4;
-  *(uint *)(clientState + 0x354) = *(uint *)(clientState + 0x354) | uVar5;
+  *(uint *)(clientState + 0x330) = newEnableWord330;
+  *(uint *)(clientState + 0x334) = newEnableWord334;
+  *(uint *)(clientState + 0x350) = *(uint *)(clientState + 0x350) | enableBitsWord330;
+  *(uint *)(clientState + 0x354) = *(uint *)(clientState + 0x354) | enableBitsWord334;
   *(undefined4 *)(glContext + 0x488c) = 0;
   *(undefined4 *)(glContext + 0x4890) = 0;
-  *(uint *)(glContext + 0x497c) = *(uint *)(glContext + 0x497c) | (uint)lVar6;
+  *(uint *)(glContext + 0x497c) = *(uint *)(glContext + 0x497c) | (uint)arrayBits64;
   *(undefined4 *)(glContext + 0x4894) = 0;
   if (((*(int *)(clientState + 0x344) != 0) || (*(int *)(clientState + 0x358) != 0)) ||
      (*(int *)(glContext + 0x49a0) != 0)) {

@@ -945,12 +945,12 @@ void _gleFeedbackCopyPixels(glContext, vertex)
 }
 
 /* _gleFeedbackDrawPixels @ 0xcc088 (72 bytes) */
-void _gleFeedbackDrawPixels(glContext, param_2)
+void _gleFeedbackDrawPixels(glContext, rasterPositionVertex)
   undefined4 glContext;
-  undefined4 param_2;
+  undefined4 rasterPositionVertex;
 {
   ((void (*)())_gleFeedbackToken)(glContext,(double)FLOAT_00108f20);
-  _gleFeedbackHitRecord(glContext,param_2);
+  _gleFeedbackHitRecord(glContext,rasterPositionVertex);
   return;
 }
 

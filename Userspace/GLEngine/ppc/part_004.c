@@ -432,62 +432,62 @@ int _gleFreeOrphans(glContext)
 {
   int *cursor;
   int loopIndex;
-  int *piVar1;
-  undefined4 *puVar2;
-  int iVar3;
-  int extraout_r3;
-  int iVar4;
+  int *rendererFuncs;
+  undefined4 *rendererContext;
+  int glContextThenSecondaryNextThenNextThenRendererRecordCursor;
+  int r3AfterCall;
+  int rendererHandle;
   int *glContextPtr7470;
-  int *piVar6;
-  int iVar7;
+  int *orphanNode;
+  int secondaryPrevNode;
   
-  iVar3 = glContext;
+  glContextThenSecondaryNextThenNextThenRendererRecordCursor = glContext;
   if (*(int *)(glContext + 0x7484) != 0) {
     while( true ) {
       glContextPtr7470 = *(int **)(glContext + 0x7470);
-      piVar6 = (int *)0x0;
+      orphanNode = (int *)0x0;
       if (glContextPtr7470 != (int *)(glContext + 0x7468)) {
-        iVar7 = glContextPtr7470[3];
-        piVar6 = (int *)glContextPtr7470[1];
-        iVar3 = glContextPtr7470[2];
-        *piVar6 = *glContextPtr7470;
-        *(int *)(iVar7 + 8) = iVar3;
-        iVar3 = *glContextPtr7470;
-        *(int *)(glContextPtr7470[2] + 0xc) = iVar7;
-        *(int **)(iVar3 + 4) = piVar6;
+        secondaryPrevNode = glContextPtr7470[3];
+        orphanNode = (int *)glContextPtr7470[1];
+        glContextThenSecondaryNextThenNextThenRendererRecordCursor = glContextPtr7470[2];
+        *orphanNode = *glContextPtr7470;
+        *(int *)(secondaryPrevNode + 8) = glContextThenSecondaryNextThenNextThenRendererRecordCursor;
+        glContextThenSecondaryNextThenNextThenRendererRecordCursor = *glContextPtr7470;
+        *(int *)(glContextPtr7470[2] + 0xc) = secondaryPrevNode;
+        *(int **)(glContextThenSecondaryNextThenNextThenRendererRecordCursor + 4) = orphanNode;
         glContextPtr7470[2] = (int)glContextPtr7470;
         glContextPtr7470[3] = (int)glContextPtr7470;
         *glContextPtr7470 = (int)glContextPtr7470;
         glContextPtr7470[1] = (int)glContextPtr7470;
-        piVar6 = glContextPtr7470;
+        orphanNode = glContextPtr7470;
       }
-      if (piVar6 == (int *)0x0) break;
-      iVar3 = glContext + 0x10000;
+      if (orphanNode == (int *)0x0) break;
+      glContextThenSecondaryNextThenNextThenRendererRecordCursor = glContext + 0x10000;
       loopIndex = 0;
       if (*(char *)(glContext + 0x85a4) != '\0') {
-        cursor = piVar6 + 7;
+        cursor = orphanNode + 7;
         do {
-          piVar1 = (int *)(iVar3 + -0x777c);
+          rendererFuncs = (int *)(glContextThenSecondaryNextThenNextThenRendererRecordCursor + -0x777c);
           loopIndex = loopIndex + 1;
-          iVar4 = *cursor;
+          rendererHandle = *cursor;
           cursor = cursor + 1;
-          puVar2 = (undefined4 *)(iVar3 + -0x7a54);
-          iVar3 = iVar3 + 0x2e0;
-          (**(code **)(*piVar1 + 0x1f8))(*puVar2,iVar4);
+          rendererContext = (undefined4 *)(glContextThenSecondaryNextThenNextThenRendererRecordCursor + -0x7a54);
+          glContextThenSecondaryNextThenNextThenRendererRecordCursor = glContextThenSecondaryNextThenNextThenRendererRecordCursor + 0x2e0;
+          (**(code **)(*rendererFuncs + 0x1f8))(*rendererContext,rendererHandle);
         } while (loopIndex < (int)(uint)*(byte *)(glContext + 0x85a4));
       }
-      _gleVecFree(piVar6);
+      _gleVecFree(orphanNode);
     }
     _gleVecFree(*(undefined4 *)(glContext + 0x7484));
     *(undefined4 *)(glContext + 0x7484) = 0;
-    iVar3 = 0;
+    glContextThenSecondaryNextThenNextThenRendererRecordCursor = 0;
     if (*(int *)(glContext + 0x7464) != 0) {
       _gleVecFree(*(int *)(glContext + 0x7464));
       *(undefined4 *)(glContext + 0x7464) = 0;
-      iVar3 = extraout_r3;
+      glContextThenSecondaryNextThenNextThenRendererRecordCursor = r3AfterCall;
     }
   }
-  return iVar3;
+  return glContextThenSecondaryNextThenNextThenRendererRecordCursor;
 }
 
 /* _gleFreeVertexMachine @ 0x2fc30 (136 bytes) */
@@ -1368,13 +1368,13 @@ void _glGetBooleanv_Exec(glContext, pname, params)
   double *cursor;
   int loopIndex;
   double doubleValue;
-  undefined1 auStack_b0 [16];
+  undefined1 stateFlagBytes [16];
   double stateValues [16];
   int valueType [4];
   
   if (*(short *)(glContext + 0x4a10) < 0) {
     cursor = stateValues;
-    remaining = _gleGetState(glContext,pname,cursor,valueType,auStack_b0);
+    remaining = _gleGetState(glContext,pname,cursor,valueType,stateFlagBytes);
     doubleZero = DOUBLE_00108d60;
     if (remaining == 0) {
       if (*(int *)(glContext + 0x7574) != 0) {

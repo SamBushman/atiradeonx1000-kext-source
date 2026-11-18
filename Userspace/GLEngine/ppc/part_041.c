@@ -2525,11 +2525,11 @@ double _gleSwitchToNonRevertRenderer(glContext)
   double incomingFpr6;
   double incomingFpr7;
   double incomingFpr8;
-  double incomingStack_ffffff88;
-  double incomingStack_ffffff90;
-  double incomingStack_ffffff98;
-  double incomingStack_ffffffa0;
-  double incomingStack_ffffffa8;
+  double incomingStackWord_ffffff88;
+  double incomingStackWord_ffffff90;
+  double incomingStackWord_ffffff98;
+  double incomingStackWord_ffffffa0;
+  double incomingStackWord_ffffffa8;
   undefined4 copyContextData;
   undefined4 copyContextData1;
   undefined4 copyContextData2;
@@ -2565,8 +2565,8 @@ double _gleSwitchToNonRevertRenderer(glContext)
       ((void (*)())_gleSwitchRenderersReadBuffers)(glContext,(uint)*(byte *)(glContext + 0x85a5),&copyContextData);
       forwardedFloatArg1 = (double)((int (*)())_gleSwitchToRenderer)(glContext,currentRendererIndex);
       *(byte *)(glContext + 0x85a8) = currentRenderer;
-      ((void (*)())_gleUpdateDepthRangeData)(glContext,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffff88,
-                 incomingStack_ffffff90,incomingStack_ffffff98,incomingStack_ffffffa0,incomingStack_ffffffa8);
+      ((void (*)())_gleUpdateDepthRangeData)(glContext,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStackWord_ffffff88,
+                 incomingStackWord_ffffff90,incomingStackWord_ffffff98,incomingStackWord_ffffffa0,incomingStackWord_ffffffa8);
       _gleUpdatePolyMode(glContext);
       ((void (*)())_gleUpdateViewScissorData)(glContext,fparam_1_00,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
       _gleUpdateTextureTransform(glContext);
@@ -2614,8 +2614,7 @@ double _gleUpdateDispatchCodeChange(glContext, dispatchModeBits)
   byte rendererIndexByte;
   undefined *a6;
   undefined *setEyeInterpFunc;
-  uint uVar3;
-  uint dispatchFlags;
+  uint dispatchBit4ThenRendererQueryResultThenChangeWord3ThenDispatchFlagsThenInvertedBit3;
   int rendererRecord;
   undefined4 a3;
   undefined4 incomingR7;
@@ -2629,11 +2628,11 @@ double _gleUpdateDispatchCodeChange(glContext, dispatchModeBits)
   double incomingFpr6;
   double incomingFpr7;
   double incomingFpr8;
-  double incomingStack_ffffff88;
-  double incomingStack_ffffff90;
-  double incomingStack_ffffff98;
-  double incomingStack_ffffffa0;
-  double incomingStack_ffffffa8;
+  double incomingStackWord_ffffff88;
+  double incomingStackWord_ffffff90;
+  double incomingStackWord_ffffff98;
+  double incomingStackWord_ffffffa0;
+  double incomingStackWord_ffffffa8;
   uint copyContextWord0;
   uint copyContextWord1;
   uint copyContextWord2;
@@ -2642,46 +2641,46 @@ double _gleUpdateDispatchCodeChange(glContext, dispatchModeBits)
   
   if ((dispatchModeBits & 4) != (uint)*(byte *)(glContext + 0x7581)) {
     *(char *)(glContext + 0x7581) = (char)(dispatchModeBits & 4);
-    uVar3 = (uint)*(byte *)(glContext + 0x7581);
-    if (uVar3 == 0) {
+    dispatchBit4ThenRendererQueryResultThenChangeWord3ThenDispatchFlagsThenInvertedBit3 = (uint)*(byte *)(glContext + 0x7581);
+    if (dispatchBit4ThenRendererQueryResultThenChangeWord3ThenDispatchFlagsThenInvertedBit3 == 0) {
       rendererIndexByte = *(byte *)(glContext + 0x85a5);
       rendererIndex = (uint)rendererIndexByte;
       if (rendererIndex != 0xff) {
-        copyContextWord0 = uVar3;
-        copyContextWord1 = uVar3;
-        copyContextWord2 = uVar3;
-        copyContextWord3 = uVar3;
-        copyContextWord4 = uVar3;
+        copyContextWord0 = dispatchBit4ThenRendererQueryResultThenChangeWord3ThenDispatchFlagsThenInvertedBit3;
+        copyContextWord1 = dispatchBit4ThenRendererQueryResultThenChangeWord3ThenDispatchFlagsThenInvertedBit3;
+        copyContextWord2 = dispatchBit4ThenRendererQueryResultThenChangeWord3ThenDispatchFlagsThenInvertedBit3;
+        copyContextWord3 = dispatchBit4ThenRendererQueryResultThenChangeWord3ThenDispatchFlagsThenInvertedBit3;
+        copyContextWord4 = dispatchBit4ThenRendererQueryResultThenChangeWord3ThenDispatchFlagsThenInvertedBit3;
         ((void (*)())_gleSwitchRenderersReadBuffers)(glContext,(uint)*(byte *)(glContext + 0x85a6),&copyContextWord0);
         a3 = 0;
         rendererRecord = rendererIndex * 0x2e0 + glContext;
-        uVar3 = (**(code **)(*(int *)(rendererRecord + 0x8884) + 0x138))
+        dispatchBit4ThenRendererQueryResultThenChangeWord3ThenDispatchFlagsThenInvertedBit3 = (**(code **)(*(int *)(rendererRecord + 0x8884) + 0x138))
                           (*(undefined4 *)(rendererRecord + 0x85ac),*(undefined4 *)(glContext + 0x484c),
                            *(undefined4 *)(glContext + 0x4848));
-        if ((uVar3 < 5) && (rendererIndex != *(byte *)(glContext + 0x85a8))) {
+        if ((dispatchBit4ThenRendererQueryResultThenChangeWord3ThenDispatchFlagsThenInvertedBit3 < 5) && (rendererIndex != *(byte *)(glContext + 0x85a8))) {
           _gleSynchronizePluginTextures(glContext);
           ((void (*)())_gleSynchronizePluginBuffers)(glContext);
           *(byte *)(glContext + 0x85a8) = rendererIndexByte;
           f1AfterSwitchToRenderer = (double)((int (*)())_gleSwitchToRenderer)(glContext,(uint)*(byte *)(glContext + 0x85a5));
-          ((void (*)())_gleUpdateDepthRangeData)(glContext,f1AfterSwitchToRenderer,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffff88,
-                     incomingStack_ffffff90,incomingStack_ffffff98,incomingStack_ffffffa0,incomingStack_ffffffa8);
+          ((void (*)())_gleUpdateDepthRangeData)(glContext,f1AfterSwitchToRenderer,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStackWord_ffffff88,
+                     incomingStackWord_ffffff90,incomingStackWord_ffffff98,incomingStackWord_ffffffa0,incomingStackWord_ffffffa8);
           _gleUpdatePolyMode(glContext);
           ((void (*)())_gleUpdateViewScissorData)(glContext,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
           _gleUpdateTextureTransform(glContext);
           setEyeInterpFunc = PTR__gleSetEyeInterpFunc_0011203c;
           a6 = PTR__gleSetClipInterpFunc_00112038;
-          uVar3 = *(uint *)(glContext + 0x31c) | 0x7ffffff;
+          dispatchBit4ThenRendererQueryResultThenChangeWord3ThenDispatchFlagsThenInvertedBit3 = *(uint *)(glContext + 0x31c) | 0x7ffffff;
           *(uint *)(glContext + 0x314) = *(uint *)(glContext + 0x314) | 0x3ffffff;
           *(undefined **)(glContext + 0x49c8) = setEyeInterpFunc;
           *(undefined **)(glContext + 0x49cc) = a6;
           *(uint *)(glContext + 0x318) = *(uint *)(glContext + 0x318) | 0xfffffffd;
-          *(uint *)(glContext + 0x31c) = uVar3;
+          *(uint *)(glContext + 0x31c) = dispatchBit4ThenRendererQueryResultThenChangeWord3ThenDispatchFlagsThenInvertedBit3;
           *(undefined4 *)(glContext + 800) = 0xffffffff;
           *(undefined4 *)(glContext + 0x310) = 0xffffffff;
-          dispatchFlags = (**(code **)(glContext + 0x4788))
+          dispatchBit4ThenRendererQueryResultThenChangeWord3ThenDispatchFlagsThenInvertedBit3 = (**(code **)(glContext + 0x4788))
                             (*(undefined4 *)(glContext + 0x4688),glContext + 0x4698,glContext + 0x310,a3,
-                             incomingR7,0xffffffff,a6,dispatchFlags);
-          if ((dispatchFlags & 8) == 0) {
+                             incomingR7,0xffffffff,a6,dispatchBit4ThenRendererQueryResultThenChangeWord3ThenDispatchFlagsThenInvertedBit3);
+          if ((dispatchBit4ThenRendererQueryResultThenChangeWord3ThenDispatchFlagsThenInvertedBit3 & 8) == 0) {
             ((void (*)())_gleSwitchRenderersWriteBuffers)(glContext,(uint)*(byte *)(glContext + 0x85a5),&copyContextWord0);
           }
           dispatchModeBits = 0;
@@ -2702,9 +2701,9 @@ double _gleUpdateDispatchCodeChange(glContext, dispatchModeBits)
     *(undefined4 *)(glContext + 0x4890) = 0;
     *(undefined4 *)(glContext + 0x4894) = 0;
   }
-  uVar3 = (dispatchModeBits ^ 8) >> 3 & 1;
-  if (uVar3 != *(byte *)(glContext + 0x759d)) {
-    *(char *)(glContext + 0x759d) = (char)uVar3;
+  dispatchBit4ThenRendererQueryResultThenChangeWord3ThenDispatchFlagsThenInvertedBit3 = (dispatchModeBits ^ 8) >> 3 & 1;
+  if (dispatchBit4ThenRendererQueryResultThenChangeWord3ThenDispatchFlagsThenInvertedBit3 != *(byte *)(glContext + 0x759d)) {
+    *(char *)(glContext + 0x759d) = (char)dispatchBit4ThenRendererQueryResultThenChangeWord3ThenDispatchFlagsThenInvertedBit3;
     ((void (*)())_gleUpdateFramebufferOperationFuncs)(glContext);
   }
   return;
@@ -3367,19 +3366,19 @@ LAB_000c9cc0:
 }
 
 /* _gleDrawPixelsSaveState @ 0xc9de8 (756 bytes) */
-int _gleDrawPixelsSaveState(glContext, param_2)
+int _gleDrawPixelsSaveState(glContext, savedStateRecord)
   int glContext;
-  uint *param_2;
+  uint *savedStateRecord;
 {
-  uint uVar1;
-  uint uVar2;
-  int iVar3;
-  byte bVar4;
+  uint drawableWidthThenDrawableHeight;
+  uint drawableHeight;
+  int framebufferObject;
+  byte savedFieldMask;
   double f1AfterCall;
   double f1AfterCall1;
   double f1AfterCall2;
   double f1AfterCall3;
-  double fparam_1;
+  double forwardedFpr1;
   double incomingFpr2;
   double incomingFpr3;
   double incomingFpr4;
@@ -3387,112 +3386,112 @@ int _gleDrawPixelsSaveState(glContext, param_2)
   double incomingFpr6;
   double incomingFpr7;
   double incomingFpr8;
-  double incomingStack_ffffff88;
-  double incomingStack_ffffff90;
-  double incomingStack_ffffff98;
-  double incomingStack_ffffffa0;
-  double incomingStack_ffffffa8;
+  double incomingStackWord_ffffff88;
+  double incomingStackWord_ffffff90;
+  double incomingStackWord_ffffff98;
+  double incomingStackWord_ffffffa0;
+  double incomingStackWord_ffffffa8;
   
-  bVar4 = *(ushort *)(glContext + 0x3538) != 0x1e01;
-  if ((bool)bVar4) {
-    *param_2 = (uint)*(ushort *)(glContext + 0x3538);
+  savedFieldMask = *(ushort *)(glContext + 0x3538) != 0x1e01;
+  if ((bool)savedFieldMask) {
+    *savedStateRecord = (uint)*(ushort *)(glContext + 0x3538);
     *(undefined2 *)(glContext + 0x3538) = 0x1e01;
     *(uint *)(glContext + 800) = *(uint *)(glContext + 800) | 1;
   }
   *(undefined4 *)(glContext + 0x3534) = 4;
   _gleUpdateTextureParams(glContext,0);
-  fparam_1 = f1AfterCall;
+  forwardedFpr1 = f1AfterCall;
   if (*(byte *)(glContext + 0x34da) != 0) {
-    param_2[1] = (uint)*(byte *)(glContext + 0x34da);
+    savedStateRecord[1] = (uint)*(byte *)(glContext + 0x34da);
     *(undefined1 *)(glContext + 0x34da) = 0;
     _gleUpdatePolyMode(glContext);
-    bVar4 = bVar4 | 2;
+    savedFieldMask = savedFieldMask | 2;
     *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x800000;
-    fparam_1 = f1AfterCall1;
+    forwardedFpr1 = f1AfterCall1;
   }
   if (*(byte *)(glContext + 0x34d8) != 0) {
-    param_2[2] = (uint)*(byte *)(glContext + 0x34d8);
-    bVar4 = bVar4 | 4;
+    savedStateRecord[2] = (uint)*(byte *)(glContext + 0x34d8);
+    savedFieldMask = savedFieldMask | 4;
     *(undefined1 *)(glContext + 0x34d8) = 0;
     *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x2000000;
   }
   if (*(byte *)(glContext + 0x34dd) != 0) {
-    param_2[3] = (uint)*(byte *)(glContext + 0x34dd);
-    bVar4 = bVar4 | 8;
+    savedStateRecord[3] = (uint)*(byte *)(glContext + 0x34dd);
+    savedFieldMask = savedFieldMask | 8;
     *(undefined1 *)(glContext + 0x34dd) = 0;
     *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x800000;
   }
   if (*(byte *)(glContext + 0x34d9) != 0) {
-    param_2[4] = (uint)*(byte *)(glContext + 0x34d9);
-    bVar4 = bVar4 | 0x10;
+    savedStateRecord[4] = (uint)*(byte *)(glContext + 0x34d9);
+    savedFieldMask = savedFieldMask | 0x10;
     *(undefined1 *)(glContext + 0x34d9) = 0;
     *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x800000;
   }
   if (*(byte *)(glContext + 0x4664) != 0) {
-    param_2[6] = (uint)*(byte *)(glContext + 0x4664);
+    savedStateRecord[6] = (uint)*(byte *)(glContext + 0x4664);
     *(undefined1 *)(glContext + 0x4664) = 0;
-    bVar4 = bVar4 | 0x40;
+    savedFieldMask = savedFieldMask | 0x40;
     _gleVPDisable(glContext);
-    fparam_1 = f1AfterCall2;
+    forwardedFpr1 = f1AfterCall2;
   }
   if (*(uint *)(glContext + 0x5430) != 0) {
-    param_2[7] = *(uint *)(glContext + 0x5430);
+    savedStateRecord[7] = *(uint *)(glContext + 0x5430);
     *(undefined4 *)(glContext + 0x5430) = 0;
-    bVar4 = bVar4 | 0x80;
+    savedFieldMask = savedFieldMask | 0x80;
     _gleVPDisable(glContext);
-    fparam_1 = f1AfterCall3;
+    forwardedFpr1 = f1AfterCall3;
   }
-  param_2[5] = *(uint *)(glContext + 0x4ff4);
-  param_2[8] = *(uint *)(glContext + 0x1ba0);
-  param_2[9] = *(uint *)(glContext + 0x1ba4);
-  param_2[10] = *(uint *)(glContext + 0x1ba8);
-  param_2[0xb] = *(uint *)(glContext + 0x1bac);
-  iVar3 = *(int *)(glContext + 0x744c);
+  savedStateRecord[5] = *(uint *)(glContext + 0x4ff4);
+  savedStateRecord[8] = *(uint *)(glContext + 0x1ba0);
+  savedStateRecord[9] = *(uint *)(glContext + 0x1ba4);
+  savedStateRecord[10] = *(uint *)(glContext + 0x1ba8);
+  savedStateRecord[0xb] = *(uint *)(glContext + 0x1bac);
+  framebufferObject = *(int *)(glContext + 0x744c);
   *(undefined4 *)(glContext + 0x1ba4) = 0;
   *(undefined4 *)(glContext + 0x1ba0) = 0;
-  if (iVar3 == 0) {
-    uVar1 = *(uint *)(glContext + 0x471c);
+  if (framebufferObject == 0) {
+    drawableWidthThenDrawableHeight = *(uint *)(glContext + 0x471c);
   }
   else {
-    uVar1 = (uint)*(ushort *)(iVar3 + 0xca);
+    drawableWidthThenDrawableHeight = (uint)*(ushort *)(framebufferObject + 0xca);
   }
-  *(uint *)(glContext + 0x1ba8) = uVar1;
-  if (iVar3 == 0) {
-    uVar1 = *(uint *)(glContext + 0x4720);
+  *(uint *)(glContext + 0x1ba8) = drawableWidthThenDrawableHeight;
+  if (framebufferObject == 0) {
+    drawableWidthThenDrawableHeight = *(uint *)(glContext + 0x4720);
   }
   else {
-    uVar1 = (uint)*(ushort *)(iVar3 + 0xcc);
+    drawableWidthThenDrawableHeight = (uint)*(ushort *)(framebufferObject + 0xcc);
   }
-  *(uint *)(glContext + 0x1bac) = uVar1;
-  ((void (*)())_gleUpdateViewScissorData)(glContext,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
-  _gleCopyMatrix(glContext + 0x1c80,param_2 + 0xc);
-  _gleCopyMatrix(glContext + 0x1cc0,param_2 + 0x1c);
-  _gleCopyMatrix(glContext + *(int *)(glContext + 0x53d4) * 0x40 + 0x1fc0,param_2 + 0x2c);
+  *(uint *)(glContext + 0x1bac) = drawableWidthThenDrawableHeight;
+  ((void (*)())_gleUpdateViewScissorData)(glContext,forwardedFpr1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
+  _gleCopyMatrix(glContext + 0x1c80,savedStateRecord + 0xc);
+  _gleCopyMatrix(glContext + 0x1cc0,savedStateRecord + 0x1c);
+  _gleCopyMatrix(glContext + *(int *)(glContext + 0x53d4) * 0x40 + 0x1fc0,savedStateRecord + 0x2c);
   _glMatrixMode_Exec(glContext,0x1701);
   _glLoadIdentity_Exec(glContext);
-  iVar3 = *(int *)(glContext + 0x744c);
-  if (iVar3 == 0) {
-    uVar1 = *(uint *)(glContext + 0x471c);
+  framebufferObject = *(int *)(glContext + 0x744c);
+  if (framebufferObject == 0) {
+    drawableWidthThenDrawableHeight = *(uint *)(glContext + 0x471c);
   }
   else {
-    uVar1 = (uint)*(ushort *)(iVar3 + 0xca);
+    drawableWidthThenDrawableHeight = (uint)*(ushort *)(framebufferObject + 0xca);
   }
-  if (iVar3 == 0) {
-    uVar2 = *(uint *)(glContext + 0x4720);
+  if (framebufferObject == 0) {
+    drawableHeight = *(uint *)(glContext + 0x4720);
   }
   else {
-    uVar2 = (uint)*(ushort *)(iVar3 + 0xcc);
+    drawableHeight = (uint)*(ushort *)(framebufferObject + 0xcc);
   }
   ((void (*)())_glOrtho_Exec)(glContext,DOUBLE_00108d60,
-                (double)CONCAT44(0x43300000,uVar1 ^ 0x80000000) - DOUBLE_00108d58,DOUBLE_00108d60,
-                (double)CONCAT44(0x43300000,uVar2 ^ 0x80000000) - DOUBLE_00108d58,DOUBLE_00108d60,
-                DOUBLE_00108dc8,incomingFpr7,incomingFpr8,incomingStack_ffffff88,incomingStack_ffffff90,incomingStack_ffffff98,
-                incomingStack_ffffffa0,incomingStack_ffffffa8);
+                (double)CONCAT44(0x43300000,drawableWidthThenDrawableHeight ^ 0x80000000) - DOUBLE_00108d58,DOUBLE_00108d60,
+                (double)CONCAT44(0x43300000,drawableHeight ^ 0x80000000) - DOUBLE_00108d58,DOUBLE_00108d60,
+                DOUBLE_00108dc8,incomingFpr7,incomingFpr8,incomingStackWord_ffffff88,incomingStackWord_ffffff90,incomingStackWord_ffffff98,
+                incomingStackWord_ffffffa0,incomingStackWord_ffffffa8);
   _glMatrixMode_Exec(glContext,0x1700);
   _glLoadIdentity_Exec(glContext);
   _glMatrixMode_Exec(glContext,0x1702);
   _glLoadIdentity_Exec(glContext);
-  return bVar4;
+  return savedFieldMask;
 }
 
 /* _gleDrawPixelsRestoreState @ 0xca0dc (408 bytes) */
@@ -3706,10 +3705,10 @@ int _gleDrawPixelsFast(glContext, width, height, format, typeThenTextureType, pi
   double destYFraction;
   double rasterPosXDouble;
   double intToDoubleBias;
-  undefined4 incomingStack_fffffd90;
-  undefined4 incomingStack_fffffd94;
-  undefined4 incomingStack_fffffd98;
-  undefined4 incomingStack_fffffd9c;
+  undefined4 incomingStackWord_fffffd90;
+  undefined4 incomingStackWord_fffffd94;
+  undefined4 incomingStackWord_fffffd98;
+  undefined4 incomingStackWord_fffffd9c;
   float quadY0;
   float quadX0;
   float tileDestY;
@@ -3821,8 +3820,8 @@ LAB_000ca634:
   sourceFormat = 0x80e1;
   transferState = 0;
   ((void (*)())_CopySourceSubImageToTexture)(glContext,width,height,format,typeThenTextureType,pixels,width,height,imageWidth * iVar15,0x80e1,
-             textureType,convertedPixels,0,0,incomingStack_fffffd90,incomingStack_fffffd94,incomingStack_fffffd98,
-             incomingStack_fffffd9c,glContext + 0x31cc,1,(double)FLOAT_00108e50,(double)FLOAT_00108e50,
+             textureType,convertedPixels,0,0,incomingStackWord_fffffd90,incomingStackWord_fffffd94,incomingStackWord_fffffd98,
+             incomingStackWord_fffffd9c,glContext + 0x31cc,1,(double)FLOAT_00108e50,(double)FLOAT_00108e50,
              (double)zoomXSign,zoomYSign);
   sourcePixels = convertedPixels;
   iVar15 = format;
@@ -3972,8 +3971,8 @@ LAB_000ca704:
               ((void (*)())_CopySourceSubImageToTexture)(glContext,imageWidth,imageHeight,sourceFormat,typeThenTextureType,sourcePixels,(int)(double)tileWidth,tileHeightInt,tileRowBytes,
                          0x80e1,textureType,
                          *(int *)(0x74a4 + glContext) +
-                         *drawPixelsShare * *(int *)(glContext + 0x748c),tileXOffset,tileYOffset,incomingStack_fffffd90
-                         ,incomingStack_fffffd94,incomingStack_fffffd98,incomingStack_fffffd9c,transferState,0,
+                         *drawPixelsShare * *(int *)(glContext + 0x748c),tileXOffset,tileYOffset,incomingStackWord_fffffd90
+                         ,incomingStackWord_fffffd94,incomingStackWord_fffffd98,incomingStackWord_fffffd9c,transferState,0,
                          (double)(tileDestX -
                                  (float)((double)CONCAT44(0x43300000,(int)tileDestX ^ 0x80000000) -
                                         intToDoubleBias2)),destYFraction,(double)zoomXSign,zoomYSign);

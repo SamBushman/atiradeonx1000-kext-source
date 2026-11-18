@@ -2886,8 +2886,8 @@ void _gleMultiVtxTextureCoordGenEyeST(param_1, vertexCursor, vertexCount, texUni
 }
 
 /* _gleMultiVtxTextureCoordGenObjectST @ 0xf70dc (156 bytes) */
-void _gleMultiVtxTextureCoordGenObjectST(param_1, vertexCursor, vertexCount, texUnit)
-  int param_1;
+void _gleMultiVtxTextureCoordGenObjectST(glContext, vertexCursor, vertexCount, texUnit)
+  int glContext;
   uint vertexCursor;
   int vertexCount;
   int texUnit;
@@ -2900,39 +2900,39 @@ void _gleMultiVtxTextureCoordGenObjectST(param_1, vertexCursor, vertexCount, tex
   float objectPlaneSA;
   float objectPlaneTB;
   float objectPlaneTC;
-  float fVar9;
-  float fVar10;
-  float fVar11;
-  float fVar12;
-  uint uVar13;
-  int iVar14;
+  float objectY;
+  float objectX;
+  float objectZ;
+  float objectW;
+  uint vertexEndThenRemainingVertices;
+  int texUnitRecord;
   int texCoordSlot;
   
-  uVar13 = vertexCursor + vertexCount * 0x100;
-  iVar14 = param_1 + texUnit * 0x94;
-  objectPlaneTA = *(float *)(iVar14 + 0x3d20);
-  objectPlaneSD = *(float *)(iVar14 + 0x3d08);
-  objectPlaneSB = *(float *)(iVar14 + 0x3d00);
-  objectPlaneSC = *(float *)(iVar14 + 0x3d04);
-  objectPlaneTD = *(float *)(iVar14 + 0x3d2c);
-  objectPlaneSA = *(float *)(iVar14 + 0x3cfc);
-  objectPlaneTB = *(float *)(iVar14 + 0x3d24);
-  objectPlaneTC = *(float *)(iVar14 + 0x3d28);
-  if (uVar13 <= vertexCursor) {
+  vertexEndThenRemainingVertices = vertexCursor + vertexCount * 0x100;
+  texUnitRecord = glContext + texUnit * 0x94;
+  objectPlaneTA = *(float *)(texUnitRecord + 0x3d20);
+  objectPlaneSD = *(float *)(texUnitRecord + 0x3d08);
+  objectPlaneSB = *(float *)(texUnitRecord + 0x3d00);
+  objectPlaneSC = *(float *)(texUnitRecord + 0x3d04);
+  objectPlaneTD = *(float *)(texUnitRecord + 0x3d2c);
+  objectPlaneSA = *(float *)(texUnitRecord + 0x3cfc);
+  objectPlaneTB = *(float *)(texUnitRecord + 0x3d24);
+  objectPlaneTC = *(float *)(texUnitRecord + 0x3d28);
+  if (vertexEndThenRemainingVertices <= vertexCursor) {
     return;
   }
-  uVar13 = (uVar13 - vertexCursor) + 0xff >> 8;
+  vertexEndThenRemainingVertices = (vertexEndThenRemainingVertices - vertexCursor) + 0xff >> 8;
   do {
-    fVar9 = *(float *)(vertexCursor + 0x24);
+    objectY = *(float *)(vertexCursor + 0x24);
     texCoordSlot = texUnit * 0x10 + vertexCursor;
-    fVar10 = *(float *)(vertexCursor + 0x20);
-    fVar11 = *(float *)(vertexCursor + 0x28);
-    fVar12 = *(float *)(vertexCursor + 0x2c);
+    objectX = *(float *)(vertexCursor + 0x20);
+    objectZ = *(float *)(vertexCursor + 0x28);
+    objectW = *(float *)(vertexCursor + 0x2c);
     vertexCursor = vertexCursor + 0x100;
-    *(float *)(texCoordSlot + 0x84) = objectPlaneTD * fVar12 + (objectPlaneTC * fVar11 + (objectPlaneTA * fVar10 + objectPlaneTB * fVar9));
-    *(float *)(texCoordSlot + 0x80) = objectPlaneSD * fVar12 + (objectPlaneSC * fVar11 + (objectPlaneSA * fVar10 + objectPlaneSB * fVar9));
-    uVar13 = uVar13 - 1;
-  } while (uVar13 != 0);
+    *(float *)(texCoordSlot + 0x84) = objectPlaneTD * objectW + (objectPlaneTC * objectZ + (objectPlaneTA * objectX + objectPlaneTB * objectY));
+    *(float *)(texCoordSlot + 0x80) = objectPlaneSD * objectW + (objectPlaneSC * objectZ + (objectPlaneSA * objectX + objectPlaneSB * objectY));
+    vertexEndThenRemainingVertices = vertexEndThenRemainingVertices - 1;
+  } while (vertexEndThenRemainingVertices != 0);
   return;
 }
 

@@ -1304,55 +1304,55 @@ void _glGetVertexAttribivARB_Exec(glContext, index, pname, params)
   uint *params;
 {
   undefined4 glErrorCode;
-  uint uVar2;
+  uint queryResult;
   uint loopIndex;
-  int iVar3;
+  int mapRecordBase;
   int remaining;
-  int iVar4;
+  int bufferObjectThenCopyIndex;
   int byteOffset;
   int clientState;
   int mapData;
   int byteOffset2;
   int remaining3;
   int remaining2;
-  longlong lVar6;
+  longlong indexBit64;
   
   if (index < 0x10) {
     if (pname == 0x8a02) {
       mapData = _gleGetMapData(glContext);
-      uVar2 = (uint)(byte)((unsigned char *)0x9da8)[index + mapData];
+      queryResult = (uint)(byte)((unsigned char *)0x9da8)[index + mapData];
     }
     else {
       if (pname < 0x8a03) {
         if (pname == 0x8625) {
-          uVar2 = *(ushort *)(index * 0x18 + *(int *)(glContext + 0x4a60) + 0x1b8) & 0xffff7fff;
+          queryResult = *(ushort *)(index * 0x18 + *(int *)(glContext + 0x4a60) + 0x1b8) & 0xffff7fff;
           goto LAB_000b1560;
         }
         if (pname < 0x8626) {
           if (pname == 0x8623) {
-            uVar2 = (uint)*(short *)(index * 0x18 + *(int *)(glContext + 0x4a60) + 0x1ba);
+            queryResult = (uint)*(short *)(index * 0x18 + *(int *)(glContext + 0x4a60) + 0x1ba);
 LAB_000b1560:
-            *params = uVar2;
+            *params = queryResult;
             return;
           }
           if (0x8623 < pname) {
-            uVar2 = *(uint *)(index * 0x18 + *(int *)(glContext + 0x4a60) + 0x1b4);
+            queryResult = *(uint *)(index * 0x18 + *(int *)(glContext + 0x4a60) + 0x1b4);
             goto LAB_000b1560;
           }
           if (pname == 0x8622) {
             clientState = *(int *)(glContext + 0x4a60);
-            lVar6 = ___ashldi3(1,0,index);
-            uVar2 = 0;
-            if ((*(uint *)(clientState + 0x330) & (uint)((ulonglong)lVar6 >> 0x20)) != 0 ||
-                (*(uint *)(clientState + 0x334) & (uint)lVar6) != 0) {
-              uVar2 = 1;
+            indexBit64 = ___ashldi3(1,0,index);
+            queryResult = 0;
+            if ((*(uint *)(clientState + 0x330) & (uint)((ulonglong)indexBit64 >> 0x20)) != 0 ||
+                (*(uint *)(clientState + 0x334) & (uint)indexBit64) != 0) {
+              queryResult = 1;
             }
             goto LAB_000b165c;
           }
         }
         else {
           if (pname == 0x886a) {
-            uVar2 = (uint)(int)*(short *)(index * 0x18 + *(int *)(glContext + 0x4a60) + 0x1b8) >>
+            queryResult = (uint)(int)*(short *)(index * 0x18 + *(int *)(glContext + 0x4a60) + 0x1b8) >>
                     0x1f;
             goto LAB_000b1560;
           }
@@ -1377,10 +1377,10 @@ LAB_000b1560:
             }
           }
           else if (pname == 0x889f) {
-            uVar2 = 0;
-            iVar4 = *(int *)(index * 4 + *(int *)(glContext + 0x4a60) + 0x3a0);
-            if (iVar4 != 0) {
-              uVar2 = *(uint *)(iVar4 + 4);
+            queryResult = 0;
+            bufferObjectThenCopyIndex = *(int *)(index * 4 + *(int *)(glContext + 0x4a60) + 0x3a0);
+            if (bufferObjectThenCopyIndex != 0) {
+              queryResult = *(uint *)(bufferObjectThenCopyIndex + 4);
             }
             goto LAB_000b165c;
           }
@@ -1394,7 +1394,7 @@ LAB_000b1734:
       }
       if (pname == 0x8a06) {
         mapData = _gleGetMapData(glContext);
-        uVar2 = (uint)*(byte *)(index + mapData + 0x9db8);
+        queryResult = (uint)*(byte *)(index + mapData + 0x9db8);
       }
       else {
         if (0x8a06 < pname) {
@@ -1412,13 +1412,13 @@ LAB_000b1734:
           }
           if (pname < 0x8a08) {
             mapData = _gleGetMapData(glContext);
-            iVar3 = index * 0x660 + mapData;
-            remaining3 = *(int *)(iVar3 + 0x37a8) * *(int *)(iVar3 + 0x37ac) *
+            mapRecordBase = index * 0x660 + mapData;
+            remaining3 = *(int *)(mapRecordBase + 0x37a8) * *(int *)(mapRecordBase + 0x37ac) *
                     (uint)*(byte *)(index + mapData + 0x9db8);
-            iVar4 = 0;
+            bufferObjectThenCopyIndex = 0;
             for (; remaining3 != 0; remaining3 = remaining3 + -1) {
-              params[iVar4] = (int)*(float *)(iVar4 * 4 + iVar3 + 0x37c8);
-              iVar4 = iVar4 + 1;
+              params[bufferObjectThenCopyIndex] = (int)*(float *)(bufferObjectThenCopyIndex * 4 + mapRecordBase + 0x37c8);
+              bufferObjectThenCopyIndex = bufferObjectThenCopyIndex + 1;
             }
             return;
           }
@@ -1439,13 +1439,13 @@ LAB_000b1734:
         if (pname != 0x8a04) {
           if (pname < 0x8a05) {
             mapData = _gleGetMapData(glContext);
-            iVar3 = index * 0xb0 + mapData;
-            remaining3 = *(int *)(iVar3 + 0x2ca8) *
+            mapRecordBase = index * 0xb0 + mapData;
+            remaining3 = *(int *)(mapRecordBase + 0x2ca8) *
                     (uint)(byte)((unsigned char *)0x9da8)[index + mapData];
-            iVar4 = 0;
+            bufferObjectThenCopyIndex = 0;
             for (; remaining3 != 0; remaining3 = remaining3 + -1) {
-              params[iVar4] = (int)*(float *)(iVar4 * 4 + iVar3 + 0x2cb8);
-              iVar4 = iVar4 + 1;
+              params[bufferObjectThenCopyIndex] = (int)*(float *)(bufferObjectThenCopyIndex * 4 + mapRecordBase + 0x2cb8);
+              bufferObjectThenCopyIndex = bufferObjectThenCopyIndex + 1;
             }
             return;
           }
@@ -1461,11 +1461,11 @@ LAB_000b1734:
           return;
         }
         mapData = _gleGetMapData(glContext);
-        uVar2 = *(uint *)(index * 0xb0 + mapData + 0x2ca8);
+        queryResult = *(uint *)(index * 0xb0 + mapData + 0x2ca8);
       }
     }
 LAB_000b165c:
-    *params = uVar2;
+    *params = queryResult;
   }
   else {
     if (*(int *)(glContext + 0x7574) != 0) {

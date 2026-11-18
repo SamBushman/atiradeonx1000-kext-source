@@ -2853,13 +2853,13 @@ LAB_00070da0:
 /* _glMap2d_CompExec @ 0x70dac (156 bytes) */
 void _glMap2d_CompExec(undefined4 glContext,undefined4 target,undefined4 u1ShadowHi,undefined4 u1ShadowLo,undefined4 u2ShadowHi,undefined4 u2ShadowLo,undefined4 ustride,undefined4 uorder,undefined4 v1ShadowHi,undefined4 v1ShadowLo,undefined4 v2ShadowHi,undefined4 v2ShadowLo,undefined4 vstride,undefined4 vorder,undefined4 points,double u1,double u2,double v1,double v2)
 {
-  undefined4 incomingStack_ffffff88;
-  undefined4 incomingStack_ffffff8c;
-  undefined4 incomingStack_ffffff90;
-  undefined4 incomingStack_ffffff94;
+  undefined4 incomingStackWord_ffffff88;
+  undefined4 incomingStackWord_ffffff8c;
+  undefined4 incomingStackWord_ffffff90;
+  undefined4 incomingStackWord_ffffff94;
   
-  ((void (*)())_glMap2d_Comp)(glContext,target,u1ShadowHi,u1ShadowLo,u2ShadowHi,u2ShadowLo,ustride,uorder,incomingStack_ffffff88,
-                incomingStack_ffffff8c,incomingStack_ffffff90,incomingStack_ffffff94,vstride,vorder,points,
+  ((void (*)())_glMap2d_Comp)(glContext,target,u1ShadowHi,u1ShadowLo,u2ShadowHi,u2ShadowLo,ustride,uorder,incomingStackWord_ffffff88,
+                incomingStackWord_ffffff8c,incomingStackWord_ffffff90,incomingStackWord_ffffff94,vstride,vorder,points,
                 u1,u2,v1,v2);
   ((void (*)())_glMap2d_Exec)(glContext,target,u1ShadowHi,u1ShadowLo,u2ShadowHi,u2ShadowLo,ustride,uorder,v1ShadowHi,v1ShadowLo,
                 v2ShadowHi,v2ShadowLo,vstride,vorder,points,u1,u2,v1,v2);

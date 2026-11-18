@@ -160,15 +160,15 @@ void _glDepthFunc_CompExec(glContext, func)
 /* _glDepthRange_ListExec @ 0x625c8 (44 bytes) */
 undefined4 _glDepthRange_ListExec(undefined4 glContext,double *recordedArgs,double unusedFloatArg1,double unusedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  double incomingStack_ffffffb8;
-  double incomingStack_ffffffc0;
-  double incomingStack_ffffffc8;
-  double incomingStack_ffffffd0;
-  double incomingStack_ffffffd8;
+  double incomingStackWord_ffffffb8;
+  double incomingStackWord_ffffffc0;
+  double incomingStackWord_ffffffc8;
+  double incomingStackWord_ffffffd0;
+  double incomingStackWord_ffffffd8;
   
   ((void (*)())_glDepthRange_Exec)(glContext,*recordedArgs,recordedArgs[1],forwardedFloatArg3,forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,
-                     forwardedFloatArg8,incomingStack_ffffffb8,incomingStack_ffffffc0,incomingStack_ffffffc8,
-                     incomingStack_ffffffd0,incomingStack_ffffffd8);
+                     forwardedFloatArg8,incomingStackWord_ffffffb8,incomingStackWord_ffffffc0,incomingStackWord_ffffffc8,
+                     incomingStackWord_ffffffd0,incomingStackWord_ffffffd8);
   return 0x10;
 }
 
@@ -401,15 +401,15 @@ void _glCallLists_Exec(glContext, n, type, lists)
   int loopIndex3;
   int loopIndex2;
   int loopIndex;
-  byte *pbVar1;
-  short sVar2;
-  ushort uVar3;
+  byte *listByteElement;
+  short shortListId;
+  ushort ushortListId;
   double twoPow31;
-  float fVar5;
-  uint uVar6;
-  int iVar7;
-  int iVar8;
-  float dVar9;
+  float floatListId;
+  uint floatListIdAsUint;
+  int intListIdThenByteOffset;
+  int nextByteOffset;
+  float floatListIdDouble;
   
   twoPow31 = DOUBLE_00108d80;
   switch(type) {
@@ -417,9 +417,9 @@ void _glCallLists_Exec(glContext, n, type, lists)
     loopIndex = 0;
     if (0 < n) {
       do {
-        pbVar1 = (byte *)((int)lists + loopIndex);
+        listByteElement = (byte *)((int)lists + loopIndex);
         loopIndex = loopIndex + 1;
-        _gleCallList(glContext,(int)(char)*pbVar1 + *(int *)(glContext + 0x5404));
+        _gleCallList(glContext,(int)(char)*listByteElement + *(int *)(glContext + 0x5404));
       } while (loopIndex < n);
     }
     break;
@@ -427,18 +427,18 @@ void _glCallLists_Exec(glContext, n, type, lists)
     loopIndex2 = 0;
     if (0 < n) {
       do {
-        pbVar1 = (byte *)((int)lists + loopIndex2);
+        listByteElement = (byte *)((int)lists + loopIndex2);
         loopIndex2 = loopIndex2 + 1;
-        _gleCallList(glContext,(uint)*pbVar1 + *(int *)(glContext + 0x5404));
+        _gleCallList(glContext,(uint)*listByteElement + *(int *)(glContext + 0x5404));
       } while (loopIndex2 < n);
     }
     break;
   case 0x1402:
     if (0 < n) {
       do {
-        sVar2 = *(short *)lists;
+        shortListId = *(short *)lists;
         lists = (float *)((int)lists + 2);
-        _gleCallList(glContext,(int)sVar2 + *(int *)(glContext + 0x5404));
+        _gleCallList(glContext,(int)shortListId + *(int *)(glContext + 0x5404));
         n = n + -1;
       } while (n != 0);
     }
@@ -446,9 +446,9 @@ void _glCallLists_Exec(glContext, n, type, lists)
   case 0x1403:
     if (0 < n) {
       do {
-        uVar3 = *(ushort *)lists;
+        ushortListId = *(ushort *)lists;
         lists = (float *)((int)lists + 2);
-        _gleCallList(glContext,(uint)uVar3 + *(int *)(glContext + 0x5404));
+        _gleCallList(glContext,(uint)ushortListId + *(int *)(glContext + 0x5404));
         n = n + -1;
       } while (n != 0);
     }
@@ -456,9 +456,9 @@ void _glCallLists_Exec(glContext, n, type, lists)
   case 0x1404:
     if (0 < n) {
       do {
-        iVar7 = *(int *)lists;
+        intListIdThenByteOffset = *(int *)lists;
         lists = lists + 1;
-        _gleCallList(glContext,iVar7 + *(int *)(glContext + 0x5404));
+        _gleCallList(glContext,intListIdThenByteOffset + *(int *)(glContext + 0x5404));
         n = n + -1;
       } while (n != 0);
     }
@@ -466,9 +466,9 @@ void _glCallLists_Exec(glContext, n, type, lists)
   case 0x1405:
     if (0 < n) {
       do {
-        iVar7 = *(int *)lists;
+        intListIdThenByteOffset = *(int *)lists;
         lists = lists + 1;
-        _gleCallList(glContext,iVar7 + *(int *)(glContext + 0x5404));
+        _gleCallList(glContext,intListIdThenByteOffset + *(int *)(glContext + 0x5404));
         n = n + -1;
       } while (n != 0);
     }
@@ -476,16 +476,16 @@ void _glCallLists_Exec(glContext, n, type, lists)
   case 0x1406:
     if (0 < n) {
       do {
-        fVar5 = *lists;
-        dVar9 = (double)fVar5;
+        floatListId = *lists;
+        floatListIdDouble = (double)floatListId;
         lists = lists + 1;
-        if (twoPow31 <= (double)dVar9) {
-          uVar6 = (int)((double)dVar9 - twoPow31) ^ 0x80000000;
+        if (twoPow31 <= (double)floatListIdDouble) {
+          floatListIdAsUint = (int)((double)floatListIdDouble - twoPow31) ^ 0x80000000;
         }
         else {
-          uVar6 = (uint)(int)fVar5;
+          floatListIdAsUint = (uint)(int)floatListId;
         }
-        _gleCallList(glContext,uVar6 + *(int *)(glContext + 0x5404));
+        _gleCallList(glContext,floatListIdAsUint + *(int *)(glContext + 0x5404));
         n = n + -1;
       } while (n != 0);
     }
@@ -502,30 +502,30 @@ void _glCallLists_Exec(glContext, n, type, lists)
     }
     break;
   case 0x1408:
-    iVar7 = 0;
+    intListIdThenByteOffset = 0;
     if (0 < n * 3) {
       do {
-        iVar8 = iVar7 + 3;
-        _gleCallList(glContext,(uint)*(byte *)((int)lists + iVar7) * 0x10000 +
-                             (uint)*(byte *)((int)lists + iVar7 + 1) * 0x100 +
-                             (uint)*(byte *)((int)lists + iVar7 + 2) + *(int *)(glContext + 0x5404))
+        nextByteOffset = intListIdThenByteOffset + 3;
+        _gleCallList(glContext,(uint)*(byte *)((int)lists + intListIdThenByteOffset) * 0x10000 +
+                             (uint)*(byte *)((int)lists + intListIdThenByteOffset + 1) * 0x100 +
+                             (uint)*(byte *)((int)lists + intListIdThenByteOffset + 2) + *(int *)(glContext + 0x5404))
         ;
-        iVar7 = iVar8;
-      } while (iVar8 < n * 3);
+        intListIdThenByteOffset = nextByteOffset;
+      } while (nextByteOffset < n * 3);
     }
     break;
   case 0x1409:
-    iVar7 = 0;
+    intListIdThenByteOffset = 0;
     if (0 < n << 2) {
       do {
-        iVar8 = iVar7 + 4;
-        _gleCallList(glContext,(uint)*(byte *)((int)lists + iVar7) * 0x1000000 +
-                             (uint)*(byte *)((int)lists + iVar7 + 1) * 0x10000 +
-                             (uint)*(byte *)((int)lists + iVar7 + 2) * 0x100 +
-                             (uint)*(byte *)((int)lists + iVar7 + 3) + *(int *)(glContext + 0x5404))
+        nextByteOffset = intListIdThenByteOffset + 4;
+        _gleCallList(glContext,(uint)*(byte *)((int)lists + intListIdThenByteOffset) * 0x1000000 +
+                             (uint)*(byte *)((int)lists + intListIdThenByteOffset + 1) * 0x10000 +
+                             (uint)*(byte *)((int)lists + intListIdThenByteOffset + 2) * 0x100 +
+                             (uint)*(byte *)((int)lists + intListIdThenByteOffset + 3) + *(int *)(glContext + 0x5404))
         ;
-        iVar7 = iVar8;
-      } while (iVar8 < n << 2);
+        intListIdThenByteOffset = nextByteOffset;
+      } while (nextByteOffset < n << 2);
     }
     break;
   default:
@@ -1968,14 +1968,14 @@ void _glEvalCoord1fv_CompExec(glContext, u)
 /* _glEvalCoord2d_ListExec @ 0x64a78 (44 bytes) */
 undefined4 _glEvalCoord2d_ListExec(undefined4 glContext,float *recordedArgs,double unusedFloatArg1,double unusedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12)
 {
-  double incomingStack_ffffffb8;
-  double incomingStack_ffffffc0;
-  double incomingStack_ffffffc8;
-  double incomingStack_ffffffd0;
+  double incomingStackWord_ffffffb8;
+  double incomingStackWord_ffffffc0;
+  double incomingStackWord_ffffffc8;
+  double incomingStackWord_ffffffd0;
   
   ((void (*)())_gleEvalMap2)(glContext,(double)*recordedArgs,(double)recordedArgs[1],forwardedFloatArg3,forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,
-               forwardedFloatArg7,forwardedFloatArg8,incomingStack_ffffffb8,incomingStack_ffffffc0,incomingStack_ffffffc8,
-               incomingStack_ffffffd0);
+               forwardedFloatArg7,forwardedFloatArg8,incomingStackWord_ffffffb8,incomingStackWord_ffffffc0,incomingStackWord_ffffffc8,
+               incomingStackWord_ffffffd0);
   return 8;
 }
 

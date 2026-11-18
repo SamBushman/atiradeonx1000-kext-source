@@ -1,0 +1,16 @@
+local	_glTexImage2D_Comp	bVar1	formatMatchesType	INFERRED	format == the one format the packed/special pixel type allows (0x1900, 0x1907, 0x1908, 0x80e1 or the uVar3 value); false falls through to GL_INVALID_ENUM
+local	_glTexImage2D_Comp	iVar4	requiredBufferExtent	CONFIRMED	result of _gleOffsetLimitImage(ctx+0x31cc, width, height, format, type, pixels): the extent of the unpack buffer the image needs, compared with its size
+local	_glTexImage2D_Comp	iVar7	unpackBufferSize	CONFIRMED	*(unpackBuffer+0x38): the bound unpack buffer's size
+local	_glTexImage2D_Comp	iVar8	unpackBuffer	CONFIRMED	the bound GL_PIXEL_UNPACK_BUFFER object (ctx+0x4a6c): +0x30 data pointer added to pixels, +0x38 size, +0x40 plugin-sync flag
+local	_glTexImage2D_Comp	dVar9	bytesPerElementResult	CONFIRMED	return value of _gleBytesPerElement(type) (0 for the packed types, then _glePixelBytes is used)
+local	_glTexSubImage2D_Comp	bVar1	formatMatchesType	INFERRED	format == the one format the packed/special pixel type allows (0x1907, 0x1908, 0x80e1 ...); false falls through to GL_INVALID_ENUM
+local	_glTexSubImage2D_Comp	uVar2	alignedImageSize	CONFIRMED	imageSize + 3 & ~3: the image payload size rounded up to 4 bytes, added to the record header for _gleAddListItem
+local	_glTexSubImage2D_Comp	iVar4	requiredBufferExtent	CONFIRMED	result of _gleOffsetLimitImage(ctx+0x31cc, width, height, format, type, pixels): the extent of the unpack buffer the image needs, compared with its size
+local	_glTexSubImage2D_Comp	iVar7	unpackBufferSize	CONFIRMED	*(unpackBuffer+0x38): the bound unpack buffer's size
+local	_glTexSubImage2D_Comp	iVar8	unpackBuffer	CONFIRMED	the bound GL_PIXEL_UNPACK_BUFFER object (ctx+0x4a6c): +0x30 data pointer added to pixels, +0x38 size, +0x40 plugin-sync flag
+local	_glTexSubImage2D_Comp	dVar9	bytesPerElementResult	CONFIRMED	return value of _gleBytesPerElement(type) (0 for the packed types, then _glePixelBytes is used)
+local	_glCombinerParameterivNV_Exec	fVar4	alphaFloat	CONFIRMED	(float)params[3] (alpha), only compared with 0.0/1.0 and copied into the clamped value
+local	_glCombinerParameterivNV_Exec	iVar7	constantColorBase	CONFIRMED	glContext + (pname - 0x852a)*0x10: base of the 16-byte constant color record (GL_CONSTANT_COLOR0_NV/1_NV) whose floats are at +0x4200..+0x420c
+local	_glCombinerParameterivNV_Exec	uVar8	generalCombinerCount	CONFIRMED	*params for pname 0x854e (GL_NUM_GENERAL_COMBINERS_NV): must be 1..the renderer limit at *(ctx+0x468c)+0x98 and is stored at ctx+0x41fc
+local	_glCombinerStageParameterfvNV_Exec	fVar2	alpha	CONFIRMED	params[3] (alpha), only compared with 0.0/1.0 and copied into the clamped value
+local	_glCombinerStageParameterfvNV_Exec	iVar7	stageIndexThenConstantColorRecord	CONFIRMED	stage - 0x8550 (range-checked against the limit at *(ctx+0x468c)+0x98), then glContext + (stageIndex*8 + pname-0x852a)*0x10, the base of the stage's constant color record (floats at +0x4280..+0x428c)

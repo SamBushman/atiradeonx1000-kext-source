@@ -1119,20 +1119,18 @@ int _gliSetInteger(glContext, stateId, valuePtr)
   uint stateId;
   int *valuePtr;
 {
-  int loopIndex2;
+  int borderThenTargetThenFaceIndex;
   int loopIndex;
   byte levelFlagByte;
   ushort textureFlags;
-  undefined2 uVar3;
-  undefined1 uVar4;
+  undefined2 textureWord30Value;
+  undefined1 glContextByte4691;
   undefined4 funcCache;
   undefined4 baseFormat;
   int checkedTextureObject;
   int mipmapSource;
-  int iVar7;
-  int width;
-  undefined1 uVar8;
-  int iVar9;
+  int pluginResultThenWidth;
+  undefined1 glContextByte4692;
   int firstPluginError;
   int textureObject;
   int levelBase;
@@ -1144,8 +1142,7 @@ int _gliSetInteger(glContext, stateId, valuePtr)
   int surfaceHandle2;
   int depth;
   int textureLevel;
-  int iVar13;
-  int internalformat;
+  int shrinkCountThenRendererRecordCursorThenInternalformat;
   uint targetThenFace;
   int levelRecord2;
   int height;
@@ -1167,10 +1164,10 @@ int _gliSetInteger(glContext, stateId, valuePtr)
       return 0;
     }
     funcCache = *(undefined4 *)(glContext + 0x49b8);
-    iVar13 = *(short *)(glContext + 0x49c2) - newCacheLimit;
+    shrinkCountThenRendererRecordCursorThenInternalformat = *(short *)(glContext + 0x49c2) - newCacheLimit;
     *(short *)(glContext + 0x49c2) = (short)newCacheLimit;
 LAB_0002085c:
-    _gleShrinkFuncCache(funcCache,iVar13);
+    _gleShrinkFuncCache(funcCache,shrinkCountThenRendererRecordCursorThenInternalformat);
   }
   else {
     if (stateId < 0x177) {
@@ -1189,7 +1186,7 @@ LAB_0002085c:
             return 0;
           }
           funcCache = *(undefined4 *)(glContext + 0x5094);
-          iVar13 = *(short *)(glContext + 0x509a) - newCacheLimit;
+          shrinkCountThenRendererRecordCursorThenInternalformat = *(short *)(glContext + 0x509a) - newCacheLimit;
           *(short *)(glContext + 0x509a) = (short)newCacheLimit;
         }
         else if (stateId < 0x163) {
@@ -1207,7 +1204,7 @@ LAB_0002085c:
             return 0;
           }
           funcCache = *(undefined4 *)(glContext + 0x5088);
-          iVar13 = *(short *)(glContext + 0x508e) - newCacheLimit;
+          shrinkCountThenRendererRecordCursorThenInternalformat = *(short *)(glContext + 0x508e) - newCacheLimit;
           *(short *)(glContext + 0x508e) = (short)newCacheLimit;
         }
         else if (stateId == 0x16a) {
@@ -1220,7 +1217,7 @@ LAB_0002085c:
             return 0;
           }
           funcCache = *(undefined4 *)(glContext + 0x48b0);
-          iVar13 = *(short *)(glContext + 0x48b6) - newCacheLimit;
+          shrinkCountThenRendererRecordCursorThenInternalformat = *(short *)(glContext + 0x48b6) - newCacheLimit;
           *(short *)(glContext + 0x48b6) = (short)newCacheLimit;
         }
         else if (stateId < 0x16b) {
@@ -1234,7 +1231,7 @@ LAB_0002085c:
             return 0;
           }
           funcCache = *(undefined4 *)(glContext + 0x50a0);
-          iVar13 = *(short *)(glContext + 0x50a6) - newCacheLimit;
+          shrinkCountThenRendererRecordCursorThenInternalformat = *(short *)(glContext + 0x50a6) - newCacheLimit;
           *(short *)(glContext + 0x50a6) = (short)newCacheLimit;
         }
         else {
@@ -1248,7 +1245,7 @@ LAB_0002085c:
             return 0;
           }
           funcCache = *(undefined4 *)(glContext + 0x49b4);
-          iVar13 = *(short *)(glContext + 0x49be) - newCacheLimit;
+          shrinkCountThenRendererRecordCursorThenInternalformat = *(short *)(glContext + 0x49be) - newCacheLimit;
           *(short *)(glContext + 0x49be) = (short)newCacheLimit;
         }
         goto LAB_0002085c;
@@ -1259,17 +1256,17 @@ LAB_0002085c:
       }
       if (stateId < 0xe6) {
         if (stateId == 0xdd) {
-          uVar8 = 0;
+          glContextByte4692 = 0;
           *(char *)(glContext + 0x4690) = '\x01' - (*valuePtr == 0);
           if ((*(char *)(glContext + 0x4690) == '\0') || (*(int *)(glContext + 0x4848) == 0)) {
-            uVar8 = 1;
+            glContextByte4692 = 1;
           }
-          uVar4 = 0;
-          *(undefined1 *)(glContext + 0x4692) = uVar8;
+          glContextByte4691 = 0;
+          *(undefined1 *)(glContext + 0x4692) = glContextByte4692;
           if ((*(int *)(glContext + 0x4e1c) == 0x1c00) && (*(char *)(glContext + 0x4692) == '\0')) {
-            uVar4 = 1;
+            glContextByte4691 = 1;
           }
-          *(undefined1 *)(glContext + 0x4691) = uVar4;
+          *(undefined1 *)(glContext + 0x4691) = glContextByte4691;
           *(undefined4 *)(glContext + 0x757c) = 0xffffffff;
           _gliSetCurrentPluginDispatchTable(glContext);
           return 0;
@@ -1279,17 +1276,17 @@ LAB_0002085c:
           return 0;
         }
 LAB_00020f04:
-        iVar13 = glContext + 0x10000;
+        shrinkCountThenRendererRecordCursorThenInternalformat = glContext + 0x10000;
         loopIndex = 0;
         if (*(char *)(glContext + 0x85a4) != '\0') {
           do {
-            iVar7 = (**(code **)(*(int *)(iVar13 + -0x777c) + 0x140))
-                              (*(undefined4 *)(iVar13 + -0x7a54),stateId,valuePtr);
-            if ((iVar7 != 0) && (firstPluginError == 0)) {
-              firstPluginError = iVar7;
+            pluginResultThenWidth = (**(code **)(*(int *)(shrinkCountThenRendererRecordCursorThenInternalformat + -0x777c) + 0x140))
+                              (*(undefined4 *)(shrinkCountThenRendererRecordCursorThenInternalformat + -0x7a54),stateId,valuePtr);
+            if ((pluginResultThenWidth != 0) && (firstPluginError == 0)) {
+              firstPluginError = pluginResultThenWidth;
             }
             loopIndex = loopIndex + 1;
-            iVar13 = iVar13 + 0x2e0;
+            shrinkCountThenRendererRecordCursorThenInternalformat = shrinkCountThenRendererRecordCursorThenInternalformat + 0x2e0;
           } while (loopIndex < (int)(uint)*(byte *)(glContext + 0x85a4));
           return firstPluginError;
         }
@@ -1303,23 +1300,23 @@ LAB_00020f04:
       }
       if (-1 < *(short *)(glContext + 0x4a10)) goto LAB_00020c88;
       targetThenFace = valuePtr[1];
-      iVar9 = valuePtr[7];
+      borderThenTargetThenFaceIndex = valuePtr[7];
       surfaceHandle = *valuePtr;
       level = valuePtr[2];
-      internalformat = valuePtr[3];
-      width = valuePtr[4];
+      shrinkCountThenRendererRecordCursorThenInternalformat = valuePtr[3];
+      pluginResultThenWidth = valuePtr[4];
       height = valuePtr[5];
       depth = valuePtr[6];
       if (targetThenFace == 0xde1) {
 LAB_00020a7c:
         checkedTextureObject = _gleCheckTexImage2DArgs
-                          (glContext,targetThenFace,level,internalformat,width,height,iVar9,0x80e1,0x1401);
+                          (glContext,targetThenFace,level,shrinkCountThenRendererRecordCursorThenInternalformat,pluginResultThenWidth,height,borderThenTargetThenFaceIndex,0x80e1,0x1401);
       }
       else if (targetThenFace < 0xde2) {
         if (targetThenFace != 0xde0) {
           return 0x2717;
         }
-        checkedTextureObject = _gleCheckTexImage1DArgs(glContext,0xde0,level,internalformat,width,iVar9,0x80e1,0x1401);
+        checkedTextureObject = _gleCheckTexImage1DArgs(glContext,0xde0,level,shrinkCountThenRendererRecordCursorThenInternalformat,pluginResultThenWidth,borderThenTargetThenFaceIndex,0x80e1,0x1401);
       }
       else {
         if (targetThenFace != 0x806f) {
@@ -1328,7 +1325,7 @@ LAB_00020a7c:
           }
           goto LAB_00020a7c;
         }
-        checkedTextureObject = ((int (*)())_gleCheckTexImage3DArgs)(glContext,0x806f,level,internalformat,width,height,depth,iVar9,0x80e1,0x1401);
+        checkedTextureObject = ((int (*)())_gleCheckTexImage3DArgs)(glContext,0x806f,level,shrinkCountThenRendererRecordCursorThenInternalformat,pluginResultThenWidth,height,depth,borderThenTargetThenFaceIndex,0x80e1,0x1401);
       }
       if (checkedTextureObject == 0) {
         return 0;
@@ -1368,8 +1365,8 @@ LAB_00020c88:
         }
         *(byte *)(levelBase + 0xcf) = *(byte *)(levelBase + 0xcf) & 0xdf;
       }
-      _gleCreateGlobalLevel(glContext,levelRecord2,width,height,depth,iVar9);
-      _gleCreatePluginTextureLevel(glContext,checkedTextureObject,levelRecord2,targetThenFace,level,internalformat);
+      _gleCreateGlobalLevel(glContext,levelRecord2,pluginResultThenWidth,height,depth,borderThenTargetThenFaceIndex);
+      _gleCreatePluginTextureLevel(glContext,checkedTextureObject,levelRecord2,targetThenFace,level,shrinkCountThenRendererRecordCursorThenInternalformat);
     }
     else {
       if (stateId == 0x3e1) {
@@ -1393,7 +1390,7 @@ joined_r0x00020e50:
             return 0;
           }
           funcCache = *(undefined4 *)(glContext + 0x48b8);
-          iVar13 = *(short *)(glContext + 0x48be) - newCacheLimit;
+          shrinkCountThenRendererRecordCursorThenInternalformat = *(short *)(glContext + 0x48be) - newCacheLimit;
           *(short *)(glContext + 0x48be) = (short)newCacheLimit;
         }
         else if (stateId < 0x185) {
@@ -1407,7 +1404,7 @@ joined_r0x00020e50:
               return 0;
             }
             funcCache = *(undefined4 *)(glContext + 0x48a0);
-            iVar13 = *(short *)(glContext + 0x48a6) - newCacheLimit;
+            shrinkCountThenRendererRecordCursorThenInternalformat = *(short *)(glContext + 0x48a6) - newCacheLimit;
             *(short *)(glContext + 0x48a6) = (short)newCacheLimit;
           }
           else {
@@ -1421,7 +1418,7 @@ joined_r0x00020e50:
               return 0;
             }
             funcCache = *(undefined4 *)(glContext + 0x48a8);
-            iVar13 = *(short *)(glContext + 0x48ae) - newCacheLimit;
+            shrinkCountThenRendererRecordCursorThenInternalformat = *(short *)(glContext + 0x48ae) - newCacheLimit;
             *(short *)(glContext + 0x48ae) = (short)newCacheLimit;
           }
         }
@@ -1443,7 +1440,7 @@ joined_r0x00020e50:
             return 0;
           }
           funcCache = *(undefined4 *)(glContext + 0x48c0);
-          iVar13 = *(short *)(glContext + 0x48c6) - newCacheLimit;
+          shrinkCountThenRendererRecordCursorThenInternalformat = *(short *)(glContext + 0x48c6) - newCacheLimit;
           *(short *)(glContext + 0x48c6) = (short)newCacheLimit;
         }
         goto LAB_0002085c;
@@ -1471,12 +1468,12 @@ joined_r0x00020e50:
         }
         goto LAB_00020f04;
       }
-      iVar9 = valuePtr[1];
-      internalformat = valuePtr[2];
-      width = valuePtr[3];
+      borderThenTargetThenFaceIndex = valuePtr[1];
+      shrinkCountThenRendererRecordCursorThenInternalformat = valuePtr[2];
+      pluginResultThenWidth = valuePtr[3];
       height = valuePtr[4];
       surfaceHandle2 = *valuePtr;
-      textureObject = _gleCheckTexImage2DArgs(glContext,iVar9,0,internalformat,width,height,0,0x80e1,0x8367);
+      textureObject = _gleCheckTexImage2DArgs(glContext,borderThenTargetThenFaceIndex,0,shrinkCountThenRendererRecordCursorThenInternalformat,pluginResultThenWidth,height,0,0x80e1,0x8367);
       if (textureObject == 0) {
         return 0;
       }
@@ -1489,17 +1486,17 @@ joined_r0x00020e50:
       }
       *(int *)(textureObject + 0x2c) = surfaceHandle2;
       if (stateId != 0x3e5) {
-        uVar3 = 0x404;
+        textureWord30Value = 0x404;
       }
       else {
-        uVar3 = *(undefined2 *)((int)valuePtr + 0x1a);
+        textureWord30Value = *(undefined2 *)((int)valuePtr + 0x1a);
       }
-      *(undefined2 *)(textureObject + 0x30) = uVar3;
+      *(undefined2 *)(textureObject + 0x30) = textureWord30Value;
       faceCount = 6;
-      if (iVar9 != 0x8513) {
+      if (borderThenTargetThenFaceIndex != 0x8513) {
         faceCount = 1;
       }
-      loopIndex2 = 0;
+      borderThenTargetThenFaceIndex = 0;
       if (faceCount != 0) {
         textureLevel = textureObject + 0xc4;
         do {
@@ -1518,21 +1515,21 @@ joined_r0x00020e50:
             }
             *(byte *)(textureLevel + 0xb) = *(byte *)(textureLevel + 0xb) & 0xdf;
           }
-          ((int (*)())_gleCreateSurfaceLevel)(glContext,textureLevel,width,height,0,0);
+          ((int (*)())_gleCreateSurfaceLevel)(glContext,textureLevel,pluginResultThenWidth,height,0,0);
           if (stateId != 0x3e5) {
             mipmapSource = 0;
           }
           else {
             mipmapSource = valuePtr[7];
           }
-          baseFormat = _gleReqToBase(internalformat);
-          _gleCreatePluginTextureLevel(glContext,textureObject,textureLevel,loopIndex2,0,baseFormat);
+          baseFormat = _gleReqToBase(shrinkCountThenRendererRecordCursorThenInternalformat);
+          _gleCreatePluginTextureLevel(glContext,textureObject,textureLevel,borderThenTargetThenFaceIndex,0,baseFormat);
           if (mipmapSource != 0) {
-            _gleGenSurfaceMipmaps(glContext,textureObject,loopIndex2,mipmapSource,*(uint *)(textureObject + 0x6c) >> 0xf & 1);
+            _gleGenSurfaceMipmaps(glContext,textureObject,borderThenTargetThenFaceIndex,mipmapSource,*(uint *)(textureObject + 0x6c) >> 0xf & 1);
           }
-          loopIndex2 = loopIndex2 + 1;
+          borderThenTargetThenFaceIndex = borderThenTargetThenFaceIndex + 1;
           textureLevel = textureLevel + 0x168;
-        } while (loopIndex2 < faceCount);
+        } while (borderThenTargetThenFaceIndex < faceCount);
       }
     }
     *(uint *)(glContext + 0x314) =
@@ -2001,10 +1998,10 @@ int _gleGetEnabled(glContext, cap)
   int glContext;
   uint cap;
 {
-  uint uVar1;
-  uint uVar2;
+  uint stateWord;
+  uint shiftAmount;
   int clientState;
-  longlong lVar4;
+  longlong texCoordArrayEnableMask;
   
   if (cap < 0x4008) {
     if (cap < 0x4000) {
@@ -2108,8 +2105,8 @@ LAB_000223a8:
           return (uint)*(byte *)(glContext + 0x3128);
         }
         if (cap != 0xb90) goto LAB_000223a8;
-        uVar1 = *(uint *)(glContext + 0x3520);
-        uVar2 = (uint)*(byte *)(glContext + 0x7583);
+        stateWord = *(uint *)(glContext + 0x3520);
+        shiftAmount = (uint)*(byte *)(glContext + 0x7583);
       }
       else {
         if (cap == 0xdb3) {
@@ -2164,9 +2161,9 @@ LAB_000223a8:
           goto LAB_000223a8;
         }
         if (cap == 0xde0) {
-          uVar1 = *(uint *)(*(int *)(glContext + 0x53d4) * 0x7c + glContext + 0x3534);
+          stateWord = *(uint *)(*(int *)(glContext + 0x53d4) * 0x7c + glContext + 0x3534);
 LAB_00022360:
-          return uVar1 >> 4 & 1;
+          return stateWord >> 4 & 1;
         }
         if (cap < 0xde1) {
           if (cap == 0xdb6) {
@@ -2195,7 +2192,7 @@ LAB_00022360:
         }
         if (cap < 0x2a03) {
           if (cap == 0xde1) {
-            uVar1 = *(uint *)(*(int *)(glContext + 0x53d4) * 0x7c + glContext + 0x3534);
+            stateWord = *(uint *)(*(int *)(glContext + 0x53d4) * 0x7c + glContext + 0x3534);
             goto LAB_0002236c;
           }
           if (cap == 0x2a01) {
@@ -2203,18 +2200,18 @@ LAB_00022360:
           }
           goto LAB_000223a8;
         }
-        uVar2 = cap - 0x3000;
-        if (5 < uVar2) goto LAB_000223a8;
-        uVar1 = *(uint *)(glContext + 0x4188);
+        shiftAmount = cap - 0x3000;
+        if (5 < shiftAmount) goto LAB_000223a8;
+        stateWord = *(uint *)(glContext + 0x4188);
       }
     }
     else {
-      uVar1 = *(uint *)(glContext + 0x30a0);
-      uVar2 = cap - 0x4000;
+      stateWord = *(uint *)(glContext + 0x30a0);
+      shiftAmount = cap - 0x4000;
     }
-    uVar1 = uVar1 >> (uVar2 & 0x3f);
+    stateWord = stateWord >> (shiftAmount & 0x3f);
 LAB_00022378:
-    return uVar1 & 1;
+    return stateWord & 1;
   }
   if (cap == 0x8200) {
 LAB_00022328:
@@ -2222,7 +2219,7 @@ LAB_00022328:
   }
   if (cap < 0x8201) {
     if (cap == 0x8076) {
-      uVar1 = *(uint *)(*(int *)(glContext + 0x4a60) + 0x334) >> 0x12;
+      stateWord = *(uint *)(*(int *)(glContext + 0x4a60) + 0x334) >> 0x12;
       goto LAB_0002227c;
     }
     if (0x8076 < cap) {
@@ -2231,7 +2228,7 @@ LAB_00022328:
       }
       if (cap < 0x80a0) {
         if (cap == 0x8079) {
-          uVar1 = *(uint *)(*(int *)(glContext + 0x4a60) + 0x334) >> 0x16;
+          stateWord = *(uint *)(*(int *)(glContext + 0x4a60) + 0x334) >> 0x16;
           goto LAB_0002227c;
         }
         if (cap < 0x807a) {
@@ -2240,9 +2237,9 @@ LAB_00022328:
           }
           if (cap == 0x8078) {
             clientState = *(int *)(glContext + 0x4a60);
-            lVar4 = ___ashldi3(0,0x1000000,*(undefined4 *)(glContext + 0x53d8));
-            if ((*(uint *)(clientState + 0x330) & (uint)((ulonglong)lVar4 >> 0x20)) == 0 &&
-                (*(uint *)(clientState + 0x334) & (uint)lVar4) == 0) {
+            texCoordArrayEnableMask = ___ashldi3(0,0x1000000,*(undefined4 *)(glContext + 0x53d8));
+            if ((*(uint *)(clientState + 0x330) & (uint)((ulonglong)texCoordArrayEnableMask >> 0x20)) == 0 &&
+                (*(uint *)(clientState + 0x334) & (uint)texCoordArrayEnableMask) == 0) {
               return 0;
             }
             return 1;
@@ -2281,9 +2278,9 @@ LAB_00022328:
       goto LAB_000223a8;
     }
     if (cap == 0x802e) {
-      uVar1 = *(uint *)(glContext + 0x3410);
+      stateWord = *(uint *)(glContext + 0x3410);
 LAB_0002236c:
-      return uVar1 >> 3 & 1;
+      return stateWord >> 3 & 1;
     }
     if (cap < 0x802f) {
       if (cap != 0x8011) {
@@ -2292,33 +2289,33 @@ LAB_0002236c:
             return (uint)*(byte *)(glContext + 0x280c);
           }
           if (cap == 0x8010) {
-            uVar1 = (uint)*(byte *)(glContext + 0x3413);
+            stateWord = (uint)*(byte *)(glContext + 0x3413);
             goto LAB_00022378;
           }
         }
         else {
           if (cap == 0x8012) {
-            uVar1 = *(uint *)(glContext + 0x3410);
+            stateWord = *(uint *)(glContext + 0x3410);
             goto LAB_00022398;
           }
           if (cap == 0x8024) {
-            uVar1 = *(uint *)(glContext + 0x3410);
+            stateWord = *(uint *)(glContext + 0x3410);
             goto LAB_00022360;
           }
         }
         goto LAB_000223a8;
       }
-      uVar1 = *(uint *)(glContext + 0x3410);
+      stateWord = *(uint *)(glContext + 0x3410);
     }
     else {
       if (cap != 0x806f) {
         if (0x806f < cap) {
           if (cap == 0x8074) {
-            uVar1 = *(uint *)(*(int *)(glContext + 0x4a60) + 0x334) >> 0x10;
+            stateWord = *(uint *)(*(int *)(glContext + 0x4a60) + 0x334) >> 0x10;
           }
           else {
             if (cap != 0x8075) goto LAB_000223a8;
-            uVar1 = *(uint *)(*(int *)(glContext + 0x4a60) + 0x334) >> 0x11;
+            stateWord = *(uint *)(*(int *)(glContext + 0x4a60) + 0x334) >> 0x11;
           }
           goto LAB_0002227c;
         }
@@ -2330,9 +2327,9 @@ LAB_0002236c:
         }
         goto LAB_000223a8;
       }
-      uVar1 = *(uint *)(*(int *)(glContext + 0x53d4) * 0x7c + glContext + 0x3534);
+      stateWord = *(uint *)(*(int *)(glContext + 0x53d4) * 0x7c + glContext + 0x3534);
     }
-    return uVar1 >> 1 & 1;
+    return stateWord >> 1 & 1;
   }
   if (cap == 0x8643) {
     return (uint)*(byte *)(glContext + 0x4666);
@@ -2343,9 +2340,9 @@ LAB_0002236c:
     }
     if (cap < 0x851e) {
       if (cap == 0x845e) {
-        uVar1 = *(uint *)(*(int *)(glContext + 0x4a60) + 0x334) >> 0x14;
+        stateWord = *(uint *)(*(int *)(glContext + 0x4a60) + 0x334) >> 0x14;
 LAB_0002227c:
-        return uVar1 & 1;
+        return stateWord & 1;
       }
       if (cap < 0x845f) {
         if (cap != 0x8457) {
@@ -2354,12 +2351,12 @@ LAB_0002227c:
           }
           goto LAB_000223a8;
         }
-        uVar1 = *(uint *)(*(int *)(glContext + 0x4a60) + 0x334) >> 0x13;
+        stateWord = *(uint *)(*(int *)(glContext + 0x4a60) + 0x334) >> 0x13;
         goto LAB_0002227c;
       }
       if (cap != 0x84f5) {
         if (cap != 0x8513) goto LAB_000223a8;
-        uVar1 = (uint)*(byte *)(*(int *)(glContext + 0x53d4) * 0x7c + glContext + 0x3537);
+        stateWord = (uint)*(byte *)(*(int *)(glContext + 0x53d4) * 0x7c + glContext + 0x3537);
         goto LAB_00022378;
       }
     }
@@ -2382,7 +2379,7 @@ LAB_0002227c:
       }
       goto LAB_000223a8;
     }
-    uVar1 = *(uint *)(*(int *)(glContext + 0x53d4) * 0x7c + glContext + 0x3534);
+    stateWord = *(uint *)(*(int *)(glContext + 0x53d4) * 0x7c + glContext + 0x3534);
   }
   else {
     if (cap == 0x8804) goto LAB_00022328;
@@ -2400,7 +2397,7 @@ LAB_0002227c:
       }
       else {
         if (cap == 0x86ad) {
-          uVar1 = *(uint *)(*(int *)(glContext + 0x4a60) + 0x334) >> 0x15;
+          stateWord = *(uint *)(*(int *)(glContext + 0x4a60) + 0x334) >> 0x15;
           goto LAB_0002227c;
         }
         if (cap == 0x86de) {
@@ -2420,7 +2417,7 @@ LAB_0002227c:
       }
       else {
         if (cap == 0x8a0c) {
-          uVar1 = *(uint *)(*(int *)(glContext + 0x4a60) + 0x334) >> 0x17;
+          stateWord = *(uint *)(*(int *)(glContext + 0x4a60) + 0x334) >> 0x17;
           goto LAB_0002227c;
         }
         if (cap == 0x19262) {
@@ -2429,10 +2426,10 @@ LAB_0002227c:
       }
       goto LAB_000223a8;
     }
-    uVar1 = *(uint *)(glContext + 0x3520);
+    stateWord = *(uint *)(glContext + 0x3520);
   }
 LAB_00022398:
-  return uVar1 >> 2 & 1;
+  return stateWord >> 2 & 1;
 }
 
 /* _gleShareSharedState @ 0x223d4 (88 bytes) */
@@ -2812,32 +2809,25 @@ void _glProgramStringARB_Exec(glContext, target, format, len, string)
   int len;
   int string;
 {
-  int allocatedBlock;
+  int allocatedBlockThenProgramBodyThenCopyOffsetThenDirtyWordCursor;
   int remaining4;
   int loopIndex5;
-  int loopIndex4;
-  int remaining2;
-  int loopIndex3;
-  int loopIndex2;
-  int loopIndex;
-  undefined4 glErrorCode;
-  uint *puVar1;
-  bool bVar2;
-  undefined4 uVar3;
-  uint uVar4;
+  int stringIndexThenCopyOffsetThenDirtyWordCursorThenRemainingWordCount;
+  undefined4 glErrorCodeThenCopiedWord;
+  uint *copyWordPtrThenBodyWordPtr;
+  bool stringHasNoEarlyNul;
+  uint expectedTargetThenNewDirtyWord;
   undefined4 *srcCursor;
-  int iVar6;
-  int iVar7;
-  int iVar8;
+  int programSlotThenProgramRecordThenProgramBodyThenBodyWordCursor;
   int remaining3;
   int remaining;
-  uint local_60 [15];
+  uint savedRecordWords28 [15];
   
   if (-1 < *(short *)(glContext + 0x4a10)) {
     if (*(int *)(glContext + 0x7574) != 0) {
       return;
     }
-    glErrorCode = 0x502;
+    glErrorCodeThenCopiedWord = 0x502;
     goto LAB_00022bb8;
   }
   if (-1 < len) {
@@ -2846,104 +2836,104 @@ LAB_00022b48:
       if (*(int *)(glContext + 0x7574) != 0) {
         return;
       }
-      glErrorCode = 0x500;
+      glErrorCodeThenCopiedWord = 0x500;
       goto LAB_00022bb8;
     }
     if (target == 0x8620) {
-      iVar7 = 0;
+      programSlotThenProgramRecordThenProgramBodyThenBodyWordCursor = 0;
     }
     else {
       if (target < 0x8621) {
-        uVar4 = 0x8200;
+        expectedTargetThenNewDirtyWord = 0x8200;
       }
       else {
-        uVar4 = 0x8804;
+        expectedTargetThenNewDirtyWord = 0x8804;
       }
-      if (target != uVar4) goto LAB_00022b48;
-      iVar7 = 1;
+      if (target != expectedTargetThenNewDirtyWord) goto LAB_00022b48;
+      programSlotThenProgramRecordThenProgramBodyThenBodyWordCursor = 1;
     }
-    loopIndex2 = 0;
-    allocatedBlock = _malloc(len + 1);
-    bVar2 = len == 0;
+    stringIndexThenCopyOffsetThenDirtyWordCursorThenRemainingWordCount = 0;
+    allocatedBlockThenProgramBodyThenCopyOffsetThenDirtyWordCursor = _malloc(len + 1);
+    stringHasNoEarlyNul = len == 0;
     if (0 < len) {
       do {
-        if (*(char *)(string + loopIndex2) == '\0') break;
-        *(char *)(allocatedBlock + loopIndex2) = *(char *)(string + loopIndex2);
-        loopIndex2 = loopIndex2 + 1;
-        bVar2 = loopIndex2 == len;
-      } while (loopIndex2 < len);
+        if (*(char *)(string + stringIndexThenCopyOffsetThenDirtyWordCursorThenRemainingWordCount) == '\0') break;
+        *(char *)(allocatedBlockThenProgramBodyThenCopyOffsetThenDirtyWordCursor + stringIndexThenCopyOffsetThenDirtyWordCursorThenRemainingWordCount) = *(char *)(string + stringIndexThenCopyOffsetThenDirtyWordCursorThenRemainingWordCount);
+        stringIndexThenCopyOffsetThenDirtyWordCursorThenRemainingWordCount = stringIndexThenCopyOffsetThenDirtyWordCursorThenRemainingWordCount + 1;
+        stringHasNoEarlyNul = stringIndexThenCopyOffsetThenDirtyWordCursorThenRemainingWordCount == len;
+      } while (stringIndexThenCopyOffsetThenDirtyWordCursorThenRemainingWordCount < len);
     }
-    *(undefined1 *)(allocatedBlock + loopIndex2) = 0;
-    if (bVar2) {
-      iVar7 = *(int *)(iVar7 * 4 + glContext + 0x5420);
-      if (*(int *)(iVar7 + 0x14) != 0) {
-        ((void (*)())_gleModifyPluginPipelineProgram)(glContext,iVar7 + 0x10,1);
-        _free(*(undefined4 *)(iVar7 + 0x14));
+    *(undefined1 *)(allocatedBlockThenProgramBodyThenCopyOffsetThenDirtyWordCursor + stringIndexThenCopyOffsetThenDirtyWordCursorThenRemainingWordCount) = 0;
+    if (stringHasNoEarlyNul) {
+      programSlotThenProgramRecordThenProgramBodyThenBodyWordCursor = *(int *)(programSlotThenProgramRecordThenProgramBodyThenBodyWordCursor * 4 + glContext + 0x5420);
+      if (*(int *)(programSlotThenProgramRecordThenProgramBodyThenBodyWordCursor + 0x14) != 0) {
+        ((void (*)())_gleModifyPluginPipelineProgram)(glContext,programSlotThenProgramRecordThenProgramBodyThenBodyWordCursor + 0x10,1);
+        _free(*(undefined4 *)(programSlotThenProgramRecordThenProgramBodyThenBodyWordCursor + 0x14));
       }
-      *(undefined1 *)(iVar7 + 0x4c) = 1;
-      *(undefined4 *)(iVar7 + 0x1c) = 0x8875;
-      *(int *)(iVar7 + 0x18) = loopIndex2;
-      *(int *)(iVar7 + 0x14) = allocatedBlock;
-      *(short *)(iVar7 + 0x4c8) = (short)target;
+      *(undefined1 *)(programSlotThenProgramRecordThenProgramBodyThenBodyWordCursor + 0x4c) = 1;
+      *(undefined4 *)(programSlotThenProgramRecordThenProgramBodyThenBodyWordCursor + 0x1c) = 0x8875;
+      *(int *)(programSlotThenProgramRecordThenProgramBodyThenBodyWordCursor + 0x18) = stringIndexThenCopyOffsetThenDirtyWordCursorThenRemainingWordCount;
+      *(int *)(programSlotThenProgramRecordThenProgramBodyThenBodyWordCursor + 0x14) = allocatedBlockThenProgramBodyThenCopyOffsetThenDirtyWordCursor;
+      *(short *)(programSlotThenProgramRecordThenProgramBodyThenBodyWordCursor + 0x4c8) = (short)target;
       if (target == 0x8620) {
-        iVar6 = iVar7 + 0x10;
+        allocatedBlockThenProgramBodyThenCopyOffsetThenDirtyWordCursor = programSlotThenProgramRecordThenProgramBodyThenBodyWordCursor + 0x10;
         remaining3 = 9;
-        srcCursor = (undefined4 *)(iVar7 + 0x28);
-        loopIndex3 = 0;
+        srcCursor = (undefined4 *)(programSlotThenProgramRecordThenProgramBodyThenBodyWordCursor + 0x28);
+        stringIndexThenCopyOffsetThenDirtyWordCursorThenRemainingWordCount = 0;
         do {
-          uVar3 = *srcCursor;
+          glErrorCodeThenCopiedWord = *srcCursor;
           srcCursor = srcCursor + 1;
-          *(undefined4 *)((int)local_60 + loopIndex3) = uVar3;
-          loopIndex3 = loopIndex3 + 4;
+          *(undefined4 *)((int)savedRecordWords28 + stringIndexThenCopyOffsetThenDirtyWordCursorThenRemainingWordCount) = glErrorCodeThenCopiedWord;
+          stringIndexThenCopyOffsetThenDirtyWordCursorThenRemainingWordCount = stringIndexThenCopyOffsetThenDirtyWordCursorThenRemainingWordCount + 4;
           remaining3 = remaining3 + -1;
         } while (remaining3 != 0);
-        ((void (*)())_glePPParse)(glContext,iVar6,0);
-        ((void (*)())_glePPUpdateProgram)(glContext,iVar6);
+        ((void (*)())_glePPParse)(glContext,allocatedBlockThenProgramBodyThenCopyOffsetThenDirtyWordCursor,0);
+        ((void (*)())_glePPUpdateProgram)(glContext,allocatedBlockThenProgramBodyThenCopyOffsetThenDirtyWordCursor);
         _gleUpdateInverseNeeds(glContext);
         remaining = 9;
         loopIndex5 = 0;
-        iVar8 = glContext;
+        stringIndexThenCopyOffsetThenDirtyWordCursorThenRemainingWordCount = glContext;
         do {
-          puVar1 = (uint *)((int)local_60 + loopIndex5);
+          copyWordPtrThenBodyWordPtr = (uint *)((int)savedRecordWords28 + loopIndex5);
           loopIndex5 = loopIndex5 + 4;
-          uVar4 = *(uint *)(iVar8 + 0x324) | *(uint *)(iVar6 + 0x18) & ~*puVar1;
-          *(uint *)(iVar8 + 0x324) = uVar4;
-          puVar1 = (uint *)(iVar6 + 0x18);
-          iVar6 = iVar6 + 4;
-          *(uint *)(iVar8 + 0x324) = uVar4 & *puVar1;
-          iVar8 = iVar8 + 4;
+          expectedTargetThenNewDirtyWord = *(uint *)(stringIndexThenCopyOffsetThenDirtyWordCursorThenRemainingWordCount + 0x324) | *(uint *)(allocatedBlockThenProgramBodyThenCopyOffsetThenDirtyWordCursor + 0x18) & ~*copyWordPtrThenBodyWordPtr;
+          *(uint *)(stringIndexThenCopyOffsetThenDirtyWordCursorThenRemainingWordCount + 0x324) = expectedTargetThenNewDirtyWord;
+          copyWordPtrThenBodyWordPtr = (uint *)(allocatedBlockThenProgramBodyThenCopyOffsetThenDirtyWordCursor + 0x18);
+          allocatedBlockThenProgramBodyThenCopyOffsetThenDirtyWordCursor = allocatedBlockThenProgramBodyThenCopyOffsetThenDirtyWordCursor + 4;
+          *(uint *)(stringIndexThenCopyOffsetThenDirtyWordCursorThenRemainingWordCount + 0x324) = expectedTargetThenNewDirtyWord & *copyWordPtrThenBodyWordPtr;
+          stringIndexThenCopyOffsetThenDirtyWordCursorThenRemainingWordCount = stringIndexThenCopyOffsetThenDirtyWordCursorThenRemainingWordCount + 4;
           remaining = remaining + -1;
         } while (remaining != 0);
         _gleSelectVertexSubmitFunc(glContext);
         *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x400000;
       }
       if (target == 0x8804) {
-        srcCursor = (undefined4 *)(iVar7 + 0x28);
-        remaining2 = 5;
-        iVar7 = iVar7 + 0x10;
-        loopIndex = 0;
+        srcCursor = (undefined4 *)(programSlotThenProgramRecordThenProgramBodyThenBodyWordCursor + 0x28);
+        stringIndexThenCopyOffsetThenDirtyWordCursorThenRemainingWordCount = 5;
+        programSlotThenProgramRecordThenProgramBodyThenBodyWordCursor = programSlotThenProgramRecordThenProgramBodyThenBodyWordCursor + 0x10;
+        allocatedBlockThenProgramBodyThenCopyOffsetThenDirtyWordCursor = 0;
         do {
-          uVar3 = *srcCursor;
+          glErrorCodeThenCopiedWord = *srcCursor;
           srcCursor = srcCursor + 1;
-          *(undefined4 *)((int)local_60 + loopIndex) = uVar3;
-          loopIndex = loopIndex + 4;
-          remaining2 = remaining2 + -1;
-        } while (remaining2 != 0);
-        ((void (*)())_glePPParse)(glContext,iVar7,1);
-        ((void (*)())_glePPUpdateProgram)(glContext,iVar7);
+          *(undefined4 *)((int)savedRecordWords28 + allocatedBlockThenProgramBodyThenCopyOffsetThenDirtyWordCursor) = glErrorCodeThenCopiedWord;
+          allocatedBlockThenProgramBodyThenCopyOffsetThenDirtyWordCursor = allocatedBlockThenProgramBodyThenCopyOffsetThenDirtyWordCursor + 4;
+          stringIndexThenCopyOffsetThenDirtyWordCursorThenRemainingWordCount = stringIndexThenCopyOffsetThenDirtyWordCursorThenRemainingWordCount + -1;
+        } while (stringIndexThenCopyOffsetThenDirtyWordCursorThenRemainingWordCount != 0);
+        ((void (*)())_glePPParse)(glContext,programSlotThenProgramRecordThenProgramBodyThenBodyWordCursor,1);
+        ((void (*)())_glePPUpdateProgram)(glContext,programSlotThenProgramRecordThenProgramBodyThenBodyWordCursor);
         _gleUpdateInverseNeeds(glContext);
         remaining4 = 9;
-        loopIndex4 = 0;
-        iVar6 = glContext;
+        stringIndexThenCopyOffsetThenDirtyWordCursorThenRemainingWordCount = 0;
+        allocatedBlockThenProgramBodyThenCopyOffsetThenDirtyWordCursor = glContext;
         do {
-          puVar1 = (uint *)((int)local_60 + loopIndex4);
-          loopIndex4 = loopIndex4 + 4;
-          uVar4 = *(uint *)(iVar6 + 0x348) | *(uint *)(iVar7 + 0x18) & ~*puVar1;
-          *(uint *)(iVar6 + 0x348) = uVar4;
-          puVar1 = (uint *)(iVar7 + 0x18);
-          iVar7 = iVar7 + 4;
-          *(uint *)(iVar6 + 0x348) = uVar4 & *puVar1;
-          iVar6 = iVar6 + 4;
+          copyWordPtrThenBodyWordPtr = (uint *)((int)savedRecordWords28 + stringIndexThenCopyOffsetThenDirtyWordCursorThenRemainingWordCount);
+          stringIndexThenCopyOffsetThenDirtyWordCursorThenRemainingWordCount = stringIndexThenCopyOffsetThenDirtyWordCursorThenRemainingWordCount + 4;
+          expectedTargetThenNewDirtyWord = *(uint *)(allocatedBlockThenProgramBodyThenCopyOffsetThenDirtyWordCursor + 0x348) | *(uint *)(programSlotThenProgramRecordThenProgramBodyThenBodyWordCursor + 0x18) & ~*copyWordPtrThenBodyWordPtr;
+          *(uint *)(allocatedBlockThenProgramBodyThenCopyOffsetThenDirtyWordCursor + 0x348) = expectedTargetThenNewDirtyWord;
+          copyWordPtrThenBodyWordPtr = (uint *)(programSlotThenProgramRecordThenProgramBodyThenBodyWordCursor + 0x18);
+          programSlotThenProgramRecordThenProgramBodyThenBodyWordCursor = programSlotThenProgramRecordThenProgramBodyThenBodyWordCursor + 4;
+          *(uint *)(allocatedBlockThenProgramBodyThenCopyOffsetThenDirtyWordCursor + 0x348) = expectedTargetThenNewDirtyWord & *copyWordPtrThenBodyWordPtr;
+          allocatedBlockThenProgramBodyThenCopyOffsetThenDirtyWordCursor = allocatedBlockThenProgramBodyThenCopyOffsetThenDirtyWordCursor + 4;
           remaining4 = remaining4 + -1;
         } while (remaining4 != 0);
         _gleSelectVertexSubmitFunc(glContext);
@@ -2957,14 +2947,14 @@ LAB_00022b48:
       *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x1000000;
       return;
     }
-    _free(allocatedBlock);
+    _free(allocatedBlockThenProgramBodyThenCopyOffsetThenDirtyWordCursor);
   }
   if (*(int *)(glContext + 0x7574) != 0) {
     return;
   }
-  glErrorCode = 0x501;
+  glErrorCodeThenCopiedWord = 0x501;
 LAB_00022bb8:
-  *(undefined4 *)(glContext + 0x7574) = glErrorCode;
+  *(undefined4 *)(glContext + 0x7574) = glErrorCodeThenCopiedWord;
   return;
 }
 
@@ -4011,11 +4001,14 @@ int _glePPLogParam(glContext, paramLogState, bankIndex, paramWord, paramWord2, s
   int lastSlot;
 {
   bool slotIsUnused;
-  int iVar2;
+  int slotRecord;
+  int slotRecordThenSlotWord2;
+  int slotWordIndex;
+  int slotScanCursor;
   undefined4 matchKind;
-  int iVar4;
-  int iVar5;
-  int iVar6;
+  int slotWord2ThenSlotRecordThenPriorityRowOffset;
+  int freeBitsWordThenDirtyBitsWordThenSlotRecord;
+  int freeBitsWordCase4;
   uint paramKind;
   uint slotWord1;
   uint slotPriority;
@@ -4043,15 +4036,15 @@ int _glePPLogParam(glContext, paramLogState, bankIndex, paramWord, paramWord2, s
         return 0xffffffff;
       }
       matchKind = 1;
-      iVar2 = (bankIndex * 0x146 + requestedSlot) * 8 + paramLogState;
-      slotIsUnused = *(int *)(iVar2 + 0x8074) == 0 && *(int *)(iVar2 + 0x8078) == 0;
+      slotRecord = (bankIndex * 0x146 + requestedSlot) * 8 + paramLogState;
+      slotIsUnused = *(int *)(slotRecord + 0x8074) == 0 && *(int *)(slotRecord + 0x8078) == 0;
       goto LAB_00024ea0;
     }
     freeSlot = 0;
     if (lastSlot - slotSpan == -1) {
       return 0xffffffff;
     }
-    iVar2 = bankIndex * 0xa30 + paramLogState + 0x8070;
+    slotScanCursor = bankIndex * 0xa30 + paramLogState + 0x8070;
     do {
       for (spanEnd = freeSlot;
           ((int)spanEnd < (int)(freeSlot + slotSpan) &&
@@ -4059,8 +4052,8 @@ int _glePPLogParam(glContext, paramLogState, bankIndex, paramWord, paramWord2, s
           spanEnd = spanEnd + 1) {
       }
       if (spanEnd == freeSlot + slotSpan) {
-        if ((*(int *)(iVar2 + 4) == -1) && (*(int *)(iVar2 + 8) == -1)) goto LAB_00024ff0;
-        if (*(int *)(iVar2 + 4) == 0 && *(int *)(iVar2 + 8) == 0) {
+        if ((*(int *)(slotScanCursor + 4) == -1) && (*(int *)(slotScanCursor + 8) == -1)) goto LAB_00024ff0;
+        if (*(int *)(slotScanCursor + 4) == 0 && *(int *)(slotScanCursor + 8) == 0) {
           if (unusedSlot == 0xffffffff) {
             unusedSlot = freeSlot;
           }
@@ -4074,7 +4067,7 @@ int _glePPLogParam(glContext, paramLogState, bankIndex, paramWord, paramWord2, s
         }
       }
       freeSlot = freeSlot + 1;
-      iVar2 = iVar2 + 8;
+      slotScanCursor = slotScanCursor + 8;
     } while (freeSlot < (lastSlot - slotSpan) + 1U);
     requestedSlot = evictionSlot;
     if (unusedSlot != 0xffffffff) {
@@ -4093,7 +4086,7 @@ LAB_00024fd4:
       if (lastSlot - slotSpan == -1) {
         return 0xffffffff;
       }
-      iVar2 = bankIndex * 0xa30 + paramLogState + 0x8070;
+      slotScanCursor = bankIndex * 0xa30 + paramLogState + 0x8070;
       do {
         for (spanEnd = requestedSlot;
             ((int)spanEnd < (int)(requestedSlot + slotSpan) &&
@@ -4101,18 +4094,18 @@ LAB_00024fd4:
             spanEnd = spanEnd + 1) {
         }
         if (spanEnd == requestedSlot + slotSpan) {
-          slotWord1 = *(uint *)(iVar2 + 4);
-          iVar4 = *(int *)(iVar2 + 8);
-          if ((slotWord1 == paramWord) && (iVar4 == paramWord2)) {
+          slotWord1 = *(uint *)(slotScanCursor + 4);
+          slotWord2ThenSlotRecordThenPriorityRowOffset = *(int *)(slotScanCursor + 8);
+          if ((slotWord1 == paramWord) && (slotWord2ThenSlotRecordThenPriorityRowOffset == paramWord2)) {
             matchKind = 5;
             goto LAB_00025008;
           }
-          if ((slotWord1 == 0xffffffff) && (iVar4 == -1)) {
+          if ((slotWord1 == 0xffffffff) && (slotWord2ThenSlotRecordThenPriorityRowOffset == -1)) {
             if (freeSlot == 0xffffffff) {
               freeSlot = requestedSlot;
             }
           }
-          else if (slotWord1 == 0 && iVar4 == 0) {
+          else if (slotWord1 == 0 && slotWord2ThenSlotRecordThenPriorityRowOffset == 0) {
             if (unusedSlot == 0xffffffff) {
               unusedSlot = requestedSlot;
             }
@@ -4126,7 +4119,7 @@ LAB_00024fd4:
           }
         }
         requestedSlot = requestedSlot + 1;
-        iVar2 = iVar2 + 8;
+        slotScanCursor = slotScanCursor + 8;
       } while (requestedSlot < (lastSlot - slotSpan) + 1U);
       if (unusedSlot != 0xffffffff) {
         matchKind = 2;
@@ -4145,70 +4138,70 @@ LAB_00024ff0:
     if ((*(uint *)(blockedSlotBits + ((int)requestedSlot >> 5) * 4) >> (requestedSlot & 0x1f) & 1) != 0) {
       return 0xffffffff;
     }
-    iVar2 = (bankIndex * 0x146 + requestedSlot) * 8 + paramLogState;
-    slotValue1 = *(uint *)(iVar2 + 0x8074);
-    iVar2 = *(int *)(iVar2 + 0x8078);
-    if (((slotValue1 == paramWord) && (matchKind = 5, iVar2 == paramWord2)) ||
-       ((slotValue1 == 0xffffffff && (matchKind = 3, iVar2 == -1)))) goto LAB_00025008;
-    slotIsUnused = slotValue1 == 0 && iVar2 == 0;
+    slotRecordThenSlotWord2 = (bankIndex * 0x146 + requestedSlot) * 8 + paramLogState;
+    slotValue1 = *(uint *)(slotRecordThenSlotWord2 + 0x8074);
+    slotRecordThenSlotWord2 = *(int *)(slotRecordThenSlotWord2 + 0x8078);
+    if (((slotValue1 == paramWord) && (matchKind = 5, slotRecordThenSlotWord2 == paramWord2)) ||
+       ((slotValue1 == 0xffffffff && (matchKind = 3, slotRecordThenSlotWord2 == -1)))) goto LAB_00025008;
+    slotIsUnused = slotValue1 == 0 && slotRecordThenSlotWord2 == 0;
     matchKind = 2;
 LAB_00024ea0:
     if (slotIsUnused) goto LAB_00025008;
   }
   matchKind = 4;
 LAB_00025008:
-  iVar2 = (int)requestedSlot >> 5;
+  slotWordIndex = (int)requestedSlot >> 5;
                     
   switch(matchKind) {
   case 0:
-    iVar4 = bankIndex * 0x518;
+    slotWord2ThenSlotRecordThenPriorityRowOffset = bankIndex * 0x518;
     oldPriority = 0;
     break;
   case 1:
-    iVar4 = (bankIndex * 0x146 + requestedSlot) * 8 + paramLogState;
-    iVar5 = (bankIndex * 0x28c + iVar2) * 4 + paramLogState;
-    *(undefined4 *)(iVar4 + 0x8074) = 0xffffffff;
-    *(undefined4 *)(iVar4 + 0x8078) = 0xffffffff;
-    iVar4 = bankIndex * 0x518;
+    slotWord2ThenSlotRecordThenPriorityRowOffset = (bankIndex * 0x146 + requestedSlot) * 8 + paramLogState;
+    freeBitsWordThenDirtyBitsWordThenSlotRecord = (bankIndex * 0x28c + slotWordIndex) * 4 + paramLogState;
+    *(undefined4 *)(slotWord2ThenSlotRecordThenPriorityRowOffset + 0x8074) = 0xffffffff;
+    *(undefined4 *)(slotWord2ThenSlotRecordThenPriorityRowOffset + 0x8078) = 0xffffffff;
+    slotWord2ThenSlotRecordThenPriorityRowOffset = bankIndex * 0x518;
     oldPriority = 0;
-    *(uint *)(iVar5 + 0x8a74) = *(uint *)(iVar5 + 0x8a74) | 1 << (requestedSlot & 0x1f);
+    *(uint *)(freeBitsWordThenDirtyBitsWordThenSlotRecord + 0x8a74) = *(uint *)(freeBitsWordThenDirtyBitsWordThenSlotRecord + 0x8a74) | 1 << (requestedSlot & 0x1f);
     break;
   case 2:
-    iVar5 = (bankIndex * 0x28c + iVar2) * 4 + paramLogState;
-    oldSlotBits = *(uint *)(iVar5 + 0x8a74);
-    iVar4 = (bankIndex * 0x146 + requestedSlot) * 8 + paramLogState;
+    freeBitsWordThenDirtyBitsWordThenSlotRecord = (bankIndex * 0x28c + slotWordIndex) * 4 + paramLogState;
+    oldSlotBits = *(uint *)(freeBitsWordThenDirtyBitsWordThenSlotRecord + 0x8a74);
+    slotWord2ThenSlotRecordThenPriorityRowOffset = (bankIndex * 0x146 + requestedSlot) * 8 + paramLogState;
     slotBit = 1 << (requestedSlot & 0x1f);
-    *(uint *)(iVar4 + 0x8074) = paramWord;
-    *(int *)(iVar4 + 0x8078) = paramWord2;
+    *(uint *)(slotWord2ThenSlotRecordThenPriorityRowOffset + 0x8074) = paramWord;
+    *(int *)(slotWord2ThenSlotRecordThenPriorityRowOffset + 0x8078) = paramWord2;
     oldPriority = 0;
-    *(uint *)(iVar5 + 0x8a74) = oldSlotBits & ~slotBit;
+    *(uint *)(freeBitsWordThenDirtyBitsWordThenSlotRecord + 0x8a74) = oldSlotBits & ~slotBit;
     if (bankIndex == 0) {
-      iVar4 = 0;
-      iVar5 = iVar2 * 4 + glContext;
-      *(uint *)(iVar5 + 0x324) = *(uint *)(iVar5 + 0x324) | slotBit;
+      slotWord2ThenSlotRecordThenPriorityRowOffset = 0;
+      freeBitsWordThenDirtyBitsWordThenSlotRecord = slotWordIndex * 4 + glContext;
+      *(uint *)(freeBitsWordThenDirtyBitsWordThenSlotRecord + 0x324) = *(uint *)(freeBitsWordThenDirtyBitsWordThenSlotRecord + 0x324) | slotBit;
     }
     else {
-      iVar4 = bankIndex * 0x518;
-      iVar5 = iVar2 * 4 + glContext;
-      *(uint *)(iVar5 + 0x348) = *(uint *)(iVar5 + 0x348) | slotBit;
+      slotWord2ThenSlotRecordThenPriorityRowOffset = bankIndex * 0x518;
+      freeBitsWordThenDirtyBitsWordThenSlotRecord = slotWordIndex * 4 + glContext;
+      *(uint *)(freeBitsWordThenDirtyBitsWordThenSlotRecord + 0x348) = *(uint *)(freeBitsWordThenDirtyBitsWordThenSlotRecord + 0x348) | slotBit;
     }
     break;
   case 5:
   case 3:
-    iVar4 = bankIndex * 0x518;
-    oldPriority = *(short *)((iVar4 + requestedSlot) * 2 + paramLogState + 0x8874);
+    slotWord2ThenSlotRecordThenPriorityRowOffset = bankIndex * 0x518;
+    oldPriority = *(short *)((slotWord2ThenSlotRecordThenPriorityRowOffset + requestedSlot) * 2 + paramLogState + 0x8874);
     break;
   case 4:
-    iVar4 = bankIndex * 0x518;
-    iVar5 = (bankIndex * 0x146 + requestedSlot) * 8 + paramLogState;
-    iVar6 = (bankIndex * 0x28c + iVar2) * 4 + paramLogState;
-    oldPriority = *(short *)((iVar4 + requestedSlot) * 2 + paramLogState + 0x8874);
-    *(undefined4 *)(iVar5 + 0x8074) = 0xffffffff;
-    *(undefined4 *)(iVar5 + 0x8078) = 0xffffffff;
-    *(uint *)(iVar6 + 0x8a74) = *(uint *)(iVar6 + 0x8a74) | 1 << (requestedSlot & 0x1f);
+    slotWord2ThenSlotRecordThenPriorityRowOffset = bankIndex * 0x518;
+    freeBitsWordThenDirtyBitsWordThenSlotRecord = (bankIndex * 0x146 + requestedSlot) * 8 + paramLogState;
+    freeBitsWordCase4 = (bankIndex * 0x28c + slotWordIndex) * 4 + paramLogState;
+    oldPriority = *(short *)((slotWord2ThenSlotRecordThenPriorityRowOffset + requestedSlot) * 2 + paramLogState + 0x8874);
+    *(undefined4 *)(freeBitsWordThenDirtyBitsWordThenSlotRecord + 0x8074) = 0xffffffff;
+    *(undefined4 *)(freeBitsWordThenDirtyBitsWordThenSlotRecord + 0x8078) = 0xffffffff;
+    *(uint *)(freeBitsWordCase4 + 0x8a74) = *(uint *)(freeBitsWordCase4 + 0x8a74) | 1 << (requestedSlot & 0x1f);
   }
-  *(uint *)(iVar2 * 4 + blockedSlotBits) = *(uint *)(iVar2 * 4 + blockedSlotBits) | 1 << (requestedSlot & 0x1f);
-  *(short *)((iVar4 + requestedSlot) * 2 + paramLogState + 0x8874) = oldPriority + 1;
+  *(uint *)(slotWordIndex * 4 + blockedSlotBits) = *(uint *)(slotWordIndex * 4 + blockedSlotBits) | 1 << (requestedSlot & 0x1f);
+  *(short *)((slotWord2ThenSlotRecordThenPriorityRowOffset + requestedSlot) * 2 + paramLogState + 0x8874) = oldPriority + 1;
   return requestedSlot;
 }
 
@@ -4231,7 +4224,7 @@ void _PPEmulatorProgramSetupHandlesFromPPStream(emulatorProgram, glContext, ppSt
   int resultChunk;
   uint operandDescriptor;
   undefined4 operandDescriptorWord2;
-  undefined1 auStack_30 [4];
+  undefined1 chunkEntryCount [4];
   int handleOffset;
   undefined1 resultComponentStride [4];
   int componentStride [2];
@@ -4258,7 +4251,7 @@ void _PPEmulatorProgramSetupHandlesFromPPStream(emulatorProgram, glContext, ppSt
   }
   resultHandleBank = *(int *)(emulatorProgram + 0x8c);
   for (resultChunk = **(int **)(ppStream + 0x1c); resultChunk != 0; resultChunk = *(int *)(resultChunk + 8)) {
-    _PPStreamChunkGetStream(&operandDescriptor,resultChunk,ppStream,auStack_30,0);
+    _PPStreamChunkGetStream(&operandDescriptor,resultChunk,ppStream,chunkEntryCount,0);
     ((void (*)())_gleVPGetResultOffset)(glContext,operandDescriptor,operandDescriptorWord2,&handleOffset,resultComponentStride);
     *(int *)(resultHandleBank + (uint)*(ushort *)(resultChunk + 0x12) * 0x10) = handleOffset;
     *(int *)((uint)*(ushort *)(resultChunk + 0x12) * 0x10 + resultHandleBank + 4) = handleOffset + 4;
@@ -4277,7 +4270,7 @@ void _PPEmulatorProgramSetupHandlesFromPPStream(emulatorProgram, glContext, ppSt
   for (parameterChunk = **(int **)(ppStream + 0x10); parameterChunk != 0; parameterChunk = *(int *)(parameterChunk + 8)) {
     operandKind = *(uint *)(parameterChunk + 0xc) >> 0x10 & 0x1f;
     if ((operandKind == 1) || (operandKind == 0x11)) {
-      _PPStreamChunkGetStream(&operandDescriptor,parameterChunk,ppStream,auStack_30,0);
+      _PPStreamChunkGetStream(&operandDescriptor,parameterChunk,ppStream,chunkEntryCount,0);
       handleOffset = (operandDescriptor & 0xffff) * 0x10;
       *(int *)(parameterHandleBank + (uint)*(ushort *)(parameterChunk + 0x12) * 0x10) = handleOffset;
       *(int *)((uint)*(ushort *)(parameterChunk + 0x12) * 0x10 + parameterHandleBank + 4) = handleOffset + 4;
@@ -4285,7 +4278,7 @@ void _PPEmulatorProgramSetupHandlesFromPPStream(emulatorProgram, glContext, ppSt
       *(int *)((uint)*(ushort *)(parameterChunk + 0x12) * 0x10 + parameterHandleBank + 0xc) = handleOffset + 0xc;
     }
     else {
-      _PPStreamChunkGetStream(&operandDescriptor,parameterChunk,ppStream,auStack_30,0);
+      _PPStreamChunkGetStream(&operandDescriptor,parameterChunk,ppStream,chunkEntryCount,0);
       ((void (*)())_gleVPGetParameterPtr)(glContext,operandDescriptor,operandDescriptorWord2,&handleOffset,componentStride);
       *(int *)(parameterHandleBank + (uint)*(ushort *)(parameterChunk + 0x12) * 0x10) = handleOffset;
       *(int *)((uint)*(ushort *)(parameterChunk + 0x12) * 0x10 + parameterHandleBank + 4) = handleOffset + componentStride[0];
@@ -4826,62 +4819,65 @@ void _glProgramLocalParameter4fvARB_Exec(glContext, target, index, params)
   uint index;
   undefined4 *params;
 {
-  byte bVar1;
-  uint uVar2;
+  byte dirtyBitIndex;
+  byte dirtyBitIndex2;
+  uint changeWord3WithFlag;
+  uint alternateFragmentTarget;
   undefined4 glErrorCode;
-  int iVar4;
+  int dirtyWord348Ptr;
   int glContextWord5424;
-  int iVar5;
-  int iVar6;
-  int iVar7;
+  int pipelineStageIndex;
+  int boundProgramThenLocalParamArrayThenEntry;
+  int stageTableBase;
+  int dirtyWordPtr;
   
   if (target == 0x8620) {
-    iVar5 = 0;
+    pipelineStageIndex = 0;
     if (index < 0x100) {
-      uVar2 = *(uint *)(glContext + 0x31c) | 0x400000;
+      changeWord3WithFlag = *(uint *)(glContext + 0x31c) | 0x400000;
 LAB_00026190:
-      *(uint *)(glContext + 0x31c) = uVar2;
+      *(uint *)(glContext + 0x31c) = changeWord3WithFlag;
       if (*(int *)(glContext + 0x5434) == 0) {
-        bVar1 = *(byte *)(index + *(int *)(glContext + 0x5420) + 0x58);
+        dirtyBitIndex = *(byte *)(index + *(int *)(glContext + 0x5420) + 0x58);
       }
       else {
-        bVar1 = *(byte *)(index + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x8c);
+        dirtyBitIndex = *(byte *)(index + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x8c);
       }
-      iVar7 = (bVar1 >> 3 & 0x1c) + glContext;
+      dirtyWordPtr = (dirtyBitIndex >> 3 & 0x1c) + glContext;
       glContextWord5424 = *(int *)(glContext + 0x5424);
-      iVar6 = iVar5 * 4 + glContext;
-      *(uint *)(iVar7 + 0x324) = *(uint *)(iVar7 + 0x324) | 1 << (bVar1 & 0x1f);
-      bVar1 = *(byte *)(index + glContextWord5424 + 0x58);
-      iVar4 = (bVar1 >> 3 & 0x1c) + glContext;
-      iVar5 = *(int *)(iVar6 + 0x5420);
-      *(uint *)(iVar4 + 0x348) = *(uint *)(iVar4 + 0x348) | 1 << (bVar1 & 0x1f);
-      iVar5 = *(int *)(iVar5 + 0x4e0);
-      *(undefined4 *)(iVar5 + index * 0x10) = *params;
-      iVar5 = iVar5 + index * 0x10;
-      *(undefined4 *)(iVar5 + 4) = params[1];
-      *(undefined4 *)(iVar5 + 8) = params[2];
-      *(undefined4 *)(iVar5 + 0xc) = params[3];
-      ((void (*)())_gleModifyPluginPipelineProgram)(glContext,*(int *)(iVar6 + 0x5420) + 0x10,2);
+      stageTableBase = pipelineStageIndex * 4 + glContext;
+      *(uint *)(dirtyWordPtr + 0x324) = *(uint *)(dirtyWordPtr + 0x324) | 1 << (dirtyBitIndex & 0x1f);
+      dirtyBitIndex2 = *(byte *)(index + glContextWord5424 + 0x58);
+      dirtyWord348Ptr = (dirtyBitIndex2 >> 3 & 0x1c) + glContext;
+      boundProgramThenLocalParamArrayThenEntry = *(int *)(stageTableBase + 0x5420);
+      *(uint *)(dirtyWord348Ptr + 0x348) = *(uint *)(dirtyWord348Ptr + 0x348) | 1 << (dirtyBitIndex2 & 0x1f);
+      boundProgramThenLocalParamArrayThenEntry = *(int *)(boundProgramThenLocalParamArrayThenEntry + 0x4e0);
+      *(undefined4 *)(boundProgramThenLocalParamArrayThenEntry + index * 0x10) = *params;
+      boundProgramThenLocalParamArrayThenEntry = boundProgramThenLocalParamArrayThenEntry + index * 0x10;
+      *(undefined4 *)(boundProgramThenLocalParamArrayThenEntry + 4) = params[1];
+      *(undefined4 *)(boundProgramThenLocalParamArrayThenEntry + 8) = params[2];
+      *(undefined4 *)(boundProgramThenLocalParamArrayThenEntry + 0xc) = params[3];
+      ((void (*)())_gleModifyPluginPipelineProgram)(glContext,*(int *)(stageTableBase + 0x5420) + 0x10,2);
       return;
     }
   }
   else {
     if (target < 0x8621) {
-      uVar2 = 0x8200;
+      alternateFragmentTarget = 0x8200;
     }
     else {
-      uVar2 = 0x8804;
+      alternateFragmentTarget = 0x8804;
     }
-    if (target != uVar2) {
+    if (target != alternateFragmentTarget) {
       if (*(int *)(glContext + 0x7574) != 0) {
         return;
       }
       glErrorCode = 0x500;
       goto LAB_00026188;
     }
-    iVar5 = 1;
+    pipelineStageIndex = 1;
     if (index < 0x80) {
-      uVar2 = *(uint *)(glContext + 0x31c) | 0x1000000;
+      changeWord3WithFlag = *(uint *)(glContext + 0x31c) | 0x1000000;
       goto LAB_00026190;
     }
   }
@@ -10846,74 +10842,74 @@ int _gleSelectPixelExtractFunc(format, type)
 }
 
 /* _gleSelectModifyPixelFunc @ 0x2efd0 (476 bytes) */
-int _gleSelectModifyPixelFunc(param_1, param_2)
-  int param_1;
-  uint param_2;
+int _gleSelectModifyPixelFunc(glContext, format)
+  int glContext;
+  uint format;
 {
-  bool bVar1;
-  int iVar2;
-  undefined *puVar3;
+  bool formatIsLuminanceAlphaThenBGRA;
+  int isIndexFormat;
+  undefined *modifyPixelFunc;
   
-  iVar2 = _gleIsIndex(param_2);
-  if (iVar2 == 0) {
-    if (param_2 == 0x1902) {
-      puVar3 = (undefined *)0x0;
-      if ((*(uint *)(param_1 + 0x3414) & 0x3000) != 0) {
-        puVar3 = PTR__gleModifyPixelDepth_00111200;
+  isIndexFormat = _gleIsIndex(format);
+  if (isIndexFormat == 0) {
+    if (format == 0x1902) {
+      modifyPixelFunc = (undefined *)0x0;
+      if ((*(uint *)(glContext + 0x3414) & 0x3000) != 0) {
+        modifyPixelFunc = PTR__gleModifyPixelDepth_00111200;
       }
     }
-    else if (param_2 == 0x86f4) {
-      puVar3 = (undefined *)0x0;
-      if ((*(uint *)(param_1 + 0x3418) & 0xf) != 0) {
-        puVar3 = PTR__gleModifyPixelHILO_001111fc;
+    else if (format == 0x86f4) {
+      modifyPixelFunc = (undefined *)0x0;
+      if ((*(uint *)(glContext + 0x3418) & 0xf) != 0) {
+        modifyPixelFunc = PTR__gleModifyPixelHILO_001111fc;
       }
     }
-    else if ((param_2 - 0x86f5 < 2) || (param_2 == 0x86dc)) {
-      puVar3 = (undefined *)0x0;
-      if ((*(uint *)(param_1 + 0x3418) & 0xff0) != 0) {
-        puVar3 = PTR__gleModifyPixelDSDTMagVib_001111f8;
+    else if ((format - 0x86f5 < 2) || (format == 0x86dc)) {
+      modifyPixelFunc = (undefined *)0x0;
+      if ((*(uint *)(glContext + 0x3418) & 0xff0) != 0) {
+        modifyPixelFunc = PTR__gleModifyPixelDSDTMagVib_001111f8;
       }
     }
     else {
-      puVar3 = (undefined *)0x0;
-      if (((*(uint *)(param_1 + 0x3414) & 0xff1) != 0) &&
-         (puVar3 = PTR__gleModifyPixelRGBA_001111f4, param_2 != 0x1908)) {
-        puVar3 = PTR__gleModifyPixelA_001111e0;
-        if (param_2 < 0x1909) {
-          if (param_2 == 0x1904) {
+      modifyPixelFunc = (undefined *)0x0;
+      if (((*(uint *)(glContext + 0x3414) & 0xff1) != 0) &&
+         (modifyPixelFunc = PTR__gleModifyPixelRGBA_001111f4, format != 0x1908)) {
+        modifyPixelFunc = PTR__gleModifyPixelA_001111e0;
+        if (format < 0x1909) {
+          if (format == 0x1904) {
             return PTR__gleModifyPixelG_001111e8;
           }
-          if (param_2 < 0x1905) {
-            if (param_2 == 0x1903) {
+          if (format < 0x1905) {
+            if (format == 0x1903) {
               return PTR__gleModifyPixelR_001111ec;
             }
           }
           else {
-            if (param_2 == 0x1905) {
+            if (format == 0x1905) {
               return PTR__gleModifyPixelB_001111e4;
             }
-            if (param_2 == 0x1907) {
+            if (format == 0x1907) {
               return PTR__gleModifyPixelRGB_001111f0;
             }
           }
         }
         else {
-          if (param_2 == 0x8000) {
+          if (format == 0x8000) {
             return PTR__gleModifyPixelRGBA_001111f4;
           }
-          if (param_2 < 0x8001) {
-            if (param_2 == 0x1909) {
+          if (format < 0x8001) {
+            if (format == 0x1909) {
               return PTR__gleModifyPixelRGB_001111f0;
             }
-            bVar1 = param_2 == 0x190a;
+            formatIsLuminanceAlphaThenBGRA = format == 0x190a;
           }
           else {
-            if (param_2 == 0x80e0) {
+            if (format == 0x80e0) {
               return PTR__gleModifyPixelRGB_001111f0;
             }
-            bVar1 = param_2 == 0x80e1;
+            formatIsLuminanceAlphaThenBGRA = format == 0x80e1;
           }
-          if (bVar1) {
+          if (formatIsLuminanceAlphaThenBGRA) {
             return PTR__gleModifyPixelRGBA_001111f4;
           }
         }
@@ -10921,12 +10917,12 @@ int _gleSelectModifyPixelFunc(param_1, param_2)
     }
   }
   else {
-    puVar3 = PTR__gleModifyPixelRGBAIndex_00111208;
-    if ((param_2 != 0x1900) && (puVar3 = (undefined *)0x0, (*(uint *)(param_1 + 0x3414) & 0xe) != 0)
+    modifyPixelFunc = PTR__gleModifyPixelRGBAIndex_00111208;
+    if ((format != 0x1900) && (modifyPixelFunc = (undefined *)0x0, (*(uint *)(glContext + 0x3414) & 0xe) != 0)
        ) {
-      puVar3 = PTR__gleModifyPixelStencil_00111204;
+      modifyPixelFunc = PTR__gleModifyPixelStencil_00111204;
     }
   }
-  return puVar3;
+  return modifyPixelFunc;
 }
 

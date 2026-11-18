@@ -444,75 +444,75 @@ void _glePreInitGlobals()
 /* _glePreInitTOC @ 0x1d9c (560 bytes) */
 int _glePreInitTOC()
 {
-  float fVar1;
-  float fVar2;
-  undefined *puVar3;
-  undefined4 in_r3;
-  undefined4 extraout_r3;
-  uint uVar4;
+  float stagedFloatConstant;
+  float stagedFloatConstant2;
+  undefined *rtcTocStruct;
+  undefined4 returnValueR3;
+  undefined4 r3AfterCall;
+  uint processorFeatureBits;
   
-  puVar3 = PTR__gle_rtc_toc_struct_0011205c;
+  rtcTocStruct = PTR__gle_rtc_toc_struct_0011205c;
   *(undefined4 *)(PTR__gle_rtc_toc_struct_0011205c + 0x38) = 0x40400000;
-  fVar1 = FLOAT_00108eb8;
-  *(undefined4 *)(puVar3 + 0x30) = 0;
-  *(float *)(puVar3 + 0x44) = fVar1;
-  fVar1 = FLOAT_00108ebc;
-  *(undefined4 *)(puVar3 + 0x3c) = 0x41400000;
-  *(float *)(puVar3 + 0x4c) = fVar1;
-  fVar1 = FLOAT_00108ec0;
-  *(undefined4 *)(puVar3 + 0x48) = 0x3e800000;
-  *(float *)(puVar3 + 0x54) = fVar1;
-  fVar1 = FLOAT_00108e98;
-  *(undefined4 *)(puVar3 + 0x40) = 0x3f000000;
-  *(float *)(puVar3 + 0x58) = fVar1;
-  fVar1 = FLOAT_00108e78;
-  *(undefined4 *)(puVar3 + 0x50) = 0x3d800000;
-  *(float *)(puVar3 + 0x5c) = fVar1;
-  fVar1 = FLOAT_00108e9c;
-  *(undefined4 *)(puVar3 + 0x68) = 0x30000000;
-  *(float *)(puVar3 + 0x60) = fVar1;
-  fVar1 = FLOAT_00108e74;
-  *(undefined4 *)(puVar3 + 0x6c) = 0x2f800000;
-  *(float *)(puVar3 + 100) = fVar1;
-  *(float *)(puVar3 + 0x70) = FLOAT_00108e80;
-  *(float *)(puVar3 + 0x74) = FLOAT_00108eb4;
-  *(float *)(puVar3 + 0x78) = FLOAT_00108ec4;
-  *(float *)(puVar3 + 0x7c) = FLOAT_00108ec8;
-  fVar1 = FLOAT_00108ecc;
-  *(undefined4 *)(puVar3 + 0x98) = 0x47800000;
-  *(float *)(puVar3 + 0x80) = fVar1;
-  fVar1 = FLOAT_00108ed0;
-  *(undefined4 *)(puVar3 + 0x34) = 0x3f800000;
-  *(float *)(puVar3 + 0x90) = fVar1;
-  fVar1 = FLOAT_00108ed4;
-  *(undefined4 *)(puVar3 + 0xb0) = 0x3f800000;
-  *(float *)(puVar3 + 0x94) = fVar1;
-  *(float *)(puVar3 + 0x9c) = FLOAT_00108ed8;
-  *(float *)(puVar3 + 0xa0) = FLOAT_00108edc;
-  *(float *)(puVar3 + 0xa4) = FLOAT_00108ee0;
-  *(float *)(puVar3 + 0xa8) = FLOAT_00108ee4;
-  *(float *)(puVar3 + 0xac) = FLOAT_00108ee8;
-  *(float *)(puVar3 + 0xb4) = FLOAT_00108eec;
-  *(float *)(puVar3 + 0xb8) = FLOAT_00108ef0;
-  *(float *)(puVar3 + 0xbc) = FLOAT_00108ef4;
-  *(float *)(puVar3 + 0xc0) = FLOAT_00108ef8;
-  *(float *)(puVar3 + 0xc4) = FLOAT_00108efc;
-  *(float *)(puVar3 + 200) = FLOAT_00108f00;
-  *(float *)(puVar3 + 0xcc) = FLOAT_00108f04;
-  *(float *)(puVar3 + 0xd0) = FLOAT_00108f08;
-  uVar4 = *(uint *)PTR__gle_processor_0011204c;
-  *(float *)(puVar3 + 0xd4) = FLOAT_00108f0c;
-  fVar1 = FLOAT_00108f10;
-  *(undefined8 *)(puVar3 + 0xe8) = 0x4330000000000000;
-  fVar2 = FLOAT_00108f14;
-  *(float *)(puVar3 + 0xd8) = fVar1;
-  *(float *)(puVar3 + 0xdc) = fVar2;
-  *(undefined8 *)(puVar3 + 0xe0) = 0x4330000080000000;
-  if ((uVar4 & 0x10) != 0) {
+  stagedFloatConstant = FLOAT_00108eb8;
+  *(undefined4 *)(rtcTocStruct + 0x30) = 0;
+  *(float *)(rtcTocStruct + 0x44) = stagedFloatConstant;
+  stagedFloatConstant = FLOAT_00108ebc;
+  *(undefined4 *)(rtcTocStruct + 0x3c) = 0x41400000;
+  *(float *)(rtcTocStruct + 0x4c) = stagedFloatConstant;
+  stagedFloatConstant = FLOAT_00108ec0;
+  *(undefined4 *)(rtcTocStruct + 0x48) = 0x3e800000;
+  *(float *)(rtcTocStruct + 0x54) = stagedFloatConstant;
+  stagedFloatConstant = FLOAT_00108e98;
+  *(undefined4 *)(rtcTocStruct + 0x40) = 0x3f000000;
+  *(float *)(rtcTocStruct + 0x58) = stagedFloatConstant;
+  stagedFloatConstant = FLOAT_00108e78;
+  *(undefined4 *)(rtcTocStruct + 0x50) = 0x3d800000;
+  *(float *)(rtcTocStruct + 0x5c) = stagedFloatConstant;
+  stagedFloatConstant = FLOAT_00108e9c;
+  *(undefined4 *)(rtcTocStruct + 0x68) = 0x30000000;
+  *(float *)(rtcTocStruct + 0x60) = stagedFloatConstant;
+  stagedFloatConstant = FLOAT_00108e74;
+  *(undefined4 *)(rtcTocStruct + 0x6c) = 0x2f800000;
+  *(float *)(rtcTocStruct + 100) = stagedFloatConstant;
+  *(float *)(rtcTocStruct + 0x70) = FLOAT_00108e80;
+  *(float *)(rtcTocStruct + 0x74) = FLOAT_00108eb4;
+  *(float *)(rtcTocStruct + 0x78) = FLOAT_00108ec4;
+  *(float *)(rtcTocStruct + 0x7c) = FLOAT_00108ec8;
+  stagedFloatConstant = FLOAT_00108ecc;
+  *(undefined4 *)(rtcTocStruct + 0x98) = 0x47800000;
+  *(float *)(rtcTocStruct + 0x80) = stagedFloatConstant;
+  stagedFloatConstant = FLOAT_00108ed0;
+  *(undefined4 *)(rtcTocStruct + 0x34) = 0x3f800000;
+  *(float *)(rtcTocStruct + 0x90) = stagedFloatConstant;
+  stagedFloatConstant = FLOAT_00108ed4;
+  *(undefined4 *)(rtcTocStruct + 0xb0) = 0x3f800000;
+  *(float *)(rtcTocStruct + 0x94) = stagedFloatConstant;
+  *(float *)(rtcTocStruct + 0x9c) = FLOAT_00108ed8;
+  *(float *)(rtcTocStruct + 0xa0) = FLOAT_00108edc;
+  *(float *)(rtcTocStruct + 0xa4) = FLOAT_00108ee0;
+  *(float *)(rtcTocStruct + 0xa8) = FLOAT_00108ee4;
+  *(float *)(rtcTocStruct + 0xac) = FLOAT_00108ee8;
+  *(float *)(rtcTocStruct + 0xb4) = FLOAT_00108eec;
+  *(float *)(rtcTocStruct + 0xb8) = FLOAT_00108ef0;
+  *(float *)(rtcTocStruct + 0xbc) = FLOAT_00108ef4;
+  *(float *)(rtcTocStruct + 0xc0) = FLOAT_00108ef8;
+  *(float *)(rtcTocStruct + 0xc4) = FLOAT_00108efc;
+  *(float *)(rtcTocStruct + 200) = FLOAT_00108f00;
+  *(float *)(rtcTocStruct + 0xcc) = FLOAT_00108f04;
+  *(float *)(rtcTocStruct + 0xd0) = FLOAT_00108f08;
+  processorFeatureBits = *(uint *)PTR__gle_processor_0011204c;
+  *(float *)(rtcTocStruct + 0xd4) = FLOAT_00108f0c;
+  stagedFloatConstant = FLOAT_00108f10;
+  *(undefined8 *)(rtcTocStruct + 0xe8) = 0x4330000000000000;
+  stagedFloatConstant2 = FLOAT_00108f14;
+  *(float *)(rtcTocStruct + 0xd8) = stagedFloatConstant;
+  *(float *)(rtcTocStruct + 0xdc) = stagedFloatConstant2;
+  *(undefined8 *)(rtcTocStruct + 0xe0) = 0x4330000080000000;
+  if ((processorFeatureBits & 0x10) != 0) {
     ((void (*)())_glePreInitVectorTOC)();
-    in_r3 = extraout_r3;
+    returnValueR3 = r3AfterCall;
   }
-  return in_r3;
+  return returnValueR3;
 }
 
 /* _glePreInitVectorTOC @ 0x1fcc (100 bytes) */
@@ -3702,9 +3702,9 @@ void _gleInitPipelineProgramState(glContext)
 }
 
 /* _gleCreatePipelineProgramObject @ 0x60cc (480 bytes) */
-int _gleCreatePipelineProgramObject(glContext, param_2, program)
+int _gleCreatePipelineProgramObject(glContext, pipelineStageIndex, program)
   undefined4 glContext;
-  int param_2;
+  int pipelineStageIndex;
   undefined4 program;
 {
   undefined4 *cursor2;
@@ -3712,40 +3712,40 @@ int _gleCreatePipelineProgramObject(glContext, param_2, program)
   int loopIndex;
   int remaining3;
   int remaining2;
-  int iVar1;
-  uint uVar2;
-  undefined *puVar3;
-  undefined4 *puVar4;
-  int iVar5;
+  int vec4Offset;
+  uint headerSizeAligned16;
+  undefined *freeObjectFunc;
+  undefined4 *fillCursor;
+  int vec4Entry;
   undefined4 *allocatedBlock;
   int remaining4;
-  int iVar8;
-  undefined1 uVar9;
+  int headerSizeThenVec4Array;
+  undefined1 fillByte;
   int remaining;
   
-  iVar8 = 0x4e4;
-  if (param_2 == 0) {
+  headerSizeThenVec4Array = 0x4e4;
+  if (pipelineStageIndex == 0) {
     remaining4 = 0x100;
-    iVar8 = 0x4e8;
-    uVar9 = 0;
+    headerSizeThenVec4Array = 0x4e8;
+    fillByte = 0;
   }
-  else if (param_2 == 1) {
+  else if (pipelineStageIndex == 1) {
     remaining4 = 0x80;
-    iVar8 = 0x4f4;
-    uVar9 = 0x80;
+    headerSizeThenVec4Array = 0x4f4;
+    fillByte = 0x80;
   }
   else {
     remaining4 = 0;
-    uVar9 = 0;
+    fillByte = 0;
   }
-  uVar2 = iVar8 + 0xfU & 0xfffffff0;
-  allocatedBlock = (undefined4 *)((int (*)())_gleVecAlloc)(uVar2 + remaining4 * 0x10);
-  puVar3 = PTR__gleFreePipelineProgramObject_00110e90;
+  headerSizeAligned16 = headerSizeThenVec4Array + 0xfU & 0xfffffff0;
+  allocatedBlock = (undefined4 *)((int (*)())_gleVecAlloc)(headerSizeAligned16 + remaining4 * 0x10);
+  freeObjectFunc = PTR__gleFreePipelineProgramObject_00110e90;
   *(undefined1 *)(allocatedBlock + 0x13) = 1;
   allocatedBlock[2] = 1;
-  allocatedBlock[3] = puVar3;
+  allocatedBlock[3] = freeObjectFunc;
   allocatedBlock[1] = program;
-  iVar8 = (int)allocatedBlock + uVar2;
+  headerSizeThenVec4Array = (int)allocatedBlock + headerSizeAligned16;
   allocatedBlock[9] = 0;
   cursor = allocatedBlock + 0x12a;
   *allocatedBlock = 0;
@@ -3772,17 +3772,17 @@ int _gleCreatePipelineProgramObject(glContext, param_2, program)
     cursor2 = cursor2 + 1;
     remaining2 = remaining2 + -1;
   } while (remaining2 != 0);
-  puVar4 = allocatedBlock + 0x16;
+  fillCursor = allocatedBlock + 0x16;
   remaining3 = 0x450;
   do {
-    *(undefined1 *)puVar4 = uVar9;
-    puVar4 = (undefined4 *)((int)puVar4 + 1);
+    *(undefined1 *)fillCursor = fillByte;
+    fillCursor = (undefined4 *)((int)fillCursor + 1);
     remaining3 = remaining3 + -1;
   } while (remaining3 != 0);
-  if (param_2 == 0) {
+  if (pipelineStageIndex == 0) {
     allocatedBlock[0x139] = 0;
   }
-  else if (param_2 == 1) {
+  else if (pipelineStageIndex == 1) {
     *(undefined2 *)(allocatedBlock + 0x13c) = 0;
     allocatedBlock[0x139] = 0;
     allocatedBlock[0x13a] = 0;
@@ -3793,19 +3793,19 @@ int _gleCreatePipelineProgramObject(glContext, param_2, program)
   allocatedBlock[0x137] = 0;
   allocatedBlock[0x133] = 0;
   allocatedBlock[0x136] = 0;
-  *(short *)((int)allocatedBlock + 0x4ca) = (short)param_2;
+  *(short *)((int)allocatedBlock + 0x4ca) = (short)pipelineStageIndex;
   allocatedBlock[0x134] = 0xffffffff;
   allocatedBlock[0x135] = 0xffffffff;
-  allocatedBlock[0x138] = iVar8;
+  allocatedBlock[0x138] = headerSizeThenVec4Array;
   *(undefined2 *)(allocatedBlock + 0x132) = 0;
   for (; remaining4 != 0; remaining4 = remaining4 + -1) {
-    iVar1 = loopIndex * 0x10;
+    vec4Offset = loopIndex * 0x10;
     loopIndex = loopIndex + 1;
-    iVar5 = iVar1 + iVar8;
-    *(undefined4 *)(iVar8 + iVar1) = 0;
-    *(undefined4 *)(iVar5 + 0xc) = 0x3f800000;
-    *(undefined4 *)(iVar5 + 4) = 0;
-    *(undefined4 *)(iVar5 + 8) = 0;
+    vec4Entry = vec4Offset + headerSizeThenVec4Array;
+    *(undefined4 *)(headerSizeThenVec4Array + vec4Offset) = 0;
+    *(undefined4 *)(vec4Entry + 0xc) = 0x3f800000;
+    *(undefined4 *)(vec4Entry + 4) = 0;
+    *(undefined4 *)(vec4Entry + 8) = 0;
   }
   return allocatedBlock;
 }
@@ -3919,9 +3919,9 @@ void _gleInitVertexArrayState(glContext)
 }
 
 /* _gleCreateVertexArrayObject @ 0x6434 (428 bytes) */
-int _gleCreateVertexArrayObject(glContext, param_2)
+int _gleCreateVertexArrayObject(glContext, vertexArrayId)
   int glContext;
-  undefined4 param_2;
+  undefined4 vertexArrayId;
 {
   undefined4 *cursor4;
   undefined4 *cursor3;
@@ -3929,23 +3929,23 @@ int _gleCreateVertexArrayObject(glContext, param_2)
   int loopIndex;
   int remaining3;
   int remaining2;
-  undefined *puVar1;
+  undefined *freeObjectFunc;
   undefined4 *cursor;
   undefined4 *cursor5;
-  undefined4 *puVar4;
+  undefined4 *objectBaseThenCursor;
   int remaining;
   int remaining4;
   undefined4 *vertexArrayObject;
   
-  puVar4 = (undefined4 *)((int (*)())_gleVecAlloc)((uint)*(byte *)(glContext + 0x85a4) * 0x8c + 0x3e0);
-  vertexArrayObject = puVar4;
-  puVar1 = PTR__gleFreeVertexArrayObject_001115f8;
+  objectBaseThenCursor = (undefined4 *)((int (*)())_gleVecAlloc)((uint)*(byte *)(glContext + 0x85a4) * 0x8c + 0x3e0);
+  vertexArrayObject = objectBaseThenCursor;
+  freeObjectFunc = PTR__gleFreeVertexArrayObject_001115f8;
   remaining = 0x20;
-  *puVar4 = 0;
-  puVar4[2] = 1;
-  puVar4[3] = puVar1;
-  puVar4[1] = param_2;
-  cursor = puVar4;
+  *objectBaseThenCursor = 0;
+  objectBaseThenCursor[2] = 1;
+  objectBaseThenCursor[3] = freeObjectFunc;
+  objectBaseThenCursor[1] = vertexArrayId;
+  cursor = objectBaseThenCursor;
   do {
     cursor[0xc] = 0;
     cursor[0xd] = 0;
@@ -3958,45 +3958,45 @@ int _gleCreateVertexArrayObject(glContext, param_2)
     cursor = cursor + 6;
     remaining = remaining + -1;
   } while (remaining != 0);
-  puVar4[0xd4] = 0;
-  puVar4[0xd5] = 0;
-  puVar4[0xcc] = 0;
-  puVar4[0xcd] = 0;
-  puVar4[0xce] = 0;
-  puVar4[0xcf] = 0;
-  *(undefined2 *)(puVar4 + 0x32) = 0x1401;
+  objectBaseThenCursor[0xd4] = 0;
+  objectBaseThenCursor[0xd5] = 0;
+  objectBaseThenCursor[0xcc] = 0;
+  objectBaseThenCursor[0xcd] = 0;
+  objectBaseThenCursor[0xce] = 0;
+  objectBaseThenCursor[0xcf] = 0;
+  *(undefined2 *)(objectBaseThenCursor + 0x32) = 0x1401;
   remaining2 = 0x20;
-  *(undefined2 *)(puVar4 + 0x38) = 0x1405;
-  *(undefined2 *)((int)puVar4 + 0x342) = 0x85b4;
-  cursor2 = puVar4 + 0xd8;
-  *(undefined2 *)((int)puVar4 + 0x9a) = 3;
-  *(undefined2 *)((int)puVar4 + 0xe2) = 1;
-  puVar4[0xd7] = 0;
-  *(undefined2 *)((int)puVar4 + 0x52) = 3;
-  *(undefined2 *)((int)puVar4 + 0x82) = 1;
-  *(undefined2 *)((int)puVar4 + 0xb2) = 1;
-  *(undefined2 *)((int)puVar4 + 0xca) = 1;
-  puVar4[0xd2] = 0;
-  puVar4[0xd1] = 0;
-  *(undefined1 *)(puVar4 + 0xd3) = 0;
-  puVar4[0xd6] = 0;
+  *(undefined2 *)(objectBaseThenCursor + 0x38) = 0x1405;
+  *(undefined2 *)((int)objectBaseThenCursor + 0x342) = 0x85b4;
+  cursor2 = objectBaseThenCursor + 0xd8;
+  *(undefined2 *)((int)objectBaseThenCursor + 0x9a) = 3;
+  *(undefined2 *)((int)objectBaseThenCursor + 0xe2) = 1;
+  objectBaseThenCursor[0xd7] = 0;
+  *(undefined2 *)((int)objectBaseThenCursor + 0x52) = 3;
+  *(undefined2 *)((int)objectBaseThenCursor + 0x82) = 1;
+  *(undefined2 *)((int)objectBaseThenCursor + 0xb2) = 1;
+  *(undefined2 *)((int)objectBaseThenCursor + 0xca) = 1;
+  objectBaseThenCursor[0xd2] = 0;
+  objectBaseThenCursor[0xd1] = 0;
+  *(undefined1 *)(objectBaseThenCursor + 0xd3) = 0;
+  objectBaseThenCursor[0xd6] = 0;
   do {
     *cursor2 = 0;
     cursor2 = cursor2 + 1;
     remaining2 = remaining2 + -1;
   } while (remaining2 != 0);
   remaining3 = 8;
-  cursor3 = puVar4 + 4;
+  cursor3 = objectBaseThenCursor + 4;
   do {
     *cursor3 = 0;
     cursor3 = cursor3 + 1;
     remaining3 = remaining3 + -1;
   } while (remaining3 != 0);
   loopIndex = 0;
-  cursor4 = puVar4;
+  cursor4 = objectBaseThenCursor;
   if (*(char *)(glContext + 0x85a4) != '\0') {
     do {
-      cursor5 = puVar4 + 0xf8;
+      cursor5 = objectBaseThenCursor + 0xf8;
       remaining4 = 0x20;
       do {
         *cursor5 = 0;
@@ -4007,7 +4007,7 @@ int _gleCreateVertexArrayObject(glContext, param_2)
       loopIndex = loopIndex + 1;
       cursor4[0x119] = 0xffffffff;
       cursor4[0x11a] = 0xffffffff;
-      puVar4 = puVar4 + 0x23;
+      objectBaseThenCursor = objectBaseThenCursor + 0x23;
       cursor4 = cursor4 + 0x23;
     } while (loopIndex < (int)(uint)*(byte *)(glContext + 0x85a4));
   }

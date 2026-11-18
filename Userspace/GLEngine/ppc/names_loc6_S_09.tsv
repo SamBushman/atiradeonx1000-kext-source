@@ -1,0 +1,27 @@
+local	_gleDrawArraysOrElements_IMM_Exec	param_6	arrayStateRecord	CONFIRMED	the callers (_glDrawArrays-family entries in part_007 and part_034) pass their arrayStateRecord (*(ctx+0x4a60) + 0x10); the body reads the client array enable/dirty words at +0x320/+0x324 and the per-unit records at +0x20/+0xea of it
+local	_gleDrawArraysOrElements_IMM_Exec	fparam_1	forwardedFloatArg1ThenF1AfterCall	INFERRED	stale incoming f1 forwarded as an extra argument of _gleUpdateFramebufferCompleteness; reassigned f1 left by _gleUpdateMatrixFunc
+local	_gleDrawArraysOrElements_IMM_Exec	extraout_f1	f1AfterCall	INFERRED	Ghidra pseudo-register: f1 as left by the call to _gleUpdateMatrixFunc
+local	_gleDrawArraysOrElements_IMM_Exec	bVar1	rendererInfoByte79Zero	CONFIRMED	rendererInfoByte79 == 0: selects the 0x17000000 vs 0x17ffffff mask of changeWord3 and the matching no-pending-change test (same pattern and name as _gleDrawArraysOrElements_VBO_Exec)
+local	_gleDrawArraysOrElements_IMM_Exec	uVar3	firstArgCopy	CONFIRMED	copy of the first parameter made only to be passed on as a stale argument to _gleUpdateFramebufferCompleteness
+local	_gleDrawArraysOrElements_IMM_Exec	iVar9	countArgCopyThenVertexArrayFunc	CONFIRMED	copy of the count parameter passed on as a stale argument to _gleUpdateFramebufferCompleteness; later the vertex array function read from ctx+0x4890 (or returned by _gleGetVertexArrayFunc) and passed to _gleDrawArraysOrElements_Core
+local	_gleDrawArraysOrElements_IMM_Exec	iVar4	arrayStateRecordCopyThenDirtyWord	CONFIRMED	copy of arrayStateRecord passed on as a stale argument to _gleUpdateFramebufferCompleteness; later the word read from the dirty array at ctx+0x324 in the scan loop
+local	_gleDrawArraysOrElements_IMM_Exec	uVar5	shiftedEnabledBits	CONFIRMED	glContextWord514c >> (loopIndex2 & 0x3f): the bits of ctx+0x514c from the current unit upward; bit 0 selects the unit, 0 ends the scan
+local	_gleDrawArraysOrElements_CVA_Exec	param_5	forwardedArg5	CONFIRMED	forwarded unchanged to _gleUpdateFramebufferCompleteness and _gleDrawArraysOrElements_IMM_Exec; the callers (part_007 and part_034) pass forwardedArg5 / a constant flag
+local	_gleDrawArraysOrElements_CVA_Exec	param_6	arrayStateRecord	CONFIRMED	the callers pass their arrayStateRecord (*(ctx+0x4a60) + 0x10); forwarded to _gleDrawArraysOrElements_IMM_Exec; the body reads its enable/dirty words at +0x320/+0x324
+local	_gleDrawArraysOrElements_CVA_Exec	fparam_1	forwardedFloatArg1ThenF1AfterCall	INFERRED	stale incoming f1 forwarded as an extra argument; later reassigned with the f1 left by _gleUpdateMatrixFunc, _gleUpdateLightRGBASums, _gleUpdateDispatchCodeChange, _gleSwitchToNonRevertRenderer and _gleCompileVertexArray
+local	_gleDrawArraysOrElements_CVA_Exec	extraout_f1	f1AfterCall	INFERRED	Ghidra pseudo-register: f1 as left by the first call (_gleUpdateMatrixFunc)
+local	_gleDrawArraysOrElements_CVA_Exec	extraout_f1_00	f1AfterCall1	INFERRED	Ghidra pseudo-register: f1 as left by a later call
+local	_gleDrawArraysOrElements_CVA_Exec	extraout_f1_01	f1AfterCall2	INFERRED	Ghidra pseudo-register: f1 as left by a later call
+local	_gleDrawArraysOrElements_CVA_Exec	cVar2	rendererInfoByte79	CONFIRMED	*(char*)(*(ctx+0x468c) + 0x79): the renderer info byte tested against 0
+local	_gleDrawArraysOrElements_CVA_Exec	bVar1	rendererInfoByte79Zero	CONFIRMED	rendererInfoByte79 == 0: selects the 0x17000000 vs 0x17ffffff mask of the change word and the matching no-pending-change test
+local	_gleDrawArraysOrElements_CVA_Exec	uVar3	firstArgCopy	CONFIRMED	copy of the first parameter made only to be passed on as a stale argument to _gleUpdateFramebufferCompleteness
+local	_gleDrawArraysOrElements_CVA_Exec	iVar10	countArgCopy	CONFIRMED	copy of the count parameter passed on as a stale argument to _gleUpdateFramebufferCompleteness
+local	_gleDrawArraysOrElements_CVA_Exec	uVar8	forwardedArg5Copy	CONFIRMED	copy of param_5 passed on as a stale argument to _gleUpdateFramebufferCompleteness
+local	_gleDrawArraysOrElements_CVA_Exec	iVar4	arrayStateRecordCopyThenDirtyWord	CONFIRMED	copy of arrayStateRecord passed on as a stale argument to _gleUpdateFramebufferCompleteness; later the word read from the dirty array at ctx+0x324 in the scan loop
+local	_gleDrawArraysOrElements_VBO_Exec	param_5	forwardedArg5	CONFIRMED	forwarded to _gleExecuteVertexArrayRange and _gleUpdateFramebufferCompleteness; the callers (part_007 and part_034) pass forwardedArg5 / a constant flag
+local	_gleDrawArraysOrElements_VBO_Exec	fparam_1	forwardedFloatArg1ThenF1AfterCall	INFERRED	stale incoming f1 forwarded as an extra argument; later reassigned with the f1 left by _gleUpdateMatrixFunc, _gleExecuteVertexArrayRange, _gleUpdateLightRGBASums, _gleUpdateDispatchCodeChange and _gleSwitchToNonRevertRenderer
+local	_gleDrawArraysOrElements_VBO_Exec	extraout_f1	f1AfterCall	INFERRED	Ghidra pseudo-register: f1 as left by the call to _gleUpdateMatrixFunc
+local	_gleDrawArraysOrElements_VBO_Exec	extraout_f1_00	f1AfterCall1	INFERRED	Ghidra pseudo-register: f1 as left by a call
+local	_gleDrawArraysOrElements_VBO_Exec	extraout_f1_01	f1AfterCall2	INFERRED	Ghidra pseudo-register: f1 as left by a call
+local	_gleDrawArraysOrElements_VBO_Exec	extraout_f1_02	f1AfterCall3	INFERRED	Ghidra pseudo-register: f1 as left by the call to _gleExecuteVertexArrayRange
+local	_gleDrawArraysOrElements_VBO_Exec	extraout_f1_03	f1AfterCall4	INFERRED	Ghidra pseudo-register: f1 as left by a call

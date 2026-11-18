@@ -1,0 +1,30 @@
+local	_glePPRelocateParam	param_1	oldParamIndex	CONFIRMED	compared with the 16-bit parameter-index fields of the instruction operands (+0x22/+0x2a/+0x32) and of the parameter-array ranges (+0xe); callers pass the index the parameter had before relocation
+local	_glePPRelocateParam	param_2	newParamIndex	CONFIRMED	its low 16 bits replace every matching parameter index; callers pass the new index (the surviving duplicate's index, or the loopIndex of the compaction loop)
+local	_glePPRelocateParam	param_3	instructionList	CONFIRMED	head pointer of the instruction list walked through node+8 links; callers pass their instructionList
+local	_glePPRelocateParam	param_4	paramArrayList	CONFIRMED	optional list (may be 0) of parameter-array range nodes (+0xe first index, +0x12 last index); callers pass paramArrayList or 0
+local	_glePPRelocateParam	iVar1	instructionNodeThenParamArrayNode	CONFIRMED	node cursor: walks the instruction list (param_3) first, then the parameter-array list (param_4)
+local	_glePPRelocateParam	uVar2	instructionHeader	CONFIRMED	*(uint*)(node+0xc), the instruction header word whose top bits (>> 0x1d) give the operand count; the caller _glePPUpdateProgram calls the same load instructionHeader
+local	_glePushMaterial	param_2	faceIndex	INFERRED	indexes the 2-entry pointer array of current material records at glContext+0x4dd0 (front/back); _glePopMaterials walks the same two entries
+local	_glePushMaterial	puVar3	currentMaterialRecord	CONFIRMED	the face's current material record (*(ctx+0x4dd0+faceIndex*4)); on a push it is replaced by the new copy, and the (new) current record is returned
+local	_glePushMaterial	puVar2	newMaterialRecord	CONFIRMED	record taken from the free list at ctx+0x4dd8 or freshly allocated (0x240 bytes), filled with a copy of the current record and linked as the new current one
+local	_glePushMaterial	uVar4	copiedQword	CONFIRMED	8-byte word +0x38 of the current record, held for one store into the copy
+local	_glePushMaterial	uVar1	copiedWord	CONFIRMED	4-byte word +0x40 of the current record, held for one store into the copy
+local	_glePopMaterials	iVar2	remainingFaces	CONFIRMED	counts down from 1 to 0 over the two faces' material records
+local	_glePopMaterials	piVar4	currentMaterialCursor	CONFIRMED	cursor over the pointer array of current material records at ctx+0x4dd0
+local	_glePopMaterials	iVar5	currentMaterialRecord	CONFIRMED	the current material record of the face being popped (read through the pointer array)
+local	_glePopMaterials	iVar7	olderMaterialRecord	CONFIRMED	*(current+0x23c): the previously pushed (older) record, the link _glePushMaterial stores at +0x23c
+local	_glePopMaterials	iVar6	baseMaterialRecord	INFERRED	ctx+0x2c20 advanced by 0x240 per face: the embedded 0x240-byte record of the face (the bottom of its push stack)
+local	_glePopMaterials	iVar1	freeListHead	CONFIRMED	*(ctx+0x4dd8): the free list of material records that _glePushMaterial pops from
+local	_glePopMaterials	iVar3	baseNewerRecord	INFERRED	*(base+0x238): the record just above the base record (the +0x238 link _glePushMaterial sets to the newer record); relinked at the head of the free list
+local	_glFrustum_ListExec	fVar8	frustumXScale	INFERRED	recordedArgs[0]: multiplies the first column of the current matrix (m[0..3] *= it), the x-scale entry 2n/(r-l) of a frustum matrix
+local	_glFrustum_ListExec	fVar9	frustumYScale	INFERRED	recordedArgs[1]: multiplies the second column of the current matrix (m[4..7] *= it), the y-scale entry 2n/(t-b)
+local	_glFrustum_ListExec	fVar2	frustumA	INFERRED	recordedArgs[2]: weight of column 0 in the new third column (the x-offset entry (r+l)/(r-l) of the frustum matrix)
+local	_glFrustum_ListExec	fVar1	frustumB	INFERRED	recordedArgs[3]: weight of column 1 in the new third column (the y-offset entry (t+b)/(t-b))
+local	_glFrustum_ListExec	fVar3	frustumC	INFERRED	recordedArgs[4]: weight of the old third column in the new third column (the depth entry -(f+n)/(f-n))
+local	_glFrustum_ListExec	fVar7	frustumD	INFERRED	recordedArgs[5]: multiplies the old third column to form the new fourth column (the depth entry -2fn/(f-n))
+local	_glFrustum_ListExec	fVar4	oldColumn2X	CONFIRMED	currentMatrix[8] before the update (third column, row 0)
+local	_glFrustum_ListExec	fVar5	oldColumn2Y	CONFIRMED	currentMatrix[9] before the update (third column, row 1)
+local	_glFrustum_ListExec	fVar6	oldColumn2Z	CONFIRMED	currentMatrix[10] before the update (third column, row 2)
+local	_glFrustum_ListExec	fVar10	oldColumn3W	CONFIRMED	currentMatrix[0xf] before the update (fourth column, row 3)
+local	_gleFreeOrphans	piVar6	orphanNode	CONFIRMED	node unlinked from the orphan list at ctx+0x7468 (first entry at ctx+0x7470), whose per-unit words are released through the plugin function and which is then freed with _gleVecFree
+local	_gleFreeOrphans	extraout_r3	r3AfterCall	INFERRED	Ghidra pseudo-register: r3 as left by the _gleVecFree call, returned

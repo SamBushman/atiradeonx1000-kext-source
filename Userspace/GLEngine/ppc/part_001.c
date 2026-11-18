@@ -636,37 +636,37 @@ double _gleUpdateLightPosition(int glContext,int lightIndex,double unusedFloatAr
 /* _gleVectorNormalizeNO @ 0x76c0 (204 bytes) */
 double _gleVectorNormalizeNO(undefined4 unusedArg1,float *inVector,float *outVector,double unusedFloatArg1)
 {
-  float fVar1;
-  float dVar2;
-  float dVar3;
-  float dVar4;
-  float dVar5;
+  float lengthSquaredThenOutputZ;
+  float lengthSquaredThenNewtonTermThenInverseLength;
+  float yThenNormalizedY;
+  float xThenNormalizedX;
+  float z;
   float newtonCorrection;
   double reciprocalSqrtEstimate;
   
-  dVar3 = (double)inVector[1];
-  dVar4 = (double)*inVector;
-  dVar5 = (double)inVector[2];
-  fVar1 = (dVar5 * dVar5 + (dVar4 * dVar4 + (dVar3 * dVar3)));
-  dVar2 = (double)fVar1;
-  if ((double)dVar2 <= DOUBLE_00108de8) {
-    dVar2 = (double)FLOAT_00108eb4;
-    fVar1 = FLOAT_00108e58;
+  yThenNormalizedY = (double)inVector[1];
+  xThenNormalizedX = (double)*inVector;
+  z = (double)inVector[2];
+  lengthSquaredThenOutputZ = (z * z + (xThenNormalizedX * xThenNormalizedX + (yThenNormalizedY * yThenNormalizedY)));
+  lengthSquaredThenNewtonTermThenInverseLength = (double)lengthSquaredThenOutputZ;
+  if ((double)lengthSquaredThenNewtonTermThenInverseLength <= DOUBLE_00108de8) {
+    lengthSquaredThenNewtonTermThenInverseLength = (double)FLOAT_00108eb4;
+    lengthSquaredThenOutputZ = FLOAT_00108e58;
   }
   else {
-    reciprocalSqrtEstimate = (double)GH_U2F((unsigned int)((0x5f375a00 - ((uint)GH_F2U(fVar1) >> 1))));
-    dVar2 = (double)(float)((double)(float)((double)dVar2 * reciprocalSqrtEstimate) * reciprocalSqrtEstimate);
-    newtonCorrection = (double)(FLOAT_00108f38 - dVar2);
-    dVar2 = (double)(float)(reciprocalSqrtEstimate * DOUBLE_00108df0 * (double)newtonCorrection *
-                           -(double)((dVar2 * newtonCorrection) * newtonCorrection - FLOAT_00108f48));
-    dVar4 = (double)(dVar4 * dVar2);
-    dVar3 = (double)(dVar3 * dVar2);
-    fVar1 = (dVar5 * dVar2);
+    reciprocalSqrtEstimate = (double)GH_U2F((unsigned int)((0x5f375a00 - ((uint)GH_F2U(lengthSquaredThenOutputZ) >> 1))));
+    lengthSquaredThenNewtonTermThenInverseLength = (double)(float)((double)(float)((double)lengthSquaredThenNewtonTermThenInverseLength * reciprocalSqrtEstimate) * reciprocalSqrtEstimate);
+    newtonCorrection = (double)(FLOAT_00108f38 - lengthSquaredThenNewtonTermThenInverseLength);
+    lengthSquaredThenNewtonTermThenInverseLength = (double)(float)(reciprocalSqrtEstimate * DOUBLE_00108df0 * (double)newtonCorrection *
+                           -(double)((lengthSquaredThenNewtonTermThenInverseLength * newtonCorrection) * newtonCorrection - FLOAT_00108f48));
+    xThenNormalizedX = (double)(xThenNormalizedX * lengthSquaredThenNewtonTermThenInverseLength);
+    yThenNormalizedY = (double)(yThenNormalizedY * lengthSquaredThenNewtonTermThenInverseLength);
+    lengthSquaredThenOutputZ = (z * lengthSquaredThenNewtonTermThenInverseLength);
   }
-  outVector[2] = fVar1;
-  *outVector = (float)(double)dVar4;
-  outVector[1] = (float)(double)dVar3;
-  return (double)dVar2;
+  outVector[2] = lengthSquaredThenOutputZ;
+  *outVector = (float)(double)xThenNormalizedX;
+  outVector[1] = (float)(double)yThenNormalizedY;
+  return (double)lengthSquaredThenNewtonTermThenInverseLength;
 }
 
 /* _gleUpdateLightFast @ 0x778c (152 bytes) */
@@ -5636,22 +5636,22 @@ int _gleGenHashNames(hashTable, listRange)
 }
 
 /* _gliAttachDrawableWithOptions @ 0x1250c (656 bytes) */
-int _gliAttachDrawableWithOptions(glContext, param_2, param_3, param_4, forwardedArg5)
+int _gliAttachDrawableWithOptions(glContext, drawableWord484c, drawableWord4848, rendererIndex, forwardedArg5)
   int glContext;
-  int param_2;
-  int param_3;
-  uint param_4;
+  int drawableWord484c;
+  int drawableWord4848;
+  uint rendererIndex;
   undefined4 forwardedArg5;
 {
-  bool bVar1;
-  int iVar2;
-  undefined1 uVar3;
-  int iVar4;
-  char cVar5;
-  uint uVar6;
+  bool pluginStateChanged;
+  int rendererMismatchMaskThenFallbackRendererRecord;
+  undefined1 glContextByte4691;
+  int rendererRecord;
+  char glContextByte4692;
+  uint attachResult;
   uint glContextByte85a5;
-  double extraout_f1;
-  double fparam_1;
+  double f1AfterCall;
+  double forwardedFpr1;
   double incomingFpr2;
   double incomingFpr3;
   double incomingFpr4;
@@ -5659,100 +5659,100 @@ int _gliAttachDrawableWithOptions(glContext, param_2, param_3, param_4, forwarde
   double incomingFpr6;
   double incomingFpr7;
   double incomingFpr8;
-  double incomingStack_ffffff98;
-  double incomingStack_ffffffa0;
-  double incomingStack_ffffffa8;
-  double incomingStack_ffffffb0;
-  double incomingStack_ffffffb8;
+  double incomingStackWord_ffffff98;
+  double incomingStackWord_ffffffa0;
+  double incomingStackWord_ffffffa8;
+  double incomingStackWord_ffffffb0;
+  double incomingStackWord_ffffffb8;
   
-  iVar2 = -(uint)(*(byte *)(glContext + 0x85a8) ^ *(byte *)(glContext + 0x85a6));
-  bVar1 = false;
+  rendererMismatchMaskThenFallbackRendererRecord = -(uint)(*(byte *)(glContext + 0x85a8) ^ *(byte *)(glContext + 0x85a6));
+  pluginStateChanged = false;
   if ((glContext == 0) || (*(int *)(glContext + 0x467c) != 0x3463a223)) {
     return 0x2714;
   }
-  if ((param_2 == 0) != (param_3 == 0)) {
+  if ((drawableWord484c == 0) != (drawableWord4848 == 0)) {
     return 0x2715;
   }
-  if (((int)param_4 < 0) || ((int)(uint)*(byte *)(glContext + 0x85a4) <= (int)param_4)) {
+  if (((int)rendererIndex < 0) || ((int)(uint)*(byte *)(glContext + 0x85a4) <= (int)rendererIndex)) {
     return 0x2718;
   }
-  *(char *)(glContext + 0x85a6) = (char)param_4;
+  *(char *)(glContext + 0x85a6) = (char)rendererIndex;
   *(undefined1 *)(glContext + 0x85a7) = 0;
-  iVar4 = param_4 * 0x2e0 + glContext;
-  uVar6 = (**(code **)(*(int *)(iVar4 + 0x8884) + 0x138))
-                    (*(undefined4 *)(iVar4 + 0x85ac),param_2,param_3,forwardedArg5);
-  fparam_1 = extraout_f1;
-  if ((uVar6 < 5) && (param_4 != *(byte *)(glContext + 0x85a8))) {
-    fparam_1 = (double)_gliSwitchPlugin(glContext,param_4);
-    bVar1 = true;
-    uVar6 = 2;
+  rendererRecord = rendererIndex * 0x2e0 + glContext;
+  attachResult = (**(code **)(*(int *)(rendererRecord + 0x8884) + 0x138))
+                    (*(undefined4 *)(rendererRecord + 0x85ac),drawableWord484c,drawableWord4848,forwardedArg5);
+  forwardedFpr1 = f1AfterCall;
+  if ((attachResult < 5) && (rendererIndex != *(byte *)(glContext + 0x85a8))) {
+    forwardedFpr1 = (double)_gliSwitchPlugin(glContext,rendererIndex);
+    pluginStateChanged = true;
+    attachResult = 2;
   }
-  if (uVar6 == 2) {
-    ((void (*)())_gliUpdatePluginConfig)(glContext,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffff98,
-               incomingStack_ffffffa0,incomingStack_ffffffa8,incomingStack_ffffffb0,incomingStack_ffffffb8);
+  if (attachResult == 2) {
+    ((void (*)())_gliUpdatePluginConfig)(glContext,forwardedFpr1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStackWord_ffffff98,
+               incomingStackWord_ffffffa0,incomingStackWord_ffffffa8,incomingStackWord_ffffffb0,incomingStackWord_ffffffb8);
 LAB_00012634:
-    bVar1 = true;
+    pluginStateChanged = true;
 LAB_00012638:
-    if (iVar2 < 0) {
+    if (rendererMismatchMaskThenFallbackRendererRecord < 0) {
       _gliDetachRevert(glContext);
     }
 LAB_000126b8:
-    uVar6 = 0;
+    attachResult = 0;
   }
   else {
-    if ((uVar6 < 2) || (uVar6 == 4)) goto LAB_00012638;
-    if (uVar6 < 4) goto LAB_00012634;
-    if (uVar6 == 0x2720) {
-      if ((param_2 == 0) || (glContextByte85a5 = (uint)*(byte *)(glContext + 0x85a5), glContextByte85a5 == 0xff)) {
-        uVar6 = 0x2720;
+    if ((attachResult < 2) || (attachResult == 4)) goto LAB_00012638;
+    if (attachResult < 4) goto LAB_00012634;
+    if (attachResult == 0x2720) {
+      if ((drawableWord484c == 0) || (glContextByte85a5 = (uint)*(byte *)(glContext + 0x85a5), glContextByte85a5 == 0xff)) {
+        attachResult = 0x2720;
         goto LAB_00012744;
       }
       *(undefined1 *)(glContext + 0x85a7) = 1;
-      iVar2 = glContextByte85a5 * 0x2e0 + glContext;
-      uVar6 = (**(code **)(*(int *)(iVar2 + 0x8884) + 0x138))
-                        (*(undefined4 *)(iVar2 + 0x85ac),param_2,param_3,forwardedArg5);
-      if (4 < uVar6) goto LAB_000126d8;
+      rendererMismatchMaskThenFallbackRendererRecord = glContextByte85a5 * 0x2e0 + glContext;
+      attachResult = (**(code **)(*(int *)(rendererMismatchMaskThenFallbackRendererRecord + 0x8884) + 0x138))
+                        (*(undefined4 *)(rendererMismatchMaskThenFallbackRendererRecord + 0x85ac),drawableWord484c,drawableWord4848,forwardedArg5);
+      if (4 < attachResult) goto LAB_000126d8;
       if (glContextByte85a5 != *(byte *)(glContext + 0x85a8)) {
         _gliSwitchPlugin(glContext,glContextByte85a5);
-        bVar1 = true;
+        pluginStateChanged = true;
       }
       goto LAB_000126b8;
     }
-    if (iVar2 < 0) {
+    if (rendererMismatchMaskThenFallbackRendererRecord < 0) {
       _gliDetachRevert(glContext);
     }
 LAB_000126d8:
-    if (uVar6 != 0) {
+    if (attachResult != 0) {
 LAB_00012744:
       *(undefined4 *)(glContext + 0x4848) = 0;
       *(undefined4 *)(glContext + 0x484c) = 0;
       if ((*(char *)(glContext + 0x4692) != '\0') && (*(char *)(glContext + 0x4691) == '\0')) {
-        return uVar6;
+        return attachResult;
       }
       *(undefined1 *)(glContext + 0x4691) = 0;
       *(undefined1 *)(glContext + 0x4692) = 1;
       goto LAB_00012774;
     }
   }
-  cVar5 = '\0';
-  if ((*(char *)(glContext + 0x4690) == '\0') || (param_3 == 0)) {
-    cVar5 = '\x01';
+  glContextByte4692 = '\0';
+  if ((*(char *)(glContext + 0x4690) == '\0') || (drawableWord4848 == 0)) {
+    glContextByte4692 = '\x01';
   }
-  *(int *)(glContext + 0x4848) = param_3;
-  *(int *)(glContext + 0x484c) = param_2;
-  if ((!bVar1) && (*(char *)(glContext + 0x4692) == cVar5)) {
-    return uVar6;
+  *(int *)(glContext + 0x4848) = drawableWord4848;
+  *(int *)(glContext + 0x484c) = drawableWord484c;
+  if ((!pluginStateChanged) && (*(char *)(glContext + 0x4692) == glContextByte4692)) {
+    return attachResult;
   }
-  *(char *)(glContext + 0x4692) = cVar5;
-  uVar3 = 0;
-  if ((*(int *)(glContext + 0x4e1c) == 0x1c00) && (cVar5 == '\0')) {
-    uVar3 = 1;
+  *(char *)(glContext + 0x4692) = glContextByte4692;
+  glContextByte4691 = 0;
+  if ((*(int *)(glContext + 0x4e1c) == 0x1c00) && (glContextByte4692 == '\0')) {
+    glContextByte4691 = 1;
   }
-  *(undefined1 *)(glContext + 0x4691) = uVar3;
+  *(undefined1 *)(glContext + 0x4691) = glContextByte4691;
   *(undefined4 *)(glContext + 0x757c) = 0xffffffff;
 LAB_00012774:
   ((void (*)())_gliSetCurrentPluginDispatchTable)(glContext);
-  return uVar6;
+  return attachResult;
 }
 
 /* _gliUpdatePluginConfig @ 0x127a4 (104 bytes) */

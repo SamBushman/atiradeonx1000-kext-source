@@ -350,11 +350,11 @@ void _glSwap_RevertExec(glContext)
   double incomingFpr6;
   double incomingFpr7;
   double incomingFpr8;
-  double incomingStack_ffffffb8;
-  double incomingStack_ffffffc0;
-  double incomingStack_ffffffc8;
-  double incomingStack_ffffffd0;
-  double incomingStack_ffffffd8;
+  double incomingStackWord_ffffffb8;
+  double incomingStackWord_ffffffc0;
+  double incomingStackWord_ffffffc8;
+  double incomingStackWord_ffffffd0;
+  double incomingStackWord_ffffffd8;
   
   glContextByte85a5 = *(byte *)(glContext + 0x85a5);
   if (*(short *)(glContext + 0x4a10) < 0) {
@@ -365,8 +365,8 @@ void _glSwap_RevertExec(glContext)
               (*(undefined4 *)(rendererRecord + 0x85ac),*(undefined4 *)(glContext + 0x484c),
                *(undefined4 *)(glContext + 0x4848),0);
     f1AfterCall = (double)_gleSwitchToRenderer(glContext,(uint)glContextByte85a5);
-    ((void (*)())_gleUpdateDepthRangeData)(glContext,f1AfterCall,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffffb8,
-               incomingStack_ffffffc0,incomingStack_ffffffc8,incomingStack_ffffffd0,incomingStack_ffffffd8);
+    ((void (*)())_gleUpdateDepthRangeData)(glContext,f1AfterCall,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStackWord_ffffffb8,
+               incomingStackWord_ffffffc0,incomingStackWord_ffffffc8,incomingStackWord_ffffffd0,incomingStackWord_ffffffd8);
     _gleUpdatePolyMode(glContext);
     ((void (*)())_gleUpdateViewScissorData)(glContext,incomingFpr1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
     _gleUpdateTextureTransform(glContext);

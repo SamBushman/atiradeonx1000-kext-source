@@ -1,0 +1,45 @@
+local	_glGetMaterialiv_Exec	iVar6	faceIndexThenMaterialTableBaseThenColorIndexRecord	CONFIRMED	0 for GL_FRONT (0x404) or 1 for GL_BACK (0x405); then glContext + faceIndex*4, whose +0x4dd0 word is the face's material record; for GL_COLOR_INDEXES (0x1603) glContext + faceIndex*0x10, whose +0x2f0..0x2f8 floats are the color indexes
+local	_glGetMaterialiv_Exec	fVar1	materialAlpha	CONFIRMED	the fourth float (+0xc, +0x1c, +0x2c, +0x3c) of the queried material colour record, scaled to int into params[3]
+local	_gleSetClientEnableFlag	param_3	enable	CONFIRMED	nonzero sets, zero clears the array's enable bits in the client state words +0x330/+0x334 (the glEnableClientState / glDisableClientState distinction); stored as a boolean (-param_3 >> 31) for the edge flag and 0x851d arrays
+local	_gleSetClientEnableFlag	lVar6	arrayBits64	CONFIRMED	64-bit value whose high word is the enable bit mask for the client state word +0x330 and whose low word (also (uint) lVar6) is ored into ctx+0x497c; for the texture coord array it is 1<<24 shifted by the unit at ctx+0x53d8 (___ashldi3)
+local	_gleSetClientEnableFlag	uVar4	enableBitsWord330	CONFIRMED	high word of arrayBits64: the bits of the client state word +0x330 (and its change word +0x350) that this array owns
+local	_gleSetClientEnableFlag	uVar5	enableBitsWord334	CONFIRMED	the bits of the client state word +0x334 (and its change word +0x354) that this array owns (0x10000, 0x20000, 0x40000, 0x80000, ... or the low word of the texture-coord mask)
+local	_gleSetClientEnableFlag	uVar2	newEnableWord330	CONFIRMED	the new value of client state word +0x330: old value with enableBitsWord330 cleared or set
+local	_gleSetClientEnableFlag	uVar3	newEnableWord334	CONFIRMED	the new value of client state word +0x334: old value with enableBitsWord334 cleared or set
+local	_glCallLists_Exec	pbVar1	listByteElement	CONFIRMED	address of the current byte of lists in the GL_BYTE / GL_UNSIGNED_BYTE loops (lists + loop index); its value (+ list base ctx+0x5404) is passed to _gleCallList
+local	_glCallLists_Exec	sVar2	shortListId	CONFIRMED	the current GL_SHORT list id read from lists, sign-extended and offset by the list base
+local	_glCallLists_Exec	uVar3	ushortListId	CONFIRMED	the current GL_UNSIGNED_SHORT list id read from lists, offset by the list base
+local	_glCallLists_Exec	fVar5	floatListId	CONFIRMED	the current GL_FLOAT list id read from lists
+local	_glCallLists_Exec	dVar9	floatListIdDouble	CONFIRMED	(double) copy of floatListId, compared with 2^31 for the unsigned conversion
+local	_glCallLists_Exec	uVar6	floatListIdAsUint	CONFIRMED	floatListId converted to an unsigned integer (2^31 correction when >= 2^31), offset by the list base and passed to _gleCallList
+local	_glCallLists_Exec	iVar7	intListIdThenByteOffset	CONFIRMED	the current GL_INT / GL_UNSIGNED_INT list id for types 0x1404/0x1405; the byte offset into lists of the current 3-byte (GL_3_BYTES) or 4-byte (GL_4_BYTES) element for types 0x1408/0x1409
+local	_glCallLists_Exec	iVar8	nextByteOffset	CONFIRMED	byteOffset + 3 (GL_3_BYTES) or + 4 (GL_4_BYTES): the offset of the next element, the loop variable of those cases
+local	_gleHalfFloatFilter2	iVar5	srcElement	CONFIRMED	src + byteOffset: address of the current element in the source row; the other samples are at fixed offsets from it
+local	_gleHalfFloatFilter2	dVar7	sampleBase	CONFIRMED	half float at src+byteOffset converted by _gleHalfFloatToFloat
+local	_gleHalfFloatFilter2	dVar8	sampleA	CONFIRMED	half float at srcElement+offsetA converted to float
+local	_gleHalfFloatFilter2	dVar9	sampleB	CONFIRMED	half float at srcElement+offsetB converted to float
+local	_gleHalfFloatFilter2	dVar10	sampleAB	CONFIRMED	half float at srcElement+offsetA+offsetB converted to float
+local	_gleHalfFloatFilter2	fVar1	filteredValue	CONFIRMED	sum of the four converted samples times weight (FLOAT_00108f88): the filtered value that is converted back to half float
+local	_gleHalfFloatFilter2	uVar2	floatExponentBits	CONFIRMED	the float bit pattern of filteredValue masked with 0x7f800000 (exponent field), compared with the half float overflow/denormal limits
+local	_gleHalfFloatFilter2	uVar4	halfResult	CONFIRMED	the half float bits of filteredValue (sign from bit 31, exponent and mantissa converted), stored at dst + byteOffset
+local	_gleHalfFloatFilter3	iVar6	srcElement	CONFIRMED	src + byteOffset: address of the current element in the source row; most samples are at fixed offsets from it
+local	_gleHalfFloatFilter3	puVar5	sampleBCCursor	CONFIRMED	pointer to the sample at element + offsetB + offsetC (starts at src+offsetB+offsetC), advanced by one half float per element
+local	_gleHalfFloatFilter3	dVar8	sampleBase	CONFIRMED	half float at src+byteOffset converted by _gleHalfFloatToFloat
+local	_gleHalfFloatFilter3	dVar9	sampleA	CONFIRMED	half float at srcElement+offsetA converted to float
+local	_gleHalfFloatFilter3	dVar10	sampleB	CONFIRMED	half float at srcElement+offsetB converted to float
+local	_gleHalfFloatFilter3	dVar11	sampleAB	CONFIRMED	half float at srcElement+offsetA+offsetB converted to float
+local	_gleHalfFloatFilter3	dVar12	sampleC	CONFIRMED	half float at srcElement+offsetC converted to float
+local	_gleHalfFloatFilter3	dVar13	sampleAC	CONFIRMED	half float at srcElement+offsetA+offsetC converted to float
+local	_gleHalfFloatFilter3	dVar14	sampleBC	CONFIRMED	half float at *sampleBCCursor (element+offsetB+offsetC) converted to float
+local	_gleHalfFloatFilter3	dVar15	sampleABC	CONFIRMED	half float at sampleBCCursor + offsetA (element+offsetA+offsetB+offsetC) converted to float
+local	_gleHalfFloatFilter3	fVar1	filteredValue	CONFIRMED	sum of the eight converted samples times weight (FLOAT_00108f4c): the filtered value that is converted back to half float
+local	_gleHalfFloatFilter3	uVar2	floatExponentBits	CONFIRMED	the float bit pattern of filteredValue masked with 0x7f800000 (exponent field), compared with the half float overflow/denormal limits
+local	_gleHalfFloatFilter3	uVar4	halfResult	CONFIRMED	the half float bits of filteredValue (sign from bit 31, exponent and mantissa converted), stored at dst + byteOffset
+local	_gle332Filter3	bVar1	sampleBase	CONFIRMED	packed 3-3-2 byte read from *src: one of the eight samples of the 2x2x2 box filter (the bit fields 0xe0, 0x1c and 0x3 are summed separately and divided by 8)
+local	_gle332Filter3	bVar2	sampleA	CONFIRMED	packed 3-3-2 byte read from src[offsetA]: one of the eight samples of the 2x2x2 box filter (the bit fields 0xe0, 0x1c and 0x3 are summed separately and divided by 8)
+local	_gle332Filter3	bVar3	sampleB	CONFIRMED	packed 3-3-2 byte read from src[offsetB]: one of the eight samples of the 2x2x2 box filter (the bit fields 0xe0, 0x1c and 0x3 are summed separately and divided by 8)
+local	_gle332Filter3	bVar4	sampleAB	CONFIRMED	packed 3-3-2 byte read from src[offsetB + offsetA]: one of the eight samples of the 2x2x2 box filter (the bit fields 0xe0, 0x1c and 0x3 are summed separately and divided by 8)
+local	_gle332Filter3	bVar5	sampleC	CONFIRMED	packed 3-3-2 byte read from src[offsetC]: one of the eight samples of the 2x2x2 box filter (the bit fields 0xe0, 0x1c and 0x3 are summed separately and divided by 8)
+local	_gle332Filter3	bVar6	sampleAC	CONFIRMED	packed 3-3-2 byte read from src[offsetC + offsetA]: one of the eight samples of the 2x2x2 box filter (the bit fields 0xe0, 0x1c and 0x3 are summed separately and divided by 8)
+local	_gle332Filter3	bVar7	sampleBC	CONFIRMED	packed 3-3-2 byte read from src[offsetC + offsetB]: one of the eight samples of the 2x2x2 box filter (the bit fields 0xe0, 0x1c and 0x3 are summed separately and divided by 8)
+local	_gle332Filter3	bVar8	sampleABC	CONFIRMED	packed 3-3-2 byte read from src[offsetC + offsetB + offsetA]: one of the eight samples of the 2x2x2 box filter (the bit fields 0xe0, 0x1c and 0x3 are summed separately and divided by 8)

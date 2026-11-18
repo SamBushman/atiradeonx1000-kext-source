@@ -601,45 +601,45 @@ int _gleTestFence(glContext, param_2, fence)
   int param_2;
   undefined4 fence;
 {
-  bool bVar1;
-  int iVar2;
-  int iVar3;
-  int iVar4;
-  int iVar5;
-  uint uVar6;
-  undefined4 *puVar7;
+  bool previousRenderersComplete;
+  int fenceObject;
+  int initialOneThenRendererTestResult;
+  int allRenderersComplete;
+  int rendererRecordCursor;
+  uint rendererIndex;
+  undefined4 *rendererFenceHandlePtr;
   
-  iVar3 = 1;
-  iVar4 = 0;
+  initialOneThenRendererTestResult = 1;
+  allRenderersComplete = 0;
   if (param_2 == 0) {
-    iVar2 = _gleLookupHashObject(glContext + 0x543c,fence);
-    iVar4 = iVar3;
-    if (iVar2 == 0) {
+    fenceObject = _gleLookupHashObject(glContext + 0x543c,fence);
+    allRenderersComplete = initialOneThenRendererTestResult;
+    if (fenceObject == 0) {
       if (*(int *)(glContext + 0x7574) == 0) {
         *(undefined4 *)(glContext + 0x7574) = 0x502;
       }
     }
     else {
-      iVar5 = glContext + 0x10000;
-      uVar6 = 0;
+      rendererRecordCursor = glContext + 0x10000;
+      rendererIndex = 0;
       if (*(char *)(glContext + 0x85a4) != '\0') {
-        puVar7 = (undefined4 *)(iVar2 + 0x10);
+        rendererFenceHandlePtr = (undefined4 *)(fenceObject + 0x10);
         do {
-          bVar1 = iVar4 != 0;
-          iVar4 = 0;
-          if ((bVar1) &&
-             (iVar3 = (**(code **)(*(int *)(iVar5 + -0x777c) + 0x1c0))
-                                (*(undefined4 *)(iVar5 + -0x7a54),0,*puVar7), iVar3 != 0)) {
-            iVar4 = 1;
+          previousRenderersComplete = allRenderersComplete != 0;
+          allRenderersComplete = 0;
+          if ((previousRenderersComplete) &&
+             (initialOneThenRendererTestResult = (**(code **)(*(int *)(rendererRecordCursor + -0x777c) + 0x1c0))
+                                (*(undefined4 *)(rendererRecordCursor + -0x7a54),0,*rendererFenceHandlePtr), initialOneThenRendererTestResult != 0)) {
+            allRenderersComplete = 1;
           }
-          uVar6 = uVar6 + 1;
-          iVar5 = iVar5 + 0x2e0;
-          puVar7 = puVar7 + 1;
-        } while (uVar6 < *(byte *)(glContext + 0x85a4));
+          rendererIndex = rendererIndex + 1;
+          rendererRecordCursor = rendererRecordCursor + 0x2e0;
+          rendererFenceHandlePtr = rendererFenceHandlePtr + 1;
+        } while (rendererIndex < *(byte *)(glContext + 0x85a4));
       }
     }
   }
-  return iVar4;
+  return allRenderersComplete;
 }
 
 /* _gleFinishFence @ 0xcd410 (172 bytes) */
@@ -2128,7 +2128,7 @@ int _LFSParserAttachString(parser, sourceString, preprocessFlag)
   int sourceString;
   int preprocessFlag;
 {
-  int iVar1;
+  int sourceLengthThenPreprocessedTextThenNewlineResult;
   int textCopy;
   uint textLength;
   uint scanPosition;
@@ -2137,14 +2137,14 @@ int _LFSParserAttachString(parser, sourceString, preprocessFlag)
   if (*parser == 0) {
     if (sourceString != 0) {
       if (preprocessFlag == 0) {
-        iVar1 = _strlen(sourceString);
-        textCopy = _calloc(iVar1 + 1,1);
+        sourceLengthThenPreprocessedTextThenNewlineResult = _strlen(sourceString);
+        textCopy = _calloc(sourceLengthThenPreprocessedTextThenNewlineResult + 1,1);
         *parser = textCopy;
-        _memmove(textCopy,sourceString,iVar1);
+        _memmove(textCopy,sourceString,sourceLengthThenPreprocessedTextThenNewlineResult);
       }
       else {
-        iVar1 = ((int (*)())_LFSParserPreprocessString)(parser,sourceString);
-        *parser = iVar1;
+        sourceLengthThenPreprocessedTextThenNewlineResult = ((int (*)())_LFSParserPreprocessString)(parser,sourceString);
+        *parser = sourceLengthThenPreprocessedTextThenNewlineResult;
       }
       scanPosition = 0;
       textLength = _strlen(*parser);
@@ -2153,8 +2153,8 @@ int _LFSParserAttachString(parser, sourceString, preprocessFlag)
       if (textLength != 0) {
         do {
           stepLength[0] = 1;
-          iVar1 = ((int (*)())_LFSParserCheckForNewline)(parser,*parser,scanPosition,textLength,stepLength);
-          if (iVar1 != 0) {
+          sourceLengthThenPreprocessedTextThenNewlineResult = ((int (*)())_LFSParserCheckForNewline)(parser,*parser,scanPosition,textLength,stepLength);
+          if (sourceLengthThenPreprocessedTextThenNewlineResult != 0) {
             parser[2] = parser[2] + 1;
           }
           textLength = parser[1];
@@ -3400,126 +3400,126 @@ int _LFSParserParse(parser)
 }
 
 /* _LFSParserBuildErrorString @ 0xd1080 (580 bytes) */
-void _LFSParserBuildErrorString(param_1, param_2)
-  int param_1;
-  undefined4 param_2;
+void _LFSParserBuildErrorString(parser, errorCode)
+  int parser;
+  undefined4 errorCode;
 {
-  int iVar1;
-  char *pcVar2;
-  undefined1 auStack_120 [256];
-  undefined4 local_20;
-  undefined4 local_1c;
+  int hintPartFound;
+  char *errorMessage;
+  undefined1 hintBuffer [256];
+  undefined4 savedParserWord0c;
+  undefined4 savedParserWord10;
   
-  switch(param_2) {
+  switch(errorCode) {
   default:
-    pcVar2 = "";
+    errorMessage = "";
     break;
   case 1:
-    pcVar2 = "end of stream";
+    errorMessage = "end of stream";
     break;
   case 2:
-    pcVar2 = "missing semicolon";
+    errorMessage = "missing semicolon";
     break;
   case 3:
-    pcVar2 = "unrecognised instruction";
+    errorMessage = "unrecognised instruction";
     break;
   case 4:
-    pcVar2 = "invalid program header";
+    errorMessage = "invalid program header";
     break;
   case 5:
-    pcVar2 = "invalid register";
+    errorMessage = "invalid register";
     break;
   case 6:
-    pcVar2 = "malformed destination mask";
+    errorMessage = "malformed destination mask";
     break;
   case 7:
-    pcVar2 = "malformed destination modifier";
+    errorMessage = "malformed destination modifier";
     break;
   case 8:
-    pcVar2 = "unexpected end of file";
+    errorMessage = "unexpected end of file";
     break;
   case 9:
-    pcVar2 = "invalid identifier name";
+    errorMessage = "invalid identifier name";
     break;
   case 10:
-    pcVar2 = "missing comma";
+    errorMessage = "missing comma";
     break;
   case 0xb:
-    pcVar2 = "malformed source modifier";
+    errorMessage = "malformed source modifier";
     break;
   case 0xc:
-    pcVar2 = "operation outside of pass block";
+    errorMessage = "operation outside of pass block";
     break;
   case 0xd:
-    pcVar2 = "constant binding outside of constant block";
+    errorMessage = "constant binding outside of constant block";
     break;
   case 0xe:
-    pcVar2 = "malformed source selector";
+    errorMessage = "malformed source selector";
     break;
   case 0xf:
-    pcVar2 = "malformed constant binding";
+    errorMessage = "malformed constant binding";
     break;
   case 0x10:
-    pcVar2 = "malformed array specifier";
+    errorMessage = "malformed array specifier";
     break;
   case 0x11:
-    pcVar2 = "SEMANTIC RESTRICTION #1 - constant already bound";
+    errorMessage = "SEMANTIC RESTRICTION #1 - constant already bound";
     break;
   case 0x12:
-    pcVar2 = "SEMANTIC RESTRICTION #1 - constant not bound";
+    errorMessage = "SEMANTIC RESTRICTION #1 - constant not bound";
     break;
   case 0x13:
-    pcVar2 = "SEMANTIC RESTRICTION #2 - greater than 2 constant arguments";
+    errorMessage = "SEMANTIC RESTRICTION #2 - greater than 2 constant arguments";
     break;
   case 0x14:
-    pcVar2 = "SEMANTIC RESTRICTION #3 - color arguments used in non output pass";
+    errorMessage = "SEMANTIC RESTRICTION #3 - color arguments used in non output pass";
     break;
   case 0x15:
-    pcVar2 = "SEMANTIC RESTRICTION #4 - no alu operations in preliminary pass";
+    errorMessage = "SEMANTIC RESTRICTION #4 - no alu operations in preliminary pass";
     break;
   case 0x16:
-    pcVar2 = "SEMANTIC RESTRICTION #5 - excess color/alpha pairs in pass";
+    errorMessage = "SEMANTIC RESTRICTION #5 - excess color/alpha pairs in pass";
     break;
   case 0x17:
-    pcVar2 = "SEMANTIC RESTRICTION #6 - destination register overwritten in same pass";
+    errorMessage = "SEMANTIC RESTRICTION #6 - destination register overwritten in same pass";
     break;
   case 0x18:
-    pcVar2 = "SEMANTIC RESTRICTION #7 - register init with register argument in preliminary pass";
+    errorMessage = "SEMANTIC RESTRICTION #7 - register init with register argument in preliminary pass";
     break;
   case 0x19:
-    pcVar2 = "SEMANTIC RESTRICTION #8 - same texture coordinate with selector exists";
+    errorMessage = "SEMANTIC RESTRICTION #8 - same texture coordinate with selector exists";
     break;
   case 0x1a:
-    pcVar2 = "SEMANTIC RESTRICTION #9 - this selector is not allowed in the output pass";
+    errorMessage = "SEMANTIC RESTRICTION #9 - this selector is not allowed in the output pass";
     break;
   case 0x1b:
-    pcVar2 = "SEMANTIC RESTRICTION #10 - no writemask is allowed for this instruction";
+    errorMessage = "SEMANTIC RESTRICTION #10 - no writemask is allowed for this instruction";
     break;
   case 0x1c:
-    pcVar2 = "SEMANTIC RESTRICTION #11 - alpha component cannot be read for secondary color";
+    errorMessage = "SEMANTIC RESTRICTION #11 - alpha component cannot be read for secondary color";
     break;
   case 0x1d:
-    pcVar2 = "SEMANTIC RESTRICTION #12 - register number exceeds supported";
+    errorMessage = "SEMANTIC RESTRICTION #12 - register number exceeds supported";
     break;
   case 0x1e:
-    pcVar2 = "SEMANTIC RESTRICTION #13 - texture unit number exceeds supported";
+    errorMessage = "SEMANTIC RESTRICTION #13 - texture unit number exceeds supported";
     break;
   case 0x1f:
-    pcVar2 = "missing or invalid version token";
+    errorMessage = "missing or invalid version token";
   }
-  local_20 = *(undefined4 *)(param_1 + 0xc);
-  local_1c = *(undefined4 *)(param_1 + 0x10);
-  *(undefined4 *)(param_1 + 0xc) = *(undefined4 *)(param_1 + 0x45c);
-  *(undefined4 *)(param_1 + 0x10) = *(undefined4 *)(param_1 + 0x460);
-  iVar1 = ((int (*)())_LFSParserGetPart)(param_1,auStack_120);
-  if (iVar1 == 0) {
-    _sprintf((char *)(param_1 + 0x5c),"%s",pcVar2);
+  savedParserWord0c = *(undefined4 *)(parser + 0xc);
+  savedParserWord10 = *(undefined4 *)(parser + 0x10);
+  *(undefined4 *)(parser + 0xc) = *(undefined4 *)(parser + 0x45c);
+  *(undefined4 *)(parser + 0x10) = *(undefined4 *)(parser + 0x460);
+  hintPartFound = ((int (*)())_LFSParserGetPart)(parser,hintBuffer);
+  if (hintPartFound == 0) {
+    _sprintf((char *)(parser + 0x5c),"%s",errorMessage);
   }
   else {
-    _sprintf((char *)(param_1 + 0x5c),"%s (hint: \'%s\')",pcVar2,auStack_120);
+    _sprintf((char *)(parser + 0x5c),"%s (hint: \'%s\')",errorMessage,hintBuffer);
   }
-  *(undefined4 *)(param_1 + 0xc) = local_20;
-  *(undefined4 *)(param_1 + 0x10) = local_1c;
+  *(undefined4 *)(parser + 0xc) = savedParserWord0c;
+  *(undefined4 *)(parser + 0x10) = savedParserWord10;
   return;
 }
 
