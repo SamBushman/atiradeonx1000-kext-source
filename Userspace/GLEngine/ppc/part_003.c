@@ -625,7 +625,7 @@ int _gleTestObject(glContext, objectType, name)
   int iVar2;
   int rendererBase;
   int allValid;
-  undefined4 *handleCursor;
+  undefined4 *srcCursor;
   uint loopIndex;
   
   allValid = 1;
@@ -643,18 +643,18 @@ LAB_0001ff68:
       rendererBase = glContext + 0x10000;
       loopIndex = 0;
       if (*(char *)(glContext + 0x85a4) != '\0') {
-        handleCursor = (undefined4 *)(iVar2 + 0x10);
+        srcCursor = (undefined4 *)(iVar2 + 0x10);
         do {
           stillValid = allValid != 0;
           allValid = 0;
           if ((stillValid) &&
              (iVar2 = (**(code **)(*(int *)(rendererBase + -0x777c) + 0x1c0))
-                                (*(undefined4 *)(rendererBase + -0x7a54),objectType,*handleCursor), iVar2 != 0)) {
+                                (*(undefined4 *)(rendererBase + -0x7a54),objectType,*srcCursor), iVar2 != 0)) {
             allValid = 1;
           }
           loopIndex = loopIndex + 1;
           rendererBase = rendererBase + 0x2e0;
-          handleCursor = handleCursor + 1;
+          srcCursor = srcCursor + 1;
         } while (loopIndex < *(byte *)(glContext + 0x85a4));
       }
     }
@@ -665,18 +665,18 @@ LAB_0001ff68:
     rendererBase = glContext + 0x10000;
     loopIndex2 = 0;
     if (*(char *)(glContext + 0x85a4) != '\0') {
-      handleCursor = (undefined4 *)(iVar2 + 0x10);
+      srcCursor = (undefined4 *)(iVar2 + 0x10);
       do {
         stillValid = allValid != 0;
         allValid = 0;
         if ((stillValid) &&
            (iVar2 = (**(code **)(*(int *)(rendererBase + -0x777c) + 0x1c0))
-                              (*(undefined4 *)(rendererBase + -0x7a54),objectType,*handleCursor), iVar2 != 0)) {
+                              (*(undefined4 *)(rendererBase + -0x7a54),objectType,*srcCursor), iVar2 != 0)) {
           allValid = 1;
         }
         loopIndex2 = loopIndex2 + 1;
         rendererBase = rendererBase + 0x2e0;
-        handleCursor = handleCursor + 1;
+        srcCursor = srcCursor + 1;
       } while (loopIndex2 < *(byte *)(glContext + 0x85a4));
     }
     break;
@@ -686,18 +686,18 @@ LAB_0001ff68:
     rendererBase = glContext + 0x10000;
     loopIndex3 = 0;
     if (*(char *)(glContext + 0x85a4) != '\0') {
-      handleCursor = (undefined4 *)(iVar2 + 0x10);
+      srcCursor = (undefined4 *)(iVar2 + 0x10);
       do {
         stillValid = allValid != 0;
         allValid = 0;
         if ((stillValid) &&
            (iVar2 = (**(code **)(*(int *)(rendererBase + -0x777c) + 0x1c0))
-                              (*(undefined4 *)(rendererBase + -0x7a54),objectType,*handleCursor), iVar2 != 0)) {
+                              (*(undefined4 *)(rendererBase + -0x7a54),objectType,*srcCursor), iVar2 != 0)) {
           allValid = 1;
         }
         loopIndex3 = loopIndex3 + 1;
         rendererBase = rendererBase + 0x2e0;
-        handleCursor = handleCursor + 1;
+        srcCursor = srcCursor + 1;
       } while (loopIndex3 < *(byte *)(glContext + 0x85a4));
     }
     break;
@@ -707,18 +707,18 @@ LAB_0001ff68:
     rendererBase = glContext + 0x10000;
     loopIndex4 = 0;
     if (*(char *)(glContext + 0x85a4) != '\0') {
-      handleCursor = (undefined4 *)(iVar2 + 0x10);
+      srcCursor = (undefined4 *)(iVar2 + 0x10);
       do {
         stillValid = allValid != 0;
         allValid = 0;
         if ((stillValid) &&
            (iVar2 = (**(code **)(*(int *)(rendererBase + -0x777c) + 0x1c0))
-                              (*(undefined4 *)(rendererBase + -0x7a54),objectType,*handleCursor), iVar2 != 0)) {
+                              (*(undefined4 *)(rendererBase + -0x7a54),objectType,*srcCursor), iVar2 != 0)) {
           allValid = 1;
         }
         loopIndex4 = loopIndex4 + 1;
         rendererBase = rendererBase + 0x2e0;
-        handleCursor = handleCursor + 1;
+        srcCursor = srcCursor + 1;
       } while (loopIndex4 < *(byte *)(glContext + 0x85a4));
     }
     break;
@@ -728,18 +728,18 @@ LAB_0001ff68:
     rendererBase = glContext + 0x10000;
     loopIndex5 = 0;
     if (*(char *)(glContext + 0x85a4) != '\0') {
-      handleCursor = (undefined4 *)(iVar2 + 0x10);
+      srcCursor = (undefined4 *)(iVar2 + 0x10);
       do {
         stillValid = allValid != 0;
         allValid = 0;
         if ((stillValid) &&
            (iVar2 = (**(code **)(*(int *)(rendererBase + -0x777c) + 0x1c0))
-                              (*(undefined4 *)(rendererBase + -0x7a54),objectType,*handleCursor), iVar2 != 0)) {
+                              (*(undefined4 *)(rendererBase + -0x7a54),objectType,*srcCursor), iVar2 != 0)) {
           allValid = 1;
         }
         loopIndex5 = loopIndex5 + 1;
         rendererBase = rendererBase + 0x2e0;
-        handleCursor = handleCursor + 1;
+        srcCursor = srcCursor + 1;
       } while (loopIndex5 < *(byte *)(glContext + 0x85a4));
     }
     break;

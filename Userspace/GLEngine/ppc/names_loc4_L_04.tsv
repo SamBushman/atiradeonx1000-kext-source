@@ -135,7 +135,6 @@ local	_gleTestObject	param_2	objectType	CONFIRMED	selects the name hash table (c
 local	_gleTestObject	iVar4	allValid	CONFIRMED	1 while every renderer's test of its handle returned nonzero; set to 0 by the first renderer that rejects it; returned (1 also for type 5 or when no renderer exists)
 local	_gleTestObject	bVar1	stillValid	CONFIRMED	allValid on entry of an iteration: renderers after a failed one are not asked
 local	_gleTestObject	iVar3	rendererBase	CONFIRMED	ctx + 0x10000, advanced by 0x2e0 per renderer: the renderer array (renderer function table at -0x777c, renderer context at -0x7a54)
-local	_gleTestObject	srcCursor	handleCursor	CONFIRMED	walks the object's per-renderer handles starting at object+0x10 (one word per renderer)
 local	_gleClipPoly	param_2	vertexList	CONFIRMED	polygon as an array of vertex pointers (callers pass polygonList); the plane loop alternates between it and the scratch list as input and output
 local	_gleClipPoly	param_3	vertexCount	CONFIRMED	number of vertices in vertexList (callers pass the polygon's vertex count)
 local	_gleClipPoly	param_4	clipPlaneMask	CONFIRMED	bit mask of the frustum planes to clip against (callers pass batchClipCodes & 0xff); bits are tested one plane at a time against the per-vertex outcode byte at vertex+0x7f and extended with the outcodes of generated vertices
