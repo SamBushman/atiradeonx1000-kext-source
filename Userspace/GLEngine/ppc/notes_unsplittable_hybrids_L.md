@@ -3,30 +3,39 @@
 Every name in `names_loc4_L_*.tsv` was applied with `apply_names.py` and the committed state
 passed the image gate (`VERDICT: IDENTICAL`). The groups below were written, checked and gated,
 but could not be committed, or were never written because the variable is a hybrid.
+Note: some batches reused a `names_loc4_L_NN.tsv` number, so the file set is not a complete
+record of every rename; `names_loc4_L_20.tsv` restores the `_gliGetInteger` rows. The part files
+are authoritative.
 
 ## Role splits refused by the image gate (names were correct, the build changed)
 
 Each row set below applied cleanly (0 errors) and compiled, but the compiled image differed
-(register allocation swapped). They were dropped, not forced. The variable keeps its placeholder.
+(register allocation swapped, one function per failing gate). They were dropped, not forced.
+The variable (or that web) keeps its placeholder. Groups not listed here passed and are committed.
 
-- `_gliSetInteger`: `iVar7`, `iVar16`, `iVar13` web splits (gate L4_9); `iVar9` split into
-  `border` / `cubeTarget` (gate L4_12). The `iVar12` splits (`depth`, `textureLevel`) passed and are committed.
-- `_glGetPixelMapuiv_Exec`: even the whole-variable renames `iVar6` (`bufferObject`), `uVar5`
-  (`uintValue`) and `dVar7` (`scaledValue`) change allocation (gates L4_9, L4_10). Left untouched.
-- `_gleEmptyImage`: the `iVar6` splits (`rowLength`, `alignRemainder`, `skipBytes`, `rowStride`) change
-  allocation (gates L4_10, L4_11). The `iVar16`, `iVar17`, `iVar19`, `iVar21` splits passed.
-- `_glLinkProgramARB_Exec`: `iVar14` splits and the first half of the `iVar18` splits passed.
-  The second half (`fragmentLocalParamCount`, `ppStreamManager`, `shaderIndex`, `uniformIndex`,
-  `attribIndex`, `shaderStringLength`, `unitRecord`) fails as a whole, in both halves
-  of a bisect, and with `shaderIndex` alone (gates L4_17 to L4_20).
-- `_gleFeedbackTriangleStripFunc_body`: the eight whole-variable names passed. All role splits fail,
-  in each of three groups: {`uVar12`, `uVar20`, `uVar11`, `uVar21`}, {`uVar8`, `uVar22`, `uVar25`, `uVar10`},
-  {`iVar13`, `iVar23`, `iVar17`, `iVar14`, `puVar15`} (gates L4_16, L4_18, L4_19, L4_20).
-- The integer webs of the strip/fan render bodies (`_gleVPRenderTriangleStrip_body`,
-  `_gleVPRenderTriangleFan_body`, `_gleRenderFlatTrianglesFunc_body`, `_gleSelectTriangleStripFunc_body`,
-  `_gleSelectTriangleFanFunc_body`) and the dirty-word address webs of `_gleUpdateLightRGBASums`
-  and `_gleLightMaterialRGBAChange_B_AD` follow the same pattern (gate L4_5, L4_7).
-  Whole-variable names and the splits that passed are committed; the rest keep placeholders.
+- `_gliSetInteger`: `iVar9` split into `border` / `cubeTarget` (gates L4_10, L4_12).
+  The `iVar12`, `iVar7`, `iVar16`, `iVar13` splits passed.
+- `_glGetPixelMapuiv_Exec`: the whole-variable rename `iVar6` (`bufferObject`) changes allocation
+  (gate L4_10). `uVar5` (`uintValue`) and `dVar7` (`scaledValue`) passed.
+- `_gleEmptyImage`: the `iVar6` splits (`rowLength`, `alignRemainder`, `skipBytes`, `rowStride`)
+  (gates L4_10, L4_11). The `iVar16`, `iVar17`, `iVar19`, `iVar21` splits passed.
+- `_glLinkProgramARB_Exec`: `iVar18` webs `ppStreamManager` and `shaderIndex` (each fails alone,
+  gates L4_24 to L4_27). `fragmentLocalParamCount` and the four webs `uniformIndex`, `attribIndex`,
+  `shaderStringLength`, `unitRecord` passed.
+- `_gleFeedbackTriangleStripFunc_body`: `uVar20` (`runStartParity`, `lastClippedTriangleStart`),
+  `uVar21` (`nextRunParity`), `iVar13` (`cullResult`, `runVertexCount`, `triangleVertexCount`) and
+  `iVar23` (`runTriangleCount`, `polygonFacing`) each fail alone (gates L4_24 to L4_33).
+  `uVar12`, `uVar11`, `uVar8`, `uVar22`, `uVar25`, `uVar10`, `iVar17`, `iVar14`, `puVar15` passed.
+- `_gleVPRenderTriangleStrip_body`: `iVar9` `remaining` and `runVertexCount`, and `iVar11`
+  (`runFacing`, `triangleVertexCount`) fail. `_gleVPRenderTriangleFan_body` `iVar11` and
+  `_gleSelectTriangleStripFunc_body` `iVar10` (`runFacing`, `triangleVertexCount`) fail.
+  `_gleSelectTriangleStripFunc_body` `iVar17` `polygonCullResultThenFacing` fails (the
+  `runTriangleCount` web of the same variable passes).
+  `_gleRenderFlatTrianglesFunc_body` `iVar7` `runVertexCount` / `triangleVertexCount` /
+  `polygonVertexCount` (13 rows together) fail; the other flat-triangle webs passed.
+- `_gleUpdateLightRGBASums`: the dirty-word address webs and the light integer webs failed in the
+  first batches (gate L4_5, mixed with other groups); they were not retried one at a time
+  because their row files no longer match the code after later renames.
 
 ## Hybrids: one variable, several unrelated roles in one web (not split, no honest single name)
 
