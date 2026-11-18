@@ -1,0 +1,61 @@
+local	_gleUpdateFramebufferCompleteness	param_2	framebufferObject	CONFIRMED	ctx+0x744c is the framebufferObject word everywhere else (52 functions already name it so); here it is the object whose status (+0xc0), draw buffers (+0xb0), attachment slots (+0xc4) are computed
+local	_gleUpdateFramebufferCompleteness	uVar2	framebufferStatus	CONFIRMED	only assigned the GL_FRAMEBUFFER_INCOMPLETE_* constants 0x8cd6..0x8cdc and stored to framebufferObject+0xc0 (the status word)
+local	_gleUpdateFramebufferCompleteness	iVar9	attachmentIndex	INFERRED	counter 0..5 over the six attachment slots (slot array at framebufferObject+0xc4, record stride 0x18)
+local	_gleUpdateFramebufferCompleteness	uVar10	distinctImageCount	INFERRED	number of distinct attached image records collected in local_50 (duplicate attachment => 0x8cd8)
+local	_gleUpdateFramebufferCompleteness	local_50	seenImages	INFERRED	array of attached image record addresses already seen (compared against each new one: equal => GL_FRAMEBUFFER_INCOMPLETE_DUPLICATE_ATTACHMENT_EXT 0x8cd8)
+local	_gleUpdateFramebufferCompleteness	piVar11	attachmentSlotPtr	INFERRED	walks the attachment slot array at framebufferObject+0xc4 (one int per attachment)
+local	_gleUpdateFramebufferCompleteness	sVar8	colorAttachmentFormat	INFERRED	first non-zero format short (image+0x88) of the colour attachments (index < 4); a later different value gives GL_FRAMEBUFFER_INCOMPLETE_FORMATS 0x8cda
+local	_gleUpdateFramebufferCompleteness	iVar3	attachedImage	INFERRED	image record of the attachment: object + 0x10 + level*0x168 + face*0x18; its +200/+0xca shorts are compared across attachments (dimensions error 0x8cd9)
+local	_gleUpdateFramebufferCompleteness	puVar7	drawBufferPtr	INFERRED	walks the four draw-buffer enum shorts at framebufferObject+0xb0
+local	_gleUpdateFramebufferCompleteness	uVar1	drawBufferEnum	INFERRED	draw-buffer enum read from the short array; indexed as (enum - 0x8ce0 = GL_COLOR_ATTACHMENT0) into the slot array
+local	_gleClipPolyPlane	param_2	polygonList	INFERRED	array of vertex-record pointers of the polygon being clipped: the input list at entry, re-pointed after each plane pass at the list that received the clipped result (param_4 is the other buffer)
+local	_gleClipPolyPlane	param_3	vertexCount	CONFIRMED	number of entries of the input list: only used as piVar17 = param_2 + param_3 (end of list)
+local	_gleClipPolyPlane	param_4	outputList	INFERRED	second list buffer: pass results ping-pong between it and the input list, and the final result is copied into it when it ended up in the other buffer
+local	_gleClipPolyPlane	param_5	outVertexCount	CONFIRMED	int out parameter: *param_5 receives the clipped vertex count (0 when fewer than 3 vertices are left)
+use	_gleClipPolyPlane	iVar12	activePlaneCount	CONFIRMED	ctx+0x4dfc: number of enabled user clip planes written by _gleUpdateClipPlane (loop bound of the plane passes)	^\s*iVar12\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x4dfc\);$	+1
+use	_gleClipPolyPlane	iVar12	activePlaneCount	CONFIRMED	ctx+0x4dfc: number of enabled user clip planes written by _gleUpdateClipPlane (loop bound of the plane passes)	^\s*if\ \(0\ <\ iVar12\)\ \{$	+1
+use	_gleClipPolyPlane	iVar12	activePlaneCount	CONFIRMED	ctx+0x4dfc: number of enabled user clip planes written by _gleUpdateClipPlane (loop bound of the plane passes)	^\s*\}\ while\ \(iVar14\ <\ iVar12\);$	+1
+use	_gleClipPolyPlane	iVar12	copyIndex	INFERRED	index of the final copy loop that moves the result list into outputList	^\s*if\ \(\(param_2\ !=\ param_4\)\ \&\&\ \(iVar12\ =\ 0,\ iVar14\ =\ iVar10,\ 0\ <\ iVar10\)\)\ \{$	+1
+use	_gleClipPolyPlane	iVar12	copyIndex	INFERRED	index of the final copy loop that moves the result list into outputList	^\s*param_4\[iVar12\]\ =\ param_2\[iVar12\];$	+1
+use	_gleClipPolyPlane	iVar12	copyIndex	INFERRED	index of the final copy loop that moves the result list into outputList	^\s*iVar12\ =\ iVar12\ \+\ 1;$	+1
+use	_gleClipPolyPlane	iVar14	planePass	INFERRED	pass counter 0..activePlaneCount over the enabled clip planes	^\s*iVar14\ =\ 0;$	+1
+use	_gleClipPolyPlane	iVar14	planePass	INFERRED	pass counter 0..activePlaneCount over the enabled clip planes	^\s*iVar14\ =\ iVar14\ \+\ 1;$	+1
+use	_gleClipPolyPlane	iVar14	planePass	INFERRED	pass counter 0..activePlaneCount over the enabled clip planes	^\s*\}\ while\ \(iVar14\ <\ iVar12\);$	+1
+use	_gleClipPolyPlane	iVar14	copyRemaining	INFERRED	down-counter of the final copy loop (set to the result count)	^\s*if\ \(\(param_2\ !=\ param_4\)\ \&\&\ \(iVar12\ =\ 0,\ iVar14\ =\ iVar10,\ 0\ <\ iVar10\)\)\ \{$	+1
+use	_gleClipPolyPlane	iVar14	copyRemaining	INFERRED	down-counter of the final copy loop (set to the result count)	^\s*iVar14\ =\ iVar14\ \+\ \-1;$	+1
+use	_gleClipPolyPlane	iVar14	copyRemaining	INFERRED	down-counter of the final copy loop (set to the result count)	^\s*\}\ while\ \(iVar14\ !=\ 0\);$	+1
+use	_gleClipPolyPlane	iVar10	resultCount	INFERRED	vertex count of the list just produced by the last plane pass ((cursor - list) >> 2); 0 before the first pass; stored to *param_5	^\s*iVar10\ =\ 0;$	+1
+use	_gleClipPolyPlane	iVar10	resultCount	INFERRED	vertex count of the list just produced by the last plane pass ((cursor - list) >> 2); 0 before the first pass; stored to *param_5	^\s*iVar10\ =\ \(int\)piVar18\ \-\ \(int\)param_2\ >>\ 2;$	+2
+use	_gleClipPolyPlane	iVar10	resultCount	INFERRED	vertex count of the list just produced by the last plane pass ((cursor - list) >> 2); 0 before the first pass; stored to *param_5	^\s*piVar17\ =\ param_2\ \+\ iVar10;$	+1
+use	_gleClipPolyPlane	iVar10	resultCount	INFERRED	vertex count of the list just produced by the last plane pass ((cursor - list) >> 2); 0 before the first pass; stored to *param_5	^\s*if\ \(\(param_2\ !=\ param_4\)\ \&\&\ \(iVar12\ =\ 0,\ iVar14\ =\ iVar10,\ 0\ <\ iVar10\)\)\ \{$	+1
+use	_gleClipPolyPlane	iVar10	resultCount	INFERRED	vertex count of the list just produced by the last plane pass ((cursor - list) >> 2); 0 before the first pass; stored to *param_5	^\s*\*param_5\ =\ iVar10;$	+1
+use	_gleClipPolyPlane	iVar10	planeIndexThenEquation	INFERRED	enabled plane index (*planeIndexPtr) which is then turned into the address of its equation record glContext + index*0x10 (x/y/z/w coefficients at +0x418c..0x4198)	^\s*iVar10\ =\ \*piVar13;$	+1
+use	_gleClipPolyPlane	iVar10	planeIndexThenEquation	INFERRED	enabled plane index (*planeIndexPtr) which is then turned into the address of its equation record glContext + index*0x10 (x/y/z/w coefficients at +0x418c..0x4198)	^\s*iVar10\ =\ param_1\ \+\ iVar10\ \*\ 0x10;$	+1
+use	_gleClipPolyPlane	iVar10	planeIndexThenEquation	INFERRED	enabled plane index (*planeIndexPtr) which is then turned into the address of its equation record glContext + index*0x10 (x/y/z/w coefficients at +0x418c..0x4198)	^\s*fVar2\ =\ \*\(float\ \*\)\(iVar10\ \+\ 0x4190\);$	+2
+use	_gleClipPolyPlane	iVar10	planeIndexThenEquation	INFERRED	enabled plane index (*planeIndexPtr) which is then turned into the address of its equation record glContext + index*0x10 (x/y/z/w coefficients at +0x418c..0x4198)	^\s*fVar5\ =\ \*\(float\ \*\)\(iVar10\ \+\ 0x4194\);$	+1
+use	_gleClipPolyPlane	iVar10	planeIndexThenEquation	INFERRED	enabled plane index (*planeIndexPtr) which is then turned into the address of its equation record glContext + index*0x10 (x/y/z/w coefficients at +0x418c..0x4198)	^\s*fVar7\ =\ \*\(float\ \*\)\(iVar10\ \+\ 0x4198\);$	+1
+use	_gleClipPolyPlane	iVar10	nextVertex	INFERRED	vertex record of the next slot (edgeStart[1]) of the polygon edge being clipped	^\s*iVar10\ =\ piVar19\[1\];$	+4
+use	_gleClipPolyPlane	iVar10	nextVertex	INFERRED	vertex record of the next slot (edgeStart[1]) of the polygon edge being clipped	^\s*\(param_1,\ \*piVar19,\ iVar10,\ iVar15,\ \(double\)\(fVar1\ /\ \(fVar1\ \-\ fVar4\)\)\);$	+1
+local	_gleClipPolyPlane	piVar13	planeIndexPtr	CONFIRMED	walks the array of enabled plane indices at ctx+0x4e00 (filled by _gleUpdateClipPlane)
+local	_gleClipPolyPlane	iVar11	firstVertex	INFERRED	first vertex record of the pass input list (*list); its address is also appended after the last vertex to close the polygon
+local	_gleClipPolyPlane	piVar16	passInputList	INFERRED	start of the list read by the current plane pass (param_2 at entry, the previous pass output afterwards)
+local	_gleClipPolyPlane	piVar17	passInputEnd	INFERRED	end of the pass input list; the slot there receives the closing copy of the first vertex
+local	_gleClipPolyPlane	piVar18	outputCursor	INFERRED	write cursor in the list that receives the current pass result (alternates between the two buffers)
+local	_gleClipPolyPlane	piVar19	edgeStart	INFERRED	loop cursor over the pass input list: slot of the start vertex of the edge being clipped
+local	_gleClipPolyPlane	iVar15	newVertexCursor	INFERRED	cursor of vertex records for clip-generated vertices: loaded from ctx+0x4858 (the vertex write cursor), advanced by 0x100 per new vertex, stored back to ctx+0x4858
+local	_gleClipPolyPlane	fVar2	planeB	INFERRED	y coefficient of the clip-plane equation (ctx + index*0x10 + 0x4190), multiplied with vertex word 9 (+0x24)
+local	_gleClipPolyPlane	fVar3	planeA	INFERRED	x coefficient of the clip-plane equation (ctx + index*0x10 + 0x418c), multiplied with vertex word 8 (+0x20)
+local	_gleClipPolyPlane	fVar5	planeC	INFERRED	z coefficient of the clip-plane equation (+0x4194), multiplied with vertex word 0xa (+0x28)
+local	_gleClipPolyPlane	fVar7	planeD	INFERRED	w coefficient of the clip-plane equation (+0x4198), multiplied with vertex word 0xb (+0x2c)
+use	_gleClipPolyPlane	fVar4	firstWord08	INFERRED	vertex word 8 (+0x20) of the first vertex of the pass list, used in its plane distance	^\s*fVar4\ =\ \*\(float\ \*\)\(iVar11\ \+\ 0x20\);$	+1
+use	_gleClipPolyPlane	fVar4	firstWord08	INFERRED	vertex word 8 (+0x20) of the first vertex of the pass list, used in its plane distance	^\s*fVar1\ =\ fVar8\ \*\ fVar7\ \+\ \(fVar6\ \*\ fVar5\ \+\ \(fVar4\ \*\ fVar3\ \+\ fVar1\ \*\ fVar2\)\);$	+1
+local	_gleClipPolyPlane	fVar6	firstWord0a	INFERRED	vertex word 0xa (+0x28) of the first vertex of the pass list, used in its plane distance
+local	_gleClipPolyPlane	fVar8	firstWord0b	INFERRED	vertex word 0xb (+0x2c) of the first vertex of the pass list, used in its plane distance
+use	_gleClipPolyPlane	fVar4	distanceEnd	INFERRED	plane distance (dot product with the plane equation) of the end vertex of the edge being clipped	^\s*fVar4\ =\ \*\(float\ \*\)\(iVar10\ \+\ 0x2c\)\ \*\ fVar7\ \+$	+1
+use	_gleClipPolyPlane	fVar4	distanceEnd	INFERRED	plane distance (dot product with the plane equation) of the end vertex of the edge being clipped	^\s*if\ \(fVar9\ <=\ fVar4\)\ \{$	+1
+use	_gleClipPolyPlane	fVar4	distanceEnd	INFERRED	plane distance (dot product with the plane equation) of the end vertex of the edge being clipped	^\s*\(param_1,\ \*piVar19,\ iVar10,\ iVar15,\ \(double\)\(fVar1\ /\ \(fVar1\ \-\ fVar4\)\)\);$	+1
+use	_gleClipPolyPlane	fVar4	distanceEnd	INFERRED	plane distance (dot product with the plane equation) of the end vertex of the edge being clipped	^\s*if\ \(fVar4\ <\ fVar9\)\ \{$	+1
+use	_gleClipPolyPlane	fVar4	distanceEnd	INFERRED	plane distance (dot product with the plane equation) of the end vertex of the edge being clipped	^\s*\(param_1,\ piVar19\[1\],\ \*piVar19,\ iVar15,\ \(double\)\(fVar4\ /\ \(fVar4\ \-\ fVar1\)\)\);$	+1
+use	_gleClipPolyPlane	fVar4	distanceEnd	INFERRED	plane distance (dot product with the plane equation) of the end vertex of the edge being clipped	^\s*fVar1\ =\ fVar4;$	+1
+local	_gleClipPolyPlane	fVar1	startWord09ThenDistance	INFERRED	loaded as vertex word 9 (+0x24) of the first vertex, then overwritten by the dot product: plane distance of the edge start vertex (carried over from edge to edge as distanceEnd)
+local	_gleClipPolyPlane	fVar9	floatZero	INFERRED	literal-pool FLOAT_00108e50 (0.0), the inside/outside threshold of the distance tests

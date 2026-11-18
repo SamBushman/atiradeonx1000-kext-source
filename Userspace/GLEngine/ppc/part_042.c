@@ -935,38 +935,38 @@ void _gleSetEnable_Error(glContext)
 }
 
 /* _gleFeedbackCopyPixels @ 0xcc040 (72 bytes) */
-void _gleFeedbackCopyPixels(param_1, param_2)
-  undefined4 param_1;
+void _gleFeedbackCopyPixels(glContext, param_2)
+  undefined4 glContext;
   undefined4 param_2;
 {
-  ((void (*)())_gleFeedbackToken)(param_1,(double)FLOAT_00108f1c);
-  _gleFeedbackHitRecord(param_1,param_2);
+  ((void (*)())_gleFeedbackToken)(glContext,(double)FLOAT_00108f1c);
+  _gleFeedbackHitRecord(glContext,param_2);
   return;
 }
 
 /* _gleFeedbackDrawPixels @ 0xcc088 (72 bytes) */
-void _gleFeedbackDrawPixels(param_1, param_2)
-  undefined4 param_1;
+void _gleFeedbackDrawPixels(glContext, param_2)
+  undefined4 glContext;
   undefined4 param_2;
 {
-  ((void (*)())_gleFeedbackToken)(param_1,(double)FLOAT_00108f20);
-  _gleFeedbackHitRecord(param_1,param_2);
+  ((void (*)())_gleFeedbackToken)(glContext,(double)FLOAT_00108f20);
+  _gleFeedbackHitRecord(glContext,param_2);
   return;
 }
 
 /* _gleFeedbackBitmap @ 0xcc0d0 (72 bytes) */
-void _gleFeedbackBitmap(param_1, param_2)
-  undefined4 param_1;
+void _gleFeedbackBitmap(glContext, param_2)
+  undefined4 glContext;
   undefined4 param_2;
 {
-  ((void (*)())_gleFeedbackToken)(param_1,(double)FLOAT_00108f24);
-  _gleFeedbackHitRecord(param_1,param_2);
+  ((void (*)())_gleFeedbackToken)(glContext,(double)FLOAT_00108f24);
+  _gleFeedbackHitRecord(glContext,param_2);
   return;
 }
 
 /* _gleFeedbackPoints @ 0xcc118 (112 bytes) */
-void _gleFeedbackPoints(param_1, param_2, param_3)
-  undefined4 param_1;
+void _gleFeedbackPoints(glContext, param_2, param_3)
+  undefined4 glContext;
   uint param_2;
   int param_3;
 {
@@ -974,15 +974,15 @@ void _gleFeedbackPoints(param_1, param_2, param_3)
   
   uVar1 = param_2 + param_3 * 0x100;
   for (; param_2 < uVar1; param_2 = param_2 + 0x100) {
-    ((void (*)())_gleFeedbackToken)(param_1,(double)FLOAT_00108f28);
-    _gleFeedbackHitRecord(param_1,param_2);
+    ((void (*)())_gleFeedbackToken)(glContext,(double)FLOAT_00108f28);
+    _gleFeedbackHitRecord(glContext,param_2);
   }
   return;
 }
 
 /* _gleFeedbackPointsPtr @ 0xcc188 (112 bytes) */
-void _gleFeedbackPointsPtr(param_1, param_2, param_3)
-  undefined4 param_1;
+void _gleFeedbackPointsPtr(glContext, param_2, param_3)
+  undefined4 glContext;
   undefined4 *param_2;
   int param_3;
 {
@@ -990,22 +990,22 @@ void _gleFeedbackPointsPtr(param_1, param_2, param_3)
   
   puVar1 = param_2 + param_3;
   for (; param_2 < puVar1; param_2 = param_2 + 1) {
-    ((void (*)())_gleFeedbackToken)(param_1,(double)FLOAT_00108f28);
-    _gleFeedbackHitRecord(param_1,*param_2);
+    ((void (*)())_gleFeedbackToken)(glContext,(double)FLOAT_00108f28);
+    _gleFeedbackHitRecord(glContext,*param_2);
   }
   return;
 }
 
 /* _gleFeedbackLines_body @ 0xcc204 (116 bytes) */
-void _gleFeedbackLines_body(param_1, param_2, param_3)
-  undefined4 param_1;
+void _gleFeedbackLines_body(glContext, param_2, param_3)
+  undefined4 glContext;
   uint param_2;
   int param_3;
 {
   for (; param_2 < param_3 - 0x100U; param_2 = param_2 + 0x200) {
-    ((void (*)())_gleFeedbackToken)(param_1,(double)FLOAT_00108f2c);
-    _gleFeedbackHitRecord(param_1,param_2);
-    _gleFeedbackHitRecord(param_1,param_2 + 0x100);
+    ((void (*)())_gleFeedbackToken)(glContext,(double)FLOAT_00108f2c);
+    _gleFeedbackHitRecord(glContext,param_2);
+    _gleFeedbackHitRecord(glContext,param_2 + 0x100);
   }
   return;
 }

@@ -714,24 +714,30 @@ void _gleMap1VertexAttrib4fLoad(undefined4 unusedArg1,undefined4 unusedArg2,unde
 /* _gleEvalMap1 @ 0xdf0f4 (968 bytes) */
 void _gleEvalMap1(int glContext,float floatArg1)
 {
-  byte bVar1;
-  float fVar2;
-  float fVar3;
-  undefined4 *puVar4;
+  byte attribByteSize;
+  byte slotByteSize;
+  float domainStart;
+  float domainScale;
+  float domainScale2;
+  float offsetFromStart;
+  undefined4 *mapDataThenPoints;
   undefined4 *puVar5;
-  undefined4 *puVar6;
-  undefined4 uVar7;
+  undefined4 *selectedPoints;
+  undefined4 order;
+  undefined4 hookResult;
   undefined4 incomingR6;
-  undefined4 uVar8;
+  undefined4 components;
   int iVar9;
-  int iVar10;
-  int iVar11;
+  int outStart;
+  int nextOut;
+  int out;
   undefined4 *puVar12;
   undefined4 *puVar13;
   undefined4 *puVar14;
-  uint uVar15;
-  byte *pbVar16;
-  undefined4 *puVar17;
+  uint flagsUpdated;
+  uint slotMask;
+  byte *sizeCursor;
+  undefined4 *slotMapCursor;
   double incomingFpr2;
   double incomingFpr3;
   double incomingFpr4;
@@ -745,7 +751,7 @@ void _gleEvalMap1(int glContext,float floatArg1)
   double incomingStack_ffffffa0;
   double incomingStack_ffffffa8;
   
-  puVar4 = (undefined4 *)_gleGetMapData(glContext);
+  mapDataThenPoints = (undefined4 *)_gleGetMapData(glContext);
   if (*(short *)(glContext + 0x4a10) < 0) {
     return;
   }
@@ -754,143 +760,143 @@ void _gleEvalMap1(int glContext,float floatArg1)
     (**(code **)(glContext + 0x4a0c))(glContext);
     iVar9 = *(int *)(glContext + 0x4858);
   }
-  iVar10 = *(int *)(glContext + 0x4860);
-  iVar11 = iVar10;
+  outStart = *(int *)(glContext + 0x4860);
+  out = outStart;
   if (*(char *)(glContext + 0x7515) != '\0') {
-    iVar11 = iVar10 + 0xc;
-    ((void (*)())_gleEvalDomain1Coord)(glContext,puVar4 + 0x52,puVar4[0x4e],incomingR6,3,iVar10,
-               (double)((float)(floatArg1 - (double)GH_U2F((unsigned int)(puVar4[0x4f]))) * GH_U2F((unsigned int)(puVar4[0x51]))),incomingFpr2
+    out = outStart + 0xc;
+    ((void (*)())_gleEvalDomain1Coord)(glContext,mapDataThenPoints + 0x52,mapDataThenPoints[0x4e],incomingR6,3,outStart,
+               (double)((float)(floatArg1 - (double)GH_U2F((unsigned int)(mapDataThenPoints[0x4f]))) * GH_U2F((unsigned int)(mapDataThenPoints[0x51]))),incomingFpr2
                ,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffff88,incomingStack_ffffff90,
                incomingStack_ffffff98,incomingStack_ffffffa0,incomingStack_ffffffa8);
   }
   if (*(char *)(glContext + 0x7516) != '\0') {
-    ((void (*)())_gleEvalDomain1Color)(glContext,puVar4 + 0x74,puVar4[0x70],incomingR6,4,iVar11,
-               (double)((float)(floatArg1 - (double)GH_U2F((unsigned int)(puVar4[0x71]))) * GH_U2F((unsigned int)(puVar4[0x73]))),incomingFpr2
+    ((void (*)())_gleEvalDomain1Color)(glContext,mapDataThenPoints + 0x74,mapDataThenPoints[0x70],incomingR6,4,out,
+               (double)((float)(floatArg1 - (double)GH_U2F((unsigned int)(mapDataThenPoints[0x71]))) * GH_U2F((unsigned int)(mapDataThenPoints[0x73]))),incomingFpr2
                ,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffff88,incomingStack_ffffff90,
                incomingStack_ffffff98,incomingStack_ffffffa0,incomingStack_ffffffa8);
     if (*(char *)(glContext + 0x4df8) != '\0') {
-      (**(code **)(glContext + 0x4de0))(glContext,iVar11);
+      (**(code **)(glContext + 0x4de0))(glContext,out);
     }
-    iVar11 = iVar11 + 0x10;
+    out = out + 0x10;
   }
-  bVar1 = *(byte *)(glContext + 0x751c);
-  if (bVar1 == 8) {
-    fVar2 = GH_U2F((unsigned int)(puVar4[0xb9]));
-    fVar3 = GH_U2F((unsigned int)(puVar4[0xbb]));
-    uVar7 = puVar4[0xb8];
-    puVar5 = puVar4 + 0xbc;
-    uVar8 = 2;
-    iVar10 = iVar11 + 8;
+  attribByteSize = *(byte *)(glContext + 0x751c);
+  if (attribByteSize == 8) {
+    domainStart = GH_U2F((unsigned int)(mapDataThenPoints[0xb9]));
+    domainScale2 = GH_U2F((unsigned int)(mapDataThenPoints[0xbb]));
+    order = mapDataThenPoints[0xb8];
+    puVar5 = mapDataThenPoints + 0xbc;
+    components = 2;
+    nextOut = out + 8;
 LAB_000df2c8:
-    ((void (*)())_gleEvalDomain1Coord)(glContext,puVar5,uVar7,incomingR6,uVar8,iVar11,
-               (double)((floatArg1 - fVar2) * fVar3),incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,
+    ((void (*)())_gleEvalDomain1Coord)(glContext,puVar5,order,incomingR6,components,out,
+               (double)((floatArg1 - domainStart) * domainScale2),incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,
                incomingFpr7,incomingFpr8,incomingStack_ffffff88,incomingStack_ffffff90,incomingStack_ffffff98,incomingStack_ffffffa0,
                incomingStack_ffffffa8);
-    iVar11 = iVar10;
+    out = nextOut;
   }
-  else if (bVar1 < 9) {
-    if (bVar1 == 4) {
-      fVar2 = GH_U2F((unsigned int)(puVar4[0xab]));
-      fVar3 = GH_U2F((unsigned int)(puVar4[0xad]));
-      uVar7 = puVar4[0xaa];
-      puVar5 = puVar4 + 0xae;
-      uVar8 = 1;
-      iVar10 = iVar11 + 4;
+  else if (attribByteSize < 9) {
+    if (attribByteSize == 4) {
+      domainStart = GH_U2F((unsigned int)(mapDataThenPoints[0xab]));
+      domainScale2 = GH_U2F((unsigned int)(mapDataThenPoints[0xad]));
+      order = mapDataThenPoints[0xaa];
+      puVar5 = mapDataThenPoints + 0xae;
+      components = 1;
+      nextOut = out + 4;
       goto LAB_000df2c8;
     }
   }
   else {
-    if (bVar1 == 0xc) {
-      iVar10 = iVar11 + 0xc;
-      ((void (*)())_gleEvalDomain1Coord)(glContext,puVar4 + 0xd4,puVar4[0xd0],incomingR6,3,iVar11,
-                 (double)((float)(floatArg1 - (double)GH_U2F((unsigned int)(puVar4[0xd1]))) * GH_U2F((unsigned int)(puVar4[0xd3]))),
+    if (attribByteSize == 0xc) {
+      nextOut = out + 0xc;
+      ((void (*)())_gleEvalDomain1Coord)(glContext,mapDataThenPoints + 0xd4,mapDataThenPoints[0xd0],incomingR6,3,out,
+                 (double)((float)(floatArg1 - (double)GH_U2F((unsigned int)(mapDataThenPoints[0xd1]))) * GH_U2F((unsigned int)(mapDataThenPoints[0xd3]))),
                  incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffff88,incomingStack_ffffff90,
                  incomingStack_ffffff98,incomingStack_ffffffa0,incomingStack_ffffffa8);
-      uVar15 = *(uint *)(glContext + 0x486c) | 1;
+      flagsUpdated = *(uint *)(glContext + 0x486c) | 1;
     }
     else {
-      if (bVar1 != 0x10) goto LAB_000df2d0;
-      iVar10 = iVar11 + 0x10;
-      ((void (*)())_gleEvalDomain1Coord)(glContext,puVar4 + 0xf6,puVar4[0xf2],incomingR6,4,iVar11,
-                 (double)((float)(floatArg1 - (double)GH_U2F((unsigned int)(puVar4[0xf3]))) * GH_U2F((unsigned int)(puVar4[0xf5]))),
+      if (attribByteSize != 0x10) goto LAB_000df2d0;
+      nextOut = out + 0x10;
+      ((void (*)())_gleEvalDomain1Coord)(glContext,mapDataThenPoints + 0xf6,mapDataThenPoints[0xf2],incomingR6,4,out,
+                 (double)((float)(floatArg1 - (double)GH_U2F((unsigned int)(mapDataThenPoints[0xf3]))) * GH_U2F((unsigned int)(mapDataThenPoints[0xf5]))),
                  incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffff88,incomingStack_ffffff90,
                  incomingStack_ffffff98,incomingStack_ffffffa0,incomingStack_ffffffa8);
-      uVar15 = *(uint *)(glContext + 0x486c) | 3;
+      flagsUpdated = *(uint *)(glContext + 0x486c) | 3;
     }
-    *(uint *)(glContext + 0x486c) = uVar15;
-    iVar11 = iVar10;
+    *(uint *)(glContext + 0x486c) = flagsUpdated;
+    out = nextOut;
   }
 LAB_000df2d0:
-  uVar15 = *(uint *)(glContext + 0x74d8);
-  if (uVar15 != 0) {
-    puVar12 = puVar4 + 0xb2e;
-    pbVar16 = (byte *)(glContext + 0x7524);
+  slotMask = *(uint *)(glContext + 0x74d8);
+  if (slotMask != 0) {
+    puVar12 = mapDataThenPoints + 0xb2e;
+    sizeCursor = (byte *)(glContext + 0x7524);
     puVar5 = puVar12;
     puVar13 = puVar12;
     puVar14 = puVar12;
-    puVar17 = puVar4;
+    slotMapCursor = mapDataThenPoints;
     do {
-      bVar1 = *pbVar16;
-      pbVar16 = pbVar16 + 1;
-      if (bVar1 == 8) {
-        fVar2 = GH_U2F((unsigned int)(puVar17[0xb2d]));
-        fVar3 = (float)(floatArg1 - (double)GH_U2F((unsigned int)(puVar17[0xb2b])));
-        uVar7 = puVar17[0xb2a];
-        uVar8 = 2;
-        iVar10 = iVar11 + 8;
-        puVar6 = puVar13;
+      slotByteSize = *sizeCursor;
+      sizeCursor = sizeCursor + 1;
+      if (slotByteSize == 8) {
+        domainScale = GH_U2F((unsigned int)(slotMapCursor[0xb2d]));
+        offsetFromStart = (float)(floatArg1 - (double)GH_U2F((unsigned int)(slotMapCursor[0xb2b])));
+        order = slotMapCursor[0xb2a];
+        components = 2;
+        nextOut = out + 8;
+        selectedPoints = puVar13;
 LAB_000df3c0:
-        ((void (*)())_gleEvalDomain1Coord)(glContext,puVar6,uVar7,incomingR6,uVar8,iVar11,(double)(fVar3 * fVar2),incomingFpr2,incomingFpr3,incomingFpr4
+        ((void (*)())_gleEvalDomain1Coord)(glContext,selectedPoints,order,incomingR6,components,out,(double)(offsetFromStart * domainScale),incomingFpr2,incomingFpr3,incomingFpr4
                    ,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffff88,incomingStack_ffffff90,incomingStack_ffffff98,
                    incomingStack_ffffffa0,incomingStack_ffffffa8);
-        iVar11 = iVar10;
+        out = nextOut;
       }
       else {
-        if (8 < bVar1) {
-          if (bVar1 == 0xc) {
-            fVar2 = GH_U2F((unsigned int)(puVar17[0xb2d]));
-            fVar3 = (float)(floatArg1 - (double)GH_U2F((unsigned int)(puVar17[0xb2b])));
-            uVar7 = puVar17[0xb2a];
-            uVar8 = 3;
-            iVar10 = iVar11 + 0xc;
-            puVar6 = puVar12;
+        if (8 < slotByteSize) {
+          if (slotByteSize == 0xc) {
+            domainScale = GH_U2F((unsigned int)(slotMapCursor[0xb2d]));
+            offsetFromStart = (float)(floatArg1 - (double)GH_U2F((unsigned int)(slotMapCursor[0xb2b])));
+            order = slotMapCursor[0xb2a];
+            components = 3;
+            nextOut = out + 0xc;
+            selectedPoints = puVar12;
           }
           else {
-            if (bVar1 != 0x10) goto LAB_000df3c8;
-            fVar2 = GH_U2F((unsigned int)(puVar17[0xb2d]));
-            fVar3 = (float)(floatArg1 - (double)GH_U2F((unsigned int)(puVar17[0xb2b])));
-            uVar7 = puVar17[0xb2a];
-            uVar8 = 4;
-            iVar10 = iVar11 + 0x10;
-            puVar6 = puVar5;
+            if (slotByteSize != 0x10) goto LAB_000df3c8;
+            domainScale = GH_U2F((unsigned int)(slotMapCursor[0xb2d]));
+            offsetFromStart = (float)(floatArg1 - (double)GH_U2F((unsigned int)(slotMapCursor[0xb2b])));
+            order = slotMapCursor[0xb2a];
+            components = 4;
+            nextOut = out + 0x10;
+            selectedPoints = puVar5;
           }
           goto LAB_000df3c0;
         }
-        if (bVar1 == 4) {
-          fVar2 = GH_U2F((unsigned int)(puVar17[0xb2d]));
-          fVar3 = (float)(floatArg1 - (double)GH_U2F((unsigned int)(puVar17[0xb2b])));
-          uVar7 = puVar17[0xb2a];
-          uVar8 = 1;
-          iVar10 = iVar11 + 4;
-          puVar6 = puVar14;
+        if (slotByteSize == 4) {
+          domainScale = GH_U2F((unsigned int)(slotMapCursor[0xb2d]));
+          offsetFromStart = (float)(floatArg1 - (double)GH_U2F((unsigned int)(slotMapCursor[0xb2b])));
+          order = slotMapCursor[0xb2a];
+          components = 1;
+          nextOut = out + 4;
+          selectedPoints = puVar14;
           goto LAB_000df3c0;
         }
       }
 LAB_000df3c8:
-      uVar15 = uVar15 >> 1;
+      slotMask = slotMask >> 1;
       puVar5 = puVar5 + 0x2c;
       puVar12 = puVar12 + 0x2c;
       puVar13 = puVar13 + 0x2c;
-      puVar17 = puVar17 + 0x2c;
+      slotMapCursor = slotMapCursor + 0x2c;
       puVar14 = puVar14 + 0x2c;
-    } while (uVar15 != 0);
+    } while (slotMask != 0);
   }
   if (*(char *)(glContext + 0x7514) == '\f') {
-    fVar2 = GH_U2F((unsigned int)(puVar4[1]));
-    fVar3 = GH_U2F((unsigned int)(puVar4[3]));
-    uVar7 = *puVar4;
-    puVar4 = puVar4 + 4;
-    uVar8 = 3;
+    domainStart = GH_U2F((unsigned int)(mapDataThenPoints[1]));
+    domainScale2 = GH_U2F((unsigned int)(mapDataThenPoints[3]));
+    order = *mapDataThenPoints;
+    mapDataThenPoints = mapDataThenPoints + 4;
+    components = 3;
   }
   else {
     if (*(char *)(glContext + 0x7514) != '\x10') {
@@ -904,21 +910,21 @@ LAB_000df3c8:
       }
       goto LAB_000df478;
     }
-    fVar2 = GH_U2F((unsigned int)(puVar4[0x23]));
-    fVar3 = GH_U2F((unsigned int)(puVar4[0x25]));
-    uVar7 = puVar4[0x22];
-    puVar4 = puVar4 + 0x26;
-    uVar8 = 4;
+    domainStart = GH_U2F((unsigned int)(mapDataThenPoints[0x23]));
+    domainScale2 = GH_U2F((unsigned int)(mapDataThenPoints[0x25]));
+    order = mapDataThenPoints[0x22];
+    mapDataThenPoints = mapDataThenPoints + 0x26;
+    components = 4;
   }
-  ((void (*)())_gleEvalDomain1Coord)(glContext,puVar4,uVar7,incomingR6,uVar8,iVar11,
-             (double)((floatArg1 - fVar2) * fVar3),incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7
+  ((void (*)())_gleEvalDomain1Coord)(glContext,mapDataThenPoints,order,incomingR6,components,out,
+             (double)((floatArg1 - domainStart) * domainScale2),incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7
              ,incomingFpr8,incomingStack_ffffff88,incomingStack_ffffff90,incomingStack_ffffff98,incomingStack_ffffffa0,
              incomingStack_ffffffa8);
 LAB_000df478:
   *(int *)(glContext + 0x48ec) = glContext + 0x7508;
-  uVar7 = (**(code **)(glContext + 0x4898))(glContext,*(undefined4 *)(glContext + 0x4860),iVar9);
+  hookResult = (**(code **)(glContext + 0x4898))(glContext,*(undefined4 *)(glContext + 0x4860),iVar9);
   *(undefined4 *)(glContext + 0x48ec) = 0;
-  *(undefined4 *)(glContext + 0x4858) = uVar7;
+  *(undefined4 *)(glContext + 0x4858) = hookResult;
   return;
 }
 
@@ -2400,46 +2406,52 @@ void _gleMap2VertexAttrib4fLoad(undefined4 unusedArg1,undefined4 unusedArg2,unde
 /* _gleEvalMap2 @ 0xe0df0 (1504 bytes) */
 void _gleEvalMap2(int glContext,float floatArg1,float floatArg2,double floatArg3,double floatArg4,double floatArg5,double floatArg6,double floatArg7,double floatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12)
 {
-  byte bVar1;
-  float fVar2;
-  float fVar3;
+  byte attribByteSize;
+  byte slotByteSize;
+  float uNormalized;
+  float vNormalized;
   undefined *vectorNormalize;
-  undefined4 uVar5;
-  int iVar6;
-  undefined4 uVar7;
+  undefined4 uorder;
+  undefined4 hookResult;
+  int selectedPoints;
+  undefined4 vorder;
   undefined4 incomingR7;
   undefined4 incomingR8;
-  undefined4 uVar8;
+  undefined4 components;
   int iVar9;
-  float *pfVar10;
-  float *pfVar11;
-  float *pfVar12;
-  int iVar13;
+  float *outStart;
+  float *nextOut;
+  float *out;
+  int mapDataThenPoints;
   int iVar14;
   int iVar15;
   int iVar16;
   int iVar17;
-  uint uVar18;
-  int iVar19;
-  byte *pbVar20;
-  float dVar21;
-  float dVar22;
+  uint flagsUpdated;
+  uint slotMask;
+  int slotMapCursor;
+  byte *sizeCursor;
+  float slotUNormalized;
+  float lastUNormalized;
+  float slotVNormalized;
+  float lastVNormalized;
   double incomingFpr9;
   double incomingFpr10;
-  float dVar23;
+  float lastVOffset3;
+  float lastVOffset4;
   double incomingStack_ffffff48;
   double incomingStack_ffffff50;
   double incomingStack_ffffff58;
   double incomingStack_ffffff60;
   double incomingStack_ffffff68;
-  float local_70;
-  float local_6c;
-  float local_68;
-  float local_60;
-  float local_5c;
-  float local_58;
+  float deriv1X;
+  float deriv1Y;
+  float deriv1Z;
+  float deriv2X;
+  float deriv2Y;
+  float deriv2Z;
   
-  iVar13 = *(int *)(glContext + 0x7450);
+  mapDataThenPoints = *(int *)(glContext + 0x7450);
   if (*(short *)(glContext + 0x4a10) < 0) {
     return;
   }
@@ -2448,187 +2460,187 @@ void _gleEvalMap2(int glContext,float floatArg1,float floatArg2,double floatArg3
     (**(code **)(glContext + 0x4a0c))(glContext);
     iVar9 = *(int *)(glContext + 0x4858);
   }
-  pfVar10 = *(float **)(glContext + 0x4860);
-  pfVar12 = pfVar10;
+  outStart = *(float **)(glContext + 0x4860);
+  out = outStart;
   if (*(char *)(glContext + 0x7555) != '\0') {
     if (*(char *)(glContext + 0x74f2) == '\0') {
-      ((void (*)())_gleEvalDomain2Coord)(glContext,iVar13 + 0xfc8,*(undefined4 *)(iVar13 + 0xfa8),
-                 *(undefined4 *)(iVar13 + 0xfac),incomingR7,incomingR8,3,pfVar10,
-                 (double)((floatArg1 - *(float *)(iVar13 + 0xfb0)) *
-                         *(float *)(iVar13 + 0xfc0)),
-                 (double)((floatArg2 - *(float *)(iVar13 + 0xfb8)) *
-                         *(float *)(iVar13 + 0xfc4)),floatArg3,floatArg4,floatArg5,floatArg6,floatArg7,
+      ((void (*)())_gleEvalDomain2Coord)(glContext,mapDataThenPoints + 0xfc8,*(undefined4 *)(mapDataThenPoints + 0xfa8),
+                 *(undefined4 *)(mapDataThenPoints + 0xfac),incomingR7,incomingR8,3,outStart,
+                 (double)((floatArg1 - *(float *)(mapDataThenPoints + 0xfb0)) *
+                         *(float *)(mapDataThenPoints + 0xfc0)),
+                 (double)((floatArg2 - *(float *)(mapDataThenPoints + 0xfb8)) *
+                         *(float *)(mapDataThenPoints + 0xfc4)),floatArg3,floatArg4,floatArg5,floatArg6,floatArg7,
                  floatArg8,incomingStack_ffffff48,incomingStack_ffffff50,incomingStack_ffffff58,incomingStack_ffffff60,
                  incomingStack_ffffff68);
     }
-    pfVar12 = pfVar10 + 3;
+    out = outStart + 3;
   }
   if (*(char *)(glContext + 0x7556) != '\0') {
-    ((void (*)())_gleEvalDomain2Color)(glContext,iVar13 + 0x1498,*(undefined4 *)(iVar13 + 0x1478),
-               *(undefined4 *)(iVar13 + 0x147c),incomingR7,incomingR8,4,pfVar12,
-               (double)((floatArg1 - *(float *)(iVar13 + 0x1480)) *
-                       *(float *)(iVar13 + 0x1490)),
-               (double)((floatArg2 - *(float *)(iVar13 + 0x1488)) *
-                       *(float *)(iVar13 + 0x1494)),floatArg3,floatArg4,floatArg5,floatArg6,floatArg7,
+    ((void (*)())_gleEvalDomain2Color)(glContext,mapDataThenPoints + 0x1498,*(undefined4 *)(mapDataThenPoints + 0x1478),
+               *(undefined4 *)(mapDataThenPoints + 0x147c),incomingR7,incomingR8,4,out,
+               (double)((floatArg1 - *(float *)(mapDataThenPoints + 0x1480)) *
+                       *(float *)(mapDataThenPoints + 0x1490)),
+               (double)((floatArg2 - *(float *)(mapDataThenPoints + 0x1488)) *
+                       *(float *)(mapDataThenPoints + 0x1494)),floatArg3,floatArg4,floatArg5,floatArg6,floatArg7,
                floatArg8,incomingStack_ffffff48,incomingStack_ffffff50,incomingStack_ffffff58,incomingStack_ffffff60,
                incomingStack_ffffff68);
     if (*(char *)(glContext + 0x4df8) != '\0') {
-      (**(code **)(glContext + 0x4de0))(glContext,pfVar12);
+      (**(code **)(glContext + 0x4de0))(glContext,out);
     }
-    pfVar12 = pfVar12 + 4;
+    out = out + 4;
   }
-  bVar1 = *(byte *)(glContext + 0x755c);
-  if (bVar1 == 8) {
-    uVar5 = *(undefined4 *)(iVar13 + 0x1e38);
-    iVar14 = iVar13 + 0x1e58;
-    fVar2 = (floatArg1 - *(float *)(iVar13 + 0x1e40)) * *(float *)(iVar13 + 0x1e50);
-    uVar7 = *(undefined4 *)(iVar13 + 0x1e3c);
-    fVar3 = (floatArg2 - *(float *)(iVar13 + 0x1e48)) * *(float *)(iVar13 + 0x1e54);
-    uVar8 = 2;
-    pfVar11 = pfVar12 + 2;
+  attribByteSize = *(byte *)(glContext + 0x755c);
+  if (attribByteSize == 8) {
+    uorder = *(undefined4 *)(mapDataThenPoints + 0x1e38);
+    iVar14 = mapDataThenPoints + 0x1e58;
+    uNormalized = (floatArg1 - *(float *)(mapDataThenPoints + 0x1e40)) * *(float *)(mapDataThenPoints + 0x1e50);
+    vorder = *(undefined4 *)(mapDataThenPoints + 0x1e3c);
+    vNormalized = (floatArg2 - *(float *)(mapDataThenPoints + 0x1e48)) * *(float *)(mapDataThenPoints + 0x1e54);
+    components = 2;
+    nextOut = out + 2;
 LAB_000e105c:
-    ((void (*)())_gleEvalDomain2Coord)(glContext,iVar14,uVar5,uVar7,incomingR7,incomingR8,uVar8,pfVar12,(double)fVar2,(double)fVar3,
+    ((void (*)())_gleEvalDomain2Coord)(glContext,iVar14,uorder,vorder,incomingR7,incomingR8,components,out,(double)uNormalized,(double)vNormalized,
                floatArg3,floatArg4,floatArg5,floatArg6,floatArg7,floatArg8,incomingStack_ffffff48,
                incomingStack_ffffff50,incomingStack_ffffff58,incomingStack_ffffff60,incomingStack_ffffff68);
-    pfVar12 = pfVar11;
+    out = nextOut;
   }
-  else if (bVar1 < 9) {
-    if (bVar1 == 4) {
-      uVar5 = *(undefined4 *)(iVar13 + 0x1c88);
-      iVar14 = iVar13 + 0x1ca8;
-      fVar2 = (floatArg1 - *(float *)(iVar13 + 0x1c90)) * *(float *)(iVar13 + 0x1ca0);
-      uVar7 = *(undefined4 *)(iVar13 + 0x1c8c);
-      fVar3 = (floatArg2 - *(float *)(iVar13 + 0x1c98)) * *(float *)(iVar13 + 0x1ca4);
-      uVar8 = 1;
-      pfVar11 = pfVar12 + 1;
+  else if (attribByteSize < 9) {
+    if (attribByteSize == 4) {
+      uorder = *(undefined4 *)(mapDataThenPoints + 0x1c88);
+      iVar14 = mapDataThenPoints + 0x1ca8;
+      uNormalized = (floatArg1 - *(float *)(mapDataThenPoints + 0x1c90)) * *(float *)(mapDataThenPoints + 0x1ca0);
+      vorder = *(undefined4 *)(mapDataThenPoints + 0x1c8c);
+      vNormalized = (floatArg2 - *(float *)(mapDataThenPoints + 0x1c98)) * *(float *)(mapDataThenPoints + 0x1ca4);
+      components = 1;
+      nextOut = out + 1;
       goto LAB_000e105c;
     }
   }
   else {
-    if (bVar1 == 0xc) {
-      pfVar11 = pfVar12 + 3;
-      ((void (*)())_gleEvalDomain2Coord)(glContext,iVar13 + 0x2198,*(undefined4 *)(iVar13 + 0x2178),
-                 *(undefined4 *)(iVar13 + 0x217c),incomingR7,incomingR8,3,pfVar12,
-                 (double)((floatArg1 - *(float *)(iVar13 + 0x2180)) *
-                         *(float *)(iVar13 + 0x2190)),
-                 (double)((floatArg2 - *(float *)(iVar13 + 0x2188)) *
-                         *(float *)(iVar13 + 0x2194)),floatArg3,floatArg4,floatArg5,floatArg6,floatArg7,
+    if (attribByteSize == 0xc) {
+      nextOut = out + 3;
+      ((void (*)())_gleEvalDomain2Coord)(glContext,mapDataThenPoints + 0x2198,*(undefined4 *)(mapDataThenPoints + 0x2178),
+                 *(undefined4 *)(mapDataThenPoints + 0x217c),incomingR7,incomingR8,3,out,
+                 (double)((floatArg1 - *(float *)(mapDataThenPoints + 0x2180)) *
+                         *(float *)(mapDataThenPoints + 0x2190)),
+                 (double)((floatArg2 - *(float *)(mapDataThenPoints + 0x2188)) *
+                         *(float *)(mapDataThenPoints + 0x2194)),floatArg3,floatArg4,floatArg5,floatArg6,floatArg7,
                  floatArg8,incomingStack_ffffff48,incomingStack_ffffff50,incomingStack_ffffff58,incomingStack_ffffff60,
                  incomingStack_ffffff68);
-      uVar18 = *(uint *)(glContext + 0x486c) | 1;
+      flagsUpdated = *(uint *)(glContext + 0x486c) | 1;
     }
     else {
-      if (bVar1 != 0x10) goto LAB_000e1060;
-      pfVar11 = pfVar12 + 4;
-      ((void (*)())_gleEvalDomain2Coord)(glContext,iVar13 + 0x2668,*(undefined4 *)(iVar13 + 0x2648),
-                 *(undefined4 *)(iVar13 + 0x264c),incomingR7,incomingR8,4,pfVar12,
-                 (double)((floatArg1 - *(float *)(iVar13 + 0x2650)) *
-                         *(float *)(iVar13 + 0x2660)),
-                 (double)((floatArg2 - *(float *)(iVar13 + 0x2658)) *
-                         *(float *)(iVar13 + 0x2664)),floatArg3,floatArg4,floatArg5,floatArg6,floatArg7,
+      if (attribByteSize != 0x10) goto LAB_000e1060;
+      nextOut = out + 4;
+      ((void (*)())_gleEvalDomain2Coord)(glContext,mapDataThenPoints + 0x2668,*(undefined4 *)(mapDataThenPoints + 0x2648),
+                 *(undefined4 *)(mapDataThenPoints + 0x264c),incomingR7,incomingR8,4,out,
+                 (double)((floatArg1 - *(float *)(mapDataThenPoints + 0x2650)) *
+                         *(float *)(mapDataThenPoints + 0x2660)),
+                 (double)((floatArg2 - *(float *)(mapDataThenPoints + 0x2658)) *
+                         *(float *)(mapDataThenPoints + 0x2664)),floatArg3,floatArg4,floatArg5,floatArg6,floatArg7,
                  floatArg8,incomingStack_ffffff48,incomingStack_ffffff50,incomingStack_ffffff58,incomingStack_ffffff60,
                  incomingStack_ffffff68);
-      uVar18 = *(uint *)(glContext + 0x486c) | 3;
+      flagsUpdated = *(uint *)(glContext + 0x486c) | 3;
     }
-    *(uint *)(glContext + 0x486c) = uVar18;
-    pfVar12 = pfVar11;
+    *(uint *)(glContext + 0x486c) = flagsUpdated;
+    out = nextOut;
   }
 LAB_000e1060:
-  uVar18 = *(uint *)(glContext + 0x74dc);
-  if (uVar18 != 0) {
-    iVar16 = iVar13 + 0x37c8;
-    pbVar20 = (byte *)(glContext + 0x7564);
+  slotMask = *(uint *)(glContext + 0x74dc);
+  if (slotMask != 0) {
+    iVar16 = mapDataThenPoints + 0x37c8;
+    sizeCursor = (byte *)(glContext + 0x7564);
     iVar14 = iVar16;
     iVar15 = iVar16;
     iVar17 = iVar16;
-    iVar19 = iVar13;
+    slotMapCursor = mapDataThenPoints;
     do {
-      bVar1 = *pbVar20;
-      pbVar20 = pbVar20 + 1;
-      if (bVar1 == 8) {
-        uVar5 = *(undefined4 *)(iVar19 + 0x37a8);
-        dVar21 = (double)((floatArg1 - *(float *)(iVar19 + 0x37b0)) *
-                         *(float *)(iVar19 + 0x37c0));
-        uVar7 = *(undefined4 *)(iVar19 + 0x37ac);
-        dVar22 = (double)((floatArg2 - *(float *)(iVar19 + 0x37b8)) *
-                         *(float *)(iVar19 + 0x37c4));
-        uVar8 = 2;
-        pfVar11 = pfVar12 + 2;
-        iVar6 = iVar15;
+      slotByteSize = *sizeCursor;
+      sizeCursor = sizeCursor + 1;
+      if (slotByteSize == 8) {
+        uorder = *(undefined4 *)(slotMapCursor + 0x37a8);
+        slotUNormalized = (double)((floatArg1 - *(float *)(slotMapCursor + 0x37b0)) *
+                         *(float *)(slotMapCursor + 0x37c0));
+        vorder = *(undefined4 *)(slotMapCursor + 0x37ac);
+        slotVNormalized = (double)((floatArg2 - *(float *)(slotMapCursor + 0x37b8)) *
+                         *(float *)(slotMapCursor + 0x37c4));
+        components = 2;
+        nextOut = out + 2;
+        selectedPoints = iVar15;
 LAB_000e11b0:
-        ((void (*)())_gleEvalDomain2Coord)(glContext,iVar6,uVar5,uVar7,incomingR7,incomingR8,uVar8,pfVar12,(double)dVar21,(double)dVar22,floatArg3,
+        ((void (*)())_gleEvalDomain2Coord)(glContext,selectedPoints,uorder,vorder,incomingR7,incomingR8,components,out,(double)slotUNormalized,(double)slotVNormalized,floatArg3,
                    floatArg4,floatArg5,floatArg6,floatArg7,floatArg8,incomingStack_ffffff48,incomingStack_ffffff50,
                    incomingStack_ffffff58,incomingStack_ffffff60,incomingStack_ffffff68);
-        pfVar12 = pfVar11;
+        out = nextOut;
       }
       else {
-        if (8 < bVar1) {
-          if (bVar1 == 0xc) {
-            uVar5 = *(undefined4 *)(iVar19 + 0x37a8);
-            dVar21 = (double)((floatArg1 - *(float *)(iVar19 + 0x37b0)) *
-                             *(float *)(iVar19 + 0x37c0));
-            uVar7 = *(undefined4 *)(iVar19 + 0x37ac);
-            dVar22 = (double)((floatArg2 - *(float *)(iVar19 + 0x37b8)) *
-                             *(float *)(iVar19 + 0x37c4));
-            uVar8 = 3;
-            pfVar11 = pfVar12 + 3;
-            iVar6 = iVar16;
+        if (8 < slotByteSize) {
+          if (slotByteSize == 0xc) {
+            uorder = *(undefined4 *)(slotMapCursor + 0x37a8);
+            slotUNormalized = (double)((floatArg1 - *(float *)(slotMapCursor + 0x37b0)) *
+                             *(float *)(slotMapCursor + 0x37c0));
+            vorder = *(undefined4 *)(slotMapCursor + 0x37ac);
+            slotVNormalized = (double)((floatArg2 - *(float *)(slotMapCursor + 0x37b8)) *
+                             *(float *)(slotMapCursor + 0x37c4));
+            components = 3;
+            nextOut = out + 3;
+            selectedPoints = iVar16;
           }
           else {
-            if (bVar1 != 0x10) goto LAB_000e11b4;
-            uVar5 = *(undefined4 *)(iVar19 + 0x37a8);
-            dVar21 = (double)((floatArg1 - *(float *)(iVar19 + 0x37b0)) *
-                             *(float *)(iVar19 + 0x37c0));
-            uVar7 = *(undefined4 *)(iVar19 + 0x37ac);
-            dVar22 = (double)((floatArg2 - *(float *)(iVar19 + 0x37b8)) *
-                             *(float *)(iVar19 + 0x37c4));
-            uVar8 = 4;
-            pfVar11 = pfVar12 + 4;
-            iVar6 = iVar14;
+            if (slotByteSize != 0x10) goto LAB_000e11b4;
+            uorder = *(undefined4 *)(slotMapCursor + 0x37a8);
+            slotUNormalized = (double)((floatArg1 - *(float *)(slotMapCursor + 0x37b0)) *
+                             *(float *)(slotMapCursor + 0x37c0));
+            vorder = *(undefined4 *)(slotMapCursor + 0x37ac);
+            slotVNormalized = (double)((floatArg2 - *(float *)(slotMapCursor + 0x37b8)) *
+                             *(float *)(slotMapCursor + 0x37c4));
+            components = 4;
+            nextOut = out + 4;
+            selectedPoints = iVar14;
           }
           goto LAB_000e11b0;
         }
-        if (bVar1 == 4) {
-          uVar5 = *(undefined4 *)(iVar19 + 0x37a8);
-          dVar21 = (double)((floatArg1 - *(float *)(iVar19 + 0x37b0)) *
-                           *(float *)(iVar19 + 0x37c0));
-          uVar7 = *(undefined4 *)(iVar19 + 0x37ac);
-          dVar22 = (double)((floatArg2 - *(float *)(iVar19 + 0x37b8)) *
-                           *(float *)(iVar19 + 0x37c4));
-          uVar8 = 1;
-          pfVar11 = pfVar12 + 1;
-          iVar6 = iVar17;
+        if (slotByteSize == 4) {
+          uorder = *(undefined4 *)(slotMapCursor + 0x37a8);
+          slotUNormalized = (double)((floatArg1 - *(float *)(slotMapCursor + 0x37b0)) *
+                           *(float *)(slotMapCursor + 0x37c0));
+          vorder = *(undefined4 *)(slotMapCursor + 0x37ac);
+          slotVNormalized = (double)((floatArg2 - *(float *)(slotMapCursor + 0x37b8)) *
+                           *(float *)(slotMapCursor + 0x37c4));
+          components = 1;
+          nextOut = out + 1;
+          selectedPoints = iVar17;
           goto LAB_000e11b0;
         }
       }
 LAB_000e11b4:
-      uVar18 = uVar18 >> 1;
+      slotMask = slotMask >> 1;
       iVar14 = iVar14 + 0x660;
       iVar16 = iVar16 + 0x660;
       iVar15 = iVar15 + 0x660;
-      iVar19 = iVar19 + 0x660;
+      slotMapCursor = slotMapCursor + 0x660;
       iVar17 = iVar17 + 0x660;
-    } while (uVar18 != 0);
+    } while (slotMask != 0);
   }
   if (*(char *)(glContext + 0x7554) == '\f') {
-    dVar23 = (double)(floatArg2 - *(float *)(iVar13 + 0x488));
-    dVar21 = (double)((floatArg1 - *(float *)(iVar13 + 0x480)) * *(float *)(iVar13 + 0x490));
-    dVar22 = (double)(dVar23 * *(float *)(iVar13 + 0x494));
+    lastVOffset3 = (double)(floatArg2 - *(float *)(mapDataThenPoints + 0x488));
+    lastUNormalized = (double)((floatArg1 - *(float *)(mapDataThenPoints + 0x480)) * *(float *)(mapDataThenPoints + 0x490));
+    lastVNormalized = (double)(lastVOffset3 * *(float *)(mapDataThenPoints + 0x494));
     if (*(char *)(glContext + 0x74f2) == '\0') {
-      uVar7 = *(undefined4 *)(iVar13 + 0x47c);
-      uVar5 = *(undefined4 *)(iVar13 + 0x478);
-      iVar13 = iVar13 + 0x498;
-      uVar8 = 3;
+      vorder = *(undefined4 *)(mapDataThenPoints + 0x47c);
+      uorder = *(undefined4 *)(mapDataThenPoints + 0x478);
+      mapDataThenPoints = mapDataThenPoints + 0x498;
+      components = 3;
 LAB_000e1350:
-      ((void (*)())_gleEvalDomain2Coord)(glContext,iVar13,uVar5,uVar7,incomingR7,incomingR8,uVar8,pfVar12,(double)dVar21,(double)dVar22,floatArg3,
+      ((void (*)())_gleEvalDomain2Coord)(glContext,mapDataThenPoints,uorder,vorder,incomingR7,incomingR8,components,out,(double)lastUNormalized,(double)lastVNormalized,floatArg3,
                  floatArg4,floatArg5,floatArg6,floatArg7,floatArg8,incomingStack_ffffff48,incomingStack_ffffff50,
                  incomingStack_ffffff58,incomingStack_ffffff60,incomingStack_ffffff68);
       goto LAB_000e1388;
     }
-    ((void (*)())_gleEvalDomainDeriv2Coord)(glContext,iVar13 + 0x498,*(undefined4 *)(iVar13 + 0x478),
-               *(undefined4 *)(iVar13 + 0x47c),incomingR7,incomingR8,3,&local_70,&local_60,pfVar12,(double)dVar21,
-               (double)dVar22,floatArg3,floatArg4,floatArg5,floatArg6,floatArg7,floatArg8,incomingFpr9,incomingFpr10,
-               (double)*(float *)(iVar13 + 0x494),(double)*(float *)(iVar13 + 0x490),(double)dVar23);
+    ((void (*)())_gleEvalDomainDeriv2Coord)(glContext,mapDataThenPoints + 0x498,*(undefined4 *)(mapDataThenPoints + 0x478),
+               *(undefined4 *)(mapDataThenPoints + 0x47c),incomingR7,incomingR8,3,&deriv1X,&deriv2X,out,(double)lastUNormalized,
+               (double)lastVNormalized,floatArg3,floatArg4,floatArg5,floatArg6,floatArg7,floatArg8,incomingFpr9,incomingFpr10,
+               (double)*(float *)(mapDataThenPoints + 0x494),(double)*(float *)(mapDataThenPoints + 0x490),(double)lastVOffset3);
   }
   else {
     if (*(char *)(glContext + 0x7554) != '\x10') {
@@ -2642,32 +2654,32 @@ LAB_000e1350:
       }
       goto LAB_000e1388;
     }
-    dVar23 = (double)(floatArg2 - *(float *)(iVar13 + 0x958));
-    dVar21 = (double)((floatArg1 - *(float *)(iVar13 + 0x950)) * *(float *)(iVar13 + 0x960));
-    dVar22 = (double)(dVar23 * *(float *)(iVar13 + 0x964));
+    lastVOffset4 = (double)(floatArg2 - *(float *)(mapDataThenPoints + 0x958));
+    lastUNormalized = (double)((floatArg1 - *(float *)(mapDataThenPoints + 0x950)) * *(float *)(mapDataThenPoints + 0x960));
+    lastVNormalized = (double)(lastVOffset4 * *(float *)(mapDataThenPoints + 0x964));
     if (*(char *)(glContext + 0x74f2) == '\0') {
-      uVar7 = *(undefined4 *)(iVar13 + 0x94c);
-      uVar5 = *(undefined4 *)(iVar13 + 0x948);
-      iVar13 = iVar13 + 0x968;
-      uVar8 = 4;
+      vorder = *(undefined4 *)(mapDataThenPoints + 0x94c);
+      uorder = *(undefined4 *)(mapDataThenPoints + 0x948);
+      mapDataThenPoints = mapDataThenPoints + 0x968;
+      components = 4;
       goto LAB_000e1350;
     }
-    ((void (*)())_gleEvalDomainDeriv2Coord)(glContext,iVar13 + 0x968,*(undefined4 *)(iVar13 + 0x948),
-               *(undefined4 *)(iVar13 + 0x94c),incomingR7,incomingR8,4,&local_70,&local_60,pfVar12,(double)dVar21,
-               (double)dVar22,floatArg3,floatArg4,floatArg5,floatArg6,floatArg7,floatArg8,incomingFpr9,incomingFpr10,
-               (double)*(float *)(iVar13 + 0x964),(double)*(float *)(iVar13 + 0x960),(double)dVar23);
-    ((void (*)())_gleComputeFirstPartial)(glContext,pfVar12,&local_70,&local_60);
+    ((void (*)())_gleEvalDomainDeriv2Coord)(glContext,mapDataThenPoints + 0x968,*(undefined4 *)(mapDataThenPoints + 0x948),
+               *(undefined4 *)(mapDataThenPoints + 0x94c),incomingR7,incomingR8,4,&deriv1X,&deriv2X,out,(double)lastUNormalized,
+               (double)lastVNormalized,floatArg3,floatArg4,floatArg5,floatArg6,floatArg7,floatArg8,incomingFpr9,incomingFpr10,
+               (double)*(float *)(mapDataThenPoints + 0x964),(double)*(float *)(mapDataThenPoints + 0x960),(double)lastVOffset4);
+    ((void (*)())_gleComputeFirstPartial)(glContext,out,&deriv1X,&deriv2X);
   }
   vectorNormalize = PTR__gleVectorNormalize_00112064;
-  *pfVar10 = local_6c * local_58 - local_68 * local_5c;
-  pfVar10[1] = local_68 * local_60 - local_70 * local_58;
-  pfVar10[2] = local_70 * local_5c - local_6c * local_60;
-  (**(code **)vectorNormalize)(glContext,pfVar10,pfVar10);
+  *outStart = deriv1Y * deriv2Z - deriv1Z * deriv2Y;
+  outStart[1] = deriv1Z * deriv2X - deriv1X * deriv2Z;
+  outStart[2] = deriv1X * deriv2Y - deriv1Y * deriv2X;
+  (**(code **)vectorNormalize)(glContext,outStart,outStart);
 LAB_000e1388:
   *(int *)(glContext + 0x48ec) = glContext + 0x7548;
-  uVar5 = (**(code **)(glContext + 0x489c))(glContext,*(undefined4 *)(glContext + 0x4860),iVar9);
+  hookResult = (**(code **)(glContext + 0x489c))(glContext,*(undefined4 *)(glContext + 0x4860),iVar9);
   *(undefined4 *)(glContext + 0x48ec) = 0;
-  *(undefined4 *)(glContext + 0x4858) = uVar5;
+  *(undefined4 *)(glContext + 0x4858) = hookResult;
   return;
 }
 
@@ -2701,9 +2713,9 @@ void _gleFreeQueryObject(glContext, param_2)
 }
 
 /* _gleCreateQueryObject @ 0xe1450 (200 bytes) */
-int _gleCreateQueryObject(glContext, param_2)
+int _gleCreateQueryObject(glContext, id)
   int glContext;
-  undefined4 param_2;
+  undefined4 id;
 {
   int *piVar1;
   undefined4 *puVar2;
@@ -2717,7 +2729,7 @@ int _gleCreateQueryObject(glContext, param_2)
   freeQueryObject = PTR__gleFreeQueryObject_00110e8c;
   puVar5[2] = 1;
   puVar5[3] = freeQueryObject;
-  puVar5[1] = param_2;
+  puVar5[1] = id;
   puVar4 = puVar5 + 4;
   *puVar5 = 0;
   iVar7 = 8;

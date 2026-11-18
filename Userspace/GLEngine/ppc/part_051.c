@@ -454,8 +454,8 @@ int _gleClipPoints(unusedArg1, param_2, param_3, param_4)
 }
 
 /* _gleClipPointsPlane @ 0xeaa30 (244 bytes) */
-int _gleClipPointsPlane(param_1, param_2, param_3)
-  int param_1;
+int _gleClipPointsPlane(glContext, param_2, param_3)
+  int glContext;
   int *param_2;
   int param_3;
 {
@@ -474,13 +474,13 @@ int _gleClipPointsPlane(param_1, param_2, param_3)
   
   fVar5 = FLOAT_00108e50;
   iVar7 = 0;
-  iVar11 = *(int *)(param_1 + 0x4dfc);
+  iVar11 = *(int *)(glContext + 0x4dfc);
   if ((0 < iVar11) && (0 < param_3)) {
-    piVar8 = (int *)(param_1 + 0x4e00);
+    piVar8 = (int *)(glContext + 0x4e00);
     do {
       iVar6 = *piVar8;
       piVar8 = piVar8 + 1;
-      iVar6 = param_1 + iVar6 * 0x10;
+      iVar6 = glContext + iVar6 * 0x10;
       fVar1 = *(float *)(iVar6 + 0x418c);
       fVar2 = *(float *)(iVar6 + 0x4198);
       fVar3 = *(float *)(iVar6 + 0x4190);
@@ -595,54 +595,55 @@ void _gleFeedbackPointsFunc_body(glContext, unusedArg2, unusedArg3)
 void _gleRenderPointsFunc_body(glContext)
   int glContext;
 {
-  bool bVar1;
+  bool texturingEnabled;
   int iVar2;
-  uint uVar3;
+  int texEnableBits;
+  uint batchClipCodes;
   undefined4 uVar4;
   code *UNRECOVERED_JUMPTABLE;
-  int iVar5;
+  int vertexCursor;
   int iVar6;
   
-  iVar2 = _gleTexEnableBits(glContext);
-  iVar5 = *(int *)(glContext + 0x4854);
-  iVar6 = *(int *)(glContext + 0x4858) - iVar5 >> 8;
+  texEnableBits = _gleTexEnableBits(glContext);
+  vertexCursor = *(int *)(glContext + 0x4854);
+  iVar6 = *(int *)(glContext + 0x4858) - vertexCursor >> 8;
   if ((iVar6 < 1) ||
-     (uVar3 = (**(code **)(glContext + 0x5060))(glContext,iVar5,iVar6), (uVar3 & 0xff00) != 0)) {
+     (batchClipCodes = (**(code **)(glContext + 0x5060))(glContext,vertexCursor,iVar6), (batchClipCodes & 0xff00) != 0)) {
     return;
   }
-  bVar1 = iVar2 != 0;
-  if ((bVar1) && (*(char *)(glContext + 0x53e4) != '\0')) {
-    (**(code **)(glContext + 0x53dc))(glContext,iVar5,iVar6);
+  texturingEnabled = texEnableBits != 0;
+  if ((texturingEnabled) && (*(char *)(glContext + 0x53e4) != '\0')) {
+    (**(code **)(glContext + 0x53dc))(glContext,vertexCursor,iVar6);
   }
   if (*(char *)(glContext + 0x50b4) != '\0') {
-    (**(code **)(glContext + 0x5064))(glContext,iVar5,iVar6);
+    (**(code **)(glContext + 0x5064))(glContext,vertexCursor,iVar6);
   }
   if ((*(char *)(glContext + 0x30aa) != '\0') || (*(char *)(glContext + 0x53e6) != '\0')) {
-    (**(code **)(glContext + 0x5068))(glContext,iVar5,iVar6);
+    (**(code **)(glContext + 0x5068))(glContext,vertexCursor,iVar6);
   }
-  if (((uVar3 & 0xff) == 0) && (*(char *)(glContext + 0x4e18) == '\0')) {
-    if (bVar1) {
+  if (((batchClipCodes & 0xff) == 0) && (*(char *)(glContext + 0x4e18) == '\0')) {
+    if (texturingEnabled) {
       if (*(char *)(glContext + 0x53e5) != '\0') {
-        (**(code **)(glContext + 0x53e0))(glContext,iVar5,iVar6);
+        (**(code **)(glContext + 0x53e0))(glContext,vertexCursor,iVar6);
       }
-      (**(code **)(glContext + 0x506c))(glContext,iVar5,iVar6,0);
+      (**(code **)(glContext + 0x506c))(glContext,vertexCursor,iVar6,0);
     }
     if (*(char *)(glContext + 0x30aa) != '\0') {
-      (**(code **)(glContext + 0x4de8))(glContext,iVar5,iVar6);
+      (**(code **)(glContext + 0x4de8))(glContext,vertexCursor,iVar6);
     }
     UNRECOVERED_JUMPTABLE = *(code **)(glContext + 0x46b0);
     uVar4 = *(undefined4 *)(glContext + 0x4688);
-    iVar2 = iVar5;
+    iVar2 = vertexCursor;
   }
   else {
-    if (bVar1) {
+    if (texturingEnabled) {
       if (*(char *)(glContext + 0x53e5) != '\0') {
-        (**(code **)(glContext + 0x53e0))(glContext,iVar5,iVar6);
+        (**(code **)(glContext + 0x53e0))(glContext,vertexCursor,iVar6);
       }
-      (**(code **)(glContext + 0x5074))(glContext,iVar5,iVar6,0);
+      (**(code **)(glContext + 0x5074))(glContext,vertexCursor,iVar6,0);
     }
     iVar2 = *(int *)(glContext + 0x4870);
-    iVar6 = ((int (*)())_gleClipPoints)(glContext,iVar5,iVar6,iVar2);
+    iVar6 = ((int (*)())_gleClipPoints)(glContext,vertexCursor,iVar6,iVar2);
     if (iVar6 == 0) {
       return;
     }

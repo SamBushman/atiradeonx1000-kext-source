@@ -352,50 +352,50 @@ LAB_001077b0:
 }
 
 /* _gliGetAttribute @ 0x1077e4 (12 bytes) */
-void _gliGetAttribute(param_1, param_2, param_3)
-  int param_1;
-  undefined4 param_2;
-  undefined4 param_3;
+void _gliGetAttribute(glContext, attribBit, attribBuffer)
+  int glContext;
+  undefined4 attribBit;
+  undefined4 attribBuffer;
 {
-  if (param_1 == 0) {
+  if (glContext == 0) {
     return;
   }
-  _gleGetAttrib(param_1,param_2,param_3);
+  _gleGetAttrib(glContext,attribBit,attribBuffer);
   return;
 }
 
 /* _gliSetAttribute @ 0x1077f0 (72 bytes) */
-void _gliSetAttribute(param_1, param_2, param_3)
-  int param_1;
-  undefined4 param_2;
-  undefined4 param_3;
+void _gliSetAttribute(glContext, attribBit, attribBuffer)
+  int glContext;
+  undefined4 attribBit;
+  undefined4 attribBuffer;
 {
-  if (param_1 != 0) {
-    _gleSetAttrib(param_1,param_2,param_3);
-    _gleUpdateState(param_1);
+  if (glContext != 0) {
+    _gleSetAttrib(glContext,attribBit,attribBuffer);
+    _gleUpdateState(glContext);
     return;
   }
   return;
 }
 
 /* _gliCopyAttributes @ 0x107838 (120 bytes) */
-void _gliCopyAttributes(param_1, param_2)
-  int param_1;
-  int param_2;
+void _gliCopyAttributes(glContext, glContext2)
+  int glContext;
+  int glContext2;
 {
   uint uVar1;
   uint uVar2;
   undefined1 auStack_2c60 [11340];
   
-  if ((param_1 != 0) && (param_2 != 0)) {
+  if ((glContext != 0) && (glContext2 != 0)) {
     uVar2 = 1;
     do {
-      _gleGetAttrib(param_1,uVar2,auStack_2c60);
+      _gleGetAttrib(glContext,uVar2,auStack_2c60);
       uVar1 = uVar2 << 1;
-      _gleSetAttrib(param_2,uVar2,auStack_2c60);
+      _gleSetAttrib(glContext2,uVar2,auStack_2c60);
       uVar2 = uVar1;
     } while (uVar1 < 0xfffff);
-    _gleUpdateState(param_2);
+    _gleUpdateState(glContext2);
   }
   return;
 }
@@ -495,13 +495,13 @@ void _gliDetachRevert(glContext)
 }
 
 /* _gliAttachDrawable @ 0x107ad8 (8 bytes) */
-void _gliAttachDrawable(param_1, param_2, param_3, param_4)
-  undefined4 param_1;
+void _gliAttachDrawable(glContext, param_2, param_3, param_4)
+  undefined4 glContext;
   undefined4 param_2;
   undefined4 param_3;
   undefined4 param_4;
 {
-  _gliAttachDrawableWithOptions(param_1,param_2,param_3,param_4,0);
+  _gliAttachDrawableWithOptions(glContext,param_2,param_3,param_4,0);
   return;
 }
 

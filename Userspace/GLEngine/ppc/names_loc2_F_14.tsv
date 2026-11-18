@@ -1,0 +1,143 @@
+use	_gleVAClipLine	bVar2	combinedCodes	INFERRED	startCode | endCode: planes the line still crosses; loop ends when 0	^\s*bVar2\ =\ bVar10\ \|\ bVar9;$	+1
+use	_gleVAClipLine	bVar2	combinedCodes	INFERRED	startCode | endCode: planes the line still crosses; loop ends when 0	^\s*if\ \(bVar2\ !=\ 0\)\ \{$	+1
+use	_gleVAClipLine	bVar2	combinedCodes	INFERRED	startCode | endCode: planes the line still crosses; loop ends when 0	^\s*if\ \(\(bVar2\ \&\ bVar11\)\ !=\ 0\)\ \{$	+1
+use	_gleVAClipLine	bVar2	combinedCodes	INFERRED	startCode | endCode: planes the line still crosses; loop ends when 0	^\s*bVar2\ =\ bVar10\ \|\ bVar9;$@2	+2
+use	_gleVAClipLine	piVar1	newFreeIndexCursor	INFERRED	free index stack pointer after consuming the generated vertices (+1 or +2 entries), stored back to ctx+0x499c	^\s*piVar1\ =\ piVar7\ \+\ 1;$	+1
+use	_gleVAClipLine	piVar1	newFreeIndexCursor	INFERRED	free index stack pointer after consuming the generated vertices (+1 or +2 entries), stored back to ctx+0x499c	^\s*piVar1\ =\ piVar7\ \+\ 2;$	+1
+use	_gleVAClipLine	piVar1	newFreeIndexCursor	INFERRED	free index stack pointer after consuming the generated vertices (+1 or +2 entries), stored back to ctx+0x499c	^\s*\*\(int\ \*\*\)\(param_1\ \+\ 0x499c\)\ =\ piVar1;$	+1
+use	_gleVAClipLine	uVar3	result	INFERRED	return value: 0 = line rejected, 2 = line accepted (2 endpoints)	^\s*uVar3\ =\ 0;$	+1
+use	_gleVAClipLine	uVar3	result	INFERRED	return value: 0 = line rejected, 2 = line accepted (2 endpoints)	^\s*uVar3\ =\ 2;$	+1
+use	_gleVAClipLine	uVar3	result	INFERRED	return value: 0 = line rejected, 2 = line accepted (2 endpoints)	^\s*uVar3\ =\ 2;$@2	+1
+use	_gleVAClipLine	uVar3	result	INFERRED	return value: 0 = line rejected, 2 = line accepted (2 endpoints)	^\s*return\ uVar3;$	+1
+use	_gleVAClipLine	iVar4	newEndVertex	INFERRED	second entry of the free index stack at ctx+0x499c: index of the vertex generated when the end is clipped	^\s*iVar4\ =\ piVar7\[1\];$	+1
+use	_gleVAClipLine	iVar4	newEndVertex	INFERRED	second entry of the free index stack at ctx+0x499c: index of the vertex generated when the end is clipped	^\s*\(\*\*\(code\ \*\*\)\(param_1\ \+\ 0x49c4\)\)\(param_1,param_2,param_3,iVar8,iVar6,iVar4,bVar11\);$	+3
+use	_gleVAClipLine	iVar4	newEndVertex	INFERRED	second entry of the free index stack at ctx+0x499c: index of the vertex generated when the end is clipped	^\s*if\ \(iVar8\ ==\ iVar4\)\ \{$	+1
+use	_gleVAClipLine	iVar5	newStartVertex	INFERRED	first entry of the free index stack at ctx+0x499c: index of the vertex generated when the start is clipped	^\s*iVar5\ =\ \*piVar7;$	+1
+use	_gleVAClipLine	iVar5	newStartVertex	INFERRED	first entry of the free index stack at ctx+0x499c: index of the vertex generated when the start is clipped	^\s*\(\*\*\(code\ \*\*\)\(param_1\ \+\ 0x49c4\)\)\(param_1,param_2,param_3,iVar6,iVar8,iVar5,bVar11\);$	+3
+use	_gleVAClipLine	iVar5	newStartVertex	INFERRED	first entry of the free index stack at ctx+0x499c: index of the vertex generated when the start is clipped	^\s*if\ \(iVar6\ ==\ iVar5\)\ \{$	+1
+use	_gleVAClipLine	iVar5	newStartVertex	INFERRED	first entry of the free index stack at ctx+0x499c: index of the vertex generated when the start is clipped	^\s*\*param_4\ =\ iVar5;$	+1
+use	_gleVAClipLine	iVar5	newStartVertex	INFERRED	first entry of the free index stack at ctx+0x499c: index of the vertex generated when the start is clipped	^\s*piVar7\[1\]\ =\ iVar5;$	+1
+use	_gleVAClipLine	iVar6	startVertex	INFERRED	index of the line start vertex (*lineIndices); replaced by the new vertex when the start is clipped	^\s*iVar6\ =\ \*param_4;$	+1
+use	_gleVAClipLine	iVar6	startVertex	INFERRED	index of the line start vertex (*lineIndices); replaced by the new vertex when the start is clipped	^\s*bVar10\ =\ \*\(byte\ \*\)\(param_3\ \+\ iVar6\)\ \&\ 0x3f;$	+1
+use	_gleVAClipLine	iVar6	startVertex	INFERRED	index of the line start vertex (*lineIndices); replaced by the new vertex when the start is clipped	^\s*\(\*\*\(code\ \*\*\)\(param_1\ \+\ 0x49c4\)\)\(param_1,param_2,param_3,iVar8,iVar6,iVar4,bVar11\);$	+1
+use	_gleVAClipLine	iVar6	startVertex	INFERRED	index of the line start vertex (*lineIndices); replaced by the new vertex when the start is clipped	^\s*\(\*\*\(code\ \*\*\)\(param_1\ \+\ 0x49c4\)\)\(param_1,param_2,param_3,iVar6,iVar8,iVar5,bVar11\);$	+1
+use	_gleVAClipLine	iVar6	startVertex	INFERRED	index of the line start vertex (*lineIndices); replaced by the new vertex when the start is clipped	^\s*iVar6\ =\ iVar5;$	+1
+use	_gleVAClipLine	iVar6	startVertex	INFERRED	index of the line start vertex (*lineIndices); replaced by the new vertex when the start is clipped	^\s*if\ \(iVar6\ ==\ iVar5\)\ \{$	+1
+use	_gleVAClipLine	piVar7	freeIndexCursor	INFERRED	free vertex-index stack pointer at ctx+0x499c (flushed by _gleFlushIndexStack with the first generated index upward)	^\s*piVar7\ =\ \*\(int\ \*\*\)\(param_1\ \+\ 0x499c\);$	+1
+use	_gleVAClipLine	piVar7	freeIndexCursor	INFERRED	free vertex-index stack pointer at ctx+0x499c (flushed by _gleFlushIndexStack with the first generated index upward)	^\s*iVar5\ =\ \*piVar7;$	+2
+use	_gleVAClipLine	piVar7	freeIndexCursor	INFERRED	free vertex-index stack pointer at ctx+0x499c (flushed by _gleFlushIndexStack with the first generated index upward)	^\s*piVar1\ =\ piVar7\ \+\ 1;$	+1
+use	_gleVAClipLine	piVar7	freeIndexCursor	INFERRED	free vertex-index stack pointer at ctx+0x499c (flushed by _gleFlushIndexStack with the first generated index upward)	^\s*piVar1\ =\ piVar7\ \+\ 2;$	+1
+use	_gleVAClipLine	piVar7	freeIndexCursor	INFERRED	free vertex-index stack pointer at ctx+0x499c (flushed by _gleFlushIndexStack with the first generated index upward)	^\s*piVar7\[1\]\ =\ iVar5;$	+2
+use	_gleVAClipLine	iVar8	endVertex	INFERRED	index of the line end vertex (lineIndices[1]); replaced by the new vertex when the end is clipped	^\s*iVar8\ =\ param_4\[1\];$	+1
+use	_gleVAClipLine	iVar8	endVertex	INFERRED	index of the line end vertex (lineIndices[1]); replaced by the new vertex when the end is clipped	^\s*bVar9\ =\ \*\(byte\ \*\)\(param_3\ \+\ iVar8\)\ \&\ 0x3f;$	+1
+use	_gleVAClipLine	iVar8	endVertex	INFERRED	index of the line end vertex (lineIndices[1]); replaced by the new vertex when the end is clipped	^\s*\(\*\*\(code\ \*\*\)\(param_1\ \+\ 0x49c4\)\)\(param_1,param_2,param_3,iVar8,iVar6,iVar4,bVar11\);$	+1
+use	_gleVAClipLine	iVar8	endVertex	INFERRED	index of the line end vertex (lineIndices[1]); replaced by the new vertex when the end is clipped	^\s*iVar8\ =\ iVar4;$	+1
+use	_gleVAClipLine	iVar8	endVertex	INFERRED	index of the line end vertex (lineIndices[1]); replaced by the new vertex when the end is clipped	^\s*\(\*\*\(code\ \*\*\)\(param_1\ \+\ 0x49c4\)\)\(param_1,param_2,param_3,iVar6,iVar8,iVar5,bVar11\);$	+1
+use	_gleVAClipLine	iVar8	endVertex	INFERRED	index of the line end vertex (lineIndices[1]); replaced by the new vertex when the end is clipped	^\s*if\ \(iVar8\ ==\ iVar4\)\ \{$	+1
+use	_gleVAClipLine	iVar8	endVertex	INFERRED	index of the line end vertex (lineIndices[1]); replaced by the new vertex when the end is clipped	^\s*param_4\[1\]\ =\ iVar8;$	+1
+use	_gleVAClipLine	iVar8	endVertex	INFERRED	index of the line end vertex (lineIndices[1]); replaced by the new vertex when the end is clipped	^\s*param_4\[1\]\ =\ iVar8;$@2	+1
+use	_gleVAClipLine	bVar9	endCode	INFERRED	clip code (& 0x3f) of the end vertex; reloaded from the new vertex after clipping the end	^\s*bVar9\ =\ \*\(byte\ \*\)\(param_3\ \+\ iVar8\)\ \&\ 0x3f;$	+1
+use	_gleVAClipLine	bVar9	endCode	INFERRED	clip code (& 0x3f) of the end vertex; reloaded from the new vertex after clipping the end	^\s*if\ \(\(bVar10\ \&\ bVar9\)\ ==\ 0\)\ \{$	+2
+use	_gleVAClipLine	bVar9	endCode	INFERRED	clip code (& 0x3f) of the end vertex; reloaded from the new vertex after clipping the end	^\s*bVar9\ =\ \*\(byte\ \*\)\(param_3\ \+\ iVar4\);$	+1
+use	_gleVAClipLine	bVar9	endCode	INFERRED	clip code (& 0x3f) of the end vertex; reloaded from the new vertex after clipping the end	^\s*if\ \(\(bVar10\ \&\ bVar9\)\ !=\ 0\)\ \{$	+1
+use	_gleVAClipLine	bVar9	endCode	INFERRED	clip code (& 0x3f) of the end vertex; reloaded from the new vertex after clipping the end	^\s*bVar2\ =\ bVar10\ \|\ bVar9;$@2	+1
+use	_gleVAClipLine	bVar10	startCode	INFERRED	clip code (& 0x3f) of the start vertex; reloaded from the new vertex after clipping the start	^\s*bVar10\ =\ \*\(byte\ \*\)\(param_3\ \+\ iVar6\)\ \&\ 0x3f;$	+1
+use	_gleVAClipLine	bVar10	startCode	INFERRED	clip code (& 0x3f) of the start vertex; reloaded from the new vertex after clipping the start	^\s*if\ \(\(bVar10\ \&\ bVar9\)\ ==\ 0\)\ \{$	+2
+use	_gleVAClipLine	bVar10	startCode	INFERRED	clip code (& 0x3f) of the start vertex; reloaded from the new vertex after clipping the start	^\s*if\ \(\(bVar10\ \&\ bVar11\)\ ==\ 0\)\ \{$	+1
+use	_gleVAClipLine	bVar10	startCode	INFERRED	clip code (& 0x3f) of the start vertex; reloaded from the new vertex after clipping the start	^\s*bVar10\ =\ \*\(byte\ \*\)\(param_3\ \+\ iVar5\);$	+1
+use	_gleVAClipLine	bVar10	startCode	INFERRED	clip code (& 0x3f) of the start vertex; reloaded from the new vertex after clipping the start	^\s*if\ \(\(bVar10\ \&\ bVar9\)\ !=\ 0\)\ \{$	+1
+use	_gleVAClipLine	bVar10	startCode	INFERRED	clip code (& 0x3f) of the start vertex; reloaded from the new vertex after clipping the start	^\s*bVar2\ =\ bVar10\ \|\ bVar9;$@2	+1
+use	_gleVAClipLine	bVar11	planeBit	CONFIRMED	plane bit under test: starts at 1, shifted left each pass, loop ends after bit 0x20 (six planes)	^\s*bVar11\ =\ 1;$	+1
+use	_gleVAClipLine	bVar11	planeBit	CONFIRMED	plane bit under test: starts at 1, shifted left each pass, loop ends after bit 0x20 (six planes)	^\s*if\ \(\(bVar2\ \&\ bVar11\)\ !=\ 0\)\ \{$	+3
+use	_gleVAClipLine	bVar11	planeBit	CONFIRMED	plane bit under test: starts at 1, shifted left each pass, loop ends after bit 0x20 (six planes)	^\s*\(\*\*\(code\ \*\*\)\(param_1\ \+\ 0x49c4\)\)\(param_1,param_2,param_3,iVar6,iVar8,iVar5,bVar11\);$	+1
+use	_gleVAClipLine	bVar11	planeBit	CONFIRMED	plane bit under test: starts at 1, shifted left each pass, loop ends after bit 0x20 (six planes)	^\s*bVar11\ =\ bVar11\ <<\ 1;$	+2
+local	_gleVAClipLine	param_4	lineIndices	INFERRED	two vertex indices of the line (start, end), rewritten in place with the clipped endpoints
+local	_gleVAClipLine	param_3	clipCodes	CONFIRMED	per-vertex clip code byte table: indexed by vertex index, tested against the six plane bits (0x3f) and, in VAClipPoly, 0xc3
+local	_gleVAClipLine	param_1	glContext	INFERRED	first argument of the hook at ctx+0x49c4; ctx+0x499c (free index stack) and ctx+0x49c4 read from it
+local	_gleVAClipLine	param_2	forwardedArg2	CONFIRMED	only forwarded unchanged to the hook at ctx+0x49c4
+use	_gleVAClipPoly	bVar1	newCode	INFERRED	clip code of the vertex just generated by the hook	^\s*bVar1\ =\ \*\(byte\ \*\)\(param_3\ \+\ uVar2\);$	+1
+use	_gleVAClipPoly	bVar1	newCode	INFERRED	clip code of the vertex just generated by the hook	^\s*bVar11\ =\ bVar11\ \|\ bVar1;$	+1
+use	_gleVAClipPoly	bVar1	newCode	INFERRED	clip code of the vertex just generated by the hook	^\s*bVar1\ =\ \*\(byte\ \*\)\(param_3\ \+\ uVar2\);$@2	+1
+use	_gleVAClipPoly	bVar1	newCode	INFERRED	clip code of the vertex just generated by the hook	^\s*bVar11\ =\ bVar11\ \|\ bVar1;$@2	+1
+use	_gleVAClipPoly	uVar2	vertexIndex	INFERRED	index loaded from the polygon in the first loop	^\s*uVar2\ =\ \*puVar9;$	+1
+use	_gleVAClipPoly	uVar2	vertexIndex	INFERRED	index loaded from the polygon in the first loop	^\s*bVar3\ =\ bVar3\ \&\ \*\(byte\ \*\)\(param_3\ \+\ uVar2\);$	+2
+use	_gleVAClipPoly	uVar2	newVertex	CONFIRMED	index popped from the free index stack: the vertex generated by the hook	^\s*uVar2\ =\ \*puVar12;$	+1
+use	_gleVAClipPoly	uVar2	newVertex	CONFIRMED	index popped from the free index stack: the vertex generated by the hook	^\s*\(param_1,uStack0000001c,param_3,uVar15,puVar7\[1\],uVar2,bVar3\);$	+3
+use	_gleVAClipPoly	uVar2	newVertex	CONFIRMED	index popped from the free index stack: the vertex generated by the hook	^\s*uVar2\ =\ \*puVar12;$@2	+1
+use	_gleVAClipPoly	uVar2	newVertex	CONFIRMED	index popped from the free index stack: the vertex generated by the hook	^\s*\(param_1,uStack0000001c,param_3,uVar15,\*puVar7,uVar2,bVar3\);$	+3
+use	_gleVAClipPoly	iVar4	resultCount	INFERRED	return value: 0 = rejected, indexCount = trivially accepted, else the vertex count of the clipped polygon	^\s*iVar4\ =\ 0;$	+1
+use	_gleVAClipPoly	iVar4	resultCount	INFERRED	return value: 0 = rejected, indexCount = trivially accepted, else the vertex count of the clipped polygon	^\s*if\ \(\(\(bVar3\ \&\ 0x3f\)\ ==\ 0\)\ \&\&\ \(iVar4\ =\ param_4,\ \(bVar11\ \&\ 0xc3\)\ !=\ 0\)\)\ \{$	+1
+use	_gleVAClipPoly	iVar4	resultCount	INFERRED	return value: 0 = rejected, indexCount = trivially accepted, else the vertex count of the clipped polygon	^\s*iVar4\ =\ 0;$@2	+1
+use	_gleVAClipPoly	iVar4	resultCount	INFERRED	return value: 0 = rejected, indexCount = trivially accepted, else the vertex count of the clipped polygon	^\s*iVar4\ =\ \(int\)puVar14\ \-\ \(int\)puVar6\ >>\ 2;$	+1
+use	_gleVAClipPoly	iVar4	resultCount	INFERRED	return value: 0 = rejected, indexCount = trivially accepted, else the vertex count of the clipped polygon	^\s*if\ \(iVar4\ <\ 3\)\ \{$	+1
+use	_gleVAClipPoly	iVar4	resultCount	INFERRED	return value: 0 = rejected, indexCount = trivially accepted, else the vertex count of the clipped polygon	^\s*puVar13\ =\ puVar6\ \+\ iVar4;$	+1
+use	_gleVAClipPoly	iVar4	resultCount	INFERRED	return value: 0 = rejected, indexCount = trivially accepted, else the vertex count of the clipped polygon	^\s*if\ \(\(puVar8\ !=\ param_5\)\ \&\&\ \(iVar10\ =\ 0,\ iVar16\ =\ iVar4,\ 0\ <\ iVar4\)\)\ \{$	+1
+use	_gleVAClipPoly	iVar4	resultCount	INFERRED	return value: 0 = rejected, indexCount = trivially accepted, else the vertex count of the clipped polygon	^\s*return\ iVar4;$	+1
+use	_gleVAClipPoly	uVar5	firstGeneratedIndex	INFERRED	ctx+0x4988 + ctx+0x4984: indices at or above it are vertices generated by clipping (those dropped are recycled)	^\s*uVar5\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x4988\)\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x4984\);$	+1
+use	_gleVAClipPoly	uVar5	firstGeneratedIndex	INFERRED	ctx+0x4988 + ctx+0x4984: indices at or above it are vertices generated by clipping (those dropped are recycled)	^\s*if\ \(uVar5\ <=\ uVar15\)\ \{$	+1
+use	_gleVAClipPoly	uVar5	firstGeneratedIndex	INFERRED	ctx+0x4988 + ctx+0x4984: indices at or above it are vertices generated by clipping (those dropped are recycled)	^\s*if\ \(uVar5\ <=\ uVar15\)\ \{$@2	+1
+use	_gleVAClipPoly	puVar6	dstPoly	INFERRED	output polygon buffer of the current plane pass (ping-pong with the source polygon)	^\s*puVar6\ =\ local_f0;$	+1
+use	_gleVAClipPoly	puVar6	dstPoly	INFERRED	output polygon buffer of the current plane pass (ping-pong with the source polygon)	^\s*puVar7\ =\ puVar6;$	+1
+use	_gleVAClipPoly	puVar6	dstPoly	INFERRED	output polygon buffer of the current plane pass (ping-pong with the source polygon)	^\s*puVar14\ =\ puVar6;$	+1
+use	_gleVAClipPoly	puVar6	dstPoly	INFERRED	output polygon buffer of the current plane pass (ping-pong with the source polygon)	^\s*iVar4\ =\ \(int\)puVar14\ \-\ \(int\)puVar6\ >>\ 2;$	+1
+use	_gleVAClipPoly	puVar6	dstPoly	INFERRED	output polygon buffer of the current plane pass (ping-pong with the source polygon)	^\s*puVar13\ =\ puVar6\ \+\ iVar4;$	+1
+use	_gleVAClipPoly	puVar6	dstPoly	INFERRED	output polygon buffer of the current plane pass (ping-pong with the source polygon)	^\s*puVar8\ =\ puVar6;$	+1
+use	_gleVAClipPoly	puVar6	dstPoly	INFERRED	output polygon buffer of the current plane pass (ping-pong with the source polygon)	^\s*puVar6\ =\ puVar7;$	+1
+use	_gleVAClipPoly	puVar8	srcPoly	INFERRED	source polygon of the current pass (starts as indices, then the other buffer)	^\s*puVar8\ =\ param_5;$	+1
+use	_gleVAClipPoly	puVar8	srcPoly	INFERRED	source polygon of the current pass (starts as indices, then the other buffer)	^\s*\*puVar13\ =\ \*puVar8;$	+2
+use	_gleVAClipPoly	puVar8	srcPoly	INFERRED	source polygon of the current pass (starts as indices, then the other buffer)	^\s*puVar7\ =\ puVar8;$	+2
+use	_gleVAClipPoly	puVar8	srcPoly	INFERRED	source polygon of the current pass (starts as indices, then the other buffer)	^\s*if\ \(\(puVar8\ !=\ param_5\)\ \&\&\ \(iVar10\ =\ 0,\ iVar16\ =\ iVar4,\ 0\ <\ iVar4\)\)\ \{$	+1
+use	_gleVAClipPoly	puVar8	srcPoly	INFERRED	source polygon of the current pass (starts as indices, then the other buffer)	^\s*param_5\[iVar10\]\ =\ puVar8\[iVar10\];$	+1
+use	_gleVAClipPoly	iVar10	planeIndex	CONFIRMED	plane under test 0..5 (_out_codes[planeIndex]); loop ends at 6	^\s*iVar10\ =\ 0;$	+1
+use	_gleVAClipPoly	iVar10	planeIndex	CONFIRMED	plane under test 0..5 (_out_codes[planeIndex]); loop ends at 6	^\s*if\ \(\(\(\&_out_codes\)\[iVar10\]\ \&\ \~\*\(byte\ \*\)\(param_3\ \+\ uVar15\)\)\ ==\ 0\)\ \{$	+1
+use	_gleVAClipPoly	iVar10	planeIndex	CONFIRMED	plane under test 0..5 (_out_codes[planeIndex]); loop ends at 6	^\s*if\ \(\(\(\&_out_codes\)\[iVar10\]\ \&\ \~\*\(byte\ \*\)\(param_3\ \+\ uVar15\)\)\ ==\ 0\)\ \{$@2	+1
+use	_gleVAClipPoly	iVar10	planeIndex	CONFIRMED	plane under test 0..5 (_out_codes[planeIndex]); loop ends at 6	^\s*iVar10\ =\ iVar10\ \+\ 1;$	+1
+use	_gleVAClipPoly	iVar10	planeIndex	CONFIRMED	plane under test 0..5 (_out_codes[planeIndex]); loop ends at 6	^\s*\}\ while\ \(iVar10\ <\ 6\);$	+1
+use	_gleVAClipPoly	iVar10	copyIndex	INFERRED	element index of the final copy of the clipped polygon back into indices	^\s*if\ \(\(puVar8\ !=\ param_5\)\ \&\&\ \(iVar10\ =\ 0,\ iVar16\ =\ iVar4,\ 0\ <\ iVar4\)\)\ \{$	+1
+use	_gleVAClipPoly	iVar10	copyIndex	INFERRED	element index of the final copy of the clipped polygon back into indices	^\s*param_5\[iVar10\]\ =\ puVar8\[iVar10\];$	+1
+use	_gleVAClipPoly	iVar10	copyIndex	INFERRED	element index of the final copy of the clipped polygon back into indices	^\s*iVar10\ =\ iVar10\ \+\ 1;$@2	+1
+use	_gleVAClipPoly	bVar11	orCodes	INFERRED	OR of the clip codes of the polygon vertices: planes that cut the polygon; generated vertex codes are OR-ed in	^\s*bVar11\ =\ 0;$	+1
+use	_gleVAClipPoly	bVar11	orCodes	INFERRED	OR of the clip codes of the polygon vertices: planes that cut the polygon; generated vertex codes are OR-ed in	^\s*bVar11\ =\ bVar11\ \|\ \*\(byte\ \*\)\(param_3\ \+\ uVar2\);$	+1
+use	_gleVAClipPoly	bVar11	orCodes	INFERRED	OR of the clip codes of the polygon vertices: planes that cut the polygon; generated vertex codes are OR-ed in	^\s*if\ \(\(\(bVar3\ \&\ 0x3f\)\ ==\ 0\)\ \&\&\ \(iVar4\ =\ param_4,\ \(bVar11\ \&\ 0xc3\)\ !=\ 0\)\)\ \{$	+1
+use	_gleVAClipPoly	bVar11	orCodes	INFERRED	OR of the clip codes of the polygon vertices: planes that cut the polygon; generated vertex codes are OR-ed in	^\s*if\ \(\(bVar11\ \&\ bVar3\)\ !=\ 0\)\ \{$	+1
+use	_gleVAClipPoly	bVar11	orCodes	INFERRED	OR of the clip codes of the polygon vertices: planes that cut the polygon; generated vertex codes are OR-ed in	^\s*bVar11\ =\ bVar11\ \|\ bVar1;$	+1
+use	_gleVAClipPoly	bVar11	orCodes	INFERRED	OR of the clip codes of the polygon vertices: planes that cut the polygon; generated vertex codes are OR-ed in	^\s*bVar11\ =\ bVar11\ \|\ bVar1;$@2	+1
+use	_gleVAClipPoly	puVar12	freeIndexCursor	INFERRED	free vertex-index stack pointer at ctx+0x499c; popped when a vertex is generated, pushed when dropped ones are recycled	^\s*puVar12\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ 0x499c\);$	+1
+use	_gleVAClipPoly	puVar12	freeIndexCursor	INFERRED	free vertex-index stack pointer at ctx+0x499c; popped when a vertex is generated, pushed when dropped ones are recycled	^\s*uVar2\ =\ \*puVar12;$	+2
+use	_gleVAClipPoly	puVar12	freeIndexCursor	INFERRED	free vertex-index stack pointer at ctx+0x499c; popped when a vertex is generated, pushed when dropped ones are recycled	^\s*uVar2\ =\ \*puVar12;$@2	+2
+use	_gleVAClipPoly	puVar12	freeIndexCursor	INFERRED	free vertex-index stack pointer at ctx+0x499c; popped when a vertex is generated, pushed when dropped ones are recycled	^\s*puVar12\ =\ puVar12\ \+\ \-1;$	+2
+use	_gleVAClipPoly	puVar12	freeIndexCursor	INFERRED	free vertex-index stack pointer at ctx+0x499c; popped when a vertex is generated, pushed when dropped ones are recycled	^\s*\*\(uint\ \*\*\)\(param_1\ \+\ 0x499c\)\ =\ puVar12;$	+1
+use	_gleVAClipPoly	puVar13	srcEnd	INFERRED	end of the source polygon; the first vertex is copied there so the last edge wraps	^\s*puVar13\ =\ param_5\ \+\ param_4;$	+1
+use	_gleVAClipPoly	puVar13	srcEnd	INFERRED	end of the source polygon; the first vertex is copied there so the last edge wraps	^\s*\*puVar13\ =\ \*puVar8;$	+1
+use	_gleVAClipPoly	puVar13	srcEnd	INFERRED	end of the source polygon; the first vertex is copied there so the last edge wraps	^\s*puVar13\[1\]\ =\ \*puVar7;$	+1
+use	_gleVAClipPoly	puVar13	srcEnd	INFERRED	end of the source polygon; the first vertex is copied there so the last edge wraps	^\s*for\ \(;\ puVar7\ <=\ puVar13;\ puVar7\ =\ puVar7\ \+\ 1\)\ \{$	+1
+use	_gleVAClipPoly	puVar13	srcEnd	INFERRED	end of the source polygon; the first vertex is copied there so the last edge wraps	^\s*puVar13\ =\ puVar6\ \+\ iVar4;$	+1
+use	_gleVAClipPoly	puVar14	dstCursor	INFERRED	write cursor into dstPoly	^\s*puVar14\ =\ puVar6;$	+1
+use	_gleVAClipPoly	puVar14	dstCursor	INFERRED	write cursor into dstPoly	^\s*\*puVar14\ =\ uVar2;$	+2
+use	_gleVAClipPoly	puVar14	dstCursor	INFERRED	write cursor into dstPoly	^\s*\*puVar14\ =\ uVar15;$	+2
+use	_gleVAClipPoly	puVar14	dstCursor	INFERRED	write cursor into dstPoly	^\s*\*puVar14\ =\ uVar2;$@2	+1
+use	_gleVAClipPoly	puVar14	dstCursor	INFERRED	write cursor into dstPoly	^\s*puVar14\ =\ puVar14\ \+\ 1;$@3	+1
+use	_gleVAClipPoly	puVar14	dstCursor	INFERRED	write cursor into dstPoly	^\s*\*puVar14\ =\ uVar15;$@2	+1
+use	_gleVAClipPoly	puVar14	dstCursor	INFERRED	write cursor into dstPoly	^\s*iVar4\ =\ \(int\)puVar14\ \-\ \(int\)puVar6\ >>\ 2;$	+1
+use	_gleVAClipPoly	uVar15	remaining	INFERRED	loop counter (word count) of the first loop, and of the push-back loop	^\s*uVar15\ =\ \(uint\)\(\(int\)\(param_5\ \+\ param_4\)\ \+\ \(3\ \-\ \(int\)param_5\)\)\ >>\ 2;$	+1
+use	_gleVAClipPoly	uVar15	remaining	INFERRED	loop counter (word count) of the first loop, and of the push-back loop	^\s*uVar15\ =\ uVar15\ \-\ 1;$	+2
+use	_gleVAClipPoly	uVar15	remaining	INFERRED	loop counter (word count) of the first loop, and of the push-back loop	^\s*uVar15\ =\ \(uint\)\(\(int\)puVar9\ \+\ \(3\ \-\ \(int\)local_a0\)\)\ >>\ 2;$	+1
+use	_gleVAClipPoly	uVar15	remaining	INFERRED	loop counter (word count) of the first loop, and of the push-back loop	^\s*uVar15\ =\ uVar15\ \-\ 1;$@2	+2
+use	_gleVAClipPoly	uVar15	edgeVertexIndex	INFERRED	index of a vertex of the current edge: the start *srcCursor, or in the second branch the end srcCursor[1]	^\s*uVar15\ =\ \*puVar7;$	+2
+use	_gleVAClipPoly	uVar15	edgeVertexIndex	INFERRED	index of a vertex of the current edge: the start *srcCursor, or in the second branch the end srcCursor[1]	^\s*\(param_1,uStack0000001c,param_3,uVar15,puVar7\[1\],uVar2,bVar3\);$	+1
+use	_gleVAClipPoly	uVar15	edgeVertexIndex	INFERRED	index of a vertex of the current edge: the start *srcCursor, or in the second branch the end srcCursor[1]	^\s*uVar15\ =\ \*puVar7;$@2	+1
+use	_gleVAClipPoly	uVar15	edgeVertexIndex	INFERRED	index of a vertex of the current edge: the start *srcCursor, or in the second branch the end srcCursor[1]	^\s*if\ \(uVar5\ <=\ uVar15\)\ \{$	+2
+use	_gleVAClipPoly	uVar15	edgeVertexIndex	INFERRED	index of a vertex of the current edge: the start *srcCursor, or in the second branch the end srcCursor[1]	^\s*else\ if\ \(\(bVar3\ \&\ \*\(byte\ \*\)\(param_3\ \+\ uVar15\)\)\ ==\ 0\)\ \{$	+2
+use	_gleVAClipPoly	uVar15	edgeVertexIndex	INFERRED	index of a vertex of the current edge: the start *srcCursor, or in the second branch the end srcCursor[1]	^\s*uVar15\ =\ puVar7\[1\];$	+2
+use	_gleVAClipPoly	uVar15	edgeVertexIndex	INFERRED	index of a vertex of the current edge: the start *srcCursor, or in the second branch the end srcCursor[1]	^\s*\(param_1,uStack0000001c,param_3,uVar15,\*puVar7,uVar2,bVar3\);$	+1
+use	_gleVAClipPoly	uVar15	edgeVertexIndex	INFERRED	index of a vertex of the current edge: the start *srcCursor, or in the second branch the end srcCursor[1]	^\s*else\ if\ \(\(bVar3\ \&\ \*\(byte\ \*\)\(param_3\ \+\ uVar15\)\)\ !=\ 0\)\ goto\ LAB_000da380;$	+1
+use	_gleVAClipPoly	uVar15	edgeVertexIndex	INFERRED	index of a vertex of the current edge: the start *srcCursor, or in the second branch the end srcCursor[1]	^\s*\*puVar14\ =\ uVar15;$@2	+1
+use	_gleVAClipPoly	uVar15	edgeVertexIndex	INFERRED	index of a vertex of the current edge: the start *srcCursor, or in the second branch the end srcCursor[1]	^\s*if\ \(uVar5\ <=\ uVar15\)\ \{$@2	+2
+use	_gleVAClipPoly	iVar16	copyRemaining	INFERRED	count-down of the final copy loop (starts at resultCount)	^\s*if\ \(\(puVar8\ !=\ param_5\)\ \&\&\ \(iVar10\ =\ 0,\ iVar16\ =\ iVar4,\ 0\ <\ iVar4\)\)\ \{$	+1
+use	_gleVAClipPoly	iVar16	copyRemaining	INFERRED	count-down of the final copy loop (starts at resultCount)	^\s*iVar16\ =\ iVar16\ \+\ \-1;$	+1
+use	_gleVAClipPoly	iVar16	copyRemaining	INFERRED	count-down of the final copy loop (starts at resultCount)	^\s*\}\ while\ \(iVar16\ !=\ 0\);$	+1
+local	_gleVAClipPoly	param_1	glContext	INFERRED	first argument of the hook at ctx+0x49c4; ctx+0x4984/0x4988/0x499c read from it
+local	_gleVAClipPoly	param_5	indices	CONFIRMED	polygon vertex index array: input, and overwritten with the clipped polygon at the end
+local	_gleVAClipPoly	param_4	indexCount	CONFIRMED	number of vertex indices of the input polygon (loop bound param_5 + param_4)
+local	_gleVAClipPoly	param_3	clipCodes	CONFIRMED	per-vertex clip code byte table: indexed by vertex index, tested against the six plane bits (0x3f) and, in VAClipPoly, 0xc3
+local	_gleVAClipPoly	param_2	forwardedArg2	CONFIRMED	only forwarded unchanged (via uStack0000001c) to the hook at ctx+0x49c4

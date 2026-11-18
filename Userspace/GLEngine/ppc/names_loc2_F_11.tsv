@@ -1,0 +1,166 @@
+use	_gleGetHistogram	bVar1	formatIsAbgr	CONFIRMED	format == 0x8000 (GL_ABGR_EXT)	^\s*bVar1\ =\ param_4\ ==\ 0x8000;$	+1
+use	_gleGetHistogram	bVar1	formatIsAbgr	CONFIRMED	format == 0x8000 (GL_ABGR_EXT)	^\s*if\ \(!bVar1\)\ \{$	+1
+use	_gleGetHistogram	bVar1	formatIsAbgr	CONFIRMED	format == 0x8000 (GL_ABGR_EXT)	^\s*if\ \(!bVar1\)\ \{$@2	+1
+use	_gleGetHistogram	bVar1	formatIsAbgr	CONFIRMED	format == 0x8000 (GL_ABGR_EXT)	^\s*if\ \(!bVar1\)\ \{$@3	+1
+use	_gleGetHistogram	bVar1	formatIsAbgr	CONFIRMED	format == 0x8000 (GL_ABGR_EXT)	^\s*if\ \(bVar1\)\ \{$	+1
+use	_gleGetHistogram	bVar2	formatIsBgr	CONFIRMED	format == 0x80e0 (GL_BGR)	^\s*bVar2\ =\ param_4\ ==\ 0x80e0;$	+1
+use	_gleGetHistogram	bVar2	formatIsBgr	CONFIRMED	format == 0x80e0 (GL_BGR)	^\s*if\ \(bVar2\)\ \{$	+1
+use	_gleGetHistogram	bVar2	formatIsBgr	CONFIRMED	format == 0x80e0 (GL_BGR)	^\s*if\ \(bVar2\)\ \{$@2	+1
+use	_gleGetHistogram	bVar2	formatIsBgr	CONFIRMED	format == 0x80e0 (GL_BGR)	^\s*if\ \(bVar2\)\ \{$@3	+1
+use	_gleGetHistogram	bVar2	formatIsBgr	CONFIRMED	format == 0x80e0 (GL_BGR)	^\s*if\ \(bVar2\)\ \{$@4	+1
+use	_gleGetHistogram	bVar3	formatIsBgra	CONFIRMED	format == 0x80e1 (GL_BGRA)	^\s*bVar3\ =\ param_4\ ==\ 0x80e1;$	+1
+use	_gleGetHistogram	bVar3	formatIsBgra	CONFIRMED	format == 0x80e1 (GL_BGRA)	^\s*if\ \(bVar3\)\ \{$	+1
+use	_gleGetHistogram	bVar3	formatIsBgra	CONFIRMED	format == 0x80e1 (GL_BGRA)	^\s*if\ \(!bVar3\)\ goto\ LAB_000d3734;$	+1
+use	_gleGetHistogram	bVar3	formatIsBgra	CONFIRMED	format == 0x80e1 (GL_BGRA)	^\s*if\ \(bVar3\)\ \{$@2	+1
+use	_gleGetHistogram	bVar3	formatIsBgra	CONFIRMED	format == 0x80e1 (GL_BGRA)	^\s*if\ \(bVar3\)\ \{$@3	+1
+use	_gleGetHistogram	bVar4	formatIsRed	CONFIRMED	format == 0x1903 (GL_RED)	^\s*bVar4\ =\ param_4\ ==\ 0x1903;$	+1
+use	_gleGetHistogram	bVar4	formatIsRed	CONFIRMED	format == 0x1903 (GL_RED)	^\s*else\ if\ \(bVar4\)\ \{$	+1
+use	_gleGetHistogram	bVar4	formatIsRed	CONFIRMED	format == 0x1903 (GL_RED)	^\s*if\ \(bVar4\)\ goto\ LAB_000d309c;$	+1
+use	_gleGetHistogram	bVar4	formatIsRed	CONFIRMED	format == 0x1903 (GL_RED)	^\s*if\ \(\(bVar4\)\ \|\|\ \(fVar21\ =\ GH_U2F\(local_7c\),\ !bVar5\)\)\ goto\ LAB_000d32bc;$	+1
+use	_gleGetHistogram	bVar4	formatIsRed	CONFIRMED	format == 0x1903 (GL_RED)	^\s*if\ \(\(bVar4\)\ \|\|\ \(uVar17\ =\ \(\*\(unsigned\ short\ \*\)\(\(unsigned\ char\ \*\)\&\(local_7c\)\ \+\ 2\)\),\ !bVar5\)\)\ goto\ LAB_000d30c0;$	+1
+use	_gleGetHistogram	bVar5	formatIsNotGreen	CONFIRMED	format != 0x1904 (GL_GREEN)	^\s*bVar5\ =\ param_4\ !=\ 0x1904;$	+1
+use	_gleGetHistogram	bVar5	formatIsNotGreen	CONFIRMED	format != 0x1904 (GL_GREEN)	^\s*if\ \(bVar5\)\ goto\ LAB_000d3734;$	+1
+use	_gleGetHistogram	bVar5	formatIsNotGreen	CONFIRMED	format != 0x1904 (GL_GREEN)	^\s*if\ \(bVar5\)\ goto\ LAB_000d3734;$@2	+1
+use	_gleGetHistogram	bVar5	formatIsNotGreen	CONFIRMED	format != 0x1904 (GL_GREEN)	^\s*if\ \(\(bVar4\)\ \|\|\ \(fVar21\ =\ GH_U2F\(local_7c\),\ !bVar5\)\)\ goto\ LAB_000d32bc;$	+1
+use	_gleGetHistogram	bVar5	formatIsNotGreen	CONFIRMED	format != 0x1904 (GL_GREEN)	^\s*if\ \(\(bVar4\)\ \|\|\ \(uVar17\ =\ \(\*\(unsigned\ short\ \*\)\(\(unsigned\ char\ \*\)\&\(local_7c\)\ \+\ 2\)\),\ !bVar5\)\)\ goto\ LAB_000d30c0;$	+1
+use	_gleGetHistogram	bVar6	formatIsAlpha	CONFIRMED	format == 0x1906 (GL_ALPHA)	^\s*bVar6\ =\ param_4\ ==\ 0x1906;$	+1
+use	_gleGetHistogram	bVar6	formatIsAlpha	CONFIRMED	format == 0x1906 (GL_ALPHA)	^\s*if\ \(bVar6\)\ \{$	+1
+use	_gleGetHistogram	bVar6	formatIsAlpha	CONFIRMED	format == 0x1906 (GL_ALPHA)	^\s*if\ \(!bVar6\)\ \{$	+1
+use	_gleGetHistogram	bVar6	formatIsAlpha	CONFIRMED	format == 0x1906 (GL_ALPHA)	^\s*if\ \(bVar6\)\ goto\ LAB_000d32bc;$	+1
+use	_gleGetHistogram	bVar6	formatIsAlpha	CONFIRMED	format == 0x1906 (GL_ALPHA)	^\s*if\ \(bVar6\)\ goto\ LAB_000d30c0;$	+1
+use	_gleGetHistogram	bVar7	formatIsRgb	CONFIRMED	format == 0x1907 (GL_RGB)	^\s*bVar7\ =\ param_4\ ==\ 0x1907;$	+1
+use	_gleGetHistogram	bVar7	formatIsRgb	CONFIRMED	format == 0x1907 (GL_RGB)	^\s*if\ \(!bVar7\)\ goto\ LAB_000d3734;$	+1
+use	_gleGetHistogram	bVar7	formatIsRgb	CONFIRMED	format == 0x1907 (GL_RGB)	^\s*if\ \(!bVar7\)\ goto\ LAB_000d3734;$@2	+1
+use	_gleGetHistogram	bVar7	formatIsRgb	CONFIRMED	format == 0x1907 (GL_RGB)	^\s*if\ \(bVar7\)\ \{$	+1
+use	_gleGetHistogram	bVar7	formatIsRgb	CONFIRMED	format == 0x1907 (GL_RGB)	^\s*if\ \(bVar7\)\ \{$@2	+1
+use	_gleGetHistogram	bVar8	swapBytes	INFERRED	pixel-store swap-bytes flag (ctx+0x31c8): selects the byte-swapped copy of every value (the GH_F2U shift/or sequence swaps the 4 bytes)	^\s*bVar8\ =\ \*\(char\ \*\)\(param_1\ \+\ 0x31c8\)\ !=\ '\\0';$	+1
+use	_gleGetHistogram	bVar8	swapBytes	INFERRED	pixel-store swap-bytes flag (ctx+0x31c8): selects the byte-swapped copy of every value (the GH_F2U shift/or sequence swaps the 4 bytes)	^\s*if\ \(bVar8\)\ \{$	+1
+use	_gleGetHistogram	bVar8	swapBytes	INFERRED	pixel-store swap-bytes flag (ctx+0x31c8): selects the byte-swapped copy of every value (the GH_F2U shift/or sequence swaps the 4 bytes)	^\s*if\ \(bVar8\)\ \{$@2	+1
+use	_gleGetHistogram	bVar8	swapBytes	INFERRED	pixel-store swap-bytes flag (ctx+0x31c8): selects the byte-swapped copy of every value (the GH_F2U shift/or sequence swaps the 4 bytes)	^\s*if\ \(bVar8\)\ \{$@3	+1
+use	_gleGetHistogram	bVar9	formatIsRgba	CONFIRMED	format == 0x1908 (GL_RGBA)	^\s*bVar9\ =\ param_4\ ==\ 0x1908;$	+1
+use	_gleGetHistogram	bVar9	formatIsRgba	CONFIRMED	format == 0x1908 (GL_RGBA)	^\s*if\ \(bVar9\)\ \{$	+1
+use	_gleGetHistogram	bVar9	formatIsRgba	CONFIRMED	format == 0x1908 (GL_RGBA)	^\s*if\ \(bVar9\)\ \{$@2	+1
+use	_gleGetHistogram	bVar9	formatIsRgba	CONFIRMED	format == 0x1908 (GL_RGBA)	^\s*if\ \(bVar9\)\ goto\ LAB_000d3048;$	+1
+use	_gleGetHistogram	bVar9	formatIsRgba	CONFIRMED	format == 0x1908 (GL_RGBA)	^\s*if\ \(bVar9\)\ \{$@3	+1
+use	_gleGetHistogram	bVar9	formatIsRgba	CONFIRMED	format == 0x1908 (GL_RGBA)	^\s*if\ \(bVar9\)\ \{$@4	+1
+use	_gleGetHistogram	bVar10	formatIsLuminance	CONFIRMED	format == 0x1909 (GL_LUMINANCE)	^\s*bVar10\ =\ param_4\ ==\ 0x1909;$	+1
+use	_gleGetHistogram	bVar10	formatIsLuminance	CONFIRMED	format == 0x1909 (GL_LUMINANCE)	^\s*if\ \(bVar10\)\ goto\ LAB_000d3720;$	+1
+use	_gleGetHistogram	bVar10	formatIsLuminance	CONFIRMED	format == 0x1909 (GL_LUMINANCE)	^\s*if\ \(bVar10\)\ \{$	+1
+use	_gleGetHistogram	bVar10	formatIsLuminance	CONFIRMED	format == 0x1909 (GL_LUMINANCE)	^\s*if\ \(bVar10\)\ goto\ LAB_000d32bc;$	+1
+use	_gleGetHistogram	bVar10	formatIsLuminance	CONFIRMED	format == 0x1909 (GL_LUMINANCE)	^\s*if\ \(bVar10\)\ goto\ LAB_000d30c0;$	+1
+use	_gleGetHistogram	bVar11	formatIsBlue	CONFIRMED	format == 0x1905 (GL_BLUE)	^\s*bVar11\ =\ param_4\ ==\ 0x1905;$	+1
+use	_gleGetHistogram	bVar11	formatIsBlue	CONFIRMED	format == 0x1905 (GL_BLUE)	^\s*else\ if\ \(bVar11\)\ \{$	+1
+use	_gleGetHistogram	bVar11	formatIsBlue	CONFIRMED	format == 0x1905 (GL_BLUE)	^\s*if\ \(!bVar11\)\ goto\ LAB_000d2f78;$	+1
+use	_gleGetHistogram	bVar11	formatIsBlue	CONFIRMED	format == 0x1905 (GL_BLUE)	^\s*if\ \(bVar11\)\ goto\ LAB_000d3020;$	+1
+use	_gleGetHistogram	bVar11	formatIsBlue	CONFIRMED	format == 0x1905 (GL_BLUE)	^\s*if\ \(!bVar11\)\ \{$	+1
+use	_gleGetHistogram	bVar11	formatIsBlue	CONFIRMED	format == 0x1905 (GL_BLUE)	^\s*if\ \(bVar11\)\ \{$	+1
+use	_gleGetHistogram	bVar12	formatIsLuminanceAlpha	CONFIRMED	format == 0x190a (GL_LUMINANCE_ALPHA)	^\s*bVar12\ =\ param_4\ ==\ 0x190a;$	+1
+use	_gleGetHistogram	bVar12	formatIsLuminanceAlpha	CONFIRMED	format == 0x190a (GL_LUMINANCE_ALPHA)	^\s*if\ \(bVar12\)\ \{$	+1
+use	_gleGetHistogram	bVar12	formatIsLuminanceAlpha	CONFIRMED	format == 0x190a (GL_LUMINANCE_ALPHA)	^\s*if\ \(!bVar12\)\ goto\ LAB_000d3734;$	+1
+use	_gleGetHistogram	bVar12	formatIsLuminanceAlpha	CONFIRMED	format == 0x190a (GL_LUMINANCE_ALPHA)	^\s*if\ \(bVar12\)\ \{$@2	+1
+use	_gleGetHistogram	bVar12	formatIsLuminanceAlpha	CONFIRMED	format == 0x190a (GL_LUMINANCE_ALPHA)	^\s*if\ \(bVar12\)\ \{$@3	+1
+use	_gleGetHistogram	bVar13	formatAboveRgba	CONFIRMED	format > 0x1908 (GL_RGBA): range test that splits the format dispatch	^\s*bVar13\ =\ 0x1908\ <\ param_4;$	+1
+use	_gleGetHistogram	bVar13	formatAboveRgba	CONFIRMED	format > 0x1908 (GL_RGBA): range test that splits the format dispatch	^\s*if\ \(bVar13\)\ \{$	+1
+use	_gleGetHistogram	bVar13	formatAboveRgba	CONFIRMED	format > 0x1908 (GL_RGBA): range test that splits the format dispatch	^\s*if\ \(!bVar13\)\ \{$	+1
+use	_gleGetHistogram	bVar13	formatAboveRgba	CONFIRMED	format > 0x1908 (GL_RGBA): range test that splits the format dispatch	^\s*if\ \(bVar13\)\ goto\ LAB_000d2fc4;$	+1
+use	_gleGetHistogram	bVar13	formatAboveRgba	CONFIRMED	format > 0x1908 (GL_RGBA): range test that splits the format dispatch	^\s*if\ \(!bVar13\)\ \{$@2	+1
+use	_gleGetHistogram	bVar13	formatAboveRgba	CONFIRMED	format > 0x1908 (GL_RGBA): range test that splits the format dispatch	^\s*else\ if\ \(bVar13\)\ \{$	+1
+use	_gleGetHistogram	bVar14	formatAboveBlue	CONFIRMED	format > 0x1905 (GL_BLUE): range test that splits the format dispatch	^\s*bVar14\ =\ 0x1905\ <\ param_4;$	+1
+use	_gleGetHistogram	bVar14	formatAboveBlue	CONFIRMED	format > 0x1905 (GL_BLUE): range test that splits the format dispatch	^\s*else\ if\ \(bVar14\)\ \{$	+1
+use	_gleGetHistogram	bVar14	formatAboveBlue	CONFIRMED	format > 0x1905 (GL_BLUE): range test that splits the format dispatch	^\s*if\ \(bVar14\)\ \{$	+1
+use	_gleGetHistogram	bVar14	formatAboveBlue	CONFIRMED	format > 0x1905 (GL_BLUE): range test that splits the format dispatch	^\s*if\ \(bVar14\)\ \{$@2	+1
+use	_gleGetHistogram	bVar14	formatAboveBlue	CONFIRMED	format > 0x1905 (GL_BLUE): range test that splits the format dispatch	^\s*if\ \(bVar14\)\ \{$@3	+1
+use	_gleGetHistogram	bVar15	formatAboveAbgr	CONFIRMED	format > 0x8000 (GL_ABGR_EXT): range test that splits the format dispatch	^\s*bVar15\ =\ 0x8000\ <\ param_4;$	+1
+use	_gleGetHistogram	bVar15	formatAboveAbgr	CONFIRMED	format > 0x8000 (GL_ABGR_EXT): range test that splits the format dispatch	^\s*if\ \(bVar15\)\ \{$	+1
+use	_gleGetHistogram	bVar15	formatAboveAbgr	CONFIRMED	format > 0x8000 (GL_ABGR_EXT): range test that splits the format dispatch	^\s*if\ \(bVar15\)\ \{$@2	+1
+use	_gleGetHistogram	bVar15	formatAboveAbgr	CONFIRMED	format > 0x8000 (GL_ABGR_EXT): range test that splits the format dispatch	^\s*if\ \(bVar15\)\ \{$@3	+1
+use	_gleGetHistogram	bVar15	formatAboveAbgr	CONFIRMED	format > 0x8000 (GL_ABGR_EXT): range test that splits the format dispatch	^\s*if\ \(bVar15\)\ \{$@4	+1
+use	_gleGetHistogram	dVar16	uintToDoubleBias	INFERRED	bias constant subtracted in each int-to-double conversion CONCAT44(0x43300000, n) - bias (magic-exponent conversion of the bin counter)	^\s*dVar16\ =\ DOUBLE_00108d58;$	+1
+use	_gleGetHistogram	dVar16	uintToDoubleBias	INFERRED	bias constant subtracted in each int-to-double conversion CONCAT44(0x43300000, n) - bias (magic-exponent conversion of the bin counter)	^\s*fVar21\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,\-\*pfVar28\)\ \-\ dVar16\);$	+4
+use	_gleGetHistogram	iVar19	packAlignment	CONFIRMED	ctx+0x31c4: pack alignment 1/2/4/8: the output pointer is rounded up to it (tests 2, 4, 8 and masks 1, 3, 7)	^\s*iVar19\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x31c4\);$	+1
+use	_gleGetHistogram	iVar19	packAlignment	CONFIRMED	ctx+0x31c4: pack alignment 1/2/4/8: the output pointer is rounded up to it (tests 2, 4, 8 and masks 1, 3, 7)	^\s*if\ \(iVar19\ ==\ 4\)\ \{$	+1
+use	_gleGetHistogram	iVar19	packAlignment	CONFIRMED	ctx+0x31c4: pack alignment 1/2/4/8: the output pointer is rounded up to it (tests 2, 4, 8 and masks 1, 3, 7)	^\s*else\ if\ \(iVar19\ <\ 5\)\ \{$	+2
+use	_gleGetHistogram	iVar19	packAlignment	CONFIRMED	ctx+0x31c4: pack alignment 1/2/4/8: the output pointer is rounded up to it (tests 2, 4, 8 and masks 1, 3, 7)	^\s*else\ if\ \(\(iVar19\ ==\ 8\)\ \&\&\ \(\(\(uint\)pfVar25\ \&\ 7\)\ !=\ 0\)\)\ \{$	+1
+use	_gleGetHistogram	iVar19	binsRemaining	INFERRED	down-counter of the output loop: starts at the bin count and is decremented per bin	^\s*iVar19\ =\ iVar26;$	+1
+use	_gleGetHistogram	iVar19	binsRemaining	INFERRED	down-counter of the output loop: starts at the bin count and is decremented per bin	^\s*iVar19\ =\ iVar19\ \+\ \-1;$	+2
+use	_gleGetHistogram	iVar20	pixelBytes	CONFIRMED	_glePixelBytes(format, type): bytes of one output pixel; scales the pack skip-pixels offset	^\s*iVar20\ =\ _glePixelBytes\(param_4,param_5\);$	+1
+use	_gleGetHistogram	iVar20	pixelBytes	CONFIRMED	_glePixelBytes(format, type): bytes of one output pixel; scales the pack skip-pixels offset	^\s*pfVar25\ =\ \(float\ \*\)\(param_6\ \+\ iVar20\ \*\ \*\(int\ \*\)\(param_1\ \+\ 0x31bc\)\);$	+1
+use	_gleGetHistogram	iVar20	binByteOffset	INFERRED	byte offset of bin binIndex in the table (16 bytes per bin: R, G, B, A counters)	^\s*iVar20\ =\ iVar19\ \*\ 0x10;$	+1
+use	_gleGetHistogram	iVar20	binByteOffset	INFERRED	byte offset of bin binIndex in the table (16 bytes per bin: R, G, B, A counters)	^\s*iVar20\ =\ iVar19\ <<\ 4;$	+1
+use	_gleGetHistogram	iVar20	binByteOffset	INFERRED	byte offset of bin binIndex in the table (16 bytes per bin: R, G, B, A counters)	^\s*\*\(undefined4\ \*\)\(\(int\)pfVar27\ \+\ iVar20\)\ =\ 0;$	+3
+use	_gleGetHistogram	pfVar25	dstCursor	CONFIRMED	output pointer: starts at values + pixelBytes * skip-pixels (rounded up to packAlignment) and advances by each stored component	^\s*pfVar25\ =\ \(float\ \*\)\(param_6\ \+\ iVar20\ \*\ \*\(int\ \*\)\(param_1\ \+\ 0x31bc\)\);$	+1
+use	_gleGetHistogram	pfVar25	dstCursor	CONFIRMED	output pointer: starts at values + pixelBytes * skip-pixels (rounded up to packAlignment) and advances by each stored component	^\s*if\ \(\(\(uint\)pfVar25\ \&\ 3\)\ !=\ 0\)\ \{$	+2
+use	_gleGetHistogram	pfVar25	dstCursor	CONFIRMED	output pointer: starts at values + pixelBytes * skip-pixels (rounded up to packAlignment) and advances by each stored component	^\s*if\ \(\(iVar19\ ==\ 2\)\ \&\&\ \(\(\(uint\)pfVar25\ \&\ 1\)\ !=\ 0\)\)\ \{$	+2
+use	_gleGetHistogram	pfVar25	dstCursor	CONFIRMED	output pointer: starts at values + pixelBytes * skip-pixels (rounded up to packAlignment) and advances by each stored component	^\s*else\ if\ \(\(iVar19\ ==\ 8\)\ \&\&\ \(\(\(uint\)pfVar25\ \&\ 7\)\ !=\ 0\)\)\ \{$	+2
+use	_gleGetHistogram	pfVar25	dstCursor	CONFIRMED	output pointer: starts at values + pixelBytes * skip-pixels (rounded up to packAlignment) and advances by each stored component	^\s*\*pfVar25\ =\ fVar21;$	+4
+use	_gleGetHistogram	pfVar25	dstCursor	CONFIRMED	output pointer: starts at values + pixelBytes * skip-pixels (rounded up to packAlignment) and advances by each stored component	^\s*\*pfVar25\ =\ fVar23;$@2	+1
+use	_gleGetHistogram	pfVar25	dstCursor	CONFIRMED	output pointer: starts at values + pixelBytes * skip-pixels (rounded up to packAlignment) and advances by each stored component	^\s*\*pfVar25\ =\ fVar23;$@3	+4
+use	_gleGetHistogram	pfVar25	dstCursor	CONFIRMED	output pointer: starts at values + pixelBytes * skip-pixels (rounded up to packAlignment) and advances by each stored component	^\s*\*pfVar25\ =\ fVar21;$@3	+1
+use	_gleGetHistogram	pfVar25	dstCursor	CONFIRMED	output pointer: starts at values + pixelBytes * skip-pixels (rounded up to packAlignment) and advances by each stored component	^\s*pfVar25\ =\ pfVar25\ \+\ 1;$	+2
+use	_gleGetHistogram	pfVar25	dstCursor	CONFIRMED	output pointer: starts at values + pixelBytes * skip-pixels (rounded up to packAlignment) and advances by each stored component	^\s*\*pfVar25\ =\ fVar24;$@2	+3
+use	_gleGetHistogram	pfVar25	dstCursor	CONFIRMED	output pointer: starts at values + pixelBytes * skip-pixels (rounded up to packAlignment) and advances by each stored component	^\s*pfVar25\[1\]\ =\ fVar22;$@3	+3
+use	_gleGetHistogram	pfVar25	dstCursor	CONFIRMED	output pointer: starts at values + pixelBytes * skip-pixels (rounded up to packAlignment) and advances by each stored component	^\s*\*pfVar25\ =\ fVar23;$@5	+1
+use	_gleGetHistogram	pfVar25	dstCursor	CONFIRMED	output pointer: starts at values + pixelBytes * skip-pixels (rounded up to packAlignment) and advances by each stored component	^\s*\*pfVar25\ =\ fVar24;$@3	+1
+use	_gleGetHistogram	pfVar25	dstCursor	CONFIRMED	output pointer: starts at values + pixelBytes * skip-pixels (rounded up to packAlignment) and advances by each stored component	^\s*\*pfVar25\ =\ fVar21;$@5	+4
+use	_gleGetHistogram	pfVar25	dstCursor	CONFIRMED	output pointer: starts at values + pixelBytes * skip-pixels (rounded up to packAlignment) and advances by each stored component	^\s*\*pfVar25\ =\ fVar21;$@6	+1
+use	_gleGetHistogram	pfVar25	dstCursor	CONFIRMED	output pointer: starts at values + pixelBytes * skip-pixels (rounded up to packAlignment) and advances by each stored component	^\s*\*pfVar25\ =\ fVar22;$	+1
+use	_gleGetHistogram	pfVar25	dstCursor	CONFIRMED	output pointer: starts at values + pixelBytes * skip-pixels (rounded up to packAlignment) and advances by each stored component	^\s*pfVar25\ =\ pfVar25\ \+\ 1;$@3	+1
+use	_gleGetHistogram	pfVar25	dstCursor	CONFIRMED	output pointer: starts at values + pixelBytes * skip-pixels (rounded up to packAlignment) and advances by each stored component	^\s*\*\(undefined1\ \*\)pfVar25\ =\ \*\(undefined1\ \*\)\(\(int\)pfVar28\ \+\ 3\);$	+2
+use	_gleGetHistogram	pfVar25	dstCursor	CONFIRMED	output pointer: starts at values + pixelBytes * skip-pixels (rounded up to packAlignment) and advances by each stored component	^\s*pfVar25\ =\ \(float\ \*\)\(\(int\)pfVar25\ \+\ 2\);$	+2
+use	_gleGetHistogram	pfVar25	dstCursor	CONFIRMED	output pointer: starts at values + pixelBytes * skip-pixels (rounded up to packAlignment) and advances by each stored component	^\s*\*\(undefined1\ \*\)pfVar25\ =\ \*\(undefined1\ \*\)\(\(int\)pfVar28\ \+\ 0xb\);$	+2
+use	_gleGetHistogram	pfVar25	dstCursor	CONFIRMED	output pointer: starts at values + pixelBytes * skip-pixels (rounded up to packAlignment) and advances by each stored component	^\s*pfVar25\ =\ \(float\ \*\)\(\(int\)pfVar25\ \+\ 2\);$@2	+2
+use	_gleGetHistogram	pfVar25	dstCursor	CONFIRMED	output pointer: starts at values + pixelBytes * skip-pixels (rounded up to packAlignment) and advances by each stored component	^\s*\*\(undefined1\ \*\)pfVar25\ =\ \*\(undefined1\ \*\)\(\(int\)pfVar28\ \+\ 0xb\);$@2	+2
+use	_gleGetHistogram	pfVar25	dstCursor	CONFIRMED	output pointer: starts at values + pixelBytes * skip-pixels (rounded up to packAlignment) and advances by each stored component	^\s*\*\(undefined1\ \*\)pfVar25\ =\ \*\(undefined1\ \*\)\(\(int\)pfVar28\ \+\ 3\);$@2	+1
+use	_gleGetHistogram	pfVar25	dstCursor	CONFIRMED	output pointer: starts at values + pixelBytes * skip-pixels (rounded up to packAlignment) and advances by each stored component	^\s*\*\(undefined1\ \*\)pfVar25\ =\ \*\(undefined1\ \*\)\(\(int\)pfVar28\ \+\ 0xf\);$	+4
+use	_gleGetHistogram	pfVar25	dstCursor	CONFIRMED	output pointer: starts at values + pixelBytes * skip-pixels (rounded up to packAlignment) and advances by each stored component	^\s*pfVar25\ =\ \(float\ \*\)\(\(int\)pfVar25\ \+\ 1\);$@2	+2
+use	_gleGetHistogram	pfVar25	dstCursor	CONFIRMED	output pointer: starts at values + pixelBytes * skip-pixels (rounded up to packAlignment) and advances by each stored component	^\s*\*\(undefined1\ \*\)pfVar25\ =\ \*\(undefined1\ \*\)\(\(int\)pfVar28\ \+\ 3\);$@3	+2
+use	_gleGetHistogram	pfVar25	dstCursor	CONFIRMED	output pointer: starts at values + pixelBytes * skip-pixels (rounded up to packAlignment) and advances by each stored component	^\s*\*\(undefined1\ \*\)pfVar25\ =\ uVar18;$@4	+1
+use	_gleGetHistogram	pfVar25	dstCursor	CONFIRMED	output pointer: starts at values + pixelBytes * skip-pixels (rounded up to packAlignment) and advances by each stored component	^\s*pfVar25\ =\ \(float\ \*\)\(\(int\)pfVar25\ \+\ 1\);$@3	+1
+use	_gleGetHistogram	pfVar25	dstCursor	CONFIRMED	output pointer: starts at values + pixelBytes * skip-pixels (rounded up to packAlignment) and advances by each stored component	^\s*\*\(unsigned\ int\ \*\)pfVar25\ =\ local_80;$	+2
+use	_gleGetHistogram	pfVar25	dstCursor	CONFIRMED	output pointer: starts at values + pixelBytes * skip-pixels (rounded up to packAlignment) and advances by each stored component	^\s*pfVar25\ =\ pfVar25\ \+\ 2;$@5	+2
+use	_gleGetHistogram	pfVar25	dstCursor	CONFIRMED	output pointer: starts at values + pixelBytes * skip-pixels (rounded up to packAlignment) and advances by each stored component	^\s*\*\(unsigned\ int\ \*\)pfVar25\ =\ local_80;$@3	+2
+use	_gleGetHistogram	pfVar25	dstCursor	CONFIRMED	output pointer: starts at values + pixelBytes * skip-pixels (rounded up to packAlignment) and advances by each stored component	^\s*\*pfVar25\ =\ fVar21;$@7	+1
+use	_gleGetHistogram	pfVar25	dstCursor	CONFIRMED	output pointer: starts at values + pixelBytes * skip-pixels (rounded up to packAlignment) and advances by each stored component	^\s*\*\(unsigned\ int\ \*\)pfVar25\ =\ local_78;$	+2
+use	_gleGetHistogram	pfVar25	dstCursor	CONFIRMED	output pointer: starts at values + pixelBytes * skip-pixels (rounded up to packAlignment) and advances by each stored component	^\s*pfVar25\ =\ pfVar25\ \+\ 2;$@6	+2
+use	_gleGetHistogram	pfVar25	dstCursor	CONFIRMED	output pointer: starts at values + pixelBytes * skip-pixels (rounded up to packAlignment) and advances by each stored component	^\s*\*\(unsigned\ int\ \*\)pfVar25\ =\ local_78;$@3	+2
+use	_gleGetHistogram	pfVar25	dstCursor	CONFIRMED	output pointer: starts at values + pixelBytes * skip-pixels (rounded up to packAlignment) and advances by each stored component	^\s*\*\(unsigned\ int\ \*\)pfVar25\ =\ local_80;$@4	+1
+use	_gleGetHistogram	pfVar25	dstCursor	CONFIRMED	output pointer: starts at values + pixelBytes * skip-pixels (rounded up to packAlignment) and advances by each stored component	^\s*\*\(unsigned\ int\ \*\)pfVar25\ =\ local_74;$	+4
+use	_gleGetHistogram	pfVar25	dstCursor	CONFIRMED	output pointer: starts at values + pixelBytes * skip-pixels (rounded up to packAlignment) and advances by each stored component	^\s*pfVar25\ =\ pfVar25\ \+\ 1;$@4	+2
+use	_gleGetHistogram	pfVar25	dstCursor	CONFIRMED	output pointer: starts at values + pixelBytes * skip-pixels (rounded up to packAlignment) and advances by each stored component	^\s*\*\(ushort\ \*\)pfVar25\ =\ \(\*\(unsigned\ short\ \*\)\(\(unsigned\ char\ \*\)\&\(local_80\)\ \+\ 2\)\);$	+2
+use	_gleGetHistogram	pfVar25	dstCursor	CONFIRMED	output pointer: starts at values + pixelBytes * skip-pixels (rounded up to packAlignment) and advances by each stored component	^\s*pfVar25\ =\ pfVar25\ \+\ 1;$@5	+2
+use	_gleGetHistogram	pfVar25	dstCursor	CONFIRMED	output pointer: starts at values + pixelBytes * skip-pixels (rounded up to packAlignment) and advances by each stored component	^\s*pfVar25\ =\ \(float\ \*\)\(\(int\)pfVar25\ \+\ 2\);$@4	+2
+use	_gleGetHistogram	pfVar25	dstCursor	CONFIRMED	output pointer: starts at values + pixelBytes * skip-pixels (rounded up to packAlignment) and advances by each stored component	^\s*pfVar25\ =\ \(float\ \*\)\(\(int\)pfVar25\ \+\ 2\);$@5	+1
+use	_gleGetHistogram	pfVar25	dstCursor	CONFIRMED	output pointer: starts at values + pixelBytes * skip-pixels (rounded up to packAlignment) and advances by each stored component	^\s*\*\(ushort\ \*\)pfVar25\ =\ \(\*\(unsigned\ short\ \*\)\(\(unsigned\ char\ \*\)\&\(local_74\)\ \+\ 2\)\);$	+4
+use	_gleGetHistogram	pfVar25	dstCursor	CONFIRMED	output pointer: starts at values + pixelBytes * skip-pixels (rounded up to packAlignment) and advances by each stored component	^\s*\*\(ushort\ \*\)pfVar25\ =\ \(\*\(unsigned\ short\ \*\)\(\(unsigned\ char\ \*\)\&\(local_78\)\ \+\ 2\)\);$	+2
+use	_gleGetHistogram	pfVar25	dstCursor	CONFIRMED	output pointer: starts at values + pixelBytes * skip-pixels (rounded up to packAlignment) and advances by each stored component	^\s*pfVar25\ =\ pfVar25\ \+\ 1;$@7	+2
+use	_gleGetHistogram	pfVar25	dstCursor	CONFIRMED	output pointer: starts at values + pixelBytes * skip-pixels (rounded up to packAlignment) and advances by each stored component	^\s*\*\(ushort\ \*\)pfVar25\ =\ \(\*\(unsigned\ short\ \*\)\(\(unsigned\ char\ \*\)\&\(local_78\)\ \+\ 2\)\);$@3	+2
+use	_gleGetHistogram	pfVar25	dstCursor	CONFIRMED	output pointer: starts at values + pixelBytes * skip-pixels (rounded up to packAlignment) and advances by each stored component	^\s*\*\(ushort\ \*\)pfVar25\ =\ \(\*\(unsigned\ short\ \*\)\(\(unsigned\ char\ \*\)\&\(local_80\)\ \+\ 2\)\);$@4	+1
+use	_gleGetHistogram	pfVar25	dstCursor	CONFIRMED	output pointer: starts at values + pixelBytes * skip-pixels (rounded up to packAlignment) and advances by each stored component	^\s*\*\(ushort\ \*\)pfVar25\ =\ uVar17;$	+1
+use	_gleGetHistogram	pfVar25	dstCursor	CONFIRMED	output pointer: starts at values + pixelBytes * skip-pixels (rounded up to packAlignment) and advances by each stored component	^\s*\*\(ushort\ \*\)pfVar25\ =\ \(\*\(unsigned\ short\ \*\)\(\(unsigned\ char\ \*\)\&\(local_80\)\ \+\ 2\)\);$@5	+2
+use	_gleGetHistogram	iVar26	binCountThenRemaining	INFERRED	HYBRID: number of histogram bins (ctx+0x3388), then decremented as the reset loop counter	^\s*iVar26\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x3388\);$	+1
+use	_gleGetHistogram	iVar26	binCountThenRemaining	INFERRED	HYBRID: number of histogram bins (ctx+0x3388), then decremented as the reset loop counter	^\s*if\ \(0\ <\ iVar26\)\ \{$	+1
+use	_gleGetHistogram	iVar26	binCountThenRemaining	INFERRED	HYBRID: number of histogram bins (ctx+0x3388), then decremented as the reset loop counter	^\s*iVar19\ =\ iVar26;$	+1
+use	_gleGetHistogram	iVar26	binCountThenRemaining	INFERRED	HYBRID: number of histogram bins (ctx+0x3388), then decremented as the reset loop counter	^\s*if\ \(\(param_3\ !=\ 0\)\ \&\&\ \(iVar19\ =\ 0,\ 0\ <\ iVar26\)\)\ \{$	+1
+use	_gleGetHistogram	iVar26	binCountThenRemaining	INFERRED	HYBRID: number of histogram bins (ctx+0x3388), then decremented as the reset loop counter	^\s*iVar26\ =\ iVar26\ \+\ \-1;$	+2
+use	_gleGetHistogram	pfVar28	binCursor	INFERRED	pointer to the current histogram bin (four 32-bit counters R, G, B, A per bin; advances by 4 words)	^\s*pfVar28\ =\ pfVar27;$	+1
+use	_gleGetHistogram	pfVar28	binCursor	INFERRED	pointer to the current histogram bin (four 32-bit counters R, G, B, A per bin; advances by 4 words)	^\s*fVar21\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,\-\*pfVar28\)\ \-\ dVar16\);$	+4
+use	_gleGetHistogram	pfVar28	binCursor	INFERRED	pointer to the current histogram bin (four 32-bit counters R, G, B, A per bin; advances by 4 words)	^\s*\*\(undefined1\ \*\)pfVar25\ =\ \*\(undefined1\ \*\)\(\(int\)pfVar28\ \+\ 3\);$	+3
+use	_gleGetHistogram	pfVar28	binCursor	INFERRED	pointer to the current histogram bin (four 32-bit counters R, G, B, A per bin; advances by 4 words)	^\s*uVar18\ =\ \*\(undefined1\ \*\)\(\(int\)pfVar28\ \+\ 0xf\);$	+1
+use	_gleGetHistogram	pfVar28	binCursor	INFERRED	pointer to the current histogram bin (four 32-bit counters R, G, B, A per bin; advances by 4 words)	^\s*uVar18\ =\ \*\(undefined1\ \*\)\(\(int\)pfVar28\ \+\ 0xb\);$@2	+1
+use	_gleGetHistogram	pfVar28	binCursor	INFERRED	pointer to the current histogram bin (four 32-bit counters R, G, B, A per bin; advances by 4 words)	^\s*\*\(undefined1\ \*\)pfVar25\ =\ \*\(undefined1\ \*\)\(\(int\)pfVar28\ \+\ 0xb\);$	+3
+use	_gleGetHistogram	pfVar28	binCursor	INFERRED	pointer to the current histogram bin (four 32-bit counters R, G, B, A per bin; advances by 4 words)	^\s*\*\(undefined1\ \*\)pfVar25\ =\ \*\(undefined1\ \*\)\(\(int\)pfVar28\ \+\ 0xb\);$@2	+3
+use	_gleGetHistogram	pfVar28	binCursor	INFERRED	pointer to the current histogram bin (four 32-bit counters R, G, B, A per bin; advances by 4 words)	^\s*uVar18\ =\ \*\(undefined1\ \*\)\(\(int\)pfVar28\ \+\ 3\);$@3	+1
+use	_gleGetHistogram	pfVar28	binCursor	INFERRED	pointer to the current histogram bin (four 32-bit counters R, G, B, A per bin; advances by 4 words)	^\s*\*\(undefined1\ \*\)pfVar25\ =\ \*\(undefined1\ \*\)\(\(int\)pfVar28\ \+\ 3\);$@2	+1
+use	_gleGetHistogram	pfVar28	binCursor	INFERRED	pointer to the current histogram bin (four 32-bit counters R, G, B, A per bin; advances by 4 words)	^\s*\*\(undefined1\ \*\)pfVar25\ =\ \*\(undefined1\ \*\)\(\(int\)pfVar28\ \+\ 0xf\);$	+2
+use	_gleGetHistogram	pfVar28	binCursor	INFERRED	pointer to the current histogram bin (four 32-bit counters R, G, B, A per bin; advances by 4 words)	^\s*\*\(undefined1\ \*\)pfVar25\ =\ \*\(undefined1\ \*\)\(\(int\)pfVar28\ \+\ 7\);$	+2
+use	_gleGetHistogram	pfVar28	binCursor	INFERRED	pointer to the current histogram bin (four 32-bit counters R, G, B, A per bin; advances by 4 words)	^\s*\*\(undefined1\ \*\)pfVar25\ =\ \*\(undefined1\ \*\)\(\(int\)pfVar28\ \+\ 3\);$@3	+3
+use	_gleGetHistogram	pfVar28	binCursor	INFERRED	pointer to the current histogram bin (four 32-bit counters R, G, B, A per bin; advances by 4 words)	^\s*uVar18\ =\ \*\(undefined1\ \*\)\(\(int\)pfVar28\ \+\ 0xf\);$@2	+1
+use	_gleGetHistogram	pfVar28	binCursor	INFERRED	pointer to the current histogram bin (four 32-bit counters R, G, B, A per bin; advances by 4 words)	^\s*uVar18\ =\ \*\(undefined1\ \*\)\(\(int\)pfVar28\ \+\ 7\);$	+1
+use	_gleGetHistogram	pfVar28	binCursor	INFERRED	pointer to the current histogram bin (four 32-bit counters R, G, B, A per bin; advances by 4 words)	^\s*local_80\ =\ GH_F2U\(\*pfVar28\);$	+4
+use	_gleGetHistogram	pfVar28	binCursor	INFERRED	pointer to the current histogram bin (four 32-bit counters R, G, B, A per bin; advances by 4 words)	^\s*fVar24\ =\ \*pfVar28;$	+4
+use	_gleGetHistogram	pfVar28	binCursor	INFERRED	pointer to the current histogram bin (four 32-bit counters R, G, B, A per bin; advances by 4 words)	^\s*\(\*\(unsigned\ short\ \*\)\(\(unsigned\ char\ \*\)\&\(local_80\)\ \+\ 2\)\)\ =\ SUB42\(\*pfVar28,0\);$	+4
+use	_gleGetHistogram	pfVar28	binCursor	INFERRED	pointer to the current histogram bin (four 32-bit counters R, G, B, A per bin; advances by 4 words)	^\s*\(ushort\)\(\(\(uint\)GH_F2U\(\*pfVar28\)\ \&\ 0xff\)\ <<\ 8\)\ \|\ \(ushort\)\(\(uint\)GH_F2U\(\*pfVar28\)\ >>\ 8\)\ \&\ 0xff;$	+1
+use	_gleGetHistogram	pfVar28	binCursor	INFERRED	pointer to the current histogram bin (four 32-bit counters R, G, B, A per bin; advances by 4 words)	^\s*\(ushort\)\(\(\(uint\)GH_F2U\(pfVar28\[1\]\)\ \&\ 0xff\)\ <<\ 8\)\ \|\ \(ushort\)\(\(uint\)GH_F2U\(pfVar28\[1\]\)\ >>\ 8\)\ \&\ 0xff;$	+1
+use	_gleGetHistogram	pfVar28	binCursor	INFERRED	pointer to the current histogram bin (four 32-bit counters R, G, B, A per bin; advances by 4 words)	^\s*\(ushort\)\(\(\(uint\)GH_F2U\(pfVar28\[2\]\)\ \&\ 0xff\)\ <<\ 8\)\ \|\ \(ushort\)\(\(uint\)GH_F2U\(pfVar28\[2\]\)\ >>\ 8\)\ \&\ 0xff;$	+1
+use	_gleGetHistogram	pfVar28	binCursor	INFERRED	pointer to the current histogram bin (four 32-bit counters R, G, B, A per bin; advances by 4 words)	^\s*\(ushort\)\(\(\(uint\)GH_F2U\(pfVar28\[3\]\)\ \&\ 0xff\)\ <<\ 8\)\ \|\ \(ushort\)\(\(uint\)GH_F2U\(pfVar28\[3\]\)\ >>\ 8\)\ \&\ 0xff;$	+1
+use	_gleGetHistogram	pfVar28	binCursor	INFERRED	pointer to the current histogram bin (four 32-bit counters R, G, B, A per bin; advances by 4 words)	^\s*pfVar28\ =\ pfVar28\ \+\ 4;$	+1

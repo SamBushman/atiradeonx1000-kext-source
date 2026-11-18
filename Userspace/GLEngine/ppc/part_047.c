@@ -37,25 +37,25 @@ void _glePPRelocateOutput(param_1, param_2, param_3)
 }
 
 /* _gleBytesPerElement @ 0xe1db8 (140 bytes) */
-double _gleBytesPerElement(uint param_1)
+double _gleBytesPerElement(uint type)
 {
-  if (param_1 < 0x1404) {
-    if (0x1401 < param_1) {
+  if (type < 0x1404) {
+    if (0x1401 < type) {
 LAB_000e1e14:
       return (double)FLOAT_00108ea4;
     }
-    if (0x13ff < param_1) {
+    if (0x13ff < type) {
       return (double)FLOAT_00108e54;
     }
   }
   else {
-    if (param_1 == 0x140b) goto LAB_000e1e14;
-    if (param_1 < 0x140c) {
-      if (param_1 < 0x1407) {
+    if (type == 0x140b) goto LAB_000e1e14;
+    if (type < 0x140c) {
+      if (type < 0x1407) {
         return (double)FLOAT_00108ea8;
       }
     }
-    else if (param_1 == 0x1a00) {
+    else if (type == 0x1a00) {
       return (double)FLOAT_00108f4c;
     }
   }
@@ -63,21 +63,21 @@ LAB_000e1e14:
 }
 
 /* _gleElementOffset @ 0xe1e44 (112 bytes) */
-int _gleElementOffset(unusedArg1, param_2, param_3, param_4, param_5, param_6)
+int _gleElementOffset(unusedArg1, param_2, param_3, param_4, format, param_6)
   undefined4 unusedArg1;
   int param_2;
   int param_3;
   int param_4;
-  undefined4 param_5;
+  undefined4 format;
   int param_6;
 {
   int iVar1;
   int iVar2;
   
-  iVar2 = _gleComponents(param_5);
+  iVar2 = _gleComponents(format);
   iVar1 = iVar2 * param_6;
   if (param_4 == 0x1a00) {
-    iVar1 = _gleRowBytes(param_5,0x1a00,param_6);
+    iVar1 = _gleRowBytes(format,0x1a00,param_6);
     iVar1 = iVar1 << 3;
   }
   return iVar1 * param_3 + iVar2 * param_2;

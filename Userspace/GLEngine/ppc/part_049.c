@@ -457,16 +457,16 @@ void _gleExtractPixel_DSDT_MAG_VIB_Float(pixel, src)
 }
 
 /* _gleImageSize @ 0xe5df4 (48 bytes) */
-int _gleImageSize(param_1, param_2, param_3, param_4)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  int param_4;
+int _gleImageSize(format, type, width, height)
+  undefined4 format;
+  undefined4 type;
+  undefined4 width;
+  int height;
 {
   int iVar1;
   
-  iVar1 = _gleRowBytes(param_1,param_2,param_3);
-  return iVar1 * param_4;
+  iVar1 = _gleRowBytes(format,type,width);
+  return iVar1 * height;
 }
 
 /* _gleFillImage @ 0xe5e24 (732 bytes) */
@@ -1378,12 +1378,12 @@ void _gleModifyPixelSignedRGB_UnsignedA(glContext, pixel)
 }
 
 /* _gleSelectPixelInsertFunc @ 0xe7454 (2464 bytes) */
-int _gleSelectPixelInsertFunc(param_1, param_2)
-  uint param_1;
-  uint param_2;
+int _gleSelectPixelInsertFunc(format, type)
+  uint format;
+  uint type;
 {
-  if (param_1 == 0x1906) {
-    switch(param_2) {
+  if (format == 0x1906) {
+    switch(type) {
     case 0x1400:
       return PTR__gleInsertPixel_A_Byte_0011125c;
     case 0x1401:
@@ -1400,9 +1400,9 @@ int _gleSelectPixelInsertFunc(param_1, param_2)
       return PTR__gleInsertPixel_A_Float_00111244;
     }
   }
-  if (param_1 < 0x1907) {
-    if (param_1 == 0x1902) {
-      switch(param_2) {
+  if (format < 0x1907) {
+    if (format == 0x1902) {
+      switch(type) {
       case 0x1400:
         return PTR__gleInsertPixel_Depth_Byte_001113a8;
       case 0x1401:
@@ -1419,9 +1419,9 @@ int _gleSelectPixelInsertFunc(param_1, param_2)
         return PTR__gleInsertPixel_Depth_Float_00111390;
       }
     }
-    if (0x1902 < param_1) {
-      if (param_1 == 0x1904) {
-        switch(param_2) {
+    if (0x1902 < format) {
+      if (format == 0x1904) {
+        switch(type) {
         case 0x1400:
           return PTR__gleInsertPixel_G_Byte_00111294;
         case 0x1401:
@@ -1438,8 +1438,8 @@ int _gleSelectPixelInsertFunc(param_1, param_2)
           return PTR__gleInsertPixel_G_Float_0011127c;
         }
       }
-      if (0x1904 < param_1) {
-        switch(param_2) {
+      if (0x1904 < format) {
+        switch(type) {
         case 0x1400:
           return PTR__gleInsertPixel_B_Byte_00111278;
         case 0x1401:
@@ -1456,7 +1456,7 @@ int _gleSelectPixelInsertFunc(param_1, param_2)
           return PTR__gleInsertPixel_B_Float_00111260;
         }
       }
-      switch(param_2) {
+      switch(type) {
       case 0x1400:
         return PTR__gleInsertPixel_R_Byte_001112b0;
       case 0x1401:
@@ -1473,8 +1473,8 @@ int _gleSelectPixelInsertFunc(param_1, param_2)
         return PTR__gleInsertPixel_R_Float_00111298;
       }
     }
-    if (0x18ff < param_1) {
-      switch(param_2) {
+    if (0x18ff < format) {
+      switch(type) {
       case 0x1400:
         return PTR__gleInsertPixel_Index_Byte_001113c4;
       case 0x1401:
@@ -1493,8 +1493,8 @@ int _gleSelectPixelInsertFunc(param_1, param_2)
     }
   }
   else {
-    if (param_1 == 0x1909) {
-      switch(param_2) {
+    if (format == 0x1909) {
+      switch(type) {
       case 0x1400:
         return PTR__gleInsertPixel_L_Byte_00111240;
       case 0x1401:
@@ -1511,101 +1511,101 @@ int _gleSelectPixelInsertFunc(param_1, param_2)
         return PTR__gleInsertPixel_L_Float_00111228;
       }
     }
-    if (param_1 < 0x190a) {
-      if (param_1 == 0x1907) {
-        if (param_2 == 0x1404) {
+    if (format < 0x190a) {
+      if (format == 0x1907) {
+        if (type == 0x1404) {
           return PTR__gleInsertPixel_RGB_Int_001112cc;
         }
-        if (param_2 < 0x1405) {
-          if (param_2 == 0x1401) {
+        if (type < 0x1405) {
+          if (type == 0x1401) {
             return PTR__gleInsertPixel_RGB_Ubyte_001112d8;
           }
-          if (param_2 < 0x1402) {
-            if (param_2 == 0x1400) {
+          if (type < 0x1402) {
+            if (type == 0x1400) {
               return PTR__gleInsertPixel_RGB_Byte_001112dc;
             }
           }
           else {
-            if (param_2 == 0x1402) {
+            if (type == 0x1402) {
               return PTR__gleInsertPixel_RGB_Short_001112d4;
             }
-            if (param_2 == 0x1403) {
+            if (type == 0x1403) {
               return PTR__gleInsertPixel_RGB_Ushort_001112d0;
             }
           }
         }
         else {
-          if (param_2 == 0x8032) {
+          if (type == 0x8032) {
             return PTR__gleInsertPixel_RGB_332_001112c0;
           }
-          if (param_2 < 0x8033) {
-            if (param_2 == 0x1405) {
+          if (type < 0x8033) {
+            if (type == 0x1405) {
               return PTR__gleInsertPixel_RGB_Uint_001112c8;
             }
-            if (param_2 == 0x1406) {
+            if (type == 0x1406) {
               return PTR__gleInsertPixel_RGB_Float_001112c4;
             }
           }
           else {
-            if (param_2 == 0x8362) {
+            if (type == 0x8362) {
               return PTR__gleInsertPixel_RGB_233Rev_001112bc;
             }
-            if (param_2 == 0x8363) {
+            if (type == 0x8363) {
               return PTR__gleInsertPixel_RGB_565_001112b8;
             }
           }
         }
         return PTR__gleInsertPixel_RGB_565Rev_001112b4;
       }
-      if (param_1 == 0x1908) {
-        if (param_2 == 0x1406) {
+      if (format == 0x1908) {
+        if (type == 0x1406) {
           return PTR__gleInsertPixel_RGBA_Float_00111374;
         }
-        if (param_2 < 0x1407) {
-          if (param_2 == 0x1402) {
+        if (type < 0x1407) {
+          if (type == 0x1402) {
             return PTR__gleInsertPixel_RGBA_Short_00111384;
           }
-          if (0x1402 < param_2) {
-            if (param_2 == 0x1404) {
+          if (0x1402 < type) {
+            if (type == 0x1404) {
               return PTR__gleInsertPixel_RGBA_Int_0011137c;
             }
-            if (0x1404 < param_2) {
+            if (0x1404 < type) {
               return PTR__gleInsertPixel_RGBA_Uint_00111378;
             }
             return PTR__gleInsertPixel_RGBA_Ushort_00111380;
           }
-          if (param_2 == 0x1400) {
+          if (type == 0x1400) {
             return PTR__gleInsertPixel_RGBA_Byte_0011138c;
           }
-          if (param_2 == 0x1401) {
+          if (type == 0x1401) {
             return PTR__gleInsertPixel_RGBA_Ubyte_00111388;
           }
         }
         else {
-          if (param_2 == 0x8036) {
+          if (type == 0x8036) {
             return PTR__gleInsertPixel_RGBA_1010102_00111358;
           }
-          if (param_2 < 0x8037) {
-            if (param_2 == 0x8034) {
+          if (type < 0x8037) {
+            if (type == 0x8034) {
               return PTR__gleInsertPixel_RGBA_5551_00111368;
             }
-            if (0x8034 < param_2) {
+            if (0x8034 < type) {
               return PTR__gleInsertPixel_RGBA_8888_00111360;
             }
-            if (param_2 == 0x8033) {
+            if (type == 0x8033) {
               return PTR__gleInsertPixel_RGBA_4444_00111370;
             }
           }
           else {
-            if (param_2 == 0x8366) {
+            if (type == 0x8366) {
               return PTR__gleInsertPixel_RGBA_1555Rev_00111364;
             }
-            if (param_2 < 0x8367) {
-              if (param_2 == 0x8365) {
+            if (type < 0x8367) {
+              if (type == 0x8365) {
                 return PTR__gleInsertPixel_RGBA_4444Rev_0011136c;
               }
             }
-            else if (param_2 == 0x8367) {
+            else if (type == 0x8367) {
               return PTR__gleInsertPixel_RGBA_8888Rev_0011135c;
             }
           }
@@ -1614,8 +1614,8 @@ int _gleSelectPixelInsertFunc(param_1, param_2)
       }
     }
     else {
-      if (param_1 == 0x80e0) {
-        switch(param_2) {
+      if (format == 0x80e0) {
+        switch(type) {
         case 0x1400:
           return PTR__gleInsertPixel_BGR_EXT_Byte_001112f8;
         case 0x1401:
@@ -1632,9 +1632,9 @@ int _gleSelectPixelInsertFunc(param_1, param_2)
           return PTR__gleInsertPixel_BGR_EXT_Float_001112e0;
         }
       }
-      if (param_1 < 0x80e1) {
-        if (param_1 == 0x8000) {
-          switch(param_2) {
+      if (format < 0x80e1) {
+        if (format == 0x8000) {
+          switch(type) {
           case 0x1400:
             return PTR__gleInsertPixel_ABGR_EXT_Byte_00111350;
           case 0x1401:
@@ -1652,55 +1652,55 @@ int _gleSelectPixelInsertFunc(param_1, param_2)
           }
         }
       }
-      else if (param_1 == 0x80e1) {
-        if (param_2 == 0x1406) {
+      else if (format == 0x80e1) {
+        if (type == 0x1406) {
           return PTR__gleInsertPixel_BGRA_EXT_Float_0011131c;
         }
-        if (param_2 < 0x1407) {
-          if (param_2 == 0x1402) {
+        if (type < 0x1407) {
+          if (type == 0x1402) {
             return PTR__gleInsertPixel_BGRA_EXT_Short_0011132c;
           }
-          if (0x1402 < param_2) {
-            if (param_2 == 0x1404) {
+          if (0x1402 < type) {
+            if (type == 0x1404) {
               return PTR__gleInsertPixel_BGRA_EXT_Int_00111324;
             }
-            if (0x1404 < param_2) {
+            if (0x1404 < type) {
               return PTR__gleInsertPixel_BGRA_EXT_Uint_00111320;
             }
             return PTR__gleInsertPixel_BGRA_EXT_Ushort_00111328;
           }
-          if (param_2 == 0x1400) {
+          if (type == 0x1400) {
             return PTR__gleInsertPixel_BGRA_EXT_Byte_00111334;
           }
-          if (param_2 == 0x1401) {
+          if (type == 0x1401) {
             return PTR__gleInsertPixel_BGRA_EXT_Ubyte_00111330;
           }
         }
         else {
-          if (param_2 == 0x8036) {
+          if (type == 0x8036) {
             return PTR__gleInsertPixel_BGRA_1010102_00111300;
           }
-          if (param_2 < 0x8037) {
-            if (param_2 == 0x8034) {
+          if (type < 0x8037) {
+            if (type == 0x8034) {
               return PTR__gleInsertPixel_BGRA_5551_00111310;
             }
-            if (0x8034 < param_2) {
+            if (0x8034 < type) {
               return PTR__gleInsertPixel_BGRA_8888_00111308;
             }
-            if (param_2 == 0x8033) {
+            if (type == 0x8033) {
               return PTR__gleInsertPixel_BGRA_4444_00111318;
             }
           }
           else {
-            if (param_2 == 0x8366) {
+            if (type == 0x8366) {
               return PTR__gleInsertPixel_BGRA_1555Rev_0011130c;
             }
-            if (param_2 < 0x8367) {
-              if (param_2 == 0x8365) {
+            if (type < 0x8367) {
+              if (type == 0x8365) {
                 return PTR__gleInsertPixel_BGRA_4444Rev_00111314;
               }
             }
-            else if (param_2 == 0x8367) {
+            else if (type == 0x8367) {
               return PTR__gleInsertPixel_BGRA_8888Rev_00111304;
             }
           }
@@ -1709,7 +1709,7 @@ int _gleSelectPixelInsertFunc(param_1, param_2)
       }
     }
   }
-  switch(param_2) {
+  switch(type) {
   case 0x1400:
     return PTR__gleInsertPixel_LA_Byte_00111224;
   case 0x1401:

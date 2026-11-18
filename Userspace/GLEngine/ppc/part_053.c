@@ -212,11 +212,11 @@ void _gleUpdateScissorData(param_1)
 }
 
 /* _gleSelectHit @ 0xf3984 (8 bytes) */
-double _gleSelectHit(param_1, param_2)
-  undefined4 param_1;
+double _gleSelectHit(glContext, param_2)
+  undefined4 glContext;
   int param_2;
 {
-  ((void (*)())_gleSelectHitRecord)(param_1,(double)*(float *)(param_2 + 8));
+  ((void (*)())_gleSelectHitRecord)(glContext,(double)*(float *)(param_2 + 8));
   return;
 }
 
@@ -286,8 +286,8 @@ LAB_000f3a4c:
 }
 
 /* _gleSelectPoints @ 0xf3ae0 (84 bytes) */
-void _gleSelectPoints(param_1, param_2, param_3)
-  undefined4 param_1;
+void _gleSelectPoints(glContext, param_2, param_3)
+  undefined4 glContext;
   uint param_2;
   int param_3;
 {
@@ -295,14 +295,14 @@ void _gleSelectPoints(param_1, param_2, param_3)
   
   uVar1 = param_2 + param_3 * 0x100;
   for (; param_2 < uVar1; param_2 = param_2 + 0x100) {
-    ((void (*)())_gleSelectHitRecord)(param_1,(double)*(float *)(param_2 + 8));
+    ((void (*)())_gleSelectHitRecord)(glContext,(double)*(float *)(param_2 + 8));
   }
   return;
 }
 
 /* _gleSelectPointsPtr @ 0xf3b34 (88 bytes) */
-void _gleSelectPointsPtr(param_1, param_2, param_3)
-  undefined4 param_1;
+void _gleSelectPointsPtr(glContext, param_2, param_3)
+  undefined4 glContext;
   int *param_2;
   int param_3;
 {
@@ -310,14 +310,14 @@ void _gleSelectPointsPtr(param_1, param_2, param_3)
   
   piVar1 = param_2 + param_3;
   for (; param_2 < piVar1; param_2 = param_2 + 1) {
-    ((void (*)())_gleSelectHitRecord)(param_1,(double)*(float *)(*param_2 + 8));
+    ((void (*)())_gleSelectHitRecord)(glContext,(double)*(float *)(*param_2 + 8));
   }
   return;
 }
 
 /* _gleSelectLines @ 0xf3b8c (100 bytes) */
-void _gleSelectLines(param_1, param_2, param_3)
-  undefined4 param_1;
+void _gleSelectLines(glContext, param_2, param_3)
+  undefined4 glContext;
   uint param_2;
   int param_3;
 {
@@ -325,15 +325,15 @@ void _gleSelectLines(param_1, param_2, param_3)
   
   iVar1 = param_2 + param_3 * 0x100;
   for (; param_2 < iVar1 - 0x100U; param_2 = param_2 + 0x200) {
-    ((void (*)())_gleSelectHitRecord)(param_1,(double)*(float *)(param_2 + 8));
-    ((void (*)())_gleSelectHitRecord)(param_1,(double)*(float *)(param_2 + 0x108));
+    ((void (*)())_gleSelectHitRecord)(glContext,(double)*(float *)(param_2 + 8));
+    ((void (*)())_gleSelectHitRecord)(glContext,(double)*(float *)(param_2 + 0x108));
   }
   return;
 }
 
 /* _gleSelectLineStrip @ 0xf3bf0 (100 bytes) */
-void _gleSelectLineStrip(param_1, param_2, param_3)
-  undefined4 param_1;
+void _gleSelectLineStrip(glContext, param_2, param_3)
+  undefined4 glContext;
   uint param_2;
   int param_3;
 {
@@ -341,8 +341,8 @@ void _gleSelectLineStrip(param_1, param_2, param_3)
   
   iVar1 = param_2 + param_3 * 0x100;
   for (; param_2 < iVar1 - 0x100U; param_2 = param_2 + 0x100) {
-    ((void (*)())_gleSelectHitRecord)(param_1,(double)*(float *)(param_2 + 8));
-    ((void (*)())_gleSelectHitRecord)(param_1,(double)*(float *)(param_2 + 0x108));
+    ((void (*)())_gleSelectHitRecord)(glContext,(double)*(float *)(param_2 + 8));
+    ((void (*)())_gleSelectHitRecord)(glContext,(double)*(float *)(param_2 + 0x108));
   }
   return;
 }
@@ -365,8 +365,8 @@ void _gleSelectLineLoop_body(param_1, param_2, param_3)
 }
 
 /* _gleSelectLinesPtr @ 0xf3cd0 (108 bytes) */
-void _gleSelectLinesPtr(param_1, param_2, param_3)
-  undefined4 param_1;
+void _gleSelectLinesPtr(glContext, param_2, param_3)
+  undefined4 glContext;
   int *param_2;
   int param_3;
 {
@@ -374,15 +374,15 @@ void _gleSelectLinesPtr(param_1, param_2, param_3)
   
   piVar1 = param_2 + param_3 + -1;
   for (; param_2 < piVar1; param_2 = param_2 + 2) {
-    ((void (*)())_gleSelectHitRecord)(param_1,(double)*(float *)(*param_2 + 8));
-    ((void (*)())_gleSelectHitRecord)(param_1,(double)*(float *)(param_2[1] + 8));
+    ((void (*)())_gleSelectHitRecord)(glContext,(double)*(float *)(*param_2 + 8));
+    ((void (*)())_gleSelectHitRecord)(glContext,(double)*(float *)(param_2[1] + 8));
   }
   return;
 }
 
 /* _gleSelectPolygon @ 0xf3d3c (84 bytes) */
-void _gleSelectPolygon(param_1, param_2, param_3)
-  undefined4 param_1;
+void _gleSelectPolygon(glContext, param_2, param_3)
+  undefined4 glContext;
   uint param_2;
   int param_3;
 {
@@ -390,14 +390,14 @@ void _gleSelectPolygon(param_1, param_2, param_3)
   
   uVar1 = param_2 + param_3 * 0x100;
   for (; param_2 < uVar1; param_2 = param_2 + 0x100) {
-    ((void (*)())_gleSelectHitRecord)(param_1,(double)*(float *)(param_2 + 8));
+    ((void (*)())_gleSelectHitRecord)(glContext,(double)*(float *)(param_2 + 8));
   }
   return;
 }
 
 /* _gleSelectPolygonPtr @ 0xf3d90 (88 bytes) */
-double _gleSelectPolygonPtr(param_1, param_2, param_3)
-  undefined4 param_1;
+double _gleSelectPolygonPtr(glContext, param_2, param_3)
+  undefined4 glContext;
   int *param_2;
   int param_3;
 {
@@ -405,14 +405,14 @@ double _gleSelectPolygonPtr(param_1, param_2, param_3)
   
   piVar1 = param_2 + param_3;
   for (; param_2 < piVar1; param_2 = param_2 + 1) {
-    ((void (*)())_gleSelectHitRecord)(param_1,(double)*(float *)(*param_2 + 8));
+    ((void (*)())_gleSelectHitRecord)(glContext,(double)*(float *)(*param_2 + 8));
   }
   return;
 }
 
 /* _gleSelectTriangles @ 0xf3de8 (116 bytes) */
-double _gleSelectTriangles(param_1, param_2, param_3)
-  undefined4 param_1;
+double _gleSelectTriangles(glContext, param_2, param_3)
+  undefined4 glContext;
   uint param_2;
   int param_3;
 {
@@ -423,7 +423,7 @@ double _gleSelectTriangles(param_1, param_2, param_3)
   if (-1 < param_3 + -3) {
     do {
       for (uVar2 = param_2; uVar2 < param_2 + 0x300; uVar2 = uVar2 + 0x100) {
-        ((void (*)())_gleSelectHitRecord)(param_1,(double)*(float *)(uVar2 + 8));
+        ((void (*)())_gleSelectHitRecord)(glContext,(double)*(float *)(uVar2 + 8));
       }
       iVar1 = iVar1 + 3;
       param_2 = param_2 + 0x300;
@@ -433,8 +433,8 @@ double _gleSelectTriangles(param_1, param_2, param_3)
 }
 
 /* _gleSelectTriangleFan @ 0xf3e5c (124 bytes) */
-double _gleSelectTriangleFan(param_1, param_2, param_3, param_4)
-  undefined4 param_1;
+double _gleSelectTriangleFan(glContext, param_2, param_3, param_4)
+  undefined4 glContext;
   int param_2;
   uint param_3;
   int param_4;
@@ -445,9 +445,9 @@ double _gleSelectTriangleFan(param_1, param_2, param_3, param_4)
   if (-1 < param_4 + -2) {
     iVar1 = param_4 + -1;
     do {
-      ((void (*)())_gleSelectHitRecord)(param_1,(double)*(float *)(param_2 + 8));
+      ((void (*)())_gleSelectHitRecord)(glContext,(double)*(float *)(param_2 + 8));
       for (uVar2 = param_3; uVar2 < param_3 + 0x200; uVar2 = uVar2 + 0x100) {
-        ((void (*)())_gleSelectHitRecord)(param_1,(double)*(float *)(uVar2 + 8));
+        ((void (*)())_gleSelectHitRecord)(glContext,(double)*(float *)(uVar2 + 8));
       }
       iVar1 = iVar1 + -1;
       param_3 = param_3 + 0x100;
@@ -457,8 +457,8 @@ double _gleSelectTriangleFan(param_1, param_2, param_3, param_4)
 }
 
 /* _gleSelectTriangleStrip @ 0xf3ed8 (108 bytes) */
-double _gleSelectTriangleStrip(param_1, param_2, param_3)
-  undefined4 param_1;
+double _gleSelectTriangleStrip(glContext, param_2, param_3)
+  undefined4 glContext;
   uint param_2;
   int param_3;
 {
@@ -469,7 +469,7 @@ double _gleSelectTriangleStrip(param_1, param_2, param_3)
     iVar1 = param_3 + -2;
     do {
       for (uVar2 = param_2; uVar2 < param_2 + 0x300; uVar2 = uVar2 + 0x100) {
-        ((void (*)())_gleSelectHitRecord)(param_1,(double)*(float *)(uVar2 + 8));
+        ((void (*)())_gleSelectHitRecord)(glContext,(double)*(float *)(uVar2 + 8));
       }
       iVar1 = iVar1 + -1;
       param_2 = param_2 + 0x100;
@@ -479,8 +479,8 @@ double _gleSelectTriangleStrip(param_1, param_2, param_3)
 }
 
 /* _gleSelectQuads @ 0xf3f44 (116 bytes) */
-double _gleSelectQuads(param_1, param_2, param_3)
-  undefined4 param_1;
+double _gleSelectQuads(glContext, param_2, param_3)
+  undefined4 glContext;
   uint param_2;
   int param_3;
 {
@@ -491,7 +491,7 @@ double _gleSelectQuads(param_1, param_2, param_3)
   if (-1 < param_3 + -4) {
     do {
       for (uVar2 = param_2; uVar2 < param_2 + 0x400; uVar2 = uVar2 + 0x100) {
-        ((void (*)())_gleSelectHitRecord)(param_1,(double)*(float *)(uVar2 + 8));
+        ((void (*)())_gleSelectHitRecord)(glContext,(double)*(float *)(uVar2 + 8));
       }
       iVar1 = iVar1 + 4;
       param_2 = param_2 + 0x400;
@@ -501,8 +501,8 @@ double _gleSelectQuads(param_1, param_2, param_3)
 }
 
 /* _gleSelectQuadStrip @ 0xf3fb8 (116 bytes) */
-double _gleSelectQuadStrip(param_1, param_2, param_3)
-  undefined4 param_1;
+double _gleSelectQuadStrip(glContext, param_2, param_3)
+  undefined4 glContext;
   uint param_2;
   int param_3;
 {
@@ -513,7 +513,7 @@ double _gleSelectQuadStrip(param_1, param_2, param_3)
   if (-1 < param_3 + -4) {
     do {
       for (uVar2 = param_2; uVar2 < param_2 + 0x400; uVar2 = uVar2 + 0x100) {
-        ((void (*)())_gleSelectHitRecord)(param_1,(double)*(float *)(uVar2 + 8));
+        ((void (*)())_gleSelectHitRecord)(glContext,(double)*(float *)(uVar2 + 8));
       }
       iVar1 = iVar1 + 2;
       param_2 = param_2 + 0x200;
@@ -911,8 +911,8 @@ switchD_000f44b0_caseD_0:
 }
 
 /* _gleShaderParse @ 0xf48d8 (244 bytes) */
-void _gleShaderParse(param_1, param_2)
-  int param_1;
+void _gleShaderParse(glContext, param_2)
+  int glContext;
   int param_2;
 {
   int iVar1;
@@ -929,8 +929,8 @@ void _gleShaderParse(param_1, param_2)
       iVar1 = _ShConstructCompiler(*(int *)(param_2 + 0x20) != 0x8b31,0);
       *(int *)(param_2 + 0x30) = iVar1;
     }
-    uVar4 = _ShCompile(iVar1,local_20,1,*(undefined4 *)(param_1 + 0x7594),
-                       *(undefined4 *)(param_1 + 0x7598));
+    uVar4 = _ShCompile(iVar1,local_20,1,*(undefined4 *)(glContext + 0x7594),
+                       *(undefined4 *)(glContext + 0x7598));
     *(undefined1 *)(param_2 + 0x24) = 0;
     *(undefined1 *)(param_2 + 0x25) = uVar4;
     uVar2 = _ShGetInfoLog(*(undefined4 *)(param_2 + 0x30));
@@ -1886,72 +1886,84 @@ double _gleSphereGenST(undefined4 param_1,undefined4 param_2,float *param_3,floa
 }
 
 /* _gleVtxTextureCoordGenObjectSlow @ 0xf5d54 (500 bytes) */
-void _gleVtxTextureCoordGenObjectSlow(param_1, param_2, param_3)
+void _gleVtxTextureCoordGenObjectSlow(param_1, vertexStartThenCursor, vertexCount)
   int param_1;
-  uint param_2;
-  int param_3;
+  uint vertexStartThenCursor;
+  int vertexCount;
 {
-  float fVar1;
-  float fVar2;
-  float fVar3;
-  float fVar4;
-  uint uVar5;
+  float objectPlaneSD;
+  float objectPlaneQD;
+  float objectPlaneRD;
+  float objectPlaneTD;
+  float objectPlaneSA;
+  float objectPlaneQA;
+  float objectPlaneRA;
+  float objectPlaneTA;
+  float objectPlaneSB;
+  float objectPlaneQB;
+  float objectPlaneRB;
+  float objectPlaneTB;
+  float objectPlaneSC;
+  float objectPlaneQC;
+  float objectPlaneRC;
+  float objectPlaneTC;
+  uint vertexCursor;
   uint uVar6;
-  uint uVar7;
+  uint remaining;
   
-  uVar6 = param_2 + param_3 * 0x100;
+  uVar6 = vertexStartThenCursor + vertexCount * 0x100;
   if ((*(char *)(param_1 + 0x3d78) != '\0') && (*(short *)(param_1 + 0x3ce8) == 0x2401)) {
-    fVar1 = *(float *)(param_1 + 0x3d08);
-    fVar2 = *(float *)(param_1 + 0x3cfc);
-    fVar3 = *(float *)(param_1 + 0x3d00);
-    fVar4 = *(float *)(param_1 + 0x3d04);
-    if (param_2 < uVar6) {
-      uVar7 = (uVar6 - param_2) + 0xff >> 8;
-      uVar5 = param_2;
+    objectPlaneSD = *(float *)(param_1 + 0x3d08);
+    objectPlaneSA = *(float *)(param_1 + 0x3cfc);
+    objectPlaneSB = *(float *)(param_1 + 0x3d00);
+    objectPlaneSC = *(float *)(param_1 + 0x3d04);
+    if (vertexStartThenCursor < uVar6) {
+      remaining = (uVar6 - vertexStartThenCursor) + 0xff >> 8;
+      vertexCursor = vertexStartThenCursor;
       do {
-        *(float *)(uVar5 + 0x80) =
-             fVar1 * *(float *)(uVar5 + 0x2c) +
-             (fVar4 * *(float *)(uVar5 + 0x28) +
-             (fVar2 * *(float *)(uVar5 + 0x20) + fVar3 * *(float *)(uVar5 + 0x24)));
-        uVar5 = uVar5 + 0x100;
-        uVar7 = uVar7 - 1;
-      } while (uVar7 != 0);
+        *(float *)(vertexCursor + 0x80) =
+             objectPlaneSD * *(float *)(vertexCursor + 0x2c) +
+             (objectPlaneSC * *(float *)(vertexCursor + 0x28) +
+             (objectPlaneSA * *(float *)(vertexCursor + 0x20) + objectPlaneSB * *(float *)(vertexCursor + 0x24)));
+        vertexCursor = vertexCursor + 0x100;
+        remaining = remaining - 1;
+      } while (remaining != 0);
     }
   }
   if ((*(char *)(param_1 + 0x3d79) != '\0') && (*(short *)(param_1 + 0x3d0c) == 0x2401)) {
-    fVar1 = *(float *)(param_1 + 0x3d2c);
-    fVar2 = *(float *)(param_1 + 0x3d20);
-    fVar3 = *(float *)(param_1 + 0x3d24);
-    fVar4 = *(float *)(param_1 + 0x3d28);
-    if (param_2 < uVar6) {
-      uVar7 = (uVar6 - param_2) + 0xff >> 8;
-      uVar5 = param_2;
+    objectPlaneTD = *(float *)(param_1 + 0x3d2c);
+    objectPlaneTA = *(float *)(param_1 + 0x3d20);
+    objectPlaneTB = *(float *)(param_1 + 0x3d24);
+    objectPlaneTC = *(float *)(param_1 + 0x3d28);
+    if (vertexStartThenCursor < uVar6) {
+      remaining = (uVar6 - vertexStartThenCursor) + 0xff >> 8;
+      vertexCursor = vertexStartThenCursor;
       do {
-        *(float *)(uVar5 + 0x84) =
-             fVar1 * *(float *)(uVar5 + 0x2c) +
-             (fVar4 * *(float *)(uVar5 + 0x28) +
-             (fVar2 * *(float *)(uVar5 + 0x20) + fVar3 * *(float *)(uVar5 + 0x24)));
-        uVar5 = uVar5 + 0x100;
-        uVar7 = uVar7 - 1;
-      } while (uVar7 != 0);
+        *(float *)(vertexCursor + 0x84) =
+             objectPlaneTD * *(float *)(vertexCursor + 0x2c) +
+             (objectPlaneTC * *(float *)(vertexCursor + 0x28) +
+             (objectPlaneTA * *(float *)(vertexCursor + 0x20) + objectPlaneTB * *(float *)(vertexCursor + 0x24)));
+        vertexCursor = vertexCursor + 0x100;
+        remaining = remaining - 1;
+      } while (remaining != 0);
     }
   }
   if ((*(char *)(param_1 + 0x3d7a) != '\0') && (*(short *)(param_1 + 0x3d30) == 0x2401)) {
-    fVar1 = *(float *)(param_1 + 0x3d50);
-    fVar2 = *(float *)(param_1 + 0x3d44);
-    fVar3 = *(float *)(param_1 + 0x3d48);
-    fVar4 = *(float *)(param_1 + 0x3d4c);
-    if (param_2 < uVar6) {
-      uVar7 = (uVar6 - param_2) + 0xff >> 8;
-      uVar5 = param_2;
+    objectPlaneRD = *(float *)(param_1 + 0x3d50);
+    objectPlaneRA = *(float *)(param_1 + 0x3d44);
+    objectPlaneRB = *(float *)(param_1 + 0x3d48);
+    objectPlaneRC = *(float *)(param_1 + 0x3d4c);
+    if (vertexStartThenCursor < uVar6) {
+      remaining = (uVar6 - vertexStartThenCursor) + 0xff >> 8;
+      vertexCursor = vertexStartThenCursor;
       do {
-        *(float *)(uVar5 + 0x88) =
-             fVar1 * *(float *)(uVar5 + 0x2c) +
-             (fVar4 * *(float *)(uVar5 + 0x28) +
-             (fVar2 * *(float *)(uVar5 + 0x20) + fVar3 * *(float *)(uVar5 + 0x24)));
-        uVar5 = uVar5 + 0x100;
-        uVar7 = uVar7 - 1;
-      } while (uVar7 != 0);
+        *(float *)(vertexCursor + 0x88) =
+             objectPlaneRD * *(float *)(vertexCursor + 0x2c) +
+             (objectPlaneRC * *(float *)(vertexCursor + 0x28) +
+             (objectPlaneRA * *(float *)(vertexCursor + 0x20) + objectPlaneRB * *(float *)(vertexCursor + 0x24)));
+        vertexCursor = vertexCursor + 0x100;
+        remaining = remaining - 1;
+      } while (remaining != 0);
     }
     *(uint *)(param_1 + 0x486c) = *(uint *)(param_1 + 0x486c) | 1;
   }
@@ -1961,18 +1973,18 @@ void _gleVtxTextureCoordGenObjectSlow(param_1, param_2, param_3)
   if (*(short *)(param_1 + 0x3d54) != 0x2401) {
     return;
   }
-  fVar1 = *(float *)(param_1 + 0x3d74);
-  fVar2 = *(float *)(param_1 + 0x3d68);
-  fVar3 = *(float *)(param_1 + 0x3d6c);
-  fVar4 = *(float *)(param_1 + 0x3d70);
-  if (param_2 < uVar6) {
-    uVar6 = (uVar6 - param_2) + 0xff >> 8;
+  objectPlaneQD = *(float *)(param_1 + 0x3d74);
+  objectPlaneQA = *(float *)(param_1 + 0x3d68);
+  objectPlaneQB = *(float *)(param_1 + 0x3d6c);
+  objectPlaneQC = *(float *)(param_1 + 0x3d70);
+  if (vertexStartThenCursor < uVar6) {
+    uVar6 = (uVar6 - vertexStartThenCursor) + 0xff >> 8;
     do {
-      *(float *)(param_2 + 0x8c) =
-           fVar1 * *(float *)(param_2 + 0x2c) +
-           (fVar4 * *(float *)(param_2 + 0x28) +
-           (fVar2 * *(float *)(param_2 + 0x20) + fVar3 * *(float *)(param_2 + 0x24)));
-      param_2 = param_2 + 0x100;
+      *(float *)(vertexStartThenCursor + 0x8c) =
+           objectPlaneQD * *(float *)(vertexStartThenCursor + 0x2c) +
+           (objectPlaneQC * *(float *)(vertexStartThenCursor + 0x28) +
+           (objectPlaneQA * *(float *)(vertexStartThenCursor + 0x20) + objectPlaneQB * *(float *)(vertexStartThenCursor + 0x24)));
+      vertexStartThenCursor = vertexStartThenCursor + 0x100;
       uVar6 = uVar6 - 1;
     } while (uVar6 != 0);
   }
@@ -1981,17 +1993,31 @@ void _gleVtxTextureCoordGenObjectSlow(param_1, param_2, param_3)
 }
 
 /* _gleVtxTextureCoordGenEyeSlow @ 0xf5f48 (1288 bytes) */
-void _gleVtxTextureCoordGenEyeSlow(int param_1,uint param_2,int param_3,double fparam_1)
+void _gleVtxTextureCoordGenEyeSlow(int glContext,uint vertexStartThenCursor,int vertexCount,double fparam_1)
 {
   float fVar1;
-  float fVar2;
-  float fVar3;
-  float fVar4;
-  ushort uVar5;
+  float eyePlaneQD;
+  float eyePlaneRD;
+  float eyePlaneTD;
+  float eyePlaneSD;
+  float eyePlaneSA;
+  float eyePlaneQA;
+  float eyePlaneRA;
+  float eyePlaneTA;
+  float eyePlaneSB;
+  float eyePlaneQB;
+  float eyePlaneRB;
+  float eyePlaneTB;
+  float eyePlaneSC;
+  float eyePlaneQC;
+  float eyePlaneRC;
+  float eyePlaneTC;
+  ushort texGenMode;
   undefined *vectorNormalize;
   uint uVar7;
-  uint uVar8;
-  uint uVar9;
+  uint vertexCursor;
+  uint vertexCursor2;
+  uint remaining;
   undefined4 local_40;
   undefined4 local_3c;
   float local_30;
@@ -1999,367 +2025,367 @@ void _gleVtxTextureCoordGenEyeSlow(int param_1,uint param_2,int param_3,double f
   float local_28;
   
   vectorNormalize = PTR__gleVectorNormalize_00112064;
-  uVar7 = param_2 + param_3 * 0x100;
-  if (*(char *)(param_1 + 0x3d78) != '\0') {
-    uVar5 = *(ushort *)(param_1 + 0x3ce8);
-    uVar9 = param_2;
-    if (uVar5 == 0x2402) {
-      for (; uVar9 < uVar7; uVar9 = uVar9 + 0x100) {
-        fparam_1 = (double)((double (*)())_gleSphereGenST)(param_1,uVar9 + 0x20,uVar9 + 0x40,&local_40,fparam_1);
-        *(undefined4 *)(uVar9 + 0x80) = local_40;
+  uVar7 = vertexStartThenCursor + vertexCount * 0x100;
+  if (*(char *)(glContext + 0x3d78) != '\0') {
+    texGenMode = *(ushort *)(glContext + 0x3ce8);
+    vertexCursor2 = vertexStartThenCursor;
+    if (texGenMode == 0x2402) {
+      for (; vertexCursor2 < uVar7; vertexCursor2 = vertexCursor2 + 0x100) {
+        fparam_1 = (double)((double (*)())_gleSphereGenST)(glContext,vertexCursor2 + 0x20,vertexCursor2 + 0x40,&local_40,fparam_1);
+        *(undefined4 *)(vertexCursor2 + 0x80) = local_40;
       }
     }
-    else if (uVar5 < 0x2403) {
-      if (uVar5 == 0x2400) {
-        fVar1 = *(float *)(param_1 + 0x3cf8);
-        fVar2 = *(float *)(param_1 + 0x3cec);
-        fVar3 = *(float *)(param_1 + 0x3cf0);
-        fVar4 = *(float *)(param_1 + 0x3cf4);
-        if (param_2 < uVar7) {
-          uVar9 = (uVar7 - param_2) + 0xff >> 8;
-          uVar8 = param_2;
+    else if (texGenMode < 0x2403) {
+      if (texGenMode == 0x2400) {
+        eyePlaneSD = *(float *)(glContext + 0x3cf8);
+        eyePlaneSA = *(float *)(glContext + 0x3cec);
+        eyePlaneSB = *(float *)(glContext + 0x3cf0);
+        eyePlaneSC = *(float *)(glContext + 0x3cf4);
+        if (vertexStartThenCursor < uVar7) {
+          remaining = (uVar7 - vertexStartThenCursor) + 0xff >> 8;
+          vertexCursor = vertexStartThenCursor;
           do {
-            *(float *)(uVar8 + 0x80) =
-                 fVar1 * *(float *)(uVar8 + 0x2c) +
-                 (fVar4 * *(float *)(uVar8 + 0x28) +
-                 (fVar2 * *(float *)(uVar8 + 0x20) + fVar3 * *(float *)(uVar8 + 0x24)));
-            uVar8 = uVar8 + 0x100;
-            uVar9 = uVar9 - 1;
-          } while (uVar9 != 0);
+            *(float *)(vertexCursor + 0x80) =
+                 eyePlaneSD * *(float *)(vertexCursor + 0x2c) +
+                 (eyePlaneSC * *(float *)(vertexCursor + 0x28) +
+                 (eyePlaneSA * *(float *)(vertexCursor + 0x20) + eyePlaneSB * *(float *)(vertexCursor + 0x24)));
+            vertexCursor = vertexCursor + 0x100;
+            remaining = remaining - 1;
+          } while (remaining != 0);
         }
       }
     }
-    else if (uVar5 == 0x8511) {
-      if (param_2 < uVar7) {
-        uVar9 = (uVar7 - param_2) + 0xff >> 8;
-        uVar8 = param_2;
+    else if (texGenMode == 0x8511) {
+      if (vertexStartThenCursor < uVar7) {
+        remaining = (uVar7 - vertexStartThenCursor) + 0xff >> 8;
+        vertexCursor = vertexStartThenCursor;
         do {
-          *(undefined4 *)(uVar8 + 0x80) = *(undefined4 *)(uVar8 + 0x40);
-          uVar8 = uVar8 + 0x100;
-          uVar9 = uVar9 - 1;
-        } while (uVar9 != 0);
+          *(undefined4 *)(vertexCursor + 0x80) = *(undefined4 *)(vertexCursor + 0x40);
+          vertexCursor = vertexCursor + 0x100;
+          remaining = remaining - 1;
+        } while (remaining != 0);
       }
     }
-    else if ((uVar5 == 0x8512) && (param_2 < uVar7)) {
+    else if ((texGenMode == 0x8512) && (vertexStartThenCursor < uVar7)) {
       do {
-        fparam_1 = (double)(**(double ( **)(int,int,int))vectorNormalize)(param_1, uVar9 + 0x20, &local_30);
-        fVar1 = *(float *)(uVar9 + 0x48) * local_28 +
-                (*(float *)(uVar9 + 0x40) * local_30 + *(float *)(uVar9 + 0x44) * local_2c);
-        *(float *)(uVar9 + 0x80) = -(*(float *)(uVar9 + 0x40) * (fVar1 + fVar1) - local_30);
-        uVar9 = uVar9 + 0x100;
-      } while (uVar9 < uVar7);
+        fparam_1 = (double)(**(double ( **)(int,int,int))vectorNormalize)(glContext, vertexCursor2 + 0x20, &local_30);
+        fVar1 = *(float *)(vertexCursor2 + 0x48) * local_28 +
+                (*(float *)(vertexCursor2 + 0x40) * local_30 + *(float *)(vertexCursor2 + 0x44) * local_2c);
+        *(float *)(vertexCursor2 + 0x80) = -(*(float *)(vertexCursor2 + 0x40) * (fVar1 + fVar1) - local_30);
+        vertexCursor2 = vertexCursor2 + 0x100;
+      } while (vertexCursor2 < uVar7);
     }
   }
   vectorNormalize = PTR__gleVectorNormalize_00112064;
-  if (*(char *)(param_1 + 0x3d79) != '\0') {
-    uVar5 = *(ushort *)(param_1 + 0x3d0c);
-    uVar9 = param_2;
-    if (uVar5 == 0x2402) {
-      for (; uVar9 < uVar7; uVar9 = uVar9 + 0x100) {
-        fparam_1 = (double)((double (*)())_gleSphereGenST)(param_1,uVar9 + 0x20,uVar9 + 0x40,&local_40,fparam_1);
-        *(undefined4 *)(uVar9 + 0x84) = local_3c;
+  if (*(char *)(glContext + 0x3d79) != '\0') {
+    texGenMode = *(ushort *)(glContext + 0x3d0c);
+    vertexCursor2 = vertexStartThenCursor;
+    if (texGenMode == 0x2402) {
+      for (; vertexCursor2 < uVar7; vertexCursor2 = vertexCursor2 + 0x100) {
+        fparam_1 = (double)((double (*)())_gleSphereGenST)(glContext,vertexCursor2 + 0x20,vertexCursor2 + 0x40,&local_40,fparam_1);
+        *(undefined4 *)(vertexCursor2 + 0x84) = local_3c;
       }
     }
-    else if (uVar5 < 0x2403) {
-      if (uVar5 == 0x2400) {
-        fVar1 = *(float *)(param_1 + 0x3d1c);
-        fVar2 = *(float *)(param_1 + 0x3d10);
-        fVar3 = *(float *)(param_1 + 0x3d14);
-        fVar4 = *(float *)(param_1 + 0x3d18);
-        if (param_2 < uVar7) {
-          uVar9 = (uVar7 - param_2) + 0xff >> 8;
-          uVar8 = param_2;
+    else if (texGenMode < 0x2403) {
+      if (texGenMode == 0x2400) {
+        eyePlaneTD = *(float *)(glContext + 0x3d1c);
+        eyePlaneTA = *(float *)(glContext + 0x3d10);
+        eyePlaneTB = *(float *)(glContext + 0x3d14);
+        eyePlaneTC = *(float *)(glContext + 0x3d18);
+        if (vertexStartThenCursor < uVar7) {
+          remaining = (uVar7 - vertexStartThenCursor) + 0xff >> 8;
+          vertexCursor = vertexStartThenCursor;
           do {
-            *(float *)(uVar8 + 0x84) =
-                 fVar1 * *(float *)(uVar8 + 0x2c) +
-                 (fVar4 * *(float *)(uVar8 + 0x28) +
-                 (fVar2 * *(float *)(uVar8 + 0x20) + fVar3 * *(float *)(uVar8 + 0x24)));
-            uVar8 = uVar8 + 0x100;
-            uVar9 = uVar9 - 1;
-          } while (uVar9 != 0);
+            *(float *)(vertexCursor + 0x84) =
+                 eyePlaneTD * *(float *)(vertexCursor + 0x2c) +
+                 (eyePlaneTC * *(float *)(vertexCursor + 0x28) +
+                 (eyePlaneTA * *(float *)(vertexCursor + 0x20) + eyePlaneTB * *(float *)(vertexCursor + 0x24)));
+            vertexCursor = vertexCursor + 0x100;
+            remaining = remaining - 1;
+          } while (remaining != 0);
         }
       }
     }
-    else if (uVar5 == 0x8511) {
-      if (param_2 < uVar7) {
-        uVar9 = (uVar7 - param_2) + 0xff >> 8;
-        uVar8 = param_2;
+    else if (texGenMode == 0x8511) {
+      if (vertexStartThenCursor < uVar7) {
+        remaining = (uVar7 - vertexStartThenCursor) + 0xff >> 8;
+        vertexCursor = vertexStartThenCursor;
         do {
-          *(undefined4 *)(uVar8 + 0x84) = *(undefined4 *)(uVar8 + 0x44);
-          uVar8 = uVar8 + 0x100;
-          uVar9 = uVar9 - 1;
-        } while (uVar9 != 0);
+          *(undefined4 *)(vertexCursor + 0x84) = *(undefined4 *)(vertexCursor + 0x44);
+          vertexCursor = vertexCursor + 0x100;
+          remaining = remaining - 1;
+        } while (remaining != 0);
       }
     }
-    else if ((uVar5 == 0x8512) && (param_2 < uVar7)) {
+    else if ((texGenMode == 0x8512) && (vertexStartThenCursor < uVar7)) {
       do {
-        (**(code **)vectorNormalize)(param_1,uVar9 + 0x20,&local_30);
-        fVar1 = *(float *)(uVar9 + 0x48) * local_28 +
-                (*(float *)(uVar9 + 0x40) * local_30 + *(float *)(uVar9 + 0x44) * local_2c);
-        *(float *)(uVar9 + 0x84) = -(*(float *)(uVar9 + 0x44) * (fVar1 + fVar1) - local_2c);
-        uVar9 = uVar9 + 0x100;
-      } while (uVar9 < uVar7);
+        (**(code **)vectorNormalize)(glContext,vertexCursor2 + 0x20,&local_30);
+        fVar1 = *(float *)(vertexCursor2 + 0x48) * local_28 +
+                (*(float *)(vertexCursor2 + 0x40) * local_30 + *(float *)(vertexCursor2 + 0x44) * local_2c);
+        *(float *)(vertexCursor2 + 0x84) = -(*(float *)(vertexCursor2 + 0x44) * (fVar1 + fVar1) - local_2c);
+        vertexCursor2 = vertexCursor2 + 0x100;
+      } while (vertexCursor2 < uVar7);
     }
   }
   vectorNormalize = PTR__gleVectorNormalize_00112064;
-  if (*(char *)(param_1 + 0x3d7a) != '\0') {
-    uVar5 = *(ushort *)(param_1 + 0x3d30);
-    if (uVar5 == 0x8511) {
-      if (param_2 < uVar7) {
-        uVar9 = (uVar7 - param_2) + 0xff >> 8;
-        uVar8 = param_2;
+  if (*(char *)(glContext + 0x3d7a) != '\0') {
+    texGenMode = *(ushort *)(glContext + 0x3d30);
+    if (texGenMode == 0x8511) {
+      if (vertexStartThenCursor < uVar7) {
+        remaining = (uVar7 - vertexStartThenCursor) + 0xff >> 8;
+        vertexCursor = vertexStartThenCursor;
         do {
-          *(undefined4 *)(uVar8 + 0x88) = *(undefined4 *)(uVar8 + 0x48);
-          uVar8 = uVar8 + 0x100;
-          uVar9 = uVar9 - 1;
-        } while (uVar9 != 0);
+          *(undefined4 *)(vertexCursor + 0x88) = *(undefined4 *)(vertexCursor + 0x48);
+          vertexCursor = vertexCursor + 0x100;
+          remaining = remaining - 1;
+        } while (remaining != 0);
       }
     }
-    else if (uVar5 < 0x8512) {
-      if (uVar5 == 0x2400) {
-        fVar1 = *(float *)(param_1 + 0x3d40);
-        fVar2 = *(float *)(param_1 + 0x3d34);
-        fVar3 = *(float *)(param_1 + 0x3d38);
-        fVar4 = *(float *)(param_1 + 0x3d3c);
-        if (param_2 < uVar7) {
-          uVar9 = (uVar7 - param_2) + 0xff >> 8;
-          uVar8 = param_2;
+    else if (texGenMode < 0x8512) {
+      if (texGenMode == 0x2400) {
+        eyePlaneRD = *(float *)(glContext + 0x3d40);
+        eyePlaneRA = *(float *)(glContext + 0x3d34);
+        eyePlaneRB = *(float *)(glContext + 0x3d38);
+        eyePlaneRC = *(float *)(glContext + 0x3d3c);
+        if (vertexStartThenCursor < uVar7) {
+          remaining = (uVar7 - vertexStartThenCursor) + 0xff >> 8;
+          vertexCursor = vertexStartThenCursor;
           do {
-            *(float *)(uVar8 + 0x88) =
-                 fVar1 * *(float *)(uVar8 + 0x2c) +
-                 (fVar4 * *(float *)(uVar8 + 0x28) +
-                 (fVar2 * *(float *)(uVar8 + 0x20) + fVar3 * *(float *)(uVar8 + 0x24)));
-            uVar8 = uVar8 + 0x100;
-            uVar9 = uVar9 - 1;
-          } while (uVar9 != 0);
+            *(float *)(vertexCursor + 0x88) =
+                 eyePlaneRD * *(float *)(vertexCursor + 0x2c) +
+                 (eyePlaneRC * *(float *)(vertexCursor + 0x28) +
+                 (eyePlaneRA * *(float *)(vertexCursor + 0x20) + eyePlaneRB * *(float *)(vertexCursor + 0x24)));
+            vertexCursor = vertexCursor + 0x100;
+            remaining = remaining - 1;
+          } while (remaining != 0);
         }
       }
     }
-    else if ((uVar5 == 0x8512) && (param_2 < uVar7)) {
-      uVar9 = param_2;
+    else if ((texGenMode == 0x8512) && (vertexStartThenCursor < uVar7)) {
+      vertexCursor2 = vertexStartThenCursor;
       do {
-        (**(code **)vectorNormalize)(param_1,uVar9 + 0x20,&local_30);
-        fVar1 = *(float *)(uVar9 + 0x48) * local_28 +
-                (*(float *)(uVar9 + 0x40) * local_30 + *(float *)(uVar9 + 0x44) * local_2c);
-        *(float *)(uVar9 + 0x88) = -(*(float *)(uVar9 + 0x48) * (fVar1 + fVar1) - local_28);
-        uVar9 = uVar9 + 0x100;
-      } while (uVar9 < uVar7);
+        (**(code **)vectorNormalize)(glContext,vertexCursor2 + 0x20,&local_30);
+        fVar1 = *(float *)(vertexCursor2 + 0x48) * local_28 +
+                (*(float *)(vertexCursor2 + 0x40) * local_30 + *(float *)(vertexCursor2 + 0x44) * local_2c);
+        *(float *)(vertexCursor2 + 0x88) = -(*(float *)(vertexCursor2 + 0x48) * (fVar1 + fVar1) - local_28);
+        vertexCursor2 = vertexCursor2 + 0x100;
+      } while (vertexCursor2 < uVar7);
     }
-    *(uint *)(param_1 + 0x486c) = *(uint *)(param_1 + 0x486c) | 1;
+    *(uint *)(glContext + 0x486c) = *(uint *)(glContext + 0x486c) | 1;
   }
-  if (*(char *)(param_1 + 0x3d7b) != '\0') {
-    if (*(short *)(param_1 + 0x3d54) == 0x2400) {
-      fVar1 = *(float *)(param_1 + 0x3d64);
-      fVar2 = *(float *)(param_1 + 0x3d58);
-      fVar3 = *(float *)(param_1 + 0x3d5c);
-      fVar4 = *(float *)(param_1 + 0x3d60);
-      if (param_2 < uVar7) {
-        uVar7 = (uVar7 - param_2) + 0xff >> 8;
+  if (*(char *)(glContext + 0x3d7b) != '\0') {
+    if (*(short *)(glContext + 0x3d54) == 0x2400) {
+      eyePlaneQD = *(float *)(glContext + 0x3d64);
+      eyePlaneQA = *(float *)(glContext + 0x3d58);
+      eyePlaneQB = *(float *)(glContext + 0x3d5c);
+      eyePlaneQC = *(float *)(glContext + 0x3d60);
+      if (vertexStartThenCursor < uVar7) {
+        uVar7 = (uVar7 - vertexStartThenCursor) + 0xff >> 8;
         do {
-          *(float *)(param_2 + 0x8c) =
-               fVar1 * *(float *)(param_2 + 0x2c) +
-               (fVar4 * *(float *)(param_2 + 0x28) +
-               (fVar2 * *(float *)(param_2 + 0x20) + fVar3 * *(float *)(param_2 + 0x24)));
-          param_2 = param_2 + 0x100;
+          *(float *)(vertexStartThenCursor + 0x8c) =
+               eyePlaneQD * *(float *)(vertexStartThenCursor + 0x2c) +
+               (eyePlaneQC * *(float *)(vertexStartThenCursor + 0x28) +
+               (eyePlaneQA * *(float *)(vertexStartThenCursor + 0x20) + eyePlaneQB * *(float *)(vertexStartThenCursor + 0x24)));
+          vertexStartThenCursor = vertexStartThenCursor + 0x100;
           uVar7 = uVar7 - 1;
         } while (uVar7 != 0);
       }
     }
-    *(uint *)(param_1 + 0x486c) = *(uint *)(param_1 + 0x486c) | 2;
+    *(uint *)(glContext + 0x486c) = *(uint *)(glContext + 0x486c) | 2;
   }
   return;
 }
 
 /* _gleVtxTextureCoordGenEyeST @ 0xf6450 (140 bytes) */
-void _gleVtxTextureCoordGenEyeST(param_1, param_2, param_3)
+void _gleVtxTextureCoordGenEyeST(param_1, vertexCursor, vertexCount)
   int param_1;
-  uint param_2;
-  int param_3;
+  uint vertexCursor;
+  int vertexCount;
 {
-  float fVar1;
-  float fVar2;
-  float fVar3;
-  float fVar4;
-  float fVar5;
-  float fVar6;
-  float fVar7;
-  float fVar8;
+  float eyePlaneSD;
+  float eyePlaneSB;
+  float eyePlaneSC;
+  float eyePlaneTA;
+  float eyePlaneTD;
+  float eyePlaneSA;
+  float eyePlaneTB;
+  float eyePlaneTC;
   uint uVar9;
   
-  uVar9 = param_2 + param_3 * 0x100;
-  fVar1 = *(float *)(param_1 + 0x3cf8);
-  fVar2 = *(float *)(param_1 + 0x3cf0);
-  fVar3 = *(float *)(param_1 + 0x3cf4);
-  fVar4 = *(float *)(param_1 + 0x3d10);
-  fVar5 = *(float *)(param_1 + 0x3d1c);
-  fVar6 = *(float *)(param_1 + 0x3cec);
-  fVar7 = *(float *)(param_1 + 0x3d14);
-  fVar8 = *(float *)(param_1 + 0x3d18);
-  if (uVar9 <= param_2) {
+  uVar9 = vertexCursor + vertexCount * 0x100;
+  eyePlaneSD = *(float *)(param_1 + 0x3cf8);
+  eyePlaneSB = *(float *)(param_1 + 0x3cf0);
+  eyePlaneSC = *(float *)(param_1 + 0x3cf4);
+  eyePlaneTA = *(float *)(param_1 + 0x3d10);
+  eyePlaneTD = *(float *)(param_1 + 0x3d1c);
+  eyePlaneSA = *(float *)(param_1 + 0x3cec);
+  eyePlaneTB = *(float *)(param_1 + 0x3d14);
+  eyePlaneTC = *(float *)(param_1 + 0x3d18);
+  if (uVar9 <= vertexCursor) {
     return;
   }
-  uVar9 = (uVar9 - param_2) + 0xff >> 8;
+  uVar9 = (uVar9 - vertexCursor) + 0xff >> 8;
   do {
-    *(float *)(param_2 + 0x84) =
-         fVar5 * *(float *)(param_2 + 0x2c) +
-         (fVar8 * *(float *)(param_2 + 0x28) +
-         (fVar4 * *(float *)(param_2 + 0x20) + fVar7 * *(float *)(param_2 + 0x24)));
-    *(float *)(param_2 + 0x80) =
-         fVar1 * *(float *)(param_2 + 0x2c) +
-         (fVar3 * *(float *)(param_2 + 0x28) +
-         (fVar6 * *(float *)(param_2 + 0x20) + fVar2 * *(float *)(param_2 + 0x24)));
-    param_2 = param_2 + 0x100;
+    *(float *)(vertexCursor + 0x84) =
+         eyePlaneTD * *(float *)(vertexCursor + 0x2c) +
+         (eyePlaneTC * *(float *)(vertexCursor + 0x28) +
+         (eyePlaneTA * *(float *)(vertexCursor + 0x20) + eyePlaneTB * *(float *)(vertexCursor + 0x24)));
+    *(float *)(vertexCursor + 0x80) =
+         eyePlaneSD * *(float *)(vertexCursor + 0x2c) +
+         (eyePlaneSC * *(float *)(vertexCursor + 0x28) +
+         (eyePlaneSA * *(float *)(vertexCursor + 0x20) + eyePlaneSB * *(float *)(vertexCursor + 0x24)));
+    vertexCursor = vertexCursor + 0x100;
     uVar9 = uVar9 - 1;
   } while (uVar9 != 0);
   return;
 }
 
 /* _gleVtxTextureCoordGenObjectST @ 0xf64dc (140 bytes) */
-void _gleVtxTextureCoordGenObjectST(param_1, param_2, param_3)
+void _gleVtxTextureCoordGenObjectST(param_1, vertexCursor, vertexCount)
   int param_1;
-  uint param_2;
-  int param_3;
+  uint vertexCursor;
+  int vertexCount;
 {
-  float fVar1;
-  float fVar2;
-  float fVar3;
-  float fVar4;
-  float fVar5;
-  float fVar6;
-  float fVar7;
-  float fVar8;
+  float objectPlaneSD;
+  float objectPlaneSB;
+  float objectPlaneSC;
+  float objectPlaneTA;
+  float objectPlaneTD;
+  float objectPlaneSA;
+  float objectPlaneTB;
+  float objectPlaneTC;
   uint uVar9;
   
-  uVar9 = param_2 + param_3 * 0x100;
-  fVar1 = *(float *)(param_1 + 0x3d08);
-  fVar2 = *(float *)(param_1 + 0x3d00);
-  fVar3 = *(float *)(param_1 + 0x3d04);
-  fVar4 = *(float *)(param_1 + 0x3d20);
-  fVar5 = *(float *)(param_1 + 0x3d2c);
-  fVar6 = *(float *)(param_1 + 0x3cfc);
-  fVar7 = *(float *)(param_1 + 0x3d24);
-  fVar8 = *(float *)(param_1 + 0x3d28);
-  if (uVar9 <= param_2) {
+  uVar9 = vertexCursor + vertexCount * 0x100;
+  objectPlaneSD = *(float *)(param_1 + 0x3d08);
+  objectPlaneSB = *(float *)(param_1 + 0x3d00);
+  objectPlaneSC = *(float *)(param_1 + 0x3d04);
+  objectPlaneTA = *(float *)(param_1 + 0x3d20);
+  objectPlaneTD = *(float *)(param_1 + 0x3d2c);
+  objectPlaneSA = *(float *)(param_1 + 0x3cfc);
+  objectPlaneTB = *(float *)(param_1 + 0x3d24);
+  objectPlaneTC = *(float *)(param_1 + 0x3d28);
+  if (uVar9 <= vertexCursor) {
     return;
   }
-  uVar9 = (uVar9 - param_2) + 0xff >> 8;
+  uVar9 = (uVar9 - vertexCursor) + 0xff >> 8;
   do {
-    *(float *)(param_2 + 0x84) =
-         fVar5 * *(float *)(param_2 + 0x2c) +
-         (fVar8 * *(float *)(param_2 + 0x28) +
-         (fVar4 * *(float *)(param_2 + 0x20) + fVar7 * *(float *)(param_2 + 0x24)));
-    *(float *)(param_2 + 0x80) =
-         fVar1 * *(float *)(param_2 + 0x2c) +
-         (fVar3 * *(float *)(param_2 + 0x28) +
-         (fVar6 * *(float *)(param_2 + 0x20) + fVar2 * *(float *)(param_2 + 0x24)));
-    param_2 = param_2 + 0x100;
+    *(float *)(vertexCursor + 0x84) =
+         objectPlaneTD * *(float *)(vertexCursor + 0x2c) +
+         (objectPlaneTC * *(float *)(vertexCursor + 0x28) +
+         (objectPlaneTA * *(float *)(vertexCursor + 0x20) + objectPlaneTB * *(float *)(vertexCursor + 0x24)));
+    *(float *)(vertexCursor + 0x80) =
+         objectPlaneSD * *(float *)(vertexCursor + 0x2c) +
+         (objectPlaneSC * *(float *)(vertexCursor + 0x28) +
+         (objectPlaneSA * *(float *)(vertexCursor + 0x20) + objectPlaneSB * *(float *)(vertexCursor + 0x24)));
+    vertexCursor = vertexCursor + 0x100;
     uVar9 = uVar9 - 1;
   } while (uVar9 != 0);
   return;
 }
 
 /* _gleVtxTextureCoordGenSphereST @ 0xf6568 (92 bytes) */
-void _gleVtxTextureCoordGenSphereST(undefined4 param_1,uint param_2,int param_3,double fparam_1)
+void _gleVtxTextureCoordGenSphereST(undefined4 param_1,uint vertexCursor,int vertexCount,double fparam_1)
 {
-  uint uVar1;
+  uint vertexEnd;
   
-  uVar1 = param_2 + param_3 * 0x100;
-  for (; param_2 < uVar1; param_2 = param_2 + 0x100) {
-    fparam_1 = (double)((double (*)())_gleSphereGenST)(param_1,param_2 + 0x20,param_2 + 0x40,param_2 + 0x80,fparam_1
+  vertexEnd = vertexCursor + vertexCount * 0x100;
+  for (; vertexCursor < vertexEnd; vertexCursor = vertexCursor + 0x100) {
+    fparam_1 = (double)((double (*)())_gleSphereGenST)(param_1,vertexCursor + 0x20,vertexCursor + 0x40,vertexCursor + 0x80,fparam_1
                                       );
   }
   return;
 }
 
 /* _gleVtxTextureCoordGenReflectST @ 0xf65c4 (168 bytes) */
-void _gleVtxTextureCoordGenReflectST(param_1, param_2, param_3)
-  undefined4 param_1;
-  uint param_2;
-  int param_3;
+void _gleVtxTextureCoordGenReflectST(glContext, vertexCursor, vertexCount)
+  undefined4 glContext;
+  uint vertexCursor;
+  int vertexCount;
 {
   float fVar1;
   undefined *vectorNormalize;
-  uint uVar3;
+  uint vertexEnd;
   float fStack_30;
   float fStack_2c;
   float fStack_28;
   
   vectorNormalize = PTR__gleVectorNormalize_00112064;
-  uVar3 = param_2 + param_3 * 0x100;
-  for (; param_2 < uVar3; param_2 = param_2 + 0x100) {
-    (**(code **)vectorNormalize)(param_1,param_2 + 0x20,&fStack_30);
-    fVar1 = *(float *)(param_2 + 0x48) * fStack_28 +
-            (*(float *)(param_2 + 0x40) * fStack_30 + *(float *)(param_2 + 0x44) * fStack_2c);
+  vertexEnd = vertexCursor + vertexCount * 0x100;
+  for (; vertexCursor < vertexEnd; vertexCursor = vertexCursor + 0x100) {
+    (**(code **)vectorNormalize)(glContext,vertexCursor + 0x20,&fStack_30);
+    fVar1 = *(float *)(vertexCursor + 0x48) * fStack_28 +
+            (*(float *)(vertexCursor + 0x40) * fStack_30 + *(float *)(vertexCursor + 0x44) * fStack_2c);
     fVar1 = fVar1 + fVar1;
-    *(float *)(param_2 + 0x84) = -(*(float *)(param_2 + 0x44) * fVar1 - fStack_2c);
-    *(float *)(param_2 + 0x80) = -(*(float *)(param_2 + 0x40) * fVar1 - fStack_30);
+    *(float *)(vertexCursor + 0x84) = -(*(float *)(vertexCursor + 0x44) * fVar1 - fStack_2c);
+    *(float *)(vertexCursor + 0x80) = -(*(float *)(vertexCursor + 0x40) * fVar1 - fStack_30);
   }
   return;
 }
 
 /* _gleVtxTextureCoordGenReflectSTR @ 0xf666c (188 bytes) */
-void _gleVtxTextureCoordGenReflectSTR(int param_1,uint param_2,int param_3,double fparam_1)
+void _gleVtxTextureCoordGenReflectSTR(int param_1,uint vertexCursor,int vertexCount,double fparam_1)
 {
   float fVar1;
   undefined *vectorNormalize;
-  uint uVar3;
+  uint vertexEnd;
   float fStack_30;
   float fStack_2c;
   float fStack_28;
   
   vectorNormalize = PTR__gleVectorNormalize_00112064;
-  uVar3 = param_2 + param_3 * 0x100;
-  for (; param_2 < uVar3; param_2 = param_2 + 0x100) {
-    fparam_1 = (double)(**(double ( **)(int,int,int,double))vectorNormalize)(param_1, param_2 + 0x20, &fStack_30, fparam_1);
-    fVar1 = *(float *)(param_2 + 0x48) * fStack_28 +
-            (*(float *)(param_2 + 0x40) * fStack_30 + *(float *)(param_2 + 0x44) * fStack_2c);
+  vertexEnd = vertexCursor + vertexCount * 0x100;
+  for (; vertexCursor < vertexEnd; vertexCursor = vertexCursor + 0x100) {
+    fparam_1 = (double)(**(double ( **)(int,int,int,double))vectorNormalize)(param_1, vertexCursor + 0x20, &fStack_30, fparam_1);
+    fVar1 = *(float *)(vertexCursor + 0x48) * fStack_28 +
+            (*(float *)(vertexCursor + 0x40) * fStack_30 + *(float *)(vertexCursor + 0x44) * fStack_2c);
     fVar1 = fVar1 + fVar1;
-    *(float *)(param_2 + 0x88) = -(*(float *)(param_2 + 0x48) * fVar1 - fStack_28);
-    *(float *)(param_2 + 0x80) = -(*(float *)(param_2 + 0x40) * fVar1 - fStack_30);
-    *(float *)(param_2 + 0x84) = -(*(float *)(param_2 + 0x44) * fVar1 - fStack_2c);
+    *(float *)(vertexCursor + 0x88) = -(*(float *)(vertexCursor + 0x48) * fVar1 - fStack_28);
+    *(float *)(vertexCursor + 0x80) = -(*(float *)(vertexCursor + 0x40) * fVar1 - fStack_30);
+    *(float *)(vertexCursor + 0x84) = -(*(float *)(vertexCursor + 0x44) * fVar1 - fStack_2c);
   }
   *(uint *)(param_1 + 0x486c) = *(uint *)(param_1 + 0x486c) | 1;
   return;
 }
 
 /* _gleVtxTextureCoordGenNormalST @ 0xf6728 (60 bytes) */
-void _gleVtxTextureCoordGenNormalST(unusedArg1, param_2, param_3)
+void _gleVtxTextureCoordGenNormalST(unusedArg1, vertexCursor, vertexCount)
   undefined4 unusedArg1;
-  uint param_2;
-  int param_3;
+  uint vertexCursor;
+  int vertexCount;
 {
   uint uVar1;
   
-  uVar1 = param_2 + param_3 * 0x100;
-  if (uVar1 <= param_2) {
+  uVar1 = vertexCursor + vertexCount * 0x100;
+  if (uVar1 <= vertexCursor) {
     return;
   }
-  uVar1 = (uVar1 - param_2) + 0xff >> 8;
+  uVar1 = (uVar1 - vertexCursor) + 0xff >> 8;
   do {
-    *(undefined4 *)(param_2 + 0x80) = *(undefined4 *)(param_2 + 0x40);
-    *(undefined4 *)(param_2 + 0x84) = *(undefined4 *)(param_2 + 0x44);
-    param_2 = param_2 + 0x100;
+    *(undefined4 *)(vertexCursor + 0x80) = *(undefined4 *)(vertexCursor + 0x40);
+    *(undefined4 *)(vertexCursor + 0x84) = *(undefined4 *)(vertexCursor + 0x44);
+    vertexCursor = vertexCursor + 0x100;
     uVar1 = uVar1 - 1;
   } while (uVar1 != 0);
   return;
 }
 
 /* _gleVtxTextureCoordGenNormalSTR @ 0xf6764 (80 bytes) */
-void _gleVtxTextureCoordGenNormalSTR(param_1, param_2, param_3)
+void _gleVtxTextureCoordGenNormalSTR(param_1, vertexCursor, vertexCount)
   int param_1;
-  uint param_2;
-  int param_3;
+  uint vertexCursor;
+  int vertexCount;
 {
   uint uVar1;
   
-  uVar1 = param_2 + param_3 * 0x100;
-  if (param_2 < uVar1) {
-    uVar1 = (uVar1 - param_2) + 0xff >> 8;
+  uVar1 = vertexCursor + vertexCount * 0x100;
+  if (vertexCursor < uVar1) {
+    uVar1 = (uVar1 - vertexCursor) + 0xff >> 8;
     do {
-      *(undefined4 *)(param_2 + 0x80) = *(undefined4 *)(param_2 + 0x40);
-      *(undefined4 *)(param_2 + 0x84) = *(undefined4 *)(param_2 + 0x44);
-      *(undefined4 *)(param_2 + 0x88) = *(undefined4 *)(param_2 + 0x48);
-      param_2 = param_2 + 0x100;
+      *(undefined4 *)(vertexCursor + 0x80) = *(undefined4 *)(vertexCursor + 0x40);
+      *(undefined4 *)(vertexCursor + 0x84) = *(undefined4 *)(vertexCursor + 0x44);
+      *(undefined4 *)(vertexCursor + 0x88) = *(undefined4 *)(vertexCursor + 0x48);
+      vertexCursor = vertexCursor + 0x100;
       uVar1 = uVar1 - 1;
     } while (uVar1 != 0);
   }
@@ -2368,19 +2394,19 @@ void _gleVtxTextureCoordGenNormalSTR(param_1, param_2, param_3)
 }
 
 /* _gleMultiVtxTextureCoordGenWrapObject @ 0xf67b8 (112 bytes) */
-void _gleMultiVtxTextureCoordGenWrapObject(param_1, param_2, param_3)
-  int param_1;
-  undefined4 param_2;
-  undefined4 param_3;
+void _gleMultiVtxTextureCoordGenWrapObject(glContext, vertices, vertexCount)
+  int glContext;
+  undefined4 vertices;
+  undefined4 vertexCount;
 {
   uint uVar1;
   int iVar2;
   
   uVar1 = 0;
-  iVar2 = param_1 + 0x5300;
+  iVar2 = glContext + 0x5300;
   do {
     if (*(char *)(iVar2 + 0x1c) != '\0') {
-      (**(code **)(iVar2 + 0x14))(param_1,param_2,param_3,uVar1);
+      (**(code **)(iVar2 + 0x14))(glContext,vertices,vertexCount,uVar1);
     }
     uVar1 = uVar1 + 1;
     iVar2 = iVar2 + 0xc;
@@ -2389,19 +2415,19 @@ void _gleMultiVtxTextureCoordGenWrapObject(param_1, param_2, param_3)
 }
 
 /* _gleMultiVtxTextureCoordGenWrapEye @ 0xf6828 (112 bytes) */
-void _gleMultiVtxTextureCoordGenWrapEye(param_1, param_2, param_3)
-  int param_1;
-  undefined4 param_2;
-  undefined4 param_3;
+void _gleMultiVtxTextureCoordGenWrapEye(glContext, vertices, vertexCount)
+  int glContext;
+  undefined4 vertices;
+  undefined4 vertexCount;
 {
   uint uVar1;
   int iVar2;
   
   uVar1 = 0;
-  iVar2 = param_1 + 0x5300;
+  iVar2 = glContext + 0x5300;
   do {
     if (*(char *)(iVar2 + 0x1c) != '\0') {
-      (**(code **)(iVar2 + 0x18))(param_1,param_2,param_3,uVar1);
+      (**(code **)(iVar2 + 0x18))(glContext,vertices,vertexCount,uVar1);
     }
     uVar1 = uVar1 + 1;
     iVar2 = iVar2 + 0xc;
@@ -2410,92 +2436,105 @@ void _gleMultiVtxTextureCoordGenWrapEye(param_1, param_2, param_3)
 }
 
 /* _gleMultiVtxTextureCoordGenObjectSlow @ 0xf6898 (552 bytes) */
-void _gleMultiVtxTextureCoordGenObjectSlow(param_1, param_2, param_3, param_4)
+void _gleMultiVtxTextureCoordGenObjectSlow(param_1, vertexStartThenCursor, vertexCount, texUnit)
   int param_1;
-  uint param_2;
-  int param_3;
-  int param_4;
+  uint vertexStartThenCursor;
+  int vertexCount;
+  int texUnit;
 {
   float *pfVar1;
   float *pfVar2;
   float *pfVar3;
   float *pfVar4;
-  float fVar5;
-  float fVar6;
-  float fVar7;
-  float fVar8;
-  int iVar9;
+  float objectPlaneSA;
+  float objectPlaneQA;
+  float objectPlaneRA;
+  float objectPlaneTA;
+  float objectPlaneSD;
+  float objectPlaneQD;
+  float objectPlaneRD;
+  float objectPlaneTD;
+  float objectPlaneSB;
+  float objectPlaneQB;
+  float objectPlaneRB;
+  float objectPlaneTB;
+  float objectPlaneSC;
+  float objectPlaneQC;
+  float objectPlaneRC;
+  float objectPlaneTC;
+  int unitState;
+  int texCoordSlot;
   uint uVar10;
-  uint uVar11;
+  uint vertexCursor;
   int iVar12;
-  uint uVar13;
+  uint remaining;
   
-  iVar12 = param_4 * 0x94;
-  uVar10 = param_2 + param_3 * 0x100;
-  iVar9 = iVar12 + param_1;
-  if ((*(char *)(iVar9 + 0x3d78) != '\0') && (*(short *)(iVar9 + 0x3ce8) == 0x2401)) {
-    fVar5 = *(float *)(iVar9 + 0x3cfc);
-    fVar6 = *(float *)(iVar9 + 0x3d08);
-    fVar7 = *(float *)(iVar9 + 0x3d00);
-    fVar8 = *(float *)(iVar9 + 0x3d04);
-    if (param_2 < uVar10) {
-      uVar13 = (uVar10 - param_2) + 0xff >> 8;
-      uVar11 = param_2;
+  iVar12 = texUnit * 0x94;
+  uVar10 = vertexStartThenCursor + vertexCount * 0x100;
+  unitState = iVar12 + param_1;
+  if ((*(char *)(unitState + 0x3d78) != '\0') && (*(short *)(unitState + 0x3ce8) == 0x2401)) {
+    objectPlaneSA = *(float *)(unitState + 0x3cfc);
+    objectPlaneSD = *(float *)(unitState + 0x3d08);
+    objectPlaneSB = *(float *)(unitState + 0x3d00);
+    objectPlaneSC = *(float *)(unitState + 0x3d04);
+    if (vertexStartThenCursor < uVar10) {
+      remaining = (uVar10 - vertexStartThenCursor) + 0xff >> 8;
+      vertexCursor = vertexStartThenCursor;
       do {
-        pfVar1 = (float *)(uVar11 + 0x24);
-        iVar9 = param_4 * 0x10 + uVar11;
-        pfVar2 = (float *)(uVar11 + 0x20);
-        pfVar3 = (float *)(uVar11 + 0x28);
-        pfVar4 = (float *)(uVar11 + 0x2c);
-        uVar11 = uVar11 + 0x100;
-        *(float *)(iVar9 + 0x80) =
-             fVar6 * *pfVar4 + (fVar8 * *pfVar3 + (fVar5 * *pfVar2 + fVar7 * *pfVar1));
-        uVar13 = uVar13 - 1;
-      } while (uVar13 != 0);
+        pfVar1 = (float *)(vertexCursor + 0x24);
+        texCoordSlot = texUnit * 0x10 + vertexCursor;
+        pfVar2 = (float *)(vertexCursor + 0x20);
+        pfVar3 = (float *)(vertexCursor + 0x28);
+        pfVar4 = (float *)(vertexCursor + 0x2c);
+        vertexCursor = vertexCursor + 0x100;
+        *(float *)(texCoordSlot + 0x80) =
+             objectPlaneSD * *pfVar4 + (objectPlaneSC * *pfVar3 + (objectPlaneSA * *pfVar2 + objectPlaneSB * *pfVar1));
+        remaining = remaining - 1;
+      } while (remaining != 0);
     }
   }
-  iVar9 = iVar12 + param_1;
-  if ((*(char *)(iVar9 + 0x3d79) != '\0') && (*(short *)(iVar9 + 0x3d0c) == 0x2401)) {
-    fVar5 = *(float *)(iVar9 + 0x3d20);
-    fVar6 = *(float *)(iVar9 + 0x3d2c);
-    fVar7 = *(float *)(iVar9 + 0x3d24);
-    fVar8 = *(float *)(iVar9 + 0x3d28);
-    if (param_2 < uVar10) {
-      uVar13 = (uVar10 - param_2) + 0xff >> 8;
-      uVar11 = param_2;
+  unitState = iVar12 + param_1;
+  if ((*(char *)(unitState + 0x3d79) != '\0') && (*(short *)(unitState + 0x3d0c) == 0x2401)) {
+    objectPlaneTA = *(float *)(unitState + 0x3d20);
+    objectPlaneTD = *(float *)(unitState + 0x3d2c);
+    objectPlaneTB = *(float *)(unitState + 0x3d24);
+    objectPlaneTC = *(float *)(unitState + 0x3d28);
+    if (vertexStartThenCursor < uVar10) {
+      remaining = (uVar10 - vertexStartThenCursor) + 0xff >> 8;
+      vertexCursor = vertexStartThenCursor;
       do {
-        pfVar1 = (float *)(uVar11 + 0x24);
-        iVar9 = param_4 * 0x10 + uVar11;
-        pfVar2 = (float *)(uVar11 + 0x20);
-        pfVar3 = (float *)(uVar11 + 0x28);
-        pfVar4 = (float *)(uVar11 + 0x2c);
-        uVar11 = uVar11 + 0x100;
-        *(float *)(iVar9 + 0x84) =
-             fVar6 * *pfVar4 + (fVar8 * *pfVar3 + (fVar5 * *pfVar2 + fVar7 * *pfVar1));
-        uVar13 = uVar13 - 1;
-      } while (uVar13 != 0);
+        pfVar1 = (float *)(vertexCursor + 0x24);
+        texCoordSlot = texUnit * 0x10 + vertexCursor;
+        pfVar2 = (float *)(vertexCursor + 0x20);
+        pfVar3 = (float *)(vertexCursor + 0x28);
+        pfVar4 = (float *)(vertexCursor + 0x2c);
+        vertexCursor = vertexCursor + 0x100;
+        *(float *)(texCoordSlot + 0x84) =
+             objectPlaneTD * *pfVar4 + (objectPlaneTC * *pfVar3 + (objectPlaneTA * *pfVar2 + objectPlaneTB * *pfVar1));
+        remaining = remaining - 1;
+      } while (remaining != 0);
     }
   }
-  iVar9 = iVar12 + param_1;
-  if ((*(char *)(iVar9 + 0x3d7a) != '\0') && (*(short *)(iVar9 + 0x3d30) == 0x2401)) {
-    fVar5 = *(float *)(iVar9 + 0x3d44);
-    fVar6 = *(float *)(iVar9 + 0x3d50);
-    fVar7 = *(float *)(iVar9 + 0x3d48);
-    fVar8 = *(float *)(iVar9 + 0x3d4c);
-    if (param_2 < uVar10) {
-      uVar13 = (uVar10 - param_2) + 0xff >> 8;
-      uVar11 = param_2;
+  unitState = iVar12 + param_1;
+  if ((*(char *)(unitState + 0x3d7a) != '\0') && (*(short *)(unitState + 0x3d30) == 0x2401)) {
+    objectPlaneRA = *(float *)(unitState + 0x3d44);
+    objectPlaneRD = *(float *)(unitState + 0x3d50);
+    objectPlaneRB = *(float *)(unitState + 0x3d48);
+    objectPlaneRC = *(float *)(unitState + 0x3d4c);
+    if (vertexStartThenCursor < uVar10) {
+      remaining = (uVar10 - vertexStartThenCursor) + 0xff >> 8;
+      vertexCursor = vertexStartThenCursor;
       do {
-        pfVar1 = (float *)(uVar11 + 0x24);
-        iVar9 = param_4 * 0x10 + uVar11;
-        pfVar2 = (float *)(uVar11 + 0x20);
-        pfVar3 = (float *)(uVar11 + 0x28);
-        pfVar4 = (float *)(uVar11 + 0x2c);
-        uVar11 = uVar11 + 0x100;
-        *(float *)(iVar9 + 0x88) =
-             fVar6 * *pfVar4 + (fVar8 * *pfVar3 + (fVar5 * *pfVar2 + fVar7 * *pfVar1));
-        uVar13 = uVar13 - 1;
-      } while (uVar13 != 0);
+        pfVar1 = (float *)(vertexCursor + 0x24);
+        texCoordSlot = texUnit * 0x10 + vertexCursor;
+        pfVar2 = (float *)(vertexCursor + 0x20);
+        pfVar3 = (float *)(vertexCursor + 0x28);
+        pfVar4 = (float *)(vertexCursor + 0x2c);
+        vertexCursor = vertexCursor + 0x100;
+        *(float *)(texCoordSlot + 0x88) =
+             objectPlaneRD * *pfVar4 + (objectPlaneRC * *pfVar3 + (objectPlaneRA * *pfVar2 + objectPlaneRB * *pfVar1));
+        remaining = remaining - 1;
+      } while (remaining != 0);
     }
     *(uint *)(param_1 + 0x486c) = *(uint *)(param_1 + 0x486c) | 1;
   }
@@ -2506,21 +2545,21 @@ void _gleMultiVtxTextureCoordGenObjectSlow(param_1, param_2, param_3, param_4)
   if (*(short *)(iVar12 + 0x3d54) != 0x2401) {
     return;
   }
-  fVar5 = *(float *)(iVar12 + 0x3d68);
-  fVar6 = *(float *)(iVar12 + 0x3d74);
-  fVar7 = *(float *)(iVar12 + 0x3d6c);
-  fVar8 = *(float *)(iVar12 + 0x3d70);
-  if (param_2 < uVar10) {
-    uVar10 = (uVar10 - param_2) + 0xff >> 8;
+  objectPlaneQA = *(float *)(iVar12 + 0x3d68);
+  objectPlaneQD = *(float *)(iVar12 + 0x3d74);
+  objectPlaneQB = *(float *)(iVar12 + 0x3d6c);
+  objectPlaneQC = *(float *)(iVar12 + 0x3d70);
+  if (vertexStartThenCursor < uVar10) {
+    uVar10 = (uVar10 - vertexStartThenCursor) + 0xff >> 8;
     do {
-      pfVar1 = (float *)(param_2 + 0x24);
-      iVar9 = param_4 * 0x10 + param_2;
-      pfVar2 = (float *)(param_2 + 0x20);
-      pfVar3 = (float *)(param_2 + 0x28);
-      pfVar4 = (float *)(param_2 + 0x2c);
-      param_2 = param_2 + 0x100;
-      *(float *)(iVar9 + 0x8c) =
-           fVar6 * *pfVar4 + (fVar8 * *pfVar3 + (fVar5 * *pfVar2 + fVar7 * *pfVar1));
+      pfVar1 = (float *)(vertexStartThenCursor + 0x24);
+      texCoordSlot = texUnit * 0x10 + vertexStartThenCursor;
+      pfVar2 = (float *)(vertexStartThenCursor + 0x20);
+      pfVar3 = (float *)(vertexStartThenCursor + 0x28);
+      pfVar4 = (float *)(vertexStartThenCursor + 0x2c);
+      vertexStartThenCursor = vertexStartThenCursor + 0x100;
+      *(float *)(texCoordSlot + 0x8c) =
+           objectPlaneQD * *pfVar4 + (objectPlaneQC * *pfVar3 + (objectPlaneQA * *pfVar2 + objectPlaneQB * *pfVar1));
       uVar10 = uVar10 - 1;
     } while (uVar10 != 0);
   }
@@ -2529,7 +2568,7 @@ void _gleMultiVtxTextureCoordGenObjectSlow(param_1, param_2, param_3, param_4)
 }
 
 /* _gleMultiVtxTextureCoordGenEyeSlow @ 0xf6ac0 (1408 bytes) */
-void _gleMultiVtxTextureCoordGenEyeSlow(int param_1,uint param_2,int param_3,int param_4,double fparam_1)
+void _gleMultiVtxTextureCoordGenEyeSlow(int glContext,uint vertexStartThenCursor,int vertexCount,int texUnit,double fparam_1)
 {
   undefined4 *puVar1;
   float *pfVar2;
@@ -2537,16 +2576,31 @@ void _gleMultiVtxTextureCoordGenEyeSlow(int param_1,uint param_2,int param_3,int
   float *pfVar4;
   float *pfVar5;
   float fVar6;
-  float fVar7;
-  float fVar8;
-  float fVar9;
-  ushort uVar10;
+  float eyePlaneQA;
+  float eyePlaneRA;
+  float eyePlaneTA;
+  float eyePlaneSA;
+  float eyePlaneSD;
+  float eyePlaneQD;
+  float eyePlaneRD;
+  float eyePlaneTD;
+  float eyePlaneSB;
+  float eyePlaneQB;
+  float eyePlaneRB;
+  float eyePlaneTB;
+  float eyePlaneSC;
+  float eyePlaneQC;
+  float eyePlaneRC;
+  float eyePlaneTC;
+  ushort texGenMode;
   undefined *vectorNormalize;
-  int iVar12;
+  int unitState;
+  int texCoordSlot;
   int iVar13;
   uint uVar14;
-  uint uVar15;
-  uint uVar16;
+  uint vertexCursor;
+  uint vertexCursor2;
+  uint remaining;
   undefined4 uStack_50;
   undefined4 uStack_4c;
   float fStack_40;
@@ -2554,431 +2608,433 @@ void _gleMultiVtxTextureCoordGenEyeSlow(int param_1,uint param_2,int param_3,int
   float fStack_38;
   
   vectorNormalize = PTR__gleVectorNormalize_00112064;
-  iVar13 = param_4 * 0x94;
-  iVar12 = iVar13 + param_1;
-  uVar14 = param_2 + param_3 * 0x100;
-  if (*(char *)(iVar12 + 0x3d78) != '\0') {
-    uVar10 = *(ushort *)(iVar12 + 0x3ce8);
-    if (uVar10 == 0x2402) {
-      if (param_2 < uVar14) {
-        uVar16 = param_2;
+  iVar13 = texUnit * 0x94;
+  unitState = iVar13 + glContext;
+  uVar14 = vertexStartThenCursor + vertexCount * 0x100;
+  if (*(char *)(unitState + 0x3d78) != '\0') {
+    texGenMode = *(ushort *)(unitState + 0x3ce8);
+    if (texGenMode == 0x2402) {
+      if (vertexStartThenCursor < uVar14) {
+        vertexCursor2 = vertexStartThenCursor;
         do {
-          fparam_1 = (double)((double (*)())_gleSphereGenST)(param_1,uVar16 + 0x20,uVar16 + 0x40,&uStack_50,fparam_1
+          fparam_1 = (double)((double (*)())_gleSphereGenST)(glContext,vertexCursor2 + 0x20,vertexCursor2 + 0x40,&uStack_50,fparam_1
                                             );
-          iVar12 = param_4 * 0x10 + uVar16;
-          uVar16 = uVar16 + 0x100;
-          *(undefined4 *)(iVar12 + 0x80) = uStack_50;
-        } while (uVar16 < uVar14);
+          texCoordSlot = texUnit * 0x10 + vertexCursor2;
+          vertexCursor2 = vertexCursor2 + 0x100;
+          *(undefined4 *)(texCoordSlot + 0x80) = uStack_50;
+        } while (vertexCursor2 < uVar14);
       }
     }
-    else if (uVar10 < 0x2403) {
-      if (uVar10 == 0x2400) {
-        fVar6 = *(float *)(iVar12 + 0x3cec);
-        fVar7 = *(float *)(iVar12 + 0x3cf8);
-        fVar8 = *(float *)(iVar12 + 0x3cf0);
-        fVar9 = *(float *)(iVar12 + 0x3cf4);
-        if (param_2 < uVar14) {
-          uVar16 = (uVar14 - param_2) + 0xff >> 8;
-          uVar15 = param_2;
+    else if (texGenMode < 0x2403) {
+      if (texGenMode == 0x2400) {
+        eyePlaneSA = *(float *)(unitState + 0x3cec);
+        eyePlaneSD = *(float *)(unitState + 0x3cf8);
+        eyePlaneSB = *(float *)(unitState + 0x3cf0);
+        eyePlaneSC = *(float *)(unitState + 0x3cf4);
+        if (vertexStartThenCursor < uVar14) {
+          remaining = (uVar14 - vertexStartThenCursor) + 0xff >> 8;
+          vertexCursor = vertexStartThenCursor;
           do {
-            pfVar2 = (float *)(uVar15 + 0x24);
-            iVar12 = param_4 * 0x10 + uVar15;
-            pfVar3 = (float *)(uVar15 + 0x20);
-            pfVar4 = (float *)(uVar15 + 0x28);
-            pfVar5 = (float *)(uVar15 + 0x2c);
-            uVar15 = uVar15 + 0x100;
-            *(float *)(iVar12 + 0x80) =
-                 fVar7 * *pfVar5 + (fVar9 * *pfVar4 + (fVar6 * *pfVar3 + fVar8 * *pfVar2));
-            uVar16 = uVar16 - 1;
-          } while (uVar16 != 0);
+            pfVar2 = (float *)(vertexCursor + 0x24);
+            texCoordSlot = texUnit * 0x10 + vertexCursor;
+            pfVar3 = (float *)(vertexCursor + 0x20);
+            pfVar4 = (float *)(vertexCursor + 0x28);
+            pfVar5 = (float *)(vertexCursor + 0x2c);
+            vertexCursor = vertexCursor + 0x100;
+            *(float *)(texCoordSlot + 0x80) =
+                 eyePlaneSD * *pfVar5 + (eyePlaneSC * *pfVar4 + (eyePlaneSA * *pfVar3 + eyePlaneSB * *pfVar2));
+            remaining = remaining - 1;
+          } while (remaining != 0);
         }
       }
     }
-    else if (uVar10 == 0x8511) {
-      if (param_2 < uVar14) {
-        uVar16 = (uVar14 - param_2) + 0xff >> 8;
-        uVar15 = param_2;
+    else if (texGenMode == 0x8511) {
+      if (vertexStartThenCursor < uVar14) {
+        remaining = (uVar14 - vertexStartThenCursor) + 0xff >> 8;
+        vertexCursor = vertexStartThenCursor;
         do {
-          puVar1 = (undefined4 *)(uVar15 + 0x40);
-          iVar12 = param_4 * 0x10 + uVar15;
-          uVar15 = uVar15 + 0x100;
-          *(undefined4 *)(iVar12 + 0x80) = *puVar1;
-          uVar16 = uVar16 - 1;
-        } while (uVar16 != 0);
+          puVar1 = (undefined4 *)(vertexCursor + 0x40);
+          texCoordSlot = texUnit * 0x10 + vertexCursor;
+          vertexCursor = vertexCursor + 0x100;
+          *(undefined4 *)(texCoordSlot + 0x80) = *puVar1;
+          remaining = remaining - 1;
+        } while (remaining != 0);
       }
     }
-    else if ((uVar10 == 0x8512) && (param_2 < uVar14)) {
-      uVar16 = param_2;
+    else if ((texGenMode == 0x8512) && (vertexStartThenCursor < uVar14)) {
+      vertexCursor2 = vertexStartThenCursor;
       do {
-        fparam_1 = (double)(**(double ( **)(int,int,int))vectorNormalize)(param_1, uVar16 + 0x20, &fStack_40);
-        pfVar2 = (float *)(uVar16 + 0x44);
-        iVar12 = param_4 * 0x10 + uVar16;
-        pfVar3 = (float *)(uVar16 + 0x40);
-        pfVar4 = (float *)(uVar16 + 0x48);
-        uVar16 = uVar16 + 0x100;
+        fparam_1 = (double)(**(double ( **)(int,int,int))vectorNormalize)(glContext, vertexCursor2 + 0x20, &fStack_40);
+        pfVar2 = (float *)(vertexCursor2 + 0x44);
+        texCoordSlot = texUnit * 0x10 + vertexCursor2;
+        pfVar3 = (float *)(vertexCursor2 + 0x40);
+        pfVar4 = (float *)(vertexCursor2 + 0x48);
+        vertexCursor2 = vertexCursor2 + 0x100;
         fVar6 = *pfVar4 * fStack_38 + (*pfVar3 * fStack_40 + *pfVar2 * fStack_3c);
-        *(float *)(iVar12 + 0x80) = -(*pfVar3 * (fVar6 + fVar6) - fStack_40);
-      } while (uVar16 < uVar14);
+        *(float *)(texCoordSlot + 0x80) = -(*pfVar3 * (fVar6 + fVar6) - fStack_40);
+      } while (vertexCursor2 < uVar14);
     }
   }
   vectorNormalize = PTR__gleVectorNormalize_00112064;
-  iVar12 = iVar13 + param_1;
-  if (*(char *)(iVar12 + 0x3d79) != '\0') {
-    uVar10 = *(ushort *)(iVar12 + 0x3d0c);
-    if (uVar10 == 0x2402) {
-      if (param_2 < uVar14) {
-        uVar16 = param_2;
+  unitState = iVar13 + glContext;
+  if (*(char *)(unitState + 0x3d79) != '\0') {
+    texGenMode = *(ushort *)(unitState + 0x3d0c);
+    if (texGenMode == 0x2402) {
+      if (vertexStartThenCursor < uVar14) {
+        vertexCursor2 = vertexStartThenCursor;
         do {
-          fparam_1 = (double)((double (*)())_gleSphereGenST)(param_1,uVar16 + 0x20,uVar16 + 0x40,&uStack_50,fparam_1
+          fparam_1 = (double)((double (*)())_gleSphereGenST)(glContext,vertexCursor2 + 0x20,vertexCursor2 + 0x40,&uStack_50,fparam_1
                                             );
-          iVar12 = param_4 * 0x10 + uVar16;
-          uVar16 = uVar16 + 0x100;
-          *(undefined4 *)(iVar12 + 0x84) = uStack_4c;
-        } while (uVar16 < uVar14);
+          texCoordSlot = texUnit * 0x10 + vertexCursor2;
+          vertexCursor2 = vertexCursor2 + 0x100;
+          *(undefined4 *)(texCoordSlot + 0x84) = uStack_4c;
+        } while (vertexCursor2 < uVar14);
       }
     }
-    else if (uVar10 < 0x2403) {
-      if (uVar10 == 0x2400) {
-        fVar6 = *(float *)(iVar12 + 0x3d10);
-        fVar7 = *(float *)(iVar12 + 0x3d1c);
-        fVar8 = *(float *)(iVar12 + 0x3d14);
-        fVar9 = *(float *)(iVar12 + 0x3d18);
-        if (param_2 < uVar14) {
-          uVar16 = (uVar14 - param_2) + 0xff >> 8;
-          uVar15 = param_2;
+    else if (texGenMode < 0x2403) {
+      if (texGenMode == 0x2400) {
+        eyePlaneTA = *(float *)(unitState + 0x3d10);
+        eyePlaneTD = *(float *)(unitState + 0x3d1c);
+        eyePlaneTB = *(float *)(unitState + 0x3d14);
+        eyePlaneTC = *(float *)(unitState + 0x3d18);
+        if (vertexStartThenCursor < uVar14) {
+          remaining = (uVar14 - vertexStartThenCursor) + 0xff >> 8;
+          vertexCursor = vertexStartThenCursor;
           do {
-            pfVar2 = (float *)(uVar15 + 0x24);
-            iVar12 = param_4 * 0x10 + uVar15;
-            pfVar3 = (float *)(uVar15 + 0x20);
-            pfVar4 = (float *)(uVar15 + 0x28);
-            pfVar5 = (float *)(uVar15 + 0x2c);
-            uVar15 = uVar15 + 0x100;
-            *(float *)(iVar12 + 0x84) =
-                 fVar7 * *pfVar5 + (fVar9 * *pfVar4 + (fVar6 * *pfVar3 + fVar8 * *pfVar2));
-            uVar16 = uVar16 - 1;
-          } while (uVar16 != 0);
+            pfVar2 = (float *)(vertexCursor + 0x24);
+            texCoordSlot = texUnit * 0x10 + vertexCursor;
+            pfVar3 = (float *)(vertexCursor + 0x20);
+            pfVar4 = (float *)(vertexCursor + 0x28);
+            pfVar5 = (float *)(vertexCursor + 0x2c);
+            vertexCursor = vertexCursor + 0x100;
+            *(float *)(texCoordSlot + 0x84) =
+                 eyePlaneTD * *pfVar5 + (eyePlaneTC * *pfVar4 + (eyePlaneTA * *pfVar3 + eyePlaneTB * *pfVar2));
+            remaining = remaining - 1;
+          } while (remaining != 0);
         }
       }
     }
-    else if (uVar10 == 0x8511) {
-      if (param_2 < uVar14) {
-        uVar16 = (uVar14 - param_2) + 0xff >> 8;
-        uVar15 = param_2;
+    else if (texGenMode == 0x8511) {
+      if (vertexStartThenCursor < uVar14) {
+        remaining = (uVar14 - vertexStartThenCursor) + 0xff >> 8;
+        vertexCursor = vertexStartThenCursor;
         do {
-          puVar1 = (undefined4 *)(uVar15 + 0x44);
-          iVar12 = param_4 * 0x10 + uVar15;
-          uVar15 = uVar15 + 0x100;
-          *(undefined4 *)(iVar12 + 0x84) = *puVar1;
-          uVar16 = uVar16 - 1;
-        } while (uVar16 != 0);
+          puVar1 = (undefined4 *)(vertexCursor + 0x44);
+          texCoordSlot = texUnit * 0x10 + vertexCursor;
+          vertexCursor = vertexCursor + 0x100;
+          *(undefined4 *)(texCoordSlot + 0x84) = *puVar1;
+          remaining = remaining - 1;
+        } while (remaining != 0);
       }
     }
-    else if ((uVar10 == 0x8512) && (param_2 < uVar14)) {
-      uVar16 = param_2;
+    else if ((texGenMode == 0x8512) && (vertexStartThenCursor < uVar14)) {
+      vertexCursor2 = vertexStartThenCursor;
       do {
-        (**(code **)vectorNormalize)(param_1,uVar16 + 0x20,&fStack_40);
-        pfVar2 = (float *)(uVar16 + 0x44);
-        iVar12 = param_4 * 0x10 + uVar16;
-        pfVar3 = (float *)(uVar16 + 0x40);
-        pfVar4 = (float *)(uVar16 + 0x48);
-        uVar16 = uVar16 + 0x100;
+        (**(code **)vectorNormalize)(glContext,vertexCursor2 + 0x20,&fStack_40);
+        pfVar2 = (float *)(vertexCursor2 + 0x44);
+        texCoordSlot = texUnit * 0x10 + vertexCursor2;
+        pfVar3 = (float *)(vertexCursor2 + 0x40);
+        pfVar4 = (float *)(vertexCursor2 + 0x48);
+        vertexCursor2 = vertexCursor2 + 0x100;
         fVar6 = *pfVar4 * fStack_38 + (*pfVar3 * fStack_40 + *pfVar2 * fStack_3c);
-        *(float *)(iVar12 + 0x84) = -(*pfVar2 * (fVar6 + fVar6) - fStack_3c);
-      } while (uVar16 < uVar14);
+        *(float *)(texCoordSlot + 0x84) = -(*pfVar2 * (fVar6 + fVar6) - fStack_3c);
+      } while (vertexCursor2 < uVar14);
     }
   }
   vectorNormalize = PTR__gleVectorNormalize_00112064;
-  iVar12 = iVar13 + param_1;
-  if (*(char *)(iVar12 + 0x3d7a) != '\0') {
-    uVar10 = *(ushort *)(iVar12 + 0x3d30);
-    if (uVar10 == 0x8511) {
-      if (param_2 < uVar14) {
-        uVar16 = (uVar14 - param_2) + 0xff >> 8;
-        uVar15 = param_2;
+  unitState = iVar13 + glContext;
+  if (*(char *)(unitState + 0x3d7a) != '\0') {
+    texGenMode = *(ushort *)(unitState + 0x3d30);
+    if (texGenMode == 0x8511) {
+      if (vertexStartThenCursor < uVar14) {
+        remaining = (uVar14 - vertexStartThenCursor) + 0xff >> 8;
+        vertexCursor = vertexStartThenCursor;
         do {
-          puVar1 = (undefined4 *)(uVar15 + 0x48);
-          iVar12 = param_4 * 0x10 + uVar15;
-          uVar15 = uVar15 + 0x100;
-          *(undefined4 *)(iVar12 + 0x88) = *puVar1;
-          uVar16 = uVar16 - 1;
-        } while (uVar16 != 0);
+          puVar1 = (undefined4 *)(vertexCursor + 0x48);
+          texCoordSlot = texUnit * 0x10 + vertexCursor;
+          vertexCursor = vertexCursor + 0x100;
+          *(undefined4 *)(texCoordSlot + 0x88) = *puVar1;
+          remaining = remaining - 1;
+        } while (remaining != 0);
       }
     }
-    else if (uVar10 < 0x8512) {
-      if (uVar10 == 0x2400) {
-        fVar6 = *(float *)(iVar12 + 0x3d34);
-        fVar7 = *(float *)(iVar12 + 0x3d40);
-        fVar8 = *(float *)(iVar12 + 0x3d38);
-        fVar9 = *(float *)(iVar12 + 0x3d3c);
-        if (param_2 < uVar14) {
-          uVar16 = (uVar14 - param_2) + 0xff >> 8;
-          uVar15 = param_2;
+    else if (texGenMode < 0x8512) {
+      if (texGenMode == 0x2400) {
+        eyePlaneRA = *(float *)(unitState + 0x3d34);
+        eyePlaneRD = *(float *)(unitState + 0x3d40);
+        eyePlaneRB = *(float *)(unitState + 0x3d38);
+        eyePlaneRC = *(float *)(unitState + 0x3d3c);
+        if (vertexStartThenCursor < uVar14) {
+          remaining = (uVar14 - vertexStartThenCursor) + 0xff >> 8;
+          vertexCursor = vertexStartThenCursor;
           do {
-            pfVar2 = (float *)(uVar15 + 0x24);
-            iVar12 = param_4 * 0x10 + uVar15;
-            pfVar3 = (float *)(uVar15 + 0x20);
-            pfVar4 = (float *)(uVar15 + 0x28);
-            pfVar5 = (float *)(uVar15 + 0x2c);
-            uVar15 = uVar15 + 0x100;
-            *(float *)(iVar12 + 0x88) =
-                 fVar7 * *pfVar5 + (fVar9 * *pfVar4 + (fVar6 * *pfVar3 + fVar8 * *pfVar2));
-            uVar16 = uVar16 - 1;
-          } while (uVar16 != 0);
+            pfVar2 = (float *)(vertexCursor + 0x24);
+            texCoordSlot = texUnit * 0x10 + vertexCursor;
+            pfVar3 = (float *)(vertexCursor + 0x20);
+            pfVar4 = (float *)(vertexCursor + 0x28);
+            pfVar5 = (float *)(vertexCursor + 0x2c);
+            vertexCursor = vertexCursor + 0x100;
+            *(float *)(texCoordSlot + 0x88) =
+                 eyePlaneRD * *pfVar5 + (eyePlaneRC * *pfVar4 + (eyePlaneRA * *pfVar3 + eyePlaneRB * *pfVar2));
+            remaining = remaining - 1;
+          } while (remaining != 0);
         }
       }
     }
-    else if ((uVar10 == 0x8512) && (param_2 < uVar14)) {
-      uVar16 = param_2;
+    else if ((texGenMode == 0x8512) && (vertexStartThenCursor < uVar14)) {
+      vertexCursor2 = vertexStartThenCursor;
       do {
-        (**(code **)vectorNormalize)(param_1,uVar16 + 0x20,&fStack_40);
-        pfVar2 = (float *)(uVar16 + 0x44);
-        iVar12 = param_4 * 0x10 + uVar16;
-        pfVar3 = (float *)(uVar16 + 0x40);
-        pfVar4 = (float *)(uVar16 + 0x48);
-        uVar16 = uVar16 + 0x100;
+        (**(code **)vectorNormalize)(glContext,vertexCursor2 + 0x20,&fStack_40);
+        pfVar2 = (float *)(vertexCursor2 + 0x44);
+        texCoordSlot = texUnit * 0x10 + vertexCursor2;
+        pfVar3 = (float *)(vertexCursor2 + 0x40);
+        pfVar4 = (float *)(vertexCursor2 + 0x48);
+        vertexCursor2 = vertexCursor2 + 0x100;
         fVar6 = *pfVar4 * fStack_38 + (*pfVar3 * fStack_40 + *pfVar2 * fStack_3c);
-        *(float *)(iVar12 + 0x88) = -(*pfVar4 * (fVar6 + fVar6) - fStack_38);
-      } while (uVar16 < uVar14);
+        *(float *)(texCoordSlot + 0x88) = -(*pfVar4 * (fVar6 + fVar6) - fStack_38);
+      } while (vertexCursor2 < uVar14);
     }
-    *(uint *)(param_1 + 0x486c) = *(uint *)(param_1 + 0x486c) | 1;
+    *(uint *)(glContext + 0x486c) = *(uint *)(glContext + 0x486c) | 1;
   }
-  iVar13 = iVar13 + param_1;
+  iVar13 = iVar13 + glContext;
   if (*(char *)(iVar13 + 0x3d7b) != '\0') {
     if (*(short *)(iVar13 + 0x3d54) == 0x2400) {
-      fVar6 = *(float *)(iVar13 + 0x3d58);
-      fVar7 = *(float *)(iVar13 + 0x3d64);
-      fVar8 = *(float *)(iVar13 + 0x3d5c);
-      fVar9 = *(float *)(iVar13 + 0x3d60);
-      if (param_2 < uVar14) {
-        uVar14 = (uVar14 - param_2) + 0xff >> 8;
+      eyePlaneQA = *(float *)(iVar13 + 0x3d58);
+      eyePlaneQD = *(float *)(iVar13 + 0x3d64);
+      eyePlaneQB = *(float *)(iVar13 + 0x3d5c);
+      eyePlaneQC = *(float *)(iVar13 + 0x3d60);
+      if (vertexStartThenCursor < uVar14) {
+        uVar14 = (uVar14 - vertexStartThenCursor) + 0xff >> 8;
         do {
-          pfVar2 = (float *)(param_2 + 0x24);
-          iVar12 = param_4 * 0x10 + param_2;
-          pfVar3 = (float *)(param_2 + 0x20);
-          pfVar4 = (float *)(param_2 + 0x28);
-          pfVar5 = (float *)(param_2 + 0x2c);
-          param_2 = param_2 + 0x100;
-          *(float *)(iVar12 + 0x8c) =
-               fVar7 * *pfVar5 + (fVar9 * *pfVar4 + (fVar6 * *pfVar3 + fVar8 * *pfVar2));
+          pfVar2 = (float *)(vertexStartThenCursor + 0x24);
+          texCoordSlot = texUnit * 0x10 + vertexStartThenCursor;
+          pfVar3 = (float *)(vertexStartThenCursor + 0x20);
+          pfVar4 = (float *)(vertexStartThenCursor + 0x28);
+          pfVar5 = (float *)(vertexStartThenCursor + 0x2c);
+          vertexStartThenCursor = vertexStartThenCursor + 0x100;
+          *(float *)(texCoordSlot + 0x8c) =
+               eyePlaneQD * *pfVar5 + (eyePlaneQC * *pfVar4 + (eyePlaneQA * *pfVar3 + eyePlaneQB * *pfVar2));
           uVar14 = uVar14 - 1;
         } while (uVar14 != 0);
       }
     }
-    *(uint *)(param_1 + 0x486c) = *(uint *)(param_1 + 0x486c) | 2;
+    *(uint *)(glContext + 0x486c) = *(uint *)(glContext + 0x486c) | 2;
   }
   return;
 }
 
 /* _gleMultiVtxTextureCoordGenEyeST @ 0xf7040 (156 bytes) */
-void _gleMultiVtxTextureCoordGenEyeST(param_1, param_2, param_3, param_4)
+void _gleMultiVtxTextureCoordGenEyeST(param_1, vertexCursor, vertexCount, texUnit)
   int param_1;
-  uint param_2;
-  int param_3;
-  int param_4;
+  uint vertexCursor;
+  int vertexCount;
+  int texUnit;
 {
-  float fVar1;
-  float fVar2;
-  float fVar3;
-  float fVar4;
-  float fVar5;
-  float fVar6;
-  float fVar7;
-  float fVar8;
+  float eyePlaneTA;
+  float eyePlaneSD;
+  float eyePlaneSB;
+  float eyePlaneSC;
+  float eyePlaneTD;
+  float eyePlaneSA;
+  float eyePlaneTB;
+  float eyePlaneTC;
   float fVar9;
   float fVar10;
   float fVar11;
   float fVar12;
   uint uVar13;
   int iVar14;
+  int texCoordSlot;
   
-  uVar13 = param_2 + param_3 * 0x100;
-  iVar14 = param_1 + param_4 * 0x94;
-  fVar1 = *(float *)(iVar14 + 0x3d10);
-  fVar2 = *(float *)(iVar14 + 0x3cf8);
-  fVar3 = *(float *)(iVar14 + 0x3cf0);
-  fVar4 = *(float *)(iVar14 + 0x3cf4);
-  fVar5 = *(float *)(iVar14 + 0x3d1c);
-  fVar6 = *(float *)(iVar14 + 0x3cec);
-  fVar7 = *(float *)(iVar14 + 0x3d14);
-  fVar8 = *(float *)(iVar14 + 0x3d18);
-  if (uVar13 <= param_2) {
+  uVar13 = vertexCursor + vertexCount * 0x100;
+  iVar14 = param_1 + texUnit * 0x94;
+  eyePlaneTA = *(float *)(iVar14 + 0x3d10);
+  eyePlaneSD = *(float *)(iVar14 + 0x3cf8);
+  eyePlaneSB = *(float *)(iVar14 + 0x3cf0);
+  eyePlaneSC = *(float *)(iVar14 + 0x3cf4);
+  eyePlaneTD = *(float *)(iVar14 + 0x3d1c);
+  eyePlaneSA = *(float *)(iVar14 + 0x3cec);
+  eyePlaneTB = *(float *)(iVar14 + 0x3d14);
+  eyePlaneTC = *(float *)(iVar14 + 0x3d18);
+  if (uVar13 <= vertexCursor) {
     return;
   }
-  uVar13 = (uVar13 - param_2) + 0xff >> 8;
+  uVar13 = (uVar13 - vertexCursor) + 0xff >> 8;
   do {
-    fVar9 = *(float *)(param_2 + 0x24);
-    iVar14 = param_4 * 0x10 + param_2;
-    fVar10 = *(float *)(param_2 + 0x20);
-    fVar11 = *(float *)(param_2 + 0x28);
-    fVar12 = *(float *)(param_2 + 0x2c);
-    param_2 = param_2 + 0x100;
-    *(float *)(iVar14 + 0x84) = fVar5 * fVar12 + (fVar8 * fVar11 + (fVar1 * fVar10 + fVar7 * fVar9));
-    *(float *)(iVar14 + 0x80) = fVar2 * fVar12 + (fVar4 * fVar11 + (fVar6 * fVar10 + fVar3 * fVar9));
+    fVar9 = *(float *)(vertexCursor + 0x24);
+    texCoordSlot = texUnit * 0x10 + vertexCursor;
+    fVar10 = *(float *)(vertexCursor + 0x20);
+    fVar11 = *(float *)(vertexCursor + 0x28);
+    fVar12 = *(float *)(vertexCursor + 0x2c);
+    vertexCursor = vertexCursor + 0x100;
+    *(float *)(texCoordSlot + 0x84) = eyePlaneTD * fVar12 + (eyePlaneTC * fVar11 + (eyePlaneTA * fVar10 + eyePlaneTB * fVar9));
+    *(float *)(texCoordSlot + 0x80) = eyePlaneSD * fVar12 + (eyePlaneSC * fVar11 + (eyePlaneSA * fVar10 + eyePlaneSB * fVar9));
     uVar13 = uVar13 - 1;
   } while (uVar13 != 0);
   return;
 }
 
 /* _gleMultiVtxTextureCoordGenObjectST @ 0xf70dc (156 bytes) */
-void _gleMultiVtxTextureCoordGenObjectST(param_1, param_2, param_3, param_4)
+void _gleMultiVtxTextureCoordGenObjectST(param_1, vertexCursor, vertexCount, texUnit)
   int param_1;
-  uint param_2;
-  int param_3;
-  int param_4;
+  uint vertexCursor;
+  int vertexCount;
+  int texUnit;
 {
-  float fVar1;
-  float fVar2;
-  float fVar3;
-  float fVar4;
-  float fVar5;
-  float fVar6;
-  float fVar7;
-  float fVar8;
+  float objectPlaneTA;
+  float objectPlaneSD;
+  float objectPlaneSB;
+  float objectPlaneSC;
+  float objectPlaneTD;
+  float objectPlaneSA;
+  float objectPlaneTB;
+  float objectPlaneTC;
   float fVar9;
   float fVar10;
   float fVar11;
   float fVar12;
   uint uVar13;
   int iVar14;
+  int texCoordSlot;
   
-  uVar13 = param_2 + param_3 * 0x100;
-  iVar14 = param_1 + param_4 * 0x94;
-  fVar1 = *(float *)(iVar14 + 0x3d20);
-  fVar2 = *(float *)(iVar14 + 0x3d08);
-  fVar3 = *(float *)(iVar14 + 0x3d00);
-  fVar4 = *(float *)(iVar14 + 0x3d04);
-  fVar5 = *(float *)(iVar14 + 0x3d2c);
-  fVar6 = *(float *)(iVar14 + 0x3cfc);
-  fVar7 = *(float *)(iVar14 + 0x3d24);
-  fVar8 = *(float *)(iVar14 + 0x3d28);
-  if (uVar13 <= param_2) {
+  uVar13 = vertexCursor + vertexCount * 0x100;
+  iVar14 = param_1 + texUnit * 0x94;
+  objectPlaneTA = *(float *)(iVar14 + 0x3d20);
+  objectPlaneSD = *(float *)(iVar14 + 0x3d08);
+  objectPlaneSB = *(float *)(iVar14 + 0x3d00);
+  objectPlaneSC = *(float *)(iVar14 + 0x3d04);
+  objectPlaneTD = *(float *)(iVar14 + 0x3d2c);
+  objectPlaneSA = *(float *)(iVar14 + 0x3cfc);
+  objectPlaneTB = *(float *)(iVar14 + 0x3d24);
+  objectPlaneTC = *(float *)(iVar14 + 0x3d28);
+  if (uVar13 <= vertexCursor) {
     return;
   }
-  uVar13 = (uVar13 - param_2) + 0xff >> 8;
+  uVar13 = (uVar13 - vertexCursor) + 0xff >> 8;
   do {
-    fVar9 = *(float *)(param_2 + 0x24);
-    iVar14 = param_4 * 0x10 + param_2;
-    fVar10 = *(float *)(param_2 + 0x20);
-    fVar11 = *(float *)(param_2 + 0x28);
-    fVar12 = *(float *)(param_2 + 0x2c);
-    param_2 = param_2 + 0x100;
-    *(float *)(iVar14 + 0x84) = fVar5 * fVar12 + (fVar8 * fVar11 + (fVar1 * fVar10 + fVar7 * fVar9));
-    *(float *)(iVar14 + 0x80) = fVar2 * fVar12 + (fVar4 * fVar11 + (fVar6 * fVar10 + fVar3 * fVar9));
+    fVar9 = *(float *)(vertexCursor + 0x24);
+    texCoordSlot = texUnit * 0x10 + vertexCursor;
+    fVar10 = *(float *)(vertexCursor + 0x20);
+    fVar11 = *(float *)(vertexCursor + 0x28);
+    fVar12 = *(float *)(vertexCursor + 0x2c);
+    vertexCursor = vertexCursor + 0x100;
+    *(float *)(texCoordSlot + 0x84) = objectPlaneTD * fVar12 + (objectPlaneTC * fVar11 + (objectPlaneTA * fVar10 + objectPlaneTB * fVar9));
+    *(float *)(texCoordSlot + 0x80) = objectPlaneSD * fVar12 + (objectPlaneSC * fVar11 + (objectPlaneSA * fVar10 + objectPlaneSB * fVar9));
     uVar13 = uVar13 - 1;
   } while (uVar13 != 0);
   return;
 }
 
 /* _gleMultiVtxTextureCoordGenSphereST @ 0xf7178 (108 bytes) */
-void _gleMultiVtxTextureCoordGenSphereST(undefined4 param_1,uint param_2,int param_3,int param_4,double fparam_1)
+void _gleMultiVtxTextureCoordGenSphereST(undefined4 param_1,uint vertexCursor,int vertexCount,int param_4,double fparam_1)
 {
   int iVar1;
   int iVar2;
-  uint uVar3;
+  uint vertexEnd;
   int iVar4;
   
-  uVar3 = param_2 + param_3 * 0x100;
-  if (param_2 < uVar3) {
-    iVar4 = param_2 + param_4 * 0x10 + 0x80;
+  vertexEnd = vertexCursor + vertexCount * 0x100;
+  if (vertexCursor < vertexEnd) {
+    iVar4 = vertexCursor + param_4 * 0x10 + 0x80;
     do {
-      iVar1 = param_2 + 0x20;
-      iVar2 = param_2 + 0x40;
-      param_2 = param_2 + 0x100;
+      iVar1 = vertexCursor + 0x20;
+      iVar2 = vertexCursor + 0x40;
+      vertexCursor = vertexCursor + 0x100;
       fparam_1 = (double)((double (*)())_gleSphereGenST)(param_1,iVar1,iVar2,iVar4,fparam_1);
       iVar4 = iVar4 + 0x100;
-    } while (param_2 < uVar3);
+    } while (vertexCursor < vertexEnd);
   }
   return;
 }
 
 /* _gleMultiVtxTextureCoordGenReflectST @ 0xf71e4 (184 bytes) */
-void _gleMultiVtxTextureCoordGenReflectST(param_1, param_2, param_3, param_4)
-  undefined4 param_1;
-  uint param_2;
-  int param_3;
+void _gleMultiVtxTextureCoordGenReflectST(glContext, vertexCursor, vertexCount, param_4)
+  undefined4 glContext;
+  uint vertexCursor;
+  int vertexCount;
   int param_4;
 {
   float *pfVar1;
   float fVar2;
   undefined *vectorNormalize;
-  int iVar4;
-  uint uVar5;
+  int texCoordSlot;
+  uint vertexEnd;
   float fStack_30;
   float fStack_2c;
   float fStack_28;
   
   vectorNormalize = PTR__gleVectorNormalize_00112064;
-  uVar5 = param_2 + param_3 * 0x100;
-  if (param_2 < uVar5) {
+  vertexEnd = vertexCursor + vertexCount * 0x100;
+  if (vertexCursor < vertexEnd) {
     do {
-      (**(code **)vectorNormalize)(param_1,param_2 + 0x20,&fStack_30);
-      iVar4 = param_4 * 0x10 + param_2;
-      fVar2 = *(float *)(param_2 + 0x48) * fStack_28 +
-              (*(float *)(param_2 + 0x40) * fStack_30 + *(float *)(param_2 + 0x44) * fStack_2c);
+      (**(code **)vectorNormalize)(glContext,vertexCursor + 0x20,&fStack_30);
+      texCoordSlot = param_4 * 0x10 + vertexCursor;
+      fVar2 = *(float *)(vertexCursor + 0x48) * fStack_28 +
+              (*(float *)(vertexCursor + 0x40) * fStack_30 + *(float *)(vertexCursor + 0x44) * fStack_2c);
       fVar2 = fVar2 + fVar2;
-      *(float *)(iVar4 + 0x80) = -(*(float *)(param_2 + 0x40) * fVar2 - fStack_30);
-      pfVar1 = (float *)(param_2 + 0x44);
-      param_2 = param_2 + 0x100;
-      *(float *)(iVar4 + 0x84) = -(*pfVar1 * fVar2 - fStack_2c);
-    } while (param_2 < uVar5);
+      *(float *)(texCoordSlot + 0x80) = -(*(float *)(vertexCursor + 0x40) * fVar2 - fStack_30);
+      pfVar1 = (float *)(vertexCursor + 0x44);
+      vertexCursor = vertexCursor + 0x100;
+      *(float *)(texCoordSlot + 0x84) = -(*pfVar1 * fVar2 - fStack_2c);
+    } while (vertexCursor < vertexEnd);
   }
   return;
 }
 
 /* _gleMultiVtxTextureCoordGenReflectSTR @ 0xf729c (212 bytes) */
-void _gleMultiVtxTextureCoordGenReflectSTR(int param_1,uint param_2,int param_3,int param_4,double fparam_1)
+void _gleMultiVtxTextureCoordGenReflectSTR(int param_1,uint vertexCursor,int vertexCount,int param_4,double fparam_1)
 {
   float *pfVar1;
   float fVar2;
   undefined *vectorNormalize;
-  int iVar4;
-  uint uVar5;
+  int texCoordSlot;
+  uint vertexEnd;
   float fStack_30;
   float fStack_2c;
   float fStack_28;
   
   vectorNormalize = PTR__gleVectorNormalize_00112064;
-  uVar5 = param_2 + param_3 * 0x100;
-  if (param_2 < uVar5) {
+  vertexEnd = vertexCursor + vertexCount * 0x100;
+  if (vertexCursor < vertexEnd) {
     do {
-      fparam_1 = (double)(**(double ( **)(int,int,int,double))vectorNormalize)(param_1, param_2 + 0x20, &fStack_30, fparam_1);
-      iVar4 = param_4 * 0x10 + param_2;
-      fVar2 = *(float *)(param_2 + 0x48) * fStack_28 +
-              (*(float *)(param_2 + 0x40) * fStack_30 + *(float *)(param_2 + 0x44) * fStack_2c);
+      fparam_1 = (double)(**(double ( **)(int,int,int,double))vectorNormalize)(param_1, vertexCursor + 0x20, &fStack_30, fparam_1);
+      texCoordSlot = param_4 * 0x10 + vertexCursor;
+      fVar2 = *(float *)(vertexCursor + 0x48) * fStack_28 +
+              (*(float *)(vertexCursor + 0x40) * fStack_30 + *(float *)(vertexCursor + 0x44) * fStack_2c);
       fVar2 = fVar2 + fVar2;
-      *(float *)(iVar4 + 0x80) = -(*(float *)(param_2 + 0x40) * fVar2 - fStack_30);
-      *(float *)(iVar4 + 0x84) = -(*(float *)(param_2 + 0x44) * fVar2 - fStack_2c);
-      pfVar1 = (float *)(param_2 + 0x48);
-      param_2 = param_2 + 0x100;
-      *(float *)(iVar4 + 0x88) = -(*pfVar1 * fVar2 - fStack_28);
-    } while (param_2 < uVar5);
+      *(float *)(texCoordSlot + 0x80) = -(*(float *)(vertexCursor + 0x40) * fVar2 - fStack_30);
+      *(float *)(texCoordSlot + 0x84) = -(*(float *)(vertexCursor + 0x44) * fVar2 - fStack_2c);
+      pfVar1 = (float *)(vertexCursor + 0x48);
+      vertexCursor = vertexCursor + 0x100;
+      *(float *)(texCoordSlot + 0x88) = -(*pfVar1 * fVar2 - fStack_28);
+    } while (vertexCursor < vertexEnd);
   }
   *(uint *)(param_1 + 0x486c) = *(uint *)(param_1 + 0x486c) | 1;
   return;
 }
 
 /* _gleMultiVtxTextureCoordGenNormalST @ 0xf7370 (68 bytes) */
-void _gleMultiVtxTextureCoordGenNormalST(unusedArg1, param_2, param_3, param_4)
+void _gleMultiVtxTextureCoordGenNormalST(unusedArg1, vertexCursor, vertexCount, param_4)
   undefined4 unusedArg1;
-  uint param_2;
-  int param_3;
+  uint vertexCursor;
+  int vertexCount;
   int param_4;
 {
   undefined4 *puVar1;
   uint uVar2;
-  int iVar3;
+  int texCoordSlot;
   
-  uVar2 = param_2 + param_3 * 0x100;
-  if (uVar2 <= param_2) {
+  uVar2 = vertexCursor + vertexCount * 0x100;
+  if (uVar2 <= vertexCursor) {
     return;
   }
-  uVar2 = (uVar2 - param_2) + 0xff >> 8;
+  uVar2 = (uVar2 - vertexCursor) + 0xff >> 8;
   do {
-    iVar3 = param_4 * 0x10 + param_2;
-    *(undefined4 *)(iVar3 + 0x80) = *(undefined4 *)(param_2 + 0x40);
-    puVar1 = (undefined4 *)(param_2 + 0x44);
-    param_2 = param_2 + 0x100;
-    *(undefined4 *)(iVar3 + 0x84) = *puVar1;
+    texCoordSlot = param_4 * 0x10 + vertexCursor;
+    *(undefined4 *)(texCoordSlot + 0x80) = *(undefined4 *)(vertexCursor + 0x40);
+    puVar1 = (undefined4 *)(vertexCursor + 0x44);
+    vertexCursor = vertexCursor + 0x100;
+    *(undefined4 *)(texCoordSlot + 0x84) = *puVar1;
     uVar2 = uVar2 - 1;
   } while (uVar2 != 0);
   return;

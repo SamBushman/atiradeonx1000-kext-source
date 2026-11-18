@@ -1,26 +1,26 @@
 #include "decls.h"
 
 /* _gleMultiVtxTextureCoordGenNormalSTR @ 0xf73b4 (88 bytes) */
-void _gleMultiVtxTextureCoordGenNormalSTR(param_1, param_2, param_3, param_4)
+void _gleMultiVtxTextureCoordGenNormalSTR(param_1, vertexCursor, vertexCount, param_4)
   int param_1;
-  uint param_2;
-  int param_3;
+  uint vertexCursor;
+  int vertexCount;
   int param_4;
 {
   undefined4 *puVar1;
   uint uVar2;
-  int iVar3;
+  int texCoordSlot;
   
-  uVar2 = param_2 + param_3 * 0x100;
-  if (param_2 < uVar2) {
-    uVar2 = (uVar2 - param_2) + 0xff >> 8;
+  uVar2 = vertexCursor + vertexCount * 0x100;
+  if (vertexCursor < uVar2) {
+    uVar2 = (uVar2 - vertexCursor) + 0xff >> 8;
     do {
-      iVar3 = param_4 * 0x10 + param_2;
-      *(undefined4 *)(iVar3 + 0x80) = *(undefined4 *)(param_2 + 0x40);
-      *(undefined4 *)(iVar3 + 0x84) = *(undefined4 *)(param_2 + 0x44);
-      puVar1 = (undefined4 *)(param_2 + 0x48);
-      param_2 = param_2 + 0x100;
-      *(undefined4 *)(iVar3 + 0x88) = *puVar1;
+      texCoordSlot = param_4 * 0x10 + vertexCursor;
+      *(undefined4 *)(texCoordSlot + 0x80) = *(undefined4 *)(vertexCursor + 0x40);
+      *(undefined4 *)(texCoordSlot + 0x84) = *(undefined4 *)(vertexCursor + 0x44);
+      puVar1 = (undefined4 *)(vertexCursor + 0x48);
+      vertexCursor = vertexCursor + 0x100;
+      *(undefined4 *)(texCoordSlot + 0x88) = *puVar1;
       uVar2 = uVar2 - 1;
     } while (uVar2 != 0);
   }
@@ -29,14 +29,14 @@ void _gleMultiVtxTextureCoordGenNormalSTR(param_1, param_2, param_3, param_4)
 }
 
 /* _gleTextureImageCopy @ 0xf7410 (260 bytes) */
-void _gleTextureImageCopy(glContext, param_2, unusedArg3, param_4, param_5, param_6, param_7)
+void _gleTextureImageCopy(glContext, param_2, unusedArg3, param_4, y, width, height)
   int glContext;
   int param_2;
   undefined4 unusedArg3;
   undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+  undefined4 y;
+  undefined4 width;
+  undefined4 height;
 {
   undefined4 uVar1;
   undefined4 uVar2;
@@ -62,7 +62,7 @@ void _gleTextureImageCopy(glContext, param_2, unusedArg3, param_4, param_5, para
   *(undefined4 *)(glContext + 0x31c0) = 0;
   *(undefined4 *)(glContext + 0x31c4) = 1;
   (**(code **)(glContext + 0x46a0))
-            (*(undefined4 *)(glContext + 0x4688),param_4,param_5,param_6,param_7,
+            (*(undefined4 *)(glContext + 0x4688),param_4,y,width,height,
              *(undefined2 *)(param_2 + 0x10),*(undefined2 *)(param_2 + 0x12),
              *(undefined4 *)(param_2 + 0x14));
   *(undefined4 *)(glContext + 0x31b0) = uVar5;
@@ -76,16 +76,16 @@ void _gleTextureImageCopy(glContext, param_2, unusedArg3, param_4, param_5, para
 }
 
 /* _gleTextureSubImageCopy @ 0xf7514 (348 bytes) */
-void _gleTextureSubImageCopy(glContext, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9)
+void _gleTextureSubImageCopy(glContext, param_2, param_3, yoffset, zoffset, param_6, y, width, height)
   int glContext;
   int param_2;
   int param_3;
-  int param_4;
-  int param_5;
+  int yoffset;
+  int zoffset;
   undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
-  undefined4 param_9;
+  undefined4 y;
+  undefined4 width;
+  undefined4 height;
 {
   byte bVar1;
   undefined4 uVar2;
@@ -105,17 +105,17 @@ void _gleTextureSubImageCopy(glContext, param_2, param_3, param_4, param_5, para
   uVar2 = *(undefined4 *)(glContext + 0x31bc);
   uVar3 = *(undefined4 *)(glContext + 0x31c0);
   uVar6 = *(undefined4 *)(glContext + 0x31c4);
-  if ((*(ushort *)(param_2 + 8) < 2) && (param_5 == 0)) {
+  if ((*(ushort *)(param_2 + 8) < 2) && (zoffset == 0)) {
     *(undefined4 *)(glContext + 0x31c0) = 0;
   }
   else {
-    *(uint *)(glContext + 0x31c0) = param_5 + (uint)*(byte *)(param_2 + 10);
+    *(uint *)(glContext + 0x31c0) = zoffset + (uint)*(byte *)(param_2 + 10);
   }
-  if ((*(ushort *)(param_2 + 6) < 2) && (param_4 == 0)) {
+  if ((*(ushort *)(param_2 + 6) < 2) && (yoffset == 0)) {
     *(undefined4 *)(glContext + 0x31b8) = 0;
   }
   else {
-    *(uint *)(glContext + 0x31b8) = param_4 + (uint)*(byte *)(param_2 + 10);
+    *(uint *)(glContext + 0x31b8) = yoffset + (uint)*(byte *)(param_2 + 10);
   }
   bVar1 = *(byte *)(param_2 + 10);
   *(undefined4 *)(glContext + 0x31c4) = 1;
@@ -123,7 +123,7 @@ void _gleTextureSubImageCopy(glContext, param_2, param_3, param_4, param_5, para
   *(uint *)(glContext + 0x31bc) = param_3 + (uint)bVar1;
   *(undefined1 *)(glContext + 0x31c8) = 0;
   (**(code **)(glContext + 0x46a0))
-            (*(undefined4 *)(glContext + 0x4688),param_6,param_7,param_8,param_9,
+            (*(undefined4 *)(glContext + 0x4688),param_6,y,width,height,
              *(undefined2 *)(param_2 + 0x10),*(undefined2 *)(param_2 + 0x12),
              *(undefined4 *)(param_2 + 0x14));
   *(undefined4 *)(glContext + 0x31b0) = uVar7;
@@ -1204,25 +1204,32 @@ void _gle1616Filter3(dst, src, unusedArg3, offsetA, offsetB, offsetC)
 }
 
 /* _gleGenerateMipmapData @ 0xfa61c (5348 bytes) */
-void _gleGenerateMipmapData(param_1, param_2, param_3, param_4, param_5)
-  int param_1;
-  int param_2;
-  int param_3;
-  int param_4;
-  int param_5;
+void _gleGenerateMipmapData(glContext, texture, face, sourceLevel, lastLevelThenLevelArg)
+  int glContext;
+  int texture;
+  int face;
+  int sourceLevel;
+  int lastLevelThenLevelArg;
 {
-  bool bVar1;
-  bool bVar2;
-  bool bVar3;
-  bool bVar4;
-  ushort uVar5;
+  bool moreThanOneDimension;
+  bool isThreeDimensional;
+  bool isOneDimensional;
+  bool isTwoDimensional;
+  ushort destWidth;
   ushort uVar6;
-  int iVar7;
-  int iVar8;
-  int iVar9;
+  ushort format;
+  ushort pixelType;
+  ushort dimensionCode;
+  int levelRecordThenComponentCount;
+  int blockBytes;
+  int destLevelRecord;
+  int bytesPerPixel;
+  int savedGlContext;
+  int decodedData;
   int iVar10;
-  undefined4 uVar11;
-  undefined4 uVar12;
+  undefined4 rgbaRowBytes;
+  undefined4 compressedBuffer;
+  undefined4 compressedRowBytes;
   undefined1 *puVar13;
   undefined1 *puVar14;
   int incomingR8;
@@ -1230,11 +1237,16 @@ void _gleGenerateMipmapData(param_1, param_2, param_3, param_4, param_5)
   int incomingR10;
   int iVar16;
   int iVar17;
-  code *pcVar18;
-  code *pcVar19;
-  int iVar20;
-  int iVar21;
-  int iVar22;
+  int dstCursor3;
+  int columnsRemaining3;
+  int sliceBytes;
+  code *filter2D;
+  code *filter3D;
+  int srcThenDestInteriorWidth;
+  int pixelTransferState;
+  int rowBytes;
+  int dstCursor4;
+  int pixelStep;
   int iVar23;
   int iVar24;
   int iVar25;
@@ -1257,7 +1269,7 @@ void _gleGenerateMipmapData(param_1, param_2, param_3, param_4, param_5)
   int iStack0000001c;
   int iStack00000020;
   int iStack00000028;
-  uint uVar36;
+  uint destHeight;
   int local_1b0;
   undefined4 local_1ac;
   undefined1 auStack_1a8 [4];
@@ -1286,24 +1298,26 @@ void _gleGenerateMipmapData(param_1, param_2, param_3, param_4, param_5)
   uint local_114;
   uint local_110;
   undefined1 local_d4;
-  int local_d0;
-  int local_cc;
-  uint local_c8;
-  uint local_c4;
-  int local_c0;
-  int local_bc;
-  uint local_b8;
-  int local_b4;
-  code *local_b0;
-  int local_ac;
-  int local_a8;
-  uint local_a4;
-  int local_a0;
+  int sourceImage;
+  int nextLevel;
+  int levelsToRecompress;
+  uint srcThenDestInteriorHeight;
+  uint srcThenDestInteriorDepth;
+  int twiceBorder;
+  int dimensions;
+  uint pixelPairShift;
+  int originalCompressedData;
+  int decodedLevelData;
+  code *filter1D;
+  int faceOffset;
+  int rowPadBytes;
+  uint slicesRemaining;
+  int borderCopy;
   int local_9c;
   int local_98;
   int local_94;
   int local_90;
-  int local_8c;
+  int firstGeneratedLevel;
   int local_88;
   int local_84;
   int local_80;
@@ -1317,132 +1331,132 @@ void _gleGenerateMipmapData(param_1, param_2, param_3, param_4, param_5)
   int local_60;
   int local_5c;
   
-  uVar6 = *(ushort *)(param_2 + 0x24) & 0xf;
-  local_b8 = 0;
-  local_b4 = 0;
-  if (uVar6 == 1) {
-    local_bc = 3;
+  dimensionCode = *(ushort *)(texture + 0x24) & 0xf;
+  pixelPairShift = 0;
+  originalCompressedData = 0;
+  if (dimensionCode == 1) {
+    dimensions = 3;
   }
   else {
-    if (uVar6 < 2) {
-      if ((*(ushort *)(param_2 + 0x24) & 0xf) != 0) {
+    if (dimensionCode < 2) {
+      if ((*(ushort *)(texture + 0x24) & 0xf) != 0) {
         return;
       }
     }
-    else if (uVar6 != 3) {
-      if (uVar6 != 4) {
+    else if (dimensionCode != 3) {
+      if (dimensionCode != 4) {
         return;
       }
-      local_bc = 1;
+      dimensions = 1;
       goto LAB_000fa6b0;
     }
-    local_bc = 2;
+    dimensions = 2;
   }
 LAB_000fa6b0:
-  local_ac = param_3 * 0x168;
-  iVar7 = param_2 + local_ac + param_4 * 0x18;
-  local_d0 = iVar7 + 0xc4;
-  iStack00000018 = param_1;
-  iStack0000001c = param_2;
-  iStack00000020 = param_3;
-  iStack00000028 = param_5;
-  iVar7 = _gleComponents((uint)*(ushort *)(iVar7 + 0xd4));
-  pcVar18 = (code *)PTR__gle8888Filter2_001115d4;
-  pcVar19 = (code *)PTR__gle8888Filter3_001115d0;
-  uVar6 = *(ushort *)(local_d0 + 0x12);
-  uVar28 = (uint)uVar6;
+  faceOffset = face * 0x168;
+  levelRecordThenComponentCount = texture + faceOffset + sourceLevel * 0x18;
+  sourceImage = levelRecordThenComponentCount + 0xc4;
+  iStack00000018 = glContext;
+  iStack0000001c = texture;
+  iStack00000020 = face;
+  iStack00000028 = lastLevelThenLevelArg;
+  levelRecordThenComponentCount = _gleComponents((uint)*(ushort *)(levelRecordThenComponentCount + 0xd4));
+  filter2D = (code *)PTR__gle8888Filter2_001115d4;
+  filter3D = (code *)PTR__gle8888Filter3_001115d0;
+  pixelType = *(ushort *)(sourceImage + 0x12);
+  uVar28 = (uint)pixelType;
   bVar35 = (uVar28 < 0x8032) << 3 | (0x8032 < uVar28) << 2 | (uVar28 == 0x8032) << 1 | in_xer_so & 1
   ;
   if (uVar28 == 0x8032) {
-    local_b0 = (code *)PTR__gle332Filter1_0011156c;
-    pcVar18 = (code *)PTR__gle332Filter2_00111568;
-    pcVar19 = (code *)PTR__gle332Filter3_00111564;
+    filter1D = (code *)PTR__gle332Filter1_0011156c;
+    filter2D = (code *)PTR__gle332Filter2_00111568;
+    filter3D = (code *)PTR__gle332Filter3_00111564;
 LAB_000faa98:
-    iVar9 = 1;
+    bytesPerPixel = 1;
     goto LAB_000facc8;
   }
   if (0x8032 >= uVar28) {
     bVar35 = (uVar28 < 0x1400) << 3 | (0x1400 < uVar28) << 2 | (uVar28 == 0x1400) << 1 |
              in_xer_so & 1;
-    iVar9 = iVar7;
+    bytesPerPixel = levelRecordThenComponentCount;
     if (uVar28 == 0x1400) {
-      local_b0 = (code *)PTR__gleByteFilter1_001115c0;
-      pcVar18 = (code *)PTR__gleByteFilter2_001115bc;
-      pcVar19 = (code *)PTR__gleByteFilter3_001115b8;
+      filter1D = (code *)PTR__gleByteFilter1_001115c0;
+      filter2D = (code *)PTR__gleByteFilter2_001115bc;
+      filter3D = (code *)PTR__gleByteFilter3_001115b8;
       goto LAB_000facc8;
     }
     if (0x1400 >= uVar28) {
       bVar35 = (uVar28 < 5) << 3 | (5 < uVar28) << 2 | (uVar28 == 5) << 1 | in_xer_so & 1;
       if (uVar28 == 5) {
-        local_b0 = (code *)PTR__gle1616Filter1_001114dc;
-        pcVar18 = (code *)PTR__gle1616Filter2_001114d8;
-        pcVar19 = (code *)PTR__gle1616Filter3_001114d4;
+        filter1D = (code *)PTR__gle1616Filter1_001114dc;
+        filter2D = (code *)PTR__gle1616Filter2_001114d8;
+        filter3D = (code *)PTR__gle1616Filter3_001114d4;
       }
       else {
         if (5 >= uVar28) {
           if (uVar28 == 0) {
-            iVar7 = 4;
+            levelRecordThenComponentCount = 4;
             puVar15 = &DAT_0010a634;
-            local_b0 = (code *)PTR__gle8888Filter1_001115d8;
-            local_b4 = *(int *)(local_d0 + 0x14);
-            iVar9 = _malloc((uint)*(ushort *)(local_d0 + 4) * 4 * (uint)*(ushort *)(local_d0 + 6) *
-                            (uint)*(ushort *)(local_d0 + 8));
-            bVar35 = (iVar9 < 0) << 3 | (0 < iVar9) << 2 | (iVar9 == 0) << 1 | in_xer_so & 1;
-            *(int *)(local_d0 + 0x14) = iVar9;
-            if (iVar9 == 0) {
+            filter1D = (code *)PTR__gle8888Filter1_001115d8;
+            originalCompressedData = *(int *)(sourceImage + 0x14);
+            decodedData = _malloc((uint)*(ushort *)(sourceImage + 4) * 4 * (uint)*(ushort *)(sourceImage + 6) *
+                            (uint)*(ushort *)(sourceImage + 8));
+            bVar35 = (decodedData < 0) << 3 | (0 < decodedData) << 2 | (decodedData == 0) << 1 | in_xer_so & 1;
+            *(int *)(sourceImage + 0x14) = decodedData;
+            if (decodedData == 0) {
               return;
             }
-            uVar11 = _gleRowBytes(0x1908,0x8035,(uint)*(ushort *)(local_d0 + 4));
-            uVar12 = _gleRowBytes((uint)*(ushort *)(local_d0 + 0x10),0,
-                                  (uint)*(ushort *)(local_d0 + 0xc));
-            _glgConvertType((uint)*(ushort *)(local_d0 + 0x10),0,auStack_1a8,auStack_1a4,param_5,
+            rgbaRowBytes = _gleRowBytes(0x1908,0x8035,(uint)*(ushort *)(sourceImage + 4));
+            compressedRowBytes = _gleRowBytes((uint)*(ushort *)(sourceImage + 0x10),0,
+                                  (uint)*(ushort *)(sourceImage + 0xc));
+            _glgConvertType((uint)*(ushort *)(sourceImage + 0x10),0,auStack_1a8,auStack_1a4,lastLevelThenLevelArg,
                             incomingR8,puVar15,incomingR10);
             puVar13 = auStack_198;
             puVar14 = auStack_194;
-            _glgConvertType(0x1908,0x8035,puVar13,puVar14,param_5,incomingR8,puVar15,incomingR10);
+            _glgConvertType(0x1908,0x8035,puVar13,puVar14,lastLevelThenLevelArg,incomingR8,puVar15,incomingR10);
             local_190 = 2;
-            local_184 = (uint)*(ushort *)(local_d0 + 4);
-            local_180 = (uint)*(ushort *)(local_d0 + 6);
-            local_1b0 = local_b4;
-            local_1a0 = *(undefined4 *)(local_d0 + 0x14);
-            local_144 = (undefined1)uVar6;
-            local_1ac = uVar12;
-            local_19c = uVar11;
+            local_184 = (uint)*(ushort *)(sourceImage + 4);
+            local_180 = (uint)*(ushort *)(sourceImage + 6);
+            local_1b0 = originalCompressedData;
+            local_1a0 = *(undefined4 *)(sourceImage + 0x14);
+            local_144 = (undefined1)pixelType;
+            local_1ac = compressedRowBytes;
+            local_19c = rgbaRowBytes;
             local_18c = uVar28;
             local_188 = uVar28;
-            _glgProcessPixels(iStack00000018 + 0x31a8,&local_1b0,puVar13,puVar14,param_5,incomingR8,
+            _glgProcessPixels(iStack00000018 + 0x31a8,&local_1b0,puVar13,puVar14,lastLevelThenLevelArg,incomingR8,
                               iStack00000018,incomingR10);
-            iVar9 = 4;
+            bytesPerPixel = 4;
             goto LAB_000facc8;
           }
           bVar35 = (uVar28 == 0) << 3 | (1 < uVar28) << 2 | (uVar28 == 1) << 1 | in_xer_so & 1;
           if (uVar28 != 1) {
             return;
           }
-          local_b0 = (code *)PTR__gles8s8Filter1_001114e8;
-          pcVar18 = (code *)PTR__gles8s8Filter2_001114e4;
-          pcVar19 = (code *)PTR__gles8s8Filter3_001114e0;
+          filter1D = (code *)PTR__gles8s8Filter1_001114e8;
+          filter2D = (code *)PTR__gles8s8Filter2_001114e4;
+          filter3D = (code *)PTR__gles8s8Filter3_001114e0;
           goto LAB_000fac40;
         }
         bVar35 = (uVar28 < 7) << 3 | (7 < uVar28) << 2 | (uVar28 == 7) << 1 | in_xer_so & 1;
         if (uVar28 == 7) {
-          local_b0 = (code *)PTR__gle8s8s8s8Filter1_001114c4;
-          pcVar18 = (code *)PTR__gle8s8s8s8Filter2_001114c0;
-          pcVar19 = (code *)PTR__gle8s8s8s8Filter3_001114bc;
+          filter1D = (code *)PTR__gle8s8s8s8Filter1_001114c4;
+          filter2D = (code *)PTR__gle8s8s8s8Filter2_001114c0;
+          filter3D = (code *)PTR__gle8s8s8s8Filter3_001114bc;
         }
         else if (uVar28 < 7) {
-          local_b0 = (code *)PTR__gles16s16Filter1_001114d0;
-          pcVar18 = (code *)PTR__gles16s16Filter2_001114cc;
-          pcVar19 = (code *)PTR__gles16s16Filter3_001114c8;
+          filter1D = (code *)PTR__gles16s16Filter1_001114d0;
+          filter2D = (code *)PTR__gles16s16Filter2_001114cc;
+          filter3D = (code *)PTR__gles16s16Filter3_001114c8;
         }
         else {
           bVar35 = (uVar28 < 8) << 3 | (8 < uVar28) << 2 | (uVar28 == 8) << 1 | in_xer_so & 1;
           if (uVar28 != 8) {
             return;
           }
-          local_b0 = (code *)PTR__gles8s8s8s8Filter1_001114b8;
-          pcVar18 = (code *)PTR__gles8s8s8s8Filter2_001114b4;
-          pcVar19 = (code *)PTR__gles8s8s8s8Filter3_001114b0;
+          filter1D = (code *)PTR__gles8s8s8s8Filter1_001114b8;
+          filter2D = (code *)PTR__gles8s8s8s8Filter2_001114b4;
+          filter3D = (code *)PTR__gles8s8s8s8Filter3_001114b0;
         }
       }
       goto LAB_000facc4;
@@ -1450,40 +1464,40 @@ LAB_000faa98:
     bVar35 = (uVar28 < 0x1404) << 3 | (0x1404 < uVar28) << 2 | (uVar28 == 0x1404) << 1 |
              in_xer_so & 1;
     if (uVar28 == 0x1404) {
-      local_b0 = (code *)PTR__gleIntFilter1_00111590;
-      pcVar18 = (code *)PTR__gleIntFilter2_0011158c;
-      pcVar19 = (code *)PTR__gleIntFilter3_00111588;
+      filter1D = (code *)PTR__gleIntFilter1_00111590;
+      filter2D = (code *)PTR__gleIntFilter2_0011158c;
+      filter3D = (code *)PTR__gleIntFilter3_00111588;
     }
     else {
       if (0x1404 >= uVar28) {
         bVar35 = (uVar28 < 0x1402) << 3 | (0x1402 < uVar28) << 2 | (uVar28 == 0x1402) << 1 |
                  in_xer_so & 1;
         if (uVar28 == 0x1402) {
-          local_b0 = (code *)PTR__gleShortFilter1_001115a8;
-          pcVar18 = (code *)PTR__gleShortFilter2_001115a4;
-          pcVar19 = (code *)PTR__gleShortFilter3_001115a0;
+          filter1D = (code *)PTR__gleShortFilter1_001115a8;
+          filter2D = (code *)PTR__gleShortFilter2_001115a4;
+          filter3D = (code *)PTR__gleShortFilter3_001115a0;
         }
         else {
           if (0x1402 >= uVar28) {
-            local_b0 = (code *)PTR__gleUbyteFilter1_001115cc;
-            pcVar18 = (code *)PTR__gleUbyteFilter2_001115c8;
-            pcVar19 = (code *)PTR__gleUbyteFilter3_001115c4;
+            filter1D = (code *)PTR__gleUbyteFilter1_001115cc;
+            filter2D = (code *)PTR__gleUbyteFilter2_001115c8;
+            filter3D = (code *)PTR__gleUbyteFilter3_001115c4;
             goto LAB_000facc8;
           }
-          local_b0 = (code *)PTR__gleUshortFilter1_001115b4;
-          pcVar18 = (code *)PTR__gleUshortFilter2_001115b0;
-          pcVar19 = (code *)PTR__gleUshortFilter3_001115ac;
+          filter1D = (code *)PTR__gleUshortFilter1_001115b4;
+          filter2D = (code *)PTR__gleUshortFilter2_001115b0;
+          filter3D = (code *)PTR__gleUshortFilter3_001115ac;
         }
 LAB_000faa54:
-        iVar9 = iVar7 << 1;
+        bytesPerPixel = levelRecordThenComponentCount << 1;
         goto LAB_000facc8;
       }
       bVar35 = (uVar28 < 0x1406) << 3 | (0x1406 < uVar28) << 2 | (uVar28 == 0x1406) << 1 |
                in_xer_so & 1;
       if (uVar28 == 0x1406) {
-        local_b0 = (code *)PTR__gleFloatFilter1_00111584;
-        pcVar18 = (code *)PTR__gleFloatFilter2_00111580;
-        pcVar19 = (code *)PTR__gleFloatFilter3_0011157c;
+        filter1D = (code *)PTR__gleFloatFilter1_00111584;
+        filter2D = (code *)PTR__gleFloatFilter2_00111580;
+        filter3D = (code *)PTR__gleFloatFilter3_0011157c;
       }
       else {
         if (uVar28 >= 0x1406) {
@@ -1492,58 +1506,58 @@ LAB_000faa54:
           if (uVar28 != 0x140b) {
             return;
           }
-          local_b0 = (code *)PTR__gleHalfFloatFilter1_00111578;
-          pcVar18 = (code *)PTR__gleHalfFloatFilter2_00111574;
-          pcVar19 = (code *)PTR__gleHalfFloatFilter3_00111570;
+          filter1D = (code *)PTR__gleHalfFloatFilter1_00111578;
+          filter2D = (code *)PTR__gleHalfFloatFilter2_00111574;
+          filter3D = (code *)PTR__gleHalfFloatFilter3_00111570;
           goto LAB_000faa54;
         }
-        local_b0 = (code *)PTR__gleUintFilter1_0011159c;
-        pcVar18 = (code *)PTR__gleUintFilter2_00111598;
-        pcVar19 = (code *)PTR__gleUintFilter3_00111594;
+        filter1D = (code *)PTR__gleUintFilter1_0011159c;
+        filter2D = (code *)PTR__gleUintFilter2_00111598;
+        filter3D = (code *)PTR__gleUintFilter3_00111594;
       }
     }
-    iVar9 = iVar7 << 2;
+    bytesPerPixel = levelRecordThenComponentCount << 2;
     goto LAB_000facc8;
   }
   bVar35 = (uVar28 < 0x8365) << 3 | (0x8365 < uVar28) << 2 | (uVar28 == 0x8365) << 1 | in_xer_so & 1
   ;
   if (uVar28 == 0x8365) {
 LAB_000faac0:
-    local_b0 = (code *)PTR__gle4444Filter1_00111548;
-    pcVar18 = (code *)PTR__gle4444Filter2_00111544;
-    pcVar19 = (code *)PTR__gle4444Filter3_00111540;
+    filter1D = (code *)PTR__gle4444Filter1_00111548;
+    filter2D = (code *)PTR__gle4444Filter2_00111544;
+    filter3D = (code *)PTR__gle4444Filter3_00111540;
 LAB_000fac40:
-    iVar9 = 2;
+    bytesPerPixel = 2;
   }
   else {
     if (0x8365 < uVar28) {
       if (uVar28 < 0x85bc) {
         if (0x85b9 < uVar28) {
-          uVar6 = *(ushort *)(local_d0 + 0x10);
-          bVar35 = (uVar6 < 0x85b9) << 3 | (0x85b9 < uVar6) << 2 | (uVar6 == 0x85b9) << 1 |
+          format = *(ushort *)(sourceImage + 0x10);
+          bVar35 = (format < 0x85b9) << 3 | (0x85b9 < format) << 2 | (format == 0x85b9) << 1 |
                    in_xer_so & 1;
-          if (uVar6 == 0x85b9) {
-            local_b8 = 1;
-            local_b0 = (code *)PTR__gle8888Filter1_001115d8;
-            iVar9 = 4;
+          if (format == 0x85b9) {
+            pixelPairShift = 1;
+            filter1D = (code *)PTR__gle8888Filter1_001115d8;
+            bytesPerPixel = 4;
             goto LAB_000facc8;
           }
-          local_b0 = (code *)PTR__gle88Filter1_00111524;
-          pcVar18 = (code *)PTR__gle88Filter2_00111520;
-          pcVar19 = (code *)PTR__gle88Filter3_0011151c;
+          filter1D = (code *)PTR__gle88Filter1_00111524;
+          filter2D = (code *)PTR__gle88Filter2_00111520;
+          filter3D = (code *)PTR__gle88Filter3_0011151c;
           goto LAB_000fac40;
         }
         bVar35 = (uVar28 < 0x8367) << 3 | (0x8367 < uVar28) << 2 | (uVar28 == 0x8367) << 1 |
                  in_xer_so & 1;
         if (uVar28 == 0x8367) {
 LAB_000fab84:
-          local_b0 = (code *)PTR__gle8888Filter1_001115d8;
+          filter1D = (code *)PTR__gle8888Filter1_001115d8;
         }
         else {
           if (uVar28 < 0x8367) {
-            local_b0 = (code *)PTR__gle1555RevFilter1_00111530;
-            pcVar18 = (code *)PTR__gle1555RevFilter2_0011152c;
-            pcVar19 = (code *)PTR__gle1555RevFilter3_00111528;
+            filter1D = (code *)PTR__gle1555RevFilter1_00111530;
+            filter2D = (code *)PTR__gle1555RevFilter2_0011152c;
+            filter3D = (code *)PTR__gle1555RevFilter3_00111528;
             goto LAB_000fac40;
           }
           bVar35 = (uVar28 < 0x8368) << 3 | (0x8368 < uVar28) << 2 | (uVar28 == 0x8368) << 1 |
@@ -1551,18 +1565,18 @@ LAB_000fab84:
           if (uVar28 != 0x8368) {
             return;
           }
-          local_b0 = (code *)PTR__gle2101010RevFilter1_0011150c;
-          pcVar18 = (code *)PTR__gle2101010RevFilter2_00111508;
-          pcVar19 = (code *)PTR__gle2101010RevFilter3_00111504;
+          filter1D = (code *)PTR__gle2101010RevFilter1_0011150c;
+          filter2D = (code *)PTR__gle2101010RevFilter2_00111508;
+          filter3D = (code *)PTR__gle2101010RevFilter3_00111504;
         }
       }
       else {
         bVar35 = (uVar28 < 0x86da) << 3 | (0x86da < uVar28) << 2 | (uVar28 == 0x86da) << 1 |
                  in_xer_so & 1;
         if (uVar28 == 0x86da) {
-          local_b0 = (code *)PTR__gles8s888Filter1_001114f4;
-          pcVar18 = (code *)PTR__gles8s888Filter2_001114f0;
-          pcVar19 = (code *)PTR__gles8s888Filter3_001114ec;
+          filter1D = (code *)PTR__gles8s888Filter1_001114f4;
+          filter2D = (code *)PTR__gles8s888Filter2_001114f0;
+          filter3D = (code *)PTR__gles8s888Filter3_001114ec;
         }
         else {
           bVar35 = (uVar28 < 0x86db) << 3 | (0x86db < uVar28) << 2 | (uVar28 == 0x86db) << 1 |
@@ -1570,9 +1584,9 @@ LAB_000fab84:
           if (uVar28 != 0x86db) {
             return;
           }
-          local_b0 = (code *)PTR__gle88s8s8Filter1_00111500;
-          pcVar18 = (code *)PTR__gle88s8s8Filter2_001114fc;
-          pcVar19 = (code *)PTR__gle88s8s8Filter3_001114f8;
+          filter1D = (code *)PTR__gle88s8s8Filter1_00111500;
+          filter2D = (code *)PTR__gle88s8s8Filter2_001114fc;
+          filter3D = (code *)PTR__gle88s8s8Filter3_001114f8;
         }
       }
     }
@@ -1584,17 +1598,17 @@ LAB_000fab84:
           bVar35 = (uVar28 < 0x8362) << 3 | (0x8362 < uVar28) << 2 | (uVar28 == 0x8362) << 1 |
                    in_xer_so & 1;
           if (uVar28 == 0x8362) {
-            local_b0 = (code *)PTR__gle233RevFilter1_00111560;
-            pcVar18 = (code *)PTR__gle233RevFilter2_0011155c;
-            pcVar19 = (code *)PTR__gle233RevFilter3_00111558;
+            filter1D = (code *)PTR__gle233RevFilter1_00111560;
+            filter2D = (code *)PTR__gle233RevFilter2_0011155c;
+            filter3D = (code *)PTR__gle233RevFilter3_00111558;
             goto LAB_000faa98;
           }
           if (uVar28 < 0x8362) {
             return;
           }
-          local_b0 = (code *)PTR__gle565Filter1_00111554;
-          pcVar18 = (code *)PTR__gle565Filter2_00111550;
-          pcVar19 = (code *)PTR__gle565Filter3_0011154c;
+          filter1D = (code *)PTR__gle565Filter1_00111554;
+          filter2D = (code *)PTR__gle565Filter2_00111550;
+          filter3D = (code *)PTR__gle565Filter3_0011154c;
         }
         else {
           bVar35 = (uVar28 < 0x8034) << 3 | (0x8034 < uVar28) << 2 | (uVar28 == 0x8034) << 1 |
@@ -1603,39 +1617,39 @@ LAB_000fab84:
             if (0x8034 < uVar28) goto LAB_000fab84;
             goto LAB_000faac0;
           }
-          local_b0 = (code *)PTR__gle5551Filter1_0011153c;
-          pcVar18 = (code *)PTR__gle5551Filter2_00111538;
-          pcVar19 = (code *)PTR__gle5551Filter3_00111534;
+          filter1D = (code *)PTR__gle5551Filter1_0011153c;
+          filter2D = (code *)PTR__gle5551Filter2_00111538;
+          filter3D = (code *)PTR__gle5551Filter3_00111534;
         }
         goto LAB_000fac40;
       }
-      local_b0 = (code *)PTR__gle1010102Filter1_00111518;
-      pcVar18 = (code *)PTR__gle1010102Filter2_00111514;
-      pcVar19 = (code *)PTR__gle1010102Filter3_00111510;
+      filter1D = (code *)PTR__gle1010102Filter1_00111518;
+      filter2D = (code *)PTR__gle1010102Filter2_00111514;
+      filter3D = (code *)PTR__gle1010102Filter3_00111510;
     }
 LAB_000facc4:
-    iVar9 = 4;
+    bytesPerPixel = 4;
   }
 LAB_000facc8:
-  uVar28 = (uint)*(byte *)(local_d0 + 10);
-  bVar1 = 1 < local_bc;
-  bVar3 = local_bc == 1;
-  bVar33 = (local_bc < 1) << 3 | bVar1 << 2 | bVar3 << 1 | in_xer_so & 1;
-  local_c0 = uVar28 * 2;
-  local_c8 = (uint)*(ushort *)(local_d0 + 6);
-  iVar20 = (int)((uint)*(ushort *)(local_d0 + 4) + uVar28 * -2) >> (local_b8 & 0x3f);
-  if (bVar1) {
-    local_c8 = local_c8 + uVar28 * -2;
+  uVar28 = (uint)*(byte *)(sourceImage + 10);
+  moreThanOneDimension = 1 < dimensions;
+  isOneDimensional = dimensions == 1;
+  bVar33 = (dimensions < 1) << 3 | moreThanOneDimension << 2 | isOneDimensional << 1 | in_xer_so & 1;
+  twiceBorder = uVar28 * 2;
+  srcThenDestInteriorHeight = (uint)*(ushort *)(sourceImage + 6);
+  srcThenDestInteriorWidth = (int)((uint)*(ushort *)(sourceImage + 4) + uVar28 * -2) >> (pixelPairShift & 0x3f);
+  if (moreThanOneDimension) {
+    srcThenDestInteriorHeight = srcThenDestInteriorHeight + uVar28 * -2;
   }
-  bVar2 = 2 < local_bc;
-  bVar4 = local_bc == 2;
-  bVar34 = (local_bc < 2) << 3 | bVar2 << 2 | bVar4 << 1 | in_xer_so & 1;
-  local_c4 = (uint)*(ushort *)(local_d0 + 8);
-  if (bVar2) {
-    local_c4 = local_c4 + uVar28 * -2;
+  isThreeDimensional = 2 < dimensions;
+  isTwoDimensional = dimensions == 2;
+  bVar34 = (dimensions < 2) << 3 | isThreeDimensional << 2 | isTwoDimensional << 1 | in_xer_so & 1;
+  srcThenDestInteriorDepth = (uint)*(ushort *)(sourceImage + 8);
+  if (isThreeDimensional) {
+    srcThenDestInteriorDepth = srcThenDestInteriorDepth + uVar28 * -2;
   }
-  local_74 = iVar9 << 1;
-  local_cc = param_4 + 1;
+  local_74 = bytesPerPixel << 1;
+  nextLevel = sourceLevel + 1;
   bVar32 = (uVar28 != 0) << 2 | (uVar28 == 0) << 1 | in_xer_so & 1;
   local_7c = (uint)bVar32 << 0x1c | (uint)(in_cr1 & 0xf) << 0x18 | (uint)bVar33 << 0x14 |
              (uint)bVar34 << 0x10 | (uint)(unaff_cr4 & 0xf) << 0xc | (uint)(in_cr5 & 0xf) << 8 |
@@ -1643,139 +1657,139 @@ LAB_000facc8:
   local_70 = (uint)bVar32 << 0x1c | (uint)(in_cr1 & 0xf) << 0x18 | (uint)bVar33 << 0x14 |
              (uint)bVar34 << 0x10 | (uint)(unaff_cr4 & 0xf) << 0xc | (uint)(in_cr5 & 0xf) << 8 |
              (uint)(in_cr6 & 0xf) << 4 | (uint)(bVar35 & 0xf);
-  local_a0 = local_c0 >> 1;
-  iVar23 = local_d0;
-  local_8c = local_cc;
+  borderCopy = twiceBorder >> 1;
+  iVar23 = sourceImage;
+  firstGeneratedLevel = nextLevel;
   local_78 = local_7c;
   local_6c = local_74;
   local_68 = local_74;
   local_64 = local_74;
   local_5c = local_74;
   do {
-    if ((((iVar20 < 2) && ((int)local_c8 < 2)) && ((int)local_c4 < 2)) ||
-       (iStack00000028 < local_cc)) {
-      if (local_b4 != 0) {
-        uVar6 = *(ushort *)(local_d0 + 0x10);
-        iStack00000028 = local_cc;
-        if (((0x83f3 < uVar6) || (0x83f1 < uVar6)) || (iVar7 = 8, uVar6 < 0x83f0)) {
-          iVar7 = 0x10;
+    if ((((srcThenDestInteriorWidth < 2) && ((int)srcThenDestInteriorHeight < 2)) && ((int)srcThenDestInteriorDepth < 2)) ||
+       (iStack00000028 < nextLevel)) {
+      if (originalCompressedData != 0) {
+        format = *(ushort *)(sourceImage + 0x10);
+        iStack00000028 = nextLevel;
+        if (((0x83f3 < format) || (0x83f1 < format)) || (blockBytes = 8, format < 0x83f0)) {
+          blockBytes = 0x10;
         }
-        local_cc = local_8c;
-        _free(*(undefined4 *)(local_d0 + 0x14));
-        *(int *)(local_d0 + 0x14) = local_b4;
-        if (local_cc < iStack00000028) {
-          iVar23 = local_cc * 0x18 + iStack0000001c + local_ac + 0xc4;
-          local_cc = iStack00000028 - local_cc;
-          iVar20 = iStack00000018 + 0x31a8;
-          iVar9 = iStack00000018;
+        levelsToRecompress = firstGeneratedLevel;
+        _free(*(undefined4 *)(sourceImage + 0x14));
+        *(int *)(sourceImage + 0x14) = originalCompressedData;
+        if (levelsToRecompress < iStack00000028) {
+          iVar23 = levelsToRecompress * 0x18 + iStack0000001c + faceOffset + 0xc4;
+          levelsToRecompress = iStack00000028 - levelsToRecompress;
+          pixelTransferState = iStack00000018 + 0x31a8;
+          savedGlContext = iStack00000018;
           do {
-            local_b4 = *(undefined4 *)(iVar23 + 0x14);
-            uVar11 = _malloc(iVar7 * ((int)(*(ushort *)(iVar23 + 4) + 3) >> 2) *
+            decodedLevelData = *(undefined4 *)(iVar23 + 0x14);
+            compressedBuffer = _malloc(blockBytes * ((int)(*(ushort *)(iVar23 + 4) + 3) >> 2) *
                              ((int)(*(ushort *)(iVar23 + 6) + 3) >> 2));
-            *(undefined4 *)(iVar23 + 0x14) = uVar11;
-            uVar11 = _gleRowBytes(0x1908,0x8035,(uint)*(ushort *)(iVar23 + 4));
-            uVar12 = _gleRowBytes((uint)*(ushort *)(iVar23 + 0x10),0,(uint)*(ushort *)(iVar23 + 0xc)
+            *(undefined4 *)(iVar23 + 0x14) = compressedBuffer;
+            rgbaRowBytes = _gleRowBytes(0x1908,0x8035,(uint)*(ushort *)(iVar23 + 4));
+            compressedRowBytes = _gleRowBytes((uint)*(ushort *)(iVar23 + 0x10),0,(uint)*(ushort *)(iVar23 + 0xc)
                                  );
-            _glgConvertType(0x1908,0x8035,auStack_138,auStack_134,param_5,incomingR8,iVar9,incomingR10);
+            _glgConvertType(0x1908,0x8035,auStack_138,auStack_134,lastLevelThenLevelArg,incomingR8,savedGlContext,incomingR10);
             puVar13 = auStack_128;
             puVar14 = auStack_124;
-            _glgConvertType((uint)*(ushort *)(iVar23 + 0x10),0,auStack_128,auStack_124,param_5,incomingR8
-                            ,iVar9,incomingR10);
+            _glgConvertType((uint)*(ushort *)(iVar23 + 0x10),0,auStack_128,auStack_124,lastLevelThenLevelArg,incomingR8
+                            ,savedGlContext,incomingR10);
             local_11c = 0;
             local_120 = 2;
             local_118 = 0;
             local_114 = (uint)*(ushort *)(iVar23 + 4);
             local_110 = (uint)*(ushort *)(iVar23 + 6);
-            local_140 = local_b4;
+            local_140 = decodedLevelData;
             local_130 = *(undefined4 *)(iVar23 + 0x14);
             iVar23 = iVar23 + 0x18;
             local_d4 = 0;
-            local_13c = uVar11;
-            local_12c = uVar12;
-            _glgProcessPixels(iVar20,&local_140,puVar13,puVar14,param_5,incomingR8,iVar9,incomingR10);
-            _free(local_b4);
-            local_cc = local_cc + -1;
-          } while (local_cc != 0);
+            local_13c = rgbaRowBytes;
+            local_12c = compressedRowBytes;
+            _glgProcessPixels(pixelTransferState,&local_140,puVar13,puVar14,lastLevelThenLevelArg,incomingR8,savedGlContext,incomingR10);
+            _free(decodedLevelData);
+            levelsToRecompress = levelsToRecompress + -1;
+          } while (levelsToRecompress != 0);
         }
       }
       return;
     }
-    iVar8 = iStack0000001c + local_ac + local_cc * 0x18;
-    iVar22 = iVar9;
-    if (iVar20 == 1) {
-      iVar22 = 0;
+    destLevelRecord = iStack0000001c + faceOffset + nextLevel * 0x18;
+    pixelStep = bytesPerPixel;
+    if (srcThenDestInteriorWidth == 1) {
+      pixelStep = 0;
     }
-    iVar26 = (int)(uint)*(ushort *)(iVar23 + 0xc) >> (local_b8 & 0x3f);
-    iVar21 = iVar26 * iVar9;
-    local_a8 = (iVar26 - (iVar20 + local_c0)) * iVar9;
+    iVar26 = (int)(uint)*(ushort *)(iVar23 + 0xc) >> (pixelPairShift & 0x3f);
+    rowBytes = iVar26 * bytesPerPixel;
+    rowPadBytes = (iVar26 - (srcThenDestInteriorWidth + twiceBorder)) * bytesPerPixel;
     iVar26 = 0;
-    if (local_c8 != 1) {
-      iVar26 = iVar21;
+    if (srcThenDestInteriorHeight != 1) {
+      iVar26 = rowBytes;
     }
-    iVar17 = (uint)*(ushort *)(iVar23 + 0xe) * iVar21;
-    iVar16 = ((uint)*(ushort *)(iVar23 + 0xe) - (local_c8 + local_c0)) * iVar21;
+    sliceBytes = (uint)*(ushort *)(iVar23 + 0xe) * rowBytes;
+    iVar16 = ((uint)*(ushort *)(iVar23 + 0xe) - (srcThenDestInteriorHeight + twiceBorder)) * rowBytes;
     iVar27 = 0;
-    if (local_c4 != 1) {
-      iVar27 = iVar17;
+    if (srcThenDestInteriorDepth != 1) {
+      iVar27 = sliceBytes;
     }
-    local_c8 = (uint)*(ushort *)(iVar8 + 0xca);
-    iVar20 = (int)((uint)*(ushort *)(iVar8 + 200) - local_c0) >> (local_b8 & 0x3f);
-    if (bVar1) {
-      local_c8 = local_c8 - local_c0;
+    srcThenDestInteriorHeight = (uint)*(ushort *)(destLevelRecord + 0xca);
+    srcThenDestInteriorWidth = (int)((uint)*(ushort *)(destLevelRecord + 200) - twiceBorder) >> (pixelPairShift & 0x3f);
+    if (moreThanOneDimension) {
+      srcThenDestInteriorHeight = srcThenDestInteriorHeight - twiceBorder;
     }
-    uVar28 = (uint)*(ushort *)(iVar8 + 0xcc);
-    local_c4 = uVar28;
-    if (bVar2) {
-      local_c4 = uVar28 - local_c0;
+    uVar28 = (uint)*(ushort *)(destLevelRecord + 0xcc);
+    srcThenDestInteriorDepth = uVar28;
+    if (isThreeDimensional) {
+      srcThenDestInteriorDepth = uVar28 - twiceBorder;
     }
-    iVar10 = _malloc((uint)*(ushort *)(iVar8 + 0xd0) * (uint)*(ushort *)(iVar8 + 0xd2) * uVar28 *
-                     (iVar9 >> (local_b8 & 0x3f)));
-    *(int *)(iVar8 + 0xd8) = iVar10;
+    iVar10 = _malloc((uint)*(ushort *)(destLevelRecord + 0xd0) * (uint)*(ushort *)(destLevelRecord + 0xd2) * uVar28 *
+                     (bytesPerPixel >> (pixelPairShift & 0x3f)));
+    *(int *)(destLevelRecord + 0xd8) = iVar10;
     iVar23 = *(int *)(iVar23 + 0x14);
-    *(byte *)(iVar8 + 0xcf) = *(byte *)(iVar8 + 0xcf) | 0x10;
-    if (bVar4) {
+    *(byte *)(destLevelRecord + 0xcf) = *(byte *)(destLevelRecord + 0xcf) | 0x10;
+    if (isTwoDimensional) {
       bVar35 = (byte)(local_78 >> 0x18);
       if (!(bool)(bVar35 >> 5 & 1)) {
-        iVar16 = iVar10 + iVar9;
-        iVar27 = iVar23 + iVar9;
-        (*pcVar18)(iVar10,iVar23,iVar7,iVar9,iVar21);
-        if (0 < iVar20) {
+        iVar16 = iVar10 + bytesPerPixel;
+        iVar27 = iVar23 + bytesPerPixel;
+        (*filter2D)(iVar10,iVar23,levelRecordThenComponentCount,bytesPerPixel,rowBytes);
+        if (0 < srcThenDestInteriorWidth) {
           iVar23 = iVar27;
-          iVar17 = iVar20;
+          columnsRemaining3 = srcThenDestInteriorWidth;
           iVar10 = iVar16;
           do {
-            iVar16 = iVar10 + iVar9;
-            iVar27 = iVar23 + iVar9 + iVar22;
-            (*pcVar18)(iVar10,iVar23,iVar7,iVar22,iVar21);
-            iVar17 = iVar17 + -1;
+            iVar16 = iVar10 + bytesPerPixel;
+            iVar27 = iVar23 + bytesPerPixel + pixelStep;
+            (*filter2D)(iVar10,iVar23,levelRecordThenComponentCount,pixelStep,rowBytes);
+            columnsRemaining3 = columnsRemaining3 + -1;
             iVar23 = iVar27;
             iVar10 = iVar16;
-          } while (iVar17 != 0);
+          } while (columnsRemaining3 != 0);
         }
-        iVar10 = iVar16 + iVar9;
-        (*pcVar18)(iVar16,iVar27 - iVar9,iVar7,iVar9,iVar21);
-        iVar23 = (iVar27 - iVar9) + iVar9 * 2 + local_a8;
+        iVar10 = iVar16 + bytesPerPixel;
+        (*filter2D)(iVar16,iVar27 - bytesPerPixel,levelRecordThenComponentCount,bytesPerPixel,rowBytes);
+        iVar23 = (iVar27 - bytesPerPixel) + bytesPerPixel * 2 + rowPadBytes;
       }
       iVar27 = local_74;
-      if (0 < (int)local_c8) {
-        iVar16 = local_a8 + iVar26;
-        uVar28 = local_c8;
+      if (0 < (int)srcThenDestInteriorHeight) {
+        iVar16 = rowPadBytes + iVar26;
+        uVar28 = srcThenDestInteriorHeight;
         do {
           iVar17 = iVar23;
           iVar24 = iVar10;
           if (!(bool)(bVar35 >> 5 & 1)) {
-            iVar24 = iVar10 + iVar9;
-            iVar17 = iVar23 + iVar9;
-            (*pcVar18)(iVar10,iVar23,iVar7,iVar9,iVar26);
+            iVar24 = iVar10 + bytesPerPixel;
+            iVar17 = iVar23 + bytesPerPixel;
+            (*filter2D)(iVar10,iVar23,levelRecordThenComponentCount,bytesPerPixel,iVar26);
           }
           iVar23 = iVar17;
-          iVar10 = iVar20;
+          iVar10 = srcThenDestInteriorWidth;
           iVar29 = iVar24;
-          if (0 < iVar20) {
+          if (0 < srcThenDestInteriorWidth) {
             do {
-              iVar24 = iVar29 + iVar9;
-              iVar17 = iVar23 + iVar9 + iVar22;
-              (*pcVar18)(iVar29,iVar23,iVar7,iVar22,iVar26);
+              iVar24 = iVar29 + bytesPerPixel;
+              iVar17 = iVar23 + bytesPerPixel + pixelStep;
+              (*filter2D)(iVar29,iVar23,levelRecordThenComponentCount,pixelStep,iVar26);
               iVar10 = iVar10 + -1;
               iVar23 = iVar17;
               iVar29 = iVar24;
@@ -1783,173 +1797,173 @@ LAB_000facc8:
           }
           iVar10 = iVar24;
           if (!(bool)(bVar35 >> 5 & 1)) {
-            iVar23 = iVar17 - iVar9;
-            iVar10 = iVar24 + iVar9;
+            iVar23 = iVar17 - bytesPerPixel;
+            iVar10 = iVar24 + bytesPerPixel;
             iVar17 = iVar23 + iVar27;
-            (*pcVar18)(iVar24,iVar23,iVar7,iVar9,iVar26);
+            (*filter2D)(iVar24,iVar23,levelRecordThenComponentCount,bytesPerPixel,iVar26);
           }
           uVar28 = uVar28 - 1;
           iVar23 = iVar17 + iVar16;
         } while (uVar28 != 0);
       }
       if (!(bool)(bVar35 >> 5 & 1)) {
-        iVar27 = iVar10 + iVar9;
-        iVar26 = (iVar23 - iVar21) + iVar9;
-        (*pcVar18)(iVar10,iVar23 - iVar21,iVar7,iVar9,iVar21);
-        if (0 < iVar20) {
+        iVar27 = iVar10 + bytesPerPixel;
+        iVar26 = (iVar23 - rowBytes) + bytesPerPixel;
+        (*filter2D)(iVar10,iVar23 - rowBytes,levelRecordThenComponentCount,bytesPerPixel,rowBytes);
+        if (0 < srcThenDestInteriorWidth) {
           iVar23 = iVar26;
-          iVar16 = iVar20;
-          iVar17 = iVar27;
+          iVar16 = srcThenDestInteriorWidth;
+          dstCursor3 = iVar27;
           do {
-            iVar27 = iVar17 + iVar9;
-            iVar26 = iVar23 + iVar9 + iVar22;
-            (*pcVar18)(iVar17,iVar23,iVar7,iVar22,iVar21);
+            iVar27 = dstCursor3 + bytesPerPixel;
+            iVar26 = iVar23 + bytesPerPixel + pixelStep;
+            (*filter2D)(dstCursor3,iVar23,levelRecordThenComponentCount,pixelStep,rowBytes);
             iVar16 = iVar16 + -1;
             iVar23 = iVar26;
-            iVar17 = iVar27;
+            dstCursor3 = iVar27;
           } while (iVar16 != 0);
         }
-        (*pcVar18)(iVar27,iVar26 - iVar9,iVar7,iVar9,iVar21);
+        (*filter2D)(iVar27,iVar26 - bytesPerPixel,levelRecordThenComponentCount,bytesPerPixel,rowBytes);
       }
-      uVar5 = *(ushort *)(iVar8 + 200);
+      destWidth = *(ushort *)(destLevelRecord + 200);
       incomingR10 = 0;
       uVar28 = 1;
-      uVar6 = *(ushort *)(iVar8 + 0xca);
+      uVar6 = *(ushort *)(destLevelRecord + 0xca);
 LAB_000fb8d8:
-      uVar36 = (uint)uVar6;
-      incomingR8 = local_a0;
-      iVar23 = local_a0;
+      destHeight = (uint)uVar6;
+      incomingR8 = borderCopy;
+      iVar23 = borderCopy;
 LAB_000fb8dc:
-      param_5 = local_cc;
+      lastLevelThenLevelArg = nextLevel;
       _gleModifyPluginTextureLevel
-                (iStack00000018,iStack0000001c,iVar8 + 0xc4,iStack00000020,local_cc,incomingR8,iVar23,
-                 incomingR10,(uint)uVar5,uVar36,uVar28);
+                (iStack00000018,iStack0000001c,destLevelRecord + 0xc4,iStack00000020,nextLevel,incomingR8,iVar23,
+                 incomingR10,(uint)destWidth,destHeight,uVar28);
     }
-    else if (bVar2) {
-      if (local_bc == 3) {
+    else if (isThreeDimensional) {
+      if (dimensions == 3) {
         bVar35 = (byte)(local_70 >> 0x18);
         if (!(bool)(bVar35 >> 5 & 1)) {
-          iVar29 = iVar10 + iVar9;
-          iVar24 = iVar23 + iVar9;
-          (*pcVar19)(iVar10,iVar23,iVar7,iVar9,iVar21,iVar17);
-          if (0 < iVar20) {
+          iVar29 = iVar10 + bytesPerPixel;
+          iVar24 = iVar23 + bytesPerPixel;
+          (*filter3D)(iVar10,iVar23,levelRecordThenComponentCount,bytesPerPixel,rowBytes,sliceBytes);
+          if (0 < srcThenDestInteriorWidth) {
             iVar23 = iVar24;
-            iVar10 = iVar20;
+            iVar10 = srcThenDestInteriorWidth;
             iVar31 = iVar29;
             do {
-              iVar29 = iVar31 + iVar9;
-              iVar24 = iVar23 + iVar9 + iVar22;
-              (*pcVar19)(iVar31,iVar23,iVar7,iVar22,iVar21,iVar17);
+              iVar29 = iVar31 + bytesPerPixel;
+              iVar24 = iVar23 + bytesPerPixel + pixelStep;
+              (*filter3D)(iVar31,iVar23,levelRecordThenComponentCount,pixelStep,rowBytes,sliceBytes);
               iVar10 = iVar10 + -1;
               iVar23 = iVar24;
               iVar31 = iVar29;
             } while (iVar10 != 0);
           }
           local_9c = local_6c;
-          iVar10 = iVar29 + iVar9;
-          iVar23 = (iVar24 - iVar9) + local_6c;
-          (*pcVar19)(iVar29,iVar24 - iVar9,iVar7,iVar9,iVar21,iVar17);
-          iVar23 = iVar23 + local_a8;
-          if (0 < (int)local_c8) {
-            local_80 = iVar9 + iVar22;
-            iVar24 = local_a8 + iVar26;
-            uVar28 = local_c8;
+          iVar10 = iVar29 + bytesPerPixel;
+          iVar23 = (iVar24 - bytesPerPixel) + local_6c;
+          (*filter3D)(iVar29,iVar24 - bytesPerPixel,levelRecordThenComponentCount,bytesPerPixel,rowBytes,sliceBytes);
+          iVar23 = iVar23 + rowPadBytes;
+          if (0 < (int)srcThenDestInteriorHeight) {
+            local_80 = bytesPerPixel + pixelStep;
+            iVar24 = rowPadBytes + iVar26;
+            uVar28 = srcThenDestInteriorHeight;
             do {
-              iVar30 = iVar10 + iVar9;
-              iVar25 = iVar23 + iVar9;
-              (*pcVar19)(iVar10,iVar23,iVar7,iVar9,iVar26,iVar17);
+              iVar30 = iVar10 + bytesPerPixel;
+              iVar25 = iVar23 + bytesPerPixel;
+              (*filter3D)(iVar10,iVar23,levelRecordThenComponentCount,bytesPerPixel,iVar26,sliceBytes);
               iVar23 = local_80;
               iVar10 = iVar25;
-              iVar29 = iVar20;
+              iVar29 = srcThenDestInteriorWidth;
               iVar31 = iVar30;
-              if (0 < iVar20) {
+              if (0 < srcThenDestInteriorWidth) {
                 do {
-                  iVar30 = iVar31 + iVar9;
+                  iVar30 = iVar31 + bytesPerPixel;
                   iVar25 = iVar10 + iVar23;
-                  (*pcVar19)(iVar31,iVar10,iVar7,iVar22,iVar26,iVar17);
+                  (*filter3D)(iVar31,iVar10,levelRecordThenComponentCount,pixelStep,iVar26,sliceBytes);
                   iVar29 = iVar29 + -1;
                   iVar10 = iVar25;
                   iVar31 = iVar30;
                 } while (iVar29 != 0);
               }
-              iVar10 = iVar30 + iVar9;
-              iVar23 = (iVar25 - iVar9) + local_9c;
-              (*pcVar19)(iVar30,iVar25 - iVar9,iVar7,iVar9,iVar26,iVar17);
+              iVar10 = iVar30 + bytesPerPixel;
+              iVar23 = (iVar25 - bytesPerPixel) + local_9c;
+              (*filter3D)(iVar30,iVar25 - bytesPerPixel,levelRecordThenComponentCount,bytesPerPixel,iVar26,sliceBytes);
               uVar28 = uVar28 - 1;
               iVar23 = iVar23 + iVar24;
             } while (uVar28 != 0);
           }
-          iVar29 = iVar10 + iVar9;
-          iVar24 = (iVar23 - iVar21) + iVar9;
-          (*pcVar19)(iVar10,iVar23 - iVar21,iVar7,iVar9,iVar21,iVar17);
-          if (0 < iVar20) {
+          iVar29 = iVar10 + bytesPerPixel;
+          iVar24 = (iVar23 - rowBytes) + bytesPerPixel;
+          (*filter3D)(iVar10,iVar23 - rowBytes,levelRecordThenComponentCount,bytesPerPixel,rowBytes,sliceBytes);
+          if (0 < srcThenDestInteriorWidth) {
             iVar23 = iVar24;
-            iVar10 = iVar20;
+            iVar10 = srcThenDestInteriorWidth;
             iVar31 = iVar29;
             do {
-              iVar29 = iVar31 + iVar9;
-              iVar24 = iVar23 + iVar9 + iVar22;
-              (*pcVar19)(iVar31,iVar23,iVar7,iVar22,iVar21,iVar17);
+              iVar29 = iVar31 + bytesPerPixel;
+              iVar24 = iVar23 + bytesPerPixel + pixelStep;
+              (*filter3D)(iVar31,iVar23,levelRecordThenComponentCount,pixelStep,rowBytes,sliceBytes);
               iVar10 = iVar10 + -1;
               iVar23 = iVar24;
               iVar31 = iVar29;
             } while (iVar10 != 0);
           }
-          iVar10 = iVar29 + iVar9;
-          iVar23 = (iVar24 - iVar9) + local_9c;
-          (*pcVar19)(iVar29,iVar24 - iVar9,iVar7,iVar9,iVar21,iVar17);
-          iVar23 = iVar23 + local_a8 + iVar21 + iVar16;
+          iVar10 = iVar29 + bytesPerPixel;
+          iVar23 = (iVar24 - bytesPerPixel) + local_9c;
+          (*filter3D)(iVar29,iVar24 - bytesPerPixel,levelRecordThenComponentCount,bytesPerPixel,rowBytes,sliceBytes);
+          iVar23 = iVar23 + rowPadBytes + rowBytes + iVar16;
         }
-        if (0 < (int)local_c4) {
+        if (0 < (int)srcThenDestInteriorDepth) {
           local_90 = iVar16 + iVar27;
-          local_88 = local_a8 + iVar26;
-          local_a4 = local_c4;
-          local_60 = iVar9 + iVar22;
+          local_88 = rowPadBytes + iVar26;
+          slicesRemaining = srcThenDestInteriorDepth;
+          local_60 = bytesPerPixel + pixelStep;
           local_98 = local_68;
           local_84 = local_5c;
           do {
             if (!(bool)(bVar35 >> 5 & 1)) {
-              iVar24 = iVar10 + iVar9;
-              iVar16 = iVar23 + iVar9;
-              (*pcVar19)(iVar10,iVar23,iVar7,iVar9,iVar21,iVar27);
-              if (0 < iVar20) {
+              iVar24 = iVar10 + bytesPerPixel;
+              iVar16 = iVar23 + bytesPerPixel;
+              (*filter3D)(iVar10,iVar23,levelRecordThenComponentCount,bytesPerPixel,rowBytes,iVar27);
+              if (0 < srcThenDestInteriorWidth) {
                 iVar23 = iVar16;
-                iVar10 = iVar20;
+                iVar10 = srcThenDestInteriorWidth;
                 iVar29 = iVar24;
                 do {
-                  iVar24 = iVar29 + iVar9;
-                  iVar16 = iVar23 + iVar9 + iVar22;
-                  (*pcVar19)(iVar29,iVar23,iVar7,iVar22,iVar21,iVar27);
+                  iVar24 = iVar29 + bytesPerPixel;
+                  iVar16 = iVar23 + bytesPerPixel + pixelStep;
+                  (*filter3D)(iVar29,iVar23,levelRecordThenComponentCount,pixelStep,rowBytes,iVar27);
                   iVar10 = iVar10 + -1;
                   iVar23 = iVar16;
                   iVar29 = iVar24;
                 } while (iVar10 != 0);
               }
-              iVar10 = iVar24 + iVar9;
-              iVar23 = (iVar16 - iVar9) + local_98 + local_a8;
-              (*pcVar19)(iVar24,iVar16 - iVar9,iVar7,iVar9,iVar21,iVar27);
+              iVar10 = iVar24 + bytesPerPixel;
+              iVar23 = (iVar16 - bytesPerPixel) + local_98 + rowPadBytes;
+              (*filter3D)(iVar24,iVar16 - bytesPerPixel,levelRecordThenComponentCount,bytesPerPixel,rowBytes,iVar27);
             }
             iVar24 = local_60;
             iVar16 = local_88;
-            if (0 < (int)local_c8) {
+            if (0 < (int)srcThenDestInteriorHeight) {
               local_94 = local_84;
-              uVar28 = local_c8;
+              uVar28 = srcThenDestInteriorHeight;
               do {
                 iVar29 = iVar23;
                 iVar31 = iVar10;
                 if (!(bool)(bVar35 >> 5 & 1)) {
-                  iVar31 = iVar10 + iVar9;
-                  iVar29 = iVar23 + iVar9;
-                  (*pcVar19)(iVar10,iVar23,iVar7,iVar9,iVar26,iVar27);
+                  iVar31 = iVar10 + bytesPerPixel;
+                  iVar29 = iVar23 + bytesPerPixel;
+                  (*filter3D)(iVar10,iVar23,levelRecordThenComponentCount,bytesPerPixel,iVar26,iVar27);
                 }
                 iVar23 = iVar29;
-                iVar10 = iVar20;
+                iVar10 = srcThenDestInteriorWidth;
                 iVar25 = iVar31;
-                if (0 < iVar20) {
+                if (0 < srcThenDestInteriorWidth) {
                   do {
-                    iVar31 = iVar25 + iVar9;
+                    iVar31 = iVar25 + bytesPerPixel;
                     iVar29 = iVar23 + iVar24;
-                    (*pcVar19)(iVar25,iVar23,iVar7,iVar22,iVar26,iVar27);
+                    (*filter3D)(iVar25,iVar23,levelRecordThenComponentCount,pixelStep,iVar26,iVar27);
                     iVar10 = iVar10 + -1;
                     iVar23 = iVar29;
                     iVar25 = iVar31;
@@ -1957,155 +1971,155 @@ LAB_000fb8dc:
                 }
                 iVar10 = iVar31;
                 if (!(bool)(bVar35 >> 5 & 1)) {
-                  iVar23 = iVar29 - iVar9;
-                  iVar10 = iVar31 + iVar9;
+                  iVar23 = iVar29 - bytesPerPixel;
+                  iVar10 = iVar31 + bytesPerPixel;
                   iVar29 = iVar23 + local_94;
-                  (*pcVar19)(iVar31,iVar23,iVar7,iVar9,iVar26,iVar27);
+                  (*filter3D)(iVar31,iVar23,levelRecordThenComponentCount,bytesPerPixel,iVar26,iVar27);
                 }
                 uVar28 = uVar28 - 1;
                 iVar23 = iVar29 + iVar16;
               } while (uVar28 != 0);
             }
             if (!(bool)(bVar35 >> 5 & 1)) {
-              iVar24 = iVar10 + iVar9;
-              iVar16 = (iVar23 - iVar21) + iVar9;
-              (*pcVar19)(iVar10,iVar23 - iVar21,iVar7,iVar9,iVar21,iVar27);
-              if (0 < iVar20) {
+              iVar24 = iVar10 + bytesPerPixel;
+              iVar16 = (iVar23 - rowBytes) + bytesPerPixel;
+              (*filter3D)(iVar10,iVar23 - rowBytes,levelRecordThenComponentCount,bytesPerPixel,rowBytes,iVar27);
+              if (0 < srcThenDestInteriorWidth) {
                 iVar23 = iVar16;
-                iVar10 = iVar20;
+                iVar10 = srcThenDestInteriorWidth;
                 iVar29 = iVar24;
                 do {
-                  iVar24 = iVar29 + iVar9;
-                  iVar16 = iVar23 + iVar9 + iVar22;
-                  (*pcVar19)(iVar29,iVar23,iVar7,iVar22,iVar21,iVar27);
+                  iVar24 = iVar29 + bytesPerPixel;
+                  iVar16 = iVar23 + bytesPerPixel + pixelStep;
+                  (*filter3D)(iVar29,iVar23,levelRecordThenComponentCount,pixelStep,rowBytes,iVar27);
                   iVar10 = iVar10 + -1;
                   iVar23 = iVar16;
                   iVar29 = iVar24;
                 } while (iVar10 != 0);
               }
-              iVar10 = iVar24 + iVar9;
-              iVar23 = (iVar16 - iVar9) + local_98;
-              (*pcVar19)(iVar24,iVar16 - iVar9,iVar7,iVar9,iVar21,iVar27);
-              iVar23 = iVar23 + local_a8 + iVar21;
+              iVar10 = iVar24 + bytesPerPixel;
+              iVar23 = (iVar16 - bytesPerPixel) + local_98;
+              (*filter3D)(iVar24,iVar16 - bytesPerPixel,levelRecordThenComponentCount,bytesPerPixel,rowBytes,iVar27);
+              iVar23 = iVar23 + rowPadBytes + rowBytes;
             }
-            local_a4 = local_a4 - 1;
+            slicesRemaining = slicesRemaining - 1;
             iVar23 = iVar23 + local_90;
-          } while (local_a4 != 0);
+          } while (slicesRemaining != 0);
         }
         if (!(bool)(bVar35 >> 5 & 1)) {
-          iVar16 = iVar10 + iVar9;
-          iVar27 = (iVar23 - iVar17) + iVar9;
-          (*pcVar19)(iVar10,iVar23 - iVar17,iVar7,iVar9,iVar21,iVar17);
-          if (0 < iVar20) {
+          iVar16 = iVar10 + bytesPerPixel;
+          iVar27 = (iVar23 - sliceBytes) + bytesPerPixel;
+          (*filter3D)(iVar10,iVar23 - sliceBytes,levelRecordThenComponentCount,bytesPerPixel,rowBytes,sliceBytes);
+          if (0 < srcThenDestInteriorWidth) {
             iVar23 = iVar27;
-            iVar10 = iVar20;
+            iVar10 = srcThenDestInteriorWidth;
             iVar24 = iVar16;
             do {
-              iVar16 = iVar24 + iVar9;
-              iVar27 = iVar23 + iVar9 + iVar22;
-              (*pcVar19)(iVar24,iVar23,iVar7,iVar22,iVar21,iVar17);
+              iVar16 = iVar24 + bytesPerPixel;
+              iVar27 = iVar23 + bytesPerPixel + pixelStep;
+              (*filter3D)(iVar24,iVar23,levelRecordThenComponentCount,pixelStep,rowBytes,sliceBytes);
               iVar10 = iVar10 + -1;
               iVar23 = iVar27;
               iVar24 = iVar16;
             } while (iVar10 != 0);
           }
           iVar23 = local_64;
-          iVar24 = iVar16 + iVar9;
-          iVar10 = (iVar27 - iVar9) + local_64;
-          (*pcVar19)(iVar16,iVar27 - iVar9,iVar7,iVar9,iVar21,iVar17);
-          iVar10 = iVar10 + local_a8;
-          if (0 < (int)local_c8) {
-            iVar27 = local_a8 + iVar26;
-            uVar28 = local_c8;
+          iVar24 = iVar16 + bytesPerPixel;
+          iVar10 = (iVar27 - bytesPerPixel) + local_64;
+          (*filter3D)(iVar16,iVar27 - bytesPerPixel,levelRecordThenComponentCount,bytesPerPixel,rowBytes,sliceBytes);
+          iVar10 = iVar10 + rowPadBytes;
+          if (0 < (int)srcThenDestInteriorHeight) {
+            iVar27 = rowPadBytes + iVar26;
+            uVar28 = srcThenDestInteriorHeight;
             do {
-              iVar31 = iVar24 + iVar9;
-              iVar29 = iVar10 + iVar9;
-              (*pcVar19)(iVar24,iVar10,iVar7,iVar9,iVar26,iVar17);
+              iVar31 = iVar24 + bytesPerPixel;
+              iVar29 = iVar10 + bytesPerPixel;
+              (*filter3D)(iVar24,iVar10,levelRecordThenComponentCount,bytesPerPixel,iVar26,sliceBytes);
               iVar16 = iVar29;
-              iVar10 = iVar20;
+              iVar10 = srcThenDestInteriorWidth;
               iVar24 = iVar31;
-              if (0 < iVar20) {
+              if (0 < srcThenDestInteriorWidth) {
                 do {
-                  iVar31 = iVar24 + iVar9;
-                  iVar29 = iVar16 + iVar9 + iVar22;
-                  (*pcVar19)(iVar24,iVar16,iVar7,iVar22,iVar26,iVar17);
+                  iVar31 = iVar24 + bytesPerPixel;
+                  iVar29 = iVar16 + bytesPerPixel + pixelStep;
+                  (*filter3D)(iVar24,iVar16,levelRecordThenComponentCount,pixelStep,iVar26,sliceBytes);
                   iVar10 = iVar10 + -1;
                   iVar16 = iVar29;
                   iVar24 = iVar31;
                 } while (iVar10 != 0);
               }
-              iVar24 = iVar31 + iVar9;
-              iVar10 = (iVar29 - iVar9) + iVar23 + iVar27;
-              (*pcVar19)(iVar31,iVar29 - iVar9,iVar7,iVar9,iVar26,iVar17);
+              iVar24 = iVar31 + bytesPerPixel;
+              iVar10 = (iVar29 - bytesPerPixel) + iVar23 + iVar27;
+              (*filter3D)(iVar31,iVar29 - bytesPerPixel,levelRecordThenComponentCount,bytesPerPixel,iVar26,sliceBytes);
               uVar28 = uVar28 - 1;
             } while (uVar28 != 0);
           }
-          iVar26 = iVar24 + iVar9;
-          iVar23 = (iVar10 - iVar21) + iVar9;
-          (*pcVar19)(iVar24,iVar10 - iVar21,iVar7,iVar9,iVar21,iVar17);
-          if (0 < iVar20) {
+          iVar26 = iVar24 + bytesPerPixel;
+          iVar23 = (iVar10 - rowBytes) + bytesPerPixel;
+          (*filter3D)(iVar24,iVar10 - rowBytes,levelRecordThenComponentCount,bytesPerPixel,rowBytes,sliceBytes);
+          if (0 < srcThenDestInteriorWidth) {
             iVar27 = iVar23;
-            iVar16 = iVar20;
+            iVar16 = srcThenDestInteriorWidth;
             iVar10 = iVar26;
             do {
-              iVar26 = iVar10 + iVar9;
-              iVar23 = iVar27 + iVar9 + iVar22;
-              (*pcVar19)(iVar10,iVar27,iVar7,iVar22,iVar21,iVar17);
+              iVar26 = iVar10 + bytesPerPixel;
+              iVar23 = iVar27 + bytesPerPixel + pixelStep;
+              (*filter3D)(iVar10,iVar27,levelRecordThenComponentCount,pixelStep,rowBytes,sliceBytes);
               iVar16 = iVar16 + -1;
               iVar27 = iVar23;
               iVar10 = iVar26;
             } while (iVar16 != 0);
           }
-          (*pcVar19)(iVar26,iVar23 - iVar9,iVar7,iVar9,iVar21,iVar17);
+          (*filter3D)(iVar26,iVar23 - bytesPerPixel,levelRecordThenComponentCount,bytesPerPixel,rowBytes,sliceBytes);
         }
-        uVar5 = *(ushort *)(iVar8 + 200);
-        uVar6 = *(ushort *)(iVar8 + 0xca);
-        uVar28 = (uint)*(ushort *)(iVar8 + 0xcc);
-        incomingR10 = local_a0;
+        destWidth = *(ushort *)(destLevelRecord + 200);
+        uVar6 = *(ushort *)(destLevelRecord + 0xca);
+        uVar28 = (uint)*(ushort *)(destLevelRecord + 0xcc);
+        incomingR10 = borderCopy;
         goto LAB_000fb8d8;
       }
     }
-    else if (bVar3) {
+    else if (isOneDimensional) {
       bVar35 = (byte)(local_7c >> 0x18);
       iVar26 = iVar23;
-      iVar21 = iVar10;
+      dstCursor4 = iVar10;
       if (!(bool)(bVar35 >> 5 & 1)) {
-        iVar21 = iVar10 + iVar9;
-        iVar26 = iVar23 + iVar9;
-        (*local_b0)(iVar10,iVar23,iVar7,iVar9);
+        dstCursor4 = iVar10 + bytesPerPixel;
+        iVar26 = iVar23 + bytesPerPixel;
+        (*filter1D)(iVar10,iVar23,levelRecordThenComponentCount,bytesPerPixel);
       }
-      if (0 < iVar20) {
+      if (0 < srcThenDestInteriorWidth) {
         iVar23 = iVar26;
-        iVar27 = iVar20;
-        iVar16 = iVar21;
+        iVar27 = srcThenDestInteriorWidth;
+        iVar16 = dstCursor4;
         do {
-          iVar21 = iVar16 + iVar9;
-          iVar26 = iVar23 + iVar9 + iVar22;
-          (*local_b0)(iVar16,iVar23,iVar7,iVar22);
+          dstCursor4 = iVar16 + bytesPerPixel;
+          iVar26 = iVar23 + bytesPerPixel + pixelStep;
+          (*filter1D)(iVar16,iVar23,levelRecordThenComponentCount,pixelStep);
           iVar27 = iVar27 + -1;
           iVar23 = iVar26;
-          iVar16 = iVar21;
+          iVar16 = dstCursor4;
         } while (iVar27 != 0);
       }
       if (!(bool)(bVar35 >> 5 & 1)) {
-        (*local_b0)(iVar21,iVar26 - iVar9,iVar7,iVar9);
+        (*filter1D)(dstCursor4,iVar26 - bytesPerPixel,levelRecordThenComponentCount,bytesPerPixel);
       }
-      uVar5 = *(ushort *)(iVar8 + 200);
+      destWidth = *(ushort *)(destLevelRecord + 200);
       incomingR10 = 0;
       uVar28 = 1;
-      uVar36 = 1;
-      incomingR8 = local_c0 >> 1;
+      destHeight = 1;
+      incomingR8 = twiceBorder >> 1;
       iVar23 = 0;
       goto LAB_000fb8dc;
     }
-    local_cc = local_cc + 1;
-    iVar23 = iVar8 + 0xc4;
+    nextLevel = nextLevel + 1;
+    iVar23 = destLevelRecord + 0xc4;
   } while( true );
 }
 
 /* _gleGenerateEmptyMipmaps @ 0xfbb00 (868 bytes) */
-int _gleGenerateEmptyMipmaps(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  undefined4 param_1;
+int _gleGenerateEmptyMipmaps(glContext, param_2, param_3, param_4, param_5, param_6, param_7)
+  undefined4 glContext;
   int param_2;
   int param_3;
   int param_4;
@@ -2137,12 +2151,12 @@ int _gleGenerateEmptyMipmaps(param_1, param_2, param_3, param_4, param_5, param_
   else {
     if (uVar4 < 2) {
       if ((*(ushort *)(param_2 + 0x24) & 0xf) != 0) {
-        return param_1;
+        return glContext;
       }
     }
     else if (uVar4 != 3) {
       if (uVar4 != 4) {
-        return param_1;
+        return glContext;
       }
       uVar13 = 1;
       goto LAB_000fbb7c;
@@ -2171,11 +2185,11 @@ LAB_000fbb7c:
   for (; (((iVar10 = iVar9, 1 < (int)uVar15 || (1 < (int)uVar12)) || (1 < (int)uVar14)) &&
          (iVar11 <= param_5)); iVar11 = iVar11 + 1) {
     if ((*(byte *)(iVar10 + 0xb) & 0x20) != 0) {
-      _gleDeletePluginTextureLevel(param_1,param_2,iVar10,param_3,iVar11);
+      _gleDeletePluginTextureLevel(glContext,param_2,iVar10,param_3,iVar11);
       if (*(int *)(iVar10 + 0x14) != 0) {
         bVar1 = *(byte *)(iVar10 + 0xb);
         if ((bVar1 & 1) == 0) {
-          _gleFreeTextureLevel(param_1,param_2,iVar10);
+          _gleFreeTextureLevel(glContext,param_2,iVar10);
           bVar1 = *(byte *)(iVar10 + 0xb);
         }
         else {
@@ -2222,7 +2236,7 @@ LAB_000fbb7c:
       *(undefined2 *)(iVar10 + 0xc) = 0;
       *(undefined2 *)(iVar10 + 0xe) = 0;
     }
-    uVar8 = _gleCreatePluginTextureLevel(param_1,param_2,iVar10,param_3,iVar11,uVar7);
+    uVar8 = _gleCreatePluginTextureLevel(glContext,param_2,iVar10,param_3,iVar11,uVar7);
     iVar9 = iVar10 + 0x18;
     iVar6 = iVar10;
   }
@@ -2234,11 +2248,11 @@ LAB_000fbb7c:
     do {
       bVar1 = *(byte *)(iVar16 + 0xb);
       if ((bVar1 & 0x20) != 0) {
-        uVar8 = _gleDeletePluginTextureLevel(param_1,param_2,iVar16,param_3,iVar11);
+        uVar8 = _gleDeletePluginTextureLevel(glContext,param_2,iVar16,param_3,iVar11);
         if (*(int *)(iVar16 + 0x14) != 0) {
           bVar1 = *(byte *)(iVar16 + 0xb);
           if ((bVar1 & 1) == 0) {
-            uVar8 = _gleFreeTextureLevel(param_1,param_2,iVar16);
+            uVar8 = _gleFreeTextureLevel(glContext,param_2,iVar16);
             bVar1 = *(byte *)(iVar16 + 0xb);
           }
           else {
@@ -2266,11 +2280,11 @@ LAB_000fbb7c:
 }
 
 /* _gleGenMipmapsToLevel @ 0xfbe64 (384 bytes) */
-int _gleGenMipmapsToLevel(glContext, param_2, param_3, param_4, param_5, param_6)
+int _gleGenMipmapsToLevel(glContext, param_2, param_3, level, param_5, param_6)
   int glContext;
   int param_2;
   int param_3;
-  int param_4;
+  int level;
   undefined4 param_5;
   int param_6;
 {
@@ -2282,9 +2296,9 @@ int _gleGenMipmapsToLevel(glContext, param_2, param_3, param_4, param_5, param_6
   
   if ((*(ushort *)(param_2 + 0x24) & 0xf) != 2) {
     iVar5 = param_3 * 0x168;
-    iVar1 = param_2 + iVar5 + param_4 * 0x18;
-    ((int (*)())_gleGenerateEmptyMipmaps)(glContext,param_2,param_3,param_4,param_5,0,0);
-    if ((*(byte *)(iVar5 + param_4 * 0x18 + param_2 + 0xcf) & 0x20) == 0) {
+    iVar1 = param_2 + iVar5 + level * 0x18;
+    ((int (*)())_gleGenerateEmptyMipmaps)(glContext,param_2,param_3,level,param_5,0,0);
+    if ((*(byte *)(iVar5 + level * 0x18 + param_2 + 0xcf) & 0x20) == 0) {
       return 0;
     }
     iVar3 = (**(code **)(glContext + 0x4714))
@@ -2303,7 +2317,7 @@ int _gleGenMipmapsToLevel(glContext, param_2, param_3, param_4, param_5, param_6
       if (0xf < (int)uVar4) {
         uVar4 = 0xf;
       }
-      iVar1 = param_4 + 1;
+      iVar1 = level + 1;
       if (iVar1 <= (int)uVar4) {
         iVar3 = (uVar4 + 1) - iVar1;
         pbVar2 = (byte *)(iVar1 * 0x18 + iVar5 + param_2 + 0xcf);
@@ -2320,7 +2334,7 @@ int _gleGenMipmapsToLevel(glContext, param_2, param_3, param_4, param_5, param_6
         _gleAllocateTextureLevel(glContext,param_2,iVar1 + 0xc4);
       }
       _gleSynchronizePluginTextureLevels(glContext,param_2);
-      ((void (*)())_gleGenerateMipmapData)(glContext,param_2,param_3,param_4,param_5);
+      ((void (*)())_gleGenerateMipmapData)(glContext,param_2,param_3,level,param_5);
     }
   }
   return 0;
@@ -2389,67 +2403,67 @@ double _gleHalfFloatToFloat(uint param_1)
 }
 
 /* _gleLookUpTexture1D @ 0xfc10c (72 bytes) */
-int _gleLookUpTexture1D(glContext, param_2)
+int _gleLookUpTexture1D(glContext, target)
   int glContext;
-  int param_2;
+  int target;
 {
-  if (param_2 == 0xde0) {
+  if (target == 0xde0) {
     return *(int *)(*(int *)(glContext + 0x53d4) * 0x14 + glContext + 0x5164) + 0x10;
   }
-  if (param_2 != 0x8063) {
+  if (target != 0x8063) {
     return 0;
   }
   return *(int *)(glContext + 0x52b8) + 0x10;
 }
 
 /* _gleLookUpNonProxyTexture1D @ 0xfc154 (40 bytes) */
-int _gleLookUpNonProxyTexture1D(glContext, param_2)
+int _gleLookUpNonProxyTexture1D(glContext, target)
   int glContext;
-  int param_2;
+  int target;
 {
-  if (param_2 != 0xde0) {
+  if (target != 0xde0) {
     return 0;
   }
   return *(int *)(*(int *)(glContext + 0x53d4) * 0x14 + glContext + 0x5164) + 0x10;
 }
 
 /* _gleLookUpNonProxyTexture3D @ 0xfc17c (48 bytes) */
-int _gleLookUpNonProxyTexture3D(glContext, param_2)
+int _gleLookUpNonProxyTexture3D(glContext, target)
   int glContext;
-  int param_2;
+  int target;
 {
-  if (param_2 != 0x806f) {
+  if (target != 0x806f) {
     return 0;
   }
   return *(int *)(*(int *)(glContext + 0x53d4) * 0x14 + glContext + 0x5158) + 0x10;
 }
 
 /* _gleLookUpColorTable @ 0xfc1ac (544 bytes) */
-int _gleLookUpColorTable(glContext, param_2)
+int _gleLookUpColorTable(glContext, target)
   int glContext;
-  uint param_2;
+  uint target;
 {
   int iVar1;
   
   iVar1 = *(int *)(glContext + 0x53d4);
-  if (param_2 == 0x80d2) {
+  if (target == 0x80d2) {
     iVar1 = *(int *)(glContext + 0x52c4);
     goto LAB_000fc364;
   }
-  if (param_2 < 0x80d3) {
-    if (param_2 == 0x8064) {
+  if (target < 0x80d3) {
+    if (target == 0x8064) {
       iVar1 = *(int *)(glContext + 0x52b4);
     }
     else {
-      if (param_2 < 0x8065) {
-        if (param_2 != 0xde1) {
-          if (param_2 < 0xde2) {
-            if (param_2 == 0xde0) {
+      if (target < 0x8065) {
+        if (target != 0xde1) {
+          if (target < 0xde2) {
+            if (target == 0xde0) {
               iVar1 = *(int *)(iVar1 * 0x14 + glContext + 0x5164);
               goto LAB_000fc320;
             }
           }
-          else if (param_2 == 0x8063) {
+          else if (target == 0x8063) {
             iVar1 = *(int *)(glContext + 0x52b8);
             goto LAB_000fc364;
           }
@@ -2458,22 +2472,22 @@ int _gleLookUpColorTable(glContext, param_2)
         iVar1 = *(int *)(iVar1 * 0x14 + glContext + 0x5160);
         goto LAB_000fc320;
       }
-      if (param_2 == 0x8070) {
+      if (target == 0x8070) {
         iVar1 = *(int *)(glContext + 0x52ac);
       }
       else {
-        if (param_2 < 0x8071) {
-          if (param_2 != 0x806f) {
+        if (target < 0x8071) {
+          if (target != 0x806f) {
             return 0;
           }
           iVar1 = *(int *)(iVar1 * 0x14 + glContext + 0x5158);
           goto LAB_000fc320;
         }
-        if (param_2 == 0x80d0) {
+        if (target == 0x80d0) {
           iVar1 = *(int *)(glContext + 0x52bc);
         }
         else {
-          if (param_2 != 0x80d1) {
+          if (target != 0x80d1) {
             return 0;
           }
           iVar1 = *(int *)(glContext + 0x52c0);
@@ -2483,17 +2497,17 @@ int _gleLookUpColorTable(glContext, param_2)
 LAB_000fc364:
     return iVar1 + 0x10;
   }
-  if (param_2 != 0x84f5) {
-    if (param_2 < 0x84f6) {
-      if (param_2 == 0x80d4) {
+  if (target != 0x84f5) {
+    if (target < 0x84f6) {
+      if (target == 0x80d4) {
         iVar1 = *(int *)(glContext + 0x52cc);
       }
-      else if (param_2 < 0x80d4) {
+      else if (target < 0x80d4) {
         iVar1 = *(int *)(glContext + 0x52c8);
       }
       else {
-        if (param_2 != 0x80d5) {
-          if (param_2 != 0x81fb) {
+        if (target != 0x80d5) {
+          if (target != 0x81fb) {
             return 0;
           }
           iVar1 = *(int *)(iVar1 * 4 + glContext + 0x52d4);
@@ -2503,22 +2517,22 @@ LAB_000fc364:
       }
       goto LAB_000fc364;
     }
-    if (param_2 == 0x8513) {
+    if (target == 0x8513) {
       iVar1 = *(int *)(iVar1 * 0x14 + glContext + 0x5154);
       goto LAB_000fc320;
     }
-    if (param_2 < 0x8514) {
-      if (param_2 != 0x84f7) {
+    if (target < 0x8514) {
+      if (target != 0x84f7) {
         return 0;
       }
       iVar1 = *(int *)(glContext + 0x52b0);
       goto LAB_000fc364;
     }
-    if (param_2 == 0x851b) {
+    if (target == 0x851b) {
       iVar1 = *(int *)(glContext + 0x52a8);
       goto LAB_000fc364;
     }
-    if (param_2 != 0x85b3) {
+    if (target != 0x85b3) {
       return 0;
     }
   }
@@ -2528,31 +2542,31 @@ LAB_000fc320:
 }
 
 /* _gleLookUpNonProxyColorTable @ 0xfc3cc (324 bytes) */
-int _gleLookUpNonProxyColorTable(glContext, param_2)
+int _gleLookUpNonProxyColorTable(glContext, target)
   int glContext;
-  uint param_2;
+  uint target;
 {
   int iVar1;
   
   iVar1 = *(int *)(glContext + 0x53d4);
-  if (param_2 == 0x80d1) {
+  if (target == 0x80d1) {
     iVar1 = *(int *)(glContext + 0x52c0);
 LAB_000fc4f8:
     return iVar1 + 0x10;
   }
-  if (param_2 < 0x80d2) {
-    if (param_2 == 0xde1) {
+  if (target < 0x80d2) {
+    if (target == 0xde1) {
       iVar1 = *(int *)(iVar1 * 0x14 + glContext + 0x5160);
     }
-    else if (param_2 < 0xde2) {
-      if (param_2 != 0xde0) {
+    else if (target < 0xde2) {
+      if (target != 0xde0) {
         return 0;
       }
       iVar1 = *(int *)(iVar1 * 0x14 + glContext + 0x5164);
     }
     else {
-      if (param_2 != 0x806f) {
-        if (param_2 != 0x80d0) {
+      if (target != 0x806f) {
+        if (target != 0x80d0) {
           return 0;
         }
         iVar1 = *(int *)(glContext + 0x52bc);
@@ -2562,23 +2576,23 @@ LAB_000fc4f8:
     }
     goto LAB_000fc4a4;
   }
-  if (param_2 != 0x84f5) {
-    if (param_2 < 0x84f6) {
-      if (param_2 == 0x80d2) {
+  if (target != 0x84f5) {
+    if (target < 0x84f6) {
+      if (target == 0x80d2) {
         iVar1 = *(int *)(glContext + 0x52c4);
         goto LAB_000fc4f8;
       }
-      if (param_2 != 0x81fb) {
+      if (target != 0x81fb) {
         return 0;
       }
       iVar1 = *(int *)(iVar1 * 4 + glContext + 0x52d4);
       goto LAB_000fc4a4;
     }
-    if (param_2 == 0x8513) {
+    if (target == 0x8513) {
       iVar1 = *(int *)(iVar1 * 0x14 + glContext + 0x5154);
       goto LAB_000fc4a4;
     }
-    if (param_2 != 0x85b3) {
+    if (target != 0x85b3) {
       return 0;
     }
   }
@@ -2650,18 +2664,18 @@ void _gleReclaimTextureObjectResources(glContext)
 }
 
 /* _gleCompressedTextureImagePut @ 0xfc668 (252 bytes) */
-int _gleCompressedTextureImagePut(unusedArg1, param_2, param_3, param_4, unusedArg5, param_6, param_7, param_8, param_9, unusedArg10, param_11)
+int _gleCompressedTextureImagePut(unusedArg1, param_2, param_3, param_4, unusedArg5, width, height, param_8, internalformat, unusedArg10, data)
   undefined4 unusedArg1;
   int param_2;
   int param_3;
   int param_4;
   undefined4 unusedArg5;
-  int param_6;
-  int param_7;
+  int width;
+  int height;
   int param_8;
-  uint param_9;
+  uint internalformat;
   undefined4 unusedArg10;
-  int param_11;
+  int data;
 {
   ushort uVar1;
   ushort uVar2;
@@ -2674,7 +2688,7 @@ int _gleCompressedTextureImagePut(unusedArg1, param_2, param_3, param_4, unusedA
   int iVar9;
   int iVar10;
   
-  if (((0x83f3 < param_9) || (0x83f1 < param_9)) || (iVar8 = 3, param_9 < 0x83f0)) {
+  if (((0x83f3 < internalformat) || (0x83f1 < internalformat)) || (iVar8 = 3, internalformat < 0x83f0)) {
     iVar8 = 4;
   }
   iVar7 = 0;
@@ -2682,19 +2696,19 @@ int _gleCompressedTextureImagePut(unusedArg1, param_2, param_3, param_4, unusedA
   uVar2 = *(ushort *)(param_2 + 6);
   iVar4 = param_4 >> 2;
   if (0 < param_8) {
-    iVar6 = param_7 + 3 >> 2;
-    iVar5 = (param_6 + 3 >> 2) << iVar8;
+    iVar6 = height + 3 >> 2;
+    iVar5 = (width + 3 >> 2) << iVar8;
     do {
       iVar10 = 0;
-      iVar9 = param_11;
+      iVar9 = data;
       if (0 < iVar6) {
         do {
           iVar3 = iVar4 + iVar10;
           iVar10 = iVar10 + 1;
-          param_11 = iVar9 + iVar5;
+          data = iVar9 + iVar5;
           _memcpy(*(int *)(param_2 + 0x14) +
                   (iVar3 * ((int)(uVar1 + 3) >> 2) + (param_3 >> 2) << iVar8),iVar9,iVar5);
-          iVar9 = param_11;
+          iVar9 = data;
         } while (iVar10 < iVar6);
       }
       iVar7 = iVar7 + 1;
@@ -2720,13 +2734,14 @@ int _gleTextureImagePut_FastByte(unusedArg1, width, height, src, dst, srcRowStri
 {
   byte *srcComponent;
   byte srcValue;
-  int iVar3;
-  byte *pbVar4;
+  int dstComponentCount;
+  int remaining;
+  byte *srcCursor;
   byte *dstRowEnd;
   uint pixelsLeft;
   
-  iVar3 = _gleComponents(dstFormat);
-  dstRowEnd = dst + width * iVar3;
+  dstComponentCount = _gleComponents(dstFormat);
+  dstRowEnd = dst + width * dstComponentCount;
   switch(dstFormat) {
   case 0x1900:
     if (srcFormat != 0x1900) {
@@ -2735,15 +2750,15 @@ int _gleTextureImagePut_FastByte(unusedArg1, width, height, src, dst, srcRowStri
     if (0 < height) {
       do {
         if (dst < dstRowEnd) {
-          iVar3 = (int)dstRowEnd - (int)dst;
-          pbVar4 = src;
+          remaining = (int)dstRowEnd - (int)dst;
+          srcCursor = src;
           do {
-            srcValue = *pbVar4;
-            pbVar4 = pbVar4 + 1;
+            srcValue = *srcCursor;
+            srcCursor = srcCursor + 1;
             *dst = srcValue << 1 | srcValue >> 6 & 1;
             dst = dst + 1;
-            iVar3 = iVar3 + -1;
-          } while (iVar3 != 0);
+            remaining = remaining + -1;
+          } while (remaining != 0);
         }
         height = height + -1;
         src = src + srcRowStride;
@@ -2759,15 +2774,15 @@ int _gleTextureImagePut_FastByte(unusedArg1, width, height, src, dst, srcRowStri
       if (0 < height) {
         do {
           if (dst < dstRowEnd) {
-            iVar3 = (int)dstRowEnd - (int)dst;
-            pbVar4 = src + 3;
+            remaining = (int)dstRowEnd - (int)dst;
+            srcCursor = src + 3;
             do {
-              srcValue = *pbVar4;
-              pbVar4 = pbVar4 + 4;
+              srcValue = *srcCursor;
+              srcCursor = srcCursor + 4;
               *dst = srcValue << 1 | srcValue >> 6 & 1;
               dst = dst + 1;
-              iVar3 = iVar3 + -1;
-            } while (iVar3 != 0);
+              remaining = remaining + -1;
+            } while (remaining != 0);
           }
           height = height + -1;
           src = src + srcRowStride;
@@ -2781,15 +2796,15 @@ int _gleTextureImagePut_FastByte(unusedArg1, width, height, src, dst, srcRowStri
         if (0 < height) {
           do {
             if (dst < dstRowEnd) {
-              iVar3 = (int)dstRowEnd - (int)dst;
-              pbVar4 = src;
+              remaining = (int)dstRowEnd - (int)dst;
+              srcCursor = src;
               do {
-                srcValue = *pbVar4;
-                pbVar4 = pbVar4 + 1;
+                srcValue = *srcCursor;
+                srcCursor = srcCursor + 1;
                 *dst = srcValue << 1 | srcValue >> 6 & 1;
                 dst = dst + 1;
-                iVar3 = iVar3 + -1;
-              } while (iVar3 != 0);
+                remaining = remaining + -1;
+              } while (remaining != 0);
             }
             height = height + -1;
             src = src + srcRowStride;
@@ -2805,12 +2820,12 @@ int _gleTextureImagePut_FastByte(unusedArg1, width, height, src, dst, srcRowStri
         if (0 < height) {
           do {
             if (dst < dstRowEnd) {
-              iVar3 = (int)dstRowEnd - (int)dst;
+              remaining = (int)dstRowEnd - (int)dst;
               do {
                 *dst = 0xff;
                 dst = dst + 1;
-                iVar3 = iVar3 + -1;
-              } while (iVar3 != 0);
+                remaining = remaining + -1;
+              } while (remaining != 0);
             }
             height = height + -1;
             dst = dst + dstRowSkip;
@@ -2821,12 +2836,12 @@ int _gleTextureImagePut_FastByte(unusedArg1, width, height, src, dst, srcRowStri
       else if (0 < height) {
         do {
           if (dst < dstRowEnd) {
-            iVar3 = (int)dstRowEnd - (int)dst;
+            remaining = (int)dstRowEnd - (int)dst;
             do {
               *dst = 0xff;
               dst = dst + 1;
-              iVar3 = iVar3 + -1;
-            } while (iVar3 != 0);
+              remaining = remaining + -1;
+            } while (remaining != 0);
           }
           height = height + -1;
           dst = dst + dstRowSkip;
@@ -2838,15 +2853,15 @@ int _gleTextureImagePut_FastByte(unusedArg1, width, height, src, dst, srcRowStri
       if (0 < height) {
         do {
           if (dst < dstRowEnd) {
-            iVar3 = (int)dstRowEnd - (int)dst;
-            pbVar4 = src;
+            remaining = (int)dstRowEnd - (int)dst;
+            srcCursor = src;
             do {
-              srcValue = *pbVar4;
-              pbVar4 = pbVar4 + 4;
+              srcValue = *srcCursor;
+              srcCursor = srcCursor + 4;
               *dst = srcValue << 1 | srcValue >> 6 & 1;
               dst = dst + 1;
-              iVar3 = iVar3 + -1;
-            } while (iVar3 != 0);
+              remaining = remaining + -1;
+            } while (remaining != 0);
           }
           height = height + -1;
           src = src + srcRowStride;
@@ -2860,12 +2875,12 @@ int _gleTextureImagePut_FastByte(unusedArg1, width, height, src, dst, srcRowStri
         if (0 < height) {
           do {
             if (dst < dstRowEnd) {
-              iVar3 = (int)dstRowEnd - (int)dst;
+              remaining = (int)dstRowEnd - (int)dst;
               do {
                 *dst = 0xff;
                 dst = dst + 1;
-                iVar3 = iVar3 + -1;
-              } while (iVar3 != 0);
+                remaining = remaining + -1;
+              } while (remaining != 0);
             }
             height = height + -1;
             dst = dst + dstRowSkip;
@@ -2880,15 +2895,15 @@ int _gleTextureImagePut_FastByte(unusedArg1, width, height, src, dst, srcRowStri
         if (0 < height) {
           do {
             if (dst < dstRowEnd) {
-              iVar3 = (int)dstRowEnd - (int)dst;
-              pbVar4 = src + 1;
+              remaining = (int)dstRowEnd - (int)dst;
+              srcCursor = src + 1;
               do {
-                srcValue = *pbVar4;
-                pbVar4 = pbVar4 + 2;
+                srcValue = *srcCursor;
+                srcCursor = srcCursor + 2;
                 *dst = srcValue << 1 | srcValue >> 6 & 1;
                 dst = dst + 1;
-                iVar3 = iVar3 + -1;
-              } while (iVar3 != 0);
+                remaining = remaining + -1;
+              } while (remaining != 0);
             }
             height = height + -1;
             src = src + srcRowStride;
@@ -2902,12 +2917,12 @@ int _gleTextureImagePut_FastByte(unusedArg1, width, height, src, dst, srcRowStri
       if (0 < height) {
         do {
           if (dst < dstRowEnd) {
-            iVar3 = (int)dstRowEnd - (int)dst;
+            remaining = (int)dstRowEnd - (int)dst;
             do {
               *dst = 0xff;
               dst = dst + 1;
-              iVar3 = iVar3 + -1;
-            } while (iVar3 != 0);
+              remaining = remaining + -1;
+            } while (remaining != 0);
           }
           height = height + -1;
           dst = dst + dstRowSkip;
@@ -2922,15 +2937,15 @@ int _gleTextureImagePut_FastByte(unusedArg1, width, height, src, dst, srcRowStri
       if (0 < height) {
         do {
           if (dst < dstRowEnd) {
-            iVar3 = (int)dstRowEnd - (int)dst;
-            pbVar4 = src + 3;
+            remaining = (int)dstRowEnd - (int)dst;
+            srcCursor = src + 3;
             do {
-              srcValue = *pbVar4;
-              pbVar4 = pbVar4 + 4;
+              srcValue = *srcCursor;
+              srcCursor = srcCursor + 4;
               *dst = srcValue << 1 | srcValue >> 6 & 1;
               dst = dst + 1;
-              iVar3 = iVar3 + -1;
-            } while (iVar3 != 0);
+              remaining = remaining + -1;
+            } while (remaining != 0);
           }
           height = height + -1;
           src = src + srcRowStride;
@@ -2942,7 +2957,7 @@ int _gleTextureImagePut_FastByte(unusedArg1, width, height, src, dst, srcRowStri
     break;
   case 0x1907:
     if (srcFormat == 0x1908) {
-      pbVar4 = src;
+      srcCursor = src;
       if (0 < height) {
         do {
           for (; dst < dstRowEnd; dst = dst + 3) {
@@ -2953,16 +2968,16 @@ int _gleTextureImagePut_FastByte(unusedArg1, width, height, src, dst, srcRowStri
             dst[2] = *srcComponent << 1 | *srcComponent >> 6 & 1;
           }
           height = height + -1;
-          src = pbVar4 + srcRowStride;
+          src = srcCursor + srcRowStride;
           dst = dst + dstRowSkip;
           dstRowEnd = dstRowEnd + dstRowStride;
-          pbVar4 = src;
+          srcCursor = src;
         } while (height != 0);
       }
     }
     else if (srcFormat < 0x1909) {
       if (srcFormat == 0x1905) {
-        pbVar4 = src;
+        srcCursor = src;
         if (0 < height) {
           do {
             for (; dst < dstRowEnd; dst = dst + 3) {
@@ -2973,16 +2988,16 @@ int _gleTextureImagePut_FastByte(unusedArg1, width, height, src, dst, srcRowStri
               dst[2] = srcValue << 1 | srcValue >> 6 & 1;
             }
             height = height + -1;
-            src = pbVar4 + srcRowStride;
+            src = srcCursor + srcRowStride;
             dst = dst + dstRowSkip;
             dstRowEnd = dstRowEnd + dstRowStride;
-            pbVar4 = src;
+            srcCursor = src;
           } while (height != 0);
         }
       }
       else if (srcFormat < 0x1906) {
         if (srcFormat == 0x1903) {
-          pbVar4 = src;
+          srcCursor = src;
           if (0 < height) {
             do {
               for (; dst < dstRowEnd; dst = dst + 3) {
@@ -2993,10 +3008,10 @@ int _gleTextureImagePut_FastByte(unusedArg1, width, height, src, dst, srcRowStri
                 *dst = srcValue << 1 | srcValue >> 6 & 1;
               }
               height = height + -1;
-              src = pbVar4 + srcRowStride;
+              src = srcCursor + srcRowStride;
               dst = dst + dstRowSkip;
               dstRowEnd = dstRowEnd + dstRowStride;
-              pbVar4 = src;
+              srcCursor = src;
             } while (height != 0);
           }
         }
@@ -3004,7 +3019,7 @@ int _gleTextureImagePut_FastByte(unusedArg1, width, height, src, dst, srcRowStri
           if (srcFormat != 0x1904) {
             return 0;
           }
-          pbVar4 = src;
+          srcCursor = src;
           if (0 < height) {
             do {
               for (; dst < dstRowEnd; dst = dst + 3) {
@@ -3015,10 +3030,10 @@ int _gleTextureImagePut_FastByte(unusedArg1, width, height, src, dst, srcRowStri
                 dst[1] = srcValue << 1 | srcValue >> 6 & 1;
               }
               height = height + -1;
-              src = pbVar4 + srcRowStride;
+              src = srcCursor + srcRowStride;
               dst = dst + dstRowSkip;
               dstRowEnd = dstRowEnd + dstRowStride;
-              pbVar4 = src;
+              srcCursor = src;
             } while (height != 0);
           }
         }
@@ -3041,7 +3056,7 @@ int _gleTextureImagePut_FastByte(unusedArg1, width, height, src, dst, srcRowStri
         if (srcFormat != 0x1907) {
           return 0;
         }
-        pbVar4 = src;
+        srcCursor = src;
         if (0 < height) {
           do {
             for (; dst < dstRowEnd; dst = dst + 3) {
@@ -3052,10 +3067,10 @@ int _gleTextureImagePut_FastByte(unusedArg1, width, height, src, dst, srcRowStri
               dst[2] = *srcComponent << 1 | *srcComponent >> 6 & 1;
             }
             height = height + -1;
-            src = pbVar4 + srcRowStride;
+            src = srcCursor + srcRowStride;
             dst = dst + dstRowSkip;
             dstRowEnd = dstRowEnd + dstRowStride;
-            pbVar4 = src;
+            srcCursor = src;
           } while (height != 0);
         }
       }
@@ -3064,12 +3079,12 @@ int _gleTextureImagePut_FastByte(unusedArg1, width, height, src, dst, srcRowStri
       if (0 < height) {
         do {
           if (dst < dstRowEnd) {
-            pbVar4 = src + 1;
+            srcCursor = src + 1;
             do {
-              *dst = pbVar4[2] << 1 | pbVar4[2] >> 6 & 1;
-              dst[1] = pbVar4[1] << 1 | pbVar4[1] >> 6 & 1;
-              srcValue = *pbVar4;
-              pbVar4 = pbVar4 + 4;
+              *dst = srcCursor[2] << 1 | srcCursor[2] >> 6 & 1;
+              dst[1] = srcCursor[1] << 1 | srcCursor[1] >> 6 & 1;
+              srcValue = *srcCursor;
+              srcCursor = srcCursor + 4;
               dst[2] = srcValue << 1 | srcValue >> 6 & 1;
               dst = dst + 3;
             } while (dst < dstRowEnd);
@@ -3083,7 +3098,7 @@ int _gleTextureImagePut_FastByte(unusedArg1, width, height, src, dst, srcRowStri
     }
     else if (srcFormat < 0x8001) {
       if (srcFormat == 0x1909) {
-        pbVar4 = src;
+        srcCursor = src;
         if (0 < height) {
           do {
             for (; dst < dstRowEnd; dst = dst + 3) {
@@ -3094,10 +3109,10 @@ int _gleTextureImagePut_FastByte(unusedArg1, width, height, src, dst, srcRowStri
               dst[1] = *dst;
             }
             height = height + -1;
-            src = pbVar4 + srcRowStride;
+            src = srcCursor + srcRowStride;
             dst = dst + dstRowSkip;
             dstRowEnd = dstRowEnd + dstRowStride;
-            pbVar4 = src;
+            srcCursor = src;
           } while (height != 0);
         }
       }
@@ -3105,7 +3120,7 @@ int _gleTextureImagePut_FastByte(unusedArg1, width, height, src, dst, srcRowStri
         if (srcFormat != 0x190a) {
           return 0;
         }
-        pbVar4 = src;
+        srcCursor = src;
         if (0 < height) {
           do {
             for (; dst < dstRowEnd; dst = dst + 3) {
@@ -3116,16 +3131,16 @@ int _gleTextureImagePut_FastByte(unusedArg1, width, height, src, dst, srcRowStri
               dst[1] = *dst;
             }
             height = height + -1;
-            src = pbVar4 + srcRowStride;
+            src = srcCursor + srcRowStride;
             dst = dst + dstRowSkip;
             dstRowEnd = dstRowEnd + dstRowStride;
-            pbVar4 = src;
+            srcCursor = src;
           } while (height != 0);
         }
       }
     }
     else if (srcFormat == 0x80e0) {
-      pbVar4 = src;
+      srcCursor = src;
       if (0 < height) {
         do {
           for (; dst < dstRowEnd; dst = dst + 3) {
@@ -3136,10 +3151,10 @@ int _gleTextureImagePut_FastByte(unusedArg1, width, height, src, dst, srcRowStri
             dst[2] = srcValue << 1 | srcValue >> 6 & 1;
           }
           height = height + -1;
-          src = pbVar4 + srcRowStride;
+          src = srcCursor + srcRowStride;
           dst = dst + dstRowSkip;
           dstRowEnd = dstRowEnd + dstRowStride;
-          pbVar4 = src;
+          srcCursor = src;
         } while (height != 0);
       }
     }
@@ -3147,7 +3162,7 @@ int _gleTextureImagePut_FastByte(unusedArg1, width, height, src, dst, srcRowStri
       if (srcFormat != 0x80e1) {
         return 0;
       }
-      pbVar4 = src;
+      srcCursor = src;
       if (0 < height) {
         do {
           for (; dst < dstRowEnd; dst = dst + 3) {
@@ -3158,10 +3173,10 @@ int _gleTextureImagePut_FastByte(unusedArg1, width, height, src, dst, srcRowStri
             dst[2] = srcValue << 1 | srcValue >> 6 & 1;
           }
           height = height + -1;
-          src = pbVar4 + srcRowStride;
+          src = srcCursor + srcRowStride;
           dst = dst + dstRowSkip;
           dstRowEnd = dstRowEnd + dstRowStride;
-          pbVar4 = src;
+          srcCursor = src;
         } while (height != 0);
       }
     }
@@ -3172,13 +3187,13 @@ int _gleTextureImagePut_FastByte(unusedArg1, width, height, src, dst, srcRowStri
         do {
           if (dst < dstRowEnd) {
             pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
-            pbVar4 = src;
+            srcCursor = src;
             do {
-              *dst = *pbVar4 << 1 | *pbVar4 >> 6 & 1;
-              dst[1] = pbVar4[1] << 1 | pbVar4[1] >> 6 & 1;
-              dst[2] = pbVar4[2] << 1 | pbVar4[2] >> 6 & 1;
-              srcComponent = pbVar4 + 3;
-              pbVar4 = pbVar4 + 4;
+              *dst = *srcCursor << 1 | *srcCursor >> 6 & 1;
+              dst[1] = srcCursor[1] << 1 | srcCursor[1] >> 6 & 1;
+              dst[2] = srcCursor[2] << 1 | srcCursor[2] >> 6 & 1;
+              srcComponent = srcCursor + 3;
+              srcCursor = srcCursor + 4;
               dst[3] = *srcComponent << 1 | *srcComponent >> 6 & 1;
               dst = dst + 4;
               pixelsLeft = pixelsLeft - 1;
@@ -3197,12 +3212,12 @@ int _gleTextureImagePut_FastByte(unusedArg1, width, height, src, dst, srcRowStri
           do {
             if (dst < dstRowEnd) {
               pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
-              pbVar4 = src;
+              srcCursor = src;
               do {
                 *dst = 0;
                 dst[1] = 0;
-                srcValue = *pbVar4;
-                pbVar4 = pbVar4 + 1;
+                srcValue = *srcCursor;
+                srcCursor = srcCursor + 1;
                 dst[3] = 0xff;
                 dst[2] = srcValue << 1 | srcValue >> 6 & 1;
                 dst = dst + 4;
@@ -3222,10 +3237,10 @@ int _gleTextureImagePut_FastByte(unusedArg1, width, height, src, dst, srcRowStri
             do {
               if (dst < dstRowEnd) {
                 pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
-                pbVar4 = src;
+                srcCursor = src;
                 do {
-                  srcValue = *pbVar4;
-                  pbVar4 = pbVar4 + 1;
+                  srcValue = *srcCursor;
+                  srcCursor = srcCursor + 1;
                   dst[1] = 0;
                   dst[2] = 0;
                   *dst = srcValue << 1 | srcValue >> 6 & 1;
@@ -3249,11 +3264,11 @@ int _gleTextureImagePut_FastByte(unusedArg1, width, height, src, dst, srcRowStri
             do {
               if (dst < dstRowEnd) {
                 pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
-                pbVar4 = src;
+                srcCursor = src;
                 do {
                   *dst = 0;
-                  srcValue = *pbVar4;
-                  pbVar4 = pbVar4 + 1;
+                  srcValue = *srcCursor;
+                  srcCursor = srcCursor + 1;
                   dst[2] = 0;
                   dst[3] = 0xff;
                   dst[1] = srcValue << 1 | srcValue >> 6 & 1;
@@ -3274,13 +3289,13 @@ int _gleTextureImagePut_FastByte(unusedArg1, width, height, src, dst, srcRowStri
           do {
             if (dst < dstRowEnd) {
               pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
-              pbVar4 = src;
+              srcCursor = src;
               do {
                 *dst = 0;
                 dst[1] = 0;
                 dst[2] = 0;
-                srcValue = *pbVar4;
-                pbVar4 = pbVar4 + 1;
+                srcValue = *srcCursor;
+                srcCursor = srcCursor + 1;
                 dst[3] = srcValue << 1 | srcValue >> 6 & 1;
                 dst = dst + 4;
                 pixelsLeft = pixelsLeft - 1;
@@ -3301,12 +3316,12 @@ int _gleTextureImagePut_FastByte(unusedArg1, width, height, src, dst, srcRowStri
           do {
             if (dst < dstRowEnd) {
               pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
-              pbVar4 = src;
+              srcCursor = src;
               do {
-                *dst = *pbVar4 << 1 | *pbVar4 >> 6 & 1;
-                dst[1] = pbVar4[1] << 1 | pbVar4[1] >> 6 & 1;
-                srcValue = pbVar4[2];
-                pbVar4 = pbVar4 + 3;
+                *dst = *srcCursor << 1 | *srcCursor >> 6 & 1;
+                dst[1] = srcCursor[1] << 1 | srcCursor[1] >> 6 & 1;
+                srcValue = srcCursor[2];
+                srcCursor = srcCursor + 3;
                 dst[3] = 0xff;
                 dst[2] = srcValue << 1 | srcValue >> 6 & 1;
                 dst = dst + 4;
@@ -3326,13 +3341,13 @@ int _gleTextureImagePut_FastByte(unusedArg1, width, height, src, dst, srcRowStri
         do {
           if (dst < dstRowEnd) {
             pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
-            pbVar4 = src;
+            srcCursor = src;
             do {
-              *dst = pbVar4[3] << 1 | pbVar4[3] >> 6 & 1;
-              dst[1] = pbVar4[2] << 1 | pbVar4[2] >> 6 & 1;
-              dst[2] = pbVar4[1] << 1 | pbVar4[1] >> 6 & 1;
-              srcValue = *pbVar4;
-              pbVar4 = pbVar4 + 4;
+              *dst = srcCursor[3] << 1 | srcCursor[3] >> 6 & 1;
+              dst[1] = srcCursor[2] << 1 | srcCursor[2] >> 6 & 1;
+              dst[2] = srcCursor[1] << 1 | srcCursor[1] >> 6 & 1;
+              srcValue = *srcCursor;
+              srcCursor = srcCursor + 4;
               dst[3] = srcValue << 1 | srcValue >> 6 & 1;
               dst = dst + 4;
               pixelsLeft = pixelsLeft - 1;
@@ -3351,10 +3366,10 @@ int _gleTextureImagePut_FastByte(unusedArg1, width, height, src, dst, srcRowStri
           do {
             if (dst < dstRowEnd) {
               pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
-              pbVar4 = src;
+              srcCursor = src;
               do {
-                srcValue = *pbVar4;
-                pbVar4 = pbVar4 + 1;
+                srcValue = *srcCursor;
+                srcCursor = srcCursor + 1;
                 dst[3] = 0xff;
                 *dst = srcValue << 1 | srcValue >> 6 & 1;
                 dst[2] = *dst;
@@ -3378,13 +3393,13 @@ int _gleTextureImagePut_FastByte(unusedArg1, width, height, src, dst, srcRowStri
           do {
             if (dst < dstRowEnd) {
               pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
-              pbVar4 = src;
+              srcCursor = src;
               do {
-                *dst = *pbVar4 << 1 | *pbVar4 >> 6 & 1;
+                *dst = *srcCursor << 1 | *srcCursor >> 6 & 1;
                 dst[2] = *dst;
                 dst[1] = *dst;
-                srcComponent = pbVar4 + 1;
-                pbVar4 = pbVar4 + 2;
+                srcComponent = srcCursor + 1;
+                srcCursor = srcCursor + 2;
                 dst[3] = *srcComponent << 1 | *srcComponent >> 6 & 1;
                 dst = dst + 4;
                 pixelsLeft = pixelsLeft - 1;
@@ -3403,12 +3418,12 @@ int _gleTextureImagePut_FastByte(unusedArg1, width, height, src, dst, srcRowStri
         do {
           if (dst < dstRowEnd) {
             pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
-            pbVar4 = src;
+            srcCursor = src;
             do {
-              *dst = pbVar4[2] << 1 | pbVar4[2] >> 6 & 1;
-              dst[1] = pbVar4[1] << 1 | pbVar4[1] >> 6 & 1;
-              srcValue = *pbVar4;
-              pbVar4 = pbVar4 + 3;
+              *dst = srcCursor[2] << 1 | srcCursor[2] >> 6 & 1;
+              dst[1] = srcCursor[1] << 1 | srcCursor[1] >> 6 & 1;
+              srcValue = *srcCursor;
+              srcCursor = srcCursor + 3;
               dst[3] = 0xff;
               dst[2] = srcValue << 1 | srcValue >> 6 & 1;
               dst = dst + 4;
@@ -3430,13 +3445,13 @@ int _gleTextureImagePut_FastByte(unusedArg1, width, height, src, dst, srcRowStri
         do {
           if (dst < dstRowEnd) {
             pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
-            pbVar4 = src;
+            srcCursor = src;
             do {
-              *dst = pbVar4[2] << 1 | pbVar4[2] >> 6 & 1;
-              dst[1] = pbVar4[1] << 1 | pbVar4[1] >> 6 & 1;
-              dst[2] = *pbVar4 << 1 | *pbVar4 >> 6 & 1;
-              srcComponent = pbVar4 + 3;
-              pbVar4 = pbVar4 + 4;
+              *dst = srcCursor[2] << 1 | srcCursor[2] >> 6 & 1;
+              dst[1] = srcCursor[1] << 1 | srcCursor[1] >> 6 & 1;
+              dst[2] = *srcCursor << 1 | *srcCursor >> 6 & 1;
+              srcComponent = srcCursor + 3;
+              srcCursor = srcCursor + 4;
               dst[3] = *srcComponent << 1 | *srcComponent >> 6 & 1;
               dst = dst + 4;
               pixelsLeft = pixelsLeft - 1;
@@ -3455,15 +3470,15 @@ int _gleTextureImagePut_FastByte(unusedArg1, width, height, src, dst, srcRowStri
       if (0 < height) {
         do {
           if (dst < dstRowEnd) {
-            iVar3 = (int)dstRowEnd - (int)dst;
-            pbVar4 = src;
+            remaining = (int)dstRowEnd - (int)dst;
+            srcCursor = src;
             do {
-              srcValue = *pbVar4;
-              pbVar4 = pbVar4 + 4;
+              srcValue = *srcCursor;
+              srcCursor = srcCursor + 4;
               *dst = srcValue << 1 | srcValue >> 6 & 1;
               dst = dst + 1;
-              iVar3 = iVar3 + -1;
-            } while (iVar3 != 0);
+              remaining = remaining + -1;
+            } while (remaining != 0);
           }
           height = height + -1;
           src = src + srcRowStride;
@@ -3481,15 +3496,15 @@ int _gleTextureImagePut_FastByte(unusedArg1, width, height, src, dst, srcRowStri
           if (0 < height) {
             do {
               if (dst < dstRowEnd) {
-                iVar3 = (int)dstRowEnd - (int)dst;
-                pbVar4 = src;
+                remaining = (int)dstRowEnd - (int)dst;
+                srcCursor = src;
                 do {
-                  srcValue = *pbVar4;
-                  pbVar4 = pbVar4 + 1;
+                  srcValue = *srcCursor;
+                  srcCursor = srcCursor + 1;
                   *dst = srcValue << 1 | srcValue >> 6 & 1;
                   dst = dst + 1;
-                  iVar3 = iVar3 + -1;
-                } while (iVar3 != 0);
+                  remaining = remaining + -1;
+                } while (remaining != 0);
               }
               height = height + -1;
               src = src + srcRowStride;
@@ -3501,12 +3516,12 @@ int _gleTextureImagePut_FastByte(unusedArg1, width, height, src, dst, srcRowStri
         else if (0 < height) {
           do {
             if (dst < dstRowEnd) {
-              iVar3 = (int)dstRowEnd - (int)dst;
+              remaining = (int)dstRowEnd - (int)dst;
               do {
                 *dst = 0;
                 dst = dst + 1;
-                iVar3 = iVar3 + -1;
-              } while (iVar3 != 0);
+                remaining = remaining + -1;
+              } while (remaining != 0);
             }
             height = height + -1;
             dst = dst + dstRowSkip;
@@ -3517,15 +3532,15 @@ int _gleTextureImagePut_FastByte(unusedArg1, width, height, src, dst, srcRowStri
       else if (0 < height) {
         do {
           if (dst < dstRowEnd) {
-            iVar3 = (int)dstRowEnd - (int)dst;
-            pbVar4 = src;
+            remaining = (int)dstRowEnd - (int)dst;
+            srcCursor = src;
             do {
-              srcValue = *pbVar4;
-              pbVar4 = pbVar4 + 3;
+              srcValue = *srcCursor;
+              srcCursor = srcCursor + 3;
               *dst = srcValue << 1 | srcValue >> 6 & 1;
               dst = dst + 1;
-              iVar3 = iVar3 + -1;
-            } while (iVar3 != 0);
+              remaining = remaining + -1;
+            } while (remaining != 0);
           }
           height = height + -1;
           src = src + srcRowStride;
@@ -3538,15 +3553,15 @@ int _gleTextureImagePut_FastByte(unusedArg1, width, height, src, dst, srcRowStri
       if (0 < height) {
         do {
           if (dst < dstRowEnd) {
-            iVar3 = (int)dstRowEnd - (int)dst;
-            pbVar4 = src + 3;
+            remaining = (int)dstRowEnd - (int)dst;
+            srcCursor = src + 3;
             do {
-              srcValue = *pbVar4;
-              pbVar4 = pbVar4 + 4;
+              srcValue = *srcCursor;
+              srcCursor = srcCursor + 4;
               *dst = srcValue << 1 | srcValue >> 6 & 1;
               dst = dst + 1;
-              iVar3 = iVar3 + -1;
-            } while (iVar3 != 0);
+              remaining = remaining + -1;
+            } while (remaining != 0);
           }
           height = height + -1;
           src = src + srcRowStride;
@@ -3560,15 +3575,15 @@ int _gleTextureImagePut_FastByte(unusedArg1, width, height, src, dst, srcRowStri
         if (0 < height) {
           do {
             if (dst < dstRowEnd) {
-              iVar3 = (int)dstRowEnd - (int)dst;
-              pbVar4 = src;
+              remaining = (int)dstRowEnd - (int)dst;
+              srcCursor = src;
               do {
-                srcValue = *pbVar4;
-                pbVar4 = pbVar4 + 1;
+                srcValue = *srcCursor;
+                srcCursor = srcCursor + 1;
                 *dst = srcValue << 1 | srcValue >> 6 & 1;
                 dst = dst + 1;
-                iVar3 = iVar3 + -1;
-              } while (iVar3 != 0);
+                remaining = remaining + -1;
+              } while (remaining != 0);
             }
             height = height + -1;
             src = src + srcRowStride;
@@ -3584,15 +3599,15 @@ int _gleTextureImagePut_FastByte(unusedArg1, width, height, src, dst, srcRowStri
         if (0 < height) {
           do {
             if (dst < dstRowEnd) {
-              iVar3 = (int)dstRowEnd - (int)dst;
-              pbVar4 = src;
+              remaining = (int)dstRowEnd - (int)dst;
+              srcCursor = src;
               do {
-                srcValue = *pbVar4;
-                pbVar4 = pbVar4 + 2;
+                srcValue = *srcCursor;
+                srcCursor = srcCursor + 2;
                 *dst = srcValue << 1 | srcValue >> 6 & 1;
                 dst = dst + 1;
-                iVar3 = iVar3 + -1;
-              } while (iVar3 != 0);
+                remaining = remaining + -1;
+              } while (remaining != 0);
             }
             height = height + -1;
             src = src + srcRowStride;
@@ -3606,15 +3621,15 @@ int _gleTextureImagePut_FastByte(unusedArg1, width, height, src, dst, srcRowStri
       if (0 < height) {
         do {
           if (dst < dstRowEnd) {
-            iVar3 = (int)dstRowEnd - (int)dst;
-            pbVar4 = src + 2;
+            remaining = (int)dstRowEnd - (int)dst;
+            srcCursor = src + 2;
             do {
-              srcValue = *pbVar4;
-              pbVar4 = pbVar4 + 3;
+              srcValue = *srcCursor;
+              srcCursor = srcCursor + 3;
               *dst = srcValue << 1 | srcValue >> 6 & 1;
               dst = dst + 1;
-              iVar3 = iVar3 + -1;
-            } while (iVar3 != 0);
+              remaining = remaining + -1;
+            } while (remaining != 0);
           }
           height = height + -1;
           src = src + srcRowStride;
@@ -3630,15 +3645,15 @@ int _gleTextureImagePut_FastByte(unusedArg1, width, height, src, dst, srcRowStri
       if (0 < height) {
         do {
           if (dst < dstRowEnd) {
-            iVar3 = (int)dstRowEnd - (int)dst;
-            pbVar4 = src + 2;
+            remaining = (int)dstRowEnd - (int)dst;
+            srcCursor = src + 2;
             do {
-              srcValue = *pbVar4;
-              pbVar4 = pbVar4 + 4;
+              srcValue = *srcCursor;
+              srcCursor = srcCursor + 4;
               *dst = srcValue << 1 | srcValue >> 6 & 1;
               dst = dst + 1;
-              iVar3 = iVar3 + -1;
-            } while (iVar3 != 0);
+              remaining = remaining + -1;
+            } while (remaining != 0);
           }
           height = height + -1;
           src = src + srcRowStride;
@@ -3654,11 +3669,11 @@ int _gleTextureImagePut_FastByte(unusedArg1, width, height, src, dst, srcRowStri
         do {
           if (dst < dstRowEnd) {
             pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
-            pbVar4 = src;
+            srcCursor = src;
             do {
-              *dst = *pbVar4 << 1 | *pbVar4 >> 6 & 1;
-              srcComponent = pbVar4 + 3;
-              pbVar4 = pbVar4 + 4;
+              *dst = *srcCursor << 1 | *srcCursor >> 6 & 1;
+              srcComponent = srcCursor + 3;
+              srcCursor = srcCursor + 4;
               dst[1] = *srcComponent << 1 | *srcComponent >> 6 & 1;
               dst = dst + 2;
               pixelsLeft = pixelsLeft - 1;
@@ -3681,10 +3696,10 @@ int _gleTextureImagePut_FastByte(unusedArg1, width, height, src, dst, srcRowStri
             do {
               if (dst < dstRowEnd) {
                 pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
-                pbVar4 = src;
+                srcCursor = src;
                 do {
-                  srcValue = *pbVar4;
-                  pbVar4 = pbVar4 + 1;
+                  srcValue = *srcCursor;
+                  srcCursor = srcCursor + 1;
                   dst[1] = 0xff;
                   *dst = srcValue << 1 | srcValue >> 6 & 1;
                   dst = dst + 2;
@@ -3720,11 +3735,11 @@ int _gleTextureImagePut_FastByte(unusedArg1, width, height, src, dst, srcRowStri
           do {
             if (dst < dstRowEnd) {
               pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
-              pbVar4 = src;
+              srcCursor = src;
               do {
                 *dst = 0;
-                srcValue = *pbVar4;
-                pbVar4 = pbVar4 + 1;
+                srcValue = *srcCursor;
+                srcCursor = srcCursor + 1;
                 dst[1] = srcValue << 1 | srcValue >> 6 & 1;
                 dst = dst + 2;
                 pixelsLeft = pixelsLeft - 1;
@@ -3745,10 +3760,10 @@ int _gleTextureImagePut_FastByte(unusedArg1, width, height, src, dst, srcRowStri
           do {
             if (dst < dstRowEnd) {
               pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
-              pbVar4 = src;
+              srcCursor = src;
               do {
-                srcValue = *pbVar4;
-                pbVar4 = pbVar4 + 3;
+                srcValue = *srcCursor;
+                srcCursor = srcCursor + 3;
                 dst[1] = 0xff;
                 *dst = srcValue << 1 | srcValue >> 6 & 1;
                 dst = dst + 2;
@@ -3768,11 +3783,11 @@ int _gleTextureImagePut_FastByte(unusedArg1, width, height, src, dst, srcRowStri
         do {
           if (dst < dstRowEnd) {
             pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
-            pbVar4 = src;
+            srcCursor = src;
             do {
-              *dst = pbVar4[3] << 1 | pbVar4[3] >> 6 & 1;
-              srcValue = *pbVar4;
-              pbVar4 = pbVar4 + 4;
+              *dst = srcCursor[3] << 1 | srcCursor[3] >> 6 & 1;
+              srcValue = *srcCursor;
+              srcCursor = srcCursor + 4;
               dst[1] = srcValue << 1 | srcValue >> 6 & 1;
               dst = dst + 2;
               pixelsLeft = pixelsLeft - 1;
@@ -3791,10 +3806,10 @@ int _gleTextureImagePut_FastByte(unusedArg1, width, height, src, dst, srcRowStri
           do {
             if (dst < dstRowEnd) {
               pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
-              pbVar4 = src;
+              srcCursor = src;
               do {
-                srcValue = *pbVar4;
-                pbVar4 = pbVar4 + 1;
+                srcValue = *srcCursor;
+                srcCursor = srcCursor + 1;
                 dst[1] = 0xff;
                 *dst = srcValue << 1 | srcValue >> 6 & 1;
                 dst = dst + 2;
@@ -3816,11 +3831,11 @@ int _gleTextureImagePut_FastByte(unusedArg1, width, height, src, dst, srcRowStri
           do {
             if (dst < dstRowEnd) {
               pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
-              pbVar4 = src;
+              srcCursor = src;
               do {
-                *dst = *pbVar4 << 1 | *pbVar4 >> 6 & 1;
-                srcComponent = pbVar4 + 1;
-                pbVar4 = pbVar4 + 2;
+                *dst = *srcCursor << 1 | *srcCursor >> 6 & 1;
+                srcComponent = srcCursor + 1;
+                srcCursor = srcCursor + 2;
                 dst[1] = *srcComponent << 1 | *srcComponent >> 6 & 1;
                 dst = dst + 2;
                 pixelsLeft = pixelsLeft - 1;
@@ -3838,11 +3853,11 @@ int _gleTextureImagePut_FastByte(unusedArg1, width, height, src, dst, srcRowStri
       if (0 < height) {
         do {
           if (dst < dstRowEnd) {
-            pbVar4 = src + 2;
+            srcCursor = src + 2;
             pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
             do {
-              srcValue = *pbVar4;
-              pbVar4 = pbVar4 + 3;
+              srcValue = *srcCursor;
+              srcCursor = srcCursor + 3;
               dst[1] = 0xff;
               *dst = srcValue << 1 | srcValue >> 6 & 1;
               dst = dst + 2;
@@ -3863,12 +3878,12 @@ int _gleTextureImagePut_FastByte(unusedArg1, width, height, src, dst, srcRowStri
       if (0 < height) {
         do {
           if (dst < dstRowEnd) {
-            pbVar4 = src + 3;
+            srcCursor = src + 3;
             pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
             do {
-              *dst = pbVar4[-1] << 1 | pbVar4[-1] >> 6 & 1;
-              srcValue = *pbVar4;
-              pbVar4 = pbVar4 + 4;
+              *dst = srcCursor[-1] << 1 | srcCursor[-1] >> 6 & 1;
+              srcValue = *srcCursor;
+              srcCursor = srcCursor + 4;
               dst[1] = srcValue << 1 | srcValue >> 6 & 1;
               dst = dst + 2;
               pixelsLeft = pixelsLeft - 1;
@@ -3901,13 +3916,14 @@ int _gleTextureImagePut_FastShort(unusedArg1, width, height, src, dst, srcRowStr
 {
   ushort *srcComponent;
   ushort srcValue;
-  ushort *puVar3;
-  int iVar4;
+  ushort *srcCursor;
+  int dstComponentCount;
+  int remaining;
   undefined1 *dstRowEnd;
   uint pixelsLeft;
   
-  iVar4 = _gleComponents(dstFormat);
-  dstRowEnd = dst + width * iVar4;
+  dstComponentCount = _gleComponents(dstFormat);
+  dstRowEnd = dst + width * dstComponentCount;
   switch(dstFormat) {
   case 0x1900:
     if (srcFormat != 0x1900) {
@@ -3916,15 +3932,15 @@ int _gleTextureImagePut_FastShort(unusedArg1, width, height, src, dst, srcRowStr
     if (0 < height) {
       do {
         if (dst < dstRowEnd) {
-          iVar4 = (int)dstRowEnd - (int)dst;
-          puVar3 = src;
+          remaining = (int)dstRowEnd - (int)dst;
+          srcCursor = src;
           do {
-            srcValue = *puVar3;
-            puVar3 = puVar3 + 1;
+            srcValue = *srcCursor;
+            srcCursor = srcCursor + 1;
             *dst = (char)(srcValue >> 7);
             dst = dst + 1;
-            iVar4 = iVar4 + -1;
-          } while (iVar4 != 0);
+            remaining = remaining + -1;
+          } while (remaining != 0);
         }
         height = height + -1;
         src = (ushort *)((int)src + srcRowStride);
@@ -3940,15 +3956,15 @@ int _gleTextureImagePut_FastShort(unusedArg1, width, height, src, dst, srcRowStr
       if (0 < height) {
         do {
           if (dst < dstRowEnd) {
-            iVar4 = (int)dstRowEnd - (int)dst;
-            puVar3 = src;
+            remaining = (int)dstRowEnd - (int)dst;
+            srcCursor = src;
             do {
-              srcComponent = puVar3 + 3;
-              puVar3 = puVar3 + 4;
+              srcComponent = srcCursor + 3;
+              srcCursor = srcCursor + 4;
               *dst = (char)(*srcComponent >> 7);
               dst = dst + 1;
-              iVar4 = iVar4 + -1;
-            } while (iVar4 != 0);
+              remaining = remaining + -1;
+            } while (remaining != 0);
           }
           height = height + -1;
           src = (ushort *)((int)src + srcRowStride);
@@ -3962,15 +3978,15 @@ int _gleTextureImagePut_FastShort(unusedArg1, width, height, src, dst, srcRowStr
         if (0 < height) {
           do {
             if (dst < dstRowEnd) {
-              iVar4 = (int)dstRowEnd - (int)dst;
-              puVar3 = src;
+              remaining = (int)dstRowEnd - (int)dst;
+              srcCursor = src;
               do {
-                srcValue = *puVar3;
-                puVar3 = puVar3 + 1;
+                srcValue = *srcCursor;
+                srcCursor = srcCursor + 1;
                 *dst = (char)(srcValue >> 7);
                 dst = dst + 1;
-                iVar4 = iVar4 + -1;
-              } while (iVar4 != 0);
+                remaining = remaining + -1;
+              } while (remaining != 0);
             }
             height = height + -1;
             src = (ushort *)((int)src + srcRowStride);
@@ -3986,12 +4002,12 @@ int _gleTextureImagePut_FastShort(unusedArg1, width, height, src, dst, srcRowStr
         if (0 < height) {
           do {
             if (dst < dstRowEnd) {
-              iVar4 = (int)dstRowEnd - (int)dst;
+              remaining = (int)dstRowEnd - (int)dst;
               do {
                 *dst = 0xff;
                 dst = dst + 1;
-                iVar4 = iVar4 + -1;
-              } while (iVar4 != 0);
+                remaining = remaining + -1;
+              } while (remaining != 0);
             }
             height = height + -1;
             dst = dst + dstRowSkip;
@@ -4002,12 +4018,12 @@ int _gleTextureImagePut_FastShort(unusedArg1, width, height, src, dst, srcRowStr
       else if (0 < height) {
         do {
           if (dst < dstRowEnd) {
-            iVar4 = (int)dstRowEnd - (int)dst;
+            remaining = (int)dstRowEnd - (int)dst;
             do {
               *dst = 0xff;
               dst = dst + 1;
-              iVar4 = iVar4 + -1;
-            } while (iVar4 != 0);
+              remaining = remaining + -1;
+            } while (remaining != 0);
           }
           height = height + -1;
           dst = dst + dstRowSkip;
@@ -4019,15 +4035,15 @@ int _gleTextureImagePut_FastShort(unusedArg1, width, height, src, dst, srcRowStr
       if (0 < height) {
         do {
           if (dst < dstRowEnd) {
-            iVar4 = (int)dstRowEnd - (int)dst;
-            puVar3 = src;
+            remaining = (int)dstRowEnd - (int)dst;
+            srcCursor = src;
             do {
-              srcValue = *puVar3;
-              puVar3 = puVar3 + 4;
+              srcValue = *srcCursor;
+              srcCursor = srcCursor + 4;
               *dst = (char)(srcValue >> 7);
               dst = dst + 1;
-              iVar4 = iVar4 + -1;
-            } while (iVar4 != 0);
+              remaining = remaining + -1;
+            } while (remaining != 0);
           }
           height = height + -1;
           src = (ushort *)((int)src + srcRowStride);
@@ -4041,12 +4057,12 @@ int _gleTextureImagePut_FastShort(unusedArg1, width, height, src, dst, srcRowStr
         if (0 < height) {
           do {
             if (dst < dstRowEnd) {
-              iVar4 = (int)dstRowEnd - (int)dst;
+              remaining = (int)dstRowEnd - (int)dst;
               do {
                 *dst = 0xff;
                 dst = dst + 1;
-                iVar4 = iVar4 + -1;
-              } while (iVar4 != 0);
+                remaining = remaining + -1;
+              } while (remaining != 0);
             }
             height = height + -1;
             dst = dst + dstRowSkip;
@@ -4061,15 +4077,15 @@ int _gleTextureImagePut_FastShort(unusedArg1, width, height, src, dst, srcRowStr
         if (0 < height) {
           do {
             if (dst < dstRowEnd) {
-              iVar4 = (int)dstRowEnd - (int)dst;
-              puVar3 = src;
+              remaining = (int)dstRowEnd - (int)dst;
+              srcCursor = src;
               do {
-                srcComponent = puVar3 + 1;
-                puVar3 = puVar3 + 2;
+                srcComponent = srcCursor + 1;
+                srcCursor = srcCursor + 2;
                 *dst = (char)(*srcComponent >> 7);
                 dst = dst + 1;
-                iVar4 = iVar4 + -1;
-              } while (iVar4 != 0);
+                remaining = remaining + -1;
+              } while (remaining != 0);
             }
             height = height + -1;
             src = (ushort *)((int)src + srcRowStride);
@@ -4083,12 +4099,12 @@ int _gleTextureImagePut_FastShort(unusedArg1, width, height, src, dst, srcRowStr
       if (0 < height) {
         do {
           if (dst < dstRowEnd) {
-            iVar4 = (int)dstRowEnd - (int)dst;
+            remaining = (int)dstRowEnd - (int)dst;
             do {
               *dst = 0xff;
               dst = dst + 1;
-              iVar4 = iVar4 + -1;
-            } while (iVar4 != 0);
+              remaining = remaining + -1;
+            } while (remaining != 0);
           }
           height = height + -1;
           dst = dst + dstRowSkip;
@@ -4103,15 +4119,15 @@ int _gleTextureImagePut_FastShort(unusedArg1, width, height, src, dst, srcRowStr
       if (0 < height) {
         do {
           if (dst < dstRowEnd) {
-            iVar4 = (int)dstRowEnd - (int)dst;
-            puVar3 = src;
+            remaining = (int)dstRowEnd - (int)dst;
+            srcCursor = src;
             do {
-              srcComponent = puVar3 + 3;
-              puVar3 = puVar3 + 4;
+              srcComponent = srcCursor + 3;
+              srcCursor = srcCursor + 4;
               *dst = (char)(*srcComponent >> 7);
               dst = dst + 1;
-              iVar4 = iVar4 + -1;
-            } while (iVar4 != 0);
+              remaining = remaining + -1;
+            } while (remaining != 0);
           }
           height = height + -1;
           src = (ushort *)((int)src + srcRowStride);
@@ -4123,7 +4139,7 @@ int _gleTextureImagePut_FastShort(unusedArg1, width, height, src, dst, srcRowStr
     break;
   case 0x1907:
     if (srcFormat == 0x1908) {
-      puVar3 = src;
+      srcCursor = src;
       if (0 < height) {
         do {
           for (; dst < dstRowEnd; dst = dst + 3) {
@@ -4134,16 +4150,16 @@ int _gleTextureImagePut_FastShort(unusedArg1, width, height, src, dst, srcRowStr
             dst[2] = (char)(*srcComponent >> 7);
           }
           height = height + -1;
-          src = (ushort *)((int)puVar3 + srcRowStride);
+          src = (ushort *)((int)srcCursor + srcRowStride);
           dst = dst + dstRowSkip;
           dstRowEnd = dstRowEnd + dstRowStride;
-          puVar3 = src;
+          srcCursor = src;
         } while (height != 0);
       }
     }
     else if (srcFormat < 0x1909) {
       if (srcFormat == 0x1905) {
-        puVar3 = src;
+        srcCursor = src;
         if (0 < height) {
           do {
             for (; dst < dstRowEnd; dst = dst + 3) {
@@ -4154,16 +4170,16 @@ int _gleTextureImagePut_FastShort(unusedArg1, width, height, src, dst, srcRowStr
               dst[2] = (char)(srcValue >> 7);
             }
             height = height + -1;
-            src = (ushort *)((int)puVar3 + srcRowStride);
+            src = (ushort *)((int)srcCursor + srcRowStride);
             dst = dst + dstRowSkip;
             dstRowEnd = dstRowEnd + dstRowStride;
-            puVar3 = src;
+            srcCursor = src;
           } while (height != 0);
         }
       }
       else if (srcFormat < 0x1906) {
         if (srcFormat == 0x1903) {
-          puVar3 = src;
+          srcCursor = src;
           if (0 < height) {
             do {
               for (; dst < dstRowEnd; dst = dst + 3) {
@@ -4174,10 +4190,10 @@ int _gleTextureImagePut_FastShort(unusedArg1, width, height, src, dst, srcRowStr
                 *dst = (char)(srcValue >> 7);
               }
               height = height + -1;
-              src = (ushort *)((int)puVar3 + srcRowStride);
+              src = (ushort *)((int)srcCursor + srcRowStride);
               dst = dst + dstRowSkip;
               dstRowEnd = dstRowEnd + dstRowStride;
-              puVar3 = src;
+              srcCursor = src;
             } while (height != 0);
           }
         }
@@ -4185,7 +4201,7 @@ int _gleTextureImagePut_FastShort(unusedArg1, width, height, src, dst, srcRowStr
           if (srcFormat != 0x1904) {
             return 0;
           }
-          puVar3 = src;
+          srcCursor = src;
           if (0 < height) {
             do {
               for (; dst < dstRowEnd; dst = dst + 3) {
@@ -4196,10 +4212,10 @@ int _gleTextureImagePut_FastShort(unusedArg1, width, height, src, dst, srcRowStr
                 dst[1] = (char)(srcValue >> 7);
               }
               height = height + -1;
-              src = (ushort *)((int)puVar3 + srcRowStride);
+              src = (ushort *)((int)srcCursor + srcRowStride);
               dst = dst + dstRowSkip;
               dstRowEnd = dstRowEnd + dstRowStride;
-              puVar3 = src;
+              srcCursor = src;
             } while (height != 0);
           }
         }
@@ -4222,7 +4238,7 @@ int _gleTextureImagePut_FastShort(unusedArg1, width, height, src, dst, srcRowStr
         if (srcFormat != 0x1907) {
           return 0;
         }
-        puVar3 = src;
+        srcCursor = src;
         if (0 < height) {
           do {
             for (; dst < dstRowEnd; dst = dst + 3) {
@@ -4233,16 +4249,16 @@ int _gleTextureImagePut_FastShort(unusedArg1, width, height, src, dst, srcRowStr
               dst[2] = (char)(*srcComponent >> 7);
             }
             height = height + -1;
-            src = (ushort *)((int)puVar3 + srcRowStride);
+            src = (ushort *)((int)srcCursor + srcRowStride);
             dst = dst + dstRowSkip;
             dstRowEnd = dstRowEnd + dstRowStride;
-            puVar3 = src;
+            srcCursor = src;
           } while (height != 0);
         }
       }
     }
     else if (srcFormat == 0x8000) {
-      puVar3 = src;
+      srcCursor = src;
       if (0 < height) {
         do {
           for (; dst < dstRowEnd; dst = dst + 3) {
@@ -4253,16 +4269,16 @@ int _gleTextureImagePut_FastShort(unusedArg1, width, height, src, dst, srcRowStr
             dst[2] = (char)(*srcComponent >> 7);
           }
           height = height + -1;
-          src = (ushort *)((int)puVar3 + srcRowStride);
+          src = (ushort *)((int)srcCursor + srcRowStride);
           dst = dst + dstRowSkip;
           dstRowEnd = dstRowEnd + dstRowStride;
-          puVar3 = src;
+          srcCursor = src;
         } while (height != 0);
       }
     }
     else if (srcFormat < 0x8001) {
       if (srcFormat == 0x1909) {
-        puVar3 = src;
+        srcCursor = src;
         if (0 < height) {
           do {
             for (; dst < dstRowEnd; dst = dst + 3) {
@@ -4273,10 +4289,10 @@ int _gleTextureImagePut_FastShort(unusedArg1, width, height, src, dst, srcRowStr
               dst[1] = *dst;
             }
             height = height + -1;
-            src = (ushort *)((int)puVar3 + srcRowStride);
+            src = (ushort *)((int)srcCursor + srcRowStride);
             dst = dst + dstRowSkip;
             dstRowEnd = dstRowEnd + dstRowStride;
-            puVar3 = src;
+            srcCursor = src;
           } while (height != 0);
         }
       }
@@ -4284,7 +4300,7 @@ int _gleTextureImagePut_FastShort(unusedArg1, width, height, src, dst, srcRowStr
         if (srcFormat != 0x190a) {
           return 0;
         }
-        puVar3 = src;
+        srcCursor = src;
         if (0 < height) {
           do {
             for (; dst < dstRowEnd; dst = dst + 3) {
@@ -4295,16 +4311,16 @@ int _gleTextureImagePut_FastShort(unusedArg1, width, height, src, dst, srcRowStr
               dst[1] = *dst;
             }
             height = height + -1;
-            src = (ushort *)((int)puVar3 + srcRowStride);
+            src = (ushort *)((int)srcCursor + srcRowStride);
             dst = dst + dstRowSkip;
             dstRowEnd = dstRowEnd + dstRowStride;
-            puVar3 = src;
+            srcCursor = src;
           } while (height != 0);
         }
       }
     }
     else if (srcFormat == 0x80e0) {
-      puVar3 = src;
+      srcCursor = src;
       if (0 < height) {
         do {
           for (; dst < dstRowEnd; dst = dst + 3) {
@@ -4315,10 +4331,10 @@ int _gleTextureImagePut_FastShort(unusedArg1, width, height, src, dst, srcRowStr
             dst[2] = (char)(srcValue >> 7);
           }
           height = height + -1;
-          src = (ushort *)((int)puVar3 + srcRowStride);
+          src = (ushort *)((int)srcCursor + srcRowStride);
           dst = dst + dstRowSkip;
           dstRowEnd = dstRowEnd + dstRowStride;
-          puVar3 = src;
+          srcCursor = src;
         } while (height != 0);
       }
     }
@@ -4326,7 +4342,7 @@ int _gleTextureImagePut_FastShort(unusedArg1, width, height, src, dst, srcRowStr
       if (srcFormat != 0x80e1) {
         return 0;
       }
-      puVar3 = src;
+      srcCursor = src;
       if (0 < height) {
         do {
           for (; dst < dstRowEnd; dst = dst + 3) {
@@ -4337,10 +4353,10 @@ int _gleTextureImagePut_FastShort(unusedArg1, width, height, src, dst, srcRowStr
             dst[2] = (char)(srcValue >> 7);
           }
           height = height + -1;
-          src = (ushort *)((int)puVar3 + srcRowStride);
+          src = (ushort *)((int)srcCursor + srcRowStride);
           dst = dst + dstRowSkip;
           dstRowEnd = dstRowEnd + dstRowStride;
-          puVar3 = src;
+          srcCursor = src;
         } while (height != 0);
       }
     }
@@ -4351,13 +4367,13 @@ int _gleTextureImagePut_FastShort(unusedArg1, width, height, src, dst, srcRowStr
         do {
           if (dst < dstRowEnd) {
             pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
-            puVar3 = src;
+            srcCursor = src;
             do {
-              *dst = (char)(*puVar3 >> 7);
-              dst[1] = (char)(puVar3[1] >> 7);
-              dst[2] = (char)(puVar3[2] >> 7);
-              srcComponent = puVar3 + 3;
-              puVar3 = puVar3 + 4;
+              *dst = (char)(*srcCursor >> 7);
+              dst[1] = (char)(srcCursor[1] >> 7);
+              dst[2] = (char)(srcCursor[2] >> 7);
+              srcComponent = srcCursor + 3;
+              srcCursor = srcCursor + 4;
               dst[3] = (char)(*srcComponent >> 7);
               dst = dst + 4;
               pixelsLeft = pixelsLeft - 1;
@@ -4376,12 +4392,12 @@ int _gleTextureImagePut_FastShort(unusedArg1, width, height, src, dst, srcRowStr
           do {
             if (dst < dstRowEnd) {
               pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
-              puVar3 = src;
+              srcCursor = src;
               do {
                 *dst = 0;
                 dst[1] = 0;
-                srcValue = *puVar3;
-                puVar3 = puVar3 + 1;
+                srcValue = *srcCursor;
+                srcCursor = srcCursor + 1;
                 dst[3] = 0xff;
                 dst[2] = (char)(srcValue >> 7);
                 dst = dst + 4;
@@ -4401,10 +4417,10 @@ int _gleTextureImagePut_FastShort(unusedArg1, width, height, src, dst, srcRowStr
             do {
               if (dst < dstRowEnd) {
                 pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
-                puVar3 = src;
+                srcCursor = src;
                 do {
-                  srcValue = *puVar3;
-                  puVar3 = puVar3 + 1;
+                  srcValue = *srcCursor;
+                  srcCursor = srcCursor + 1;
                   dst[1] = 0;
                   dst[2] = 0;
                   *dst = (char)(srcValue >> 7);
@@ -4428,11 +4444,11 @@ int _gleTextureImagePut_FastShort(unusedArg1, width, height, src, dst, srcRowStr
             do {
               if (dst < dstRowEnd) {
                 pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
-                puVar3 = src;
+                srcCursor = src;
                 do {
                   *dst = 0;
-                  srcValue = *puVar3;
-                  puVar3 = puVar3 + 1;
+                  srcValue = *srcCursor;
+                  srcCursor = srcCursor + 1;
                   dst[2] = 0;
                   dst[3] = 0xff;
                   dst[1] = (char)(srcValue >> 7);
@@ -4453,13 +4469,13 @@ int _gleTextureImagePut_FastShort(unusedArg1, width, height, src, dst, srcRowStr
           do {
             if (dst < dstRowEnd) {
               pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
-              puVar3 = src;
+              srcCursor = src;
               do {
                 *dst = 0;
                 dst[1] = 0;
                 dst[2] = 0;
-                srcValue = *puVar3;
-                puVar3 = puVar3 + 1;
+                srcValue = *srcCursor;
+                srcCursor = srcCursor + 1;
                 dst[3] = (char)(srcValue >> 7);
                 dst = dst + 4;
                 pixelsLeft = pixelsLeft - 1;
@@ -4480,12 +4496,12 @@ int _gleTextureImagePut_FastShort(unusedArg1, width, height, src, dst, srcRowStr
           do {
             if (dst < dstRowEnd) {
               pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
-              puVar3 = src;
+              srcCursor = src;
               do {
-                *dst = (char)(*puVar3 >> 7);
-                dst[1] = (char)(puVar3[1] >> 7);
-                srcValue = puVar3[2];
-                puVar3 = puVar3 + 3;
+                *dst = (char)(*srcCursor >> 7);
+                dst[1] = (char)(srcCursor[1] >> 7);
+                srcValue = srcCursor[2];
+                srcCursor = srcCursor + 3;
                 dst[3] = 0xff;
                 dst[2] = (char)(srcValue >> 7);
                 dst = dst + 4;
@@ -4505,13 +4521,13 @@ int _gleTextureImagePut_FastShort(unusedArg1, width, height, src, dst, srcRowStr
         do {
           if (dst < dstRowEnd) {
             pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
-            puVar3 = src;
+            srcCursor = src;
             do {
-              *dst = (char)(puVar3[3] >> 7);
-              dst[1] = (char)(puVar3[2] >> 7);
-              dst[2] = (char)(puVar3[1] >> 7);
-              srcValue = *puVar3;
-              puVar3 = puVar3 + 4;
+              *dst = (char)(srcCursor[3] >> 7);
+              dst[1] = (char)(srcCursor[2] >> 7);
+              dst[2] = (char)(srcCursor[1] >> 7);
+              srcValue = *srcCursor;
+              srcCursor = srcCursor + 4;
               dst[3] = (char)(srcValue >> 7);
               dst = dst + 4;
               pixelsLeft = pixelsLeft - 1;
@@ -4530,10 +4546,10 @@ int _gleTextureImagePut_FastShort(unusedArg1, width, height, src, dst, srcRowStr
           do {
             if (dst < dstRowEnd) {
               pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
-              puVar3 = src;
+              srcCursor = src;
               do {
-                srcValue = *puVar3;
-                puVar3 = puVar3 + 1;
+                srcValue = *srcCursor;
+                srcCursor = srcCursor + 1;
                 dst[3] = 0xff;
                 *dst = (char)(srcValue >> 7);
                 dst[2] = *dst;
@@ -4557,13 +4573,13 @@ int _gleTextureImagePut_FastShort(unusedArg1, width, height, src, dst, srcRowStr
           do {
             if (dst < dstRowEnd) {
               pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
-              puVar3 = src;
+              srcCursor = src;
               do {
-                *dst = (char)(*puVar3 >> 7);
+                *dst = (char)(*srcCursor >> 7);
                 dst[2] = *dst;
                 dst[1] = *dst;
-                srcComponent = puVar3 + 1;
-                puVar3 = puVar3 + 2;
+                srcComponent = srcCursor + 1;
+                srcCursor = srcCursor + 2;
                 dst[3] = (char)(*srcComponent >> 7);
                 dst = dst + 4;
                 pixelsLeft = pixelsLeft - 1;
@@ -4582,12 +4598,12 @@ int _gleTextureImagePut_FastShort(unusedArg1, width, height, src, dst, srcRowStr
         do {
           if (dst < dstRowEnd) {
             pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
-            puVar3 = src;
+            srcCursor = src;
             do {
-              *dst = (char)(puVar3[2] >> 7);
-              dst[1] = (char)(puVar3[1] >> 7);
-              srcValue = *puVar3;
-              puVar3 = puVar3 + 3;
+              *dst = (char)(srcCursor[2] >> 7);
+              dst[1] = (char)(srcCursor[1] >> 7);
+              srcValue = *srcCursor;
+              srcCursor = srcCursor + 3;
               dst[3] = 0xff;
               dst[2] = (char)(srcValue >> 7);
               dst = dst + 4;
@@ -4609,13 +4625,13 @@ int _gleTextureImagePut_FastShort(unusedArg1, width, height, src, dst, srcRowStr
         do {
           if (dst < dstRowEnd) {
             pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
-            puVar3 = src;
+            srcCursor = src;
             do {
-              *dst = (char)(puVar3[2] >> 7);
-              dst[1] = (char)(puVar3[1] >> 7);
-              dst[2] = (char)(*puVar3 >> 7);
-              srcComponent = puVar3 + 3;
-              puVar3 = puVar3 + 4;
+              *dst = (char)(srcCursor[2] >> 7);
+              dst[1] = (char)(srcCursor[1] >> 7);
+              dst[2] = (char)(*srcCursor >> 7);
+              srcComponent = srcCursor + 3;
+              srcCursor = srcCursor + 4;
               dst[3] = (char)(*srcComponent >> 7);
               dst = dst + 4;
               pixelsLeft = pixelsLeft - 1;
@@ -4634,15 +4650,15 @@ int _gleTextureImagePut_FastShort(unusedArg1, width, height, src, dst, srcRowStr
       if (0 < height) {
         do {
           if (dst < dstRowEnd) {
-            iVar4 = (int)dstRowEnd - (int)dst;
-            puVar3 = src;
+            remaining = (int)dstRowEnd - (int)dst;
+            srcCursor = src;
             do {
-              srcValue = *puVar3;
-              puVar3 = puVar3 + 4;
+              srcValue = *srcCursor;
+              srcCursor = srcCursor + 4;
               *dst = (char)(srcValue >> 7);
               dst = dst + 1;
-              iVar4 = iVar4 + -1;
-            } while (iVar4 != 0);
+              remaining = remaining + -1;
+            } while (remaining != 0);
           }
           height = height + -1;
           src = (ushort *)((int)src + srcRowStride);
@@ -4660,15 +4676,15 @@ int _gleTextureImagePut_FastShort(unusedArg1, width, height, src, dst, srcRowStr
           if (0 < height) {
             do {
               if (dst < dstRowEnd) {
-                iVar4 = (int)dstRowEnd - (int)dst;
-                puVar3 = src;
+                remaining = (int)dstRowEnd - (int)dst;
+                srcCursor = src;
                 do {
-                  srcValue = *puVar3;
-                  puVar3 = puVar3 + 1;
+                  srcValue = *srcCursor;
+                  srcCursor = srcCursor + 1;
                   *dst = (char)(srcValue >> 7);
                   dst = dst + 1;
-                  iVar4 = iVar4 + -1;
-                } while (iVar4 != 0);
+                  remaining = remaining + -1;
+                } while (remaining != 0);
               }
               height = height + -1;
               src = (ushort *)((int)src + srcRowStride);
@@ -4680,12 +4696,12 @@ int _gleTextureImagePut_FastShort(unusedArg1, width, height, src, dst, srcRowStr
         else if (0 < height) {
           do {
             if (dst < dstRowEnd) {
-              iVar4 = (int)dstRowEnd - (int)dst;
+              remaining = (int)dstRowEnd - (int)dst;
               do {
                 *dst = 0;
                 dst = dst + 1;
-                iVar4 = iVar4 + -1;
-              } while (iVar4 != 0);
+                remaining = remaining + -1;
+              } while (remaining != 0);
             }
             height = height + -1;
             dst = dst + dstRowSkip;
@@ -4696,15 +4712,15 @@ int _gleTextureImagePut_FastShort(unusedArg1, width, height, src, dst, srcRowStr
       else if (0 < height) {
         do {
           if (dst < dstRowEnd) {
-            iVar4 = (int)dstRowEnd - (int)dst;
-            puVar3 = src;
+            remaining = (int)dstRowEnd - (int)dst;
+            srcCursor = src;
             do {
-              srcValue = *puVar3;
-              puVar3 = puVar3 + 3;
+              srcValue = *srcCursor;
+              srcCursor = srcCursor + 3;
               *dst = (char)(srcValue >> 7);
               dst = dst + 1;
-              iVar4 = iVar4 + -1;
-            } while (iVar4 != 0);
+              remaining = remaining + -1;
+            } while (remaining != 0);
           }
           height = height + -1;
           src = (ushort *)((int)src + srcRowStride);
@@ -4717,15 +4733,15 @@ int _gleTextureImagePut_FastShort(unusedArg1, width, height, src, dst, srcRowStr
       if (0 < height) {
         do {
           if (dst < dstRowEnd) {
-            iVar4 = (int)dstRowEnd - (int)dst;
-            puVar3 = src;
+            remaining = (int)dstRowEnd - (int)dst;
+            srcCursor = src;
             do {
-              srcComponent = puVar3 + 3;
-              puVar3 = puVar3 + 4;
+              srcComponent = srcCursor + 3;
+              srcCursor = srcCursor + 4;
               *dst = (char)(*srcComponent >> 7);
               dst = dst + 1;
-              iVar4 = iVar4 + -1;
-            } while (iVar4 != 0);
+              remaining = remaining + -1;
+            } while (remaining != 0);
           }
           height = height + -1;
           src = (ushort *)((int)src + srcRowStride);
@@ -4739,15 +4755,15 @@ int _gleTextureImagePut_FastShort(unusedArg1, width, height, src, dst, srcRowStr
         if (0 < height) {
           do {
             if (dst < dstRowEnd) {
-              iVar4 = (int)dstRowEnd - (int)dst;
-              puVar3 = src;
+              remaining = (int)dstRowEnd - (int)dst;
+              srcCursor = src;
               do {
-                srcValue = *puVar3;
-                puVar3 = puVar3 + 1;
+                srcValue = *srcCursor;
+                srcCursor = srcCursor + 1;
                 *dst = (char)(srcValue >> 7);
                 dst = dst + 1;
-                iVar4 = iVar4 + -1;
-              } while (iVar4 != 0);
+                remaining = remaining + -1;
+              } while (remaining != 0);
             }
             height = height + -1;
             src = (ushort *)((int)src + srcRowStride);
@@ -4763,15 +4779,15 @@ int _gleTextureImagePut_FastShort(unusedArg1, width, height, src, dst, srcRowStr
         if (0 < height) {
           do {
             if (dst < dstRowEnd) {
-              iVar4 = (int)dstRowEnd - (int)dst;
-              puVar3 = src;
+              remaining = (int)dstRowEnd - (int)dst;
+              srcCursor = src;
               do {
-                srcValue = *puVar3;
-                puVar3 = puVar3 + 2;
+                srcValue = *srcCursor;
+                srcCursor = srcCursor + 2;
                 *dst = (char)(srcValue >> 7);
                 dst = dst + 1;
-                iVar4 = iVar4 + -1;
-              } while (iVar4 != 0);
+                remaining = remaining + -1;
+              } while (remaining != 0);
             }
             height = height + -1;
             src = (ushort *)((int)src + srcRowStride);
@@ -4785,15 +4801,15 @@ int _gleTextureImagePut_FastShort(unusedArg1, width, height, src, dst, srcRowStr
       if (0 < height) {
         do {
           if (dst < dstRowEnd) {
-            iVar4 = (int)dstRowEnd - (int)dst;
-            puVar3 = src;
+            remaining = (int)dstRowEnd - (int)dst;
+            srcCursor = src;
             do {
-              srcComponent = puVar3 + 2;
-              puVar3 = puVar3 + 3;
+              srcComponent = srcCursor + 2;
+              srcCursor = srcCursor + 3;
               *dst = (char)(*srcComponent >> 7);
               dst = dst + 1;
-              iVar4 = iVar4 + -1;
-            } while (iVar4 != 0);
+              remaining = remaining + -1;
+            } while (remaining != 0);
           }
           height = height + -1;
           src = (ushort *)((int)src + srcRowStride);
@@ -4809,15 +4825,15 @@ int _gleTextureImagePut_FastShort(unusedArg1, width, height, src, dst, srcRowStr
       if (0 < height) {
         do {
           if (dst < dstRowEnd) {
-            iVar4 = (int)dstRowEnd - (int)dst;
-            puVar3 = src;
+            remaining = (int)dstRowEnd - (int)dst;
+            srcCursor = src;
             do {
-              srcComponent = puVar3 + 2;
-              puVar3 = puVar3 + 4;
+              srcComponent = srcCursor + 2;
+              srcCursor = srcCursor + 4;
               *dst = (char)(*srcComponent >> 7);
               dst = dst + 1;
-              iVar4 = iVar4 + -1;
-            } while (iVar4 != 0);
+              remaining = remaining + -1;
+            } while (remaining != 0);
           }
           height = height + -1;
           src = (ushort *)((int)src + srcRowStride);
@@ -4833,11 +4849,11 @@ int _gleTextureImagePut_FastShort(unusedArg1, width, height, src, dst, srcRowStr
         do {
           if (dst < dstRowEnd) {
             pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
-            puVar3 = src;
+            srcCursor = src;
             do {
-              *dst = (char)(*puVar3 >> 7);
-              srcComponent = puVar3 + 3;
-              puVar3 = puVar3 + 4;
+              *dst = (char)(*srcCursor >> 7);
+              srcComponent = srcCursor + 3;
+              srcCursor = srcCursor + 4;
               dst[1] = (char)(*srcComponent >> 7);
               dst = dst + 2;
               pixelsLeft = pixelsLeft - 1;
@@ -4860,10 +4876,10 @@ int _gleTextureImagePut_FastShort(unusedArg1, width, height, src, dst, srcRowStr
             do {
               if (dst < dstRowEnd) {
                 pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
-                puVar3 = src;
+                srcCursor = src;
                 do {
-                  srcValue = *puVar3;
-                  puVar3 = puVar3 + 1;
+                  srcValue = *srcCursor;
+                  srcCursor = srcCursor + 1;
                   dst[1] = 0xff;
                   *dst = (char)(srcValue >> 7);
                   dst = dst + 2;
@@ -4899,11 +4915,11 @@ int _gleTextureImagePut_FastShort(unusedArg1, width, height, src, dst, srcRowStr
           do {
             if (dst < dstRowEnd) {
               pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
-              puVar3 = src;
+              srcCursor = src;
               do {
                 *dst = 0;
-                srcValue = *puVar3;
-                puVar3 = puVar3 + 1;
+                srcValue = *srcCursor;
+                srcCursor = srcCursor + 1;
                 dst[1] = (char)(srcValue >> 7);
                 dst = dst + 2;
                 pixelsLeft = pixelsLeft - 1;
@@ -4924,10 +4940,10 @@ int _gleTextureImagePut_FastShort(unusedArg1, width, height, src, dst, srcRowStr
           do {
             if (dst < dstRowEnd) {
               pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
-              puVar3 = src;
+              srcCursor = src;
               do {
-                srcValue = *puVar3;
-                puVar3 = puVar3 + 3;
+                srcValue = *srcCursor;
+                srcCursor = srcCursor + 3;
                 dst[1] = 0xff;
                 *dst = (char)(srcValue >> 7);
                 dst = dst + 2;
@@ -4947,11 +4963,11 @@ int _gleTextureImagePut_FastShort(unusedArg1, width, height, src, dst, srcRowStr
         do {
           if (dst < dstRowEnd) {
             pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
-            puVar3 = src;
+            srcCursor = src;
             do {
-              *dst = (char)(puVar3[3] >> 7);
-              srcValue = *puVar3;
-              puVar3 = puVar3 + 4;
+              *dst = (char)(srcCursor[3] >> 7);
+              srcValue = *srcCursor;
+              srcCursor = srcCursor + 4;
               dst[1] = (char)(srcValue >> 7);
               dst = dst + 2;
               pixelsLeft = pixelsLeft - 1;
@@ -4970,10 +4986,10 @@ int _gleTextureImagePut_FastShort(unusedArg1, width, height, src, dst, srcRowStr
           do {
             if (dst < dstRowEnd) {
               pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
-              puVar3 = src;
+              srcCursor = src;
               do {
-                srcValue = *puVar3;
-                puVar3 = puVar3 + 1;
+                srcValue = *srcCursor;
+                srcCursor = srcCursor + 1;
                 dst[1] = 0xff;
                 *dst = (char)(srcValue >> 7);
                 dst = dst + 2;
@@ -4995,11 +5011,11 @@ int _gleTextureImagePut_FastShort(unusedArg1, width, height, src, dst, srcRowStr
           do {
             if (dst < dstRowEnd) {
               pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
-              puVar3 = src;
+              srcCursor = src;
               do {
-                *dst = (char)(*puVar3 >> 7);
-                srcComponent = puVar3 + 1;
-                puVar3 = puVar3 + 2;
+                *dst = (char)(*srcCursor >> 7);
+                srcComponent = srcCursor + 1;
+                srcCursor = srcCursor + 2;
                 dst[1] = (char)(*srcComponent >> 7);
                 dst = dst + 2;
                 pixelsLeft = pixelsLeft - 1;
@@ -5018,10 +5034,10 @@ int _gleTextureImagePut_FastShort(unusedArg1, width, height, src, dst, srcRowStr
         do {
           if (dst < dstRowEnd) {
             pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
-            puVar3 = src;
+            srcCursor = src;
             do {
-              srcValue = puVar3[2];
-              puVar3 = puVar3 + 3;
+              srcValue = srcCursor[2];
+              srcCursor = srcCursor + 3;
               dst[1] = 0xff;
               *dst = (char)(srcValue >> 7);
               dst = dst + 2;
@@ -5043,11 +5059,11 @@ int _gleTextureImagePut_FastShort(unusedArg1, width, height, src, dst, srcRowStr
         do {
           if (dst < dstRowEnd) {
             pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
-            puVar3 = src;
+            srcCursor = src;
             do {
-              *dst = (char)(puVar3[2] >> 7);
-              srcComponent = puVar3 + 3;
-              puVar3 = puVar3 + 4;
+              *dst = (char)(srcCursor[2] >> 7);
+              srcComponent = srcCursor + 3;
+              srcCursor = srcCursor + 4;
               dst[1] = (char)(*srcComponent >> 7);
               dst = dst + 2;
               pixelsLeft = pixelsLeft - 1;
@@ -5080,13 +5096,14 @@ int _gleTextureImagePut_FastUshort(unusedArg1, width, height, src, dst, srcRowSt
 {
   undefined2 *srcComponent;
   undefined2 srcValue;
-  undefined2 *puVar3;
-  int iVar4;
+  undefined2 *srcCursor;
+  int dstComponentCount;
+  int remaining;
   undefined1 *dstRowEnd;
   uint pixelsLeft;
   
-  iVar4 = _gleComponents(dstFormat);
-  dstRowEnd = dst + width * iVar4;
+  dstComponentCount = _gleComponents(dstFormat);
+  dstRowEnd = dst + width * dstComponentCount;
   switch(dstFormat) {
   case 0x1900:
     if (srcFormat != 0x1900) {
@@ -5095,15 +5112,15 @@ int _gleTextureImagePut_FastUshort(unusedArg1, width, height, src, dst, srcRowSt
     if (0 < height) {
       do {
         if (dst < dstRowEnd) {
-          iVar4 = (int)dstRowEnd - (int)dst;
-          puVar3 = src;
+          remaining = (int)dstRowEnd - (int)dst;
+          srcCursor = src;
           do {
-            srcValue = *puVar3;
-            puVar3 = puVar3 + 1;
+            srcValue = *srcCursor;
+            srcCursor = srcCursor + 1;
             *dst = (char)((ushort)srcValue >> 8);
             dst = dst + 1;
-            iVar4 = iVar4 + -1;
-          } while (iVar4 != 0);
+            remaining = remaining + -1;
+          } while (remaining != 0);
         }
         height = height + -1;
         src = (undefined2 *)((int)src + srcRowStride);
@@ -5119,15 +5136,15 @@ int _gleTextureImagePut_FastUshort(unusedArg1, width, height, src, dst, srcRowSt
       if (0 < height) {
         do {
           if (dst < dstRowEnd) {
-            iVar4 = (int)dstRowEnd - (int)dst;
-            puVar3 = src;
+            remaining = (int)dstRowEnd - (int)dst;
+            srcCursor = src;
             do {
-              srcComponent = puVar3 + 3;
-              puVar3 = puVar3 + 4;
+              srcComponent = srcCursor + 3;
+              srcCursor = srcCursor + 4;
               *dst = (char)((ushort)*srcComponent >> 8);
               dst = dst + 1;
-              iVar4 = iVar4 + -1;
-            } while (iVar4 != 0);
+              remaining = remaining + -1;
+            } while (remaining != 0);
           }
           height = height + -1;
           src = (undefined2 *)((int)src + srcRowStride);
@@ -5141,15 +5158,15 @@ int _gleTextureImagePut_FastUshort(unusedArg1, width, height, src, dst, srcRowSt
         if (0 < height) {
           do {
             if (dst < dstRowEnd) {
-              iVar4 = (int)dstRowEnd - (int)dst;
-              puVar3 = src;
+              remaining = (int)dstRowEnd - (int)dst;
+              srcCursor = src;
               do {
-                srcValue = *puVar3;
-                puVar3 = puVar3 + 1;
+                srcValue = *srcCursor;
+                srcCursor = srcCursor + 1;
                 *dst = (char)((ushort)srcValue >> 8);
                 dst = dst + 1;
-                iVar4 = iVar4 + -1;
-              } while (iVar4 != 0);
+                remaining = remaining + -1;
+              } while (remaining != 0);
             }
             height = height + -1;
             src = (undefined2 *)((int)src + srcRowStride);
@@ -5165,12 +5182,12 @@ int _gleTextureImagePut_FastUshort(unusedArg1, width, height, src, dst, srcRowSt
         if (0 < height) {
           do {
             if (dst < dstRowEnd) {
-              iVar4 = (int)dstRowEnd - (int)dst;
+              remaining = (int)dstRowEnd - (int)dst;
               do {
                 *dst = 0xff;
                 dst = dst + 1;
-                iVar4 = iVar4 + -1;
-              } while (iVar4 != 0);
+                remaining = remaining + -1;
+              } while (remaining != 0);
             }
             height = height + -1;
             dst = dst + dstRowSkip;
@@ -5181,12 +5198,12 @@ int _gleTextureImagePut_FastUshort(unusedArg1, width, height, src, dst, srcRowSt
       else if (0 < height) {
         do {
           if (dst < dstRowEnd) {
-            iVar4 = (int)dstRowEnd - (int)dst;
+            remaining = (int)dstRowEnd - (int)dst;
             do {
               *dst = 0xff;
               dst = dst + 1;
-              iVar4 = iVar4 + -1;
-            } while (iVar4 != 0);
+              remaining = remaining + -1;
+            } while (remaining != 0);
           }
           height = height + -1;
           dst = dst + dstRowSkip;
@@ -5198,15 +5215,15 @@ int _gleTextureImagePut_FastUshort(unusedArg1, width, height, src, dst, srcRowSt
       if (0 < height) {
         do {
           if (dst < dstRowEnd) {
-            iVar4 = (int)dstRowEnd - (int)dst;
-            puVar3 = src;
+            remaining = (int)dstRowEnd - (int)dst;
+            srcCursor = src;
             do {
-              srcValue = *puVar3;
-              puVar3 = puVar3 + 4;
+              srcValue = *srcCursor;
+              srcCursor = srcCursor + 4;
               *dst = (char)((ushort)srcValue >> 8);
               dst = dst + 1;
-              iVar4 = iVar4 + -1;
-            } while (iVar4 != 0);
+              remaining = remaining + -1;
+            } while (remaining != 0);
           }
           height = height + -1;
           src = (undefined2 *)((int)src + srcRowStride);
@@ -5220,12 +5237,12 @@ int _gleTextureImagePut_FastUshort(unusedArg1, width, height, src, dst, srcRowSt
         if (0 < height) {
           do {
             if (dst < dstRowEnd) {
-              iVar4 = (int)dstRowEnd - (int)dst;
+              remaining = (int)dstRowEnd - (int)dst;
               do {
                 *dst = 0xff;
                 dst = dst + 1;
-                iVar4 = iVar4 + -1;
-              } while (iVar4 != 0);
+                remaining = remaining + -1;
+              } while (remaining != 0);
             }
             height = height + -1;
             dst = dst + dstRowSkip;
@@ -5240,15 +5257,15 @@ int _gleTextureImagePut_FastUshort(unusedArg1, width, height, src, dst, srcRowSt
         if (0 < height) {
           do {
             if (dst < dstRowEnd) {
-              iVar4 = (int)dstRowEnd - (int)dst;
-              puVar3 = src;
+              remaining = (int)dstRowEnd - (int)dst;
+              srcCursor = src;
               do {
-                srcComponent = puVar3 + 1;
-                puVar3 = puVar3 + 2;
+                srcComponent = srcCursor + 1;
+                srcCursor = srcCursor + 2;
                 *dst = (char)((ushort)*srcComponent >> 8);
                 dst = dst + 1;
-                iVar4 = iVar4 + -1;
-              } while (iVar4 != 0);
+                remaining = remaining + -1;
+              } while (remaining != 0);
             }
             height = height + -1;
             src = (undefined2 *)((int)src + srcRowStride);
@@ -5262,12 +5279,12 @@ int _gleTextureImagePut_FastUshort(unusedArg1, width, height, src, dst, srcRowSt
       if (0 < height) {
         do {
           if (dst < dstRowEnd) {
-            iVar4 = (int)dstRowEnd - (int)dst;
+            remaining = (int)dstRowEnd - (int)dst;
             do {
               *dst = 0xff;
               dst = dst + 1;
-              iVar4 = iVar4 + -1;
-            } while (iVar4 != 0);
+              remaining = remaining + -1;
+            } while (remaining != 0);
           }
           height = height + -1;
           dst = dst + dstRowSkip;
@@ -5282,15 +5299,15 @@ int _gleTextureImagePut_FastUshort(unusedArg1, width, height, src, dst, srcRowSt
       if (0 < height) {
         do {
           if (dst < dstRowEnd) {
-            iVar4 = (int)dstRowEnd - (int)dst;
-            puVar3 = src;
+            remaining = (int)dstRowEnd - (int)dst;
+            srcCursor = src;
             do {
-              srcComponent = puVar3 + 3;
-              puVar3 = puVar3 + 4;
+              srcComponent = srcCursor + 3;
+              srcCursor = srcCursor + 4;
               *dst = (char)((ushort)*srcComponent >> 8);
               dst = dst + 1;
-              iVar4 = iVar4 + -1;
-            } while (iVar4 != 0);
+              remaining = remaining + -1;
+            } while (remaining != 0);
           }
           height = height + -1;
           src = (undefined2 *)((int)src + srcRowStride);
@@ -5302,7 +5319,7 @@ int _gleTextureImagePut_FastUshort(unusedArg1, width, height, src, dst, srcRowSt
     break;
   case 0x1907:
     if (srcFormat == 0x1908) {
-      puVar3 = src;
+      srcCursor = src;
       if (0 < height) {
         do {
           for (; dst < dstRowEnd; dst = dst + 3) {
@@ -5313,16 +5330,16 @@ int _gleTextureImagePut_FastUshort(unusedArg1, width, height, src, dst, srcRowSt
             dst[2] = (char)((ushort)*srcComponent >> 8);
           }
           height = height + -1;
-          src = (undefined2 *)((int)puVar3 + srcRowStride);
+          src = (undefined2 *)((int)srcCursor + srcRowStride);
           dst = dst + dstRowSkip;
           dstRowEnd = dstRowEnd + dstRowStride;
-          puVar3 = src;
+          srcCursor = src;
         } while (height != 0);
       }
     }
     else if (srcFormat < 0x1909) {
       if (srcFormat == 0x1905) {
-        puVar3 = src;
+        srcCursor = src;
         if (0 < height) {
           do {
             for (; dst < dstRowEnd; dst = dst + 3) {
@@ -5333,16 +5350,16 @@ int _gleTextureImagePut_FastUshort(unusedArg1, width, height, src, dst, srcRowSt
               dst[2] = (char)((ushort)srcValue >> 8);
             }
             height = height + -1;
-            src = (undefined2 *)((int)puVar3 + srcRowStride);
+            src = (undefined2 *)((int)srcCursor + srcRowStride);
             dst = dst + dstRowSkip;
             dstRowEnd = dstRowEnd + dstRowStride;
-            puVar3 = src;
+            srcCursor = src;
           } while (height != 0);
         }
       }
       else if (srcFormat < 0x1906) {
         if (srcFormat == 0x1903) {
-          puVar3 = src;
+          srcCursor = src;
           if (0 < height) {
             do {
               for (; dst < dstRowEnd; dst = dst + 3) {
@@ -5353,10 +5370,10 @@ int _gleTextureImagePut_FastUshort(unusedArg1, width, height, src, dst, srcRowSt
                 *dst = (char)((ushort)srcValue >> 8);
               }
               height = height + -1;
-              src = (undefined2 *)((int)puVar3 + srcRowStride);
+              src = (undefined2 *)((int)srcCursor + srcRowStride);
               dst = dst + dstRowSkip;
               dstRowEnd = dstRowEnd + dstRowStride;
-              puVar3 = src;
+              srcCursor = src;
             } while (height != 0);
           }
         }
@@ -5364,7 +5381,7 @@ int _gleTextureImagePut_FastUshort(unusedArg1, width, height, src, dst, srcRowSt
           if (srcFormat != 0x1904) {
             return 0;
           }
-          puVar3 = src;
+          srcCursor = src;
           if (0 < height) {
             do {
               for (; dst < dstRowEnd; dst = dst + 3) {
@@ -5375,10 +5392,10 @@ int _gleTextureImagePut_FastUshort(unusedArg1, width, height, src, dst, srcRowSt
                 dst[1] = (char)((ushort)srcValue >> 8);
               }
               height = height + -1;
-              src = (undefined2 *)((int)puVar3 + srcRowStride);
+              src = (undefined2 *)((int)srcCursor + srcRowStride);
               dst = dst + dstRowSkip;
               dstRowEnd = dstRowEnd + dstRowStride;
-              puVar3 = src;
+              srcCursor = src;
             } while (height != 0);
           }
         }
@@ -5401,7 +5418,7 @@ int _gleTextureImagePut_FastUshort(unusedArg1, width, height, src, dst, srcRowSt
         if (srcFormat != 0x1907) {
           return 0;
         }
-        puVar3 = src;
+        srcCursor = src;
         if (0 < height) {
           do {
             for (; dst < dstRowEnd; dst = dst + 3) {
@@ -5412,16 +5429,16 @@ int _gleTextureImagePut_FastUshort(unusedArg1, width, height, src, dst, srcRowSt
               dst[2] = (char)((ushort)*srcComponent >> 8);
             }
             height = height + -1;
-            src = (undefined2 *)((int)puVar3 + srcRowStride);
+            src = (undefined2 *)((int)srcCursor + srcRowStride);
             dst = dst + dstRowSkip;
             dstRowEnd = dstRowEnd + dstRowStride;
-            puVar3 = src;
+            srcCursor = src;
           } while (height != 0);
         }
       }
     }
     else if (srcFormat == 0x8000) {
-      puVar3 = src;
+      srcCursor = src;
       if (0 < height) {
         do {
           for (; dst < dstRowEnd; dst = dst + 3) {
@@ -5432,16 +5449,16 @@ int _gleTextureImagePut_FastUshort(unusedArg1, width, height, src, dst, srcRowSt
             dst[2] = (char)((ushort)*srcComponent >> 8);
           }
           height = height + -1;
-          src = (undefined2 *)((int)puVar3 + srcRowStride);
+          src = (undefined2 *)((int)srcCursor + srcRowStride);
           dst = dst + dstRowSkip;
           dstRowEnd = dstRowEnd + dstRowStride;
-          puVar3 = src;
+          srcCursor = src;
         } while (height != 0);
       }
     }
     else if (srcFormat < 0x8001) {
       if (srcFormat == 0x1909) {
-        puVar3 = src;
+        srcCursor = src;
         if (0 < height) {
           do {
             for (; dst < dstRowEnd; dst = dst + 3) {
@@ -5452,10 +5469,10 @@ int _gleTextureImagePut_FastUshort(unusedArg1, width, height, src, dst, srcRowSt
               dst[1] = *dst;
             }
             height = height + -1;
-            src = (undefined2 *)((int)puVar3 + srcRowStride);
+            src = (undefined2 *)((int)srcCursor + srcRowStride);
             dst = dst + dstRowSkip;
             dstRowEnd = dstRowEnd + dstRowStride;
-            puVar3 = src;
+            srcCursor = src;
           } while (height != 0);
         }
       }
@@ -5463,7 +5480,7 @@ int _gleTextureImagePut_FastUshort(unusedArg1, width, height, src, dst, srcRowSt
         if (srcFormat != 0x190a) {
           return 0;
         }
-        puVar3 = src;
+        srcCursor = src;
         if (0 < height) {
           do {
             for (; dst < dstRowEnd; dst = dst + 3) {
@@ -5474,16 +5491,16 @@ int _gleTextureImagePut_FastUshort(unusedArg1, width, height, src, dst, srcRowSt
               dst[1] = *dst;
             }
             height = height + -1;
-            src = (undefined2 *)((int)puVar3 + srcRowStride);
+            src = (undefined2 *)((int)srcCursor + srcRowStride);
             dst = dst + dstRowSkip;
             dstRowEnd = dstRowEnd + dstRowStride;
-            puVar3 = src;
+            srcCursor = src;
           } while (height != 0);
         }
       }
     }
     else if (srcFormat == 0x80e0) {
-      puVar3 = src;
+      srcCursor = src;
       if (0 < height) {
         do {
           for (; dst < dstRowEnd; dst = dst + 3) {
@@ -5494,10 +5511,10 @@ int _gleTextureImagePut_FastUshort(unusedArg1, width, height, src, dst, srcRowSt
             dst[2] = (char)((ushort)srcValue >> 8);
           }
           height = height + -1;
-          src = (undefined2 *)((int)puVar3 + srcRowStride);
+          src = (undefined2 *)((int)srcCursor + srcRowStride);
           dst = dst + dstRowSkip;
           dstRowEnd = dstRowEnd + dstRowStride;
-          puVar3 = src;
+          srcCursor = src;
         } while (height != 0);
       }
     }
@@ -5505,7 +5522,7 @@ int _gleTextureImagePut_FastUshort(unusedArg1, width, height, src, dst, srcRowSt
       if (srcFormat != 0x80e1) {
         return 0;
       }
-      puVar3 = src;
+      srcCursor = src;
       if (0 < height) {
         do {
           for (; dst < dstRowEnd; dst = dst + 3) {
@@ -5516,10 +5533,10 @@ int _gleTextureImagePut_FastUshort(unusedArg1, width, height, src, dst, srcRowSt
             dst[2] = (char)((ushort)srcValue >> 8);
           }
           height = height + -1;
-          src = (undefined2 *)((int)puVar3 + srcRowStride);
+          src = (undefined2 *)((int)srcCursor + srcRowStride);
           dst = dst + dstRowSkip;
           dstRowEnd = dstRowEnd + dstRowStride;
-          puVar3 = src;
+          srcCursor = src;
         } while (height != 0);
       }
     }
@@ -5530,13 +5547,13 @@ int _gleTextureImagePut_FastUshort(unusedArg1, width, height, src, dst, srcRowSt
         do {
           if (dst < dstRowEnd) {
             pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
-            puVar3 = src;
+            srcCursor = src;
             do {
-              *dst = (char)((ushort)*puVar3 >> 8);
-              dst[1] = (char)((ushort)puVar3[1] >> 8);
-              dst[2] = (char)((ushort)puVar3[2] >> 8);
-              srcComponent = puVar3 + 3;
-              puVar3 = puVar3 + 4;
+              *dst = (char)((ushort)*srcCursor >> 8);
+              dst[1] = (char)((ushort)srcCursor[1] >> 8);
+              dst[2] = (char)((ushort)srcCursor[2] >> 8);
+              srcComponent = srcCursor + 3;
+              srcCursor = srcCursor + 4;
               dst[3] = (char)((ushort)*srcComponent >> 8);
               dst = dst + 4;
               pixelsLeft = pixelsLeft - 1;
@@ -5555,12 +5572,12 @@ int _gleTextureImagePut_FastUshort(unusedArg1, width, height, src, dst, srcRowSt
           do {
             if (dst < dstRowEnd) {
               pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
-              puVar3 = src;
+              srcCursor = src;
               do {
                 *dst = 0;
                 dst[1] = 0;
-                srcValue = *puVar3;
-                puVar3 = puVar3 + 1;
+                srcValue = *srcCursor;
+                srcCursor = srcCursor + 1;
                 dst[3] = 0xff;
                 dst[2] = (char)((ushort)srcValue >> 8);
                 dst = dst + 4;
@@ -5580,10 +5597,10 @@ int _gleTextureImagePut_FastUshort(unusedArg1, width, height, src, dst, srcRowSt
             do {
               if (dst < dstRowEnd) {
                 pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
-                puVar3 = src;
+                srcCursor = src;
                 do {
-                  srcValue = *puVar3;
-                  puVar3 = puVar3 + 1;
+                  srcValue = *srcCursor;
+                  srcCursor = srcCursor + 1;
                   dst[1] = 0;
                   dst[2] = 0;
                   *dst = (char)((ushort)srcValue >> 8);
@@ -5607,11 +5624,11 @@ int _gleTextureImagePut_FastUshort(unusedArg1, width, height, src, dst, srcRowSt
             do {
               if (dst < dstRowEnd) {
                 pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
-                puVar3 = src;
+                srcCursor = src;
                 do {
                   *dst = 0;
-                  srcValue = *puVar3;
-                  puVar3 = puVar3 + 1;
+                  srcValue = *srcCursor;
+                  srcCursor = srcCursor + 1;
                   dst[2] = 0;
                   dst[3] = 0xff;
                   dst[1] = (char)((ushort)srcValue >> 8);
@@ -5632,13 +5649,13 @@ int _gleTextureImagePut_FastUshort(unusedArg1, width, height, src, dst, srcRowSt
           do {
             if (dst < dstRowEnd) {
               pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
-              puVar3 = src;
+              srcCursor = src;
               do {
                 *dst = 0;
                 dst[1] = 0;
                 dst[2] = 0;
-                srcValue = *puVar3;
-                puVar3 = puVar3 + 1;
+                srcValue = *srcCursor;
+                srcCursor = srcCursor + 1;
                 dst[3] = (char)((ushort)srcValue >> 8);
                 dst = dst + 4;
                 pixelsLeft = pixelsLeft - 1;
@@ -5659,12 +5676,12 @@ int _gleTextureImagePut_FastUshort(unusedArg1, width, height, src, dst, srcRowSt
           do {
             if (dst < dstRowEnd) {
               pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
-              puVar3 = src;
+              srcCursor = src;
               do {
-                *dst = (char)((ushort)*puVar3 >> 8);
-                dst[1] = (char)((ushort)puVar3[1] >> 8);
-                srcValue = puVar3[2];
-                puVar3 = puVar3 + 3;
+                *dst = (char)((ushort)*srcCursor >> 8);
+                dst[1] = (char)((ushort)srcCursor[1] >> 8);
+                srcValue = srcCursor[2];
+                srcCursor = srcCursor + 3;
                 dst[3] = 0xff;
                 dst[2] = (char)((ushort)srcValue >> 8);
                 dst = dst + 4;
@@ -5684,13 +5701,13 @@ int _gleTextureImagePut_FastUshort(unusedArg1, width, height, src, dst, srcRowSt
         do {
           if (dst < dstRowEnd) {
             pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
-            puVar3 = src;
+            srcCursor = src;
             do {
-              *dst = (char)((ushort)puVar3[3] >> 8);
-              dst[1] = (char)((ushort)puVar3[2] >> 8);
-              dst[2] = (char)((ushort)puVar3[1] >> 8);
-              srcValue = *puVar3;
-              puVar3 = puVar3 + 4;
+              *dst = (char)((ushort)srcCursor[3] >> 8);
+              dst[1] = (char)((ushort)srcCursor[2] >> 8);
+              dst[2] = (char)((ushort)srcCursor[1] >> 8);
+              srcValue = *srcCursor;
+              srcCursor = srcCursor + 4;
               dst[3] = (char)((ushort)srcValue >> 8);
               dst = dst + 4;
               pixelsLeft = pixelsLeft - 1;
@@ -5709,10 +5726,10 @@ int _gleTextureImagePut_FastUshort(unusedArg1, width, height, src, dst, srcRowSt
           do {
             if (dst < dstRowEnd) {
               pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
-              puVar3 = src;
+              srcCursor = src;
               do {
-                srcValue = *puVar3;
-                puVar3 = puVar3 + 1;
+                srcValue = *srcCursor;
+                srcCursor = srcCursor + 1;
                 dst[3] = 0xff;
                 *dst = (char)((ushort)srcValue >> 8);
                 dst[2] = *dst;
@@ -5736,13 +5753,13 @@ int _gleTextureImagePut_FastUshort(unusedArg1, width, height, src, dst, srcRowSt
           do {
             if (dst < dstRowEnd) {
               pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
-              puVar3 = src;
+              srcCursor = src;
               do {
-                *dst = (char)((ushort)*puVar3 >> 8);
+                *dst = (char)((ushort)*srcCursor >> 8);
                 dst[2] = *dst;
                 dst[1] = *dst;
-                srcComponent = puVar3 + 1;
-                puVar3 = puVar3 + 2;
+                srcComponent = srcCursor + 1;
+                srcCursor = srcCursor + 2;
                 dst[3] = (char)((ushort)*srcComponent >> 8);
                 dst = dst + 4;
                 pixelsLeft = pixelsLeft - 1;
@@ -5761,12 +5778,12 @@ int _gleTextureImagePut_FastUshort(unusedArg1, width, height, src, dst, srcRowSt
         do {
           if (dst < dstRowEnd) {
             pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
-            puVar3 = src;
+            srcCursor = src;
             do {
-              *dst = (char)((ushort)puVar3[2] >> 8);
-              dst[1] = (char)((ushort)puVar3[1] >> 8);
-              srcValue = *puVar3;
-              puVar3 = puVar3 + 3;
+              *dst = (char)((ushort)srcCursor[2] >> 8);
+              dst[1] = (char)((ushort)srcCursor[1] >> 8);
+              srcValue = *srcCursor;
+              srcCursor = srcCursor + 3;
               dst[3] = 0xff;
               dst[2] = (char)((ushort)srcValue >> 8);
               dst = dst + 4;
@@ -5788,13 +5805,13 @@ int _gleTextureImagePut_FastUshort(unusedArg1, width, height, src, dst, srcRowSt
         do {
           if (dst < dstRowEnd) {
             pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
-            puVar3 = src;
+            srcCursor = src;
             do {
-              *dst = (char)((ushort)puVar3[2] >> 8);
-              dst[1] = (char)((ushort)puVar3[1] >> 8);
-              dst[2] = (char)((ushort)*puVar3 >> 8);
-              srcComponent = puVar3 + 3;
-              puVar3 = puVar3 + 4;
+              *dst = (char)((ushort)srcCursor[2] >> 8);
+              dst[1] = (char)((ushort)srcCursor[1] >> 8);
+              dst[2] = (char)((ushort)*srcCursor >> 8);
+              srcComponent = srcCursor + 3;
+              srcCursor = srcCursor + 4;
               dst[3] = (char)((ushort)*srcComponent >> 8);
               dst = dst + 4;
               pixelsLeft = pixelsLeft - 1;
@@ -5813,15 +5830,15 @@ int _gleTextureImagePut_FastUshort(unusedArg1, width, height, src, dst, srcRowSt
       if (0 < height) {
         do {
           if (dst < dstRowEnd) {
-            iVar4 = (int)dstRowEnd - (int)dst;
-            puVar3 = src;
+            remaining = (int)dstRowEnd - (int)dst;
+            srcCursor = src;
             do {
-              srcValue = *puVar3;
-              puVar3 = puVar3 + 4;
+              srcValue = *srcCursor;
+              srcCursor = srcCursor + 4;
               *dst = (char)((ushort)srcValue >> 8);
               dst = dst + 1;
-              iVar4 = iVar4 + -1;
-            } while (iVar4 != 0);
+              remaining = remaining + -1;
+            } while (remaining != 0);
           }
           height = height + -1;
           src = (undefined2 *)((int)src + srcRowStride);
@@ -5839,15 +5856,15 @@ int _gleTextureImagePut_FastUshort(unusedArg1, width, height, src, dst, srcRowSt
           if (0 < height) {
             do {
               if (dst < dstRowEnd) {
-                iVar4 = (int)dstRowEnd - (int)dst;
-                puVar3 = src;
+                remaining = (int)dstRowEnd - (int)dst;
+                srcCursor = src;
                 do {
-                  srcValue = *puVar3;
-                  puVar3 = puVar3 + 1;
+                  srcValue = *srcCursor;
+                  srcCursor = srcCursor + 1;
                   *dst = (char)((ushort)srcValue >> 8);
                   dst = dst + 1;
-                  iVar4 = iVar4 + -1;
-                } while (iVar4 != 0);
+                  remaining = remaining + -1;
+                } while (remaining != 0);
               }
               height = height + -1;
               src = (undefined2 *)((int)src + srcRowStride);
@@ -5859,12 +5876,12 @@ int _gleTextureImagePut_FastUshort(unusedArg1, width, height, src, dst, srcRowSt
         else if (0 < height) {
           do {
             if (dst < dstRowEnd) {
-              iVar4 = (int)dstRowEnd - (int)dst;
+              remaining = (int)dstRowEnd - (int)dst;
               do {
                 *dst = 0;
                 dst = dst + 1;
-                iVar4 = iVar4 + -1;
-              } while (iVar4 != 0);
+                remaining = remaining + -1;
+              } while (remaining != 0);
             }
             height = height + -1;
             dst = dst + dstRowSkip;
@@ -5875,15 +5892,15 @@ int _gleTextureImagePut_FastUshort(unusedArg1, width, height, src, dst, srcRowSt
       else if (0 < height) {
         do {
           if (dst < dstRowEnd) {
-            iVar4 = (int)dstRowEnd - (int)dst;
-            puVar3 = src;
+            remaining = (int)dstRowEnd - (int)dst;
+            srcCursor = src;
             do {
-              srcValue = *puVar3;
-              puVar3 = puVar3 + 3;
+              srcValue = *srcCursor;
+              srcCursor = srcCursor + 3;
               *dst = (char)((ushort)srcValue >> 8);
               dst = dst + 1;
-              iVar4 = iVar4 + -1;
-            } while (iVar4 != 0);
+              remaining = remaining + -1;
+            } while (remaining != 0);
           }
           height = height + -1;
           src = (undefined2 *)((int)src + srcRowStride);
@@ -5896,15 +5913,15 @@ int _gleTextureImagePut_FastUshort(unusedArg1, width, height, src, dst, srcRowSt
       if (0 < height) {
         do {
           if (dst < dstRowEnd) {
-            iVar4 = (int)dstRowEnd - (int)dst;
-            puVar3 = src;
+            remaining = (int)dstRowEnd - (int)dst;
+            srcCursor = src;
             do {
-              srcComponent = puVar3 + 3;
-              puVar3 = puVar3 + 4;
+              srcComponent = srcCursor + 3;
+              srcCursor = srcCursor + 4;
               *dst = (char)((ushort)*srcComponent >> 8);
               dst = dst + 1;
-              iVar4 = iVar4 + -1;
-            } while (iVar4 != 0);
+              remaining = remaining + -1;
+            } while (remaining != 0);
           }
           height = height + -1;
           src = (undefined2 *)((int)src + srcRowStride);
@@ -5918,15 +5935,15 @@ int _gleTextureImagePut_FastUshort(unusedArg1, width, height, src, dst, srcRowSt
         if (0 < height) {
           do {
             if (dst < dstRowEnd) {
-              iVar4 = (int)dstRowEnd - (int)dst;
-              puVar3 = src;
+              remaining = (int)dstRowEnd - (int)dst;
+              srcCursor = src;
               do {
-                srcValue = *puVar3;
-                puVar3 = puVar3 + 1;
+                srcValue = *srcCursor;
+                srcCursor = srcCursor + 1;
                 *dst = (char)((ushort)srcValue >> 8);
                 dst = dst + 1;
-                iVar4 = iVar4 + -1;
-              } while (iVar4 != 0);
+                remaining = remaining + -1;
+              } while (remaining != 0);
             }
             height = height + -1;
             src = (undefined2 *)((int)src + srcRowStride);
@@ -5942,15 +5959,15 @@ int _gleTextureImagePut_FastUshort(unusedArg1, width, height, src, dst, srcRowSt
         if (0 < height) {
           do {
             if (dst < dstRowEnd) {
-              iVar4 = (int)dstRowEnd - (int)dst;
-              puVar3 = src;
+              remaining = (int)dstRowEnd - (int)dst;
+              srcCursor = src;
               do {
-                srcValue = *puVar3;
-                puVar3 = puVar3 + 2;
+                srcValue = *srcCursor;
+                srcCursor = srcCursor + 2;
                 *dst = (char)((ushort)srcValue >> 8);
                 dst = dst + 1;
-                iVar4 = iVar4 + -1;
-              } while (iVar4 != 0);
+                remaining = remaining + -1;
+              } while (remaining != 0);
             }
             height = height + -1;
             src = (undefined2 *)((int)src + srcRowStride);
@@ -5964,15 +5981,15 @@ int _gleTextureImagePut_FastUshort(unusedArg1, width, height, src, dst, srcRowSt
       if (0 < height) {
         do {
           if (dst < dstRowEnd) {
-            iVar4 = (int)dstRowEnd - (int)dst;
-            puVar3 = src;
+            remaining = (int)dstRowEnd - (int)dst;
+            srcCursor = src;
             do {
-              srcComponent = puVar3 + 2;
-              puVar3 = puVar3 + 3;
+              srcComponent = srcCursor + 2;
+              srcCursor = srcCursor + 3;
               *dst = (char)((ushort)*srcComponent >> 8);
               dst = dst + 1;
-              iVar4 = iVar4 + -1;
-            } while (iVar4 != 0);
+              remaining = remaining + -1;
+            } while (remaining != 0);
           }
           height = height + -1;
           src = (undefined2 *)((int)src + srcRowStride);
@@ -5988,15 +6005,15 @@ int _gleTextureImagePut_FastUshort(unusedArg1, width, height, src, dst, srcRowSt
       if (0 < height) {
         do {
           if (dst < dstRowEnd) {
-            iVar4 = (int)dstRowEnd - (int)dst;
-            puVar3 = src;
+            remaining = (int)dstRowEnd - (int)dst;
+            srcCursor = src;
             do {
-              srcComponent = puVar3 + 2;
-              puVar3 = puVar3 + 4;
+              srcComponent = srcCursor + 2;
+              srcCursor = srcCursor + 4;
               *dst = (char)((ushort)*srcComponent >> 8);
               dst = dst + 1;
-              iVar4 = iVar4 + -1;
-            } while (iVar4 != 0);
+              remaining = remaining + -1;
+            } while (remaining != 0);
           }
           height = height + -1;
           src = (undefined2 *)((int)src + srcRowStride);
@@ -6012,11 +6029,11 @@ int _gleTextureImagePut_FastUshort(unusedArg1, width, height, src, dst, srcRowSt
         do {
           if (dst < dstRowEnd) {
             pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
-            puVar3 = src;
+            srcCursor = src;
             do {
-              *dst = (char)((ushort)*puVar3 >> 8);
-              srcComponent = puVar3 + 3;
-              puVar3 = puVar3 + 4;
+              *dst = (char)((ushort)*srcCursor >> 8);
+              srcComponent = srcCursor + 3;
+              srcCursor = srcCursor + 4;
               dst[1] = (char)((ushort)*srcComponent >> 8);
               dst = dst + 2;
               pixelsLeft = pixelsLeft - 1;
@@ -6039,10 +6056,10 @@ int _gleTextureImagePut_FastUshort(unusedArg1, width, height, src, dst, srcRowSt
             do {
               if (dst < dstRowEnd) {
                 pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
-                puVar3 = src;
+                srcCursor = src;
                 do {
-                  srcValue = *puVar3;
-                  puVar3 = puVar3 + 1;
+                  srcValue = *srcCursor;
+                  srcCursor = srcCursor + 1;
                   dst[1] = 0xff;
                   *dst = (char)((ushort)srcValue >> 8);
                   dst = dst + 2;
@@ -6078,11 +6095,11 @@ int _gleTextureImagePut_FastUshort(unusedArg1, width, height, src, dst, srcRowSt
           do {
             if (dst < dstRowEnd) {
               pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
-              puVar3 = src;
+              srcCursor = src;
               do {
                 *dst = 0;
-                srcValue = *puVar3;
-                puVar3 = puVar3 + 1;
+                srcValue = *srcCursor;
+                srcCursor = srcCursor + 1;
                 dst[1] = (char)((ushort)srcValue >> 8);
                 dst = dst + 2;
                 pixelsLeft = pixelsLeft - 1;
@@ -6103,10 +6120,10 @@ int _gleTextureImagePut_FastUshort(unusedArg1, width, height, src, dst, srcRowSt
           do {
             if (dst < dstRowEnd) {
               pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
-              puVar3 = src;
+              srcCursor = src;
               do {
-                srcValue = *puVar3;
-                puVar3 = puVar3 + 3;
+                srcValue = *srcCursor;
+                srcCursor = srcCursor + 3;
                 dst[1] = 0xff;
                 *dst = (char)((ushort)srcValue >> 8);
                 dst = dst + 2;
@@ -6126,11 +6143,11 @@ int _gleTextureImagePut_FastUshort(unusedArg1, width, height, src, dst, srcRowSt
         do {
           if (dst < dstRowEnd) {
             pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
-            puVar3 = src;
+            srcCursor = src;
             do {
-              *dst = (char)((ushort)puVar3[3] >> 8);
-              srcValue = *puVar3;
-              puVar3 = puVar3 + 4;
+              *dst = (char)((ushort)srcCursor[3] >> 8);
+              srcValue = *srcCursor;
+              srcCursor = srcCursor + 4;
               dst[1] = (char)((ushort)srcValue >> 8);
               dst = dst + 2;
               pixelsLeft = pixelsLeft - 1;
@@ -6149,10 +6166,10 @@ int _gleTextureImagePut_FastUshort(unusedArg1, width, height, src, dst, srcRowSt
           do {
             if (dst < dstRowEnd) {
               pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
-              puVar3 = src;
+              srcCursor = src;
               do {
-                srcValue = *puVar3;
-                puVar3 = puVar3 + 1;
+                srcValue = *srcCursor;
+                srcCursor = srcCursor + 1;
                 dst[1] = 0xff;
                 *dst = (char)((ushort)srcValue >> 8);
                 dst = dst + 2;
@@ -6174,11 +6191,11 @@ int _gleTextureImagePut_FastUshort(unusedArg1, width, height, src, dst, srcRowSt
           do {
             if (dst < dstRowEnd) {
               pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
-              puVar3 = src;
+              srcCursor = src;
               do {
-                *dst = (char)((ushort)*puVar3 >> 8);
-                srcComponent = puVar3 + 1;
-                puVar3 = puVar3 + 2;
+                *dst = (char)((ushort)*srcCursor >> 8);
+                srcComponent = srcCursor + 1;
+                srcCursor = srcCursor + 2;
                 dst[1] = (char)((ushort)*srcComponent >> 8);
                 dst = dst + 2;
                 pixelsLeft = pixelsLeft - 1;
@@ -6197,10 +6214,10 @@ int _gleTextureImagePut_FastUshort(unusedArg1, width, height, src, dst, srcRowSt
         do {
           if (dst < dstRowEnd) {
             pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
-            puVar3 = src;
+            srcCursor = src;
             do {
-              srcValue = puVar3[2];
-              puVar3 = puVar3 + 3;
+              srcValue = srcCursor[2];
+              srcCursor = srcCursor + 3;
               dst[1] = 0xff;
               *dst = (char)((ushort)srcValue >> 8);
               dst = dst + 2;
@@ -6222,11 +6239,11 @@ int _gleTextureImagePut_FastUshort(unusedArg1, width, height, src, dst, srcRowSt
         do {
           if (dst < dstRowEnd) {
             pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
-            puVar3 = src;
+            srcCursor = src;
             do {
-              *dst = (char)((ushort)puVar3[2] >> 8);
-              srcComponent = puVar3 + 3;
-              puVar3 = puVar3 + 4;
+              *dst = (char)((ushort)srcCursor[2] >> 8);
+              srcComponent = srcCursor + 3;
+              srcCursor = srcCursor + 4;
               dst[1] = (char)((ushort)*srcComponent >> 8);
               dst = dst + 2;
               pixelsLeft = pixelsLeft - 1;
@@ -6258,14 +6275,16 @@ int _gleTextureImagePut_FastInt(unusedArg1, width, height, src, dst, srcRowStrid
   int srcFormat;
 {
   uint *srcComponent;
-  uint uVar2;
-  uint *puVar3;
-  int iVar4;
+  uint srcValue;
+  uint *srcCursor;
+  int dstComponentCount;
+  int remaining;
   undefined1 *dstRowEnd;
-  uint uVar6;
+  uint srcValue2;
+  uint pixelsLeft;
   
-  iVar4 = _gleComponents(dstFormat);
-  dstRowEnd = dst + width * iVar4;
+  dstComponentCount = _gleComponents(dstFormat);
+  dstRowEnd = dst + width * dstComponentCount;
   switch(dstFormat) {
   case 0x1900:
     if (srcFormat != 0x1900) {
@@ -6274,15 +6293,15 @@ int _gleTextureImagePut_FastInt(unusedArg1, width, height, src, dst, srcRowStrid
     if (0 < height) {
       do {
         if (dst < dstRowEnd) {
-          iVar4 = (int)dstRowEnd - (int)dst;
-          puVar3 = src;
+          remaining = (int)dstRowEnd - (int)dst;
+          srcCursor = src;
           do {
-            uVar6 = *puVar3;
-            puVar3 = puVar3 + 1;
-            *dst = (char)(uVar6 >> 0x17);
+            srcValue2 = *srcCursor;
+            srcCursor = srcCursor + 1;
+            *dst = (char)(srcValue2 >> 0x17);
             dst = dst + 1;
-            iVar4 = iVar4 + -1;
-          } while (iVar4 != 0);
+            remaining = remaining + -1;
+          } while (remaining != 0);
         }
         height = height + -1;
         src = (uint *)((int)src + srcRowStride);
@@ -6298,15 +6317,15 @@ int _gleTextureImagePut_FastInt(unusedArg1, width, height, src, dst, srcRowStrid
       if (0 < height) {
         do {
           if (dst < dstRowEnd) {
-            iVar4 = (int)dstRowEnd - (int)dst;
-            puVar3 = src;
+            remaining = (int)dstRowEnd - (int)dst;
+            srcCursor = src;
             do {
-              srcComponent = puVar3 + 3;
-              puVar3 = puVar3 + 4;
+              srcComponent = srcCursor + 3;
+              srcCursor = srcCursor + 4;
               *dst = (char)(*srcComponent >> 0x17);
               dst = dst + 1;
-              iVar4 = iVar4 + -1;
-            } while (iVar4 != 0);
+              remaining = remaining + -1;
+            } while (remaining != 0);
           }
           height = height + -1;
           src = (uint *)((int)src + srcRowStride);
@@ -6320,15 +6339,15 @@ int _gleTextureImagePut_FastInt(unusedArg1, width, height, src, dst, srcRowStrid
         if (0 < height) {
           do {
             if (dst < dstRowEnd) {
-              iVar4 = (int)dstRowEnd - (int)dst;
-              puVar3 = src;
+              remaining = (int)dstRowEnd - (int)dst;
+              srcCursor = src;
               do {
-                uVar6 = *puVar3;
-                puVar3 = puVar3 + 1;
-                *dst = (char)(uVar6 >> 0x17);
+                srcValue2 = *srcCursor;
+                srcCursor = srcCursor + 1;
+                *dst = (char)(srcValue2 >> 0x17);
                 dst = dst + 1;
-                iVar4 = iVar4 + -1;
-              } while (iVar4 != 0);
+                remaining = remaining + -1;
+              } while (remaining != 0);
             }
             height = height + -1;
             src = (uint *)((int)src + srcRowStride);
@@ -6344,12 +6363,12 @@ int _gleTextureImagePut_FastInt(unusedArg1, width, height, src, dst, srcRowStrid
         if (0 < height) {
           do {
             if (dst < dstRowEnd) {
-              iVar4 = (int)dstRowEnd - (int)dst;
+              remaining = (int)dstRowEnd - (int)dst;
               do {
                 *dst = 0xff;
                 dst = dst + 1;
-                iVar4 = iVar4 + -1;
-              } while (iVar4 != 0);
+                remaining = remaining + -1;
+              } while (remaining != 0);
             }
             height = height + -1;
             dst = dst + dstRowSkip;
@@ -6360,12 +6379,12 @@ int _gleTextureImagePut_FastInt(unusedArg1, width, height, src, dst, srcRowStrid
       else if (0 < height) {
         do {
           if (dst < dstRowEnd) {
-            iVar4 = (int)dstRowEnd - (int)dst;
+            remaining = (int)dstRowEnd - (int)dst;
             do {
               *dst = 0xff;
               dst = dst + 1;
-              iVar4 = iVar4 + -1;
-            } while (iVar4 != 0);
+              remaining = remaining + -1;
+            } while (remaining != 0);
           }
           height = height + -1;
           dst = dst + dstRowSkip;
@@ -6377,15 +6396,15 @@ int _gleTextureImagePut_FastInt(unusedArg1, width, height, src, dst, srcRowStrid
       if (0 < height) {
         do {
           if (dst < dstRowEnd) {
-            iVar4 = (int)dstRowEnd - (int)dst;
-            puVar3 = src;
+            remaining = (int)dstRowEnd - (int)dst;
+            srcCursor = src;
             do {
-              uVar6 = *puVar3;
-              puVar3 = puVar3 + 4;
-              *dst = (char)(uVar6 >> 0x17);
+              srcValue2 = *srcCursor;
+              srcCursor = srcCursor + 4;
+              *dst = (char)(srcValue2 >> 0x17);
               dst = dst + 1;
-              iVar4 = iVar4 + -1;
-            } while (iVar4 != 0);
+              remaining = remaining + -1;
+            } while (remaining != 0);
           }
           height = height + -1;
           src = (uint *)((int)src + srcRowStride);
@@ -6399,12 +6418,12 @@ int _gleTextureImagePut_FastInt(unusedArg1, width, height, src, dst, srcRowStrid
         if (0 < height) {
           do {
             if (dst < dstRowEnd) {
-              iVar4 = (int)dstRowEnd - (int)dst;
+              remaining = (int)dstRowEnd - (int)dst;
               do {
                 *dst = 0xff;
                 dst = dst + 1;
-                iVar4 = iVar4 + -1;
-              } while (iVar4 != 0);
+                remaining = remaining + -1;
+              } while (remaining != 0);
             }
             height = height + -1;
             dst = dst + dstRowSkip;
@@ -6419,15 +6438,15 @@ int _gleTextureImagePut_FastInt(unusedArg1, width, height, src, dst, srcRowStrid
         if (0 < height) {
           do {
             if (dst < dstRowEnd) {
-              iVar4 = (int)dstRowEnd - (int)dst;
-              puVar3 = src;
+              remaining = (int)dstRowEnd - (int)dst;
+              srcCursor = src;
               do {
-                srcComponent = puVar3 + 1;
-                puVar3 = puVar3 + 2;
+                srcComponent = srcCursor + 1;
+                srcCursor = srcCursor + 2;
                 *dst = (char)(*srcComponent >> 0x17);
                 dst = dst + 1;
-                iVar4 = iVar4 + -1;
-              } while (iVar4 != 0);
+                remaining = remaining + -1;
+              } while (remaining != 0);
             }
             height = height + -1;
             src = (uint *)((int)src + srcRowStride);
@@ -6441,12 +6460,12 @@ int _gleTextureImagePut_FastInt(unusedArg1, width, height, src, dst, srcRowStrid
       if (0 < height) {
         do {
           if (dst < dstRowEnd) {
-            iVar4 = (int)dstRowEnd - (int)dst;
+            remaining = (int)dstRowEnd - (int)dst;
             do {
               *dst = 0xff;
               dst = dst + 1;
-              iVar4 = iVar4 + -1;
-            } while (iVar4 != 0);
+              remaining = remaining + -1;
+            } while (remaining != 0);
           }
           height = height + -1;
           dst = dst + dstRowSkip;
@@ -6461,15 +6480,15 @@ int _gleTextureImagePut_FastInt(unusedArg1, width, height, src, dst, srcRowStrid
       if (0 < height) {
         do {
           if (dst < dstRowEnd) {
-            iVar4 = (int)dstRowEnd - (int)dst;
-            puVar3 = src;
+            remaining = (int)dstRowEnd - (int)dst;
+            srcCursor = src;
             do {
-              srcComponent = puVar3 + 3;
-              puVar3 = puVar3 + 4;
+              srcComponent = srcCursor + 3;
+              srcCursor = srcCursor + 4;
               *dst = (char)(*srcComponent >> 0x17);
               dst = dst + 1;
-              iVar4 = iVar4 + -1;
-            } while (iVar4 != 0);
+              remaining = remaining + -1;
+            } while (remaining != 0);
           }
           height = height + -1;
           src = (uint *)((int)src + srcRowStride);
@@ -6481,7 +6500,7 @@ int _gleTextureImagePut_FastInt(unusedArg1, width, height, src, dst, srcRowStrid
     break;
   case 0x1907:
     if (srcFormat == 0x1908) {
-      puVar3 = src;
+      srcCursor = src;
       if (0 < height) {
         do {
           for (; dst < dstRowEnd; dst = dst + 3) {
@@ -6492,50 +6511,50 @@ int _gleTextureImagePut_FastInt(unusedArg1, width, height, src, dst, srcRowStrid
             dst[2] = (char)(*srcComponent >> 0x17);
           }
           height = height + -1;
-          src = (uint *)((int)puVar3 + srcRowStride);
+          src = (uint *)((int)srcCursor + srcRowStride);
           dst = dst + dstRowSkip;
           dstRowEnd = dstRowEnd + dstRowStride;
-          puVar3 = src;
+          srcCursor = src;
         } while (height != 0);
       }
     }
     else if (srcFormat < 0x1909) {
       if (srcFormat == 0x1905) {
-        puVar3 = src;
+        srcCursor = src;
         if (0 < height) {
           do {
             for (; dst < dstRowEnd; dst = dst + 3) {
               *dst = 0;
               dst[1] = 0;
-              uVar6 = *src;
+              srcValue2 = *src;
               src = src + 1;
-              dst[2] = (char)(uVar6 >> 0x17);
+              dst[2] = (char)(srcValue2 >> 0x17);
             }
             height = height + -1;
-            src = (uint *)((int)puVar3 + srcRowStride);
+            src = (uint *)((int)srcCursor + srcRowStride);
             dst = dst + dstRowSkip;
             dstRowEnd = dstRowEnd + dstRowStride;
-            puVar3 = src;
+            srcCursor = src;
           } while (height != 0);
         }
       }
       else if (srcFormat < 0x1906) {
         if (srcFormat == 0x1903) {
-          puVar3 = src;
+          srcCursor = src;
           if (0 < height) {
             do {
               for (; dst < dstRowEnd; dst = dst + 3) {
-                uVar6 = *src;
+                srcValue2 = *src;
                 src = src + 1;
                 dst[1] = 0;
                 dst[2] = 0;
-                *dst = (char)(uVar6 >> 0x17);
+                *dst = (char)(srcValue2 >> 0x17);
               }
               height = height + -1;
-              src = (uint *)((int)puVar3 + srcRowStride);
+              src = (uint *)((int)srcCursor + srcRowStride);
               dst = dst + dstRowSkip;
               dstRowEnd = dstRowEnd + dstRowStride;
-              puVar3 = src;
+              srcCursor = src;
             } while (height != 0);
           }
         }
@@ -6543,21 +6562,21 @@ int _gleTextureImagePut_FastInt(unusedArg1, width, height, src, dst, srcRowStrid
           if (srcFormat != 0x1904) {
             return 0;
           }
-          puVar3 = src;
+          srcCursor = src;
           if (0 < height) {
             do {
               for (; dst < dstRowEnd; dst = dst + 3) {
                 *dst = 0;
-                uVar6 = *src;
+                srcValue2 = *src;
                 src = src + 1;
                 dst[2] = 0;
-                dst[1] = (char)(uVar6 >> 0x17);
+                dst[1] = (char)(srcValue2 >> 0x17);
               }
               height = height + -1;
-              src = (uint *)((int)puVar3 + srcRowStride);
+              src = (uint *)((int)srcCursor + srcRowStride);
               dst = dst + dstRowSkip;
               dstRowEnd = dstRowEnd + dstRowStride;
-              puVar3 = src;
+              srcCursor = src;
             } while (height != 0);
           }
         }
@@ -6580,7 +6599,7 @@ int _gleTextureImagePut_FastInt(unusedArg1, width, height, src, dst, srcRowStrid
         if (srcFormat != 0x1907) {
           return 0;
         }
-        puVar3 = src;
+        srcCursor = src;
         if (0 < height) {
           do {
             for (; dst < dstRowEnd; dst = dst + 3) {
@@ -6591,16 +6610,16 @@ int _gleTextureImagePut_FastInt(unusedArg1, width, height, src, dst, srcRowStrid
               dst[2] = (char)(*srcComponent >> 0x17);
             }
             height = height + -1;
-            src = (uint *)((int)puVar3 + srcRowStride);
+            src = (uint *)((int)srcCursor + srcRowStride);
             dst = dst + dstRowSkip;
             dstRowEnd = dstRowEnd + dstRowStride;
-            puVar3 = src;
+            srcCursor = src;
           } while (height != 0);
         }
       }
     }
     else if (srcFormat == 0x8000) {
-      puVar3 = src;
+      srcCursor = src;
       if (0 < height) {
         do {
           for (; dst < dstRowEnd; dst = dst + 3) {
@@ -6611,30 +6630,30 @@ int _gleTextureImagePut_FastInt(unusedArg1, width, height, src, dst, srcRowStrid
             dst[2] = (char)(*srcComponent >> 0x17);
           }
           height = height + -1;
-          src = (uint *)((int)puVar3 + srcRowStride);
+          src = (uint *)((int)srcCursor + srcRowStride);
           dst = dst + dstRowSkip;
           dstRowEnd = dstRowEnd + dstRowStride;
-          puVar3 = src;
+          srcCursor = src;
         } while (height != 0);
       }
     }
     else if (srcFormat < 0x8001) {
       if (srcFormat == 0x1909) {
-        puVar3 = src;
+        srcCursor = src;
         if (0 < height) {
           do {
             for (; dst < dstRowEnd; dst = dst + 3) {
-              uVar6 = *src;
+              srcValue2 = *src;
               src = src + 1;
-              *dst = (char)(uVar6 >> 0x17);
+              *dst = (char)(srcValue2 >> 0x17);
               dst[2] = *dst;
               dst[1] = *dst;
             }
             height = height + -1;
-            src = (uint *)((int)puVar3 + srcRowStride);
+            src = (uint *)((int)srcCursor + srcRowStride);
             dst = dst + dstRowSkip;
             dstRowEnd = dstRowEnd + dstRowStride;
-            puVar3 = src;
+            srcCursor = src;
           } while (height != 0);
         }
       }
@@ -6642,41 +6661,41 @@ int _gleTextureImagePut_FastInt(unusedArg1, width, height, src, dst, srcRowStrid
         if (srcFormat != 0x190a) {
           return 0;
         }
-        puVar3 = src;
+        srcCursor = src;
         if (0 < height) {
           do {
             for (; dst < dstRowEnd; dst = dst + 3) {
-              uVar6 = *src;
+              srcValue2 = *src;
               src = src + 2;
-              *dst = (char)(uVar6 >> 0x17);
+              *dst = (char)(srcValue2 >> 0x17);
               dst[2] = *dst;
               dst[1] = *dst;
             }
             height = height + -1;
-            src = (uint *)((int)puVar3 + srcRowStride);
+            src = (uint *)((int)srcCursor + srcRowStride);
             dst = dst + dstRowSkip;
             dstRowEnd = dstRowEnd + dstRowStride;
-            puVar3 = src;
+            srcCursor = src;
           } while (height != 0);
         }
       }
     }
     else if (srcFormat == 0x80e0) {
-      puVar3 = src;
+      srcCursor = src;
       if (0 < height) {
         do {
           for (; dst < dstRowEnd; dst = dst + 3) {
             *dst = (char)(src[2] >> 0x17);
             dst[1] = (char)(src[1] >> 0x17);
-            uVar6 = *src;
+            srcValue2 = *src;
             src = src + 3;
-            dst[2] = (char)(uVar6 >> 0x17);
+            dst[2] = (char)(srcValue2 >> 0x17);
           }
           height = height + -1;
-          src = (uint *)((int)puVar3 + srcRowStride);
+          src = (uint *)((int)srcCursor + srcRowStride);
           dst = dst + dstRowSkip;
           dstRowEnd = dstRowEnd + dstRowStride;
-          puVar3 = src;
+          srcCursor = src;
         } while (height != 0);
       }
     }
@@ -6684,21 +6703,21 @@ int _gleTextureImagePut_FastInt(unusedArg1, width, height, src, dst, srcRowStrid
       if (srcFormat != 0x80e1) {
         return 0;
       }
-      puVar3 = src;
+      srcCursor = src;
       if (0 < height) {
         do {
           for (; dst < dstRowEnd; dst = dst + 3) {
             *dst = (char)(src[2] >> 0x17);
             dst[1] = (char)(src[1] >> 0x17);
-            uVar6 = *src;
+            srcValue2 = *src;
             src = src + 4;
-            dst[2] = (char)(uVar6 >> 0x17);
+            dst[2] = (char)(srcValue2 >> 0x17);
           }
           height = height + -1;
-          src = (uint *)((int)puVar3 + srcRowStride);
+          src = (uint *)((int)srcCursor + srcRowStride);
           dst = dst + dstRowSkip;
           dstRowEnd = dstRowEnd + dstRowStride;
-          puVar3 = src;
+          srcCursor = src;
         } while (height != 0);
       }
     }
@@ -6708,18 +6727,18 @@ int _gleTextureImagePut_FastInt(unusedArg1, width, height, src, dst, srcRowStrid
       if (0 < height) {
         do {
           if (dst < dstRowEnd) {
-            uVar6 = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
-            puVar3 = src;
+            pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
+            srcCursor = src;
             do {
-              *dst = (char)(*puVar3 >> 0x17);
-              dst[1] = (char)(puVar3[1] >> 0x17);
-              dst[2] = (char)(puVar3[2] >> 0x17);
-              srcComponent = puVar3 + 3;
-              puVar3 = puVar3 + 4;
+              *dst = (char)(*srcCursor >> 0x17);
+              dst[1] = (char)(srcCursor[1] >> 0x17);
+              dst[2] = (char)(srcCursor[2] >> 0x17);
+              srcComponent = srcCursor + 3;
+              srcCursor = srcCursor + 4;
               dst[3] = (char)(*srcComponent >> 0x17);
               dst = dst + 4;
-              uVar6 = uVar6 - 1;
-            } while (uVar6 != 0);
+              pixelsLeft = pixelsLeft - 1;
+            } while (pixelsLeft != 0);
           }
           height = height + -1;
           src = (uint *)((int)src + srcRowStride);
@@ -6733,18 +6752,18 @@ int _gleTextureImagePut_FastInt(unusedArg1, width, height, src, dst, srcRowStrid
         if (0 < height) {
           do {
             if (dst < dstRowEnd) {
-              uVar6 = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
-              puVar3 = src;
+              pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
+              srcCursor = src;
               do {
                 *dst = 0;
                 dst[1] = 0;
-                uVar2 = *puVar3;
-                puVar3 = puVar3 + 1;
+                srcValue = *srcCursor;
+                srcCursor = srcCursor + 1;
                 dst[3] = 0xff;
-                dst[2] = (char)(uVar2 >> 0x17);
+                dst[2] = (char)(srcValue >> 0x17);
                 dst = dst + 4;
-                uVar6 = uVar6 - 1;
-              } while (uVar6 != 0);
+                pixelsLeft = pixelsLeft - 1;
+              } while (pixelsLeft != 0);
             }
             height = height + -1;
             src = (uint *)((int)src + srcRowStride);
@@ -6758,18 +6777,18 @@ int _gleTextureImagePut_FastInt(unusedArg1, width, height, src, dst, srcRowStrid
           if (0 < height) {
             do {
               if (dst < dstRowEnd) {
-                uVar6 = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
-                puVar3 = src;
+                pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
+                srcCursor = src;
                 do {
-                  uVar2 = *puVar3;
-                  puVar3 = puVar3 + 1;
+                  srcValue = *srcCursor;
+                  srcCursor = srcCursor + 1;
                   dst[1] = 0;
                   dst[2] = 0;
-                  *dst = (char)(uVar2 >> 0x17);
+                  *dst = (char)(srcValue >> 0x17);
                   dst[3] = 0xff;
                   dst = dst + 4;
-                  uVar6 = uVar6 - 1;
-                } while (uVar6 != 0);
+                  pixelsLeft = pixelsLeft - 1;
+                } while (pixelsLeft != 0);
               }
               height = height + -1;
               src = (uint *)((int)src + srcRowStride);
@@ -6785,18 +6804,18 @@ int _gleTextureImagePut_FastInt(unusedArg1, width, height, src, dst, srcRowStrid
           if (0 < height) {
             do {
               if (dst < dstRowEnd) {
-                uVar6 = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
-                puVar3 = src;
+                pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
+                srcCursor = src;
                 do {
                   *dst = 0;
-                  uVar2 = *puVar3;
-                  puVar3 = puVar3 + 1;
+                  srcValue = *srcCursor;
+                  srcCursor = srcCursor + 1;
                   dst[2] = 0;
                   dst[3] = 0xff;
-                  dst[1] = (char)(uVar2 >> 0x17);
+                  dst[1] = (char)(srcValue >> 0x17);
                   dst = dst + 4;
-                  uVar6 = uVar6 - 1;
-                } while (uVar6 != 0);
+                  pixelsLeft = pixelsLeft - 1;
+                } while (pixelsLeft != 0);
               }
               height = height + -1;
               src = (uint *)((int)src + srcRowStride);
@@ -6810,18 +6829,18 @@ int _gleTextureImagePut_FastInt(unusedArg1, width, height, src, dst, srcRowStrid
         if (0 < height) {
           do {
             if (dst < dstRowEnd) {
-              uVar6 = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
-              puVar3 = src;
+              pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
+              srcCursor = src;
               do {
                 *dst = 0;
                 dst[1] = 0;
                 dst[2] = 0;
-                uVar2 = *puVar3;
-                puVar3 = puVar3 + 1;
-                dst[3] = (char)(uVar2 >> 0x17);
+                srcValue = *srcCursor;
+                srcCursor = srcCursor + 1;
+                dst[3] = (char)(srcValue >> 0x17);
                 dst = dst + 4;
-                uVar6 = uVar6 - 1;
-              } while (uVar6 != 0);
+                pixelsLeft = pixelsLeft - 1;
+              } while (pixelsLeft != 0);
             }
             height = height + -1;
             src = (uint *)((int)src + srcRowStride);
@@ -6837,18 +6856,18 @@ int _gleTextureImagePut_FastInt(unusedArg1, width, height, src, dst, srcRowStrid
         if (0 < height) {
           do {
             if (dst < dstRowEnd) {
-              uVar6 = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
-              puVar3 = src;
+              pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
+              srcCursor = src;
               do {
-                *dst = (char)(*puVar3 >> 0x17);
-                dst[1] = (char)(puVar3[1] >> 0x17);
-                uVar2 = puVar3[2];
-                puVar3 = puVar3 + 3;
+                *dst = (char)(*srcCursor >> 0x17);
+                dst[1] = (char)(srcCursor[1] >> 0x17);
+                srcValue = srcCursor[2];
+                srcCursor = srcCursor + 3;
                 dst[3] = 0xff;
-                dst[2] = (char)(uVar2 >> 0x17);
+                dst[2] = (char)(srcValue >> 0x17);
                 dst = dst + 4;
-                uVar6 = uVar6 - 1;
-              } while (uVar6 != 0);
+                pixelsLeft = pixelsLeft - 1;
+              } while (pixelsLeft != 0);
             }
             height = height + -1;
             src = (uint *)((int)src + srcRowStride);
@@ -6862,18 +6881,18 @@ int _gleTextureImagePut_FastInt(unusedArg1, width, height, src, dst, srcRowStrid
       if (0 < height) {
         do {
           if (dst < dstRowEnd) {
-            uVar6 = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
-            puVar3 = src;
+            pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
+            srcCursor = src;
             do {
-              *dst = (char)(puVar3[3] >> 0x17);
-              dst[1] = (char)(puVar3[2] >> 0x17);
-              dst[2] = (char)(puVar3[1] >> 0x17);
-              uVar2 = *puVar3;
-              puVar3 = puVar3 + 4;
-              dst[3] = (char)(uVar2 >> 0x17);
+              *dst = (char)(srcCursor[3] >> 0x17);
+              dst[1] = (char)(srcCursor[2] >> 0x17);
+              dst[2] = (char)(srcCursor[1] >> 0x17);
+              srcValue = *srcCursor;
+              srcCursor = srcCursor + 4;
+              dst[3] = (char)(srcValue >> 0x17);
               dst = dst + 4;
-              uVar6 = uVar6 - 1;
-            } while (uVar6 != 0);
+              pixelsLeft = pixelsLeft - 1;
+            } while (pixelsLeft != 0);
           }
           height = height + -1;
           src = (uint *)((int)src + srcRowStride);
@@ -6887,18 +6906,18 @@ int _gleTextureImagePut_FastInt(unusedArg1, width, height, src, dst, srcRowStrid
         if (0 < height) {
           do {
             if (dst < dstRowEnd) {
-              uVar6 = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
-              puVar3 = src;
+              pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
+              srcCursor = src;
               do {
-                uVar2 = *puVar3;
-                puVar3 = puVar3 + 1;
+                srcValue = *srcCursor;
+                srcCursor = srcCursor + 1;
                 dst[3] = 0xff;
-                *dst = (char)(uVar2 >> 0x17);
+                *dst = (char)(srcValue >> 0x17);
                 dst[2] = *dst;
                 dst[1] = *dst;
                 dst = dst + 4;
-                uVar6 = uVar6 - 1;
-              } while (uVar6 != 0);
+                pixelsLeft = pixelsLeft - 1;
+              } while (pixelsLeft != 0);
             }
             height = height + -1;
             src = (uint *)((int)src + srcRowStride);
@@ -6914,18 +6933,18 @@ int _gleTextureImagePut_FastInt(unusedArg1, width, height, src, dst, srcRowStrid
         if (0 < height) {
           do {
             if (dst < dstRowEnd) {
-              uVar6 = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
-              puVar3 = src;
+              pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
+              srcCursor = src;
               do {
-                *dst = (char)(*puVar3 >> 0x17);
+                *dst = (char)(*srcCursor >> 0x17);
                 dst[2] = *dst;
                 dst[1] = *dst;
-                srcComponent = puVar3 + 1;
-                puVar3 = puVar3 + 2;
+                srcComponent = srcCursor + 1;
+                srcCursor = srcCursor + 2;
                 dst[3] = (char)(*srcComponent >> 0x17);
                 dst = dst + 4;
-                uVar6 = uVar6 - 1;
-              } while (uVar6 != 0);
+                pixelsLeft = pixelsLeft - 1;
+              } while (pixelsLeft != 0);
             }
             height = height + -1;
             src = (uint *)((int)src + srcRowStride);
@@ -6939,18 +6958,18 @@ int _gleTextureImagePut_FastInt(unusedArg1, width, height, src, dst, srcRowStrid
       if (0 < height) {
         do {
           if (dst < dstRowEnd) {
-            uVar6 = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
-            puVar3 = src;
+            pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
+            srcCursor = src;
             do {
-              *dst = (char)(puVar3[2] >> 0x17);
-              dst[1] = (char)(puVar3[1] >> 0x17);
-              uVar2 = *puVar3;
-              puVar3 = puVar3 + 3;
+              *dst = (char)(srcCursor[2] >> 0x17);
+              dst[1] = (char)(srcCursor[1] >> 0x17);
+              srcValue = *srcCursor;
+              srcCursor = srcCursor + 3;
               dst[3] = 0xff;
-              dst[2] = (char)(uVar2 >> 0x17);
+              dst[2] = (char)(srcValue >> 0x17);
               dst = dst + 4;
-              uVar6 = uVar6 - 1;
-            } while (uVar6 != 0);
+              pixelsLeft = pixelsLeft - 1;
+            } while (pixelsLeft != 0);
           }
           height = height + -1;
           src = (uint *)((int)src + srcRowStride);
@@ -6966,18 +6985,18 @@ int _gleTextureImagePut_FastInt(unusedArg1, width, height, src, dst, srcRowStrid
       if (0 < height) {
         do {
           if (dst < dstRowEnd) {
-            uVar6 = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
-            puVar3 = src;
+            pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
+            srcCursor = src;
             do {
-              *dst = (char)(puVar3[2] >> 0x17);
-              dst[1] = (char)(puVar3[1] >> 0x17);
-              dst[2] = (char)(*puVar3 >> 0x17);
-              srcComponent = puVar3 + 3;
-              puVar3 = puVar3 + 4;
+              *dst = (char)(srcCursor[2] >> 0x17);
+              dst[1] = (char)(srcCursor[1] >> 0x17);
+              dst[2] = (char)(*srcCursor >> 0x17);
+              srcComponent = srcCursor + 3;
+              srcCursor = srcCursor + 4;
               dst[3] = (char)(*srcComponent >> 0x17);
               dst = dst + 4;
-              uVar6 = uVar6 - 1;
-            } while (uVar6 != 0);
+              pixelsLeft = pixelsLeft - 1;
+            } while (pixelsLeft != 0);
           }
           height = height + -1;
           src = (uint *)((int)src + srcRowStride);
@@ -6992,15 +7011,15 @@ int _gleTextureImagePut_FastInt(unusedArg1, width, height, src, dst, srcRowStrid
       if (0 < height) {
         do {
           if (dst < dstRowEnd) {
-            iVar4 = (int)dstRowEnd - (int)dst;
-            puVar3 = src;
+            remaining = (int)dstRowEnd - (int)dst;
+            srcCursor = src;
             do {
-              uVar6 = *puVar3;
-              puVar3 = puVar3 + 4;
-              *dst = (char)(uVar6 >> 0x17);
+              srcValue2 = *srcCursor;
+              srcCursor = srcCursor + 4;
+              *dst = (char)(srcValue2 >> 0x17);
               dst = dst + 1;
-              iVar4 = iVar4 + -1;
-            } while (iVar4 != 0);
+              remaining = remaining + -1;
+            } while (remaining != 0);
           }
           height = height + -1;
           src = (uint *)((int)src + srcRowStride);
@@ -7018,15 +7037,15 @@ int _gleTextureImagePut_FastInt(unusedArg1, width, height, src, dst, srcRowStrid
           if (0 < height) {
             do {
               if (dst < dstRowEnd) {
-                iVar4 = (int)dstRowEnd - (int)dst;
-                puVar3 = src;
+                remaining = (int)dstRowEnd - (int)dst;
+                srcCursor = src;
                 do {
-                  uVar6 = *puVar3;
-                  puVar3 = puVar3 + 1;
-                  *dst = (char)(uVar6 >> 0x17);
+                  srcValue2 = *srcCursor;
+                  srcCursor = srcCursor + 1;
+                  *dst = (char)(srcValue2 >> 0x17);
                   dst = dst + 1;
-                  iVar4 = iVar4 + -1;
-                } while (iVar4 != 0);
+                  remaining = remaining + -1;
+                } while (remaining != 0);
               }
               height = height + -1;
               src = (uint *)((int)src + srcRowStride);
@@ -7038,12 +7057,12 @@ int _gleTextureImagePut_FastInt(unusedArg1, width, height, src, dst, srcRowStrid
         else if (0 < height) {
           do {
             if (dst < dstRowEnd) {
-              iVar4 = (int)dstRowEnd - (int)dst;
+              remaining = (int)dstRowEnd - (int)dst;
               do {
                 *dst = 0;
                 dst = dst + 1;
-                iVar4 = iVar4 + -1;
-              } while (iVar4 != 0);
+                remaining = remaining + -1;
+              } while (remaining != 0);
             }
             height = height + -1;
             dst = dst + dstRowSkip;
@@ -7054,15 +7073,15 @@ int _gleTextureImagePut_FastInt(unusedArg1, width, height, src, dst, srcRowStrid
       else if (0 < height) {
         do {
           if (dst < dstRowEnd) {
-            iVar4 = (int)dstRowEnd - (int)dst;
-            puVar3 = src;
+            remaining = (int)dstRowEnd - (int)dst;
+            srcCursor = src;
             do {
-              uVar6 = *puVar3;
-              puVar3 = puVar3 + 3;
-              *dst = (char)(uVar6 >> 0x17);
+              srcValue2 = *srcCursor;
+              srcCursor = srcCursor + 3;
+              *dst = (char)(srcValue2 >> 0x17);
               dst = dst + 1;
-              iVar4 = iVar4 + -1;
-            } while (iVar4 != 0);
+              remaining = remaining + -1;
+            } while (remaining != 0);
           }
           height = height + -1;
           src = (uint *)((int)src + srcRowStride);
@@ -7075,15 +7094,15 @@ int _gleTextureImagePut_FastInt(unusedArg1, width, height, src, dst, srcRowStrid
       if (0 < height) {
         do {
           if (dst < dstRowEnd) {
-            iVar4 = (int)dstRowEnd - (int)dst;
-            puVar3 = src;
+            remaining = (int)dstRowEnd - (int)dst;
+            srcCursor = src;
             do {
-              srcComponent = puVar3 + 3;
-              puVar3 = puVar3 + 4;
+              srcComponent = srcCursor + 3;
+              srcCursor = srcCursor + 4;
               *dst = (char)(*srcComponent >> 0x17);
               dst = dst + 1;
-              iVar4 = iVar4 + -1;
-            } while (iVar4 != 0);
+              remaining = remaining + -1;
+            } while (remaining != 0);
           }
           height = height + -1;
           src = (uint *)((int)src + srcRowStride);
@@ -7097,15 +7116,15 @@ int _gleTextureImagePut_FastInt(unusedArg1, width, height, src, dst, srcRowStrid
         if (0 < height) {
           do {
             if (dst < dstRowEnd) {
-              iVar4 = (int)dstRowEnd - (int)dst;
-              puVar3 = src;
+              remaining = (int)dstRowEnd - (int)dst;
+              srcCursor = src;
               do {
-                uVar6 = *puVar3;
-                puVar3 = puVar3 + 1;
-                *dst = (char)(uVar6 >> 0x17);
+                srcValue2 = *srcCursor;
+                srcCursor = srcCursor + 1;
+                *dst = (char)(srcValue2 >> 0x17);
                 dst = dst + 1;
-                iVar4 = iVar4 + -1;
-              } while (iVar4 != 0);
+                remaining = remaining + -1;
+              } while (remaining != 0);
             }
             height = height + -1;
             src = (uint *)((int)src + srcRowStride);
@@ -7121,15 +7140,15 @@ int _gleTextureImagePut_FastInt(unusedArg1, width, height, src, dst, srcRowStrid
         if (0 < height) {
           do {
             if (dst < dstRowEnd) {
-              iVar4 = (int)dstRowEnd - (int)dst;
-              puVar3 = src;
+              remaining = (int)dstRowEnd - (int)dst;
+              srcCursor = src;
               do {
-                uVar6 = *puVar3;
-                puVar3 = puVar3 + 2;
-                *dst = (char)(uVar6 >> 0x17);
+                srcValue2 = *srcCursor;
+                srcCursor = srcCursor + 2;
+                *dst = (char)(srcValue2 >> 0x17);
                 dst = dst + 1;
-                iVar4 = iVar4 + -1;
-              } while (iVar4 != 0);
+                remaining = remaining + -1;
+              } while (remaining != 0);
             }
             height = height + -1;
             src = (uint *)((int)src + srcRowStride);
@@ -7143,15 +7162,15 @@ int _gleTextureImagePut_FastInt(unusedArg1, width, height, src, dst, srcRowStrid
       if (0 < height) {
         do {
           if (dst < dstRowEnd) {
-            iVar4 = (int)dstRowEnd - (int)dst;
-            puVar3 = src;
+            remaining = (int)dstRowEnd - (int)dst;
+            srcCursor = src;
             do {
-              srcComponent = puVar3 + 2;
-              puVar3 = puVar3 + 3;
+              srcComponent = srcCursor + 2;
+              srcCursor = srcCursor + 3;
               *dst = (char)(*srcComponent >> 0x17);
               dst = dst + 1;
-              iVar4 = iVar4 + -1;
-            } while (iVar4 != 0);
+              remaining = remaining + -1;
+            } while (remaining != 0);
           }
           height = height + -1;
           src = (uint *)((int)src + srcRowStride);
@@ -7167,15 +7186,15 @@ int _gleTextureImagePut_FastInt(unusedArg1, width, height, src, dst, srcRowStrid
       if (0 < height) {
         do {
           if (dst < dstRowEnd) {
-            iVar4 = (int)dstRowEnd - (int)dst;
-            puVar3 = src;
+            remaining = (int)dstRowEnd - (int)dst;
+            srcCursor = src;
             do {
-              srcComponent = puVar3 + 2;
-              puVar3 = puVar3 + 4;
+              srcComponent = srcCursor + 2;
+              srcCursor = srcCursor + 4;
               *dst = (char)(*srcComponent >> 0x17);
               dst = dst + 1;
-              iVar4 = iVar4 + -1;
-            } while (iVar4 != 0);
+              remaining = remaining + -1;
+            } while (remaining != 0);
           }
           height = height + -1;
           src = (uint *)((int)src + srcRowStride);
@@ -7190,16 +7209,16 @@ int _gleTextureImagePut_FastInt(unusedArg1, width, height, src, dst, srcRowStrid
       if (0 < height) {
         do {
           if (dst < dstRowEnd) {
-            uVar6 = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
-            puVar3 = src;
+            pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
+            srcCursor = src;
             do {
-              *dst = (char)(*puVar3 >> 0x17);
-              srcComponent = puVar3 + 3;
-              puVar3 = puVar3 + 4;
+              *dst = (char)(*srcCursor >> 0x17);
+              srcComponent = srcCursor + 3;
+              srcCursor = srcCursor + 4;
               dst[1] = (char)(*srcComponent >> 0x17);
               dst = dst + 2;
-              uVar6 = uVar6 - 1;
-            } while (uVar6 != 0);
+              pixelsLeft = pixelsLeft - 1;
+            } while (pixelsLeft != 0);
           }
           height = height + -1;
           src = (uint *)((int)src + srcRowStride);
@@ -7217,16 +7236,16 @@ int _gleTextureImagePut_FastInt(unusedArg1, width, height, src, dst, srcRowStrid
           if (0 < height) {
             do {
               if (dst < dstRowEnd) {
-                uVar6 = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
-                puVar3 = src;
+                pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
+                srcCursor = src;
                 do {
-                  uVar2 = *puVar3;
-                  puVar3 = puVar3 + 1;
+                  srcValue = *srcCursor;
+                  srcCursor = srcCursor + 1;
                   dst[1] = 0xff;
-                  *dst = (char)(uVar2 >> 0x17);
+                  *dst = (char)(srcValue >> 0x17);
                   dst = dst + 2;
-                  uVar6 = uVar6 - 1;
-                } while (uVar6 != 0);
+                  pixelsLeft = pixelsLeft - 1;
+                } while (pixelsLeft != 0);
               }
               height = height + -1;
               src = (uint *)((int)src + srcRowStride);
@@ -7238,13 +7257,13 @@ int _gleTextureImagePut_FastInt(unusedArg1, width, height, src, dst, srcRowStrid
         else if (0 < height) {
           do {
             if (dst < dstRowEnd) {
-              uVar6 = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
+              pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
               do {
                 *dst = 0;
                 dst[1] = 0xff;
                 dst = dst + 2;
-                uVar6 = uVar6 - 1;
-              } while (uVar6 != 0);
+                pixelsLeft = pixelsLeft - 1;
+              } while (pixelsLeft != 0);
             }
             height = height + -1;
             dst = dst + dstRowSkip;
@@ -7256,16 +7275,16 @@ int _gleTextureImagePut_FastInt(unusedArg1, width, height, src, dst, srcRowStrid
         if (0 < height) {
           do {
             if (dst < dstRowEnd) {
-              uVar6 = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
-              puVar3 = src;
+              pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
+              srcCursor = src;
               do {
                 *dst = 0;
-                uVar2 = *puVar3;
-                puVar3 = puVar3 + 1;
-                dst[1] = (char)(uVar2 >> 0x17);
+                srcValue = *srcCursor;
+                srcCursor = srcCursor + 1;
+                dst[1] = (char)(srcValue >> 0x17);
                 dst = dst + 2;
-                uVar6 = uVar6 - 1;
-              } while (uVar6 != 0);
+                pixelsLeft = pixelsLeft - 1;
+              } while (pixelsLeft != 0);
             }
             height = height + -1;
             src = (uint *)((int)src + srcRowStride);
@@ -7281,16 +7300,16 @@ int _gleTextureImagePut_FastInt(unusedArg1, width, height, src, dst, srcRowStrid
         if (0 < height) {
           do {
             if (dst < dstRowEnd) {
-              uVar6 = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
-              puVar3 = src;
+              pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
+              srcCursor = src;
               do {
-                uVar2 = *puVar3;
-                puVar3 = puVar3 + 3;
+                srcValue = *srcCursor;
+                srcCursor = srcCursor + 3;
                 dst[1] = 0xff;
-                *dst = (char)(uVar2 >> 0x17);
+                *dst = (char)(srcValue >> 0x17);
                 dst = dst + 2;
-                uVar6 = uVar6 - 1;
-              } while (uVar6 != 0);
+                pixelsLeft = pixelsLeft - 1;
+              } while (pixelsLeft != 0);
             }
             height = height + -1;
             src = (uint *)((int)src + srcRowStride);
@@ -7304,16 +7323,16 @@ int _gleTextureImagePut_FastInt(unusedArg1, width, height, src, dst, srcRowStrid
       if (0 < height) {
         do {
           if (dst < dstRowEnd) {
-            uVar6 = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
-            puVar3 = src;
+            pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
+            srcCursor = src;
             do {
-              *dst = (char)(puVar3[3] >> 0x17);
-              uVar2 = *puVar3;
-              puVar3 = puVar3 + 4;
-              dst[1] = (char)(uVar2 >> 0x17);
+              *dst = (char)(srcCursor[3] >> 0x17);
+              srcValue = *srcCursor;
+              srcCursor = srcCursor + 4;
+              dst[1] = (char)(srcValue >> 0x17);
               dst = dst + 2;
-              uVar6 = uVar6 - 1;
-            } while (uVar6 != 0);
+              pixelsLeft = pixelsLeft - 1;
+            } while (pixelsLeft != 0);
           }
           height = height + -1;
           src = (uint *)((int)src + srcRowStride);
@@ -7327,16 +7346,16 @@ int _gleTextureImagePut_FastInt(unusedArg1, width, height, src, dst, srcRowStrid
         if (0 < height) {
           do {
             if (dst < dstRowEnd) {
-              uVar6 = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
-              puVar3 = src;
+              pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
+              srcCursor = src;
               do {
-                uVar2 = *puVar3;
-                puVar3 = puVar3 + 1;
+                srcValue = *srcCursor;
+                srcCursor = srcCursor + 1;
                 dst[1] = 0xff;
-                *dst = (char)(uVar2 >> 0x17);
+                *dst = (char)(srcValue >> 0x17);
                 dst = dst + 2;
-                uVar6 = uVar6 - 1;
-              } while (uVar6 != 0);
+                pixelsLeft = pixelsLeft - 1;
+              } while (pixelsLeft != 0);
             }
             height = height + -1;
             src = (uint *)((int)src + srcRowStride);
@@ -7352,16 +7371,16 @@ int _gleTextureImagePut_FastInt(unusedArg1, width, height, src, dst, srcRowStrid
         if (0 < height) {
           do {
             if (dst < dstRowEnd) {
-              uVar6 = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
-              puVar3 = src;
+              pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
+              srcCursor = src;
               do {
-                *dst = (char)(*puVar3 >> 0x17);
-                srcComponent = puVar3 + 1;
-                puVar3 = puVar3 + 2;
+                *dst = (char)(*srcCursor >> 0x17);
+                srcComponent = srcCursor + 1;
+                srcCursor = srcCursor + 2;
                 dst[1] = (char)(*srcComponent >> 0x17);
                 dst = dst + 2;
-                uVar6 = uVar6 - 1;
-              } while (uVar6 != 0);
+                pixelsLeft = pixelsLeft - 1;
+              } while (pixelsLeft != 0);
             }
             height = height + -1;
             src = (uint *)((int)src + srcRowStride);
@@ -7375,16 +7394,16 @@ int _gleTextureImagePut_FastInt(unusedArg1, width, height, src, dst, srcRowStrid
       if (0 < height) {
         do {
           if (dst < dstRowEnd) {
-            uVar6 = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
-            puVar3 = src;
+            pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
+            srcCursor = src;
             do {
-              uVar2 = puVar3[2];
-              puVar3 = puVar3 + 3;
+              srcValue = srcCursor[2];
+              srcCursor = srcCursor + 3;
               dst[1] = 0xff;
-              *dst = (char)(uVar2 >> 0x17);
+              *dst = (char)(srcValue >> 0x17);
               dst = dst + 2;
-              uVar6 = uVar6 - 1;
-            } while (uVar6 != 0);
+              pixelsLeft = pixelsLeft - 1;
+            } while (pixelsLeft != 0);
           }
           height = height + -1;
           src = (uint *)((int)src + srcRowStride);
@@ -7400,16 +7419,16 @@ int _gleTextureImagePut_FastInt(unusedArg1, width, height, src, dst, srcRowStrid
       if (0 < height) {
         do {
           if (dst < dstRowEnd) {
-            uVar6 = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
-            puVar3 = src;
+            pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
+            srcCursor = src;
             do {
-              *dst = (char)(puVar3[2] >> 0x17);
-              srcComponent = puVar3 + 3;
-              puVar3 = puVar3 + 4;
+              *dst = (char)(srcCursor[2] >> 0x17);
+              srcComponent = srcCursor + 3;
+              srcCursor = srcCursor + 4;
               dst[1] = (char)(*srcComponent >> 0x17);
               dst = dst + 2;
-              uVar6 = uVar6 - 1;
-            } while (uVar6 != 0);
+              pixelsLeft = pixelsLeft - 1;
+            } while (pixelsLeft != 0);
           }
           height = height + -1;
           src = (uint *)((int)src + srcRowStride);
@@ -7438,13 +7457,14 @@ int _gleTextureImagePut_FastUint(unusedArg1, width, height, src, dst, srcRowStri
 {
   undefined1 *srcComponent;
   undefined1 srcValue;
-  int iVar3;
-  undefined1 *puVar4;
+  int dstComponentCount;
+  int remaining;
+  undefined1 *srcCursor;
   undefined1 *dstRowEnd;
   uint pixelsLeft;
   
-  iVar3 = _gleComponents(dstFormat);
-  dstRowEnd = dst + width * iVar3;
+  dstComponentCount = _gleComponents(dstFormat);
+  dstRowEnd = dst + width * dstComponentCount;
   switch(dstFormat) {
   case 0x1900:
     if (srcFormat != 0x1900) {
@@ -7453,15 +7473,15 @@ int _gleTextureImagePut_FastUint(unusedArg1, width, height, src, dst, srcRowStri
     if (0 < height) {
       do {
         if (dst < dstRowEnd) {
-          iVar3 = (int)dstRowEnd - (int)dst;
-          puVar4 = src;
+          remaining = (int)dstRowEnd - (int)dst;
+          srcCursor = src;
           do {
-            srcValue = *puVar4;
-            puVar4 = puVar4 + 4;
+            srcValue = *srcCursor;
+            srcCursor = srcCursor + 4;
             *dst = srcValue;
             dst = dst + 1;
-            iVar3 = iVar3 + -1;
-          } while (iVar3 != 0);
+            remaining = remaining + -1;
+          } while (remaining != 0);
         }
         height = height + -1;
         src = src + srcRowStride;
@@ -7477,15 +7497,15 @@ int _gleTextureImagePut_FastUint(unusedArg1, width, height, src, dst, srcRowStri
       if (0 < height) {
         do {
           if (dst < dstRowEnd) {
-            iVar3 = (int)dstRowEnd - (int)dst;
-            puVar4 = src;
+            remaining = (int)dstRowEnd - (int)dst;
+            srcCursor = src;
             do {
-              srcComponent = puVar4 + 0xc;
-              puVar4 = puVar4 + 0x10;
+              srcComponent = srcCursor + 0xc;
+              srcCursor = srcCursor + 0x10;
               *dst = *srcComponent;
               dst = dst + 1;
-              iVar3 = iVar3 + -1;
-            } while (iVar3 != 0);
+              remaining = remaining + -1;
+            } while (remaining != 0);
           }
           height = height + -1;
           src = src + srcRowStride;
@@ -7499,15 +7519,15 @@ int _gleTextureImagePut_FastUint(unusedArg1, width, height, src, dst, srcRowStri
         if (0 < height) {
           do {
             if (dst < dstRowEnd) {
-              iVar3 = (int)dstRowEnd - (int)dst;
-              puVar4 = src;
+              remaining = (int)dstRowEnd - (int)dst;
+              srcCursor = src;
               do {
-                srcValue = *puVar4;
-                puVar4 = puVar4 + 4;
+                srcValue = *srcCursor;
+                srcCursor = srcCursor + 4;
                 *dst = srcValue;
                 dst = dst + 1;
-                iVar3 = iVar3 + -1;
-              } while (iVar3 != 0);
+                remaining = remaining + -1;
+              } while (remaining != 0);
             }
             height = height + -1;
             src = src + srcRowStride;
@@ -7523,12 +7543,12 @@ int _gleTextureImagePut_FastUint(unusedArg1, width, height, src, dst, srcRowStri
         if (0 < height) {
           do {
             if (dst < dstRowEnd) {
-              iVar3 = (int)dstRowEnd - (int)dst;
+              remaining = (int)dstRowEnd - (int)dst;
               do {
                 *dst = 0xff;
                 dst = dst + 1;
-                iVar3 = iVar3 + -1;
-              } while (iVar3 != 0);
+                remaining = remaining + -1;
+              } while (remaining != 0);
             }
             height = height + -1;
             dst = dst + dstRowSkip;
@@ -7539,12 +7559,12 @@ int _gleTextureImagePut_FastUint(unusedArg1, width, height, src, dst, srcRowStri
       else if (0 < height) {
         do {
           if (dst < dstRowEnd) {
-            iVar3 = (int)dstRowEnd - (int)dst;
+            remaining = (int)dstRowEnd - (int)dst;
             do {
               *dst = 0xff;
               dst = dst + 1;
-              iVar3 = iVar3 + -1;
-            } while (iVar3 != 0);
+              remaining = remaining + -1;
+            } while (remaining != 0);
           }
           height = height + -1;
           dst = dst + dstRowSkip;
@@ -7556,15 +7576,15 @@ int _gleTextureImagePut_FastUint(unusedArg1, width, height, src, dst, srcRowStri
       if (0 < height) {
         do {
           if (dst < dstRowEnd) {
-            iVar3 = (int)dstRowEnd - (int)dst;
-            puVar4 = src;
+            remaining = (int)dstRowEnd - (int)dst;
+            srcCursor = src;
             do {
-              srcValue = *puVar4;
-              puVar4 = puVar4 + 0x10;
+              srcValue = *srcCursor;
+              srcCursor = srcCursor + 0x10;
               *dst = srcValue;
               dst = dst + 1;
-              iVar3 = iVar3 + -1;
-            } while (iVar3 != 0);
+              remaining = remaining + -1;
+            } while (remaining != 0);
           }
           height = height + -1;
           src = src + srcRowStride;
@@ -7578,12 +7598,12 @@ int _gleTextureImagePut_FastUint(unusedArg1, width, height, src, dst, srcRowStri
         if (0 < height) {
           do {
             if (dst < dstRowEnd) {
-              iVar3 = (int)dstRowEnd - (int)dst;
+              remaining = (int)dstRowEnd - (int)dst;
               do {
                 *dst = 0xff;
                 dst = dst + 1;
-                iVar3 = iVar3 + -1;
-              } while (iVar3 != 0);
+                remaining = remaining + -1;
+              } while (remaining != 0);
             }
             height = height + -1;
             dst = dst + dstRowSkip;
@@ -7598,15 +7618,15 @@ int _gleTextureImagePut_FastUint(unusedArg1, width, height, src, dst, srcRowStri
         if (0 < height) {
           do {
             if (dst < dstRowEnd) {
-              iVar3 = (int)dstRowEnd - (int)dst;
-              puVar4 = src;
+              remaining = (int)dstRowEnd - (int)dst;
+              srcCursor = src;
               do {
-                srcComponent = puVar4 + 4;
-                puVar4 = puVar4 + 8;
+                srcComponent = srcCursor + 4;
+                srcCursor = srcCursor + 8;
                 *dst = *srcComponent;
                 dst = dst + 1;
-                iVar3 = iVar3 + -1;
-              } while (iVar3 != 0);
+                remaining = remaining + -1;
+              } while (remaining != 0);
             }
             height = height + -1;
             src = src + srcRowStride;
@@ -7620,12 +7640,12 @@ int _gleTextureImagePut_FastUint(unusedArg1, width, height, src, dst, srcRowStri
       if (0 < height) {
         do {
           if (dst < dstRowEnd) {
-            iVar3 = (int)dstRowEnd - (int)dst;
+            remaining = (int)dstRowEnd - (int)dst;
             do {
               *dst = 0xff;
               dst = dst + 1;
-              iVar3 = iVar3 + -1;
-            } while (iVar3 != 0);
+              remaining = remaining + -1;
+            } while (remaining != 0);
           }
           height = height + -1;
           dst = dst + dstRowSkip;
@@ -7640,15 +7660,15 @@ int _gleTextureImagePut_FastUint(unusedArg1, width, height, src, dst, srcRowStri
       if (0 < height) {
         do {
           if (dst < dstRowEnd) {
-            iVar3 = (int)dstRowEnd - (int)dst;
-            puVar4 = src;
+            remaining = (int)dstRowEnd - (int)dst;
+            srcCursor = src;
             do {
-              srcComponent = puVar4 + 0xc;
-              puVar4 = puVar4 + 0x10;
+              srcComponent = srcCursor + 0xc;
+              srcCursor = srcCursor + 0x10;
               *dst = *srcComponent;
               dst = dst + 1;
-              iVar3 = iVar3 + -1;
-            } while (iVar3 != 0);
+              remaining = remaining + -1;
+            } while (remaining != 0);
           }
           height = height + -1;
           src = src + srcRowStride;
@@ -7660,7 +7680,7 @@ int _gleTextureImagePut_FastUint(unusedArg1, width, height, src, dst, srcRowStri
     break;
   case 0x1907:
     if (srcFormat == 0x1908) {
-      puVar4 = src;
+      srcCursor = src;
       if (0 < height) {
         do {
           for (; dst < dstRowEnd; dst = dst + 3) {
@@ -7671,16 +7691,16 @@ int _gleTextureImagePut_FastUint(unusedArg1, width, height, src, dst, srcRowStri
             dst[2] = *srcComponent;
           }
           height = height + -1;
-          src = puVar4 + srcRowStride;
+          src = srcCursor + srcRowStride;
           dst = dst + dstRowSkip;
           dstRowEnd = dstRowEnd + dstRowStride;
-          puVar4 = src;
+          srcCursor = src;
         } while (height != 0);
       }
     }
     else if (srcFormat < 0x1909) {
       if (srcFormat == 0x1905) {
-        puVar4 = src;
+        srcCursor = src;
         if (0 < height) {
           do {
             for (; dst < dstRowEnd; dst = dst + 3) {
@@ -7691,16 +7711,16 @@ int _gleTextureImagePut_FastUint(unusedArg1, width, height, src, dst, srcRowStri
               dst[2] = srcValue;
             }
             height = height + -1;
-            src = puVar4 + srcRowStride;
+            src = srcCursor + srcRowStride;
             dst = dst + dstRowSkip;
             dstRowEnd = dstRowEnd + dstRowStride;
-            puVar4 = src;
+            srcCursor = src;
           } while (height != 0);
         }
       }
       else if (srcFormat < 0x1906) {
         if (srcFormat == 0x1903) {
-          puVar4 = src;
+          srcCursor = src;
           if (0 < height) {
             do {
               for (; dst < dstRowEnd; dst = dst + 3) {
@@ -7711,10 +7731,10 @@ int _gleTextureImagePut_FastUint(unusedArg1, width, height, src, dst, srcRowStri
                 dst[2] = 0;
               }
               height = height + -1;
-              src = puVar4 + srcRowStride;
+              src = srcCursor + srcRowStride;
               dst = dst + dstRowSkip;
               dstRowEnd = dstRowEnd + dstRowStride;
-              puVar4 = src;
+              srcCursor = src;
             } while (height != 0);
           }
         }
@@ -7722,7 +7742,7 @@ int _gleTextureImagePut_FastUint(unusedArg1, width, height, src, dst, srcRowStri
           if (srcFormat != 0x1904) {
             return 0;
           }
-          puVar4 = src;
+          srcCursor = src;
           if (0 < height) {
             do {
               for (; dst < dstRowEnd; dst = dst + 3) {
@@ -7733,10 +7753,10 @@ int _gleTextureImagePut_FastUint(unusedArg1, width, height, src, dst, srcRowStri
                 dst[1] = srcValue;
               }
               height = height + -1;
-              src = puVar4 + srcRowStride;
+              src = srcCursor + srcRowStride;
               dst = dst + dstRowSkip;
               dstRowEnd = dstRowEnd + dstRowStride;
-              puVar4 = src;
+              srcCursor = src;
             } while (height != 0);
           }
         }
@@ -7759,7 +7779,7 @@ int _gleTextureImagePut_FastUint(unusedArg1, width, height, src, dst, srcRowStri
         if (srcFormat != 0x1907) {
           return 0;
         }
-        puVar4 = src;
+        srcCursor = src;
         if (0 < height) {
           do {
             for (; dst < dstRowEnd; dst = dst + 3) {
@@ -7770,16 +7790,16 @@ int _gleTextureImagePut_FastUint(unusedArg1, width, height, src, dst, srcRowStri
               dst[2] = *srcComponent;
             }
             height = height + -1;
-            src = puVar4 + srcRowStride;
+            src = srcCursor + srcRowStride;
             dst = dst + dstRowSkip;
             dstRowEnd = dstRowEnd + dstRowStride;
-            puVar4 = src;
+            srcCursor = src;
           } while (height != 0);
         }
       }
     }
     else if (srcFormat == 0x8000) {
-      puVar4 = src;
+      srcCursor = src;
       if (0 < height) {
         do {
           for (; dst < dstRowEnd; dst = dst + 3) {
@@ -7790,16 +7810,16 @@ int _gleTextureImagePut_FastUint(unusedArg1, width, height, src, dst, srcRowStri
             dst[2] = *srcComponent;
           }
           height = height + -1;
-          src = puVar4 + srcRowStride;
+          src = srcCursor + srcRowStride;
           dst = dst + dstRowSkip;
           dstRowEnd = dstRowEnd + dstRowStride;
-          puVar4 = src;
+          srcCursor = src;
         } while (height != 0);
       }
     }
     else if (srcFormat < 0x8001) {
       if (srcFormat == 0x1909) {
-        puVar4 = src;
+        srcCursor = src;
         if (0 < height) {
           do {
             for (; dst < dstRowEnd; dst = dst + 3) {
@@ -7810,10 +7830,10 @@ int _gleTextureImagePut_FastUint(unusedArg1, width, height, src, dst, srcRowStri
               dst[1] = *dst;
             }
             height = height + -1;
-            src = puVar4 + srcRowStride;
+            src = srcCursor + srcRowStride;
             dst = dst + dstRowSkip;
             dstRowEnd = dstRowEnd + dstRowStride;
-            puVar4 = src;
+            srcCursor = src;
           } while (height != 0);
         }
       }
@@ -7821,7 +7841,7 @@ int _gleTextureImagePut_FastUint(unusedArg1, width, height, src, dst, srcRowStri
         if (srcFormat != 0x190a) {
           return 0;
         }
-        puVar4 = src;
+        srcCursor = src;
         if (0 < height) {
           do {
             for (; dst < dstRowEnd; dst = dst + 3) {
@@ -7832,16 +7852,16 @@ int _gleTextureImagePut_FastUint(unusedArg1, width, height, src, dst, srcRowStri
               dst[1] = *dst;
             }
             height = height + -1;
-            src = puVar4 + srcRowStride;
+            src = srcCursor + srcRowStride;
             dst = dst + dstRowSkip;
             dstRowEnd = dstRowEnd + dstRowStride;
-            puVar4 = src;
+            srcCursor = src;
           } while (height != 0);
         }
       }
     }
     else if (srcFormat == 0x80e0) {
-      puVar4 = src;
+      srcCursor = src;
       if (0 < height) {
         do {
           for (; dst < dstRowEnd; dst = dst + 3) {
@@ -7852,10 +7872,10 @@ int _gleTextureImagePut_FastUint(unusedArg1, width, height, src, dst, srcRowStri
             dst[2] = srcValue;
           }
           height = height + -1;
-          src = puVar4 + srcRowStride;
+          src = srcCursor + srcRowStride;
           dst = dst + dstRowSkip;
           dstRowEnd = dstRowEnd + dstRowStride;
-          puVar4 = src;
+          srcCursor = src;
         } while (height != 0);
       }
     }
@@ -7863,7 +7883,7 @@ int _gleTextureImagePut_FastUint(unusedArg1, width, height, src, dst, srcRowStri
       if (srcFormat != 0x80e1) {
         return 0;
       }
-      puVar4 = src;
+      srcCursor = src;
       if (0 < height) {
         do {
           for (; dst < dstRowEnd; dst = dst + 3) {
@@ -7874,10 +7894,10 @@ int _gleTextureImagePut_FastUint(unusedArg1, width, height, src, dst, srcRowStri
             dst[2] = srcValue;
           }
           height = height + -1;
-          src = puVar4 + srcRowStride;
+          src = srcCursor + srcRowStride;
           dst = dst + dstRowSkip;
           dstRowEnd = dstRowEnd + dstRowStride;
-          puVar4 = src;
+          srcCursor = src;
         } while (height != 0);
       }
     }
@@ -7888,13 +7908,13 @@ int _gleTextureImagePut_FastUint(unusedArg1, width, height, src, dst, srcRowStri
         do {
           if (dst < dstRowEnd) {
             pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
-            puVar4 = src;
+            srcCursor = src;
             do {
-              *dst = *puVar4;
-              dst[1] = puVar4[4];
-              dst[2] = puVar4[8];
-              srcComponent = puVar4 + 0xc;
-              puVar4 = puVar4 + 0x10;
+              *dst = *srcCursor;
+              dst[1] = srcCursor[4];
+              dst[2] = srcCursor[8];
+              srcComponent = srcCursor + 0xc;
+              srcCursor = srcCursor + 0x10;
               dst[3] = *srcComponent;
               dst = dst + 4;
               pixelsLeft = pixelsLeft - 1;
@@ -7913,12 +7933,12 @@ int _gleTextureImagePut_FastUint(unusedArg1, width, height, src, dst, srcRowStri
           do {
             if (dst < dstRowEnd) {
               pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
-              puVar4 = src;
+              srcCursor = src;
               do {
                 *dst = 0;
                 dst[1] = 0;
-                srcValue = *puVar4;
-                puVar4 = puVar4 + 4;
+                srcValue = *srcCursor;
+                srcCursor = srcCursor + 4;
                 dst[3] = 0xff;
                 dst[2] = srcValue;
                 dst = dst + 4;
@@ -7938,10 +7958,10 @@ int _gleTextureImagePut_FastUint(unusedArg1, width, height, src, dst, srcRowStri
             do {
               if (dst < dstRowEnd) {
                 pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
-                puVar4 = src;
+                srcCursor = src;
                 do {
-                  srcValue = *puVar4;
-                  puVar4 = puVar4 + 4;
+                  srcValue = *srcCursor;
+                  srcCursor = srcCursor + 4;
                   dst[1] = 0;
                   *dst = srcValue;
                   dst[2] = 0;
@@ -7965,11 +7985,11 @@ int _gleTextureImagePut_FastUint(unusedArg1, width, height, src, dst, srcRowStri
             do {
               if (dst < dstRowEnd) {
                 pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
-                puVar4 = src;
+                srcCursor = src;
                 do {
                   *dst = 0;
-                  srcValue = *puVar4;
-                  puVar4 = puVar4 + 4;
+                  srcValue = *srcCursor;
+                  srcCursor = srcCursor + 4;
                   dst[2] = 0;
                   dst[1] = srcValue;
                   dst[3] = 0xff;
@@ -7990,13 +8010,13 @@ int _gleTextureImagePut_FastUint(unusedArg1, width, height, src, dst, srcRowStri
           do {
             if (dst < dstRowEnd) {
               pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
-              puVar4 = src;
+              srcCursor = src;
               do {
                 *dst = 0;
                 dst[1] = 0;
                 dst[2] = 0;
-                srcValue = *puVar4;
-                puVar4 = puVar4 + 4;
+                srcValue = *srcCursor;
+                srcCursor = srcCursor + 4;
                 dst[3] = srcValue;
                 dst = dst + 4;
                 pixelsLeft = pixelsLeft - 1;
@@ -8017,12 +8037,12 @@ int _gleTextureImagePut_FastUint(unusedArg1, width, height, src, dst, srcRowStri
           do {
             if (dst < dstRowEnd) {
               pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
-              puVar4 = src;
+              srcCursor = src;
               do {
-                *dst = *puVar4;
-                dst[1] = puVar4[4];
-                srcValue = puVar4[8];
-                puVar4 = puVar4 + 0xc;
+                *dst = *srcCursor;
+                dst[1] = srcCursor[4];
+                srcValue = srcCursor[8];
+                srcCursor = srcCursor + 0xc;
                 dst[3] = 0xff;
                 dst[2] = srcValue;
                 dst = dst + 4;
@@ -8042,13 +8062,13 @@ int _gleTextureImagePut_FastUint(unusedArg1, width, height, src, dst, srcRowStri
         do {
           if (dst < dstRowEnd) {
             pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
-            puVar4 = src;
+            srcCursor = src;
             do {
-              *dst = puVar4[0xc];
-              dst[1] = puVar4[8];
-              dst[2] = puVar4[4];
-              srcValue = *puVar4;
-              puVar4 = puVar4 + 0x10;
+              *dst = srcCursor[0xc];
+              dst[1] = srcCursor[8];
+              dst[2] = srcCursor[4];
+              srcValue = *srcCursor;
+              srcCursor = srcCursor + 0x10;
               dst[3] = srcValue;
               dst = dst + 4;
               pixelsLeft = pixelsLeft - 1;
@@ -8067,10 +8087,10 @@ int _gleTextureImagePut_FastUint(unusedArg1, width, height, src, dst, srcRowStri
           do {
             if (dst < dstRowEnd) {
               pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
-              puVar4 = src;
+              srcCursor = src;
               do {
-                srcValue = *puVar4;
-                puVar4 = puVar4 + 4;
+                srcValue = *srcCursor;
+                srcCursor = srcCursor + 4;
                 dst[3] = 0xff;
                 *dst = srcValue;
                 dst[2] = *dst;
@@ -8094,13 +8114,13 @@ int _gleTextureImagePut_FastUint(unusedArg1, width, height, src, dst, srcRowStri
           do {
             if (dst < dstRowEnd) {
               pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
-              puVar4 = src;
+              srcCursor = src;
               do {
-                *dst = *puVar4;
+                *dst = *srcCursor;
                 dst[2] = *dst;
                 dst[1] = *dst;
-                srcComponent = puVar4 + 4;
-                puVar4 = puVar4 + 8;
+                srcComponent = srcCursor + 4;
+                srcCursor = srcCursor + 8;
                 dst[3] = *srcComponent;
                 dst = dst + 4;
                 pixelsLeft = pixelsLeft - 1;
@@ -8119,12 +8139,12 @@ int _gleTextureImagePut_FastUint(unusedArg1, width, height, src, dst, srcRowStri
         do {
           if (dst < dstRowEnd) {
             pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
-            puVar4 = src;
+            srcCursor = src;
             do {
-              *dst = puVar4[8];
-              dst[1] = puVar4[4];
-              srcValue = *puVar4;
-              puVar4 = puVar4 + 0xc;
+              *dst = srcCursor[8];
+              dst[1] = srcCursor[4];
+              srcValue = *srcCursor;
+              srcCursor = srcCursor + 0xc;
               dst[3] = 0xff;
               dst[2] = srcValue;
               dst = dst + 4;
@@ -8146,13 +8166,13 @@ int _gleTextureImagePut_FastUint(unusedArg1, width, height, src, dst, srcRowStri
         do {
           if (dst < dstRowEnd) {
             pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
-            puVar4 = src;
+            srcCursor = src;
             do {
-              *dst = puVar4[8];
-              dst[1] = puVar4[4];
-              dst[2] = *puVar4;
-              srcComponent = puVar4 + 0xc;
-              puVar4 = puVar4 + 0x10;
+              *dst = srcCursor[8];
+              dst[1] = srcCursor[4];
+              dst[2] = *srcCursor;
+              srcComponent = srcCursor + 0xc;
+              srcCursor = srcCursor + 0x10;
               dst[3] = *srcComponent;
               dst = dst + 4;
               pixelsLeft = pixelsLeft - 1;
@@ -8171,15 +8191,15 @@ int _gleTextureImagePut_FastUint(unusedArg1, width, height, src, dst, srcRowStri
       if (0 < height) {
         do {
           if (dst < dstRowEnd) {
-            iVar3 = (int)dstRowEnd - (int)dst;
-            puVar4 = src;
+            remaining = (int)dstRowEnd - (int)dst;
+            srcCursor = src;
             do {
-              srcValue = *puVar4;
-              puVar4 = puVar4 + 0x10;
+              srcValue = *srcCursor;
+              srcCursor = srcCursor + 0x10;
               *dst = srcValue;
               dst = dst + 1;
-              iVar3 = iVar3 + -1;
-            } while (iVar3 != 0);
+              remaining = remaining + -1;
+            } while (remaining != 0);
           }
           height = height + -1;
           src = src + srcRowStride;
@@ -8197,15 +8217,15 @@ int _gleTextureImagePut_FastUint(unusedArg1, width, height, src, dst, srcRowStri
           if (0 < height) {
             do {
               if (dst < dstRowEnd) {
-                iVar3 = (int)dstRowEnd - (int)dst;
-                puVar4 = src;
+                remaining = (int)dstRowEnd - (int)dst;
+                srcCursor = src;
                 do {
-                  srcValue = *puVar4;
-                  puVar4 = puVar4 + 4;
+                  srcValue = *srcCursor;
+                  srcCursor = srcCursor + 4;
                   *dst = srcValue;
                   dst = dst + 1;
-                  iVar3 = iVar3 + -1;
-                } while (iVar3 != 0);
+                  remaining = remaining + -1;
+                } while (remaining != 0);
               }
               height = height + -1;
               src = src + srcRowStride;
@@ -8217,12 +8237,12 @@ int _gleTextureImagePut_FastUint(unusedArg1, width, height, src, dst, srcRowStri
         else if (0 < height) {
           do {
             if (dst < dstRowEnd) {
-              iVar3 = (int)dstRowEnd - (int)dst;
+              remaining = (int)dstRowEnd - (int)dst;
               do {
                 *dst = 0;
                 dst = dst + 1;
-                iVar3 = iVar3 + -1;
-              } while (iVar3 != 0);
+                remaining = remaining + -1;
+              } while (remaining != 0);
             }
             height = height + -1;
             dst = dst + dstRowSkip;
@@ -8233,15 +8253,15 @@ int _gleTextureImagePut_FastUint(unusedArg1, width, height, src, dst, srcRowStri
       else if (0 < height) {
         do {
           if (dst < dstRowEnd) {
-            iVar3 = (int)dstRowEnd - (int)dst;
-            puVar4 = src;
+            remaining = (int)dstRowEnd - (int)dst;
+            srcCursor = src;
             do {
-              srcValue = *puVar4;
-              puVar4 = puVar4 + 0xc;
+              srcValue = *srcCursor;
+              srcCursor = srcCursor + 0xc;
               *dst = srcValue;
               dst = dst + 1;
-              iVar3 = iVar3 + -1;
-            } while (iVar3 != 0);
+              remaining = remaining + -1;
+            } while (remaining != 0);
           }
           height = height + -1;
           src = src + srcRowStride;
@@ -8254,15 +8274,15 @@ int _gleTextureImagePut_FastUint(unusedArg1, width, height, src, dst, srcRowStri
       if (0 < height) {
         do {
           if (dst < dstRowEnd) {
-            iVar3 = (int)dstRowEnd - (int)dst;
-            puVar4 = src;
+            remaining = (int)dstRowEnd - (int)dst;
+            srcCursor = src;
             do {
-              srcComponent = puVar4 + 0xc;
-              puVar4 = puVar4 + 0x10;
+              srcComponent = srcCursor + 0xc;
+              srcCursor = srcCursor + 0x10;
               *dst = *srcComponent;
               dst = dst + 1;
-              iVar3 = iVar3 + -1;
-            } while (iVar3 != 0);
+              remaining = remaining + -1;
+            } while (remaining != 0);
           }
           height = height + -1;
           src = src + srcRowStride;
@@ -8276,15 +8296,15 @@ int _gleTextureImagePut_FastUint(unusedArg1, width, height, src, dst, srcRowStri
         if (0 < height) {
           do {
             if (dst < dstRowEnd) {
-              iVar3 = (int)dstRowEnd - (int)dst;
-              puVar4 = src;
+              remaining = (int)dstRowEnd - (int)dst;
+              srcCursor = src;
               do {
-                srcValue = *puVar4;
-                puVar4 = puVar4 + 4;
+                srcValue = *srcCursor;
+                srcCursor = srcCursor + 4;
                 *dst = srcValue;
                 dst = dst + 1;
-                iVar3 = iVar3 + -1;
-              } while (iVar3 != 0);
+                remaining = remaining + -1;
+              } while (remaining != 0);
             }
             height = height + -1;
             src = src + srcRowStride;
@@ -8300,15 +8320,15 @@ int _gleTextureImagePut_FastUint(unusedArg1, width, height, src, dst, srcRowStri
         if (0 < height) {
           do {
             if (dst < dstRowEnd) {
-              iVar3 = (int)dstRowEnd - (int)dst;
-              puVar4 = src;
+              remaining = (int)dstRowEnd - (int)dst;
+              srcCursor = src;
               do {
-                srcValue = *puVar4;
-                puVar4 = puVar4 + 8;
+                srcValue = *srcCursor;
+                srcCursor = srcCursor + 8;
                 *dst = srcValue;
                 dst = dst + 1;
-                iVar3 = iVar3 + -1;
-              } while (iVar3 != 0);
+                remaining = remaining + -1;
+              } while (remaining != 0);
             }
             height = height + -1;
             src = src + srcRowStride;
@@ -8322,15 +8342,15 @@ int _gleTextureImagePut_FastUint(unusedArg1, width, height, src, dst, srcRowStri
       if (0 < height) {
         do {
           if (dst < dstRowEnd) {
-            iVar3 = (int)dstRowEnd - (int)dst;
-            puVar4 = src;
+            remaining = (int)dstRowEnd - (int)dst;
+            srcCursor = src;
             do {
-              srcComponent = puVar4 + 8;
-              puVar4 = puVar4 + 0xc;
+              srcComponent = srcCursor + 8;
+              srcCursor = srcCursor + 0xc;
               *dst = *srcComponent;
               dst = dst + 1;
-              iVar3 = iVar3 + -1;
-            } while (iVar3 != 0);
+              remaining = remaining + -1;
+            } while (remaining != 0);
           }
           height = height + -1;
           src = src + srcRowStride;
@@ -8346,15 +8366,15 @@ int _gleTextureImagePut_FastUint(unusedArg1, width, height, src, dst, srcRowStri
       if (0 < height) {
         do {
           if (dst < dstRowEnd) {
-            iVar3 = (int)dstRowEnd - (int)dst;
-            puVar4 = src;
+            remaining = (int)dstRowEnd - (int)dst;
+            srcCursor = src;
             do {
-              srcComponent = puVar4 + 8;
-              puVar4 = puVar4 + 0x10;
+              srcComponent = srcCursor + 8;
+              srcCursor = srcCursor + 0x10;
               *dst = *srcComponent;
               dst = dst + 1;
-              iVar3 = iVar3 + -1;
-            } while (iVar3 != 0);
+              remaining = remaining + -1;
+            } while (remaining != 0);
           }
           height = height + -1;
           src = src + srcRowStride;
@@ -8370,11 +8390,11 @@ int _gleTextureImagePut_FastUint(unusedArg1, width, height, src, dst, srcRowStri
         do {
           if (dst < dstRowEnd) {
             pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
-            puVar4 = src;
+            srcCursor = src;
             do {
-              *dst = *puVar4;
-              srcComponent = puVar4 + 0xc;
-              puVar4 = puVar4 + 0x10;
+              *dst = *srcCursor;
+              srcComponent = srcCursor + 0xc;
+              srcCursor = srcCursor + 0x10;
               dst[1] = *srcComponent;
               dst = dst + 2;
               pixelsLeft = pixelsLeft - 1;
@@ -8397,10 +8417,10 @@ int _gleTextureImagePut_FastUint(unusedArg1, width, height, src, dst, srcRowStri
             do {
               if (dst < dstRowEnd) {
                 pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
-                puVar4 = src;
+                srcCursor = src;
                 do {
-                  srcValue = *puVar4;
-                  puVar4 = puVar4 + 4;
+                  srcValue = *srcCursor;
+                  srcCursor = srcCursor + 4;
                   dst[1] = 0xff;
                   *dst = srcValue;
                   dst = dst + 2;
@@ -8436,11 +8456,11 @@ int _gleTextureImagePut_FastUint(unusedArg1, width, height, src, dst, srcRowStri
           do {
             if (dst < dstRowEnd) {
               pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
-              puVar4 = src;
+              srcCursor = src;
               do {
                 *dst = 0;
-                srcValue = *puVar4;
-                puVar4 = puVar4 + 4;
+                srcValue = *srcCursor;
+                srcCursor = srcCursor + 4;
                 dst[1] = srcValue;
                 dst = dst + 2;
                 pixelsLeft = pixelsLeft - 1;
@@ -8461,10 +8481,10 @@ int _gleTextureImagePut_FastUint(unusedArg1, width, height, src, dst, srcRowStri
           do {
             if (dst < dstRowEnd) {
               pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
-              puVar4 = src;
+              srcCursor = src;
               do {
-                srcValue = *puVar4;
-                puVar4 = puVar4 + 0xc;
+                srcValue = *srcCursor;
+                srcCursor = srcCursor + 0xc;
                 dst[1] = 0xff;
                 *dst = srcValue;
                 dst = dst + 2;
@@ -8484,11 +8504,11 @@ int _gleTextureImagePut_FastUint(unusedArg1, width, height, src, dst, srcRowStri
         do {
           if (dst < dstRowEnd) {
             pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
-            puVar4 = src;
+            srcCursor = src;
             do {
-              *dst = puVar4[0xc];
-              srcValue = *puVar4;
-              puVar4 = puVar4 + 0x10;
+              *dst = srcCursor[0xc];
+              srcValue = *srcCursor;
+              srcCursor = srcCursor + 0x10;
               dst[1] = srcValue;
               dst = dst + 2;
               pixelsLeft = pixelsLeft - 1;
@@ -8507,10 +8527,10 @@ int _gleTextureImagePut_FastUint(unusedArg1, width, height, src, dst, srcRowStri
           do {
             if (dst < dstRowEnd) {
               pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
-              puVar4 = src;
+              srcCursor = src;
               do {
-                srcValue = *puVar4;
-                puVar4 = puVar4 + 4;
+                srcValue = *srcCursor;
+                srcCursor = srcCursor + 4;
                 dst[1] = 0xff;
                 *dst = srcValue;
                 dst = dst + 2;
@@ -8532,11 +8552,11 @@ int _gleTextureImagePut_FastUint(unusedArg1, width, height, src, dst, srcRowStri
           do {
             if (dst < dstRowEnd) {
               pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
-              puVar4 = src;
+              srcCursor = src;
               do {
-                *dst = *puVar4;
-                srcComponent = puVar4 + 4;
-                puVar4 = puVar4 + 8;
+                *dst = *srcCursor;
+                srcComponent = srcCursor + 4;
+                srcCursor = srcCursor + 8;
                 dst[1] = *srcComponent;
                 dst = dst + 2;
                 pixelsLeft = pixelsLeft - 1;
@@ -8555,10 +8575,10 @@ int _gleTextureImagePut_FastUint(unusedArg1, width, height, src, dst, srcRowStri
         do {
           if (dst < dstRowEnd) {
             pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
-            puVar4 = src;
+            srcCursor = src;
             do {
-              srcValue = puVar4[8];
-              puVar4 = puVar4 + 0xc;
+              srcValue = srcCursor[8];
+              srcCursor = srcCursor + 0xc;
               dst[1] = 0xff;
               *dst = srcValue;
               dst = dst + 2;
@@ -8580,11 +8600,11 @@ int _gleTextureImagePut_FastUint(unusedArg1, width, height, src, dst, srcRowStri
         do {
           if (dst < dstRowEnd) {
             pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
-            puVar4 = src;
+            srcCursor = src;
             do {
-              *dst = puVar4[8];
-              srcComponent = puVar4 + 0xc;
-              puVar4 = puVar4 + 0x10;
+              *dst = srcCursor[8];
+              srcComponent = srcCursor + 0xc;
+              srcCursor = srcCursor + 0x10;
               dst[1] = *srcComponent;
               dst = dst + 2;
               pixelsLeft = pixelsLeft - 1;
@@ -8602,12 +8622,12 @@ int _gleTextureImagePut_FastUint(unusedArg1, width, height, src, dst, srcRowStri
 }
 
 /* _gleCreateColorTableLevel @ 0x103454 (224 bytes) */
-int _gleCreateColorTableLevel(param_1, param_2, param_3, param_4, param_5, unusedArg6, unusedArg7, param_8)
-  undefined4 param_1;
+int _gleCreateColorTableLevel(glContext, param_2, param_3, internalformat, width, unusedArg6, unusedArg7, param_8)
+  undefined4 glContext;
   undefined4 param_2;
   int param_3;
-  undefined4 param_4;
-  int param_5;
+  undefined4 internalformat;
+  int width;
   undefined4 unusedArg6;
   undefined4 unusedArg7;
   int param_8;
@@ -8617,20 +8637,20 @@ int _gleCreateColorTableLevel(param_1, param_2, param_3, param_4, param_5, unuse
   
   *(undefined1 *)(param_3 + 10) = 0;
   *(undefined4 *)(param_3 + 0x14) = 0;
-  if (param_5 != 0) {
+  if (width != 0) {
     *(undefined1 *)(param_3 + 0xb) = 0x20;
-    *(short *)(param_3 + 4) = (short)param_5;
+    *(short *)(param_3 + 4) = (short)width;
     *(undefined2 *)(param_3 + 6) = 1;
     *(undefined2 *)(param_3 + 8) = 1;
-    uVar2 = _gleImagingTexFormatToInternal(param_4);
+    uVar2 = _gleImagingTexFormatToInternal(internalformat);
     *(undefined2 *)(param_3 + 0x10) = uVar2;
     *(undefined2 *)(param_3 + 0x12) = 0x1406;
-    *(short *)(param_3 + 0xc) = (short)param_5;
+    *(short *)(param_3 + 0xc) = (short)width;
     *(undefined2 *)(param_3 + 0xe) = 1;
     if (param_8 == 0) {
       return 1;
     }
-    iVar1 = _gleAllocateTextureLevel(param_1,param_2,param_3);
+    iVar1 = _gleAllocateTextureLevel(glContext,param_2,param_3);
     if (iVar1 != 0) {
       *(byte *)(param_3 + 0xb) = *(byte *)(param_3 + 0xb) | 0x10;
       return 1;

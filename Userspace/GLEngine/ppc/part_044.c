@@ -88,11 +88,11 @@ void _LFSStreamChunkListRemoveChunk(param_1, param_2)
 }
 
 /* _LFSStreamChunkListGetStream @ 0xd19c8 (280 bytes) */
-void _LFSStreamChunkListGetStream(param_1, param_2, param_3, param_4)
+void _LFSStreamChunkListGetStream(param_1, param_2, param_3, forwardedArg4)
   int *param_1;
   int param_2;
   int *param_3;
-  undefined4 param_4;
+  undefined4 forwardedArg4;
 {
   undefined4 uVar1;
   int iVar2;
@@ -106,13 +106,13 @@ void _LFSStreamChunkListGetStream(param_1, param_2, param_3, param_4)
   iVar2 = 0;
   *param_3 = 0;
   for (iVar4 = *param_1; iVar4 != 0; iVar4 = *(int *)(iVar4 + 0x4c)) {
-    _LFSStreamChunkGetStream(iVar4,param_4,&local_30,0);
+    _LFSStreamChunkGetStream(iVar4,forwardedArg4,&local_30,0);
     *param_3 = *param_3 + local_30;
   }
   if ((param_2 != 0) && (iVar4 = *param_1, iVar4 != 0)) {
     iVar3 = 0;
     do {
-      uVar1 = _LFSStreamChunkGetStream(iVar4,param_4,&local_30,0);
+      uVar1 = _LFSStreamChunkGetStream(iVar4,forwardedArg4,&local_30,0);
       iVar2 = iVar2 + 1;
       *(undefined4 *)(iVar3 + param_2) = uVar1;
       iVar3 = iVar3 + 4;
@@ -124,7 +124,7 @@ void _LFSStreamChunkListGetStream(param_1, param_2, param_3, param_4)
           do {
             uVar5 = uVar5 + 1;
             iVar2 = iVar2 + 1;
-            uVar1 = _LFSStreamChunkGetStream(iVar4,param_4,auStack_2c,uVar5);
+            uVar1 = _LFSStreamChunkGetStream(iVar4,forwardedArg4,auStack_2c,uVar5);
             iVar3 = iVar3 + 4;
             *puVar6 = uVar1;
             puVar6 = puVar6 + 1;
@@ -430,35 +430,35 @@ void _LFSStreamOutputDebugInfo(param_1)
 }
 
 /* _gleFPChanged @ 0xd2290 (76 bytes) */
-void _gleFPChanged(param_1)
-  int param_1;
+void _gleFPChanged(glContext)
+  int glContext;
 {
   undefined *setClipInterpFunc;
   
-  _gleSelectVertexSubmitFunc(param_1);
+  _gleSelectVertexSubmitFunc(glContext);
   setClipInterpFunc = PTR__gleSetClipInterpFunc_00112038;
-  *(undefined **)(param_1 + 0x49c8) = PTR__gleSetEyeInterpFunc_0011203c;
-  *(undefined **)(param_1 + 0x49cc) = setClipInterpFunc;
+  *(undefined **)(glContext + 0x49c8) = PTR__gleSetEyeInterpFunc_0011203c;
+  *(undefined **)(glContext + 0x49cc) = setClipInterpFunc;
   return;
 }
 
 /* _gleFPEnable @ 0xd22dc (64 bytes) */
-void _gleFPEnable(param_1)
-  int param_1;
+void _gleFPEnable(glContext)
+  int glContext;
 {
-  ((void (*)())_gleFPChanged)(param_1);
-  _gleSelectVertexSubmitFunc(param_1);
-  *(uint *)(param_1 + 0x31c) = *(uint *)(param_1 + 0x31c) | 0x1000000;
+  ((void (*)())_gleFPChanged)(glContext);
+  _gleSelectVertexSubmitFunc(glContext);
+  *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x1000000;
   return;
 }
 
 /* _gleFPDisable @ 0xd231c (64 bytes) */
-void _gleFPDisable(param_1)
-  int param_1;
+void _gleFPDisable(glContext)
+  int glContext;
 {
-  ((void (*)())_gleFPChanged)(param_1);
-  _gleSelectVertexSubmitFunc(param_1);
-  *(uint *)(param_1 + 0x31c) = *(uint *)(param_1 + 0x31c) | 0x1000000;
+  ((void (*)())_gleFPChanged)(glContext);
+  _gleSelectVertexSubmitFunc(glContext);
+  *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x1000000;
   return;
 }
 
@@ -469,11 +469,11 @@ int _zeroTargetExtractor()
 }
 
 /* _gleGetHashMachineObjectNameTargetPairs @ 0xd2364 (400 bytes) */
-void _gleGetHashMachineObjectNameTargetPairs(glContext, param_2, param_3, param_4)
+void _gleGetHashMachineObjectNameTargetPairs(glContext, param_2, param_3, valuePtr)
   int glContext;
   int *param_2;
   int param_3;
-  int *param_4;
+  int *valuePtr;
 {
   undefined *zeroTargetExtractor;
   int *piVar2;
@@ -490,7 +490,7 @@ void _gleGetHashMachineObjectNameTargetPairs(glContext, param_2, param_3, param_
   zeroTargetExtractor = PTR__zeroTargetExtractor_00110e30;
   iVar6 = 0;
   a2 = param_3;
-  a3 = param_4;
+  a3 = valuePtr;
   if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
     _pthread_mutex_lock(*(int *)(glContext + 0x5148) + 0x8028);
   }
@@ -506,12 +506,12 @@ void _gleGetHashMachineObjectNameTargetPairs(glContext, param_2, param_3, param_
     if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
       _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);
     }
-    *param_4 = 0;
+    *valuePtr = 0;
   }
   else {
     piVar2 = (int *)_malloc(iVar6 * 8 + 4);
     *piVar2 = iVar6;
-    *param_4 = (int)piVar2;
+    *valuePtr = (int)piVar2;
     pcVar5 = (code *)PTR__gleTextureTargetExtractor_0011215c;
     if ((param_3 != 2) &&
        (pcVar5 = (code *)PTR__glePipelineProgramTargetExtactor_00112158, param_3 != 4)) {
@@ -522,11 +522,11 @@ void _gleGetHashMachineObjectNameTargetPairs(glContext, param_2, param_3, param_
     do {
       piVar4 = piVar2 + 1;
       for (piVar2 = (int *)*piVar2; piVar2 != (int *)0x0; piVar2 = (int *)*piVar2) {
-        a6 = *param_4;
+        a6 = *valuePtr;
         *(int *)((iVar6 + 1) * 4 + a6) = piVar2[1];
         iVar6 = iVar6 + 2;
         uVar3 = (*pcVar5)(glContext,piVar2,a2,a3,incomingR7,incomingR8,a6);
-        *(undefined4 *)(iVar6 * 4 + *param_4) = uVar3;
+        *(undefined4 *)(iVar6 * 4 + *valuePtr) = uVar3;
       }
       piVar2 = piVar4;
     } while (piVar4 <= param_2 + 0x3ff);
@@ -539,77 +539,77 @@ void _gleGetHashMachineObjectNameTargetPairs(glContext, param_2, param_3, param_
 }
 
 /* _gleImagingTexFormatToInternal @ 0xd24f4 (560 bytes) */
-int _gleImagingTexFormatToInternal(param_1)
-  uint param_1;
+int _gleImagingTexFormatToInternal(internalformat)
+  uint internalformat;
 {
   bool bVar1;
   uint uVar2;
   
-  if (param_1 < 0x805c) {
-    if (0x8054 < param_1) {
+  if (internalformat < 0x805c) {
+    if (0x8054 < internalformat) {
       return 0x1908;
     }
-    if (0x803e < param_1) {
-      if (param_1 == 0x8049) {
+    if (0x803e < internalformat) {
+      if (internalformat == 0x8049) {
         return 0x8049;
       }
-      if (param_1 < 0x804a) {
-        if (0x8042 < param_1) {
+      if (internalformat < 0x804a) {
+        if (0x8042 < internalformat) {
           return 0x190a;
         }
         return 0x1909;
       }
-      if (param_1 < 0x804e) {
+      if (internalformat < 0x804e) {
         return 0x8049;
       }
-      if (param_1 < 0x804f) {
+      if (internalformat < 0x804f) {
         return 0;
       }
       return 0x1907;
     }
-    if (0x803a < param_1) {
+    if (0x803a < internalformat) {
       return 0x1906;
     }
-    if (param_1 == 4) {
+    if (internalformat == 4) {
       return 0x1908;
     }
-    if (param_1 < 5) {
-      if (param_1 == 2) {
+    if (internalformat < 5) {
+      if (internalformat == 2) {
         return 0x190a;
       }
-      if (param_1 < 3) {
-        if (param_1 != 1) {
+      if (internalformat < 3) {
+        if (internalformat != 1) {
           return 0;
         }
         return 0x1909;
       }
       return 0x1907;
     }
-    if (param_1 < 0x1906) {
+    if (internalformat < 0x1906) {
       return 0;
     }
-    if (param_1 < 0x190b) {
-      return param_1;
+    if (internalformat < 0x190b) {
+      return internalformat;
     }
-    bVar1 = param_1 == 0x2a10;
+    bVar1 = internalformat == 0x2a10;
   }
   else {
-    if (param_1 == 0x8817) {
+    if (internalformat == 0x8817) {
       return 0x8049;
     }
-    if (param_1 < 0x8818) {
-      if (param_1 == 0x84ed) {
+    if (internalformat < 0x8818) {
+      if (internalformat == 0x84ed) {
         return 0x1907;
       }
-      if (param_1 < 0x84ee) {
-        if (param_1 == 0x84ea) {
+      if (internalformat < 0x84ee) {
+        if (internalformat == 0x84ea) {
           return 0x1909;
         }
-        if (0x84ea < param_1) {
-          if (param_1 == 0x84eb) {
+        if (0x84ea < internalformat) {
+          if (internalformat == 0x84eb) {
             return 0x190a;
           }
-          if (param_1 != 0x84ec) {
+          if (internalformat != 0x84ec) {
             return 0;
           }
           return 0x8049;
@@ -617,50 +617,50 @@ int _gleImagingTexFormatToInternal(param_1)
         uVar2 = 0x84e9;
       }
       else {
-        if (param_1 == 0x8814) {
+        if (internalformat == 0x8814) {
           return 0x1908;
         }
-        if (param_1 < 0x8815) {
-          if (param_1 == 0x84ee) {
+        if (internalformat < 0x8815) {
+          if (internalformat == 0x84ee) {
             return 0x1908;
           }
           return 0;
         }
-        if (param_1 == 0x8815) {
+        if (internalformat == 0x8815) {
           return 0x1907;
         }
         uVar2 = 0x8816;
       }
-      if (param_1 == uVar2) {
+      if (internalformat == uVar2) {
         return 0x1906;
       }
       return 0;
     }
-    if (param_1 == 0x881c) {
+    if (internalformat == 0x881c) {
       return 0x1906;
     }
-    if (0x881c < param_1) {
-      if (param_1 == 0x881e) {
+    if (0x881c < internalformat) {
+      if (internalformat == 0x881e) {
         return 0x1909;
       }
-      if (0x881d < param_1) {
-        if ((param_1 != 0x881f) && (param_1 != 0x8837)) {
+      if (0x881d < internalformat) {
+        if ((internalformat != 0x881f) && (internalformat != 0x8837)) {
           return 0;
         }
         return 0x190a;
       }
       return 0x8049;
     }
-    if (param_1 == 0x8819) {
+    if (internalformat == 0x8819) {
       return 0x190a;
     }
-    if (param_1 < 0x8819) {
+    if (internalformat < 0x8819) {
       return 0x1909;
     }
-    if (param_1 == 0x881a) {
+    if (internalformat == 0x881a) {
       return 0x1908;
     }
-    bVar1 = param_1 == 0x881b;
+    bVar1 = internalformat == 0x881b;
   }
   if (bVar1) {
     return 0x1907;
@@ -669,16 +669,16 @@ int _gleImagingTexFormatToInternal(param_1)
 }
 
 /* _gleImagingUnpackData @ 0xd2724 (316 bytes) */
-void _gleImagingUnpackData(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9)
+void _gleImagingUnpackData(param_1, param_2, height, format, param_5, param_6, type, param_8, filterData)
   int param_1;
   int param_2;
-  undefined4 param_3;
-  undefined4 param_4;
+  undefined4 height;
+  undefined4 format;
   undefined4 param_5;
   undefined4 param_6;
-  undefined4 param_7;
+  undefined4 type;
   int param_8;
-  undefined4 param_9;
+  undefined4 filterData;
 {
   undefined1 *puVar1;
   undefined1 *puVar2;
@@ -710,23 +710,23 @@ void _gleImagingUnpackData(param_1, param_2, param_3, param_4, param_5, param_6,
   iVar4 = param_1 + 0x31cc;
   puVar5 = auStack_40;
   piVar6 = local_3c;
-  uVar3 = param_3;
+  uVar3 = height;
   _glePixelPackSettings
-            (param_1,param_6,param_7,param_2,param_3,iVar4,puVar5,piVar6,&local_50,auStack_4c,
+            (param_1,param_6,type,param_2,height,iVar4,puVar5,piVar6,&local_50,auStack_4c,
              auStack_48,auStack_44);
-  _glgConvertType(param_4,param_5,auStack_b8,auStack_b4,uVar3,iVar4,puVar5,piVar6);
+  _glgConvertType(format,param_5,auStack_b8,auStack_b4,uVar3,iVar4,puVar5,piVar6);
   puVar1 = auStack_a8;
   puVar2 = auStack_a4;
-  _glgConvertType(param_6,param_7,puVar1,puVar2,uVar3,iVar4,puVar5,piVar6);
+  _glgConvertType(param_6,type,puVar1,puVar2,uVar3,iVar4,puVar5,piVar6);
   local_c0 = param_8 + local_3c[0];
   local_98 = 5;
   local_bc = local_50;
   local_a0 = 2;
-  local_b0 = param_9;
+  local_b0 = filterData;
   local_9c = 0;
   local_94 = param_2;
-  local_90 = param_3;
-  local_ac = _glePixelBytes(param_6,param_7);
+  local_90 = height;
+  local_ac = _glePixelBytes(param_6,type);
   local_ac = param_2 * local_ac;
   local_54 = 0;
   if (*(char *)(param_1 + 0x31e4) != '\0') {
@@ -740,15 +740,15 @@ void _gleImagingUnpackData(param_1, param_2, param_3, param_4, param_5, param_6,
 }
 
 /* _gleImagingPackData @ 0xd2860 (312 bytes) */
-void _gleImagingPackData(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9)
+void _gleImagingPackData(param_1, rowWidth, param_3, format, type, param_6, param_7, filterData, param_9)
   int param_1;
-  int param_2;
+  int rowWidth;
   undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
+  undefined4 format;
+  undefined4 type;
   undefined4 param_6;
   undefined4 param_7;
-  undefined4 param_8;
+  undefined4 filterData;
   int param_9;
 {
   undefined1 *puVar1;
@@ -783,15 +783,15 @@ void _gleImagingPackData(param_1, param_2, param_3, param_4, param_5, param_6, p
   piVar6 = local_3c;
   uVar3 = param_3;
   _glePixelPackSettings
-            (param_1,param_4,param_5,param_2,param_3,iVar4,puVar5,piVar6,&local_50,auStack_4c,
+            (param_1,format,type,rowWidth,param_3,iVar4,puVar5,piVar6,&local_50,auStack_4c,
              auStack_48,auStack_44);
-  _glgConvertType(param_4,param_5,auStack_b8,auStack_b4,uVar3,iVar4,puVar5,piVar6);
+  _glgConvertType(format,type,auStack_b8,auStack_b4,uVar3,iVar4,puVar5,piVar6);
   puVar1 = auStack_a8;
   puVar2 = auStack_a4;
   _glgConvertType(param_6,param_7,puVar1,puVar2,uVar3,iVar4,puVar5,piVar6);
-  local_c0 = param_8;
-  local_bc = _glePixelBytes(param_4,param_5);
-  local_bc = param_2 * local_bc;
+  local_c0 = filterData;
+  local_bc = _glePixelBytes(format,type);
+  local_bc = rowWidth * local_bc;
   local_b0 = param_9 + local_3c[0];
   local_98 = 5;
   local_a0 = 2;
@@ -801,7 +801,7 @@ void _gleImagingPackData(param_1, param_2, param_3, param_4, param_5, param_6, p
   if (*(char *)(param_1 + 0x31c9) != '\0') {
     local_9c = local_9c | 4;
   }
-  local_94 = param_2;
+  local_94 = rowWidth;
   local_90 = param_3;
   _glgProcessPixels(param_1 + 0x31a8,&local_c0,puVar1,puVar2,uVar3,iVar4,0,piVar6);
   return;
@@ -937,91 +937,95 @@ switchD_000d2a7c_default:
 }
 
 /* _gleGetHistogram @ 0xd2d54 (3104 bytes) */
-void _gleGetHistogram(param_1, unusedArg2, reset, format, type, values)
-  int param_1;
+void _gleGetHistogram(glContext, unusedArg2, reset, format, type, values)
+  int glContext;
   undefined4 unusedArg2;
   int reset;
   uint format;
   uint type;
   int values;
 {
-  bool bVar1;
-  bool bVar2;
-  bool bVar3;
-  bool bVar4;
-  bool bVar5;
-  bool bVar6;
-  bool bVar7;
-  bool bVar8;
-  bool bVar9;
-  bool bVar10;
-  bool bVar11;
-  bool bVar12;
-  bool bVar13;
-  bool bVar14;
-  bool bVar15;
-  double dVar16;
+  bool formatIsAbgr;
+  bool formatIsBgr;
+  bool formatIsBgra;
+  bool formatIsRed;
+  bool formatIsNotGreen;
+  bool formatIsAlpha;
+  bool formatIsRgb;
+  bool swapBytes;
+  bool formatIsRgba;
+  bool formatIsLuminance;
+  bool formatIsBlue;
+  bool formatIsLuminanceAlpha;
+  bool formatAboveRgba;
+  bool formatAboveBlue;
+  bool formatAboveAbgr;
+  double uintToDoubleBias;
   undefined1 uVar18;
   ushort uVar17;
   int iVar19;
-  int iVar20;
+  int binsRemaining;
+  int packAlignment;
+  int pixelBytes;
+  int binByteOffset;
   float fVar21;
   float fVar22;
   float fVar23;
   float fVar24;
   float *pfVar25;
-  int iVar26;
+  float *dstCursor;
+  int binCountThenRemaining;
   float *histogramTable;
-  float *pfVar28;
+  float *binCursor;
   undefined4 local_80;
   undefined4 local_7c;
   undefined4 local_78;
   undefined4 local_74;
   
-  histogramTable = *(float **)(param_1 + 0x3384);
-  iVar26 = *(int *)(param_1 + 0x3388);
-  iVar20 = _glePixelBytes(format,type);
-  dVar16 = DOUBLE_00108d58;
-  iVar19 = *(int *)(param_1 + 0x31c4);
-  pfVar25 = (float *)(values + iVar20 * *(int *)(param_1 + 0x31bc));
-  if (iVar19 == 4) {
-    if (((uint)pfVar25 & 3) != 0) {
-      pfVar25 = (float *)((uint)(pfVar25 + 1) & 0xfffffffc);
+  histogramTable = *(float **)(glContext + 0x3384);
+  binCountThenRemaining = *(int *)(glContext + 0x3388);
+  pixelBytes = _glePixelBytes(format,type);
+  uintToDoubleBias = DOUBLE_00108d58;
+  packAlignment = *(int *)(glContext + 0x31c4);
+  dstCursor = (float *)(values + pixelBytes * *(int *)(glContext + 0x31bc));
+  if (packAlignment == 4) {
+    if (((uint)dstCursor & 3) != 0) {
+      dstCursor = (float *)((uint)(dstCursor + 1) & 0xfffffffc);
     }
   }
-  else if (iVar19 < 5) {
-    if ((iVar19 == 2) && (((uint)pfVar25 & 1) != 0)) {
-      pfVar25 = (float *)((int)pfVar25 + 1);
+  else if (packAlignment < 5) {
+    if ((packAlignment == 2) && (((uint)dstCursor & 1) != 0)) {
+      dstCursor = (float *)((int)dstCursor + 1);
     }
   }
-  else if ((iVar19 == 8) && (((uint)pfVar25 & 7) != 0)) {
-    pfVar25 = (float *)((uint)(pfVar25 + 2) & 0xfffffff8);
+  else if ((packAlignment == 8) && (((uint)dstCursor & 7) != 0)) {
+    dstCursor = (float *)((uint)(dstCursor + 2) & 0xfffffff8);
   }
-  if (0 < iVar26) {
-    bVar14 = 0x1905 < format;
-    bVar1 = format == 0x8000;
-    bVar4 = format == 0x1903;
-    bVar5 = format != 0x1904;
-    bVar2 = format == 0x80e0;
-    bVar3 = format == 0x80e1;
-    bVar6 = format == 0x1906;
-    bVar7 = format == 0x1907;
-    bVar8 = *(char *)(param_1 + 0x31c8) != '\0';
-    bVar15 = 0x8000 < format;
-    bVar9 = format == 0x1908;
-    bVar10 = format == 0x1909;
-    bVar13 = 0x1908 < format;
-    bVar11 = format == 0x1905;
-    bVar12 = format == 0x190a;
-    pfVar28 = histogramTable;
-    iVar19 = iVar26;
+  if (0 < binCountThenRemaining) {
+    formatAboveBlue = 0x1905 < format;
+    formatIsAbgr = format == 0x8000;
+    formatIsRed = format == 0x1903;
+    formatIsNotGreen = format != 0x1904;
+    formatIsBgr = format == 0x80e0;
+    formatIsBgra = format == 0x80e1;
+    formatIsAlpha = format == 0x1906;
+    formatIsRgb = format == 0x1907;
+    swapBytes = *(char *)(glContext + 0x31c8) != '\0';
+    formatAboveAbgr = 0x8000 < format;
+    formatIsRgba = format == 0x1908;
+    formatIsLuminance = format == 0x1909;
+    formatAboveRgba = 0x1908 < format;
+    formatIsBlue = format == 0x1905;
+    formatIsLuminanceAlpha = format == 0x190a;
+    binCursor = histogramTable;
+    binsRemaining = binCountThenRemaining;
     do {
       if (type == 0x1406) {
-        fVar21 = (float)((double)CONCAT44(0x43300000,-*pfVar28) - dVar16);
-        fVar22 = (float)((double)CONCAT44(0x43300000,-pfVar28[1]) - dVar16);
-        fVar23 = (float)((double)CONCAT44(0x43300000,-pfVar28[2]) - dVar16);
-        fVar24 = (float)((double)CONCAT44(0x43300000,-pfVar28[3]) - dVar16);
-        if (bVar8) {
+        fVar21 = (float)((double)CONCAT44(0x43300000,-*binCursor) - uintToDoubleBias);
+        fVar22 = (float)((double)CONCAT44(0x43300000,-binCursor[1]) - uintToDoubleBias);
+        fVar23 = (float)((double)CONCAT44(0x43300000,-binCursor[2]) - uintToDoubleBias);
+        fVar24 = (float)((double)CONCAT44(0x43300000,-binCursor[3]) - uintToDoubleBias);
+        if (swapBytes) {
           fVar21 = GH_U2F((unsigned int)(((uint)GH_F2U(fVar21) >> 0x18 | (uint)GH_F2U(fVar21) >> 8 & 0xff00 |
                            ((uint)GH_F2U(fVar21) & 0xff00) << 8 | (int)GH_F2U(fVar21) << 0x18)));
           fVar22 = GH_U2F((unsigned int)(((uint)GH_F2U(fVar22) >> 0x18 | (uint)GH_F2U(fVar22) >> 8 & 0xff00 |
@@ -1031,171 +1035,171 @@ void _gleGetHistogram(param_1, unusedArg2, reset, format, type, values)
           fVar24 = GH_U2F((unsigned int)(((uint)GH_F2U(fVar24) >> 0x18 | (uint)GH_F2U(fVar24) >> 8 & 0xff00 |
                            ((uint)GH_F2U(fVar24) & 0xff00) << 8 | (int)GH_F2U(fVar24) << 0x18)));
         }
-        if (bVar9) {
-          *pfVar25 = fVar21;
-          pfVar25[1] = fVar22;
-          pfVar25 = pfVar25 + 2;
-          *pfVar25 = fVar23;
+        if (formatIsRgba) {
+          *dstCursor = fVar21;
+          dstCursor[1] = fVar22;
+          dstCursor = dstCursor + 2;
+          *dstCursor = fVar23;
           goto LAB_000d372c;
         }
-        if (bVar13) {
-          if (!bVar1) {
-            if (bVar15) {
-              if (bVar2) {
-                *pfVar25 = fVar23;
+        if (formatAboveRgba) {
+          if (!formatIsAbgr) {
+            if (formatAboveAbgr) {
+              if (formatIsBgr) {
+                *dstCursor = fVar23;
                 goto LAB_000d3714;
               }
-              if (bVar3) {
-                *pfVar25 = fVar23;
-                pfVar25[1] = fVar22;
-                pfVar25 = pfVar25 + 2;
-                *pfVar25 = fVar21;
+              if (formatIsBgra) {
+                *dstCursor = fVar23;
+                dstCursor[1] = fVar22;
+                dstCursor = dstCursor + 2;
+                *dstCursor = fVar21;
                 goto LAB_000d372c;
               }
             }
             else {
-              if (bVar10) goto LAB_000d3720;
-              if (bVar12) {
-                *pfVar25 = fVar21;
+              if (formatIsLuminance) goto LAB_000d3720;
+              if (formatIsLuminanceAlpha) {
+                *dstCursor = fVar21;
 LAB_000d372c:
-                pfVar25 = pfVar25 + 1;
-                *pfVar25 = fVar24;
+                dstCursor = dstCursor + 1;
+                *dstCursor = fVar24;
                 goto LAB_000d3730;
               }
             }
             goto LAB_000d3734;
           }
-          *pfVar25 = fVar24;
-          pfVar25 = pfVar25 + 1;
-          *pfVar25 = fVar23;
+          *dstCursor = fVar24;
+          dstCursor = dstCursor + 1;
+          *dstCursor = fVar23;
 LAB_000d3714:
-          pfVar25[1] = fVar22;
-          pfVar25 = pfVar25 + 2;
-          *pfVar25 = fVar21;
+          dstCursor[1] = fVar22;
+          dstCursor = dstCursor + 2;
+          *dstCursor = fVar21;
         }
-        else if (bVar11) {
-          *pfVar25 = fVar23;
+        else if (formatIsBlue) {
+          *dstCursor = fVar23;
         }
-        else if (bVar14) {
-          if (bVar6) {
-            *pfVar25 = fVar24;
+        else if (formatAboveBlue) {
+          if (formatIsAlpha) {
+            *dstCursor = fVar24;
           }
           else {
-            if (!bVar7) goto LAB_000d3734;
-            *pfVar25 = fVar21;
-            pfVar25[1] = fVar22;
-            pfVar25 = pfVar25 + 2;
-            *pfVar25 = fVar23;
+            if (!formatIsRgb) goto LAB_000d3734;
+            *dstCursor = fVar21;
+            dstCursor[1] = fVar22;
+            dstCursor = dstCursor + 2;
+            *dstCursor = fVar23;
           }
         }
-        else if (bVar4) {
+        else if (formatIsRed) {
 LAB_000d3720:
-          *pfVar25 = fVar21;
+          *dstCursor = fVar21;
         }
         else {
-          if (bVar5) goto LAB_000d3734;
-          *pfVar25 = fVar22;
+          if (formatIsNotGreen) goto LAB_000d3734;
+          *dstCursor = fVar22;
         }
 LAB_000d3730:
-        pfVar25 = pfVar25 + 1;
+        dstCursor = dstCursor + 1;
         goto LAB_000d3734;
       }
       if (0x1406 < type) goto LAB_000d3734;
       if (type != 0x1402) {
         if (type < 0x1403) {
           if (type == 0x1400) {
-            if (bVar9) {
+            if (formatIsRgba) {
 LAB_000d3048:
-              *(undefined1 *)pfVar25 = *(undefined1 *)((int)pfVar28 + 3);
-              *(undefined1 *)((int)pfVar25 + 1) = *(undefined1 *)((int)pfVar28 + 7);
-              uVar18 = *(undefined1 *)((int)pfVar28 + 0xb);
+              *(undefined1 *)dstCursor = *(undefined1 *)((int)binCursor + 3);
+              *(undefined1 *)((int)dstCursor + 1) = *(undefined1 *)((int)binCursor + 7);
+              uVar18 = *(undefined1 *)((int)binCursor + 0xb);
 LAB_000d3074:
-              pfVar25 = (float *)((int)pfVar25 + 2);
-              *(undefined1 *)pfVar25 = uVar18;
+              dstCursor = (float *)((int)dstCursor + 2);
+              *(undefined1 *)dstCursor = uVar18;
 LAB_000d30ac:
-              uVar18 = *(undefined1 *)((int)pfVar28 + 0xf);
+              uVar18 = *(undefined1 *)((int)binCursor + 0xf);
             }
             else {
-              if (!bVar13) {
-                if (!bVar11) goto LAB_000d2f78;
+              if (!formatAboveRgba) {
+                if (!formatIsBlue) goto LAB_000d2f78;
 LAB_000d3020:
-                uVar18 = *(undefined1 *)((int)pfVar28 + 0xb);
+                uVar18 = *(undefined1 *)((int)binCursor + 0xb);
                 goto LAB_000d2f38;
               }
 LAB_000d2fc4:
-              if (!bVar1) {
-                if (bVar15) {
-                  if (bVar2) {
-                    *(undefined1 *)pfVar25 = *(undefined1 *)((int)pfVar28 + 0xb);
-                    *(undefined1 *)((int)pfVar25 + 1) = *(undefined1 *)((int)pfVar28 + 7);
-                    uVar18 = *(undefined1 *)((int)pfVar28 + 3);
+              if (!formatIsAbgr) {
+                if (formatAboveAbgr) {
+                  if (formatIsBgr) {
+                    *(undefined1 *)dstCursor = *(undefined1 *)((int)binCursor + 0xb);
+                    *(undefined1 *)((int)dstCursor + 1) = *(undefined1 *)((int)binCursor + 7);
+                    uVar18 = *(undefined1 *)((int)binCursor + 3);
 LAB_000d2f54:
-                    pfVar25 = (float *)((int)pfVar25 + 2);
-                    *(undefined1 *)pfVar25 = uVar18;
+                    dstCursor = (float *)((int)dstCursor + 2);
+                    *(undefined1 *)dstCursor = uVar18;
                     goto LAB_000d30b4;
                   }
-                  if (!bVar3) goto LAB_000d3734;
-                  *(undefined1 *)pfVar25 = *(undefined1 *)((int)pfVar28 + 0xb);
-                  *(undefined1 *)((int)pfVar25 + 1) = *(undefined1 *)((int)pfVar28 + 7);
-                  uVar18 = *(undefined1 *)((int)pfVar28 + 3);
+                  if (!formatIsBgra) goto LAB_000d3734;
+                  *(undefined1 *)dstCursor = *(undefined1 *)((int)binCursor + 0xb);
+                  *(undefined1 *)((int)dstCursor + 1) = *(undefined1 *)((int)binCursor + 7);
+                  uVar18 = *(undefined1 *)((int)binCursor + 3);
                   goto LAB_000d3074;
                 }
-                if (bVar10) {
+                if (formatIsLuminance) {
 LAB_000d309c:
-                  uVar18 = *(undefined1 *)((int)pfVar28 + 3);
+                  uVar18 = *(undefined1 *)((int)binCursor + 3);
                   goto LAB_000d2f38;
                 }
-                if (!bVar12) goto LAB_000d3734;
-                *(undefined1 *)pfVar25 = *(undefined1 *)((int)pfVar28 + 3);
+                if (!formatIsLuminanceAlpha) goto LAB_000d3734;
+                *(undefined1 *)dstCursor = *(undefined1 *)((int)binCursor + 3);
                 goto LAB_000d30ac;
               }
-              *(undefined1 *)pfVar25 = *(undefined1 *)((int)pfVar28 + 0xf);
-              *(undefined1 *)((int)pfVar25 + 1) = *(undefined1 *)((int)pfVar28 + 0xb);
-              pfVar25 = (float *)((int)pfVar25 + 2);
-              *(undefined1 *)pfVar25 = *(undefined1 *)((int)pfVar28 + 7);
-              uVar18 = *(undefined1 *)((int)pfVar28 + 3);
+              *(undefined1 *)dstCursor = *(undefined1 *)((int)binCursor + 0xf);
+              *(undefined1 *)((int)dstCursor + 1) = *(undefined1 *)((int)binCursor + 0xb);
+              dstCursor = (float *)((int)dstCursor + 2);
+              *(undefined1 *)dstCursor = *(undefined1 *)((int)binCursor + 7);
+              uVar18 = *(undefined1 *)((int)binCursor + 3);
             }
-            pfVar25 = (float *)((int)pfVar25 + 1);
-            *(undefined1 *)pfVar25 = uVar18;
+            dstCursor = (float *)((int)dstCursor + 1);
+            *(undefined1 *)dstCursor = uVar18;
           }
           else {
             if (type != 0x1401) goto LAB_000d3734;
-            if (bVar9) goto LAB_000d3048;
-            if (bVar13) goto LAB_000d2fc4;
-            if (bVar11) goto LAB_000d3020;
+            if (formatIsRgba) goto LAB_000d3048;
+            if (formatAboveRgba) goto LAB_000d2fc4;
+            if (formatIsBlue) goto LAB_000d3020;
 LAB_000d2f78:
-            if (bVar14) {
-              if (!bVar6) {
-                if (!bVar7) goto LAB_000d3734;
-                *(undefined1 *)pfVar25 = *(undefined1 *)((int)pfVar28 + 3);
-                *(undefined1 *)((int)pfVar25 + 1) = *(undefined1 *)((int)pfVar28 + 7);
-                uVar18 = *(undefined1 *)((int)pfVar28 + 0xb);
+            if (formatAboveBlue) {
+              if (!formatIsAlpha) {
+                if (!formatIsRgb) goto LAB_000d3734;
+                *(undefined1 *)dstCursor = *(undefined1 *)((int)binCursor + 3);
+                *(undefined1 *)((int)dstCursor + 1) = *(undefined1 *)((int)binCursor + 7);
+                uVar18 = *(undefined1 *)((int)binCursor + 0xb);
                 goto LAB_000d2f54;
               }
-              uVar18 = *(undefined1 *)((int)pfVar28 + 0xf);
+              uVar18 = *(undefined1 *)((int)binCursor + 0xf);
             }
             else {
-              if (bVar4) goto LAB_000d309c;
-              if (bVar5) goto LAB_000d3734;
-              uVar18 = *(undefined1 *)((int)pfVar28 + 7);
+              if (formatIsRed) goto LAB_000d309c;
+              if (formatIsNotGreen) goto LAB_000d3734;
+              uVar18 = *(undefined1 *)((int)binCursor + 7);
             }
 LAB_000d2f38:
-            *(undefined1 *)pfVar25 = uVar18;
+            *(undefined1 *)dstCursor = uVar18;
           }
 LAB_000d30b4:
-          pfVar25 = (float *)((int)pfVar25 + 1);
+          dstCursor = (float *)((int)dstCursor + 1);
           goto LAB_000d3734;
         }
         if ((type == 0x1404) || (0x1404 < type)) {
-          local_80 = GH_F2U(*pfVar28);
-          local_7c = GH_F2U(pfVar28[1]);
-          local_78 = GH_F2U(pfVar28[2]);
-          local_74 = GH_F2U(pfVar28[3]);
-          if (bVar8) {
-            fVar24 = *pfVar28;
-            fVar23 = pfVar28[1];
-            fVar22 = pfVar28[2];
-            fVar21 = pfVar28[3];
+          local_80 = GH_F2U(*binCursor);
+          local_7c = GH_F2U(binCursor[1]);
+          local_78 = GH_F2U(binCursor[2]);
+          local_74 = GH_F2U(binCursor[3]);
+          if (swapBytes) {
+            fVar24 = *binCursor;
+            fVar23 = binCursor[1];
+            fVar22 = binCursor[2];
+            fVar21 = binCursor[3];
             local_80 = ((unsigned int)(((int)GH_F2U(fVar24) >> 0x18 | (uint)GH_F2U(fVar24) >> 8 & 0xff00 |
                                ((uint)GH_F2U(fVar24) & 0xff00) << 8 | (int)GH_F2U(fVar24) << 0x18)));
             local_7c = ((unsigned int)(((int)GH_F2U(fVar23) >> 0x18 | (uint)GH_F2U(fVar23) >> 8 & 0xff00 |
@@ -1205,134 +1209,134 @@ LAB_000d30b4:
             local_74 = ((unsigned int)(((int)GH_F2U(fVar21) >> 0x18 | (uint)GH_F2U(fVar21) >> 8 & 0xff00 |
                                ((uint)GH_F2U(fVar21) & 0xff00) << 8 | (int)GH_F2U(fVar21) << 0x18)));
           }
-          if (bVar9) {
-            *(unsigned int *)pfVar25 = local_80;
-            ((unsigned int *)pfVar25)[1] = local_7c;
+          if (formatIsRgba) {
+            *(unsigned int *)dstCursor = local_80;
+            ((unsigned int *)dstCursor)[1] = local_7c;
             local_80 = local_78;
 LAB_000d32f4:
-            pfVar25 = pfVar25 + 2;
-            *(unsigned int *)pfVar25 = local_80;
+            dstCursor = dstCursor + 2;
+            *(unsigned int *)dstCursor = local_80;
             local_80 = local_74;
           }
           else {
-            if (!bVar13) {
+            if (!formatAboveRgba) {
               fVar21 = GH_U2F(local_78);
-              if (!bVar11) {
-                if (bVar14) {
+              if (!formatIsBlue) {
+                if (formatAboveBlue) {
                   fVar21 = GH_U2F(local_74);
-                  if (bVar6) goto LAB_000d32bc;
-                  if (bVar7) {
-                    *(unsigned int *)pfVar25 = local_80;
-                    ((unsigned int *)pfVar25)[1] = local_7c;
+                  if (formatIsAlpha) goto LAB_000d32bc;
+                  if (formatIsRgb) {
+                    *(unsigned int *)dstCursor = local_80;
+                    ((unsigned int *)dstCursor)[1] = local_7c;
                     goto LAB_000d32d8;
                   }
                 }
                 else {
                   fVar21 = GH_U2F(local_80);
-                  if ((bVar4) || (fVar21 = GH_U2F(local_7c), !bVar5)) goto LAB_000d32bc;
+                  if ((formatIsRed) || (fVar21 = GH_U2F(local_7c), !formatIsNotGreen)) goto LAB_000d32bc;
                 }
                 goto LAB_000d3734;
               }
 LAB_000d32bc:
-              *pfVar25 = fVar21;
+              *dstCursor = fVar21;
               goto LAB_000d3730;
             }
-            if (!bVar1) {
-              if (bVar15) {
-                if (bVar2) {
-                  *(unsigned int *)pfVar25 = local_78;
-                  ((unsigned int *)pfVar25)[1] = local_7c;
+            if (!formatIsAbgr) {
+              if (formatAboveAbgr) {
+                if (formatIsBgr) {
+                  *(unsigned int *)dstCursor = local_78;
+                  ((unsigned int *)dstCursor)[1] = local_7c;
                   local_78 = local_80;
 LAB_000d32d8:
-                  pfVar25 = pfVar25 + 2;
-                  *(unsigned int *)pfVar25 = local_78;
+                  dstCursor = dstCursor + 2;
+                  *(unsigned int *)dstCursor = local_78;
                   goto LAB_000d3730;
                 }
-                if (bVar3) {
-                  *(unsigned int *)pfVar25 = local_78;
-                  ((unsigned int *)pfVar25)[1] = local_7c;
+                if (formatIsBgra) {
+                  *(unsigned int *)dstCursor = local_78;
+                  ((unsigned int *)dstCursor)[1] = local_7c;
                   goto LAB_000d32f4;
                 }
               }
               else {
                 fVar21 = GH_U2F(local_80);
-                if (bVar10) goto LAB_000d32bc;
-                if (bVar12) {
-                  *(unsigned int *)pfVar25 = local_80;
+                if (formatIsLuminance) goto LAB_000d32bc;
+                if (formatIsLuminanceAlpha) {
+                  *(unsigned int *)dstCursor = local_80;
                   local_80 = local_74;
                   goto LAB_000d32fc;
                 }
               }
               goto LAB_000d3734;
             }
-            *(unsigned int *)pfVar25 = local_74;
-            ((unsigned int *)pfVar25)[1] = local_78;
-            pfVar25 = pfVar25 + 2;
-            *(unsigned int *)pfVar25 = local_7c;
+            *(unsigned int *)dstCursor = local_74;
+            ((unsigned int *)dstCursor)[1] = local_78;
+            dstCursor = dstCursor + 2;
+            *(unsigned int *)dstCursor = local_7c;
           }
 LAB_000d32fc:
-          pfVar25 = pfVar25 + 1;
-          *(unsigned int *)pfVar25 = local_80;
+          dstCursor = dstCursor + 1;
+          *(unsigned int *)dstCursor = local_80;
           goto LAB_000d3730;
         }
       }
-      (*(unsigned short *)((unsigned char *)&(local_80) + 2)) = SUB42(*pfVar28,0);
-      (*(unsigned short *)((unsigned char *)&(local_7c) + 2)) = SUB42(pfVar28[1],0);
-      (*(unsigned short *)((unsigned char *)&(local_78) + 2)) = SUB42(pfVar28[2],0);
-      (*(unsigned short *)((unsigned char *)&(local_74) + 2)) = SUB42(pfVar28[3],0);
-      if (bVar8) {
+      (*(unsigned short *)((unsigned char *)&(local_80) + 2)) = SUB42(*binCursor,0);
+      (*(unsigned short *)((unsigned char *)&(local_7c) + 2)) = SUB42(binCursor[1],0);
+      (*(unsigned short *)((unsigned char *)&(local_78) + 2)) = SUB42(binCursor[2],0);
+      (*(unsigned short *)((unsigned char *)&(local_74) + 2)) = SUB42(binCursor[3],0);
+      if (swapBytes) {
         (*(unsigned short *)((unsigned char *)&(local_80) + 2)) =
-             (ushort)(((uint)GH_F2U(*pfVar28) & 0xff) << 8) | (ushort)((uint)GH_F2U(*pfVar28) >> 8) & 0xff;
+             (ushort)(((uint)GH_F2U(*binCursor) & 0xff) << 8) | (ushort)((uint)GH_F2U(*binCursor) >> 8) & 0xff;
         (*(unsigned short *)((unsigned char *)&(local_7c) + 2)) =
-             (ushort)(((uint)GH_F2U(pfVar28[1]) & 0xff) << 8) | (ushort)((uint)GH_F2U(pfVar28[1]) >> 8) & 0xff;
+             (ushort)(((uint)GH_F2U(binCursor[1]) & 0xff) << 8) | (ushort)((uint)GH_F2U(binCursor[1]) >> 8) & 0xff;
         (*(unsigned short *)((unsigned char *)&(local_78) + 2)) =
-             (ushort)(((uint)GH_F2U(pfVar28[2]) & 0xff) << 8) | (ushort)((uint)GH_F2U(pfVar28[2]) >> 8) & 0xff;
+             (ushort)(((uint)GH_F2U(binCursor[2]) & 0xff) << 8) | (ushort)((uint)GH_F2U(binCursor[2]) >> 8) & 0xff;
         (*(unsigned short *)((unsigned char *)&(local_74) + 2)) =
-             (ushort)(((uint)GH_F2U(pfVar28[3]) & 0xff) << 8) | (ushort)((uint)GH_F2U(pfVar28[3]) >> 8) & 0xff;
+             (ushort)(((uint)GH_F2U(binCursor[3]) & 0xff) << 8) | (ushort)((uint)GH_F2U(binCursor[3]) >> 8) & 0xff;
       }
-      if (bVar9) {
-        *(ushort *)pfVar25 = (*(unsigned short *)((unsigned char *)&(local_80) + 2));
-        *(ushort *)((int)pfVar25 + 2) = (*(unsigned short *)((unsigned char *)&(local_7c) + 2));
+      if (formatIsRgba) {
+        *(ushort *)dstCursor = (*(unsigned short *)((unsigned char *)&(local_80) + 2));
+        *(ushort *)((int)dstCursor + 2) = (*(unsigned short *)((unsigned char *)&(local_7c) + 2));
         (*(unsigned short *)((unsigned char *)&(local_80) + 2)) = (*(unsigned short *)((unsigned char *)&(local_78) + 2));
 LAB_000d3270:
-        pfVar25 = pfVar25 + 1;
-        *(ushort *)pfVar25 = (*(unsigned short *)((unsigned char *)&(local_80) + 2));
+        dstCursor = dstCursor + 1;
+        *(ushort *)dstCursor = (*(unsigned short *)((unsigned char *)&(local_80) + 2));
         (*(unsigned short *)((unsigned char *)&(local_80) + 2)) = (*(unsigned short *)((unsigned char *)&(local_74) + 2));
 LAB_000d32ac:
-        pfVar25 = (float *)((int)pfVar25 + 2);
-        *(ushort *)pfVar25 = (*(unsigned short *)((unsigned char *)&(local_80) + 2));
+        dstCursor = (float *)((int)dstCursor + 2);
+        *(ushort *)dstCursor = (*(unsigned short *)((unsigned char *)&(local_80) + 2));
 LAB_000d32b0:
-        pfVar25 = (float *)((int)pfVar25 + 2);
+        dstCursor = (float *)((int)dstCursor + 2);
       }
-      else if (bVar13) {
-        if (bVar1) {
-          *(ushort *)pfVar25 = (*(unsigned short *)((unsigned char *)&(local_74) + 2));
-          *(ushort *)((int)pfVar25 + 2) = (*(unsigned short *)((unsigned char *)&(local_78) + 2));
-          pfVar25 = pfVar25 + 1;
-          *(ushort *)pfVar25 = (*(unsigned short *)((unsigned char *)&(local_7c) + 2));
+      else if (formatAboveRgba) {
+        if (formatIsAbgr) {
+          *(ushort *)dstCursor = (*(unsigned short *)((unsigned char *)&(local_74) + 2));
+          *(ushort *)((int)dstCursor + 2) = (*(unsigned short *)((unsigned char *)&(local_78) + 2));
+          dstCursor = dstCursor + 1;
+          *(ushort *)dstCursor = (*(unsigned short *)((unsigned char *)&(local_7c) + 2));
           goto LAB_000d32ac;
         }
-        if (bVar15) {
-          if (bVar2) {
-            *(ushort *)pfVar25 = (*(unsigned short *)((unsigned char *)&(local_78) + 2));
-            *(ushort *)((int)pfVar25 + 2) = (*(unsigned short *)((unsigned char *)&(local_7c) + 2));
+        if (formatAboveAbgr) {
+          if (formatIsBgr) {
+            *(ushort *)dstCursor = (*(unsigned short *)((unsigned char *)&(local_78) + 2));
+            *(ushort *)((int)dstCursor + 2) = (*(unsigned short *)((unsigned char *)&(local_7c) + 2));
             (*(unsigned short *)((unsigned char *)&(local_78) + 2)) = (*(unsigned short *)((unsigned char *)&(local_80) + 2));
 LAB_000d30dc:
-            pfVar25 = pfVar25 + 1;
-            *(ushort *)pfVar25 = (*(unsigned short *)((unsigned char *)&(local_78) + 2));
+            dstCursor = dstCursor + 1;
+            *(ushort *)dstCursor = (*(unsigned short *)((unsigned char *)&(local_78) + 2));
             goto LAB_000d32b0;
           }
-          if (bVar3) {
-            *(ushort *)pfVar25 = (*(unsigned short *)((unsigned char *)&(local_78) + 2));
-            *(ushort *)((int)pfVar25 + 2) = (*(unsigned short *)((unsigned char *)&(local_7c) + 2));
+          if (formatIsBgra) {
+            *(ushort *)dstCursor = (*(unsigned short *)((unsigned char *)&(local_78) + 2));
+            *(ushort *)((int)dstCursor + 2) = (*(unsigned short *)((unsigned char *)&(local_7c) + 2));
             goto LAB_000d3270;
           }
         }
         else {
           uVar17 = (*(unsigned short *)((unsigned char *)&(local_80) + 2));
-          if (bVar10) goto LAB_000d30c0;
-          if (bVar12) {
-            *(ushort *)pfVar25 = (*(unsigned short *)((unsigned char *)&(local_80) + 2));
+          if (formatIsLuminance) goto LAB_000d30c0;
+          if (formatIsLuminanceAlpha) {
+            *(ushort *)dstCursor = (*(unsigned short *)((unsigned char *)&(local_80) + 2));
             (*(unsigned short *)((unsigned char *)&(local_80) + 2)) = (*(unsigned short *)((unsigned char *)&(local_74) + 2));
             goto LAB_000d32ac;
           }
@@ -1340,31 +1344,31 @@ LAB_000d30dc:
       }
       else {
         uVar17 = (*(unsigned short *)((unsigned char *)&(local_78) + 2));
-        if (bVar11) {
+        if (formatIsBlue) {
 LAB_000d30c0:
-          *(ushort *)pfVar25 = uVar17;
+          *(ushort *)dstCursor = uVar17;
           goto LAB_000d32b0;
         }
-        if (bVar14) {
+        if (formatAboveBlue) {
           uVar17 = (*(unsigned short *)((unsigned char *)&(local_74) + 2));
-          if (bVar6) goto LAB_000d30c0;
-          if (bVar7) {
-            *(ushort *)pfVar25 = (*(unsigned short *)((unsigned char *)&(local_80) + 2));
-            *(ushort *)((int)pfVar25 + 2) = (*(unsigned short *)((unsigned char *)&(local_7c) + 2));
+          if (formatIsAlpha) goto LAB_000d30c0;
+          if (formatIsRgb) {
+            *(ushort *)dstCursor = (*(unsigned short *)((unsigned char *)&(local_80) + 2));
+            *(ushort *)((int)dstCursor + 2) = (*(unsigned short *)((unsigned char *)&(local_7c) + 2));
             goto LAB_000d30dc;
           }
         }
         else {
           uVar17 = (*(unsigned short *)((unsigned char *)&(local_80) + 2));
-          if ((bVar4) || (uVar17 = (*(unsigned short *)((unsigned char *)&(local_7c) + 2)), !bVar5)) goto LAB_000d30c0;
+          if ((formatIsRed) || (uVar17 = (*(unsigned short *)((unsigned char *)&(local_7c) + 2)), !formatIsNotGreen)) goto LAB_000d30c0;
         }
       }
 LAB_000d3734:
-      pfVar28 = pfVar28 + 4;
-      iVar19 = iVar19 + -1;
-    } while (iVar19 != 0);
+      binCursor = binCursor + 4;
+      binsRemaining = binsRemaining + -1;
+    } while (binsRemaining != 0);
   }
-  if ((reset != 0) && (iVar19 = 0, 0 < iVar26)) {
+  if ((reset != 0) && (iVar19 = 0, 0 < binCountThenRemaining)) {
     pfVar25 = histogramTable;
     do {
       if (format == 0x8032) goto LAB_000d3938;
@@ -1400,7 +1404,7 @@ LAB_000d3904:
       else {
         if (format == 0x80e1) {
 LAB_000d3928:
-          iVar20 = iVar19 * 0x10;
+          binByteOffset = iVar19 * 0x10;
           histogramTable[iVar19 * 4 + 3] = 0.0;
         }
         else {
@@ -1414,24 +1418,24 @@ LAB_000d3928:
           if (format < 0x8037) goto LAB_000d3928;
           if (format != 0x80e0) goto LAB_000d394c;
 LAB_000d3938:
-          iVar20 = iVar19 << 4;
+          binByteOffset = iVar19 << 4;
         }
-        *(undefined4 *)((int)histogramTable + iVar20) = 0;
-        *(undefined4 *)((int)histogramTable + iVar20 + 8) = 0;
-        *(undefined4 *)((int)histogramTable + iVar20 + 4) = 0;
+        *(undefined4 *)((int)histogramTable + binByteOffset) = 0;
+        *(undefined4 *)((int)histogramTable + binByteOffset + 8) = 0;
+        *(undefined4 *)((int)histogramTable + binByteOffset + 4) = 0;
       }
 LAB_000d394c:
       iVar19 = iVar19 + 1;
       pfVar25 = pfVar25 + 4;
-      iVar26 = iVar26 + -1;
-    } while (iVar26 != 0);
+      binCountThenRemaining = binCountThenRemaining + -1;
+    } while (binCountThenRemaining != 0);
   }
   return;
 }
 
 /* _gleGetMinmax @ 0xd3974 (628 bytes) */
-void _gleGetMinmax(param_1, unusedArg2, reset, format, type, values)
-  int param_1;
+void _gleGetMinmax(glContext, unusedArg2, reset, format, type, values)
+  int glContext;
   undefined4 unusedArg2;
   int reset;
   uint format;
@@ -1449,7 +1453,7 @@ void _gleGetMinmax(param_1, unusedArg2, reset, format, type, values)
   undefined4 local_74;
   undefined4 local_70;
   
-  minmaxTable = *(undefined4 **)(param_1 + 0x337c);
+  minmaxTable = *(undefined4 **)(glContext + 0x337c);
   pixelBytes = _glePixelBytes(format,type);
   insertFunc = (code *)_gleSelectPixelInsertFunc(format,type);
   local_7c = *minmaxTable;
@@ -1540,8 +1544,8 @@ LAB_000d3b98:
 }
 
 /* _gleConvolutionFilter1D @ 0xd3be8 (224 bytes) */
-void _gleConvolutionFilter1D(param_1, unusedArg2, internalformat, width, format, type, image)
-  int param_1;
+void _gleConvolutionFilter1D(glContext, unusedArg2, internalformat, width, format, type, image)
+  int glContext;
   undefined4 unusedArg2;
   undefined4 internalformat;
   int width;
@@ -1552,28 +1556,28 @@ void _gleConvolutionFilter1D(param_1, unusedArg2, internalformat, width, format,
   int bytesPerPixel;
   undefined4 filterData;
   
-  if (*(int *)(param_1 + 0x32cc) != 0) {
-    _free(*(int *)(param_1 + 0x32cc));
+  if (*(int *)(glContext + 0x32cc) != 0) {
+    _free(*(int *)(glContext + 0x32cc));
   }
-  *(undefined4 *)(param_1 + 0x32d4) = 1;
-  *(int *)(param_1 + 0x32d0) = width;
+  *(undefined4 *)(glContext + 0x32d4) = 1;
+  *(int *)(glContext + 0x32d0) = width;
   if (width == 0) {
-    *(undefined4 *)(param_1 + 0x32cc) = 0;
+    *(undefined4 *)(glContext + 0x32cc) = 0;
     return;
   }
   bytesPerPixel = _glePixelBytes(internalformat,0x1406);
   filterData = _malloc(width * bytesPerPixel);
-  *(undefined4 *)(param_1 + 0x32cc) = filterData;
-  *(short *)(param_1 + 0x32ca) = (short)internalformat;
-  ((void (*)())_gleImagingUnpackData)(param_1,width,1,format,type,internalformat,0x1406,image,filterData);
-  ((void (*)())_gleImagingScaleAndBias)(param_1,param_1 + 0x32a8,*(undefined4 *)(param_1 + 0x32cc),
-             (uint)*(ushort *)(param_1 + 0x32ca),0,width,0);
+  *(undefined4 *)(glContext + 0x32cc) = filterData;
+  *(short *)(glContext + 0x32ca) = (short)internalformat;
+  ((void (*)())_gleImagingUnpackData)(glContext,width,1,format,type,internalformat,0x1406,image,filterData);
+  ((void (*)())_gleImagingScaleAndBias)(glContext,glContext + 0x32a8,*(undefined4 *)(glContext + 0x32cc),
+             (uint)*(ushort *)(glContext + 0x32ca),0,width,0);
   return;
 }
 
 /* _gleConvolutionFilter2D @ 0xd3cc8 (240 bytes) */
-void _gleConvolutionFilter2D(param_1, unusedArg2, internalformat, width, height, format, type, image)
-  int param_1;
+void _gleConvolutionFilter2D(glContext, unusedArg2, internalformat, width, height, format, type, image)
+  int glContext;
   undefined4 unusedArg2;
   undefined4 internalformat;
   int width;
@@ -1585,50 +1589,50 @@ void _gleConvolutionFilter2D(param_1, unusedArg2, internalformat, width, height,
   int bytesPerPixel;
   undefined4 filterData;
   
-  if (*(int *)(param_1 + 0x330c) != 0) {
-    _free(*(int *)(param_1 + 0x330c));
+  if (*(int *)(glContext + 0x330c) != 0) {
+    _free(*(int *)(glContext + 0x330c));
   }
-  *(int *)(param_1 + 0x3310) = width;
-  *(int *)(param_1 + 0x3314) = height;
+  *(int *)(glContext + 0x3310) = width;
+  *(int *)(glContext + 0x3314) = height;
   if ((width != 0) && (height != 0)) {
     bytesPerPixel = _glePixelBytes(internalformat,0x1406);
     filterData = _malloc(width * height * bytesPerPixel);
-    *(undefined4 *)(param_1 + 0x330c) = filterData;
-    *(short *)(param_1 + 0x330a) = (short)internalformat;
-    ((void (*)())_gleImagingUnpackData)(param_1,width,height,format,type,internalformat,0x1406,image,filterData);
-    ((void (*)())_gleImagingScaleAndBias)(param_1,param_1 + 0x32e8,*(undefined4 *)(param_1 + 0x330c),
-               (uint)*(ushort *)(param_1 + 0x330a),0,width * height,0);
+    *(undefined4 *)(glContext + 0x330c) = filterData;
+    *(short *)(glContext + 0x330a) = (short)internalformat;
+    ((void (*)())_gleImagingUnpackData)(glContext,width,height,format,type,internalformat,0x1406,image,filterData);
+    ((void (*)())_gleImagingScaleAndBias)(glContext,glContext + 0x32e8,*(undefined4 *)(glContext + 0x330c),
+               (uint)*(ushort *)(glContext + 0x330a),0,width * height,0);
     return;
   }
-  *(undefined4 *)(param_1 + 0x330c) = 0;
+  *(undefined4 *)(glContext + 0x330c) = 0;
   return;
 }
 
 /* _gleGetConvolutionFilter @ 0xd3db8 (100 bytes) */
-void _gleGetConvolutionFilter(param_1, param_2, param_3, param_4, param_5)
-  int param_1;
-  int param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
+void _gleGetConvolutionFilter(glContext, target, format, type, image)
+  int glContext;
+  int target;
+  undefined4 format;
+  undefined4 type;
+  undefined4 image;
 {
   int iVar1;
   
-  iVar1 = param_1 + 0x3298;
-  if (param_2 != 0x8010) {
-    iVar1 = param_1 + 0x32d8;
+  iVar1 = glContext + 0x3298;
+  if (target != 0x8010) {
+    iVar1 = glContext + 0x32d8;
   }
   if (*(int *)(iVar1 + 0x34) != 0) {
-    ((void (*)())_gleImagingPackData)(param_1,*(undefined4 *)(iVar1 + 0x38),*(undefined4 *)(iVar1 + 0x3c),
-                        (uint)*(ushort *)(iVar1 + 0x32),0x1406,param_3,param_4,
-                        *(int *)(iVar1 + 0x34),param_5);
+    ((void (*)())_gleImagingPackData)(glContext,*(undefined4 *)(iVar1 + 0x38),*(undefined4 *)(iVar1 + 0x3c),
+                        (uint)*(ushort *)(iVar1 + 0x32),0x1406,format,type,
+                        *(int *)(iVar1 + 0x34),image);
   }
   return;
 }
 
 /* _gleSeparableFilter2D @ 0xd3e1c (340 bytes) */
-void _gleSeparableFilter2D(param_1, unusedArg2, internalformat, width, height, format, type, row, column)
-  int param_1;
+void _gleSeparableFilter2D(glContext, unusedArg2, internalformat, width, height, format, type, row, column)
+  int glContext;
   undefined4 unusedArg2;
   undefined4 internalformat;
   int width;
@@ -1642,32 +1646,32 @@ void _gleSeparableFilter2D(param_1, unusedArg2, internalformat, width, height, f
   int filterData;
   
   iVar1 = _glePixelBytes(internalformat,0x1406);
-  if (*(int *)(param_1 + 0x334c) != 0) {
-    _free(*(int *)(param_1 + 0x334c));
+  if (*(int *)(glContext + 0x334c) != 0) {
+    _free(*(int *)(glContext + 0x334c));
   }
-  *(int *)(param_1 + 0x3350) = width;
-  *(int *)(param_1 + 0x3354) = height;
+  *(int *)(glContext + 0x3350) = width;
+  *(int *)(glContext + 0x3354) = height;
   if ((width != 0) && (height != 0)) {
     filterData = _malloc((width + height) * iVar1);
-    *(int *)(param_1 + 0x334c) = filterData;
-    *(short *)(param_1 + 0x334a) = (short)internalformat;
-    *(int *)(param_1 + 0x3350) = width;
-    *(int *)(param_1 + 0x3354) = height;
+    *(int *)(glContext + 0x334c) = filterData;
+    *(short *)(glContext + 0x334a) = (short)internalformat;
+    *(int *)(glContext + 0x3350) = width;
+    *(int *)(glContext + 0x3354) = height;
     iVar1 = filterData + width * iVar1;
-    ((void (*)())_gleImagingUnpackData)(param_1,width,1,format,type,internalformat,0x1406,row,filterData);
-    ((void (*)())_gleImagingUnpackData)(param_1,height,1,format,type,internalformat,0x1406,column,iVar1);
-    ((void (*)())_gleImagingScaleAndBias)(param_1,param_1 + 0x3328,*(undefined4 *)(param_1 + 0x334c),
-               (uint)*(ushort *)(param_1 + 0x334a),0,width,0);
-    ((void (*)())_gleImagingScaleAndBias)(param_1,param_1 + 0x3328,iVar1,(uint)*(ushort *)(param_1 + 0x334a),0,height,0);
+    ((void (*)())_gleImagingUnpackData)(glContext,width,1,format,type,internalformat,0x1406,row,filterData);
+    ((void (*)())_gleImagingUnpackData)(glContext,height,1,format,type,internalformat,0x1406,column,iVar1);
+    ((void (*)())_gleImagingScaleAndBias)(glContext,glContext + 0x3328,*(undefined4 *)(glContext + 0x334c),
+               (uint)*(ushort *)(glContext + 0x334a),0,width,0);
+    ((void (*)())_gleImagingScaleAndBias)(glContext,glContext + 0x3328,iVar1,(uint)*(ushort *)(glContext + 0x334a),0,height,0);
     return;
   }
-  *(undefined4 *)(param_1 + 0x334c) = 0;
+  *(undefined4 *)(glContext + 0x334c) = 0;
   return;
 }
 
 /* _gleGetSeparableFilter @ 0xd3f70 (164 bytes) */
-void _gleGetSeparableFilter(param_1, unusedArg2, format, type, row, column)
-  int param_1;
+void _gleGetSeparableFilter(glContext, unusedArg2, format, type, row, column)
+  int glContext;
   undefined4 unusedArg2;
   undefined4 format;
   undefined4 type;
@@ -1678,57 +1682,57 @@ void _gleGetSeparableFilter(param_1, unusedArg2, format, type, row, column)
   int rowWidth;
   int filterData;
   
-  bytesPerPixel = _glePixelBytes((uint)*(ushort *)(param_1 + 0x334a),0x1406);
-  rowWidth = *(int *)(param_1 + 0x3350);
-  filterData = *(int *)(param_1 + 0x334c);
-  ((void (*)())_gleImagingPackData)(param_1,rowWidth,1,(uint)*(ushort *)(param_1 + 0x334a),0x1406,format,type,
+  bytesPerPixel = _glePixelBytes((uint)*(ushort *)(glContext + 0x334a),0x1406);
+  rowWidth = *(int *)(glContext + 0x3350);
+  filterData = *(int *)(glContext + 0x334c);
+  ((void (*)())_gleImagingPackData)(glContext,rowWidth,1,(uint)*(ushort *)(glContext + 0x334a),0x1406,format,type,
                       filterData,row);
-  ((void (*)())_gleImagingPackData)(param_1,*(undefined4 *)(param_1 + 0x3354),1,
-                      (uint)*(ushort *)(param_1 + 0x334a),0x1406,format,type,
+  ((void (*)())_gleImagingPackData)(glContext,*(undefined4 *)(glContext + 0x3354),1,
+                      (uint)*(ushort *)(glContext + 0x334a),0x1406,format,type,
                       filterData + rowWidth * bytesPerPixel,column);
   return;
 }
 
 /* _gleColorTable @ 0xd4014 (128 bytes) */
-void _gleColorTable(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  undefined4 param_1;
-  undefined4 param_2;
+void _gleColorTable(glContext, scaleBias, param_3, param_4, format, type, table)
+  undefined4 glContext;
+  undefined4 scaleBias;
   int param_3;
   undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+  undefined4 format;
+  undefined4 type;
+  undefined4 table;
 {
-  ((void (*)())_gleImagingUnpackData)(param_1,param_4,1,param_5,param_6,(uint)*(ushort *)(param_3 + 0x10),
-             (uint)*(ushort *)(param_3 + 0x12),param_7,*(undefined4 *)(param_3 + 0x14));
-  ((void (*)())_gleImagingScaleAndBias)(param_1,param_2,*(undefined4 *)(param_3 + 0x14),(uint)*(ushort *)(param_3 + 0x10),0,
+  ((void (*)())_gleImagingUnpackData)(glContext,param_4,1,format,type,(uint)*(ushort *)(param_3 + 0x10),
+             (uint)*(ushort *)(param_3 + 0x12),table,*(undefined4 *)(param_3 + 0x14));
+  ((void (*)())_gleImagingScaleAndBias)(glContext,scaleBias,*(undefined4 *)(param_3 + 0x14),(uint)*(ushort *)(param_3 + 0x10),0,
              param_4,1);
   return;
 }
 
 /* _gleColorSubTable @ 0xd4094 (160 bytes) */
-void _gleColorSubTable(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  undefined4 param_1;
-  undefined4 param_2;
+void _gleColorSubTable(glContext, scaleBias, param_3, param_4, pixelCount, format, type, data)
+  undefined4 glContext;
+  undefined4 scaleBias;
   int param_3;
   int param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
+  undefined4 pixelCount;
+  undefined4 format;
+  undefined4 type;
+  undefined4 data;
 {
   int iVar1;
   
   iVar1 = _glePixelBytes((uint)*(ushort *)(param_3 + 0x10),(uint)*(ushort *)(param_3 + 0x12));
-  ((void (*)())_gleImagingUnpackData)(param_1,param_5,1,param_6,param_7,(uint)*(ushort *)(param_3 + 0x10),
-             (uint)*(ushort *)(param_3 + 0x12),param_8,*(int *)(param_3 + 0x14) + iVar1 * param_4);
-  ((void (*)())_gleImagingScaleAndBias)(param_1,param_2,*(undefined4 *)(param_3 + 0x14),(uint)*(ushort *)(param_3 + 0x10),
-             param_4,param_5,1);
+  ((void (*)())_gleImagingUnpackData)(glContext,pixelCount,1,format,type,(uint)*(ushort *)(param_3 + 0x10),
+             (uint)*(ushort *)(param_3 + 0x12),data,*(int *)(param_3 + 0x14) + iVar1 * param_4);
+  ((void (*)())_gleImagingScaleAndBias)(glContext,scaleBias,*(undefined4 *)(param_3 + 0x14),(uint)*(ushort *)(param_3 + 0x10),
+             param_4,pixelCount,1);
   return;
 }
 
 /* _gleTransformLightDirection @ 0xd4134 (296 bytes) */
-void _gleTransformLightDirection(int param_1,int param_2,double fparam_1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10)
+void _gleTransformLightDirection(int glContext,int param_2,double fparam_1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10)
 {
   float fVar1;
   float fVar2;
@@ -1739,32 +1743,32 @@ void _gleTransformLightDirection(int param_1,int param_2,double fparam_1,double 
   int iVar7;
   bool bVar8;
   
-  iVar7 = param_1 + param_2 * 0x80;
+  iVar7 = glContext + param_2 * 0x80;
   fVar1 = *(float *)(iVar7 + 0x2860);
   fVar2 = *(float *)(iVar7 + 0x2864);
   fVar3 = *(float *)(iVar7 + 0x2868);
-  if ((*(uint *)(param_1 + 0x50b0) & 0x10) != 0) {
-    fparam_1 = ((double (*)())_gleModelMatInvert)(param_1);
+  if ((*(uint *)(glContext + 0x50b0) & 0x10) != 0) {
+    fparam_1 = ((double (*)())_gleModelMatInvert)(glContext);
   }
   bVar8 = *(float *)(iVar7 + 0x285c) != FLOAT_00108e50;
-  fVar6 = fVar3 * *(float *)(param_1 + 0x22e0) +
-          (fVar1 * *(float *)(param_1 + 0x22c0) + fVar2 * *(float *)(param_1 + 0x22d0));
+  fVar6 = fVar3 * *(float *)(glContext + 0x22e0) +
+          (fVar1 * *(float *)(glContext + 0x22c0) + fVar2 * *(float *)(glContext + 0x22d0));
   *(float *)(iVar7 + 0x2860) = fVar6;
-  fVar5 = fVar3 * *(float *)(param_1 + 0x22e4) +
-          (fVar1 * *(float *)(param_1 + 0x22c4) + fVar2 * *(float *)(param_1 + 0x22d4));
+  fVar5 = fVar3 * *(float *)(glContext + 0x22e4) +
+          (fVar1 * *(float *)(glContext + 0x22c4) + fVar2 * *(float *)(glContext + 0x22d4));
   *(float *)(iVar7 + 0x2864) = fVar5;
-  fVar4 = fVar3 * *(float *)(param_1 + 0x22e8) +
-          (fVar1 * *(float *)(param_1 + 0x22c8) + fVar2 * *(float *)(param_1 + 0x22d8));
+  fVar4 = fVar3 * *(float *)(glContext + 0x22e8) +
+          (fVar1 * *(float *)(glContext + 0x22c8) + fVar2 * *(float *)(glContext + 0x22d8));
   *(float *)(iVar7 + 0x2868) = fVar4;
   if (bVar8) {
     fVar1 = -(fVar3 * *(float *)(iVar7 + 0x2858) +
              (fVar1 * *(float *)(iVar7 + 0x2850) + fVar2 * *(float *)(iVar7 + 0x2854))) /
             *(float *)(iVar7 + 0x285c);
-    *(float *)(iVar7 + 0x2860) = fVar1 * *(float *)(param_1 + 0x22f0) + fVar6;
-    *(float *)(iVar7 + 0x2864) = fVar1 * *(float *)(param_1 + 0x22f4) + fVar5;
-    *(float *)(iVar7 + 0x2868) = fVar1 * *(float *)(param_1 + 0x22f8) + fVar4;
+    *(float *)(iVar7 + 0x2860) = fVar1 * *(float *)(glContext + 0x22f0) + fVar6;
+    *(float *)(iVar7 + 0x2864) = fVar1 * *(float *)(glContext + 0x22f4) + fVar5;
+    *(float *)(iVar7 + 0x2868) = fVar1 * *(float *)(glContext + 0x22f8) + fVar4;
   }
-  ((void (*)())_gleUpdateLightDirection)(param_1,param_2,fparam_1);
+  ((void (*)())_gleUpdateLightDirection)(glContext,param_2,fparam_1);
   return;
 }
 
@@ -1896,8 +1900,8 @@ LAB_000d43fc:
 }
 
 /* _glePopMaterials @ 0xd440c (124 bytes) */
-void _glePopMaterials(param_1)
-  int param_1;
+void _glePopMaterials(glContext)
+  int glContext;
 {
   int iVar1;
   int iVar2;
@@ -1907,8 +1911,8 @@ void _glePopMaterials(param_1)
   int iVar6;
   int iVar7;
   
-  iVar6 = param_1 + 0x2c20;
-  piVar4 = (int *)(param_1 + 0x4dd0);
+  iVar6 = glContext + 0x2c20;
+  piVar4 = (int *)(glContext + 0x4dd0);
   iVar2 = 1;
   do {
     iVar5 = *piVar4;
@@ -1916,13 +1920,13 @@ void _glePopMaterials(param_1)
     iVar7 = *(int *)(iVar5 + 0x23c);
     if (iVar7 != 0) {
       if (*(int *)(iVar7 + 0x23c) != 0) {
-        iVar1 = *(int *)(param_1 + 0x4dd8);
+        iVar1 = *(int *)(glContext + 0x4dd8);
         iVar3 = *(int *)(iVar6 + 0x238);
         *(int *)(iVar3 + 0x23c) = iVar1;
         if (iVar1 != 0) {
           *(int *)(iVar1 + 0x238) = iVar3;
         }
-        *(int *)(param_1 + 0x4dd8) = iVar7;
+        *(int *)(glContext + 0x4dd8) = iVar7;
         *(int *)(iVar6 + 0x238) = iVar5;
         *(int *)(iVar5 + 0x23c) = iVar6;
       }
@@ -1988,26 +1992,28 @@ double _gleLightExponentPow(undefined4 unusedArg1,int param_2,float floatArg1,do
 }
 
 /* _gleVtxLightRGBAFront_body @ 0xd45ec (1180 bytes) */
-void _gleVtxLightRGBAFront_body(int param_1,int param_2,int param_3,double fparam_1)
+void _gleVtxLightRGBAFront_body(int glContext,int vertex,int vertexCount,double fparam_1)
 {
   float fVar1;
-  undefined4 uVar2;
+  float inverseW;
+  undefined4 colorAlpha;
   undefined *vectorNormalize;
   int iVar4;
   int extraout_r3;
   int r3AfterCall1;
-  uint uVar5;
-  int iVar6;
-  float *pfVar7;
-  uint uVar8;
-  int iVar9;
-  int iVar10;
-  int iVar11;
-  int iVar12;
-  int iVar13;
+  uint enabledLightMask;
+  int vertexIndex;
+  float *eyePosition;
+  uint lightIndex;
+  int lightParams;
+  int material;
+  int lightParams2;
+  int lightProducts;
+  int lightRecord;
   double extraout_f1;
   double f1AfterCall1;
   double dVar14;
+  double floatZero;
   double f1AfterCall2;
   double incomingFpr2;
   double incomingFpr3;
@@ -2016,629 +2022,636 @@ void _gleVtxLightRGBAFront_body(int param_1,int param_2,int param_3,double fpara
   double incomingFpr6;
   double incomingFpr7;
   double incomingFpr8;
-  float dVar15;
-  float dVar16;
-  float dVar17;
-  float dVar18;
-  float dVar19;
-  float dVar20;
-  float dVar21;
-  float dVar22;
+  float floatOne;
+  float lightContributionG;
+  float lightContributionR;
+  float lightContributionB;
+  float colorB;
+  float colorG;
+  float colorR;
+  float lightAttenuation;
   double incomingStack_fffffee8;
   double incomingStack_fffffef0;
   double incomingStack_fffffef8;
   double incomingStack_ffffff00;
   double incomingStack_ffffff08;
-  float local_e0;
-  float local_dc;
-  float local_d8;
-  float local_d0;
-  float local_cc;
-  float local_c8;
-  float local_c0;
-  float local_bc;
-  float local_b8;
-  uint local_b0;
+  float eyeX;
+  float eyeY;
+  float eyeZ;
+  float toLightX;
+  float toLightY;
+  float toLightZ;
+  float halfX;
+  float halfY;
+  float halfZ;
+  uint localViewer;
   float *local_ac;
   
-  iVar6 = 0;
-  local_b0 = (uint)*(byte *)(param_1 + 0x30ad);
-  uVar5 = *(uint *)(param_1 + 0x30a0);
-  iVar4 = param_1;
-  if (param_3 < 1) {
+  vertexIndex = 0;
+  localViewer = (uint)*(byte *)(glContext + 0x30ad);
+  enabledLightMask = *(uint *)(glContext + 0x30a0);
+  iVar4 = glContext;
+  if (vertexCount < 1) {
     return;
   }
 LAB_000d462c:
-  if ((*(byte *)(param_2 + 0x7e) & 2) != 0) {
-    iVar10 = *(int *)(param_2 + 0x74);
-    *(byte *)(param_2 + 0x7e) = *(byte *)(param_2 + 0x7e) & 0xfd;
-    if (*(char *)(iVar10 + 0x234) != '\0') {
-      _gleUpdateLightRGBASums(param_1,iVar10,0);
+  if ((*(byte *)(vertex + 0x7e) & 2) != 0) {
+    material = *(int *)(vertex + 0x74);
+    *(byte *)(vertex + 0x7e) = *(byte *)(vertex + 0x7e) & 0xfd;
+    if (*(char *)(material + 0x234) != '\0') {
+      _gleUpdateLightRGBASums(glContext,material,0);
           }
     vectorNormalize = PTR__gleVectorNormalize_00112064;
-    pfVar7 = (float *)(param_2 + 0x20);
-    if (*(float *)(param_2 + 0x2c) != FLOAT_00108e54) {
-      fVar1 = FLOAT_00108e54 / *(float *)(param_2 + 0x2c);
-      pfVar7 = &local_e0;
-      local_d8 = *(float *)(param_2 + 0x28) * fVar1;
-      local_e0 = *(float *)(param_2 + 0x20) * fVar1;
-      local_dc = *(float *)(param_2 + 0x24) * fVar1;
+    eyePosition = (float *)(vertex + 0x20);
+    if (*(float *)(vertex + 0x2c) != FLOAT_00108e54) {
+      inverseW = FLOAT_00108e54 / *(float *)(vertex + 0x2c);
+      eyePosition = &eyeX;
+      eyeZ = *(float *)(vertex + 0x28) * inverseW;
+      eyeX = *(float *)(vertex + 0x20) * inverseW;
+      eyeY = *(float *)(vertex + 0x24) * inverseW;
     }
-    dVar21 = (double)*(float *)(iVar10 + 0x1d0);
-    dVar20 = (double)*(float *)(iVar10 + 0x1d4);
-    uVar8 = 0;
-    dVar19 = (double)*(float *)(iVar10 + 0x1d8);
-    uVar2 = *(undefined4 *)(iVar10 + 0x1dc);
+    colorR = (double)*(float *)(material + 0x1d0);
+    colorG = (double)*(float *)(material + 0x1d4);
+    lightIndex = 0;
+    colorB = (double)*(float *)(material + 0x1d8);
+    colorAlpha = *(undefined4 *)(material + 0x1dc);
     local_ac = &FLOAT_00108e80;
-    dVar15 = (double)FLOAT_00108e54;
-    iVar9 = param_1;
-    iVar11 = param_1;
-    iVar12 = iVar10;
-    iVar13 = param_1;
+    floatOne = (double)FLOAT_00108e54;
+    lightParams = glContext;
+    lightParams2 = glContext;
+    lightProducts = material;
+    lightRecord = glContext;
     do {
-      if ((uVar5 & 1 << (uVar8 & 0x3f)) == 0) {
-        if (uVar5 >> (uVar8 & 0x3f) == 0) goto LAB_000d4a5c;
+      if ((enabledLightMask & 1 << (lightIndex & 0x3f)) == 0) {
+        if (enabledLightMask >> (lightIndex & 0x3f) == 0) goto LAB_000d4a5c;
       }
-      else if (*(char *)(iVar13 + 0x4ad8) == '\0') {
-        if (*(char *)(iVar13 + 0x4ad9) == '\0') {
-          local_d0 = *(float *)(iVar13 + 0x4a70) - *pfVar7;
-          local_cc = *(float *)(iVar13 + 0x4a74) - pfVar7[1];
-          local_c8 = *(float *)(iVar13 + 0x4a78) - pfVar7[2];
-          f1AfterCall1 = ((double (*)())(*(code **)vectorNormalize))(param_1,&local_d0,&local_d0);
-          if ((*(char *)(iVar13 + 0x4adb) != '\0') || (f1AfterCall1 < (double)*local_ac)) {
-            dVar22 = (double)*(float *)(iVar13 + 0x4ad4);
+      else if (*(char *)(lightRecord + 0x4ad8) == '\0') {
+        if (*(char *)(lightRecord + 0x4ad9) == '\0') {
+          toLightX = *(float *)(lightRecord + 0x4a70) - *eyePosition;
+          toLightY = *(float *)(lightRecord + 0x4a74) - eyePosition[1];
+          toLightZ = *(float *)(lightRecord + 0x4a78) - eyePosition[2];
+          f1AfterCall1 = ((double (*)())(*(code **)vectorNormalize))(glContext,&toLightX,&toLightX);
+          if ((*(char *)(lightRecord + 0x4adb) != '\0') || (f1AfterCall1 < (double)*local_ac)) {
+            lightAttenuation = (double)*(float *)(lightRecord + 0x4ad4);
           }
           else {
-            fVar1 = (float)((double)dVar15 / f1AfterCall1);
-            dVar22 = (double)(dVar15 / (*(float *)(iVar11 + 0x2878) * fVar1 * fVar1 +
-                                                      (*(float *)(iVar11 + 0x2874) * fVar1 +
-                                                      *(float *)(iVar11 + 0x2870))));
+            fVar1 = (float)((double)floatOne / f1AfterCall1);
+            lightAttenuation = (double)(floatOne / (*(float *)(lightParams2 + 0x2878) * fVar1 * fVar1 +
+                                                      (*(float *)(lightParams2 + 0x2874) * fVar1 +
+                                                      *(float *)(lightParams2 + 0x2870))));
           }
         }
         else {
-          dVar22 = (double)FLOAT_00108e54;
-          local_d0 = *(float *)(iVar13 + 0x4a7c);
-          local_cc = *(float *)(iVar13 + 0x4a80);
-          local_c8 = *(float *)(iVar13 + 0x4a84);
+          lightAttenuation = (double)FLOAT_00108e54;
+          toLightX = *(float *)(lightRecord + 0x4a7c);
+          toLightY = *(float *)(lightRecord + 0x4a80);
+          toLightZ = *(float *)(lightRecord + 0x4a84);
         }
-        if (*(char *)(iVar13 + 0x4ada) != '\0') {
-          fparam_1 = -(double)(local_c8 * *(float *)(iVar13 + 0x4a90) +
-                              (local_d0 * *(float *)(iVar13 + 0x4a88) +
-                              local_cc * *(float *)(iVar13 + 0x4a8c)));
-          if (fparam_1 < (double)*(float *)(iVar11 + 0x286c)) goto LAB_000d4a44;
-          dVar14 = ((double (*)())_gleLightExponentPow)(iVar4,iVar13 + 0x4a70,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,
+        if (*(char *)(lightRecord + 0x4ada) != '\0') {
+          fparam_1 = -(double)(toLightZ * *(float *)(lightRecord + 0x4a90) +
+                              (toLightX * *(float *)(lightRecord + 0x4a88) +
+                              toLightY * *(float *)(lightRecord + 0x4a8c)));
+          if (fparam_1 < (double)*(float *)(lightParams2 + 0x286c)) goto LAB_000d4a44;
+          dVar14 = ((double (*)())_gleLightExponentPow)(iVar4,lightRecord + 0x4a70,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,
                               incomingFpr8,incomingStack_fffffee8,incomingStack_fffffef0,incomingStack_fffffef8,
                               incomingStack_ffffff00,incomingStack_ffffff08);
-          dVar22 = (double)(float)((double)dVar22 * dVar14);
+          lightAttenuation = (double)(float)((double)lightAttenuation * dVar14);
         }
-        if (local_b0 == 0) {
-          local_b8 = (local_c8 + dVar15);
-          local_c0 = local_d0;
-          local_bc = local_cc;
+        if (localViewer == 0) {
+          halfZ = (toLightZ + floatOne);
+          halfX = toLightX;
+          halfY = toLightY;
         }
         else {
-          local_c0 = -*pfVar7;
-          local_bc = -pfVar7[1];
-          local_b8 = -pfVar7[2];
-          (**(code **)vectorNormalize)(param_1,&local_c0,&local_c0);
-          local_c0 = local_c0 + local_d0;
-          local_bc = local_bc + local_cc;
-          local_b8 = local_b8 + local_c8;
+          halfX = -*eyePosition;
+          halfY = -eyePosition[1];
+          halfZ = -eyePosition[2];
+          (**(code **)vectorNormalize)(glContext,&halfX,&halfX);
+          halfX = halfX + toLightX;
+          halfY = halfY + toLightY;
+          halfZ = halfZ + toLightZ;
         }
-        f1AfterCall2 = ((double (*)())(*(code **)vectorNormalize))(param_1,&local_c0,&local_c0);
-        dVar14 = (double)FLOAT_00108e50;
+        f1AfterCall2 = ((double (*)())(*(code **)vectorNormalize))(glContext,&halfX,&halfX);
+        floatZero = (double)FLOAT_00108e50;
         fparam_1 = f1AfterCall2;
-        if ((double)dVar22 != dVar14) {
-          incomingFpr8 = (double)*(float *)(param_2 + 0x40);
-          incomingFpr7 = (double)*(float *)(param_2 + 0x48);
-          dVar17 = (double)*(float *)(iVar12 + 0x50);
-          dVar16 = (double)*(float *)(iVar12 + 0x54);
-          dVar18 = (double)*(float *)(iVar12 + 0x58);
-          fparam_1 = (double)(float)(incomingFpr7 * (double)local_c8 +
-                                    (double)(float)(incomingFpr8 * (double)local_d0 +
-                                                   (double)(*(float *)(param_2 + 0x44) * local_cc)))
+        if ((double)lightAttenuation != floatZero) {
+          incomingFpr8 = (double)*(float *)(vertex + 0x40);
+          incomingFpr7 = (double)*(float *)(vertex + 0x48);
+          lightContributionR = (double)*(float *)(lightProducts + 0x50);
+          lightContributionG = (double)*(float *)(lightProducts + 0x54);
+          lightContributionB = (double)*(float *)(lightProducts + 0x58);
+          fparam_1 = (double)(float)(incomingFpr7 * (double)toLightZ +
+                                    (double)(float)(incomingFpr8 * (double)toLightX +
+                                                   (double)(*(float *)(vertex + 0x44) * toLightY)))
           ;
-          if (dVar14 < fparam_1) {
-            dVar18 = (double)(float)(fparam_1 * (double)*(float *)(iVar12 + 0x68) + (double)dVar18);
-            dVar17 = (double)(float)(fparam_1 * (double)*(float *)(iVar12 + 0x60) + (double)dVar17);
-            dVar16 = (double)(float)(fparam_1 * (double)*(float *)(iVar12 + 100) + (double)dVar16);
-            fparam_1 = (double)(float)(incomingFpr7 * (double)local_b8 +
-                                      (double)(float)(incomingFpr8 * (double)local_c0 +
-                                                     (double)(*(float *)(param_2 + 0x44) * local_bc)
+          if (floatZero < fparam_1) {
+            lightContributionB = (double)(float)(fparam_1 * (double)*(float *)(lightProducts + 0x68) + (double)lightContributionB);
+            lightContributionR = (double)(float)(fparam_1 * (double)*(float *)(lightProducts + 0x60) + (double)lightContributionR);
+            lightContributionG = (double)(float)(fparam_1 * (double)*(float *)(lightProducts + 100) + (double)lightContributionG);
+            fparam_1 = (double)(float)(incomingFpr7 * (double)halfZ +
+                                      (double)(float)(incomingFpr8 * (double)halfX +
+                                                     (double)(*(float *)(vertex + 0x44) * halfY)
                                                      ));
-            if (dVar14 < fparam_1) {
-              incomingFpr2 = (double)*(float *)(iVar10 + 0x40);
+            if (floatZero < fparam_1) {
+              incomingFpr2 = (double)*(float *)(material + 0x40);
               dVar14 = _pow(fparam_1,incomingFpr2);
               fparam_1 = (double)(float)dVar14;
-              dVar18 = (double)(float)(fparam_1 * (double)*(float *)(iVar12 + 0x78) + (double)dVar18);
-              dVar17 = (double)(float)(fparam_1 * (double)*(float *)(iVar12 + 0x70) + (double)dVar17);
-              dVar16 = (double)(float)(fparam_1 * (double)*(float *)(iVar12 + 0x74) + (double)dVar16);
+              lightContributionB = (double)(float)(fparam_1 * (double)*(float *)(lightProducts + 0x78) + (double)lightContributionB);
+              lightContributionR = (double)(float)(fparam_1 * (double)*(float *)(lightProducts + 0x70) + (double)lightContributionR);
+              lightContributionG = (double)(float)(fparam_1 * (double)*(float *)(lightProducts + 0x74) + (double)lightContributionG);
               iVar4 = r3AfterCall1;
             }
           }
-          if ((double)dVar22 == (double)dVar15) {
-            dVar21 = (double)(dVar21 + dVar17);
-            dVar20 = (double)(dVar20 + dVar16);
-            dVar19 = (double)(dVar19 + dVar18);
+          if ((double)lightAttenuation == (double)floatOne) {
+            colorR = (double)(colorR + lightContributionR);
+            colorG = (double)(colorG + lightContributionG);
+            colorB = (double)(colorB + lightContributionB);
           }
           else {
-            dVar19 = (double)(dVar22 * dVar18 + dVar19);
-            dVar21 = (double)(dVar22 * dVar17 + dVar21);
-            dVar20 = (double)(dVar22 * dVar16 + dVar20);
+            colorB = (double)(lightAttenuation * lightContributionB + colorB);
+            colorR = (double)(lightAttenuation * lightContributionR + colorR);
+            colorG = (double)(lightAttenuation * lightContributionG + colorG);
           }
         }
       }
       else {
-        incomingFpr8 = (double)*(float *)(param_2 + 0x48);
+        incomingFpr8 = (double)*(float *)(vertex + 0x48);
         incomingFpr7 = (double)FLOAT_00108e50;
-        fparam_1 = (double)(float)(incomingFpr8 * (double)*(float *)(iVar13 + 0x4a84) +
-                                  (double)(*(float *)(param_2 + 0x40) * *(float *)(iVar13 + 0x4a7c)
-                                          + *(float *)(param_2 + 0x44) * *(float *)(iVar13 + 0x4a80)
+        fparam_1 = (double)(float)(incomingFpr8 * (double)*(float *)(lightRecord + 0x4a84) +
+                                  (double)(*(float *)(vertex + 0x40) * *(float *)(lightRecord + 0x4a7c)
+                                          + *(float *)(vertex + 0x44) * *(float *)(lightRecord + 0x4a80)
                                           ));
-        dVar21 = (double)(dVar21 + *(float *)(iVar12 + 0x50));
-        dVar20 = (double)(dVar20 + *(float *)(iVar12 + 0x54));
-        dVar19 = (double)(dVar19 + *(float *)(iVar12 + 0x58));
+        colorR = (double)(colorR + *(float *)(lightProducts + 0x50));
+        colorG = (double)(colorG + *(float *)(lightProducts + 0x54));
+        colorB = (double)(colorB + *(float *)(lightProducts + 0x58));
         if (incomingFpr7 < fparam_1) {
-          dVar21 = (double)(float)(fparam_1 * (double)*(float *)(iVar12 + 0x60) + (double)dVar21);
-          dVar20 = (double)(float)(fparam_1 * (double)*(float *)(iVar12 + 100) + (double)dVar20);
-          dVar19 = (double)(float)(fparam_1 * (double)*(float *)(iVar12 + 0x68) + (double)dVar19);
-          fparam_1 = (double)(float)(incomingFpr8 * (double)*(float *)(iVar9 + 0x2888) +
-                                    (double)(*(float *)(param_2 + 0x40) * *(float *)(iVar9 + 0x2880)
-                                            + *(float *)(param_2 + 0x44) *
-                                              *(float *)(iVar9 + 0x2884)));
+          colorR = (double)(float)(fparam_1 * (double)*(float *)(lightProducts + 0x60) + (double)colorR);
+          colorG = (double)(float)(fparam_1 * (double)*(float *)(lightProducts + 100) + (double)colorG);
+          colorB = (double)(float)(fparam_1 * (double)*(float *)(lightProducts + 0x68) + (double)colorB);
+          fparam_1 = (double)(float)(incomingFpr8 * (double)*(float *)(lightParams + 0x2888) +
+                                    (double)(*(float *)(vertex + 0x40) * *(float *)(lightParams + 0x2880)
+                                            + *(float *)(vertex + 0x44) *
+                                              *(float *)(lightParams + 0x2884)));
           if (incomingFpr7 < fparam_1) {
-            fparam_1 = ((double (*)())_gleMaterialShinePow)(iVar4,iVar10 + 0x1e8,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,
+            fparam_1 = ((double (*)())_gleMaterialShinePow)(iVar4,material + 0x1e8,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,
                                   incomingFpr8,incomingStack_fffffee8,incomingStack_fffffef0,incomingStack_fffffef8,
                                   incomingStack_ffffff00,incomingStack_ffffff08);
-            dVar19 = (double)(float)(fparam_1 * (double)*(float *)(iVar12 + 0x78) + (double)dVar19);
-            dVar21 = (double)(float)(fparam_1 * (double)*(float *)(iVar12 + 0x70) + (double)dVar21);
-            dVar20 = (double)(float)(fparam_1 * (double)*(float *)(iVar12 + 0x74) + (double)dVar20);
+            colorB = (double)(float)(fparam_1 * (double)*(float *)(lightProducts + 0x78) + (double)colorB);
+            colorR = (double)(float)(fparam_1 * (double)*(float *)(lightProducts + 0x70) + (double)colorR);
+            colorG = (double)(float)(fparam_1 * (double)*(float *)(lightProducts + 0x74) + (double)colorG);
             iVar4 = iVar4;
           }
         }
       }
 LAB_000d4a44:
-      uVar8 = uVar8 + 1;
-      iVar13 = iVar13 + 0x6c;
-      iVar12 = iVar12 + 0x30;
-      iVar9 = iVar9 + 0x80;
-      iVar11 = iVar11 + 0x80;
+      lightIndex = lightIndex + 1;
+      lightRecord = lightRecord + 0x6c;
+      lightProducts = lightProducts + 0x30;
+      lightParams = lightParams + 0x80;
+      lightParams2 = lightParams2 + 0x80;
     } while( true );
   }
   goto LAB_000d4a6c;
 LAB_000d4a5c:
-  *(float *)(param_2 + 0x30) = (float)(double)dVar21;
-  *(float *)(param_2 + 0x34) = (float)(double)dVar20;
-  *(float *)(param_2 + 0x38) = (float)(double)dVar19;
-  *(undefined4 *)(param_2 + 0x3c) = uVar2;
+  *(float *)(vertex + 0x30) = (float)(double)colorR;
+  *(float *)(vertex + 0x34) = (float)(double)colorG;
+  *(float *)(vertex + 0x38) = (float)(double)colorB;
+  *(undefined4 *)(vertex + 0x3c) = colorAlpha;
 LAB_000d4a6c:
-  iVar6 = iVar6 + 1;
-  param_2 = param_2 + 0x100;
-  if (param_3 <= iVar6) {
+  vertexIndex = vertexIndex + 1;
+  vertex = vertex + 0x100;
+  if (vertexCount <= vertexIndex) {
     return;
   }
   goto LAB_000d462c;
 }
 
 /* _gleVtxLightRGBABack_body @ 0xd4a8c (1188 bytes) */
-void _gleVtxLightRGBABack_body(int param_1,int param_2,int param_3,double fparam_1,double fparam_2,double floatArg3,double floatArg4,double floatArg5,double floatArg6,double fparam_7,double fparam_8,double unusedFloatArg9)
+void _gleVtxLightRGBABack_body(int glContext,int vertex,int vertexCount,double fparam_1,double fparam_2,double floatArg3,double floatArg4,double floatArg5,double floatArg6,double fparam_7,double fparam_8,double unusedFloatArg9)
 {
   float fVar1;
-  undefined4 uVar2;
+  float inverseW;
+  undefined4 colorAlpha;
   undefined *vectorNormalize;
   int iVar4;
   int extraout_r3;
   int r3AfterCall1;
-  uint uVar5;
-  int iVar6;
-  float *pfVar7;
-  uint uVar8;
-  int iVar9;
-  int iVar10;
-  int iVar11;
-  int iVar12;
-  int iVar13;
+  uint enabledLightMask;
+  int vertexIndex;
+  float *eyePosition;
+  uint lightIndex;
+  int lightParams;
+  int material;
+  int lightParams2;
+  int lightProducts;
+  int lightRecord;
   double extraout_f1;
   double f1AfterCall1;
   double dVar14;
   double f1AfterCall2;
   float dVar15;
-  float dVar16;
-  float dVar17;
-  float dVar18;
-  float dVar19;
-  float dVar20;
-  float dVar21;
-  float dVar22;
+  float lightAttenuation;
+  float floatOne;
+  float lightContributionG;
+  float lightContributionR;
+  float lightContributionB;
+  float colorB;
+  float colorG;
+  float colorR;
   double incomingStack_fffffee8;
   double incomingStack_fffffef0;
   double incomingStack_fffffef8;
   double incomingStack_ffffff00;
   double incomingStack_ffffff08;
-  float local_e0;
-  float local_dc;
-  float local_d8;
-  float local_d0;
-  float local_cc;
-  float local_c8;
-  float local_c0;
-  float local_bc;
-  float local_b8;
-  uint local_b0;
+  float eyeX;
+  float eyeY;
+  float eyeZ;
+  float toLightX;
+  float toLightY;
+  float toLightZ;
+  float halfX;
+  float halfY;
+  float halfZ;
+  uint localViewer;
   float *local_ac;
   
-  iVar6 = 0;
-  local_b0 = (uint)*(byte *)(param_1 + 0x30ad);
-  uVar5 = *(uint *)(param_1 + 0x30a0);
-  iVar4 = param_1;
-  if (param_3 < 1) {
+  vertexIndex = 0;
+  localViewer = (uint)*(byte *)(glContext + 0x30ad);
+  enabledLightMask = *(uint *)(glContext + 0x30a0);
+  iVar4 = glContext;
+  if (vertexCount < 1) {
     return;
   }
 LAB_000d4acc:
-  if ((*(byte *)(param_2 + 0x7e) & 4) != 0) {
-    iVar10 = *(int *)(param_2 + 0x78);
-    *(byte *)(param_2 + 0x7e) = *(byte *)(param_2 + 0x7e) & 0xfb;
-    if (*(char *)(iVar10 + 0x234) != '\0') {
-      _gleUpdateLightRGBASums(param_1,iVar10,1);
+  if ((*(byte *)(vertex + 0x7e) & 4) != 0) {
+    material = *(int *)(vertex + 0x78);
+    *(byte *)(vertex + 0x7e) = *(byte *)(vertex + 0x7e) & 0xfb;
+    if (*(char *)(material + 0x234) != '\0') {
+      _gleUpdateLightRGBASums(glContext,material,1);
           }
     vectorNormalize = PTR__gleVectorNormalize_00112064;
-    pfVar7 = (float *)(param_2 + 0x20);
-    if (*(float *)(param_2 + 0x2c) != FLOAT_00108e54) {
-      fVar1 = FLOAT_00108e54 / *(float *)(param_2 + 0x2c);
-      pfVar7 = &local_e0;
-      local_d8 = *(float *)(param_2 + 0x28) * fVar1;
-      local_e0 = *(float *)(param_2 + 0x20) * fVar1;
-      local_dc = *(float *)(param_2 + 0x24) * fVar1;
+    eyePosition = (float *)(vertex + 0x20);
+    if (*(float *)(vertex + 0x2c) != FLOAT_00108e54) {
+      inverseW = FLOAT_00108e54 / *(float *)(vertex + 0x2c);
+      eyePosition = &eyeX;
+      eyeZ = *(float *)(vertex + 0x28) * inverseW;
+      eyeX = *(float *)(vertex + 0x20) * inverseW;
+      eyeY = *(float *)(vertex + 0x24) * inverseW;
     }
-    dVar22 = (double)*(float *)(iVar10 + 0x1d0);
-    dVar21 = (double)*(float *)(iVar10 + 0x1d4);
-    uVar8 = 0;
-    dVar20 = (double)*(float *)(iVar10 + 0x1d8);
-    uVar2 = *(undefined4 *)(iVar10 + 0x1dc);
+    colorR = (double)*(float *)(material + 0x1d0);
+    colorG = (double)*(float *)(material + 0x1d4);
+    lightIndex = 0;
+    colorB = (double)*(float *)(material + 0x1d8);
+    colorAlpha = *(undefined4 *)(material + 0x1dc);
     local_ac = &FLOAT_00108e80;
-    dVar16 = (double)FLOAT_00108e54;
-    iVar9 = param_1;
-    iVar11 = param_1;
-    iVar12 = iVar10;
-    iVar13 = param_1;
+    floatOne = (double)FLOAT_00108e54;
+    lightParams = glContext;
+    lightParams2 = glContext;
+    lightProducts = material;
+    lightRecord = glContext;
     do {
-      if ((uVar5 & 1 << (uVar8 & 0x3f)) == 0) {
-        if (uVar5 >> (uVar8 & 0x3f) == 0) goto LAB_000d4f04;
+      if ((enabledLightMask & 1 << (lightIndex & 0x3f)) == 0) {
+        if (enabledLightMask >> (lightIndex & 0x3f) == 0) goto LAB_000d4f04;
       }
-      else if (*(char *)(iVar13 + 0x4ad8) == '\0') {
-        if (*(char *)(iVar13 + 0x4ad9) == '\0') {
-          local_d0 = *(float *)(iVar13 + 0x4a70) - *pfVar7;
-          local_cc = *(float *)(iVar13 + 0x4a74) - pfVar7[1];
-          local_c8 = *(float *)(iVar13 + 0x4a78) - pfVar7[2];
-          f1AfterCall1 = ((double (*)())(*(code **)vectorNormalize))(param_1,&local_d0,&local_d0);
-          if ((*(char *)(iVar13 + 0x4adb) != '\0') || (f1AfterCall1 < (double)*local_ac)) {
-            dVar15 = (double)*(float *)(iVar13 + 0x4ad4);
+      else if (*(char *)(lightRecord + 0x4ad8) == '\0') {
+        if (*(char *)(lightRecord + 0x4ad9) == '\0') {
+          toLightX = *(float *)(lightRecord + 0x4a70) - *eyePosition;
+          toLightY = *(float *)(lightRecord + 0x4a74) - eyePosition[1];
+          toLightZ = *(float *)(lightRecord + 0x4a78) - eyePosition[2];
+          f1AfterCall1 = ((double (*)())(*(code **)vectorNormalize))(glContext,&toLightX,&toLightX);
+          if ((*(char *)(lightRecord + 0x4adb) != '\0') || (f1AfterCall1 < (double)*local_ac)) {
+            lightAttenuation = (double)*(float *)(lightRecord + 0x4ad4);
           }
           else {
-            fVar1 = (float)((double)dVar16 / f1AfterCall1);
-            dVar15 = (double)(dVar16 / (*(float *)(iVar11 + 0x2878) * fVar1 * fVar1 +
-                                                      (*(float *)(iVar11 + 0x2874) * fVar1 +
-                                                      *(float *)(iVar11 + 0x2870))));
+            fVar1 = (float)((double)floatOne / f1AfterCall1);
+            lightAttenuation = (double)(floatOne / (*(float *)(lightParams2 + 0x2878) * fVar1 * fVar1 +
+                                                      (*(float *)(lightParams2 + 0x2874) * fVar1 +
+                                                      *(float *)(lightParams2 + 0x2870))));
           }
         }
         else {
-          dVar15 = (double)FLOAT_00108e54;
-          local_d0 = *(float *)(iVar13 + 0x4a7c);
-          local_cc = *(float *)(iVar13 + 0x4a80);
-          local_c8 = *(float *)(iVar13 + 0x4a84);
+          lightAttenuation = (double)FLOAT_00108e54;
+          toLightX = *(float *)(lightRecord + 0x4a7c);
+          toLightY = *(float *)(lightRecord + 0x4a80);
+          toLightZ = *(float *)(lightRecord + 0x4a84);
         }
-        if (*(char *)(iVar13 + 0x4ada) != '\0') {
-          fparam_1 = -(double)(local_c8 * *(float *)(iVar13 + 0x4a90) +
-                              (local_d0 * *(float *)(iVar13 + 0x4a88) +
-                              local_cc * *(float *)(iVar13 + 0x4a8c)));
-          if (fparam_1 < (double)*(float *)(iVar11 + 0x286c)) goto LAB_000d4eec;
-          dVar14 = ((double (*)())_gleLightExponentPow)(iVar4,iVar13 + 0x4a70,fparam_1,fparam_2,floatArg3,floatArg4,floatArg5,
+        if (*(char *)(lightRecord + 0x4ada) != '\0') {
+          fparam_1 = -(double)(toLightZ * *(float *)(lightRecord + 0x4a90) +
+                              (toLightX * *(float *)(lightRecord + 0x4a88) +
+                              toLightY * *(float *)(lightRecord + 0x4a8c)));
+          if (fparam_1 < (double)*(float *)(lightParams2 + 0x286c)) goto LAB_000d4eec;
+          dVar14 = ((double (*)())_gleLightExponentPow)(iVar4,lightRecord + 0x4a70,fparam_1,fparam_2,floatArg3,floatArg4,floatArg5,
                               floatArg6,fparam_7,fparam_8,incomingStack_fffffee8,incomingStack_fffffef0,
                               incomingStack_fffffef8,incomingStack_ffffff00,incomingStack_ffffff08);
-          dVar15 = (double)(float)((double)dVar15 * dVar14);
+          lightAttenuation = (double)(float)((double)lightAttenuation * dVar14);
         }
-        if (local_b0 == 0) {
-          local_b8 = (local_c8 + dVar16);
-          local_c0 = local_d0;
-          local_bc = local_cc;
+        if (localViewer == 0) {
+          halfZ = (toLightZ + floatOne);
+          halfX = toLightX;
+          halfY = toLightY;
         }
         else {
-          local_c0 = -*pfVar7;
-          local_bc = -pfVar7[1];
-          local_b8 = -pfVar7[2];
-          (**(code **)vectorNormalize)(param_1,&local_c0,&local_c0);
-          local_c0 = local_c0 + local_d0;
-          local_bc = local_bc + local_cc;
-          local_b8 = local_b8 + local_c8;
+          halfX = -*eyePosition;
+          halfY = -eyePosition[1];
+          halfZ = -eyePosition[2];
+          (**(code **)vectorNormalize)(glContext,&halfX,&halfX);
+          halfX = halfX + toLightX;
+          halfY = halfY + toLightY;
+          halfZ = halfZ + toLightZ;
         }
-        f1AfterCall2 = ((double (*)())(*(code **)vectorNormalize))(param_1,&local_c0,&local_c0);
+        f1AfterCall2 = ((double (*)())(*(code **)vectorNormalize))(glContext,&halfX,&halfX);
         fparam_8 = (double)FLOAT_00108e50;
         fparam_1 = f1AfterCall2;
-        if ((double)dVar15 != fparam_8) {
-          fparam_7 = (double)*(float *)(param_2 + 0x48);
-          dVar18 = (double)*(float *)(iVar12 + 0x50);
-          dVar17 = (double)*(float *)(iVar12 + 0x54);
-          dVar19 = (double)*(float *)(iVar12 + 0x58);
-          dVar14 = (double)(float)(fparam_7 * (double)local_c8 +
-                                  (double)(*(float *)(param_2 + 0x40) * local_d0 +
-                                          *(float *)(param_2 + 0x44) * local_cc));
+        if ((double)lightAttenuation != fparam_8) {
+          fparam_7 = (double)*(float *)(vertex + 0x48);
+          lightContributionR = (double)*(float *)(lightProducts + 0x50);
+          lightContributionG = (double)*(float *)(lightProducts + 0x54);
+          lightContributionB = (double)*(float *)(lightProducts + 0x58);
+          dVar14 = (double)(float)(fparam_7 * (double)toLightZ +
+                                  (double)(*(float *)(vertex + 0x40) * toLightX +
+                                          *(float *)(vertex + 0x44) * toLightY));
           fparam_1 = -dVar14;
           if (fparam_8 < fparam_1) {
-            dVar18 = -(double)(float)(dVar14 * (double)*(float *)(iVar12 + 0x60) - (double)dVar18);
-            dVar19 = -(double)(float)(dVar14 * (double)*(float *)(iVar12 + 0x68) - (double)dVar19);
-            fparam_1 = -(double)(float)(fparam_7 * (double)local_b8 +
-                                       (double)(*(float *)(param_2 + 0x40) * local_c0 +
-                                               *(float *)(param_2 + 0x44) * local_bc));
-            dVar17 = -(double)(float)(dVar14 * (double)*(float *)(iVar12 + 100) - (double)dVar17);
+            lightContributionR = -(double)(float)(dVar14 * (double)*(float *)(lightProducts + 0x60) - (double)lightContributionR);
+            lightContributionB = -(double)(float)(dVar14 * (double)*(float *)(lightProducts + 0x68) - (double)lightContributionB);
+            fparam_1 = -(double)(float)(fparam_7 * (double)halfZ +
+                                       (double)(*(float *)(vertex + 0x40) * halfX +
+                                               *(float *)(vertex + 0x44) * halfY));
+            lightContributionG = -(double)(float)(dVar14 * (double)*(float *)(lightProducts + 100) - (double)lightContributionG);
             if (fparam_8 < fparam_1) {
-              fparam_2 = (double)*(float *)(iVar10 + 0x40);
+              fparam_2 = (double)*(float *)(material + 0x40);
               dVar14 = _pow(fparam_1,fparam_2);
               fparam_1 = (double)(float)dVar14;
-              dVar19 = (double)(float)(fparam_1 * (double)*(float *)(iVar12 + 0x78) + (double)dVar19);
-              dVar18 = (double)(float)(fparam_1 * (double)*(float *)(iVar12 + 0x70) + (double)dVar18);
-              dVar17 = (double)(float)(fparam_1 * (double)*(float *)(iVar12 + 0x74) + (double)dVar17);
+              lightContributionB = (double)(float)(fparam_1 * (double)*(float *)(lightProducts + 0x78) + (double)lightContributionB);
+              lightContributionR = (double)(float)(fparam_1 * (double)*(float *)(lightProducts + 0x70) + (double)lightContributionR);
+              lightContributionG = (double)(float)(fparam_1 * (double)*(float *)(lightProducts + 0x74) + (double)lightContributionG);
               iVar4 = r3AfterCall1;
             }
           }
-          if ((double)dVar15 == (double)dVar16) {
-            dVar22 = (double)(dVar22 + dVar18);
-            dVar21 = (double)(dVar21 + dVar17);
-            dVar20 = (double)(dVar20 + dVar19);
+          if ((double)lightAttenuation == (double)floatOne) {
+            colorR = (double)(colorR + lightContributionR);
+            colorG = (double)(colorG + lightContributionG);
+            colorB = (double)(colorB + lightContributionB);
           }
           else {
-            dVar20 = (double)(dVar15 * dVar19 + dVar20);
-            dVar22 = (double)(dVar15 * dVar18 + dVar22);
-            dVar21 = (double)(dVar15 * dVar17 + dVar21);
+            colorB = (double)(lightAttenuation * lightContributionB + colorB);
+            colorR = (double)(lightAttenuation * lightContributionR + colorR);
+            colorG = (double)(lightAttenuation * lightContributionG + colorG);
           }
         }
       }
       else {
-        fparam_8 = (double)*(float *)(param_2 + 0x48);
+        fparam_8 = (double)*(float *)(vertex + 0x48);
         fparam_7 = (double)FLOAT_00108e50;
-        dVar15 = (double)(float)(fparam_8 * (double)*(float *)(iVar13 + 0x4a84) +
-                                (double)(*(float *)(param_2 + 0x40) * *(float *)(iVar13 + 0x4a7c) +
-                                        *(float *)(param_2 + 0x44) * *(float *)(iVar13 + 0x4a80)));
-        dVar22 = (double)(dVar22 + *(float *)(iVar12 + 0x50));
-        dVar21 = (double)(dVar21 + *(float *)(iVar12 + 0x54));
+        dVar15 = (double)(float)(fparam_8 * (double)*(float *)(lightRecord + 0x4a84) +
+                                (double)(*(float *)(vertex + 0x40) * *(float *)(lightRecord + 0x4a7c) +
+                                        *(float *)(vertex + 0x44) * *(float *)(lightRecord + 0x4a80)));
+        colorR = (double)(colorR + *(float *)(lightProducts + 0x50));
+        colorG = (double)(colorG + *(float *)(lightProducts + 0x54));
         fparam_1 = -(double)dVar15;
-        dVar20 = (double)(dVar20 + *(float *)(iVar12 + 0x58));
+        colorB = (double)(colorB + *(float *)(lightProducts + 0x58));
         if (fparam_7 < fparam_1) {
-          dVar22 = -(double)(dVar15 * *(float *)(iVar12 + 0x60) - dVar22);
-          dVar21 = -(double)(dVar15 * *(float *)(iVar12 + 100) - dVar21);
-          fparam_1 = -(double)(float)(fparam_8 * (double)*(float *)(iVar9 + 0x2888) +
-                                     (double)(*(float *)(param_2 + 0x40) *
-                                              *(float *)(iVar9 + 0x2880) +
-                                             *(float *)(param_2 + 0x44) * *(float *)(iVar9 + 0x2884)
+          colorR = -(double)(dVar15 * *(float *)(lightProducts + 0x60) - colorR);
+          colorG = -(double)(dVar15 * *(float *)(lightProducts + 100) - colorG);
+          fparam_1 = -(double)(float)(fparam_8 * (double)*(float *)(lightParams + 0x2888) +
+                                     (double)(*(float *)(vertex + 0x40) *
+                                              *(float *)(lightParams + 0x2880) +
+                                             *(float *)(vertex + 0x44) * *(float *)(lightParams + 0x2884)
                                              ));
-          dVar20 = -(double)(dVar15 * *(float *)(iVar12 + 0x68) - dVar20);
+          colorB = -(double)(dVar15 * *(float *)(lightProducts + 0x68) - colorB);
           if (fparam_7 < fparam_1) {
-            fparam_1 = ((double (*)())_gleMaterialShinePow)(iVar4,iVar10 + 0x1e8,fparam_1,fparam_2,floatArg3,floatArg4,floatArg5,
+            fparam_1 = ((double (*)())_gleMaterialShinePow)(iVar4,material + 0x1e8,fparam_1,fparam_2,floatArg3,floatArg4,floatArg5,
                                   floatArg6,fparam_7,fparam_8,incomingStack_fffffee8,incomingStack_fffffef0,
                                   incomingStack_fffffef8,incomingStack_ffffff00,incomingStack_ffffff08);
-            dVar20 = (double)(float)(fparam_1 * (double)*(float *)(iVar12 + 0x78) + (double)dVar20);
-            dVar22 = (double)(float)(fparam_1 * (double)*(float *)(iVar12 + 0x70) + (double)dVar22);
-            dVar21 = (double)(float)(fparam_1 * (double)*(float *)(iVar12 + 0x74) + (double)dVar21);
+            colorB = (double)(float)(fparam_1 * (double)*(float *)(lightProducts + 0x78) + (double)colorB);
+            colorR = (double)(float)(fparam_1 * (double)*(float *)(lightProducts + 0x70) + (double)colorR);
+            colorG = (double)(float)(fparam_1 * (double)*(float *)(lightProducts + 0x74) + (double)colorG);
             iVar4 = iVar4;
           }
         }
       }
 LAB_000d4eec:
-      uVar8 = uVar8 + 1;
-      iVar13 = iVar13 + 0x6c;
-      iVar12 = iVar12 + 0x30;
-      iVar9 = iVar9 + 0x80;
-      iVar11 = iVar11 + 0x80;
+      lightIndex = lightIndex + 1;
+      lightRecord = lightRecord + 0x6c;
+      lightProducts = lightProducts + 0x30;
+      lightParams = lightParams + 0x80;
+      lightParams2 = lightParams2 + 0x80;
     } while( true );
   }
   goto LAB_000d4f14;
 LAB_000d4f04:
-  *(float *)(param_2 + 0x30) = (float)(double)dVar22;
-  *(float *)(param_2 + 0x34) = (float)(double)dVar21;
-  *(float *)(param_2 + 0x38) = (float)(double)dVar20;
-  *(undefined4 *)(param_2 + 0x3c) = uVar2;
+  *(float *)(vertex + 0x30) = (float)(double)colorR;
+  *(float *)(vertex + 0x34) = (float)(double)colorG;
+  *(float *)(vertex + 0x38) = (float)(double)colorB;
+  *(undefined4 *)(vertex + 0x3c) = colorAlpha;
 LAB_000d4f14:
-  iVar6 = iVar6 + 1;
-  param_2 = param_2 + 0x100;
-  if (param_3 <= iVar6) {
+  vertexIndex = vertexIndex + 1;
+  vertex = vertex + 0x100;
+  if (vertexCount <= vertexIndex) {
     return;
   }
   goto LAB_000d4acc;
 }
 
 /* _gleVtxLightSpecRGBAFront @ 0xd4f30 (1632 bytes) */
-void _gleVtxLightSpecRGBAFront(int param_1,int param_2,int param_3,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11)
+void _gleVtxLightSpecRGBAFront(int glContext,int vertex,int vertexCount,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11)
 {
   float fVar1;
+  float inverseW;
   float fVar2;
   float fVar3;
-  undefined4 uVar4;
+  undefined4 colorAlpha;
   undefined *vectorNormalize;
   int iVar6;
   int extraout_r3;
   int extraout_r3_00;
   int r3AfterCall2;
-  uint uVar7;
-  int iVar8;
-  float *pfVar9;
-  uint uVar10;
-  int iVar11;
-  int iVar12;
-  int iVar13;
-  int iVar14;
-  int iVar15;
+  uint enabledLightMask;
+  int vertexIndex;
+  float *eyePosition;
+  uint lightIndex;
+  int lightParams;
+  int lightParams2;
+  int material;
+  int lightProducts;
+  int lightRecord;
   double extraout_f1;
   double f1AfterCall1;
   double f1AfterCall2;
   double f1AfterCall3;
   double dVar16;
   float dVar17;
+  float lightContributionB;
   double dVar18;
-  float dVar19;
+  double lightAttenuation;
+  float floatOne;
   float dVar20;
   float dVar21;
-  float dVar22;
+  float floatZero;
   float dVar23;
-  float dVar24;
-  float dVar25;
+  float lightContributionG;
+  float lightContributionR;
   float dVar26;
-  float dVar27;
-  float dVar28;
-  float dVar29;
+  float colorB;
+  float colorG;
+  float colorR;
   int iStack00000020;
   double incomingStack_fffffea8;
   double incomingStack_fffffeb0;
   double incomingStack_fffffeb8;
   double incomingStack_fffffec0;
   double incomingStack_fffffec8;
-  float local_120;
-  float local_11c;
-  float local_118;
-  float local_110;
-  float local_10c;
-  float local_108;
+  float eyeX;
+  float eyeY;
+  float eyeZ;
+  float halfX;
+  float halfY;
+  float halfZ;
   float local_100;
   float local_fc;
+  float toLightY;
   float local_f8;
+  float toLightZ;
   float local_f0;
   float local_ec;
   float local_e8;
   float local_e0;
   float local_dc;
   float local_d8;
-  uint local_d0;
+  uint localViewer;
   
-  iVar8 = 0;
-  local_d0 = (uint)*(byte *)(param_1 + 0x30ad);
-  uVar7 = *(uint *)(param_1 + 0x30a0);
-  iVar6 = param_1;
-  iStack00000020 = param_3;
-  if (param_3 < 1) {
+  vertexIndex = 0;
+  localViewer = (uint)*(byte *)(glContext + 0x30ad);
+  enabledLightMask = *(uint *)(glContext + 0x30a0);
+  iVar6 = glContext;
+  iStack00000020 = vertexCount;
+  if (vertexCount < 1) {
     return;
   }
 LAB_000d4f74:
-  if ((*(byte *)(param_2 + 0x7e) & 2) != 0) {
-    iVar13 = *(int *)(param_2 + 0x74);
-    *(byte *)(param_2 + 0x7e) = *(byte *)(param_2 + 0x7e) & 0xfd;
-    if (*(char *)(iVar13 + 0x234) != '\0') {
-      _gleUpdateLightRGBASums(param_1,iVar13,0);
+  if ((*(byte *)(vertex + 0x7e) & 2) != 0) {
+    material = *(int *)(vertex + 0x74);
+    *(byte *)(vertex + 0x7e) = *(byte *)(vertex + 0x7e) & 0xfd;
+    if (*(char *)(material + 0x234) != '\0') {
+      _gleUpdateLightRGBASums(glContext,material,0);
           }
-    pfVar9 = (float *)(param_2 + 0x20);
-    if (*(float *)(param_2 + 0x2c) != FLOAT_00108e54) {
-      fVar1 = FLOAT_00108e54 / *(float *)(param_2 + 0x2c);
-      pfVar9 = &local_120;
-      local_118 = *(float *)(param_2 + 0x28) * fVar1;
-      local_120 = *(float *)(param_2 + 0x20) * fVar1;
-      local_11c = *(float *)(param_2 + 0x24) * fVar1;
+    eyePosition = (float *)(vertex + 0x20);
+    if (*(float *)(vertex + 0x2c) != FLOAT_00108e54) {
+      inverseW = FLOAT_00108e54 / *(float *)(vertex + 0x2c);
+      eyePosition = &eyeX;
+      eyeZ = *(float *)(vertex + 0x28) * inverseW;
+      eyeX = *(float *)(vertex + 0x20) * inverseW;
+      eyeY = *(float *)(vertex + 0x24) * inverseW;
     }
-    if (*(char *)(param_1 + 0x30ae) != '\0') {
-      if ((local_d0 == 0) || (*(int *)(param_1 + 0x4ddc) == 0)) {
-        local_10c = 0.0;
-        local_108 = 1.0;
-        local_110 = 0.0;
+    if (*(char *)(glContext + 0x30ae) != '\0') {
+      if ((localViewer == 0) || (*(int *)(glContext + 0x4ddc) == 0)) {
+        halfY = 0.0;
+        halfZ = 1.0;
+        halfX = 0.0;
       }
       else {
-        local_110 = -*pfVar9;
-        local_10c = -pfVar9[1];
-        local_108 = -pfVar9[2];
-        f1AfterCall1 = ((double (*)())(*(code **)PTR__gleVectorNormalize_00112064))(param_1,&local_110,&local_110);
+        halfX = -*eyePosition;
+        halfY = -eyePosition[1];
+        halfZ = -eyePosition[2];
+        f1AfterCall1 = ((double (*)())(*(code **)PTR__gleVectorNormalize_00112064))(glContext,&halfX,&halfX);
         fparam_1 = f1AfterCall1;
       }
     }
     vectorNormalize = PTR__gleVectorNormalize_00112064;
-    dVar22 = (double)FLOAT_00108e50;
-    dVar29 = (double)*(float *)(iVar13 + 0x1d0);
-    uVar10 = 0;
-    dVar28 = (double)*(float *)(iVar13 + 0x1d4);
-    dVar27 = (double)*(float *)(iVar13 + 0x1d8);
-    uVar4 = *(undefined4 *)(iVar13 + 0x1dc);
-    dVar19 = (double)FLOAT_00108e54;
-    iVar11 = param_1;
-    iVar12 = param_1;
-    iVar14 = iVar13;
-    iVar15 = param_1;
-    dVar20 = (double)dVar22;
-    dVar21 = (double)dVar22;
-    dVar23 = (double)dVar22;
+    floatZero = (double)FLOAT_00108e50;
+    colorR = (double)*(float *)(material + 0x1d0);
+    lightIndex = 0;
+    colorG = (double)*(float *)(material + 0x1d4);
+    colorB = (double)*(float *)(material + 0x1d8);
+    colorAlpha = *(undefined4 *)(material + 0x1dc);
+    floatOne = (double)FLOAT_00108e54;
+    lightParams = glContext;
+    lightParams2 = glContext;
+    lightProducts = material;
+    lightRecord = glContext;
+    dVar20 = (double)floatZero;
+    dVar21 = (double)floatZero;
+    dVar23 = (double)floatZero;
     do {
-      if ((uVar7 & 1 << (uVar10 & 0x3f)) == 0) {
-        if (uVar7 >> (uVar10 & 0x3f) == 0) goto LAB_000d5530;
+      if ((enabledLightMask & 1 << (lightIndex & 0x3f)) == 0) {
+        if (enabledLightMask >> (lightIndex & 0x3f) == 0) goto LAB_000d5530;
       }
-      else if (*(char *)(iVar15 + 0x4ad8) == '\0') {
-        if (*(char *)(iVar15 + 0x4ad9) == '\0') {
-          local_100 = *(float *)(iVar15 + 0x4a70) - *pfVar9;
-          local_fc = *(float *)(iVar15 + 0x4a74) - pfVar9[1];
-          local_f8 = *(float *)(iVar15 + 0x4a78) - pfVar9[2];
-          f1AfterCall2 = ((double (*)())(*(code **)vectorNormalize))(param_1,&local_100,&local_100);
-          if ((*(char *)(iVar15 + 0x4adb) != '\0') || (f1AfterCall2 < (double)FLOAT_00108e80)) {
-            dVar18 = (double)*(float *)(iVar15 + 0x4ad4);
+      else if (*(char *)(lightRecord + 0x4ad8) == '\0') {
+        if (*(char *)(lightRecord + 0x4ad9) == '\0') {
+          local_100 = *(float *)(lightRecord + 0x4a70) - *eyePosition;
+          toLightY = *(float *)(lightRecord + 0x4a74) - eyePosition[1];
+          toLightZ = *(float *)(lightRecord + 0x4a78) - eyePosition[2];
+          f1AfterCall2 = ((double (*)())(*(code **)vectorNormalize))(glContext,&local_100,&local_100);
+          if ((*(char *)(lightRecord + 0x4adb) != '\0') || (f1AfterCall2 < (double)FLOAT_00108e80)) {
+            lightAttenuation = (double)*(float *)(lightRecord + 0x4ad4);
             fparam_1 = f1AfterCall2;
           }
           else {
-            fparam_1 = (double)(float)((double)dVar19 / f1AfterCall2);
-            dVar18 = (double)(dVar19 / (float)((double)(float)((double)*(float *)(
-                                                  iVar12 + 0x2878) * fparam_1) * fparam_1 +
-                                                  (double)(float)((double)*(float *)(iVar12 + 0x2874
+            fparam_1 = (double)(float)((double)floatOne / f1AfterCall2);
+            lightAttenuation = (double)(floatOne / (float)((double)(float)((double)*(float *)(
+                                                  lightParams2 + 0x2878) * fparam_1) * fparam_1 +
+                                                  (double)(float)((double)*(float *)(lightParams2 + 0x2874
                                                                                     ) * fparam_1 +
-                                                                 (double)*(float *)(iVar12 + 0x2870)
+                                                                 (double)*(float *)(lightParams2 + 0x2870)
                                                                  )));
           }
         }
         else {
-          dVar18 = (double)FLOAT_00108e54;
-          local_100 = *(float *)(iVar15 + 0x4a7c);
-          local_fc = *(float *)(iVar15 + 0x4a80);
-          local_f8 = *(float *)(iVar15 + 0x4a84);
+          lightAttenuation = (double)FLOAT_00108e54;
+          local_100 = *(float *)(lightRecord + 0x4a7c);
+          toLightY = *(float *)(lightRecord + 0x4a80);
+          toLightZ = *(float *)(lightRecord + 0x4a84);
         }
-        if (*(char *)(iVar15 + 0x4ada) != '\0') {
-          fparam_1 = -(double)(local_f8 * *(float *)(iVar15 + 0x4a90) +
-                              (local_100 * *(float *)(iVar15 + 0x4a88) +
-                              local_fc * *(float *)(iVar15 + 0x4a8c)));
-          if (fparam_1 < (double)*(float *)(iVar12 + 0x286c)) goto LAB_000d5518;
-          fparam_1 = ((double (*)())_gleLightExponentPow)(iVar6,iVar15 + 0x4a70,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,
+        if (*(char *)(lightRecord + 0x4ada) != '\0') {
+          fparam_1 = -(double)(toLightZ * *(float *)(lightRecord + 0x4a90) +
+                              (local_100 * *(float *)(lightRecord + 0x4a88) +
+                              toLightY * *(float *)(lightRecord + 0x4a8c)));
+          if (fparam_1 < (double)*(float *)(lightParams2 + 0x286c)) goto LAB_000d5518;
+          fparam_1 = ((double (*)())_gleLightExponentPow)(iVar6,lightRecord + 0x4a70,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,
                                 fparam_6,fparam_7,fparam_8,incomingStack_fffffea8,incomingStack_fffffeb0,
                                 incomingStack_fffffeb8,incomingStack_fffffec0,incomingStack_fffffec8);
-          dVar18 = (double)(float)(dVar18 * fparam_1);
+          lightAttenuation = (double)(float)(lightAttenuation * fparam_1);
           iVar6 = iVar6;
         }
-        if (*(char *)(param_1 + 0x30ae) == '\0') {
-          if (local_d0 == 0) {
-            local_108 = (local_f8 + dVar19);
-            local_110 = local_100;
-            local_10c = local_fc;
+        if (*(char *)(glContext + 0x30ae) == '\0') {
+          if (localViewer == 0) {
+            halfZ = (toLightZ + floatOne);
+            halfX = local_100;
+            halfY = toLightY;
           }
           else {
-            local_110 = -*pfVar9;
-            local_10c = -pfVar9[1];
-            local_108 = -pfVar9[2];
-            (**(code **)vectorNormalize)(param_1,&local_110,&local_110);
-            local_110 = local_110 + local_100;
-            local_10c = local_10c + local_fc;
-            local_108 = local_108 + local_f8;
+            halfX = -*eyePosition;
+            halfY = -eyePosition[1];
+            halfZ = -eyePosition[2];
+            (**(code **)vectorNormalize)(glContext,&halfX,&halfX);
+            halfX = halfX + local_100;
+            halfY = halfY + toLightY;
+            halfZ = halfZ + toLightZ;
           }
-          f1AfterCall3 = ((double (*)())(*(code **)vectorNormalize))(param_1,&local_110,&local_110);
+          f1AfterCall3 = ((double (*)())(*(code **)vectorNormalize))(glContext,&halfX,&halfX);
           fparam_1 = f1AfterCall3;
         }
-        if (dVar18 != (double)FLOAT_00108e50) {
-          fparam_4 = (double)*(float *)(param_2 + 0x44);
-          dVar26 = (double)local_fc;
-          fparam_5 = (double)*(float *)(param_2 + 0x40);
+        if (lightAttenuation != (double)FLOAT_00108e50) {
+          fparam_4 = (double)*(float *)(vertex + 0x44);
+          dVar26 = (double)toLightY;
+          fparam_5 = (double)*(float *)(vertex + 0x40);
           fparam_3 = (double)local_100;
-          fparam_6 = (double)*(float *)(param_2 + 0x48);
-          fparam_2 = (double)local_f8;
-          dVar25 = (double)*(float *)(iVar14 + 0x50);
-          dVar24 = (double)*(float *)(iVar14 + 0x54);
-          dVar17 = (double)*(float *)(iVar14 + 0x58);
+          fparam_6 = (double)*(float *)(vertex + 0x48);
+          fparam_2 = (double)toLightZ;
+          lightContributionR = (double)*(float *)(lightProducts + 0x50);
+          lightContributionG = (double)*(float *)(lightProducts + 0x54);
+          lightContributionB = (double)*(float *)(lightProducts + 0x58);
           dVar16 = (double)(float)(fparam_6 * fparam_2 +
                                   (double)(float)(fparam_5 * fparam_3 +
                                                  (double)(float)(fparam_4 * (double)dVar26)));
           if ((double)FLOAT_00108e50 < dVar16) {
-            dVar25 = (double)(float)(dVar16 * (double)*(float *)(iVar14 + 0x60) + (double)dVar25);
-            dVar24 = (double)(float)(dVar16 * (double)*(float *)(iVar14 + 100) + (double)dVar24);
-            dVar17 = (double)(float)(dVar16 * (double)*(float *)(iVar14 + 0x68) + (double)dVar17);
-            if (*(char *)(param_1 + 0x30ae) == '\0') {
-              fVar1 = (float)(fparam_6 * (double)local_108 +
-                             (double)(float)(fparam_5 * (double)local_110 +
-                                            (double)(float)(fparam_4 * (double)local_10c)));
+            lightContributionR = (double)(float)(dVar16 * (double)*(float *)(lightProducts + 0x60) + (double)lightContributionR);
+            lightContributionG = (double)(float)(dVar16 * (double)*(float *)(lightProducts + 100) + (double)lightContributionG);
+            lightContributionB = (double)(float)(dVar16 * (double)*(float *)(lightProducts + 0x68) + (double)lightContributionB);
+            if (*(char *)(glContext + 0x30ae) == '\0') {
+              fVar1 = (float)(fparam_6 * (double)halfZ +
+                             (double)(float)(fparam_5 * (double)halfX +
+                                            (double)(float)(fparam_4 * (double)halfY)));
             }
             else {
               local_e8 = (float)(fparam_5 * (double)dVar26 - (double)(float)(fparam_4 * fparam_3));
@@ -2653,16 +2666,16 @@ LAB_000d4f74:
               local_dc = ((fVar1 + fVar1) + dVar26);
               local_d8 = (float)((double)(fVar2 + fVar2) + fparam_2);
               local_e0 = (float)((double)(fVar3 + fVar3) + fparam_3);
-              fVar1 = local_d8 * local_108 + (local_e0 * local_110 + local_dc * local_10c);
+              fVar1 = local_d8 * halfZ + (local_e0 * halfX + local_dc * halfY);
             }
-            if (!((double)dVar22 < (double)fVar1)) goto LAB_000d54cc;
-            fparam_2 = (double)*(float *)(iVar13 + 0x40);
+            if (!((double)floatZero < (double)fVar1)) goto LAB_000d54cc;
+            fparam_2 = (double)*(float *)(material + 0x40);
             dVar16 = _pow((double)fVar1,fparam_2);
             fVar1 = (float)dVar16;
-            dVar26 = (double)(fVar1 * *(float *)(iVar14 + 0x78));
+            dVar26 = (double)(fVar1 * *(float *)(lightProducts + 0x78));
             iVar6 = r3AfterCall2;
-            fparam_1 = (double)(fVar1 * *(float *)(iVar14 + 0x74));
-            dVar16 = (double)(fVar1 * *(float *)(iVar14 + 0x70));
+            fparam_1 = (double)(fVar1 * *(float *)(lightProducts + 0x74));
+            dVar16 = (double)(fVar1 * *(float *)(lightProducts + 0x70));
           }
           else {
 LAB_000d54cc:
@@ -2670,292 +2683,297 @@ LAB_000d54cc:
             fparam_1 = (double)dVar26;
             dVar16 = (double)dVar26;
           }
-          if (dVar18 == (double)dVar19) {
-            dVar29 = (double)(dVar29 + dVar25);
-            dVar28 = (double)(dVar28 + dVar24);
-            dVar27 = (double)(dVar27 + dVar17);
+          if (lightAttenuation == (double)floatOne) {
+            colorR = (double)(colorR + lightContributionR);
+            colorG = (double)(colorG + lightContributionG);
+            colorB = (double)(colorB + lightContributionB);
             dVar23 = (double)(float)((double)dVar23 + dVar16);
             dVar21 = (double)(float)((double)dVar21 + fparam_1);
             dVar20 = (double)(dVar20 + dVar26);
           }
           else {
-            dVar20 = (double)(float)(dVar18 * (double)dVar26 + (double)dVar20);
-            dVar29 = (double)(float)(dVar18 * (double)dVar25 + (double)dVar29);
-            dVar28 = (double)(float)(dVar18 * (double)dVar24 + (double)dVar28);
-            dVar27 = (double)(float)(dVar18 * (double)dVar17 + (double)dVar27);
-            dVar23 = (double)(float)(dVar18 * dVar16 + (double)dVar23);
-            dVar21 = (double)(float)(dVar18 * fparam_1 + (double)dVar21);
+            dVar20 = (double)(float)(lightAttenuation * (double)dVar26 + (double)dVar20);
+            colorR = (double)(float)(lightAttenuation * (double)lightContributionR + (double)colorR);
+            colorG = (double)(float)(lightAttenuation * (double)lightContributionG + (double)colorG);
+            colorB = (double)(float)(lightAttenuation * (double)lightContributionB + (double)colorB);
+            dVar23 = (double)(float)(lightAttenuation * dVar16 + (double)dVar23);
+            dVar21 = (double)(float)(lightAttenuation * fparam_1 + (double)dVar21);
           }
         }
       }
       else {
-        dVar16 = (double)*(float *)(param_2 + 0x44);
-        fparam_7 = (double)*(float *)(iVar15 + 0x4a80);
-        fparam_8 = (double)*(float *)(param_2 + 0x40);
-        dVar17 = (double)*(float *)(param_2 + 0x48);
-        dVar18 = (double)*(float *)(iVar15 + 0x4a84);
-        dVar29 = (double)(dVar29 + *(float *)(iVar14 + 0x50));
+        dVar16 = (double)*(float *)(vertex + 0x44);
+        fparam_7 = (double)*(float *)(lightRecord + 0x4a80);
+        fparam_8 = (double)*(float *)(vertex + 0x40);
+        dVar17 = (double)*(float *)(vertex + 0x48);
+        dVar18 = (double)*(float *)(lightRecord + 0x4a84);
+        colorR = (double)(colorR + *(float *)(lightProducts + 0x50));
         fparam_1 = (double)(float)((double)dVar17 * dVar18 +
-                                  (double)(float)(fparam_8 * (double)*(float *)(iVar15 + 0x4a7c) +
+                                  (double)(float)(fparam_8 * (double)*(float *)(lightRecord + 0x4a7c) +
                                                  (double)(float)(dVar16 * fparam_7)));
-        dVar28 = (double)(dVar28 + *(float *)(iVar14 + 0x54));
-        dVar27 = (double)(dVar27 + *(float *)(iVar14 + 0x58));
-        if ((double)dVar22 < fparam_1) {
-          dVar29 = (double)(float)(fparam_1 * (double)*(float *)(iVar14 + 0x60) + (double)dVar29);
-          dVar28 = (double)(float)(fparam_1 * (double)*(float *)(iVar14 + 100) + (double)dVar28);
-          dVar27 = (double)(float)(fparam_1 * (double)*(float *)(iVar14 + 0x68) + (double)dVar27);
-          if (*(char *)(param_1 + 0x30ae) == '\0') {
-            dVar18 = (double)dVar17 * (double)*(float *)(iVar11 + 0x2888) +
-                     (double)(float)(fparam_8 * (double)*(float *)(iVar11 + 0x2880) +
-                                    (double)(float)(dVar16 * (double)*(float *)(iVar11 + 0x2884)));
+        colorG = (double)(colorG + *(float *)(lightProducts + 0x54));
+        colorB = (double)(colorB + *(float *)(lightProducts + 0x58));
+        if ((double)floatZero < fparam_1) {
+          colorR = (double)(float)(fparam_1 * (double)*(float *)(lightProducts + 0x60) + (double)colorR);
+          colorG = (double)(float)(fparam_1 * (double)*(float *)(lightProducts + 100) + (double)colorG);
+          colorB = (double)(float)(fparam_1 * (double)*(float *)(lightProducts + 0x68) + (double)colorB);
+          if (*(char *)(glContext + 0x30ae) == '\0') {
+            dVar18 = (double)dVar17 * (double)*(float *)(lightParams + 0x2888) +
+                     (double)(float)(fparam_8 * (double)*(float *)(lightParams + 0x2880) +
+                                    (double)(float)(dVar16 * (double)*(float *)(lightParams + 0x2884)));
           }
           else {
-            local_f8 = *(float *)(iVar15 + 0x4a84);
+            local_f8 = *(float *)(lightRecord + 0x4a84);
             local_100 = (float)(dVar16 * dVar18 - (double)(float)((double)dVar17 * fparam_7));
-            local_fc = (dVar17 * *(float *)(iVar15 + 0x4a7c) - (float)(fparam_8 * dVar18));
+            local_fc = (dVar17 * *(float *)(lightRecord + 0x4a7c) - (float)(fparam_8 * dVar18));
             fVar1 = (float)(fparam_8 * (double)local_fc -
                            (double)(float)(dVar16 * (double)local_100));
             dVar18 = (double)(fVar1 + fVar1) + dVar18;
           }
           fparam_1 = (double)(float)dVar18;
-          if ((double)dVar22 < fparam_1) {
-            fparam_1 = ((double (*)())_gleMaterialShinePow)(iVar6,iVar13 + 0x1e8,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,
+          if ((double)floatZero < fparam_1) {
+            fparam_1 = ((double (*)())_gleMaterialShinePow)(iVar6,material + 0x1e8,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,
                                   fparam_6,fparam_7,fparam_8,incomingStack_fffffea8,incomingStack_fffffeb0,
                                   incomingStack_fffffeb8,incomingStack_fffffec0,incomingStack_fffffec8);
-            dVar20 = (double)(float)(fparam_1 * (double)*(float *)(iVar14 + 0x78) + (double)dVar20);
-            dVar23 = (double)(float)(fparam_1 * (double)*(float *)(iVar14 + 0x70) + (double)dVar23);
-            dVar21 = (double)(float)(fparam_1 * (double)*(float *)(iVar14 + 0x74) + (double)dVar21);
+            dVar20 = (double)(float)(fparam_1 * (double)*(float *)(lightProducts + 0x78) + (double)dVar20);
+            dVar23 = (double)(float)(fparam_1 * (double)*(float *)(lightProducts + 0x70) + (double)dVar23);
+            dVar21 = (double)(float)(fparam_1 * (double)*(float *)(lightProducts + 0x74) + (double)dVar21);
             iVar6 = iVar6;
           }
         }
       }
 LAB_000d5518:
-      uVar10 = uVar10 + 1;
-      iVar15 = iVar15 + 0x6c;
-      iVar14 = iVar14 + 0x30;
-      iVar11 = iVar11 + 0x80;
-      iVar12 = iVar12 + 0x80;
+      lightIndex = lightIndex + 1;
+      lightRecord = lightRecord + 0x6c;
+      lightProducts = lightProducts + 0x30;
+      lightParams = lightParams + 0x80;
+      lightParams2 = lightParams2 + 0x80;
     } while( true );
   }
   goto LAB_000d5570;
 LAB_000d5530:
-  if (*(short *)(param_1 + 0x30a8) == -0x7e06) {
-    *(float *)(param_2 + 0x50) = (float)(double)dVar23;
-    *(float *)(param_2 + 0x54) = (float)(double)dVar21;
-    *(float *)(param_2 + 0x58) = (float)(double)dVar20;
+  if (*(short *)(glContext + 0x30a8) == -0x7e06) {
+    *(float *)(vertex + 0x50) = (float)(double)dVar23;
+    *(float *)(vertex + 0x54) = (float)(double)dVar21;
+    *(float *)(vertex + 0x58) = (float)(double)dVar20;
   }
   else {
-    dVar29 = (double)(dVar29 + dVar23);
-    dVar28 = (double)(dVar28 + dVar21);
-    dVar27 = (double)(dVar27 + dVar20);
+    colorR = (double)(colorR + dVar23);
+    colorG = (double)(colorG + dVar21);
+    colorB = (double)(colorB + dVar20);
   }
-  *(float *)(param_2 + 0x30) = (float)(double)dVar29;
-  *(float *)(param_2 + 0x34) = (float)(double)dVar28;
-  *(float *)(param_2 + 0x38) = (float)(double)dVar27;
-  *(undefined4 *)(param_2 + 0x3c) = uVar4;
+  *(float *)(vertex + 0x30) = (float)(double)colorR;
+  *(float *)(vertex + 0x34) = (float)(double)colorG;
+  *(float *)(vertex + 0x38) = (float)(double)colorB;
+  *(undefined4 *)(vertex + 0x3c) = colorAlpha;
 LAB_000d5570:
-  iVar8 = iVar8 + 1;
-  param_2 = param_2 + 0x100;
-  if (iStack00000020 <= iVar8) {
+  vertexIndex = vertexIndex + 1;
+  vertex = vertex + 0x100;
+  if (iStack00000020 <= vertexIndex) {
     return;
   }
   goto LAB_000d4f74;
 }
 
 /* _gleVtxLightSpecRGBABack @ 0xd5590 (1640 bytes) */
-void _gleVtxLightSpecRGBABack(int param_1,int param_2,int param_3,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11)
+void _gleVtxLightSpecRGBABack(int glContext,int vertex,int vertexCount,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11)
 {
   float fVar1;
+  float inverseW;
   float fVar2;
   float fVar3;
-  undefined4 uVar4;
+  undefined4 colorAlpha;
   undefined *vectorNormalize;
   int iVar6;
   int extraout_r3;
   int extraout_r3_00;
   int r3AfterCall2;
-  uint uVar7;
-  int iVar8;
-  float *pfVar9;
-  uint uVar10;
-  int iVar11;
-  int iVar12;
-  int iVar13;
-  int iVar14;
-  int iVar15;
+  uint enabledLightMask;
+  int vertexIndex;
+  float *eyePosition;
+  uint lightIndex;
+  int lightParams;
+  int lightParams2;
+  int material;
+  int lightProducts;
+  int lightRecord;
   double extraout_f1;
   double f1AfterCall1;
   double f1AfterCall2;
   double f1AfterCall3;
   float dVar16;
+  float lightAttenuation;
   double dVar17;
   float dVar18;
-  float dVar19;
+  float lightContributionB;
+  float floatOne;
   float dVar20;
   float dVar21;
-  float dVar22;
+  float floatZero;
   float dVar23;
-  float dVar24;
-  float dVar25;
+  float lightContributionG;
+  float lightContributionR;
   float dVar26;
-  float dVar27;
-  float dVar28;
-  float dVar29;
+  float colorB;
+  float colorG;
+  float colorR;
   int iStack00000020;
   double incomingStack_fffffea8;
   double incomingStack_fffffeb0;
   double incomingStack_fffffeb8;
   double incomingStack_fffffec0;
   double incomingStack_fffffec8;
-  float local_120;
-  float local_11c;
-  float local_118;
-  float local_110;
-  float local_10c;
-  float local_108;
+  float eyeX;
+  float eyeY;
+  float eyeZ;
+  float halfX;
+  float halfY;
+  float halfZ;
   float local_100;
   float local_fc;
+  float toLightY;
   float local_f8;
+  float toLightZ;
   float local_f0;
   float local_ec;
   float local_e8;
   float local_e0;
   float local_dc;
   float local_d8;
-  uint local_d0;
+  uint localViewer;
   
-  iVar8 = 0;
-  local_d0 = (uint)*(byte *)(param_1 + 0x30ad);
-  uVar7 = *(uint *)(param_1 + 0x30a0);
-  iVar6 = param_1;
-  iStack00000020 = param_3;
-  if (param_3 < 1) {
+  vertexIndex = 0;
+  localViewer = (uint)*(byte *)(glContext + 0x30ad);
+  enabledLightMask = *(uint *)(glContext + 0x30a0);
+  iVar6 = glContext;
+  iStack00000020 = vertexCount;
+  if (vertexCount < 1) {
     return;
   }
 LAB_000d55d4:
-  if ((*(byte *)(param_2 + 0x7e) & 4) != 0) {
-    iVar13 = *(int *)(param_2 + 0x78);
-    *(byte *)(param_2 + 0x7e) = *(byte *)(param_2 + 0x7e) & 0xfb;
-    if (*(char *)(iVar13 + 0x234) != '\0') {
-      _gleUpdateLightRGBASums(param_1,iVar13,1);
+  if ((*(byte *)(vertex + 0x7e) & 4) != 0) {
+    material = *(int *)(vertex + 0x78);
+    *(byte *)(vertex + 0x7e) = *(byte *)(vertex + 0x7e) & 0xfb;
+    if (*(char *)(material + 0x234) != '\0') {
+      _gleUpdateLightRGBASums(glContext,material,1);
           }
-    pfVar9 = (float *)(param_2 + 0x20);
-    if (*(float *)(param_2 + 0x2c) != FLOAT_00108e54) {
-      fVar1 = FLOAT_00108e54 / *(float *)(param_2 + 0x2c);
-      pfVar9 = &local_120;
-      local_118 = *(float *)(param_2 + 0x28) * fVar1;
-      local_120 = *(float *)(param_2 + 0x20) * fVar1;
-      local_11c = *(float *)(param_2 + 0x24) * fVar1;
+    eyePosition = (float *)(vertex + 0x20);
+    if (*(float *)(vertex + 0x2c) != FLOAT_00108e54) {
+      inverseW = FLOAT_00108e54 / *(float *)(vertex + 0x2c);
+      eyePosition = &eyeX;
+      eyeZ = *(float *)(vertex + 0x28) * inverseW;
+      eyeX = *(float *)(vertex + 0x20) * inverseW;
+      eyeY = *(float *)(vertex + 0x24) * inverseW;
     }
-    if (*(char *)(param_1 + 0x30ae) != '\0') {
-      if ((local_d0 == 0) || (*(int *)(param_1 + 0x4ddc) == 0)) {
-        local_10c = 0.0;
-        local_108 = 1.0;
-        local_110 = 0.0;
+    if (*(char *)(glContext + 0x30ae) != '\0') {
+      if ((localViewer == 0) || (*(int *)(glContext + 0x4ddc) == 0)) {
+        halfY = 0.0;
+        halfZ = 1.0;
+        halfX = 0.0;
       }
       else {
-        local_110 = -*pfVar9;
-        local_10c = -pfVar9[1];
-        local_108 = -pfVar9[2];
-        f1AfterCall1 = ((double (*)())(*(code **)PTR__gleVectorNormalize_00112064))(param_1,&local_110,&local_110);
+        halfX = -*eyePosition;
+        halfY = -eyePosition[1];
+        halfZ = -eyePosition[2];
+        f1AfterCall1 = ((double (*)())(*(code **)PTR__gleVectorNormalize_00112064))(glContext,&halfX,&halfX);
         fparam_1 = f1AfterCall1;
       }
     }
     vectorNormalize = PTR__gleVectorNormalize_00112064;
-    dVar22 = (double)FLOAT_00108e50;
-    dVar29 = (double)*(float *)(iVar13 + 0x1d0);
-    uVar10 = 0;
-    dVar28 = (double)*(float *)(iVar13 + 0x1d4);
-    dVar27 = (double)*(float *)(iVar13 + 0x1d8);
-    uVar4 = *(undefined4 *)(iVar13 + 0x1dc);
-    dVar19 = (double)FLOAT_00108e54;
-    iVar11 = param_1;
-    iVar12 = param_1;
-    iVar14 = iVar13;
-    iVar15 = param_1;
-    dVar20 = (double)dVar22;
-    dVar21 = (double)dVar22;
-    dVar23 = (double)dVar22;
+    floatZero = (double)FLOAT_00108e50;
+    colorR = (double)*(float *)(material + 0x1d0);
+    lightIndex = 0;
+    colorG = (double)*(float *)(material + 0x1d4);
+    colorB = (double)*(float *)(material + 0x1d8);
+    colorAlpha = *(undefined4 *)(material + 0x1dc);
+    floatOne = (double)FLOAT_00108e54;
+    lightParams = glContext;
+    lightParams2 = glContext;
+    lightProducts = material;
+    lightRecord = glContext;
+    dVar20 = (double)floatZero;
+    dVar21 = (double)floatZero;
+    dVar23 = (double)floatZero;
     do {
-      if ((uVar7 & 1 << (uVar10 & 0x3f)) == 0) {
-        if (uVar7 >> (uVar10 & 0x3f) == 0) goto LAB_000d5b98;
+      if ((enabledLightMask & 1 << (lightIndex & 0x3f)) == 0) {
+        if (enabledLightMask >> (lightIndex & 0x3f) == 0) goto LAB_000d5b98;
       }
-      else if (*(char *)(iVar15 + 0x4ad8) == '\0') {
-        if (*(char *)(iVar15 + 0x4ad9) == '\0') {
-          local_100 = *(float *)(iVar15 + 0x4a70) - *pfVar9;
-          local_fc = *(float *)(iVar15 + 0x4a74) - pfVar9[1];
-          local_f8 = *(float *)(iVar15 + 0x4a78) - pfVar9[2];
-          f1AfterCall2 = ((double (*)())(*(code **)vectorNormalize))(param_1,&local_100,&local_100);
-          if ((*(char *)(iVar15 + 0x4adb) != '\0') || (f1AfterCall2 < (double)FLOAT_00108e80)) {
-            dVar16 = (double)*(float *)(iVar15 + 0x4ad4);
+      else if (*(char *)(lightRecord + 0x4ad8) == '\0') {
+        if (*(char *)(lightRecord + 0x4ad9) == '\0') {
+          local_100 = *(float *)(lightRecord + 0x4a70) - *eyePosition;
+          toLightY = *(float *)(lightRecord + 0x4a74) - eyePosition[1];
+          toLightZ = *(float *)(lightRecord + 0x4a78) - eyePosition[2];
+          f1AfterCall2 = ((double (*)())(*(code **)vectorNormalize))(glContext,&local_100,&local_100);
+          if ((*(char *)(lightRecord + 0x4adb) != '\0') || (f1AfterCall2 < (double)FLOAT_00108e80)) {
+            lightAttenuation = (double)*(float *)(lightRecord + 0x4ad4);
             fparam_1 = f1AfterCall2;
           }
           else {
-            fparam_1 = (double)(float)((double)dVar19 / f1AfterCall2);
-            dVar16 = (double)(dVar19 / (float)((double)(float)((double)*(float *)(
-                                                  iVar12 + 0x2878) * fparam_1) * fparam_1 +
-                                                  (double)(float)((double)*(float *)(iVar12 + 0x2874
+            fparam_1 = (double)(float)((double)floatOne / f1AfterCall2);
+            lightAttenuation = (double)(floatOne / (float)((double)(float)((double)*(float *)(
+                                                  lightParams2 + 0x2878) * fparam_1) * fparam_1 +
+                                                  (double)(float)((double)*(float *)(lightParams2 + 0x2874
                                                                                     ) * fparam_1 +
-                                                                 (double)*(float *)(iVar12 + 0x2870)
+                                                                 (double)*(float *)(lightParams2 + 0x2870)
                                                                  )));
           }
         }
         else {
-          dVar16 = (double)FLOAT_00108e54;
-          local_100 = *(float *)(iVar15 + 0x4a7c);
-          local_fc = *(float *)(iVar15 + 0x4a80);
-          local_f8 = *(float *)(iVar15 + 0x4a84);
+          lightAttenuation = (double)FLOAT_00108e54;
+          local_100 = *(float *)(lightRecord + 0x4a7c);
+          toLightY = *(float *)(lightRecord + 0x4a80);
+          toLightZ = *(float *)(lightRecord + 0x4a84);
         }
-        if (*(char *)(iVar15 + 0x4ada) != '\0') {
-          fparam_1 = -(double)(local_f8 * *(float *)(iVar15 + 0x4a90) +
-                              (local_100 * *(float *)(iVar15 + 0x4a88) +
-                              local_fc * *(float *)(iVar15 + 0x4a8c)));
-          if (fparam_1 < (double)*(float *)(iVar12 + 0x286c)) goto LAB_000d5b80;
-          fparam_1 = ((double (*)())_gleLightExponentPow)(iVar6,iVar15 + 0x4a70,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,
+        if (*(char *)(lightRecord + 0x4ada) != '\0') {
+          fparam_1 = -(double)(toLightZ * *(float *)(lightRecord + 0x4a90) +
+                              (local_100 * *(float *)(lightRecord + 0x4a88) +
+                              toLightY * *(float *)(lightRecord + 0x4a8c)));
+          if (fparam_1 < (double)*(float *)(lightParams2 + 0x286c)) goto LAB_000d5b80;
+          fparam_1 = ((double (*)())_gleLightExponentPow)(iVar6,lightRecord + 0x4a70,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,
                                 fparam_6,fparam_7,fparam_8,incomingStack_fffffea8,incomingStack_fffffeb0,
                                 incomingStack_fffffeb8,incomingStack_fffffec0,incomingStack_fffffec8);
-          dVar16 = (double)(float)((double)dVar16 * fparam_1);
+          lightAttenuation = (double)(float)((double)lightAttenuation * fparam_1);
           iVar6 = iVar6;
         }
-        if (*(char *)(param_1 + 0x30ae) == '\0') {
-          if (local_d0 == 0) {
-            local_108 = (local_f8 + dVar19);
-            local_110 = local_100;
-            local_10c = local_fc;
+        if (*(char *)(glContext + 0x30ae) == '\0') {
+          if (localViewer == 0) {
+            halfZ = (toLightZ + floatOne);
+            halfX = local_100;
+            halfY = toLightY;
           }
           else {
-            local_110 = -*pfVar9;
-            local_10c = -pfVar9[1];
-            local_108 = -pfVar9[2];
-            (**(code **)vectorNormalize)(param_1,&local_110,&local_110);
-            local_110 = local_110 + local_100;
-            local_10c = local_10c + local_fc;
-            local_108 = local_108 + local_f8;
+            halfX = -*eyePosition;
+            halfY = -eyePosition[1];
+            halfZ = -eyePosition[2];
+            (**(code **)vectorNormalize)(glContext,&halfX,&halfX);
+            halfX = halfX + local_100;
+            halfY = halfY + toLightY;
+            halfZ = halfZ + toLightZ;
           }
-          f1AfterCall3 = ((double (*)())(*(code **)vectorNormalize))(param_1,&local_110,&local_110);
+          f1AfterCall3 = ((double (*)())(*(code **)vectorNormalize))(glContext,&halfX,&halfX);
           fparam_1 = f1AfterCall3;
         }
-        if ((double)dVar16 != (double)FLOAT_00108e50) {
-          fparam_4 = (double)*(float *)(param_2 + 0x44);
-          dVar26 = (double)local_fc;
-          fparam_5 = (double)*(float *)(param_2 + 0x40);
+        if ((double)lightAttenuation != (double)FLOAT_00108e50) {
+          fparam_4 = (double)*(float *)(vertex + 0x44);
+          dVar26 = (double)toLightY;
+          fparam_5 = (double)*(float *)(vertex + 0x40);
           fparam_3 = (double)local_100;
-          fparam_6 = (double)*(float *)(param_2 + 0x48);
-          fparam_2 = (double)local_f8;
-          dVar25 = (double)*(float *)(iVar14 + 0x50);
-          dVar24 = (double)*(float *)(iVar14 + 0x54);
-          dVar18 = (double)*(float *)(iVar14 + 0x58);
+          fparam_6 = (double)*(float *)(vertex + 0x48);
+          fparam_2 = (double)toLightZ;
+          lightContributionR = (double)*(float *)(lightProducts + 0x50);
+          lightContributionG = (double)*(float *)(lightProducts + 0x54);
+          lightContributionB = (double)*(float *)(lightProducts + 0x58);
           dVar17 = (double)(float)(fparam_6 * fparam_2 +
                                   (double)(float)(fparam_5 * fparam_3 +
                                                  (double)(float)(fparam_4 * (double)dVar26)));
           if ((double)FLOAT_00108e50 < -dVar17) {
-            dVar25 = -(double)(float)(dVar17 * (double)*(float *)(iVar14 + 0x60) - (double)dVar25);
-            dVar24 = -(double)(float)(dVar17 * (double)*(float *)(iVar14 + 100) - (double)dVar24);
-            dVar18 = -(double)(float)(dVar17 * (double)*(float *)(iVar14 + 0x68) - (double)dVar18);
-            if (*(char *)(param_1 + 0x30ae) == '\0') {
-              dVar17 = -(double)(float)(fparam_6 * (double)local_108 +
-                                       (double)(float)(fparam_5 * (double)local_110 +
-                                                      (double)(float)(fparam_4 * (double)local_10c))
+            lightContributionR = -(double)(float)(dVar17 * (double)*(float *)(lightProducts + 0x60) - (double)lightContributionR);
+            lightContributionG = -(double)(float)(dVar17 * (double)*(float *)(lightProducts + 100) - (double)lightContributionG);
+            lightContributionB = -(double)(float)(dVar17 * (double)*(float *)(lightProducts + 0x68) - (double)lightContributionB);
+            if (*(char *)(glContext + 0x30ae) == '\0') {
+              dVar17 = -(double)(float)(fparam_6 * (double)halfZ +
+                                       (double)(float)(fparam_5 * (double)halfX +
+                                                      (double)(float)(fparam_4 * (double)halfY))
                                        );
             }
             else {
@@ -2971,16 +2989,16 @@ LAB_000d55d4:
               local_dc = ((fVar1 + fVar1) + dVar26);
               local_e0 = (float)((double)(fVar2 + fVar2) + fparam_3);
               local_d8 = (float)((double)(fVar3 + fVar3) + fparam_2);
-              dVar17 = (double)(local_d8 * local_108 + (local_e0 * local_110 + local_dc * local_10c));
+              dVar17 = (double)(local_d8 * halfZ + (local_e0 * halfX + local_dc * halfY));
             }
-            if (!((double)dVar22 < dVar17)) goto LAB_000d5b34;
-            fparam_2 = (double)*(float *)(iVar13 + 0x40);
+            if (!((double)floatZero < dVar17)) goto LAB_000d5b34;
+            fparam_2 = (double)*(float *)(material + 0x40);
             dVar17 = _pow(dVar17,fparam_2);
             fVar1 = (float)dVar17;
-            dVar26 = (double)(fVar1 * *(float *)(iVar14 + 0x78));
+            dVar26 = (double)(fVar1 * *(float *)(lightProducts + 0x78));
             iVar6 = r3AfterCall2;
-            fparam_1 = (double)(fVar1 * *(float *)(iVar14 + 0x74));
-            dVar17 = (double)(fVar1 * *(float *)(iVar14 + 0x70));
+            fparam_1 = (double)(fVar1 * *(float *)(lightProducts + 0x74));
+            dVar17 = (double)(fVar1 * *(float *)(lightProducts + 0x70));
           }
           else {
 LAB_000d5b34:
@@ -2988,113 +3006,113 @@ LAB_000d5b34:
             fparam_1 = (double)dVar26;
             dVar17 = (double)dVar26;
           }
-          if ((double)dVar16 == (double)dVar19) {
-            dVar29 = (double)(dVar29 + dVar25);
-            dVar28 = (double)(dVar28 + dVar24);
-            dVar27 = (double)(dVar27 + dVar18);
+          if ((double)lightAttenuation == (double)floatOne) {
+            colorR = (double)(colorR + lightContributionR);
+            colorG = (double)(colorG + lightContributionG);
+            colorB = (double)(colorB + lightContributionB);
             dVar23 = (double)(float)((double)dVar23 + dVar17);
             dVar21 = (double)(float)((double)dVar21 + fparam_1);
             dVar20 = (double)(dVar20 + dVar26);
           }
           else {
-            dVar20 = (double)(dVar16 * dVar26 + dVar20);
-            dVar29 = (double)(dVar16 * dVar25 + dVar29);
-            dVar28 = (double)(dVar16 * dVar24 + dVar28);
-            dVar27 = (double)(dVar16 * dVar18 + dVar27);
-            dVar23 = (double)(float)((double)dVar16 * dVar17 + (double)dVar23);
-            dVar21 = (double)(float)((double)dVar16 * fparam_1 + (double)dVar21);
+            dVar20 = (double)(lightAttenuation * dVar26 + dVar20);
+            colorR = (double)(lightAttenuation * lightContributionR + colorR);
+            colorG = (double)(lightAttenuation * lightContributionG + colorG);
+            colorB = (double)(lightAttenuation * lightContributionB + colorB);
+            dVar23 = (double)(float)((double)lightAttenuation * dVar17 + (double)dVar23);
+            dVar21 = (double)(float)((double)lightAttenuation * fparam_1 + (double)dVar21);
           }
         }
       }
       else {
-        fparam_7 = (double)*(float *)(param_2 + 0x44);
-        fparam_6 = (double)*(float *)(iVar15 + 0x4a80);
-        fparam_8 = (double)*(float *)(param_2 + 0x40);
-        dVar16 = (double)*(float *)(param_2 + 0x48);
-        dVar17 = (double)*(float *)(iVar15 + 0x4a84);
-        dVar29 = (double)(dVar29 + *(float *)(iVar14 + 0x50));
+        fparam_7 = (double)*(float *)(vertex + 0x44);
+        fparam_6 = (double)*(float *)(lightRecord + 0x4a80);
+        fparam_8 = (double)*(float *)(vertex + 0x40);
+        dVar16 = (double)*(float *)(vertex + 0x48);
+        dVar17 = (double)*(float *)(lightRecord + 0x4a84);
+        colorR = (double)(colorR + *(float *)(lightProducts + 0x50));
         dVar18 = (double)(float)((double)dVar16 * dVar17 +
-                                (double)(float)(fparam_8 * (double)*(float *)(iVar15 + 0x4a7c) +
+                                (double)(float)(fparam_8 * (double)*(float *)(lightRecord + 0x4a7c) +
                                                (double)(float)(fparam_7 * fparam_6)));
-        dVar28 = (double)(dVar28 + *(float *)(iVar14 + 0x54));
-        dVar27 = (double)(dVar27 + *(float *)(iVar14 + 0x58));
+        colorG = (double)(colorG + *(float *)(lightProducts + 0x54));
+        colorB = (double)(colorB + *(float *)(lightProducts + 0x58));
         fparam_1 = -(double)dVar18;
-        if ((double)dVar22 < fparam_1) {
-          dVar29 = -(double)(dVar18 * *(float *)(iVar14 + 0x60) - dVar29);
-          dVar28 = -(double)(dVar18 * *(float *)(iVar14 + 100) - dVar28);
-          dVar27 = -(double)(dVar18 * *(float *)(iVar14 + 0x68) - dVar27);
-          if (*(char *)(param_1 + 0x30ae) == '\0') {
-            fparam_1 = -(double)(dVar16 * *(float *)(iVar11 + 0x2888) + (float)(fparam_8 *
-                                                       (double)*(float *)(iVar11 + 0x2880) +
+        if ((double)floatZero < fparam_1) {
+          colorR = -(double)(dVar18 * *(float *)(lightProducts + 0x60) - colorR);
+          colorG = -(double)(dVar18 * *(float *)(lightProducts + 100) - colorG);
+          colorB = -(double)(dVar18 * *(float *)(lightProducts + 0x68) - colorB);
+          if (*(char *)(glContext + 0x30ae) == '\0') {
+            fparam_1 = -(double)(dVar16 * *(float *)(lightParams + 0x2888) + (float)(fparam_8 *
+                                                       (double)*(float *)(lightParams + 0x2880) +
                                                       (double)(float)(fparam_7 *
-                                                                     (double)*(float *)(iVar11 + 
+                                                                     (double)*(float *)(lightParams + 
                                                   0x2884))));
           }
           else {
-            local_f8 = *(float *)(iVar15 + 0x4a84);
+            local_f8 = *(float *)(lightRecord + 0x4a84);
             local_100 = (float)((double)dVar16 * fparam_6 - (double)(float)(fparam_7 * dVar17));
             local_fc = (float)(fparam_8 * dVar17 -
-                              (double)(dVar16 * *(float *)(iVar15 + 0x4a7c)));
+                              (double)(dVar16 * *(float *)(lightRecord + 0x4a7c)));
             fVar1 = (float)(fparam_7 * (double)local_100 -
                            (double)(float)(fparam_8 * (double)local_fc));
             fparam_1 = (double)(float)((double)(fVar1 + fVar1) + dVar17);
           }
-          if ((double)dVar22 < fparam_1) {
-            fparam_1 = ((double (*)())_gleMaterialShinePow)(iVar6,iVar13 + 0x1e8,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,
+          if ((double)floatZero < fparam_1) {
+            fparam_1 = ((double (*)())_gleMaterialShinePow)(iVar6,material + 0x1e8,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,
                                   fparam_6,fparam_7,fparam_8,incomingStack_fffffea8,incomingStack_fffffeb0,
                                   incomingStack_fffffeb8,incomingStack_fffffec0,incomingStack_fffffec8);
-            dVar27 = (double)(float)(fparam_1 * (double)*(float *)(iVar14 + 0x78) + (double)dVar27);
-            dVar29 = (double)(float)(fparam_1 * (double)*(float *)(iVar14 + 0x70) + (double)dVar29);
-            dVar28 = (double)(float)(fparam_1 * (double)*(float *)(iVar14 + 0x74) + (double)dVar28);
+            colorB = (double)(float)(fparam_1 * (double)*(float *)(lightProducts + 0x78) + (double)colorB);
+            colorR = (double)(float)(fparam_1 * (double)*(float *)(lightProducts + 0x70) + (double)colorR);
+            colorG = (double)(float)(fparam_1 * (double)*(float *)(lightProducts + 0x74) + (double)colorG);
             iVar6 = iVar6;
           }
         }
       }
 LAB_000d5b80:
-      uVar10 = uVar10 + 1;
-      iVar15 = iVar15 + 0x6c;
-      iVar14 = iVar14 + 0x30;
-      iVar11 = iVar11 + 0x80;
-      iVar12 = iVar12 + 0x80;
+      lightIndex = lightIndex + 1;
+      lightRecord = lightRecord + 0x6c;
+      lightProducts = lightProducts + 0x30;
+      lightParams = lightParams + 0x80;
+      lightParams2 = lightParams2 + 0x80;
     } while( true );
   }
   goto LAB_000d5bd8;
 LAB_000d5b98:
-  if (*(short *)(param_1 + 0x30a8) == -0x7e06) {
-    *(float *)(param_2 + 0x50) = (float)(double)dVar23;
-    *(float *)(param_2 + 0x54) = (float)(double)dVar21;
-    *(float *)(param_2 + 0x58) = (float)(double)dVar20;
+  if (*(short *)(glContext + 0x30a8) == -0x7e06) {
+    *(float *)(vertex + 0x50) = (float)(double)dVar23;
+    *(float *)(vertex + 0x54) = (float)(double)dVar21;
+    *(float *)(vertex + 0x58) = (float)(double)dVar20;
   }
   else {
-    dVar29 = (double)(dVar29 + dVar23);
-    dVar28 = (double)(dVar28 + dVar21);
-    dVar27 = (double)(dVar27 + dVar20);
+    colorR = (double)(colorR + dVar23);
+    colorG = (double)(colorG + dVar21);
+    colorB = (double)(colorB + dVar20);
   }
-  *(float *)(param_2 + 0x30) = (float)(double)dVar29;
-  *(float *)(param_2 + 0x34) = (float)(double)dVar28;
-  *(float *)(param_2 + 0x38) = (float)(double)dVar27;
-  *(undefined4 *)(param_2 + 0x3c) = uVar4;
+  *(float *)(vertex + 0x30) = (float)(double)colorR;
+  *(float *)(vertex + 0x34) = (float)(double)colorG;
+  *(float *)(vertex + 0x38) = (float)(double)colorB;
+  *(undefined4 *)(vertex + 0x3c) = colorAlpha;
 LAB_000d5bd8:
-  iVar8 = iVar8 + 1;
-  param_2 = param_2 + 0x100;
-  if (iStack00000020 <= iVar8) {
+  vertexIndex = vertexIndex + 1;
+  vertex = vertex + 0x100;
+  if (iStack00000020 <= vertexIndex) {
     return;
   }
   goto LAB_000d55d4;
 }
 
 /* _gleVtxLightFastRGBAFront @ 0xd5bf8 (372 bytes) */
-void _gleVtxLightFastRGBAFront(int param_1,int param_2,int param_3,double unusedFloatArg1)
+void _gleVtxLightFastRGBAFront(int glContext,int vertex,int vertexCount,double unusedFloatArg1)
 {
-  undefined4 uVar1;
+  undefined4 colorAlpha;
   int iVar2;
   int extraout_r3;
-  int iVar3;
-  uint uVar4;
-  uint uVar5;
-  int iVar6;
+  int vertexIndex;
+  uint enabledLightMask;
+  uint lightIndex;
+  int lightParams;
   int iVar7;
-  int iVar8;
+  int material;
   int iVar9;
   double dVar10;
   double incomingFpr2;
@@ -3102,7 +3120,7 @@ void _gleVtxLightFastRGBAFront(int param_1,int param_2,int param_3,double unused
   double incomingFpr4;
   double incomingFpr5;
   double incomingFpr6;
-  double fparam_7;
+  double floatZero;
   double fparam_8;
   float dVar11;
   float dVar12;
@@ -3113,47 +3131,47 @@ void _gleVtxLightFastRGBAFront(int param_1,int param_2,int param_3,double unused
   double incomingStack_ffffff90;
   double incomingStack_ffffff98;
   
-  iVar3 = 0;
-  uVar4 = *(uint *)(param_1 + 0x30a0);
-  iVar2 = param_1;
-  if (param_3 < 1) {
+  vertexIndex = 0;
+  enabledLightMask = *(uint *)(glContext + 0x30a0);
+  iVar2 = glContext;
+  if (vertexCount < 1) {
 LAB_000d5d60:
     return;
   }
 LAB_000d5c2c:
-  if ((*(byte *)(param_2 + 0x7e) & 2) != 0) {
-    iVar8 = *(int *)(param_2 + 0x74);
-    *(byte *)(param_2 + 0x7e) = *(byte *)(param_2 + 0x7e) & 0xfd;
-    if (*(char *)(iVar8 + 0x234) != '\0') {
-      _gleUpdateLightRGBASums(param_1,iVar8,0);
+  if ((*(byte *)(vertex + 0x7e) & 2) != 0) {
+    material = *(int *)(vertex + 0x74);
+    *(byte *)(vertex + 0x7e) = *(byte *)(vertex + 0x7e) & 0xfd;
+    if (*(char *)(material + 0x234) != '\0') {
+      _gleUpdateLightRGBASums(glContext,material,0);
     }
-    dVar13 = (double)*(float *)(iVar8 + 0x1e8);
-    iVar7 = iVar8 + 0x50;
-    dVar12 = (double)*(float *)(iVar8 + 0x1ec);
-    dVar11 = (double)*(float *)(iVar8 + 0x1f0);
-    uVar5 = 0;
-    uVar1 = *(undefined4 *)(iVar8 + 0x1dc);
-    iVar6 = param_1 + 0x2820;
-    iVar9 = param_1 + 0x4a70;
+    dVar13 = (double)*(float *)(material + 0x1e8);
+    iVar7 = material + 0x50;
+    dVar12 = (double)*(float *)(material + 0x1ec);
+    dVar11 = (double)*(float *)(material + 0x1f0);
+    lightIndex = 0;
+    colorAlpha = *(undefined4 *)(material + 0x1dc);
+    lightParams = glContext + 0x2820;
+    iVar9 = glContext + 0x4a70;
     do {
-      if ((uVar4 & 1 << (uVar5 & 0x3f)) == 0) {
-        if (uVar4 >> (uVar5 & 0x3f) == 0) goto LAB_000d5d40;
+      if ((enabledLightMask & 1 << (lightIndex & 0x3f)) == 0) {
+        if (enabledLightMask >> (lightIndex & 0x3f) == 0) goto LAB_000d5d40;
       }
       else {
-        fparam_8 = (double)*(float *)(param_2 + 0x48);
-        fparam_7 = (double)FLOAT_00108e50;
+        fparam_8 = (double)*(float *)(vertex + 0x48);
+        floatZero = (double)FLOAT_00108e50;
         dVar10 = (double)(float)(fparam_8 * (double)*(float *)(iVar9 + 0x14) +
-                                (double)(*(float *)(param_2 + 0x40) * *(float *)(iVar9 + 0xc) +
-                                        *(float *)(param_2 + 0x44) * *(float *)(iVar9 + 0x10)));
-        if (fparam_7 < dVar10) {
+                                (double)(*(float *)(vertex + 0x40) * *(float *)(iVar9 + 0xc) +
+                                        *(float *)(vertex + 0x44) * *(float *)(iVar9 + 0x10)));
+        if (floatZero < dVar10) {
           dVar12 = (double)(float)(dVar10 * (double)*(float *)(iVar7 + 0x14) + (double)dVar12);
           dVar11 = (double)(float)(dVar10 * (double)*(float *)(iVar7 + 0x18) + (double)dVar11);
           dVar13 = (double)(float)(dVar10 * (double)*(float *)(iVar7 + 0x10) + (double)dVar13);
-          dVar10 = (double)(float)(fparam_8 * (double)*(float *)(iVar6 + 0x68) +
-                                  (double)(*(float *)(param_2 + 0x40) * *(float *)(iVar6 + 0x60) +
-                                          *(float *)(param_2 + 0x44) * *(float *)(iVar6 + 100)));
-          if (fparam_7 < dVar10) {
-            dVar10 = ((double (*)())_gleMaterialShinePow)(iVar2,iVar8 + 0x1e8,dVar10,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,fparam_7,
+          dVar10 = (double)(float)(fparam_8 * (double)*(float *)(lightParams + 0x68) +
+                                  (double)(*(float *)(vertex + 0x40) * *(float *)(lightParams + 0x60) +
+                                          *(float *)(vertex + 0x44) * *(float *)(lightParams + 100)));
+          if (floatZero < dVar10) {
+            dVar10 = ((double (*)())_gleMaterialShinePow)(iVar2,material + 0x1e8,dVar10,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,floatZero,
                                 fparam_8,incomingStack_ffffff78,incomingStack_ffffff80,incomingStack_ffffff88,
                                 incomingStack_ffffff90,incomingStack_ffffff98);
             dVar13 = (double)(float)(dVar10 * (double)*(float *)(iVar7 + 0x20) + (double)dVar13);
@@ -3163,37 +3181,37 @@ LAB_000d5c2c:
           }
         }
       }
-      uVar5 = uVar5 + 1;
+      lightIndex = lightIndex + 1;
       iVar9 = iVar9 + 0x6c;
       iVar7 = iVar7 + 0x30;
-      iVar6 = iVar6 + 0x80;
+      lightParams = lightParams + 0x80;
     } while( true );
   }
   goto LAB_000d5d50;
 LAB_000d5d40:
-  *(float *)(param_2 + 0x30) = (float)(double)dVar13;
-  *(float *)(param_2 + 0x34) = (float)(double)dVar12;
-  *(float *)(param_2 + 0x38) = (float)(double)dVar11;
-  *(undefined4 *)(param_2 + 0x3c) = uVar1;
+  *(float *)(vertex + 0x30) = (float)(double)dVar13;
+  *(float *)(vertex + 0x34) = (float)(double)dVar12;
+  *(float *)(vertex + 0x38) = (float)(double)dVar11;
+  *(undefined4 *)(vertex + 0x3c) = colorAlpha;
 LAB_000d5d50:
-  iVar3 = iVar3 + 1;
-  param_2 = param_2 + 0x100;
-  if (param_3 <= iVar3) goto LAB_000d5d60;
+  vertexIndex = vertexIndex + 1;
+  vertex = vertex + 0x100;
+  if (vertexCount <= vertexIndex) goto LAB_000d5d60;
   goto LAB_000d5c2c;
 }
 
 /* _gleVtxLightFastRGBABack @ 0xd5d6c (376 bytes) */
-void _gleVtxLightFastRGBABack(int param_1,int param_2,int param_3,double unusedFloatArg1,double floatArg2,double floatArg3,double floatArg4,double floatArg5,double floatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9)
+void _gleVtxLightFastRGBABack(int glContext,int vertex,int vertexCount,double unusedFloatArg1,double floatArg2,double floatArg3,double floatArg4,double floatArg5,double floatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9)
 {
-  undefined4 uVar1;
+  undefined4 colorAlpha;
   int iVar2;
   int extraout_r3;
-  int iVar3;
-  uint uVar4;
-  uint uVar5;
-  int iVar6;
+  int vertexIndex;
+  uint enabledLightMask;
+  uint lightIndex;
+  int lightParams;
   int iVar7;
-  int iVar8;
+  int material;
   int iVar9;
   double fparam_1_00;
   double dVar10;
@@ -3208,49 +3226,49 @@ void _gleVtxLightFastRGBABack(int param_1,int param_2,int param_3,double unusedF
   double incomingStack_ffffff90;
   double incomingStack_ffffff98;
   
-  iVar3 = 0;
-  uVar4 = *(uint *)(param_1 + 0x30a0);
-  iVar2 = param_1;
-  if (param_3 < 1) {
+  vertexIndex = 0;
+  enabledLightMask = *(uint *)(glContext + 0x30a0);
+  iVar2 = glContext;
+  if (vertexCount < 1) {
 LAB_000d5ed8:
     return;
   }
 LAB_000d5da0:
-  if ((*(byte *)(param_2 + 0x7e) & 4) != 0) {
-    iVar8 = *(int *)(param_2 + 0x78);
-    *(byte *)(param_2 + 0x7e) = *(byte *)(param_2 + 0x7e) & 0xfb;
-    if (*(char *)(iVar8 + 0x234) != '\0') {
-      _gleUpdateLightRGBASums(param_1,iVar8,1);
+  if ((*(byte *)(vertex + 0x7e) & 4) != 0) {
+    material = *(int *)(vertex + 0x78);
+    *(byte *)(vertex + 0x7e) = *(byte *)(vertex + 0x7e) & 0xfb;
+    if (*(char *)(material + 0x234) != '\0') {
+      _gleUpdateLightRGBASums(glContext,material,1);
     }
-    dVar14 = (double)*(float *)(iVar8 + 0x1e8);
-    iVar7 = iVar8 + 0x50;
-    dVar13 = (double)*(float *)(iVar8 + 0x1ec);
-    dVar12 = (double)*(float *)(iVar8 + 0x1f0);
-    uVar5 = 0;
-    uVar1 = *(undefined4 *)(iVar8 + 0x1dc);
-    iVar6 = param_1 + 0x2820;
-    iVar9 = param_1 + 0x4a70;
+    dVar14 = (double)*(float *)(material + 0x1e8);
+    iVar7 = material + 0x50;
+    dVar13 = (double)*(float *)(material + 0x1ec);
+    dVar12 = (double)*(float *)(material + 0x1f0);
+    lightIndex = 0;
+    colorAlpha = *(undefined4 *)(material + 0x1dc);
+    lightParams = glContext + 0x2820;
+    iVar9 = glContext + 0x4a70;
     do {
-      if ((uVar4 & 1 << (uVar5 & 0x3f)) == 0) {
-        if (uVar4 >> (uVar5 & 0x3f) == 0) goto LAB_000d5eb8;
+      if ((enabledLightMask & 1 << (lightIndex & 0x3f)) == 0) {
+        if (enabledLightMask >> (lightIndex & 0x3f) == 0) goto LAB_000d5eb8;
       }
       else {
-        fparam_8_00 = (double)*(float *)(param_2 + 0x48);
+        fparam_8_00 = (double)*(float *)(vertex + 0x48);
         dVar10 = (double)FLOAT_00108e50;
         dVar11 = (double)(float)(fparam_8_00 * (double)*(float *)(iVar9 + 0x14) +
-                                (double)(*(float *)(param_2 + 0x40) * *(float *)(iVar9 + 0xc) +
-                                        *(float *)(param_2 + 0x44) * *(float *)(iVar9 + 0x10)));
+                                (double)(*(float *)(vertex + 0x40) * *(float *)(iVar9 + 0xc) +
+                                        *(float *)(vertex + 0x44) * *(float *)(iVar9 + 0x10)));
         if (dVar10 < -(double)dVar11) {
           dVar14 = -(double)(dVar11 * *(float *)(iVar7 + 0x10) - dVar14);
           dVar13 = -(double)(dVar11 * *(float *)(iVar7 + 0x14) - dVar13);
-          fparam_1_00 = -(double)(float)(fparam_8_00 * (double)*(float *)(iVar6 + 0x68) +
-                                        (double)(*(float *)(param_2 + 0x40) *
-                                                 *(float *)(iVar6 + 0x60) +
-                                                *(float *)(param_2 + 0x44) * *(float *)(iVar6 + 100)
+          fparam_1_00 = -(double)(float)(fparam_8_00 * (double)*(float *)(lightParams + 0x68) +
+                                        (double)(*(float *)(vertex + 0x40) *
+                                                 *(float *)(lightParams + 0x60) +
+                                                *(float *)(vertex + 0x44) * *(float *)(lightParams + 100)
                                                 ));
           dVar12 = -(double)(dVar11 * *(float *)(iVar7 + 0x18) - dVar12);
           if (dVar10 < fparam_1_00) {
-            dVar10 = ((double (*)())_gleMaterialShinePow)(iVar2,iVar8 + 0x1e8,fparam_1_00,floatArg2,floatArg3,floatArg4,floatArg5,
+            dVar10 = ((double (*)())_gleMaterialShinePow)(iVar2,material + 0x1e8,fparam_1_00,floatArg2,floatArg3,floatArg4,floatArg5,
                                 floatArg6,dVar10,fparam_8_00,incomingStack_ffffff78,incomingStack_ffffff80,
                                 incomingStack_ffffff88,incomingStack_ffffff90,incomingStack_ffffff98);
             dVar14 = (double)(float)(dVar10 * (double)*(float *)(iVar7 + 0x20) + (double)dVar14);
@@ -3260,47 +3278,48 @@ LAB_000d5da0:
           }
         }
       }
-      uVar5 = uVar5 + 1;
+      lightIndex = lightIndex + 1;
       iVar9 = iVar9 + 0x6c;
       iVar7 = iVar7 + 0x30;
-      iVar6 = iVar6 + 0x80;
+      lightParams = lightParams + 0x80;
     } while( true );
   }
   goto LAB_000d5ec8;
 LAB_000d5eb8:
-  *(float *)(param_2 + 0x30) = (float)(double)dVar14;
-  *(float *)(param_2 + 0x34) = (float)(double)dVar13;
-  *(float *)(param_2 + 0x38) = (float)(double)dVar12;
-  *(undefined4 *)(param_2 + 0x3c) = uVar1;
+  *(float *)(vertex + 0x30) = (float)(double)dVar14;
+  *(float *)(vertex + 0x34) = (float)(double)dVar13;
+  *(float *)(vertex + 0x38) = (float)(double)dVar12;
+  *(undefined4 *)(vertex + 0x3c) = colorAlpha;
 LAB_000d5ec8:
-  iVar3 = iVar3 + 1;
-  param_2 = param_2 + 0x100;
-  if (param_3 <= iVar3) goto LAB_000d5ed8;
+  vertexIndex = vertexIndex + 1;
+  vertex = vertex + 0x100;
+  if (vertexCount <= vertexIndex) goto LAB_000d5ed8;
   goto LAB_000d5da0;
 }
 
 /* _gleVtxLightRGBAFrontPtr @ 0xd5ee4 (1192 bytes) */
-void _gleVtxLightRGBAFrontPtr(int param_1,int *param_2,int param_3,double fparam_1)
+void _gleVtxLightRGBAFrontPtr(int glContext,int *vertexPtrCursor,int vertexCount,double fparam_1)
 {
   float fVar1;
-  undefined4 uVar2;
+  undefined4 colorAlpha;
   undefined *vectorNormalize;
   int iVar4;
   int extraout_r3;
   int r3AfterCall1;
-  uint uVar5;
-  int iVar6;
+  uint enabledLightMask;
+  int vertexIndex;
   float *pfVar7;
-  uint uVar8;
-  int iVar9;
-  int iVar10;
-  int iVar11;
-  int iVar12;
-  int iVar13;
+  uint lightIndex;
+  int lightParams;
+  int material;
+  int lightParams2;
+  int lightProducts;
+  int lightRecord;
   int iVar14;
   double extraout_f1;
   double f1AfterCall1;
   double dVar15;
+  double floatZero;
   double f1AfterCall2;
   double incomingFpr2;
   double incomingFpr3;
@@ -3309,14 +3328,14 @@ void _gleVtxLightRGBAFrontPtr(int param_1,int *param_2,int param_3,double fparam
   double incomingFpr6;
   double incomingFpr7;
   double incomingFpr8;
-  float dVar16;
-  float dVar17;
-  float dVar18;
-  float dVar19;
-  float dVar20;
-  float dVar21;
-  float dVar22;
-  float dVar23;
+  float floatOne;
+  float lightContributionG;
+  float lightContributionR;
+  float lightContributionB;
+  float colorB;
+  float colorG;
+  float colorR;
+  float lightAttenuation;
   int iStack00000020;
   double incomingStack_fffffee8;
   double incomingStack_fffffef0;
@@ -3326,31 +3345,31 @@ void _gleVtxLightRGBAFrontPtr(int param_1,int *param_2,int param_3,double fparam
   float local_e0;
   float local_dc;
   float local_d8;
-  float local_d0;
-  float local_cc;
-  float local_c8;
-  float local_c0;
-  float local_bc;
-  float local_b8;
-  uint local_b0;
+  float toLightX;
+  float toLightY;
+  float toLightZ;
+  float halfX;
+  float halfY;
+  float halfZ;
+  uint localViewer;
   float *local_ac;
   
-  iVar6 = 0;
-  local_b0 = (uint)*(byte *)(param_1 + 0x30ad);
-  uVar5 = *(uint *)(param_1 + 0x30a0);
-  iVar4 = param_1;
-  iStack00000020 = param_3;
-  if (param_3 < 1) {
+  vertexIndex = 0;
+  localViewer = (uint)*(byte *)(glContext + 0x30ad);
+  enabledLightMask = *(uint *)(glContext + 0x30a0);
+  iVar4 = glContext;
+  iStack00000020 = vertexCount;
+  if (vertexCount < 1) {
     return;
   }
 LAB_000d5f28:
-  iVar14 = *param_2;
-  param_2 = param_2 + 1;
+  iVar14 = *vertexPtrCursor;
+  vertexPtrCursor = vertexPtrCursor + 1;
   if ((*(byte *)(iVar14 + 0x7e) & 2) != 0) {
-    iVar10 = *(int *)(iVar14 + 0x74);
+    material = *(int *)(iVar14 + 0x74);
     *(byte *)(iVar14 + 0x7e) = *(byte *)(iVar14 + 0x7e) & 0xfd;
-    if (*(char *)(iVar10 + 0x234) != '\0') {
-      _gleUpdateLightRGBASums(param_1,iVar10,0);
+    if (*(char *)(material + 0x234) != '\0') {
+      _gleUpdateLightRGBASums(glContext,material,0);
           }
     vectorNormalize = PTR__gleVectorNormalize_00112064;
     pfVar7 = (float *)(iVar14 + 0x20);
@@ -3361,190 +3380,191 @@ LAB_000d5f28:
       local_e0 = *(float *)(iVar14 + 0x20) * fVar1;
       local_dc = *(float *)(iVar14 + 0x24) * fVar1;
     }
-    dVar22 = (double)*(float *)(iVar10 + 0x1d0);
-    dVar21 = (double)*(float *)(iVar10 + 0x1d4);
-    uVar8 = 0;
-    dVar20 = (double)*(float *)(iVar10 + 0x1d8);
-    uVar2 = *(undefined4 *)(iVar10 + 0x1dc);
+    colorR = (double)*(float *)(material + 0x1d0);
+    colorG = (double)*(float *)(material + 0x1d4);
+    lightIndex = 0;
+    colorB = (double)*(float *)(material + 0x1d8);
+    colorAlpha = *(undefined4 *)(material + 0x1dc);
     local_ac = &FLOAT_00108e80;
-    dVar16 = (double)FLOAT_00108e54;
-    iVar9 = param_1;
-    iVar11 = param_1;
-    iVar12 = iVar10;
-    iVar13 = param_1;
+    floatOne = (double)FLOAT_00108e54;
+    lightParams = glContext;
+    lightParams2 = glContext;
+    lightProducts = material;
+    lightRecord = glContext;
     do {
-      if ((uVar5 & 1 << (uVar8 & 0x3f)) == 0) {
-        if (uVar5 >> (uVar8 & 0x3f) == 0) goto LAB_000d6360;
+      if ((enabledLightMask & 1 << (lightIndex & 0x3f)) == 0) {
+        if (enabledLightMask >> (lightIndex & 0x3f) == 0) goto LAB_000d6360;
       }
-      else if (*(char *)(iVar13 + 0x4ad8) == '\0') {
-        if (*(char *)(iVar13 + 0x4ad9) == '\0') {
-          local_d0 = *(float *)(iVar13 + 0x4a70) - *pfVar7;
-          local_cc = *(float *)(iVar13 + 0x4a74) - pfVar7[1];
-          local_c8 = *(float *)(iVar13 + 0x4a78) - pfVar7[2];
-          f1AfterCall1 = ((double (*)())(*(code **)vectorNormalize))(param_1,&local_d0,&local_d0);
-          if ((*(char *)(iVar13 + 0x4adb) != '\0') || (f1AfterCall1 < (double)*local_ac)) {
-            dVar23 = (double)*(float *)(iVar13 + 0x4ad4);
+      else if (*(char *)(lightRecord + 0x4ad8) == '\0') {
+        if (*(char *)(lightRecord + 0x4ad9) == '\0') {
+          toLightX = *(float *)(lightRecord + 0x4a70) - *pfVar7;
+          toLightY = *(float *)(lightRecord + 0x4a74) - pfVar7[1];
+          toLightZ = *(float *)(lightRecord + 0x4a78) - pfVar7[2];
+          f1AfterCall1 = ((double (*)())(*(code **)vectorNormalize))(glContext,&toLightX,&toLightX);
+          if ((*(char *)(lightRecord + 0x4adb) != '\0') || (f1AfterCall1 < (double)*local_ac)) {
+            lightAttenuation = (double)*(float *)(lightRecord + 0x4ad4);
           }
           else {
-            fVar1 = (float)((double)dVar16 / f1AfterCall1);
-            dVar23 = (double)(dVar16 / (*(float *)(iVar11 + 0x2878) * fVar1 * fVar1 +
-                                                      (*(float *)(iVar11 + 0x2874) * fVar1 +
-                                                      *(float *)(iVar11 + 0x2870))));
+            fVar1 = (float)((double)floatOne / f1AfterCall1);
+            lightAttenuation = (double)(floatOne / (*(float *)(lightParams2 + 0x2878) * fVar1 * fVar1 +
+                                                      (*(float *)(lightParams2 + 0x2874) * fVar1 +
+                                                      *(float *)(lightParams2 + 0x2870))));
           }
         }
         else {
-          dVar23 = (double)FLOAT_00108e54;
-          local_d0 = *(float *)(iVar13 + 0x4a7c);
-          local_cc = *(float *)(iVar13 + 0x4a80);
-          local_c8 = *(float *)(iVar13 + 0x4a84);
+          lightAttenuation = (double)FLOAT_00108e54;
+          toLightX = *(float *)(lightRecord + 0x4a7c);
+          toLightY = *(float *)(lightRecord + 0x4a80);
+          toLightZ = *(float *)(lightRecord + 0x4a84);
         }
-        if (*(char *)(iVar13 + 0x4ada) != '\0') {
-          fparam_1 = -(double)(local_c8 * *(float *)(iVar13 + 0x4a90) +
-                              (local_d0 * *(float *)(iVar13 + 0x4a88) +
-                              local_cc * *(float *)(iVar13 + 0x4a8c)));
-          if (fparam_1 < (double)*(float *)(iVar11 + 0x286c)) goto LAB_000d6348;
-          dVar15 = ((double (*)())_gleLightExponentPow)(iVar4,iVar13 + 0x4a70,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,
+        if (*(char *)(lightRecord + 0x4ada) != '\0') {
+          fparam_1 = -(double)(toLightZ * *(float *)(lightRecord + 0x4a90) +
+                              (toLightX * *(float *)(lightRecord + 0x4a88) +
+                              toLightY * *(float *)(lightRecord + 0x4a8c)));
+          if (fparam_1 < (double)*(float *)(lightParams2 + 0x286c)) goto LAB_000d6348;
+          dVar15 = ((double (*)())_gleLightExponentPow)(iVar4,lightRecord + 0x4a70,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,
                               incomingFpr8,incomingStack_fffffee8,incomingStack_fffffef0,incomingStack_fffffef8,
                               incomingStack_ffffff00,incomingStack_ffffff08);
-          dVar23 = (double)(float)((double)dVar23 * dVar15);
+          lightAttenuation = (double)(float)((double)lightAttenuation * dVar15);
         }
-        if (local_b0 == 0) {
-          local_b8 = (local_c8 + dVar16);
-          local_c0 = local_d0;
-          local_bc = local_cc;
+        if (localViewer == 0) {
+          halfZ = (toLightZ + floatOne);
+          halfX = toLightX;
+          halfY = toLightY;
         }
         else {
-          local_c0 = -*pfVar7;
-          local_bc = -pfVar7[1];
-          local_b8 = -pfVar7[2];
-          (**(code **)vectorNormalize)(param_1,&local_c0,&local_c0);
-          local_c0 = local_c0 + local_d0;
-          local_bc = local_bc + local_cc;
-          local_b8 = local_b8 + local_c8;
+          halfX = -*pfVar7;
+          halfY = -pfVar7[1];
+          halfZ = -pfVar7[2];
+          (**(code **)vectorNormalize)(glContext,&halfX,&halfX);
+          halfX = halfX + toLightX;
+          halfY = halfY + toLightY;
+          halfZ = halfZ + toLightZ;
         }
-        f1AfterCall2 = ((double (*)())(*(code **)vectorNormalize))(param_1,&local_c0,&local_c0);
-        dVar15 = (double)FLOAT_00108e50;
+        f1AfterCall2 = ((double (*)())(*(code **)vectorNormalize))(glContext,&halfX,&halfX);
+        floatZero = (double)FLOAT_00108e50;
         fparam_1 = f1AfterCall2;
-        if ((double)dVar23 != dVar15) {
+        if ((double)lightAttenuation != floatZero) {
           incomingFpr8 = (double)*(float *)(iVar14 + 0x40);
           incomingFpr7 = (double)*(float *)(iVar14 + 0x48);
-          dVar18 = (double)*(float *)(iVar12 + 0x50);
-          dVar17 = (double)*(float *)(iVar12 + 0x54);
-          dVar19 = (double)*(float *)(iVar12 + 0x58);
-          fparam_1 = (double)(float)(incomingFpr7 * (double)local_c8 +
-                                    (double)(float)(incomingFpr8 * (double)local_d0 +
-                                                   (double)(*(float *)(iVar14 + 0x44) * local_cc)));
-          if (dVar15 < fparam_1) {
-            dVar19 = (double)(float)(fparam_1 * (double)*(float *)(iVar12 + 0x68) + (double)dVar19);
-            dVar18 = (double)(float)(fparam_1 * (double)*(float *)(iVar12 + 0x60) + (double)dVar18);
-            dVar17 = (double)(float)(fparam_1 * (double)*(float *)(iVar12 + 100) + (double)dVar17);
-            fparam_1 = (double)(float)(incomingFpr7 * (double)local_b8 +
-                                      (double)(float)(incomingFpr8 * (double)local_c0 +
-                                                     (double)(*(float *)(iVar14 + 0x44) * local_bc))
+          lightContributionR = (double)*(float *)(lightProducts + 0x50);
+          lightContributionG = (double)*(float *)(lightProducts + 0x54);
+          lightContributionB = (double)*(float *)(lightProducts + 0x58);
+          fparam_1 = (double)(float)(incomingFpr7 * (double)toLightZ +
+                                    (double)(float)(incomingFpr8 * (double)toLightX +
+                                                   (double)(*(float *)(iVar14 + 0x44) * toLightY)));
+          if (floatZero < fparam_1) {
+            lightContributionB = (double)(float)(fparam_1 * (double)*(float *)(lightProducts + 0x68) + (double)lightContributionB);
+            lightContributionR = (double)(float)(fparam_1 * (double)*(float *)(lightProducts + 0x60) + (double)lightContributionR);
+            lightContributionG = (double)(float)(fparam_1 * (double)*(float *)(lightProducts + 100) + (double)lightContributionG);
+            fparam_1 = (double)(float)(incomingFpr7 * (double)halfZ +
+                                      (double)(float)(incomingFpr8 * (double)halfX +
+                                                     (double)(*(float *)(iVar14 + 0x44) * halfY))
                                       );
-            if (dVar15 < fparam_1) {
-              incomingFpr2 = (double)*(float *)(iVar10 + 0x40);
+            if (floatZero < fparam_1) {
+              incomingFpr2 = (double)*(float *)(material + 0x40);
               dVar15 = _pow(fparam_1,incomingFpr2);
               fparam_1 = (double)(float)dVar15;
-              dVar19 = (double)(float)(fparam_1 * (double)*(float *)(iVar12 + 0x78) + (double)dVar19);
-              dVar18 = (double)(float)(fparam_1 * (double)*(float *)(iVar12 + 0x70) + (double)dVar18);
-              dVar17 = (double)(float)(fparam_1 * (double)*(float *)(iVar12 + 0x74) + (double)dVar17);
+              lightContributionB = (double)(float)(fparam_1 * (double)*(float *)(lightProducts + 0x78) + (double)lightContributionB);
+              lightContributionR = (double)(float)(fparam_1 * (double)*(float *)(lightProducts + 0x70) + (double)lightContributionR);
+              lightContributionG = (double)(float)(fparam_1 * (double)*(float *)(lightProducts + 0x74) + (double)lightContributionG);
               iVar4 = r3AfterCall1;
             }
           }
-          if ((double)dVar23 == (double)dVar16) {
-            dVar22 = (double)(dVar22 + dVar18);
-            dVar21 = (double)(dVar21 + dVar17);
-            dVar20 = (double)(dVar20 + dVar19);
+          if ((double)lightAttenuation == (double)floatOne) {
+            colorR = (double)(colorR + lightContributionR);
+            colorG = (double)(colorG + lightContributionG);
+            colorB = (double)(colorB + lightContributionB);
           }
           else {
-            dVar20 = (double)(dVar23 * dVar19 + dVar20);
-            dVar22 = (double)(dVar23 * dVar18 + dVar22);
-            dVar21 = (double)(dVar23 * dVar17 + dVar21);
+            colorB = (double)(lightAttenuation * lightContributionB + colorB);
+            colorR = (double)(lightAttenuation * lightContributionR + colorR);
+            colorG = (double)(lightAttenuation * lightContributionG + colorG);
           }
         }
       }
       else {
         incomingFpr8 = (double)*(float *)(iVar14 + 0x48);
         incomingFpr7 = (double)FLOAT_00108e50;
-        fparam_1 = (double)(float)(incomingFpr8 * (double)*(float *)(iVar13 + 0x4a84) +
-                                  (double)(*(float *)(iVar14 + 0x40) * *(float *)(iVar13 + 0x4a7c) +
-                                          *(float *)(iVar14 + 0x44) * *(float *)(iVar13 + 0x4a80)));
-        dVar22 = (double)(dVar22 + *(float *)(iVar12 + 0x50));
-        dVar21 = (double)(dVar21 + *(float *)(iVar12 + 0x54));
-        dVar20 = (double)(dVar20 + *(float *)(iVar12 + 0x58));
+        fparam_1 = (double)(float)(incomingFpr8 * (double)*(float *)(lightRecord + 0x4a84) +
+                                  (double)(*(float *)(iVar14 + 0x40) * *(float *)(lightRecord + 0x4a7c) +
+                                          *(float *)(iVar14 + 0x44) * *(float *)(lightRecord + 0x4a80)));
+        colorR = (double)(colorR + *(float *)(lightProducts + 0x50));
+        colorG = (double)(colorG + *(float *)(lightProducts + 0x54));
+        colorB = (double)(colorB + *(float *)(lightProducts + 0x58));
         if (incomingFpr7 < fparam_1) {
-          dVar22 = (double)(float)(fparam_1 * (double)*(float *)(iVar12 + 0x60) + (double)dVar22);
-          dVar21 = (double)(float)(fparam_1 * (double)*(float *)(iVar12 + 100) + (double)dVar21);
-          dVar20 = (double)(float)(fparam_1 * (double)*(float *)(iVar12 + 0x68) + (double)dVar20);
-          fparam_1 = (double)(float)(incomingFpr8 * (double)*(float *)(iVar9 + 0x2888) +
-                                    (double)(*(float *)(iVar14 + 0x40) * *(float *)(iVar9 + 0x2880)
-                                            + *(float *)(iVar14 + 0x44) * *(float *)(iVar9 + 0x2884)
+          colorR = (double)(float)(fparam_1 * (double)*(float *)(lightProducts + 0x60) + (double)colorR);
+          colorG = (double)(float)(fparam_1 * (double)*(float *)(lightProducts + 100) + (double)colorG);
+          colorB = (double)(float)(fparam_1 * (double)*(float *)(lightProducts + 0x68) + (double)colorB);
+          fparam_1 = (double)(float)(incomingFpr8 * (double)*(float *)(lightParams + 0x2888) +
+                                    (double)(*(float *)(iVar14 + 0x40) * *(float *)(lightParams + 0x2880)
+                                            + *(float *)(iVar14 + 0x44) * *(float *)(lightParams + 0x2884)
                                             ));
           if (incomingFpr7 < fparam_1) {
-            fparam_1 = ((double (*)())_gleMaterialShinePow)(iVar4,iVar10 + 0x1e8,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,
+            fparam_1 = ((double (*)())_gleMaterialShinePow)(iVar4,material + 0x1e8,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,
                                   incomingFpr8,incomingStack_fffffee8,incomingStack_fffffef0,incomingStack_fffffef8,
                                   incomingStack_ffffff00,incomingStack_ffffff08);
-            dVar20 = (double)(float)(fparam_1 * (double)*(float *)(iVar12 + 0x78) + (double)dVar20);
-            dVar22 = (double)(float)(fparam_1 * (double)*(float *)(iVar12 + 0x70) + (double)dVar22);
-            dVar21 = (double)(float)(fparam_1 * (double)*(float *)(iVar12 + 0x74) + (double)dVar21);
+            colorB = (double)(float)(fparam_1 * (double)*(float *)(lightProducts + 0x78) + (double)colorB);
+            colorR = (double)(float)(fparam_1 * (double)*(float *)(lightProducts + 0x70) + (double)colorR);
+            colorG = (double)(float)(fparam_1 * (double)*(float *)(lightProducts + 0x74) + (double)colorG);
             iVar4 = iVar4;
           }
         }
       }
 LAB_000d6348:
-      uVar8 = uVar8 + 1;
-      iVar13 = iVar13 + 0x6c;
-      iVar12 = iVar12 + 0x30;
-      iVar9 = iVar9 + 0x80;
-      iVar11 = iVar11 + 0x80;
+      lightIndex = lightIndex + 1;
+      lightRecord = lightRecord + 0x6c;
+      lightProducts = lightProducts + 0x30;
+      lightParams = lightParams + 0x80;
+      lightParams2 = lightParams2 + 0x80;
     } while( true );
   }
   goto LAB_000d6370;
 LAB_000d6360:
-  *(undefined4 *)(iVar14 + 0x3c) = uVar2;
-  *(float *)(iVar14 + 0x30) = (float)(double)dVar22;
-  *(float *)(iVar14 + 0x34) = (float)(double)dVar21;
-  *(float *)(iVar14 + 0x38) = (float)(double)dVar20;
+  *(undefined4 *)(iVar14 + 0x3c) = colorAlpha;
+  *(float *)(iVar14 + 0x30) = (float)(double)colorR;
+  *(float *)(iVar14 + 0x34) = (float)(double)colorG;
+  *(float *)(iVar14 + 0x38) = (float)(double)colorB;
 LAB_000d6370:
-  iVar6 = iVar6 + 1;
-  if (iStack00000020 <= iVar6) {
+  vertexIndex = vertexIndex + 1;
+  if (iStack00000020 <= vertexIndex) {
     return;
   }
   goto LAB_000d5f28;
 }
 
 /* _gleVtxLightRGBABackPtr @ 0xd638c (1200 bytes) */
-void _gleVtxLightRGBABackPtr(int param_1,int *param_2,int param_3,double fparam_1,double fparam_2,double floatArg3,double floatArg4,double floatArg5,double floatArg6,double fparam_7,double fparam_8,double unusedFloatArg9)
+void _gleVtxLightRGBABackPtr(int glContext,int *vertexPtrCursor,int vertexCount,double fparam_1,double fparam_2,double floatArg3,double floatArg4,double floatArg5,double floatArg6,double fparam_7,double fparam_8,double unusedFloatArg9)
 {
   float fVar1;
-  undefined4 uVar2;
+  undefined4 colorAlpha;
   undefined *vectorNormalize;
   int iVar4;
   int extraout_r3;
   int r3AfterCall1;
-  uint uVar5;
-  int iVar6;
+  uint enabledLightMask;
+  int vertexIndex;
   float *pfVar7;
-  uint uVar8;
-  int iVar9;
-  int iVar10;
-  int iVar11;
-  int iVar12;
-  int iVar13;
+  uint lightIndex;
+  int lightParams;
+  int material;
+  int lightParams2;
+  int lightProducts;
+  int lightRecord;
   int iVar14;
   double extraout_f1;
   double f1AfterCall1;
   double dVar15;
   double f1AfterCall2;
   float dVar16;
-  float dVar17;
-  float dVar18;
-  float dVar19;
-  float dVar20;
-  float dVar21;
-  float dVar22;
-  float dVar23;
+  float lightAttenuation;
+  float floatOne;
+  float lightContributionG;
+  float lightContributionR;
+  float lightContributionB;
+  float colorB;
+  float colorG;
+  float colorR;
   int iStack00000020;
   double incomingStack_fffffee8;
   double incomingStack_fffffef0;
@@ -3554,31 +3574,31 @@ void _gleVtxLightRGBABackPtr(int param_1,int *param_2,int param_3,double fparam_
   float local_e0;
   float local_dc;
   float local_d8;
-  float local_d0;
-  float local_cc;
-  float local_c8;
-  float local_c0;
-  float local_bc;
-  float local_b8;
-  uint local_b0;
+  float toLightX;
+  float toLightY;
+  float toLightZ;
+  float halfX;
+  float halfY;
+  float halfZ;
+  uint localViewer;
   float *local_ac;
   
-  iVar6 = 0;
-  local_b0 = (uint)*(byte *)(param_1 + 0x30ad);
-  uVar5 = *(uint *)(param_1 + 0x30a0);
-  iVar4 = param_1;
-  iStack00000020 = param_3;
-  if (param_3 < 1) {
+  vertexIndex = 0;
+  localViewer = (uint)*(byte *)(glContext + 0x30ad);
+  enabledLightMask = *(uint *)(glContext + 0x30a0);
+  iVar4 = glContext;
+  iStack00000020 = vertexCount;
+  if (vertexCount < 1) {
     return;
   }
 LAB_000d63d0:
-  iVar14 = *param_2;
-  param_2 = param_2 + 1;
+  iVar14 = *vertexPtrCursor;
+  vertexPtrCursor = vertexPtrCursor + 1;
   if ((*(byte *)(iVar14 + 0x7e) & 4) != 0) {
-    iVar10 = *(int *)(iVar14 + 0x78);
+    material = *(int *)(iVar14 + 0x78);
     *(byte *)(iVar14 + 0x7e) = *(byte *)(iVar14 + 0x7e) & 0xfb;
-    if (*(char *)(iVar10 + 0x234) != '\0') {
-      _gleUpdateLightRGBASums(param_1,iVar10,1);
+    if (*(char *)(material + 0x234) != '\0') {
+      _gleUpdateLightRGBASums(glContext,material,1);
           }
     vectorNormalize = PTR__gleVectorNormalize_00112064;
     pfVar7 = (float *)(iVar14 + 0x20);
@@ -3589,198 +3609,199 @@ LAB_000d63d0:
       local_e0 = *(float *)(iVar14 + 0x20) * fVar1;
       local_dc = *(float *)(iVar14 + 0x24) * fVar1;
     }
-    dVar23 = (double)*(float *)(iVar10 + 0x1d0);
-    dVar22 = (double)*(float *)(iVar10 + 0x1d4);
-    uVar8 = 0;
-    dVar21 = (double)*(float *)(iVar10 + 0x1d8);
-    uVar2 = *(undefined4 *)(iVar10 + 0x1dc);
+    colorR = (double)*(float *)(material + 0x1d0);
+    colorG = (double)*(float *)(material + 0x1d4);
+    lightIndex = 0;
+    colorB = (double)*(float *)(material + 0x1d8);
+    colorAlpha = *(undefined4 *)(material + 0x1dc);
     local_ac = &FLOAT_00108e80;
-    dVar17 = (double)FLOAT_00108e54;
-    iVar9 = param_1;
-    iVar11 = param_1;
-    iVar12 = iVar10;
-    iVar13 = param_1;
+    floatOne = (double)FLOAT_00108e54;
+    lightParams = glContext;
+    lightParams2 = glContext;
+    lightProducts = material;
+    lightRecord = glContext;
     do {
-      if ((uVar5 & 1 << (uVar8 & 0x3f)) == 0) {
-        if (uVar5 >> (uVar8 & 0x3f) == 0) goto LAB_000d6810;
+      if ((enabledLightMask & 1 << (lightIndex & 0x3f)) == 0) {
+        if (enabledLightMask >> (lightIndex & 0x3f) == 0) goto LAB_000d6810;
       }
-      else if (*(char *)(iVar13 + 0x4ad8) == '\0') {
-        if (*(char *)(iVar13 + 0x4ad9) == '\0') {
-          local_d0 = *(float *)(iVar13 + 0x4a70) - *pfVar7;
-          local_cc = *(float *)(iVar13 + 0x4a74) - pfVar7[1];
-          local_c8 = *(float *)(iVar13 + 0x4a78) - pfVar7[2];
-          f1AfterCall1 = ((double (*)())(*(code **)vectorNormalize))(param_1,&local_d0,&local_d0);
-          if ((*(char *)(iVar13 + 0x4adb) != '\0') || (f1AfterCall1 < (double)*local_ac)) {
-            dVar16 = (double)*(float *)(iVar13 + 0x4ad4);
+      else if (*(char *)(lightRecord + 0x4ad8) == '\0') {
+        if (*(char *)(lightRecord + 0x4ad9) == '\0') {
+          toLightX = *(float *)(lightRecord + 0x4a70) - *pfVar7;
+          toLightY = *(float *)(lightRecord + 0x4a74) - pfVar7[1];
+          toLightZ = *(float *)(lightRecord + 0x4a78) - pfVar7[2];
+          f1AfterCall1 = ((double (*)())(*(code **)vectorNormalize))(glContext,&toLightX,&toLightX);
+          if ((*(char *)(lightRecord + 0x4adb) != '\0') || (f1AfterCall1 < (double)*local_ac)) {
+            lightAttenuation = (double)*(float *)(lightRecord + 0x4ad4);
           }
           else {
-            fVar1 = (float)((double)dVar17 / f1AfterCall1);
-            dVar16 = (double)(dVar17 / (*(float *)(iVar11 + 0x2878) * fVar1 * fVar1 +
-                                                      (*(float *)(iVar11 + 0x2874) * fVar1 +
-                                                      *(float *)(iVar11 + 0x2870))));
+            fVar1 = (float)((double)floatOne / f1AfterCall1);
+            lightAttenuation = (double)(floatOne / (*(float *)(lightParams2 + 0x2878) * fVar1 * fVar1 +
+                                                      (*(float *)(lightParams2 + 0x2874) * fVar1 +
+                                                      *(float *)(lightParams2 + 0x2870))));
           }
         }
         else {
-          dVar16 = (double)FLOAT_00108e54;
-          local_d0 = *(float *)(iVar13 + 0x4a7c);
-          local_cc = *(float *)(iVar13 + 0x4a80);
-          local_c8 = *(float *)(iVar13 + 0x4a84);
+          lightAttenuation = (double)FLOAT_00108e54;
+          toLightX = *(float *)(lightRecord + 0x4a7c);
+          toLightY = *(float *)(lightRecord + 0x4a80);
+          toLightZ = *(float *)(lightRecord + 0x4a84);
         }
-        if (*(char *)(iVar13 + 0x4ada) != '\0') {
-          fparam_1 = -(double)(local_c8 * *(float *)(iVar13 + 0x4a90) +
-                              (local_d0 * *(float *)(iVar13 + 0x4a88) +
-                              local_cc * *(float *)(iVar13 + 0x4a8c)));
-          if (fparam_1 < (double)*(float *)(iVar11 + 0x286c)) goto LAB_000d67f8;
-          dVar15 = ((double (*)())_gleLightExponentPow)(iVar4,iVar13 + 0x4a70,fparam_1,fparam_2,floatArg3,floatArg4,floatArg5,
+        if (*(char *)(lightRecord + 0x4ada) != '\0') {
+          fparam_1 = -(double)(toLightZ * *(float *)(lightRecord + 0x4a90) +
+                              (toLightX * *(float *)(lightRecord + 0x4a88) +
+                              toLightY * *(float *)(lightRecord + 0x4a8c)));
+          if (fparam_1 < (double)*(float *)(lightParams2 + 0x286c)) goto LAB_000d67f8;
+          dVar15 = ((double (*)())_gleLightExponentPow)(iVar4,lightRecord + 0x4a70,fparam_1,fparam_2,floatArg3,floatArg4,floatArg5,
                               floatArg6,fparam_7,fparam_8,incomingStack_fffffee8,incomingStack_fffffef0,
                               incomingStack_fffffef8,incomingStack_ffffff00,incomingStack_ffffff08);
-          dVar16 = (double)(float)((double)dVar16 * dVar15);
+          lightAttenuation = (double)(float)((double)lightAttenuation * dVar15);
         }
-        if (local_b0 == 0) {
-          local_b8 = (local_c8 + dVar17);
-          local_c0 = local_d0;
-          local_bc = local_cc;
+        if (localViewer == 0) {
+          halfZ = (toLightZ + floatOne);
+          halfX = toLightX;
+          halfY = toLightY;
         }
         else {
-          local_c0 = -*pfVar7;
-          local_bc = -pfVar7[1];
-          local_b8 = -pfVar7[2];
-          (**(code **)vectorNormalize)(param_1,&local_c0,&local_c0);
-          local_c0 = local_c0 + local_d0;
-          local_bc = local_bc + local_cc;
-          local_b8 = local_b8 + local_c8;
+          halfX = -*pfVar7;
+          halfY = -pfVar7[1];
+          halfZ = -pfVar7[2];
+          (**(code **)vectorNormalize)(glContext,&halfX,&halfX);
+          halfX = halfX + toLightX;
+          halfY = halfY + toLightY;
+          halfZ = halfZ + toLightZ;
         }
-        f1AfterCall2 = ((double (*)())(*(code **)vectorNormalize))(param_1,&local_c0,&local_c0);
+        f1AfterCall2 = ((double (*)())(*(code **)vectorNormalize))(glContext,&halfX,&halfX);
         fparam_8 = (double)FLOAT_00108e50;
         fparam_1 = f1AfterCall2;
-        if ((double)dVar16 != fparam_8) {
+        if ((double)lightAttenuation != fparam_8) {
           fparam_7 = (double)*(float *)(iVar14 + 0x48);
-          dVar19 = (double)*(float *)(iVar12 + 0x50);
-          dVar18 = (double)*(float *)(iVar12 + 0x54);
-          dVar20 = (double)*(float *)(iVar12 + 0x58);
-          dVar15 = (double)(float)(fparam_7 * (double)local_c8 +
-                                  (double)(*(float *)(iVar14 + 0x40) * local_d0 +
-                                          *(float *)(iVar14 + 0x44) * local_cc));
+          lightContributionR = (double)*(float *)(lightProducts + 0x50);
+          lightContributionG = (double)*(float *)(lightProducts + 0x54);
+          lightContributionB = (double)*(float *)(lightProducts + 0x58);
+          dVar15 = (double)(float)(fparam_7 * (double)toLightZ +
+                                  (double)(*(float *)(iVar14 + 0x40) * toLightX +
+                                          *(float *)(iVar14 + 0x44) * toLightY));
           fparam_1 = -dVar15;
           if (fparam_8 < fparam_1) {
-            dVar19 = -(double)(float)(dVar15 * (double)*(float *)(iVar12 + 0x60) - (double)dVar19);
-            dVar20 = -(double)(float)(dVar15 * (double)*(float *)(iVar12 + 0x68) - (double)dVar20);
-            fparam_1 = -(double)(float)(fparam_7 * (double)local_b8 +
-                                       (double)(*(float *)(iVar14 + 0x40) * local_c0 +
-                                               *(float *)(iVar14 + 0x44) * local_bc));
-            dVar18 = -(double)(float)(dVar15 * (double)*(float *)(iVar12 + 100) - (double)dVar18);
+            lightContributionR = -(double)(float)(dVar15 * (double)*(float *)(lightProducts + 0x60) - (double)lightContributionR);
+            lightContributionB = -(double)(float)(dVar15 * (double)*(float *)(lightProducts + 0x68) - (double)lightContributionB);
+            fparam_1 = -(double)(float)(fparam_7 * (double)halfZ +
+                                       (double)(*(float *)(iVar14 + 0x40) * halfX +
+                                               *(float *)(iVar14 + 0x44) * halfY));
+            lightContributionG = -(double)(float)(dVar15 * (double)*(float *)(lightProducts + 100) - (double)lightContributionG);
             if (fparam_8 < fparam_1) {
-              fparam_2 = (double)*(float *)(iVar10 + 0x40);
+              fparam_2 = (double)*(float *)(material + 0x40);
               dVar15 = _pow(fparam_1,fparam_2);
               fparam_1 = (double)(float)dVar15;
-              dVar20 = (double)(float)(fparam_1 * (double)*(float *)(iVar12 + 0x78) + (double)dVar20);
-              dVar19 = (double)(float)(fparam_1 * (double)*(float *)(iVar12 + 0x70) + (double)dVar19);
-              dVar18 = (double)(float)(fparam_1 * (double)*(float *)(iVar12 + 0x74) + (double)dVar18);
+              lightContributionB = (double)(float)(fparam_1 * (double)*(float *)(lightProducts + 0x78) + (double)lightContributionB);
+              lightContributionR = (double)(float)(fparam_1 * (double)*(float *)(lightProducts + 0x70) + (double)lightContributionR);
+              lightContributionG = (double)(float)(fparam_1 * (double)*(float *)(lightProducts + 0x74) + (double)lightContributionG);
               iVar4 = r3AfterCall1;
             }
           }
-          if ((double)dVar16 == (double)dVar17) {
-            dVar23 = (double)(dVar23 + dVar19);
-            dVar22 = (double)(dVar22 + dVar18);
-            dVar21 = (double)(dVar21 + dVar20);
+          if ((double)lightAttenuation == (double)floatOne) {
+            colorR = (double)(colorR + lightContributionR);
+            colorG = (double)(colorG + lightContributionG);
+            colorB = (double)(colorB + lightContributionB);
           }
           else {
-            dVar21 = (double)(dVar16 * dVar20 + dVar21);
-            dVar23 = (double)(dVar16 * dVar19 + dVar23);
-            dVar22 = (double)(dVar16 * dVar18 + dVar22);
+            colorB = (double)(lightAttenuation * lightContributionB + colorB);
+            colorR = (double)(lightAttenuation * lightContributionR + colorR);
+            colorG = (double)(lightAttenuation * lightContributionG + colorG);
           }
         }
       }
       else {
         fparam_8 = (double)*(float *)(iVar14 + 0x48);
         fparam_7 = (double)FLOAT_00108e50;
-        dVar16 = (double)(float)(fparam_8 * (double)*(float *)(iVar13 + 0x4a84) +
-                                (double)(*(float *)(iVar14 + 0x40) * *(float *)(iVar13 + 0x4a7c) +
-                                        *(float *)(iVar14 + 0x44) * *(float *)(iVar13 + 0x4a80)));
-        dVar23 = (double)(dVar23 + *(float *)(iVar12 + 0x50));
-        dVar22 = (double)(dVar22 + *(float *)(iVar12 + 0x54));
+        dVar16 = (double)(float)(fparam_8 * (double)*(float *)(lightRecord + 0x4a84) +
+                                (double)(*(float *)(iVar14 + 0x40) * *(float *)(lightRecord + 0x4a7c) +
+                                        *(float *)(iVar14 + 0x44) * *(float *)(lightRecord + 0x4a80)));
+        colorR = (double)(colorR + *(float *)(lightProducts + 0x50));
+        colorG = (double)(colorG + *(float *)(lightProducts + 0x54));
         fparam_1 = -(double)dVar16;
-        dVar21 = (double)(dVar21 + *(float *)(iVar12 + 0x58));
+        colorB = (double)(colorB + *(float *)(lightProducts + 0x58));
         if (fparam_7 < fparam_1) {
-          dVar23 = -(double)(dVar16 * *(float *)(iVar12 + 0x60) - dVar23);
-          dVar22 = -(double)(dVar16 * *(float *)(iVar12 + 100) - dVar22);
-          fparam_1 = -(double)(float)(fparam_8 * (double)*(float *)(iVar9 + 0x2888) +
-                                     (double)(*(float *)(iVar14 + 0x40) * *(float *)(iVar9 + 0x2880)
+          colorR = -(double)(dVar16 * *(float *)(lightProducts + 0x60) - colorR);
+          colorG = -(double)(dVar16 * *(float *)(lightProducts + 100) - colorG);
+          fparam_1 = -(double)(float)(fparam_8 * (double)*(float *)(lightParams + 0x2888) +
+                                     (double)(*(float *)(iVar14 + 0x40) * *(float *)(lightParams + 0x2880)
                                              + *(float *)(iVar14 + 0x44) *
-                                               *(float *)(iVar9 + 0x2884)));
-          dVar21 = -(double)(dVar16 * *(float *)(iVar12 + 0x68) - dVar21);
+                                               *(float *)(lightParams + 0x2884)));
+          colorB = -(double)(dVar16 * *(float *)(lightProducts + 0x68) - colorB);
           if (fparam_7 < fparam_1) {
-            fparam_1 = ((double (*)())_gleMaterialShinePow)(iVar4,iVar10 + 0x1e8,fparam_1,fparam_2,floatArg3,floatArg4,floatArg5,
+            fparam_1 = ((double (*)())_gleMaterialShinePow)(iVar4,material + 0x1e8,fparam_1,fparam_2,floatArg3,floatArg4,floatArg5,
                                   floatArg6,fparam_7,fparam_8,incomingStack_fffffee8,incomingStack_fffffef0,
                                   incomingStack_fffffef8,incomingStack_ffffff00,incomingStack_ffffff08);
-            dVar21 = (double)(float)(fparam_1 * (double)*(float *)(iVar12 + 0x78) + (double)dVar21);
-            dVar23 = (double)(float)(fparam_1 * (double)*(float *)(iVar12 + 0x70) + (double)dVar23);
-            dVar22 = (double)(float)(fparam_1 * (double)*(float *)(iVar12 + 0x74) + (double)dVar22);
+            colorB = (double)(float)(fparam_1 * (double)*(float *)(lightProducts + 0x78) + (double)colorB);
+            colorR = (double)(float)(fparam_1 * (double)*(float *)(lightProducts + 0x70) + (double)colorR);
+            colorG = (double)(float)(fparam_1 * (double)*(float *)(lightProducts + 0x74) + (double)colorG);
             iVar4 = iVar4;
           }
         }
       }
 LAB_000d67f8:
-      uVar8 = uVar8 + 1;
-      iVar13 = iVar13 + 0x6c;
-      iVar12 = iVar12 + 0x30;
-      iVar9 = iVar9 + 0x80;
-      iVar11 = iVar11 + 0x80;
+      lightIndex = lightIndex + 1;
+      lightRecord = lightRecord + 0x6c;
+      lightProducts = lightProducts + 0x30;
+      lightParams = lightParams + 0x80;
+      lightParams2 = lightParams2 + 0x80;
     } while( true );
   }
   goto LAB_000d6820;
 LAB_000d6810:
-  *(undefined4 *)(iVar14 + 0x3c) = uVar2;
-  *(float *)(iVar14 + 0x30) = (float)(double)dVar23;
-  *(float *)(iVar14 + 0x34) = (float)(double)dVar22;
-  *(float *)(iVar14 + 0x38) = (float)(double)dVar21;
+  *(undefined4 *)(iVar14 + 0x3c) = colorAlpha;
+  *(float *)(iVar14 + 0x30) = (float)(double)colorR;
+  *(float *)(iVar14 + 0x34) = (float)(double)colorG;
+  *(float *)(iVar14 + 0x38) = (float)(double)colorB;
 LAB_000d6820:
-  iVar6 = iVar6 + 1;
-  if (iStack00000020 <= iVar6) {
+  vertexIndex = vertexIndex + 1;
+  if (iStack00000020 <= vertexIndex) {
     return;
   }
   goto LAB_000d63d0;
 }
 
 /* _gleVtxLightSpecRGBAFrontPtr @ 0xd683c (1680 bytes) */
-void _gleVtxLightSpecRGBAFrontPtr(int param_1,int param_2,int param_3,double fparam_1,double fparam_2,double floatArg3,double floatArg4,double fparam_5,double fparam_6,double fparam_7,double fparam_8)
+void _gleVtxLightSpecRGBAFrontPtr(int glContext,int param_2,int vertexCount,double fparam_1,double fparam_2,double floatArg3,double floatArg4,double fparam_5,double fparam_6,double fparam_7,double fparam_8)
 {
   float fVar1;
-  undefined4 uVar2;
+  undefined4 colorAlpha;
   undefined *vectorNormalize;
   int iVar4;
   int extraout_r3;
   int extraout_r3_00;
   int r3AfterCall2;
-  uint uVar5;
-  int iVar6;
+  uint enabledLightMask;
+  int vertexIndex;
   float *pfVar7;
-  uint uVar8;
-  int iVar9;
-  int iVar10;
-  int iVar11;
-  int iVar12;
-  int iVar13;
-  int iVar14;
+  uint lightIndex;
+  int lightParams;
+  int lightParams2;
+  int material;
+  int lightProducts;
+  int lightRecord;
+  int vertex;
   double extraout_f1;
   double f1AfterCall1;
   double f1AfterCall2;
   double f1AfterCall3;
   double dVar15;
   double dVar16;
+  double lightAttenuation;
   float dVar17;
   float dVar18;
-  float dVar19;
+  float floatOne;
   float dVar20;
   float dVar21;
-  float dVar22;
+  float floatZero;
   float dVar23;
-  float dVar24;
-  float dVar25;
-  float dVar26;
-  float dVar27;
-  float dVar28;
-  float dVar29;
+  float lightContributionB;
+  float lightContributionG;
+  float lightContributionR;
+  float colorB;
+  float colorG;
+  float colorR;
   int iStack0000001c;
   double incomingStack_fffffea8;
   double incomingStack_fffffeb0;
@@ -3790,180 +3811,182 @@ void _gleVtxLightSpecRGBAFrontPtr(int param_1,int param_2,int param_3,double fpa
   float local_120;
   float local_11c;
   float local_118;
-  float local_110;
-  float local_10c;
-  float local_108;
+  float halfX;
+  float halfY;
+  float halfZ;
   float local_100;
   float local_fc;
+  float toLightY;
   float local_f8;
+  float toLightZ;
   float local_f0;
   float local_ec;
   float local_e8;
   float local_e0;
   float local_dc;
   float local_d8;
-  uint local_d0;
+  uint localViewer;
   float *local_cc;
   
-  iVar6 = 0;
-  local_d0 = (uint)*(byte *)(param_1 + 0x30ad);
-  uVar5 = *(uint *)(param_1 + 0x30a0);
-  iVar4 = param_1;
+  vertexIndex = 0;
+  localViewer = (uint)*(byte *)(glContext + 0x30ad);
+  enabledLightMask = *(uint *)(glContext + 0x30a0);
+  iVar4 = glContext;
   iStack0000001c = param_2;
-  if (param_3 < 1) {
+  if (vertexCount < 1) {
     return;
   }
 LAB_000d6880:
-  iVar14 = *(int *)(iStack0000001c + iVar6 * 4);
-  if ((*(byte *)(iVar14 + 0x7e) & 2) != 0) {
-    iVar11 = *(int *)(iVar14 + 0x74);
-    *(byte *)(iVar14 + 0x7e) = *(byte *)(iVar14 + 0x7e) & 0xfd;
-    if (*(char *)(iVar11 + 0x234) != '\0') {
-      _gleUpdateLightRGBASums(param_1,iVar11,0);
+  vertex = *(int *)(iStack0000001c + vertexIndex * 4);
+  if ((*(byte *)(vertex + 0x7e) & 2) != 0) {
+    material = *(int *)(vertex + 0x74);
+    *(byte *)(vertex + 0x7e) = *(byte *)(vertex + 0x7e) & 0xfd;
+    if (*(char *)(material + 0x234) != '\0') {
+      _gleUpdateLightRGBASums(glContext,material,0);
           }
-    pfVar7 = (float *)(iVar14 + 0x20);
-    if (*(float *)(iVar14 + 0x2c) != FLOAT_00108e54) {
-      fVar1 = FLOAT_00108e54 / *(float *)(iVar14 + 0x2c);
+    pfVar7 = (float *)(vertex + 0x20);
+    if (*(float *)(vertex + 0x2c) != FLOAT_00108e54) {
+      fVar1 = FLOAT_00108e54 / *(float *)(vertex + 0x2c);
       pfVar7 = &local_120;
-      local_118 = *(float *)(iVar14 + 0x28) * fVar1;
-      local_120 = *(float *)(iVar14 + 0x20) * fVar1;
-      local_11c = *(float *)(iVar14 + 0x24) * fVar1;
+      local_118 = *(float *)(vertex + 0x28) * fVar1;
+      local_120 = *(float *)(vertex + 0x20) * fVar1;
+      local_11c = *(float *)(vertex + 0x24) * fVar1;
     }
-    if (*(char *)(param_1 + 0x30ae) != '\0') {
-      if ((local_d0 == 0) || (*(int *)(param_1 + 0x4ddc) == 0)) {
-        local_10c = 0.0;
-        local_108 = 1.0;
-        local_110 = 0.0;
+    if (*(char *)(glContext + 0x30ae) != '\0') {
+      if ((localViewer == 0) || (*(int *)(glContext + 0x4ddc) == 0)) {
+        halfY = 0.0;
+        halfZ = 1.0;
+        halfX = 0.0;
       }
       else {
-        local_110 = -*pfVar7;
-        local_10c = -pfVar7[1];
-        local_108 = -pfVar7[2];
-        f1AfterCall1 = ((double (*)())(*(code **)PTR__gleVectorNormalize_00112064))(param_1,&local_110,&local_110);
+        halfX = -*pfVar7;
+        halfY = -pfVar7[1];
+        halfZ = -pfVar7[2];
+        f1AfterCall1 = ((double (*)())(*(code **)PTR__gleVectorNormalize_00112064))(glContext,&halfX,&halfX);
         fparam_1 = f1AfterCall1;
       }
     }
     vectorNormalize = PTR__gleVectorNormalize_00112064;
-    dVar22 = (double)FLOAT_00108e50;
-    dVar29 = (double)*(float *)(iVar11 + 0x1d0);
-    uVar8 = 0;
-    dVar28 = (double)*(float *)(iVar11 + 0x1d4);
-    dVar27 = (double)*(float *)(iVar11 + 0x1d8);
-    uVar2 = *(undefined4 *)(iVar11 + 0x1dc);
+    floatZero = (double)FLOAT_00108e50;
+    colorR = (double)*(float *)(material + 0x1d0);
+    lightIndex = 0;
+    colorG = (double)*(float *)(material + 0x1d4);
+    colorB = (double)*(float *)(material + 0x1d8);
+    colorAlpha = *(undefined4 *)(material + 0x1dc);
     local_cc = &FLOAT_00108e80;
-    dVar19 = (double)FLOAT_00108e54;
-    iVar9 = param_1;
-    iVar10 = param_1;
-    iVar12 = iVar11;
-    iVar13 = param_1;
-    dVar20 = (double)dVar22;
-    dVar21 = (double)dVar22;
-    dVar23 = (double)dVar22;
+    floatOne = (double)FLOAT_00108e54;
+    lightParams = glContext;
+    lightParams2 = glContext;
+    lightProducts = material;
+    lightRecord = glContext;
+    dVar20 = (double)floatZero;
+    dVar21 = (double)floatZero;
+    dVar23 = (double)floatZero;
     do {
-      if ((uVar5 & 1 << (uVar8 & 0x3f)) == 0) {
-        if (uVar5 >> (uVar8 & 0x3f) == 0) goto LAB_000d6e74;
+      if ((enabledLightMask & 1 << (lightIndex & 0x3f)) == 0) {
+        if (enabledLightMask >> (lightIndex & 0x3f) == 0) goto LAB_000d6e74;
       }
-      else if (*(char *)(iVar13 + 0x4ad8) == '\0') {
-        if (*(char *)(iVar13 + 0x4ad9) == '\0') {
-          local_100 = *(float *)(iVar13 + 0x4a70) - *pfVar7;
-          local_fc = *(float *)(iVar13 + 0x4a74) - pfVar7[1];
-          local_f8 = *(float *)(iVar13 + 0x4a78) - pfVar7[2];
-          f1AfterCall2 = ((double (*)())(*(code **)vectorNormalize))(param_1,&local_100,&local_100);
-          if ((*(char *)(iVar13 + 0x4adb) != '\0') || (f1AfterCall2 < (double)*local_cc)) {
-            dVar16 = (double)*(float *)(iVar13 + 0x4ad4);
+      else if (*(char *)(lightRecord + 0x4ad8) == '\0') {
+        if (*(char *)(lightRecord + 0x4ad9) == '\0') {
+          local_100 = *(float *)(lightRecord + 0x4a70) - *pfVar7;
+          toLightY = *(float *)(lightRecord + 0x4a74) - pfVar7[1];
+          toLightZ = *(float *)(lightRecord + 0x4a78) - pfVar7[2];
+          f1AfterCall2 = ((double (*)())(*(code **)vectorNormalize))(glContext,&local_100,&local_100);
+          if ((*(char *)(lightRecord + 0x4adb) != '\0') || (f1AfterCall2 < (double)*local_cc)) {
+            lightAttenuation = (double)*(float *)(lightRecord + 0x4ad4);
             fparam_1 = f1AfterCall2;
           }
           else {
-            fparam_1 = (double)(float)((double)dVar19 / f1AfterCall2);
-            dVar16 = (double)(dVar19 / (float)((double)(float)((double)*(float *)(
-                                                  iVar10 + 0x2878) * fparam_1) * fparam_1 +
-                                                  (double)(float)((double)*(float *)(iVar10 + 0x2874
+            fparam_1 = (double)(float)((double)floatOne / f1AfterCall2);
+            lightAttenuation = (double)(floatOne / (float)((double)(float)((double)*(float *)(
+                                                  lightParams2 + 0x2878) * fparam_1) * fparam_1 +
+                                                  (double)(float)((double)*(float *)(lightParams2 + 0x2874
                                                                                     ) * fparam_1 +
-                                                                 (double)*(float *)(iVar10 + 0x2870)
+                                                                 (double)*(float *)(lightParams2 + 0x2870)
                                                                  )));
           }
         }
         else {
-          dVar16 = (double)FLOAT_00108e54;
-          local_100 = *(float *)(iVar13 + 0x4a7c);
-          local_fc = *(float *)(iVar13 + 0x4a80);
-          local_f8 = *(float *)(iVar13 + 0x4a84);
+          lightAttenuation = (double)FLOAT_00108e54;
+          local_100 = *(float *)(lightRecord + 0x4a7c);
+          toLightY = *(float *)(lightRecord + 0x4a80);
+          toLightZ = *(float *)(lightRecord + 0x4a84);
         }
-        if (*(char *)(iVar13 + 0x4ada) != '\0') {
-          fparam_1 = -(double)(local_f8 * *(float *)(iVar13 + 0x4a90) +
-                              (local_100 * *(float *)(iVar13 + 0x4a88) +
-                              local_fc * *(float *)(iVar13 + 0x4a8c)));
-          if (fparam_1 < (double)*(float *)(iVar10 + 0x286c)) goto LAB_000d6e5c;
-          fparam_1 = ((double (*)())_gleLightExponentPow)(iVar4,iVar13 + 0x4a70,fparam_1,fparam_2,floatArg3,floatArg4,fparam_5,
+        if (*(char *)(lightRecord + 0x4ada) != '\0') {
+          fparam_1 = -(double)(toLightZ * *(float *)(lightRecord + 0x4a90) +
+                              (local_100 * *(float *)(lightRecord + 0x4a88) +
+                              toLightY * *(float *)(lightRecord + 0x4a8c)));
+          if (fparam_1 < (double)*(float *)(lightParams2 + 0x286c)) goto LAB_000d6e5c;
+          fparam_1 = ((double (*)())_gleLightExponentPow)(iVar4,lightRecord + 0x4a70,fparam_1,fparam_2,floatArg3,floatArg4,fparam_5,
                                 fparam_6,fparam_7,fparam_8,incomingStack_fffffea8,incomingStack_fffffeb0,
                                 incomingStack_fffffeb8,incomingStack_fffffec0,incomingStack_fffffec8);
-          dVar16 = (double)(float)(dVar16 * fparam_1);
+          lightAttenuation = (double)(float)(lightAttenuation * fparam_1);
           iVar4 = iVar4;
         }
-        if (*(char *)(param_1 + 0x30ae) == '\0') {
-          if (local_d0 == 0) {
-            local_108 = (local_f8 + dVar19);
-            local_110 = local_100;
-            local_10c = local_fc;
+        if (*(char *)(glContext + 0x30ae) == '\0') {
+          if (localViewer == 0) {
+            halfZ = (toLightZ + floatOne);
+            halfX = local_100;
+            halfY = toLightY;
           }
           else {
-            local_110 = -*pfVar7;
-            local_10c = -pfVar7[1];
-            local_108 = -pfVar7[2];
-            (**(code **)vectorNormalize)(param_1,&local_110,&local_110);
-            local_110 = local_110 + local_100;
-            local_10c = local_10c + local_fc;
-            local_108 = local_108 + local_f8;
+            halfX = -*pfVar7;
+            halfY = -pfVar7[1];
+            halfZ = -pfVar7[2];
+            (**(code **)vectorNormalize)(glContext,&halfX,&halfX);
+            halfX = halfX + local_100;
+            halfY = halfY + toLightY;
+            halfZ = halfZ + toLightZ;
           }
-          f1AfterCall3 = ((double (*)())(*(code **)vectorNormalize))(param_1,&local_110,&local_110);
+          f1AfterCall3 = ((double (*)())(*(code **)vectorNormalize))(glContext,&halfX,&halfX);
           fparam_1 = f1AfterCall3;
         }
-        if (dVar16 != (double)FLOAT_00108e50) {
-          dVar18 = (double)*(float *)(iVar14 + 0x44);
-          fparam_6 = (double)local_fc;
+        if (lightAttenuation != (double)FLOAT_00108e50) {
+          dVar18 = (double)*(float *)(vertex + 0x44);
+          fparam_6 = (double)toLightY;
           fparam_7 = (double)local_100;
-          dVar17 = (double)*(float *)(iVar14 + 0x48);
-          fparam_5 = (double)local_f8;
-          dVar26 = (double)*(float *)(iVar12 + 0x50);
-          dVar25 = (double)*(float *)(iVar12 + 0x54);
-          dVar24 = (double)*(float *)(iVar12 + 0x58);
+          dVar17 = (double)*(float *)(vertex + 0x48);
+          fparam_5 = (double)toLightZ;
+          lightContributionR = (double)*(float *)(lightProducts + 0x50);
+          lightContributionG = (double)*(float *)(lightProducts + 0x54);
+          lightContributionB = (double)*(float *)(lightProducts + 0x58);
           dVar15 = (double)(float)((double)dVar17 * fparam_5 +
-                                  (double)(float)((double)*(float *)(iVar14 + 0x40) * fparam_7 +
+                                  (double)(float)((double)*(float *)(vertex + 0x40) * fparam_7 +
                                                  (double)(float)((double)dVar18 * fparam_6)));
           if ((double)FLOAT_00108e50 < dVar15) {
-            dVar26 = (double)(float)(dVar15 * (double)*(float *)(iVar12 + 0x60) + (double)dVar26);
-            dVar25 = (double)(float)(dVar15 * (double)*(float *)(iVar12 + 100) + (double)dVar25);
-            dVar24 = (double)(float)(dVar15 * (double)*(float *)(iVar12 + 0x68) + (double)dVar24);
-            if (*(char *)(param_1 + 0x30ae) == '\0') {
-              fVar1 = (dVar17 * local_108 + (*(float *)(iVar14 + 0x40) * local_110 + (dVar18 * local_10c)));
+            lightContributionR = (double)(float)(dVar15 * (double)*(float *)(lightProducts + 0x60) + (double)lightContributionR);
+            lightContributionG = (double)(float)(dVar15 * (double)*(float *)(lightProducts + 100) + (double)lightContributionG);
+            lightContributionB = (double)(float)(dVar15 * (double)*(float *)(lightProducts + 0x68) + (double)lightContributionB);
+            if (*(char *)(glContext + 0x30ae) == '\0') {
+              fVar1 = (dVar17 * halfZ + (*(float *)(vertex + 0x40) * halfX + (dVar18 * halfY)));
             }
             else {
               local_f0 = (float)((double)dVar18 * fparam_5 - (double)(float)((double)dVar17 * fparam_6));
               fparam_8 = (double)local_f0;
               local_ec = (float)((double)dVar17 * fparam_7 -
-                                (double)(float)((double)*(float *)(iVar14 + 0x40) * fparam_5));
+                                (double)(float)((double)*(float *)(vertex + 0x40) * fparam_5));
               dVar15 = (double)local_ec;
-              local_e8 = (float)((double)*(float *)(iVar14 + 0x40) * fparam_6 -
-                                (double)(float)((double)*(float *)(iVar14 + 0x44) * fparam_7));
+              local_e8 = (float)((double)*(float *)(vertex + 0x40) * fparam_6 -
+                                (double)(float)((double)*(float *)(vertex + 0x44) * fparam_7));
               dVar17 = (double)local_e8;
-              fVar1 = (*(float *)(iVar14 + 0x44) * dVar17 - (float)((double)*(float *)(iVar14 + 0x48) * dVar15));
+              fVar1 = (*(float *)(vertex + 0x44) * dVar17 - (float)((double)*(float *)(vertex + 0x48) * dVar15));
               local_e0 = (float)((double)(fVar1 + fVar1) + fparam_7);
-              fVar1 = (float)((double)*(float *)(iVar14 + 0x48) * fparam_8 -
-                             (double)(*(float *)(iVar14 + 0x40) * dVar17));
+              fVar1 = (float)((double)*(float *)(vertex + 0x48) * fparam_8 -
+                             (double)(*(float *)(vertex + 0x40) * dVar17));
               local_dc = (float)((double)(fVar1 + fVar1) + fparam_6);
-              fVar1 = (float)((double)*(float *)(iVar14 + 0x40) * dVar15 -
-                             (double)(float)((double)*(float *)(iVar14 + 0x44) * fparam_8));
+              fVar1 = (float)((double)*(float *)(vertex + 0x40) * dVar15 -
+                             (double)(float)((double)*(float *)(vertex + 0x44) * fparam_8));
               local_d8 = (float)((double)(fVar1 + fVar1) + fparam_5);
-              fVar1 = local_d8 * local_108 + (local_e0 * local_110 + local_dc * local_10c);
+              fVar1 = local_d8 * halfZ + (local_e0 * halfX + local_dc * halfY);
             }
-            if (!((double)dVar22 < (double)fVar1)) goto LAB_000d6e10;
-            fparam_2 = (double)*(float *)(iVar11 + 0x40);
+            if (!((double)floatZero < (double)fVar1)) goto LAB_000d6e10;
+            fparam_2 = (double)*(float *)(material + 0x40);
             dVar15 = _pow((double)fVar1,fparam_2);
             fVar1 = (float)dVar15;
-            dVar17 = (double)(fVar1 * *(float *)(iVar12 + 0x78));
+            dVar17 = (double)(fVar1 * *(float *)(lightProducts + 0x78));
             iVar4 = r3AfterCall2;
-            fparam_1 = (double)(fVar1 * *(float *)(iVar12 + 0x74));
-            dVar15 = (double)(fVar1 * *(float *)(iVar12 + 0x70));
+            fparam_1 = (double)(fVar1 * *(float *)(lightProducts + 0x74));
+            dVar15 = (double)(fVar1 * *(float *)(lightProducts + 0x70));
           }
           else {
 LAB_000d6e10:
@@ -3971,135 +3994,136 @@ LAB_000d6e10:
             fparam_1 = (double)dVar17;
             dVar15 = (double)dVar17;
           }
-          if (dVar16 == (double)dVar19) {
-            dVar29 = (double)(dVar29 + dVar26);
-            dVar28 = (double)(dVar28 + dVar25);
-            dVar27 = (double)(dVar27 + dVar24);
+          if (lightAttenuation == (double)floatOne) {
+            colorR = (double)(colorR + lightContributionR);
+            colorG = (double)(colorG + lightContributionG);
+            colorB = (double)(colorB + lightContributionB);
             dVar23 = (double)(float)((double)dVar23 + dVar15);
             dVar21 = (double)(float)((double)dVar21 + fparam_1);
             dVar20 = (double)(dVar20 + dVar17);
           }
           else {
-            dVar20 = (double)(float)(dVar16 * (double)dVar17 + (double)dVar20);
-            dVar29 = (double)(float)(dVar16 * (double)dVar26 + (double)dVar29);
-            dVar28 = (double)(float)(dVar16 * (double)dVar25 + (double)dVar28);
-            dVar27 = (double)(float)(dVar16 * (double)dVar24 + (double)dVar27);
-            dVar23 = (double)(float)(dVar16 * dVar15 + (double)dVar23);
-            dVar21 = (double)(float)(dVar16 * fparam_1 + (double)dVar21);
+            dVar20 = (double)(float)(lightAttenuation * (double)dVar17 + (double)dVar20);
+            colorR = (double)(float)(lightAttenuation * (double)lightContributionR + (double)colorR);
+            colorG = (double)(float)(lightAttenuation * (double)lightContributionG + (double)colorG);
+            colorB = (double)(float)(lightAttenuation * (double)lightContributionB + (double)colorB);
+            dVar23 = (double)(float)(lightAttenuation * dVar15 + (double)dVar23);
+            dVar21 = (double)(float)(lightAttenuation * fparam_1 + (double)dVar21);
           }
         }
       }
       else {
-        fparam_8 = (double)*(float *)(iVar14 + 0x44);
-        fparam_7 = (double)*(float *)(iVar13 + 0x4a80);
-        dVar16 = (double)*(float *)(iVar13 + 0x4a84);
-        dVar29 = (double)(dVar29 + *(float *)(iVar12 + 0x50));
-        fparam_1 = (double)(float)((double)*(float *)(iVar14 + 0x48) * dVar16 +
-                                  (double)(*(float *)(iVar14 + 0x40) * *(float *)(iVar13 + 0x4a7c) +
+        fparam_8 = (double)*(float *)(vertex + 0x44);
+        fparam_7 = (double)*(float *)(lightRecord + 0x4a80);
+        dVar16 = (double)*(float *)(lightRecord + 0x4a84);
+        colorR = (double)(colorR + *(float *)(lightProducts + 0x50));
+        fparam_1 = (double)(float)((double)*(float *)(vertex + 0x48) * dVar16 +
+                                  (double)(*(float *)(vertex + 0x40) * *(float *)(lightRecord + 0x4a7c) +
                                           (float)(fparam_8 * fparam_7)));
-        dVar28 = (double)(dVar28 + *(float *)(iVar12 + 0x54));
-        dVar27 = (double)(dVar27 + *(float *)(iVar12 + 0x58));
-        if ((double)dVar22 < fparam_1) {
-          dVar29 = (double)(float)(fparam_1 * (double)*(float *)(iVar12 + 0x60) + (double)dVar29);
-          dVar28 = (double)(float)(fparam_1 * (double)*(float *)(iVar12 + 100) + (double)dVar28);
-          dVar27 = (double)(float)(fparam_1 * (double)*(float *)(iVar12 + 0x68) + (double)dVar27);
-          if (*(char *)(param_1 + 0x30ae) == '\0') {
-            dVar16 = (double)*(float *)(iVar14 + 0x48) * (double)*(float *)(iVar9 + 0x2888) +
-                     (double)(*(float *)(iVar14 + 0x40) * *(float *)(iVar9 + 0x2880) +
-                             (float)(fparam_8 * (double)*(float *)(iVar9 + 0x2884)));
+        colorG = (double)(colorG + *(float *)(lightProducts + 0x54));
+        colorB = (double)(colorB + *(float *)(lightProducts + 0x58));
+        if ((double)floatZero < fparam_1) {
+          colorR = (double)(float)(fparam_1 * (double)*(float *)(lightProducts + 0x60) + (double)colorR);
+          colorG = (double)(float)(fparam_1 * (double)*(float *)(lightProducts + 100) + (double)colorG);
+          colorB = (double)(float)(fparam_1 * (double)*(float *)(lightProducts + 0x68) + (double)colorB);
+          if (*(char *)(glContext + 0x30ae) == '\0') {
+            dVar16 = (double)*(float *)(vertex + 0x48) * (double)*(float *)(lightParams + 0x2888) +
+                     (double)(*(float *)(vertex + 0x40) * *(float *)(lightParams + 0x2880) +
+                             (float)(fparam_8 * (double)*(float *)(lightParams + 0x2884)));
           }
           else {
-            local_f8 = *(float *)(iVar13 + 0x4a84);
+            local_f8 = *(float *)(lightRecord + 0x4a84);
             local_100 = (float)(fparam_8 * dVar16 -
-                               (double)(float)((double)*(float *)(iVar14 + 0x48) * fparam_7));
-            local_fc = (*(float *)(iVar14 + 0x48) * *(float *)(iVar13 + 0x4a7c) - (float)((double)*(float *)(iVar14 + 0x40) * dVar16));
-            fVar1 = (*(float *)(iVar14 + 0x40) * local_fc - (*(float *)(iVar14 + 0x44) * local_100));
+                               (double)(float)((double)*(float *)(vertex + 0x48) * fparam_7));
+            local_fc = (*(float *)(vertex + 0x48) * *(float *)(lightRecord + 0x4a7c) - (float)((double)*(float *)(vertex + 0x40) * dVar16));
+            fVar1 = (*(float *)(vertex + 0x40) * local_fc - (*(float *)(vertex + 0x44) * local_100));
             dVar16 = (double)(fVar1 + fVar1) + dVar16;
           }
           fparam_1 = (double)(float)dVar16;
-          if ((double)dVar22 < fparam_1) {
-            fparam_1 = ((double (*)())_gleMaterialShinePow)(iVar4,iVar11 + 0x1e8,fparam_1,fparam_2,floatArg3,floatArg4,fparam_5,
+          if ((double)floatZero < fparam_1) {
+            fparam_1 = ((double (*)())_gleMaterialShinePow)(iVar4,material + 0x1e8,fparam_1,fparam_2,floatArg3,floatArg4,fparam_5,
                                   fparam_6,fparam_7,fparam_8,incomingStack_fffffea8,incomingStack_fffffeb0,
                                   incomingStack_fffffeb8,incomingStack_fffffec0,incomingStack_fffffec8);
-            dVar27 = (double)(float)(fparam_1 * (double)*(float *)(iVar12 + 0x78) + (double)dVar27);
-            dVar29 = (double)(float)(fparam_1 * (double)*(float *)(iVar12 + 0x70) + (double)dVar29);
-            dVar28 = (double)(float)(fparam_1 * (double)*(float *)(iVar12 + 0x74) + (double)dVar28);
+            colorB = (double)(float)(fparam_1 * (double)*(float *)(lightProducts + 0x78) + (double)colorB);
+            colorR = (double)(float)(fparam_1 * (double)*(float *)(lightProducts + 0x70) + (double)colorR);
+            colorG = (double)(float)(fparam_1 * (double)*(float *)(lightProducts + 0x74) + (double)colorG);
             iVar4 = iVar4;
           }
         }
       }
 LAB_000d6e5c:
-      uVar8 = uVar8 + 1;
-      iVar13 = iVar13 + 0x6c;
-      iVar12 = iVar12 + 0x30;
-      iVar9 = iVar9 + 0x80;
-      iVar10 = iVar10 + 0x80;
+      lightIndex = lightIndex + 1;
+      lightRecord = lightRecord + 0x6c;
+      lightProducts = lightProducts + 0x30;
+      lightParams = lightParams + 0x80;
+      lightParams2 = lightParams2 + 0x80;
     } while( true );
   }
   goto LAB_000d6eb4;
 LAB_000d6e74:
-  if (*(short *)(param_1 + 0x30a8) == -0x7e06) {
-    *(float *)(iVar14 + 0x50) = (float)(double)dVar23;
-    *(float *)(iVar14 + 0x54) = (float)(double)dVar21;
-    *(float *)(iVar14 + 0x58) = (float)(double)dVar20;
+  if (*(short *)(glContext + 0x30a8) == -0x7e06) {
+    *(float *)(vertex + 0x50) = (float)(double)dVar23;
+    *(float *)(vertex + 0x54) = (float)(double)dVar21;
+    *(float *)(vertex + 0x58) = (float)(double)dVar20;
   }
   else {
-    dVar29 = (double)(dVar29 + dVar23);
-    dVar28 = (double)(dVar28 + dVar21);
-    dVar27 = (double)(dVar27 + dVar20);
+    colorR = (double)(colorR + dVar23);
+    colorG = (double)(colorG + dVar21);
+    colorB = (double)(colorB + dVar20);
   }
-  *(undefined4 *)(iVar14 + 0x3c) = uVar2;
-  *(float *)(iVar14 + 0x30) = (float)(double)dVar29;
-  *(float *)(iVar14 + 0x34) = (float)(double)dVar28;
-  *(float *)(iVar14 + 0x38) = (float)(double)dVar27;
+  *(undefined4 *)(vertex + 0x3c) = colorAlpha;
+  *(float *)(vertex + 0x30) = (float)(double)colorR;
+  *(float *)(vertex + 0x34) = (float)(double)colorG;
+  *(float *)(vertex + 0x38) = (float)(double)colorB;
 LAB_000d6eb4:
-  iVar6 = iVar6 + 1;
-  if (param_3 <= iVar6) {
+  vertexIndex = vertexIndex + 1;
+  if (vertexCount <= vertexIndex) {
     return;
   }
   goto LAB_000d6880;
 }
 
 /* _gleVtxLightSpecRGBABackPtr @ 0xd6ecc (1688 bytes) */
-void _gleVtxLightSpecRGBABackPtr(int param_1,int param_2,int param_3,double fparam_1,double fparam_2,double floatArg3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double unusedFloatArg9,double unusedFloatArg10)
+void _gleVtxLightSpecRGBABackPtr(int glContext,int param_2,int vertexCount,double fparam_1,double fparam_2,double floatArg3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double unusedFloatArg9,double unusedFloatArg10)
 {
   float fVar1;
   float fVar2;
-  undefined4 uVar3;
+  undefined4 colorAlpha;
   undefined *vectorNormalize;
   int iVar5;
   int extraout_r3;
   int extraout_r3_00;
   int r3AfterCall2;
-  uint uVar6;
-  int iVar7;
+  uint enabledLightMask;
+  int vertexIndex;
   float *pfVar8;
-  uint uVar9;
-  int iVar10;
-  int iVar11;
-  int iVar12;
-  int iVar13;
-  int iVar14;
-  int iVar15;
+  uint lightIndex;
+  int lightParams;
+  int lightParams2;
+  int material;
+  int lightProducts;
+  int lightRecord;
+  int vertex;
   double extraout_f1;
   double f1AfterCall1;
   double f1AfterCall2;
   double f1AfterCall3;
   float dVar16;
+  float lightAttenuation;
   double dVar17;
   float dVar18;
   float dVar19;
-  float dVar20;
+  float floatOne;
   float dVar21;
   float dVar22;
-  float dVar23;
+  float floatZero;
   float dVar24;
-  float dVar25;
-  float dVar26;
-  float dVar27;
-  float dVar28;
-  float dVar29;
-  float dVar30;
+  float lightContributionB;
+  float lightContributionG;
+  float lightContributionR;
+  float colorB;
+  float colorG;
+  float colorR;
   int iStack0000001c;
   int iStack00000020;
   double incomingStack_fffffea8;
@@ -4110,181 +4134,183 @@ void _gleVtxLightSpecRGBABackPtr(int param_1,int param_2,int param_3,double fpar
   float local_120;
   float local_11c;
   float local_118;
-  float local_110;
-  float local_10c;
-  float local_108;
+  float halfX;
+  float halfY;
+  float halfZ;
   float local_100;
   float local_fc;
+  float toLightY;
   float local_f8;
+  float toLightZ;
   float local_f0;
   float local_ec;
   float local_e8;
   float local_e0;
   float local_dc;
   float local_d8;
-  uint local_d0;
+  uint localViewer;
   
-  iVar7 = 0;
-  local_d0 = (uint)*(byte *)(param_1 + 0x30ad);
-  uVar6 = *(uint *)(param_1 + 0x30a0);
-  iVar5 = param_1;
+  vertexIndex = 0;
+  localViewer = (uint)*(byte *)(glContext + 0x30ad);
+  enabledLightMask = *(uint *)(glContext + 0x30a0);
+  iVar5 = glContext;
   iStack0000001c = param_2;
-  iStack00000020 = param_3;
-  if (param_3 < 1) {
+  iStack00000020 = vertexCount;
+  if (vertexCount < 1) {
     return;
   }
 LAB_000d6f10:
-  iVar15 = *(int *)(iStack0000001c + iVar7 * 4);
-  if ((*(byte *)(iVar15 + 0x7e) & 4) != 0) {
-    iVar12 = *(int *)(iVar15 + 0x78);
-    *(byte *)(iVar15 + 0x7e) = *(byte *)(iVar15 + 0x7e) & 0xfb;
-    if (*(char *)(iVar12 + 0x234) != '\0') {
-      _gleUpdateLightRGBASums(param_1,iVar12,1);
+  vertex = *(int *)(iStack0000001c + vertexIndex * 4);
+  if ((*(byte *)(vertex + 0x7e) & 4) != 0) {
+    material = *(int *)(vertex + 0x78);
+    *(byte *)(vertex + 0x7e) = *(byte *)(vertex + 0x7e) & 0xfb;
+    if (*(char *)(material + 0x234) != '\0') {
+      _gleUpdateLightRGBASums(glContext,material,1);
           }
-    pfVar8 = (float *)(iVar15 + 0x20);
-    if (*(float *)(iVar15 + 0x2c) != FLOAT_00108e54) {
-      fVar1 = FLOAT_00108e54 / *(float *)(iVar15 + 0x2c);
+    pfVar8 = (float *)(vertex + 0x20);
+    if (*(float *)(vertex + 0x2c) != FLOAT_00108e54) {
+      fVar1 = FLOAT_00108e54 / *(float *)(vertex + 0x2c);
       pfVar8 = &local_120;
-      local_118 = *(float *)(iVar15 + 0x28) * fVar1;
-      local_120 = *(float *)(iVar15 + 0x20) * fVar1;
-      local_11c = *(float *)(iVar15 + 0x24) * fVar1;
+      local_118 = *(float *)(vertex + 0x28) * fVar1;
+      local_120 = *(float *)(vertex + 0x20) * fVar1;
+      local_11c = *(float *)(vertex + 0x24) * fVar1;
     }
-    if (*(char *)(param_1 + 0x30ae) != '\0') {
-      if ((local_d0 == 0) || (*(int *)(param_1 + 0x4ddc) == 0)) {
-        local_10c = 0.0;
-        local_108 = 1.0;
-        local_110 = 0.0;
+    if (*(char *)(glContext + 0x30ae) != '\0') {
+      if ((localViewer == 0) || (*(int *)(glContext + 0x4ddc) == 0)) {
+        halfY = 0.0;
+        halfZ = 1.0;
+        halfX = 0.0;
       }
       else {
-        local_110 = -*pfVar8;
-        local_10c = -pfVar8[1];
-        local_108 = -pfVar8[2];
-        f1AfterCall1 = ((double (*)())(*(code **)PTR__gleVectorNormalize_00112064))(param_1,&local_110,&local_110);
+        halfX = -*pfVar8;
+        halfY = -pfVar8[1];
+        halfZ = -pfVar8[2];
+        f1AfterCall1 = ((double (*)())(*(code **)PTR__gleVectorNormalize_00112064))(glContext,&halfX,&halfX);
         fparam_1 = f1AfterCall1;
       }
     }
     vectorNormalize = PTR__gleVectorNormalize_00112064;
-    dVar23 = (double)FLOAT_00108e50;
-    dVar30 = (double)*(float *)(iVar12 + 0x1d0);
-    uVar9 = 0;
-    dVar29 = (double)*(float *)(iVar12 + 0x1d4);
-    dVar28 = (double)*(float *)(iVar12 + 0x1d8);
-    uVar3 = *(undefined4 *)(iVar12 + 0x1dc);
-    dVar20 = (double)FLOAT_00108e54;
-    iVar10 = param_1;
-    iVar11 = param_1;
-    iVar13 = iVar12;
-    iVar14 = param_1;
-    dVar21 = (double)dVar23;
-    dVar22 = (double)dVar23;
-    dVar24 = (double)dVar23;
+    floatZero = (double)FLOAT_00108e50;
+    colorR = (double)*(float *)(material + 0x1d0);
+    lightIndex = 0;
+    colorG = (double)*(float *)(material + 0x1d4);
+    colorB = (double)*(float *)(material + 0x1d8);
+    colorAlpha = *(undefined4 *)(material + 0x1dc);
+    floatOne = (double)FLOAT_00108e54;
+    lightParams = glContext;
+    lightParams2 = glContext;
+    lightProducts = material;
+    lightRecord = glContext;
+    dVar21 = (double)floatZero;
+    dVar22 = (double)floatZero;
+    dVar24 = (double)floatZero;
     do {
-      if ((uVar6 & 1 << (uVar9 & 0x3f)) == 0) {
-        if (uVar6 >> (uVar9 & 0x3f) == 0) goto LAB_000d7508;
+      if ((enabledLightMask & 1 << (lightIndex & 0x3f)) == 0) {
+        if (enabledLightMask >> (lightIndex & 0x3f) == 0) goto LAB_000d7508;
       }
-      else if (*(char *)(iVar14 + 0x4ad8) == '\0') {
-        if (*(char *)(iVar14 + 0x4ad9) == '\0') {
-          local_100 = *(float *)(iVar14 + 0x4a70) - *pfVar8;
-          local_fc = *(float *)(iVar14 + 0x4a74) - pfVar8[1];
-          local_f8 = *(float *)(iVar14 + 0x4a78) - pfVar8[2];
-          f1AfterCall2 = ((double (*)())(*(code **)vectorNormalize))(param_1,&local_100,&local_100);
-          if ((*(char *)(iVar14 + 0x4adb) != '\0') || (f1AfterCall2 < (double)FLOAT_00108e80)) {
-            dVar16 = (double)*(float *)(iVar14 + 0x4ad4);
+      else if (*(char *)(lightRecord + 0x4ad8) == '\0') {
+        if (*(char *)(lightRecord + 0x4ad9) == '\0') {
+          local_100 = *(float *)(lightRecord + 0x4a70) - *pfVar8;
+          toLightY = *(float *)(lightRecord + 0x4a74) - pfVar8[1];
+          toLightZ = *(float *)(lightRecord + 0x4a78) - pfVar8[2];
+          f1AfterCall2 = ((double (*)())(*(code **)vectorNormalize))(glContext,&local_100,&local_100);
+          if ((*(char *)(lightRecord + 0x4adb) != '\0') || (f1AfterCall2 < (double)FLOAT_00108e80)) {
+            lightAttenuation = (double)*(float *)(lightRecord + 0x4ad4);
             fparam_1 = f1AfterCall2;
           }
           else {
-            fparam_1 = (double)(float)((double)dVar20 / f1AfterCall2);
-            dVar16 = (double)(dVar20 / (float)((double)(float)((double)*(float *)(
-                                                  iVar11 + 0x2878) * fparam_1) * fparam_1 +
-                                                  (double)(float)((double)*(float *)(iVar11 + 0x2874
+            fparam_1 = (double)(float)((double)floatOne / f1AfterCall2);
+            lightAttenuation = (double)(floatOne / (float)((double)(float)((double)*(float *)(
+                                                  lightParams2 + 0x2878) * fparam_1) * fparam_1 +
+                                                  (double)(float)((double)*(float *)(lightParams2 + 0x2874
                                                                                     ) * fparam_1 +
-                                                                 (double)*(float *)(iVar11 + 0x2870)
+                                                                 (double)*(float *)(lightParams2 + 0x2870)
                                                                  )));
           }
         }
         else {
-          dVar16 = (double)FLOAT_00108e54;
-          local_100 = *(float *)(iVar14 + 0x4a7c);
-          local_fc = *(float *)(iVar14 + 0x4a80);
-          local_f8 = *(float *)(iVar14 + 0x4a84);
+          lightAttenuation = (double)FLOAT_00108e54;
+          local_100 = *(float *)(lightRecord + 0x4a7c);
+          toLightY = *(float *)(lightRecord + 0x4a80);
+          toLightZ = *(float *)(lightRecord + 0x4a84);
         }
-        if (*(char *)(iVar14 + 0x4ada) != '\0') {
-          fparam_1 = -(double)(local_f8 * *(float *)(iVar14 + 0x4a90) +
-                              (local_100 * *(float *)(iVar14 + 0x4a88) +
-                              local_fc * *(float *)(iVar14 + 0x4a8c)));
-          if (fparam_1 < (double)*(float *)(iVar11 + 0x286c)) goto LAB_000d74f0;
-          fparam_1 = ((double (*)())_gleLightExponentPow)(iVar5,iVar14 + 0x4a70,fparam_1,fparam_2,floatArg3,fparam_4,fparam_5,
+        if (*(char *)(lightRecord + 0x4ada) != '\0') {
+          fparam_1 = -(double)(toLightZ * *(float *)(lightRecord + 0x4a90) +
+                              (local_100 * *(float *)(lightRecord + 0x4a88) +
+                              toLightY * *(float *)(lightRecord + 0x4a8c)));
+          if (fparam_1 < (double)*(float *)(lightParams2 + 0x286c)) goto LAB_000d74f0;
+          fparam_1 = ((double (*)())_gleLightExponentPow)(iVar5,lightRecord + 0x4a70,fparam_1,fparam_2,floatArg3,fparam_4,fparam_5,
                                 fparam_6,fparam_7,fparam_8,incomingStack_fffffea8,incomingStack_fffffeb0,
                                 incomingStack_fffffeb8,incomingStack_fffffec0,incomingStack_fffffec8);
-          dVar16 = (double)(float)((double)dVar16 * fparam_1);
+          lightAttenuation = (double)(float)((double)lightAttenuation * fparam_1);
           iVar5 = iVar5;
         }
-        if (*(char *)(param_1 + 0x30ae) == '\0') {
-          if (local_d0 == 0) {
-            local_108 = (local_f8 + dVar20);
-            local_110 = local_100;
-            local_10c = local_fc;
+        if (*(char *)(glContext + 0x30ae) == '\0') {
+          if (localViewer == 0) {
+            halfZ = (toLightZ + floatOne);
+            halfX = local_100;
+            halfY = toLightY;
           }
           else {
-            local_110 = -*pfVar8;
-            local_10c = -pfVar8[1];
-            local_108 = -pfVar8[2];
-            (**(code **)vectorNormalize)(param_1,&local_110,&local_110);
-            local_110 = local_110 + local_100;
-            local_10c = local_10c + local_fc;
-            local_108 = local_108 + local_f8;
+            halfX = -*pfVar8;
+            halfY = -pfVar8[1];
+            halfZ = -pfVar8[2];
+            (**(code **)vectorNormalize)(glContext,&halfX,&halfX);
+            halfX = halfX + local_100;
+            halfY = halfY + toLightY;
+            halfZ = halfZ + toLightZ;
           }
-          f1AfterCall3 = ((double (*)())(*(code **)vectorNormalize))(param_1,&local_110,&local_110);
+          f1AfterCall3 = ((double (*)())(*(code **)vectorNormalize))(glContext,&halfX,&halfX);
           fparam_1 = f1AfterCall3;
         }
-        if ((double)dVar16 != (double)FLOAT_00108e50) {
-          dVar17 = (double)*(float *)(iVar15 + 0x44);
-          fparam_5 = (double)local_fc;
-          fparam_4 = (double)*(float *)(iVar15 + 0x40);
+        if ((double)lightAttenuation != (double)FLOAT_00108e50) {
+          dVar17 = (double)*(float *)(vertex + 0x44);
+          fparam_5 = (double)toLightY;
+          fparam_4 = (double)*(float *)(vertex + 0x40);
           fparam_7 = (double)local_100;
-          fparam_8 = (double)*(float *)(iVar15 + 0x48);
-          fparam_6 = (double)local_f8;
-          dVar27 = (double)*(float *)(iVar13 + 0x50);
-          dVar26 = (double)*(float *)(iVar13 + 0x54);
-          dVar25 = (double)*(float *)(iVar13 + 0x58);
+          fparam_8 = (double)*(float *)(vertex + 0x48);
+          fparam_6 = (double)toLightZ;
+          lightContributionR = (double)*(float *)(lightProducts + 0x50);
+          lightContributionG = (double)*(float *)(lightProducts + 0x54);
+          lightContributionB = (double)*(float *)(lightProducts + 0x58);
           dVar19 = (double)(float)(fparam_8 * fparam_6 +
                                   (double)(float)(fparam_4 * fparam_7 +
                                                  (double)(float)(dVar17 * fparam_5)));
           if ((double)FLOAT_00108e50 < -(double)dVar19) {
-            dVar27 = -(double)(dVar19 * *(float *)(iVar13 + 0x60) - dVar27);
-            dVar26 = -(double)(dVar19 * *(float *)(iVar13 + 100) - dVar26);
-            dVar25 = -(double)(dVar19 * *(float *)(iVar13 + 0x68) - dVar25);
-            if (*(char *)(param_1 + 0x30ae) == '\0') {
-              dVar17 = -(double)(float)(fparam_8 * (double)local_108 +
-                                       (double)(float)(fparam_4 * (double)local_110 +
-                                                      (double)(float)(dVar17 * (double)local_10c)));
+            lightContributionR = -(double)(dVar19 * *(float *)(lightProducts + 0x60) - lightContributionR);
+            lightContributionG = -(double)(dVar19 * *(float *)(lightProducts + 100) - lightContributionG);
+            lightContributionB = -(double)(dVar19 * *(float *)(lightProducts + 0x68) - lightContributionB);
+            if (*(char *)(glContext + 0x30ae) == '\0') {
+              dVar17 = -(double)(float)(fparam_8 * (double)halfZ +
+                                       (double)(float)(fparam_4 * (double)halfX +
+                                                      (double)(float)(dVar17 * (double)halfY)));
             }
             else {
               local_f0 = (float)(fparam_8 * fparam_5 - (double)(float)(dVar17 * fparam_6));
               dVar19 = (double)local_f0;
-              local_ec = (float)((double)*(float *)(iVar15 + 0x40) * fparam_6 -
+              local_ec = (float)((double)*(float *)(vertex + 0x40) * fparam_6 -
                                 (double)(float)(fparam_8 * fparam_7));
               dVar18 = (double)local_ec;
-              local_e8 = (float)((double)*(float *)(iVar15 + 0x44) * fparam_7 -
-                                (double)(float)((double)*(float *)(iVar15 + 0x40) * fparam_5));
+              local_e8 = (float)((double)*(float *)(vertex + 0x44) * fparam_7 -
+                                (double)(float)((double)*(float *)(vertex + 0x40) * fparam_5));
               dVar17 = (double)local_e8;
-              fVar1 = (*(float *)(iVar15 + 0x48) * dVar18 - (float)((double)*(float *)(iVar15 + 0x44) * dVar17));
-              fVar2 = (float)((double)*(float *)(iVar15 + 0x40) * dVar17 -
-                             (double)(*(float *)(iVar15 + 0x48) * dVar19));
+              fVar1 = (*(float *)(vertex + 0x48) * dVar18 - (float)((double)*(float *)(vertex + 0x44) * dVar17));
+              fVar2 = (float)((double)*(float *)(vertex + 0x40) * dVar17 -
+                             (double)(*(float *)(vertex + 0x48) * dVar19));
               local_e0 = (float)((double)(fVar1 + fVar1) + fparam_7);
               local_dc = (float)((double)(fVar2 + fVar2) + fparam_5);
-              fVar1 = (*(float *)(iVar15 + 0x44) * dVar19 - (*(float *)(iVar15 + 0x40) * dVar18));
+              fVar1 = (*(float *)(vertex + 0x44) * dVar19 - (*(float *)(vertex + 0x40) * dVar18));
               local_d8 = (float)((double)(fVar1 + fVar1) + fparam_6);
-              dVar17 = (double)(local_d8 * local_108 + (local_e0 * local_110 + local_dc * local_10c));
+              dVar17 = (double)(local_d8 * halfZ + (local_e0 * halfX + local_dc * halfY));
             }
-            if (!((double)dVar23 < dVar17)) goto LAB_000d74a4;
-            fparam_2 = (double)*(float *)(iVar12 + 0x40);
+            if (!((double)floatZero < dVar17)) goto LAB_000d74a4;
+            fparam_2 = (double)*(float *)(material + 0x40);
             dVar17 = _pow(dVar17,fparam_2);
             fVar1 = (float)dVar17;
-            dVar19 = (double)(fVar1 * *(float *)(iVar13 + 0x78));
+            dVar19 = (double)(fVar1 * *(float *)(lightProducts + 0x78));
             iVar5 = r3AfterCall2;
-            fparam_1 = (double)(fVar1 * *(float *)(iVar13 + 0x74));
-            dVar17 = (double)(fVar1 * *(float *)(iVar13 + 0x70));
+            fparam_1 = (double)(fVar1 * *(float *)(lightProducts + 0x74));
+            dVar17 = (double)(fVar1 * *(float *)(lightProducts + 0x70));
           }
           else {
 LAB_000d74a4:
@@ -4292,113 +4318,113 @@ LAB_000d74a4:
             fparam_1 = (double)dVar19;
             dVar17 = (double)dVar19;
           }
-          if ((double)dVar16 == (double)dVar20) {
-            dVar30 = (double)(dVar30 + dVar27);
-            dVar29 = (double)(dVar29 + dVar26);
-            dVar28 = (double)(dVar28 + dVar25);
+          if ((double)lightAttenuation == (double)floatOne) {
+            colorR = (double)(colorR + lightContributionR);
+            colorG = (double)(colorG + lightContributionG);
+            colorB = (double)(colorB + lightContributionB);
             dVar24 = (double)(float)((double)dVar24 + dVar17);
             dVar22 = (double)(float)((double)dVar22 + fparam_1);
             dVar21 = (double)(dVar21 + dVar19);
           }
           else {
-            dVar21 = (double)(dVar16 * dVar19 + dVar21);
-            dVar30 = (double)(dVar16 * dVar27 + dVar30);
-            dVar29 = (double)(dVar16 * dVar26 + dVar29);
-            dVar28 = (double)(dVar16 * dVar25 + dVar28);
-            dVar24 = (double)(float)((double)dVar16 * dVar17 + (double)dVar24);
-            dVar22 = (double)(float)((double)dVar16 * fparam_1 + (double)dVar22);
+            dVar21 = (double)(lightAttenuation * dVar19 + dVar21);
+            colorR = (double)(lightAttenuation * lightContributionR + colorR);
+            colorG = (double)(lightAttenuation * lightContributionG + colorG);
+            colorB = (double)(lightAttenuation * lightContributionB + colorB);
+            dVar24 = (double)(float)((double)lightAttenuation * dVar17 + (double)dVar24);
+            dVar22 = (double)(float)((double)lightAttenuation * fparam_1 + (double)dVar22);
           }
         }
       }
       else {
-        dVar19 = (double)*(float *)(iVar15 + 0x44);
-        fparam_6 = (double)*(float *)(iVar14 + 0x4a80);
-        fparam_7 = (double)*(float *)(iVar15 + 0x40);
-        fparam_8 = (double)*(float *)(iVar15 + 0x48);
-        dVar16 = (double)*(float *)(iVar14 + 0x4a84);
-        dVar30 = (double)(dVar30 + *(float *)(iVar13 + 0x50));
+        dVar19 = (double)*(float *)(vertex + 0x44);
+        fparam_6 = (double)*(float *)(lightRecord + 0x4a80);
+        fparam_7 = (double)*(float *)(vertex + 0x40);
+        fparam_8 = (double)*(float *)(vertex + 0x48);
+        dVar16 = (double)*(float *)(lightRecord + 0x4a84);
+        colorR = (double)(colorR + *(float *)(lightProducts + 0x50));
         dVar17 = (double)(float)(fparam_8 * (double)dVar16 +
-                                (double)(float)(fparam_7 * (double)*(float *)(iVar14 + 0x4a7c) +
+                                (double)(float)(fparam_7 * (double)*(float *)(lightRecord + 0x4a7c) +
                                                (double)(float)((double)dVar19 * fparam_6)));
-        dVar29 = (double)(dVar29 + *(float *)(iVar13 + 0x54));
-        dVar28 = (double)(dVar28 + *(float *)(iVar13 + 0x58));
+        colorG = (double)(colorG + *(float *)(lightProducts + 0x54));
+        colorB = (double)(colorB + *(float *)(lightProducts + 0x58));
         fparam_1 = -dVar17;
-        if ((double)dVar23 < fparam_1) {
-          dVar30 = -(double)(float)(dVar17 * (double)*(float *)(iVar13 + 0x60) - (double)dVar30);
-          dVar29 = -(double)(float)(dVar17 * (double)*(float *)(iVar13 + 100) - (double)dVar29);
-          dVar28 = -(double)(float)(dVar17 * (double)*(float *)(iVar13 + 0x68) - (double)dVar28);
-          if (*(char *)(param_1 + 0x30ae) == '\0') {
-            fparam_1 = -(double)(float)(fparam_8 * (double)*(float *)(iVar10 + 0x2888) +
+        if ((double)floatZero < fparam_1) {
+          colorR = -(double)(float)(dVar17 * (double)*(float *)(lightProducts + 0x60) - (double)colorR);
+          colorG = -(double)(float)(dVar17 * (double)*(float *)(lightProducts + 100) - (double)colorG);
+          colorB = -(double)(float)(dVar17 * (double)*(float *)(lightProducts + 0x68) - (double)colorB);
+          if (*(char *)(glContext + 0x30ae) == '\0') {
+            fparam_1 = -(double)(float)(fparam_8 * (double)*(float *)(lightParams + 0x2888) +
                                        (double)(float)(fparam_7 *
-                                                       (double)*(float *)(iVar10 + 0x2880) +
+                                                       (double)*(float *)(lightParams + 0x2880) +
                                                       (double)(dVar19 * *(float *)(
-                                                  iVar10 + 0x2884))));
+                                                  lightParams + 0x2884))));
           }
           else {
-            local_f8 = *(float *)(iVar14 + 0x4a84);
-            local_100 = (float)((double)*(float *)(iVar15 + 0x48) * fparam_6 -
+            local_f8 = *(float *)(lightRecord + 0x4a84);
+            local_100 = (float)((double)*(float *)(vertex + 0x48) * fparam_6 -
                                (double)(dVar19 * dVar16));
-            local_fc = (*(float *)(iVar15 + 0x40) * dVar16 - (*(float *)(iVar15 + 0x48) * *(float *)(iVar14 + 0x4a7c)));
-            fVar1 = *(float *)(iVar15 + 0x44) * local_100 -
-                    (*(float *)(iVar15 + 0x40) * local_fc);
+            local_fc = (*(float *)(vertex + 0x40) * dVar16 - (*(float *)(vertex + 0x48) * *(float *)(lightRecord + 0x4a7c)));
+            fVar1 = *(float *)(vertex + 0x44) * local_100 -
+                    (*(float *)(vertex + 0x40) * local_fc);
             fparam_1 = (double)((fVar1 + fVar1) + dVar16);
           }
-          if ((double)dVar23 < fparam_1) {
-            fparam_1 = ((double (*)())_gleMaterialShinePow)(iVar5,iVar12 + 0x1e8,fparam_1,fparam_2,floatArg3,fparam_4,fparam_5,
+          if ((double)floatZero < fparam_1) {
+            fparam_1 = ((double (*)())_gleMaterialShinePow)(iVar5,material + 0x1e8,fparam_1,fparam_2,floatArg3,fparam_4,fparam_5,
                                   fparam_6,fparam_7,fparam_8,incomingStack_fffffea8,incomingStack_fffffeb0,
                                   incomingStack_fffffeb8,incomingStack_fffffec0,incomingStack_fffffec8);
-            dVar28 = (double)(float)(fparam_1 * (double)*(float *)(iVar13 + 0x78) + (double)dVar28);
-            dVar30 = (double)(float)(fparam_1 * (double)*(float *)(iVar13 + 0x70) + (double)dVar30);
-            dVar29 = (double)(float)(fparam_1 * (double)*(float *)(iVar13 + 0x74) + (double)dVar29);
+            colorB = (double)(float)(fparam_1 * (double)*(float *)(lightProducts + 0x78) + (double)colorB);
+            colorR = (double)(float)(fparam_1 * (double)*(float *)(lightProducts + 0x70) + (double)colorR);
+            colorG = (double)(float)(fparam_1 * (double)*(float *)(lightProducts + 0x74) + (double)colorG);
             iVar5 = iVar5;
           }
         }
       }
 LAB_000d74f0:
-      uVar9 = uVar9 + 1;
-      iVar14 = iVar14 + 0x6c;
-      iVar13 = iVar13 + 0x30;
-      iVar10 = iVar10 + 0x80;
-      iVar11 = iVar11 + 0x80;
+      lightIndex = lightIndex + 1;
+      lightRecord = lightRecord + 0x6c;
+      lightProducts = lightProducts + 0x30;
+      lightParams = lightParams + 0x80;
+      lightParams2 = lightParams2 + 0x80;
     } while( true );
   }
   goto LAB_000d7548;
 LAB_000d7508:
-  if (*(short *)(param_1 + 0x30a8) == -0x7e06) {
-    *(float *)(iVar15 + 0x50) = (float)(double)dVar24;
-    *(float *)(iVar15 + 0x54) = (float)(double)dVar22;
-    *(float *)(iVar15 + 0x58) = (float)(double)dVar21;
+  if (*(short *)(glContext + 0x30a8) == -0x7e06) {
+    *(float *)(vertex + 0x50) = (float)(double)dVar24;
+    *(float *)(vertex + 0x54) = (float)(double)dVar22;
+    *(float *)(vertex + 0x58) = (float)(double)dVar21;
   }
   else {
-    dVar30 = (double)(dVar30 + dVar24);
-    dVar29 = (double)(dVar29 + dVar22);
-    dVar28 = (double)(dVar28 + dVar21);
+    colorR = (double)(colorR + dVar24);
+    colorG = (double)(colorG + dVar22);
+    colorB = (double)(colorB + dVar21);
   }
-  *(undefined4 *)(iVar15 + 0x3c) = uVar3;
-  *(float *)(iVar15 + 0x30) = (float)(double)dVar30;
-  *(float *)(iVar15 + 0x34) = (float)(double)dVar29;
-  *(float *)(iVar15 + 0x38) = (float)(double)dVar28;
+  *(undefined4 *)(vertex + 0x3c) = colorAlpha;
+  *(float *)(vertex + 0x30) = (float)(double)colorR;
+  *(float *)(vertex + 0x34) = (float)(double)colorG;
+  *(float *)(vertex + 0x38) = (float)(double)colorB;
 LAB_000d7548:
-  iVar7 = iVar7 + 1;
-  if (iStack00000020 <= iVar7) {
+  vertexIndex = vertexIndex + 1;
+  if (iStack00000020 <= vertexIndex) {
     return;
   }
   goto LAB_000d6f10;
 }
 
 /* _gleVtxLightFastRGBAFrontPtr @ 0xd7564 (376 bytes) */
-void _gleVtxLightFastRGBAFrontPtr(int param_1,int *param_2,int param_3,double unusedFloatArg1)
+void _gleVtxLightFastRGBAFrontPtr(int glContext,int *vertexPtrCursor,int vertexCount,double unusedFloatArg1)
 {
-  undefined4 uVar1;
+  undefined4 colorAlpha;
   int iVar2;
   int extraout_r3;
-  int iVar3;
-  uint uVar4;
-  uint uVar5;
-  int iVar6;
+  int vertexIndex;
+  uint enabledLightMask;
+  uint lightIndex;
+  int lightParams;
   int iVar7;
   int iVar8;
-  int iVar9;
+  int material;
   int iVar10;
   double dVar11;
   double incomingFpr2;
@@ -4406,7 +4432,7 @@ void _gleVtxLightFastRGBAFrontPtr(int param_1,int *param_2,int param_3,double un
   double incomingFpr4;
   double incomingFpr5;
   double incomingFpr6;
-  double fparam_7;
+  double floatZero;
   double fparam_8;
   float dVar12;
   float dVar13;
@@ -4417,49 +4443,49 @@ void _gleVtxLightFastRGBAFrontPtr(int param_1,int *param_2,int param_3,double un
   double incomingStack_ffffff80;
   double incomingStack_ffffff88;
   
-  iVar3 = 0;
-  uVar4 = *(uint *)(param_1 + 0x30a0);
-  iVar2 = param_1;
-  if (param_3 < 1) {
+  vertexIndex = 0;
+  enabledLightMask = *(uint *)(glContext + 0x30a0);
+  iVar2 = glContext;
+  if (vertexCount < 1) {
 LAB_000d76d0:
     return;
   }
 LAB_000d7598:
-  iVar7 = *param_2;
-  param_2 = param_2 + 1;
+  iVar7 = *vertexPtrCursor;
+  vertexPtrCursor = vertexPtrCursor + 1;
   if ((*(byte *)(iVar7 + 0x7e) & 2) != 0) {
-    iVar9 = *(int *)(iVar7 + 0x74);
+    material = *(int *)(iVar7 + 0x74);
     *(byte *)(iVar7 + 0x7e) = *(byte *)(iVar7 + 0x7e) & 0xfd;
-    if (*(char *)(iVar9 + 0x234) != '\0') {
-      _gleUpdateLightRGBASums(param_1,iVar9,0);
+    if (*(char *)(material + 0x234) != '\0') {
+      _gleUpdateLightRGBASums(glContext,material,0);
     }
-    dVar14 = (double)*(float *)(iVar9 + 0x1e8);
-    iVar8 = iVar9 + 0x50;
-    dVar13 = (double)*(float *)(iVar9 + 0x1ec);
-    dVar12 = (double)*(float *)(iVar9 + 0x1f0);
-    uVar5 = 0;
-    uVar1 = *(undefined4 *)(iVar9 + 0x1dc);
-    iVar6 = param_1 + 0x2820;
-    iVar10 = param_1 + 0x4a70;
+    dVar14 = (double)*(float *)(material + 0x1e8);
+    iVar8 = material + 0x50;
+    dVar13 = (double)*(float *)(material + 0x1ec);
+    dVar12 = (double)*(float *)(material + 0x1f0);
+    lightIndex = 0;
+    colorAlpha = *(undefined4 *)(material + 0x1dc);
+    lightParams = glContext + 0x2820;
+    iVar10 = glContext + 0x4a70;
     do {
-      if ((uVar4 & 1 << (uVar5 & 0x3f)) == 0) {
-        if (uVar4 >> (uVar5 & 0x3f) == 0) goto LAB_000d76b4;
+      if ((enabledLightMask & 1 << (lightIndex & 0x3f)) == 0) {
+        if (enabledLightMask >> (lightIndex & 0x3f) == 0) goto LAB_000d76b4;
       }
       else {
         fparam_8 = (double)*(float *)(iVar7 + 0x48);
-        fparam_7 = (double)FLOAT_00108e50;
+        floatZero = (double)FLOAT_00108e50;
         dVar11 = (double)(float)(fparam_8 * (double)*(float *)(iVar10 + 0x14) +
                                 (double)(*(float *)(iVar7 + 0x40) * *(float *)(iVar10 + 0xc) +
                                         *(float *)(iVar7 + 0x44) * *(float *)(iVar10 + 0x10)));
-        if (fparam_7 < dVar11) {
+        if (floatZero < dVar11) {
           dVar13 = (double)(float)(dVar11 * (double)*(float *)(iVar8 + 0x14) + (double)dVar13);
           dVar12 = (double)(float)(dVar11 * (double)*(float *)(iVar8 + 0x18) + (double)dVar12);
           dVar14 = (double)(float)(dVar11 * (double)*(float *)(iVar8 + 0x10) + (double)dVar14);
-          dVar11 = (double)(float)(fparam_8 * (double)*(float *)(iVar6 + 0x68) +
-                                  (double)(*(float *)(iVar7 + 0x40) * *(float *)(iVar6 + 0x60) +
-                                          *(float *)(iVar7 + 0x44) * *(float *)(iVar6 + 100)));
-          if (fparam_7 < dVar11) {
-            dVar11 = ((double (*)())_gleMaterialShinePow)(iVar2,iVar9 + 0x1e8,dVar11,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,fparam_7,
+          dVar11 = (double)(float)(fparam_8 * (double)*(float *)(lightParams + 0x68) +
+                                  (double)(*(float *)(iVar7 + 0x40) * *(float *)(lightParams + 0x60) +
+                                          *(float *)(iVar7 + 0x44) * *(float *)(lightParams + 100)));
+          if (floatZero < dVar11) {
+            dVar11 = ((double (*)())_gleMaterialShinePow)(iVar2,material + 0x1e8,dVar11,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,floatZero,
                                 fparam_8,incomingStack_ffffff68,incomingStack_ffffff70,incomingStack_ffffff78,
                                 incomingStack_ffffff80,incomingStack_ffffff88);
             dVar14 = (double)(float)(dVar11 * (double)*(float *)(iVar8 + 0x20) + (double)dVar14);
@@ -4469,37 +4495,37 @@ LAB_000d7598:
           }
         }
       }
-      uVar5 = uVar5 + 1;
+      lightIndex = lightIndex + 1;
       iVar10 = iVar10 + 0x6c;
       iVar8 = iVar8 + 0x30;
-      iVar6 = iVar6 + 0x80;
+      lightParams = lightParams + 0x80;
     } while( true );
   }
   goto LAB_000d76c4;
 LAB_000d76b4:
-  *(undefined4 *)(iVar7 + 0x3c) = uVar1;
+  *(undefined4 *)(iVar7 + 0x3c) = colorAlpha;
   *(float *)(iVar7 + 0x30) = (float)(double)dVar14;
   *(float *)(iVar7 + 0x34) = (float)(double)dVar13;
   *(float *)(iVar7 + 0x38) = (float)(double)dVar12;
 LAB_000d76c4:
-  iVar3 = iVar3 + 1;
-  if (param_3 <= iVar3) goto LAB_000d76d0;
+  vertexIndex = vertexIndex + 1;
+  if (vertexCount <= vertexIndex) goto LAB_000d76d0;
   goto LAB_000d7598;
 }
 
 /* _gleVtxLightFastRGBABackPtr @ 0xd76dc (380 bytes) */
-void _gleVtxLightFastRGBABackPtr(int param_1,int *param_2,int param_3,double unusedFloatArg1,double floatArg2,double floatArg3,double floatArg4,double floatArg5,double floatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9)
+void _gleVtxLightFastRGBABackPtr(int glContext,int *vertexPtrCursor,int vertexCount,double unusedFloatArg1,double floatArg2,double floatArg3,double floatArg4,double floatArg5,double floatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9)
 {
-  undefined4 uVar1;
+  undefined4 colorAlpha;
   int iVar2;
   int extraout_r3;
-  int iVar3;
-  uint uVar4;
-  uint uVar5;
-  int iVar6;
+  int vertexIndex;
+  uint enabledLightMask;
+  uint lightIndex;
+  int lightParams;
   int iVar7;
   int iVar8;
-  int iVar9;
+  int material;
   int iVar10;
   double fparam_1_00;
   double dVar11;
@@ -4514,33 +4540,33 @@ void _gleVtxLightFastRGBABackPtr(int param_1,int *param_2,int param_3,double unu
   double incomingStack_ffffff80;
   double incomingStack_ffffff88;
   
-  iVar3 = 0;
-  uVar4 = *(uint *)(param_1 + 0x30a0);
-  iVar2 = param_1;
-  if (param_3 < 1) {
+  vertexIndex = 0;
+  enabledLightMask = *(uint *)(glContext + 0x30a0);
+  iVar2 = glContext;
+  if (vertexCount < 1) {
 LAB_000d784c:
     return;
   }
 LAB_000d7710:
-  iVar7 = *param_2;
-  param_2 = param_2 + 1;
+  iVar7 = *vertexPtrCursor;
+  vertexPtrCursor = vertexPtrCursor + 1;
   if ((*(byte *)(iVar7 + 0x7e) & 4) != 0) {
-    iVar9 = *(int *)(iVar7 + 0x78);
+    material = *(int *)(iVar7 + 0x78);
     *(byte *)(iVar7 + 0x7e) = *(byte *)(iVar7 + 0x7e) & 0xfb;
-    if (*(char *)(iVar9 + 0x234) != '\0') {
-      _gleUpdateLightRGBASums(param_1,iVar9,1);
+    if (*(char *)(material + 0x234) != '\0') {
+      _gleUpdateLightRGBASums(glContext,material,1);
     }
-    dVar15 = (double)*(float *)(iVar9 + 0x1e8);
-    iVar8 = iVar9 + 0x50;
-    dVar14 = (double)*(float *)(iVar9 + 0x1ec);
-    dVar13 = (double)*(float *)(iVar9 + 0x1f0);
-    uVar5 = 0;
-    uVar1 = *(undefined4 *)(iVar9 + 0x1dc);
-    iVar6 = param_1 + 0x2820;
-    iVar10 = param_1 + 0x4a70;
+    dVar15 = (double)*(float *)(material + 0x1e8);
+    iVar8 = material + 0x50;
+    dVar14 = (double)*(float *)(material + 0x1ec);
+    dVar13 = (double)*(float *)(material + 0x1f0);
+    lightIndex = 0;
+    colorAlpha = *(undefined4 *)(material + 0x1dc);
+    lightParams = glContext + 0x2820;
+    iVar10 = glContext + 0x4a70;
     do {
-      if ((uVar4 & 1 << (uVar5 & 0x3f)) == 0) {
-        if (uVar4 >> (uVar5 & 0x3f) == 0) goto LAB_000d7830;
+      if ((enabledLightMask & 1 << (lightIndex & 0x3f)) == 0) {
+        if (enabledLightMask >> (lightIndex & 0x3f) == 0) goto LAB_000d7830;
       }
       else {
         fparam_8_00 = (double)*(float *)(iVar7 + 0x48);
@@ -4551,13 +4577,13 @@ LAB_000d7710:
         if (dVar11 < -(double)dVar12) {
           dVar15 = -(double)(dVar12 * *(float *)(iVar8 + 0x10) - dVar15);
           dVar14 = -(double)(dVar12 * *(float *)(iVar8 + 0x14) - dVar14);
-          fparam_1_00 = -(double)(float)(fparam_8_00 * (double)*(float *)(iVar6 + 0x68) +
-                                        (double)(*(float *)(iVar7 + 0x40) * *(float *)(iVar6 + 0x60)
-                                                + *(float *)(iVar7 + 0x44) * *(float *)(iVar6 + 100)
+          fparam_1_00 = -(double)(float)(fparam_8_00 * (double)*(float *)(lightParams + 0x68) +
+                                        (double)(*(float *)(iVar7 + 0x40) * *(float *)(lightParams + 0x60)
+                                                + *(float *)(iVar7 + 0x44) * *(float *)(lightParams + 100)
                                                 ));
           dVar13 = -(double)(dVar12 * *(float *)(iVar8 + 0x18) - dVar13);
           if (dVar11 < fparam_1_00) {
-            dVar11 = ((double (*)())_gleMaterialShinePow)(iVar2,iVar9 + 0x1e8,fparam_1_00,floatArg2,floatArg3,floatArg4,floatArg5,
+            dVar11 = ((double (*)())_gleMaterialShinePow)(iVar2,material + 0x1e8,fparam_1_00,floatArg2,floatArg3,floatArg4,floatArg5,
                                 floatArg6,dVar11,fparam_8_00,incomingStack_ffffff68,incomingStack_ffffff70,
                                 incomingStack_ffffff78,incomingStack_ffffff80,incomingStack_ffffff88);
             dVar15 = (double)(float)(dVar11 * (double)*(float *)(iVar8 + 0x20) + (double)dVar15);
@@ -4567,21 +4593,21 @@ LAB_000d7710:
           }
         }
       }
-      uVar5 = uVar5 + 1;
+      lightIndex = lightIndex + 1;
       iVar10 = iVar10 + 0x6c;
       iVar8 = iVar8 + 0x30;
-      iVar6 = iVar6 + 0x80;
+      lightParams = lightParams + 0x80;
     } while( true );
   }
   goto LAB_000d7840;
 LAB_000d7830:
-  *(undefined4 *)(iVar7 + 0x3c) = uVar1;
+  *(undefined4 *)(iVar7 + 0x3c) = colorAlpha;
   *(float *)(iVar7 + 0x30) = (float)(double)dVar15;
   *(float *)(iVar7 + 0x34) = (float)(double)dVar14;
   *(float *)(iVar7 + 0x38) = (float)(double)dVar13;
 LAB_000d7840:
-  iVar3 = iVar3 + 1;
-  if (param_3 <= iVar3) goto LAB_000d784c;
+  vertexIndex = vertexIndex + 1;
+  if (vertexCount <= vertexIndex) goto LAB_000d784c;
   goto LAB_000d7710;
 }
 
