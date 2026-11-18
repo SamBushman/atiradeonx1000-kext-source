@@ -5651,7 +5651,7 @@ int _gliAttachDrawableWithOptions(glContext, drawableWord484c, drawableWord4848,
   uint attachResult;
   uint glContextByte85a5;
   double f1AfterCall;
-  double fparam_1;
+  double forwardedFpr1;
   double incomingFpr2;
   double incomingFpr3;
   double incomingFpr4;
@@ -5681,14 +5681,14 @@ int _gliAttachDrawableWithOptions(glContext, drawableWord484c, drawableWord4848,
   rendererRecord = rendererIndex * 0x2e0 + glContext;
   attachResult = (**(code **)(*(int *)(rendererRecord + 0x8884) + 0x138))
                     (*(undefined4 *)(rendererRecord + 0x85ac),drawableWord484c,drawableWord4848,forwardedArg5);
-  fparam_1 = f1AfterCall;
+  forwardedFpr1 = f1AfterCall;
   if ((attachResult < 5) && (rendererIndex != *(byte *)(glContext + 0x85a8))) {
-    fparam_1 = (double)_gliSwitchPlugin(glContext,rendererIndex);
+    forwardedFpr1 = (double)_gliSwitchPlugin(glContext,rendererIndex);
     pluginStateChanged = true;
     attachResult = 2;
   }
   if (attachResult == 2) {
-    ((void (*)())_gliUpdatePluginConfig)(glContext,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStackWord_ffffff98,
+    ((void (*)())_gliUpdatePluginConfig)(glContext,forwardedFpr1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStackWord_ffffff98,
                incomingStackWord_ffffffa0,incomingStackWord_ffffffa8,incomingStackWord_ffffffb0,incomingStackWord_ffffffb8);
 LAB_00012634:
     pluginStateChanged = true;

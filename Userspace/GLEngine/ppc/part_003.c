@@ -1119,20 +1119,18 @@ int _gliSetInteger(glContext, stateId, valuePtr)
   uint stateId;
   int *valuePtr;
 {
-  int loopIndex2;
+  int borderThenTargetThenFaceIndex;
   int loopIndex;
   byte levelFlagByte;
   ushort textureFlags;
-  undefined2 uVar3;
-  undefined1 uVar4;
+  undefined2 textureWord30Value;
+  undefined1 glContextByte4691;
   undefined4 funcCache;
   undefined4 baseFormat;
   int checkedTextureObject;
   int mipmapSource;
-  int iVar7;
-  int width;
-  undefined1 uVar8;
-  int iVar9;
+  int pluginResultThenWidth;
+  undefined1 glContextByte4692;
   int firstPluginError;
   int textureObject;
   int levelBase;
@@ -1144,8 +1142,7 @@ int _gliSetInteger(glContext, stateId, valuePtr)
   int surfaceHandle2;
   int depth;
   int textureLevel;
-  int iVar13;
-  int internalformat;
+  int shrinkCountThenRendererRecordCursorThenInternalformat;
   uint targetThenFace;
   int levelRecord2;
   int height;
@@ -1167,10 +1164,10 @@ int _gliSetInteger(glContext, stateId, valuePtr)
       return 0;
     }
     funcCache = *(undefined4 *)(glContext + 0x49b8);
-    iVar13 = *(short *)(glContext + 0x49c2) - newCacheLimit;
+    shrinkCountThenRendererRecordCursorThenInternalformat = *(short *)(glContext + 0x49c2) - newCacheLimit;
     *(short *)(glContext + 0x49c2) = (short)newCacheLimit;
 LAB_0002085c:
-    _gleShrinkFuncCache(funcCache,iVar13);
+    _gleShrinkFuncCache(funcCache,shrinkCountThenRendererRecordCursorThenInternalformat);
   }
   else {
     if (stateId < 0x177) {
@@ -1189,7 +1186,7 @@ LAB_0002085c:
             return 0;
           }
           funcCache = *(undefined4 *)(glContext + 0x5094);
-          iVar13 = *(short *)(glContext + 0x509a) - newCacheLimit;
+          shrinkCountThenRendererRecordCursorThenInternalformat = *(short *)(glContext + 0x509a) - newCacheLimit;
           *(short *)(glContext + 0x509a) = (short)newCacheLimit;
         }
         else if (stateId < 0x163) {
@@ -1207,7 +1204,7 @@ LAB_0002085c:
             return 0;
           }
           funcCache = *(undefined4 *)(glContext + 0x5088);
-          iVar13 = *(short *)(glContext + 0x508e) - newCacheLimit;
+          shrinkCountThenRendererRecordCursorThenInternalformat = *(short *)(glContext + 0x508e) - newCacheLimit;
           *(short *)(glContext + 0x508e) = (short)newCacheLimit;
         }
         else if (stateId == 0x16a) {
@@ -1220,7 +1217,7 @@ LAB_0002085c:
             return 0;
           }
           funcCache = *(undefined4 *)(glContext + 0x48b0);
-          iVar13 = *(short *)(glContext + 0x48b6) - newCacheLimit;
+          shrinkCountThenRendererRecordCursorThenInternalformat = *(short *)(glContext + 0x48b6) - newCacheLimit;
           *(short *)(glContext + 0x48b6) = (short)newCacheLimit;
         }
         else if (stateId < 0x16b) {
@@ -1234,7 +1231,7 @@ LAB_0002085c:
             return 0;
           }
           funcCache = *(undefined4 *)(glContext + 0x50a0);
-          iVar13 = *(short *)(glContext + 0x50a6) - newCacheLimit;
+          shrinkCountThenRendererRecordCursorThenInternalformat = *(short *)(glContext + 0x50a6) - newCacheLimit;
           *(short *)(glContext + 0x50a6) = (short)newCacheLimit;
         }
         else {
@@ -1248,7 +1245,7 @@ LAB_0002085c:
             return 0;
           }
           funcCache = *(undefined4 *)(glContext + 0x49b4);
-          iVar13 = *(short *)(glContext + 0x49be) - newCacheLimit;
+          shrinkCountThenRendererRecordCursorThenInternalformat = *(short *)(glContext + 0x49be) - newCacheLimit;
           *(short *)(glContext + 0x49be) = (short)newCacheLimit;
         }
         goto LAB_0002085c;
@@ -1259,17 +1256,17 @@ LAB_0002085c:
       }
       if (stateId < 0xe6) {
         if (stateId == 0xdd) {
-          uVar8 = 0;
+          glContextByte4692 = 0;
           *(char *)(glContext + 0x4690) = '\x01' - (*valuePtr == 0);
           if ((*(char *)(glContext + 0x4690) == '\0') || (*(int *)(glContext + 0x4848) == 0)) {
-            uVar8 = 1;
+            glContextByte4692 = 1;
           }
-          uVar4 = 0;
-          *(undefined1 *)(glContext + 0x4692) = uVar8;
+          glContextByte4691 = 0;
+          *(undefined1 *)(glContext + 0x4692) = glContextByte4692;
           if ((*(int *)(glContext + 0x4e1c) == 0x1c00) && (*(char *)(glContext + 0x4692) == '\0')) {
-            uVar4 = 1;
+            glContextByte4691 = 1;
           }
-          *(undefined1 *)(glContext + 0x4691) = uVar4;
+          *(undefined1 *)(glContext + 0x4691) = glContextByte4691;
           *(undefined4 *)(glContext + 0x757c) = 0xffffffff;
           _gliSetCurrentPluginDispatchTable(glContext);
           return 0;
@@ -1279,17 +1276,17 @@ LAB_0002085c:
           return 0;
         }
 LAB_00020f04:
-        iVar13 = glContext + 0x10000;
+        shrinkCountThenRendererRecordCursorThenInternalformat = glContext + 0x10000;
         loopIndex = 0;
         if (*(char *)(glContext + 0x85a4) != '\0') {
           do {
-            iVar7 = (**(code **)(*(int *)(iVar13 + -0x777c) + 0x140))
-                              (*(undefined4 *)(iVar13 + -0x7a54),stateId,valuePtr);
-            if ((iVar7 != 0) && (firstPluginError == 0)) {
-              firstPluginError = iVar7;
+            pluginResultThenWidth = (**(code **)(*(int *)(shrinkCountThenRendererRecordCursorThenInternalformat + -0x777c) + 0x140))
+                              (*(undefined4 *)(shrinkCountThenRendererRecordCursorThenInternalformat + -0x7a54),stateId,valuePtr);
+            if ((pluginResultThenWidth != 0) && (firstPluginError == 0)) {
+              firstPluginError = pluginResultThenWidth;
             }
             loopIndex = loopIndex + 1;
-            iVar13 = iVar13 + 0x2e0;
+            shrinkCountThenRendererRecordCursorThenInternalformat = shrinkCountThenRendererRecordCursorThenInternalformat + 0x2e0;
           } while (loopIndex < (int)(uint)*(byte *)(glContext + 0x85a4));
           return firstPluginError;
         }
@@ -1303,23 +1300,23 @@ LAB_00020f04:
       }
       if (-1 < *(short *)(glContext + 0x4a10)) goto LAB_00020c88;
       targetThenFace = valuePtr[1];
-      iVar9 = valuePtr[7];
+      borderThenTargetThenFaceIndex = valuePtr[7];
       surfaceHandle = *valuePtr;
       level = valuePtr[2];
-      internalformat = valuePtr[3];
-      width = valuePtr[4];
+      shrinkCountThenRendererRecordCursorThenInternalformat = valuePtr[3];
+      pluginResultThenWidth = valuePtr[4];
       height = valuePtr[5];
       depth = valuePtr[6];
       if (targetThenFace == 0xde1) {
 LAB_00020a7c:
         checkedTextureObject = _gleCheckTexImage2DArgs
-                          (glContext,targetThenFace,level,internalformat,width,height,iVar9,0x80e1,0x1401);
+                          (glContext,targetThenFace,level,shrinkCountThenRendererRecordCursorThenInternalformat,pluginResultThenWidth,height,borderThenTargetThenFaceIndex,0x80e1,0x1401);
       }
       else if (targetThenFace < 0xde2) {
         if (targetThenFace != 0xde0) {
           return 0x2717;
         }
-        checkedTextureObject = _gleCheckTexImage1DArgs(glContext,0xde0,level,internalformat,width,iVar9,0x80e1,0x1401);
+        checkedTextureObject = _gleCheckTexImage1DArgs(glContext,0xde0,level,shrinkCountThenRendererRecordCursorThenInternalformat,pluginResultThenWidth,borderThenTargetThenFaceIndex,0x80e1,0x1401);
       }
       else {
         if (targetThenFace != 0x806f) {
@@ -1328,7 +1325,7 @@ LAB_00020a7c:
           }
           goto LAB_00020a7c;
         }
-        checkedTextureObject = ((int (*)())_gleCheckTexImage3DArgs)(glContext,0x806f,level,internalformat,width,height,depth,iVar9,0x80e1,0x1401);
+        checkedTextureObject = ((int (*)())_gleCheckTexImage3DArgs)(glContext,0x806f,level,shrinkCountThenRendererRecordCursorThenInternalformat,pluginResultThenWidth,height,depth,borderThenTargetThenFaceIndex,0x80e1,0x1401);
       }
       if (checkedTextureObject == 0) {
         return 0;
@@ -1368,8 +1365,8 @@ LAB_00020c88:
         }
         *(byte *)(levelBase + 0xcf) = *(byte *)(levelBase + 0xcf) & 0xdf;
       }
-      _gleCreateGlobalLevel(glContext,levelRecord2,width,height,depth,iVar9);
-      _gleCreatePluginTextureLevel(glContext,checkedTextureObject,levelRecord2,targetThenFace,level,internalformat);
+      _gleCreateGlobalLevel(glContext,levelRecord2,pluginResultThenWidth,height,depth,borderThenTargetThenFaceIndex);
+      _gleCreatePluginTextureLevel(glContext,checkedTextureObject,levelRecord2,targetThenFace,level,shrinkCountThenRendererRecordCursorThenInternalformat);
     }
     else {
       if (stateId == 0x3e1) {
@@ -1393,7 +1390,7 @@ joined_r0x00020e50:
             return 0;
           }
           funcCache = *(undefined4 *)(glContext + 0x48b8);
-          iVar13 = *(short *)(glContext + 0x48be) - newCacheLimit;
+          shrinkCountThenRendererRecordCursorThenInternalformat = *(short *)(glContext + 0x48be) - newCacheLimit;
           *(short *)(glContext + 0x48be) = (short)newCacheLimit;
         }
         else if (stateId < 0x185) {
@@ -1407,7 +1404,7 @@ joined_r0x00020e50:
               return 0;
             }
             funcCache = *(undefined4 *)(glContext + 0x48a0);
-            iVar13 = *(short *)(glContext + 0x48a6) - newCacheLimit;
+            shrinkCountThenRendererRecordCursorThenInternalformat = *(short *)(glContext + 0x48a6) - newCacheLimit;
             *(short *)(glContext + 0x48a6) = (short)newCacheLimit;
           }
           else {
@@ -1421,7 +1418,7 @@ joined_r0x00020e50:
               return 0;
             }
             funcCache = *(undefined4 *)(glContext + 0x48a8);
-            iVar13 = *(short *)(glContext + 0x48ae) - newCacheLimit;
+            shrinkCountThenRendererRecordCursorThenInternalformat = *(short *)(glContext + 0x48ae) - newCacheLimit;
             *(short *)(glContext + 0x48ae) = (short)newCacheLimit;
           }
         }
@@ -1443,7 +1440,7 @@ joined_r0x00020e50:
             return 0;
           }
           funcCache = *(undefined4 *)(glContext + 0x48c0);
-          iVar13 = *(short *)(glContext + 0x48c6) - newCacheLimit;
+          shrinkCountThenRendererRecordCursorThenInternalformat = *(short *)(glContext + 0x48c6) - newCacheLimit;
           *(short *)(glContext + 0x48c6) = (short)newCacheLimit;
         }
         goto LAB_0002085c;
@@ -1471,12 +1468,12 @@ joined_r0x00020e50:
         }
         goto LAB_00020f04;
       }
-      iVar9 = valuePtr[1];
-      internalformat = valuePtr[2];
-      width = valuePtr[3];
+      borderThenTargetThenFaceIndex = valuePtr[1];
+      shrinkCountThenRendererRecordCursorThenInternalformat = valuePtr[2];
+      pluginResultThenWidth = valuePtr[3];
       height = valuePtr[4];
       surfaceHandle2 = *valuePtr;
-      textureObject = _gleCheckTexImage2DArgs(glContext,iVar9,0,internalformat,width,height,0,0x80e1,0x8367);
+      textureObject = _gleCheckTexImage2DArgs(glContext,borderThenTargetThenFaceIndex,0,shrinkCountThenRendererRecordCursorThenInternalformat,pluginResultThenWidth,height,0,0x80e1,0x8367);
       if (textureObject == 0) {
         return 0;
       }
@@ -1489,17 +1486,17 @@ joined_r0x00020e50:
       }
       *(int *)(textureObject + 0x2c) = surfaceHandle2;
       if (stateId != 0x3e5) {
-        uVar3 = 0x404;
+        textureWord30Value = 0x404;
       }
       else {
-        uVar3 = *(undefined2 *)((int)valuePtr + 0x1a);
+        textureWord30Value = *(undefined2 *)((int)valuePtr + 0x1a);
       }
-      *(undefined2 *)(textureObject + 0x30) = uVar3;
+      *(undefined2 *)(textureObject + 0x30) = textureWord30Value;
       faceCount = 6;
-      if (iVar9 != 0x8513) {
+      if (borderThenTargetThenFaceIndex != 0x8513) {
         faceCount = 1;
       }
-      loopIndex2 = 0;
+      borderThenTargetThenFaceIndex = 0;
       if (faceCount != 0) {
         textureLevel = textureObject + 0xc4;
         do {
@@ -1518,21 +1515,21 @@ joined_r0x00020e50:
             }
             *(byte *)(textureLevel + 0xb) = *(byte *)(textureLevel + 0xb) & 0xdf;
           }
-          ((int (*)())_gleCreateSurfaceLevel)(glContext,textureLevel,width,height,0,0);
+          ((int (*)())_gleCreateSurfaceLevel)(glContext,textureLevel,pluginResultThenWidth,height,0,0);
           if (stateId != 0x3e5) {
             mipmapSource = 0;
           }
           else {
             mipmapSource = valuePtr[7];
           }
-          baseFormat = _gleReqToBase(internalformat);
-          _gleCreatePluginTextureLevel(glContext,textureObject,textureLevel,loopIndex2,0,baseFormat);
+          baseFormat = _gleReqToBase(shrinkCountThenRendererRecordCursorThenInternalformat);
+          _gleCreatePluginTextureLevel(glContext,textureObject,textureLevel,borderThenTargetThenFaceIndex,0,baseFormat);
           if (mipmapSource != 0) {
-            _gleGenSurfaceMipmaps(glContext,textureObject,loopIndex2,mipmapSource,*(uint *)(textureObject + 0x6c) >> 0xf & 1);
+            _gleGenSurfaceMipmaps(glContext,textureObject,borderThenTargetThenFaceIndex,mipmapSource,*(uint *)(textureObject + 0x6c) >> 0xf & 1);
           }
-          loopIndex2 = loopIndex2 + 1;
+          borderThenTargetThenFaceIndex = borderThenTargetThenFaceIndex + 1;
           textureLevel = textureLevel + 0x168;
-        } while (loopIndex2 < faceCount);
+        } while (borderThenTargetThenFaceIndex < faceCount);
       }
     }
     *(uint *)(glContext + 0x314) =

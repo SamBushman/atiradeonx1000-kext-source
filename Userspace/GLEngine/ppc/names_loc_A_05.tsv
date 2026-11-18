@@ -468,11 +468,11 @@ use	_gleDeletePluginTexture	iVar5	loopIndex	INFERRED	only ever set to a start va
 use	_gliSetInteger	iVar16	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar16\ =\ 0;$	+1
 use	_gliSetInteger	iVar16	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar16\ =\ iVar16\ \+\ 1;$	+1
 use	_gliSetInteger	iVar16	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar16\ <\ \(int\)\(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x85a4\)\);$	+1
-use	_gliSetInteger	iVar9	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar9\ =\ 0;$	+1
-use	_gliSetInteger	iVar9	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*_gleCreatePluginTextureLevel\(param_1,iVar10,iVar12,iVar9,0,uVar5\);$	+1
-use	_gliSetInteger	iVar9	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*_gleGenSurfaceMipmaps\(param_1,iVar10,iVar9,iVar6,\*\(uint\ \*\)\(iVar10\ \+\ 0x6c\)\ >>\ 0xf\ \&\ 1\);$	+1
-use	_gliSetInteger	iVar9	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar9\ =\ iVar9\ \+\ 1;$	+1
-use	_gliSetInteger	iVar9	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar9\ <\ iVar11\);$	+1
+use	_gliSetInteger	iVar9	borderThenTargetThenFaceIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar9\ =\ 0;$	+1
+use	_gliSetInteger	iVar9	borderThenTargetThenFaceIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*_gleCreatePluginTextureLevel\(param_1,iVar10,iVar12,iVar9,0,uVar5\);$	+1
+use	_gliSetInteger	iVar9	borderThenTargetThenFaceIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*_gleGenSurfaceMipmaps\(param_1,iVar10,iVar9,iVar6,\*\(uint\ \*\)\(iVar10\ \+\ 0x6c\)\ >>\ 0xf\ \&\ 1\);$	+1
+use	_gliSetInteger	iVar9	borderThenTargetThenFaceIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar9\ =\ iVar9\ \+\ 1;$	+1
+use	_gliSetInteger	iVar9	borderThenTargetThenFaceIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar9\ <\ iVar11\);$	+1
 use	_glGetFloatv_Exec	pdVar3	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*pdVar3\ =\ local_a0;$	+2
 use	_glGetFloatv_Exec	pdVar3	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*dVar5\ =\ \*pdVar3;$	+2
 use	_glGetFloatv_Exec	pdVar3	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*uVar2\ =\ \*\(uint\ \*\)pdVar3;$	+2

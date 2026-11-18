@@ -763,7 +763,7 @@ void _gleRenderSmoothLinesFunc_body(glContext)
   uint *polygonList;
   int vertexCountThenClippedVertexCount;
   double f1AfterCall;
-  double fparam_1;
+  double forwardedFpr1;
   
   texEnableBits = _gleTexEnableBits(glContext);
   vertexCursor = *(uint *)(glContext + 0x4854);
@@ -771,16 +771,16 @@ void _gleRenderSmoothLinesFunc_body(glContext)
   if ((1 < vertexCountThenClippedVertexCount) &&
      (batchClipCodes = (**(code **)(glContext + 0x5060))(glContext,vertexCursor,vertexCountThenClippedVertexCount), (batchClipCodes & 0xff00) == 0)) {
     texturingEnabled = texEnableBits != 0;
-    fparam_1 = f1AfterCall;
+    forwardedFpr1 = f1AfterCall;
     if ((texturingEnabled) && (*(char *)(glContext + 0x53e4) != '\0')) {
-      fparam_1 = (double)(**(double ( **)(int,int,int))(glContext + 0x53dc))(glContext, vertexCursor, vertexCountThenClippedVertexCount);
+      forwardedFpr1 = (double)(**(double ( **)(int,int,int))(glContext + 0x53dc))(glContext, vertexCursor, vertexCountThenClippedVertexCount);
     }
     if (*(char *)(glContext + 0x50b4) != '\0') {
-      fparam_1 = (double)(**(double ( **)(int,int,int))(glContext + 0x5064))(glContext, vertexCursor, vertexCountThenClippedVertexCount);
+      forwardedFpr1 = (double)(**(double ( **)(int,int,int))(glContext + 0x5064))(glContext, vertexCursor, vertexCountThenClippedVertexCount);
     }
     if ((*(char *)(glContext + 0x30aa) != '\0') || ((texturingEnabled && (*(char *)(glContext + 0x53e6) != '\0'))))
     {
-      fparam_1 = (double)(**(double ( **)(int,int,int))(glContext + 0x5068))(glContext, vertexCursor, vertexCountThenClippedVertexCount);
+      forwardedFpr1 = (double)(**(double ( **)(int,int,int))(glContext + 0x5068))(glContext, vertexCursor, vertexCountThenClippedVertexCount);
     }
     if (((batchClipCodes & 0xff) == 0) && (*(char *)(glContext + 0x4e18) == '\0')) {
       if (texturingEnabled) {
@@ -801,7 +801,7 @@ void _gleRenderSmoothLinesFunc_body(glContext)
       if (*(char *)(glContext + 0x53e5) != '\0') {
         (**(code **)(glContext + 0x53e0))(glContext,vertexCursor,vertexCountThenClippedVertexCount);
       }
-      fparam_1 = (double)(**(double ( **)(int,int,int,int))(glContext + 0x5074))(glContext, vertexCursor, vertexCountThenClippedVertexCount, 0);
+      forwardedFpr1 = (double)(**(double ( **)(int,int,int,int))(glContext + 0x5074))(glContext, vertexCursor, vertexCountThenClippedVertexCount, 0);
     }
     vertexEndThenRemainingVertices = vertexCursor + vertexCountThenClippedVertexCount * 0x100;
     polygonList = *(uint **)(glContext + 0x4870);
@@ -816,7 +816,7 @@ void _gleRenderSmoothLinesFunc_body(glContext)
       } while (vertexEndThenRemainingVertices != 0);
     }
     if ((*(char *)(glContext + 0x4e18) != '\0') &&
-       (vertexCountThenClippedVertexCount = ((int (*)())_gleClipLinesPlane)(glContext,polygonList,vertexCountThenClippedVertexCount,fparam_1), vertexCountThenClippedVertexCount == 0)) {
+       (vertexCountThenClippedVertexCount = ((int (*)())_gleClipLinesPlane)(glContext,polygonList,vertexCountThenClippedVertexCount,forwardedFpr1), vertexCountThenClippedVertexCount == 0)) {
       return;
     }
     if (((batchClipCodes & 0xff) == 0) ||

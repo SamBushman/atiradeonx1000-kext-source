@@ -3378,7 +3378,7 @@ int _gleDrawPixelsSaveState(glContext, savedStateRecord)
   double f1AfterCall1;
   double f1AfterCall2;
   double f1AfterCall3;
-  double fparam_1;
+  double forwardedFpr1;
   double incomingFpr2;
   double incomingFpr3;
   double incomingFpr4;
@@ -3400,14 +3400,14 @@ int _gleDrawPixelsSaveState(glContext, savedStateRecord)
   }
   *(undefined4 *)(glContext + 0x3534) = 4;
   _gleUpdateTextureParams(glContext,0);
-  fparam_1 = f1AfterCall;
+  forwardedFpr1 = f1AfterCall;
   if (*(byte *)(glContext + 0x34da) != 0) {
     savedStateRecord[1] = (uint)*(byte *)(glContext + 0x34da);
     *(undefined1 *)(glContext + 0x34da) = 0;
     _gleUpdatePolyMode(glContext);
     savedFieldMask = savedFieldMask | 2;
     *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x800000;
-    fparam_1 = f1AfterCall1;
+    forwardedFpr1 = f1AfterCall1;
   }
   if (*(byte *)(glContext + 0x34d8) != 0) {
     savedStateRecord[2] = (uint)*(byte *)(glContext + 0x34d8);
@@ -3432,14 +3432,14 @@ int _gleDrawPixelsSaveState(glContext, savedStateRecord)
     *(undefined1 *)(glContext + 0x4664) = 0;
     savedFieldMask = savedFieldMask | 0x40;
     _gleVPDisable(glContext);
-    fparam_1 = f1AfterCall2;
+    forwardedFpr1 = f1AfterCall2;
   }
   if (*(uint *)(glContext + 0x5430) != 0) {
     savedStateRecord[7] = *(uint *)(glContext + 0x5430);
     *(undefined4 *)(glContext + 0x5430) = 0;
     savedFieldMask = savedFieldMask | 0x80;
     _gleVPDisable(glContext);
-    fparam_1 = f1AfterCall3;
+    forwardedFpr1 = f1AfterCall3;
   }
   savedStateRecord[5] = *(uint *)(glContext + 0x4ff4);
   savedStateRecord[8] = *(uint *)(glContext + 0x1ba0);
@@ -3463,7 +3463,7 @@ int _gleDrawPixelsSaveState(glContext, savedStateRecord)
     drawableWidthThenDrawableHeight = (uint)*(ushort *)(framebufferObject + 0xcc);
   }
   *(uint *)(glContext + 0x1bac) = drawableWidthThenDrawableHeight;
-  ((void (*)())_gleUpdateViewScissorData)(glContext,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
+  ((void (*)())_gleUpdateViewScissorData)(glContext,forwardedFpr1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
   _gleCopyMatrix(glContext + 0x1c80,savedStateRecord + 0xc);
   _gleCopyMatrix(glContext + 0x1cc0,savedStateRecord + 0x1c);
   _gleCopyMatrix(glContext + *(int *)(glContext + 0x53d4) * 0x40 + 0x1fc0,savedStateRecord + 0x2c);

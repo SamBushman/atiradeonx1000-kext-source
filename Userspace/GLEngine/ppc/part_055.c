@@ -1853,8 +1853,7 @@ void _gleVPRenderQuadStrip_body(glContext)
   bool orientationChanged;
   uint *nextPolygonList;
   int texEnableBitsThenRunVertexCountThenCullResultThenPolygonBackFacing;
-  uint uVar7;
-  uint batchClipCodes;
+  uint batchClipCodesThenNextQuadStartThenRunStart;
   int cullResult;
   int flipRemaining;
   uint *spareList;
@@ -1890,9 +1889,9 @@ void _gleVPRenderQuadStrip_body(glContext)
   if ((((int)*(short *)(glContext + 0x487c) != 0) &&
       (vertexCountThenLastQuadStart = (uint)(*(int *)(glContext + 0x4858) - *(int *)(glContext + 0x4854)) /
                 (uint)(int)*(short *)(glContext + 0x487c), 3 < (int)vertexCountThenLastQuadStart)) &&
-     (batchClipCodes = _gleVPEmulate(glContext,vertexCountThenLastQuadStart), (batchClipCodes & 0xff00) == 0)) {
+     (batchClipCodesThenNextQuadStartThenRunStart = _gleVPEmulate(glContext,vertexCountThenLastQuadStart), (batchClipCodesThenNextQuadStartThenRunStart & 0xff00) == 0)) {
     vertexCursor = *(uint *)(glContext + 0x4864);
-    if (((batchClipCodes & 0xff) == 0) && (*(char *)(glContext + 0x4e18) == '\0')) {
+    if (((batchClipCodesThenNextQuadStartThenRunStart & 0xff) == 0) && (*(char *)(glContext + 0x4e18) == '\0')) {
       forwardedFpr1 = f1AfterCall;
       if (texEnableBitsThenRunVertexCountThenCullResultThenPolygonBackFacing != 0) {
         forwardedFpr1 = (double)(**(double ( **)(int,int,int,int))(glContext + 0x506c))(glContext, vertexCursor, vertexCountThenLastQuadStart, 0);
@@ -1907,13 +1906,13 @@ void _gleVPRenderQuadStrip_body(glContext)
         do {
           orientationChanged = false;
           texEnableBitsThenRunVertexCountThenCullResultThenPolygonBackFacing = 0;
-          uVar7 = vertexCursor;
+          batchClipCodesThenNextQuadStartThenRunStart = vertexCursor;
           do {
             while( true ) {
-              runStart = uVar7;
+              runStart = batchClipCodesThenNextQuadStartThenRunStart;
               if (vertexCountThenLastQuadStart < vertexCursor) goto LAB_00105bf4;
-              uVar7 = vertexCursor + 0x200;
-              cullResult = ((undefined4 (*)())_gleCullQuad)(glContext,vertexCursor,vertexCursor + 0x100,vertexCursor + 0x300,uVar7,&backFacing,
+              batchClipCodesThenNextQuadStartThenRunStart = vertexCursor + 0x200;
+              cullResult = ((undefined4 (*)())_gleCullQuad)(glContext,vertexCursor,vertexCursor + 0x100,vertexCursor + 0x300,batchClipCodesThenNextQuadStartThenRunStart,&backFacing,
                                    forwardedFpr1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
                                    incomingStackWord_ffffff78,incomingStackWord_ffffff80,incomingStackWord_ffffff88);
               forwardedFpr1 = f1AfterCall1;
@@ -1924,10 +1923,10 @@ void _gleVPRenderQuadStrip_body(glContext)
               if ((orientationChanged) && (0 < texEnableBitsThenRunVertexCountThenCullResultThenPolygonBackFacing)) goto LAB_00105bf4;
               texEnableBitsThenRunVertexCountThenCullResultThenPolygonBackFacing = texEnableBitsThenRunVertexCountThenCullResultThenPolygonBackFacing + 2;
               runBackFacingThenPolygonVertexCount = backFacing;
-              vertexCursor = uVar7;
-              uVar7 = runStart;
+              vertexCursor = batchClipCodesThenNextQuadStartThenRunStart;
+              batchClipCodesThenNextQuadStartThenRunStart = runStart;
             }
-            vertexCursor = uVar7;
+            vertexCursor = batchClipCodesThenNextQuadStartThenRunStart;
           } while (texEnableBitsThenRunVertexCountThenCullResultThenPolygonBackFacing < 1);
 LAB_00105bf4:
           texEnableBitsThenRunVertexCountThenCullResultThenPolygonBackFacing = texEnableBitsThenRunVertexCountThenCullResultThenPolygonBackFacing + 2;
@@ -1973,8 +1972,8 @@ LAB_00105bf4:
              nextSpareList = polygonList, nextPolygonList = spareList, runBackFacingThenPolygonVertexCount = clippedVertexCount[0], clippedVertexCount[0] != 0)) {
             polygonList = nextPolygonList;
             spareList = nextSpareList;
-            if ((batchClipCodes & 0xff) != 0) {
-              forwardedFpr1 = (double)_gleClipPoly(glContext,polygonList,runBackFacingThenPolygonVertexCount,batchClipCodes & 0xff,nextSpareList,clippedVertexCount,1);
+            if ((batchClipCodesThenNextQuadStartThenRunStart & 0xff) != 0) {
+              forwardedFpr1 = (double)_gleClipPoly(glContext,polygonList,runBackFacingThenPolygonVertexCount,batchClipCodesThenNextQuadStartThenRunStart & 0xff,nextSpareList,clippedVertexCount,1);
               if (clippedVertexCount[0] == 0) goto LAB_00105dd4;
               if (0 < clippedVertexCount[0]) {
                 spareList = polygonList;
