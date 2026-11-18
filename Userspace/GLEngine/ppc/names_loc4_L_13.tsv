@@ -1,0 +1,8 @@
+local	_gleFeedbackTriangleStripFunc_body	bVar3	noVertexProgram	CONFIRMED	true when neither ctx+0x4664 nor ctx+0x5434 (vertex program active) is set; selects the normal batch clip/lighting path (same role as noVertexProgram in _gleSelectTriangleStripFunc_body)
+local	_gleFeedbackTriangleStripFunc_body	bVar5	lightingEnabled	CONFIRMED	noVertexProgram && ctx+0x30aa (lighting enabled): per-run lighting functions are called through ctx+0x4de8 / 0x4df0
+local	_gleFeedbackTriangleStripFunc_body	bVar4	facingChanged	CONFIRMED	set when the facing of a triangle differs from the previous run facing (iVar17 != backFacing); then the two-sided lighting flag bit 0x7e|=6 is applied before the run is lit
+local	_gleFeedbackTriangleStripFunc_body	cVar1	cullEnabled	CONFIRMED	ctx+0x4fe0 cull-face enable byte: non-zero enables _gleCullTriangle / _gleCullPolygonPtrStack, zero takes the fast whole-strip path
+local	_gleFeedbackTriangleStripFunc_body	local_4c	clippedCount	CONFIRMED	vertex count written by _gleClipPolyPlane and _gleClipPoly
+local	_gleFeedbackTriangleStripFunc_body	pcVar16	lightFunc	CONFIRMED	per-face lighting function loaded from the table at ctx+0x4de8 / ctx+0x4df0 + face*4 and called with the vertex list
+local	_gleFeedbackTriangleStripFunc_body	piVar18	triangleVertexList	CONFIRMED	ctx+0x4870 scratch list of three vertex pointers used to emit the strip's leading triangle through _gleFeedbackPolygonPtr
+local	_gleFeedbackTriangleStripFunc_body	puVar24	polygonVertexList	CONFIRMED	ctx+0x4870 scratch vertex pointer list holding the triangle (and later the clipped polygon) handed to _gleFeedbackPolygonPtr
