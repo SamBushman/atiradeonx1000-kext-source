@@ -1,0 +1,387 @@
+#id	name	rc	pc	size	stock_cov	reb_cov	runs	IDENTICAL	REORDERED	READ_SET	FAULT_SITE	FAULT_MISMATCH	EFFECTS	EMUERR	TIMEOUT	UNINIT_REBUILT	UNINIT_OTHER	end_states	first_nonidentical	LAYOUT_DEP	PTR_VALUE_DEP	IMAGE_DATA_DEP
+263	gld_bindUnitObject	v	pin	136	24	23	126	126	0	0	0	0	0	0	0	0	0	FAULT/FAULT:126		0	0	0
+382	gldEmitConstantFlushPacket	v	p	104	15	15	80	58	0	0	22	0	0	0	0	0	0	FAULT/FAULT:80	FAULT_SITE: stock ('write', 44308) vs rebuilt ('write', 44304)	0	0	0
+150	gld_emitFramebufferState	v	pp	396	30	33	72	72	0	0	0	0	0	0	0	0	0	FAULT/FAULT:72		0	0	0
+120	gld_printApplicationPath	v	-	432	14	18	60	60	0	0	0	0	0	0	0	0	0	FAULT/FAULT:60		0	0	0
+185	gld_emitImmediateVertexList	v	iiii	344	37	38	128	128	0	0	0	0	0	0	0	0	0	FAULT/FAULT:128		0	0	0
+280	gld_testRendererAvailable	i	n	148	20	19	69	69	0	0	0	0	0	0	0	0	0	FAULT/FAULT:69		0	0	0
+365	gldGrowProgramHashTable	v	pn	364	29	29	85	85	0	0	0	0	0	0	0	0	0	FAULT/FAULT:85		0	0	0
+404	gldEmitDirtyStatePackets	v	p	532	74	84	104	104	0	0	0	0	0	0	0	0	0	FAULT/FAULT:104		0	0	0
+399	gldEmitHardwareState	v	p	3000	25	28	126	126	0	0	0	0	0	0	0	0	0	FAULT/FAULT:126		0	0	0
+175	gld_emitCopyBlitPacket	v	piiiiiiii	1540	45	49	86	0	62	0	24	0	0	0	0	0	0	FAULT/FAULT:86	FAULT_SITE: stock ('write', 44312) vs rebuilt ('write', 44320)	0	0	0
+244	gld_emitUnitObjectPackets	v	pp	492	58	54	213	213	0	0	0	0	0	0	0	0	0	FAULT/FAULT:207,RET/RET:6		0	0	0
+164	copyIndices16Swapped_prefetch_entry	v	-	16	4	4	289	289	0	0	0	0	0	0	0	0	0	FAULT/FAULT:289		0	0	0
+184	gld_emitPrimitiveVertices	v	iiiii	1176	45	53	130	10	119	0	1	0	0	0	0	0	0	FAULT/FAULT:130	FAULT_PARTIAL: same fault ('read', 1342701720); accesses completed before it differ: reads: only rebuilt reads (1342699772, 4)	0	0	0
+237	gld_validateStreamState	v	pp	980	36	38	173	136	37	0	0	0	0	0	0	0	0	FAULT/FAULT:173	REORDERED: same writes/reads per segment; order differs	0	0	0
+445	extvsReleaseState	v	p	100	19	19	101	101	0	0	0	0	0	0	0	0	0	FAULT/FAULT:73,RET/RET:28		0	0	0
+512	gldAllocListNode	v	p	116	14	14	86	86	0	0	0	0	0	0	0	0	0	FAULT/FAULT:86		0	0	0
+482	extvsEmitRnd	v	ppn	932	233	229	141	111	30	0	0	0	0	0	0	0	0	FAULT/FAULT:136,RET/RET:5	REORDERED: same writes/reads per segment; order differs	0	0	0
+166	copyIndices16Swapped_dcbz_entry	v	-	16	4	4	209	209	0	0	0	0	0	0	0	0	0	FAULT/FAULT:209		0	0	0
+446	extvsInitState	v	p	240	25	22	129	73	56	0	0	0	0	0	0	0	0	FAULT/FAULT:129	REORDERED: same writes/reads per segment; order differs	0	0	0
+167	copyIndices16Swapped_dcbz	v	nnn	392	30	28	178	178	0	0	0	0	0	0	0	0	0	FAULT/FAULT:178		0	0	0
+515	extvsStateCacheCreate	v	ppn	616	24	22	102	69	0	0	33	0	0	0	0	0	0	FAULT/FAULT:102	FAULT_SITE: stock ('write', 44304) vs rebuilt ('write', 44308)	0	0	0
+509	extvsStateFree	v	pp	272	68	68	170	170	0	0	0	0	0	0	0	0	0	FAULT/FAULT:136,RET/RET:34		0	0	0
+159	gld_startPacket	v	p	140	28	25	288	59	229	0	0	0	0	0	0	0	0	FAULT/FAULT:288	REORDERED: same writes/reads per segment; order differs	0	0	0
+530	ffvpSelectPassThroughVariant	v	p	780	50	50	66	66	0	0	0	0	0	0	0	0	0	FAULT/FAULT:66		0	0	0
+522	extvsBuildStreamBlock	v	pp	472	118	116	137	88	41	0	8	0	0	0	0	0	0	FAULT/FAULT:132,RET/RET:5	FAULT_PARTIAL: same fault ('read', 2417867384); accesses completed before it differ: reads: read (1342212476, 4): stock values [1342201456, 1342240392, 1451816584] vs rebuilt [1342201456, 1342240392]	0	0	0
+608	vpStateSelectForDraw	v	p	460	19	23	97	97	0	0	0	0	0	0	0	0	0	FAULT/FAULT:65,RET/RET:32		0	0	0
+528	ffvpSelectLitProgramVariant	v	p	132	28	29	109	25	84	0	0	0	0	0	0	0	0	FAULT/FAULT:79,RET/RET:30	REORDERED: same writes/reads per segment; order differs	0	0	0
+517	extvsUploadSingleConstant	v	ppp	276	29	29	159	25	110	0	24	0	0	0	0	0	0	FAULT/FAULT:159	FAULT_SITE: stock ('read', 17) vs rebuilt ('read', 21)	0	0	0
+458	extvsInitShaderObject	v	pp	428	50	49	520	520	0	0	0	0	0	0	0	0	0	FAULT/FAULT:520		0	0	0
+611	ctxTempListCreate	v	p	76	19	19	85	85	0	0	0	0	0	0	0	0	0	FAULT/FAULT:72,RET/RET:13		0	0	0
+610	vpStateFree	v	pp	356	84	87	155	155	0	0	0	0	0	0	0	0	0	FAULT/FAULT:111,RET/RET:44		0	0	0
+616	recordAllocCreate	i	pi	156	11	11	60	60	0	0	0	0	0	0	0	0	0	FAULT/FAULT:60		0	0	0
+554	arbEmitIlMovMadMov	v	pnnpnnppnnppnnpp	280	48	33	123	73	48	0	0	0	0	0	0	0	2	FAULT/FAULT:123	REORDERED: same writes/reads per segment; order differs	0	0	0
+219	gld_enterPointDrawState	i	pi	356	14	15	198	84	114	0	0	0	0	0	0	0	0	FAULT/FAULT:198	REORDERED: same writes/reads per segment; order differs	0	0	0
+666	gldEmitProgramConstants	v	ppiiiiii	328	17	25	130	90	0	0	40	0	0	0	0	0	0	FAULT/FAULT:130	FAULT_SITE: stock ('write', 44308) vs rebuilt ('write', 44304)	0	0	0
+542	arbEmitIlMulMaxMin2Src	v	pnnpnnppnnppnnpp	316	69	60	268	38	142	0	88	0	0	0	0	0	0	FAULT/FAULT:268	FAULT_SITE: stock ('read', 13) vs rebuilt ('read', 1)	0	0	0
+694	gldEmitPacket_reg880	v	p	152	16	16	80	80	0	0	0	0	0	0	0	0	0	FAULT/FAULT:80		0	0	0
+670	ffvpBuildPassThroughProgram	v	p	828	51	49	98	98	0	0	0	0	0	0	0	0	0	FAULT/FAULT:98		0	0	0
+613	vpStateCacheCreate	v	ppn	600	26	30	171	5	113	0	53	0	0	0	0	0	0	FAULT/FAULT:171	FAULT_PARTIAL: same fault ('read', 12); accesses completed before it differ: reads: only stock reads (1342650684, 4)	0	0	0
+667	interpolatorMapInit	v	ppip	416	98	97	83	23	58	0	0	0	0	0	0	0	0	FAULT/FAULT:64,RET/RET:19	REORDERED: same writes/reads per segment; order differs	2	0	0
+671	gldEmitVertexRoutingPackets	v	p	188	6	6	90	81	9	0	0	0	0	0	0	0	0	FAULT/FAULT:90	REORDERED: same writes/reads per segment; order differs	0	0	0
+717	arbAllocVariable	i	p	68	14	14	159	159	0	0	0	0	0	0	0	0	0	FAULT/FAULT:159		0	0	0
+746	gldCallHook1278	v	p	12	3	3	81	81	0	0	0	0	0	0	0	0	0	FAULT/FAULT:59,RET/RET:22		0	0	0
+818	paramListCreate	i	p	96	17	18	92	92	0	0	0	0	0	0	0	0	0	FAULT/FAULT:92		0	0	0
+753	arbfpGrowInstanceTable	v	pp	108	27	27	164	162	0	0	0	0	0	0	0	0	0	FAULT/FAULT:162,RET/RET:2		2	0	0
+760	gldEmitTclModeRegs	v	p	264	43	48	132	132	0	0	0	0	0	0	0	0	0	FAULT/FAULT:132		0	0	0
+541	arbEmitIlAddMad3Src	v	pnnpnnppnnppnnpp	1320	133	216	263	31	79	0	0	0	0	0	0	0	153	FAULT/FAULT:263	REORDERED: same writes/reads per segment; order differs	0	0	0
+830	ffvpBuildProgram	i	iiiiiiii	716	69	71	102	102	0	0	0	0	0	0	0	0	0	FAULT/FAULT:102		0	0	0
+384	gldValidateTextureUnits	v	iiiiddddddddd	2428	263	299	265	110	119	0	36	0	0	0	0	0	0	FAULT/FAULT:265	FAULT_PARTIAL: same fault ('read', 1362509956); accesses completed before it differ: reads: only stock reads (1342269852, 4)	0	0	0
+218	gld_drawPixelsAsPoints	v	ppnnpnnnnni	1624	50	66	237	8	204	0	25	0	0	0	0	0	0	FAULT/FAULT:237	FAULT_PARTIAL: same fault ('read', 11857); accesses completed before it differ: reads: only stock reads (1342294968, 4)	0	0	0
+866	atifsResetState	v	p	100	25	25	83	57	26	0	0	0	0	0	0	0	0	FAULT/FAULT:60,RET/RET:23	REORDERED: same writes/reads per segment; order differs	0	0	0
+841	arbProgramTableRelease	v	p	260	29	27	111	111	0	0	0	0	0	0	0	0	0	FAULT/FAULT:83,RET/RET:28		0	0	0
+831	fpVariantCacheGrow	v	pn	308	74	77	162	76	71	0	15	0	0	0	0	0	0	FAULT/FAULT:154,RET/RET:8	FAULT_PARTIAL: same fault ('read', 2); accesses completed before it differ: reads: only stock reads (1342273580, 4)	0	0	0
+165	copyIndices16Swapped_prefetch	v	ppn	484	30	24	254	254	0	0	0	0	0	0	0	0	0	FAULT/FAULT:254		0	0	0
+870	atifsCreateShaderTable	v	p	108	27	27	89	87	0	0	2	0	0	0	0	0	0	FAULT/FAULT:89	FAULT_SITE: stock ('write', 44412) vs rebuilt ('write', 44312)	0	0	0
+134	glFlush_impl_withSurfaceUpdate	v	pipiiii	212	48	53	174	6	55	40	73	0	0	0	0	0	0	FAULT/FAULT:174	FAULT_PARTIAL: same fault ('read', 17); accesses completed before it differ: reads: only stock reads (1342611620, 4)	0	0	0
+747	arbfpProgramObjectInit	v	pp	336	57	58	165	0	160	0	5	0	0	0	0	0	0	FAULT/FAULT:165	FAULT_SITE: stock ('write', 23) vs rebuilt ('write', 14)	0	0	0
+843	arbProgramTableInit	v	p	144	29	28	151	15	93	0	43	0	0	0	0	0	0	FAULT/FAULT:151	FAULT_SITE: stock ('write', 12) vs rebuilt ('write', 16)	0	0	0
+869	atifsUnshareShaderTable	v	pp	356	49	55	149	43	106	0	0	0	0	0	0	0	0	FAULT/FAULT:149	REORDERED: same writes/reads per segment; order differs	0	0	0
+681	arbEmitRecord3Src_op0b	v	pnnpnnppnnppnnpp	692	154	173	206	71	134	0	0	0	0	0	0	0	0	FAULT/FAULT:206	REORDERED: same writes/reads per segment; order differs	1	0	0
+894	gld_emitClearColorPacket	v	p	624	134	121	170	170	0	0	0	0	0	0	0	0	0	FAULT/FAULT:170		0	0	0
+898	gld_emitClearFillPacket	v	pn	268	53	64	134	28	106	0	0	0	0	0	0	0	0	FAULT/FAULT:134	REORDERED: same writes/reads per segment; order differs	0	0	0
+930	gld_scanProgramTokens	i	ppp	272	22	23	180	180	0	0	0	0	0	0	0	0	0	FAULT/FAULT:180		0	0	0
+927	gld_uploadParamConstants	v	iiid	164	41	34	172	15	84	0	73	0	0	0	0	0	0	FAULT/FAULT:160,RET/RET:12	FAULT_PARTIAL: same fault ('read', 25); accesses completed before it differ: reads: only stock reads (1342462636, 4)	0	0	0
+955	gld_emitProgramStatePackets	v	pp	928	21	23	162	140	0	0	22	0	0	0	0	0	0	FAULT/FAULT:162	FAULT_SITE: stock ('write', 44308) vs rebuilt ('write', 44304)	0	0	0
+700	gldEnterInternalDrawState	v	pnnni	1840	263	315	233	78	155	0	0	0	0	0	0	0	0	FAULT/FAULT:233	REORDERED: same writes/reads per segment; order differs	0	0	0
+944	atifsCompileCurrentShader	v	p	788	60	65	187	0	117	0	70	0	0	0	0	0	0	FAULT/FAULT:187	FAULT_PARTIAL: same fault ('read', 18); accesses completed before it differ: reads: only stock reads (1342233108, 1)	0	0	0
+896	gld_resetRasterStateForInternalDraw	v	pni	896	144	170	152	55	97	0	0	0	0	0	0	0	0	FAULT/FAULT:152	REORDERED: same writes/reads per segment; order differs	0	0	0
+956	gld_compileFragmentProgramImage	v	pp	348	24	26	151	151	0	0	0	0	0	0	0	0	0	FAULT/FAULT:151		0	0	0
+969	gld_emitLightingStatePacket	v	iiiid	160	24	21	90	71	0	0	19	0	0	0	0	0	0	FAULT/FAULT:90	FAULT_PARTIAL: same fault ('read', 1075379968); accesses completed before it differ: reads: only stock reads (1342366036, 4)	0	0	0
+963	gld_destroyUnitCmdLists	v	p	100	25	25	112	112	0	0	0	0	0	0	0	0	0	FAULT/FAULT:78,RET/RET:34		0	0	0
+752	arbfpInitProgramState	v	p	456	74	82	535	0	259	0	276	0	0	0	0	0	0	FAULT/FAULT:535	FAULT_SITE: stock ('write', 40338) vs rebuilt ('write', 40329)	0	0	0
+301	gld_emitProgramConstantUpdates	v	piipnn	1172	75	79	159	124	30	0	5	0	0	0	0	0	0	FAULT/FAULT:159	FAULT_SITE: stock ('write', 44304) vs rebuilt ('write', 44308)	0	0	0
+1059	vsdisFormatFloat	i	iiid	996	43	41	78	78	0	0	0	0	0	0	0	0	0	FAULT/FAULT:78		0	0	0
+1053	scLogToSink	i	ipiiiiii	96	24	22	102	102	0	0	0	0	0	0	0	0	0	FAULT/FAULT:73,RET/RET:29		0	0	0
+441	extvsMakeShaderCurrent	v	pp	284	71	71	171	113	58	0	0	0	0	0	0	0	0	FAULT/FAULT:162,RET/RET:9	REORDERED: same writes/reads per segment; order differs	0	0	0
+1113	Compiler__createFromRequest_da0c0	v	pp	192	42	46	113	76	0	0	37	0	0	0	0	0	0	FAULT/FAULT:113	FAULT_SITE: stock ('write', 45720) vs rebuilt ('write', 45164)	0	0	0
+1205	Compiler__setQueriedTableEntry4d4	i	pin	80	20	20	173	173	0	0	0	0	0	0	0	0	0	FAULT/FAULT:142,RET/RET:31		0	0	0
+1118	Compiler__createFromRequest	v	pp	192	42	46	121	85	0	0	36	0	0	0	0	0	0	FAULT/FAULT:121	FAULT_SITE: stock ('write', 45720) vs rebuilt ('write', 45164)	0	0	0
+899	gld_emitInternalViewportPacket	v	pn	636	70	86	202	0	201	0	1	0	0	0	0	0	0	FAULT/FAULT:202	FAULT_SITE: stock ('read', 5144) vs rebuilt ('read', 5016)	0	0	0
+1207	Compiler__allocateOrFail	i	pn	84	18	18	99	99	0	0	0	0	0	0	0	0	0	FAULT/FAULT:67,RET/RET:32		0	0	0
+1217	Compiler__init_e1920	v	pipiiiiiiiii	232	47	48	85	0	58	0	27	0	0	0	0	0	0	FAULT/FAULT:85	FAULT_SITE: stock ('write', 1424) vs rebuilt ('write', 868)	0	0	0
+874	atifsInitShader	v	pp	648	98	105	510	0	502	0	8	0	0	0	0	0	0	FAULT/FAULT:510	FAULT_SITE: stock ('write', 115) vs rebuilt ('write', 15)	0	0	0
+1218	Compiler__init_e1a48	v	pipiiiiiiiii	232	47	48	68	0	60	0	8	0	0	0	0	0	0	FAULT/FAULT:68	FAULT_SITE: stock ('write', 1928) vs rebuilt ('write', 1372)	0	0	0
+1242	IRInst__redirectDestThroughNewMov	i	pnnii	136	12	12	201	201	0	0	0	0	0	0	0	0	0	FAULT/FAULT:201		0	0	0
+1206	Compiler__fail	v	pn	48	9	9	686	686	0	0	0	0	0	0	0	0	0	FAULT/FAULT:686		0	0	0
+1041	ilRewriteForTextureState	i	ppppp	944	209	211	410	351	46	0	13	0	0	0	0	0	0	FAULT/FAULT:410	FAULT_SITE: stock ('read', 1024) vs rebuilt ('read', 1028)	0	0	0
+1230	IfFooterStatic__accept	v	pp	96	24	24	214	214	0	0	0	0	0	0	0	0	0	FAULT/FAULT:179,RET/RET:35		0	0	0
+1221	Compiler__releaseChipAndPools	v	pn	160	40	40	240	170	70	0	0	0	0	0	0	0	0	FAULT/FAULT:224,RET/RET:16	REORDERED: same writes/reads per segment; order differs	0	0	0
+1251	IRInst__createMovForDest	i	ppi	396	10	10	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
+1296	Block__resolveRedirect	v	p	88	22	22	156	156	0	0	0	0	0	0	0	0	0	FAULT/FAULT:115,RET/RET:41		0	0	0
+1279	Block__isSimple	i	p	80	13	10	125	125	0	0	0	0	0	0	0	0	0	FAULT/FAULT:125		0	0	0
+1307	Block__getFirstRealInst	i	p	104	21	18	184	184	0	0	0	0	0	0	0	0	0	FAULT/FAULT:139,RET/RET:45		0	0	0
+900	gld_clearStreamBuffers	v	pn	448	89	89	370	47	300	0	23	0	0	0	0	0	0	FAULT/FAULT:370	FAULT_PARTIAL: same fault ('read', 3); accesses completed before it differ: reads: only stock reads (1342642764, 4)	0	0	0
+1406	KhanPs__vslot17_isSimpleInst	v	ip	192	20	19	143	143	0	0	0	0	0	0	0	0	0	FAULT/FAULT:108,RET/RET:35		0	0	0
+1250	MachineCodeWriter__encodeProgram	v	pii	652	13	12	194	138	56	0	0	0	0	0	0	0	0	FAULT/FAULT:194	REORDERED: same writes/reads per segment; order differs	0	0	0
+1245	MachineAssembler__visitIfHeaderStatic	v	iiiiiii	260	65	64	464	463	1	0	0	0	0	0	0	0	0	FAULT/FAULT:460,RET/RET:4	REORDERED: same writes/reads per segment; order differs	0	0	0
+1405	KhanVs__vslot17_isSimpleInst	v	ip	192	20	19	136	136	0	0	0	0	0	0	0	0	0	FAULT/FAULT:97,RET/RET:39		0	0	0
+1248	EncoderState__init_e33cc	v	ppi	340	76	80	184	4	170	0	10	0	0	0	0	0	0	FAULT/FAULT:184	FAULT_PARTIAL: same fault ('read', 44304); accesses completed before it differ: reads: only rebuilt reads (1342395456, 4)	0	0	0
+905	gldFreeEngineState	v	p	240	15	16	164	2	105	37	19	0	0	0	0	0	0	FAULT/FAULT:164	FAULT_PARTIAL: same fault ('wild', 1342613312); accesses completed before it differ: reads: only stock reads (1342227104, 4)	1	0	0
+1408	IRInst__isForwardable	i	pip	268	27	28	164	164	0	0	0	0	0	0	0	0	0	FAULT/FAULT:129,RET/RET:35		0	0	0
+1249	EncoderState__init	v	ppi	340	76	80	217	8	182	0	27	0	0	0	0	0	0	FAULT/FAULT:217	FAULT_PARTIAL: same fault ('read', 44304); accesses completed before it differ: reads: only rebuilt reads (1342343744, 4)	0	0	0
+1424	Program__splitExports	v	p	660	77	83	186	186	0	0	0	0	0	0	0	0	0	FAULT/FAULT:156,RET/RET:30		0	0	0
+1431	IRInst__tryFoldOutputScale	v	pp	724	65	60	185	185	0	0	0	0	0	0	0	0	0	FAULT/FAULT:151,RET/RET:34		0	0	0
+1432	Program__forwardMovIntoConsumers	v	pip	464	27	19	230	230	0	0	0	0	0	0	0	0	0	FAULT/FAULT:196,RET/RET:34		0	0	0
+205	gld_deleteContextProgramObjects	v	p	212	23	24	780	779	0	0	0	0	0	0	1	0	0	FAULT/FAULT:779,TIMEOUT/TIMEOUT:1		0	0	0
+701	gldLeaveInternalDrawState	v	pp	380	91	95	237	25	128	0	83	0	0	0	1	0	0	FAULT/FAULT:236,TIMEOUT/TIMEOUT:1	FAULT_PARTIAL: same fault ('read', 5444); accesses completed before it differ: reads: only stock reads (1342208700, 4)	0	0	0
+822	fpVariantCacheInsert	i	pppiinpi	164	41	38	477	465	8	0	4	0	0	0	0	0	0	FAULT/FAULT:477	FAULT_PARTIAL: same fault ('read', 10); accesses completed before it differ: reads: only stock reads (1342220028, 4)	0	0	0
+1435	pass_assign_slots	v	p	488	12	11	442	431	10	0	0	0	0	0	0	0	0	FAULT/FAULT:442	REORDERED: same writes/reads per segment; order differs	1	0	0
+1498	IRInst__canFoldConstantSource	i	pnip	512	13	14	326	326	0	0	0	0	0	0	0	0	0	FAULT/FAULT:326		0	0	0
+1434	Program__propagateMovThroughUses	v	pip	3008	164	183	216	136	73	0	7	0	0	0	0	0	0	FAULT/FAULT:216	FAULT_PARTIAL: same fault ('read', 348); accesses completed before it differ: reads: only stock reads (1342330644, 4)	0	0	0
+1043	scDestroy	v	p	92	23	23	391	191	200	0	0	0	0	0	0	0	0	FAULT/FAULT:384,RET/RET:7	REORDERED: same writes/reads per segment; order differs	0	0	0
+1492	Compiler__getOrCreateLoadConstN	v	iiiiiiii	588	64	60	124	2	63	0	59	0	0	0	0	0	0	FAULT/FAULT:124	FAULT_SITE: stock ('read', 3206791844) vs rebuilt ('read', 3206791756)	0	0	0
+1534	Program__applySourceTokenToOperand	v	ippnp	488	106	104	178	161	9	0	0	0	0	0	0	0	8	FAULT/FAULT:132,RET/RET:46	REORDERED: same writes/reads per segment; order differs	0	0	0
+1536	OpcodeTemplate__lookup	i	npn	132	30	19	147	99	0	0	0	0	0	0	0	0	0	FAULT/FAULT:146,RET/RET:1		48	0	0
+1540	Program__createInstForIlOpcode	i	pnn	168	35	34	197	197	0	0	0	0	0	0	0	0	0	FAULT/FAULT:166,RET/RET:31		0	0	0
+1538	IRInst__applyDescriptorSwizzle	v	pp	176	44	41	158	158	0	0	0	0	0	0	0	0	0	FAULT/FAULT:115,RET/RET:43		0	0	0
+1541	Program__appendInst	v	ppi	480	36	33	239	239	0	0	0	0	0	0	0	0	0	FAULT/FAULT:239		0	0	0
+1429	Program__insertExitMarkerAndFlagBlocks	v	iiiiiii	536	32	31	421	98	323	0	0	0	0	0	0	0	0	FAULT/FAULT:421	REORDERED: same writes/reads per segment; order differs	0	0	0
+1569	IRInst__firstOperandWithSelectNot4	i	pn	116	27	26	142	142	0	0	0	0	0	0	0	0	0	FAULT/FAULT:118,RET/RET:24		0	0	0
+1574	IRInst__create	i	ii	108	9	7	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
+1578	IRInst__isProjectionOfClass26or3a	i	p	96	23	21	138	138	0	0	0	0	0	0	0	0	0	FAULT/FAULT:104,RET/RET:34		0	0	0
+1579	IRInst__isProjectionOfClass44	i	p	88	22	22	145	145	0	0	0	0	0	0	0	0	0	FAULT/FAULT:99,RET/RET:46		0	0	0
+1409	Program__insertMovAfter	v	pppiii	424	13	14	543	72	471	0	0	0	0	0	0	0	0	FAULT/FAULT:543	REORDERED: same writes/reads per segment; order differs	0	0	0
+1610	IRInst__isProjectionOfOpcode2a	i	p	128	32	29	156	156	0	0	0	0	0	0	0	0	0	FAULT/FAULT:112,RET/RET:44		0	0	0
+1626	IRInst__setOperandSourceIfLegal	i	iiiiip	144	36	35	266	243	23	0	0	0	0	0	0	0	0	FAULT/FAULT:263,RET/RET:3	REORDERED: same writes/reads per segment; order differs	0	0	0
+18	_gldDestroyContext	v	p	76	12	10	591	574	0	0	0	0	0	0	2	0	0	FAULT/FAULT:589,TIMEOUT/TIMEOUT:2		15	0	0
+1433	Program__foldKind6IntoKind7Inst	v	ppp	2148	20	22	433	88	345	0	0	0	0	0	0	0	0	FAULT/FAULT:433	REORDERED: same writes/reads per segment; order differs	0	0	0
+755	gldDrawInternalRect	v	piipn	212	33	42	682	108	574	0	0	0	0	0	0	0	0	FAULT/FAULT:682	REORDERED: same writes/reads per segment; order differs	0	0	0
+1605	IRInst__ctor_10502c	v	pip	312	50	50	196	0	150	0	1	0	0	0	0	0	0	FAULT/FAULT:196	FAULT_SITE: stock ('write', 380) vs rebuilt ('write', 264)	45	0	0
+1223	Compiler__compileWithRetry	v	pniii	324	40	37	238	2	236	0	0	0	0	0	0	0	0	FAULT/FAULT:203,RET/RET:35	REORDERED: same writes/reads per segment; order differs	0	0	0
+1606	IRInst__ctor_1051b0	v	pip	312	50	50	368	0	335	0	3	0	0	0	0	0	0	FAULT/FAULT:368	FAULT_SITE: stock ('write', 65660) vs rebuilt ('write', 65544)	30	0	0
+1772	IRInst__swapOperands	v	pnnn	304	76	70	140	101	2	0	37	0	0	0	0	0	0	FAULT/FAULT:138,RET/RET:2	FAULT_SITE: stock ('read', 3497594444) vs rebuilt ('read', 3497277264)	0	0	0
+934	gld_compileFragmentProgram	v	iiiid	184	38	38	238	144	32	0	48	0	0	0	1	0	0	FAULT/FAULT:233,RET/RET:4,TIMEOUT/TIMEOUT:1	FAULT_PARTIAL: same fault ('read', 26); accesses completed before it differ: reads: only stock reads (1342599052, 4)	13	0	0
+1776	IRInst__cloneIfPresub	i	ppn	200	50	50	225	132	83	0	10	0	0	0	0	0	0	FAULT/FAULT:225	FAULT_SITE: stock ('write', 5) vs rebuilt ('write', 1)	0	0	0
+1774	IRInst__replaceBodyKeepLinks	v	ppp	200	50	50	189	47	142	0	0	0	0	0	0	0	0	FAULT/FAULT:144,RET/RET:45	REORDERED: same writes/reads per segment; order differs	0	0	0
+1786	IRInst__foldCompareConstResult	i	ppnip	132	26	29	204	204	0	0	0	0	0	0	0	0	0	FAULT/FAULT:176,RET/RET:28		0	0	0
+1619	IRInst__firstLiteralSourceValue	v	pp	184	43	44	281	280	0	0	0	0	0	0	1	0	0	FAULT/FAULT:272,RET/RET:8,TIMEOUT/TIMEOUT:1		0	0	0
+1472	IRInst__computeSourceLaneMask	v	ppnpi	200	50	48	187	87	88	0	10	0	0	0	2	0	0	FAULT/FAULT:153,RET/RET:32,TIMEOUT/TIMEOUT:2	FAULT_SITE: stock ('write', 134217728) vs rebuilt ('write', 134217731)	0	0	0
+1788	IRInst__retargetOpcode	v	pnnnni	220	22	21	200	200	0	0	0	0	0	0	0	0	0	FAULT/FAULT:200		0	0	0
+1794	IRInst__canFoldConstantCompare	i	pp	500	39	29	136	136	0	0	0	0	0	0	0	0	0	FAULT/FAULT:93,RET/RET:43		0	0	0
+1789	IRInst__retargetOpcodeFromOperands	v	pi	216	12	12	191	191	0	0	0	0	0	0	0	0	0	FAULT/FAULT:191		0	0	0
+1795	IRInst__foldConstantSourcesIntoClone	v	ppp	1240	132	141	212	188	24	0	0	0	0	0	0	0	0	FAULT/FAULT:198,RET/RET:14	REORDERED: same writes/reads per segment; order differs	0	0	0
+1832	IRInst__query68AndWord4fNotIn6_7	i	p	92	22	21	135	135	0	0	0	0	0	0	0	0	0	FAULT/FAULT:93,RET/RET:42		0	0	0
+1833	IRInst__query68AndWord4fIs18	i	p	88	22	22	143	143	0	0	0	0	0	0	0	0	0	FAULT/FAULT:105,RET/RET:38		0	0	0
+1834	IRInst__query68AndWord4fIn16_17	i	p	92	23	23	151	151	0	0	0	0	0	0	0	0	0	FAULT/FAULT:111,RET/RET:40		0	0	0
+1835	IRInst__query68AndWord4fNotMasked	i	p	116	28	25	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:114,RET/RET:36		0	0	0
+1859	OpcodeTraits__getRecordTail	v	np	76	19	19	159	159	0	0	0	0	0	0	0	0	0	FAULT/FAULT:119,RET/RET:40		0	0	0
+1861	OpcodeTraits__flagBit0	i	np	76	14	15	176	176	0	0	0	0	0	0	0	0	0	FAULT/FAULT:176		0	0	0
+1473	IRInst__computeSourceReadMask	v	ppnip	152	38	37	166	147	16	0	0	0	0	0	3	0	0	FAULT/FAULT:149,RET/RET:14,TIMEOUT/TIMEOUT:3	REORDERED: same writes/reads per segment; order differs	0	0	0
+1864	Backend__bindingSlotsSequential	v	p	172	21	23	199	199	0	0	0	0	0	0	0	0	0	FAULT/FAULT:199		0	0	0
+1865	OpcodeTraits__flagBit2	i	np	76	14	15	153	153	0	0	0	0	0	0	0	0	0	FAULT/FAULT:153		0	0	0
+1694	IRExport__ctor_108918	v	pp	276	11	9	587	0	586	0	1	0	0	0	0	0	0	FAULT/FAULT:587	FAULT_SITE: stock ('write', 16508) vs rebuilt ('write', 16392)	0	0	0
+1796	IRInst__foldCompareResultIntoCopy	i	pp	1156	77	79	334	176	156	0	0	0	0	0	0	0	2	FAULT/FAULT:334	REORDERED: same writes/reads per segment; order differs	0	0	0
+1866	OpcodeTraits__flagBit3	v	np	76	14	15	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
+1867	OpcodeTraits__flagBit6	i	np	76	14	15	154	154	0	0	0	0	0	0	0	0	0	FAULT/FAULT:154		0	0	0
+1868	OpcodeTraits__flagBit7	i	np	76	14	15	151	151	0	0	0	0	0	0	0	0	0	FAULT/FAULT:151		0	0	0
+1870	OpcodeTraits__flagBit9	i	np	76	14	15	167	166	0	0	0	0	0	0	0	0	0	FAULT/FAULT:167		1	0	0
+1869	OpcodeTraits__flagBit8	i	np	76	14	15	156	156	0	0	0	0	0	0	0	0	0	FAULT/FAULT:156		0	0	0
+1871	OpcodeTraits__flagBit10	i	np	76	14	15	155	155	0	0	0	0	0	0	0	0	0	FAULT/FAULT:155		0	0	0
+1872	OpcodeTraits__flagBit12	i	np	76	14	15	151	151	0	0	0	0	0	0	0	0	0	FAULT/FAULT:151		0	0	0
+1873	OpcodeTraits__flagBit13	i	np	76	14	15	153	153	0	0	0	0	0	0	0	0	0	FAULT/FAULT:153		0	0	0
+1874	OpcodeTraits__getField4	i	np	76	16	17	154	154	0	0	0	0	0	0	0	0	0	FAULT/FAULT:154		0	0	0
+1875	OpcodeTraits__getInstClass	i	np	76	16	17	162	162	0	0	0	0	0	0	0	0	0	FAULT/FAULT:162		0	0	0
+1876	OpcodeTraits__getFieldC	v	np	76	16	17	157	157	0	0	0	0	0	0	0	0	0	FAULT/FAULT:157		0	0	0
+1877	OpcodeTraits__getField34	i	np	76	16	17	172	172	0	0	0	0	0	0	0	0	0	FAULT/FAULT:172		0	0	0
+1688	IRExport__ctor_1085b0	v	pp	276	11	9	640	0	634	0	6	0	0	0	0	0	0	FAULT/FAULT:640	FAULT_SITE: stock ('write', 4223507775) vs rebuilt ('write', 4223507659)	0	0	0
+1890	OpcodeTraits__flag1WithoutFlag7	i	pp	124	18	19	195	195	0	0	0	0	0	0	0	0	0	FAULT/FAULT:195		0	0	0
+1878	OpcodeTraits__instFlagBit2	i	pp	80	16	18	159	159	0	0	0	0	0	0	0	0	0	FAULT/FAULT:159		0	0	0
+2157	Block__appendCopyForDest	v	pnpnnppnpn	756	19	17	222	222	0	0	0	0	0	0	0	0	0	FAULT/FAULT:222		0	0	0
+2170	ImmedConstBuffer__clone	v	ppp	360	19	23	277	171	106	0	0	0	0	0	0	0	0	FAULT/FAULT:277	REORDERED: same writes/reads per segment; order differs	0	0	0
+2182	ExportSlot__clone	v	ipp	276	19	20	381	113	268	0	0	0	0	0	0	0	0	FAULT/FAULT:381	REORDERED: same writes/reads per segment; order differs	0	0	0
+2171	VertexRegister__clone	v	ppp	240	12	10	379	117	262	0	0	0	0	0	0	0	0	FAULT/FAULT:379	REORDERED: same writes/reads per segment; order differs	0	0	0
+1801	IRInst__foldConstantFactor	v	ppnp	348	58	60	662	158	504	0	0	0	0	0	0	0	0	FAULT/FAULT:662	REORDERED: same writes/reads per segment; order differs	0	0	0
+133	glFlush_impl	v	iiiiiii	184	14	12	98	4	82	1	2	0	0	0	9	0	0	FAULT/FAULT:89,TIMEOUT/TIMEOUT:9	FAULT_PARTIAL: same fault ('read', 0); accesses completed before it differ: reads: only stock reads (1342223656, 4)	0	0	0
+2183	Resource__clone	v	ipp	244	17	19	462	125	337	0	0	0	0	0	0	0	0	FAULT/FAULT:462	REORDERED: same writes/reads per segment; order differs	0	0	0
+2184	FixedValue__clone	v	ipp	240	16	18	372	102	270	0	0	0	0	0	0	0	0	FAULT/FAULT:372	REORDERED: same writes/reads per segment; order differs	0	0	0
+1778	IRInst__findConstantOperandWithValue	i	iiid	256	38	40	421	408	9	0	0	0	0	0	4	0	0	FAULT/FAULT:417,TIMEOUT/TIMEOUT:4	REORDERED: same writes/reads per segment; order differs	0	0	0
+1800	IRInst__convertCompareToBinaryAlu	v	pp	280	63	64	588	5	571	0	10	0	0	0	1	0	0	FAULT/FAULT:587,TIMEOUT/TIMEOUT:1	FAULT_PARTIAL: same fault ('read', 0); accesses completed before it differ: reads: only rebuilt reads (1342543132, 4)	1	0	0
+2186	FixedValue__ctor_124724	v	pnnip	272	35	32	333	8	325	0	0	0	0	0	0	0	0	FAULT/FAULT:333	REORDERED: same writes/reads per segment; order differs	0	0	0
+2259	KhanPs__vslot76_getBindingLimit	v	pp	64	16	16	168	168	0	0	0	0	0	0	0	0	0	FAULT/FAULT:131,RET/RET:37		0	0	0
+2185	FixedValue__ctor_1245a8	v	pnnip	272	35	32	349	3	346	0	0	0	0	0	0	0	0	FAULT/FAULT:349	REORDERED: same writes/reads per segment; order differs	0	0	0
+2194	ExportValue__ctor_124e68	v	pinip	552	27	25	333	10	323	0	0	0	0	0	0	0	0	FAULT/FAULT:333	REORDERED: same writes/reads per segment; order differs	0	0	0
+2277	KhanVs__vslot76_getBindingLimits	v	pp	96	24	24	165	165	0	0	0	0	0	0	0	0	0	FAULT/FAULT:136,RET/RET:29		0	0	0
+2278	KhanVs__vslot77_getBindingLimits	v	pp	72	18	18	167	167	0	0	0	0	0	0	0	0	0	FAULT/FAULT:128,RET/RET:39		0	0	0
+2195	ExportValue__ctor_1250dc	v	pinip	552	27	25	330	7	323	0	0	0	0	0	0	0	0	FAULT/FAULT:330	REORDERED: same writes/reads per segment; order differs	0	0	0
+2306	IRInst__hasOperandKindClass1	i	p	108	21	21	157	114	0	0	0	0	0	0	0	0	0	FAULT/FAULT:157		43	0	0
+2310	Block__footerTargetOrSelf	i	p	80	20	20	161	161	0	0	0	0	0	0	0	0	0	FAULT/FAULT:120,RET/RET:41		0	0	0
+1509	Program__findOrCreateConstInst	i	pii	588	81	95	452	132	183	0	0	0	0	0	5	0	132	FAULT/FAULT:447,TIMEOUT/TIMEOUT:5	REORDERED: same writes/reads per segment; order differs	0	0	0
+2312	Program__mergeBlockWithSuccessor	i	iip	248	8	8	144	144	0	0	0	0	0	0	0	0	0	FAULT/FAULT:144		0	0	0
+2292	KhanVs__vslot71_canCombineSources	v	ipnpiip	416	71	46	211	211	0	0	0	0	0	0	0	0	0	FAULT/FAULT:175,RET/RET:36		0	0	0
+2314	Block__findRegionHeader	i	p	264	25	24	186	158	28	0	0	0	0	0	0	0	0	FAULT/FAULT:182,RET/RET:4	REORDERED: same writes/reads per segment; order differs	0	0	0
+2320	Program__collapseIfRegion	i	pp	296	32	32	242	242	0	0	0	0	0	0	0	0	0	FAULT/FAULT:196,RET/RET:46		0	0	0
+2307	pass_optimize_control_flow	v	p	88	22	21	429	352	77	0	0	0	0	0	0	0	0	FAULT/FAULT:429	REORDERED: same writes/reads per segment; order differs	0	0	0
+2330	Program__foldConstantIfRegion	v	ppppp	1216	71	78	330	114	216	0	0	0	0	0	0	0	0	FAULT/FAULT:330	REORDERED: same writes/reads per segment; order differs	0	0	0
+2332	IfFooter__ctor_12e56c	v	ipp	236	29	30	372	139	233	0	0	0	0	0	0	0	0	FAULT/FAULT:372	REORDERED: same writes/reads per segment; order differs	0	0	0
+1237	IRInst__hasSourceWithKey	i	pnp	156	27	27	428	419	0	0	0	0	0	0	9	0	0	FAULT/FAULT:419,TIMEOUT/TIMEOUT:9		0	0	0
+2347	IRInst__chainLast	i	p	164	18	20	137	137	0	0	0	0	0	0	0	0	0	FAULT/FAULT:91,RET/RET:46		0	0	0
+2349	IRInst__advanceToChainEnd	i	p	228	18	20	134	134	0	0	0	0	0	0	0	0	0	FAULT/FAULT:96,RET/RET:38		0	0	0
+370	gldSetCurrentProgramObject	v	pp	440	71	72	327	22	52	9	244	0	0	0	0	0	0	FAULT/FAULT:327	FAULT_PARTIAL: same fault ('wild', 1342509488); accesses completed before it differ: reads: only stock reads (1342388216, 4)	0	0	0
+2359	RegAlloc__markReloadModifiers	v	inn	280	41	40	188	188	0	0	0	0	0	0	0	0	0	FAULT/FAULT:165,RET/RET:23		0	0	0
+2362	RegAlloc__emitSpillReload	i	pipp	276	15	15	178	178	0	0	0	0	0	0	0	0	0	FAULT/FAULT:178		0	0	0
+2357	IRInst__findChainNodeById	i	in	112	21	21	280	280	0	0	0	0	0	0	0	0	0	FAULT/FAULT:280		0	0	0
+2364	IRInst__isQuery28OrOpcode93	v	p	88	18	18	156	156	0	0	0	0	0	0	0	0	0	FAULT/FAULT:115,RET/RET:41		0	0	0
+2377	RegAlloc__buildClassTables	v	pinin	1440	152	138	201	164	32	0	0	0	0	0	0	0	0	FAULT/FAULT:200,RET/RET:1	REORDERED: same writes/reads per segment; order differs	5	0	0
+2161	Program__hoistInstructions	v	p	1160	107	94	139	103	36	0	0	0	0	0	0	0	0	FAULT/FAULT:139	REORDERED: same writes/reads per segment; order differs	0	0	0
+2395	RegAlloc__registerOfInst	i	pp	264	26	20	140	140	0	0	0	0	0	0	0	0	0	FAULT/FAULT:105,RET/RET:35		0	0	0
+2326	Program__removeDeadRegion	v	ppip	820	118	121	322	40	281	0	0	0	0	0	1	0	0	FAULT/FAULT:321,TIMEOUT/TIMEOUT:1	REORDERED: same writes/reads per segment; order differs	0	0	0
+2324	Program__rebaseInstRegisters	v	pnp	460	25	25	182	149	1	0	0	0	0	0	3	0	0	FAULT/FAULT:179,TIMEOUT/TIMEOUT:3	REORDERED: same writes/reads per segment; order differs	29	0	0
+2423	Program__finishUsevectorChain	v	iiip	84	21	21	216	216	0	0	0	0	0	0	0	0	0	FAULT/FAULT:175,RET/RET:41		0	0	0
+2269	KhanPs__vslot85_findOrEncodeConstantVector	v	pppp	780	44	43	462	157	102	0	0	0	0	0	3	0	200	FAULT/FAULT:459,TIMEOUT/TIMEOUT:3	REORDERED: same writes/reads per segment; order differs	0	0	0
+2432	Rewrite__tryFoldSourceLaneMask_001396d0	i	ppnp	360	24	20	137	137	0	0	0	0	0	0	0	0	0	FAULT/FAULT:98,RET/RET:39		0	0	0
+2437	Block__scanBranchConeForFetchAndInterp	v	ppn	700	19	14	163	163	0	0	0	0	0	0	0	0	0	FAULT/FAULT:125,RET/RET:38		0	0	0
+2422	HwLimits__computeBlockLiveness	v	inpp	2336	25	30	694	693	0	0	0	0	0	0	1	0	0	FAULT/FAULT:693,TIMEOUT/TIMEOUT:1		0	0	0
+1617	IRInst__removeFromListEx	v	pip	224	46	44	225	220	0	0	0	0	0	0	5	0	0	FAULT/FAULT:208,RET/RET:12,TIMEOUT/TIMEOUT:5		0	0	0
+2453	Program__rewriteAttribShaderInsts_0013da3c	v	p	1024	72	64	152	95	57	0	0	0	0	0	0	0	0	FAULT/FAULT:152	REORDERED: same writes/reads per segment; order differs	0	0	0
+2468	PostPack__getNeededLaneMask	v	pip	464	34	26	225	225	0	0	0	0	0	0	0	0	0	FAULT/FAULT:181,RET/RET:44		0	0	0
+2336	Program__isRegionTrivial	i	ppp	476	9	10	766	763	0	0	0	0	0	0	3	0	0	FAULT/FAULT:763,TIMEOUT/TIMEOUT:3		0	0	0
+2452	Inst__swizzleThroughProducer_0013d820	v	pp	540	31	30	140	139	0	0	0	0	0	0	1	0	0	FAULT/FAULT:132,RET/RET:7,TIMEOUT/TIMEOUT:1		0	0	0
+2469	PostPack__canMoveLane	i	pppp	1532	27	29	165	165	0	0	0	0	0	0	0	0	0	FAULT/FAULT:120,RET/RET:45		0	0	0
+2481	Target__acceptsSelect	i	ipnp	132	27	26	218	218	0	0	0	0	0	0	0	0	0	FAULT/FAULT:193,RET/RET:25		0	0	0
+2491	Inst__opcodeOrSourcesDiffer	i	pp	252	40	40	184	184	0	0	0	0	0	0	0	0	0	FAULT/FAULT:158,RET/RET:26		0	0	0
+2486	Inst__noBarrierBetween	i	ppi	228	25	22	164	0	147	0	17	0	0	0	0	0	0	FAULT/FAULT:121,RET/RET:43	FAULT_PARTIAL: same fault ('read', 351); accesses completed before it differ: reads: only rebuilt reads (1342679000, 4)	0	0	0
+2492	Inst__sameOpcodeAndSources	i	pp	304	34	34	220	220	0	0	0	0	0	0	0	0	0	FAULT/FAULT:179,RET/RET:41		0	0	0
+2494	Inst__sourcesRelated	i	pp	152	31	30	210	210	0	0	0	0	0	0	0	0	0	FAULT/FAULT:177,RET/RET:33		0	0	0
+2498	Inst__hoistToOperandBlock	v	ipn	572	22	19	169	169	0	0	0	0	0	0	0	0	0	FAULT/FAULT:128,RET/RET:41		0	0	0
+2500	Inst__foldOutputScaleChain	v	pp	404	36	37	168	168	0	0	0	0	0	0	0	0	0	FAULT/FAULT:128,RET/RET:40		0	0	0
+2509	Inst__tryComposeSelectWithProducer_00149de4	i	pnppp	2740	39	37	178	178	0	0	0	0	0	0	0	0	0	FAULT/FAULT:159,RET/RET:19		0	0	0
+2519	Inst__mergeSelectsFrom	v	pi	284	55	55	195	195	0	0	0	0	0	0	0	0	0	FAULT/FAULT:155,RET/RET:40		0	0	0
+2512	Inst__tryCopyPropagate	i	pii	220	55	55	226	186	0	0	0	0	0	0	0	0	0	FAULT/FAULT:224,RET/RET:2		40	0	0
+2533	Inst__mergeSplatSourceInsts_00151370	i	ppp	1340	36	34	252	252	0	0	0	0	0	0	0	0	0	FAULT/FAULT:222,RET/RET:30		0	0	0
+2536	Inst__mergeAddWithSharedConstant_00152ea8	i	ppp	4720	34	34	195	195	0	0	0	0	0	0	0	0	0	FAULT/FAULT:170,RET/RET:25		0	0	0
+2535	Inst__mergeSplatSourceInsts_001524b8	i	ppp	1648	38	39	275	275	0	0	0	0	0	0	0	0	0	FAULT/FAULT:246,RET/RET:29		0	0	0
+2534	Inst__mergeSplatSourceInsts_00151a74	i	ppp	1896	38	37	254	254	0	0	0	0	0	0	0	0	0	FAULT/FAULT:230,RET/RET:24		0	0	0
+2545	Inst__canShiftTargetField	i	ipninp	600	59	57	193	193	0	0	0	0	0	0	0	0	0	FAULT/FAULT:166,RET/RET:27		0	0	0
+2537	Inst__mergeMulWithSharedConstant_001541f0	i	ppp	2132	34	34	191	191	0	0	0	0	0	0	0	0	0	FAULT/FAULT:166,RET/RET:25		0	0	0
+2548	Inst__shiftTargetFieldFromProducer	v	ipiiii	196	26	26	141	141	0	0	0	0	0	0	0	0	0	FAULT/FAULT:101,RET/RET:40		0	0	0
+2547	Inst__shiftTargetField	v	ipninp	496	66	60	209	114	95	0	0	0	0	0	0	0	0	FAULT/FAULT:191,RET/RET:18	REORDERED: same writes/reads per segment; order differs	0	0	0
+2549	Inst__distributeResultScale	i	np	2424	54	62	175	116	59	0	0	0	0	0	0	0	0	FAULT/FAULT:156,RET/RET:19	REORDERED: same writes/reads per segment; order differs	0	0	0
+2562	Inst__collapseClampToSaturate	i	pp	772	35	39	164	164	0	0	0	0	0	0	0	0	0	FAULT/FAULT:125,RET/RET:39		0	0	0
+2565	Inst__foldProducerIntoConsumer	i	pnppp	2960	64	60	156	139	0	0	0	0	0	0	0	0	0	FAULT/FAULT:151,RET/RET:5		17	0	0
+2567	Inst__mergeSplatSourceInsts_00161748	i	ppp	2688	47	41	283	283	0	0	0	0	0	0	0	0	0	FAULT/FAULT:263,RET/RET:20		0	0	0
+2568	Inst__mergeSplatSourceInsts_001621c8	i	ppp	2404	37	37	171	146	0	0	0	0	0	0	0	0	0	FAULT/FAULT:163,RET/RET:8		25	0	0
+2570	Inst__collapseWithChainedSource	i	pnp	1532	10	13	212	212	0	0	0	0	0	0	0	0	0	FAULT/FAULT:212		0	0	0
+2579	IRInst__needsNoSchedulerNode	i	p	136	18	18	155	155	0	0	0	0	0	0	0	0	0	FAULT/FAULT:111,RET/RET:44		0	0	0
+2584	Inst__rewriteSourceSelects_00165788	v	pi	628	100	98	223	223	0	0	0	0	0	0	0	0	0	FAULT/FAULT:223		0	0	0
+2582	Scheduler__computeBlockRegisterSets	v	p	1520	109	114	238	217	11	0	9	0	0	0	0	0	0	FAULT/FAULT:238	FAULT_SITE: stock ('write', 0) vs rebuilt ('write', 8)	1	0	0
+2586	Scheduler__addDataDependencyEdge	v	pppiiin	448	65	77	210	114	24	0	19	0	0	0	0	0	53	FAULT/FAULT:210	FAULT_PARTIAL: same fault ('read', 60); accesses completed before it differ: reads: only stock reads (1342625176, 4)	0	0	0
+2426	IRInst__noUseBetween	i	pp	308	29	29	348	346	0	0	0	0	0	0	2	0	0	FAULT/FAULT:346,TIMEOUT/TIMEOUT:2		0	0	0
+2569	Inst__collapseIntoExtraSourceDispatch	i	pp	316	71	71	182	168	0	0	0	0	0	0	1	0	0	FAULT/FAULT:166,RET/RET:15,TIMEOUT/TIMEOUT:1		13	0	0
+2600	Scheduler__transformDotProduct	i	pp	516	29	37	186	186	0	0	0	0	0	0	0	0	0	FAULT/FAULT:186		0	0	0
+2596	Scheduler__findFreeTempRegister	i	pni	692	104	110	683	683	0	0	0	0	0	0	0	0	0	FAULT/FAULT:683		0	0	0
+2606	Scheduler__commitBundle	i	p	816	27	28	170	128	0	0	0	0	0	0	0	0	0	FAULT/FAULT:170		42	0	0
+2587	Scheduler__createNode	i	pppi	488	122	122	232	131	76	0	24	0	0	0	1	0	0	FAULT/FAULT:229,RET/RET:2,TIMEOUT/TIMEOUT:1	FAULT_SITE: stock ('write', 4) vs rebuilt ('write', 68)	0	0	0
+2603	Scheduler__buildDependencyGraph	v	pn	780	45	51	412	19	387	0	6	0	0	0	0	0	0	FAULT/FAULT:380,RET/RET:32	FAULT_SITE: stock ('write', 20) vs rebuilt ('write', 16)	0	0	0
+2611	Scheduler__tryReuseLoopIndexLoad	i	pp	596	48	43	210	210	0	0	0	0	0	0	0	0	0	FAULT/FAULT:164,RET/RET:46		0	0	0
+2598	Scheduler__insertOperandCopy	i	pp	1396	97	98	461	461	0	0	0	0	0	0	0	0	0	FAULT/FAULT:461		0	0	0
+2313	Block__walkToLoopFooter	i	nnpp	344	36	33	306	294	0	0	0	0	0	0	12	0	0	FAULT/FAULT:276,RET/RET:18,TIMEOUT/TIMEOUT:12		0	0	0
+2609	Scheduler__issueNode	v	pp	392	42	43	415	55	360	0	0	0	0	0	0	0	0	FAULT/FAULT:415	REORDERED: same writes/reads per segment; order differs	0	0	0
+2610	Scheduler__tryReuseAddressRegister	i	pp	1996	98	102	444	444	0	0	0	0	0	0	0	0	0	FAULT/FAULT:424,RET/RET:20		0	0	0
+2615	Scheduler__onNodeReady	v	pp	284	51	51	394	133	261	0	0	0	0	0	0	0	0	FAULT/FAULT:378,RET/RET:16	REORDERED: same writes/reads per segment; order differs	0	0	0
+2625	SchedModel__countIssuedNode	v	pp	180	31	30	168	168	0	0	0	0	0	0	0	0	0	FAULT/FAULT:127,RET/RET:41		0	0	0
+2626	SchedModel__uncountNode	v	pp	216	43	42	160	16	107	0	37	0	0	0	0	0	0	FAULT/FAULT:134,RET/RET:26	FAULT_PARTIAL: same fault ('read', 140); accesses completed before it differ: reads: only rebuilt reads (1342432792, 4)	0	0	0
+2627	SchedModel__countNodeResources	v	pi	200	32	31	151	151	0	0	0	0	0	0	0	0	0	FAULT/FAULT:121,RET/RET:30		0	0	0
+2633	ResourceModel__vslot11	v	pp	176	33	33	208	28	129	0	50	0	0	0	0	0	0	FAULT/FAULT:189,RET/RET:19	FAULT_PARTIAL: same fault ('read', 76); accesses completed before it differ: reads: only rebuilt reads (1342270776, 4)	1	0	0
+2635	ThreadModel__vslot4	v	pp	416	75	77	411	411	0	0	0	0	0	0	0	0	0	FAULT/FAULT:411		0	0	0
+2619	Scheduler__issueDeadNode	v	pp	204	14	15	615	3	593	0	14	0	0	0	0	0	0	FAULT/FAULT:615	FAULT_PARTIAL: same fault ('read', 76); accesses completed before it differ: reads: only rebuilt reads (1342335228, 4)	5	0	0
+2646	KeyLaneTable__eqKeys	v	pp	332	14	16	223	7	203	0	13	0	0	0	0	0	0	FAULT/FAULT:223	FAULT_PARTIAL: same fault ('read', 176); accesses completed before it differ: reads: only rebuilt reads (1342535384, 4)	0	0	0
+2659	ValueKey__producerIsOpcode2aFlagged	i	p	96	24	24	147	147	0	0	0	0	0	0	0	0	0	FAULT/FAULT:102,RET/RET:45		0	0	0
+1615	IRInst__removeFromList	v	pp	224	49	47	209	198	0	0	0	0	0	0	11	0	0	FAULT/FAULT:173,RET/RET:25,TIMEOUT/TIMEOUT:11		0	0	0
+2667	ValueKey__markRegisterLiveInBlock	v	pp	304	36	36	217	151	52	0	14	0	0	0	0	0	0	FAULT/FAULT:212,RET/RET:5	FAULT_PARTIAL: same fault ('read', 305); accesses completed before it differ: reads: only stock reads (1342630008, 4)	0	0	0
+2621	pass_sched_preprocess_and_schedule_inst	v	pp	408	94	102	265	197	33	7	28	0	0	0	0	0	0	FAULT/FAULT:265	FAULT_PARTIAL: same fault ('read', 780); accesses completed before it differ: reads: only stock reads (1342281084, 4)	0	0	0
+2675	IRInst__allOperandsSplat	i	pi	176	8	10	199	199	0	0	0	0	0	0	0	0	0	FAULT/FAULT:199		0	0	0
+2668	ValueKey__allRowsUniform	i	p	176	10	12	203	203	0	0	0	0	0	0	0	0	0	FAULT/FAULT:203		0	0	0
+2647	ScopedExprTable__hashKey	v	p	168	42	42	160	160	0	0	0	0	0	0	0	0	0	FAULT/FAULT:109,RET/RET:51		0	0	0
+2687	ValueKey__markUsesBetweenBlocks	v	pnn	476	72	76	333	333	0	0	0	0	0	0	0	0	0	FAULT/FAULT:333		0	0	0
+2715	ValueKey__allRowsKnown	i	p	172	18	18	176	176	0	0	0	0	0	0	0	0	0	FAULT/FAULT:176		0	0	0
+2716	ValueKey__rowKnown	i	pn	124	29	28	153	153	0	0	0	0	0	0	0	0	0	FAULT/FAULT:125,RET/RET:28		0	0	0
+2680	ValueKey__fill	v	p	1680	55	56	343	333	0	0	0	0	0	0	0	0	0	FAULT/FAULT:343		10	0	0
+139	gld_swapBuffersImpl	v	iiiiiii	184	14	12	180	3	152	4	21	0	0	0	0	0	0	FAULT/FAULT:180	FAULT_PARTIAL: same fault ('read', 0); accesses completed before it differ: reads: only stock reads (1342634012, 4)	0	0	0
+2747	ValueKey__evaluateConstantInstruction	v	ppp	404	37	38	218	218	0	0	0	0	0	0	0	0	0	FAULT/FAULT:218		0	0	0
+2672	ValueKey__fillSourceLaneUsage	v	p	204	37	39	492	487	0	0	0	0	0	0	5	0	0	FAULT/FAULT:487,TIMEOUT/TIMEOUT:5		0	0	0
+2689	ValueKey__computeLaneFlags	v	p	2764	57	52	296	291	5	0	0	0	0	0	0	0	0	FAULT/FAULT:296	REORDERED: same writes/reads per segment; order differs	0	0	0
+2786	Inst__findLaneProducer	i	inni	288	34	28	153	153	0	0	0	0	0	0	0	0	0	FAULT/FAULT:120,RET/RET:33		0	0	0
+2758	ValueKey__insertTempCopyOfOperand	i	pn	240	9	11	373	114	259	0	0	0	0	0	0	0	0	FAULT/FAULT:373	REORDERED: same writes/reads per segment; order differs	0	0	0
+2792	ValueKey__foldModifierDifferenceIntoSource2	i	p	316	27	24	192	192	0	0	0	0	0	0	0	0	0	FAULT/FAULT:148,RET/RET:44		0	0	0
+2380	RegAlloc__insertSpillCode	v	pi	3348	28	40	214	137	40	0	30	0	5	0	0	0	2	FAULT/FAULT:214	EFFECTS: segment 0: write (2131746936, 4): stock [1342455684] vs rebuilt [1342457140]	0	0	0
+2411	pass_color_graph	i	p	516	77	78	162	132	29	0	0	0	0	0	0	0	0	FAULT/FAULT:162	REORDERED: same writes/reads per segment; order differs	1	0	0
+2614	Scheduler__advanceCycle	v	p	1640	245	245	624	2	609	0	12	0	0	0	1	0	0	FAULT/FAULT:623,TIMEOUT/TIMEOUT:1	FAULT_PARTIAL: same fault ('read', 4); accesses completed before it differ: reads: only rebuilt reads (1342275852, 4)	0	0	0
+2809	ValueKey__evaluateLaneConstants	i	pp	1104	22	22	199	199	0	0	0	0	0	0	0	0	0	FAULT/FAULT:199		0	0	0
+2807	ValueKey__replaceWithLaneConstants	i	pp	780	39	41	570	155	415	0	0	0	0	0	0	0	0	FAULT/FAULT:570	REORDERED: same writes/reads per segment; order differs	0	0	0
+2825	ValueKey__simplifyInstruction	i	p	1848	37	38	225	225	0	0	0	0	0	0	0	0	0	FAULT/FAULT:225		0	0	0
+2816	ValueKey__splitMadIntoMulAdd	v	p	972	73	73	531	15	485	0	31	0	0	0	0	0	0	FAULT/FAULT:531	FAULT_SITE: stock ('read', 344) vs rebuilt ('read', 4)	0	0	0
+2827	ValueKey__canonicalizeConstantSources	i	p	1504	64	64	200	188	0	0	0	0	0	0	0	0	0	FAULT/FAULT:190,RET/RET:10		12	0	0
+2837	Block__moveProducersBefore	v	piip	2336	177	182	280	124	156	0	0	0	0	0	0	0	0	FAULT/FAULT:280	REORDERED: same writes/reads per segment; order differs	0	0	0
+2841	Inst__isMulDotWithinLimits	i	pip	164	40	40	251	251	0	0	0	0	0	0	0	0	0	FAULT/FAULT:215,RET/RET:36		0	0	0
+2833	Block__flattenAndRebuildAddMulTree	i	pnp	6976	192	218	329	79	250	0	0	0	0	0	0	0	0	FAULT/FAULT:329	REORDERED: same writes/reads per segment; order differs	0	0	0
+2843	IRInst__foldResultScaleIntoUsers	i	pnp	2440	37	40	159	159	0	0	0	0	0	0	0	0	0	FAULT/FAULT:146,RET/RET:13		0	0	0
+2850	Inst__r300Peephole_1882a4	v	pp	408	54	47	183	183	0	0	0	0	0	0	0	0	0	FAULT/FAULT:147,RET/RET:36		0	0	0
+2860	KhanPs__vslot31_isNotTextureFetch	v	ip	52	13	13	145	145	0	0	0	0	0	0	0	0	0	FAULT/FAULT:107,RET/RET:38		0	0	0
+2861	KhanPs__vslot65_isEncodableSourceSwizzle	v	piipp	152	32	32	226	225	0	0	0	0	0	0	0	0	0	FAULT/FAULT:192,RET/RET:34		1	0	0
+2868	SchedModel__assignConstantSelectors	v	pppin	568	41	41	398	398	0	0	0	0	0	0	0	0	0	FAULT/FAULT:398		0	0	0
+2870	Inst__computeKey	v	p	188	47	47	179	179	0	0	0	0	0	0	0	0	0	FAULT/FAULT:148,RET/RET:31		0	0	0
+2871	Inst__compareForMerge	v	pp	276	31	28	183	183	0	0	0	0	0	0	0	0	0	FAULT/FAULT:158,RET/RET:25		0	0	0
+2872	SchedModel__classifySlotUse	i	ppp	480	21	20	142	142	0	0	0	0	0	0	0	0	0	FAULT/FAULT:106,RET/RET:36		0	0	0
+2874	R300SchedModel__vslot34	v	ip	364	22	26	157	157	0	0	0	0	0	0	0	0	0	FAULT/FAULT:116,RET/RET:41		0	0	0
+1630	IRPresub2__validate	v	pi	68	17	17	157	134	7	0	0	0	0	0	15	1	0	FAULT/FAULT:142,TIMEOUT/TIMEOUT:15	UNINIT_REBUILT: rebuilt differs between stack fills: stock ('read', 0) vs rebuilt ('read', 2416220396)	0	0	0
+2867	SchedModel__fitsConstantLimit	i	pppnn	364	40	40	436	434	0	0	0	0	0	0	2	0	0	FAULT/FAULT:434,TIMEOUT/TIMEOUT:2		0	0	0
+2890	R300SchedModel__tryRewriteConsumerSelects	v	pp	1664	31	31	183	164	0	0	0	0	0	0	0	0	0	FAULT/FAULT:170,RET/RET:13		19	0	0
+2888	PackState__tryPlaceInstructionSources	i	ppppp	1428	103	100	311	311	0	0	0	0	0	0	0	0	0	FAULT/FAULT:283,RET/RET:28		0	0	0
+2897	R300VSchedModel__vslot13	v	pp	108	27	27	163	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:120,RET/RET:43		14	0	0
+2891	R300SchedModel__legalizeInstruction	v	pp	1708	19	19	383	383	0	0	0	0	0	0	0	0	0	FAULT/FAULT:383		0	0	0
+2899	R300VSchedModel__vslot14	v	pp	348	40	39	204	124	80	0	0	0	0	0	0	0	0	FAULT/FAULT:169,RET/RET:35	REORDERED: same writes/reads per segment; order differs	0	0	0
+2902	R300VSchedModel__vslot4_addInstruction	v	pp	528	59	60	250	250	0	0	0	0	0	0	0	0	0	FAULT/FAULT:236,RET/RET:14		0	0	0
+2903	R300VSchedModel__vslot3_canAddInstruction	v	pp	712	39	46	133	1	132	0	0	0	0	0	0	0	0	FAULT/FAULT:86,RET/RET:47	REORDERED: same writes/reads per segment; order differs	0	0	0
+2880	R300SchedModel__vslot14	v	pp	712	136	136	301	82	42	0	149	0	0	0	1	0	0	FAULT/FAULT:300,TIMEOUT/TIMEOUT:1	FAULT_PARTIAL: same fault ('read', 19); accesses completed before it differ: reads: only stock reads (1342310172, 4)	27	0	0
+2919	R520SchedModel__vslot21	v	ippp	112	24	24	206	8	119	0	78	0	0	0	0	0	0	FAULT/FAULT:166,RET/RET:40	FAULT_PARTIAL: same fault ('read', 143); accesses completed before it differ: reads: only stock reads (1342255700, 4)	1	0	0
+2918	FudoPs__peepholeCombine	v	ipnppii	2512	86	96	293	250	43	0	0	0	0	0	0	0	0	FAULT/FAULT:293	REORDERED: same writes/reads per segment; order differs	0	0	0
+2939	DListNode__clear	v	p	104	19	18	326	326	0	0	0	0	0	0	0	0	0	FAULT/FAULT:326		0	0	0
+2904	R300VSchedModel__vslot27	v	pp	1256	40	39	409	409	0	0	0	0	0	0	0	0	0	FAULT/FAULT:409		0	0	0
+2951	HashTable__findEntry	v	pi	264	54	54	337	323	14	0	0	0	0	0	0	0	0	FAULT/FAULT:331,RET/RET:6	REORDERED: same writes/reads per segment; order differs	0	0	0
+2788	ValueKey__foldDot3SingleLaneSource	i	p	392	29	31	192	186	4	0	0	0	0	0	2	0	0	FAULT/FAULT:178,RET/RET:12,TIMEOUT/TIMEOUT:2	REORDERED: same writes/reads per segment; order differs	0	0	0
+2959	HashTable__insert_1950e0	v	pnn	208	35	34	210	73	137	0	0	0	0	0	0	0	0	FAULT/FAULT:210	REORDERED: same writes/reads per segment; order differs	0	0	0
+2966	R300MachineAssembler__vslot12_assembleNodeAndMarkChildren	v	pp	256	58	55	219	88	130	0	0	0	0	0	0	0	0	FAULT/FAULT:202,RET/RET:17	REORDERED: same writes/reads per segment; order differs	1	0	0
+2957	HashTable__insert	v	pi	184	34	35	113	107	4	0	0	0	0	0	2	0	0	FAULT/FAULT:103,RET/RET:8,TIMEOUT/TIMEOUT:2	REORDERED: same writes/reads per segment; order differs	0	0	0
+3015	R300MachineAssembler__setAluSourceSelectsAndModifiers	v	ppnpinpin	640	122	112	222	221	0	0	0	0	0	0	0	0	0	FAULT/FAULT:216,RET/RET:6		1	0	0
+3013	R300MachineAssembler__emitFetchRecord	v	iin	640	86	91	224	10	181	0	33	0	0	0	0	0	0	FAULT/FAULT:198,RET/RET:26	FAULT_PARTIAL: same fault ('read', 1740); accesses completed before it differ: reads: only rebuilt reads (1342361352, 4)	0	0	0
+3021	R300MachineAssembler__placeInstructionConstants	v	ipi	872	111	111	232	226	0	0	0	0	0	0	0	0	0	FAULT/FAULT:221,RET/RET:11		6	0	0
+3024	R300MachineAssembler__emitTexRecord	v	ppip	692	121	125	236	229	0	0	0	0	0	0	0	0	0	FAULT/FAULT:235,RET/RET:1		7	0	0
+3046	R300VMachineAssembler__vslot15_assembleUnlessConstantMove	v	ppii	156	26	26	144	144	0	0	0	0	0	0	0	0	0	FAULT/FAULT:102,RET/RET:42		0	0	0
+3055	R300VMachineAssembler__vslot27_assembleOrFail	v	ipiiii	100	18	18	131	131	0	0	0	0	0	0	0	0	0	FAULT/FAULT:94,RET/RET:37		0	0	0
+3056	R300VMachineAssembler__vslot25_assembleOrFail	v	ipii	100	18	18	148	148	0	0	0	0	0	0	0	0	0	FAULT/FAULT:109,RET/RET:39		0	0	0
+3057	R300VMachineAssembler__vslot28_assembleChildOrFail	v	ipii	100	18	18	155	155	0	0	0	0	0	0	0	0	0	FAULT/FAULT:115,RET/RET:40		0	0	0
+3062	R300VMachineAssembler__vslot24_assembleWithTarget	v	ppi	104	26	26	337	337	0	0	0	0	0	0	0	0	0	FAULT/FAULT:311,RET/RET:26		0	0	0
+3029	R300MachineAssembler__assembleAluInstruction	v	pp	8500	214	249	221	8	0	148	23	0	0	0	0	0	0	FAULT/FAULT:221	FAULT_PARTIAL: same fault ('fetch', 0); accesses completed before it differ: reads: only stock reads (1342690596, 4)	42	0	0
+3063	R300VMachineAssembler__vslot30_assembleBlockThenSlot40	v	ppi	88	22	22	186	186	0	0	0	0	0	0	0	0	0	FAULT/FAULT:148,RET/RET:38		0	0	0
+3074	R300VMachineAssembler__encodeDestinationWord	v	ppp	1596	22	23	178	178	0	0	0	0	0	0	0	0	0	FAULT/FAULT:178		0	0	0
+3076	R300VMachineAssembler__encodeDualMathOperands	v	ppp	1916	186	181	161	125	0	0	0	0	0	0	0	0	0	FAULT/FAULT:161		36	0	0
+3077	R300VMachineAssembler__vslot14_assembleInstruction	v	pp	572	42	47	121	41	0	19	40	0	0	0	0	0	0	FAULT/FAULT:121	FAULT_PARTIAL: same fault ('read', 15); accesses completed before it differ: reads: only stock reads (1342656920, 4)	21	0	0
+3083	R520VMachineAssembler__vslot32_assembleWithPredicateClear	v	ppii	184	31	30	174	174	0	0	0	0	0	0	0	0	0	FAULT/FAULT:124,RET/RET:50		0	0	0
+2450	pass_rewrite	v	p	376	35	29	421	76	331	0	14	0	0	0	0	0	0	FAULT/FAULT:421	FAULT_PARTIAL: same fault ('read', 16); accesses completed before it differ: reads: only rebuilt reads (1342317940, 4)	0	0	0
+3085	R520VMachineAssembler__vslot30_assembleBlockThenSlot40	v	ppi	104	26	25	305	305	0	0	0	0	0	0	0	0	0	FAULT/FAULT:269,RET/RET:36		0	0	0
+3092	R520VMachineAssembler__vslot31_assembleWithPredicateRestore	v	ppii	508	49	47	215	215	0	0	0	0	0	0	0	0	0	FAULT/FAULT:167,RET/RET:48		0	0	0
+2342	RegAlloc__countUnassignedHwRegs	i	p	200	44	50	232	206	0	0	0	0	0	0	26	0	0	FAULT/FAULT:206,TIMEOUT/TIMEOUT:26		0	0	0
+3125	R520MachineAssembler__vslot38_appendBranchRecord	v	pni	240	53	50	143	143	0	0	0	0	0	0	0	0	0	FAULT/FAULT:111,RET/RET:32		0	0	0
+2722	ValueKey__evaluateConstantLane	v	ppnp	300	39	40	234	116	99	0	13	0	0	0	6	0	0	FAULT/FAULT:228,FAULT/TIMEOUT:1,TIMEOUT/TIMEOUT:5	FAULT_PARTIAL: same fault ('read', 2417918168); accesses completed before it differ: reads: only stock reads (1342500056, 4)	0	0	0
+3064	R300VMachineAssembler__vslot37_patchControlFlowTarget	v	pp	252	9	10	770	768	0	0	0	0	0	0	2	0	0	FAULT/FAULT:768,TIMEOUT/TIMEOUT:2		0	0	0
+3133	R520MachineAssembler__vslot24_assembleWithTarget	v	ppi	216	54	54	320	6	290	0	24	0	0	0	0	0	0	FAULT/FAULT:307,RET/RET:13	FAULT_PARTIAL: same fault ('read', 55); accesses completed before it differ: reads: only rebuilt reads (1342427456, 4)	0	0	0
+3139	R520MachineAssembler__vslot71_setAluSourceSelectsAndModifiers	v	ppnppnpp	1192	38	42	179	179	0	0	0	0	0	0	0	0	0	FAULT/FAULT:179		0	0	0
+3142	R520MachineAssembler__vslot26_assembleThenAppendRecord	v	iiiiiii	328	55	61	333	318	11	0	4	0	0	0	0	0	0	FAULT/FAULT:333	FAULT_PARTIAL: same fault ('read', 52); accesses completed before it differ: reads: only rebuilt reads (1342199164, 4)	0	0	0
+3093	R520VMachineAssembler__vslot25_assembleConditionalBlock	v	iiiiiii	840	55	38	394	391	2	0	0	0	0	0	1	0	0	FAULT/FAULT:389,RET/RET:4,TIMEOUT/TIMEOUT:1	REORDERED: same writes/reads per segment; order differs	0	0	0
+3146	R520MachineAssembler__vslot28_endLoop	v	ppii	704	45	51	114	114	0	0	0	0	0	0	0	0	0	FAULT/FAULT:114		0	0	0
+3145	R520MachineAssembler__vslot30_assembleThenTerminate	v	ppi	188	24	28	175	18	112	0	45	0	0	0	0	0	0	FAULT/FAULT:175	FAULT_PARTIAL: same fault ('read', 52); accesses completed before it differ: reads: only rebuilt reads (1342308336, 4)	0	0	0
+3151	R520MachineAssembler__emitCompareToPredicate	v	iiin	692	12	14	176	176	0	0	0	0	0	0	0	0	0	FAULT/FAULT:176		0	0	0
+3152	R520MachineAssembler__vslot39_appendLoopStartRecord	v	pi	284	71	69	144	114	30	0	0	0	0	0	0	0	0	FAULT/FAULT:143,RET/RET:1	REORDERED: same writes/reads per segment; order differs	0	0	0
+3150	R520MachineAssembler__vslot23_emitTexRecord	v	ppip	2180	115	119	257	240	0	0	0	0	0	0	0	0	0	FAULT/FAULT:257		17	0	0
+3153	R520MachineAssembler__appendBranchEndRecord	v	pnn	380	95	91	129	92	37	0	0	0	0	0	0	0	0	FAULT/FAULT:104,RET/RET:25	REORDERED: same writes/reads per segment; order differs	0	0	0
+3156	R520MachineAssembler__vslot32_assembleBranchEnd	v	ppi	160	27	31	186	19	144	0	23	0	0	0	0	0	0	FAULT/FAULT:186	FAULT_PARTIAL: same fault ('read', 116); accesses completed before it differ: reads: only rebuilt reads (1342425440, 4)	0	0	0
+453	extvsFreeShaderObject	v	pp	184	46	46	189	96	93	0	0	0	0	0	0	0	0	FAULT/FAULT:172,RET/RET:17	REORDERED: same writes/reads per segment; order differs	0	0	0
+3132	R520MachineAssembler__vslot31_assembleChildrenAndMark	v	ppi	176	44	44	480	3	443	0	34	0	0	0	0	0	0	FAULT/FAULT:465,RET/RET:15	FAULT_PARTIAL: same fault ('read', 226); accesses completed before it differ: reads: only stock reads (1342208404, 4)	0	0	0
+3158	R520MachineAssembler__vslot25_assembleLoop	v	iiiiiii	284	43	49	440	304	124	0	12	0	0	0	0	0	0	FAULT/FAULT:440	FAULT_PARTIAL: same fault ('read', 52); accesses completed before it differ: reads: only rebuilt reads (1342295120, 4)	0	0	0
+3155	R520MachineAssembler__vslot27_assembleIf	v	iiiiiii	264	66	66	450	224	202	0	18	0	0	0	0	0	0	FAULT/FAULT:450	FAULT_PARTIAL: same fault ('read', 52); accesses completed before it differ: reads: only rebuilt reads (1342218304, 4)	6	0	0
+2757	ValueKey__refreshExprRecordForOperand	i	pn	212	47	47	187	136	48	0	0	0	0	0	3	0	0	FAULT/FAULT:180,RET/RET:4,TIMEOUT/TIMEOUT:3	REORDERED: same writes/reads per segment; order differs	0	0	0
+1628	IRInst__validate	v	pp	620	144	138	175	141	1	0	0	0	0	0	22	0	11	FAULT/FAULT:137,RET/RET:16,TIMEOUT/TIMEOUT:22	REORDERED: same writes/reads per segment; order differs	0	0	0
+3084	R520VMachineAssembler__vslot27_assembleLoopHeader	v	iiiiiii	1008	45	37	525	521	0	0	0	0	0	0	4	0	0	FAULT/FAULT:521,TIMEOUT/TIMEOUT:4		0	0	0
+2162	pass_ssa_build	v	p	1312	74	74	207	92	96	0	13	0	0	0	6	0	0	FAULT/FAULT:201,TIMEOUT/FAULT:1,TIMEOUT/TIMEOUT:5	FAULT_PARTIAL: same fault ('read', 40466); accesses completed before it differ: reads: only rebuilt reads (1342474056, 4)	0	0	0
+2383	RegAlloc__run	v	p	612	8	9	247	217	0	0	0	0	0	0	29	0	0	FAULT/FAULT:218,TIMEOUT/TIMEOUT:29		1	0	0
+3159	R520MachineAssembler__vslot37_closeBranch	v	pp	556	9	10	758	753	0	0	0	0	0	0	5	0	0	FAULT/FAULT:753,TIMEOUT/TIMEOUT:5		0	0	0
+2370	RegAlloc__initRegisterTables	v	p	320	10	12	247	203	0	0	0	0	0	0	44	0	0	FAULT/FAULT:203,TIMEOUT/TIMEOUT:44		0	0	0
+743	arbValidateProgram	v	pppi	404	93	101	110	58	35	0	0	0	0	0	17	0	0	FAULT/FAULT:93,TIMEOUT/TIMEOUT:17	REORDERED: same writes/reads per segment; order differs	0	0	0
+2952	HashTable__remove	v	pi	276	59	59	138	137	0	0	0	0	0	0	1	0	0	FAULT/FAULT:129,RET/RET:8,TIMEOUT/TIMEOUT:1		0	0	0
+364	gldMarkAllProgramsDirty	v	p	124	26	26	407	11	296	66	22	0	0	0	12	0	0	FAULT/FAULT:395,TIMEOUT/FAULT:9,TIMEOUT/TIMEOUT:3	FAULT_PARTIAL: same fault ('wild', 1342630064); accesses completed before it differ: reads: only stock reads (1342510864, 4)	0	0	0
+1636	IRPresub1__validate	v	pi	68	17	17	168	135	2	0	0	0	0	0	31	0	0	FAULT/FAULT:137,TIMEOUT/TIMEOUT:31	REORDERED: same writes/reads per segment; order differs	0	0	0
+2796	ValueKey__foldMinOfConstants	i	p	516	65	65	232	212	4	0	0	0	0	0	16	0	0	FAULT/FAULT:212,RET/RET:4,TIMEOUT/TIMEOUT:16	REORDERED: same writes/reads per segment; order differs	0	0	0
+1040	ilAssembleProgram	i	ppp	640	160	160	161	16	75	0	70	0	0	0	0	0	0	FAULT/FAULT:158,RET/RET:3	FAULT_SITE: stock ('write', 22045) vs rebuilt ('write', 21513)	0	0	0
+2953	HashTable__find	i	pi	260	55	55	159	154	5	0	0	0	0	0	0	0	0	FAULT/FAULT:140,RET/RET:19	REORDERED: same writes/reads per segment; order differs	0	0	0
+1425	Program__initAndTranslate	v	pi	772	170	162	357	197	158	0	0	0	0	0	0	0	0	FAULT/FAULT:357	REORDERED: same writes/reads per segment; order differs	2	0	0
+1325	Block__bypass	v	ppp	900	76	79	242	151	80	0	0	0	0	0	11	0	0	FAULT/FAULT:231,TIMEOUT/FAULT:2,TIMEOUT/TIMEOUT:9	REORDERED: same writes/reads per segment; order differs	0	0	0
+2190	PrimitiveIndex__ctor_12499c	v	piiip	180	41	43	275	2	263	0	8	0	0	0	2	0	0	FAULT/FAULT:273,TIMEOUT/TIMEOUT:2	FAULT_PARTIAL: same fault ('read', 0); accesses completed before it differ: reads: only rebuilt reads (1342491756, 4)	0	0	0
+2721	ValueKey__evaluateConstantInst	v	ppp	428	64	65	240	207	7	0	0	0	0	0	26	0	0	FAULT/FAULT:214,TIMEOUT/TIMEOUT:26	REORDERED: same writes/reads per segment; order differs	0	0	0
+823	fpVariantEntryRecomputeDependencies	i	pppn	204	37	37	247	119	128	0	0	0	0	0	0	0	0	FAULT/FAULT:242,RET/RET:5	REORDERED: same writes/reads per segment; order differs	0	0	0
+2797	ValueKey__foldMaxOfConstants	i	p	516	59	59	270	248	2	0	0	0	0	0	20	0	0	FAULT/FAULT:250,TIMEOUT/TIMEOUT:20	REORDERED: same writes/reads per segment; order differs	0	0	0
+867	atifsFreeShaderTable	v	p	232	48	46	175	125	23	0	0	0	0	0	27	0	0	FAULT/FAULT:144,FAULT/TIMEOUT:1,RET/RET:4,RET/TIMEOUT:2,TIMEOUT/TIMEOUT:24	REORDERED: same writes/reads per segment; order differs	0	0	0
+2202	PrimitiveIndex__ctor_125db8	v	piiip	180	41	43	358	22	336	0	0	0	0	0	0	0	0	FAULT/FAULT:358	REORDERED: same writes/reads per segment; order differs	0	0	0
+2617	Scheduler__scheduleCycle	i	p	572	61	63	213	117	36	0	16	0	0	0	44	0	0	FAULT/FAULT:169,TIMEOUT/TIMEOUT:44	FAULT_PARTIAL: same fault ('read', 1); accesses completed before it differ: reads: only stock reads (1342428624, 4)	0	0	0
+444	extvsFreeAllShaders	v	p	140	34	35	577	108	469	0	0	0	0	0	0	0	0	FAULT/FAULT:577	REORDERED: same writes/reads per segment; order differs	0	0	0
