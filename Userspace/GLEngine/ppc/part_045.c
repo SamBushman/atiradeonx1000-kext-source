@@ -222,11 +222,11 @@ int _gleClipLinesPlane(int glContext,int *lineVertexList,int vertexPointerCount,
   float planeW;
   float planeY;
   float planeZ;
-  float fVar5;
+  float endDistanceThenClipParameter;
   float startDistance;
-  float fVar7;
-  int iVar8;
-  int iVar9;
+  float zeroDistance;
+  int keptVertex;
+  int clippedVertex;
   int iVar10;
   int planeCount;
   int planeLoopIndex;
@@ -241,7 +241,7 @@ int _gleClipLinesPlane(int glContext,int *lineVertexList,int vertexPointerCount,
   if (0 < planeCount) {
     planeIndexCursor = (int *)(glContext + 0x4e00);
     do {
-      fVar7 = FLOAT_00108e50;
+      zeroDistance = FLOAT_00108e50;
       iVar10 = *planeIndexCursor;
       planeIndexCursor = planeIndexCursor + 1;
       iVar10 = glContext + iVar10 * 0x10;
@@ -256,24 +256,24 @@ int _gleClipLinesPlane(int glContext,int *lineVertexList,int vertexPointerCount,
         startDistance = *(float *)(startVertex + 0x2c) * planeW +
                 (*(float *)(startVertex + 0x28) * planeZ +
                 (*(float *)(startVertex + 0x20) * planeX + *(float *)(startVertex + 0x24) * planeY));
-        fVar5 = *(float *)(iVar10 + 0x2c) * planeW +
+        endDistanceThenClipParameter = *(float *)(iVar10 + 0x2c) * planeW +
                 (*(float *)(iVar10 + 0x28) * planeZ +
                 (*(float *)(iVar10 + 0x20) * planeX + *(float *)(iVar10 + 0x24) * planeY));
-        if (startDistance < fVar7) {
-          if (fVar7 <= fVar5) {
-            fVar5 = startDistance / (startDistance - fVar5);
-            iVar8 = iVar10;
-            iVar9 = startVertex;
+        if (startDistance < zeroDistance) {
+          if (zeroDistance <= endDistanceThenClipParameter) {
+            endDistanceThenClipParameter = startDistance / (startDistance - endDistanceThenClipParameter);
+            keptVertex = iVar10;
+            clippedVertex = startVertex;
 LAB_000d7dc4:
-            (**(int ( **)(int,int,int,int,double))(glContext + 0x49c8))(glContext, iVar9, iVar8, iVar9, (double)fVar5);
+            (**(int ( **)(int,int,int,int,double))(glContext + 0x49c8))(glContext, clippedVertex, keptVertex, clippedVertex, (double)endDistanceThenClipParameter);
             goto LAB_000d7dd0;
           }
         }
         else {
-          if (fVar5 < fVar7) {
-            fVar5 = fVar5 / (fVar5 - startDistance);
-            iVar8 = startVertex;
-            iVar9 = iVar10;
+          if (endDistanceThenClipParameter < zeroDistance) {
+            endDistanceThenClipParameter = endDistanceThenClipParameter / (endDistanceThenClipParameter - startDistance);
+            keptVertex = startVertex;
+            clippedVertex = iVar10;
             goto LAB_000d7dc4;
           }
 LAB_000d7dd0:
@@ -3355,39 +3355,39 @@ void _gleLightMaterialRGBAChange_B_AD(glContext, rgba)
 }
 
 /* _gleLightMaterialRGBAChange_FB_E @ 0xdc6cc (224 bytes) */
-void _gleLightMaterialRGBAChange_FB_E(glContext, param_2)
+void _gleLightMaterialRGBAChange_FB_E(glContext, color)
   int glContext;
-  undefined8 *param_2;
+  undefined8 *color;
 {
-  byte bVar1;
+  byte dirtyBitId;
   int iVar2;
-  int iVar3;
-  int iVar4;
-  int iVar5;
+  int faceTableOffset;
+  int dirtyWordPointer;
+  int faceIndex;
   undefined8 uVar6;
   
-  iVar5 = 0;
+  faceIndex = 0;
   do {
-    iVar2 = _glePushMaterial(glContext,iVar5);
-    *(undefined8 *)(iVar2 + 0x30) = *param_2;
-    uVar6 = param_2[1];
+    iVar2 = _glePushMaterial(glContext,faceIndex);
+    *(undefined8 *)(iVar2 + 0x30) = *color;
+    uVar6 = color[1];
     *(ushort *)(iVar2 + 0x234) = *(ushort *)(iVar2 + 0x234) | 0x202;
     *(undefined8 *)(iVar2 + 0x38) = uVar6;
     if (*(int *)(glContext + 0x5434) == 0) {
-      bVar1 = *(byte *)(iVar5 * 6 + *(int *)(glContext + 0x5420) + 0x2c3);
+      dirtyBitId = *(byte *)(faceIndex * 6 + *(int *)(glContext + 0x5420) + 0x2c3);
     }
     else {
-      bVar1 = *(byte *)(iVar5 * 6 + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x2f7);
+      dirtyBitId = *(byte *)(faceIndex * 6 + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x2f7);
     }
-    iVar3 = iVar5 * 6;
-    iVar4 = (bVar1 >> 3 & 0x1c) + glContext;
-    iVar5 = iVar5 + 1;
+    faceTableOffset = faceIndex * 6;
+    dirtyWordPointer = (dirtyBitId >> 3 & 0x1c) + glContext;
+    faceIndex = faceIndex + 1;
     iVar2 = *(int *)(glContext + 0x5424);
-    *(uint *)(iVar4 + 0x324) = *(uint *)(iVar4 + 0x324) | 1 << (bVar1 & 0x1f);
-    bVar1 = *(byte *)(iVar3 + iVar2 + 0x2c3);
-    iVar2 = (bVar1 >> 3 & 0x1c) + glContext;
-    *(uint *)(iVar2 + 0x348) = *(uint *)(iVar2 + 0x348) | 1 << (bVar1 & 0x1f);
-  } while (iVar5 < 2);
+    *(uint *)(dirtyWordPointer + 0x324) = *(uint *)(dirtyWordPointer + 0x324) | 1 << (dirtyBitId & 0x1f);
+    dirtyBitId = *(byte *)(faceTableOffset + iVar2 + 0x2c3);
+    iVar2 = (dirtyBitId >> 3 & 0x1c) + glContext;
+    *(uint *)(iVar2 + 0x348) = *(uint *)(iVar2 + 0x348) | 1 << (dirtyBitId & 0x1f);
+  } while (faceIndex < 2);
   return;
 }
 
@@ -4050,16 +4050,16 @@ void _gleEvalDomain1Coord(undefined4 glContext,int points,int order,undefined4 u
   float *coeffPtr;
   int component;
   int pointsRemaining;
-  double incomingStack_ffffff98;
-  double incomingStack_ffffffa0;
-  double incomingStack_ffffffa8;
-  double incomingStack_ffffffb0;
-  double incomingStack_ffffffb8;
+  double incomingStackWord_ffffff98;
+  double incomingStackWord_ffffffa0;
+  double incomingStackWord_ffffffa8;
+  double incomingStackWord_ffffffb0;
+  double incomingStackWord_ffffffb8;
   
   if (((double)GH_U2F((unsigned int)_uvalue_c) != u) || (_uorder_c != order)) {
     ((void (*)())_glePreEvaluate)(glContext,order,order,&_ucoeff_c,u,floatArg2,floatArg3,floatArg4,floatArg5,
-                    floatArg6,floatArg7,floatArg8,incomingStack_ffffff98,incomingStack_ffffffa0,incomingStack_ffffffa8
-                    ,incomingStack_ffffffb0,incomingStack_ffffffb8);
+                    floatArg6,floatArg7,floatArg8,incomingStackWord_ffffff98,incomingStackWord_ffffffa0,incomingStackWord_ffffffa8
+                    ,incomingStackWord_ffffffb0,incomingStackWord_ffffffb8);
     _uvalue_c = GH_F2U((float)u);
     _utype_c = 2;
     _uorder_c = order;
@@ -4102,26 +4102,26 @@ void _gleEvalDomain2Color(undefined4 glContext,int points,int uorder,int vorder,
   float *pointPtr;
   int vRemaining;
   float savedV;
-  double incomingStack_ffffff88;
-  double incomingStack_ffffff90;
-  double incomingStack_ffffff98;
-  double incomingStack_ffffffa0;
-  double incomingStack_ffffffa8;
+  double incomingStackWord_ffffff88;
+  double incomingStackWord_ffffff90;
+  double incomingStackWord_ffffff98;
+  double incomingStackWord_ffffffa0;
+  double incomingStackWord_ffffffa8;
   
   savedUOrder = uorder;
   savedV = v;
   if (((double)GH_U2F((unsigned int)_uvalue_c) != u) || (_uorder_c != uorder)) {
     ((void (*)())_glePreEvaluate)(glContext,uorder,uorder,&_ucoeff_c,u,v,floatArg3,floatArg4,floatArg5,
-                    floatArg6,floatArg7,floatArg8,incomingStack_ffffff88,incomingStack_ffffff90,incomingStack_ffffff98
-                    ,incomingStack_ffffffa0,incomingStack_ffffffa8);
+                    floatArg6,floatArg7,floatArg8,incomingStackWord_ffffff88,incomingStackWord_ffffff90,incomingStackWord_ffffff98
+                    ,incomingStackWord_ffffffa0,incomingStackWord_ffffffa8);
     _uvalue_c = GH_F2U((float)u);
     _utype_c = 2;
     _uorder_c = uorder;
   }
   if (((double)GH_U2F((unsigned int)_vvalue_c) != v) || (_vorder_c != vorder)) {
     ((void (*)())_glePreEvaluate)(glContext,vorder,savedUOrder,&_vcoeff_c,v,(double)savedV,floatArg3,floatArg4,floatArg5,
-                    floatArg6,floatArg7,floatArg8,incomingStack_ffffff88,incomingStack_ffffff90,incomingStack_ffffff98
-                    ,incomingStack_ffffffa0,incomingStack_ffffffa8);
+                    floatArg6,floatArg7,floatArg8,incomingStackWord_ffffff88,incomingStackWord_ffffff90,incomingStackWord_ffffff98
+                    ,incomingStackWord_ffffffa0,incomingStackWord_ffffffa8);
     _vvalue_c = GH_F2U((float)v);
     _vtype_c = 2;
     _vorder_c = vorder;

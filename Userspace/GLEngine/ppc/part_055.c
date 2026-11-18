@@ -23,51 +23,51 @@ int _gleCreateGlobalLevel(unusedArg1, textureLevel, width, height, depth, border
 }
 
 /* _gleSynchronizePluginTextureLevels @ 0x103574 (308 bytes) */
-void _gleSynchronizePluginTextureLevels(glContext, param_2)
+void _gleSynchronizePluginTextureLevels(glContext, textureObject)
   int glContext;
-  int param_2;
+  int textureObject;
 {
-  byte bVar1;
-  int iVar2;
-  int *piVar3;
-  int iVar4;
-  int iVar5;
-  int iVar6;
-  int iVar7;
+  byte faceCount;
+  int rendererHandleThenFaceIndex;
+  int *rendererHandleCursor;
+  int rendererIndex;
+  int faceByteOffset;
+  int level;
+  int textureLevel;
   
-  if (*(int *)(param_2 + 0x20) != 0) {
-    iVar4 = 0;
-    bVar1 = *(byte *)(param_2 + 0x90);
+  if (*(int *)(textureObject + 0x20) != 0) {
+    rendererIndex = 0;
+    faceCount = *(byte *)(textureObject + 0x90);
     if (*(byte *)(glContext + 0x85a4) != 0) {
-      piVar3 = (int *)(*(int *)(glContext + 0x5148) + 0x8054);
+      rendererHandleCursor = (int *)(*(int *)(glContext + 0x5148) + 0x8054);
       do {
-        iVar2 = *piVar3;
-        piVar3 = piVar3 + 1;
-        if (*(int *)(param_2 + 0x20) == iVar2) break;
-        iVar4 = iVar4 + 1;
-      } while (iVar4 < (int)(uint)*(byte *)(glContext + 0x85a4));
+        rendererHandleThenFaceIndex = *rendererHandleCursor;
+        rendererHandleCursor = rendererHandleCursor + 1;
+        if (*(int *)(textureObject + 0x20) == rendererHandleThenFaceIndex) break;
+        rendererIndex = rendererIndex + 1;
+      } while (rendererIndex < (int)(uint)*(byte *)(glContext + 0x85a4));
     }
-    iVar2 = 0;
-    if (bVar1 != 0) {
-      iVar5 = 0;
+    rendererHandleThenFaceIndex = 0;
+    if (faceCount != 0) {
+      faceByteOffset = 0;
       do {
-        iVar6 = -(uint)(iVar2 == 0);
-        iVar7 = (uint)(iVar2 == 0) * -0x18 + param_2 + iVar5 + 0xc4;
+        level = -(uint)(rendererHandleThenFaceIndex == 0);
+        textureLevel = (uint)(rendererHandleThenFaceIndex == 0) * -0x18 + textureObject + faceByteOffset + 0xc4;
         do {
-          if ((*(byte *)(iVar7 + 0xb) & 0x50) == 0x40) {
-            _gleUploadPluginTextureLevel(glContext,param_2,iVar7,iVar2,iVar6,iVar4);
+          if ((*(byte *)(textureLevel + 0xb) & 0x50) == 0x40) {
+            _gleUploadPluginTextureLevel(glContext,textureObject,textureLevel,rendererHandleThenFaceIndex,level,rendererIndex);
             _gleModifyPluginTextureLevel
-                      (glContext,param_2,iVar7,iVar2,iVar6,0,0,0,(uint)*(ushort *)(iVar7 + 4),
-                       (uint)*(ushort *)(iVar7 + 6),(uint)*(ushort *)(iVar7 + 8));
+                      (glContext,textureObject,textureLevel,rendererHandleThenFaceIndex,level,0,0,0,(uint)*(ushort *)(textureLevel + 4),
+                       (uint)*(ushort *)(textureLevel + 6),(uint)*(ushort *)(textureLevel + 8));
           }
-          iVar6 = iVar6 + 1;
-          iVar7 = iVar7 + 0x18;
-        } while (iVar6 < 0xf);
-        iVar2 = iVar2 + 1;
-        iVar5 = iVar5 + 0x168;
-      } while (iVar2 < (int)(uint)bVar1);
+          level = level + 1;
+          textureLevel = textureLevel + 0x18;
+        } while (level < 0xf);
+        rendererHandleThenFaceIndex = rendererHandleThenFaceIndex + 1;
+        faceByteOffset = faceByteOffset + 0x168;
+      } while (rendererHandleThenFaceIndex < (int)(uint)faceCount);
     }
-    *(undefined4 *)(param_2 + 0x20) = 0;
+    *(undefined4 *)(textureObject + 0x20) = 0;
   }
   return;
 }
@@ -2186,38 +2186,38 @@ void _gleVPFlushLineLoop(glContext)
   int glContext;
 {
   int iVar1;
-  int iVar2;
+  int vertexWriteCursor;
   int iVar3;
-  int iVar4;
-  int iVar5;
+  int vertexQwordCountThenRemaining;
+  int vertexBufferBase;
   int iVar6;
-  undefined8 local_120 [33];
+  undefined8 lastVertexCopy [33];
   
-  iVar5 = *(int *)(glContext + 0x4854);
-  iVar4 = (int)*(short *)(glContext + 0x487c) >> 3;
+  vertexBufferBase = *(int *)(glContext + 0x4854);
+  vertexQwordCountThenRemaining = (int)*(short *)(glContext + 0x487c) >> 3;
   if (*(char *)(glContext + 0x4a18) == '\0') {
     iVar3 = 0;
-    for (iVar6 = iVar4; iVar6 != 0; iVar6 = iVar6 + -1) {
+    for (iVar6 = vertexQwordCountThenRemaining; iVar6 != 0; iVar6 = iVar6 + -1) {
       iVar1 = iVar3 * 8;
       iVar3 = iVar3 + 1;
-      *(undefined8 *)(iVar5 + -0x100 + iVar1) = *(undefined8 *)(iVar5 + iVar1);
+      *(undefined8 *)(vertexBufferBase + -0x100 + iVar1) = *(undefined8 *)(vertexBufferBase + iVar1);
     }
   }
-  iVar2 = *(int *)(glContext + 0x4858);
-  iVar6 = iVar4 * 8;
+  vertexWriteCursor = *(int *)(glContext + 0x4858);
+  iVar6 = vertexQwordCountThenRemaining * 8;
   iVar1 = 0;
-  for (iVar3 = iVar4; iVar3 != 0; iVar3 = iVar3 + -1) {
-    local_120[iVar1] = *(undefined8 *)(iVar2 + iVar4 * -8 + iVar1 * 8);
+  for (iVar3 = vertexQwordCountThenRemaining; iVar3 != 0; iVar3 = iVar3 + -1) {
+    lastVertexCopy[iVar1] = *(undefined8 *)(vertexWriteCursor + vertexQwordCountThenRemaining * -8 + iVar1 * 8);
     iVar1 = iVar1 + 1;
   }
   (**(code **)(glContext + 0x4a08))(glContext);
   *(undefined1 *)(glContext + 0x4a18) = 1;
   iVar3 = 0;
-  for (; iVar4 != 0; iVar4 = iVar4 + -1) {
-    *(undefined8 *)(iVar5 + iVar3 * 8) = local_120[iVar3];
+  for (; vertexQwordCountThenRemaining != 0; vertexQwordCountThenRemaining = vertexQwordCountThenRemaining + -1) {
+    *(undefined8 *)(vertexBufferBase + iVar3 * 8) = lastVertexCopy[iVar3];
     iVar3 = iVar3 + 1;
   }
-  *(int *)(glContext + 0x4858) = iVar5 + iVar6;
+  *(int *)(glContext + 0x4858) = vertexBufferBase + iVar6;
   return;
 }
 
@@ -2261,12 +2261,12 @@ void _gleVPFlushLineLoopTCL(glContext)
 /* _gleVPFlushLineLoopTCLRDirty @ 0x106368 (252 bytes) */
 void _gleVPFlushLineLoopTCLRDirty(int glContext,double floatArg1,double floatArg2,double floatArg3,double floatArg4,double floatArg5,double floatArg6,double floatArg7,double floatArg8)
 {
-  int iVar1;
-  int iVar2;
-  int iVar3;
+  int copyByteOffset;
+  int vertexWriteCursor;
+  int vertexQwordCountThenRemaining;
   int iVar4;
   int iVar5;
-  int iVar6;
+  int vertexBufferBase;
   int iVar7;
   
   if ((((*(char *)(glContext + 0x7580) != '\0') && ((*(uint *)(glContext + 0x486c) & 1) != 0)) &&
@@ -2275,27 +2275,27 @@ void _gleVPFlushLineLoopTCLRDirty(int glContext,double floatArg1,double floatArg
     ((undefined4 (*)())_gleForceToSoftwareTCL)(glContext,floatArg1,floatArg2,floatArg3,floatArg4,floatArg5,floatArg6,floatArg7,floatArg8);
   }
   (**(code **)(glContext + 0x4a08))(glContext);
-  iVar6 = *(int *)(glContext + 0x4854);
-  iVar3 = (int)*(short *)(glContext + 0x487c) >> 3;
+  vertexBufferBase = *(int *)(glContext + 0x4854);
+  vertexQwordCountThenRemaining = (int)*(short *)(glContext + 0x487c) >> 3;
   if (*(char *)(glContext + 0x4a18) == '\0') {
     iVar4 = 0;
-    for (iVar7 = iVar3; iVar7 != 0; iVar7 = iVar7 + -1) {
+    for (iVar7 = vertexQwordCountThenRemaining; iVar7 != 0; iVar7 = iVar7 + -1) {
       iVar5 = iVar4 * 8;
       iVar4 = iVar4 + 1;
-      *(undefined8 *)(iVar6 + -0x100 + iVar5) = *(undefined8 *)(iVar6 + iVar5);
+      *(undefined8 *)(vertexBufferBase + -0x100 + iVar5) = *(undefined8 *)(vertexBufferBase + iVar5);
     }
     *(undefined1 *)(glContext + 0x4a18) = 1;
   }
   iVar5 = 0;
-  iVar2 = *(int *)(glContext + 0x4858);
-  iVar7 = iVar3 * 8;
-  iVar4 = iVar3 * -8;
-  for (; iVar3 != 0; iVar3 = iVar3 + -1) {
-    iVar1 = iVar5 * 8;
+  vertexWriteCursor = *(int *)(glContext + 0x4858);
+  iVar7 = vertexQwordCountThenRemaining * 8;
+  iVar4 = vertexQwordCountThenRemaining * -8;
+  for (; vertexQwordCountThenRemaining != 0; vertexQwordCountThenRemaining = vertexQwordCountThenRemaining + -1) {
+    copyByteOffset = iVar5 * 8;
     iVar5 = iVar5 + 1;
-    *(undefined8 *)(iVar6 + iVar1) = *(undefined8 *)(iVar2 + iVar4 + iVar1);
+    *(undefined8 *)(vertexBufferBase + copyByteOffset) = *(undefined8 *)(vertexWriteCursor + iVar4 + copyByteOffset);
   }
-  *(int *)(glContext + 0x4858) = iVar6 + iVar7;
+  *(int *)(glContext + 0x4858) = vertexBufferBase + iVar7;
   return;
 }
 

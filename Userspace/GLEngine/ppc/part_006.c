@@ -4812,15 +4812,15 @@ int _glTranslate_ListExec(glContext, recordedArgs)
 /* _glRotateY_ListExec @ 0x441e4 (44 bytes) */
 undefined4 _glRotateY_ListExec(undefined4 glContext,float *recordedArgs,double unusedFloatArg1,double unusedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  double incomingStack_ffffffb8;
-  double incomingStack_ffffffc0;
-  double incomingStack_ffffffc8;
-  double incomingStack_ffffffd0;
-  double incomingStack_ffffffd8;
+  double incomingStackWord_ffffffb8;
+  double incomingStackWord_ffffffc0;
+  double incomingStackWord_ffffffc8;
+  double incomingStackWord_ffffffd0;
+  double incomingStackWord_ffffffd8;
   
   ((void (*)())_glRotateY_Exec)(glContext,(double)*recordedArgs,(double)recordedArgs[1],forwardedFloatArg3,forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,
-                  forwardedFloatArg7,forwardedFloatArg8,incomingStack_ffffffb8,incomingStack_ffffffc0,incomingStack_ffffffc8,
-                  incomingStack_ffffffd0,incomingStack_ffffffd8);
+                  forwardedFloatArg7,forwardedFloatArg8,incomingStackWord_ffffffb8,incomingStackWord_ffffffc0,incomingStackWord_ffffffc8,
+                  incomingStackWord_ffffffd0,incomingStackWord_ffffffd8);
   return 8;
 }
 
@@ -5187,38 +5187,38 @@ void _gleFlushPluginVertexArray(glContext, param_2, forwardedArg3, forwardedArg4
   undefined4 forwardedArg3;
   undefined4 forwardedArg4;
 {
-  int *piVar1;
-  undefined4 *puVar2;
-  int iVar3;
-  undefined4 uVar4;
+  int *rendererFuncs;
+  undefined4 *rendererContext;
+  int callbackResult;
+  undefined4 rendererVertexArrayHandle;
   undefined4 uVar5;
-  int iVar6;
+  int rendererBase;
   uint loopIndex;
-  uint uVar8;
-  uint uVar9;
+  uint pendingDirtyWord0;
+  uint pendingDirtyWord1;
   undefined4 *cursor;
   
-  iVar6 = glContext + 0x10000;
-  uVar8 = param_2[0xd0];
-  uVar9 = param_2[0xd1];
+  rendererBase = glContext + 0x10000;
+  pendingDirtyWord0 = param_2[0xd0];
+  pendingDirtyWord1 = param_2[0xd1];
   param_2[0xd0] = 0;
   param_2[0xd1] = 0;
   uVar5 = 1;
   loopIndex = 0;
   cursor = param_2 + 0x114;
   while( true ) {
-    cursor[1] = cursor[1] | uVar8;
-    cursor[2] = cursor[2] | uVar9;
+    cursor[1] = cursor[1] | pendingDirtyWord0;
+    cursor[2] = cursor[2] | pendingDirtyWord1;
     cursor = cursor + 0x23;
-    piVar1 = (int *)(iVar6 + -0x777c);
+    rendererFuncs = (int *)(rendererBase + -0x777c);
     loopIndex = loopIndex + 1;
-    uVar4 = *param_2;
+    rendererVertexArrayHandle = *param_2;
     param_2 = param_2 + 1;
-    puVar2 = (undefined4 *)(iVar6 + -0x7a54);
-    iVar6 = iVar6 + 0x2e0;
-    iVar3 = (**(code **)(*piVar1 + 0x1ac))(*puVar2,uVar4,forwardedArg3,forwardedArg4,uVar5);
+    rendererContext = (undefined4 *)(rendererBase + -0x7a54);
+    rendererBase = rendererBase + 0x2e0;
+    callbackResult = (**(code **)(*rendererFuncs + 0x1ac))(*rendererContext,rendererVertexArrayHandle,forwardedArg3,forwardedArg4,uVar5);
     if (loopIndex == *(byte *)(glContext + 0x85a4)) break;
-    if (iVar3 == 1) {
+    if (callbackResult == 1) {
       uVar5 = 0;
     }
   }
@@ -5530,71 +5530,71 @@ void _gleDrawArraysSyncState(glContext, arrayBatch)
   uint texCoordSize;
   uint fogOrWeightSize;
   int texCoordCursor;
-  undefined4 *puVar11;
+  undefined4 *lastVertexFieldCursor;
   int remaining;
   
   normalSize = *(byte *)(arrayBatch + 0xd);
   glContextWord20 = *(undefined4 *)(glContext + 0x20);
   glContextWord24 = *(undefined4 *)(glContext + 0x24);
-  puVar11 = (undefined4 *)(arrayBatch + 0x2c + *(int *)(arrayBatch + 8) * (*(int *)(arrayBatch + 4) + -1));
+  lastVertexFieldCursor = (undefined4 *)(arrayBatch + 0x2c + *(int *)(arrayBatch + 8) * (*(int *)(arrayBatch + 4) + -1));
   if (normalSize != 0) {
-    *(undefined4 *)(glContext + 0x2b0) = *puVar11;
-    *(undefined4 *)(glContext + 0x2b4) = puVar11[1];
-    normalZ = puVar11 + 2;
-    puVar11 = (undefined4 *)((int)puVar11 + (uint)normalSize);
+    *(undefined4 *)(glContext + 0x2b0) = *lastVertexFieldCursor;
+    *(undefined4 *)(glContext + 0x2b4) = lastVertexFieldCursor[1];
+    normalZ = lastVertexFieldCursor + 2;
+    lastVertexFieldCursor = (undefined4 *)((int)lastVertexFieldCursor + (uint)normalSize);
     *(undefined4 *)(glContext + 0x2b8) = *normalZ;
   }
   colorSize = (uint)*(byte *)(arrayBatch + 0xe);
   if (colorSize != 0) {
-    *(undefined4 *)(glContext + 0x2a0) = *puVar11;
-    *(undefined4 *)(glContext + 0x2a4) = puVar11[1];
-    *(undefined4 *)(glContext + 0x2a8) = puVar11[2];
+    *(undefined4 *)(glContext + 0x2a0) = *lastVertexFieldCursor;
+    *(undefined4 *)(glContext + 0x2a4) = lastVertexFieldCursor[1];
+    *(undefined4 *)(glContext + 0x2a8) = lastVertexFieldCursor[2];
     componentValue = glContextWord24;
     if (colorSize == 0x10) {
-      componentValue = puVar11[3];
+      componentValue = lastVertexFieldCursor[3];
     }
-    puVar11 = (undefined4 *)((int)puVar11 + colorSize);
+    lastVertexFieldCursor = (undefined4 *)((int)lastVertexFieldCursor + colorSize);
     *(undefined4 *)(glContext + 0x2ac) = componentValue;
     if (*(char *)(glContext + 0x4df8) != '\0') {
       (**(code **)(glContext + 0x4de0))(glContext,glContext + 0x2a0);
     }
   }
   if (*(byte *)(arrayBatch + 0xf) != 0) {
-    componentValue = *puVar11;
-    puVar11 = (undefined4 *)((int)puVar11 + (uint)*(byte *)(arrayBatch + 0xf));
+    componentValue = *lastVertexFieldCursor;
+    lastVertexFieldCursor = (undefined4 *)((int)lastVertexFieldCursor + (uint)*(byte *)(arrayBatch + 0xf));
     *(undefined4 *)(glContext + 0x2cc) = componentValue;
   }
   secondaryColorSize = *(byte *)(arrayBatch + 0x10);
   if (secondaryColorSize != 0) {
-    *(undefined4 *)(glContext + 0x2c0) = *puVar11;
-    *(undefined4 *)(glContext + 0x2c4) = puVar11[1];
-    secondaryColorB = puVar11 + 2;
-    puVar11 = (undefined4 *)((int)puVar11 + (uint)secondaryColorSize);
+    *(undefined4 *)(glContext + 0x2c0) = *lastVertexFieldCursor;
+    *(undefined4 *)(glContext + 0x2c4) = lastVertexFieldCursor[1];
+    secondaryColorB = lastVertexFieldCursor + 2;
+    lastVertexFieldCursor = (undefined4 *)((int)lastVertexFieldCursor + (uint)secondaryColorSize);
     *(undefined4 *)(glContext + 0x2c8) = *secondaryColorB;
   }
   fogOrWeightSize = (uint)*(byte *)(arrayBatch + 0x11);
   if (fogOrWeightSize != 0) {
-    *(undefined4 *)(glContext + 0x2d0) = *puVar11;
+    *(undefined4 *)(glContext + 0x2d0) = *lastVertexFieldCursor;
     componentValue = glContextWord20;
     if (7 < fogOrWeightSize) {
-      componentValue = puVar11[1];
+      componentValue = lastVertexFieldCursor[1];
     }
     *(undefined4 *)(glContext + 0x2d4) = componentValue;
     componentValue = glContextWord20;
     if (0xb < fogOrWeightSize) {
-      componentValue = puVar11[2];
+      componentValue = lastVertexFieldCursor[2];
     }
     *(undefined4 *)(glContext + 0x2d8) = componentValue;
     componentValue = glContextWord20;
     if (fogOrWeightSize == 0x10) {
-      componentValue = puVar11[3];
+      componentValue = lastVertexFieldCursor[3];
     }
     *(undefined4 *)(glContext + 0x2dc) = componentValue;
-    puVar11 = (undefined4 *)((int)puVar11 + fogOrWeightSize);
+    lastVertexFieldCursor = (undefined4 *)((int)lastVertexFieldCursor + fogOrWeightSize);
   }
   if (*(byte *)(arrayBatch + 0x12) != 0) {
-    edgeFlagByte = *(undefined1 *)puVar11;
-    puVar11 = (undefined4 *)((int)puVar11 + (uint)*(byte *)(arrayBatch + 0x12));
+    edgeFlagByte = *(undefined1 *)lastVertexFieldCursor;
+    lastVertexFieldCursor = (undefined4 *)((int)lastVertexFieldCursor + (uint)*(byte *)(arrayBatch + 0x12));
     *(undefined1 *)(glContext + 0x2ec) = edgeFlagByte;
   }
   remaining = 8;
@@ -5605,31 +5605,31 @@ void _gleDrawArraysSyncState(glContext, arrayBatch)
     texCoordSize = (uint)*srcCursor;
     srcCursor = srcCursor + 1;
     if (texCoordSize != 0) {
-      *(undefined4 *)(texCoordCursor + 0x120) = *puVar11;
+      *(undefined4 *)(texCoordCursor + 0x120) = *lastVertexFieldCursor;
       if (texCoordSize == 0x10) {
         *(uint *)(glContext + 0x486c) = *(uint *)(glContext + 0x486c) | 3;
-        *(undefined4 *)(texCoordCursor + 0x124) = puVar11[1];
-        *(undefined4 *)(texCoordCursor + 0x128) = puVar11[2];
-        *(undefined4 *)(texCoordCursor + 300) = puVar11[3];
+        *(undefined4 *)(texCoordCursor + 0x124) = lastVertexFieldCursor[1];
+        *(undefined4 *)(texCoordCursor + 0x128) = lastVertexFieldCursor[2];
+        *(undefined4 *)(texCoordCursor + 300) = lastVertexFieldCursor[3];
       }
       else if (texCoordSize == 0xc) {
         *(uint *)(glContext + 0x486c) = *(uint *)(glContext + 0x486c) | 1;
-        *(undefined4 *)(texCoordCursor + 0x124) = puVar11[1];
-        componentValue = puVar11[2];
+        *(undefined4 *)(texCoordCursor + 0x124) = lastVertexFieldCursor[1];
+        componentValue = lastVertexFieldCursor[2];
         *(undefined4 *)(texCoordCursor + 300) = glContextWord24;
         *(undefined4 *)(texCoordCursor + 0x128) = componentValue;
       }
       else {
         componentValue = glContextWord20;
         if (texCoordSize == 8) {
-          componentValue = puVar11[1];
+          componentValue = lastVertexFieldCursor[1];
         }
         *(undefined4 *)(texCoordCursor + 0x124) = componentValue;
         *(undefined4 *)(loopIndex2 + glContext + 300) = glContextWord24;
         *(undefined4 *)(loopIndex2 + glContext + 0x128) = glContextWord20;
       }
     }
-    puVar11 = (undefined4 *)((int)puVar11 + texCoordSize);
+    lastVertexFieldCursor = (undefined4 *)((int)lastVertexFieldCursor + texCoordSize);
     loopIndex2 = loopIndex2 + 0x10;
     texCoordCursor = texCoordCursor + 0x10;
     remaining = remaining + -1;
@@ -5642,24 +5642,24 @@ void _gleDrawArraysSyncState(glContext, arrayBatch)
     attribSize = (uint)*srcCursor;
     srcCursor = srcCursor + 1;
     if (attribSize != 0) {
-      *(undefined4 *)(attribCursor + 0xa0) = *puVar11;
+      *(undefined4 *)(attribCursor + 0xa0) = *lastVertexFieldCursor;
       componentValue = glContextWord20;
       if (7 < attribSize) {
-        componentValue = puVar11[1];
+        componentValue = lastVertexFieldCursor[1];
       }
       *(undefined4 *)(attribCursor + 0xa4) = componentValue;
       componentValue = glContextWord20;
       if (0xb < attribSize) {
-        componentValue = puVar11[2];
+        componentValue = lastVertexFieldCursor[2];
       }
       *(undefined4 *)(loopIndex * 0x10 + glContext + 0xa8) = componentValue;
       componentValue = glContextWord24;
       if (attribSize == 0x10) {
-        componentValue = puVar11[3];
+        componentValue = lastVertexFieldCursor[3];
       }
       *(undefined4 *)(loopIndex * 0x10 + glContext + 0xac) = componentValue;
     }
-    puVar11 = (undefined4 *)((int)puVar11 + attribSize);
+    lastVertexFieldCursor = (undefined4 *)((int)lastVertexFieldCursor + attribSize);
     loopIndex = loopIndex + 1;
     attribCursor = attribCursor + 0x10;
     remaining2 = remaining2 + -1;

@@ -983,70 +983,70 @@ void _gleFreePipelineProgramObject(glContext, programObject)
 }
 
 /* _gleClearPipelineProgram @ 0x305b0 (364 bytes) */
-void _gleClearPipelineProgram(glContext, param_2)
+void _gleClearPipelineProgram(glContext, pipelineProgram)
   undefined4 glContext;
-  int *param_2;
+  int *pipelineProgram;
 {
-  int iVar1;
-  int iVar2;
+  int entryByteOffset;
+  int entryPtr;
   int loopIndex;
-  int iVar4;
+  int loggedParamVectorThenDefaultTable;
   int remaining;
   
-  iVar4 = param_2[0x12f];
-  if (param_2[1] != 0) {
-    _free(param_2[1]);
-    param_2[1] = 0;
+  loggedParamVectorThenDefaultTable = pipelineProgram[0x12f];
+  if (pipelineProgram[1] != 0) {
+    _free(pipelineProgram[1]);
+    pipelineProgram[1] = 0;
   }
-  param_2[2] = 0;
-  param_2[3] = 0;
-  *(undefined2 *)(param_2 + 0x10) = 0;
-  *(undefined2 *)((int)param_2 + 0x42) = 0;
-  *(undefined2 *)(param_2 + 0x11) = 0;
-  *(undefined2 *)((int)param_2 + 0x46) = 0;
-  *(undefined2 *)((int)param_2 + 0x3e) = 0;
-  if (*param_2 != 0) {
-    _PPStreamFree(*param_2);
-    *param_2 = 0;
+  pipelineProgram[2] = 0;
+  pipelineProgram[3] = 0;
+  *(undefined2 *)(pipelineProgram + 0x10) = 0;
+  *(undefined2 *)((int)pipelineProgram + 0x42) = 0;
+  *(undefined2 *)(pipelineProgram + 0x11) = 0;
+  *(undefined2 *)((int)pipelineProgram + 0x46) = 0;
+  *(undefined2 *)((int)pipelineProgram + 0x3e) = 0;
+  if (*pipelineProgram != 0) {
+    _PPStreamFree(*pipelineProgram);
+    *pipelineProgram = 0;
   }
-  if (*(short *)((int)param_2 + 0x4ba) == 0) {
-    if (param_2[0x135] != 0) {
-      _PPEmulatorProgramFree(param_2[0x135]);
-      param_2[0x135] = 0;
+  if (*(short *)((int)pipelineProgram + 0x4ba) == 0) {
+    if (pipelineProgram[0x135] != 0) {
+      _PPEmulatorProgramFree(pipelineProgram[0x135]);
+      pipelineProgram[0x135] = 0;
     }
     remaining = 0x100;
   }
-  else if (*(short *)((int)param_2 + 0x4ba) == 1) {
-    if (param_2[0x135] != 0) {
-      _LFSStreamFree(param_2[0x135]);
-      param_2[0x135] = 0;
+  else if (*(short *)((int)pipelineProgram + 0x4ba) == 1) {
+    if (pipelineProgram[0x135] != 0) {
+      _LFSStreamFree(pipelineProgram[0x135]);
+      pipelineProgram[0x135] = 0;
     }
-    *(undefined2 *)(param_2 + 0x138) = 0;
-    *(undefined2 *)(param_2 + 0x137) = 0;
-    *(undefined2 *)((int)param_2 + 0x4de) = 0;
+    *(undefined2 *)(pipelineProgram + 0x138) = 0;
+    *(undefined2 *)(pipelineProgram + 0x137) = 0;
+    *(undefined2 *)((int)pipelineProgram + 0x4de) = 0;
     remaining = 0x80;
   }
   else {
     remaining = 0;
   }
-  if (iVar4 != 0) {
-    if (*(short *)(param_2 + 0x12e) != -0x7e00) {
-      ((void (*)())_glePPUnlogParameters)(glContext,param_2,*(undefined4 *)(iVar4 + 0x28),iVar4 + *(int *)(iVar4 + 0x2c) * 8);
+  if (loggedParamVectorThenDefaultTable != 0) {
+    if (*(short *)(pipelineProgram + 0x12e) != -0x7e00) {
+      ((void (*)())_glePPUnlogParameters)(glContext,pipelineProgram,*(undefined4 *)(loggedParamVectorThenDefaultTable + 0x28),loggedParamVectorThenDefaultTable + *(int *)(loggedParamVectorThenDefaultTable + 0x2c) * 8);
     }
-    _gleVecFree(iVar4);
-    param_2[0x12f] = 0;
+    _gleVecFree(loggedParamVectorThenDefaultTable);
+    pipelineProgram[0x12f] = 0;
   }
-  iVar4 = param_2[0x134];
-  if (iVar4 != 0) {
+  loggedParamVectorThenDefaultTable = pipelineProgram[0x134];
+  if (loggedParamVectorThenDefaultTable != 0) {
     loopIndex = 0;
     for (; remaining != 0; remaining = remaining + -1) {
-      iVar1 = loopIndex * 0x10;
+      entryByteOffset = loopIndex * 0x10;
       loopIndex = loopIndex + 1;
-      iVar2 = iVar1 + iVar4;
-      *(undefined4 *)(iVar4 + iVar1) = 0;
-      *(undefined4 *)(iVar2 + 0xc) = 0x3f800000;
-      *(undefined4 *)(iVar2 + 4) = 0;
-      *(undefined4 *)(iVar2 + 8) = 0;
+      entryPtr = entryByteOffset + loggedParamVectorThenDefaultTable;
+      *(undefined4 *)(loggedParamVectorThenDefaultTable + entryByteOffset) = 0;
+      *(undefined4 *)(entryPtr + 0xc) = 0x3f800000;
+      *(undefined4 *)(entryPtr + 4) = 0;
+      *(undefined4 *)(entryPtr + 8) = 0;
     }
   }
   return;
@@ -1862,8 +1862,8 @@ void _glLightfv_Exec(int glContext,int light,undefined4 pname,float *params,doub
   int dirtyWord324Ptr;
   uint lightIndex;
   double cosValue;
-  double incomingStack_ffffffa8;
-  double incomingStack_ffffffb0;
+  double incomingStackWord_ffffffa8;
+  double incomingStackWord_ffffffb0;
   
   if (-1 < *(short *)(glContext + 0x4a10)) {
     if (*(int *)(glContext + 0x7574) != 0) {
@@ -1975,7 +1975,7 @@ switchD_000316d0_default:
     *(float *)(lightRecord + 0x2864) = params[1];
     *(float *)(lightRecord + 0x2868) = params[2];
     ((void (*)())_gleTransformLightDirection)(glContext,lightIndex,forwardedFloatArg1,forwardedFloatArg2,forwardedFloatArg3,forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,
-               forwardedFloatArg8,incomingStack_ffffffa8,incomingStack_ffffffb0);
+               forwardedFloatArg8,incomingStackWord_ffffffa8,incomingStackWord_ffffffb0);
     goto LAB_00031c08;
   case 0x1205:
     spotExponentValue = *params;

@@ -1,0 +1,33 @@
+local	_gle565Filter3	uVar1	texel0	CONFIRMED	the 565 texel loaded from src[0]; same texel0/texelA/texelB/texelAB convention as _gle565Filter2 extended by the offsetC taps
+local	_gle565Filter3	uVar2	texelA	CONFIRMED	the 565 texel loaded from src+offsetA; same texel0/texelA/texelB/texelAB convention as _gle565Filter2 extended by the offsetC taps
+local	_gle565Filter3	uVar3	texelB	CONFIRMED	the 565 texel loaded from src+offsetB; same texel0/texelA/texelB/texelAB convention as _gle565Filter2 extended by the offsetC taps
+local	_gle565Filter3	uVar4	texelAB	CONFIRMED	the 565 texel loaded from src+offsetB+offsetA; same texel0/texelA/texelB/texelAB convention as _gle565Filter2 extended by the offsetC taps
+local	_gle565Filter3	uVar5	texelC	CONFIRMED	the 565 texel loaded from src+offsetC; same texel0/texelA/texelB/texelAB convention as _gle565Filter2 extended by the offsetC taps
+local	_gle565Filter3	uVar6	texelCA	CONFIRMED	the 565 texel loaded from src+offsetC+offsetA; same texel0/texelA/texelB/texelAB convention as _gle565Filter2 extended by the offsetC taps
+local	_gle565Filter3	uVar7	texelCB	CONFIRMED	the 565 texel loaded from src+offsetC+offsetB; same texel0/texelA/texelB/texelAB convention as _gle565Filter2 extended by the offsetC taps
+local	_gle565Filter3	uVar8	texelCAB	CONFIRMED	the 565 texel loaded from src+offsetC+offsetB+offsetA; same texel0/texelA/texelB/texelAB convention as _gle565Filter2 extended by the offsetC taps
+local	_glGetVertexAttribfvARB_Exec	lVar10	arrayEnableBit	CONFIRMED	___ashldi3(1,0,index): the 64-bit one-bit mask of the attribute index, tested against the enable words at clientState+0x330/+0x334 for pname 0x8622 (GL_VERTEX_ATTRIB_ARRAY_ENABLED_ARB)
+local	_glGetVertexAttribfvARB_Exec	uStack_2c	intToDoubleLowWord	CONFIRMED	integer word xor 0x80000000 used as the low word of CONCAT44(0x43300000,...) in the int-to-double conversion (DOUBLE_00108d58 is the bias)
+local	_glGetVertexAttribfvARB_Exec	iVar6	copyIndex	CONFIRMED	index into params[] and into the source float array of the copy loop
+local	_gliDestroyPixelFormat	param_1	pixelFormatNode	CONFIRMED	node of the pixel-format list: +0 next link, +4 flags whose 0xff00 bits are the plugin id passed to _glepGetPlugin; the loop advances it to the next group and passes it to the plugin callback at plugin+0x11c
+local	_gliDestroyPixelFormat	piVar7	nextGroupNode	CONFIRMED	first following node whose plugin id bits (flags&0xff00) differ from the current node, or NULL; becomes param_1 for the next iteration
+local	_gliDestroyPixelFormat	bVar1	reachedListEnd	CONFIRMED	piVar7==NULL; the do-while condition is !bVar1
+local	_gliDestroyPixelFormat	uVar4	nodeFlags	CONFIRMED	param_1[1], the flags word of the current node; uVar4&0xff00 is the plugin id looked up
+local	_gliDestroyPixelFormat	uVar2	scanNodeFlags	CONFIRMED	piVar7[1], flags of the node being scanned, compared on the 0xff00 plugin id bits with nodeFlags
+local	_gliDestroyPixelFormat	iVar5	pluginDestroyResult	CONFIRMED	0x271f when _glepGetPlugin finds no plugin, otherwise the return of the plugin callback at plugin+0x11c
+local	_gliDestroyPixelFormat	iVar6	firstError	CONFIRMED	stays 0 until the first nonzero pluginDestroyResult, which it then keeps
+local	_glArrayElement_Comp	uVar2	enableWordHigh	CONFIRMED	*(clientState+0x330): upper enable-bit word, tested against the high half of the one-bit mask from ___ashldi3 (same words _glGetVertexAttribfvARB_Exec tests at clientState+0x330/+0x334)
+local	_glArrayElement_Comp	uVar4	enableWordLow	CONFIRMED	*(clientState+0x334) lower enable-bit word, tested (masked with 0xff7fffff) against the low half of the one-bit mask
+local	_glArrayElement_Comp	lVar14	attributeBit	CONFIRMED	___ashldi3(0,1,attributeBitShift): the 64-bit one-bit mask tested against the enable words
+local	_glArrayElement_Comp	iVar10	attributeBitShift	INFERRED	shift count passed to ___ashldi3, starting at 0x10 and incremented once per array record
+local	_glArrayElement_Comp	local_b0	attributeByteSizes	CONFIRMED	int table filled per array record with 0 (disabled) or *srcCursor2*4, then copied byte-wise (32 bytes) into the head of the list item
+local	_glArrayElement_Comp	dstCursor	sizeSlotCursor	CONFIRMED	pointer into attributeByteSizes advanced once per array record in the first loop (loop ends when it passes auStack_34)
+local	_glArrayElement_Comp	srcCursor2	arrayComponentCountCursor	CONFIRMED	short pointer starting at clientState+0x3a and advancing 0x18 bytes (0xc shorts) per array record; each value*4 is the bytes the array contributes
+local	_glArrayElement_Comp	iVar9	listItemDataBytes	CONFIRMED	sum of the per-array byte sizes; stored at listItem+0x20 and passed (+0x24) to _gleAddListItem as the item size
+local	_glArrayElement_Comp	puVar13	listItemData	CONFIRMED	listItem+0x24, the destination handed to the vertex-to-list function
+local	_glArrayElement_Comp	pcVar8	vertexToListFunc	CONFIRMED	ctx+0x488c cached function, fetched with _gleGetVertexToListFunc when NULL; called with (glContext, clientState+0x30, listItemData, i)
+local	_glGetColorTable_Exec	auStack_50	pixelBytes	CONFIRMED	buffer passed as pixelBytesOut (7th argument, via puVar11) of _glePixelPackSettings
+local	_glGetColorTable_Exec	puVar11	pixelBytesPtr	CONFIRMED	puVar11 = auStack_50: the pixelBytesOut pointer passed to _glePixelPackSettings and to _glgConvertType
+local	_glGetColorTable_Exec	auStack_5c	rowPadding	CONFIRMED	buffer passed as rowPaddingOut (10th argument) of _glePixelPackSettings
+local	_glGetColorTable_Exec	auStack_58	imageBytes	CONFIRMED	buffer passed as imageBytesOut (11th argument) of _glePixelPackSettings
+local	_glGetColorTable_Exec	auStack_54	imagePadding	CONFIRMED	buffer passed as imagePaddingOut (12th argument) of _glePixelPackSettings

@@ -1,0 +1,67 @@
+local	_gleFlushPrimitiveTCLRDirtyFunc	iVar3	vertexWriteCursor	INFERRED	ctx+0x4858 (the vertex write cursor: the flush ends with ctx+0x4858 = new cursor); read here to locate the vertices just written (iVar3-2*vertexSize)
+local	_gleFlushPrimitiveTCLRDirtyFunc	iVar5	vertexSizeThenSavedByteCount	INFERRED	starts as ctx+0x487c short (per-vertex byte size: ctx+0x485c buffer end = base + 0x487c*capacity); doubled (iVar5*2 / iVar5<<1) in the 2-vertex cases (5/8, 6/9) so afterwards it is the byte count copied to/from local_220 and added to the new cursor
+local	_gleFlushPrimitiveTCLRDirtyFunc	uVar6	remainingQwords	INFERRED	(byteCount+7)>>3 8-byte units still to copy, decremented per copied qword in every copy loop
+local	_gleFlushPrimitiveTCLRDirtyFunc	local_220	savedVertexBytes	INFERRED	qword array receiving the trailing vertex bytes copied out of the old vertex buffer before the buffer callback ctx+0x4a08 and copied back into the new buffer (ctx+0x4868)
+local	_gleFlushPrimitiveTCLRDirtyFunc	local_20	bufferVertexCapacity	INFERRED	local_20[0] = ctx+0x4a14 passed by address to the buffer callback ctx+0x46e8 and then used as the multiplier of the vertex size for the new buffer end ctx+0x485c = base + vertexSize*local_20[0]
+local	_gleFlushLineLoopTCLRDirtyFunc	iVar3	vertexSize	INFERRED	ctx+0x487c short: per-vertex byte size (bytes copied per vertex; cursor-iVar3 is the last vertex)
+local	_gleFlushLineLoopTCLRDirtyFunc	iVar1	vertexBufferBase	INFERRED	ctx+0x4854 buffer base: first vertex is copied to base-0x100 (saved line-loop start), last vertex is copied to base, cursor = base+vertexSize
+local	_gleFlushLineLoopTCLRDirtyFunc	iVar4	vertexWriteCursor	INFERRED	ctx+0x4858 vertex write cursor; iVar4-iVar3 is the last vertex copied to the buffer base
+local	_gleFlushLineLoopTCLRDirtyFunc	iVar2	copyByteOffset	INFERRED	byte offset advanced by 8 per copied qword in both copy loops
+local	_gleFlushLineLoopTCLRDirtyFunc	uVar5	remainingQwords	INFERRED	(vertexSize+7)>>3 qwords left to copy, decremented per copied qword
+local	_gleVPFlushLineLoop	iVar5	vertexBufferBase	INFERRED	ctx+0x4854 buffer base: first vertex saved to base-0x100, last vertex rewritten at base, cursor = base+vertexBytes
+local	_gleVPFlushLineLoop	iVar2	vertexWriteCursor	INFERRED	ctx+0x4858 vertex write cursor; the last vertex is read from iVar2-vertexBytes
+local	_gleVPFlushLineLoop	iVar4	vertexQwordCountThenRemaining	INFERRED	ctx+0x487c short >> 3 = qwords per vertex; the last copy loop counts it down to 0
+local	_gleVPFlushLineLoop	local_120	lastVertexCopy	INFERRED	qword array receiving the last vertex (cursor-vertexBytes) before the flush callback ctx+0x4a08 and copied back to the buffer base afterwards
+local	_gleVPFlushLineLoopTCLRDirty	iVar6	vertexBufferBase	INFERRED	ctx+0x4854 buffer base: first vertex saved to base-0x100, last vertex rewritten at base, cursor = base+vertexBytes
+local	_gleVPFlushLineLoopTCLRDirty	iVar2	vertexWriteCursor	INFERRED	ctx+0x4858 vertex write cursor; the last vertex is read from iVar2-vertexBytes
+local	_gleVPFlushLineLoopTCLRDirty	iVar3	vertexQwordCountThenRemaining	INFERRED	ctx+0x487c short >> 3 = qwords per vertex; the last copy loop counts it down to 0
+local	_gleVPFlushLineLoopTCLRDirty	iVar1	copyByteOffset	INFERRED	iVar5*8 byte offset of the qword copied in the last copy loop
+local	_gleFlushPolygonFunc	sVar1	vertexSize	INFERRED	ctx+0x487c short: per-vertex byte size (qword count = sVar1>>3 for both copies)
+local	_gleFlushPolygonFunc	puVar3	vertexSrcCursor	INFERRED	walks the 0x100-byte region at write cursor-0x100, source of the copy into local_110
+local	_gleFlushPolygonFunc	puVar4	vertexDstCursor	INFERRED	walks local_110, destination of the copy from the buffer
+local	_gleFlushPolygonFunc	uVar7	copiedQword	INFERRED	qword read from puVar3 and stored through puVar4
+local	_gleFlushTriangleFanFunc	sVar1	vertexSize	INFERRED	ctx+0x487c short: per-vertex byte size (qword count = sVar1>>3 for both vertex copies)
+local	_gleFlushTriangleFanFunc	iVar2	vertexQwordCountThenRemaining	INFERRED	ctx+0x487c short >> 3 = qwords per vertex; the copy loops count it down to 0 and it is reloaded before the second copy
+local	_gleFlushTriangleFanFunc	iVar6	vertexBufferBase	INFERRED	ctx+0x4854 buffer base: first vertex (the fan hub) is copied from here to local_210
+local	_gleFlushTriangleFanFunc	iVar4	qwordIndex	INFERRED	index into local_210 / byte offset base of the first-vertex copy loop
+local	_gleFlushTriangleFanFunc	puVar3	vertexSrcCursor	INFERRED	walks the 0x100-byte vertex at write cursor-0x100 (ctx+0x4858), source of the copy into local_110
+local	_gleFlushTriangleFanFunc	puVar5	vertexDstCursor	INFERRED	walks local_110, destination of the last-vertex copy
+local	_gleFlushTriangleFanFunc	uVar7	copiedQword	INFERRED	qword read through puVar3 and stored through puVar5
+local	_gleFlushTriangleFanFunc	local_210	firstVertexCopy	INFERRED	copy of the first vertex (buffer base ctx+0x4854), re-submitted with _gleSubmitVertexCopy after the flush callback ctx+0x4a08
+local	_gleFlushTriangleFanFunc	local_110	lastVertexCopy	INFERRED	copy of the vertex at write cursor-0x100 (ctx+0x4858), re-submitted with _gleSubmitVertexCopy after the flush
+local	_gleFlushPolygonFunc	local_210	firstVertexCopy	INFERRED	copy of the first vertex (buffer base ctx+0x4854), submitted with _gleSubmitVertexCopy after the flush callback ctx+0x4a08 (local_194 is a field of this record at +0x7c that is cleared)
+local	_gleFlushPolygonFunc	local_110	lastVertexCopy	INFERRED	copy of the vertex at write cursor-0x100 (ctx+0x4858), submitted with _gleSubmitVertexCopy after the flush
+local	_gleSelectTriangleFanFunc_body	local_4c	clippedVertexCount	CONFIRMED	address passed as the outVertexCount parameter of _gleClipPolyPlane and _gleClipPoly (outCount); [0] is read as the clipped polygon vertex count
+local	_gleSelectTriangleFanFunc_body	uVar15	vertexCountThenSecondLastVertexAddr	INFERRED	vertex count (batch bytes / vertex size) used as count for the clip-code callback and _gleSelectTriangleFan; then reassigned base+count*0x100-0x200 = address of the second-last vertex, the loop limit
+local	_gleFeedbackTriangleStripFunc_body	puVar9	nextPolygonList	INFERRED	polygon list to use after the optional _gleClipPolyPlane: set to polygonVertexList, or to the spare list when the plane clip ran (same pair as nextPolygonList/nextSpareList in _gleRenderFlatTriangleStripFunc_body)
+local	_gleFeedbackTriangleStripFunc_body	puVar15	nextSpareList	INFERRED	spare list to use after the optional _gleClipPolyPlane: set to spareList, or to the old polygon list when the plane clip ran (same pair as in _gleRenderFlatTriangleStripFunc_body)
+local	_gleFeedbackTriangleStripFunc_body	dVar27	lastCalleeF1	INFERRED	FPR f1 left by the previous callee, passed on as forwarded float argument of later calls (same role as lastCalleeF1 in _gleRenderFlatTriangleStripFunc_body)
+local	_gleRenderFlatTriangleStripFunc_body	iVar14	previousFacingOrLitVertexCursor	INFERRED	starts -1 and holds backFacing of the last accepted triangle (compared with backFacing, face index for lighting and polygon mode); in the no-cull branch it is also the lit-vertex cursor vertexCursor+0x200 stepped by 0x100
+local	_gleRenderFlatQuadStripFunc_body	dVar21	lastCalleeF1	INFERRED	FPR f1 left by the previous callee, passed on as forwarded float argument of later calls (same role as lastCalleeF1 in _gleRenderFlatTriangleStripFunc_body)
+local	_gleFeedbackLineLoop	param_2	vertices	INFERRED	base of the vertex records (0x100-byte stride); passed to _gleFeedbackHitRecord and advanced by 0x100 per vertex
+local	_gleFeedbackLineLoop	param_3	vertexCount	INFERRED	number of vertices: the last vertex address is param_2+param_3*0x100-0x100
+local	_gleFeedbackLineLoop	param_4	lineResetMode	INFERRED	selects the feedback tokens: 0 -> GL_LINE_TOKEN (0x702) for all segments, 1 -> first GL_LINE_RESET_TOKEN (0x707) then GL_LINE_TOKEN, other -> GL_LINE_RESET_TOKEN for all
+local	_gleFeedbackLineLoop	uVar2	firstSegmentToken	CONFIRMED	0x702 GL_LINE_TOKEN or 0x707 GL_LINE_RESET_TOKEN passed to _gleFeedbackToken before the first segment
+local	_gleFeedbackLineLoop	uVar3	nextSegmentToken	CONFIRMED	0x702 GL_LINE_TOKEN or 0x707 GL_LINE_RESET_TOKEN passed to _gleFeedbackToken before every later segment and the closing segment
+local	_gleFeedbackLineLoop	uVar4	lastVertexAddr	INFERRED	vertices+vertexCount*0x100-0x100, address of the last vertex: the segment loop runs while the next vertex is below it
+local	_gleFeedbackLineLoop	uVar6	segmentStartVertex	INFERRED	start vertex of the segment being emitted in the loop (uVar5 is its end)
+local	_gleFeedbackLineLoop	dVar1	intToDoubleBias	INFERRED	DOUBLE_00108d70 loaded once: the 0x43300000 biased-integer constant subtracted in each int-to-double token conversion
+local	_gleFeedbackLineStrip	param_2	vertices	INFERRED	base of the vertex records (0x100-byte stride); passed to _gleFeedbackHitRecord and advanced by 0x100 per vertex
+local	_gleFeedbackLineStrip	param_3	vertexCount	INFERRED	number of vertices (function needs more than 1): last vertex address is param_2+param_3*0x100-0x100
+local	_gleFeedbackLineStrip	param_4	lineResetMode	INFERRED	selects the feedback tokens: 0 -> GL_LINE_TOKEN (0x702) for all segments, 1 -> first GL_LINE_RESET_TOKEN (0x707) then GL_LINE_TOKEN, other -> GL_LINE_RESET_TOKEN for all
+local	_gleFeedbackLineStrip	uVar2	firstSegmentToken	CONFIRMED	0x702 GL_LINE_TOKEN or 0x707 GL_LINE_RESET_TOKEN passed to _gleFeedbackToken before the first segment
+local	_gleFeedbackLineStrip	uVar3	nextSegmentToken	CONFIRMED	0x702 GL_LINE_TOKEN or 0x707 GL_LINE_RESET_TOKEN passed to _gleFeedbackToken before every later segment
+local	_gleFeedbackLineStrip	uVar4	lastVertexAddr	INFERRED	vertices+vertexCount*0x100-0x100, address of the last vertex: the segment loop runs while the next vertex is below it
+local	_gleFeedbackLineStrip	uVar5	segmentStartVertex	INFERRED	start vertex of the segment being emitted (uVar6 is its end vertex)
+local	_gleFeedbackLineStrip	uVar6	segmentEndVertex	INFERRED	segmentStartVertex+0x100, end vertex of the segment being emitted; becomes the next start
+local	_gleFeedbackLineStrip	dVar1	intToDoubleBias	INFERRED	DOUBLE_00108d70 loaded once: the 0x43300000 biased-integer constant subtracted in each int-to-double token conversion
+local	_gleDrawArraysOrElements_Comp	param_2	mode	CONFIRMED	stored at list record +0x14 (the mode slot of the recorded glDrawArrays call; _gleDrawArraysOrElements_Exec takes (glContext, mode, first, count))
+local	_gleDrawArraysOrElements_Comp	param_3	first	CONFIRMED	first index: the loop runs param_3 .. param_3+count-1 calling the vertex-to-list function with the index (glDrawArrays first)
+local	_gleDrawArraysOrElements_Comp	param_4	count	CONFIRMED	stored at list record +0x18; guards the function (0 < count) and bounds the index loop (glDrawArrays count)
+local	_gleDrawArraysOrElements_Comp	local_c0	arrayByteSizes	INFERRED	table of per-client-array element byte sizes (clientState short at +0x3a+24*i, times 4; 0 when the array bit is not set); its low bytes are copied to list record +0x20..+0x3f
+local	_gleDrawArraysOrElements_Comp	uVar3	clientMaskHigh	INFERRED	clientState+0x330 word, tested against the high word of the 64-bit bit (1<<bitIndex) from ___ashldi3
+local	_gleDrawArraysOrElements_Comp	uVar2	clientMaskLowMasked	INFERRED	clientState+0x334 word & 0xff7fffff, tested against the low word of the 64-bit bit (1<<bitIndex)
+local	_gleDrawArraysOrElements_Comp	lVar13	shiftedBit64	CONFIRMED	___ashldi3(0,1,bitIndex): the 64-bit value 1<<bitIndex whose halves are tested against the two mask words
+local	_gleDrawArraysOrElements_Comp	iVar9	bitIndex	CONFIRMED	loop counter starting at 0x10 that is the shift count of ___ashldi3(0,1,iVar9) and increments once per table entry
+local	_gleDrawArraysOrElements_Comp	cVar1	copiedByte	INFERRED	byte read from the size table (stride 4) and stored to the list record bytes at +0x20
+local	_gleDrawArraysOrElements_Comp	pcVar12	listDataCursor	INFERRED	starts at list record +0x40 (after the header) and is replaced by the vertex-to-list function result: the write cursor for the recorded vertex data

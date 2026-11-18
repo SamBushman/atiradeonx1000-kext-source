@@ -1,100 +1,100 @@
 #include "decls.h"
 
 /* _gleFeedbackLineStrip @ 0xcc278 (284 bytes) */
-void _gleFeedbackLineStrip(glContext, param_2, param_3, param_4)
+void _gleFeedbackLineStrip(glContext, vertices, vertexCount, lineResetMode)
   undefined4 glContext;
-  int param_2;
-  int param_3;
-  int param_4;
+  int vertices;
+  int vertexCount;
+  int lineResetMode;
 {
-  double dVar1;
-  undefined4 uVar2;
-  undefined4 uVar3;
-  uint uVar4;
-  uint uVar5;
-  uint uVar6;
+  double intToDoubleBias;
+  undefined4 firstSegmentToken;
+  undefined4 nextSegmentToken;
+  uint lastVertexAddr;
+  uint segmentStartVertex;
+  uint segmentEndVertex;
   
-  dVar1 = DOUBLE_00108d70;
-  if (1 < param_3) {
-    if (param_4 == 0) {
-      uVar3 = 0x702;
-      uVar2 = 0x702;
+  intToDoubleBias = DOUBLE_00108d70;
+  if (1 < vertexCount) {
+    if (lineResetMode == 0) {
+      nextSegmentToken = 0x702;
+      firstSegmentToken = 0x702;
     }
-    else if (param_4 == 1) {
-      uVar2 = 0x707;
-      uVar3 = 0x702;
+    else if (lineResetMode == 1) {
+      firstSegmentToken = 0x707;
+      nextSegmentToken = 0x702;
     }
     else {
-      uVar3 = 0x707;
-      uVar2 = 0x707;
+      nextSegmentToken = 0x707;
+      firstSegmentToken = 0x707;
     }
-    uVar5 = param_2 + 0x100;
-    ((void (*)())_gleFeedbackToken)(glContext,(double)(float)((double)CONCAT44(0x43300000,uVar2) - DOUBLE_00108d70))
+    segmentStartVertex = vertices + 0x100;
+    ((void (*)())_gleFeedbackToken)(glContext,(double)(float)((double)CONCAT44(0x43300000,firstSegmentToken) - DOUBLE_00108d70))
     ;
-    _gleFeedbackHitRecord(glContext,param_2);
-    _gleFeedbackHitRecord(glContext,uVar5);
-    uVar4 = (param_2 + param_3 * 0x100) - 0x100;
-    if (uVar5 < uVar4) {
+    _gleFeedbackHitRecord(glContext,vertices);
+    _gleFeedbackHitRecord(glContext,segmentStartVertex);
+    lastVertexAddr = (vertices + vertexCount * 0x100) - 0x100;
+    if (segmentStartVertex < lastVertexAddr) {
       do {
-        uVar6 = uVar5 + 0x100;
-        ((void (*)())_gleFeedbackToken)(glContext,(double)(float)((double)CONCAT44(0x43300000,uVar3) - dVar1));
-        _gleFeedbackHitRecord(glContext,uVar5);
-        _gleFeedbackHitRecord(glContext,uVar6);
-        uVar5 = uVar6;
-      } while (uVar6 < uVar4);
+        segmentEndVertex = segmentStartVertex + 0x100;
+        ((void (*)())_gleFeedbackToken)(glContext,(double)(float)((double)CONCAT44(0x43300000,nextSegmentToken) - intToDoubleBias));
+        _gleFeedbackHitRecord(glContext,segmentStartVertex);
+        _gleFeedbackHitRecord(glContext,segmentEndVertex);
+        segmentStartVertex = segmentEndVertex;
+      } while (segmentEndVertex < lastVertexAddr);
     }
   }
   return;
 }
 
 /* _gleFeedbackLineLoop @ 0xcc394 (344 bytes) */
-void _gleFeedbackLineLoop(glContext, param_2, param_3, param_4)
+void _gleFeedbackLineLoop(glContext, vertices, vertexCount, lineResetMode)
   undefined4 glContext;
-  int param_2;
-  int param_3;
-  int param_4;
+  int vertices;
+  int vertexCount;
+  int lineResetMode;
 {
-  double dVar1;
-  undefined4 uVar2;
-  undefined4 uVar3;
-  uint uVar4;
+  double intToDoubleBias;
+  undefined4 firstSegmentToken;
+  undefined4 nextSegmentToken;
+  uint lastVertexAddr;
   uint uVar5;
-  uint uVar6;
+  uint segmentStartVertex;
   
-  dVar1 = DOUBLE_00108d70;
-  if (0 < param_3) {
-    if (param_4 == 0) {
-      uVar3 = 0x702;
-      uVar2 = 0x702;
+  intToDoubleBias = DOUBLE_00108d70;
+  if (0 < vertexCount) {
+    if (lineResetMode == 0) {
+      nextSegmentToken = 0x702;
+      firstSegmentToken = 0x702;
     }
-    else if (param_4 == 1) {
-      uVar2 = 0x707;
-      uVar3 = 0x702;
+    else if (lineResetMode == 1) {
+      firstSegmentToken = 0x707;
+      nextSegmentToken = 0x702;
     }
     else {
-      uVar3 = 0x707;
-      uVar2 = 0x707;
+      nextSegmentToken = 0x707;
+      firstSegmentToken = 0x707;
     }
-    uVar5 = param_2 + 0x100;
-    ((void (*)())_gleFeedbackToken)(glContext,(double)(float)((double)CONCAT44(0x43300000,uVar2) - DOUBLE_00108d70))
+    uVar5 = vertices + 0x100;
+    ((void (*)())_gleFeedbackToken)(glContext,(double)(float)((double)CONCAT44(0x43300000,firstSegmentToken) - DOUBLE_00108d70))
     ;
-    _gleFeedbackHitRecord(glContext,param_2);
+    _gleFeedbackHitRecord(glContext,vertices);
     _gleFeedbackHitRecord(glContext,uVar5);
-    uVar4 = (param_2 + param_3 * 0x100) - 0x100;
-    if (uVar5 < uVar4) {
-      uVar6 = uVar5;
+    lastVertexAddr = (vertices + vertexCount * 0x100) - 0x100;
+    if (uVar5 < lastVertexAddr) {
+      segmentStartVertex = uVar5;
       do {
-        uVar5 = uVar6 + 0x100;
-        ((void (*)())_gleFeedbackToken)(glContext,(double)(float)((double)CONCAT44(0x43300000,uVar3) - dVar1));
-        _gleFeedbackHitRecord(glContext,uVar6);
+        uVar5 = segmentStartVertex + 0x100;
+        ((void (*)())_gleFeedbackToken)(glContext,(double)(float)((double)CONCAT44(0x43300000,nextSegmentToken) - intToDoubleBias));
+        _gleFeedbackHitRecord(glContext,segmentStartVertex);
         _gleFeedbackHitRecord(glContext,uVar5);
-        uVar6 = uVar5;
-      } while (uVar5 < uVar4);
+        segmentStartVertex = uVar5;
+      } while (uVar5 < lastVertexAddr);
     }
-    ((void (*)())_gleFeedbackToken)(glContext,(double)(float)((double)CONCAT44(0x43300000,uVar3) - DOUBLE_00108d70))
+    ((void (*)())_gleFeedbackToken)(glContext,(double)(float)((double)CONCAT44(0x43300000,nextSegmentToken) - DOUBLE_00108d70))
     ;
     _gleFeedbackHitRecord(glContext,uVar5);
-    _gleFeedbackHitRecord(glContext,param_2);
+    _gleFeedbackHitRecord(glContext,vertices);
   }
   return;
 }
@@ -2286,38 +2286,38 @@ int _LFSParserRewind(parser, stepCount)
 }
 
 /* _LFSParserGetPart @ 0xcf648 (188 bytes) */
-int _LFSParserGetPart(param_1, param_2)
-  int param_1;
-  int param_2;
+int _LFSParserGetPart(parser, tokenBuffer)
+  int parser;
+  int tokenBuffer;
 {
-  int iVar1;
-  uint uVar2;
-  char local_30 [16];
-  undefined4 local_20;
-  undefined4 local_1c;
+  int getCharacterStatus;
+  uint partLength;
+  char currentChar [16];
+  undefined4 savedCursorWord0;
+  undefined4 savedCursorWord1;
   
-  local_20 = *(undefined4 *)(param_1 + 0xc);
-  local_1c = *(undefined4 *)(param_1 + 0x10);
-  *(undefined4 *)(param_1 + 0x45c) = local_20;
-  *(undefined4 *)(param_1 + 0x460) = local_1c;
-  local_30[0] = '\0';
-  ((void (*)())_LFSParserEatWhiteSpace)(param_1);
-  uVar2 = 0;
+  savedCursorWord0 = *(undefined4 *)(parser + 0xc);
+  savedCursorWord1 = *(undefined4 *)(parser + 0x10);
+  *(undefined4 *)(parser + 0x45c) = savedCursorWord0;
+  *(undefined4 *)(parser + 0x460) = savedCursorWord1;
+  currentChar[0] = '\0';
+  ((void (*)())_LFSParserEatWhiteSpace)(parser);
+  partLength = 0;
   do {
-    iVar1 = ((int (*)())_LFSParserGetCharacter)(param_1,local_30,0);
-    if (iVar1 != 0) break;
-    if (local_30[0] == ' ') {
-      ((int (*)())_LFSParserRewind)(param_1,1);
+    getCharacterStatus = ((int (*)())_LFSParserGetCharacter)(parser,currentChar,0);
+    if (getCharacterStatus != 0) break;
+    if (currentChar[0] == ' ') {
+      ((int (*)())_LFSParserRewind)(parser,1);
       break;
     }
-    *(char *)(param_2 + uVar2) = local_30[0];
-    uVar2 = uVar2 + 1;
-  } while (uVar2 < 0xff);
-  *(undefined1 *)(param_2 + uVar2) = 0;
-  if ((uVar2 == 0) || (uVar2 == 0xff)) {
-    uVar2 = 0;
+    *(char *)(tokenBuffer + partLength) = currentChar[0];
+    partLength = partLength + 1;
+  } while (partLength < 0xff);
+  *(undefined1 *)(tokenBuffer + partLength) = 0;
+  if ((partLength == 0) || (partLength == 0xff)) {
+    partLength = 0;
   }
-  return uVar2;
+  return partLength;
 }
 
 /* _LFSParserGetScalars @ 0xcf704 (400 bytes) */
@@ -2420,77 +2420,77 @@ int _LFSParserParseArray(parser, outValue)
 }
 
 /* _LFSParserParseRegister @ 0xcf950 (356 bytes) */
-int _LFSParserParseRegister(param_1, param_2, param_3)
-  undefined4 param_1;
-  undefined4 *param_2;
-  uint *param_3;
+int _LFSParserParseRegister(parser, registerKind, registerIndex)
+  undefined4 parser;
+  undefined4 *registerKind;
+  uint *registerIndex;
 {
-  bool bVar1;
+  bool registerNumberTooLarge;
   undefined4 uVar2;
-  uint uVar3;
+  uint registerNumber;
   int iVar4;
-  char local_110;
-  undefined1 auStack_10f [259];
+  char tokenBuffer;
+  undefined1 tokenAfterPrefix [259];
   
-  iVar4 = ((int (*)())_LFSParserGetPart)(param_1,&local_110);
+  iVar4 = ((int (*)())_LFSParserGetPart)(parser,&tokenBuffer);
   if (iVar4 == 0) {
     return 8;
   }
-  iVar4 = _memcmp(&local_110,"color0",7);
+  iVar4 = _memcmp(&tokenBuffer,"color0",7);
   if (iVar4 == 0) {
-    *param_2 = 4;
-    *param_3 = 0;
+    *registerKind = 4;
+    *registerIndex = 0;
     return 0;
   }
-  iVar4 = _memcmp(&local_110,"color1",7);
+  iVar4 = _memcmp(&tokenBuffer,"color1",7);
   uVar2 = 4;
   if (iVar4 == 0) {
 LAB_000cfa84:
-    *param_2 = uVar2;
-    uVar3 = 1;
+    *registerKind = uVar2;
+    registerNumber = 1;
 LAB_000cfa8c:
-    *param_3 = uVar3;
+    *registerIndex = registerNumber;
   }
   else {
-    if (local_110 == 'c') {
-      *param_2 = 2;
-      uVar3 = _atoi(auStack_10f);
-      bVar1 = 8 < uVar3;
-      *param_3 = uVar3;
+    if (tokenBuffer == 'c') {
+      *registerKind = 2;
+      registerNumber = _atoi(tokenAfterPrefix);
+      registerNumberTooLarge = 8 < registerNumber;
+      *registerIndex = registerNumber;
       uVar2 = 5;
     }
     else {
-      if (local_110 < 'd') {
-        if (local_110 != '0') {
-          if (local_110 != '1') {
+      if (tokenBuffer < 'd') {
+        if (tokenBuffer != '0') {
+          if (tokenBuffer != '1') {
             return 5;
           }
           uVar2 = 3;
           goto LAB_000cfa84;
         }
-        uVar3 = 0;
-        *param_2 = 3;
+        registerNumber = 0;
+        *registerKind = 3;
         goto LAB_000cfa8c;
       }
-      if (local_110 == 'r') {
-        *param_2 = 1;
-        uVar3 = _atoi(auStack_10f);
-        bVar1 = 6 < uVar3;
-        *param_3 = uVar3;
+      if (tokenBuffer == 'r') {
+        *registerKind = 1;
+        registerNumber = _atoi(tokenAfterPrefix);
+        registerNumberTooLarge = 6 < registerNumber;
+        *registerIndex = registerNumber;
         uVar2 = 0x1d;
       }
       else {
-        if (local_110 != 't') {
+        if (tokenBuffer != 't') {
           return 5;
         }
-        *param_2 = 5;
-        uVar3 = _atoi(auStack_10f);
-        bVar1 = 6 < uVar3;
-        *param_3 = uVar3;
+        *registerKind = 5;
+        registerNumber = _atoi(tokenAfterPrefix);
+        registerNumberTooLarge = 6 < registerNumber;
+        *registerIndex = registerNumber;
         uVar2 = 0x1e;
       }
     }
-    if (bVar1) {
+    if (registerNumberTooLarge) {
       return uVar2;
     }
   }
@@ -2684,60 +2684,60 @@ LAB_000cfe58:
 }
 
 /* _LFSParserParseSourceModifier @ 0xcfea8 (336 bytes) */
-int _LFSParserParseSourceModifier(param_1, param_2)
-  int param_1;
-  int param_2;
+int _LFSParserParseSourceModifier(parser, sourceVar)
+  int parser;
+  int sourceVar;
 {
-  uint uVar1;
+  uint modifierFlags;
   int iVar2;
-  uint uVar3;
-  char local_120 [256];
-  undefined4 local_20;
-  undefined4 local_1c;
+  uint modifierCount;
+  char tokenBuffer [256];
+  undefined4 savedCursorWord0;
+  undefined4 savedCursorWord1;
   
-  uVar3 = 0;
+  modifierCount = 0;
   do {
-    iVar2 = ((int (*)())_LFSParserGetPart)(param_1,local_120);
+    iVar2 = ((int (*)())_LFSParserGetPart)(parser,tokenBuffer);
     if (iVar2 == 0) {
       return 8;
     }
-    iVar2 = _memcmp(local_120,"neg",4);
+    iVar2 = _memcmp(tokenBuffer,"neg",4);
     if (iVar2 == 0) {
-      uVar1 = *(uint *)(param_2 + 0xc) | 0x100;
+      modifierFlags = *(uint *)(sourceVar + 0xc) | 0x100;
     }
     else {
-      iVar2 = _memcmp(local_120,"2x",3);
+      iVar2 = _memcmp(tokenBuffer,"2x",3);
       if (iVar2 == 0) {
-        uVar1 = *(uint *)(param_2 + 0xc) | 0x200;
+        modifierFlags = *(uint *)(sourceVar + 0xc) | 0x200;
       }
       else {
-        iVar2 = _memcmp(local_120,"bias",5);
+        iVar2 = _memcmp(tokenBuffer,"bias",5);
         if (iVar2 == 0) {
-          uVar1 = *(uint *)(param_2 + 0xc) | 0x400;
+          modifierFlags = *(uint *)(sourceVar + 0xc) | 0x400;
         }
         else {
-          iVar2 = _memcmp(local_120,"comp",5);
+          iVar2 = _memcmp(tokenBuffer,"comp",5);
           if (iVar2 != 0) {
             return 0xb;
           }
-          uVar1 = *(uint *)(param_2 + 0xc) | 0x800;
+          modifierFlags = *(uint *)(sourceVar + 0xc) | 0x800;
         }
       }
     }
-    *(uint *)(param_2 + 0xc) = uVar1;
-    local_20 = *(undefined4 *)(param_1 + 0xc);
-    local_1c = *(undefined4 *)(param_1 + 0x10);
-    iVar2 = ((int (*)())_LFSParserGetPart)(param_1,local_120);
+    *(uint *)(sourceVar + 0xc) = modifierFlags;
+    savedCursorWord0 = *(undefined4 *)(parser + 0xc);
+    savedCursorWord1 = *(undefined4 *)(parser + 0x10);
+    iVar2 = ((int (*)())_LFSParserGetPart)(parser,tokenBuffer);
     if (iVar2 == 0) {
       return 8;
     }
-    if (local_120[0] != '.') {
-      *(undefined4 *)(param_1 + 0x10) = local_1c;
-      *(undefined4 *)(param_1 + 0xc) = local_20;
+    if (tokenBuffer[0] != '.') {
+      *(undefined4 *)(parser + 0x10) = savedCursorWord1;
+      *(undefined4 *)(parser + 0xc) = savedCursorWord0;
       return 0;
     }
-    uVar3 = uVar3 + 1;
-  } while (uVar3 < 4);
+    modifierCount = modifierCount + 1;
+  } while (modifierCount < 4);
   return 0;
 }
 
@@ -3013,72 +3013,72 @@ LAB_000d064c:
 }
 
 /* _LFSParserParseRegisterInit @ 0xd06bc (940 bytes) */
-int _LFSParserParseRegisterInit(param_1)
-  int param_1;
+int _LFSParserParseRegisterInit(parser)
+  int parser;
 {
-  char cVar1;
+  char passKind;
   int iVar2;
   int iVar3;
-  uint uVar4;
-  int *piVar5;
-  char local_140 [256];
-  undefined4 local_40;
-  int local_3c;
-  int local_38;
-  int local_34;
-  int local_30;
-  int local_20 [5];
+  uint listIndex;
+  int *registerListHead;
+  char tokenBuffer [256];
+  undefined4 initOperation;
+  int sourceRegisterKind;
+  int sourceRegisterIndex;
+  int destRegisterIndex;
+  int coordFormat;
+  int destRegisterKind [5];
   
-  piVar5 = (int *)0x0;
-  local_40 = 0;
-  local_3c = 0;
-  local_38 = 0;
-  local_34 = 0;
-  local_30 = 0;
-  iVar2 = ((int (*)())_LFSParserGetPart)(param_1,local_140);
+  registerListHead = (int *)0x0;
+  initOperation = 0;
+  sourceRegisterKind = 0;
+  sourceRegisterIndex = 0;
+  destRegisterIndex = 0;
+  coordFormat = 0;
+  iVar2 = ((int (*)())_LFSParserGetPart)(parser,tokenBuffer);
   iVar3 = 8;
   if (iVar2 != 0) {
-    iVar2 = _memcmp(local_140,"PassTexCoord",0xd);
+    iVar2 = _memcmp(tokenBuffer,"PassTexCoord",0xd);
     if (iVar2 == 0) {
-      local_40 = 0;
+      initOperation = 0;
     }
     else {
-      iVar2 = _memcmp(local_140,"SampleMap",10);
+      iVar2 = _memcmp(tokenBuffer,"SampleMap",10);
       if (iVar2 != 0) {
         return 3;
       }
-      local_40 = 0x10;
+      initOperation = 0x10;
     }
-    iVar3 = ((int (*)())_LFSParserParseRegister)(param_1,local_20,&local_34);
-    if ((iVar3 == 0) && (iVar3 = 5, local_20[0] == 1)) {
+    iVar3 = ((int (*)())_LFSParserParseRegister)(parser,destRegisterKind,&destRegisterIndex);
+    if ((iVar3 == 0) && (iVar3 = 5, destRegisterKind[0] == 1)) {
       iVar3 = 0x17;
-      iVar2 = (uint)*(byte *)(param_1 + 0x19) * 0x10 + param_1 + local_34;
+      iVar2 = (uint)*(byte *)(parser + 0x19) * 0x10 + parser + destRegisterIndex;
       if (*(char *)(iVar2 + 0x24) == '\0') {
         *(undefined1 *)(iVar2 + 0x24) = 1;
-        iVar2 = ((int (*)())_LFSParserGetPart)(param_1,local_140);
+        iVar2 = ((int (*)())_LFSParserGetPart)(parser,tokenBuffer);
         iVar3 = 8;
-        if (((((iVar2 != 0) && (iVar3 = 10, local_140[0] == ',')) &&
-             (iVar3 = ((int (*)())_LFSParserParseRegister)(param_1,&local_3c,&local_38), iVar3 == 0)) &&
-            ((local_3c == 1 || (iVar3 = 5, local_3c == 5)))) &&
-           ((*(char *)(param_1 + 0x19) != '\x02' || (iVar3 = 0x18, local_3c != 1)))) {
-          iVar2 = ((int (*)())_LFSParserGetPart)(param_1,local_140);
+        if (((((iVar2 != 0) && (iVar3 = 10, tokenBuffer[0] == ',')) &&
+             (iVar3 = ((int (*)())_LFSParserParseRegister)(parser,&sourceRegisterKind,&sourceRegisterIndex), iVar3 == 0)) &&
+            ((sourceRegisterKind == 1 || (iVar3 = 5, sourceRegisterKind == 5)))) &&
+           ((*(char *)(parser + 0x19) != '\x02' || (iVar3 = 0x18, sourceRegisterKind != 1)))) {
+          iVar2 = ((int (*)())_LFSParserGetPart)(parser,tokenBuffer);
           iVar3 = 8;
-          if ((iVar2 != 0) && (iVar3 = 0xe, local_140[0] == '.')) {
-            iVar2 = ((int (*)())_LFSParserGetPart)(param_1,local_140);
+          if ((iVar2 != 0) && (iVar3 = 0xe, tokenBuffer[0] == '.')) {
+            iVar2 = ((int (*)())_LFSParserGetPart)(parser,tokenBuffer);
             iVar3 = 8;
             if (iVar2 != 0) {
-              iVar2 = _memcmp(local_140,"str",4);
+              iVar2 = _memcmp(tokenBuffer,"str",4);
               if (iVar2 == 0) {
                 iVar2 = 0;
               }
               else {
-                iVar3 = _memcmp(local_140,"stq",4);
+                iVar3 = _memcmp(tokenBuffer,"stq",4);
                 iVar2 = 0x100;
                 if (iVar3 != 0) {
-                  iVar3 = _memcmp(local_140,"str_dr",7);
+                  iVar3 = _memcmp(tokenBuffer,"str_dr",7);
                   iVar2 = 0x200;
                   if (iVar3 != 0) {
-                    iVar2 = _memcmp(local_140,"stq_dq",7);
+                    iVar2 = _memcmp(tokenBuffer,"stq_dq",7);
                     if (iVar2 != 0) {
                       return 0xe;
                     }
@@ -3086,19 +3086,19 @@ int _LFSParserParseRegisterInit(param_1)
                   }
                 }
               }
-              local_30 = iVar2;
-              if (local_3c == 5) {
-                uVar4 = 0;
+              coordFormat = iVar2;
+              if (sourceRegisterKind == 5) {
+                listIndex = 0;
                 do {
-                  if (uVar4 == 0) {
-                    piVar5 = *(int **)(*(int *)(param_1 + 0x14) + 4);
+                  if (listIndex == 0) {
+                    registerListHead = *(int **)(*(int *)(parser + 0x14) + 4);
                   }
-                  else if (uVar4 == 1) {
-                    piVar5 = *(int **)(*(int *)(param_1 + 0x14) + 0xc);
+                  else if (listIndex == 1) {
+                    registerListHead = *(int **)(*(int *)(parser + 0x14) + 0xc);
                   }
-                  for (iVar2 = *piVar5; iVar2 != 0; iVar2 = *(int *)(iVar2 + 0x4c)) {
-                    if ((*(int *)(iVar2 + 8) == 5) && (*(int *)(iVar2 + 0xc) == local_38)) {
-                      if (local_30 == 0) {
+                  for (iVar2 = *registerListHead; iVar2 != 0; iVar2 = *(int *)(iVar2 + 0x4c)) {
+                    if ((*(int *)(iVar2 + 8) == 5) && (*(int *)(iVar2 + 0xc) == sourceRegisterIndex)) {
+                      if (coordFormat == 0) {
                         iVar3 = *(int *)(iVar2 + 0x14);
                         if ((iVar3 != 0x200) && (iVar3 != 0)) {
                           return 0x19;
@@ -3107,35 +3107,35 @@ int _LFSParserParseRegisterInit(param_1)
                       else {
                         iVar3 = *(int *)(iVar2 + 0x14);
                       }
-                      if (((local_30 == 0x100) && (iVar3 != 0x300)) && (iVar3 != 0x100)) {
+                      if (((coordFormat == 0x100) && (iVar3 != 0x300)) && (iVar3 != 0x100)) {
                         return 0x19;
                       }
-                      if (((iVar3 == 0) && (local_30 != 0x200)) && (local_30 != 0)) {
+                      if (((iVar3 == 0) && (coordFormat != 0x200)) && (coordFormat != 0)) {
                         return 0x19;
                       }
-                      if (((iVar3 == 0x100) && (local_30 != 0x300)) && (local_30 != 0x100)) {
+                      if (((iVar3 == 0x100) && (coordFormat != 0x300)) && (coordFormat != 0x100)) {
                         return 0x19;
                       }
                     }
                   }
-                  uVar4 = uVar4 + 1;
-                } while (uVar4 < 2);
+                  listIndex = listIndex + 1;
+                } while (listIndex < 2);
               }
-              cVar1 = *(char *)(param_1 + 0x19);
-              if (((cVar1 == '\x03') && (local_3c == 1)) &&
-                 ((local_30 == 0x100 || (local_30 == 0x300)))) {
+              passKind = *(char *)(parser + 0x19);
+              if (((passKind == '\x03') && (sourceRegisterKind == 1)) &&
+                 ((coordFormat == 0x100 || (coordFormat == 0x300)))) {
                 iVar3 = 0x1a;
               }
               else {
-                if (cVar1 == '\x02') {
+                if (passKind == '\x02') {
                   _LFSStreamAddPreliminaryPassRegisterInit
-                            (*(undefined4 *)(param_1 + 0x14),&local_40);
+                            (*(undefined4 *)(parser + 0x14),&initOperation);
                 }
                 else {
-                  if (cVar1 != '\x03') {
+                  if (passKind != '\x03') {
                     return 0xc;
                   }
-                  _LFSStreamAddOutputPassRegisterInit(*(undefined4 *)(param_1 + 0x14),&local_40);
+                  _LFSStreamAddOutputPassRegisterInit(*(undefined4 *)(parser + 0x14),&initOperation);
                 }
                 iVar3 = 0;
               }
@@ -3544,71 +3544,71 @@ int _LFSStreamChunkCreateFromChunk(sourceChunk)
 }
 
 /* _LFSStreamChunkGetStream @ 0xd1394 (408 bytes) */
-int _LFSStreamChunkGetStream(param_1, unusedArg2, param_3, param_4)
-  byte *param_1;
+int _LFSStreamChunkGetStream(chunk, unusedArg2, chunkWordCount, subIndex)
+  byte *chunk;
   undefined4 unusedArg2;
-  undefined4 *param_3;
-  int param_4;
+  undefined4 *chunkWordCount;
+  int subIndex;
 {
-  byte bVar1;
+  byte chunkType;
   undefined4 uVar2;
   int iVar3;
   uint uVar4;
   uint uVar5;
-  uint local_20 [8];
+  uint wordBuffer [8];
   
-  *param_3 = 1;
-  bVar1 = *param_1;
-  local_20[0] = 0;
-  if (bVar1 != 2) {
-    if (2 < bVar1) {
-      if (bVar1 != 3) {
-        if (bVar1 != 4) {
+  *chunkWordCount = 1;
+  chunkType = *chunk;
+  wordBuffer[0] = 0;
+  if (chunkType != 2) {
+    if (2 < chunkType) {
+      if (chunkType != 3) {
+        if (chunkType != 4) {
           return 0;
         }
-        *param_3 = 4;
-        _memmove(local_20,param_1 + param_4 * 4 + 4,4);
-        return local_20[0];
+        *chunkWordCount = 4;
+        _memmove(wordBuffer,chunk + subIndex * 4 + 4,4);
+        return wordBuffer[0];
       }
-      uVar4 = *(uint *)(param_1 + 4);
-      uVar5 = *(int *)(param_1 + 8) << 0x14 | uVar4 | 0x60000000;
+      uVar4 = *(uint *)(chunk + 4);
+      uVar5 = *(int *)(chunk + 8) << 0x14 | uVar4 | 0x60000000;
       if (uVar4 == 1) {
-        iVar3 = *(int *)(param_1 + 0x10);
+        iVar3 = *(int *)(chunk + 0x10);
       }
       else if (uVar4 == 0) {
-        iVar3 = *(int *)(param_1 + 0xc);
+        iVar3 = *(int *)(chunk + 0xc);
       }
       else {
         if (uVar4 != 2) {
           return uVar5;
         }
-        iVar3 = *(int *)(param_1 + 0x14);
+        iVar3 = *(int *)(chunk + 0x14);
       }
       return uVar5 | iVar3 << 0xc;
     }
-    if (bVar1 != 1) {
+    if (chunkType != 1) {
       return 0;
     }
-    return *(int *)(param_1 + 0xc) << 0x14 | *(int *)(param_1 + 0x10) << 0xc |
-           *(uint *)(param_1 + 0x14) | *(uint *)(param_1 + 4) | *(uint *)(param_1 + 8) | 0x20000000;
+    return *(int *)(chunk + 0xc) << 0x14 | *(int *)(chunk + 0x10) << 0xc |
+           *(uint *)(chunk + 0x14) | *(uint *)(chunk + 4) | *(uint *)(chunk + 8) | 0x20000000;
   }
-  uVar4 = *(uint *)(param_1 + 4);
+  uVar4 = *(uint *)(chunk + 4);
   uVar2 = 2;
   if ((uVar4 != 0) && (uVar2 = 3, 0x500 < uVar4)) {
     if (0xa00 < uVar4) goto LAB_000d1440;
     uVar2 = 4;
   }
-  *param_3 = uVar2;
+  *chunkWordCount = uVar2;
 LAB_000d1440:
-  if (param_4 == 0) {
-    uVar4 = *(int *)(param_1 + 0xc) << 0x14 | *(uint *)(param_1 + 0x10) | *(uint *)(param_1 + 0x14)
-            | *(uint *)(param_1 + 4) | 0x30000000;
+  if (subIndex == 0) {
+    uVar4 = *(int *)(chunk + 0xc) << 0x14 | *(uint *)(chunk + 0x10) | *(uint *)(chunk + 0x14)
+            | *(uint *)(chunk + 4) | 0x30000000;
   }
   else {
-    iVar3 = param_4 + -1;
-    uVar4 = *(int *)(param_1 + iVar3 * 0x10 + 0x1c) << 0x14 |
-            *(uint *)(param_1 + iVar3 * 0x10 + 0x20) | *(uint *)(param_1 + iVar3 * 0x10 + 0x24) |
-            *(uint *)(param_1 + iVar3 * 0x10 + 0x18) | 0x40000000;
+    iVar3 = subIndex + -1;
+    uVar4 = *(int *)(chunk + iVar3 * 0x10 + 0x1c) << 0x14 |
+            *(uint *)(chunk + iVar3 * 0x10 + 0x20) | *(uint *)(chunk + iVar3 * 0x10 + 0x24) |
+            *(uint *)(chunk + iVar3 * 0x10 + 0x18) | 0x40000000;
   }
   return uVar4;
 }

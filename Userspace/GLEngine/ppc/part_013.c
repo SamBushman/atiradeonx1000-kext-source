@@ -693,14 +693,14 @@ int _glColorTable_Exec(glContext, target, internalformat, width, format, type, t
   undefined4 type;
   int table;
 {
-  bool bVar1;
-  byte bVar2;
-  ushort uVar3;
+  bool tablePresent;
+  byte levelFlags;
+  ushort textureTargetBits;
   undefined4 glErrorCode;
   uint uVar5;
   int iVar6;
   int imageEndOffset;
-  int iVar7;
+  int textureLevel;
   int iVar8;
   int colorTable;
   int pixelUnpackBuffer;
@@ -710,8 +710,8 @@ int _glColorTable_Exec(glContext, target, internalformat, width, format, type, t
   if (pixelUnpackBuffer == 0) {
 LAB_0005fc94:
     if (*(short *)(glContext + 0x4a10) < 0) {
-      bVar1 = table != 0;
-      if ((!bVar1) && (*(char *)(glContext + 0x31e6) != '\0')) {
+      tablePresent = table != 0;
+      if ((!tablePresent) && (*(char *)(glContext + 0x31e6) != '\0')) {
         if (*(int *)(glContext + 0x7574) != 0) {
           return;
         }
@@ -722,22 +722,22 @@ LAB_0005fc94:
       if (colorTable == 0) {
         return;
       }
-      uVar3 = *(ushort *)(colorTable + 0x24);
-      if ((uVar3 & 0x3c00) == 0x1000) {
+      textureTargetBits = *(ushort *)(colorTable + 0x24);
+      if ((textureTargetBits & 0x3c00) == 0x1000) {
 LAB_0005fd34:
-        iVar7 = colorTable + 0xac;
+        textureLevel = colorTable + 0xac;
         if ((*(byte *)(colorTable + 0xb7) & 0x20) != 0) {
-          _gleDeletePluginTextureLevel(glContext,colorTable,iVar7,0,0xffffffff);
+          _gleDeletePluginTextureLevel(glContext,colorTable,textureLevel,0,0xffffffff);
           if (*(int *)(colorTable + 0xc0) != 0) {
-            bVar2 = *(byte *)(colorTable + 0xb7);
-            if ((bVar2 & 1) == 0) {
-              _gleFreeTextureLevel(glContext,colorTable,iVar7);
-              bVar2 = *(byte *)(colorTable + 0xb7);
+            levelFlags = *(byte *)(colorTable + 0xb7);
+            if ((levelFlags & 1) == 0) {
+              _gleFreeTextureLevel(glContext,colorTable,textureLevel);
+              levelFlags = *(byte *)(colorTable + 0xb7);
             }
             else {
               *(undefined4 *)(colorTable + 0xc0) = 0;
             }
-            *(byte *)(colorTable + 0xb7) = bVar2 & 0xef;
+            *(byte *)(colorTable + 0xb7) = levelFlags & 0xef;
           }
           *(byte *)(colorTable + 0xb7) = *(byte *)(colorTable + 0xb7) & 0xdf;
         }
@@ -757,9 +757,9 @@ LAB_0005fd34:
         }
         if (iVar6 == 0) {
           iVar6 = _gleCreateTextureLevel
-                            (glContext,colorTable,iVar7,internalformat,width,1,1,0,format,type,1,table);
-          if ((iVar6 != 0) && (bVar1)) {
-            _gleTextureImagePut(glContext,iVar7,0,0,0,width,1,1,format,type,0,glContext + 0x31cc,
+                            (glContext,colorTable,textureLevel,internalformat,width,1,1,0,format,type,1,table);
+          if ((iVar6 != 0) && (tablePresent)) {
+            _gleTextureImagePut(glContext,textureLevel,0,0,0,width,1,1,format,type,0,glContext + 0x31cc,
                                 table);
           }
           *(uint *)(glContext + 0x314) =
@@ -767,35 +767,35 @@ LAB_0005fd34:
         }
         else {
           iVar8 = _gleCreateColorTableLevel
-                            (glContext,colorTable,iVar7,internalformat,width,format,type,table);
-          if ((iVar8 != 0) && (bVar1)) {
-            _gleColorTable(glContext,iVar6,iVar7,width,format,type,table);
+                            (glContext,colorTable,textureLevel,internalformat,width,format,type,table);
+          if ((iVar8 != 0) && (tablePresent)) {
+            _gleColorTable(glContext,iVar6,textureLevel,width,format,type,table);
           }
           *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x40000000;
         }
         if (width == 0) {
           return;
         }
-        _gleCreatePluginTextureLevel(glContext,colorTable,iVar7,0,0xffffffff,internalformat);
+        _gleCreatePluginTextureLevel(glContext,colorTable,textureLevel,0,0xffffffff,internalformat);
         return;
       }
-      if ((uVar3 & 0x3c00) == 0) {
-        *(ushort *)(colorTable + 0x24) = uVar3 | 0x1000;
+      if ((textureTargetBits & 0x3c00) == 0) {
+        *(ushort *)(colorTable + 0x24) = textureTargetBits | 0x1000;
         goto LAB_0005fd34;
       }
-      if ((uVar3 & 0xc00) == 0) goto LAB_0005fd34;
+      if ((textureTargetBits & 0xc00) == 0) goto LAB_0005fd34;
     }
   }
   else {
     imageEndOffset = _gleOffsetLimitImage(glContext + 0x31cc,width,1,format,type,table);
     iVar8 = *(int *)(pixelUnpackBuffer + 0x38);
     bytesPerElement = (double)((double (*)())_gleBytesPerElement)(type);
-    iVar7 = (int)bytesPerElement;
+    textureLevel = (int)bytesPerElement;
     if (imageEndOffset <= iVar8) {
-      if (iVar7 == 0) {
-        iVar7 = _glePixelBytes(format,type);
+      if (textureLevel == 0) {
+        textureLevel = _glePixelBytes(format,type);
       }
-      if (table == (table / iVar7) * iVar7) {
+      if (table == (table / textureLevel) * textureLevel) {
         if (*(int *)(pixelUnpackBuffer + 0x40) != 0) {
           _gleSynchronizePluginBuffer(glContext,pixelUnpackBuffer + 0x10);
         }
@@ -1653,7 +1653,7 @@ void _glGetColorTable_Exec(glContext, target, format, type, table)
   undefined4 *userConvertBPtr;
   uint tableHeight;
   uint glContextByte31c8;
-  undefined1 *puVar11;
+  undefined1 *pixelBytesPtr;
   int *packOffsetPtr;
   int pixelPackBuffer;
   int bufferSize;
@@ -1673,10 +1673,10 @@ void _glGetColorTable_Exec(glContext, target, format, type, table)
   uint procHeight;
   undefined1 procEnd;
   undefined4 packRowBytes;
-  undefined1 auStack_5c [4];
-  undefined1 auStack_58 [4];
-  undefined1 auStack_54 [4];
-  undefined1 auStack_50 [4];
+  undefined1 rowPadding [4];
+  undefined1 imageBytes [4];
+  undefined1 imagePadding [4];
+  undefined1 pixelBytes [4];
   int packOffset;
   undefined4 tableConvertA;
   undefined4 tableConvertB;
@@ -1712,11 +1712,11 @@ LAB_0006138c:
                         (glContext,colorTable,colorTable + 0xac,0,0xffffffff,(uint)*(byte *)(glContext + 0x85a8));
             }
             tableHeight = (uint)*(ushort *)(colorTable + 0xb2);
-            puVar11 = auStack_50;
+            pixelBytesPtr = pixelBytes;
             packOffsetPtr = &packOffset;
             _glePixelPackSettings
                       (glContext,format,type,(uint)*(ushort *)(colorTable + 0xb0),tableHeight,
-                       glContext + 0x31b0,puVar11,packOffsetPtr,&packRowBytes,auStack_5c,auStack_58,auStack_54);
+                       glContext + 0x31b0,pixelBytesPtr,packOffsetPtr,&packRowBytes,rowPadding,imageBytes,imagePadding);
             if (((((*(byte *)(colorTable + 0xb7) & 1) == 0) ||
                  (table + packOffset != *(int *)(colorTable + 0xc0))) ||
                 (format != *(ushort *)(colorTable + 0xbc))) || (type != *(ushort *)(colorTable + 0xbe))) {
@@ -1732,10 +1732,10 @@ LAB_0006138c:
             rowBytes = _gleRowBytes((uint)*(ushort *)(colorTable + 0xbc),(uint)*(ushort *)(colorTable + 0xbe),
                                  (uint)*(ushort *)(colorTable + 0xb8));
             _glgConvertType((uint)*(ushort *)(colorTable + 0xbc),(uint)*(ushort *)(colorTable + 0xbe),
-                            &tableConvertA,&tableConvertB,tableHeight,glContextByte31c8,puVar11,packOffsetPtr);
+                            &tableConvertA,&tableConvertB,tableHeight,glContextByte31c8,pixelBytesPtr,packOffsetPtr);
             userConvertAPtr = &userConvertA;
             userConvertBPtr = userConvertB;
-            _glgConvertType(format,type,userConvertAPtr,userConvertBPtr,tableHeight,glContextByte31c8,puVar11,packOffsetPtr);
+            _glgConvertType(format,type,userConvertAPtr,userConvertBPtr,tableHeight,glContextByte31c8,pixelBytesPtr,packOffsetPtr);
             procSrcConvertA = tableConvertA;
             procSrcConvertB = tableConvertB;
             procDstRowBytes = packRowBytes;

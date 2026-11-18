@@ -49,46 +49,46 @@ undefined4 _glOrtho_ListExec(int glContext,float *listRecord,double unusedFloatA
 /* _glOrtho_Comp @ 0x79558 (364 bytes) */
 int _glOrtho_Comp(int glContext,double left,double right,double bottom,double top,double zNear,double zFar,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  float fVar1;
-  float fVar2;
-  float fVar3;
-  float fVar4;
+  float rightMinusLeft;
+  float nearMinusFar;
+  float topMinusBottom;
+  float absRange;
   float *listRecord;
-  double dVar6;
-  double dVar7;
-  double dVar8;
+  double inverseNearMinusFar;
+  double inverseTopMinusBottom;
+  double inverseRightMinusLeft;
   
-  fVar1 = (float)(right - left);
-  fVar2 = (float)(zNear - zFar);
-  fVar3 = (float)(top - bottom);
-  fVar4 = fVar1;
-  if (!(FLOAT_00108e50 <= fVar1)) {
-    fVar4 = -fVar1;
+  rightMinusLeft = (float)(right - left);
+  nearMinusFar = (float)(zNear - zFar);
+  topMinusBottom = (float)(top - bottom);
+  absRange = rightMinusLeft;
+  if (!(FLOAT_00108e50 <= rightMinusLeft)) {
+    absRange = -rightMinusLeft;
   }
-  if (!(fVar4 < FLOAT_00108e80)) {
-    fVar4 = fVar3;
-    if (!(FLOAT_00108e50 <= fVar3)) {
-      fVar4 = -fVar3;
+  if (!(absRange < FLOAT_00108e80)) {
+    absRange = topMinusBottom;
+    if (!(FLOAT_00108e50 <= topMinusBottom)) {
+      absRange = -topMinusBottom;
     }
-    if (!(fVar4 < FLOAT_00108e80)) {
-      fVar4 = fVar2;
-      if (!(FLOAT_00108e50 <= fVar2)) {
-        fVar4 = -fVar2;
+    if (!(absRange < FLOAT_00108e80)) {
+      absRange = nearMinusFar;
+      if (!(FLOAT_00108e50 <= nearMinusFar)) {
+        absRange = -nearMinusFar;
       }
-      if (!(fVar4 < FLOAT_00108e80)) {
+      if (!(absRange < FLOAT_00108e80)) {
         listRecord = (float *)_gleAddListItem(glContext,PTR__glOrtho_ListExec_00110230,0x18);
         if (listRecord == (float *)0x0) {
           return 0;
         }
-        dVar6 = (double)(1.0 / fVar2);
-        dVar8 = (double)(1.0 / fVar1);
-        dVar7 = (double)(1.0 / fVar3);
-        listRecord[5] = (float)((zFar + zNear) * dVar6);
-        listRecord[4] = (float)(-(top + bottom) * dVar7);
-        *listRecord = (float)(dVar8 + dVar8);
-        listRecord[3] = (float)(-(right + left) * dVar8);
-        listRecord[1] = (float)(dVar7 + dVar7);
-        listRecord[2] = (float)(dVar6 + dVar6);
+        inverseNearMinusFar = (double)(1.0 / nearMinusFar);
+        inverseRightMinusLeft = (double)(1.0 / rightMinusLeft);
+        inverseTopMinusBottom = (double)(1.0 / topMinusBottom);
+        listRecord[5] = (float)((zFar + zNear) * inverseNearMinusFar);
+        listRecord[4] = (float)(-(top + bottom) * inverseTopMinusBottom);
+        *listRecord = (float)(inverseRightMinusLeft + inverseRightMinusLeft);
+        listRecord[3] = (float)(-(right + left) * inverseRightMinusLeft);
+        listRecord[1] = (float)(inverseTopMinusBottom + inverseTopMinusBottom);
+        listRecord[2] = (float)(inverseNearMinusFar + inverseNearMinusFar);
         return (int)listRecord;
       }
     }
@@ -102,15 +102,15 @@ int _glOrtho_Comp(int glContext,double left,double right,double bottom,double to
 /* _glOrtho_CompExec @ 0x796c4 (120 bytes) */
 void _glOrtho_CompExec(undefined4 glContext,double left,double right,double bottom,double top,double zNear,double zFar,double forwardedFloatArg7,double forwardedFloatArg8,double forwardedFloatArg9,double forwardedFloatArg10,double forwardedFloatArg11,double forwardedFloatArg12,double forwardedFloatArg13)
 {
-  double incomingStack_ffffff68;
-  double incomingStack_ffffff70;
-  double incomingStack_ffffff78;
-  double incomingStack_ffffff80;
-  double incomingStack_ffffff88;
+  double incomingStackWord_ffffff68;
+  double incomingStackWord_ffffff70;
+  double incomingStackWord_ffffff78;
+  double incomingStackWord_ffffff80;
+  double incomingStackWord_ffffff88;
   
   ((int (*)())_glOrtho_Comp)(glContext,left,right,bottom,top,zNear,zFar,forwardedFloatArg7,forwardedFloatArg8,
-                incomingStack_ffffff68,incomingStack_ffffff70,incomingStack_ffffff78,incomingStack_ffffff80,
-                incomingStack_ffffff88);
+                incomingStackWord_ffffff68,incomingStackWord_ffffff70,incomingStackWord_ffffff78,incomingStackWord_ffffff80,
+                incomingStackWord_ffffff88);
   ((void (*)())_glOrtho_Exec)(glContext,left,right,bottom,top,zNear,zFar,forwardedFloatArg7,forwardedFloatArg8,
                 forwardedFloatArg9,forwardedFloatArg10,forwardedFloatArg11,forwardedFloatArg12,forwardedFloatArg13);
   return;
@@ -603,51 +603,51 @@ void _glProgramLocalParameter4dvARB_Exec(glContext, target, index, params)
   uint index;
   double *params;
 {
-  byte bVar1;
-  uint uVar2;
+  byte dirtyBitIndex;
+  uint expectedTargetThenNewDirtyFlags31c;
   undefined4 glErrorCode;
   int iVar4;
   int iVar5;
-  int iVar6;
-  int iVar7;
+  int programKindSlot;
+  int dirtyBitWordBase;
   
   if (target == 0x8620) {
     iVar5 = 0;
     if (index < 0x100) {
-      uVar2 = *(uint *)(glContext + 0x31c) | 0x400000;
+      expectedTargetThenNewDirtyFlags31c = *(uint *)(glContext + 0x31c) | 0x400000;
 LAB_0007a1e8:
-      *(uint *)(glContext + 0x31c) = uVar2;
+      *(uint *)(glContext + 0x31c) = expectedTargetThenNewDirtyFlags31c;
       if (*(int *)(glContext + 0x5434) == 0) {
-        bVar1 = *(byte *)(index + *(int *)(glContext + 0x5420) + 0x58);
+        dirtyBitIndex = *(byte *)(index + *(int *)(glContext + 0x5420) + 0x58);
       }
       else {
-        bVar1 = *(byte *)(index + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x8c);
+        dirtyBitIndex = *(byte *)(index + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x8c);
       }
-      iVar7 = (bVar1 >> 3 & 0x1c) + glContext;
+      dirtyBitWordBase = (dirtyBitIndex >> 3 & 0x1c) + glContext;
       iVar4 = *(int *)(glContext + 0x5424);
-      iVar6 = iVar5 * 4 + glContext;
-      *(uint *)(iVar7 + 0x324) = *(uint *)(iVar7 + 0x324) | 1 << (bVar1 & 0x1f);
-      bVar1 = *(byte *)(index + iVar4 + 0x58);
-      iVar5 = (bVar1 >> 3 & 0x1c) + glContext;
-      *(uint *)(iVar5 + 0x348) = *(uint *)(iVar5 + 0x348) | 1 << (bVar1 & 0x1f);
-      iVar5 = *(int *)(*(int *)(iVar6 + 0x5420) + 0x4e0);
+      programKindSlot = iVar5 * 4 + glContext;
+      *(uint *)(dirtyBitWordBase + 0x324) = *(uint *)(dirtyBitWordBase + 0x324) | 1 << (dirtyBitIndex & 0x1f);
+      dirtyBitIndex = *(byte *)(index + iVar4 + 0x58);
+      iVar5 = (dirtyBitIndex >> 3 & 0x1c) + glContext;
+      *(uint *)(iVar5 + 0x348) = *(uint *)(iVar5 + 0x348) | 1 << (dirtyBitIndex & 0x1f);
+      iVar5 = *(int *)(*(int *)(programKindSlot + 0x5420) + 0x4e0);
       *(float *)(iVar5 + index * 0x10) = (float)*params;
       iVar5 = iVar5 + index * 0x10;
       *(float *)(iVar5 + 4) = (float)params[1];
       *(float *)(iVar5 + 8) = (float)params[2];
       *(float *)(iVar5 + 0xc) = (float)params[3];
-      _gleModifyPluginPipelineProgram(glContext,*(int *)(iVar6 + 0x5420) + 0x10,2);
+      _gleModifyPluginPipelineProgram(glContext,*(int *)(programKindSlot + 0x5420) + 0x10,2);
       return;
     }
   }
   else {
     if (target < 0x8621) {
-      uVar2 = 0x8200;
+      expectedTargetThenNewDirtyFlags31c = 0x8200;
     }
     else {
-      uVar2 = 0x8804;
+      expectedTargetThenNewDirtyFlags31c = 0x8804;
     }
-    if (target != uVar2) {
+    if (target != expectedTargetThenNewDirtyFlags31c) {
       if (*(int *)(glContext + 0x7574) != 0) {
         return;
       }
@@ -656,7 +656,7 @@ LAB_0007a1e8:
     }
     iVar5 = 1;
     if (index < 0x80) {
-      uVar2 = *(uint *)(glContext + 0x31c) | 0x1000000;
+      expectedTargetThenNewDirtyFlags31c = *(uint *)(glContext + 0x31c) | 0x1000000;
       goto LAB_0007a1e8;
     }
   }

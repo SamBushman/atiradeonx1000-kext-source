@@ -573,10 +573,10 @@ void _glEvalPoint2_Exec(int glContext,uint i,uint j,double unusedFloatArg1,doubl
 {
   double fparam_1_00;
   double fparam_2_00;
-  double incomingStack_ffffffa8;
-  double incomingStack_ffffffb0;
-  double incomingStack_ffffffb8;
-  double incomingStack_ffffffc0;
+  double incomingStackWord_ffffffa8;
+  double incomingStackWord_ffffffb0;
+  double incomingStackWord_ffffffb8;
+  double incomingStackWord_ffffffc0;
   
   if (i == 0) {
     fparam_1_00 = (double)*(float *)(glContext + 0x74bc);
@@ -601,7 +601,7 @@ void _glEvalPoint2_Exec(int glContext,uint i,uint j,double unusedFloatArg1,doubl
                           *(float *)(glContext + 0x74cc));
   }
   ((void (*)())_gleEvalMap2)(glContext,fparam_1_00,fparam_2_00,forwardedFloatArg3,forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8
-               ,incomingStack_ffffffa8,incomingStack_ffffffb0,incomingStack_ffffffb8,incomingStack_ffffffc0);
+               ,incomingStackWord_ffffffa8,incomingStackWord_ffffffb0,incomingStackWord_ffffffb8,incomingStackWord_ffffffc0);
   return;
 }
 
@@ -926,11 +926,11 @@ void _glFlush_RevertExec(glContext)
   double incomingFpr6;
   double incomingFpr7;
   double incomingFpr8;
-  double incomingStack_ffffffb8;
-  double incomingStack_ffffffc0;
-  double incomingStack_ffffffc8;
-  double incomingStack_ffffffd0;
-  double incomingStack_ffffffd8;
+  double incomingStackWord_ffffffb8;
+  double incomingStackWord_ffffffc0;
+  double incomingStackWord_ffffffc8;
+  double incomingStackWord_ffffffd0;
+  double incomingStackWord_ffffffd8;
   
   glContextByte85a5 = *(byte *)(glContext + 0x85a5);
   if (*(short *)(glContext + 0x4a10) < 0) {
@@ -941,8 +941,8 @@ void _glFlush_RevertExec(glContext)
               (*(undefined4 *)(rendererSlot + 0x85ac),*(undefined4 *)(glContext + 0x484c),
                *(undefined4 *)(glContext + 0x4848),0);
     forwardedFloatArg1 = (double)_gleSwitchToRenderer(glContext,(uint)glContextByte85a5);
-    ((void (*)())_gleUpdateDepthRangeData)(glContext,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffffb8,
-               incomingStack_ffffffc0,incomingStack_ffffffc8,incomingStack_ffffffd0,incomingStack_ffffffd8);
+    ((void (*)())_gleUpdateDepthRangeData)(glContext,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStackWord_ffffffb8,
+               incomingStackWord_ffffffc0,incomingStackWord_ffffffc8,incomingStackWord_ffffffd0,incomingStackWord_ffffffd8);
     _gleUpdatePolyMode(glContext);
     ((void (*)())_gleUpdateViewScissorData)(glContext,fparam_1_00,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
     _gleUpdateTextureTransform(glContext);
@@ -1238,8 +1238,8 @@ void _glGetRenderbufferParameterivEXT_Exec(glContext, target, pname, params)
   undefined4 glErrorCode;
   int iVar3;
   int iVar4;
-  uint local_20;
-  int local_1c [5];
+  uint parameterValue;
+  int queriedFormat [5];
   
   iVar4 = *(int *)(glContext + 0x7448);
   if (-1 < *(short *)(glContext + 0x4a10)) {
@@ -1263,18 +1263,18 @@ switchD_00066504_caseD_8d45:
   if (iVar4 == 0) goto LAB_000664c4;
   switch(pname) {
   case 0x8d42:
-    local_20 = (uint)*(ushort *)(iVar4 + 0xd8);
+    parameterValue = (uint)*(ushort *)(iVar4 + 0xd8);
     break;
   case 0x8d43:
-    local_20 = (uint)*(ushort *)(iVar4 + 0xda);
+    parameterValue = (uint)*(ushort *)(iVar4 + 0xda);
     break;
   case 0x8d44:
     iVar4 = (uint)*(byte *)(glContext + 0x85a8) * 4 + iVar4;
     (**(code **)(glContext + 0x479c))
               (*(undefined4 *)(glContext + 0x4688),*(undefined4 *)(iVar4 + 0x10),0,0,((unsigned char *)0x00001003U),
-               &local_20,iVar4);
-    if (local_20 == 0) {
-      local_20 = 0x1908;
+               &parameterValue,iVar4);
+    if (parameterValue == 0) {
+      parameterValue = 0x1908;
     }
     break;
   default:
@@ -1298,31 +1298,31 @@ LAB_000665d0:
     iVar4 = (uint)*(byte *)(glContext + 0x85a8) * 4 + iVar4;
     (**(code **)(glContext + 0x479c))
               (*(undefined4 *)(glContext + 0x4688),*(undefined4 *)(iVar4 + 0x10),0,0,((unsigned char *)0x00001003U),
-               local_1c,iVar4);
-    if (local_1c[0] == 0x8d47) {
-      local_20 = 4;
+               queriedFormat,iVar4);
+    if (queriedFormat[0] == 0x8d47) {
+      parameterValue = 4;
     }
     else {
-      if (local_1c[0] < 0x8d48) {
-        if (local_1c[0] == 0x8d46) {
-          local_20 = 1;
+      if (queriedFormat[0] < 0x8d48) {
+        if (queriedFormat[0] == 0x8d46) {
+          parameterValue = 1;
           break;
         }
       }
       else {
-        if (local_1c[0] == 0x8d48) {
-          local_20 = 8;
+        if (queriedFormat[0] == 0x8d48) {
+          parameterValue = 8;
           break;
         }
-        if (local_1c[0] == 0x8d49) {
-          local_20 = 0x10;
+        if (queriedFormat[0] == 0x8d49) {
+          parameterValue = 0x10;
           break;
         }
       }
-      local_20 = 0;
+      parameterValue = 0;
     }
   }
-  *params = local_20;
+  *params = parameterValue;
   return;
 }
 

@@ -5858,7 +5858,7 @@ void _glDrawArrays_Exec(int glContext,undefined4 mode,undefined4 first,undefined
 /* _gleEvalDrawArraysOrElements_Entires_Exec @ 0x4d570 (812 bytes) */
 void _gleEvalDrawArraysOrElements_Entires_Exec(int glContext,undefined4 mode,undefined4 first,undefined4 count,undefined4 forwardedArg5,int arrayStateRecord,double forwardedFloatArg1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
 {
-  uint uVar1;
+  uint dispatchSelectMaskThenTable;
   
   if (*(int *)(glContext + 0x5408) != 0) {
     ((void (*)())_gleDrawArraysOrElements_Exec)(glContext,mode,first,count,forwardedArg5,arrayStateRecord,forwardedFloatArg1,forwardedFloatArg2,forwardedFloatArg3,forwardedFloatArg4,
@@ -5867,17 +5867,17 @@ void _gleEvalDrawArraysOrElements_Entires_Exec(int glContext,undefined4 mode,und
   }
   if ((*(uint *)(arrayStateRecord + 0x328) & *(uint *)(arrayStateRecord + 800)) != 0 ||
       (*(uint *)(arrayStateRecord + 0x32c) & *(uint *)(arrayStateRecord + 0x324)) != 0) {
-    uVar1 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x104) == 0);
+    dispatchSelectMaskThenTable = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x104) == 0);
     *(undefined **)
-     ((*(uint *)(glContext + 0x4680) & uVar1 | *(uint *)(glContext + 0x4684) & ~uVar1) + 0x104) =
+     ((*(uint *)(glContext + 0x4680) & dispatchSelectMaskThenTable | *(uint *)(glContext + 0x4684) & ~dispatchSelectMaskThenTable) + 0x104) =
          PTR__glDrawArrays_VBO_Exec_00110448;
-    uVar1 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x10c) == 0);
+    dispatchSelectMaskThenTable = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x10c) == 0);
     *(undefined **)
-     ((*(uint *)(glContext + 0x4680) & uVar1 | *(uint *)(glContext + 0x4684) & ~uVar1) + 0x10c) =
+     ((*(uint *)(glContext + 0x4680) & dispatchSelectMaskThenTable | *(uint *)(glContext + 0x4684) & ~dispatchSelectMaskThenTable) + 0x10c) =
          PTR__glDrawElements_VBO_Exec_00110444;
-    uVar1 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x654) == 0);
+    dispatchSelectMaskThenTable = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x654) == 0);
     *(undefined **)
-     ((*(uint *)(glContext + 0x4680) & uVar1 | *(uint *)(glContext + 0x4684) & ~uVar1) + 0x654) =
+     ((*(uint *)(glContext + 0x4680) & dispatchSelectMaskThenTable | *(uint *)(glContext + 0x4684) & ~dispatchSelectMaskThenTable) + 0x654) =
          PTR__glDrawRangeElements_VBO_Exec_00110440;
     ((void (*)())_gleDrawArraysOrElements_VBO_Exec)(glContext,mode,first,count,forwardedArg5,arrayStateRecord,forwardedFloatArg1,forwardedFloatArg2,forwardedFloatArg3,forwardedFloatArg4,
                forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
@@ -5886,49 +5886,49 @@ void _gleEvalDrawArraysOrElements_Entires_Exec(int glContext,undefined4 mode,und
   if (((*(int *)(arrayStateRecord + 0x338) != 0) && (*(int *)(arrayStateRecord + 0x334) != 0)) &&
      ((*(char *)(glContext + 0x465c) != '\0' ||
       ((*(short *)(arrayStateRecord + 0x332) == -0x7a42 || (*(short *)(arrayStateRecord + 0x332) == -0x7a41)))))) {
-    uVar1 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x104) == 0);
+    dispatchSelectMaskThenTable = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x104) == 0);
     *(undefined **)
-     ((*(uint *)(glContext + 0x4680) & uVar1 | *(uint *)(glContext + 0x4684) & ~uVar1) + 0x104) =
+     ((*(uint *)(glContext + 0x4680) & dispatchSelectMaskThenTable | *(uint *)(glContext + 0x4684) & ~dispatchSelectMaskThenTable) + 0x104) =
          PTR__glDrawArrays_VAR_Exec_0011043c;
-    uVar1 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x10c) == 0);
+    dispatchSelectMaskThenTable = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x10c) == 0);
     *(undefined **)
-     ((*(uint *)(glContext + 0x4680) & uVar1 | *(uint *)(glContext + 0x4684) & ~uVar1) + 0x10c) =
+     ((*(uint *)(glContext + 0x4680) & dispatchSelectMaskThenTable | *(uint *)(glContext + 0x4684) & ~dispatchSelectMaskThenTable) + 0x10c) =
          PTR__glDrawElements_VAR_Exec_00110438;
-    uVar1 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x654) == 0);
-    uVar1 = *(uint *)(glContext + 0x4680) & uVar1 | *(uint *)(glContext + 0x4684) & ~uVar1;
-    *(undefined **)(uVar1 + 0x654) = PTR__glDrawRangeElements_VAR_Exec_00110434;
-    ((void (*)())_gleDrawArraysOrElements_VAR_Exec)(glContext,mode,first,count,forwardedArg5,arrayStateRecord,uVar1,forwardedFloatArg1,forwardedFloatArg2,forwardedFloatArg3,
+    dispatchSelectMaskThenTable = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x654) == 0);
+    dispatchSelectMaskThenTable = *(uint *)(glContext + 0x4680) & dispatchSelectMaskThenTable | *(uint *)(glContext + 0x4684) & ~dispatchSelectMaskThenTable;
+    *(undefined **)(dispatchSelectMaskThenTable + 0x654) = PTR__glDrawRangeElements_VAR_Exec_00110434;
+    ((void (*)())_gleDrawArraysOrElements_VAR_Exec)(glContext,mode,first,count,forwardedArg5,arrayStateRecord,dispatchSelectMaskThenTable,forwardedFloatArg1,forwardedFloatArg2,forwardedFloatArg3,
                forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
     return;
   }
   if (*(int *)(glContext + 0x4988) != 0) {
-    uVar1 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x104) == 0);
+    dispatchSelectMaskThenTable = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x104) == 0);
     *(undefined **)
-     ((*(uint *)(glContext + 0x4680) & uVar1 | *(uint *)(glContext + 0x4684) & ~uVar1) + 0x104) =
+     ((*(uint *)(glContext + 0x4680) & dispatchSelectMaskThenTable | *(uint *)(glContext + 0x4684) & ~dispatchSelectMaskThenTable) + 0x104) =
          PTR__glDrawArrays_CVA_Exec_00110430;
-    uVar1 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x10c) == 0);
+    dispatchSelectMaskThenTable = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x10c) == 0);
     *(undefined **)
-     ((*(uint *)(glContext + 0x4680) & uVar1 | *(uint *)(glContext + 0x4684) & ~uVar1) + 0x10c) =
+     ((*(uint *)(glContext + 0x4680) & dispatchSelectMaskThenTable | *(uint *)(glContext + 0x4684) & ~dispatchSelectMaskThenTable) + 0x10c) =
          PTR__glDrawElements_CVA_Exec_0011042c;
-    uVar1 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x654) == 0);
+    dispatchSelectMaskThenTable = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x654) == 0);
     *(undefined **)
-     ((*(uint *)(glContext + 0x4680) & uVar1 | *(uint *)(glContext + 0x4684) & ~uVar1) + 0x654) =
+     ((*(uint *)(glContext + 0x4680) & dispatchSelectMaskThenTable | *(uint *)(glContext + 0x4684) & ~dispatchSelectMaskThenTable) + 0x654) =
          PTR__glDrawRangeElements_CVA_Exec_00110428;
     ((void (*)())_gleDrawArraysOrElements_CVA_Exec)(glContext,mode,first,count,forwardedArg5,arrayStateRecord,forwardedFloatArg1,forwardedFloatArg2,forwardedFloatArg3,forwardedFloatArg4,
                forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
     return;
   }
-  uVar1 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x104) == 0);
+  dispatchSelectMaskThenTable = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x104) == 0);
   *(undefined **)
-   ((*(uint *)(glContext + 0x4680) & uVar1 | *(uint *)(glContext + 0x4684) & ~uVar1) + 0x104) =
+   ((*(uint *)(glContext + 0x4680) & dispatchSelectMaskThenTable | *(uint *)(glContext + 0x4684) & ~dispatchSelectMaskThenTable) + 0x104) =
        PTR__glDrawArrays_IMM_Exec_00110424;
-  uVar1 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x10c) == 0);
+  dispatchSelectMaskThenTable = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x10c) == 0);
   *(undefined **)
-   ((*(uint *)(glContext + 0x4680) & uVar1 | *(uint *)(glContext + 0x4684) & ~uVar1) + 0x10c) =
+   ((*(uint *)(glContext + 0x4680) & dispatchSelectMaskThenTable | *(uint *)(glContext + 0x4684) & ~dispatchSelectMaskThenTable) + 0x10c) =
        PTR__glDrawElements_IMM_Exec_00110420;
-  uVar1 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x654) == 0);
+  dispatchSelectMaskThenTable = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x654) == 0);
   *(undefined **)
-   ((*(uint *)(glContext + 0x4680) & uVar1 | *(uint *)(glContext + 0x4684) & ~uVar1) + 0x654) =
+   ((*(uint *)(glContext + 0x4680) & dispatchSelectMaskThenTable | *(uint *)(glContext + 0x4684) & ~dispatchSelectMaskThenTable) + 0x654) =
        PTR__glDrawRangeElements_IMM_Exec_0011041c;
   ((void (*)())_gleDrawArraysOrElements_IMM_Exec)(glContext,mode,first,count,forwardedArg5,arrayStateRecord,forwardedFloatArg1,forwardedFloatArg2,forwardedFloatArg3,forwardedFloatArg4,
              forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);

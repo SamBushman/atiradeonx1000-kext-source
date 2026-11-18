@@ -1100,48 +1100,48 @@ int _gliDestroyRendererInfo(rendererInfo)
 }
 
 /* _gliDestroyPixelFormat @ 0x2c00 (208 bytes) */
-int _gliDestroyPixelFormat(param_1)
-  int *param_1;
+int _gliDestroyPixelFormat(pixelFormatNode)
+  int *pixelFormatNode;
 {
-  bool bVar1;
-  uint uVar2;
+  bool reachedListEnd;
+  uint scanNodeFlags;
   int iVar3;
-  uint uVar4;
-  int iVar5;
-  int iVar6;
-  int *piVar7;
+  uint nodeFlags;
+  int pluginDestroyResult;
+  int firstError;
+  int *nextGroupNode;
   
   iVar3 = 0x271e;
-  iVar6 = 0;
-  if (param_1 != (int *)0x0) {
+  firstError = 0;
+  if (pixelFormatNode != (int *)0x0) {
     do {
-      piVar7 = (int *)*param_1;
-      bVar1 = piVar7 == (int *)0x0;
-      if (bVar1) {
-        uVar4 = param_1[1];
+      nextGroupNode = (int *)*pixelFormatNode;
+      reachedListEnd = nextGroupNode == (int *)0x0;
+      if (reachedListEnd) {
+        nodeFlags = pixelFormatNode[1];
       }
       else {
-        uVar4 = param_1[1];
-        uVar2 = piVar7[1];
-        while ((uVar2 & 0xff00) == (uVar4 & 0xff00)) {
-          piVar7 = (int *)*piVar7;
-          bVar1 = piVar7 == (int *)0x0;
-          if (bVar1) break;
-          uVar2 = piVar7[1];
+        nodeFlags = pixelFormatNode[1];
+        scanNodeFlags = nextGroupNode[1];
+        while ((scanNodeFlags & 0xff00) == (nodeFlags & 0xff00)) {
+          nextGroupNode = (int *)*nextGroupNode;
+          reachedListEnd = nextGroupNode == (int *)0x0;
+          if (reachedListEnd) break;
+          scanNodeFlags = nextGroupNode[1];
         }
       }
-      iVar3 = ((int (*)())_glepGetPlugin)(uVar4 & 0xff00);
-      iVar5 = 0x271f;
+      iVar3 = ((int (*)())_glepGetPlugin)(nodeFlags & 0xff00);
+      pluginDestroyResult = 0x271f;
       if (iVar3 != 0) {
-        iVar5 = (**(code **)(iVar3 + 0x11c))(param_1);
+        pluginDestroyResult = (**(code **)(iVar3 + 0x11c))(pixelFormatNode);
       }
-      iVar3 = iVar6;
-      if ((iVar5 != 0) && (iVar6 == 0)) {
-        iVar3 = iVar5;
+      iVar3 = firstError;
+      if ((pluginDestroyResult != 0) && (firstError == 0)) {
+        iVar3 = pluginDestroyResult;
       }
-      iVar6 = iVar3;
-      param_1 = piVar7;
-    } while (!bVar1);
+      firstError = iVar3;
+      pixelFormatNode = nextGroupNode;
+    } while (!reachedListEnd);
   }
   return iVar3;
 }
@@ -1634,36 +1634,36 @@ int _gleCreateEnableHashTable()
 }
 
 /* _gleAddEnableHashFunc @ 0x3c04 (124 bytes) */
-int _gleAddEnableHashFunc(param_1, param_2, param_3)
-  int param_1;
-  uint param_2;
-  undefined4 param_3;
+int _gleAddEnableHashFunc(hashTable, key, value)
+  int hashTable;
+  uint key;
+  undefined4 value;
 {
-  undefined4 uVar1;
-  undefined4 uVar2;
+  undefined4 oldKey;
+  undefined4 oldValue;
   undefined4 *allocatedBlock;
-  undefined4 uVar4;
-  int iVar5;
-  int iVar6;
+  undefined4 oldChain;
+  int bucket;
+  int bucketOffset;
   
-  iVar6 = (param_2 & 0x3ff) * 0x10;
-  iVar5 = iVar6 + param_1;
-  if (*(int *)(iVar6 + param_1) == 0) {
-    *(uint *)(iVar6 + param_1) = param_2;
-    *(undefined4 *)(iVar5 + 8) = 0;
+  bucketOffset = (key & 0x3ff) * 0x10;
+  bucket = bucketOffset + hashTable;
+  if (*(int *)(bucketOffset + hashTable) == 0) {
+    *(uint *)(bucketOffset + hashTable) = key;
+    *(undefined4 *)(bucket + 8) = 0;
   }
   else {
     allocatedBlock = (undefined4 *)_malloc(0x10);
-    uVar1 = *(undefined4 *)(iVar6 + param_1);
-    uVar4 = *(undefined4 *)(iVar5 + 8);
-    uVar2 = *(undefined4 *)(iVar5 + 4);
-    *(uint *)(iVar6 + param_1) = param_2;
-    *(undefined4 **)(iVar5 + 8) = allocatedBlock;
-    *allocatedBlock = uVar1;
-    allocatedBlock[1] = uVar2;
-    allocatedBlock[2] = uVar4;
+    oldKey = *(undefined4 *)(bucketOffset + hashTable);
+    oldChain = *(undefined4 *)(bucket + 8);
+    oldValue = *(undefined4 *)(bucket + 4);
+    *(uint *)(bucketOffset + hashTable) = key;
+    *(undefined4 **)(bucket + 8) = allocatedBlock;
+    *allocatedBlock = oldKey;
+    allocatedBlock[1] = oldValue;
+    allocatedBlock[2] = oldChain;
   }
-  *(undefined4 *)(iVar5 + 4) = param_3;
+  *(undefined4 *)(bucket + 4) = value;
   return;
 }
 
@@ -1871,46 +1871,46 @@ void _gleNullMemoryPointers(glContext)
 }
 
 /* _gleAllocVertexMachine @ 0x4034 (228 bytes) */
-int _gleAllocVertexMachine(glContext, param_2)
+int _gleAllocVertexMachine(glContext, vertexCapacity)
   int glContext;
-  int param_2;
+  int vertexCapacity;
 {
   undefined4 glContextWord24;
   undefined4 glContextWord20;
-  int iVar3;
-  uint uVar4;
-  int iVar5;
-  uint uVar6;
-  int iVar7;
-  int iVar8;
+  int recordBase;
+  uint allocationBaseThenInitCursor;
+  int recordsEnd;
+  uint allocationEndThenInitRecordCount;
+  int secondHalfBase;
+  int totalRecordCount;
   
-  iVar8 = param_2 + param_2 + 0xc;
-  uVar4 = ((int (*)())_gleDCBAlloc)((iVar8 * 0x42 + (iVar8 + 0x1f >> 5)) * 4 + 0x200);
-  uVar6 = uVar4 + iVar8 * 0x100 + 0x200;
-  iVar3 = uVar4 + 0x200;
-  iVar5 = iVar3 + iVar8 * 0x100;
-  iVar7 = iVar3 + param_2 * 0x100;
-  *(int *)(glContext + 0x4864) = iVar3 + (param_2 + 0xc) * 0x100;
-  *(int *)(glContext + 0x4874) = iVar5 + iVar8 * 4;
-  *(int *)(glContext + 0x30b0) = iVar5 + iVar8 * 8;
-  *(int *)(glContext + 0x4858) = iVar3;
-  *(int *)(glContext + 0x485c) = iVar7;
-  *(int *)(glContext + 0x4878) = param_2;
-  *(int *)(glContext + 0x4854) = iVar3;
-  *(int *)(glContext + 0x4860) = iVar7;
-  *(int *)(glContext + 0x4870) = iVar5;
+  totalRecordCount = vertexCapacity + vertexCapacity + 0xc;
+  allocationBaseThenInitCursor = ((int (*)())_gleDCBAlloc)((totalRecordCount * 0x42 + (totalRecordCount + 0x1f >> 5)) * 4 + 0x200);
+  allocationEndThenInitRecordCount = allocationBaseThenInitCursor + totalRecordCount * 0x100 + 0x200;
+  recordBase = allocationBaseThenInitCursor + 0x200;
+  recordsEnd = recordBase + totalRecordCount * 0x100;
+  secondHalfBase = recordBase + vertexCapacity * 0x100;
+  *(int *)(glContext + 0x4864) = recordBase + (vertexCapacity + 0xc) * 0x100;
+  *(int *)(glContext + 0x4874) = recordsEnd + totalRecordCount * 4;
+  *(int *)(glContext + 0x30b0) = recordsEnd + totalRecordCount * 8;
+  *(int *)(glContext + 0x4858) = recordBase;
+  *(int *)(glContext + 0x485c) = secondHalfBase;
+  *(int *)(glContext + 0x4878) = vertexCapacity;
+  *(int *)(glContext + 0x4854) = recordBase;
+  *(int *)(glContext + 0x4860) = secondHalfBase;
+  *(int *)(glContext + 0x4870) = recordsEnd;
   glContextWord24 = *(undefined4 *)(glContext + 0x24);
   glContextWord20 = *(undefined4 *)(glContext + 0x20);
-  if (uVar4 < uVar6) {
-    uVar6 = (uVar6 - uVar4) + 0xff >> 8;
+  if (allocationBaseThenInitCursor < allocationEndThenInitRecordCount) {
+    allocationEndThenInitRecordCount = (allocationEndThenInitRecordCount - allocationBaseThenInitCursor) + 0xff >> 8;
     do {
-      *(undefined4 *)(uVar4 + 0x20) = glContextWord20;
-      *(undefined4 *)(uVar4 + 0x24) = glContextWord20;
-      *(undefined4 *)(uVar4 + 0x28) = glContextWord20;
-      *(undefined4 *)(uVar4 + 0x2c) = glContextWord24;
-      uVar4 = uVar4 + 0x100;
-      uVar6 = uVar6 - 1;
-    } while (uVar6 != 0);
+      *(undefined4 *)(allocationBaseThenInitCursor + 0x20) = glContextWord20;
+      *(undefined4 *)(allocationBaseThenInitCursor + 0x24) = glContextWord20;
+      *(undefined4 *)(allocationBaseThenInitCursor + 0x28) = glContextWord20;
+      *(undefined4 *)(allocationBaseThenInitCursor + 0x2c) = glContextWord24;
+      allocationBaseThenInitCursor = allocationBaseThenInitCursor + 0x100;
+      allocationEndThenInitRecordCount = allocationEndThenInitRecordCount - 1;
+    } while (allocationEndThenInitRecordCount != 0);
   }
   return 0;
 }

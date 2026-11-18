@@ -1881,45 +1881,45 @@ double _gleSynchronizePluginBuffer(glContext, bufferObject)
 void _gleReclaimBufferObjectResources(glContext)
   int glContext;
 {
-  int *piVar1;
-  undefined4 *puVar2;
-  int iVar3;
-  int *piVar4;
+  int *rendererFuncs;
+  undefined4 *rendererContext;
+  int sharedStateThenClientState;
+  int *nextBucket;
   uint loopIndex;
-  int *piVar6;
-  int iVar7;
-  int *piVar8;
+  int *bucketSlotThenBufferObject;
+  int rendererBase;
+  int *bufferWordCursor;
   
-  iVar3 = *(int *)(glContext + 0x5148);
-  piVar6 = (int *)(iVar3 + 0x701c);
+  sharedStateThenClientState = *(int *)(glContext + 0x5148);
+  bucketSlotThenBufferObject = (int *)(sharedStateThenClientState + 0x701c);
   do {
-    piVar4 = piVar6 + 1;
-    for (piVar6 = (int *)*piVar6; piVar6 != (int *)0x0; piVar6 = (int *)*piVar6) {
-      if (piVar6[2] == 1) {
-        if (piVar6[0x10] != 0) {
-          ((double (*)())_gleSynchronizePluginBuffer)(glContext,piVar6 + 4);
+    nextBucket = bucketSlotThenBufferObject + 1;
+    for (bucketSlotThenBufferObject = (int *)*bucketSlotThenBufferObject; bucketSlotThenBufferObject != (int *)0x0; bucketSlotThenBufferObject = (int *)*bucketSlotThenBufferObject) {
+      if (bucketSlotThenBufferObject[2] == 1) {
+        if (bucketSlotThenBufferObject[0x10] != 0) {
+          ((double (*)())_gleSynchronizePluginBuffer)(glContext,bucketSlotThenBufferObject + 4);
         }
         loopIndex = 0;
         if (*(char *)(glContext + 0x85a4) != '\0') {
-          iVar7 = glContext + 0x10000;
-          piVar8 = piVar6;
+          rendererBase = glContext + 0x10000;
+          bufferWordCursor = bucketSlotThenBufferObject;
           do {
-            piVar1 = (int *)(iVar7 + -0x777c);
+            rendererFuncs = (int *)(rendererBase + -0x777c);
             loopIndex = loopIndex + 1;
-            puVar2 = (undefined4 *)(iVar7 + -0x7a54);
-            iVar7 = iVar7 + 0x2e0;
-            (**(code **)(*piVar1 + 0x1e0))(*puVar2,*(undefined4 *)((int)piVar8 + 0x10));
-            *(uint *)((int)piVar8 + 0x48) = *(uint *)((int)piVar8 + 0x48) | 1;
-            piVar8 = (int *)((int)piVar8 + 4);
+            rendererContext = (undefined4 *)(rendererBase + -0x7a54);
+            rendererBase = rendererBase + 0x2e0;
+            (**(code **)(*rendererFuncs + 0x1e0))(*rendererContext,*(undefined4 *)((int)bufferWordCursor + 0x10));
+            *(uint *)((int)bufferWordCursor + 0x48) = *(uint *)((int)bufferWordCursor + 0x48) | 1;
+            bufferWordCursor = (int *)((int)bufferWordCursor + 4);
           } while (loopIndex < *(byte *)(glContext + 0x85a4));
         }
       }
     }
-    piVar6 = piVar4;
-  } while (piVar4 <= (int *)(iVar3 + 0x8018));
-  iVar3 = *(int *)(glContext + 0x4a60);
-  *(undefined4 *)(iVar3 + 0x350) = *(undefined4 *)(iVar3 + 0x350);
-  *(uint *)(iVar3 + 0x354) = *(uint *)(iVar3 + 0x354) | 0x10;
+    bucketSlotThenBufferObject = nextBucket;
+  } while (nextBucket <= (int *)(sharedStateThenClientState + 0x8018));
+  sharedStateThenClientState = *(int *)(glContext + 0x4a60);
+  *(undefined4 *)(sharedStateThenClientState + 0x350) = *(undefined4 *)(sharedStateThenClientState + 0x350);
+  *(uint *)(sharedStateThenClientState + 0x354) = *(uint *)(sharedStateThenClientState + 0x354) | 0x10;
   return;
 }
 

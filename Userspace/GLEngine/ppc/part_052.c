@@ -470,8 +470,8 @@ void _gleFeedbackPolygonFunc_body(glContext)
   double incomingFpr6;
   double incomingFpr7;
   double incomingFpr8;
-  double incomingStack_ffffff88;
-  double incomingStack_ffffff90;
+  double incomingStackWord_ffffff88;
+  double incomingStackWord_ffffff90;
   uint clippedCount;
   int backFacing [5];
   
@@ -575,7 +575,7 @@ LAB_000ec290:
   listCursorThenClipDestThenFlipCursor = spareList;
   if (*(char *)(glContext + 0x4e18) != '\0') {
     ((double (*)())_gleClipPolyPlane)(glContext,polygonList,vertexCountThenClippedCount,spareList,&clippedCount,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,
-                      incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffff88,incomingStack_ffffff90);
+                      incomingFpr6,incomingFpr7,incomingFpr8,incomingStackWord_ffffff88,incomingStackWord_ffffff90);
     if (clippedCount == 0) {
       return;
     }
@@ -863,7 +863,7 @@ void _gleFeedbackTriangleStripFunc_body(glContext)
   bool twoSidedLighting;
   bool windingFlip;
   uint runStart;
-  uint *puVar9;
+  uint *nextPolygonList;
   undefined4 batchEndReset;
   uint stripParity;
   uint emitStart;
@@ -873,7 +873,7 @@ void _gleFeedbackTriangleStripFunc_body(glContext)
   int iVar13;
   int polygonVertexCount;
   int polygonCullResult;
-  uint *puVar15;
+  uint *nextSpareList;
   uint *flipColorsCursor;
   uint *flipVertexCursor;
   code *lightFunc;
@@ -890,7 +890,7 @@ void _gleFeedbackTriangleStripFunc_body(glContext)
   uint *polygonVertexList;
   uint nextVertex;
   uint vertexCursor;
-  double dVar27;
+  double lastCalleeF1;
   double f1AfterCall;
   double f1AfterCall1;
   double incomingFpr2;
@@ -900,8 +900,8 @@ void _gleFeedbackTriangleStripFunc_body(glContext)
   double incomingFpr6;
   double incomingFpr7;
   double incomingFpr8;
-  double incomingStack_ffffff78;
-  double incomingStack_ffffff80;
+  double incomingStackWord_ffffff78;
+  double incomingStackWord_ffffff80;
   int backFacing;
   int clippedCount [3];
   
@@ -950,7 +950,7 @@ void _gleFeedbackTriangleStripFunc_body(glContext)
         vertexCursor = *(uint *)(glContext + 0x4864);
       }
       if (((batchClipCodes & 0xff) == 0) && (*(char *)(glContext + 0x4e18) == '\0')) {
-        dVar27 = (double)(**(double ( **)(int,int,int,int))(glContext + 0x506c))(glContext, vertexCursor, vertexCount, 0);
+        lastCalleeF1 = (double)(**(double ( **)(int,int,int,int))(glContext + 0x506c))(glContext, vertexCursor, vertexCount, 0);
         if (cullEnabled == '\0') {
           if (lightingEnabled) {
             (**(code **)(glContext + 0x4de8))(glContext,vertexCursor,vertexCount);
@@ -968,10 +968,10 @@ void _gleFeedbackTriangleStripFunc_body(glContext)
             runStart = vertexCursor;
             while (uVar21 = stripParity, vertexCursor <= lastTriangleStart) {
               nextVertex = vertexCursor + 0x100;
-              iVar13 = ((undefined4 (*)())_gleCullTriangle)(glContext,vertexCursor,nextVertex,vertexCursor + 0x200,stripParity,&backFacing,dVar27
-                                        ,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffff78
-                                        ,incomingStack_ffffff80);
-              dVar27 = f1AfterCall;
+              iVar13 = ((undefined4 (*)())_gleCullTriangle)(glContext,vertexCursor,nextVertex,vertexCursor + 0x200,stripParity,&backFacing,lastCalleeF1
+                                        ,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStackWord_ffffff78
+                                        ,incomingStackWord_ffffff80);
+              lastCalleeF1 = f1AfterCall;
               if (iVar13 == 0) {
                 if (previousFacing != backFacing) {
                   facingChanged = true;
@@ -1028,7 +1028,7 @@ LAB_000ecb18:
                   facePolygonMode = *(ushort *)(glContext + 0x34d0);
                 }
                 iVar13 = iVar23 + 1;
-                dVar27 = (double)_gleFeedbackPolygonPtr(glContext,triangleVertexList,3,facePolygonMode - 0x1b00);
+                lastCalleeF1 = (double)_gleFeedbackPolygonPtr(glContext,triangleVertexList,3,facePolygonMode - 0x1b00);
                 if (iVar13 < 3) goto LAB_000ecbb8;
               }
               if (previousFacing != 0) {
@@ -1037,7 +1037,7 @@ LAB_000ecb18:
               else {
                 facePolygonMode = *(ushort *)(glContext + 0x34d0);
               }
-              dVar27 = (double)_gleFeedbackTriangleStrip(glContext,emitStart,iVar13,facePolygonMode - 0x1b00);
+              lastCalleeF1 = (double)_gleFeedbackTriangleStrip(glContext,emitStart,iVar13,facePolygonMode - 0x1b00);
             }
 LAB_000ecbb8: ;
           } while (vertexCursor <= lastTriangleStart);
@@ -1045,7 +1045,7 @@ LAB_000ecbb8: ;
       }
       else {
         facingChanged = false;
-        dVar27 = (double)(**(double ( **)(int,int,int,int))(glContext + 0x5074))(glContext, vertexCursor, vertexCount, 0);
+        lastCalleeF1 = (double)(**(double ( **)(int,int,int,int))(glContext + 0x5074))(glContext, vertexCursor, vertexCount, 0);
         polygonVertexList = *(uint **)(glContext + 0x4870);
         uVar20 = (vertexCursor + vertexCount * 0x100) - 0x300;
         spareList = *(uint **)(glContext + 0x4874);
@@ -1070,30 +1070,30 @@ LAB_000ecbb8: ;
               batchEndReset = *(undefined4 *)(glContext + 0x4854);
             }
             *(undefined4 *)(glContext + 0x4858) = batchEndReset;
-            puVar15 = spareList;
+            nextSpareList = spareList;
             polygonVertexCount = 3;
-            puVar9 = polygonVertexList;
+            nextPolygonList = polygonVertexList;
             iVar23 = previousFacing;
             if ((*(char *)(glContext + 0x4e18) == '\0') ||
-               (dVar27 = (double)((double (*)())_gleClipPolyPlane)(glContext,polygonVertexList,3,spareList,clippedCount,dVar27,incomingFpr2,
+               (lastCalleeF1 = (double)((double (*)())_gleClipPolyPlane)(glContext,polygonVertexList,3,spareList,clippedCount,lastCalleeF1,incomingFpr2,
                                                    incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
-                                                   incomingStack_ffffff78,incomingStack_ffffff80),
-               puVar15 = polygonVertexList, polygonVertexCount = clippedCount[0], puVar9 = spareList, clippedCount[0] != 0)) {
-              polygonVertexList = puVar9;
-              spareList = puVar15;
+                                                   incomingStackWord_ffffff78,incomingStackWord_ffffff80),
+               nextSpareList = polygonVertexList, polygonVertexCount = clippedCount[0], nextPolygonList = spareList, clippedCount[0] != 0)) {
+              polygonVertexList = nextPolygonList;
+              spareList = nextSpareList;
               if ((batchClipCodes & 0xff) != 0) {
-                dVar27 = (double)_gleClipPoly(glContext,polygonVertexList,polygonVertexCount,batchClipCodes & 0xff,puVar15,clippedCount,
+                lastCalleeF1 = (double)_gleClipPoly(glContext,polygonVertexList,polygonVertexCount,batchClipCodes & 0xff,nextSpareList,clippedCount,
                                               1);
                 if (clippedCount[0] == 0) goto LAB_000ecdf0;
                 if (0 < clippedCount[0]) {
                   spareList = polygonVertexList;
                   polygonVertexCount = clippedCount[0];
-                  polygonVertexList = puVar15;
+                  polygonVertexList = nextSpareList;
                 }
               }
               if ((cullEnabled == '\0') ||
                  (polygonCullResult = ((int (*)())_gleCullPolygonPtrStack)(glContext,polygonVertexList,polygonVertexCount,&backFacing),
-                 dVar27 = f1AfterCall1, polygonCullResult == 0)) {
+                 lastCalleeF1 = f1AfterCall1, polygonCullResult == 0)) {
                 iVar23 = backFacing;
                 if (previousFacing != backFacing) {
                   facingChanged = true;
@@ -1132,7 +1132,7 @@ LAB_000ecd84:
                 else {
                   facePolygonMode = *(ushort *)(glContext + 0x34d2);
                 }
-                dVar27 = (double)_gleFeedbackPolygonPtr(glContext,polygonVertexList,polygonVertexCount,facePolygonMode - 0x1b00);
+                lastCalleeF1 = (double)_gleFeedbackPolygonPtr(glContext,polygonVertexList,polygonVertexCount,facePolygonMode - 0x1b00);
               }
             }
 LAB_000ecdf0:
@@ -1188,8 +1188,8 @@ void _gleFeedbackTriangleFanFunc_body(glContext)
   double incomingFpr6;
   double incomingFpr7;
   double incomingFpr8;
-  double incomingStack_ffffff68;
-  double incomingStack_ffffff70;
+  double incomingStackWord_ffffff68;
+  double incomingStackWord_ffffff70;
   int backFacing;
   int clipCount [6];
   
@@ -1265,7 +1265,7 @@ joined_r0x000ed1dc:
         } while ((*(char *)(glContext + 0x4e18) != '\0') &&
                 (forwardedFloatArg1 = (double)((double (*)())_gleClipPolyPlane)(glContext,polygonList,3,spareList,clipCount,forwardedFloatArg1,incomingFpr2,
                                                     incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
-                                                    incomingStack_ffffff68,incomingStack_ffffff70),
+                                                    incomingStackWord_ffffff68,incomingStackWord_ffffff70),
                 oldPolygonList = polygonList, polygonVertexCount = clipCount[0], newPolygonList = spareList, clipCount[0] == 0));
         spareList = oldPolygonList;
         polygonList = newPolygonList;
@@ -1293,8 +1293,8 @@ joined_r0x000ed1dc:
               if (lastTriangleLimit < fanCursor) goto LAB_000ed0b0;
               nextFanVertex = fanCursor + 0x100;
               cullResult = ((undefined4 (*)())_gleCullTriangle)(glContext,vertexCursor,fanCursor,nextFanVertex,0,&backFacing,forwardedFloatArg1,incomingFpr2,incomingFpr3,
-                                       incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffff68,
-                                       incomingStack_ffffff70);
+                                       incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStackWord_ffffff68,
+                                       incomingStackWord_ffffff70);
               forwardedFloatArg1 = f1AfterCall;
               if (cullResult != 0) break;
               if (previousBackFacing != backFacing) {
@@ -2017,8 +2017,8 @@ void _gleRenderSmoothTrianglesFunc_body(glContext)
   double incomingFpr6;
   double incomingFpr7;
   double incomingFpr8;
-  double incomingStack_ffffff88;
-  double incomingStack_ffffff90;
+  double incomingStackWord_ffffff88;
+  double incomingStackWord_ffffff90;
   int backFacing;
   int clipCount [3];
   
@@ -2083,7 +2083,7 @@ LAB_000ee23c:
           do {
             cullResult = ((undefined4 (*)())_gleCullTriangle)(glContext,vertexCursor,vertexCursor + 0x100,vertexCursor + 0x200,0,&backFacing,
                                       forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
-                                      incomingStack_ffffff88,incomingStack_ffffff90);
+                                      incomingStackWord_ffffff88,incomingStackWord_ffffff90);
             forwardedFloatArg1 = forwardedFloatArg1;
             if (cullResult == 0) {
               if (previousBackFacingThenPolygonVertexCount != backFacing) {
@@ -2144,8 +2144,8 @@ LAB_000ee37c:
         previousBackFacingThenPolygonVertexCount = 3;
         if ((*(char *)(glContext + 0x4e18) == '\0') ||
            (forwardedFloatArg1 = (double)((double (*)())_gleClipPolyPlane)(glContext,polygonList,3,spareList,clipCount,forwardedFloatArg1,incomingFpr2,incomingFpr3
-                                               ,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffff88,
-                                               incomingStack_ffffff90), oldPolygonList = polygonList,
+                                               ,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStackWord_ffffff88,
+                                               incomingStackWord_ffffff90), oldPolygonList = polygonList,
            newPolygonList = spareList, previousBackFacingThenPolygonVertexCount = clipCount[0], clipCount[0] != 0)) {
           polygonList = newPolygonList;
           spareList = oldPolygonList;
@@ -2713,7 +2713,7 @@ void _gleRenderFlatTriangleStripFunc_body(glContext)
   uint runStartParity;
   uint lastTriangleStartClip;
   int *firstTrianglePolygon;
-  int iVar14;
+  int previousFacingOrLitVertexCursor;
   int polygonVertexCount;
   uint lastTriangleStart;
   uint nextCursor;
@@ -2740,12 +2740,12 @@ void _gleRenderFlatTriangleStripFunc_body(glContext)
   double incomingFpr6;
   double incomingFpr7;
   double incomingFpr8;
-  double incomingStack_ffffff78;
-  double incomingStack_ffffff80;
+  double incomingStackWord_ffffff78;
+  double incomingStackWord_ffffff80;
   int backFacing;
   int clippedVertexCount [5];
   
-  iVar14 = -1;
+  previousFacingOrLitVertexCursor = -1;
   texEnableBits = _gleTexEnableBits(glContext);
   lightingPending = *(char *)(glContext + 0x30aa);
   twoSidedLighting = false;
@@ -2786,11 +2786,11 @@ void _gleRenderFlatTriangleStripFunc_body(glContext)
       if (faceTestNeeded == '\0') {
         if ((lightingEnabled) && (-1 < vertexCount + -3)) {
           triangleCount = vertexCount + -2;
-          iVar14 = vertexCursor + 0x200;
+          previousFacingOrLitVertexCursor = vertexCursor + 0x200;
           do {
-            (**(code **)(glContext + 0x4de8))(glContext,iVar14,1);
+            (**(code **)(glContext + 0x4de8))(glContext,previousFacingOrLitVertexCursor,1);
             triangleCount = triangleCount + -1;
-            iVar14 = iVar14 + 0x100;
+            previousFacingOrLitVertexCursor = previousFacingOrLitVertexCursor + 0x100;
           } while (triangleCount != 0);
         }
         (**(code **)(glContext + 0x46cc))
@@ -2809,11 +2809,11 @@ void _gleRenderFlatTriangleStripFunc_body(glContext)
           while (carriedParity = stripParity, vertexCursor <= lastTriangleStart) {
             nextVertexCursor = vertexCursor + 0x100;
             cullResult = ((undefined4 (*)())_gleCullTriangle)(glContext,vertexCursor,nextVertexCursor,vertexCursor + 0x200,stripParity,&backFacing,lastCalleeF1,
-                                      incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffff78,
-                                      incomingStack_ffffff80);
+                                      incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStackWord_ffffff78,
+                                      incomingStackWord_ffffff80);
             lastCalleeF1 = f1AfterCall1;
             if (cullResult == 0) {
-              if (iVar14 != backFacing) {
+              if (previousFacingOrLitVertexCursor != backFacing) {
                 orientationChanged = true;
               }
               if ((orientationChanged) && (0 < runTriangleCount)) break;
@@ -2821,7 +2821,7 @@ void _gleRenderFlatTriangleStripFunc_body(glContext)
                 runStartParity = stripParity;
               }
               runTriangleCount = runTriangleCount + 1;
-              iVar14 = backFacing;
+              previousFacingOrLitVertexCursor = backFacing;
               nextRunStart = runStart;
             }
             else {
@@ -2837,7 +2837,7 @@ void _gleRenderFlatTriangleStripFunc_body(glContext)
           runVertexCount = runTriangleCount + 2;
           if (2 < runVertexCount) {
             if (lightingEnabled) {
-              lightFaceIndex = iVar14;
+              lightFaceIndex = previousFacingOrLitVertexCursor;
               if (!twoSidedLighting) {
                 lightFaceIndex = 0;
               }
@@ -2857,7 +2857,7 @@ void _gleRenderFlatTriangleStripFunc_body(glContext)
               *firstTrianglePolygon = runStart + 0x200;
               firstTrianglePolygon[2] = runStart;
               firstTrianglePolygon[1] = drawStart;
-              if (iVar14 != 0) {
+              if (previousFacingOrLitVertexCursor != 0) {
                 facePolygonMode = *(ushort *)(glContext + 0x34d2);
               }
               else {
@@ -2868,7 +2868,7 @@ void _gleRenderFlatTriangleStripFunc_body(glContext)
                                          (*(undefined4 *)(glContext + 0x4688), firstTrianglePolygon, 3, facePolygonMode - 0x1b00);
               if (runVertexCount < 3) goto LAB_000ef3cc;
             }
-            if (iVar14 != 0) {
+            if (previousFacingOrLitVertexCursor != 0) {
               facePolygonMode = *(ushort *)(glContext + 0x34d2);
             }
             else {
@@ -2910,7 +2910,7 @@ LAB_000ef3cc: ;
           if ((*(char *)(glContext + 0x4e18) == '\0') ||
              (lastCalleeF1 = (double)((double (*)())_gleClipPolyPlane)(glContext,polygonList,3,spareList,clippedVertexCount,lastCalleeF1,incomingFpr2,
                                                  incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
-                                                 incomingStack_ffffff78,incomingStack_ffffff80),
+                                                 incomingStackWord_ffffff78,incomingStackWord_ffffff80),
              nextSpareList = polygonList, nextPolygonList = spareList, polygonVertexCount = clippedVertexCount[0], clippedVertexCount[0] != 0)) {
             polygonList = nextPolygonList;
             spareList = nextSpareList;
@@ -4113,7 +4113,7 @@ void _gleRenderFlatQuadStripFunc_body(glContext)
   int lightFaceIndex;
   int vertexCount;
   double f1AfterCall;
-  double dVar21;
+  double lastCalleeF1;
   double f1AfterCall1;
   double f1AfterCall2;
   double incomingFpr2;
@@ -4123,9 +4123,9 @@ void _gleRenderFlatQuadStripFunc_body(glContext)
   double incomingFpr6;
   double incomingFpr7;
   double incomingFpr8;
-  double incomingStack_ffffff78;
-  double incomingStack_ffffff80;
-  double incomingStack_ffffff88;
+  double incomingStackWord_ffffff78;
+  double incomingStackWord_ffffff80;
+  double incomingStackWord_ffffff88;
   int backFacing;
   int clippedVertexCount [5];
   
@@ -4143,25 +4143,25 @@ void _gleRenderFlatQuadStripFunc_body(glContext)
   if ((3 < vertexCount) &&
      (batchClipCodes = (**(code **)(glContext + 0x5060))(glContext,vertexCursor,vertexCount), (batchClipCodes & 0xff00) == 0)) {
     texturingEnabled = iVar7 != 0;
-    dVar21 = f1AfterCall;
+    lastCalleeF1 = f1AfterCall;
     if ((texturingEnabled) && (*(char *)(glContext + 0x53e4) != '\0')) {
-      dVar21 = (double)(**(double ( **)(int,int,int))(glContext + 0x53dc))(glContext, vertexCursor, vertexCount);
+      lastCalleeF1 = (double)(**(double ( **)(int,int,int))(glContext + 0x53dc))(glContext, vertexCursor, vertexCount);
     }
     if (*(char *)(glContext + 0x50b4) != '\0') {
-      dVar21 = (double)(**(double ( **)(int,int,int))(glContext + 0x5064))(glContext, vertexCursor, vertexCount);
+      lastCalleeF1 = (double)(**(double ( **)(int,int,int))(glContext + 0x5064))(glContext, vertexCursor, vertexCount);
     }
     if (texturingEnabled) {
       if (*(char *)(glContext + 0x53e6) != '\0') {
         lightingPending = '\0';
-        dVar21 = (double)(**(double ( **)(int,int,int))(glContext + 0x5068))(glContext, vertexCursor, vertexCount);
+        lastCalleeF1 = (double)(**(double ( **)(int,int,int))(glContext + 0x5068))(glContext, vertexCursor, vertexCount);
       }
       if (*(char *)(glContext + 0x53e5) != '\0') {
-        dVar21 = (double)(**(double ( **)(int,int,int))(glContext + 0x53e0))(glContext, vertexCursor, vertexCount);
+        lastCalleeF1 = (double)(**(double ( **)(int,int,int))(glContext + 0x53e0))(glContext, vertexCursor, vertexCount);
       }
     }
     if (((batchClipCodes & 0xff) != 0) || (*(char *)(glContext + 0x4e18) != '\0')) {
       if (texturingEnabled) {
-        dVar21 = (double)(**(double ( **)(int,int,int,int))(glContext + 0x5074))(glContext, vertexCursor, vertexCount, 0);
+        lastCalleeF1 = (double)(**(double ( **)(int,int,int,int))(glContext + 0x5074))(glContext, vertexCursor, vertexCount, 0);
       }
       uVar17 = vertexCursor;
       spareList = *(uint **)(glContext + 0x4874);
@@ -4183,9 +4183,9 @@ joined_r0x000f1240:
         nextPolygonList = polygonList;
         polygonVertexCount = 4;
       } while ((*(char *)(glContext + 0x4e18) != '\0') &&
-              (dVar21 = (double)((double (*)())_gleClipPolyPlane)(glContext,polygonList,4,spareList,clippedVertexCount,dVar21,incomingFpr2,
+              (lastCalleeF1 = (double)((double (*)())_gleClipPolyPlane)(glContext,polygonList,4,spareList,clippedVertexCount,lastCalleeF1,incomingFpr2,
                                                   incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
-                                                  incomingStack_ffffff78,incomingStack_ffffff80),
+                                                  incomingStackWord_ffffff78,incomingStackWord_ffffff80),
               nextSpareList = polygonList, nextPolygonList = spareList, polygonVertexCount = clippedVertexCount[0], clippedVertexCount[0] == 0));
       spareList = nextSpareList;
       polygonList = nextPolygonList;
@@ -4193,7 +4193,7 @@ joined_r0x000f1240:
       goto LAB_000f12f4;
     }
     if (texturingEnabled) {
-      dVar21 = (double)(**(double ( **)(int,int,int,int))(glContext + 0x506c))(glContext, vertexCursor, vertexCount, 0);
+      lastCalleeF1 = (double)(**(double ( **)(int,int,int,int))(glContext + 0x506c))(glContext, vertexCursor, vertexCount, 0);
     }
     if (faceTestNeeded == '\0') {
       if (lightingEnabled) {
@@ -4226,9 +4226,9 @@ joined_r0x000f1240:
             if (lastQuadStart < vertexCursor) goto LAB_000f1138;
             uVar17 = vertexCursor + 0x200;
             cullResult = ((undefined4 (*)())_gleCullQuad)(glContext,vertexCursor,vertexCursor + 0x100,vertexCursor + 0x300,uVar17,&backFacing,
-                                  dVar21,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffff78
-                                  ,incomingStack_ffffff80,incomingStack_ffffff88);
-            dVar21 = f1AfterCall1;
+                                  lastCalleeF1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStackWord_ffffff78
+                                  ,incomingStackWord_ffffff80,incomingStackWord_ffffff88);
+            lastCalleeF1 = f1AfterCall1;
             if (cullResult != 0) break;
             if (iVar10 != backFacing) {
               bVar2 = true;
@@ -4267,7 +4267,7 @@ LAB_000f1138:
           else {
             facePolygonMode = *(ushort *)(glContext + 0x34d2);
           }
-          dVar21 = (double)(**(double ( **)(int,int,int,int))(glContext + 0x46d4))
+          lastCalleeF1 = (double)(**(double ( **)(int,int,int,int))(glContext + 0x46d4))
                                      (*(undefined4 *)(glContext + 0x4688), runStart, iVar7 + 2, facePolygonMode - 0x1b00);
         }
       } while (vertexCursor <= lastQuadStart);
@@ -4275,7 +4275,7 @@ LAB_000f1138:
   }
   return;
 code_r0x000f12b4:
-  dVar21 = (double)_gleClipPoly(glContext,nextPolygonList,polygonVertexCount,batchClipCodes & 0xff,nextSpareList,clippedVertexCount,1);
+  lastCalleeF1 = (double)_gleClipPoly(glContext,nextPolygonList,polygonVertexCount,batchClipCodes & 0xff,nextSpareList,clippedVertexCount,1);
   if (clippedVertexCount[0] != 0) {
     if (0 < clippedVertexCount[0]) {
       spareList = nextPolygonList;
@@ -4284,7 +4284,7 @@ code_r0x000f12b4:
     }
 LAB_000f12f4:
     if ((faceTestNeeded == '\0') ||
-       (iVar7 = ((int (*)())_gleCullPolygonPtrStack)(glContext,polygonList,polygonVertexCount,&backFacing), dVar21 = f1AfterCall2,
+       (iVar7 = ((int (*)())_gleCullPolygonPtrStack)(glContext,polygonList,polygonVertexCount,&backFacing), lastCalleeF1 = f1AfterCall2,
        iVar7 == 0)) {
       if (lightingPending != '\0') {
         (**(code **)(glContext + 0x5068))(glContext,quadLastVertexPtr,1);
@@ -4304,7 +4304,7 @@ LAB_000f12f4:
       else {
         facePolygonMode = *(ushort *)(glContext + 0x34d2);
       }
-      dVar21 = (double)(**(double ( **)(int,int,int,int))(glContext + 0x46e0))
+      lastCalleeF1 = (double)(**(double ( **)(int,int,int,int))(glContext + 0x46e0))
                                  (*(undefined4 *)(glContext + 0x4688), polygonList, polygonVertexCount, facePolygonMode - 0x1b00);
     }
   }
@@ -4825,7 +4825,7 @@ void _gleSelectTriangleFanFunc_body(glContext)
   uint uVar12;
   int vertexCursor;
   int *polygonList;
-  uint uVar15;
+  uint vertexCountThenSecondLastVertexAddr;
   int iVar16;
   uint uVar17;
   double f1AfterCall;
@@ -4839,10 +4839,10 @@ void _gleSelectTriangleFanFunc_body(glContext)
   double incomingFpr6;
   double incomingFpr7;
   double incomingFpr8;
-  double incomingStack_ffffff78;
-  double incomingStack_ffffff80;
+  double incomingStackWord_ffffff78;
+  double incomingStackWord_ffffff80;
   int backFacing;
-  int local_4c [5];
+  int clippedVertexCount [5];
   
   iVar9 = -1;
   noVertexProgram = false;
@@ -4857,13 +4857,13 @@ void _gleSelectTriangleFanFunc_body(glContext)
   cullFaceEnabled = *(char *)(glContext + 0x34da);
   vertexCursor = *(int *)(glContext + 0x4854);
   if ((((int)*(short *)(glContext + 0x487c) != 0) &&
-      (uVar15 = (uint)(*(int *)(glContext + 0x4858) - vertexCursor) /
-                (uint)(int)*(short *)(glContext + 0x487c), 2 < (int)uVar15)) &&
-     (batchClipCodes = (**(code **)(glContext + 0x5060))(glContext,vertexCursor,uVar15), (batchClipCodes & 0xff00) == 0)) {
+      (vertexCountThenSecondLastVertexAddr = (uint)(*(int *)(glContext + 0x4858) - vertexCursor) /
+                (uint)(int)*(short *)(glContext + 0x487c), 2 < (int)vertexCountThenSecondLastVertexAddr)) &&
+     (batchClipCodes = (**(code **)(glContext + 0x5060))(glContext,vertexCursor,vertexCountThenSecondLastVertexAddr), (batchClipCodes & 0xff00) == 0)) {
     dVar18 = f1AfterCall;
     if (noVertexProgram) {
       if (*(char *)(glContext + 0x4e18) != '\0') {
-        dVar18 = (double)(**(double ( **)(int,int,int))(glContext + 0x5064))(glContext, vertexCursor, uVar15);
+        dVar18 = (double)(**(double ( **)(int,int,int))(glContext + 0x5064))(glContext, vertexCursor, vertexCountThenSecondLastVertexAddr);
       }
     }
     else {
@@ -4871,11 +4871,11 @@ void _gleSelectTriangleFanFunc_body(glContext)
     }
     if (((batchClipCodes & 0xff) == 0) && (*(char *)(glContext + 0x4e18) == '\0')) {
       if (cullFaceEnabled == '\0') {
-        _gleSelectTriangleFan(glContext,vertexCursor,vertexCursor + 0x100,uVar15 - 1);
+        _gleSelectTriangleFan(glContext,vertexCursor,vertexCursor + 0x100,vertexCountThenSecondLastVertexAddr - 1);
       }
       else {
         uVar7 = vertexCursor + 0x100;
-        uVar15 = (vertexCursor + uVar15 * 0x100) - 0x200;
+        vertexCountThenSecondLastVertexAddr = (vertexCursor + vertexCountThenSecondLastVertexAddr * 0x100) - 0x200;
         do {
           facingChanged = false;
           iVar16 = 0;
@@ -4883,11 +4883,11 @@ void _gleSelectTriangleFanFunc_body(glContext)
           do {
             while( true ) {
               uVar12 = uVar17;
-              if (uVar15 < uVar7) goto LAB_000f1f60;
+              if (vertexCountThenSecondLastVertexAddr < uVar7) goto LAB_000f1f60;
               uVar17 = uVar7 + 0x100;
               iVar8 = ((undefined4 (*)())_gleCullTriangle)(glContext,vertexCursor,uVar7,uVar17,0,&backFacing,dVar18,incomingFpr2,incomingFpr3,
-                                       incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffff78,
-                                       incomingStack_ffffff80);
+                                       incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStackWord_ffffff78,
+                                       incomingStackWord_ffffff80);
               dVar18 = f1AfterCall1;
               if (iVar8 != 0) break;
               if (iVar9 != backFacing) {
@@ -4909,14 +4909,14 @@ LAB_000f1f60:
             }
             dVar18 = (double)_gleSelectTriangleFan(glContext,vertexCursor,uVar12,iVar16);
           }
-        } while (uVar7 <= uVar15);
+        } while (uVar7 <= vertexCountThenSecondLastVertexAddr);
       }
     }
     else {
       polygonList = *(int **)(glContext + 0x4870);
-      uVar15 = (vertexCursor + uVar15 * 0x100) - 0x200;
+      vertexCountThenSecondLastVertexAddr = (vertexCursor + vertexCountThenSecondLastVertexAddr * 0x100) - 0x200;
       spareList = *(int **)(glContext + 0x4874);
-      if (vertexCursor + 0x100U <= uVar15) {
+      if (vertexCursor + 0x100U <= vertexCountThenSecondLastVertexAddr) {
         uVar17 = vertexCursor + 0x100U;
         do {
           uVar12 = uVar17 + 0x100;
@@ -4934,19 +4934,19 @@ LAB_000f1f60:
           piVar5 = polygonList;
           polygonVertexCount = 3;
           if ((*(char *)(glContext + 0x4e18) == '\0') ||
-             (dVar18 = (double)((double (*)())_gleClipPolyPlane)(glContext,polygonList,3,spareList,local_4c,dVar18,incomingFpr2,
+             (dVar18 = (double)((double (*)())_gleClipPolyPlane)(glContext,polygonList,3,spareList,clippedVertexCount,dVar18,incomingFpr2,
                                                  incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
-                                                 incomingStack_ffffff78,incomingStack_ffffff80),
-             piVar11 = polygonList, piVar5 = spareList, polygonVertexCount = local_4c[0], local_4c[0] != 0)) {
+                                                 incomingStackWord_ffffff78,incomingStackWord_ffffff80),
+             piVar11 = polygonList, piVar5 = spareList, polygonVertexCount = clippedVertexCount[0], clippedVertexCount[0] != 0)) {
             polygonList = piVar5;
             spareList = piVar11;
             if ((batchClipCodes & 0xff) != 0) {
-              dVar18 = (double)_gleClipPoly(glContext,polygonList,polygonVertexCount,batchClipCodes & 0xff,piVar11,local_4c,1);
-              if (local_4c[0] == 0) goto LAB_000f20f4;
-              if (0 < local_4c[0]) {
+              dVar18 = (double)_gleClipPoly(glContext,polygonList,polygonVertexCount,batchClipCodes & 0xff,piVar11,clippedVertexCount,1);
+              if (clippedVertexCount[0] == 0) goto LAB_000f20f4;
+              if (0 < clippedVertexCount[0]) {
                 spareList = polygonList;
                 polygonList = piVar11;
-                polygonVertexCount = local_4c[0];
+                polygonVertexCount = clippedVertexCount[0];
               }
             }
             if ((cullFaceEnabled == '\0') ||
@@ -4965,7 +4965,7 @@ LAB_000f1f60:
           }
 LAB_000f20f4:
           uVar17 = uVar12;
-        } while (uVar12 <= uVar15);
+        } while (uVar12 <= vertexCountThenSecondLastVertexAddr);
       }
     }
   }
@@ -5005,9 +5005,9 @@ void _gleSelectQuadsFunc_body(glContext)
   double incomingFpr6;
   double incomingFpr7;
   double incomingFpr8;
-  double incomingStack_ffffff78;
-  double incomingStack_ffffff80;
-  double incomingStack_ffffff88;
+  double incomingStackWord_ffffff78;
+  double incomingStackWord_ffffff80;
+  double incomingStackWord_ffffff88;
   int backFacing;
   int clipCount [6];
   
@@ -5051,7 +5051,7 @@ void _gleSelectQuadsFunc_body(glContext)
             do {
               cullResultThenFlipCount = ((undefined4 (*)())_gleCullQuad)(glContext,vertexCursor,vertexCursor + 0x100,vertexCursor + 0x200,vertexCursor + 0x300,
                                    &backFacing,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
-                                   incomingStack_ffffff78,incomingStack_ffffff80,incomingStack_ffffff88);
+                                   incomingStackWord_ffffff78,incomingStackWord_ffffff80,incomingStackWord_ffffff88);
               forwardedFloatArg1 = forwardedFloatArg1;
               if (cullResultThenFlipCount == 0) {
                 if (iVar9 != backFacing) {
@@ -5104,7 +5104,7 @@ void _gleSelectQuadsFunc_body(glContext)
           if ((*(char *)(glContext + 0x4e18) == '\0') ||
              (forwardedFloatArg1 = (double)((double (*)())_gleClipPolyPlane)(glContext,polygonList,4,spareList,clipCount,forwardedFloatArg1,incomingFpr2,
                                                  incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
-                                                 incomingStack_ffffff78,incomingStack_ffffff80),
+                                                 incomingStackWord_ffffff78,incomingStackWord_ffffff80),
              oldPolygonListThenVertexPtrCursor = polygonList, polygonVertexCount = clipCount[0], newPolygonList = spareList, clipCount[0] != 0)) {
             polygonList = newPolygonList;
             spareList = oldPolygonListThenVertexPtrCursor;
@@ -5421,11 +5421,11 @@ void _gleFlushLineLoopTCLFunc(glContext)
 /* _gleFlushLineLoopTCLRDirtyFunc @ 0xf2a48 (292 bytes) */
 void _gleFlushLineLoopTCLRDirtyFunc(int glContext,double floatArg1,double floatArg2,double floatArg3,double floatArg4,double floatArg5,double floatArg6,double floatArg7,double floatArg8)
 {
-  int iVar1;
-  int iVar2;
-  int iVar3;
-  int iVar4;
-  uint uVar5;
+  int vertexBufferBase;
+  int copyByteOffset;
+  int vertexSize;
+  int vertexWriteCursor;
+  uint remainingQwords;
   
   if ((((*(char *)(glContext + 0x7580) != '\0') && ((*(uint *)(glContext + 0x486c) & 1) != 0)) &&
       (*(char *)(*(int *)(glContext + 0x468c) + 0x7a) == '\0')) &&
@@ -5437,32 +5437,32 @@ void _gleFlushLineLoopTCLRDirtyFunc(int glContext,double floatArg1,double floatA
     return;
   }
   (**(code **)(glContext + 0x4a08))(glContext);
-  iVar3 = (int)*(short *)(glContext + 0x487c);
-  iVar1 = *(int *)(glContext + 0x4854);
+  vertexSize = (int)*(short *)(glContext + 0x487c);
+  vertexBufferBase = *(int *)(glContext + 0x4854);
   if (*(char *)(glContext + 0x4a18) == '\0') {
-    iVar2 = 0;
-    if (0 < iVar3) {
-      uVar5 = iVar3 + 7U >> 3;
+    copyByteOffset = 0;
+    if (0 < vertexSize) {
+      remainingQwords = vertexSize + 7U >> 3;
       do {
-        *(undefined8 *)(iVar1 + -0x100 + iVar2) = *(undefined8 *)(iVar1 + iVar2);
-        iVar2 = iVar2 + 8;
-        uVar5 = uVar5 - 1;
-      } while (uVar5 != 0);
+        *(undefined8 *)(vertexBufferBase + -0x100 + copyByteOffset) = *(undefined8 *)(vertexBufferBase + copyByteOffset);
+        copyByteOffset = copyByteOffset + 8;
+        remainingQwords = remainingQwords - 1;
+      } while (remainingQwords != 0);
     }
     *(undefined1 *)(glContext + 0x4a18) = 1;
   }
-  iVar2 = 0;
-  iVar4 = *(int *)(glContext + 0x4858);
-  if (0 < iVar3) {
-    uVar5 = iVar3 + 7U >> 3;
+  copyByteOffset = 0;
+  vertexWriteCursor = *(int *)(glContext + 0x4858);
+  if (0 < vertexSize) {
+    remainingQwords = vertexSize + 7U >> 3;
     do {
-      *(undefined8 *)(iVar1 + iVar2) = *(undefined8 *)((iVar4 - iVar3) + iVar2);
-      iVar2 = iVar2 + 8;
-      uVar5 = uVar5 - 1;
-    } while (uVar5 != 0);
+      *(undefined8 *)(vertexBufferBase + copyByteOffset) = *(undefined8 *)((vertexWriteCursor - vertexSize) + copyByteOffset);
+      copyByteOffset = copyByteOffset + 8;
+      remainingQwords = remainingQwords - 1;
+    } while (remainingQwords != 0);
   }
   *(undefined4 *)(glContext + 0x486c) = 0;
-  *(int *)(glContext + 0x4858) = iVar1 + iVar3;
+  *(int *)(glContext + 0x4858) = vertexBufferBase + vertexSize;
   return;
 }
 
@@ -5677,44 +5677,44 @@ void _gleFlushTriQuadStripTCLRDirtyFunc(int glContext,double floatArg1,double fl
 void _gleFlushTriangleFanFunc(glContext)
   int glContext;
 {
-  short sVar1;
-  int iVar2;
-  undefined8 *puVar3;
-  int iVar4;
-  undefined8 *puVar5;
-  int iVar6;
-  undefined8 uVar7;
-  undefined8 local_210 [32];
-  undefined8 local_110 [33];
+  short vertexSize;
+  int vertexQwordCountThenRemaining;
+  undefined8 *vertexSrcCursor;
+  int qwordIndex;
+  undefined8 *vertexDstCursor;
+  int vertexBufferBase;
+  undefined8 copiedQword;
+  undefined8 firstVertexCopy [32];
+  undefined8 lastVertexCopy [33];
   
-  sVar1 = *(short *)(glContext + 0x487c);
-  iVar2 = (int)sVar1 >> 3;
-  if (0 < iVar2) {
-    iVar6 = *(int *)(glContext + 0x4854);
-    iVar4 = 0;
+  vertexSize = *(short *)(glContext + 0x487c);
+  vertexQwordCountThenRemaining = (int)vertexSize >> 3;
+  if (0 < vertexQwordCountThenRemaining) {
+    vertexBufferBase = *(int *)(glContext + 0x4854);
+    qwordIndex = 0;
     do {
-      local_210[iVar4] = *(undefined8 *)(iVar4 * 8 + iVar6);
-      iVar2 = iVar2 + -1;
-      iVar4 = iVar4 + 1;
-    } while (iVar2 != 0);
+      firstVertexCopy[qwordIndex] = *(undefined8 *)(qwordIndex * 8 + vertexBufferBase);
+      vertexQwordCountThenRemaining = vertexQwordCountThenRemaining + -1;
+      qwordIndex = qwordIndex + 1;
+    } while (vertexQwordCountThenRemaining != 0);
   }
-  iVar2 = (int)sVar1 >> 3;
-  if (0 < iVar2) {
-    puVar5 = local_110;
-    puVar3 = (undefined8 *)(*(int *)(glContext + 0x4858) + -0x100);
+  vertexQwordCountThenRemaining = (int)vertexSize >> 3;
+  if (0 < vertexQwordCountThenRemaining) {
+    vertexDstCursor = lastVertexCopy;
+    vertexSrcCursor = (undefined8 *)(*(int *)(glContext + 0x4858) + -0x100);
     do {
-      uVar7 = *puVar3;
-      puVar3 = puVar3 + 1;
-      *puVar5 = uVar7;
-      puVar5 = puVar5 + 1;
-      iVar2 = iVar2 + -1;
-    } while (iVar2 != 0);
+      copiedQword = *vertexSrcCursor;
+      vertexSrcCursor = vertexSrcCursor + 1;
+      *vertexDstCursor = copiedQword;
+      vertexDstCursor = vertexDstCursor + 1;
+      vertexQwordCountThenRemaining = vertexQwordCountThenRemaining + -1;
+    } while (vertexQwordCountThenRemaining != 0);
   }
   (**(code **)(glContext + 0x4a08))(glContext);
   *(undefined4 *)(glContext + 0x4858) = *(undefined4 *)(glContext + 0x4854);
   _glePopMaterials(glContext);
-  _gleSubmitVertexCopy(glContext,local_210);
-  _gleSubmitVertexCopy(glContext,local_110);
+  _gleSubmitVertexCopy(glContext,firstVertexCopy);
+  _gleSubmitVertexCopy(glContext,lastVertexCopy);
   return;
 }
 
@@ -5785,43 +5785,43 @@ void _gleFlushTriangleFanTCLRDirtyFunc(int glContext,double floatArg1,double flo
 void _gleFlushPolygonFunc(glContext)
   int glContext;
 {
-  short sVar1;
+  short vertexSize;
   int iVar2;
-  undefined8 *puVar3;
-  undefined8 *puVar4;
+  undefined8 *vertexSrcCursor;
+  undefined8 *vertexDstCursor;
   int iVar5;
   int iVar6;
-  undefined8 uVar7;
-  undefined8 local_210 [15];
+  undefined8 copiedQword;
+  undefined8 firstVertexCopy [15];
   undefined1 local_194;
-  undefined8 local_110 [32];
+  undefined8 lastVertexCopy [32];
   
-  sVar1 = *(short *)(glContext + 0x487c);
-  iVar2 = (int)sVar1 >> 3;
+  vertexSize = *(short *)(glContext + 0x487c);
+  iVar2 = (int)vertexSize >> 3;
   if (0 < iVar2) {
     iVar5 = *(int *)(glContext + 0x4854);
     iVar6 = 0;
     do {
-      local_210[iVar6] = *(undefined8 *)(iVar6 * 8 + iVar5);
+      firstVertexCopy[iVar6] = *(undefined8 *)(iVar6 * 8 + iVar5);
       iVar2 = iVar2 + -1;
       iVar6 = iVar6 + 1;
     } while (iVar2 != 0);
   }
   iVar6 = 0;
-  iVar2 = (int)sVar1 >> 3;
+  iVar2 = (int)vertexSize >> 3;
   if (iVar2 < 1) {
     iVar5 = *(int *)(glContext + 0x4858);
   }
   else {
     iVar5 = *(int *)(glContext + 0x4858);
-    puVar4 = local_110;
-    puVar3 = (undefined8 *)(iVar5 + -0x100);
+    vertexDstCursor = lastVertexCopy;
+    vertexSrcCursor = (undefined8 *)(iVar5 + -0x100);
     do {
       iVar6 = iVar6 + 1;
-      uVar7 = *puVar3;
-      puVar3 = puVar3 + 1;
-      *puVar4 = uVar7;
-      puVar4 = puVar4 + 1;
+      copiedQword = *vertexSrcCursor;
+      vertexSrcCursor = vertexSrcCursor + 1;
+      *vertexDstCursor = copiedQword;
+      vertexDstCursor = vertexDstCursor + 1;
     } while (iVar6 < iVar2);
   }
   *(undefined1 *)(iVar5 + -0x84) = 0;
@@ -5830,8 +5830,8 @@ void _gleFlushPolygonFunc(glContext)
   *(undefined4 *)(glContext + 0x4858) = *(undefined4 *)(glContext + 0x4854);
   _glePopMaterials(glContext);
   local_194 = 0;
-  _gleSubmitVertexCopy(glContext,local_210);
-  _gleSubmitVertexCopy(glContext,local_110);
+  _gleSubmitVertexCopy(glContext,firstVertexCopy);
+  _gleSubmitVertexCopy(glContext,lastVertexCopy);
   return;
 }
 

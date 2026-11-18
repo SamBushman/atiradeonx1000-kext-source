@@ -76,63 +76,63 @@ void _gleTextureImageCopy(glContext, levelRecord, unusedArg3, x, y, width, heigh
 }
 
 /* _gleTextureSubImageCopy @ 0xf7514 (348 bytes) */
-void _gleTextureSubImageCopy(glContext, param_2, param_3, yoffset, zoffset, param_6, y, width, height)
+void _gleTextureSubImageCopy(glContext, textureLevel, xoffset, yoffset, zoffset, x, y, width, height)
   int glContext;
-  int param_2;
-  int param_3;
+  int textureLevel;
+  int xoffset;
   int yoffset;
   int zoffset;
-  undefined4 param_6;
+  undefined4 x;
   undefined4 y;
   undefined4 width;
   undefined4 height;
 {
-  byte bVar1;
-  undefined4 uVar2;
-  undefined4 uVar3;
-  undefined4 uVar4;
-  undefined4 uVar5;
-  undefined4 uVar6;
-  undefined4 uVar7;
-  undefined4 uVar8;
+  byte borderWidth;
+  undefined4 savedPackSkipPixels;
+  undefined4 savedPackSkipImages;
+  undefined4 savedPackSkipRows;
+  undefined4 savedPackSwapAndLsbBytes;
+  undefined4 savedPackAlignment;
+  undefined4 savedPackRowLength;
+  undefined4 savedPackImageHeight;
   
-  uVar7 = *(undefined4 *)(glContext + 0x31b0);
-  *(uint *)(glContext + 0x31b0) = (uint)*(ushort *)(param_2 + 0xc);
-  uVar8 = *(undefined4 *)(0x31b4 + glContext);
-  *(uint *)(0x31b4 + glContext) = (uint)*(ushort *)(param_2 + 0xe);
-  uVar4 = *(undefined4 *)(glContext + 0x31b8);
-  uVar5 = *(undefined4 *)(glContext + 0x31c8);
-  uVar2 = *(undefined4 *)(glContext + 0x31bc);
-  uVar3 = *(undefined4 *)(glContext + 0x31c0);
-  uVar6 = *(undefined4 *)(glContext + 0x31c4);
-  if ((*(ushort *)(param_2 + 8) < 2) && (zoffset == 0)) {
+  savedPackRowLength = *(undefined4 *)(glContext + 0x31b0);
+  *(uint *)(glContext + 0x31b0) = (uint)*(ushort *)(textureLevel + 0xc);
+  savedPackImageHeight = *(undefined4 *)(0x31b4 + glContext);
+  *(uint *)(0x31b4 + glContext) = (uint)*(ushort *)(textureLevel + 0xe);
+  savedPackSkipRows = *(undefined4 *)(glContext + 0x31b8);
+  savedPackSwapAndLsbBytes = *(undefined4 *)(glContext + 0x31c8);
+  savedPackSkipPixels = *(undefined4 *)(glContext + 0x31bc);
+  savedPackSkipImages = *(undefined4 *)(glContext + 0x31c0);
+  savedPackAlignment = *(undefined4 *)(glContext + 0x31c4);
+  if ((*(ushort *)(textureLevel + 8) < 2) && (zoffset == 0)) {
     *(undefined4 *)(glContext + 0x31c0) = 0;
   }
   else {
-    *(uint *)(glContext + 0x31c0) = zoffset + (uint)*(byte *)(param_2 + 10);
+    *(uint *)(glContext + 0x31c0) = zoffset + (uint)*(byte *)(textureLevel + 10);
   }
-  if ((*(ushort *)(param_2 + 6) < 2) && (yoffset == 0)) {
+  if ((*(ushort *)(textureLevel + 6) < 2) && (yoffset == 0)) {
     *(undefined4 *)(glContext + 0x31b8) = 0;
   }
   else {
-    *(uint *)(glContext + 0x31b8) = yoffset + (uint)*(byte *)(param_2 + 10);
+    *(uint *)(glContext + 0x31b8) = yoffset + (uint)*(byte *)(textureLevel + 10);
   }
-  bVar1 = *(byte *)(param_2 + 10);
+  borderWidth = *(byte *)(textureLevel + 10);
   *(undefined4 *)(glContext + 0x31c4) = 1;
   *(undefined1 *)(glContext + 0x31c9) = 0;
-  *(uint *)(glContext + 0x31bc) = param_3 + (uint)bVar1;
+  *(uint *)(glContext + 0x31bc) = xoffset + (uint)borderWidth;
   *(undefined1 *)(glContext + 0x31c8) = 0;
   (**(code **)(glContext + 0x46a0))
-            (*(undefined4 *)(glContext + 0x4688),param_6,y,width,height,
-             *(undefined2 *)(param_2 + 0x10),*(undefined2 *)(param_2 + 0x12),
-             *(undefined4 *)(param_2 + 0x14));
-  *(undefined4 *)(glContext + 0x31b0) = uVar7;
-  *(undefined4 *)(glContext + 0x31c8) = uVar5;
-  *(undefined4 *)(0x31b4 + glContext) = uVar8;
-  *(undefined4 *)(glContext + 0x31b8) = uVar4;
-  *(undefined4 *)(glContext + 0x31bc) = uVar2;
-  *(undefined4 *)(glContext + 0x31c0) = uVar3;
-  *(undefined4 *)(glContext + 0x31c4) = uVar6;
+            (*(undefined4 *)(glContext + 0x4688),x,y,width,height,
+             *(undefined2 *)(textureLevel + 0x10),*(undefined2 *)(textureLevel + 0x12),
+             *(undefined4 *)(textureLevel + 0x14));
+  *(undefined4 *)(glContext + 0x31b0) = savedPackRowLength;
+  *(undefined4 *)(glContext + 0x31c8) = savedPackSwapAndLsbBytes;
+  *(undefined4 *)(0x31b4 + glContext) = savedPackImageHeight;
+  *(undefined4 *)(glContext + 0x31b8) = savedPackSkipRows;
+  *(undefined4 *)(glContext + 0x31bc) = savedPackSkipPixels;
+  *(undefined4 *)(glContext + 0x31c0) = savedPackSkipImages;
+  *(undefined4 *)(glContext + 0x31c4) = savedPackAlignment;
   return;
 }
 
@@ -902,30 +902,30 @@ void _gle565Filter3(dst, src, unusedArg3, offsetA, offsetB, offsetC)
   int offsetB;
   int offsetC;
 {
-  ushort uVar1;
-  ushort uVar2;
-  ushort uVar3;
-  ushort uVar4;
-  ushort uVar5;
-  ushort uVar6;
-  ushort uVar7;
-  ushort uVar8;
+  ushort texel0;
+  ushort texelA;
+  ushort texelB;
+  ushort texelAB;
+  ushort texelC;
+  ushort texelCA;
+  ushort texelCB;
+  ushort texelCAB;
   
-  uVar1 = *src;
-  uVar2 = *(ushort *)((int)src + offsetA);
-  uVar3 = *(ushort *)((int)src + offsetB);
-  uVar4 = *(ushort *)((int)src + offsetB + offsetA);
-  uVar5 = *(ushort *)((int)src + offsetC);
-  uVar6 = *(ushort *)((int)src + offsetC + offsetA);
-  uVar7 = *(ushort *)((int)src + offsetC + offsetB);
-  uVar8 = *(ushort *)((int)src + offsetC + offsetB + offsetA);
-  *dst = (ushort)((uVar1 & 0xf800) + (uVar2 & 0xf800) + (uVar3 & 0xf800) + (uVar4 & 0xf800) +
-                      (uVar5 & 0xf800) + (uVar6 & 0xf800) + (uVar7 & 0xf800) + (uVar8 & 0xf800) >> 3
+  texel0 = *src;
+  texelA = *(ushort *)((int)src + offsetA);
+  texelB = *(ushort *)((int)src + offsetB);
+  texelAB = *(ushort *)((int)src + offsetB + offsetA);
+  texelC = *(ushort *)((int)src + offsetC);
+  texelCA = *(ushort *)((int)src + offsetC + offsetA);
+  texelCB = *(ushort *)((int)src + offsetC + offsetB);
+  texelCAB = *(ushort *)((int)src + offsetC + offsetB + offsetA);
+  *dst = (ushort)((texel0 & 0xf800) + (texelA & 0xf800) + (texelB & 0xf800) + (texelAB & 0xf800) +
+                      (texelC & 0xf800) + (texelCA & 0xf800) + (texelCB & 0xf800) + (texelCAB & 0xf800) >> 3
                      ) & 0xf800 |
-             (ushort)((uVar1 & 0x7e0) + (uVar2 & 0x7e0) + (uVar3 & 0x7e0) + (uVar4 & 0x7e0) +
-                      (uVar5 & 0x7e0) + (uVar6 & 0x7e0) + (uVar7 & 0x7e0) + (uVar8 & 0x7e0) >> 3) &
-             0x7e0 | (ushort)((uVar1 & 0x1f) + (uVar2 & 0x1f) + (uVar3 & 0x1f) + (uVar4 & 0x1f) +
-                              (uVar5 & 0x1f) + (uVar6 & 0x1f) + (uVar7 & 0x1f) + (uVar8 & 0x1f) >> 3
+             (ushort)((texel0 & 0x7e0) + (texelA & 0x7e0) + (texelB & 0x7e0) + (texelAB & 0x7e0) +
+                      (texelC & 0x7e0) + (texelCA & 0x7e0) + (texelCB & 0x7e0) + (texelCAB & 0x7e0) >> 3) &
+             0x7e0 | (ushort)((texel0 & 0x1f) + (texelA & 0x1f) + (texelB & 0x1f) + (texelAB & 0x1f) +
+                              (texelC & 0x1f) + (texelCA & 0x1f) + (texelCB & 0x1f) + (texelCAB & 0x1f) >> 3
                              ) & 0x1f;
   return;
 }
