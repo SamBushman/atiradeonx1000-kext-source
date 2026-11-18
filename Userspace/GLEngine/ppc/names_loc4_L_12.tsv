@@ -1,0 +1,25 @@
+use	_glLinkProgramARB_Exec	iVar18	clearCount	CONFIRMED	countdown for the 9 words zeroed at stage record +8	^\s*iVar18\ =\ 9;$	+1
+use	_glLinkProgramARB_Exec	iVar18	clearCount	CONFIRMED	countdown for the 9 words zeroed at stage record +8	^\s*iVar18\ =\ iVar18\ \+\ \-1;$	+2
+use	_glLinkProgramARB_Exec	iVar18	linkInfoOld	CONFIRMED	stage record +0x518 info record whose sub-buffers are freed	^\s*iVar18\ =\ \*\(int\ \*\)\(puVar17\ \+\ 0x518\);$	+1
+use	_glLinkProgramARB_Exec	iVar18	linkInfoOld	CONFIRMED	stage record +0x518 info record whose sub-buffers are freed	^\s*if\ \(iVar18\ !=\ 0\)\ \{$	+4
+use	_glLinkProgramARB_Exec	iVar18	linkInfoOld	CONFIRMED	stage record +0x518 info record whose sub-buffers are freed	^\s*if\ \(\*\(int\ \*\)\(iVar18\ \+\ 8\)\ !=\ 0\)\ \{$	+3
+use	_glLinkProgramARB_Exec	iVar18	linkInfoOld	CONFIRMED	stage record +0x518 info record whose sub-buffers are freed	^\s*if\ \(\*\(int\ \*\)\(iVar18\ \+\ 0xc\)\ !=\ 0\)\ \{$	+3
+use	_glLinkProgramARB_Exec	iVar18	linkInfoOld	CONFIRMED	stage record +0x518 info record whose sub-buffers are freed	^\s*if\ \(\*\(int\ \*\)\(iVar18\ \+\ 0x18\)\ !=\ 0\)\ \{$	+3
+use	_glLinkProgramARB_Exec	iVar18	linkInfoOld	CONFIRMED	stage record +0x518 info record whose sub-buffers are freed	^\s*if\ \(\*\(int\ \*\)\(iVar18\ \+\ 0x1c\)\ !=\ 0\)\ \{$	+3
+use	_glLinkProgramARB_Exec	iVar18	linkInfoOld	CONFIRMED	stage record +0x518 info record whose sub-buffers are freed	^\s*_gleVecFree\(iVar18\);$	+1
+use	_glLinkProgramARB_Exec	iVar18	attachedShaderCount	CONFIRMED	programObj+0x48	^\s*iVar18\ =\ \*\(int\ \*\)\(iVar9\ \+\ 0x48\);$	+1
+use	_glLinkProgramARB_Exec	iVar18	attachedShaderCount	CONFIRMED	programObj+0x48	^\s*if\ \(0\ <\ iVar18\)\ \{$	+1
+use	_glLinkProgramARB_Exec	iVar18	attachedShaderCount	CONFIRMED	programObj+0x48	^\s*\}\ while\ \(iVar14\ <\ iVar18\);$	+1
+use	_glLinkProgramARB_Exec	iVar18	attachedShaderCount	CONFIRMED	programObj+0x48	^\s*if\ \(iVar18\ ==\ 0\)\ \{$	+1
+use	_glLinkProgramARB_Exec	iVar18	attachedShaderCount	CONFIRMED	programObj+0x48	^\s*iVar14\ =\ _malloc\(iVar18\ <<\ 2\);$	+1
+use	_glLinkProgramARB_Exec	iVar18	attachedCountForLink	CONFIRMED	programObj+0x48 reloaded after the handle array allocation, count passed to _ShLink	^\s*iVar18\ =\ \*\(int\ \*\)\(iVar9\ \+\ 0x48\);$@2	+2
+use	_glLinkProgramARB_Exec	iVar18	attachedCountForLink	CONFIRMED	programObj+0x48 reloaded after the handle array allocation, count passed to _ShLink	^\s*iVar18\ =\ \*\(int\ \*\)\(iVar9\ \+\ 0x48\);$@3	+2
+use	_glLinkProgramARB_Exec	iVar18	attachedCountForLink	CONFIRMED	programObj+0x48 reloaded after the handle array allocation, count passed to _ShLink	^\s*uVar12\ =\ _ShLink\(\*\(undefined4\ \*\)\(iVar9\ \+\ 0x40\),iVar14,iVar18,$	+2
+use	_glLinkProgramARB_Exec	iVar18	handleByteOffset	CONFIRMED	loop counter*4 offset into the handle array	^\s*iVar18\ =\ iVar6\ \*\ 4;$	+1
+use	_glLinkProgramARB_Exec	iVar18	handleByteOffset	CONFIRMED	loop counter*4 offset into the handle array	^\s*\*\(undefined4\ \*\)\(iVar18\ \+\ iVar14\)\ =$	+2
+use	_glLinkProgramARB_Exec	iVar18	uniformEntryOffset	CONFIRMED	loop counter*0x10 byte offset into the uniform store	^\s*iVar18\ =\ iVar6\ \*\ 0x10;$	+1
+use	_glLinkProgramARB_Exec	iVar18	uniformEntryOffset	CONFIRMED	loop counter*0x10 byte offset into the uniform store	^\s*iVar7\ =\ iVar18\ \+\ iVar14;$	+2
+use	_glLinkProgramARB_Exec	iVar18	vertexLocalParamCount	CONFIRMED	_ShGetNumShaderLocalParams(shader,0)	^\s*iVar18\ =\ _ShGetNumShaderLocalParams\(\*\(undefined4\ \*\)\(iVar9\ \+\ 0x40\),0\);$	+2
+use	_glLinkProgramARB_Exec	iVar18	vertexLocalParamCount	CONFIRMED	_ShGetNumShaderLocalParams(shader,0)	^\s*iVar6\ =\ _gleVecAlloc\(iVar18\ <<\ 4\);$	+1
+use	_glLinkProgramARB_Exec	iVar18	vertexLocalParamCount	CONFIRMED	_ShGetNumShaderLocalParams(shader,0)	^\s*if\ \(0\ <\ iVar18\)\ \{$@3	+1
+use	_glLinkProgramARB_Exec	iVar18	vertexLocalParamCount	CONFIRMED	_ShGetNumShaderLocalParams(shader,0)	^\s*iVar18\ =\ iVar18\ \+\ \-1;$@2	+2

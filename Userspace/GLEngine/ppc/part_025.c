@@ -806,6 +806,13 @@ void _glLinkProgramARB_Exec(glContext, programObj)
   char *shaderString;
   undefined1 *stageRecord;
   int iVar18;
+  int vertexLocalParamCount;
+  int uniformEntryOffset;
+  int handleByteOffset;
+  int attachedCountForLink;
+  int attachedShaderCount;
+  int linkInfoOld;
+  int clearCount;
   double extraout_f1;
   double extraout_f1_00;
   double extraout_f1_01;
@@ -866,14 +873,14 @@ void _glLinkProgramARB_Exec(glContext, programObj)
           stageRecord = *(undefined1 **)(sharedStateThenProgramObj + 0x24);
         }
         *stageRecord = 0;
-        iVar18 = 9;
+        clearCount = 9;
         *(undefined4 *)(stageRecord + 4) = 0;
         zeroCursor = (undefined4 *)(stageRecord + 8);
         do {
           *zeroCursor = 0;
           zeroCursor = zeroCursor + 1;
-          iVar18 = iVar18 + -1;
-        } while (iVar18 != 0);
+          clearCount = clearCount + -1;
+        } while (clearCount != 0);
         if (*(int *)(stageRecord + 0x4dc) != 0) {
           _PPEmulatorProgramFree(*(int *)(stageRecord + 0x4dc));
         }
@@ -888,37 +895,37 @@ void _glLinkProgramARB_Exec(glContext, programObj)
         if (*(int *)(stageRecord + 0x51c) != 0) {
           _gleVecFree(*(int *)(stageRecord + 0x51c));
         }
-        iVar18 = *(int *)(stageRecord + 0x518);
+        linkInfoOld = *(int *)(stageRecord + 0x518);
         *(undefined4 *)(stageRecord + 0x51c) = 0;
-        if (iVar18 != 0) {
-          if (*(int *)(iVar18 + 0x20) != 0) {
-            _gleVecFree(*(int *)(iVar18 + 0x20));
-            iVar18 = *(int *)(stageRecord + 0x518);
+        if (linkInfoOld != 0) {
+          if (*(int *)(linkInfoOld + 0x20) != 0) {
+            _gleVecFree(*(int *)(linkInfoOld + 0x20));
+            linkInfoOld = *(int *)(stageRecord + 0x518);
           }
-          if (*(int *)(iVar18 + 8) != 0) {
-            _gleVecFree(*(int *)(iVar18 + 8));
-            iVar18 = *(int *)(stageRecord + 0x518);
+          if (*(int *)(linkInfoOld + 8) != 0) {
+            _gleVecFree(*(int *)(linkInfoOld + 8));
+            linkInfoOld = *(int *)(stageRecord + 0x518);
           }
-          if (*(int *)(iVar18 + 0xc) != 0) {
-            _gleVecFree(*(int *)(iVar18 + 0xc));
-            iVar18 = *(int *)(stageRecord + 0x518);
+          if (*(int *)(linkInfoOld + 0xc) != 0) {
+            _gleVecFree(*(int *)(linkInfoOld + 0xc));
+            linkInfoOld = *(int *)(stageRecord + 0x518);
           }
-          if (*(int *)(iVar18 + 0x18) != 0) {
-            _gleVecFree(*(int *)(iVar18 + 0x18));
-            iVar18 = *(int *)(stageRecord + 0x518);
+          if (*(int *)(linkInfoOld + 0x18) != 0) {
+            _gleVecFree(*(int *)(linkInfoOld + 0x18));
+            linkInfoOld = *(int *)(stageRecord + 0x518);
           }
-          if (*(int *)(iVar18 + 0x1c) != 0) {
-            _gleVecFree(*(int *)(iVar18 + 0x1c));
-            iVar18 = *(int *)(stageRecord + 0x518);
+          if (*(int *)(linkInfoOld + 0x1c) != 0) {
+            _gleVecFree(*(int *)(linkInfoOld + 0x1c));
+            linkInfoOld = *(int *)(stageRecord + 0x518);
           }
-          _gleVecFree(iVar18);
+          _gleVecFree(linkInfoOld);
           *(undefined4 *)(stageRecord + 0x518) = 0;
         }
         stageIndex = stageIndex + 1;
       } while (stageIndex < 2);
-      iVar18 = *(int *)(sharedStateThenProgramObj + 0x48);
+      attachedShaderCount = *(int *)(sharedStateThenProgramObj + 0x48);
       attachIndex = 0;
-      if (0 < iVar18) {
+      if (0 < attachedShaderCount) {
         attachedShaderCursor = *(int **)(sharedStateThenProgramObj + 0x44);
         do {
           attachedShader = *attachedShaderCursor;
@@ -941,9 +948,9 @@ void _glLinkProgramARB_Exec(glContext, programObj)
             goto LAB_00088b38;
           }
           attachIndex = attachIndex + 1;
-        } while (attachIndex < iVar18);
+        } while (attachIndex < attachedShaderCount);
       }
-      if (iVar18 == 0) {
+      if (attachedShaderCount == 0) {
         linkSucceeded = _ShLink(*(undefined4 *)(sharedStateThenProgramObj + 0x40),0,0,*(undefined4 *)(glContext + 0x7594),
                          *(undefined4 *)(glContext + 0x7598));
         *(undefined1 *)(sharedStateThenProgramObj + 0x3c) = linkSucceeded;
@@ -957,19 +964,19 @@ void _glLinkProgramARB_Exec(glContext, programObj)
       }
       else {
         loopIndex = 0;
-        shaderHandles = _malloc(iVar18 << 2);
-        iVar18 = *(int *)(sharedStateThenProgramObj + 0x48);
-        if (0 < iVar18) {
+        shaderHandles = _malloc(attachedShaderCount << 2);
+        attachedCountForLink = *(int *)(sharedStateThenProgramObj + 0x48);
+        if (0 < attachedCountForLink) {
           do {
-            iVar18 = loopIndex * 4;
+            handleByteOffset = loopIndex * 4;
             loopIndex = loopIndex + 1;
-            *(undefined4 *)(iVar18 + shaderHandles) =
-                 *(undefined4 *)(*(int *)(iVar18 + *(int *)(sharedStateThenProgramObj + 0x44)) + 0x30);
-            iVar18 = *(int *)(sharedStateThenProgramObj + 0x48);
-          } while (loopIndex < iVar18);
+            *(undefined4 *)(handleByteOffset + shaderHandles) =
+                 *(undefined4 *)(*(int *)(handleByteOffset + *(int *)(sharedStateThenProgramObj + 0x44)) + 0x30);
+            attachedCountForLink = *(int *)(sharedStateThenProgramObj + 0x48);
+          } while (loopIndex < attachedCountForLink);
         }
         loopIndex = 0;
-        linkSucceeded = _ShLink(*(undefined4 *)(sharedStateThenProgramObj + 0x40),shaderHandles,iVar18,
+        linkSucceeded = _ShLink(*(undefined4 *)(sharedStateThenProgramObj + 0x40),shaderHandles,attachedCountForLink,
                          *(undefined4 *)(glContext + 0x7594),*(undefined4 *)(glContext + 0x7598));
         *(undefined1 *)(sharedStateThenProgramObj + 0x3c) = linkSucceeded;
         _free(shaderHandles);
@@ -993,22 +1000,22 @@ void _glLinkProgramARB_Exec(glContext, programObj)
         *(int *)(sharedStateThenProgramObj + 0x4c) = uniformStore;
         if (0 < *(int *)(sharedStateThenProgramObj + 0x30)) {
           do {
-            iVar18 = loopIndex * 0x10;
+            uniformEntryOffset = loopIndex * 0x10;
             loopIndex = loopIndex + 1;
-            uniformEntry = iVar18 + uniformStore;
-            *(undefined4 *)(uniformStore + iVar18) = 0;
+            uniformEntry = uniformEntryOffset + uniformStore;
+            *(undefined4 *)(uniformStore + uniformEntryOffset) = 0;
             *(undefined4 *)(uniformEntry + 0xc) = 0;
             *(undefined4 *)(uniformEntry + 4) = 0;
             *(undefined4 *)(uniformEntry + 8) = 0;
           } while (loopIndex < *(int *)(sharedStateThenProgramObj + 0x30));
         }
         vertexStage = *stageRecordSlots;
-        iVar18 = _ShGetNumShaderLocalParams(*(undefined4 *)(sharedStateThenProgramObj + 0x40),0);
-        if (iVar18 != 0) {
+        vertexLocalParamCount = _ShGetNumShaderLocalParams(*(undefined4 *)(sharedStateThenProgramObj + 0x40),0);
+        if (vertexLocalParamCount != 0) {
           rowIndex = 0;
-          vertexLocalParams = _gleVecAlloc(iVar18 << 4);
+          vertexLocalParams = _gleVecAlloc(vertexLocalParamCount << 4);
           *(int *)(vertexStage + 0x51c) = vertexLocalParams;
-          if (0 < iVar18) {
+          if (0 < vertexLocalParamCount) {
             do {
               localParamOffset = rowIndex * 0x10;
               rowIndex = rowIndex + 1;
@@ -1017,8 +1024,8 @@ void _glLinkProgramARB_Exec(glContext, programObj)
               *(undefined4 *)(localParamEntry + 0xc) = 0;
               *(undefined4 *)(localParamEntry + 4) = 0;
               *(undefined4 *)(localParamEntry + 8) = 0;
-              iVar18 = iVar18 + -1;
-            } while (iVar18 != 0);
+              vertexLocalParamCount = vertexLocalParamCount + -1;
+            } while (vertexLocalParamCount != 0);
           }
         }
         fragmentStage = *(int *)(sharedStateThenProgramObj + 0x24);
