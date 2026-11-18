@@ -45,7 +45,7 @@ void _gleSetNormalFunc(param_1, param_2, param_3)
 }
 
 /* _gleTransformNormalBlend @ 0xc5310 (468 bytes) */
-void _gleTransformNormalBlend(int param_1,uint param_2,int param_3,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleTransformNormalBlend(int param_1,uint param_2,int param_3,double fparam_1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
   byte bVar1;
   float fVar2;
@@ -60,7 +60,7 @@ void _gleTransformNormalBlend(int param_1,uint param_2,int param_3,double fparam
   float fVar11;
   float fVar12;
   int iVar13;
-  undefined *puVar14;
+  undefined *vectorNormalize;
   int iVar15;
   int iVar16;
   uint uVar17;
@@ -118,7 +118,7 @@ void _gleTransformNormalBlend(int param_1,uint param_2,int param_3,double fparam
       iVar15 = iVar15 + 0x40;
     } while (iVar16 < (int)(uint)bVar1);
   }
-  puVar14 = PTR__gleVectorNormalize_00112064;
+  vectorNormalize = PTR__gleVectorNormalize_00112064;
   uVar18 = param_2 + iVar13;
   if (*(char *)(param_1 + 0x280d) == '\0') {
     if (param_2 < uVar18) {
@@ -134,7 +134,7 @@ void _gleTransformNormalBlend(int param_1,uint param_2,int param_3,double fparam
   }
   else {
     for (; param_2 < uVar18; param_2 = param_2 + 0x100) {
-      fparam_1 = (double)(**(double ( **)(int,int,int,double))puVar14)(param_1, param_2 + 0xf0, param_2 + 0x40, fparam_1);
+      fparam_1 = (double)(**(double ( **)(int,int,int,double))vectorNormalize)(param_1, param_2 + 0xf0, param_2 + 0x40, fparam_1);
     }
   }
   return;
@@ -536,7 +536,7 @@ void _gleSetProjectionFuncZ0W1(param_1, param_2, param_3)
 }
 
 /* _gleTransformProjectionBlend @ 0xc5edc (1264 bytes) */
-void _gleTransformProjectionBlend(int glContext,float *param_2,int param_3,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleTransformProjectionBlend(int glContext,float *param_2,int param_3,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
   float fVar1;
   float fVar2;
@@ -1044,10 +1044,10 @@ LAB_000c6804:
 }
 
 /* _gleGetClientAttrib @ 0xc69d4 (460 bytes) */
-void _gleGetClientAttrib(glContext, param_2, param_3)
+void _gleGetClientAttrib(glContext, clientAttribBit, savedState)
   int glContext;
-  int param_2;
-  undefined4 *param_3;
+  int clientAttribBit;
+  undefined4 *savedState;
 {
   undefined4 *puVar1;
   int iVar2;
@@ -1057,33 +1057,33 @@ void _gleGetClientAttrib(glContext, param_2, param_3)
   undefined4 *puVar6;
   int iVar7;
   
-  if (param_2 == 1) {
-    *param_3 = *(undefined4 *)(glContext + 0x31b0);
-    param_3[2] = *(undefined4 *)(glContext + 0x31b8);
-    param_3[3] = *(undefined4 *)(glContext + 0x31bc);
-    param_3[5] = *(undefined4 *)(glContext + 0x31c4);
-    *(undefined1 *)(param_3 + 6) = *(undefined1 *)(glContext + 0x31c8);
-    *(undefined1 *)((int)param_3 + 0x19) = *(undefined1 *)(glContext + 0x31c9);
-    param_3[1] = *(undefined4 *)(0x31b4 + glContext);
-    param_3[4] = *(undefined4 *)(glContext + 0x31c0);
-    param_3[7] = *(undefined4 *)(glContext + 0x31cc);
-    param_3[9] = *(undefined4 *)(glContext + 0x31d4);
-    param_3[10] = *(undefined4 *)(glContext + 0x31d8);
-    param_3[0xc] = *(undefined4 *)(glContext + 0x31e0);
-    *(undefined1 *)(param_3 + 0xd) = *(undefined1 *)(glContext + 0x31e4);
-    *(undefined1 *)((int)param_3 + 0x35) = *(undefined1 *)(glContext + 0x31e5);
-    *(undefined1 *)((int)param_3 + 0x36) = *(undefined1 *)(glContext + 0x31e6);
-    param_3[8] = *(undefined4 *)(glContext + 0x31d0);
-    param_3[0xb] = *(undefined4 *)(glContext + 0x31dc);
+  if (clientAttribBit == 1) {
+    *savedState = *(undefined4 *)(glContext + 0x31b0);
+    savedState[2] = *(undefined4 *)(glContext + 0x31b8);
+    savedState[3] = *(undefined4 *)(glContext + 0x31bc);
+    savedState[5] = *(undefined4 *)(glContext + 0x31c4);
+    *(undefined1 *)(savedState + 6) = *(undefined1 *)(glContext + 0x31c8);
+    *(undefined1 *)((int)savedState + 0x19) = *(undefined1 *)(glContext + 0x31c9);
+    savedState[1] = *(undefined4 *)(0x31b4 + glContext);
+    savedState[4] = *(undefined4 *)(glContext + 0x31c0);
+    savedState[7] = *(undefined4 *)(glContext + 0x31cc);
+    savedState[9] = *(undefined4 *)(glContext + 0x31d4);
+    savedState[10] = *(undefined4 *)(glContext + 0x31d8);
+    savedState[0xc] = *(undefined4 *)(glContext + 0x31e0);
+    *(undefined1 *)(savedState + 0xd) = *(undefined1 *)(glContext + 0x31e4);
+    *(undefined1 *)((int)savedState + 0x35) = *(undefined1 *)(glContext + 0x31e5);
+    *(undefined1 *)((int)savedState + 0x36) = *(undefined1 *)(glContext + 0x31e6);
+    savedState[8] = *(undefined4 *)(glContext + 0x31d0);
+    savedState[0xb] = *(undefined4 *)(glContext + 0x31dc);
     return;
   }
   iVar2 = *(int *)(glContext + 0x4a60);
   iVar5 = iVar2 + 0x10;
-  *param_3 = *(undefined4 *)(iVar2 + 4);
-  *(undefined2 *)((int)param_3 + 0x206) = *(undefined2 *)(glContext + 0x48ea);
+  *savedState = *(undefined4 *)(iVar2 + 4);
+  *(undefined2 *)((int)savedState + 0x206) = *(undefined2 *)(glContext + 0x48ea);
   iVar7 = 0x20;
-  param_3[0xa7] = *(undefined4 *)(iVar2 + 0x334);
-  puVar6 = param_3;
+  savedState[0xa7] = *(undefined4 *)(iVar2 + 0x334);
+  puVar6 = savedState;
   do {
     puVar6[1] = (int)*(short *)(iVar5 + 0x2a);
     puVar6[2] = (uint)*(ushort *)(iVar5 + 0x28);
@@ -1095,21 +1095,21 @@ void _gleGetClientAttrib(glContext, param_2, param_3)
     iVar7 = iVar7 + -1;
   } while (iVar7 != 0);
   uVar4 = 0;
-  *(undefined2 *)(param_3 + 0x81) = *(undefined2 *)(glContext + 0x48e8);
-  param_3[0x82] = *(undefined4 *)(glContext + 0x48e4);
-  param_3[0x83] = *(undefined4 *)(glContext + 0x48e0);
-  param_3[0xa8] = *(undefined4 *)(iVar2 + 0x330);
+  *(undefined2 *)(savedState + 0x81) = *(undefined2 *)(glContext + 0x48e8);
+  savedState[0x82] = *(undefined4 *)(glContext + 0x48e4);
+  savedState[0x83] = *(undefined4 *)(glContext + 0x48e0);
+  savedState[0xa8] = *(undefined4 *)(iVar2 + 0x330);
   if (*(int *)(iVar2 + 0x358) != 0) {
     uVar4 = *(undefined4 *)(*(int *)(iVar2 + 0x358) + 4);
   }
-  param_3[0x84] = uVar4;
+  savedState[0x84] = uVar4;
   uVar4 = 0;
   if (*(int *)(iVar2 + 0x35c) != 0) {
     uVar4 = *(undefined4 *)(*(int *)(iVar2 + 0x35c) + 4);
   }
-  param_3[0x85] = uVar4;
+  savedState[0x85] = uVar4;
   iVar5 = 0x20;
-  puVar6 = param_3 + 0x86;
+  puVar6 = savedState + 0x86;
   piVar3 = (int *)(iVar2 + 0x360);
   do {
     iVar7 = *piVar3;
@@ -1126,20 +1126,20 @@ void _gleGetClientAttrib(glContext, param_2, param_3)
   if (*(int *)(glContext + 0x48f4) != 0) {
     uVar4 = *(undefined4 *)(*(int *)(glContext + 0x48f4) + 4);
   }
-  param_3[0xa6] = uVar4;
-  param_3[0xaa] = *(undefined4 *)(iVar2 + 0x344);
-  param_3[0xa9] = *(undefined4 *)(iVar2 + 0x348);
-  param_3[0xab] = *(undefined4 *)(glContext + 0x4984);
-  param_3[0xac] = *(undefined4 *)(glContext + 0x4988);
-  param_3[0xad] = *(int *)(glContext + 0x53d8) + 0x84c0;
+  savedState[0xa6] = uVar4;
+  savedState[0xaa] = *(undefined4 *)(iVar2 + 0x344);
+  savedState[0xa9] = *(undefined4 *)(iVar2 + 0x348);
+  savedState[0xab] = *(undefined4 *)(glContext + 0x4984);
+  savedState[0xac] = *(undefined4 *)(glContext + 0x4988);
+  savedState[0xad] = *(int *)(glContext + 0x53d8) + 0x84c0;
   return;
 }
 
 /* _gleSetClientAttrib @ 0xc6ba0 (1172 bytes) */
-void _gleSetClientAttrib(glContext, param_2, param_3)
+void _gleSetClientAttrib(glContext, clientAttribBit, savedState)
   int glContext;
-  int param_2;
-  int *param_3;
+  int clientAttribBit;
+  int *savedState;
 {
   int iVar1;
   int iVar2;
@@ -1148,94 +1148,94 @@ void _gleSetClientAttrib(glContext, param_2, param_3)
   int *piVar5;
   int *piVar6;
   
-  if (param_2 == 1) {
-    *(int *)(glContext + 0x31b0) = *param_3;
-    *(int *)(glContext + 0x31b8) = param_3[2];
-    *(int *)(glContext + 0x31bc) = param_3[3];
-    *(int *)(glContext + 0x31c4) = param_3[5];
-    *(undefined1 *)(glContext + 0x31c8) = *(undefined1 *)(param_3 + 6);
-    *(undefined1 *)(glContext + 0x31c9) = *(undefined1 *)((int)param_3 + 0x19);
-    *(int *)(0x31b4 + glContext) = param_3[1];
-    *(int *)(glContext + 0x31c0) = param_3[4];
-    *(int *)(glContext + 0x31cc) = param_3[7];
-    *(int *)(glContext + 0x31d4) = param_3[9];
-    *(int *)(glContext + 0x31d8) = param_3[10];
-    *(int *)(glContext + 0x31e0) = param_3[0xc];
-    *(undefined1 *)(glContext + 0x31e4) = *(undefined1 *)(param_3 + 0xd);
-    *(undefined1 *)(glContext + 0x31e5) = *(undefined1 *)((int)param_3 + 0x35);
-    *(undefined1 *)(glContext + 0x31e6) = *(undefined1 *)((int)param_3 + 0x36);
-    *(int *)(glContext + 0x31d0) = param_3[8];
-    *(int *)(glContext + 0x31dc) = param_3[0xb];
+  if (clientAttribBit == 1) {
+    *(int *)(glContext + 0x31b0) = *savedState;
+    *(int *)(glContext + 0x31b8) = savedState[2];
+    *(int *)(glContext + 0x31bc) = savedState[3];
+    *(int *)(glContext + 0x31c4) = savedState[5];
+    *(undefined1 *)(glContext + 0x31c8) = *(undefined1 *)(savedState + 6);
+    *(undefined1 *)(glContext + 0x31c9) = *(undefined1 *)((int)savedState + 0x19);
+    *(int *)(0x31b4 + glContext) = savedState[1];
+    *(int *)(glContext + 0x31c0) = savedState[4];
+    *(int *)(glContext + 0x31cc) = savedState[7];
+    *(int *)(glContext + 0x31d4) = savedState[9];
+    *(int *)(glContext + 0x31d8) = savedState[10];
+    *(int *)(glContext + 0x31e0) = savedState[0xc];
+    *(undefined1 *)(glContext + 0x31e4) = *(undefined1 *)(savedState + 0xd);
+    *(undefined1 *)(glContext + 0x31e5) = *(undefined1 *)((int)savedState + 0x35);
+    *(undefined1 *)(glContext + 0x31e6) = *(undefined1 *)((int)savedState + 0x36);
+    *(int *)(glContext + 0x31d0) = savedState[8];
+    *(int *)(glContext + 0x31dc) = savedState[0xb];
   }
   else {
     iVar2 = *(int *)(glContext + 0x4a60);
-    if (*(int *)(iVar2 + 4) != *param_3) {
-      _gleBindVertexArray(glContext,*param_3);
+    if (*(int *)(iVar2 + 4) != *savedState) {
+      _gleBindVertexArray(glContext,*savedState);
       iVar2 = *(int *)(glContext + 0x4a60);
     }
     iVar4 = 0;
     if (*(int *)(iVar2 + 0x358) != 0) {
       iVar4 = *(int *)(*(int *)(iVar2 + 0x358) + 4);
     }
-    *(undefined2 *)(glContext + 0x48ea) = *(undefined2 *)((int)param_3 + 0x206);
-    iVar3 = param_3[0xa7];
+    *(undefined2 *)(glContext + 0x48ea) = *(undefined2 *)((int)savedState + 0x206);
+    iVar3 = savedState[0xa7];
     *(undefined4 *)(iVar2 + 0x330) = 0;
     *(int *)(iVar2 + 0x334) = iVar3;
-    *(int *)(iVar2 + 0x330) = param_3[0xa8];
+    *(int *)(iVar2 + 0x330) = savedState[0xa8];
     *(int *)(iVar2 + 0x334) = iVar3;
-    iVar3 = param_3[0x86];
+    iVar3 = savedState[0x86];
     if (iVar4 != iVar3) {
       _glBindBuffer_Exec(glContext,0x8892,iVar3);
       iVar4 = iVar3;
     }
-    _glVertexPointer_Exec(glContext,param_3[1],param_3[2],param_3[3],param_3[4]);
-    iVar3 = param_3[0x87];
+    _glVertexPointer_Exec(glContext,savedState[1],savedState[2],savedState[3],savedState[4]);
+    iVar3 = savedState[0x87];
     if (iVar4 != iVar3) {
       _glBindBuffer_Exec(glContext,0x8892,iVar3);
       iVar4 = iVar3;
     }
-    _glNormalPointer_Exec(glContext,param_3[6] & 0xffff7fff,param_3[7],param_3[8]);
-    iVar3 = param_3[0x88];
+    _glNormalPointer_Exec(glContext,savedState[6] & 0xffff7fff,savedState[7],savedState[8]);
+    iVar3 = savedState[0x88];
     if (iVar4 != iVar3) {
       _glBindBuffer_Exec(glContext,0x8892,iVar3);
       iVar4 = iVar3;
     }
-    _glColorPointer_Exec(glContext,param_3[9],param_3[10] & 0xffff7fff,param_3[0xb],param_3[0xc]);
-    iVar3 = param_3[0x8a];
+    _glColorPointer_Exec(glContext,savedState[9],savedState[10] & 0xffff7fff,savedState[0xb],savedState[0xc]);
+    iVar3 = savedState[0x8a];
     if (iVar4 != iVar3) {
       _glBindBuffer_Exec(glContext,0x8892,iVar3);
       iVar4 = iVar3;
     }
-    _glFogCoordPointer_Exec(glContext,param_3[0xe],param_3[0xf],param_3[0x10]);
-    iVar3 = param_3[0x8b];
+    _glFogCoordPointer_Exec(glContext,savedState[0xe],savedState[0xf],savedState[0x10]);
+    iVar3 = savedState[0x8b];
     if (iVar4 != iVar3) {
       _glBindBuffer_Exec(glContext,0x8892,iVar3);
       iVar4 = iVar3;
     }
     _glSecondaryColorPointer_Exec
-              (glContext,param_3[0x11],param_3[0x12] & 0xffff7fff,param_3[0x13],param_3[0x14]);
-    iVar3 = param_3[0x89];
+              (glContext,savedState[0x11],savedState[0x12] & 0xffff7fff,savedState[0x13],savedState[0x14]);
+    iVar3 = savedState[0x89];
     if (iVar4 != iVar3) {
       _glBindBuffer_Exec(glContext,0x8892,iVar3);
       iVar4 = iVar3;
     }
     _glWeightPointerARB_Exec
-              (glContext,param_3[0x15],param_3[0x16] & 0xffff7fff,param_3[0x17],param_3[0x18]);
-    iVar3 = param_3[0x8c];
+              (glContext,savedState[0x15],savedState[0x16] & 0xffff7fff,savedState[0x17],savedState[0x18]);
+    iVar3 = savedState[0x8c];
     if (iVar4 != iVar3) {
       _glBindBuffer_Exec(glContext,0x8892,iVar3);
       iVar4 = iVar3;
     }
-    _glEdgeFlagPointer_Exec(glContext,param_3[0x1b],param_3[0x1c]);
-    iVar3 = param_3[0x8d];
+    _glEdgeFlagPointer_Exec(glContext,savedState[0x1b],savedState[0x1c]);
+    iVar3 = savedState[0x8d];
     if (iVar4 != iVar3) {
       _glBindBuffer_Exec(glContext,0x8892,iVar3);
       iVar4 = iVar3;
     }
     iVar3 = 0;
-    piVar5 = param_3 + 0x8e;
-    _glElementPointerAPPLE_Exec(glContext,param_3[0x1e],param_3[0x20]);
-    piVar6 = param_3;
+    piVar5 = savedState + 0x8e;
+    _glElementPointerAPPLE_Exec(glContext,savedState[0x1e],savedState[0x20]);
+    piVar6 = savedState;
     do {
       iVar1 = *piVar5;
       piVar5 = piVar5 + 1;
@@ -1248,9 +1248,9 @@ void _gleSetClientAttrib(glContext, param_2, param_3)
       _glTexCoordPointer_Exec(glContext,piVar6[0x21],piVar6[0x22],piVar6[0x23],piVar6[0x24]);
       piVar6 = piVar6 + 4;
     } while (iVar3 < 8);
-    piVar5 = param_3 + 0x96;
+    piVar5 = savedState + 0x96;
     iVar3 = 0;
-    piVar6 = param_3;
+    piVar6 = savedState;
     do {
       iVar1 = *piVar5;
       piVar5 = piVar5 + 1;
@@ -1265,52 +1265,52 @@ void _gleSetClientAttrib(glContext, param_2, param_3)
       piVar6 = piVar6 + 4;
       iVar3 = iVar1;
     } while (iVar1 < 0x10);
-    iVar3 = param_3[0xa6];
+    iVar3 = savedState[0xa6];
     if (iVar4 != iVar3) {
       _glBindBuffer_Exec(glContext,0x8892,iVar3);
       iVar4 = iVar3;
     }
-    _glIndexPointer_Exec(glContext,(uint)*(ushort *)(param_3 + 0x81),param_3[0x82],param_3[0x83]);
-    if (iVar4 != param_3[0x84]) {
-      _glBindBuffer_Exec(glContext,0x8892,param_3[0x84]);
+    _glIndexPointer_Exec(glContext,(uint)*(ushort *)(savedState + 0x81),savedState[0x82],savedState[0x83]);
+    if (iVar4 != savedState[0x84]) {
+      _glBindBuffer_Exec(glContext,0x8892,savedState[0x84]);
     }
     iVar4 = 0;
     if (*(int *)(iVar2 + 0x35c) != 0) {
       iVar4 = *(int *)(*(int *)(iVar2 + 0x35c) + 4);
     }
-    if (iVar4 != param_3[0x85]) {
-      _glBindBuffer_Exec(glContext,0x8893,param_3[0x85]);
+    if (iVar4 != savedState[0x85]) {
+      _glBindBuffer_Exec(glContext,0x8893,savedState[0x85]);
     }
-    _glVertexArrayRangeEXT_Exec(glContext,param_3[0xa9],param_3[0xaa]);
-    *(int *)(glContext + 0x53d8) = param_3[0xad] + -0x84c0;
+    _glVertexArrayRangeEXT_Exec(glContext,savedState[0xa9],savedState[0xaa]);
+    *(int *)(glContext + 0x53d8) = savedState[0xad] + -0x84c0;
     if (*(int *)(glContext + 0x4988) != 0) {
       _glUnlockArraysEXT_Exec(glContext);
     }
-    if (param_3[0xac] != 0) {
-      _glLockArraysEXT_Exec(glContext,param_3[0xab],param_3[0xac]);
+    if (savedState[0xac] != 0) {
+      _glLockArraysEXT_Exec(glContext,savedState[0xab],savedState[0xac]);
     }
   }
   return;
 }
 
 /* _gleAddClientAttribElem @ 0xc7034 (120 bytes) */
-void _gleAddClientAttribElem(param_1, param_2)
-  int param_1;
-  undefined4 param_2;
+void _gleAddClientAttribElem(glContext, clientAttribBit)
+  int glContext;
+  undefined4 clientAttribBit;
 {
   int *piVar1;
   undefined4 *puVar2;
   
   puVar2 = (undefined4 *)_malloc(0x2c0);
   if (puVar2 == (undefined4 *)0x0) {
-    if (*(int *)(param_1 + 0x7574) == 0) {
-      *(undefined4 *)(param_1 + 0x7574) = 0x505;
+    if (*(int *)(glContext + 0x7574) == 0) {
+      *(undefined4 *)(glContext + 0x7574) = 0x505;
     }
   }
   else {
-    *puVar2 = param_2;
-    ((void (*)())_gleGetClientAttrib)(param_1,param_2,puVar2 + 1);
-    piVar1 = *(int **)(param_1 + 0x5140);
+    *puVar2 = clientAttribBit;
+    ((void (*)())_gleGetClientAttrib)(glContext,clientAttribBit,puVar2 + 1);
+    piVar1 = *(int **)(glContext + 0x5140);
     puVar2[0xaf] = *piVar1;
     *piVar1 = (int)puVar2;
   }
@@ -1388,20 +1388,20 @@ void _gleFreeBufferObject(glContext, param_2)
 }
 
 /* _gleCreateBufferObject @ 0xc7208 (212 bytes) */
-int _gleCreateBufferObject(param_1, param_2)
-  int param_1;
+int _gleCreateBufferObject(glContext, param_2)
+  int glContext;
   undefined4 param_2;
 {
-  undefined *puVar1;
+  undefined *freeBufferObject;
   undefined4 *puVar2;
   undefined4 *puVar3;
   int iVar4;
   
-  puVar3 = (undefined4 *)_gleVecAlloc((uint)*(byte *)(param_1 + 0x85a4) * 4 + 0x48);
-  puVar1 = PTR__gleFreeBufferObject_00110a1c;
+  puVar3 = (undefined4 *)_gleVecAlloc((uint)*(byte *)(glContext + 0x85a4) * 4 + 0x48);
+  freeBufferObject = PTR__gleFreeBufferObject_00110a1c;
   puVar3[0xd] = 0;
   puVar3[2] = 1;
-  puVar3[3] = puVar1;
+  puVar3[3] = freeBufferObject;
   *puVar3 = 0;
   *(undefined1 *)(puVar3 + 0x11) = 0;
   puVar3[0x10] = 0;
@@ -1418,13 +1418,13 @@ int _gleCreateBufferObject(param_1, param_2)
     iVar4 = iVar4 + -1;
   } while (iVar4 != 0);
   iVar4 = 0;
-  if (*(char *)(param_1 + 0x85a4) != '\0') {
+  if (*(char *)(glContext + 0x85a4) != '\0') {
     puVar2 = puVar3 + 0x12;
     do {
       *puVar2 = 0xffffffff;
       iVar4 = iVar4 + 1;
       puVar2 = puVar2 + 1;
-    } while (iVar4 < (int)(uint)*(byte *)(param_1 + 0x85a4));
+    } while (iVar4 < (int)(uint)*(byte *)(glContext + 0x85a4));
   }
   return (int)puVar3;
 }
@@ -1986,9 +1986,9 @@ int _gleSwitchToRenderer(glContext, param_2)
   uint uVar2;
   int iVar3;
   undefined *puVar4;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
+  undefined4 incomingR6;
+  undefined4 incomingR7;
+  undefined4 incomingR8;
   uint uVar5;
   uint uVar6;
   undefined4 *a2;
@@ -2008,7 +2008,7 @@ int _gleSwitchToRenderer(glContext, param_2)
   *(undefined4 *)(glContext + 800) = 0xffffffff;
   *(undefined4 *)(glContext + 0x310) = 0xffffffff;
   uVar5 = (**(code **)(glContext + 0x4788))
-                    (*(undefined4 *)(glContext + 0x4688),glContext + 0x4698,a2,in_r6,in_r7,in_r8,uVar5);
+                    (*(undefined4 *)(glContext + 0x4688),glContext + 0x4698,a2,incomingR6,incomingR7,incomingR8,uVar5);
   iVar3 = 0x13;
   do {
     *a2 = 0;
@@ -2065,13 +2065,13 @@ double _gleRecoverySaveState(glContext, param_2)
   int *piVar3;
   int iVar4;
   double fparam_1;
-  double in_f2;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
+  double incomingFpr2;
+  double incomingFpr3;
+  double incomingFpr4;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
   
   *(undefined1 *)(param_2 + 0x12) = *(undefined1 *)(glContext + 0x3128);
   if (*(char *)(param_2 + 0x12) != '\0') {
@@ -2104,7 +2104,7 @@ double _gleRecoverySaveState(glContext, param_2)
   }
   else {
     param_2[0x11] = *(int *)(*(int *)(glContext + 0x5430) + 4);
-    ((void (*)())_glUseProgramObjectARB_Exec)(glContext,0,fparam_1,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8);
+    ((void (*)())_glUseProgramObjectARB_Exec)(glContext,0,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
   }
                     
                     
@@ -2114,14 +2114,14 @@ double _gleRecoverySaveState(glContext, param_2)
 }
 
 /* _gleRecoveryRestoreState @ 0xc81ec (276 bytes) */
-void _gleRecoveryRestoreState(int glContext,int *param_2,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8)
+void _gleRecoveryRestoreState(int glContext,int *param_2,double fparam_1,double floatArg2,double floatArg3,double floatArg4,double floatArg5,double floatArg6,double floatArg7,double floatArg8)
 {
   int iVar1;
   int iVar2;
   int iVar3;
   int *piVar4;
   int iVar5;
-  double extraout_f1;
+  double f1AfterCall;
   
   if (*(char *)(param_2 + 0x12) != '\0') {
     fparam_1 = (double)_glEnable_Exec(glContext,0xb71);
@@ -2141,7 +2141,7 @@ void _gleRecoveryRestoreState(int glContext,int *param_2,double fparam_1,double 
         *(int *)(iVar5 + 4) = iVar1;
         _gleUpdateTextureParams(glContext,iVar3);
         iVar2 = *(int *)(glContext + 0x468c);
-        fparam_1 = extraout_f1;
+        fparam_1 = f1AfterCall;
       }
       iVar3 = iVar3 + 1;
       iVar5 = iVar5 + 0x7c;
@@ -2156,8 +2156,8 @@ void _gleRecoveryRestoreState(int glContext,int *param_2,double fparam_1,double 
     }
   }
   if (param_2[0x11] != 0) {
-    ((void (*)())_glUseProgramObjectARB_Exec)(glContext,param_2[0x11],fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,
-               fparam_8);
+    ((void (*)())_glUseProgramObjectARB_Exec)(glContext,param_2[0x11],fparam_1,floatArg2,floatArg3,floatArg4,floatArg5,floatArg6,floatArg7,
+               floatArg8);
   }
                     
                     
@@ -2167,10 +2167,10 @@ void _gleRecoveryRestoreState(int glContext,int *param_2,double fparam_1,double 
 }
 
 /* _gleToggleScissorEnableState @ 0xc8300 (88 bytes) */
-undefined4 _gleToggleScissorEnableState(int glContext,undefined4 param_2,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8)
+undefined4 _gleToggleScissorEnableState(int glContext,undefined4 param_2,double floatArg1,double floatArg2,double floatArg3,double floatArg4,double floatArg5,double floatArg6,double floatArg7,double floatArg8)
 {
   *(undefined1 *)(glContext + 0x34f0) = (undefined1)param_2;
-  ((void (*)())_gleUpdateViewScissorData)(glContext,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
+  ((void (*)())_gleUpdateViewScissorData)(glContext,floatArg1,floatArg2,floatArg3,floatArg4,floatArg5,floatArg6,floatArg7,floatArg8);
   *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x4000000;
   (**(code **)(glContext + 0x4788))
             (*(undefined4 *)(glContext + 0x4688),glContext + 0x4698,glContext + 0x310);
@@ -2187,13 +2187,13 @@ void _gleSwitchRenderersReadBuffers(glContext, param_2, param_3)
   uint uVar2;
   int iVar3;
   double fparam_1;
-  double in_f2;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
+  double incomingFpr2;
+  double incomingFpr3;
+  double incomingFpr4;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
   undefined1 auStack_90 [80];
   undefined4 local_40;
   undefined4 local_3c;
@@ -2245,28 +2245,28 @@ void _gleSwitchRenderersReadBuffers(glContext, param_2, param_3)
     *(undefined4 *)(glContext + 0x31c4) = local_2c;
     *(undefined4 *)(glContext + 0x31c8) = local_28;
     *(uint *)(glContext + 0x310) = uVar2 | 0x200000;
-    ((void (*)())_gleRecoveryRestoreState)(glContext,auStack_90,fparam_1,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8);
+    ((void (*)())_gleRecoveryRestoreState)(glContext,auStack_90,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
   }
   return;
 }
 
 /* _gleSwitchRenderersWriteBuffers @ 0xc851c (616 bytes) */
-void _gleSwitchRenderersWriteBuffers(glContext, param_2, param_3)
+void _gleSwitchRenderersWriteBuffers(glContext, unusedArg2, param_3)
   int glContext;
-  undefined4 param_2;
+  undefined4 unusedArg2;
   undefined4 *param_3;
 {
   bool bVar1;
   ushort uVar2;
   double dVar3;
   double fparam_1;
-  double in_f2;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
+  double incomingFpr2;
+  double incomingFpr3;
+  double incomingFpr4;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
   float local_1a0;
   float local_19c;
   float local_198;
@@ -2300,7 +2300,7 @@ void _gleSwitchRenderersWriteBuffers(glContext, param_2, param_3)
     *(undefined1 *)(glContext + 0x31e6) = 0;
     dVar3 = (double)((double (*)())_gleRecoverySaveState)(glContext,auStack_a0);
     if (bVar1) {
-      ((undefined4 (*)())_gleToggleScissorEnableState)(glContext,0,dVar3,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8);
+      ((undefined4 (*)())_gleToggleScissorEnableState)(glContext,0,dVar3,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
     }
     _memset(&local_1a0,0,0x100);
     local_1a0 = *(float *)(glContext + 0x4a44) * local_1a0 + *(float *)(glContext + 0x4a48);
@@ -2324,7 +2324,7 @@ void _gleSwitchRenderersWriteBuffers(glContext, param_2, param_3)
     fparam_1 = (double)(**(double ( **)(int,int,int,int,int,int,int,int))(glContext + 0x46a4))
                                  (*(undefined4 *)(glContext + 0x4688), &local_1a0, param_3[1], *param_3, 0x80e1, 0x8367, param_3[2], 0);
     if (bVar1) {
-      fparam_1 = (double)((undefined4 (*)())_gleToggleScissorEnableState)(glContext,1,fparam_1,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,dVar3);
+      fparam_1 = (double)((undefined4 (*)())_gleToggleScissorEnableState)(glContext,1,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,dVar3);
     }
     *(undefined4 *)(glContext + 0x31d0) = local_4c;
     *(undefined4 *)(glContext + 0x31cc) = local_50;
@@ -2334,7 +2334,7 @@ void _gleSwitchRenderersWriteBuffers(glContext, param_2, param_3)
     *(undefined4 *)(glContext + 0x31e0) = local_3c;
     *(undefined4 *)(glContext + 0x31e4) = local_38;
     *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x200000;
-    ((void (*)())_gleRecoveryRestoreState)(glContext,auStack_a0,fparam_1,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,dVar3);
+    ((void (*)())_gleRecoveryRestoreState)(glContext,auStack_a0,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,dVar3);
   }
   return;
 }
@@ -2347,13 +2347,13 @@ int _gleRevertSwapToPrimary(param_1)
   undefined4 uVar2;
   uint uVar3;
   double fparam_1;
-  double in_f2;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
+  double incomingFpr2;
+  double incomingFpr3;
+  double incomingFpr4;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
   undefined4 local_30;
   undefined4 local_2c;
   undefined4 local_28;
@@ -2372,7 +2372,7 @@ int _gleRevertSwapToPrimary(param_1)
             (*(undefined4 *)(iVar1 + 0x85ac),*(undefined4 *)(param_1 + 0x484c),
              *(undefined4 *)(param_1 + 0x4848),0);
   fparam_1 = (double)((int (*)())_gleSwitchToRenderer)(param_1,uVar3);
-  ((void (*)())_gleUpdateViewScissorData)(param_1,fparam_1,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8);
+  ((void (*)())_gleUpdateViewScissorData)(param_1,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
   ((void (*)())_gleSwitchRenderersWriteBuffers)(param_1,uVar3,&local_30);
   uVar2 = ((int (*)())_gleFreeCopyContextData)(&local_30);
   return uVar2;
@@ -2443,25 +2443,25 @@ double _gleSwitchToNonRevertRenderer(glContext)
   int glContext;
 {
   byte bVar1;
-  undefined *puVar2;
+  undefined *setClipInterpFunc;
   int iVar3;
   uint uVar4;
   undefined4 uVar5;
   uint uVar6;
   double fparam_1;
   double fparam_1_00;
-  double in_f2;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
-  double in_stack_ffffff88;
-  double in_stack_ffffff90;
-  double in_stack_ffffff98;
-  double in_stack_ffffffa0;
-  double in_stack_ffffffa8;
+  double incomingFpr2;
+  double incomingFpr3;
+  double incomingFpr4;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
+  double incomingStack_ffffff88;
+  double incomingStack_ffffff90;
+  double incomingStack_ffffff98;
+  double incomingStack_ffffffa0;
+  double incomingStack_ffffffa8;
   undefined4 local_40;
   undefined4 local_3c;
   undefined4 local_38;
@@ -2497,14 +2497,14 @@ double _gleSwitchToNonRevertRenderer(glContext)
       ((void (*)())_gleSwitchRenderersReadBuffers)(glContext,(uint)*(byte *)(glContext + 0x85a5),&local_40);
       fparam_1 = (double)((int (*)())_gleSwitchToRenderer)(glContext,uVar6);
       *(byte *)(glContext + 0x85a8) = bVar1;
-      ((void (*)())_gleUpdateDepthRangeData)(glContext,fparam_1,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_stack_ffffff88,
-                 in_stack_ffffff90,in_stack_ffffff98,in_stack_ffffffa0,in_stack_ffffffa8);
+      ((void (*)())_gleUpdateDepthRangeData)(glContext,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffff88,
+                 incomingStack_ffffff90,incomingStack_ffffff98,incomingStack_ffffffa0,incomingStack_ffffffa8);
       _gleUpdatePolyMode(glContext);
-      ((void (*)())_gleUpdateViewScissorData)(glContext,fparam_1_00,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8);
+      ((void (*)())_gleUpdateViewScissorData)(glContext,fparam_1_00,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
       _gleUpdateTextureTransform(glContext);
-      puVar2 = PTR__gleSetClipInterpFunc_00112038;
+      setClipInterpFunc = PTR__gleSetClipInterpFunc_00112038;
       *(undefined **)(glContext + 0x49c8) = PTR__gleSetEyeInterpFunc_0011203c;
-      *(undefined **)(glContext + 0x49cc) = puVar2;
+      *(undefined **)(glContext + 0x49cc) = setClipInterpFunc;
       _gleSetColorMaterialEnable(glContext);
       *(undefined4 *)(glContext + 0x48d0) = 0;
       *(undefined4 *)(glContext + 0x48d4) = 0;
@@ -2545,26 +2545,26 @@ double _gleUpdateDispatchCodeChange(glContext, param_2)
 {
   byte bVar1;
   undefined *a6;
-  undefined *puVar2;
+  undefined *setEyeInterpFunc;
   uint uVar3;
   int iVar4;
   undefined4 a3;
-  undefined4 in_r7;
+  undefined4 incomingR7;
   uint uVar5;
   double fparam_1;
   double fparam_1_00;
-  double in_f2;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
-  double in_stack_ffffff88;
-  double in_stack_ffffff90;
-  double in_stack_ffffff98;
-  double in_stack_ffffffa0;
-  double in_stack_ffffffa8;
+  double incomingFpr2;
+  double incomingFpr3;
+  double incomingFpr4;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
+  double incomingStack_ffffff88;
+  double incomingStack_ffffff90;
+  double incomingStack_ffffff98;
+  double incomingStack_ffffffa0;
+  double incomingStack_ffffffa8;
   uint local_40;
   uint local_3c;
   uint local_38;
@@ -2594,16 +2594,16 @@ double _gleUpdateDispatchCodeChange(glContext, param_2)
           ((void (*)())_gleSynchronizePluginBuffers)(glContext);
           *(byte *)(glContext + 0x85a8) = bVar1;
           fparam_1 = (double)((int (*)())_gleSwitchToRenderer)(glContext,(uint)*(byte *)(glContext + 0x85a5));
-          ((void (*)())_gleUpdateDepthRangeData)(glContext,fparam_1,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_stack_ffffff88,
-                     in_stack_ffffff90,in_stack_ffffff98,in_stack_ffffffa0,in_stack_ffffffa8);
+          ((void (*)())_gleUpdateDepthRangeData)(glContext,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffff88,
+                     incomingStack_ffffff90,incomingStack_ffffff98,incomingStack_ffffffa0,incomingStack_ffffffa8);
           _gleUpdatePolyMode(glContext);
-          ((void (*)())_gleUpdateViewScissorData)(glContext,fparam_1_00,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8);
+          ((void (*)())_gleUpdateViewScissorData)(glContext,fparam_1_00,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
           _gleUpdateTextureTransform(glContext);
-          puVar2 = PTR__gleSetEyeInterpFunc_0011203c;
+          setEyeInterpFunc = PTR__gleSetEyeInterpFunc_0011203c;
           a6 = PTR__gleSetClipInterpFunc_00112038;
           uVar3 = *(uint *)(glContext + 0x31c) | 0x7ffffff;
           *(uint *)(glContext + 0x314) = *(uint *)(glContext + 0x314) | 0x3ffffff;
-          *(undefined **)(glContext + 0x49c8) = puVar2;
+          *(undefined **)(glContext + 0x49c8) = setEyeInterpFunc;
           *(undefined **)(glContext + 0x49cc) = a6;
           *(uint *)(glContext + 0x318) = *(uint *)(glContext + 0x318) | 0xfffffffd;
           *(uint *)(glContext + 0x31c) = uVar3;
@@ -2611,7 +2611,7 @@ double _gleUpdateDispatchCodeChange(glContext, param_2)
           *(undefined4 *)(glContext + 0x310) = 0xffffffff;
           uVar3 = (**(code **)(glContext + 0x4788))
                             (*(undefined4 *)(glContext + 0x4688),glContext + 0x4698,glContext + 0x310,a3,
-                             in_r7,0xffffffff,a6,uVar3);
+                             incomingR7,0xffffffff,a6,uVar3);
           if ((uVar3 & 8) == 0) {
             ((void (*)())_gleSwitchRenderersWriteBuffers)(glContext,(uint)*(byte *)(glContext + 0x85a5),&local_40);
           }
@@ -2993,7 +2993,7 @@ void _gleDrawPixelsFastLoadColorTables(param_1, param_2)
 }
 
 /* _CopySourceSubImageToTexture @ 0xc97a4 (568 bytes) */
-void _CopySourceSubImageToTexture(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,int param_6,undefined4 param_7,undefined4 param_8,undefined4 param_9,undefined4 param_10,undefined4 param_11,undefined4 param_12,int param_13,int param_14,undefined4 param_15,undefined4 param_16,undefined4 param_17,undefined4 param_18,int param_19,undefined4 param_20,float fparam_1,float fparam_2,double fparam_3,float fparam_4)
+void _CopySourceSubImageToTexture(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,int param_6,undefined4 param_7,undefined4 param_8,undefined4 param_9,undefined4 param_10,undefined4 param_11,undefined4 param_12,int param_13,int param_14,undefined4 unusedArg15,undefined4 unusedArg16,undefined4 unusedArg17,undefined4 unusedArg18,int param_19,undefined4 param_20,float floatArg1,float floatArg2,double unusedFloatArg3,float fparam_4)
 {
   undefined1 *puVar1;
   undefined1 *puVar2;
@@ -3055,9 +3055,9 @@ void _CopySourceSubImageToTexture(int param_1,undefined4 param_2,undefined4 para
     ((void (*)())_gleDrawPixelsFastLoadColorTables)(param_1,&local_e0);
     dVar8 = (double)*(float *)(param_1 + 0x31ac);
   }
-  local_ac = (float)fparam_1;
+  local_ac = (float)floatArg1;
   local_74 = 1;
-  local_a8 = (float)fparam_2;
+  local_a8 = (float)floatArg2;
   if (param_19 != 0) {
     if (*(char *)(param_19 + 0x18) != '\0') {
       local_bc = local_bc | 1;
@@ -3106,25 +3106,25 @@ void _gleInitDrawPixelsShareObject(glContext, param_2)
   int iVar7;
   undefined4 *puVar8;
   undefined4 uVar9;
-  undefined4 in_r5;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
+  undefined4 incomingR5;
+  undefined4 incomingR6;
+  undefined4 incomingR7;
+  undefined4 incomingR8;
   uint uVar10;
   int iVar11;
   int iVar12;
   uint uVar13;
   int *piVar14;
-  double extraout_f1;
-  double extraout_f1_00;
+  double f1AfterCall;
+  double f1AfterCall1;
   double fparam_1;
-  double in_f2;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
+  double incomingFpr2;
+  double incomingFpr3;
+  double incomingFpr4;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
   
   uVar2 = *(undefined1 *)(glContext + 0x31e6);
   *param_2 = 0;
@@ -3156,19 +3156,19 @@ void _gleInitDrawPixelsShareObject(glContext, param_2)
   uVar5 = *(uint *)(glContext + 0x314) | 1;
   *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x200000;
   *(uint *)(glContext + 0x314) = uVar5;
-  fparam_1 = extraout_f1;
+  fparam_1 = f1AfterCall;
   if (*(int *)(glContext + 0x50ac) != 0 ||
       (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
     _gleUpdateMatrixFunc(glContext);
-    fparam_1 = extraout_f1_00;
+    fparam_1 = f1AfterCall1;
   }
   if (*(char *)(glContext + 0x4691) == '\0') goto LAB_000c9cc0;
   iVar11 = *(int *)(glContext + 0x744c);
   piVar14 = (int *)(glContext + 0x310);
   cVar3 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
   if ((iVar11 != 0) && (*(int *)(iVar11 + 0xec) != 0)) {
-    ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,iVar11 + 0x10,in_r5,in_r6,in_r7,in_r8,uVar5,fparam_1,in_f2,in_f3,in_f4,in_f5,
-               in_f6,in_f7,in_f8);
+    ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,iVar11 + 0x10,incomingR5,incomingR6,incomingR7,incomingR8,uVar5,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,
+               incomingFpr6,incomingFpr7,incomingFpr8);
     *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000000;
   }
   if ((*(char *)(glContext + 0x4664) == '\0') && (*(int *)(glContext + 0x5430) == 0)) {
@@ -3245,7 +3245,7 @@ LAB_000c9cc0:
     do {
       iVar11 = uVar10 * 4;
       iVar12 = *(int *)(iVar11 + param_2[6]);
-      _gleInitializeGLTexture(2,1,iVar12,in_r6,in_r7,in_r8,uVar5);
+      _gleInitializeGLTexture(2,1,iVar12,incomingR6,incomingR7,incomingR8,uVar5);
       *(undefined2 *)(iVar12 + 0x3e) = 0x85be;
       *(undefined2 *)(iVar12 + 0x34) = 0x812f;
       *(undefined2 *)(iVar12 + 0x36) = 0x812f;
@@ -3259,12 +3259,12 @@ LAB_000c9cc0:
       *(undefined2 *)(iVar12 + 0xd0) = 0x40;
       *(undefined2 *)(iVar12 + 0xd2) = 0x40;
       *(undefined2 *)(iVar12 + 0xd4) = 0x80e1;
-      in_r8 = 0x8058;
+      incomingR8 = 0x8058;
       *(undefined2 *)(iVar12 + 0xd6) = 0x8035;
       iVar4 = param_2[1];
-      in_r6 = 0;
+      incomingR6 = 0;
       iVar7 = param_2[7];
-      in_r7 = 0;
+      incomingR7 = 0;
       *(undefined2 *)(iVar12 + 200) = 0x40;
       *(undefined2 *)(iVar12 + 0xca) = 0x40;
       *(undefined2 *)(iVar12 + 0xcc) = 1;
@@ -3290,23 +3290,23 @@ int _gleDrawPixelsSaveState(glContext, param_2)
   uint uVar2;
   int iVar3;
   byte bVar4;
-  double extraout_f1;
-  double extraout_f1_00;
-  double extraout_f1_01;
-  double extraout_f1_02;
+  double f1AfterCall;
+  double f1AfterCall1;
+  double f1AfterCall2;
+  double f1AfterCall3;
   double fparam_1;
-  double in_f2;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
-  double in_stack_ffffff88;
-  double in_stack_ffffff90;
-  double in_stack_ffffff98;
-  double in_stack_ffffffa0;
-  double in_stack_ffffffa8;
+  double incomingFpr2;
+  double incomingFpr3;
+  double incomingFpr4;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
+  double incomingStack_ffffff88;
+  double incomingStack_ffffff90;
+  double incomingStack_ffffff98;
+  double incomingStack_ffffffa0;
+  double incomingStack_ffffffa8;
   
   bVar4 = *(ushort *)(glContext + 0x3538) != 0x1e01;
   if ((bool)bVar4) {
@@ -3316,14 +3316,14 @@ int _gleDrawPixelsSaveState(glContext, param_2)
   }
   *(undefined4 *)(glContext + 0x3534) = 4;
   _gleUpdateTextureParams(glContext,0);
-  fparam_1 = extraout_f1;
+  fparam_1 = f1AfterCall;
   if (*(byte *)(glContext + 0x34da) != 0) {
     param_2[1] = (uint)*(byte *)(glContext + 0x34da);
     *(undefined1 *)(glContext + 0x34da) = 0;
     _gleUpdatePolyMode(glContext);
     bVar4 = bVar4 | 2;
     *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x800000;
-    fparam_1 = extraout_f1_00;
+    fparam_1 = f1AfterCall1;
   }
   if (*(byte *)(glContext + 0x34d8) != 0) {
     param_2[2] = (uint)*(byte *)(glContext + 0x34d8);
@@ -3348,14 +3348,14 @@ int _gleDrawPixelsSaveState(glContext, param_2)
     *(undefined1 *)(glContext + 0x4664) = 0;
     bVar4 = bVar4 | 0x40;
     _gleVPDisable(glContext);
-    fparam_1 = extraout_f1_01;
+    fparam_1 = f1AfterCall2;
   }
   if (*(uint *)(glContext + 0x5430) != 0) {
     param_2[7] = *(uint *)(glContext + 0x5430);
     *(undefined4 *)(glContext + 0x5430) = 0;
     bVar4 = bVar4 | 0x80;
     _gleVPDisable(glContext);
-    fparam_1 = extraout_f1_02;
+    fparam_1 = f1AfterCall3;
   }
   param_2[5] = *(uint *)(glContext + 0x4ff4);
   param_2[8] = *(uint *)(glContext + 0x1ba0);
@@ -3379,7 +3379,7 @@ int _gleDrawPixelsSaveState(glContext, param_2)
     uVar1 = (uint)*(ushort *)(iVar3 + 0xcc);
   }
   *(uint *)(glContext + 0x1bac) = uVar1;
-  ((void (*)())_gleUpdateViewScissorData)(glContext,fparam_1,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8);
+  ((void (*)())_gleUpdateViewScissorData)(glContext,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
   _gleCopyMatrix(glContext + 0x1c80,param_2 + 0xc);
   _gleCopyMatrix(glContext + 0x1cc0,param_2 + 0x1c);
   _gleCopyMatrix(glContext + *(int *)(glContext + 0x53d4) * 0x40 + 0x1fc0,param_2 + 0x2c);
@@ -3401,8 +3401,8 @@ int _gleDrawPixelsSaveState(glContext, param_2)
   ((void (*)())_glOrtho_Exec)(glContext,DOUBLE_00108d60,
                 (double)CONCAT44(0x43300000,uVar1 ^ 0x80000000) - DOUBLE_00108d58,DOUBLE_00108d60,
                 (double)CONCAT44(0x43300000,uVar2 ^ 0x80000000) - DOUBLE_00108d58,DOUBLE_00108d60,
-                DOUBLE_00108dc8,in_f7,in_f8,in_stack_ffffff88,in_stack_ffffff90,in_stack_ffffff98,
-                in_stack_ffffffa0,in_stack_ffffffa8);
+                DOUBLE_00108dc8,incomingFpr7,incomingFpr8,incomingStack_ffffff88,incomingStack_ffffff90,incomingStack_ffffff98,
+                incomingStack_ffffffa0,incomingStack_ffffffa8);
   _glMatrixMode_Exec(glContext,0x1700);
   _glLoadIdentity_Exec(glContext);
   _glMatrixMode_Exec(glContext,0x1702);
@@ -3416,16 +3416,16 @@ void _gleDrawPixelsRestoreState(glContext, param_2, param_3)
   int param_2;
   uint param_3;
 {
-  double extraout_f1;
-  double extraout_f1_00;
+  double f1AfterCall;
+  double f1AfterCall1;
   double fparam_1;
-  double in_f2;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
+  double incomingFpr2;
+  double incomingFpr3;
+  double incomingFpr4;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
   
   if ((param_3 & 1) != 0) {
     *(undefined2 *)(glContext + 0x3538) = *(undefined2 *)(param_2 + 2);
@@ -3433,12 +3433,12 @@ void _gleDrawPixelsRestoreState(glContext, param_2, param_3)
   }
   *(undefined4 *)(glContext + 0x3534) = 0;
   _gleUpdateTextureParams(glContext,0);
-  fparam_1 = extraout_f1;
+  fparam_1 = f1AfterCall;
   if ((param_3 & 2) != 0) {
     *(undefined1 *)(glContext + 0x34da) = *(undefined1 *)(param_2 + 7);
     _gleUpdatePolyMode(glContext);
     *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x800000;
-    fparam_1 = extraout_f1_00;
+    fparam_1 = f1AfterCall1;
   }
   if ((param_3 & 4) != 0) {
     *(undefined1 *)(glContext + 0x34d8) = *(undefined1 *)(param_2 + 0xb);
@@ -3455,18 +3455,18 @@ void _gleDrawPixelsRestoreState(glContext, param_2, param_3)
   if (((param_3 & 0x40) != 0) &&
      (*(undefined1 *)(glContext + 0x4664) = *(undefined1 *)(param_2 + 0x1b),
      *(int *)(param_2 + 0x18) != 0)) {
-    fparam_1 = (double)((double (*)())_gleVPEnable)(glContext,fparam_1,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8);
+    fparam_1 = (double)((double (*)())_gleVPEnable)(glContext,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
   }
   if (((param_3 & 0x80) != 0) &&
      (*(undefined4 *)(glContext + 0x5430) = *(undefined4 *)(param_2 + 0x1c),
      *(int *)(param_2 + 0x1c) != 0)) {
-    fparam_1 = (double)((double (*)())_gleVPEnable)(glContext,fparam_1,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8);
+    fparam_1 = (double)((double (*)())_gleVPEnable)(glContext,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
   }
   *(undefined4 *)(glContext + 0x1ba0) = *(undefined4 *)(param_2 + 0x20);
   *(undefined4 *)(glContext + 0x1ba4) = *(undefined4 *)(param_2 + 0x24);
   *(undefined4 *)(glContext + 0x1ba8) = *(undefined4 *)(param_2 + 0x28);
   *(undefined4 *)(glContext + 0x1bac) = *(undefined4 *)(param_2 + 0x2c);
-  ((void (*)())_gleUpdateViewScissorData)(glContext,fparam_1,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8);
+  ((void (*)())_gleUpdateViewScissorData)(glContext,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
   _glMatrixMode_Exec(glContext,0x1701);
   _glLoadMatrixf_Exec(glContext,param_2 + 0x30);
   _glMatrixMode_Exec(glContext,0x1700);
@@ -3479,12 +3479,12 @@ void _gleDrawPixelsRestoreState(glContext, param_2, param_3)
 }
 
 /* _pixelBoundaryBottomLeft @ 0xca274 (100 bytes) */
-uint _pixelBoundaryBottomLeft(float fparam_1)
+uint _pixelBoundaryBottomLeft(float floatArg1)
 {
   uint uVar1;
   
-  uVar1 = (uint)(int)fparam_1;
-  if ((fparam_1 - (float)((double)CONCAT44(0x43300000,uVar1 ^ 0x80000000) - DOUBLE_00108d58)) <=
+  uVar1 = (uint)(int)floatArg1;
+  if ((floatArg1 - (float)((double)CONCAT44(0x43300000,uVar1 ^ 0x80000000) - DOUBLE_00108d58)) <=
       FLOAT_00108e90) {
     return uVar1;
   }
@@ -3492,13 +3492,13 @@ uint _pixelBoundaryBottomLeft(float fparam_1)
 }
 
 /* _pixelBoundaryTopRight @ 0xca2d8 (92 bytes) */
-uint _pixelBoundaryTopRight(float fparam_1)
+uint _pixelBoundaryTopRight(float floatArg1)
 {
   uint uVar1;
   
-  uVar1 = (uint)(int)fparam_1;
+  uVar1 = (uint)(int)floatArg1;
   if (!(FLOAT_00108e90 <
-       (fparam_1 - (float)((double)CONCAT44(0x43300000,uVar1 ^ 0x80000000) - DOUBLE_00108d58))))
+       (floatArg1 - (float)((double)CONCAT44(0x43300000,uVar1 ^ 0x80000000) - DOUBLE_00108d58))))
   {
     return uVar1;
   }
@@ -3506,19 +3506,19 @@ uint _pixelBoundaryTopRight(float fparam_1)
 }
 
 /* _pixelCenters @ 0xca334 (160 bytes) */
-int _pixelCenters(float fparam_1,float fparam_2,double fparam_3)
+int _pixelCenters(float floatArg1,float floatArg2,double floatArg3)
 {
   int iVar1;
   int iVar2;
   int iVar3;
   
-  if ((double)FLOAT_00108e50 <= fparam_3) {
-    iVar2 = ((uint (*)())_pixelBoundaryBottomLeft)(fparam_1);
-    iVar3 = ((uint (*)())_pixelBoundaryTopRight)(fparam_2);
+  if ((double)FLOAT_00108e50 <= floatArg3) {
+    iVar2 = ((uint (*)())_pixelBoundaryBottomLeft)(floatArg1);
+    iVar3 = ((uint (*)())_pixelBoundaryTopRight)(floatArg2);
   }
   else {
-    iVar2 = ((uint (*)())_pixelBoundaryTopRight)(fparam_1);
-    iVar3 = ((uint (*)())_pixelBoundaryBottomLeft)(fparam_2);
+    iVar2 = ((uint (*)())_pixelBoundaryTopRight)(floatArg1);
+    iVar3 = ((uint (*)())_pixelBoundaryBottomLeft)(floatArg2);
   }
   iVar1 = iVar2 - iVar3;
   if (iVar2 <= iVar3) {
@@ -3574,14 +3574,14 @@ int _gleDrawPixelsFast(glContext, param_2, param_3, param_4, param_5, param_6)
   float dVar32;
   double dVar33;
   double fparam_1;
-  double extraout_f1;
+  double f1AfterCall;
   double extraout_f1_00;
-  double extraout_f1_01;
+  double f1AfterCall2;
   double dVar34;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
   float dVar35;
   float dVar36;
   double dVar37;
@@ -3594,10 +3594,10 @@ int _gleDrawPixelsFast(glContext, param_2, param_3, param_4, param_5, param_6)
   float dVar39;
   double fparam_2;
   double dVar40;
-  undefined4 in_stack_fffffd90;
-  undefined4 in_stack_fffffd94;
-  undefined4 in_stack_fffffd98;
-  undefined4 in_stack_fffffd9c;
+  undefined4 incomingStack_fffffd90;
+  undefined4 incomingStack_fffffd94;
+  undefined4 incomingStack_fffffd98;
+  undefined4 incomingStack_fffffd9c;
   float local_24c;
   float local_244;
   float local_23c;
@@ -3709,8 +3709,8 @@ LAB_000ca634:
   iVar26 = 0x80e1;
   iVar24 = 0;
   ((void (*)())_CopySourceSubImageToTexture)(glContext,param_2,param_3,param_4,param_5,param_6,param_2,param_3,uVar30 * iVar15,0x80e1,
-             iVar18,local_ec,0,0,in_stack_fffffd90,in_stack_fffffd94,in_stack_fffffd98,
-             in_stack_fffffd9c,glContext + 0x31cc,1,(double)FLOAT_00108e50,(double)FLOAT_00108e50,
+             iVar18,local_ec,0,0,incomingStack_fffffd90,incomingStack_fffffd94,incomingStack_fffffd98,
+             incomingStack_fffffd9c,glContext + 0x31cc,1,(double)FLOAT_00108e50,(double)FLOAT_00108e50,
              (double)dVar32,fparam_4);
   local_e8 = local_ec;
   iVar15 = param_4;
@@ -3860,8 +3860,8 @@ LAB_000ca704:
               ((void (*)())_CopySourceSubImageToTexture)(glContext,uVar30,uVar14,iVar26,param_5,local_e8,(int)(double)dVar39,iVar15,uVar31,
                          0x80e1,iVar18,
                          *(int *)(0x74a4 + glContext) +
-                         *puVar28 * *(int *)(glContext + 0x748c),local_224,local_22c,in_stack_fffffd90
-                         ,in_stack_fffffd94,in_stack_fffffd98,in_stack_fffffd9c,iVar24,0,
+                         *puVar28 * *(int *)(glContext + 0x748c),local_224,local_22c,incomingStack_fffffd90
+                         ,incomingStack_fffffd94,incomingStack_fffffd98,incomingStack_fffffd9c,iVar24,0,
                          (double)(local_234 -
                                  (float)((double)CONCAT44(0x43300000,(int)local_234 ^ 0x80000000) -
                                         dVar12)),fparam_2,(double)dVar32,fparam_4);
@@ -3906,7 +3906,7 @@ LAB_000ca704:
               *(uint *)(glContext + 0x314) = *(uint *)(glContext + 0x314) | 1;
               if (iVar21 != 0 || (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
                 _gleUpdateMatrixFunc(glContext);
-                fparam_1 = extraout_f1;
+                fparam_1 = f1AfterCall;
               }
               piVar13 = local_e0;
               if (*(char *)(glContext + 0x4691) != '\0') {
@@ -3914,7 +3914,7 @@ LAB_000ca704:
                 cVar8 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
                 if ((iVar29 != 0) && (*(int *)(iVar29 + 0xec) != 0)) {
                   ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,iVar29 + 0x10,piVar16,iVar15,iVar20,uVar19,iVar21,fparam_1,
-                             fparam_2,dVar34,dVar33,in_f5,in_f6,in_f7,in_f8);
+                             fparam_2,dVar34,dVar33,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
                   *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000000;
                   fparam_1 = fparam_1;
                 }
@@ -3967,7 +3967,7 @@ LAB_000cae0c:
                                        (*(undefined4 *)(glContext + 0x4688),glContext + 0x4698,piVar13);
                     if ((((uVar31 & 3) != (uint)*(byte *)(glContext + 0x7580)) ||
                         ((uVar31 & 4) != (uint)*(byte *)(glContext + 0x7581))) ||
-                       (fparam_1 = extraout_f1_01,
+                       (fparam_1 = f1AfterCall2,
                        (uVar31 & 8) != (uint)(*(char *)(glContext + 0x759d) == '\0'))) {
                       if ((uVar31 & 4) == 0) {
                         uVar31 = uVar31 & 0xfffffffe;
@@ -3995,7 +3995,7 @@ LAB_000cae0c:
                   } while (iVar21 != 0);
                 }
               }
-              ((void (*)())_glBegin_Exec)(glContext,7,fparam_1,fparam_2,dVar34,dVar33,in_f5,in_f6,in_f7,in_f8);
+              ((void (*)())_glBegin_Exec)(glContext,7,fparam_1,fparam_2,dVar34,dVar33,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
               *(undefined4 *)(glContext + 0x128) = *(undefined4 *)(glContext + 0x20);
               *(float *)(glContext + 300) = *(float *)(glContext + 0x24);
               *(undefined4 *)(glContext + 0x120) = 0;
@@ -4065,26 +4065,26 @@ LAB_000cae0c:
 }
 
 /* _gleSetEnable_TEXTURE_1D @ 0xcb104 (80 bytes) */
-void _gleSetEnable_TEXTURE_1D(glContext, param_2, param_3)
+void _gleSetEnable_TEXTURE_1D(glContext, cap, enable)
   int glContext;
-  undefined4 param_2;
-  int param_3;
+  undefined4 cap;
+  int enable;
 {
-  uint uVar1;
-  int iVar2;
-  uint uVar3;
-  uint uVar4;
+  uint newBits;
+  int texUnitState;
+  uint texUnit;
+  uint oldBits;
   
-  uVar3 = *(uint *)(glContext + 0x53d4);
-  if (uVar3 < 8) {
-    iVar2 = uVar3 * 0x7c + glContext;
-    uVar4 = *(uint *)(iVar2 + 0x3534);
-    uVar1 = uVar4 & 0xffffffef | param_3 << 4;
-    if (uVar4 == uVar1) {
+  texUnit = *(uint *)(glContext + 0x53d4);
+  if (texUnit < 8) {
+    texUnitState = texUnit * 0x7c + glContext;
+    oldBits = *(uint *)(texUnitState + 0x3534);
+    newBits = oldBits & 0xffffffef | enable << 4;
+    if (oldBits == newBits) {
       return;
     }
-    *(uint *)(iVar2 + 0x3534) = uVar1;
-    _gleUpdateTextureParams(glContext,uVar3);
+    *(uint *)(texUnitState + 0x3534) = newBits;
+    _gleUpdateTextureParams(glContext,texUnit);
     return;
   }
   if (*(int *)(glContext + 0x7574) != 0) {
@@ -4095,26 +4095,26 @@ void _gleSetEnable_TEXTURE_1D(glContext, param_2, param_3)
 }
 
 /* _gleSetEnable_TEXTURE_CUBE_MAP @ 0xcb154 (76 bytes) */
-void _gleSetEnable_TEXTURE_CUBE_MAP(glContext, param_2, param_3)
+void _gleSetEnable_TEXTURE_CUBE_MAP(glContext, cap, enable)
   int glContext;
-  undefined4 param_2;
-  uint param_3;
+  undefined4 cap;
+  uint enable;
 {
-  uint uVar1;
-  int iVar2;
-  uint uVar3;
-  uint uVar4;
+  uint newBits;
+  int texUnitState;
+  uint texUnit;
+  uint oldBits;
   
-  uVar3 = *(uint *)(glContext + 0x53d4);
-  if (uVar3 < 8) {
-    iVar2 = uVar3 * 0x7c + glContext;
-    uVar4 = *(uint *)(iVar2 + 0x3534);
-    uVar1 = uVar4 & 0xfffffffe | param_3;
-    if (uVar4 == uVar1) {
+  texUnit = *(uint *)(glContext + 0x53d4);
+  if (texUnit < 8) {
+    texUnitState = texUnit * 0x7c + glContext;
+    oldBits = *(uint *)(texUnitState + 0x3534);
+    newBits = oldBits & 0xfffffffe | enable;
+    if (oldBits == newBits) {
       return;
     }
-    *(uint *)(iVar2 + 0x3534) = uVar1;
-    _gleUpdateTextureParams(glContext,uVar3);
+    *(uint *)(texUnitState + 0x3534) = newBits;
+    _gleUpdateTextureParams(glContext,texUnit);
     return;
   }
   if (*(int *)(glContext + 0x7574) != 0) {
@@ -4125,26 +4125,26 @@ void _gleSetEnable_TEXTURE_CUBE_MAP(glContext, param_2, param_3)
 }
 
 /* _gleSetEnable_SHARED_TEXTURE_PALETTE_EXT @ 0xcb1a0 (100 bytes) */
-void _gleSetEnable_SHARED_TEXTURE_PALETTE_EXT(glContext, param_2, param_3)
+void _gleSetEnable_SHARED_TEXTURE_PALETTE_EXT(glContext, cap, enable)
   int glContext;
-  undefined4 param_2;
-  int param_3;
+  undefined4 cap;
+  int enable;
 {
-  uint uVar1;
-  int iVar2;
-  uint uVar3;
-  uint uVar4;
+  uint newBits;
+  int texUnitState;
+  uint oldBits;
+  uint texUnit;
   
-  uVar4 = *(uint *)(glContext + 0x53d4);
-  if (uVar4 < 8) {
-    iVar2 = uVar4 * 0x7c + glContext;
-    uVar3 = *(uint *)(iVar2 + 0x3534);
-    uVar1 = uVar3 & 0xfffffeff | param_3 << 8;
-    if (uVar3 == uVar1) {
+  texUnit = *(uint *)(glContext + 0x53d4);
+  if (texUnit < 8) {
+    texUnitState = texUnit * 0x7c + glContext;
+    oldBits = *(uint *)(texUnitState + 0x3534);
+    newBits = oldBits & 0xfffffeff | enable << 8;
+    if (oldBits == newBits) {
       return;
     }
-    *(uint *)(iVar2 + 0x3534) = uVar1;
-    *(uint *)(glContext + 0x314) = *(uint *)(glContext + 0x314) | 1 << (uVar4 & 0x3f);
+    *(uint *)(texUnitState + 0x3534) = newBits;
+    *(uint *)(glContext + 0x314) = *(uint *)(glContext + 0x314) | 1 << (texUnit & 0x3f);
     return;
   }
   if (*(int *)(glContext + 0x7574) != 0) {
@@ -4155,58 +4155,58 @@ void _gleSetEnable_SHARED_TEXTURE_PALETTE_EXT(glContext, param_2, param_3)
 }
 
 /* _gleSetEnable_LINE_STIPPLE @ 0xcb204 (32 bytes) */
-void _gleSetEnable_LINE_STIPPLE(param_1, param_2, param_3)
-  int param_1;
-  undefined4 param_2;
-  uint param_3;
+void _gleSetEnable_LINE_STIPPLE(glContext, cap, enable)
+  int glContext;
+  undefined4 cap;
+  uint enable;
 {
-  if (*(byte *)(param_1 + 0x318c) == param_3) {
+  if (*(byte *)(glContext + 0x318c) == enable) {
     return;
   }
-  *(char *)(param_1 + 0x318c) = (char)param_3;
-  *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x10000;
+  *(char *)(glContext + 0x318c) = (char)enable;
+  *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x10000;
   return;
 }
 
 /* _gleSetEnable_POLYGON_STIPPLE @ 0xcb224 (32 bytes) */
-void _gleSetEnable_POLYGON_STIPPLE(param_1, param_2, param_3)
-  int param_1;
-  undefined4 param_2;
-  uint param_3;
+void _gleSetEnable_POLYGON_STIPPLE(glContext, cap, enable)
+  int glContext;
+  undefined4 cap;
+  uint enable;
 {
-  if (*(byte *)(param_1 + 0x34d8) == param_3) {
+  if (*(byte *)(glContext + 0x34d8) == enable) {
     return;
   }
-  *(char *)(param_1 + 0x34d8) = (char)param_3;
-  *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x2000000;
+  *(char *)(glContext + 0x34d8) = (char)enable;
+  *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x2000000;
   return;
 }
 
 /* _gleSetEnable_INDEX_LOGIC_OP @ 0xcb244 (32 bytes) */
-void _gleSetEnable_INDEX_LOGIC_OP(param_1, param_2, param_3)
-  int param_1;
-  undefined4 param_2;
-  uint param_3;
+void _gleSetEnable_INDEX_LOGIC_OP(glContext, cap, enable)
+  int glContext;
+  undefined4 cap;
+  uint enable;
 {
-  if (*(byte *)(param_1 + 0x3192) == param_3) {
+  if (*(byte *)(glContext + 0x3192) == enable) {
     return;
   }
-  *(char *)(param_1 + 0x3192) = (char)param_3;
-  *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x20000;
+  *(char *)(glContext + 0x3192) = (char)enable;
+  *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x20000;
   return;
 }
 
 /* _gleSetEnable_COLOR_LOGIC_OP @ 0xcb264 (32 bytes) */
-void _gleSetEnable_COLOR_LOGIC_OP(param_1, param_2, param_3)
-  int param_1;
-  undefined4 param_2;
-  uint param_3;
+void _gleSetEnable_COLOR_LOGIC_OP(glContext, cap, enable)
+  int glContext;
+  undefined4 cap;
+  uint enable;
 {
-  if (*(byte *)(param_1 + 0x3193) == param_3) {
+  if (*(byte *)(glContext + 0x3193) == enable) {
     return;
   }
-  *(char *)(param_1 + 0x3193) = (char)param_3;
-  *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x20000;
+  *(char *)(glContext + 0x3193) = (char)enable;
+  *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x20000;
   return;
 }
 

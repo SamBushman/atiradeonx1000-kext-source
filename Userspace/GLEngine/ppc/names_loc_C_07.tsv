@@ -1,0 +1,231 @@
+local	_gleMap1Vertex3dLoad	iVar1	pointByteOffset	INFERRED	byte offset of the current control point: element offset * element size, source address is points + this
+local	_gleMap1Vertex3dLoad	iVar2	pointElementOffset	INFERRED	element offset of the current control point; advanced by stride each iteration
+local	_gleMap1Vertex3dLoad	iVar3	pointAddr	INFERRED	address of the current control point: points + pointByteOffset
+local	_gleMap1Vertex4dLoad	iVar1	pointByteOffset	INFERRED	byte offset of the current control point: element offset * element size, source address is points + this
+local	_gleMap1Vertex4dLoad	iVar2	pointElementOffset	INFERRED	element offset of the current control point; advanced by stride each iteration
+local	_gleMap1Vertex4dLoad	iVar3	pointAddr	INFERRED	address of the current control point: points + pointByteOffset
+local	_gleMap1ColordLoad	iVar1	pointByteOffset	INFERRED	byte offset of the current control point: element offset * element size, source address is points + this
+local	_gleMap1ColordLoad	iVar2	pointElementOffset	INFERRED	element offset of the current control point; advanced by stride each iteration
+local	_gleMap1ColordLoad	iVar3	pointAddr	INFERRED	address of the current control point: points + pointByteOffset
+local	_gleMap1IndexdLoad	pfVar1	destPtr	INFERRED	write cursor in the output record: starts at mapData + 4 (after the 4-word header) and advances one word per control point
+local	_gleMap1NormaldLoad	iVar1	pointByteOffset	INFERRED	byte offset of the current control point: element offset * element size, source address is points + this
+local	_gleMap1NormaldLoad	iVar2	pointElementOffset	INFERRED	element offset of the current control point; advanced by stride each iteration
+local	_gleMap1NormaldLoad	iVar3	pointAddr	INFERRED	address of the current control point: points + pointByteOffset
+local	_gleMap1Texture1dLoad	pfVar1	destPtr	INFERRED	write cursor in the output record: starts at mapData + 4 (after the 4-word header) and advances one word per control point
+local	_gleMap1Texture2dLoad	pdVar1	secondComponentPtr	INFERRED	pointer to the second component of the current control point (points + 1), read after points is advanced by stride
+local	_gleMap1Texture3dLoad	iVar1	pointByteOffset	INFERRED	byte offset of the current control point: element offset * element size, source address is points + this
+local	_gleMap1Texture3dLoad	iVar2	pointElementOffset	INFERRED	element offset of the current control point; advanced by stride each iteration
+local	_gleMap1Texture3dLoad	iVar3	pointAddr	INFERRED	address of the current control point: points + pointByteOffset
+local	_gleMap1Texture4dLoad	iVar1	pointByteOffset	INFERRED	byte offset of the current control point: element offset * element size, source address is points + this
+local	_gleMap1Texture4dLoad	iVar2	pointElementOffset	INFERRED	element offset of the current control point; advanced by stride each iteration
+local	_gleMap1Texture4dLoad	iVar3	pointAddr	INFERRED	address of the current control point: points + pointByteOffset
+local	_gleMap1VertexAttrib1dLoad	pfVar1	destPtr	INFERRED	write cursor in the output record: starts at mapData + 4 (after the 4-word header) and advances one word per control point
+local	_gleMap1VertexAttrib2dLoad	pdVar1	secondComponentPtr	INFERRED	pointer to the second component of the current control point (points + 1), read after points is advanced by stride
+local	_gleMap1VertexAttrib3dLoad	iVar1	pointByteOffset	INFERRED	byte offset of the current control point: element offset * element size, source address is points + this
+local	_gleMap1VertexAttrib3dLoad	iVar2	pointElementOffset	INFERRED	element offset of the current control point; advanced by stride each iteration
+local	_gleMap1VertexAttrib3dLoad	iVar3	pointAddr	INFERRED	address of the current control point: points + pointByteOffset
+local	_gleMap1VertexAttrib4dLoad	iVar1	pointByteOffset	INFERRED	byte offset of the current control point: element offset * element size, source address is points + this
+local	_gleMap1VertexAttrib4dLoad	iVar2	pointElementOffset	INFERRED	element offset of the current control point; advanced by stride each iteration
+local	_gleMap1VertexAttrib4dLoad	iVar3	pointAddr	INFERRED	address of the current control point: points + pointByteOffset
+local	_gleMap1Vertex3fLoad	iVar1	pointByteOffset	INFERRED	byte offset of the current control point: element offset * element size, source address is points + this
+local	_gleMap1Vertex3fLoad	iVar3	pointElementOffset	INFERRED	element offset of the current control point; advanced by stride each iteration
+local	_gleMap1Vertex3fLoad	iVar4	pointAddr	INFERRED	address of the current control point: points + pointByteOffset
+local	_gleMap1Vertex4fLoad	iVar1	pointByteOffset	INFERRED	byte offset of the current control point: element offset * element size, source address is points + this
+local	_gleMap1Vertex4fLoad	iVar3	pointElementOffset	INFERRED	element offset of the current control point; advanced by stride each iteration
+local	_gleMap1Vertex4fLoad	iVar4	pointAddr	INFERRED	address of the current control point: points + pointByteOffset
+local	_gleMap1ColorfLoad	iVar1	pointByteOffset	INFERRED	byte offset of the current control point: element offset * element size, source address is points + this
+local	_gleMap1ColorfLoad	iVar3	pointElementOffset	INFERRED	element offset of the current control point; advanced by stride each iteration
+local	_gleMap1ColorfLoad	iVar4	pointAddr	INFERRED	address of the current control point: points + pointByteOffset
+local	_gleMap1IndexfLoad	piVar3	destPtr	INFERRED	write cursor in the output record: starts at mapData + 4 (after the 4-word header) and advances one word per control point
+local	_gleMap1IndexfLoad	iVar1	pointValue	INFERRED	control-point value read from points and stored to the output record
+local	_gleMap1NormalfLoad	iVar1	pointByteOffset	INFERRED	byte offset of the current control point: element offset * element size, source address is points + this
+local	_gleMap1NormalfLoad	iVar3	pointElementOffset	INFERRED	element offset of the current control point; advanced by stride each iteration
+local	_gleMap1NormalfLoad	iVar4	pointAddr	INFERRED	address of the current control point: points + pointByteOffset
+local	_gleMap1Texture1fLoad	piVar3	destPtr	INFERRED	write cursor in the output record: starts at mapData + 4 (after the 4-word header) and advances one word per control point
+local	_gleMap1Texture1fLoad	iVar1	pointValue	INFERRED	control-point value read from points and stored to the output record
+local	_gleMap1Texture2fLoad	piVar1	secondComponentPtr	INFERRED	pointer to the second component of the current control point (points + 1), read after points is advanced by stride
+local	_gleMap1Texture3fLoad	iVar1	pointByteOffset	INFERRED	byte offset of the current control point: element offset * element size, source address is points + this
+local	_gleMap1Texture3fLoad	iVar3	pointElementOffset	INFERRED	element offset of the current control point; advanced by stride each iteration
+local	_gleMap1Texture3fLoad	iVar4	pointAddr	INFERRED	address of the current control point: points + pointByteOffset
+local	_gleMap1Texture4fLoad	iVar1	pointByteOffset	INFERRED	byte offset of the current control point: element offset * element size, source address is points + this
+local	_gleMap1Texture4fLoad	iVar3	pointElementOffset	INFERRED	element offset of the current control point; advanced by stride each iteration
+local	_gleMap1Texture4fLoad	iVar4	pointAddr	INFERRED	address of the current control point: points + pointByteOffset
+local	_gleMap1VertexAttrib1fLoad	piVar3	destPtr	INFERRED	write cursor in the output record: starts at mapData + 4 (after the 4-word header) and advances one word per control point
+local	_gleMap1VertexAttrib1fLoad	iVar1	pointValue	INFERRED	control-point value read from points and stored to the output record
+local	_gleMap1VertexAttrib2fLoad	piVar1	secondComponentPtr	INFERRED	pointer to the second component of the current control point (points + 1), read after points is advanced by stride
+local	_gleMap1VertexAttrib3fLoad	iVar1	pointByteOffset	INFERRED	byte offset of the current control point: element offset * element size, source address is points + this
+local	_gleMap1VertexAttrib3fLoad	iVar3	pointElementOffset	INFERRED	element offset of the current control point; advanced by stride each iteration
+local	_gleMap1VertexAttrib3fLoad	iVar4	pointAddr	INFERRED	address of the current control point: points + pointByteOffset
+local	_gleMap1VertexAttrib4fLoad	iVar1	pointByteOffset	INFERRED	byte offset of the current control point: element offset * element size, source address is points + this
+local	_gleMap1VertexAttrib4fLoad	iVar3	pointElementOffset	INFERRED	element offset of the current control point; advanced by stride each iteration
+local	_gleMap1VertexAttrib4fLoad	iVar4	pointAddr	INFERRED	address of the current control point: points + pointByteOffset
+local	_gleMap2Vertex3dLoad	dVar2	one	INFERRED	holds DOUBLE_00108d68 = 1.0 (numerator of the reciprocals; 1.0 / (u2 - u1) above uses the same literal)
+local	_gleMap2Vertex3dLoad	iVar4	uIndex	INFERRED	outer (u) loop counter, compared against uorder
+local	_gleMap2Vertex3dLoad	iVar5	uElementOffset	INFERRED	element offset of the current u row of control points; advanced by ustride each outer iteration
+local	_gleMap2Vertex3dLoad	iVar6	destRecord	INFERRED	index (in control-point records) of the current u row in the output record; advanced by vorder each outer iteration
+local	_gleMap2Vertex3dLoad	iVar8	vRemaining	INFERRED	inner (v) loop down-counter, starts at vorder
+local	_gleMap2Vertex3dLoad	pdVar3	pointPtr	INFERRED	read cursor into the control points: starts at points + uElementOffset*elemsize and advances by vstride per v step
+local	_gleMap2Vertex3dLoad	piVar7	destPtr	INFERRED	write cursor in the output record: mapData + destRecord * components, advanced by one record per v step
+local	_gleMap2Vertex3dLoad	pdVar1	lastComponentPtr	INFERRED	pointer to the last component of the current control point (pointPtr + components - 1), read before pointPtr is advanced by vstride
+local	_gleMap2Vertex4dLoad	dVar2	one	INFERRED	holds DOUBLE_00108d68 = 1.0 (numerator of the reciprocals; 1.0 / (u2 - u1) above uses the same literal)
+local	_gleMap2Vertex4dLoad	iVar4	uIndex	INFERRED	outer (u) loop counter, compared against uorder
+local	_gleMap2Vertex4dLoad	iVar5	uElementOffset	INFERRED	element offset of the current u row of control points; advanced by ustride each outer iteration
+local	_gleMap2Vertex4dLoad	iVar6	destRecord	INFERRED	index (in control-point records) of the current u row in the output record; advanced by vorder each outer iteration
+local	_gleMap2Vertex4dLoad	iVar8	vRemaining	INFERRED	inner (v) loop down-counter, starts at vorder
+local	_gleMap2Vertex4dLoad	pdVar3	pointPtr	INFERRED	read cursor into the control points: starts at points + uElementOffset*elemsize and advances by vstride per v step
+local	_gleMap2Vertex4dLoad	piVar7	destPtr	INFERRED	write cursor in the output record: mapData + destRecord * components, advanced by one record per v step
+local	_gleMap2Vertex4dLoad	pdVar1	lastComponentPtr	INFERRED	pointer to the last component of the current control point (pointPtr + components - 1), read before pointPtr is advanced by vstride
+local	_gleMap2ColordLoad	dVar2	one	INFERRED	holds DOUBLE_00108d68 = 1.0 (numerator of the reciprocals; 1.0 / (u2 - u1) above uses the same literal)
+local	_gleMap2ColordLoad	iVar4	uIndex	INFERRED	outer (u) loop counter, compared against uorder
+local	_gleMap2ColordLoad	iVar5	uElementOffset	INFERRED	element offset of the current u row of control points; advanced by ustride each outer iteration
+local	_gleMap2ColordLoad	iVar6	destRecord	INFERRED	index (in control-point records) of the current u row in the output record; advanced by vorder each outer iteration
+local	_gleMap2ColordLoad	iVar8	vRemaining	INFERRED	inner (v) loop down-counter, starts at vorder
+local	_gleMap2ColordLoad	pdVar3	pointPtr	INFERRED	read cursor into the control points: starts at points + uElementOffset*elemsize and advances by vstride per v step
+local	_gleMap2ColordLoad	piVar7	destPtr	INFERRED	write cursor in the output record: mapData + destRecord * components, advanced by one record per v step
+local	_gleMap2ColordLoad	pdVar1	lastComponentPtr	INFERRED	pointer to the last component of the current control point (pointPtr + components - 1), read before pointPtr is advanced by vstride
+local	_gleMap2IndexdLoad	iVar2	uIndex	INFERRED	outer (u) loop counter, compared against uorder
+local	_gleMap2IndexdLoad	iVar3	uElementOffset	INFERRED	element offset of the current u row of control points; advanced by ustride each outer iteration
+local	_gleMap2IndexdLoad	iVar4	destRecord	INFERRED	index (in control-point records) of the current u row in the output record; advanced by vorder each outer iteration
+local	_gleMap2IndexdLoad	iVar6	vRemaining	INFERRED	inner (v) loop down-counter, starts at vorder
+local	_gleMap2IndexdLoad	pdVar5	pointPtr	INFERRED	read cursor into the control points: starts at points + uElementOffset*elemsize and advances by vstride per v step
+local	_gleMap2NormaldLoad	dVar2	one	INFERRED	holds DOUBLE_00108d68 = 1.0 (numerator of the reciprocals; 1.0 / (u2 - u1) above uses the same literal)
+local	_gleMap2NormaldLoad	iVar4	uIndex	INFERRED	outer (u) loop counter, compared against uorder
+local	_gleMap2NormaldLoad	iVar5	uElementOffset	INFERRED	element offset of the current u row of control points; advanced by ustride each outer iteration
+local	_gleMap2NormaldLoad	iVar6	destRecord	INFERRED	index (in control-point records) of the current u row in the output record; advanced by vorder each outer iteration
+local	_gleMap2NormaldLoad	iVar8	vRemaining	INFERRED	inner (v) loop down-counter, starts at vorder
+local	_gleMap2NormaldLoad	pdVar3	pointPtr	INFERRED	read cursor into the control points: starts at points + uElementOffset*elemsize and advances by vstride per v step
+local	_gleMap2NormaldLoad	piVar7	destPtr	INFERRED	write cursor in the output record: mapData + destRecord * components, advanced by one record per v step
+local	_gleMap2NormaldLoad	pdVar1	lastComponentPtr	INFERRED	pointer to the last component of the current control point (pointPtr + components - 1), read before pointPtr is advanced by vstride
+local	_gleMap2Texture1dLoad	iVar2	uIndex	INFERRED	outer (u) loop counter, compared against uorder
+local	_gleMap2Texture1dLoad	iVar3	uElementOffset	INFERRED	element offset of the current u row of control points; advanced by ustride each outer iteration
+local	_gleMap2Texture1dLoad	iVar4	destRecord	INFERRED	index (in control-point records) of the current u row in the output record; advanced by vorder each outer iteration
+local	_gleMap2Texture1dLoad	iVar6	vRemaining	INFERRED	inner (v) loop down-counter, starts at vorder
+local	_gleMap2Texture1dLoad	pdVar5	pointPtr	INFERRED	read cursor into the control points: starts at points + uElementOffset*elemsize and advances by vstride per v step
+local	_gleMap2Texture2dLoad	iVar8	uIndex	INFERRED	outer (u) loop counter, compared against uorder
+local	_gleMap2Texture2dLoad	iVar4	uElementOffset	INFERRED	element offset of the current u row of control points; advanced by ustride each outer iteration
+local	_gleMap2Texture2dLoad	iVar5	destRecord	INFERRED	index (in control-point records) of the current u row in the output record; advanced by vorder each outer iteration
+local	_gleMap2Texture2dLoad	iVar9	vRemaining	INFERRED	inner (v) loop down-counter, starts at vorder
+local	_gleMap2Texture2dLoad	piVar3	destPtr	INFERRED	write cursor in the output record: mapData + destRecord * components, advanced by one record per v step
+local	_gleMap2Texture3dLoad	dVar2	one	INFERRED	holds DOUBLE_00108d68 = 1.0 (numerator of the reciprocals; 1.0 / (u2 - u1) above uses the same literal)
+local	_gleMap2Texture3dLoad	iVar4	uIndex	INFERRED	outer (u) loop counter, compared against uorder
+local	_gleMap2Texture3dLoad	iVar5	uElementOffset	INFERRED	element offset of the current u row of control points; advanced by ustride each outer iteration
+local	_gleMap2Texture3dLoad	iVar6	destRecord	INFERRED	index (in control-point records) of the current u row in the output record; advanced by vorder each outer iteration
+local	_gleMap2Texture3dLoad	iVar8	vRemaining	INFERRED	inner (v) loop down-counter, starts at vorder
+local	_gleMap2Texture3dLoad	pdVar3	pointPtr	INFERRED	read cursor into the control points: starts at points + uElementOffset*elemsize and advances by vstride per v step
+local	_gleMap2Texture3dLoad	piVar7	destPtr	INFERRED	write cursor in the output record: mapData + destRecord * components, advanced by one record per v step
+local	_gleMap2Texture3dLoad	pdVar1	lastComponentPtr	INFERRED	pointer to the last component of the current control point (pointPtr + components - 1), read before pointPtr is advanced by vstride
+local	_gleMap2Texture4dLoad	dVar2	one	INFERRED	holds DOUBLE_00108d68 = 1.0 (numerator of the reciprocals; 1.0 / (u2 - u1) above uses the same literal)
+local	_gleMap2Texture4dLoad	iVar4	uIndex	INFERRED	outer (u) loop counter, compared against uorder
+local	_gleMap2Texture4dLoad	iVar5	uElementOffset	INFERRED	element offset of the current u row of control points; advanced by ustride each outer iteration
+local	_gleMap2Texture4dLoad	iVar6	destRecord	INFERRED	index (in control-point records) of the current u row in the output record; advanced by vorder each outer iteration
+local	_gleMap2Texture4dLoad	iVar8	vRemaining	INFERRED	inner (v) loop down-counter, starts at vorder
+local	_gleMap2Texture4dLoad	pdVar3	pointPtr	INFERRED	read cursor into the control points: starts at points + uElementOffset*elemsize and advances by vstride per v step
+local	_gleMap2Texture4dLoad	piVar7	destPtr	INFERRED	write cursor in the output record: mapData + destRecord * components, advanced by one record per v step
+local	_gleMap2Texture4dLoad	pdVar1	lastComponentPtr	INFERRED	pointer to the last component of the current control point (pointPtr + components - 1), read before pointPtr is advanced by vstride
+local	_gleMap2VertexAttrib1dLoad	iVar2	uIndex	INFERRED	outer (u) loop counter, compared against uorder
+local	_gleMap2VertexAttrib1dLoad	iVar3	uElementOffset	INFERRED	element offset of the current u row of control points; advanced by ustride each outer iteration
+local	_gleMap2VertexAttrib1dLoad	iVar4	destRecord	INFERRED	index (in control-point records) of the current u row in the output record; advanced by vorder each outer iteration
+local	_gleMap2VertexAttrib1dLoad	iVar6	vRemaining	INFERRED	inner (v) loop down-counter, starts at vorder
+local	_gleMap2VertexAttrib1dLoad	pdVar5	pointPtr	INFERRED	read cursor into the control points: starts at points + uElementOffset*elemsize and advances by vstride per v step
+local	_gleMap2VertexAttrib2dLoad	iVar8	uIndex	INFERRED	outer (u) loop counter, compared against uorder
+local	_gleMap2VertexAttrib2dLoad	iVar4	uElementOffset	INFERRED	element offset of the current u row of control points; advanced by ustride each outer iteration
+local	_gleMap2VertexAttrib2dLoad	iVar5	destRecord	INFERRED	index (in control-point records) of the current u row in the output record; advanced by vorder each outer iteration
+local	_gleMap2VertexAttrib2dLoad	iVar9	vRemaining	INFERRED	inner (v) loop down-counter, starts at vorder
+local	_gleMap2VertexAttrib2dLoad	piVar3	destPtr	INFERRED	write cursor in the output record: mapData + destRecord * components, advanced by one record per v step
+local	_gleMap2VertexAttrib3dLoad	dVar2	one	INFERRED	holds DOUBLE_00108d68 = 1.0 (numerator of the reciprocals; 1.0 / (u2 - u1) above uses the same literal)
+local	_gleMap2VertexAttrib3dLoad	iVar4	uIndex	INFERRED	outer (u) loop counter, compared against uorder
+local	_gleMap2VertexAttrib3dLoad	iVar5	uElementOffset	INFERRED	element offset of the current u row of control points; advanced by ustride each outer iteration
+local	_gleMap2VertexAttrib3dLoad	iVar6	destRecord	INFERRED	index (in control-point records) of the current u row in the output record; advanced by vorder each outer iteration
+local	_gleMap2VertexAttrib3dLoad	iVar8	vRemaining	INFERRED	inner (v) loop down-counter, starts at vorder
+local	_gleMap2VertexAttrib3dLoad	pdVar3	pointPtr	INFERRED	read cursor into the control points: starts at points + uElementOffset*elemsize and advances by vstride per v step
+local	_gleMap2VertexAttrib3dLoad	piVar7	destPtr	INFERRED	write cursor in the output record: mapData + destRecord * components, advanced by one record per v step
+local	_gleMap2VertexAttrib3dLoad	pdVar1	lastComponentPtr	INFERRED	pointer to the last component of the current control point (pointPtr + components - 1), read before pointPtr is advanced by vstride
+local	_gleMap2VertexAttrib4dLoad	dVar2	one	INFERRED	holds DOUBLE_00108d68 = 1.0 (numerator of the reciprocals; 1.0 / (u2 - u1) above uses the same literal)
+local	_gleMap2VertexAttrib4dLoad	iVar4	uIndex	INFERRED	outer (u) loop counter, compared against uorder
+local	_gleMap2VertexAttrib4dLoad	iVar5	uElementOffset	INFERRED	element offset of the current u row of control points; advanced by ustride each outer iteration
+local	_gleMap2VertexAttrib4dLoad	iVar6	destRecord	INFERRED	index (in control-point records) of the current u row in the output record; advanced by vorder each outer iteration
+local	_gleMap2VertexAttrib4dLoad	iVar8	vRemaining	INFERRED	inner (v) loop down-counter, starts at vorder
+local	_gleMap2VertexAttrib4dLoad	pdVar3	pointPtr	INFERRED	read cursor into the control points: starts at points + uElementOffset*elemsize and advances by vstride per v step
+local	_gleMap2VertexAttrib4dLoad	piVar7	destPtr	INFERRED	write cursor in the output record: mapData + destRecord * components, advanced by one record per v step
+local	_gleMap2VertexAttrib4dLoad	pdVar1	lastComponentPtr	INFERRED	pointer to the last component of the current control point (pointPtr + components - 1), read before pointPtr is advanced by vstride
+local	_gleMap2Vertex3fLoad	iVar5	uIndex	INFERRED	outer (u) loop counter, compared against uorder
+local	_gleMap2Vertex3fLoad	iVar6	uElementOffset	INFERRED	element offset of the current u row of control points; advanced by ustride each outer iteration
+local	_gleMap2Vertex3fLoad	iVar8	destRecord	INFERRED	index (in control-point records) of the current u row in the output record; advanced by vorder each outer iteration
+local	_gleMap2Vertex3fLoad	iVar9	vRemaining	INFERRED	inner (v) loop down-counter, starts at vorder
+local	_gleMap2Vertex3fLoad	piVar4	pointPtr	INFERRED	read cursor into the control points: starts at points + uElementOffset*elemsize and advances by vstride per v step
+local	_gleMap2Vertex3fLoad	piVar7	destPtr	INFERRED	write cursor in the output record: mapData + destRecord * components, advanced by one record per v step
+local	_gleMap2Vertex3fLoad	piVar1	lastComponentPtr	INFERRED	pointer to the last component of the current control point (pointPtr + components - 1), read before pointPtr is advanced by vstride
+local	_gleMap2Vertex4fLoad	iVar5	uIndex	INFERRED	outer (u) loop counter, compared against uorder
+local	_gleMap2Vertex4fLoad	iVar6	uElementOffset	INFERRED	element offset of the current u row of control points; advanced by ustride each outer iteration
+local	_gleMap2Vertex4fLoad	iVar8	destRecord	INFERRED	index (in control-point records) of the current u row in the output record; advanced by vorder each outer iteration
+local	_gleMap2Vertex4fLoad	iVar9	vRemaining	INFERRED	inner (v) loop down-counter, starts at vorder
+local	_gleMap2Vertex4fLoad	piVar4	pointPtr	INFERRED	read cursor into the control points: starts at points + uElementOffset*elemsize and advances by vstride per v step
+local	_gleMap2Vertex4fLoad	piVar7	destPtr	INFERRED	write cursor in the output record: mapData + destRecord * components, advanced by one record per v step
+local	_gleMap2Vertex4fLoad	piVar1	lastComponentPtr	INFERRED	pointer to the last component of the current control point (pointPtr + components - 1), read before pointPtr is advanced by vstride
+local	_gleMap2ColorfLoad	iVar5	uIndex	INFERRED	outer (u) loop counter, compared against uorder
+local	_gleMap2ColorfLoad	iVar6	uElementOffset	INFERRED	element offset of the current u row of control points; advanced by ustride each outer iteration
+local	_gleMap2ColorfLoad	iVar8	destRecord	INFERRED	index (in control-point records) of the current u row in the output record; advanced by vorder each outer iteration
+local	_gleMap2ColorfLoad	iVar9	vRemaining	INFERRED	inner (v) loop down-counter, starts at vorder
+local	_gleMap2ColorfLoad	piVar4	pointPtr	INFERRED	read cursor into the control points: starts at points + uElementOffset*elemsize and advances by vstride per v step
+local	_gleMap2ColorfLoad	piVar7	destPtr	INFERRED	write cursor in the output record: mapData + destRecord * components, advanced by one record per v step
+local	_gleMap2ColorfLoad	piVar1	lastComponentPtr	INFERRED	pointer to the last component of the current control point (pointPtr + components - 1), read before pointPtr is advanced by vstride
+local	_gleMap2IndexfLoad	iVar5	uIndex	INFERRED	outer (u) loop counter, compared against uorder
+local	_gleMap2IndexfLoad	iVar6	uElementOffset	INFERRED	element offset of the current u row of control points; advanced by ustride each outer iteration
+local	_gleMap2IndexfLoad	iVar8	destRecord	INFERRED	index (in control-point records) of the current u row in the output record; advanced by vorder each outer iteration
+local	_gleMap2IndexfLoad	iVar9	vRemaining	INFERRED	inner (v) loop down-counter, starts at vorder
+local	_gleMap2IndexfLoad	piVar7	pointPtr	INFERRED	read cursor into the control points: starts at points + uElementOffset*elemsize and advances by vstride per v step
+local	_gleMap2NormalfLoad	iVar5	uIndex	INFERRED	outer (u) loop counter, compared against uorder
+local	_gleMap2NormalfLoad	iVar6	uElementOffset	INFERRED	element offset of the current u row of control points; advanced by ustride each outer iteration
+local	_gleMap2NormalfLoad	iVar8	destRecord	INFERRED	index (in control-point records) of the current u row in the output record; advanced by vorder each outer iteration
+local	_gleMap2NormalfLoad	iVar9	vRemaining	INFERRED	inner (v) loop down-counter, starts at vorder
+local	_gleMap2NormalfLoad	piVar4	pointPtr	INFERRED	read cursor into the control points: starts at points + uElementOffset*elemsize and advances by vstride per v step
+local	_gleMap2NormalfLoad	piVar7	destPtr	INFERRED	write cursor in the output record: mapData + destRecord * components, advanced by one record per v step
+local	_gleMap2NormalfLoad	piVar1	lastComponentPtr	INFERRED	pointer to the last component of the current control point (pointPtr + components - 1), read before pointPtr is advanced by vstride
+local	_gleMap2Texture1fLoad	iVar5	uIndex	INFERRED	outer (u) loop counter, compared against uorder
+local	_gleMap2Texture1fLoad	iVar6	uElementOffset	INFERRED	element offset of the current u row of control points; advanced by ustride each outer iteration
+local	_gleMap2Texture1fLoad	iVar8	destRecord	INFERRED	index (in control-point records) of the current u row in the output record; advanced by vorder each outer iteration
+local	_gleMap2Texture1fLoad	iVar9	vRemaining	INFERRED	inner (v) loop down-counter, starts at vorder
+local	_gleMap2Texture1fLoad	piVar7	pointPtr	INFERRED	read cursor into the control points: starts at points + uElementOffset*elemsize and advances by vstride per v step
+local	_gleMap2Texture2fLoad	iVar9	uIndex	INFERRED	outer (u) loop counter, compared against uorder
+local	_gleMap2Texture2fLoad	iVar7	uElementOffset	INFERRED	element offset of the current u row of control points; advanced by ustride each outer iteration
+local	_gleMap2Texture2fLoad	iVar8	destRecord	INFERRED	index (in control-point records) of the current u row in the output record; advanced by vorder each outer iteration
+local	_gleMap2Texture2fLoad	iVar12	vRemaining	INFERRED	inner (v) loop down-counter, starts at vorder
+local	_gleMap2Texture2fLoad	piVar6	destPtr	INFERRED	write cursor in the output record: mapData + destRecord * components, advanced by one record per v step
+local	_gleMap2Texture3fLoad	iVar5	uIndex	INFERRED	outer (u) loop counter, compared against uorder
+local	_gleMap2Texture3fLoad	iVar6	uElementOffset	INFERRED	element offset of the current u row of control points; advanced by ustride each outer iteration
+local	_gleMap2Texture3fLoad	iVar8	destRecord	INFERRED	index (in control-point records) of the current u row in the output record; advanced by vorder each outer iteration
+local	_gleMap2Texture3fLoad	iVar9	vRemaining	INFERRED	inner (v) loop down-counter, starts at vorder
+local	_gleMap2Texture3fLoad	piVar4	pointPtr	INFERRED	read cursor into the control points: starts at points + uElementOffset*elemsize and advances by vstride per v step
+local	_gleMap2Texture3fLoad	piVar7	destPtr	INFERRED	write cursor in the output record: mapData + destRecord * components, advanced by one record per v step
+local	_gleMap2Texture3fLoad	piVar1	lastComponentPtr	INFERRED	pointer to the last component of the current control point (pointPtr + components - 1), read before pointPtr is advanced by vstride
+local	_gleMap2Texture4fLoad	iVar5	uIndex	INFERRED	outer (u) loop counter, compared against uorder
+local	_gleMap2Texture4fLoad	iVar6	uElementOffset	INFERRED	element offset of the current u row of control points; advanced by ustride each outer iteration
+local	_gleMap2Texture4fLoad	iVar8	destRecord	INFERRED	index (in control-point records) of the current u row in the output record; advanced by vorder each outer iteration
+local	_gleMap2Texture4fLoad	iVar9	vRemaining	INFERRED	inner (v) loop down-counter, starts at vorder
+local	_gleMap2Texture4fLoad	piVar4	pointPtr	INFERRED	read cursor into the control points: starts at points + uElementOffset*elemsize and advances by vstride per v step
+local	_gleMap2Texture4fLoad	piVar7	destPtr	INFERRED	write cursor in the output record: mapData + destRecord * components, advanced by one record per v step
+local	_gleMap2Texture4fLoad	piVar1	lastComponentPtr	INFERRED	pointer to the last component of the current control point (pointPtr + components - 1), read before pointPtr is advanced by vstride
+local	_gleMap2VertexAttrib1fLoad	iVar5	uIndex	INFERRED	outer (u) loop counter, compared against uorder
+local	_gleMap2VertexAttrib1fLoad	iVar6	uElementOffset	INFERRED	element offset of the current u row of control points; advanced by ustride each outer iteration
+local	_gleMap2VertexAttrib1fLoad	iVar8	destRecord	INFERRED	index (in control-point records) of the current u row in the output record; advanced by vorder each outer iteration
+local	_gleMap2VertexAttrib1fLoad	iVar9	vRemaining	INFERRED	inner (v) loop down-counter, starts at vorder
+local	_gleMap2VertexAttrib1fLoad	piVar7	pointPtr	INFERRED	read cursor into the control points: starts at points + uElementOffset*elemsize and advances by vstride per v step
+local	_gleMap2VertexAttrib2fLoad	iVar9	uIndex	INFERRED	outer (u) loop counter, compared against uorder
+local	_gleMap2VertexAttrib2fLoad	iVar7	uElementOffset	INFERRED	element offset of the current u row of control points; advanced by ustride each outer iteration
+local	_gleMap2VertexAttrib2fLoad	iVar8	destRecord	INFERRED	index (in control-point records) of the current u row in the output record; advanced by vorder each outer iteration
+local	_gleMap2VertexAttrib2fLoad	iVar12	vRemaining	INFERRED	inner (v) loop down-counter, starts at vorder
+local	_gleMap2VertexAttrib2fLoad	piVar6	destPtr	INFERRED	write cursor in the output record: mapData + destRecord * components, advanced by one record per v step
+local	_gleMap2VertexAttrib3fLoad	iVar5	uIndex	INFERRED	outer (u) loop counter, compared against uorder
+local	_gleMap2VertexAttrib3fLoad	iVar6	uElementOffset	INFERRED	element offset of the current u row of control points; advanced by ustride each outer iteration
+local	_gleMap2VertexAttrib3fLoad	iVar8	destRecord	INFERRED	index (in control-point records) of the current u row in the output record; advanced by vorder each outer iteration
+local	_gleMap2VertexAttrib3fLoad	iVar9	vRemaining	INFERRED	inner (v) loop down-counter, starts at vorder
+local	_gleMap2VertexAttrib3fLoad	piVar4	pointPtr	INFERRED	read cursor into the control points: starts at points + uElementOffset*elemsize and advances by vstride per v step
+local	_gleMap2VertexAttrib3fLoad	piVar7	destPtr	INFERRED	write cursor in the output record: mapData + destRecord * components, advanced by one record per v step
+local	_gleMap2VertexAttrib3fLoad	piVar1	lastComponentPtr	INFERRED	pointer to the last component of the current control point (pointPtr + components - 1), read before pointPtr is advanced by vstride
+local	_gleMap2VertexAttrib4fLoad	iVar5	uIndex	INFERRED	outer (u) loop counter, compared against uorder
+local	_gleMap2VertexAttrib4fLoad	iVar6	uElementOffset	INFERRED	element offset of the current u row of control points; advanced by ustride each outer iteration
+local	_gleMap2VertexAttrib4fLoad	iVar8	destRecord	INFERRED	index (in control-point records) of the current u row in the output record; advanced by vorder each outer iteration
+local	_gleMap2VertexAttrib4fLoad	iVar9	vRemaining	INFERRED	inner (v) loop down-counter, starts at vorder
+local	_gleMap2VertexAttrib4fLoad	piVar4	pointPtr	INFERRED	read cursor into the control points: starts at points + uElementOffset*elemsize and advances by vstride per v step
+local	_gleMap2VertexAttrib4fLoad	piVar7	destPtr	INFERRED	write cursor in the output record: mapData + destRecord * components, advanced by one record per v step
+local	_gleMap2VertexAttrib4fLoad	piVar1	lastComponentPtr	INFERRED	pointer to the last component of the current control point (pointPtr + components - 1), read before pointPtr is advanced by vstride

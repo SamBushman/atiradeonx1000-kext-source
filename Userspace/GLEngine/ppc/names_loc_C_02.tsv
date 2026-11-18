@@ -1,0 +1,187 @@
+local	_gleTextureImagePut_FastByte	param_2	width	CONFIRMED	dst row end = dst + param_2 * _gleComponents(param_10): texels per row; caller _gleTextureImagePut_Fast passes its width argument here
+local	_gleTextureImagePut_FastByte	param_3	height	CONFIRMED	row count: the outer loops count it down once per row (src += srcRowStride, dst += dstRowSkip); caller passes its height argument
+local	_gleTextureImagePut_FastByte	param_4	src	CONFIRMED	source pixels, read per texel and advanced by param_6 bytes per row
+local	_gleTextureImagePut_FastByte	param_5	dst	CONFIRMED	destination texels written per pixel; its end per row is dstRowEnd = dst + width * _gleComponents(dstFormat)
+local	_gleTextureImagePut_FastByte	param_6	srcRowStride	CONFIRMED	added to the source pointer once per row
+local	_gleTextureImagePut_FastByte	param_8	dstRowSkip	INFERRED	added to dst once per row after the row end was reached; dstRowStride - dstRowSkip = bytes per row
+local	_gleTextureImagePut_FastByte	param_9	dstRowStride	INFERRED	added to dstRowEnd once per row: start-to-start distance of two destination rows (= dstRowSkip + width * components)
+local	_gleTextureImagePut_FastByte	param_10	dstFormat	CONFIRMED	switch(param_10) on GL formats (0x1900 COLOR_INDEX, 0x1906 ALPHA, 0x1907 RGB, 0x1908 RGBA, 0x1909 LUMINANCE, 0x190a LUMINANCE_ALPHA) and _gleComponents(param_10) sizes the destination row; caller passes the texture level format (+0x10)
+local	_gleTextureImagePut_FastByte	param_11	srcFormat	CONFIRMED	inner compares param_11 against GL formats to choose the component layout of the source pixels (e.g. 0x1908 RGBA: alpha at +3, stride 4); caller passes its format argument
+local	_gleTextureImagePut_FastByte	pbVar1	srcComponent	INFERRED	pointer to a later component of the current source pixel (cursor + 2/3 or +4/+0xc bytes in the Uint case), dereferenced once and then the cursor advances
+local	_gleTextureImagePut_FastByte	bVar2	srcValue	CONFIRMED	the source component just read through the source cursor (*cursor) before it is converted and stored to dst
+local	_gleTextureImagePut_FastByte	pbVar5	dstRowEnd	CONFIRMED	= dst + width * components, advanced by dstRowStride per row: the end of the current destination row (compared against dst in the pixel loops)
+local	_gleTextureImagePut_FastByte	uVar6	pixelsLeft	CONFIRMED	(dstRowEnd + 3 - dst) >> 2: number of 4-byte destination pixels in the row, counted down by the inner loop
+local	_gleTextureImagePut_FastShort	param_2	width	CONFIRMED	dst row end = dst + param_2 * _gleComponents(param_10): texels per row; caller _gleTextureImagePut_Fast passes its width argument here
+local	_gleTextureImagePut_FastShort	param_3	height	CONFIRMED	row count: the outer loops count it down once per row (src += srcRowStride, dst += dstRowSkip); caller passes its height argument
+local	_gleTextureImagePut_FastShort	param_4	src	CONFIRMED	source pixels, read per texel and advanced by param_6 bytes per row
+local	_gleTextureImagePut_FastShort	param_5	dst	CONFIRMED	destination texels written per pixel; its end per row is dstRowEnd = dst + width * _gleComponents(dstFormat)
+local	_gleTextureImagePut_FastShort	param_6	srcRowStride	CONFIRMED	added to the source pointer once per row
+local	_gleTextureImagePut_FastShort	param_8	dstRowSkip	INFERRED	added to dst once per row after the row end was reached; dstRowStride - dstRowSkip = bytes per row
+local	_gleTextureImagePut_FastShort	param_9	dstRowStride	INFERRED	added to dstRowEnd once per row: start-to-start distance of two destination rows (= dstRowSkip + width * components)
+local	_gleTextureImagePut_FastShort	param_10	dstFormat	CONFIRMED	switch(param_10) on GL formats (0x1900 COLOR_INDEX, 0x1906 ALPHA, 0x1907 RGB, 0x1908 RGBA, 0x1909 LUMINANCE, 0x190a LUMINANCE_ALPHA) and _gleComponents(param_10) sizes the destination row; caller passes the texture level format (+0x10)
+local	_gleTextureImagePut_FastShort	param_11	srcFormat	CONFIRMED	inner compares param_11 against GL formats to choose the component layout of the source pixels (e.g. 0x1908 RGBA: alpha at +3, stride 4); caller passes its format argument
+local	_gleTextureImagePut_FastShort	puVar1	srcComponent	INFERRED	pointer to a later component of the current source pixel (cursor + 2/3 or +4/+0xc bytes in the Uint case), dereferenced once and then the cursor advances
+local	_gleTextureImagePut_FastShort	uVar2	srcValue	CONFIRMED	the source component just read through the source cursor (*cursor) before it is converted and stored to dst
+local	_gleTextureImagePut_FastShort	puVar5	dstRowEnd	CONFIRMED	= dst + width * components, advanced by dstRowStride per row: the end of the current destination row (compared against dst in the pixel loops)
+local	_gleTextureImagePut_FastShort	uVar6	pixelsLeft	CONFIRMED	(dstRowEnd + 3 - dst) >> 2: number of 4-byte destination pixels in the row, counted down by the inner loop
+local	_gleTextureImagePut_FastUshort	param_2	width	CONFIRMED	dst row end = dst + param_2 * _gleComponents(param_10): texels per row; caller _gleTextureImagePut_Fast passes its width argument here
+local	_gleTextureImagePut_FastUshort	param_3	height	CONFIRMED	row count: the outer loops count it down once per row (src += srcRowStride, dst += dstRowSkip); caller passes its height argument
+local	_gleTextureImagePut_FastUshort	param_4	src	CONFIRMED	source pixels, read per texel and advanced by param_6 bytes per row
+local	_gleTextureImagePut_FastUshort	param_5	dst	CONFIRMED	destination texels written per pixel; its end per row is dstRowEnd = dst + width * _gleComponents(dstFormat)
+local	_gleTextureImagePut_FastUshort	param_6	srcRowStride	CONFIRMED	added to the source pointer once per row
+local	_gleTextureImagePut_FastUshort	param_8	dstRowSkip	INFERRED	added to dst once per row after the row end was reached; dstRowStride - dstRowSkip = bytes per row
+local	_gleTextureImagePut_FastUshort	param_9	dstRowStride	INFERRED	added to dstRowEnd once per row: start-to-start distance of two destination rows (= dstRowSkip + width * components)
+local	_gleTextureImagePut_FastUshort	param_10	dstFormat	CONFIRMED	switch(param_10) on GL formats (0x1900 COLOR_INDEX, 0x1906 ALPHA, 0x1907 RGB, 0x1908 RGBA, 0x1909 LUMINANCE, 0x190a LUMINANCE_ALPHA) and _gleComponents(param_10) sizes the destination row; caller passes the texture level format (+0x10)
+local	_gleTextureImagePut_FastUshort	param_11	srcFormat	CONFIRMED	inner compares param_11 against GL formats to choose the component layout of the source pixels (e.g. 0x1908 RGBA: alpha at +3, stride 4); caller passes its format argument
+local	_gleTextureImagePut_FastUshort	puVar1	srcComponent	INFERRED	pointer to a later component of the current source pixel (cursor + 2/3 or +4/+0xc bytes in the Uint case), dereferenced once and then the cursor advances
+local	_gleTextureImagePut_FastUshort	uVar2	srcValue	CONFIRMED	the source component just read through the source cursor (*cursor) before it is converted and stored to dst
+local	_gleTextureImagePut_FastUshort	puVar5	dstRowEnd	CONFIRMED	= dst + width * components, advanced by dstRowStride per row: the end of the current destination row (compared against dst in the pixel loops)
+local	_gleTextureImagePut_FastUshort	uVar6	pixelsLeft	CONFIRMED	(dstRowEnd + 3 - dst) >> 2: number of 4-byte destination pixels in the row, counted down by the inner loop
+local	_gleTextureImagePut_FastInt	param_2	width	CONFIRMED	dst row end = dst + param_2 * _gleComponents(param_10): texels per row; caller _gleTextureImagePut_Fast passes its width argument here
+local	_gleTextureImagePut_FastInt	param_3	height	CONFIRMED	row count: the outer loops count it down once per row (src += srcRowStride, dst += dstRowSkip); caller passes its height argument
+local	_gleTextureImagePut_FastInt	param_4	src	CONFIRMED	source pixels, read per texel and advanced by param_6 bytes per row
+local	_gleTextureImagePut_FastInt	param_5	dst	CONFIRMED	destination texels written per pixel; its end per row is dstRowEnd = dst + width * _gleComponents(dstFormat)
+local	_gleTextureImagePut_FastInt	param_6	srcRowStride	CONFIRMED	added to the source pointer once per row
+local	_gleTextureImagePut_FastInt	param_8	dstRowSkip	INFERRED	added to dst once per row after the row end was reached; dstRowStride - dstRowSkip = bytes per row
+local	_gleTextureImagePut_FastInt	param_9	dstRowStride	INFERRED	added to dstRowEnd once per row: start-to-start distance of two destination rows (= dstRowSkip + width * components)
+local	_gleTextureImagePut_FastInt	param_10	dstFormat	CONFIRMED	switch(param_10) on GL formats (0x1900 COLOR_INDEX, 0x1906 ALPHA, 0x1907 RGB, 0x1908 RGBA, 0x1909 LUMINANCE, 0x190a LUMINANCE_ALPHA) and _gleComponents(param_10) sizes the destination row; caller passes the texture level format (+0x10)
+local	_gleTextureImagePut_FastInt	param_11	srcFormat	CONFIRMED	inner compares param_11 against GL formats to choose the component layout of the source pixels (e.g. 0x1908 RGBA: alpha at +3, stride 4); caller passes its format argument
+local	_gleTextureImagePut_FastInt	puVar1	srcComponent	INFERRED	pointer to a later component of the current source pixel (cursor + 2/3 or +4/+0xc bytes in the Uint case), dereferenced once and then the cursor advances
+local	_gleTextureImagePut_FastInt	puVar5	dstRowEnd	CONFIRMED	= dst + width * components, advanced by dstRowStride per row: the end of the current destination row (compared against dst in the pixel loops)
+local	_gleTextureImagePut_FastUint	param_2	width	CONFIRMED	dst row end = dst + param_2 * _gleComponents(param_10): texels per row; caller _gleTextureImagePut_Fast passes its width argument here
+local	_gleTextureImagePut_FastUint	param_3	height	CONFIRMED	row count: the outer loops count it down once per row (src += srcRowStride, dst += dstRowSkip); caller passes its height argument
+local	_gleTextureImagePut_FastUint	param_4	src	CONFIRMED	source pixels, read per texel and advanced by param_6 bytes per row
+local	_gleTextureImagePut_FastUint	param_5	dst	CONFIRMED	destination texels written per pixel; its end per row is dstRowEnd = dst + width * _gleComponents(dstFormat)
+local	_gleTextureImagePut_FastUint	param_6	srcRowStride	CONFIRMED	added to the source pointer once per row
+local	_gleTextureImagePut_FastUint	param_8	dstRowSkip	INFERRED	added to dst once per row after the row end was reached; dstRowStride - dstRowSkip = bytes per row
+local	_gleTextureImagePut_FastUint	param_9	dstRowStride	INFERRED	added to dstRowEnd once per row: start-to-start distance of two destination rows (= dstRowSkip + width * components)
+local	_gleTextureImagePut_FastUint	param_10	dstFormat	CONFIRMED	switch(param_10) on GL formats (0x1900 COLOR_INDEX, 0x1906 ALPHA, 0x1907 RGB, 0x1908 RGBA, 0x1909 LUMINANCE, 0x190a LUMINANCE_ALPHA) and _gleComponents(param_10) sizes the destination row; caller passes the texture level format (+0x10)
+local	_gleTextureImagePut_FastUint	param_11	srcFormat	CONFIRMED	inner compares param_11 against GL formats to choose the component layout of the source pixels (e.g. 0x1908 RGBA: alpha at +3, stride 4); caller passes its format argument
+local	_gleTextureImagePut_FastUint	puVar1	srcComponent	INFERRED	pointer to a later component of the current source pixel (cursor + 2/3 or +4/+0xc bytes in the Uint case), dereferenced once and then the cursor advances
+local	_gleTextureImagePut_FastUint	uVar2	srcValue	CONFIRMED	the source component just read through the source cursor (*cursor) before it is converted and stored to dst
+local	_gleTextureImagePut_FastUint	puVar5	dstRowEnd	CONFIRMED	= dst + width * components, advanced by dstRowStride per row: the end of the current destination row (compared against dst in the pixel loops)
+local	_gleTextureImagePut_FastUint	uVar6	pixelsLeft	CONFIRMED	(dstRowEnd + 3 - dst) >> 2: number of 4-byte destination pixels in the row, counted down by the inner loop
+local	_gleTransformNormalBlend	puVar14	vectorNormalize	CONFIRMED	only assigned _gleVectorNormalize: holds the address of that function (stored into the context function-pointer slot)
+local	_gleCreateBufferObject	puVar1	freeBufferObject	CONFIRMED	only assigned _gleFreeBufferObject: holds the address of that function (stored into the context function-pointer slot)
+local	_gleSwitchToNonRevertRenderer	puVar2	setClipInterpFunc	CONFIRMED	only assigned _gleSetClipInterpFunc: holds the address of that function (stored into the context function-pointer slot)
+local	_gleUpdateDispatchCodeChange	puVar2	setEyeInterpFunc	CONFIRMED	only assigned _gleSetEyeInterpFunc: holds the address of that function (stored into the context function-pointer slot)
+local	_gleBindRenderbuffer	puVar1	freeTextureObject	CONFIRMED	only assigned _gleFreeTextureObject: holds the address of that function (stored into the context function-pointer slot)
+local	_gleCreateFramebufferObject	puVar1	freeFramebufferObject	CONFIRMED	only assigned _gleFreeFramebufferObject: holds the address of that function (stored into the context function-pointer slot)
+local	_gleFPChanged	puVar1	setClipInterpFunc	CONFIRMED	only assigned _gleSetClipInterpFunc: holds the address of that function (stored into the context function-pointer slot)
+local	_gleGetHashMachineObjectNameTargetPairs	puVar1	zeroTargetExtractor	CONFIRMED	only assigned _zeroTargetExtractor: holds the address of that function (stored into the context function-pointer slot)
+local	_gleVtxLightRGBAFront_body	puVar3	vectorNormalize	CONFIRMED	only assigned _gleVectorNormalize: holds the address of that function (stored into the context function-pointer slot)
+local	_gleVtxLightRGBABack_body	puVar3	vectorNormalize	CONFIRMED	only assigned _gleVectorNormalize: holds the address of that function (stored into the context function-pointer slot)
+local	_gleVtxLightSpecRGBAFront	puVar5	vectorNormalize	CONFIRMED	only assigned _gleVectorNormalize: holds the address of that function (stored into the context function-pointer slot)
+local	_gleVtxLightSpecRGBABack	puVar5	vectorNormalize	CONFIRMED	only assigned _gleVectorNormalize: holds the address of that function (stored into the context function-pointer slot)
+local	_gleVtxLightRGBAFrontPtr	puVar3	vectorNormalize	CONFIRMED	only assigned _gleVectorNormalize: holds the address of that function (stored into the context function-pointer slot)
+local	_gleVtxLightRGBABackPtr	puVar3	vectorNormalize	CONFIRMED	only assigned _gleVectorNormalize: holds the address of that function (stored into the context function-pointer slot)
+local	_gleVtxLightSpecRGBAFrontPtr	puVar3	vectorNormalize	CONFIRMED	only assigned _gleVectorNormalize: holds the address of that function (stored into the context function-pointer slot)
+local	_gleVtxLightSpecRGBABackPtr	puVar4	vectorNormalize	CONFIRMED	only assigned _gleVectorNormalize: holds the address of that function (stored into the context function-pointer slot)
+local	_gleBeginLinesRenderSmooth	puVar1	flushAtomicFunc	CONFIRMED	only assigned _gleFlushAtomicFunc: holds the address of that function (stored into the context function-pointer slot)
+local	_gleBeginLinesRenderFlat	puVar1	flushAtomicFunc	CONFIRMED	only assigned _gleFlushAtomicFunc: holds the address of that function (stored into the context function-pointer slot)
+local	_gleBeginLinesRenderTCL	puVar1	flushAtomicTCLFunc	CONFIRMED	only assigned _gleFlushAtomicTCLFunc: holds the address of that function (stored into the context function-pointer slot)
+local	_gleBeginLinesRenderTCLRDirty	puVar1	flushAtomicTCLRDirtyFunc	CONFIRMED	only assigned _gleFlushAtomicTCLRDirtyFunc: holds the address of that function (stored into the context function-pointer slot)
+local	_gleBeginLinesRenderTCLRDirty	puVar2	renderLinesTCLFunc	CONFIRMED	only assigned _gleRenderLinesTCLFunc: holds the address of that function (stored into the context function-pointer slot)
+local	_gleBeginLineStripRenderSmooth	puVar1	renderSmoothLineStripFunc	CONFIRMED	only assigned _gleRenderSmoothLineStripFunc: holds the address of that function (stored into the context function-pointer slot)
+local	_gleBeginLineStripRenderSmooth	puVar2	flushLineStripFunc	CONFIRMED	only assigned _gleFlushLineStripFunc: holds the address of that function (stored into the context function-pointer slot)
+local	_gleBeginLineStripRenderFlat	puVar1	renderFlatLineStripFunc	CONFIRMED	only assigned _gleRenderFlatLineStripFunc: holds the address of that function (stored into the context function-pointer slot)
+local	_gleBeginLineStripRenderFlat	puVar2	flushLineStripFunc	CONFIRMED	only assigned _gleFlushLineStripFunc: holds the address of that function (stored into the context function-pointer slot)
+local	_gleBeginLineStripRenderTCLRDirty	puVar1	flushLineStripTCLRDirtyFunc	CONFIRMED	only assigned _gleFlushLineStripTCLRDirtyFunc: holds the address of that function (stored into the context function-pointer slot)
+local	_gleBeginLineStripRenderTCLRDirty	puVar2	renderLineStripTCLFunc	CONFIRMED	only assigned _gleRenderLineStripTCLFunc: holds the address of that function (stored into the context function-pointer slot)
+local	_gleBeginLineLoopRenderSmooth	puVar1	renderSmoothLineLoopFunc	CONFIRMED	only assigned _gleRenderSmoothLineLoopFunc: holds the address of that function (stored into the context function-pointer slot)
+local	_gleBeginLineLoopRenderSmooth	puVar2	flushLineLoopFunc	CONFIRMED	only assigned _gleFlushLineLoopFunc: holds the address of that function (stored into the context function-pointer slot)
+local	_gleBeginLineLoopRenderFlat	puVar1	renderFlatLineLoopFunc	CONFIRMED	only assigned _gleRenderFlatLineLoopFunc: holds the address of that function (stored into the context function-pointer slot)
+local	_gleBeginLineLoopRenderFlat	puVar2	flushLineLoopFunc	CONFIRMED	only assigned _gleFlushLineLoopFunc: holds the address of that function (stored into the context function-pointer slot)
+local	_gleBeginLineLoopRenderTCLRDirty	puVar1	flushLineLoopTCLRDirtyFunc	CONFIRMED	only assigned _gleFlushLineLoopTCLRDirtyFunc: holds the address of that function (stored into the context function-pointer slot)
+local	_gleBeginLineLoopRenderTCLRDirty	puVar2	renderLineLoopTCLFunc	CONFIRMED	only assigned _gleRenderLineLoopTCLFunc: holds the address of that function (stored into the context function-pointer slot)
+local	_gleEvalMap2	puVar4	vectorNormalize	CONFIRMED	only assigned _gleVectorNormalize: holds the address of that function (stored into the context function-pointer slot)
+local	_gleCreateQueryObject	puVar3	freeQueryObject	CONFIRMED	only assigned _gleFreeQueryObject: holds the address of that function (stored into the context function-pointer slot)
+local	_gleBeginPointsRender	puVar1	flushAtomicFunc	CONFIRMED	only assigned _gleFlushAtomicFunc: holds the address of that function (stored into the context function-pointer slot)
+local	_gleBeginPointsRenderTCL	puVar1	flushAtomicTCLFunc	CONFIRMED	only assigned _gleFlushAtomicTCLFunc: holds the address of that function (stored into the context function-pointer slot)
+local	_gleBeginPointsRenderTCLRDirty	puVar1	flushAtomicTCLRDirtyFunc	CONFIRMED	only assigned _gleFlushAtomicTCLRDirtyFunc: holds the address of that function (stored into the context function-pointer slot)
+local	_gleBeginPointsRenderTCLRDirty	puVar2	renderPointsTCLFunc	CONFIRMED	only assigned _gleRenderPointsTCLFunc: holds the address of that function (stored into the context function-pointer slot)
+local	_gleBeginTrianglesRenderSmooth	puVar1	flushAtomicFunc	CONFIRMED	only assigned _gleFlushAtomicFunc: holds the address of that function (stored into the context function-pointer slot)
+local	_gleBeginTrianglesRenderFlat	puVar1	flushAtomicFunc	CONFIRMED	only assigned _gleFlushAtomicFunc: holds the address of that function (stored into the context function-pointer slot)
+local	_gleBeginTrianglesRenderTCL	puVar1	flushAtomicTCLFunc	CONFIRMED	only assigned _gleFlushAtomicTCLFunc: holds the address of that function (stored into the context function-pointer slot)
+local	_gleBeginTrianglesRenderTCLRDirty	puVar1	flushAtomicTCLRDirtyFunc	CONFIRMED	only assigned _gleFlushAtomicTCLRDirtyFunc: holds the address of that function (stored into the context function-pointer slot)
+local	_gleBeginTrianglesRenderTCLRDirty	puVar2	renderTrianglesTCLFunc	CONFIRMED	only assigned _gleRenderTrianglesTCLFunc: holds the address of that function (stored into the context function-pointer slot)
+local	_gleBeginTriangleStripRenderSmooth	puVar1	flushTriQuadStripFunc	CONFIRMED	only assigned _gleFlushTriQuadStripFunc: holds the address of that function (stored into the context function-pointer slot)
+local	_gleBeginTriangleStripRenderFlat	puVar1	flushTriQuadStripFunc	CONFIRMED	only assigned _gleFlushTriQuadStripFunc: holds the address of that function (stored into the context function-pointer slot)
+local	_gleBeginTriangleStripRenderTCL	puVar1	flushTriQuadStripTCLFunc	CONFIRMED	only assigned _gleFlushTriQuadStripTCLFunc: holds the address of that function (stored into the context function-pointer slot)
+local	_gleBeginTriangleStripRenderTCLRDirty	puVar1	flushTriQuadStripTCLRDirtyFunc	CONFIRMED	only assigned _gleFlushTriQuadStripTCLRDirtyFunc: holds the address of that function (stored into the context function-pointer slot)
+local	_gleBeginTriangleStripRenderTCLRDirty	puVar2	renderTriangleStripTCLFunc	CONFIRMED	only assigned _gleRenderTriangleStripTCLFunc: holds the address of that function (stored into the context function-pointer slot)
+local	_gleBeginTriangleFanRenderSmooth	puVar1	flushTriangleFanFunc	CONFIRMED	only assigned _gleFlushTriangleFanFunc: holds the address of that function (stored into the context function-pointer slot)
+local	_gleBeginTriangleFanRenderFlat	puVar1	flushTriangleFanFunc	CONFIRMED	only assigned _gleFlushTriangleFanFunc: holds the address of that function (stored into the context function-pointer slot)
+local	_gleBeginTriangleFanRenderTCL	puVar1	flushTriangleFanTCLFunc	CONFIRMED	only assigned _gleFlushTriangleFanTCLFunc: holds the address of that function (stored into the context function-pointer slot)
+local	_gleBeginTriangleFanRenderTCLRDirty	puVar1	flushTriangleFanTCLRDirtyFunc	CONFIRMED	only assigned _gleFlushTriangleFanTCLRDirtyFunc: holds the address of that function (stored into the context function-pointer slot)
+local	_gleBeginTriangleFanRenderTCLRDirty	puVar2	renderTriangleFanTCLFunc	CONFIRMED	only assigned _gleRenderTriangleFanTCLFunc: holds the address of that function (stored into the context function-pointer slot)
+local	_gleBeginQuadsRenderSmooth	puVar1	flushAtomicFunc	CONFIRMED	only assigned _gleFlushAtomicFunc: holds the address of that function (stored into the context function-pointer slot)
+local	_gleBeginQuadsRenderFlat	puVar1	flushAtomicFunc	CONFIRMED	only assigned _gleFlushAtomicFunc: holds the address of that function (stored into the context function-pointer slot)
+local	_gleBeginQuadsRenderTCLRDirty	puVar1	flushAtomicTCLRDirtyFunc	CONFIRMED	only assigned _gleFlushAtomicTCLRDirtyFunc: holds the address of that function (stored into the context function-pointer slot)
+local	_gleBeginQuadsRenderTCLRDirty	puVar2	renderQuadsTCLFunc	CONFIRMED	only assigned _gleRenderQuadsTCLFunc: holds the address of that function (stored into the context function-pointer slot)
+local	_gleBeginQuadStripRenderSmooth	puVar1	flushTriQuadStripFunc	CONFIRMED	only assigned _gleFlushTriQuadStripFunc: holds the address of that function (stored into the context function-pointer slot)
+local	_gleBeginQuadStripRenderFlat	puVar1	flushTriQuadStripFunc	CONFIRMED	only assigned _gleFlushTriQuadStripFunc: holds the address of that function (stored into the context function-pointer slot)
+local	_gleBeginQuadStripRenderTCL	puVar1	flushTriQuadStripTCLFunc	CONFIRMED	only assigned _gleFlushTriQuadStripTCLFunc: holds the address of that function (stored into the context function-pointer slot)
+local	_gleBeginQuadStripRenderTCLRDirty	puVar1	renderQuadStripTCLFunc	CONFIRMED	only assigned _gleRenderQuadStripTCLFunc: holds the address of that function (stored into the context function-pointer slot)
+local	_gleBeginQuadStripRenderTCLRDirty	puVar2	flushTriQuadStripTCLRDirtyFunc	CONFIRMED	only assigned _gleFlushTriQuadStripTCLRDirtyFunc: holds the address of that function (stored into the context function-pointer slot)
+local	_gleBeginPolygonRenderSmooth	puVar1	renderSmoothPolygonFunc	CONFIRMED	only assigned _gleRenderSmoothPolygonFunc: holds the address of that function (stored into the context function-pointer slot)
+local	_gleBeginPolygonRenderSmooth	puVar2	flushPolygonFunc	CONFIRMED	only assigned _gleFlushPolygonFunc: holds the address of that function (stored into the context function-pointer slot)
+local	_gleBeginPolygonRenderFlat	puVar1	renderFlatPolygonFunc	CONFIRMED	only assigned _gleRenderFlatPolygonFunc: holds the address of that function (stored into the context function-pointer slot)
+local	_gleBeginPolygonRenderFlat	puVar2	flushPolygonFunc	CONFIRMED	only assigned _gleFlushPolygonFunc: holds the address of that function (stored into the context function-pointer slot)
+local	_gleBeginPolygonRenderTCLRDirty	puVar1	flushPolygonTCLRDirtyFunc	CONFIRMED	only assigned _gleFlushPolygonTCLRDirtyFunc: holds the address of that function (stored into the context function-pointer slot)
+local	_gleBeginPolygonRenderTCLRDirty	puVar2	renderPolygonTCLFunc	CONFIRMED	only assigned _gleRenderPolygonTCLFunc: holds the address of that function (stored into the context function-pointer slot)
+local	_gleBeginRSLNoop	puVar1	flushNoop	CONFIRMED	only assigned _gleFlushNoop: holds the address of that function (stored into the context function-pointer slot)
+local	_gleBeginPrimitiveTCLRDirtyFunc	puVar2	renderPrimitiveTCLFunc	CONFIRMED	only assigned _gleRenderPrimitiveTCLFunc: holds the address of that function (stored into the context function-pointer slot)
+local	_gleVtxTextureCoordGenEyeSlow	puVar6	vectorNormalize	CONFIRMED	only assigned _gleVectorNormalize: holds the address of that function (stored into the context function-pointer slot)
+local	_gleVtxTextureCoordGenReflectST	puVar2	vectorNormalize	CONFIRMED	only assigned _gleVectorNormalize: holds the address of that function (stored into the context function-pointer slot)
+local	_gleVtxTextureCoordGenReflectSTR	puVar2	vectorNormalize	CONFIRMED	only assigned _gleVectorNormalize: holds the address of that function (stored into the context function-pointer slot)
+local	_gleMultiVtxTextureCoordGenEyeSlow	puVar11	vectorNormalize	CONFIRMED	only assigned _gleVectorNormalize: holds the address of that function (stored into the context function-pointer slot)
+local	_gleMultiVtxTextureCoordGenReflectST	puVar3	vectorNormalize	CONFIRMED	only assigned _gleVectorNormalize: holds the address of that function (stored into the context function-pointer slot)
+local	_gleMultiVtxTextureCoordGenReflectSTR	puVar3	vectorNormalize	CONFIRMED	only assigned _gleVectorNormalize: holds the address of that function (stored into the context function-pointer slot)
+local	_gleVPBeginPoints	puVar1	vpRenderPoints	CONFIRMED	only assigned _gleVPRenderPoints: holds the address of that function (stored into the context function-pointer slot)
+local	_gleVPBeginPoints	puVar2	vpFlushAtomic	CONFIRMED	only assigned _gleVPFlushAtomic: holds the address of that function (stored into the context function-pointer slot)
+local	_gleVPBeginLines	puVar1	vpRenderLines	CONFIRMED	only assigned _gleVPRenderLines: holds the address of that function (stored into the context function-pointer slot)
+local	_gleVPBeginLines	puVar2	vpFlushAtomic	CONFIRMED	only assigned _gleVPFlushAtomic: holds the address of that function (stored into the context function-pointer slot)
+local	_gleVPBeginLineLoop	puVar1	vpRenderLineLoop	CONFIRMED	only assigned _gleVPRenderLineLoop: holds the address of that function (stored into the context function-pointer slot)
+local	_gleVPBeginLineLoop	puVar2	vpFlushLineLoop	CONFIRMED	only assigned _gleVPFlushLineLoop: holds the address of that function (stored into the context function-pointer slot)
+local	_gleVPBeginLineStrip	puVar1	vpRenderLineStrip	CONFIRMED	only assigned _gleVPRenderLineStrip: holds the address of that function (stored into the context function-pointer slot)
+local	_gleVPBeginLineStrip	puVar2	vpFlushLineStrip	CONFIRMED	only assigned _gleVPFlushLineStrip: holds the address of that function (stored into the context function-pointer slot)
+local	_gleVPBeginTriangles	puVar1	vpRenderTriangles	CONFIRMED	only assigned _gleVPRenderTriangles: holds the address of that function (stored into the context function-pointer slot)
+local	_gleVPBeginTriangles	puVar2	vpFlushAtomic	CONFIRMED	only assigned _gleVPFlushAtomic: holds the address of that function (stored into the context function-pointer slot)
+local	_gleVPBeginTriangleStrip	puVar1	vpRenderTriangleStrip	CONFIRMED	only assigned _gleVPRenderTriangleStrip: holds the address of that function (stored into the context function-pointer slot)
+local	_gleVPBeginTriangleStrip	puVar2	vpFlushTriQuadStrip	CONFIRMED	only assigned _gleVPFlushTriQuadStrip: holds the address of that function (stored into the context function-pointer slot)
+local	_gleVPBeginTriangleFan	puVar1	vpRenderTriangleFan	CONFIRMED	only assigned _gleVPRenderTriangleFan: holds the address of that function (stored into the context function-pointer slot)
+local	_gleVPBeginTriangleFan	puVar2	vpFlushTriangleFan	CONFIRMED	only assigned _gleVPFlushTriangleFan: holds the address of that function (stored into the context function-pointer slot)
+local	_gleVPBeginQuads	puVar1	vpRenderQuads	CONFIRMED	only assigned _gleVPRenderQuads: holds the address of that function (stored into the context function-pointer slot)
+local	_gleVPBeginQuads	puVar2	vpFlushAtomic	CONFIRMED	only assigned _gleVPFlushAtomic: holds the address of that function (stored into the context function-pointer slot)
+local	_gleVPBeginQuadStrip	puVar1	vpRenderQuadStrip	CONFIRMED	only assigned _gleVPRenderQuadStrip: holds the address of that function (stored into the context function-pointer slot)
+local	_gleVPBeginQuadStrip	puVar2	vpFlushTriQuadStrip	CONFIRMED	only assigned _gleVPFlushTriQuadStrip: holds the address of that function (stored into the context function-pointer slot)
+local	_gleVPBeginPolygon	puVar1	vpRenderPolygon	CONFIRMED	only assigned _gleVPRenderPolygon: holds the address of that function (stored into the context function-pointer slot)
+local	_gleVPBeginPolygon	puVar2	vpFlushPolygon	CONFIRMED	only assigned _gleVPFlushPolygon: holds the address of that function (stored into the context function-pointer slot)
+local	_gleVPBeginPointsTCL	puVar1	vpFlushAtomicTCL	CONFIRMED	only assigned _gleVPFlushAtomicTCL: holds the address of that function (stored into the context function-pointer slot)
+local	_gleVPBeginLinesTCL	puVar1	vpFlushAtomicTCL	CONFIRMED	only assigned _gleVPFlushAtomicTCL: holds the address of that function (stored into the context function-pointer slot)
+local	_gleVPBeginLineLoopTCL	puVar1	vpFlushLineLoopTCL	CONFIRMED	only assigned _gleVPFlushLineLoopTCL: holds the address of that function (stored into the context function-pointer slot)
+local	_gleVPBeginLineLoopTCL	puVar2	renderLineLoopTCLFunc	CONFIRMED	only assigned _gleRenderLineLoopTCLFunc: holds the address of that function (stored into the context function-pointer slot)
+local	_gleVPBeginLineStripTCL	puVar1	vpFlushLineStripTCL	CONFIRMED	only assigned _gleVPFlushLineStripTCL: holds the address of that function (stored into the context function-pointer slot)
+local	_gleVPBeginLineStripTCL	puVar2	renderLineStripTCLFunc	CONFIRMED	only assigned _gleRenderLineStripTCLFunc: holds the address of that function (stored into the context function-pointer slot)
+local	_gleVPBeginTrianglesTCL	puVar1	vpFlushAtomicTCL	CONFIRMED	only assigned _gleVPFlushAtomicTCL: holds the address of that function (stored into the context function-pointer slot)
+local	_gleVPBeginTriangleStripTCL	puVar1	vpFlushTriQuadStripTCL	CONFIRMED	only assigned _gleVPFlushTriQuadStripTCL: holds the address of that function (stored into the context function-pointer slot)
+local	_gleVPBeginTriangleFanTCL	puVar1	vpFlushTriangleFanTCL	CONFIRMED	only assigned _gleVPFlushTriangleFanTCL: holds the address of that function (stored into the context function-pointer slot)
+local	_gleVPBeginQuadsTCL	puVar1	vpFlushAtomicTCL	CONFIRMED	only assigned _gleVPFlushAtomicTCL: holds the address of that function (stored into the context function-pointer slot)
+local	_gleVPBeginQuadStripTCL	puVar1	vpFlushTriQuadStripTCL	CONFIRMED	only assigned _gleVPFlushTriQuadStripTCL: holds the address of that function (stored into the context function-pointer slot)
+local	_gleVPBeginPolygonTCL	puVar1	vpFlushPolygonTCL	CONFIRMED	only assigned _gleVPFlushPolygonTCL: holds the address of that function (stored into the context function-pointer slot)
+local	_gleVPBeginPolygonTCL	puVar2	renderPolygonTCLFunc	CONFIRMED	only assigned _gleRenderPolygonTCLFunc: holds the address of that function (stored into the context function-pointer slot)
+local	_gleVPBeginPointsTCLRDirty	puVar1	vpFlushAtomicTCLRDirty	CONFIRMED	only assigned _gleVPFlushAtomicTCLRDirty: holds the address of that function (stored into the context function-pointer slot)
+local	_gleVPBeginLinesTCLRDirty	puVar1	vpFlushAtomicTCLRDirty	CONFIRMED	only assigned _gleVPFlushAtomicTCLRDirty: holds the address of that function (stored into the context function-pointer slot)
+local	_gleVPBeginLineLoopTCLRDirty	puVar1	vpFlushLineLoopTCLRDirty	CONFIRMED	only assigned _gleVPFlushLineLoopTCLRDirty: holds the address of that function (stored into the context function-pointer slot)
+local	_gleVPBeginLineLoopTCLRDirty	puVar2	renderLineLoopTCLFunc	CONFIRMED	only assigned _gleRenderLineLoopTCLFunc: holds the address of that function (stored into the context function-pointer slot)
+local	_gleVPBeginLineStripTCLRDirty	puVar1	vpFlushLineStripTCLRDirty	CONFIRMED	only assigned _gleVPFlushLineStripTCLRDirty: holds the address of that function (stored into the context function-pointer slot)
+local	_gleVPBeginLineStripTCLRDirty	puVar2	renderLineStripTCLFunc	CONFIRMED	only assigned _gleRenderLineStripTCLFunc: holds the address of that function (stored into the context function-pointer slot)
+local	_gleVPBeginTrianglesTCLRDirty	puVar1	vpFlushAtomicTCLRDirty	CONFIRMED	only assigned _gleVPFlushAtomicTCLRDirty: holds the address of that function (stored into the context function-pointer slot)
+local	_gleVPBeginTriangleStripTCLRDirty	puVar1	vpFlushTriQuadStripTCLRDirty	CONFIRMED	only assigned _gleVPFlushTriQuadStripTCLRDirty: holds the address of that function (stored into the context function-pointer slot)
+local	_gleVPBeginTriangleFanTCLRDirty	puVar1	vpFlushTriangleFanTCLRDirty	CONFIRMED	only assigned _gleVPFlushTriangleFanTCLRDirty: holds the address of that function (stored into the context function-pointer slot)
+local	_gleVPBeginQuadsTCLRDirty	puVar1	vpFlushAtomicTCLRDirty	CONFIRMED	only assigned _gleVPFlushAtomicTCLRDirty: holds the address of that function (stored into the context function-pointer slot)
+local	_gleVPBeginQuadStripTCLRDirty	puVar1	vpFlushTriQuadStripTCLRDirty	CONFIRMED	only assigned _gleVPFlushTriQuadStripTCLRDirty: holds the address of that function (stored into the context function-pointer slot)
+local	_gleVPBeginPolygonTCLRDirty	puVar1	vpFlushPolygonTCLRDirty	CONFIRMED	only assigned _gleVPFlushPolygonTCLRDirty: holds the address of that function (stored into the context function-pointer slot)
+local	_gleVPBeginPolygonTCLRDirty	puVar2	renderPolygonTCLFunc	CONFIRMED	only assigned _gleRenderPolygonTCLFunc: holds the address of that function (stored into the context function-pointer slot)
+local	_gliSwitchPlugin	puVar2	setClipInterpFunc	CONFIRMED	only assigned _gleSetClipInterpFunc: holds the address of that function (stored into the context function-pointer slot)

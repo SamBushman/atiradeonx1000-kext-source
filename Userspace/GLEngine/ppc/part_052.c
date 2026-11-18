@@ -4,11 +4,11 @@
 void _gleBeginQuadsRenderFlat(glContext)
   int glContext;
 {
-  undefined *puVar1;
+  undefined *flushAtomicFunc;
   
-  puVar1 = PTR__gleFlushAtomicFunc_00112224;
+  flushAtomicFunc = PTR__gleFlushAtomicFunc_00112224;
   *(undefined4 *)(glContext + 0x4858) = *(undefined4 *)(glContext + 0x4854);
-  *(undefined **)(glContext + 0x4a0c) = puVar1;
+  *(undefined **)(glContext + 0x4a0c) = flushAtomicFunc;
   *(undefined **)(glContext + 0x4a08) = PTR__gleRenderFlatQuadsFunc_00112284;
   return;
 }
@@ -17,14 +17,14 @@ void _gleBeginQuadsRenderFlat(glContext)
 void _gleBeginQuadsRenderTCLRDirty(glContext)
   int glContext;
 {
-  undefined *puVar1;
-  undefined *puVar2;
+  undefined *flushAtomicTCLRDirtyFunc;
+  undefined *renderQuadsTCLFunc;
   
-  puVar2 = PTR__gleRenderQuadsTCLFunc_00112280;
-  puVar1 = PTR__gleFlushAtomicTCLRDirtyFunc_00112210;
+  renderQuadsTCLFunc = PTR__gleRenderQuadsTCLFunc_00112280;
+  flushAtomicTCLRDirtyFunc = PTR__gleFlushAtomicTCLRDirtyFunc_00112210;
   *(undefined4 *)(glContext + 0x486c) = 0;
-  *(undefined **)(glContext + 0x4a0c) = puVar1;
-  *(undefined **)(glContext + 0x4a08) = puVar2;
+  *(undefined **)(glContext + 0x4a0c) = flushAtomicTCLRDirtyFunc;
+  *(undefined **)(glContext + 0x4a08) = renderQuadsTCLFunc;
   *(undefined4 *)(glContext + 0x4858) = *(undefined4 *)(glContext + 0x4854);
   return;
 }
@@ -33,11 +33,11 @@ void _gleBeginQuadsRenderTCLRDirty(glContext)
 void _gleBeginQuadStripRenderSmooth(glContext)
   int glContext;
 {
-  undefined *puVar1;
+  undefined *flushTriQuadStripFunc;
   
-  puVar1 = PTR__gleFlushTriQuadStripFunc_001122c8;
+  flushTriQuadStripFunc = PTR__gleFlushTriQuadStripFunc_001122c8;
   *(undefined4 *)(glContext + 0x4858) = *(undefined4 *)(glContext + 0x4854);
-  *(undefined **)(glContext + 0x4a0c) = puVar1;
+  *(undefined **)(glContext + 0x4a0c) = flushTriQuadStripFunc;
   *(undefined **)(glContext + 0x4a08) = PTR__gleRenderSmoothQuadStripFunc_00112274;
   return;
 }
@@ -46,11 +46,11 @@ void _gleBeginQuadStripRenderSmooth(glContext)
 void _gleBeginQuadStripRenderFlat(glContext)
   int glContext;
 {
-  undefined *puVar1;
+  undefined *flushTriQuadStripFunc;
   
-  puVar1 = PTR__gleFlushTriQuadStripFunc_001122c8;
+  flushTriQuadStripFunc = PTR__gleFlushTriQuadStripFunc_001122c8;
   *(undefined4 *)(glContext + 0x4858) = *(undefined4 *)(glContext + 0x4854);
-  *(undefined **)(glContext + 0x4a0c) = puVar1;
+  *(undefined **)(glContext + 0x4a0c) = flushTriQuadStripFunc;
   *(undefined **)(glContext + 0x4a08) = PTR__gleRenderFlatQuadStripFunc_00112270;
   return;
 }
@@ -59,11 +59,11 @@ void _gleBeginQuadStripRenderFlat(glContext)
 void _gleBeginQuadStripRenderTCL(glContext)
   int glContext;
 {
-  undefined *puVar1;
+  undefined *flushTriQuadStripTCLFunc;
   
-  puVar1 = PTR__gleFlushTriQuadStripTCLFunc_001122bc;
+  flushTriQuadStripTCLFunc = PTR__gleFlushTriQuadStripTCLFunc_001122bc;
   *(undefined4 *)(glContext + 0x4858) = *(undefined4 *)(glContext + 0x4854);
-  *(undefined **)(glContext + 0x4a0c) = puVar1;
+  *(undefined **)(glContext + 0x4a0c) = flushTriQuadStripTCLFunc;
   *(undefined **)(glContext + 0x4a08) = PTR__gleRenderQuadStripTCLFunc_0011226c;
   return;
 }
@@ -72,14 +72,14 @@ void _gleBeginQuadStripRenderTCL(glContext)
 void _gleBeginQuadStripRenderTCLRDirty(glContext)
   int glContext;
 {
-  undefined *puVar1;
-  undefined *puVar2;
+  undefined *renderQuadStripTCLFunc;
+  undefined *flushTriQuadStripTCLRDirtyFunc;
   
-  puVar2 = PTR__gleFlushTriQuadStripTCLRDirtyFunc_001122b4;
-  puVar1 = PTR__gleRenderQuadStripTCLFunc_0011226c;
+  flushTriQuadStripTCLRDirtyFunc = PTR__gleFlushTriQuadStripTCLRDirtyFunc_001122b4;
+  renderQuadStripTCLFunc = PTR__gleRenderQuadStripTCLFunc_0011226c;
   *(undefined4 *)(glContext + 0x486c) = 0;
-  *(undefined **)(glContext + 0x4a0c) = puVar2;
-  *(undefined **)(glContext + 0x4a08) = puVar1;
+  *(undefined **)(glContext + 0x4a0c) = flushTriQuadStripTCLRDirtyFunc;
+  *(undefined **)(glContext + 0x4a08) = renderQuadStripTCLFunc;
   *(undefined4 *)(glContext + 0x4858) = *(undefined4 *)(glContext + 0x4854);
   return;
 }
@@ -104,15 +104,15 @@ void _gleBeginQuadStripSelectFeedback(glContext)
 void _gleBeginPolygonRenderSmooth(glContext)
   int glContext;
 {
-  undefined *puVar1;
-  undefined *puVar2;
+  undefined *renderSmoothPolygonFunc;
+  undefined *flushPolygonFunc;
   
   *(undefined1 *)(glContext + 0x4a18) = 0;
-  puVar2 = PTR__gleFlushPolygonFunc_00112260;
-  puVar1 = PTR__gleRenderSmoothPolygonFunc_0011225c;
+  flushPolygonFunc = PTR__gleFlushPolygonFunc_00112260;
+  renderSmoothPolygonFunc = PTR__gleRenderSmoothPolygonFunc_0011225c;
   *(undefined4 *)(glContext + 0x4858) = *(undefined4 *)(glContext + 0x4854);
-  *(undefined **)(glContext + 0x4a0c) = puVar2;
-  *(undefined **)(glContext + 0x4a08) = puVar1;
+  *(undefined **)(glContext + 0x4a0c) = flushPolygonFunc;
+  *(undefined **)(glContext + 0x4a08) = renderSmoothPolygonFunc;
   return;
 }
 
@@ -120,15 +120,15 @@ void _gleBeginPolygonRenderSmooth(glContext)
 void _gleBeginPolygonRenderFlat(glContext)
   int glContext;
 {
-  undefined *puVar1;
-  undefined *puVar2;
+  undefined *renderFlatPolygonFunc;
+  undefined *flushPolygonFunc;
   
   *(undefined1 *)(glContext + 0x4a18) = 0;
-  puVar2 = PTR__gleFlushPolygonFunc_00112260;
-  puVar1 = PTR__gleRenderFlatPolygonFunc_00112258;
+  flushPolygonFunc = PTR__gleFlushPolygonFunc_00112260;
+  renderFlatPolygonFunc = PTR__gleRenderFlatPolygonFunc_00112258;
   *(undefined4 *)(glContext + 0x4858) = *(undefined4 *)(glContext + 0x4854);
-  *(undefined **)(glContext + 0x4a0c) = puVar2;
-  *(undefined **)(glContext + 0x4a08) = puVar1;
+  *(undefined **)(glContext + 0x4a0c) = flushPolygonFunc;
+  *(undefined **)(glContext + 0x4a08) = renderFlatPolygonFunc;
   return;
 }
 
@@ -136,15 +136,15 @@ void _gleBeginPolygonRenderFlat(glContext)
 void _gleBeginPolygonRenderTCLRDirty(glContext)
   int glContext;
 {
-  undefined *puVar1;
-  undefined *puVar2;
+  undefined *flushPolygonTCLRDirtyFunc;
+  undefined *renderPolygonTCLFunc;
   
   *(undefined1 *)(glContext + 0x4a18) = 0;
-  puVar2 = PTR__gleRenderPolygonTCLFunc_00112250;
-  puVar1 = PTR__gleFlushPolygonTCLRDirtyFunc_0011224c;
+  renderPolygonTCLFunc = PTR__gleRenderPolygonTCLFunc_00112250;
+  flushPolygonTCLRDirtyFunc = PTR__gleFlushPolygonTCLRDirtyFunc_0011224c;
   *(undefined4 *)(glContext + 0x486c) = 0;
-  *(undefined **)(glContext + 0x4a0c) = puVar1;
-  *(undefined **)(glContext + 0x4a08) = puVar2;
+  *(undefined **)(glContext + 0x4a0c) = flushPolygonTCLRDirtyFunc;
+  *(undefined **)(glContext + 0x4a08) = renderPolygonTCLFunc;
   *(undefined4 *)(glContext + 0x4858) = *(undefined4 *)(glContext + 0x4854);
   return;
 }
@@ -166,7 +166,7 @@ void _gleBeginPolygonSelectFeedback(glContext)
 }
 
 /* _glePolyCentroid @ 0xeb91c (244 bytes) */
-void _glePolyCentroid(undefined4 param_1,float *param_2,int param_3,float *param_4,float *param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12)
+void _glePolyCentroid(undefined4 unusedArg1,float *param_2,int param_3,float *param_4,float *param_5,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12)
 {
   float fVar1;
   float fVar2;
@@ -213,7 +213,7 @@ void _glePolyCentroid(undefined4 param_1,float *param_2,int param_3,float *param
 }
 
 /* _gleClipPolyPlane @ 0xeba10 (496 bytes) */
-double _gleClipPolyPlane(int param_1,int *param_2,int param_3,int *param_4,int *param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10)
+double _gleClipPolyPlane(int glContext,int *param_2,int param_3,int *param_4,int *param_5,double fparam_1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10)
 {
   float fVar1;
   float fVar2;
@@ -235,13 +235,13 @@ double _gleClipPolyPlane(int param_1,int *param_2,int param_3,int *param_4,int *
   int *piVar18;
   int *piVar19;
   
-  iVar12 = *(int *)(param_1 + 0x4dfc);
+  iVar12 = *(int *)(glContext + 0x4dfc);
   iVar10 = 0;
   piVar17 = param_2 + param_3;
-  iVar15 = *(int *)(param_1 + 0x4858);
+  iVar15 = *(int *)(glContext + 0x4858);
   iVar14 = 0;
   if (0 < iVar12) {
-    piVar13 = (int *)(param_1 + 0x4e00);
+    piVar13 = (int *)(glContext + 0x4e00);
     piVar18 = param_4;
     piVar16 = param_2;
     do {
@@ -249,7 +249,7 @@ double _gleClipPolyPlane(int param_1,int *param_2,int param_3,int *param_4,int *
       iVar10 = *piVar13;
       iVar11 = *piVar16;
       piVar13 = piVar13 + 1;
-      iVar10 = param_1 + iVar10 * 0x10;
+      iVar10 = glContext + iVar10 * 0x10;
       fVar1 = *(float *)(iVar11 + 0x24);
       fVar2 = *(float *)(iVar10 + 0x4190);
       fVar3 = *(float *)(iVar10 + 0x418c);
@@ -269,8 +269,8 @@ double _gleClipPolyPlane(int param_1,int *param_2,int param_3,int *param_4,int *
                 (*(float *)(iVar10 + 0x20) * fVar3 + *(float *)(iVar10 + 0x24) * fVar2));
         if (fVar1 < fVar9) {
           if (fVar9 <= fVar4) {
-            fparam_1 = (double)(**(double ( **)(int,int,int,int,double))(param_1 + 0x49c8))
-                                         (param_1, *piVar19, iVar10, iVar15, (double)(fVar1 / (fVar1 - fVar4)));
+            fparam_1 = (double)(**(double ( **)(int,int,int,int,double))(glContext + 0x49c8))
+                                         (glContext, *piVar19, iVar10, iVar15, (double)(fVar1 / (fVar1 - fVar4)));
 LAB_000ebb68:
             *piVar18 = iVar15;
             iVar15 = iVar15 + 0x100;
@@ -281,8 +281,8 @@ LAB_000ebb68:
           *piVar18 = *piVar19;
           piVar18 = piVar18 + 1;
           if (fVar4 < fVar9) {
-            fparam_1 = (double)(**(double ( **)(int,int,int,int,double))(param_1 + 0x49c8))
-                                         (param_1, piVar19[1], *piVar19, iVar15, (double)(fVar4 / (fVar4 - fVar1)));
+            fparam_1 = (double)(**(double ( **)(int,int,int,int,double))(glContext + 0x49c8))
+                                         (glContext, piVar19[1], *piVar19, iVar15, (double)(fVar4 / (fVar4 - fVar1)));
             *(undefined1 *)(iVar15 + 0x7c) = 0;
             goto LAB_000ebb68;
           }
@@ -308,7 +308,7 @@ LAB_000ebb68:
     } while (iVar14 != 0);
   }
   *param_5 = iVar10;
-  *(int *)(param_1 + 0x4858) = iVar15;
+  *(int *)(glContext + 0x4858) = iVar15;
   return fparam_1;
 }
 
@@ -360,7 +360,7 @@ int _gleCullPolygonStack(param_1, param_2, param_3, param_4, param_5)
 }
 
 /* _gleCullTriangle @ 0xebcc0 (152 bytes) */
-undefined4 _gleCullTriangle(int param_1,float *param_2,float *param_3,float *param_4,uint param_5,uint *param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10)
+undefined4 _gleCullTriangle(int param_1,float *param_2,float *param_3,float *param_4,uint param_5,uint *param_6,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10)
 {
   uint uVar1;
   
@@ -377,7 +377,7 @@ undefined4 _gleCullTriangle(int param_1,float *param_2,float *param_3,float *par
 }
 
 /* _gleCullQuad @ 0xebd58 (160 bytes) */
-undefined4 _gleCullQuad(int param_1,float *param_2,float *param_3,float *param_4,float *param_5,uint *param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11)
+undefined4 _gleCullQuad(int param_1,float *param_2,float *param_3,float *param_4,float *param_5,uint *param_6,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11)
 {
   uint uVar1;
   
@@ -457,15 +457,15 @@ void _gleFeedbackPolygonFunc_body(glContext)
   int iVar14;
   uint uVar15;
   double fparam_1;
-  double in_f2;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
-  double in_stack_ffffff88;
-  double in_stack_ffffff90;
+  double incomingFpr2;
+  double incomingFpr3;
+  double incomingFpr4;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
+  double incomingStack_ffffff88;
+  double incomingStack_ffffff90;
   uint local_40;
   int local_3c [5];
   
@@ -568,8 +568,8 @@ LAB_000ec290:
   uVar9 = 0;
   piVar6 = piVar11;
   if (*(char *)(glContext + 0x4e18) != '\0') {
-    ((double (*)())_gleClipPolyPlane)(glContext,piVar12,uVar13,piVar11,&local_40,fparam_1,in_f2,in_f3,in_f4,in_f5,
-                      in_f6,in_f7,in_f8,in_stack_ffffff88,in_stack_ffffff90);
+    ((double (*)())_gleClipPolyPlane)(glContext,piVar12,uVar13,piVar11,&local_40,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,
+                      incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffff88,incomingStack_ffffff90);
     if (local_40 == 0) {
       return;
     }
@@ -650,16 +650,16 @@ void _gleFeedbackTrianglesFunc_body(glContext)
   int iVar21;
   double dVar22;
   double extraout_f1;
-  double extraout_f1_00;
-  double in_f2;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
-  double in_stack_ffffff78;
-  double in_stack_ffffff80;
+  double f1AfterCall1;
+  double incomingFpr2;
+  double incomingFpr3;
+  double incomingFpr4;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
+  double incomingStack_ffffff78;
+  double incomingStack_ffffff80;
   int local_50;
   int local_4c [4];
   
@@ -725,8 +725,8 @@ void _gleFeedbackTrianglesFunc_body(glContext)
             if (uVar19 <= uVar15) {
               do {
                 iVar10 = ((undefined4 (*)())_gleCullTriangle)(glContext,uVar19,uVar19 + 0x100,uVar19 + 0x200,0,&local_50,
-                                          dVar22,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
-                                          in_stack_ffffff78,in_stack_ffffff80);
+                                          dVar22,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
+                                          incomingStack_ffffff78,incomingStack_ffffff80);
                 dVar22 = dVar22;
                 if (iVar10 == 0) {
                   if (iVar12 != local_50) {
@@ -792,9 +792,9 @@ LAB_000ec5d0:
           iVar20 = 3;
           puVar7 = puVar16;
           if ((*(char *)(glContext + 0x4e18) == '\0') ||
-             (dVar22 = (double)((double (*)())_gleClipPolyPlane)(glContext,puVar16,3,puVar13,local_4c,dVar22,in_f2,
-                                                 in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
-                                                 in_stack_ffffff78,in_stack_ffffff80),
+             (dVar22 = (double)((double (*)())_gleClipPolyPlane)(glContext,puVar16,3,puVar13,local_4c,dVar22,incomingFpr2,
+                                                 incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
+                                                 incomingStack_ffffff78,incomingStack_ffffff80),
              puVar14 = puVar16, iVar20 = local_4c[0], puVar7 = puVar13, local_4c[0] != 0)) {
             puVar16 = puVar7;
             puVar13 = puVar14;
@@ -809,7 +809,7 @@ LAB_000ec5d0:
             }
             if ((cVar1 == '\0') ||
                (iVar10 = ((int (*)())_gleCullPolygonPtrStack)(glContext,puVar16,iVar20,&local_50),
-               dVar22 = extraout_f1_00, iVar10 == 0)) {
+               dVar22 = f1AfterCall1, iVar10 == 0)) {
               iVar10 = local_50;
               if (bVar6) {
                 pcVar11 = *(code **)(local_50 * 4 + glContext + 0x4df0);
@@ -875,17 +875,17 @@ void _gleFeedbackTriangleStripFunc_body(glContext)
   uint uVar25;
   uint uVar26;
   double dVar27;
-  double extraout_f1;
-  double extraout_f1_00;
-  double in_f2;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
-  double in_stack_ffffff78;
-  double in_stack_ffffff80;
+  double f1AfterCall;
+  double f1AfterCall1;
+  double incomingFpr2;
+  double incomingFpr3;
+  double incomingFpr4;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
+  double incomingStack_ffffff78;
+  double incomingStack_ffffff80;
   int local_50;
   int local_4c [3];
   
@@ -953,9 +953,9 @@ void _gleFeedbackTriangleStripFunc_body(glContext)
             while (uVar21 = uVar11, uVar26 <= uVar12) {
               uVar25 = uVar26 + 0x100;
               iVar13 = ((undefined4 (*)())_gleCullTriangle)(glContext,uVar26,uVar25,uVar26 + 0x200,uVar11,&local_50,dVar27
-                                        ,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_stack_ffffff78
-                                        ,in_stack_ffffff80);
-              dVar27 = extraout_f1;
+                                        ,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffff78
+                                        ,incomingStack_ffffff80);
+              dVar27 = f1AfterCall;
               if (iVar13 == 0) {
                 if (iVar17 != local_50) {
                   bVar4 = true;
@@ -1059,9 +1059,9 @@ LAB_000ecbb8: ;
             puVar9 = puVar24;
             iVar23 = iVar17;
             if ((*(char *)(glContext + 0x4e18) == '\0') ||
-               (dVar27 = (double)((double (*)())_gleClipPolyPlane)(glContext,puVar24,3,puVar19,local_4c,dVar27,in_f2,
-                                                   in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
-                                                   in_stack_ffffff78,in_stack_ffffff80),
+               (dVar27 = (double)((double (*)())_gleClipPolyPlane)(glContext,puVar24,3,puVar19,local_4c,dVar27,incomingFpr2,
+                                                   incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
+                                                   incomingStack_ffffff78,incomingStack_ffffff80),
                puVar15 = puVar24, iVar13 = local_4c[0], puVar9 = puVar19, local_4c[0] != 0)) {
               puVar24 = puVar9;
               puVar19 = puVar15;
@@ -1077,7 +1077,7 @@ LAB_000ecbb8: ;
               }
               if ((cVar1 == '\0') ||
                  (iVar14 = ((int (*)())_gleCullPolygonPtrStack)(glContext,puVar24,iVar13,&local_50),
-                 dVar27 = extraout_f1_00, iVar14 == 0)) {
+                 dVar27 = f1AfterCall1, iVar14 == 0)) {
                 iVar23 = local_50;
                 if (iVar17 != local_50) {
                   bVar4 = true;
@@ -1154,17 +1154,17 @@ void _gleFeedbackTriangleFanFunc_body(glContext)
   int *piVar19;
   uint uVar20;
   double dVar21;
-  double extraout_f1;
-  double extraout_f1_00;
-  double in_f2;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
-  double in_stack_ffffff68;
-  double in_stack_ffffff70;
+  double f1AfterCall;
+  double f1AfterCall1;
+  double incomingFpr2;
+  double incomingFpr3;
+  double incomingFpr4;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
+  double incomingStack_ffffff68;
+  double incomingStack_ffffff70;
   int local_60;
   int local_5c [6];
   
@@ -1238,9 +1238,9 @@ joined_r0x000ed1dc:
           piVar18 = piVar19;
           uVar20 = uVar14;
         } while ((*(char *)(glContext + 0x4e18) != '\0') &&
-                (dVar21 = (double)((double (*)())_gleClipPolyPlane)(glContext,piVar19,3,piVar13,local_5c,dVar21,in_f2,
-                                                    in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
-                                                    in_stack_ffffff68,in_stack_ffffff70),
+                (dVar21 = (double)((double (*)())_gleClipPolyPlane)(glContext,piVar19,3,piVar13,local_5c,dVar21,incomingFpr2,
+                                                    incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
+                                                    incomingStack_ffffff68,incomingStack_ffffff70),
                 piVar10 = piVar19, iVar17 = local_5c[0], piVar18 = piVar13, local_5c[0] == 0));
         piVar13 = piVar10;
         piVar19 = piVar18;
@@ -1267,10 +1267,10 @@ joined_r0x000ed1dc:
               uVar14 = uVar20;
               if (uVar8 < uVar16) goto LAB_000ed0b0;
               uVar20 = uVar16 + 0x100;
-              iVar9 = ((undefined4 (*)())_gleCullTriangle)(glContext,iVar15,uVar16,uVar20,0,&local_60,dVar21,in_f2,in_f3,
-                                       in_f4,in_f5,in_f6,in_f7,in_f8,in_stack_ffffff68,
-                                       in_stack_ffffff70);
-              dVar21 = extraout_f1;
+              iVar9 = ((undefined4 (*)())_gleCullTriangle)(glContext,iVar15,uVar16,uVar20,0,&local_60,dVar21,incomingFpr2,incomingFpr3,
+                                       incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffff68,
+                                       incomingStack_ffffff70);
+              dVar21 = f1AfterCall;
               if (iVar9 != 0) break;
               if (iVar12 != local_60) {
                 bVar4 = true;
@@ -1328,7 +1328,7 @@ code_r0x000ed254:
   }
 LAB_000ed294:
   if ((cVar1 != '\0') &&
-     (iVar9 = ((int (*)())_gleCullPolygonPtrStack)(glContext,piVar19,iVar17,&local_60), dVar21 = extraout_f1_00,
+     (iVar9 = ((int (*)())_gleCullPolygonPtrStack)(glContext,piVar19,iVar17,&local_60), dVar21 = f1AfterCall1,
      iVar9 != 0)) goto joined_r0x000ed1dc;
   iVar9 = local_60;
   if (iVar12 != local_60) {
@@ -1398,18 +1398,18 @@ void _gleFeedbackQuadStripFunc_body(glContext)
   uint *puVar19;
   uint uVar20;
   double dVar21;
-  double extraout_f1;
-  double extraout_f1_00;
-  double in_f2;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
-  double in_stack_ffffff78;
-  double in_stack_ffffff80;
-  double in_stack_ffffff88;
+  double f1AfterCall;
+  double f1AfterCall1;
+  double incomingFpr2;
+  double incomingFpr3;
+  double incomingFpr4;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
+  double incomingStack_ffffff78;
+  double incomingStack_ffffff80;
+  double incomingStack_ffffff88;
   int local_50;
   int local_4c [3];
   
@@ -1484,9 +1484,9 @@ joined_r0x000ed748:
           puVar18 = puVar19;
           uVar7 = uVar15;
         } while ((*(char *)(glContext + 0x4e18) != '\0') &&
-                (dVar21 = (double)((double (*)())_gleClipPolyPlane)(glContext,puVar19,4,puVar14,local_4c,dVar21,in_f2,
-                                                    in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
-                                                    in_stack_ffffff78,in_stack_ffffff80),
+                (dVar21 = (double)((double (*)())_gleClipPolyPlane)(glContext,puVar19,4,puVar14,local_4c,dVar21,incomingFpr2,
+                                                    incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
+                                                    incomingStack_ffffff78,incomingStack_ffffff80),
                 puVar11 = puVar19, iVar17 = local_4c[0], puVar18 = puVar14, local_4c[0] == 0));
         puVar14 = puVar11;
         puVar19 = puVar18;
@@ -1512,9 +1512,9 @@ joined_r0x000ed748:
               if (uVar16 < uVar20) goto LAB_000ed654;
               uVar9 = uVar20 + 0x200;
               iVar10 = ((undefined4 (*)())_gleCullQuad)(glContext,uVar20,uVar20 + 0x100,uVar20 + 0x300,uVar9,&local_50,
-                                    dVar21,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
-                                    in_stack_ffffff78,in_stack_ffffff80,in_stack_ffffff88);
-              dVar21 = extraout_f1;
+                                    dVar21,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
+                                    incomingStack_ffffff78,incomingStack_ffffff80,incomingStack_ffffff88);
+              dVar21 = f1AfterCall;
               if (iVar10 != 0) break;
               if (iVar13 != local_50) {
                 bVar4 = true;
@@ -1572,7 +1572,7 @@ code_r0x000ed7cc:
   }
 LAB_000ed80c:
   if ((cVar1 != '\0') &&
-     (iVar10 = ((int (*)())_gleCullPolygonPtrStack)(glContext,puVar19,iVar17,&local_50), dVar21 = extraout_f1_00,
+     (iVar10 = ((int (*)())_gleCullPolygonPtrStack)(glContext,puVar19,iVar17,&local_50), dVar21 = f1AfterCall1,
      iVar10 != 0)) goto joined_r0x000ed748;
   iVar10 = local_50;
   if (iVar13 != local_50) {
@@ -1635,17 +1635,17 @@ void _gleRenderSmoothPolygonFunc_body(glContext)
   int *piVar12;
   int *piVar13;
   int iVar14;
-  double extraout_f1;
+  double f1AfterCall;
   double fparam_1;
-  double in_f2;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
-  double in_stack_ffffff88;
-  double in_stack_ffffff90;
+  double incomingFpr2;
+  double incomingFpr3;
+  double incomingFpr4;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
+  double incomingStack_ffffff88;
+  double incomingStack_ffffff90;
   int local_40;
   int local_3c [4];
   
@@ -1667,7 +1667,7 @@ void _gleRenderSmoothPolygonFunc_body(glContext)
     return;
   }
   bVar2 = iVar7 != 0;
-  fparam_1 = extraout_f1;
+  fparam_1 = f1AfterCall;
   if ((bVar2) && (*(char *)(glContext + 0x53e4) != '\0')) {
     fparam_1 = (double)(**(double ( **)(int,int,int))(glContext + 0x53dc))(glContext, piVar13, iVar14);
   }
@@ -1705,8 +1705,8 @@ LAB_000eda50:
     uVar9 = 0;
     piVar6 = piVar11;
     if (*(char *)(glContext + 0x4e18) != '\0') {
-      ((double (*)())_gleClipPolyPlane)(glContext,piVar12,iVar14,piVar11,&local_40,fparam_1,in_f2,in_f3,in_f4,in_f5,
-                        in_f6,in_f7,in_f8,in_stack_ffffff88,in_stack_ffffff90);
+      ((double (*)())_gleClipPolyPlane)(glContext,piVar12,iVar14,piVar11,&local_40,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,
+                        incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffff88,incomingStack_ffffff90);
       if (local_40 == 0) {
         return;
       }
@@ -1803,17 +1803,17 @@ void _gleRenderFlatPolygonFunc_body(glContext)
   int *piVar13;
   int *piVar14;
   int iVar15;
-  double extraout_f1;
+  double f1AfterCall;
   double fparam_1;
-  double in_f2;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
-  double in_stack_ffffff88;
-  double in_stack_ffffff90;
+  double incomingFpr2;
+  double incomingFpr3;
+  double incomingFpr4;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
+  double incomingStack_ffffff88;
+  double incomingStack_ffffff90;
   int local_40;
   int local_3c [3];
   
@@ -1831,7 +1831,7 @@ void _gleRenderFlatPolygonFunc_body(glContext)
   if ((2 < iVar15) &&
      (uVar8 = (**(code **)(glContext + 0x5060))(glContext,piVar14,iVar15), (uVar8 & 0xff00) == 0)) {
     bVar2 = iVar7 != 0;
-    fparam_1 = extraout_f1;
+    fparam_1 = f1AfterCall;
     if ((bVar2) && (*(char *)(glContext + 0x53e4) != '\0')) {
       fparam_1 = (double)(**(double ( **)(int,int,int))(glContext + 0x53dc))(glContext, piVar14, iVar15);
     }
@@ -1896,8 +1896,8 @@ void _gleRenderFlatPolygonFunc_body(glContext)
       uVar9 = 0;
       piVar6 = piVar11;
       if (*(char *)(glContext + 0x4e18) != '\0') {
-        ((double (*)())_gleClipPolyPlane)(glContext,piVar13,iVar15,piVar11,&local_40,fparam_1,in_f2,in_f3,in_f4,in_f5,
-                          in_f6,in_f7,in_f8,in_stack_ffffff88,in_stack_ffffff90);
+        ((double (*)())_gleClipPolyPlane)(glContext,piVar13,iVar15,piVar11,&local_40,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,
+                          incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffff88,incomingStack_ffffff90);
         if (local_40 == 0) {
           return;
         }
@@ -1970,19 +1970,19 @@ void _gleRenderSmoothTrianglesFunc_body(glContext)
   uint uVar16;
   uint uVar17;
   int iVar18;
-  double extraout_f1;
+  double f1AfterCall;
   double dVar19;
   double extraout_f1_00;
-  double extraout_f1_01;
-  double in_f2;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
-  double in_stack_ffffff88;
-  double in_stack_ffffff90;
+  double f1AfterCall2;
+  double incomingFpr2;
+  double incomingFpr3;
+  double incomingFpr4;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
+  double incomingStack_ffffff88;
+  double incomingStack_ffffff90;
   int local_40;
   int local_3c [3];
   
@@ -2004,7 +2004,7 @@ void _gleRenderSmoothTrianglesFunc_body(glContext)
     return;
   }
   bVar1 = iVar8 != 0;
-  dVar19 = extraout_f1;
+  dVar19 = f1AfterCall;
   if ((bVar1) && (*(char *)(glContext + 0x53e4) != '\0')) {
     dVar19 = (double)(**(double ( **)(int,int,int))(glContext + 0x53dc))(glContext, uVar16, iVar18);
   }
@@ -2046,8 +2046,8 @@ LAB_000ee23c:
         if (uVar16 <= uVar9) {
           do {
             iVar18 = ((undefined4 (*)())_gleCullTriangle)(glContext,uVar16,uVar16 + 0x100,uVar16 + 0x200,0,&local_40,
-                                      dVar19,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
-                                      in_stack_ffffff88,in_stack_ffffff90);
+                                      dVar19,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
+                                      incomingStack_ffffff88,incomingStack_ffffff90);
             dVar19 = dVar19;
             if (iVar18 == 0) {
               if (iVar11 != local_40) {
@@ -2107,9 +2107,9 @@ LAB_000ee37c:
         puVar7 = puVar14;
         iVar11 = 3;
         if ((*(char *)(glContext + 0x4e18) == '\0') ||
-           (dVar19 = (double)((double (*)())_gleClipPolyPlane)(glContext,puVar14,3,puVar12,local_3c,dVar19,in_f2,in_f3
-                                               ,in_f4,in_f5,in_f6,in_f7,in_f8,in_stack_ffffff88,
-                                               in_stack_ffffff90), puVar13 = puVar14,
+           (dVar19 = (double)((double (*)())_gleClipPolyPlane)(glContext,puVar14,3,puVar12,local_3c,dVar19,incomingFpr2,incomingFpr3
+                                               ,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffff88,
+                                               incomingStack_ffffff90), puVar13 = puVar14,
            puVar7 = puVar12, iVar11 = local_3c[0], local_3c[0] != 0)) {
           puVar14 = puVar7;
           puVar12 = puVar13;
@@ -2124,7 +2124,7 @@ LAB_000ee37c:
           }
           if ((cVar4 == '\0') ||
              (iVar8 = ((int (*)())_gleCullPolygonPtrStack)(glContext,puVar14,iVar11,&local_40),
-             dVar19 = extraout_f1_01, iVar8 == 0)) {
+             dVar19 = f1AfterCall2, iVar8 == 0)) {
             iVar8 = local_40;
             if (bVar6) {
               pcVar10 = *(code **)(local_40 * 4 + glContext + 0x4df0);
@@ -2176,19 +2176,19 @@ void _gleRenderFlatTrianglesFunc_body(glContext)
   int iVar17;
   uint uVar18;
   uint uVar19;
-  double extraout_f1;
+  double f1AfterCall;
   double dVar20;
   double extraout_f1_00;
-  double extraout_f1_01;
-  double in_f2;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
-  double in_stack_ffffff78;
-  double in_stack_ffffff80;
+  double f1AfterCall2;
+  double incomingFpr2;
+  double incomingFpr3;
+  double incomingFpr4;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
+  double incomingStack_ffffff78;
+  double incomingStack_ffffff80;
   int local_50;
   int local_4c [6];
   
@@ -2206,7 +2206,7 @@ void _gleRenderFlatTrianglesFunc_body(glContext)
   if ((2 < iVar17) &&
      (uVar8 = (**(code **)(glContext + 0x5060))(glContext,uVar18,iVar17), (uVar8 & 0xff00) == 0)) {
     bVar2 = iVar7 != 0;
-    dVar20 = extraout_f1;
+    dVar20 = f1AfterCall;
     if ((bVar2) && (*(char *)(glContext + 0x53e4) != '\0')) {
       dVar20 = (double)(**(double ( **)(int,int,int))(glContext + 0x53dc))(glContext, uVar18, iVar17);
     }
@@ -2255,8 +2255,8 @@ void _gleRenderFlatTrianglesFunc_body(glContext)
           if (uVar18 <= uVar8) {
             do {
               iVar17 = ((undefined4 (*)())_gleCullTriangle)(glContext,uVar18,uVar18 + 0x100,uVar18 + 0x200,0,&local_50,
-                                        dVar20,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
-                                        in_stack_ffffff78,in_stack_ffffff80);
+                                        dVar20,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
+                                        incomingStack_ffffff78,incomingStack_ffffff80);
               dVar20 = dVar20;
               if (iVar17 == 0) {
                 if (iVar10 != local_50) {
@@ -2325,9 +2325,9 @@ void _gleRenderFlatTrianglesFunc_body(glContext)
         puVar6 = puVar16;
         iVar7 = 3;
         if ((*(char *)(glContext + 0x4e18) == '\0') ||
-           (dVar20 = (double)((double (*)())_gleClipPolyPlane)(glContext,puVar16,3,puVar11,local_4c,dVar20,in_f2,in_f3
-                                               ,in_f4,in_f5,in_f6,in_f7,in_f8,in_stack_ffffff78,
-                                               in_stack_ffffff80), puVar12 = puVar16,
+           (dVar20 = (double)((double (*)())_gleClipPolyPlane)(glContext,puVar16,3,puVar11,local_4c,dVar20,incomingFpr2,incomingFpr3
+                                               ,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffff78,
+                                               incomingStack_ffffff80), puVar12 = puVar16,
            puVar6 = puVar11, iVar7 = local_4c[0], local_4c[0] != 0)) {
           puVar16 = puVar6;
           puVar11 = puVar12;
@@ -2342,7 +2342,7 @@ void _gleRenderFlatTrianglesFunc_body(glContext)
           }
           if ((cVar3 == '\0') ||
              (iVar17 = ((int (*)())_gleCullPolygonPtrStack)(glContext,puVar16,iVar7,&local_50),
-             dVar20 = extraout_f1_01, iVar17 == 0)) {
+             dVar20 = f1AfterCall2, iVar17 == 0)) {
             if (cVar14 != '\0') {
               (**(code **)(glContext + 0x5068))(glContext,uVar19,1);
             }
@@ -2401,19 +2401,19 @@ void _gleRenderSmoothTriangleStripFunc_body(glContext)
   uint uVar23;
   uint *puVar24;
   int iVar25;
-  double extraout_f1;
+  double f1AfterCall;
   double dVar26;
-  double extraout_f1_00;
-  double extraout_f1_01;
-  double in_f2;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
-  double in_stack_ffffff78;
-  double in_stack_ffffff80;
+  double f1AfterCall1;
+  double f1AfterCall2;
+  double incomingFpr2;
+  double incomingFpr3;
+  double incomingFpr4;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
+  double incomingStack_ffffff78;
+  double incomingStack_ffffff80;
   int local_50;
   int local_4c [4];
   
@@ -2436,7 +2436,7 @@ void _gleRenderSmoothTriangleStripFunc_body(glContext)
     return;
   }
   bVar1 = iVar11 != 0;
-  dVar26 = extraout_f1;
+  dVar26 = f1AfterCall;
   if ((bVar1) && (*(char *)(glContext + 0x53e4) != '\0')) {
     dVar26 = (double)(**(double ( **)(int,int,int))(glContext + 0x53dc))(glContext, uVar22, iVar25);
   }
@@ -2480,9 +2480,9 @@ LAB_000eec04:
         while (uVar12 = uVar10, uVar22 <= uVar19) {
           uVar23 = uVar22 + 0x100;
           iVar25 = ((undefined4 (*)())_gleCullTriangle)(glContext,uVar22,uVar23,uVar22 + 0x200,uVar10,&local_50,dVar26,
-                                    in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_stack_ffffff78,
-                                    in_stack_ffffff80);
-          dVar26 = extraout_f1_00;
+                                    incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffff78,
+                                    incomingStack_ffffff80);
+          dVar26 = f1AfterCall1;
           if (iVar25 == 0) {
             if (iVar18 != local_50) {
               bVar1 = true;
@@ -2581,9 +2581,9 @@ LAB_000eee24: ;
         iVar25 = 3;
         iVar11 = iVar18;
         if ((*(char *)(glContext + 0x4e18) == '\0') ||
-           (dVar26 = (double)((double (*)())_gleClipPolyPlane)(glContext,puVar24,3,puVar21,local_4c,dVar26,in_f2,in_f3
-                                               ,in_f4,in_f5,in_f6,in_f7,in_f8,in_stack_ffffff78,
-                                               in_stack_ffffff80), puVar14 = puVar24,
+           (dVar26 = (double)((double (*)())_gleClipPolyPlane)(glContext,puVar24,3,puVar21,local_4c,dVar26,incomingFpr2,incomingFpr3
+                                               ,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffff78,
+                                               incomingStack_ffffff80), puVar14 = puVar24,
            puVar9 = puVar21, iVar25 = local_4c[0], local_4c[0] != 0)) {
           puVar24 = puVar9;
           puVar21 = puVar14;
@@ -2598,7 +2598,7 @@ LAB_000eee24: ;
           }
           if ((cVar4 == '\0') ||
              (iVar13 = ((int (*)())_gleCullPolygonPtrStack)(glContext,puVar24,iVar25,&local_50),
-             dVar26 = extraout_f1_01, iVar13 == 0)) {
+             dVar26 = f1AfterCall2, iVar13 == 0)) {
             iVar11 = local_50;
             if (iVar18 != local_50) {
               bVar1 = true;
@@ -2671,19 +2671,19 @@ void _gleRenderFlatTriangleStripFunc_body(glContext)
   int iVar23;
   uint *puVar24;
   int iVar25;
-  double extraout_f1;
+  double f1AfterCall;
   double dVar26;
-  double extraout_f1_00;
-  double extraout_f1_01;
-  double in_f2;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
-  double in_stack_ffffff78;
-  double in_stack_ffffff80;
+  double f1AfterCall1;
+  double f1AfterCall2;
+  double incomingFpr2;
+  double incomingFpr3;
+  double incomingFpr4;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
+  double incomingStack_ffffff78;
+  double incomingStack_ffffff80;
   int local_50;
   int local_4c [5];
   
@@ -2702,7 +2702,7 @@ void _gleRenderFlatTriangleStripFunc_body(glContext)
   if ((2 < iVar25) &&
      (uVar10 = (**(code **)(glContext + 0x5060))(glContext,uVar21,iVar25), (uVar10 & 0xff00) == 0)) {
     bVar2 = iVar9 != 0;
-    dVar26 = extraout_f1;
+    dVar26 = f1AfterCall;
     if ((bVar2) && (*(char *)(glContext + 0x53e4) != '\0')) {
       dVar26 = (double)(**(double ( **)(int,int,int))(glContext + 0x53dc))(glContext, uVar21, iVar25);
     }
@@ -2751,9 +2751,9 @@ void _gleRenderFlatTriangleStripFunc_body(glContext)
           while (uVar10 = uVar11, uVar21 <= uVar15) {
             uVar22 = uVar21 + 0x100;
             iVar25 = ((undefined4 (*)())_gleCullTriangle)(glContext,uVar21,uVar22,uVar21 + 0x200,uVar11,&local_50,dVar26,
-                                      in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_stack_ffffff78,
-                                      in_stack_ffffff80);
-            dVar26 = extraout_f1_00;
+                                      incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffff78,
+                                      incomingStack_ffffff80);
+            dVar26 = f1AfterCall1;
             if (iVar25 == 0) {
               if (iVar14 != local_50) {
                 bVar2 = true;
@@ -2850,9 +2850,9 @@ LAB_000ef3cc: ;
           puVar7 = puVar24;
           iVar14 = 3;
           if ((*(char *)(glContext + 0x4e18) == '\0') ||
-             (dVar26 = (double)((double (*)())_gleClipPolyPlane)(glContext,puVar24,3,puVar17,local_4c,dVar26,in_f2,
-                                                 in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
-                                                 in_stack_ffffff78,in_stack_ffffff80),
+             (dVar26 = (double)((double (*)())_gleClipPolyPlane)(glContext,puVar24,3,puVar17,local_4c,dVar26,incomingFpr2,
+                                                 incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
+                                                 incomingStack_ffffff78,incomingStack_ffffff80),
              puVar18 = puVar24, puVar7 = puVar17, iVar14 = local_4c[0], local_4c[0] != 0)) {
             puVar24 = puVar7;
             puVar17 = puVar18;
@@ -2868,7 +2868,7 @@ LAB_000ef3cc: ;
             }
             if ((cVar3 == '\0') ||
                (iVar9 = ((int (*)())_gleCullPolygonPtrStack)(glContext,puVar24,iVar14,&local_50),
-               dVar26 = extraout_f1_01, iVar9 == 0)) {
+               dVar26 = f1AfterCall2, iVar9 == 0)) {
               if (bVar1) {
                 iVar9 = 0x4de0;
                 if (bVar5) {
@@ -2921,19 +2921,19 @@ void _gleRenderSmoothTriangleFanFunc_body(glContext)
   int *piVar18;
   int iVar19;
   uint uVar20;
-  double extraout_f1;
+  double f1AfterCall;
   double dVar21;
-  double extraout_f1_00;
-  double extraout_f1_01;
-  double in_f2;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
-  double in_stack_ffffff78;
-  double in_stack_ffffff80;
+  double f1AfterCall1;
+  double f1AfterCall2;
+  double incomingFpr2;
+  double incomingFpr3;
+  double incomingFpr4;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
+  double incomingStack_ffffff78;
+  double incomingStack_ffffff80;
   int local_50;
   int local_4c [4];
   
@@ -2955,7 +2955,7 @@ void _gleRenderSmoothTriangleFanFunc_body(glContext)
     return;
   }
   bVar1 = iVar8 != 0;
-  dVar21 = extraout_f1;
+  dVar21 = f1AfterCall;
   if ((bVar1) && (*(char *)(glContext + 0x53e4) != '\0')) {
     dVar21 = (double)(**(double ( **)(int,int,int))(glContext + 0x53dc))(glContext, iVar16, iVar19);
   }
@@ -2998,9 +2998,9 @@ joined_r0x000ef960:
       iVar8 = 3;
       uVar15 = uVar20;
     } while ((*(char *)(glContext + 0x4e18) != '\0') &&
-            (dVar21 = (double)((double (*)())_gleClipPolyPlane)(glContext,piVar18,3,piVar14,local_4c,dVar21,in_f2,
-                                                in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
-                                                in_stack_ffffff78,in_stack_ffffff80),
+            (dVar21 = (double)((double (*)())_gleClipPolyPlane)(glContext,piVar18,3,piVar14,local_4c,dVar21,incomingFpr2,
+                                                incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
+                                                incomingStack_ffffff78,incomingStack_ffffff80),
             piVar11 = piVar18, piVar17 = piVar14, iVar8 = local_4c[0], local_4c[0] == 0));
     piVar14 = piVar11;
     piVar18 = piVar17;
@@ -3030,9 +3030,9 @@ joined_r0x000ef960:
           uVar7 = uVar20;
           if (uVar15 < uVar9) goto LAB_000ef844;
           uVar20 = uVar9 + 0x100;
-          iVar19 = ((undefined4 (*)())_gleCullTriangle)(glContext,iVar16,uVar9,uVar20,0,&local_50,dVar21,in_f2,in_f3,in_f4
-                                    ,in_f5,in_f6,in_f7,in_f8,in_stack_ffffff78,in_stack_ffffff80);
-          dVar21 = extraout_f1_00;
+          iVar19 = ((undefined4 (*)())_gleCullTriangle)(glContext,iVar16,uVar9,uVar20,0,&local_50,dVar21,incomingFpr2,incomingFpr3,incomingFpr4
+                                    ,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffff78,incomingStack_ffffff80);
+          dVar21 = f1AfterCall1;
           if (iVar19 != 0) break;
           if (iVar13 != local_50) {
             bVar1 = true;
@@ -3086,7 +3086,7 @@ code_r0x000ef9c8:
   }
 LAB_000efa08:
   if ((cVar4 != '\0') &&
-     (iVar10 = ((int (*)())_gleCullPolygonPtrStack)(glContext,piVar18,iVar8,&local_50), dVar21 = extraout_f1_01,
+     (iVar10 = ((int (*)())_gleCullPolygonPtrStack)(glContext,piVar18,iVar8,&local_50), dVar21 = f1AfterCall2,
      iVar10 != 0)) goto joined_r0x000ef960;
   iVar10 = local_50;
   if (iVar13 != local_50) {
@@ -3148,19 +3148,19 @@ void _gleRenderFlatTriangleFanFunc_body(glContext)
   int iVar17;
   uint uVar18;
   char cVar19;
-  double extraout_f1;
+  double f1AfterCall;
   double dVar20;
-  double extraout_f1_00;
-  double extraout_f1_01;
-  double in_f2;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
-  double in_stack_ffffff78;
-  double in_stack_ffffff80;
+  double f1AfterCall1;
+  double f1AfterCall2;
+  double incomingFpr2;
+  double incomingFpr3;
+  double incomingFpr4;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
+  double incomingStack_ffffff78;
+  double incomingStack_ffffff80;
   int local_50;
   int local_4c [6];
   
@@ -3178,7 +3178,7 @@ void _gleRenderFlatTriangleFanFunc_body(glContext)
   if ((2 < iVar17) &&
      (uVar9 = (**(code **)(glContext + 0x5060))(glContext,iVar14,iVar17), (uVar9 & 0xff00) == 0)) {
     bVar2 = iVar8 != 0;
-    dVar20 = extraout_f1;
+    dVar20 = f1AfterCall;
     if ((bVar2) && (*(char *)(glContext + 0x53e4) != '\0')) {
       dVar20 = (double)(**(double ( **)(int,int,int))(glContext + 0x53dc))(glContext, iVar14, iVar17);
     }
@@ -3226,10 +3226,10 @@ void _gleRenderFlatTriangleFanFunc_body(glContext)
               uVar15 = uVar18;
               if (uVar11 < uVar9) goto LAB_000efd88;
               uVar18 = uVar9 + 0x100;
-              iVar17 = ((undefined4 (*)())_gleCullTriangle)(glContext,iVar14,uVar9,uVar18,0,&local_50,dVar20,in_f2,in_f3,
-                                        in_f4,in_f5,in_f6,in_f7,in_f8,in_stack_ffffff78,
-                                        in_stack_ffffff80);
-              dVar20 = extraout_f1_00;
+              iVar17 = ((undefined4 (*)())_gleCullTriangle)(glContext,iVar14,uVar9,uVar18,0,&local_50,dVar20,incomingFpr2,incomingFpr3,
+                                        incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffff78,
+                                        incomingStack_ffffff80);
+              dVar20 = f1AfterCall1;
               if (iVar17 != 0) break;
               if (iVar10 != local_50) {
                 bVar2 = true;
@@ -3290,9 +3290,9 @@ LAB_000efd88:
           piVar6 = piVar16;
           iVar10 = 3;
           if ((*(char *)(glContext + 0x4e18) == '\0') ||
-             (dVar20 = (double)((double (*)())_gleClipPolyPlane)(glContext,piVar16,3,piVar12,local_4c,dVar20,in_f2,
-                                                 in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
-                                                 in_stack_ffffff78,in_stack_ffffff80),
+             (dVar20 = (double)((double (*)())_gleClipPolyPlane)(glContext,piVar16,3,piVar12,local_4c,dVar20,incomingFpr2,
+                                                 incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
+                                                 incomingStack_ffffff78,incomingStack_ffffff80),
              piVar13 = piVar16, piVar6 = piVar12, iVar10 = local_4c[0], local_4c[0] != 0)) {
             piVar16 = piVar6;
             piVar12 = piVar13;
@@ -3307,7 +3307,7 @@ LAB_000efd88:
             }
             if ((cVar3 == '\0') ||
                (iVar8 = ((int (*)())_gleCullPolygonPtrStack)(glContext,piVar16,iVar10,&local_50),
-               dVar20 = extraout_f1_01, iVar8 == 0)) {
+               dVar20 = f1AfterCall2, iVar8 == 0)) {
               if (bVar1) {
                 if (bVar5) {
                   iVar8 = local_50 * 4 + 0x4de0;
@@ -3360,20 +3360,20 @@ void _gleRenderSmoothQuadsFunc_body(glContext)
   int iVar16;
   uint uVar17;
   uint uVar18;
-  double extraout_f1;
+  double f1AfterCall;
   double dVar19;
   double extraout_f1_00;
-  double extraout_f1_01;
-  double in_f2;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
-  double in_stack_ffffff88;
-  double in_stack_ffffff90;
-  double in_stack_ffffff98;
+  double f1AfterCall2;
+  double incomingFpr2;
+  double incomingFpr3;
+  double incomingFpr4;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
+  double incomingStack_ffffff88;
+  double incomingStack_ffffff90;
+  double incomingStack_ffffff98;
   int local_40;
   int local_3c [3];
   
@@ -3395,7 +3395,7 @@ void _gleRenderSmoothQuadsFunc_body(glContext)
     return;
   }
   bVar1 = iVar8 != 0;
-  dVar19 = extraout_f1;
+  dVar19 = f1AfterCall;
   if ((bVar1) && (*(char *)(glContext + 0x53e4) != '\0')) {
     dVar19 = (double)(**(double ( **)(int,int,int))(glContext + 0x53dc))(glContext, uVar17, iVar16);
   }
@@ -3437,8 +3437,8 @@ LAB_000f0124:
         if (uVar17 <= uVar9) {
           do {
             iVar16 = ((undefined4 (*)())_gleCullQuad)(glContext,uVar17,uVar17 + 0x100,uVar17 + 0x200,uVar17 + 0x300,
-                                  &local_40,dVar19,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
-                                  in_stack_ffffff88,in_stack_ffffff90,in_stack_ffffff98);
+                                  &local_40,dVar19,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
+                                  incomingStack_ffffff88,incomingStack_ffffff90,incomingStack_ffffff98);
             dVar19 = dVar19;
             if (iVar16 == 0) {
               if (iVar11 != local_40) {
@@ -3499,9 +3499,9 @@ LAB_000f0264:
         puVar7 = puVar14;
         iVar11 = 4;
         if ((*(char *)(glContext + 0x4e18) == '\0') ||
-           (dVar19 = (double)((double (*)())_gleClipPolyPlane)(glContext,puVar14,4,puVar12,local_3c,dVar19,in_f2,in_f3
-                                               ,in_f4,in_f5,in_f6,in_f7,in_f8,in_stack_ffffff88,
-                                               in_stack_ffffff90), puVar13 = puVar14,
+           (dVar19 = (double)((double (*)())_gleClipPolyPlane)(glContext,puVar14,4,puVar12,local_3c,dVar19,incomingFpr2,incomingFpr3
+                                               ,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffff88,
+                                               incomingStack_ffffff90), puVar13 = puVar14,
            puVar7 = puVar12, iVar11 = local_3c[0], local_3c[0] != 0)) {
           puVar14 = puVar7;
           puVar12 = puVar13;
@@ -3516,7 +3516,7 @@ LAB_000f0264:
           }
           if ((cVar4 == '\0') ||
              (iVar8 = ((int (*)())_gleCullPolygonPtrStack)(glContext,puVar14,iVar11,&local_40),
-             dVar19 = extraout_f1_01, iVar8 == 0)) {
+             dVar19 = f1AfterCall2, iVar8 == 0)) {
             iVar8 = local_40;
             if (bVar6) {
               pcVar10 = *(code **)(local_40 * 4 + glContext + 0x4df0);
@@ -3568,20 +3568,20 @@ void _gleRenderFlatQuadsFunc_body(glContext)
   int iVar17;
   uint uVar18;
   uint uVar19;
-  double extraout_f1;
+  double f1AfterCall;
   double dVar20;
   double extraout_f1_00;
-  double extraout_f1_01;
-  double in_f2;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
-  double in_stack_ffffff78;
-  double in_stack_ffffff80;
-  double in_stack_ffffff88;
+  double f1AfterCall2;
+  double incomingFpr2;
+  double incomingFpr3;
+  double incomingFpr4;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
+  double incomingStack_ffffff78;
+  double incomingStack_ffffff80;
+  double incomingStack_ffffff88;
   int local_50;
   int local_4c [6];
   
@@ -3599,7 +3599,7 @@ void _gleRenderFlatQuadsFunc_body(glContext)
   if ((3 < iVar17) &&
      (uVar8 = (**(code **)(glContext + 0x5060))(glContext,uVar18,iVar17), (uVar8 & 0xff00) == 0)) {
     bVar2 = iVar7 != 0;
-    dVar20 = extraout_f1;
+    dVar20 = f1AfterCall;
     if ((bVar2) && (*(char *)(glContext + 0x53e4) != '\0')) {
       dVar20 = (double)(**(double ( **)(int,int,int))(glContext + 0x53dc))(glContext, uVar18, iVar17);
     }
@@ -3648,8 +3648,8 @@ void _gleRenderFlatQuadsFunc_body(glContext)
           if (uVar18 <= uVar8) {
             do {
               iVar17 = ((undefined4 (*)())_gleCullQuad)(glContext,uVar18,uVar18 + 0x100,uVar18 + 0x200,uVar18 + 0x300,
-                                    &local_50,dVar20,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
-                                    in_stack_ffffff78,in_stack_ffffff80,in_stack_ffffff88);
+                                    &local_50,dVar20,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
+                                    incomingStack_ffffff78,incomingStack_ffffff80,incomingStack_ffffff88);
               dVar20 = dVar20;
               if (iVar17 == 0) {
                 if (iVar10 != local_50) {
@@ -3719,9 +3719,9 @@ void _gleRenderFlatQuadsFunc_body(glContext)
         puVar6 = puVar16;
         iVar7 = 4;
         if ((*(char *)(glContext + 0x4e18) == '\0') ||
-           (dVar20 = (double)((double (*)())_gleClipPolyPlane)(glContext,puVar16,4,puVar11,local_4c,dVar20,in_f2,in_f3
-                                               ,in_f4,in_f5,in_f6,in_f7,in_f8,in_stack_ffffff78,
-                                               in_stack_ffffff80), puVar12 = puVar16,
+           (dVar20 = (double)((double (*)())_gleClipPolyPlane)(glContext,puVar16,4,puVar11,local_4c,dVar20,incomingFpr2,incomingFpr3
+                                               ,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffff78,
+                                               incomingStack_ffffff80), puVar12 = puVar16,
            puVar6 = puVar11, iVar7 = local_4c[0], local_4c[0] != 0)) {
           puVar16 = puVar6;
           puVar11 = puVar12;
@@ -3736,7 +3736,7 @@ void _gleRenderFlatQuadsFunc_body(glContext)
           }
           if ((cVar3 == '\0') ||
              (iVar17 = ((int (*)())_gleCullPolygonPtrStack)(glContext,puVar16,iVar7,&local_50),
-             dVar20 = extraout_f1_01, iVar17 == 0)) {
+             dVar20 = f1AfterCall2, iVar17 == 0)) {
             if (cVar14 != '\0') {
               (**(code **)(glContext + 0x5068))(glContext,uVar19,1);
             }
@@ -3789,20 +3789,20 @@ void _gleRenderSmoothQuadStripFunc_body(glContext)
   uint *puVar17;
   uint *puVar18;
   int iVar19;
-  double extraout_f1;
+  double f1AfterCall;
   double dVar20;
-  double extraout_f1_00;
-  double extraout_f1_01;
-  double in_f2;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
-  double in_stack_ffffff78;
-  double in_stack_ffffff80;
-  double in_stack_ffffff88;
+  double f1AfterCall1;
+  double f1AfterCall2;
+  double incomingFpr2;
+  double incomingFpr3;
+  double incomingFpr4;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
+  double incomingStack_ffffff78;
+  double incomingStack_ffffff80;
+  double incomingStack_ffffff88;
   int local_50;
   int local_4c [5];
   
@@ -3824,7 +3824,7 @@ void _gleRenderSmoothQuadStripFunc_body(glContext)
     return;
   }
   bVar1 = iVar7 != 0;
-  dVar20 = extraout_f1;
+  dVar20 = f1AfterCall;
   if ((bVar1) && (*(char *)(glContext + 0x53e4) != '\0')) {
     dVar20 = (double)(**(double ( **)(int,int,int))(glContext + 0x53dc))(glContext, uVar15, iVar19);
   }
@@ -3868,9 +3868,9 @@ joined_r0x000f0cf4:
       iVar7 = 4;
       uVar16 = uVar14;
     } while ((*(char *)(glContext + 0x4e18) != '\0') &&
-            (dVar20 = (double)((double (*)())_gleClipPolyPlane)(glContext,puVar18,4,puVar13,local_4c,dVar20,in_f2,
-                                                in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
-                                                in_stack_ffffff78,in_stack_ffffff80),
+            (dVar20 = (double)((double (*)())_gleClipPolyPlane)(glContext,puVar18,4,puVar13,local_4c,dVar20,incomingFpr2,
+                                                incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
+                                                incomingStack_ffffff78,incomingStack_ffffff80),
             puVar10 = puVar18, puVar17 = puVar13, iVar7 = local_4c[0], local_4c[0] == 0));
     puVar13 = puVar10;
     puVar18 = puVar17;
@@ -3900,9 +3900,9 @@ joined_r0x000f0cf4:
           if (uVar8 < uVar15) goto LAB_000f0c0c;
           uVar16 = uVar15 + 0x200;
           iVar19 = ((undefined4 (*)())_gleCullQuad)(glContext,uVar15,uVar15 + 0x100,uVar15 + 0x300,uVar16,&local_50,dVar20
-                                ,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_stack_ffffff78,
-                                in_stack_ffffff80,in_stack_ffffff88);
-          dVar20 = extraout_f1_00;
+                                ,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffff78,
+                                incomingStack_ffffff80,incomingStack_ffffff88);
+          dVar20 = f1AfterCall1;
           if (iVar19 != 0) break;
           if (iVar12 != local_50) {
             bVar1 = true;
@@ -3956,7 +3956,7 @@ code_r0x000f0d68:
   }
 LAB_000f0da8:
   if ((cVar4 != '\0') &&
-     (iVar9 = ((int (*)())_gleCullPolygonPtrStack)(glContext,puVar18,iVar7,&local_50), dVar20 = extraout_f1_01,
+     (iVar9 = ((int (*)())_gleCullPolygonPtrStack)(glContext,puVar18,iVar7,&local_50), dVar20 = f1AfterCall2,
      iVar9 != 0)) goto joined_r0x000f0cf4;
   iVar9 = local_50;
   if (iVar12 != local_50) {
@@ -4019,20 +4019,20 @@ void _gleRenderFlatQuadStripFunc_body(glContext)
   uint *puVar18;
   uint *puVar19;
   int iVar20;
-  double extraout_f1;
+  double f1AfterCall;
   double dVar21;
-  double extraout_f1_00;
-  double extraout_f1_01;
-  double in_f2;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
-  double in_stack_ffffff78;
-  double in_stack_ffffff80;
-  double in_stack_ffffff88;
+  double f1AfterCall1;
+  double f1AfterCall2;
+  double incomingFpr2;
+  double incomingFpr3;
+  double incomingFpr4;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
+  double incomingStack_ffffff78;
+  double incomingStack_ffffff80;
+  double incomingStack_ffffff88;
   int local_50;
   int local_4c [5];
   
@@ -4050,7 +4050,7 @@ void _gleRenderFlatQuadStripFunc_body(glContext)
   if ((3 < iVar20) &&
      (uVar8 = (**(code **)(glContext + 0x5060))(glContext,uVar16,iVar20), (uVar8 & 0xff00) == 0)) {
     bVar2 = iVar7 != 0;
-    dVar21 = extraout_f1;
+    dVar21 = f1AfterCall;
     if ((bVar2) && (*(char *)(glContext + 0x53e4) != '\0')) {
       dVar21 = (double)(**(double ( **)(int,int,int))(glContext + 0x53dc))(glContext, uVar16, iVar20);
     }
@@ -4090,9 +4090,9 @@ joined_r0x000f1240:
         puVar18 = puVar19;
         iVar10 = 4;
       } while ((*(char *)(glContext + 0x4e18) != '\0') &&
-              (dVar21 = (double)((double (*)())_gleClipPolyPlane)(glContext,puVar19,4,puVar12,local_4c,dVar21,in_f2,
-                                                  in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
-                                                  in_stack_ffffff78,in_stack_ffffff80),
+              (dVar21 = (double)((double (*)())_gleClipPolyPlane)(glContext,puVar19,4,puVar12,local_4c,dVar21,incomingFpr2,
+                                                  incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
+                                                  incomingStack_ffffff78,incomingStack_ffffff80),
               puVar11 = puVar19, puVar18 = puVar12, iVar10 = local_4c[0], local_4c[0] == 0));
       puVar12 = puVar11;
       puVar19 = puVar18;
@@ -4133,9 +4133,9 @@ joined_r0x000f1240:
             if (uVar8 < uVar16) goto LAB_000f1138;
             uVar17 = uVar16 + 0x200;
             iVar20 = ((undefined4 (*)())_gleCullQuad)(glContext,uVar16,uVar16 + 0x100,uVar16 + 0x300,uVar17,&local_50,
-                                  dVar21,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_stack_ffffff78
-                                  ,in_stack_ffffff80,in_stack_ffffff88);
-            dVar21 = extraout_f1_00;
+                                  dVar21,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffff78
+                                  ,incomingStack_ffffff80,incomingStack_ffffff88);
+            dVar21 = f1AfterCall1;
             if (iVar20 != 0) break;
             if (iVar10 != local_50) {
               bVar2 = true;
@@ -4191,7 +4191,7 @@ code_r0x000f12b4:
     }
 LAB_000f12f4:
     if ((cVar3 == '\0') ||
-       (iVar7 = ((int (*)())_gleCullPolygonPtrStack)(glContext,puVar19,iVar10,&local_50), dVar21 = extraout_f1_01,
+       (iVar7 = ((int (*)())_gleCullPolygonPtrStack)(glContext,puVar19,iVar10,&local_50), dVar21 = f1AfterCall2,
        iVar7 == 0)) {
       if (cVar13 != '\0') {
         (**(code **)(glContext + 0x5068))(glContext,uVar15,1);
@@ -4234,17 +4234,17 @@ void _gleSelectPolygonFunc_body(glContext)
   uint uVar10;
   int iVar11;
   uint uVar12;
-  double extraout_f1;
+  double f1AfterCall;
   double dVar13;
-  double in_f2;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
-  double in_stack_ffffff88;
-  double in_stack_ffffff90;
+  double incomingFpr2;
+  double incomingFpr3;
+  double incomingFpr4;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
+  double incomingStack_ffffff88;
+  double incomingStack_ffffff90;
   uint local_40;
   undefined4 local_3c [5];
   
@@ -4263,7 +4263,7 @@ void _gleSelectPolygonFunc_body(glContext)
       (uVar10 = (uint)(*(int *)(glContext + 0x4858) - iVar11) /
                 (uint)(int)*(short *)(glContext + 0x487c), 2 < (int)uVar10)) &&
      (uVar5 = (**(code **)(glContext + 0x5060))(glContext,iVar11,uVar10), (uVar5 & 0xff00) == 0)) {
-    dVar13 = extraout_f1;
+    dVar13 = f1AfterCall;
     if (bVar2) {
       iVar11 = *(int *)(glContext + 0x4864);
     }
@@ -4298,8 +4298,8 @@ void _gleSelectPolygonFunc_body(glContext)
       uVar7 = 0;
       piVar4 = piVar8;
       if (*(char *)(glContext + 0x4e18) != '\0') {
-        ((double (*)())_gleClipPolyPlane)(glContext,piVar9,uVar10,piVar8,&local_40,dVar13,in_f2,in_f3,in_f4,in_f5,
-                          in_f6,in_f7,in_f8,in_stack_ffffff88,in_stack_ffffff90);
+        ((double (*)())_gleClipPolyPlane)(glContext,piVar9,uVar10,piVar8,&local_40,dVar13,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,
+                          incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffff88,incomingStack_ffffff90);
         if (local_40 == 0) {
           return;
         }
@@ -4356,19 +4356,19 @@ void _gleSelectTrianglesFunc_body(glContext)
   uint uVar15;
   uint uVar16;
   int iVar17;
-  double extraout_f1;
+  double f1AfterCall;
   double dVar18;
   double extraout_f1_00;
-  double extraout_f1_01;
-  double in_f2;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
-  double in_stack_ffffff78;
-  double in_stack_ffffff80;
+  double f1AfterCall2;
+  double incomingFpr2;
+  double incomingFpr3;
+  double incomingFpr4;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
+  double incomingStack_ffffff78;
+  double incomingStack_ffffff80;
   int local_50;
   int local_4c [6];
   
@@ -4388,7 +4388,7 @@ void _gleSelectTrianglesFunc_body(glContext)
       (uVar13 = (*(int *)(glContext + 0x4858) - uVar16) / (uint)(int)*(short *)(glContext + 0x487c),
       2 < (int)uVar13)) &&
      (uVar7 = (**(code **)(glContext + 0x5060))(glContext,uVar16,uVar13), (uVar7 & 0xff00) == 0)) {
-    dVar18 = extraout_f1;
+    dVar18 = f1AfterCall;
     if (bVar2) {
       if (*(char *)(glContext + 0x4e18) != '\0') {
         dVar18 = (double)(**(double ( **)(int,int,int))(glContext + 0x5064))(glContext, uVar16, uVar13);
@@ -4411,8 +4411,8 @@ void _gleSelectTrianglesFunc_body(glContext)
           if (uVar16 <= uVar13) {
             do {
               iVar8 = ((undefined4 (*)())_gleCullTriangle)(glContext,uVar16,uVar16 + 0x100,uVar16 + 0x200,0,&local_50,
-                                       dVar18,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
-                                       in_stack_ffffff78,in_stack_ffffff80);
+                                       dVar18,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
+                                       incomingStack_ffffff78,incomingStack_ffffff80);
               dVar18 = dVar18;
               if (iVar8 == 0) {
                 if (iVar9 != local_50) {
@@ -4463,9 +4463,9 @@ void _gleSelectTrianglesFunc_body(glContext)
           puVar5 = puVar12;
           iVar9 = 3;
           if ((*(char *)(glContext + 0x4e18) == '\0') ||
-             (dVar18 = (double)((double (*)())_gleClipPolyPlane)(glContext,puVar12,3,puVar10,local_4c,dVar18,in_f2,
-                                                 in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
-                                                 in_stack_ffffff78,in_stack_ffffff80),
+             (dVar18 = (double)((double (*)())_gleClipPolyPlane)(glContext,puVar12,3,puVar10,local_4c,dVar18,incomingFpr2,
+                                                 incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
+                                                 incomingStack_ffffff78,incomingStack_ffffff80),
              puVar11 = puVar12, puVar5 = puVar10, iVar9 = local_4c[0], local_4c[0] != 0)) {
             puVar12 = puVar5;
             puVar10 = puVar11;
@@ -4480,7 +4480,7 @@ void _gleSelectTrianglesFunc_body(glContext)
             }
             if ((cVar1 == '\0') ||
                (iVar17 = ((int (*)())_gleCullPolygonPtrStack)(glContext,puVar12,iVar9,&local_50),
-               dVar18 = extraout_f1_01, iVar17 == 0)) {
+               dVar18 = f1AfterCall2, iVar17 == 0)) {
               iVar17 = local_50;
               if ((!bVar2) && ((bVar4 && (puVar11 = puVar12, iVar8 = iVar9, 0 < iVar9)))) {
                 do {
@@ -4526,19 +4526,19 @@ void _gleSelectTriangleStripFunc_body(glContext)
   uint uVar19;
   uint uVar20;
   uint uVar21;
-  double extraout_f1;
+  double f1AfterCall;
   double dVar22;
-  double extraout_f1_00;
-  double extraout_f1_01;
-  double in_f2;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
-  double in_stack_ffffff78;
-  double in_stack_ffffff80;
+  double f1AfterCall1;
+  double f1AfterCall2;
+  double incomingFpr2;
+  double incomingFpr3;
+  double incomingFpr4;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
+  double incomingStack_ffffff78;
+  double incomingStack_ffffff80;
   int local_50;
   int local_4c [5];
   
@@ -4559,7 +4559,7 @@ void _gleSelectTriangleStripFunc_body(glContext)
       (uVar16 = (*(int *)(glContext + 0x4858) - uVar21) / (uint)(int)*(short *)(glContext + 0x487c),
       2 < (int)uVar16)) &&
      (uVar8 = (**(code **)(glContext + 0x5060))(glContext,uVar21,uVar16), (uVar8 & 0xff00) == 0)) {
-    dVar22 = extraout_f1;
+    dVar22 = f1AfterCall;
     if (bVar2) {
       if (*(char *)(glContext + 0x4e18) != '\0') {
         dVar22 = (double)(**(double ( **)(int,int,int))(glContext + 0x5064))(glContext, uVar21, uVar16);
@@ -4584,9 +4584,9 @@ void _gleSelectTriangleStripFunc_body(glContext)
           while (uVar16 = uVar20, uVar21 <= uVar8) {
             uVar19 = uVar21 + 0x100;
             iVar9 = ((undefined4 (*)())_gleCullTriangle)(glContext,uVar21,uVar19,uVar21 + 0x200,uVar20,&local_50,dVar22,
-                                     in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_stack_ffffff78,
-                                     in_stack_ffffff80);
-            dVar22 = extraout_f1_00;
+                                     incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffff78,
+                                     incomingStack_ffffff80);
+            dVar22 = f1AfterCall1;
             if (iVar9 == 0) {
               if (iVar10 != local_50) {
                 bVar3 = true;
@@ -4659,9 +4659,9 @@ LAB_000f1c00: ;
           iVar10 = 3;
           puVar6 = puVar18;
           if ((*(char *)(glContext + 0x4e18) == '\0') ||
-             (dVar22 = (double)((double (*)())_gleClipPolyPlane)(glContext,puVar18,3,puVar12,local_4c,dVar22,in_f2,
-                                                 in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
-                                                 in_stack_ffffff78,in_stack_ffffff80),
+             (dVar22 = (double)((double (*)())_gleClipPolyPlane)(glContext,puVar18,3,puVar12,local_4c,dVar22,incomingFpr2,
+                                                 incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
+                                                 incomingStack_ffffff78,incomingStack_ffffff80),
              puVar13 = puVar18, iVar10 = local_4c[0], puVar6 = puVar12, local_4c[0] != 0)) {
             puVar18 = puVar6;
             puVar12 = puVar13;
@@ -4676,7 +4676,7 @@ LAB_000f1c00: ;
             }
             if ((cVar1 == '\0') ||
                (iVar17 = ((int (*)())_gleCullPolygonPtrStack)(glContext,puVar18,iVar10,&local_50),
-               dVar22 = extraout_f1_01, iVar17 == 0)) {
+               dVar22 = f1AfterCall2, iVar17 == 0)) {
               iVar17 = local_50;
               if ((!bVar2) && ((bVar4 && (iVar9 = iVar10, puVar13 = puVar18, 0 < iVar10)))) {
                 do {
@@ -4717,19 +4717,19 @@ void _gleSelectTriangleFanFunc_body(glContext)
   uint uVar15;
   int iVar16;
   uint uVar17;
-  double extraout_f1;
+  double f1AfterCall;
   double dVar18;
-  double extraout_f1_00;
-  double extraout_f1_01;
-  double in_f2;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
-  double in_stack_ffffff78;
-  double in_stack_ffffff80;
+  double f1AfterCall1;
+  double f1AfterCall2;
+  double incomingFpr2;
+  double incomingFpr3;
+  double incomingFpr4;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
+  double incomingStack_ffffff78;
+  double incomingStack_ffffff80;
   int local_50;
   int local_4c [5];
   
@@ -4749,7 +4749,7 @@ void _gleSelectTriangleFanFunc_body(glContext)
       (uVar15 = (uint)(*(int *)(glContext + 0x4858) - iVar13) /
                 (uint)(int)*(short *)(glContext + 0x487c), 2 < (int)uVar15)) &&
      (uVar7 = (**(code **)(glContext + 0x5060))(glContext,iVar13,uVar15), (uVar7 & 0xff00) == 0)) {
-    dVar18 = extraout_f1;
+    dVar18 = f1AfterCall;
     if (bVar2) {
       if (*(char *)(glContext + 0x4e18) != '\0') {
         dVar18 = (double)(**(double ( **)(int,int,int))(glContext + 0x5064))(glContext, iVar13, uVar15);
@@ -4774,10 +4774,10 @@ void _gleSelectTriangleFanFunc_body(glContext)
               uVar12 = uVar17;
               if (uVar15 < uVar7) goto LAB_000f1f60;
               uVar17 = uVar7 + 0x100;
-              iVar8 = ((undefined4 (*)())_gleCullTriangle)(glContext,iVar13,uVar7,uVar17,0,&local_50,dVar18,in_f2,in_f3,
-                                       in_f4,in_f5,in_f6,in_f7,in_f8,in_stack_ffffff78,
-                                       in_stack_ffffff80);
-              dVar18 = extraout_f1_00;
+              iVar8 = ((undefined4 (*)())_gleCullTriangle)(glContext,iVar13,uVar7,uVar17,0,&local_50,dVar18,incomingFpr2,incomingFpr3,
+                                       incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffff78,
+                                       incomingStack_ffffff80);
+              dVar18 = f1AfterCall1;
               if (iVar8 != 0) break;
               if (iVar9 != local_50) {
                 bVar3 = true;
@@ -4823,9 +4823,9 @@ LAB_000f1f60:
           piVar5 = piVar14;
           iVar9 = 3;
           if ((*(char *)(glContext + 0x4e18) == '\0') ||
-             (dVar18 = (double)((double (*)())_gleClipPolyPlane)(glContext,piVar14,3,piVar10,local_4c,dVar18,in_f2,
-                                                 in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
-                                                 in_stack_ffffff78,in_stack_ffffff80),
+             (dVar18 = (double)((double (*)())_gleClipPolyPlane)(glContext,piVar14,3,piVar10,local_4c,dVar18,incomingFpr2,
+                                                 incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
+                                                 incomingStack_ffffff78,incomingStack_ffffff80),
              piVar11 = piVar14, piVar5 = piVar10, iVar9 = local_4c[0], local_4c[0] != 0)) {
             piVar14 = piVar5;
             piVar10 = piVar11;
@@ -4840,7 +4840,7 @@ LAB_000f1f60:
             }
             if ((cVar1 == '\0') ||
                (iVar16 = ((int (*)())_gleCullPolygonPtrStack)(glContext,piVar14,iVar9,&local_50),
-               dVar18 = extraout_f1_01, iVar16 == 0)) {
+               dVar18 = f1AfterCall2, iVar16 == 0)) {
               iVar16 = local_50;
               if ((!bVar2) && ((bVar4 && (piVar11 = piVar14, iVar8 = iVar9, 0 < iVar9)))) {
                 do {
@@ -4881,20 +4881,20 @@ void _gleSelectQuadsFunc_body(glContext)
   uint uVar14;
   uint uVar15;
   int iVar16;
-  double extraout_f1;
+  double f1AfterCall;
   double dVar17;
   double extraout_f1_00;
-  double extraout_f1_01;
-  double in_f2;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
-  double in_stack_ffffff78;
-  double in_stack_ffffff80;
-  double in_stack_ffffff88;
+  double f1AfterCall2;
+  double incomingFpr2;
+  double incomingFpr3;
+  double incomingFpr4;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
+  double incomingStack_ffffff78;
+  double incomingStack_ffffff80;
+  double incomingStack_ffffff88;
   int local_50;
   int local_4c [6];
   
@@ -4914,7 +4914,7 @@ void _gleSelectQuadsFunc_body(glContext)
       (uVar12 = (*(int *)(glContext + 0x4858) - uVar15) / (uint)(int)*(short *)(glContext + 0x487c),
       3 < (int)uVar12)) &&
      (uVar7 = (**(code **)(glContext + 0x5060))(glContext,uVar15,uVar12), (uVar7 & 0xff00) == 0)) {
-    dVar17 = extraout_f1;
+    dVar17 = f1AfterCall;
     if (bVar2) {
       if (*(char *)(glContext + 0x4e18) != '\0') {
         dVar17 = (double)(**(double ( **)(int,int,int))(glContext + 0x5064))(glContext, uVar15, uVar12);
@@ -4937,8 +4937,8 @@ void _gleSelectQuadsFunc_body(glContext)
           if (uVar15 <= uVar12) {
             do {
               iVar8 = ((undefined4 (*)())_gleCullQuad)(glContext,uVar15,uVar15 + 0x100,uVar15 + 0x200,uVar15 + 0x300,
-                                   &local_50,dVar17,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
-                                   in_stack_ffffff78,in_stack_ffffff80,in_stack_ffffff88);
+                                   &local_50,dVar17,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
+                                   incomingStack_ffffff78,incomingStack_ffffff80,incomingStack_ffffff88);
               dVar17 = dVar17;
               if (iVar8 == 0) {
                 if (iVar9 != local_50) {
@@ -4989,9 +4989,9 @@ void _gleSelectQuadsFunc_body(glContext)
           iVar9 = 4;
           puVar5 = puVar13;
           if ((*(char *)(glContext + 0x4e18) == '\0') ||
-             (dVar17 = (double)((double (*)())_gleClipPolyPlane)(glContext,puVar13,4,puVar10,local_4c,dVar17,in_f2,
-                                                 in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
-                                                 in_stack_ffffff78,in_stack_ffffff80),
+             (dVar17 = (double)((double (*)())_gleClipPolyPlane)(glContext,puVar13,4,puVar10,local_4c,dVar17,incomingFpr2,
+                                                 incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
+                                                 incomingStack_ffffff78,incomingStack_ffffff80),
              puVar11 = puVar13, iVar9 = local_4c[0], puVar5 = puVar10, local_4c[0] != 0)) {
             puVar13 = puVar5;
             puVar10 = puVar11;
@@ -5006,7 +5006,7 @@ void _gleSelectQuadsFunc_body(glContext)
             }
             if ((cVar1 == '\0') ||
                (iVar16 = ((int (*)())_gleCullPolygonPtrStack)(glContext,puVar13,iVar9,&local_50),
-               dVar17 = extraout_f1_01, iVar16 == 0)) {
+               dVar17 = f1AfterCall2, iVar16 == 0)) {
               iVar16 = local_50;
               if ((!bVar2) && ((bVar4 && (puVar11 = puVar13, iVar8 = iVar9, 0 < iVar9)))) {
                 do {
@@ -5047,20 +5047,20 @@ void _gleSelectQuadStripFunc_body(glContext)
   int iVar14;
   uint *puVar15;
   uint uVar16;
-  double extraout_f1;
+  double f1AfterCall;
   double dVar17;
-  double extraout_f1_00;
-  double extraout_f1_01;
-  double in_f2;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
-  double in_stack_ffffff78;
-  double in_stack_ffffff80;
-  double in_stack_ffffff88;
+  double f1AfterCall1;
+  double f1AfterCall2;
+  double incomingFpr2;
+  double incomingFpr3;
+  double incomingFpr4;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
+  double incomingStack_ffffff78;
+  double incomingStack_ffffff80;
+  double incomingStack_ffffff88;
   int local_50;
   int local_4c [6];
   
@@ -5080,7 +5080,7 @@ void _gleSelectQuadStripFunc_body(glContext)
       (uVar13 = (*(int *)(glContext + 0x4858) - uVar16) / (uint)(int)*(short *)(glContext + 0x487c),
       3 < (int)uVar13)) &&
      (uVar7 = (**(code **)(glContext + 0x5060))(glContext,uVar16,uVar13), (uVar7 & 0xff00) == 0)) {
-    dVar17 = extraout_f1;
+    dVar17 = f1AfterCall;
     if (bVar2) {
       if (*(char *)(glContext + 0x4e18) != '\0') {
         dVar17 = (double)(**(double ( **)(int,int,int))(glContext + 0x5064))(glContext, uVar16, uVar13);
@@ -5105,9 +5105,9 @@ void _gleSelectQuadStripFunc_body(glContext)
               if (uVar13 < uVar16) goto LAB_000f2614;
               uVar7 = uVar16 + 0x200;
               iVar8 = ((undefined4 (*)())_gleCullQuad)(glContext,uVar16,uVar16 + 0x100,uVar16 + 0x300,uVar7,&local_50,
-                                   dVar17,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
-                                   in_stack_ffffff78,in_stack_ffffff80,in_stack_ffffff88);
-              dVar17 = extraout_f1_00;
+                                   dVar17,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
+                                   incomingStack_ffffff78,incomingStack_ffffff80,incomingStack_ffffff88);
+              dVar17 = f1AfterCall1;
               if (iVar8 != 0) break;
               if (iVar9 != local_50) {
                 bVar3 = true;
@@ -5153,9 +5153,9 @@ LAB_000f2614:
           iVar9 = 4;
           puVar5 = puVar15;
           if ((*(char *)(glContext + 0x4e18) == '\0') ||
-             (dVar17 = (double)((double (*)())_gleClipPolyPlane)(glContext,puVar15,4,puVar10,local_4c,dVar17,in_f2,
-                                                 in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
-                                                 in_stack_ffffff78,in_stack_ffffff80),
+             (dVar17 = (double)((double (*)())_gleClipPolyPlane)(glContext,puVar15,4,puVar10,local_4c,dVar17,incomingFpr2,
+                                                 incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
+                                                 incomingStack_ffffff78,incomingStack_ffffff80),
              puVar11 = puVar15, iVar9 = local_4c[0], puVar5 = puVar10, local_4c[0] != 0)) {
             puVar15 = puVar5;
             puVar10 = puVar11;
@@ -5170,7 +5170,7 @@ LAB_000f2614:
             }
             if ((cVar1 == '\0') ||
                (iVar14 = ((int (*)())_gleCullPolygonPtrStack)(glContext,puVar15,iVar9,&local_50),
-               dVar17 = extraout_f1_01, iVar14 == 0)) {
+               dVar17 = f1AfterCall2, iVar14 == 0)) {
               iVar14 = local_50;
               if ((!bVar2) && ((bVar4 && (puVar11 = puVar15, iVar8 = iVar9, 0 < iVar9)))) {
                 do {
@@ -5202,12 +5202,12 @@ void _gleFlushAtomicFunc(glContext)
 }
 
 /* _gleFlushAtomicTCLRDirtyFunc @ 0xf2814 (172 bytes) */
-void _gleFlushAtomicTCLRDirtyFunc(int glContext,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8)
+void _gleFlushAtomicTCLRDirtyFunc(int glContext,double floatArg1,double floatArg2,double floatArg3,double floatArg4,double floatArg5,double floatArg6,double floatArg7,double floatArg8)
 {
   if ((((*(char *)(glContext + 0x7580) != '\0') && ((*(uint *)(glContext + 0x486c) & 1) != 0)) &&
       (*(char *)(*(int *)(glContext + 0x468c) + 0x7a) == '\0')) &&
      ((*(char *)(glContext + 0x4664) == '\0' && (*(int *)(glContext + 0x5434) == 0)))) {
-    ((undefined4 (*)())_gleForceToSoftwareTCL)(glContext,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
+    ((undefined4 (*)())_gleForceToSoftwareTCL)(glContext,floatArg1,floatArg2,floatArg3,floatArg4,floatArg5,floatArg6,floatArg7,floatArg8);
                     
                     
     (**(code **)(glContext + 0x4a0c))(glContext);
@@ -5304,7 +5304,7 @@ void _gleFlushLineLoopTCLFunc(glContext)
 }
 
 /* _gleFlushLineLoopTCLRDirtyFunc @ 0xf2a48 (292 bytes) */
-void _gleFlushLineLoopTCLRDirtyFunc(int glContext,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8)
+void _gleFlushLineLoopTCLRDirtyFunc(int glContext,double floatArg1,double floatArg2,double floatArg3,double floatArg4,double floatArg5,double floatArg6,double floatArg7,double floatArg8)
 {
   int iVar1;
   int iVar2;
@@ -5315,7 +5315,7 @@ void _gleFlushLineLoopTCLRDirtyFunc(int glContext,double fparam_1,double fparam_
   if ((((*(char *)(glContext + 0x7580) != '\0') && ((*(uint *)(glContext + 0x486c) & 1) != 0)) &&
       (*(char *)(*(int *)(glContext + 0x468c) + 0x7a) == '\0')) &&
      ((*(char *)(glContext + 0x4664) == '\0' && (*(int *)(glContext + 0x5434) == 0)))) {
-    ((undefined4 (*)())_gleForceToSoftwareTCL)(glContext,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
+    ((undefined4 (*)())_gleForceToSoftwareTCL)(glContext,floatArg1,floatArg2,floatArg3,floatArg4,floatArg5,floatArg6,floatArg7,floatArg8);
                     
                     
     (**(code **)(glContext + 0x4a0c))(glContext);
@@ -5410,7 +5410,7 @@ void _gleFlushLineStripTCLFunc(glContext)
 }
 
 /* _gleFlushLineStripTCLRDirtyFunc @ 0xf2c74 (236 bytes) */
-void _gleFlushLineStripTCLRDirtyFunc(int glContext,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8)
+void _gleFlushLineStripTCLRDirtyFunc(int glContext,double floatArg1,double floatArg2,double floatArg3,double floatArg4,double floatArg5,double floatArg6,double floatArg7,double floatArg8)
 {
   int iVar1;
   int iVar2;
@@ -5421,7 +5421,7 @@ void _gleFlushLineStripTCLRDirtyFunc(int glContext,double fparam_1,double fparam
   if ((((*(char *)(glContext + 0x7580) != '\0') && ((*(uint *)(glContext + 0x486c) & 1) != 0)) &&
       (*(char *)(*(int *)(glContext + 0x468c) + 0x7a) == '\0')) &&
      ((*(char *)(glContext + 0x4664) == '\0' && (*(int *)(glContext + 0x5434) == 0)))) {
-    ((undefined4 (*)())_gleForceToSoftwareTCL)(glContext,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
+    ((undefined4 (*)())_gleForceToSoftwareTCL)(glContext,floatArg1,floatArg2,floatArg3,floatArg4,floatArg5,floatArg6,floatArg7,floatArg8);
                     
                     
     (**(code **)(glContext + 0x4a0c))(glContext);
@@ -5521,7 +5521,7 @@ void _gleFlushTriQuadStripTCLFunc(glContext)
 }
 
 /* _gleFlushTriQuadStripTCLRDirtyFunc @ 0xf2e9c (232 bytes) */
-void _gleFlushTriQuadStripTCLRDirtyFunc(int glContext,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8)
+void _gleFlushTriQuadStripTCLRDirtyFunc(int glContext,double floatArg1,double floatArg2,double floatArg3,double floatArg4,double floatArg5,double floatArg6,double floatArg7,double floatArg8)
 {
   short sVar1;
   int iVar2;
@@ -5533,7 +5533,7 @@ void _gleFlushTriQuadStripTCLRDirtyFunc(int glContext,double fparam_1,double fpa
   if ((((*(char *)(glContext + 0x7580) != '\0') && ((*(uint *)(glContext + 0x486c) & 1) != 0)) &&
       (*(char *)(*(int *)(glContext + 0x468c) + 0x7a) == '\0')) &&
      ((*(char *)(glContext + 0x4664) == '\0' && (*(int *)(glContext + 0x5434) == 0)))) {
-    ((undefined4 (*)())_gleForceToSoftwareTCL)(glContext,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
+    ((undefined4 (*)())_gleForceToSoftwareTCL)(glContext,floatArg1,floatArg2,floatArg3,floatArg4,floatArg5,floatArg6,floatArg7,floatArg8);
                     
                     
     (**(code **)(glContext + 0x4a0c))(glContext);
@@ -5631,7 +5631,7 @@ void _gleFlushTriangleFanTCLFunc(glContext)
 }
 
 /* _gleFlushTriangleFanTCLRDirtyFunc @ 0xf30c4 (232 bytes) */
-void _gleFlushTriangleFanTCLRDirtyFunc(int glContext,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8)
+void _gleFlushTriangleFanTCLRDirtyFunc(int glContext,double floatArg1,double floatArg2,double floatArg3,double floatArg4,double floatArg5,double floatArg6,double floatArg7,double floatArg8)
 {
   int iVar1;
   int iVar2;
@@ -5642,7 +5642,7 @@ void _gleFlushTriangleFanTCLRDirtyFunc(int glContext,double fparam_1,double fpar
   if ((((*(char *)(glContext + 0x7580) != '\0') && ((*(uint *)(glContext + 0x486c) & 1) != 0)) &&
       (*(char *)(*(int *)(glContext + 0x468c) + 0x7a) == '\0')) &&
      ((*(char *)(glContext + 0x4664) == '\0' && (*(int *)(glContext + 0x5434) == 0)))) {
-    ((undefined4 (*)())_gleForceToSoftwareTCL)(glContext,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
+    ((undefined4 (*)())_gleForceToSoftwareTCL)(glContext,floatArg1,floatArg2,floatArg3,floatArg4,floatArg5,floatArg6,floatArg7,floatArg8);
                     
                     
     (**(code **)(glContext + 0x4a0c))(glContext);
@@ -5760,7 +5760,7 @@ void _gleFlushPolygonTCLFunc(glContext)
 }
 
 /* _gleFlushPolygonTCLRDirtyFunc @ 0xf3378 (328 bytes) */
-void _gleFlushPolygonTCLRDirtyFunc(int glContext,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8)
+void _gleFlushPolygonTCLRDirtyFunc(int glContext,double floatArg1,double floatArg2,double floatArg3,double floatArg4,double floatArg5,double floatArg6,double floatArg7,double floatArg8)
 {
   int iVar1;
   int iVar2;
@@ -5773,7 +5773,7 @@ void _gleFlushPolygonTCLRDirtyFunc(int glContext,double fparam_1,double fparam_2
   if ((((*(char *)(glContext + 0x7580) != '\0') && ((*(uint *)(glContext + 0x486c) & 1) != 0)) &&
       (*(char *)(*(int *)(glContext + 0x468c) + 0x7a) == '\0')) &&
      ((*(char *)(glContext + 0x4664) == '\0' && (*(int *)(glContext + 0x5434) == 0)))) {
-    ((undefined4 (*)())_gleForceToSoftwareTCL)(glContext,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
+    ((undefined4 (*)())_gleForceToSoftwareTCL)(glContext,floatArg1,floatArg2,floatArg3,floatArg4,floatArg5,floatArg6,floatArg7,floatArg8);
                     
                     
     (**(code **)(glContext + 0x4a0c))(glContext);

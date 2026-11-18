@@ -1,0 +1,86 @@
+local	_glePreEvaluate	param_2	order	CONFIRMED	number of control points (Bernstein basis count): 1 returns the single coefficient 1.0; 2 returns {1-u, u}; larger orders loop up to it
+local	_glePreEvaluate	param_4	coeffs	CONFIRMED	output array of order basis coefficients: [0] = 1 - u, [1] = u for order 2, extended in place by the u/(1-u) recurrence for higher orders
+local	_glePreEvaluate	dVar7	oneMinusU	CONFIRMED	single definition dVar7 = 1.0 - u
+local	_glePreEvaluate	dVar1	newCoeff	INFERRED	single definition: (1-u) * coeffs[j] + carry, stored back to coeffs[j]
+local	_gleEvalDomain1Coord	param_2	points	INFERRED	control-point array read with stride components (pfVar4 += components per point)
+local	_gleEvalDomain1Coord	param_3	order	CONFIRMED	passed to _glePreEvaluate as the order of the basis and compared with the cached _uorder_c
+local	_gleEvalDomain1Coord	param_5	components	INFERRED	number of output components: outer loop bound and stride between consecutive control points
+local	_gleEvalDomain1Coord	param_6	out	CONFIRMED	output vector of components floats: zeroed then accumulated as coefficient * control value
+local	_gleEvalDomain1Coord	iVar6	component	CONFIRMED	outer loop counter over output components (0 .. components-1)
+local	_gleEvalDomain1Coord	iVar3	componentByteOffset	CONFIRMED	single definition component * 4: byte offset of out[component]
+local	_gleEvalDomain1Coord	pfVar4	pointPtr	CONFIRMED	read cursor into points: starts at points + component and advances by components per control point
+local	_gleEvalDomain1Coord	pfVar5	coeffPtr	CONFIRMED	read cursor into the cached basis coefficients _ucoeff_c
+local	_gleEvalDomain1Coord	iVar7	pointsRemaining	CONFIRMED	inner down-counter, starts at order
+local	_gleEvalDomain1Coord	fVar1	coeff	CONFIRMED	basis coefficient loaded from *coeffPtr
+local	_gleEvalDomain1Coord	fVar2	controlValue	CONFIRMED	control-point component loaded from *pointPtr
+local	_gleEvalDomain1Color	param_2	points	INFERRED	control-point array read with stride components (pfVar4 += components per point)
+local	_gleEvalDomain1Color	param_3	order	CONFIRMED	passed to _glePreEvaluate as the order of the basis and compared with the cached _uorder_c
+local	_gleEvalDomain1Color	param_5	components	INFERRED	number of output components: outer loop bound and stride between consecutive control points
+local	_gleEvalDomain1Color	param_6	out	CONFIRMED	output vector of components floats: zeroed then accumulated as coefficient * control value
+local	_gleEvalDomain1Color	iVar6	component	CONFIRMED	outer loop counter over output components (0 .. components-1)
+local	_gleEvalDomain1Color	iVar3	componentByteOffset	CONFIRMED	single definition component * 4: byte offset of out[component]
+local	_gleEvalDomain1Color	pfVar4	pointPtr	CONFIRMED	read cursor into points: starts at points + component and advances by components per control point
+local	_gleEvalDomain1Color	pfVar5	coeffPtr	CONFIRMED	read cursor into the cached basis coefficients _ucoeff_c
+local	_gleEvalDomain1Color	iVar7	pointsRemaining	CONFIRMED	inner down-counter, starts at order
+local	_gleEvalDomain1Color	fVar1	coeff	CONFIRMED	basis coefficient loaded from *coeffPtr
+local	_gleEvalDomain1Color	fVar2	controlValue	CONFIRMED	control-point component loaded from *pointPtr
+local	_gleEvalDomain2Coord	param_2	points	INFERRED	control-point array read with stride components (pfVar8 += components per point)
+local	_gleEvalDomain2Coord	param_3	uorder	CONFIRMED	compared with the cached _uorder_c and used as the order of the u basis
+local	_gleEvalDomain2Coord	param_4	vorder	CONFIRMED	compared with the cached _vorder_c and used as the order of the v basis
+local	_gleEvalDomain2Coord	param_7	components	INFERRED	number of output components: outer loop bound and stride between consecutive control points
+local	_gleEvalDomain2Coord	param_8	out	CONFIRMED	output vector of components floats: zeroed then accumulated
+local	_gleEvalDomain2Coord	iVar3	componentByteOffset	CONFIRMED	single definition component * 4: byte offset of out[component]
+local	_gleEvalDomain2Coord	pfVar8	pointPtr	CONFIRMED	read cursor into points: starts at points + component and advances by components per control point
+local	_gleEvalDomain2Coord	pfVar7	uCoeffPtr	CONFIRMED	read cursor into the cached u basis coefficients _ucoeff_c
+local	_gleEvalDomain2Coord	iVar4	uRemaining	CONFIRMED	u-loop down-counter, starts at uorder
+local	_gleEvalDomain2Coord	fVar1	vSum	CONFIRMED	running sum over v of vcoeff * control value for the current u row
+local	_gleEvalDomain2Coord	iVar9	vRemaining	CONFIRMED	v-loop down-counter, starts at vorder - 1 after the first term
+local	_gleEvalDomain2Coord	pfVar5	vCoeffPtr	CONFIRMED	read cursor into the cached v basis coefficients _vcoeff_c
+local	_gleEvalDomain2Coord	fVar2	controlValue	CONFIRMED	control-point component loaded from *pointPtr
+local	_gleEvalDomain2Color	param_2	points	INFERRED	control-point array read with stride components (pfVar8 += components per point)
+local	_gleEvalDomain2Color	param_3	uorder	CONFIRMED	compared with the cached _uorder_c and used as the order of the u basis
+local	_gleEvalDomain2Color	param_4	vorder	CONFIRMED	compared with the cached _vorder_c and used as the order of the v basis
+local	_gleEvalDomain2Color	param_7	components	INFERRED	number of output components: outer loop bound and stride between consecutive control points
+local	_gleEvalDomain2Color	param_8	out	CONFIRMED	output vector of components floats: zeroed then accumulated
+local	_gleEvalDomain2Color	iVar3	componentByteOffset	CONFIRMED	single definition component * 4: byte offset of out[component]
+local	_gleEvalDomain2Color	pfVar8	pointPtr	CONFIRMED	read cursor into points: starts at points + component and advances by components per control point
+local	_gleEvalDomain2Color	pfVar7	uCoeffPtr	CONFIRMED	read cursor into the cached u basis coefficients _ucoeff_c
+local	_gleEvalDomain2Color	iVar4	uRemaining	CONFIRMED	u-loop down-counter, starts at uorder
+local	_gleEvalDomain2Color	fVar1	vSum	CONFIRMED	running sum over v of vcoeff * control value for the current u row
+local	_gleEvalDomain2Color	iVar9	vRemaining	CONFIRMED	v-loop down-counter, starts at vorder - 1 after the first term
+local	_gleEvalDomain2Color	pfVar5	vCoeffPtr	CONFIRMED	read cursor into the cached v basis coefficients _vcoeff_c
+local	_gleEvalDomain2Color	fVar2	controlValue	CONFIRMED	control-point component loaded from *pointPtr
+local	_gleGetMatrixf	param_1	srcMatrix	CONFIRMED	16-element matrix read element by element (param_2[i] = param_1[j])
+local	_gleGetMatrixf	param_2	dstMatrix	CONFIRMED	16-element matrix written element by element (param_2[i] = param_1[j])
+local	_gleGetTransposeMatrixd	param_1	srcMatrix	CONFIRMED	16-element matrix read element by element (param_2[i] = param_1[j])
+local	_gleGetTransposeMatrixd	param_2	dstMatrix	CONFIRMED	16-element matrix written element by element (param_2[i] = param_1[j], with index transposition i = 4*col+row)
+local	_gleGetTransposeMatrixf	param_1	srcMatrix	CONFIRMED	16-element matrix read element by element (param_2[i] = param_1[j])
+local	_gleGetTransposeMatrixf	param_2	dstMatrix	CONFIRMED	16-element matrix written element by element (param_2[i] = param_1[j], with index transposition i = 4*col+row)
+local	_gleLoadTransposeMatrixd	param_1	srcMatrix	CONFIRMED	16-element matrix read element by element (param_2[i] = param_1[j])
+local	_gleLoadTransposeMatrixd	param_2	dstMatrix	CONFIRMED	16-element matrix written element by element (param_2[i] = param_1[j], with index transposition i = 4*col+row)
+local	_gleLoadTransposeMatrixf	param_1	srcMatrix	CONFIRMED	16-element matrix read element by element (param_2[i] = param_1[j])
+local	_gleLoadTransposeMatrixf	param_2	dstMatrix	CONFIRMED	16-element matrix written element by element (param_2[i] = param_1[j], with index transposition i = 4*col+row)
+local	_gleMultTransposeMatrix	param_1	leftMatrix	CONFIRMED	16-element column-major matrix; param_3[i+4*j] = sum over k of param_1[i+4*k] * param_2[j+4*k], i.e. product = left * transpose(right)
+local	_gleMultTransposeMatrix	param_2	rightMatrix	CONFIRMED	16-element matrix used transposed: param_3[i+4*j] = sum over k of param_1[i+4*k] * param_2[j+4*k]
+local	_gleMultTransposeMatrix	param_3	productMatrix	CONFIRMED	16-element output written once per element: left * transpose(right)
+local	_gleMultTransposeMatrixd	param_1	leftMatrix	CONFIRMED	16-element column-major matrix; param_3[i+4*j] = sum over k of param_1[i+4*k] * param_2[j+4*k], i.e. product = left * transpose(right)
+local	_gleMultTransposeMatrixd	param_2	rightMatrix	CONFIRMED	16-element matrix used transposed: param_3[i+4*j] = sum over k of param_1[i+4*k] * param_2[j+4*k]
+local	_gleMultTransposeMatrixd	param_3	productMatrix	CONFIRMED	16-element output written once per element: left * transpose(right)
+local	_gleMultTransposeMatrixf	param_1	leftMatrix	CONFIRMED	16-element column-major matrix; param_3[i+4*j] = sum over k of param_1[i+4*k] * param_2[j+4*k], i.e. product = left * transpose(right)
+local	_gleMultTransposeMatrixf	param_2	rightMatrix	CONFIRMED	16-element matrix used transposed: param_3[i+4*j] = sum over k of param_1[i+4*k] * param_2[j+4*k]
+local	_gleMultTransposeMatrixf	param_3	productMatrix	CONFIRMED	16-element output written once per element: left * transpose(right)
+local	_gleInvertMatrix_601_body	pfVar13	inverseMatrix	CONFIRMED	points at param_1+0x21c0: initialised to the identity, then receives the same row operations as the working copy (Gauss-Jordan inverse)
+local	_gleInvertMatrix_601_body	fVar3	zero	CONFIRMED	holds FLOAT_00108e50 = 0.0 (identity off-diagonals; pivot == 0 singular test)
+local	_gleInvertMatrix_601_body	fVar4	one	CONFIRMED	holds FLOAT_00108e54 = 1.0 (identity diagonal; reciprocal of the pivot)
+local	_gleInvertMatrix_601_body	iVar9	pivotIndex	CONFIRMED	outer Gauss-Jordan loop counter 0..3: column/pivot being eliminated (iVar7/iVar14/iVar15 = pivotIndex + 4/8/12)
+local	_gleInvertMatrix_601_body	iVar10	maxIndex	INFERRED	index of the largest-magnitude candidate found by the ABS compare loop; swapped into the pivot position when != pivotIndex
+local	_gleRenderbufferStorage	param_2	target	CONFIRMED	both callers in part_015 pass 0x8d41 = GL_RENDERBUFFER_EXT (glRenderbufferStorageEXT first argument)
+local	_gleRenderbufferStorage	param_3	internalformat	CONFIRMED	compared against GL_DEPTH_COMPONENT/16/24/32 (0x1902,0x81a5-7) and GL_STENCIL_INDEX/1/4/8/16 (0x1901,0x8d46-9); passed (& 0xffff) as the format of the created texture level
+local	_gleRenderbufferStorage	param_4	width	INFERRED	passed to _gleCreateTextureLevel as the level width; nonzero together with height gates creation of the plugin level
+local	_gleRenderbufferStorage	param_5	height	INFERRED	passed to _gleCreateTextureLevel after width; nonzero together with width gates creation of the plugin level
+local	_gleFramebufferTexture	param_2	attachmentIndex	CONFIRMED	callers pass 0..3 for GL_COLOR_ATTACHMENTn (token - 0x8ce0), 4 for 0x8d00 depth, 5 for 0x8d20 stencil; scaled by 0x18 / 4 into the six attachment slots
+local	_gleFramebufferTexture	param_3	targetIndex	INFERRED	internal texture-target code stored in the attachment (+0x20): callers pass 2 for GL_TEXTURE_RECTANGLE (0x84f5) and 0 when detaching
+local	_gleFramebufferTexture	param_4	textureObject	CONFIRMED	texture object pointer stored in the attachment (+0xc4 slot); its refcount (+8) is incremented, and 0 detaches
+local	_gleFramebufferTexture	param_5	face	CONFIRMED	glFramebufferTexture2DEXT_Exec passes textarget - 0x8515 (GL_TEXTURE_CUBE_MAP_POSITIVE_X): the cube-map face index; scaled by 0x168 in the level table, 0 for non-cube targets
+local	_gleFramebufferTexture	param_6	level	CONFIRMED	mipmap level: forwarded from the level argument of glFramebufferTexture*EXT by the callers; scaled by 0x18 (level stride)
+local	_gleFramebufferTexture	param_7	zoffset	CONFIRMED	stored in the attachment (+0x2c); forwarded from the 3D caller param_7 (glFramebufferTexture3DEXT zoffset), 0 elsewhere

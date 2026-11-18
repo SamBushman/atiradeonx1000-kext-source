@@ -1,0 +1,72 @@
+local	_gleModifyPixelDepth	param_1	glContext	INFERRED	dereferenced only at context pixel-transfer state (+0x31e8..+0x3414: per-channel scale/bias, map sizes, map-enable bits); the first argument of every _gle* function that carries the context
+local	_gleModifyPixelDepth	param_2	pixel	INFERRED	float pixel record (+4 R, +8 G, +0xc B, +0x10 A, +0x14 depth): every channel is read, scaled/biased/mapped and written back in place
+local	_gleModifyPixelR	param_1	glContext	INFERRED	dereferenced only at context pixel-transfer state (+0x31e8..+0x3414: per-channel scale/bias, map sizes, map-enable bits); the first argument of every _gle* function that carries the context
+local	_gleModifyPixelR	param_2	pixel	INFERRED	float pixel record (+4 R, +8 G, +0xc B, +0x10 A, +0x14 depth): every channel is read, scaled/biased/mapped and written back in place
+local	_gleModifyPixelR	fVar2	red	CONFIRMED	red channel: pixel+offset * scale + bias (glPixelTransfer RED_SCALE/RED_BIAS), then clamped or mapped, and stored back to the pixel record
+local	_gleModifyPixelG	param_1	glContext	INFERRED	dereferenced only at context pixel-transfer state (+0x31e8..+0x3414: per-channel scale/bias, map sizes, map-enable bits); the first argument of every _gle* function that carries the context
+local	_gleModifyPixelG	param_2	pixel	INFERRED	float pixel record (+4 R, +8 G, +0xc B, +0x10 A, +0x14 depth): every channel is read, scaled/biased/mapped and written back in place
+local	_gleModifyPixelG	fVar2	green	CONFIRMED	green channel: pixel+offset * scale + bias (glPixelTransfer GREEN_SCALE/GREEN_BIAS), then clamped or mapped, and stored back to the pixel record
+local	_gleModifyPixelB	param_1	glContext	INFERRED	dereferenced only at context pixel-transfer state (+0x31e8..+0x3414: per-channel scale/bias, map sizes, map-enable bits); the first argument of every _gle* function that carries the context
+local	_gleModifyPixelB	param_2	pixel	INFERRED	float pixel record (+4 R, +8 G, +0xc B, +0x10 A, +0x14 depth): every channel is read, scaled/biased/mapped and written back in place
+local	_gleModifyPixelB	fVar2	blue	CONFIRMED	blue channel: pixel+offset * scale + bias (glPixelTransfer BLUE_SCALE/BLUE_BIAS), then clamped or mapped, and stored back to the pixel record
+local	_gleModifyPixelA	param_1	glContext	INFERRED	dereferenced only at context pixel-transfer state (+0x31e8..+0x3414: per-channel scale/bias, map sizes, map-enable bits); the first argument of every _gle* function that carries the context
+local	_gleModifyPixelA	param_2	pixel	INFERRED	float pixel record (+4 R, +8 G, +0xc B, +0x10 A, +0x14 depth): every channel is read, scaled/biased/mapped and written back in place
+local	_gleModifyPixelA	fVar2	alpha	CONFIRMED	alpha channel: pixel+offset * scale + bias (glPixelTransfer ALPHA_SCALE/ALPHA_BIAS), then clamped or mapped, and stored back to the pixel record
+local	_gleModifyPixelRGB	param_1	glContext	INFERRED	dereferenced only at context pixel-transfer state (+0x31e8..+0x3414: per-channel scale/bias, map sizes, map-enable bits); the first argument of every _gle* function that carries the context
+local	_gleModifyPixelRGB	param_2	pixel	INFERRED	float pixel record (+4 R, +8 G, +0xc B, +0x10 A, +0x14 depth): every channel is read, scaled/biased/mapped and written back in place
+local	_gleModifyPixelRGB	fVar4	red	CONFIRMED	red channel: pixel+offset * scale + bias (glPixelTransfer RED_SCALE/RED_BIAS), then clamped or mapped, and stored back to the pixel record
+local	_gleModifyPixelRGB	fVar5	green	CONFIRMED	green channel: pixel+offset * scale + bias (glPixelTransfer GREEN_SCALE/GREEN_BIAS), then clamped or mapped, and stored back to the pixel record
+local	_gleModifyPixelRGB	fVar6	blue	CONFIRMED	blue channel: pixel+offset * scale + bias (glPixelTransfer BLUE_SCALE/BLUE_BIAS), then clamped or mapped, and stored back to the pixel record
+local	_gleModifyPixelRGB	uVar2	greenScaledIndex	CONFIRMED	(int)(green * (mapSize - 1) + 0.5): the rounded index of the green channel into its pixel map
+local	_gleModifyPixelRGB	uVar10	greenMapIndex	INFERRED	starts as the map size - 1 (upper bound) and ends as the clamped index (min(greenScaledIndex, size-1), floored at 0) used to read the green map table
+local	_gleModifyPixelRGBA	param_1	glContext	INFERRED	dereferenced only at context pixel-transfer state (+0x31e8..+0x3414: per-channel scale/bias, map sizes, map-enable bits); the first argument of every _gle* function that carries the context
+local	_gleModifyPixelRGBA	param_2	pixel	INFERRED	float pixel record (+4 R, +8 G, +0xc B, +0x10 A, +0x14 depth): every channel is read, scaled/biased/mapped and written back in place
+local	_gleModifyPixelRGBA	fVar5	red	CONFIRMED	red channel: pixel+offset * scale + bias (glPixelTransfer RED_SCALE/RED_BIAS), then clamped or mapped, and stored back to the pixel record
+local	_gleModifyPixelRGBA	fVar6	green	CONFIRMED	green channel: pixel+offset * scale + bias (glPixelTransfer GREEN_SCALE/GREEN_BIAS), then clamped or mapped, and stored back to the pixel record
+local	_gleModifyPixelRGBA	fVar7	blue	CONFIRMED	blue channel: pixel+offset * scale + bias (glPixelTransfer BLUE_SCALE/BLUE_BIAS), then clamped or mapped, and stored back to the pixel record
+local	_gleModifyPixelRGBA	fVar8	alpha	CONFIRMED	alpha channel: pixel+offset * scale + bias (glPixelTransfer ALPHA_SCALE/ALPHA_BIAS), then clamped or mapped, and stored back to the pixel record
+local	_gleModifyPixelRGBA	uVar1	redScaledIndex	CONFIRMED	(int)(red * (mapSize - 1) + 0.5): the rounded index of the red channel into its pixel map
+local	_gleModifyPixelRGBA	uVar13	redMapIndex	INFERRED	starts as the map size - 1 (upper bound) and ends as the clamped index (min(redScaledIndex, size-1), floored at 0) used to read the red map table
+local	_gleModifyPixelRGBA	uVar2	greenScaledIndex	CONFIRMED	(int)(green * (mapSize - 1) + 0.5): the rounded index of the green channel into its pixel map
+local	_gleModifyPixelRGBA	uVar12	greenMapIndex	INFERRED	starts as the map size - 1 (upper bound) and ends as the clamped index (min(greenScaledIndex, size-1), floored at 0) used to read the green map table
+local	_gleModifyPixelRGBA	uVar3	blueScaledIndex	CONFIRMED	(int)(blue * (mapSize - 1) + 0.5): the rounded index of the blue channel into its pixel map
+local	_gleModifyPixelRGBA	uVar11	blueMapIndex	INFERRED	starts as the map size - 1 (upper bound) and ends as the clamped index (min(blueScaledIndex, size-1), floored at 0) used to read the blue map table
+local	_gleModifyPixelRGBA	uVar4	alphaScaledIndex	CONFIRMED	(int)(alpha * (mapSize - 1) + 0.5): the rounded index of the alpha channel into its pixel map
+local	_gleModifyPixelRGBA	uVar10	alphaMapIndex	INFERRED	starts as the map size - 1 (upper bound) and ends as the clamped index (min(alphaScaledIndex, size-1), floored at 0) used to read the alpha map table
+local	_gleModifyPixelHILO	param_1	glContext	INFERRED	dereferenced only at context pixel-transfer state (+0x31e8..+0x3414: per-channel scale/bias, map sizes, map-enable bits); the first argument of every _gle* function that carries the context
+local	_gleModifyPixelHILO	param_2	pixel	INFERRED	float pixel record (+4 R, +8 G, +0xc B, +0x10 A, +0x14 depth): every channel is read, scaled/biased/mapped and written back in place
+local	_gleModifyPixelHILO	fVar1	hi	CONFIRMED	hi channel: pixel+offset * scale + bias (glPixelTransfer HI_SCALE/HI_BIAS), then clamped or mapped, and stored back to the pixel record
+local	_gleModifyPixelHILO	fVar2	lo	CONFIRMED	lo channel: pixel+offset * scale + bias (glPixelTransfer LO_SCALE/LO_BIAS), then clamped or mapped, and stored back to the pixel record
+local	_gleModifyPixelDSDTMagVib	param_1	glContext	INFERRED	dereferenced only at context pixel-transfer state (+0x31e8..+0x3414: per-channel scale/bias, map sizes, map-enable bits); the first argument of every _gle* function that carries the context
+local	_gleModifyPixelDSDTMagVib	param_2	pixel	INFERRED	float pixel record (+4 R, +8 G, +0xc B, +0x10 A, +0x14 depth): every channel is read, scaled/biased/mapped and written back in place
+local	_gleModifyPixelDSDTMagVib	fVar2	red	CONFIRMED	red channel: pixel+offset * scale + bias (glPixelTransfer RED_SCALE/RED_BIAS), then clamped or mapped, and stored back to the pixel record
+local	_gleModifyPixelDSDTMagVib	fVar4	mag	CONFIRMED	mag channel: pixel+offset * scale + bias (glPixelTransfer MAG_SCALE/MAG_BIAS), then clamped or mapped, and stored back to the pixel record
+local	_gleModifyPixelDSDTMagVib	fVar5	dt	CONFIRMED	dt channel: pixel+offset * scale + bias (glPixelTransfer DT_SCALE/DT_BIAS), then clamped or mapped, and stored back to the pixel record
+local	_gleModifyPixelSignedRGBA	param_1	glContext	INFERRED	dereferenced only at context pixel-transfer state (+0x31e8..+0x3414: per-channel scale/bias, map sizes, map-enable bits); the first argument of every _gle* function that carries the context
+local	_gleModifyPixelSignedRGBA	param_2	pixel	INFERRED	float pixel record (+4 R, +8 G, +0xc B, +0x10 A, +0x14 depth): every channel is read, scaled/biased/mapped and written back in place
+local	_gleModifyPixelSignedRGBA	fVar5	red	CONFIRMED	red channel: pixel+offset * scale + bias (glPixelTransfer RED_SCALE/RED_BIAS), then clamped or mapped, and stored back to the pixel record
+local	_gleModifyPixelSignedRGBA	fVar6	green	CONFIRMED	green channel: pixel+offset * scale + bias (glPixelTransfer GREEN_SCALE/GREEN_BIAS), then clamped or mapped, and stored back to the pixel record
+local	_gleModifyPixelSignedRGBA	fVar7	blue	CONFIRMED	blue channel: pixel+offset * scale + bias (glPixelTransfer BLUE_SCALE/BLUE_BIAS), then clamped or mapped, and stored back to the pixel record
+local	_gleModifyPixelSignedRGBA	fVar8	alpha	CONFIRMED	alpha channel: pixel+offset * scale + bias (glPixelTransfer ALPHA_SCALE/ALPHA_BIAS), then clamped or mapped, and stored back to the pixel record
+local	_gleModifyPixelSignedRGBA	uVar1	redScaledIndex	CONFIRMED	(int)(red * (mapSize - 1) + 0.5): the rounded index of the red channel into its pixel map
+local	_gleModifyPixelSignedRGBA	uVar13	redMapIndex	INFERRED	starts as the map size - 1 (upper bound) and ends as the clamped index (min(redScaledIndex, size-1), floored at 0) used to read the red map table
+local	_gleModifyPixelSignedRGBA	uVar2	greenScaledIndex	CONFIRMED	(int)(green * (mapSize - 1) + 0.5): the rounded index of the green channel into its pixel map
+local	_gleModifyPixelSignedRGBA	uVar12	greenMapIndex	INFERRED	starts as the map size - 1 (upper bound) and ends as the clamped index (min(greenScaledIndex, size-1), floored at 0) used to read the green map table
+local	_gleModifyPixelSignedRGBA	uVar3	blueScaledIndex	CONFIRMED	(int)(blue * (mapSize - 1) + 0.5): the rounded index of the blue channel into its pixel map
+local	_gleModifyPixelSignedRGBA	uVar11	blueMapIndex	INFERRED	starts as the map size - 1 (upper bound) and ends as the clamped index (min(blueScaledIndex, size-1), floored at 0) used to read the blue map table
+local	_gleModifyPixelSignedRGBA	uVar4	alphaScaledIndex	CONFIRMED	(int)(alpha * (mapSize - 1) + 0.5): the rounded index of the alpha channel into its pixel map
+local	_gleModifyPixelSignedRGBA	uVar10	alphaMapIndex	INFERRED	starts as the map size - 1 (upper bound) and ends as the clamped index (min(alphaScaledIndex, size-1), floored at 0) used to read the alpha map table
+local	_gleModifyPixelSignedRGB_UnsignedA	param_1	glContext	INFERRED	dereferenced only at context pixel-transfer state (+0x31e8..+0x3414: per-channel scale/bias, map sizes, map-enable bits); the first argument of every _gle* function that carries the context
+local	_gleModifyPixelSignedRGB_UnsignedA	param_2	pixel	INFERRED	float pixel record (+4 R, +8 G, +0xc B, +0x10 A, +0x14 depth): every channel is read, scaled/biased/mapped and written back in place
+local	_gleModifyPixelSignedRGB_UnsignedA	fVar5	red	CONFIRMED	red channel: pixel+offset * scale + bias (glPixelTransfer RED_SCALE/RED_BIAS), then clamped or mapped, and stored back to the pixel record
+local	_gleModifyPixelSignedRGB_UnsignedA	fVar6	green	CONFIRMED	green channel: pixel+offset * scale + bias (glPixelTransfer GREEN_SCALE/GREEN_BIAS), then clamped or mapped, and stored back to the pixel record
+local	_gleModifyPixelSignedRGB_UnsignedA	fVar7	blue	CONFIRMED	blue channel: pixel+offset * scale + bias (glPixelTransfer BLUE_SCALE/BLUE_BIAS), then clamped or mapped, and stored back to the pixel record
+local	_gleModifyPixelSignedRGB_UnsignedA	fVar8	alpha	CONFIRMED	alpha channel: pixel+offset * scale + bias (glPixelTransfer ALPHA_SCALE/ALPHA_BIAS), then clamped or mapped, and stored back to the pixel record
+local	_gleModifyPixelSignedRGB_UnsignedA	uVar1	redScaledIndex	CONFIRMED	(int)(red * (mapSize - 1) + 0.5): the rounded index of the red channel into its pixel map
+local	_gleModifyPixelSignedRGB_UnsignedA	uVar13	redMapIndex	INFERRED	starts as the map size - 1 (upper bound) and ends as the clamped index (min(redScaledIndex, size-1), floored at 0) used to read the red map table
+local	_gleModifyPixelSignedRGB_UnsignedA	uVar2	greenScaledIndex	CONFIRMED	(int)(green * (mapSize - 1) + 0.5): the rounded index of the green channel into its pixel map
+local	_gleModifyPixelSignedRGB_UnsignedA	uVar12	greenMapIndex	INFERRED	starts as the map size - 1 (upper bound) and ends as the clamped index (min(greenScaledIndex, size-1), floored at 0) used to read the green map table
+local	_gleModifyPixelSignedRGB_UnsignedA	uVar3	blueScaledIndex	CONFIRMED	(int)(blue * (mapSize - 1) + 0.5): the rounded index of the blue channel into its pixel map
+local	_gleModifyPixelSignedRGB_UnsignedA	uVar11	blueMapIndex	INFERRED	starts as the map size - 1 (upper bound) and ends as the clamped index (min(blueScaledIndex, size-1), floored at 0) used to read the blue map table
+local	_gleModifyPixelSignedRGB_UnsignedA	uVar4	alphaScaledIndex	CONFIRMED	(int)(alpha * (mapSize - 1) + 0.5): the rounded index of the alpha channel into its pixel map
+local	_gleModifyPixelSignedRGB_UnsignedA	uVar10	alphaMapIndex	INFERRED	starts as the map size - 1 (upper bound) and ends as the clamped index (min(alphaScaledIndex, size-1), floored at 0) used to read the alpha map table

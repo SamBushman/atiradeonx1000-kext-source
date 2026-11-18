@@ -1,458 +1,458 @@
 #include "decls.h"
 
 /* _gleExtractPixel_HILO_Uint @ 0xe513c (108 bytes) */
-void _gleExtractPixel_HILO_Uint(param_1, param_2)
-  int param_1;
-  undefined4 *param_2;
+void _gleExtractPixel_HILO_Uint(pixel, src)
+  int pixel;
+  undefined4 *src;
 {
-  double dVar1;
-  double dVar2;
+  double intToDoubleBias;
+  double channelScale;
   
-  dVar2 = DOUBLE_00108da0;
-  dVar1 = DOUBLE_00108d70;
-  *(float *)(param_1 + 0x20) =
-       (float)((double)(float)((double)CONCAT44(0x43300000,*param_2) - DOUBLE_00108d70) *
+  channelScale = DOUBLE_00108da0;
+  intToDoubleBias = DOUBLE_00108d70;
+  *(float *)(pixel + 0x20) =
+       (float)((double)(float)((double)CONCAT44(0x43300000,*src) - DOUBLE_00108d70) *
               DOUBLE_00108da0);
-  *(float *)(param_1 + 0x24) =
-       (float)((double)(float)((double)CONCAT44(0x43300000,param_2[1]) - dVar1) * dVar2);
+  *(float *)(pixel + 0x24) =
+       (float)((double)(float)((double)CONCAT44(0x43300000,src[1]) - intToDoubleBias) * channelScale);
   return;
 }
 
 /* _gleExtractPixel_HILO_Float @ 0xe51a8 (20 bytes) */
-void _gleExtractPixel_HILO_Float(param_1, param_2)
-  int param_1;
-  undefined4 *param_2;
+void _gleExtractPixel_HILO_Float(pixel, src)
+  int pixel;
+  undefined4 *src;
 {
-  *(undefined4 *)(param_1 + 0x20) = *param_2;
-  *(undefined4 *)(param_1 + 0x24) = param_2[1];
+  *(undefined4 *)(pixel + 0x20) = *src;
+  *(undefined4 *)(pixel + 0x24) = src[1];
   return;
 }
 
 /* _gleExtractPixel_DSDT_Byte @ 0xe51bc (116 bytes) */
-void _gleExtractPixel_DSDT_Byte(param_1, param_2)
-  int param_1;
-  char *param_2;
+void _gleExtractPixel_DSDT_Byte(pixel, src)
+  int pixel;
+  char *src;
 {
-  double dVar1;
-  float fVar2;
+  double intToDoubleBias;
+  float channelScale;
   
-  fVar2 = FLOAT_00108e98;
-  dVar1 = DOUBLE_00108d58;
-  *(float *)(param_1 + 0x28) =
-       (float)((double)CONCAT44(0x43300000,(int)*param_2 ^ 0x80000000) - DOUBLE_00108d58) *
+  channelScale = FLOAT_00108e98;
+  intToDoubleBias = DOUBLE_00108d58;
+  *(float *)(pixel + 0x28) =
+       (float)((double)CONCAT44(0x43300000,(int)*src ^ 0x80000000) - DOUBLE_00108d58) *
        FLOAT_00108e98;
-  *(float *)(param_1 + 0x2c) =
-       (float)((double)CONCAT44(0x43300000,(int)param_2[1] ^ 0x80000000) - dVar1) * fVar2;
+  *(float *)(pixel + 0x2c) =
+       (float)((double)CONCAT44(0x43300000,(int)src[1] ^ 0x80000000) - intToDoubleBias) * channelScale;
   return;
 }
 
 /* _gleExtractPixel_DSDT_Ubyte @ 0xe5230 (104 bytes) */
-void _gleExtractPixel_DSDT_Ubyte(param_1, param_2)
-  int param_1;
-  byte *param_2;
+void _gleExtractPixel_DSDT_Ubyte(pixel, src)
+  int pixel;
+  byte *src;
 {
-  float fVar1;
+  float channelScale;
   
-  fVar1 = FLOAT_00108e78;
-  *(float *)(param_1 + 0x28) = (GH_U2F((unsigned int)((*param_2 | 0x4b000000))) - 8388608.0) * FLOAT_00108e78;
-  *(float *)(param_1 + 0x2c) = (GH_U2F((unsigned int)((param_2[1] | 0x4b000000))) - 8388608.0) * fVar1;
+  channelScale = FLOAT_00108e78;
+  *(float *)(pixel + 0x28) = (GH_U2F((unsigned int)((*src | 0x4b000000))) - 8388608.0) * FLOAT_00108e78;
+  *(float *)(pixel + 0x2c) = (GH_U2F((unsigned int)((src[1] | 0x4b000000))) - 8388608.0) * channelScale;
   return;
 }
 
 /* _gleExtractPixel_DSDT_Short @ 0xe5298 (108 bytes) */
-void _gleExtractPixel_DSDT_Short(param_1, param_2)
-  int param_1;
-  short *param_2;
+void _gleExtractPixel_DSDT_Short(pixel, src)
+  int pixel;
+  short *src;
 {
-  double dVar1;
-  float fVar2;
+  double intToDoubleBias;
+  float channelScale;
   
-  fVar2 = FLOAT_00108e9c;
-  dVar1 = DOUBLE_00108d58;
-  *(float *)(param_1 + 0x28) =
-       (float)((double)CONCAT44(0x43300000,(int)*param_2 ^ 0x80000000) - DOUBLE_00108d58) *
+  channelScale = FLOAT_00108e9c;
+  intToDoubleBias = DOUBLE_00108d58;
+  *(float *)(pixel + 0x28) =
+       (float)((double)CONCAT44(0x43300000,(int)*src ^ 0x80000000) - DOUBLE_00108d58) *
        FLOAT_00108e9c;
-  *(float *)(param_1 + 0x2c) =
-       (float)((double)CONCAT44(0x43300000,(int)param_2[1] ^ 0x80000000) - dVar1) * fVar2;
+  *(float *)(pixel + 0x2c) =
+       (float)((double)CONCAT44(0x43300000,(int)src[1] ^ 0x80000000) - intToDoubleBias) * channelScale;
   return;
 }
 
 /* _gleExtractPixel_DSDT_Ushort @ 0xe5304 (104 bytes) */
-void _gleExtractPixel_DSDT_Ushort(param_1, param_2)
-  int param_1;
-  ushort *param_2;
+void _gleExtractPixel_DSDT_Ushort(pixel, src)
+  int pixel;
+  ushort *src;
 {
-  float fVar1;
+  float channelScale;
   
-  fVar1 = FLOAT_00108e74;
-  *(float *)(param_1 + 0x28) = (GH_U2F((unsigned int)((*param_2 | 0x4b000000))) - 8388608.0) * FLOAT_00108e74;
-  *(float *)(param_1 + 0x2c) = (GH_U2F((unsigned int)((param_2[1] | 0x4b000000))) - 8388608.0) * fVar1;
+  channelScale = FLOAT_00108e74;
+  *(float *)(pixel + 0x28) = (GH_U2F((unsigned int)((*src | 0x4b000000))) - 8388608.0) * FLOAT_00108e74;
+  *(float *)(pixel + 0x2c) = (GH_U2F((unsigned int)((src[1] | 0x4b000000))) - 8388608.0) * channelScale;
   return;
 }
 
 /* _gleExtractPixel_DSDT_Int @ 0xe536c (116 bytes) */
-void _gleExtractPixel_DSDT_Int(param_1, param_2)
-  int param_1;
-  uint *param_2;
+void _gleExtractPixel_DSDT_Int(pixel, src)
+  int pixel;
+  uint *src;
 {
-  double dVar1;
-  double dVar2;
+  double intToDoubleBias;
+  double channelScale;
   
-  dVar2 = DOUBLE_00108d88;
-  dVar1 = DOUBLE_00108d58;
-  *(float *)(param_1 + 0x28) =
-       (float)((double)(float)((double)CONCAT44(0x43300000,*param_2 ^ 0x80000000) - DOUBLE_00108d58)
+  channelScale = DOUBLE_00108d88;
+  intToDoubleBias = DOUBLE_00108d58;
+  *(float *)(pixel + 0x28) =
+       (float)((double)(float)((double)CONCAT44(0x43300000,*src ^ 0x80000000) - DOUBLE_00108d58)
               * DOUBLE_00108d88);
-  *(float *)(param_1 + 0x2c) =
-       (float)((double)(float)((double)CONCAT44(0x43300000,param_2[1] ^ 0x80000000) - dVar1) * dVar2
+  *(float *)(pixel + 0x2c) =
+       (float)((double)(float)((double)CONCAT44(0x43300000,src[1] ^ 0x80000000) - intToDoubleBias) * channelScale
               );
   return;
 }
 
 /* _gleExtractPixel_DSDT_Uint @ 0xe53e0 (108 bytes) */
-void _gleExtractPixel_DSDT_Uint(param_1, param_2)
-  int param_1;
-  undefined4 *param_2;
+void _gleExtractPixel_DSDT_Uint(pixel, src)
+  int pixel;
+  undefined4 *src;
 {
-  double dVar1;
-  double dVar2;
+  double intToDoubleBias;
+  double channelScale;
   
-  dVar2 = DOUBLE_00108da0;
-  dVar1 = DOUBLE_00108d70;
-  *(float *)(param_1 + 0x28) =
-       (float)((double)(float)((double)CONCAT44(0x43300000,*param_2) - DOUBLE_00108d70) *
+  channelScale = DOUBLE_00108da0;
+  intToDoubleBias = DOUBLE_00108d70;
+  *(float *)(pixel + 0x28) =
+       (float)((double)(float)((double)CONCAT44(0x43300000,*src) - DOUBLE_00108d70) *
               DOUBLE_00108da0);
-  *(float *)(param_1 + 0x2c) =
-       (float)((double)(float)((double)CONCAT44(0x43300000,param_2[1]) - dVar1) * dVar2);
+  *(float *)(pixel + 0x2c) =
+       (float)((double)(float)((double)CONCAT44(0x43300000,src[1]) - intToDoubleBias) * channelScale);
   return;
 }
 
 /* _gleExtractPixel_DSDT_Float @ 0xe544c (20 bytes) */
-void _gleExtractPixel_DSDT_Float(param_1, param_2)
-  int param_1;
-  undefined4 *param_2;
+void _gleExtractPixel_DSDT_Float(pixel, src)
+  int pixel;
+  undefined4 *src;
 {
-  *(undefined4 *)(param_1 + 0x28) = *param_2;
-  *(undefined4 *)(param_1 + 0x2c) = param_2[1];
+  *(undefined4 *)(pixel + 0x28) = *src;
+  *(undefined4 *)(pixel + 0x2c) = src[1];
   return;
 }
 
 /* _gleExtractPixel_DSDT_MAG_Byte @ 0xe5460 (160 bytes) */
-void _gleExtractPixel_DSDT_MAG_Byte(param_1, param_2)
-  int param_1;
-  char *param_2;
+void _gleExtractPixel_DSDT_MAG_Byte(pixel, src)
+  int pixel;
+  char *src;
 {
-  char cVar1;
-  double dVar2;
-  float fVar3;
+  char magnitude;
+  double intToDoubleBias;
+  float channelScale;
   
-  fVar3 = FLOAT_00108e98;
-  dVar2 = DOUBLE_00108d58;
-  *(float *)(param_1 + 0x28) =
-       (float)((double)CONCAT44(0x43300000,(int)*param_2 ^ 0x80000000) - DOUBLE_00108d58) *
+  channelScale = FLOAT_00108e98;
+  intToDoubleBias = DOUBLE_00108d58;
+  *(float *)(pixel + 0x28) =
+       (float)((double)CONCAT44(0x43300000,(int)*src ^ 0x80000000) - DOUBLE_00108d58) *
        FLOAT_00108e98;
-  *(float *)(param_1 + 0x2c) =
-       (float)((double)CONCAT44(0x43300000,(int)param_2[1] ^ 0x80000000) - dVar2) * fVar3;
-  cVar1 = param_2[2];
-  *(undefined4 *)(param_1 + 4) = 0;
-  *(float *)(param_1 + 0x30) =
-       (float)((double)CONCAT44(0x43300000,(int)cVar1 ^ 0x80000000) - dVar2) * fVar3;
+  *(float *)(pixel + 0x2c) =
+       (float)((double)CONCAT44(0x43300000,(int)src[1] ^ 0x80000000) - intToDoubleBias) * channelScale;
+  magnitude = src[2];
+  *(undefined4 *)(pixel + 4) = 0;
+  *(float *)(pixel + 0x30) =
+       (float)((double)CONCAT44(0x43300000,(int)magnitude ^ 0x80000000) - intToDoubleBias) * channelScale;
   return;
 }
 
 /* _gleExtractPixel_DSDT_MAG_Ubyte @ 0xe5500 (148 bytes) */
-void _gleExtractPixel_DSDT_MAG_Ubyte(param_1, param_2)
-  int param_1;
-  byte *param_2;
+void _gleExtractPixel_DSDT_MAG_Ubyte(pixel, src)
+  int pixel;
+  byte *src;
 {
-  byte bVar1;
-  float fVar2;
+  byte magnitude;
+  float channelScale;
   
-  fVar2 = FLOAT_00108e78;
-  *(float *)(param_1 + 0x28) = (GH_U2F((unsigned int)((*param_2 | 0x4b000000))) - 8388608.0) * FLOAT_00108e78;
-  *(float *)(param_1 + 0x2c) = (GH_U2F((unsigned int)((param_2[1] | 0x4b000000))) - 8388608.0) * fVar2;
-  bVar1 = param_2[2];
-  *(undefined4 *)(param_1 + 4) = 0;
-  *(float *)(param_1 + 0x30) = (GH_U2F((unsigned int)((bVar1 | 0x4b000000))) - 8388608.0) * fVar2;
+  channelScale = FLOAT_00108e78;
+  *(float *)(pixel + 0x28) = (GH_U2F((unsigned int)((*src | 0x4b000000))) - 8388608.0) * FLOAT_00108e78;
+  *(float *)(pixel + 0x2c) = (GH_U2F((unsigned int)((src[1] | 0x4b000000))) - 8388608.0) * channelScale;
+  magnitude = src[2];
+  *(undefined4 *)(pixel + 4) = 0;
+  *(float *)(pixel + 0x30) = (GH_U2F((unsigned int)((magnitude | 0x4b000000))) - 8388608.0) * channelScale;
   return;
 }
 
 /* _gleExtractPixel_DSDT_MAG_Short @ 0xe5594 (148 bytes) */
-void _gleExtractPixel_DSDT_MAG_Short(param_1, param_2)
-  int param_1;
-  short *param_2;
+void _gleExtractPixel_DSDT_MAG_Short(pixel, src)
+  int pixel;
+  short *src;
 {
-  short sVar1;
-  double dVar2;
-  float fVar3;
+  short magnitude;
+  double intToDoubleBias;
+  float channelScale;
   
-  fVar3 = FLOAT_00108e9c;
-  dVar2 = DOUBLE_00108d58;
-  *(float *)(param_1 + 0x28) =
-       (float)((double)CONCAT44(0x43300000,(int)*param_2 ^ 0x80000000) - DOUBLE_00108d58) *
+  channelScale = FLOAT_00108e9c;
+  intToDoubleBias = DOUBLE_00108d58;
+  *(float *)(pixel + 0x28) =
+       (float)((double)CONCAT44(0x43300000,(int)*src ^ 0x80000000) - DOUBLE_00108d58) *
        FLOAT_00108e9c;
-  *(float *)(param_1 + 0x2c) =
-       (float)((double)CONCAT44(0x43300000,(int)param_2[1] ^ 0x80000000) - dVar2) * fVar3;
-  sVar1 = param_2[2];
-  *(undefined4 *)(param_1 + 4) = 0;
-  *(float *)(param_1 + 0x30) =
-       (float)((double)CONCAT44(0x43300000,(int)sVar1 ^ 0x80000000) - dVar2) * fVar3;
+  *(float *)(pixel + 0x2c) =
+       (float)((double)CONCAT44(0x43300000,(int)src[1] ^ 0x80000000) - intToDoubleBias) * channelScale;
+  magnitude = src[2];
+  *(undefined4 *)(pixel + 4) = 0;
+  *(float *)(pixel + 0x30) =
+       (float)((double)CONCAT44(0x43300000,(int)magnitude ^ 0x80000000) - intToDoubleBias) * channelScale;
   return;
 }
 
 /* _gleExtractPixel_DSDT_MAG_Ushort @ 0xe5628 (148 bytes) */
-void _gleExtractPixel_DSDT_MAG_Ushort(param_1, param_2)
-  int param_1;
-  ushort *param_2;
+void _gleExtractPixel_DSDT_MAG_Ushort(pixel, src)
+  int pixel;
+  ushort *src;
 {
-  ushort uVar1;
-  float fVar2;
+  ushort magnitude;
+  float channelScale;
   
-  fVar2 = FLOAT_00108e74;
-  *(float *)(param_1 + 0x28) = (GH_U2F((unsigned int)((*param_2 | 0x4b000000))) - 8388608.0) * FLOAT_00108e74;
-  *(float *)(param_1 + 0x2c) = (GH_U2F((unsigned int)((param_2[1] | 0x4b000000))) - 8388608.0) * fVar2;
-  uVar1 = param_2[2];
-  *(undefined4 *)(param_1 + 4) = 0;
-  *(float *)(param_1 + 0x30) = (GH_U2F((unsigned int)((uVar1 | 0x4b000000))) - 8388608.0) * fVar2;
+  channelScale = FLOAT_00108e74;
+  *(float *)(pixel + 0x28) = (GH_U2F((unsigned int)((*src | 0x4b000000))) - 8388608.0) * FLOAT_00108e74;
+  *(float *)(pixel + 0x2c) = (GH_U2F((unsigned int)((src[1] | 0x4b000000))) - 8388608.0) * channelScale;
+  magnitude = src[2];
+  *(undefined4 *)(pixel + 4) = 0;
+  *(float *)(pixel + 0x30) = (GH_U2F((unsigned int)((magnitude | 0x4b000000))) - 8388608.0) * channelScale;
   return;
 }
 
 /* _gleExtractPixel_DSDT_MAG_Int @ 0xe56bc (160 bytes) */
-void _gleExtractPixel_DSDT_MAG_Int(param_1, param_2)
-  int param_1;
-  uint *param_2;
+void _gleExtractPixel_DSDT_MAG_Int(pixel, src)
+  int pixel;
+  uint *src;
 {
-  double dVar1;
-  double dVar2;
-  uint uVar3;
+  double intToDoubleBias;
+  double channelScale;
+  uint magnitude;
   
-  dVar2 = DOUBLE_00108d88;
-  dVar1 = DOUBLE_00108d58;
-  *(float *)(param_1 + 0x28) =
-       (float)((double)(float)((double)CONCAT44(0x43300000,*param_2 ^ 0x80000000) - DOUBLE_00108d58)
+  channelScale = DOUBLE_00108d88;
+  intToDoubleBias = DOUBLE_00108d58;
+  *(float *)(pixel + 0x28) =
+       (float)((double)(float)((double)CONCAT44(0x43300000,*src ^ 0x80000000) - DOUBLE_00108d58)
               * DOUBLE_00108d88);
-  *(float *)(param_1 + 0x2c) =
-       (float)((double)(float)((double)CONCAT44(0x43300000,param_2[1] ^ 0x80000000) - dVar1) * dVar2
+  *(float *)(pixel + 0x2c) =
+       (float)((double)(float)((double)CONCAT44(0x43300000,src[1] ^ 0x80000000) - intToDoubleBias) * channelScale
               );
-  uVar3 = param_2[2];
-  *(undefined4 *)(param_1 + 4) = 0;
-  *(float *)(param_1 + 0x30) =
-       (float)((double)(float)((double)CONCAT44(0x43300000,uVar3 ^ 0x80000000) - dVar1) * dVar2);
+  magnitude = src[2];
+  *(undefined4 *)(pixel + 4) = 0;
+  *(float *)(pixel + 0x30) =
+       (float)((double)(float)((double)CONCAT44(0x43300000,magnitude ^ 0x80000000) - intToDoubleBias) * channelScale);
   return;
 }
 
 /* _gleExtractPixel_DSDT_MAG_Uint @ 0xe575c (148 bytes) */
-void _gleExtractPixel_DSDT_MAG_Uint(param_1, param_2)
-  int param_1;
-  undefined4 *param_2;
+void _gleExtractPixel_DSDT_MAG_Uint(pixel, src)
+  int pixel;
+  undefined4 *src;
 {
-  double dVar1;
-  double dVar2;
-  undefined4 uVar3;
+  double intToDoubleBias;
+  double channelScale;
+  undefined4 magnitude;
   
-  dVar2 = DOUBLE_00108da0;
-  dVar1 = DOUBLE_00108d70;
-  *(float *)(param_1 + 0x28) =
-       (float)((double)(float)((double)CONCAT44(0x43300000,*param_2) - DOUBLE_00108d70) *
+  channelScale = DOUBLE_00108da0;
+  intToDoubleBias = DOUBLE_00108d70;
+  *(float *)(pixel + 0x28) =
+       (float)((double)(float)((double)CONCAT44(0x43300000,*src) - DOUBLE_00108d70) *
               DOUBLE_00108da0);
-  *(float *)(param_1 + 0x2c) =
-       (float)((double)(float)((double)CONCAT44(0x43300000,param_2[1]) - dVar1) * dVar2);
-  uVar3 = param_2[2];
-  *(undefined4 *)(param_1 + 4) = 0;
-  *(float *)(param_1 + 0x30) =
-       (float)((double)(float)((double)CONCAT44(0x43300000,uVar3) - dVar1) * dVar2);
+  *(float *)(pixel + 0x2c) =
+       (float)((double)(float)((double)CONCAT44(0x43300000,src[1]) - intToDoubleBias) * channelScale);
+  magnitude = src[2];
+  *(undefined4 *)(pixel + 4) = 0;
+  *(float *)(pixel + 0x30) =
+       (float)((double)(float)((double)CONCAT44(0x43300000,magnitude) - intToDoubleBias) * channelScale);
   return;
 }
 
 /* _gleExtractPixel_DSDT_MAG_Float @ 0xe57f0 (36 bytes) */
-void _gleExtractPixel_DSDT_MAG_Float(param_1, param_2)
-  int param_1;
-  undefined4 *param_2;
+void _gleExtractPixel_DSDT_MAG_Float(pixel, src)
+  int pixel;
+  undefined4 *src;
 {
-  undefined4 uVar1;
+  undefined4 magnitude;
   
-  *(undefined4 *)(param_1 + 0x28) = *param_2;
-  *(undefined4 *)(param_1 + 0x2c) = param_2[1];
-  uVar1 = param_2[2];
-  *(undefined4 *)(param_1 + 4) = 0;
-  *(undefined4 *)(param_1 + 0x30) = uVar1;
+  *(undefined4 *)(pixel + 0x28) = *src;
+  *(undefined4 *)(pixel + 0x2c) = src[1];
+  magnitude = src[2];
+  *(undefined4 *)(pixel + 4) = 0;
+  *(undefined4 *)(pixel + 0x30) = magnitude;
   return;
 }
 
 /* _gleExtractPixel_DSDT_MAG_VIB_S8_S8_8_8 @ 0xe5814 (200 bytes) */
-void _gleExtractPixel_DSDT_MAG_VIB_S8_S8_8_8(param_1, param_2)
-  int param_1;
-  char *param_2;
+void _gleExtractPixel_DSDT_MAG_VIB_S8_S8_8_8(pixel, src)
+  int pixel;
+  char *src;
 {
-  double dVar1;
-  float fVar2;
-  float fVar3;
+  double intToDoubleBias;
+  float invMax255;
+  float invMax127;
   
-  fVar3 = FLOAT_00108e98;
-  fVar2 = FLOAT_00108e78;
-  dVar1 = DOUBLE_00108d58;
-  *(float *)(param_1 + 0x28) =
-       (float)((double)CONCAT44(0x43300000,(int)*param_2 ^ 0x80000000) - DOUBLE_00108d58) *
+  invMax127 = FLOAT_00108e98;
+  invMax255 = FLOAT_00108e78;
+  intToDoubleBias = DOUBLE_00108d58;
+  *(float *)(pixel + 0x28) =
+       (float)((double)CONCAT44(0x43300000,(int)*src ^ 0x80000000) - DOUBLE_00108d58) *
        FLOAT_00108e98;
-  *(float *)(param_1 + 0x2c) =
-       (float)((double)CONCAT44(0x43300000,(int)param_2[1] ^ 0x80000000) - dVar1) * fVar3;
-  *(float *)(param_1 + 0x30) = (GH_U2F((unsigned int)(((byte)param_2[2] | 0x4b000000))) - 8388608.0) * fVar2;
-  *(float *)(param_1 + 4) = (GH_U2F((unsigned int)(((byte)param_2[3] | 0x4b000000))) - 8388608.0) * fVar2;
+  *(float *)(pixel + 0x2c) =
+       (float)((double)CONCAT44(0x43300000,(int)src[1] ^ 0x80000000) - intToDoubleBias) * invMax127;
+  *(float *)(pixel + 0x30) = (GH_U2F((unsigned int)(((byte)src[2] | 0x4b000000))) - 8388608.0) * invMax255;
+  *(float *)(pixel + 4) = (GH_U2F((unsigned int)(((byte)src[3] | 0x4b000000))) - 8388608.0) * invMax255;
   return;
 }
 
 /* _gleExtractPixel_DSDT_MAG_VIB_8_8_S8_S8_Rev @ 0xe58dc (196 bytes) */
-void _gleExtractPixel_DSDT_MAG_VIB_8_8_S8_S8_Rev(param_1, param_2)
-  int param_1;
-  byte *param_2;
+void _gleExtractPixel_DSDT_MAG_VIB_8_8_S8_S8_Rev(pixel, src)
+  int pixel;
+  byte *src;
 {
-  double dVar1;
-  float fVar2;
-  float fVar3;
+  double intToDoubleBias;
+  float invMax255;
+  float invMax127;
   
-  fVar3 = FLOAT_00108e98;
-  fVar2 = FLOAT_00108e78;
-  dVar1 = DOUBLE_00108d58;
-  *(float *)(param_1 + 0x28) =
-       (float)((double)CONCAT44(0x43300000,(int)(char)param_2[3] ^ 0x80000000) - DOUBLE_00108d58) *
+  invMax127 = FLOAT_00108e98;
+  invMax255 = FLOAT_00108e78;
+  intToDoubleBias = DOUBLE_00108d58;
+  *(float *)(pixel + 0x28) =
+       (float)((double)CONCAT44(0x43300000,(int)(char)src[3] ^ 0x80000000) - DOUBLE_00108d58) *
        FLOAT_00108e98;
-  *(float *)(param_1 + 0x2c) =
-       (float)((double)CONCAT44(0x43300000,(int)(char)param_2[2] ^ 0x80000000) - dVar1) * fVar3;
-  *(float *)(param_1 + 0x30) = (GH_U2F((unsigned int)((param_2[1] | 0x4b000000))) - 8388608.0) * fVar2;
-  *(float *)(param_1 + 4) = (GH_U2F((unsigned int)((*param_2 | 0x4b000000))) - 8388608.0) * fVar2;
+  *(float *)(pixel + 0x2c) =
+       (float)((double)CONCAT44(0x43300000,(int)(char)src[2] ^ 0x80000000) - intToDoubleBias) * invMax127;
+  *(float *)(pixel + 0x30) = (GH_U2F((unsigned int)((src[1] | 0x4b000000))) - 8388608.0) * invMax255;
+  *(float *)(pixel + 4) = (GH_U2F((unsigned int)((*src | 0x4b000000))) - 8388608.0) * invMax255;
   return;
 }
 
 /* _gleExtractPixel_DSDT_MAG_VIB_Byte @ 0xe59a0 (188 bytes) */
-void _gleExtractPixel_DSDT_MAG_VIB_Byte(param_1, param_2)
-  int param_1;
-  char *param_2;
+void _gleExtractPixel_DSDT_MAG_VIB_Byte(pixel, src)
+  int pixel;
+  char *src;
 {
-  double dVar1;
-  float fVar2;
+  double intToDoubleBias;
+  float channelScale;
   
-  fVar2 = FLOAT_00108e98;
-  dVar1 = DOUBLE_00108d58;
-  *(float *)(param_1 + 0x28) =
-       (float)((double)CONCAT44(0x43300000,(int)*param_2 ^ 0x80000000) - DOUBLE_00108d58) *
+  channelScale = FLOAT_00108e98;
+  intToDoubleBias = DOUBLE_00108d58;
+  *(float *)(pixel + 0x28) =
+       (float)((double)CONCAT44(0x43300000,(int)*src ^ 0x80000000) - DOUBLE_00108d58) *
        FLOAT_00108e98;
-  *(float *)(param_1 + 0x2c) =
-       (float)((double)CONCAT44(0x43300000,(int)param_2[1] ^ 0x80000000) - dVar1) * fVar2;
-  *(float *)(param_1 + 0x30) =
-       (float)((double)CONCAT44(0x43300000,(int)param_2[2] ^ 0x80000000) - dVar1) * fVar2;
-  *(float *)(param_1 + 4) =
-       (float)((double)CONCAT44(0x43300000,(int)param_2[3] ^ 0x80000000) - dVar1) * fVar2;
+  *(float *)(pixel + 0x2c) =
+       (float)((double)CONCAT44(0x43300000,(int)src[1] ^ 0x80000000) - intToDoubleBias) * channelScale;
+  *(float *)(pixel + 0x30) =
+       (float)((double)CONCAT44(0x43300000,(int)src[2] ^ 0x80000000) - intToDoubleBias) * channelScale;
+  *(float *)(pixel + 4) =
+       (float)((double)CONCAT44(0x43300000,(int)src[3] ^ 0x80000000) - intToDoubleBias) * channelScale;
   return;
 }
 
 /* _gleExtractPixel_DSDT_MAG_VIB_Ubyte @ 0xe5a5c (176 bytes) */
-void _gleExtractPixel_DSDT_MAG_VIB_Ubyte(param_1, param_2)
-  int param_1;
-  byte *param_2;
+void _gleExtractPixel_DSDT_MAG_VIB_Ubyte(pixel, src)
+  int pixel;
+  byte *src;
 {
-  float fVar1;
+  float channelScale;
   
-  fVar1 = FLOAT_00108e78;
-  *(float *)(param_1 + 0x28) = (GH_U2F((unsigned int)((*param_2 | 0x4b000000))) - 8388608.0) * FLOAT_00108e78;
-  *(float *)(param_1 + 0x2c) = (GH_U2F((unsigned int)((param_2[1] | 0x4b000000))) - 8388608.0) * fVar1;
-  *(float *)(param_1 + 0x30) = (GH_U2F((unsigned int)((param_2[2] | 0x4b000000))) - 8388608.0) * fVar1;
-  *(float *)(param_1 + 4) = (GH_U2F((unsigned int)((param_2[3] | 0x4b000000))) - 8388608.0) * fVar1;
+  channelScale = FLOAT_00108e78;
+  *(float *)(pixel + 0x28) = (GH_U2F((unsigned int)((*src | 0x4b000000))) - 8388608.0) * FLOAT_00108e78;
+  *(float *)(pixel + 0x2c) = (GH_U2F((unsigned int)((src[1] | 0x4b000000))) - 8388608.0) * channelScale;
+  *(float *)(pixel + 0x30) = (GH_U2F((unsigned int)((src[2] | 0x4b000000))) - 8388608.0) * channelScale;
+  *(float *)(pixel + 4) = (GH_U2F((unsigned int)((src[3] | 0x4b000000))) - 8388608.0) * channelScale;
   return;
 }
 
 /* _gleExtractPixel_DSDT_MAG_VIB_Short @ 0xe5b0c (172 bytes) */
-void _gleExtractPixel_DSDT_MAG_VIB_Short(param_1, param_2)
-  int param_1;
-  short *param_2;
+void _gleExtractPixel_DSDT_MAG_VIB_Short(pixel, src)
+  int pixel;
+  short *src;
 {
-  double dVar1;
-  float fVar2;
+  double intToDoubleBias;
+  float channelScale;
   
-  fVar2 = FLOAT_00108e9c;
-  dVar1 = DOUBLE_00108d58;
-  *(float *)(param_1 + 0x28) =
-       (float)((double)CONCAT44(0x43300000,(int)*param_2 ^ 0x80000000) - DOUBLE_00108d58) *
+  channelScale = FLOAT_00108e9c;
+  intToDoubleBias = DOUBLE_00108d58;
+  *(float *)(pixel + 0x28) =
+       (float)((double)CONCAT44(0x43300000,(int)*src ^ 0x80000000) - DOUBLE_00108d58) *
        FLOAT_00108e9c;
-  *(float *)(param_1 + 0x2c) =
-       (float)((double)CONCAT44(0x43300000,(int)param_2[1] ^ 0x80000000) - dVar1) * fVar2;
-  *(float *)(param_1 + 0x30) =
-       (float)((double)CONCAT44(0x43300000,(int)param_2[2] ^ 0x80000000) - dVar1) * fVar2;
-  *(float *)(param_1 + 4) =
-       (float)((double)CONCAT44(0x43300000,(int)param_2[3] ^ 0x80000000) - dVar1) * fVar2;
+  *(float *)(pixel + 0x2c) =
+       (float)((double)CONCAT44(0x43300000,(int)src[1] ^ 0x80000000) - intToDoubleBias) * channelScale;
+  *(float *)(pixel + 0x30) =
+       (float)((double)CONCAT44(0x43300000,(int)src[2] ^ 0x80000000) - intToDoubleBias) * channelScale;
+  *(float *)(pixel + 4) =
+       (float)((double)CONCAT44(0x43300000,(int)src[3] ^ 0x80000000) - intToDoubleBias) * channelScale;
   return;
 }
 
 /* _gleExtractPixel_DSDT_MAG_VIB_Ushort @ 0xe5bb8 (176 bytes) */
-void _gleExtractPixel_DSDT_MAG_VIB_Ushort(param_1, param_2)
-  int param_1;
-  ushort *param_2;
+void _gleExtractPixel_DSDT_MAG_VIB_Ushort(pixel, src)
+  int pixel;
+  ushort *src;
 {
-  float fVar1;
+  float channelScale;
   
-  fVar1 = FLOAT_00108e74;
-  *(float *)(param_1 + 0x28) = (GH_U2F((unsigned int)((*param_2 | 0x4b000000))) - 8388608.0) * FLOAT_00108e74;
-  *(float *)(param_1 + 0x2c) = (GH_U2F((unsigned int)((param_2[1] | 0x4b000000))) - 8388608.0) * fVar1;
-  *(float *)(param_1 + 0x30) = (GH_U2F((unsigned int)((param_2[2] | 0x4b000000))) - 8388608.0) * fVar1;
-  *(float *)(param_1 + 4) = (GH_U2F((unsigned int)((param_2[3] | 0x4b000000))) - 8388608.0) * fVar1;
+  channelScale = FLOAT_00108e74;
+  *(float *)(pixel + 0x28) = (GH_U2F((unsigned int)((*src | 0x4b000000))) - 8388608.0) * FLOAT_00108e74;
+  *(float *)(pixel + 0x2c) = (GH_U2F((unsigned int)((src[1] | 0x4b000000))) - 8388608.0) * channelScale;
+  *(float *)(pixel + 0x30) = (GH_U2F((unsigned int)((src[2] | 0x4b000000))) - 8388608.0) * channelScale;
+  *(float *)(pixel + 4) = (GH_U2F((unsigned int)((src[3] | 0x4b000000))) - 8388608.0) * channelScale;
   return;
 }
 
 /* _gleExtractPixel_DSDT_MAG_VIB_Int @ 0xe5c68 (188 bytes) */
-void _gleExtractPixel_DSDT_MAG_VIB_Int(param_1, param_2)
-  int param_1;
-  uint *param_2;
+void _gleExtractPixel_DSDT_MAG_VIB_Int(pixel, src)
+  int pixel;
+  uint *src;
 {
-  double dVar1;
-  double dVar2;
+  double intToDoubleBias;
+  double channelScale;
   
-  dVar2 = DOUBLE_00108d88;
-  dVar1 = DOUBLE_00108d58;
-  *(float *)(param_1 + 0x28) =
-       (float)((double)(float)((double)CONCAT44(0x43300000,*param_2 ^ 0x80000000) - DOUBLE_00108d58)
+  channelScale = DOUBLE_00108d88;
+  intToDoubleBias = DOUBLE_00108d58;
+  *(float *)(pixel + 0x28) =
+       (float)((double)(float)((double)CONCAT44(0x43300000,*src ^ 0x80000000) - DOUBLE_00108d58)
               * DOUBLE_00108d88);
-  *(float *)(param_1 + 0x2c) =
-       (float)((double)(float)((double)CONCAT44(0x43300000,param_2[1] ^ 0x80000000) - dVar1) * dVar2
+  *(float *)(pixel + 0x2c) =
+       (float)((double)(float)((double)CONCAT44(0x43300000,src[1] ^ 0x80000000) - intToDoubleBias) * channelScale
               );
-  *(float *)(param_1 + 0x30) =
-       (float)((double)(float)((double)CONCAT44(0x43300000,param_2[2] ^ 0x80000000) - dVar1) * dVar2
+  *(float *)(pixel + 0x30) =
+       (float)((double)(float)((double)CONCAT44(0x43300000,src[2] ^ 0x80000000) - intToDoubleBias) * channelScale
               );
-  *(float *)(param_1 + 4) =
-       (float)((double)(float)((double)CONCAT44(0x43300000,param_2[3] ^ 0x80000000) - dVar1) * dVar2
+  *(float *)(pixel + 4) =
+       (float)((double)(float)((double)CONCAT44(0x43300000,src[3] ^ 0x80000000) - intToDoubleBias) * channelScale
               );
   return;
 }
 
 /* _gleExtractPixel_DSDT_MAG_VIB_Uint @ 0xe5d24 (172 bytes) */
-void _gleExtractPixel_DSDT_MAG_VIB_Uint(param_1, param_2)
-  int param_1;
-  undefined4 *param_2;
+void _gleExtractPixel_DSDT_MAG_VIB_Uint(pixel, src)
+  int pixel;
+  undefined4 *src;
 {
-  double dVar1;
-  double dVar2;
+  double intToDoubleBias;
+  double channelScale;
   
-  dVar2 = DOUBLE_00108da0;
-  dVar1 = DOUBLE_00108d70;
-  *(float *)(param_1 + 0x28) =
-       (float)((double)(float)((double)CONCAT44(0x43300000,*param_2) - DOUBLE_00108d70) *
+  channelScale = DOUBLE_00108da0;
+  intToDoubleBias = DOUBLE_00108d70;
+  *(float *)(pixel + 0x28) =
+       (float)((double)(float)((double)CONCAT44(0x43300000,*src) - DOUBLE_00108d70) *
               DOUBLE_00108da0);
-  *(float *)(param_1 + 0x2c) =
-       (float)((double)(float)((double)CONCAT44(0x43300000,param_2[1]) - dVar1) * dVar2);
-  *(float *)(param_1 + 0x30) =
-       (float)((double)(float)((double)CONCAT44(0x43300000,param_2[2]) - dVar1) * dVar2);
-  *(float *)(param_1 + 4) =
-       (float)((double)(float)((double)CONCAT44(0x43300000,param_2[3]) - dVar1) * dVar2);
+  *(float *)(pixel + 0x2c) =
+       (float)((double)(float)((double)CONCAT44(0x43300000,src[1]) - intToDoubleBias) * channelScale);
+  *(float *)(pixel + 0x30) =
+       (float)((double)(float)((double)CONCAT44(0x43300000,src[2]) - intToDoubleBias) * channelScale);
+  *(float *)(pixel + 4) =
+       (float)((double)(float)((double)CONCAT44(0x43300000,src[3]) - intToDoubleBias) * channelScale);
   return;
 }
 
 /* _gleExtractPixel_DSDT_MAG_VIB_Float @ 0xe5dd0 (36 bytes) */
-void _gleExtractPixel_DSDT_MAG_VIB_Float(param_1, param_2)
-  int param_1;
-  undefined4 *param_2;
+void _gleExtractPixel_DSDT_MAG_VIB_Float(pixel, src)
+  int pixel;
+  undefined4 *src;
 {
-  *(undefined4 *)(param_1 + 0x28) = *param_2;
-  *(undefined4 *)(param_1 + 0x2c) = param_2[1];
-  *(undefined4 *)(param_1 + 0x30) = param_2[2];
-  *(undefined4 *)(param_1 + 4) = param_2[3];
+  *(undefined4 *)(pixel + 0x28) = *src;
+  *(undefined4 *)(pixel + 0x2c) = src[1];
+  *(undefined4 *)(pixel + 0x30) = src[2];
+  *(undefined4 *)(pixel + 4) = src[3];
   return;
 }
 
@@ -470,18 +470,18 @@ int _gleImageSize(param_1, param_2, param_3, param_4)
 }
 
 /* _gleFillImage @ 0xe5e24 (732 bytes) */
-int _gleFillImage(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  int param_1;
-  int param_2;
-  int param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  int param_6;
-  int param_7;
-  byte *param_8;
+int _gleFillImage(glContext, width, height, unusedArg4, format, type, image, dest)
+  int glContext;
+  int width;
+  int height;
+  undefined4 unusedArg4;
+  undefined4 format;
+  int type;
+  int image;
+  byte *dest;
 {
   bool bVar1;
-  char cVar2;
+  char lsbFirst;
   byte bVar3;
   byte bVar4;
   byte bVar5;
@@ -501,17 +501,17 @@ int _gleFillImage(param_1, param_2, param_3, param_4, param_5, param_6, param_7,
   int iVar19;
   double dVar20;
   
-  iVar6 = *(int *)(param_1 + 0x31cc);
-  iVar19 = *(int *)(param_1 + 0x31e0);
-  cVar16 = *(char *)(param_1 + 0x31e4);
-  iVar15 = *(int *)(param_1 + 0x31d8);
-  iVar14 = *(int *)(param_1 + 0x31d4);
-  cVar2 = *(char *)(param_1 + 0x31e5);
-  iVar11 = _gleComponents(param_5);
+  iVar6 = *(int *)(glContext + 0x31cc);
+  iVar19 = *(int *)(glContext + 0x31e0);
+  cVar16 = *(char *)(glContext + 0x31e4);
+  iVar15 = *(int *)(glContext + 0x31d8);
+  iVar14 = *(int *)(glContext + 0x31d4);
+  lsbFirst = *(char *)(glContext + 0x31e5);
+  iVar11 = _gleComponents(format);
   if (iVar6 < 1) {
-    iVar6 = param_2;
+    iVar6 = width;
   }
-  if (param_6 == 0x1a00) {
+  if (type == 0x1a00) {
     iVar17 = iVar6 * iVar11 + 7 >> 3;
     iVar6 = iVar17 - (iVar17 / iVar19) * iVar19;
     if (iVar6 != 0) {
@@ -521,12 +521,12 @@ int _gleFillImage(param_1, param_2, param_3, param_4, param_5, param_6, param_7,
     iVar6 = ((int)uVar8 >> 3) + (uint)((int)uVar8 < 0 && (uVar8 & 7) != 0);
     uVar8 = uVar8 + iVar6 * -8;
     uVar13 = -uVar8 + 8;
-    pbVar18 = (byte *)(param_7 + iVar14 * iVar17 + iVar6);
+    pbVar18 = (byte *)(image + iVar14 * iVar17 + iVar6);
     bVar3 = *(byte *)(-uVar8 + 0x1111d0);
     bVar4 = (&_HighBitsMask)[uVar8];
-    if (0 < param_3) {
-      bVar1 = cVar2 == '\0';
-      iVar6 = param_2 * iVar11;
+    if (0 < height) {
+      bVar1 = lsbFirst == '\0';
+      iVar6 = width * iVar11;
       pbVar9 = pbVar18;
       do {
         while (iVar6 != 0) {
@@ -553,26 +553,26 @@ int _gleFillImage(param_1, param_2, param_3, param_4, param_5, param_6, param_7,
           }
           if (iVar6 < 8) {
             iVar14 = 0;
-            *param_8 = (&_HighBitsMask)[iVar6] & bVar10;
+            *dest = (&_HighBitsMask)[iVar6] & bVar10;
           }
           else {
-            *param_8 = bVar10;
+            *dest = bVar10;
             iVar14 = iVar6 + -8;
           }
-          param_8 = param_8 + 1;
+          dest = dest + 1;
           pbVar18 = pbVar18 + 1;
           iVar6 = iVar14;
         }
-        param_3 = param_3 + -1;
+        height = height + -1;
         pbVar18 = pbVar9 + iVar17;
-        iVar6 = param_2 * iVar11;
+        iVar6 = width * iVar11;
         pbVar9 = pbVar18;
-      } while (param_3 != 0);
+      } while (height != 0);
     }
   }
   else {
-    iVar17 = _glePixelBytes(param_5,param_6);
-    if (param_6 - 0x1400U < 2) {
+    iVar17 = _glePixelBytes(format,type);
+    if (type - 0x1400U < 2) {
       cVar16 = '\0';
     }
     iVar6 = iVar6 * iVar17;
@@ -580,23 +580,23 @@ int _gleFillImage(param_1, param_2, param_3, param_4, param_5, param_6, param_7,
     if (iVar7 != 0) {
       iVar6 = iVar6 + (iVar19 - iVar7);
     }
-    iVar14 = iVar14 * iVar6 + iVar15 * iVar17 + param_7;
+    iVar14 = iVar14 * iVar6 + iVar15 * iVar17 + image;
     if (cVar16 == '\0') {
-      uVar12 = _gleRowBytes(param_5,param_6,param_2);
-      _gleCopy(iVar14,param_8,uVar12,param_3,iVar6,uVar12);
+      uVar12 = _gleRowBytes(format,type,width);
+      _gleCopy(iVar14,dest,uVar12,height,iVar6,uVar12);
     }
     else {
-      dVar20 = (double)((double (*)())_gleBytesPerElement)(param_6);
+      dVar20 = (double)((double (*)())_gleBytesPerElement)(type);
       iVar15 = (int)dVar20;
-      if (0 < param_3) {
+      if (0 < height) {
         do {
-          iVar19 = param_2 * iVar11;
+          iVar19 = width * iVar11;
           iVar17 = iVar14;
-          if (0 < param_2 * iVar11) {
+          if (0 < width * iVar11) {
             do {
               if (0 < iVar15) {
                 pbVar9 = (byte *)(iVar15 + iVar17);
-                pbVar18 = param_8;
+                pbVar18 = dest;
                 iVar7 = iVar15;
                 do {
                   pbVar9 = pbVar9 + -1;
@@ -606,13 +606,13 @@ int _gleFillImage(param_1, param_2, param_3, param_4, param_5, param_6, param_7,
                 } while (iVar7 != 0);
               }
               iVar19 = iVar19 + -1;
-              param_8 = param_8 + iVar15;
+              dest = dest + iVar15;
               iVar17 = iVar17 + iVar15;
             } while (iVar19 != 0);
           }
-          param_3 = param_3 + -1;
+          height = height + -1;
           iVar14 = iVar14 + iVar6;
-        } while (param_3 != 0);
+        } while (height != 0);
       }
     }
   }
@@ -620,16 +620,16 @@ int _gleFillImage(param_1, param_2, param_3, param_4, param_5, param_6, param_7,
 }
 
 /* _gleEmptyImage @ 0xe6100 (840 bytes) */
-void _gleEmptyImage(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  int param_1;
-  int param_2;
-  int param_3;
-  undefined4 param_4;
-  int param_5;
-  byte *param_6;
-  int param_7;
+void _gleEmptyImage(glContext, width, height, format, type, source, image)
+  int glContext;
+  int width;
+  int height;
+  undefined4 format;
+  int type;
+  byte *source;
+  int image;
 {
-  char cVar1;
+  char lsbFirst;
   byte bVar2;
   byte bVar3;
   byte bVar4;
@@ -652,17 +652,17 @@ void _gleEmptyImage(param_1, param_2, param_3, param_4, param_5, param_6, param_
   int iVar21;
   double dVar22;
   
-  iVar6 = *(int *)(param_1 + 0x31cc);
-  iVar21 = *(int *)(param_1 + 0x31e0);
-  cVar18 = *(char *)(param_1 + 0x31e4);
-  iVar17 = *(int *)(param_1 + 0x31d8);
-  iVar16 = *(int *)(param_1 + 0x31d4);
-  cVar1 = *(char *)(param_1 + 0x31e5);
-  iVar10 = _gleComponents(param_4);
+  iVar6 = *(int *)(glContext + 0x31cc);
+  iVar21 = *(int *)(glContext + 0x31e0);
+  cVar18 = *(char *)(glContext + 0x31e4);
+  iVar17 = *(int *)(glContext + 0x31d8);
+  iVar16 = *(int *)(glContext + 0x31d4);
+  lsbFirst = *(char *)(glContext + 0x31e5);
+  iVar10 = _gleComponents(format);
   if (iVar6 < 1) {
-    iVar6 = param_2;
+    iVar6 = width;
   }
-  if (param_5 == 0x1a00) {
+  if (type == 0x1a00) {
     iVar19 = iVar6 * iVar10 + 7 >> 3;
     iVar6 = iVar19 - (iVar19 / iVar21) * iVar21;
     if (iVar6 != 0) {
@@ -671,35 +671,35 @@ void _gleEmptyImage(param_1, param_2, param_3, param_4, param_5, param_6, param_
     uVar8 = iVar17 * iVar10;
     iVar6 = ((int)uVar8 >> 3) + (uint)((int)uVar8 < 0 && (uVar8 & 7) != 0);
     uVar8 = uVar8 + iVar6 * -8;
-    pbVar20 = (byte *)(param_7 + iVar16 * iVar19 + iVar6);
+    pbVar20 = (byte *)(image + iVar16 * iVar19 + iVar6);
     bVar2 = *(byte *)(-uVar8 + 0x1111d0);
     bVar3 = (&_HighBitsMask)[uVar8];
-    if (0 < param_3) {
+    if (0 < height) {
       do {
         uVar13 = 0;
-        if (param_2 * iVar10 != 0) {
+        if (width * iVar10 != 0) {
           pbVar12 = pbVar20;
-          iVar6 = param_2 * iVar10;
+          iVar6 = width * iVar10;
           uVar15 = (uint)bVar2;
           do {
             if ((int)(iVar6 + uVar8) < 8) {
               uVar15 = uVar15 & (byte)(&_HighBitsMask)[iVar6 + uVar8];
             }
-            if (cVar1 == '\0') {
+            if (lsbFirst == '\0') {
               bVar4 = *pbVar12;
             }
             else {
               bVar4 = (&___glMsbToLsbTable)[*pbVar12];
             }
             if (uVar8 == 0) {
-              uVar15 = (uint)bVar4 & ~uVar15 | *param_6 & uVar15;
+              uVar15 = (uint)bVar4 & ~uVar15 | *source & uVar15;
             }
             else {
-              uVar5 = uVar13 | (int)(uint)*param_6 >> (uVar8 & 0x3f) & 0xffU;
-              uVar13 = (uint)*param_6 << (-uVar8 + 8 & 0x3f) & 0xff;
+              uVar5 = uVar13 | (int)(uint)*source >> (uVar8 & 0x3f) & 0xffU;
+              uVar13 = (uint)*source << (-uVar8 + 8 & 0x3f) & 0xff;
               uVar15 = (uint)bVar4 & ~uVar15 | uVar5 & uVar15;
             }
-            if (cVar1 == '\0') {
+            if (lsbFirst == '\0') {
               *pbVar12 = (byte)uVar15;
             }
             else {
@@ -711,19 +711,19 @@ void _gleEmptyImage(param_1, param_2, param_3, param_4, param_5, param_6, param_
             else {
               iVar6 = iVar6 + -8;
             }
-            param_6 = param_6 + 1;
+            source = source + 1;
             pbVar12 = pbVar12 + 1;
             uVar15 = 0xff;
           } while (iVar6 != 0);
           if (uVar13 != 0) {
-            if (cVar1 == '\0') {
+            if (lsbFirst == '\0') {
               bVar4 = *pbVar12;
             }
             else {
               bVar4 = (&___glMsbToLsbTable)[*pbVar12];
             }
             uVar13 = (uint)bVar4 & ~(uint)bVar3 | uVar13 & bVar3;
-            if (cVar1 == '\0') {
+            if (lsbFirst == '\0') {
               *pbVar12 = (byte)uVar13;
             }
             else {
@@ -731,14 +731,14 @@ void _gleEmptyImage(param_1, param_2, param_3, param_4, param_5, param_6, param_
             }
           }
         }
-        param_3 = param_3 + -1;
+        height = height + -1;
         pbVar20 = pbVar20 + iVar19;
-      } while (param_3 != 0);
+      } while (height != 0);
     }
   }
   else {
-    iVar19 = _glePixelBytes(param_4,param_5);
-    if (param_5 - 0x1400U < 2) {
+    iVar19 = _glePixelBytes(format,type);
+    if (type - 0x1400U < 2) {
       cVar18 = '\0';
     }
     iVar6 = iVar6 * iVar19;
@@ -746,22 +746,22 @@ void _gleEmptyImage(param_1, param_2, param_3, param_4, param_5, param_6, param_
     if (iVar7 != 0) {
       iVar6 = iVar6 + (iVar21 - iVar7);
     }
-    pbVar20 = (byte *)(iVar16 * iVar6 + iVar17 * iVar19 + param_7);
+    pbVar20 = (byte *)(iVar16 * iVar6 + iVar17 * iVar19 + image);
     if (cVar18 == '\0') {
-      uVar11 = _gleRowBytes(param_4,param_5,param_2);
-      _gleCopy(param_6,pbVar20,uVar11,param_3,uVar11,iVar6);
+      uVar11 = _gleRowBytes(format,type,width);
+      _gleCopy(source,pbVar20,uVar11,height,uVar11,iVar6);
     }
     else {
-      dVar22 = (double)((double (*)())_gleBytesPerElement)(param_5);
+      dVar22 = (double)((double (*)())_gleBytesPerElement)(type);
       iVar16 = (int)dVar22;
-      if (0 < param_3) {
+      if (0 < height) {
         do {
           pbVar12 = pbVar20;
-          iVar17 = param_2 * iVar10;
-          if (0 < param_2 * iVar10) {
+          iVar17 = width * iVar10;
+          if (0 < width * iVar10) {
             do {
               if (0 < iVar16) {
-                pbVar9 = param_6 + iVar16;
+                pbVar9 = source + iVar16;
                 pbVar14 = pbVar12;
                 iVar21 = iVar16;
                 do {
@@ -772,13 +772,13 @@ void _gleEmptyImage(param_1, param_2, param_3, param_4, param_5, param_6, param_
                 } while (iVar21 != 0);
               }
               iVar17 = iVar17 + -1;
-              param_6 = param_6 + iVar16;
+              source = source + iVar16;
               pbVar12 = pbVar12 + iVar16;
             } while (iVar17 != 0);
           }
-          param_3 = param_3 + -1;
+          height = height + -1;
           pbVar20 = pbVar20 + iVar6;
-        } while (param_3 != 0);
+        } while (height != 0);
       }
     }
   }
@@ -786,15 +786,15 @@ void _gleEmptyImage(param_1, param_2, param_3, param_4, param_5, param_6, param_
 }
 
 /* _gleModifyPixelStencil @ 0xe6448 (196 bytes) */
-void _gleModifyPixelStencil(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+void _gleModifyPixelStencil(param_1, param_2, unusedArg3, unusedArg4, unusedArg5, unusedArg6, unusedArg7, unusedArg8)
   int param_1;
   int param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
+  undefined4 unusedArg3;
+  undefined4 unusedArg4;
+  undefined4 unusedArg5;
+  undefined4 unusedArg6;
+  undefined4 unusedArg7;
+  undefined4 unusedArg8;
 {
   uint uVar1;
   uint uVar2;
@@ -843,271 +843,271 @@ void _gleModifyPixelStencil(param_1, param_2, param_3, param_4, param_5, param_6
 }
 
 /* _gleModifyPixelDepth @ 0xe650c (84 bytes) */
-void _gleModifyPixelDepth(param_1, param_2)
-  int param_1;
-  int param_2;
+void _gleModifyPixelDepth(glContext, pixel)
+  int glContext;
+  int pixel;
 {
   float fVar1;
   float fVar2;
   
-  fVar1 = *(float *)(param_2 + 0x14) * *(float *)(param_1 + 0x320c) + *(float *)(param_1 + 0x3208);
+  fVar1 = *(float *)(pixel + 0x14) * *(float *)(glContext + 0x320c) + *(float *)(glContext + 0x3208);
   fVar2 = FLOAT_00108e50;
   if ((!(fVar1 < FLOAT_00108e50)) && (fVar2 = fVar1, FLOAT_00108e54 < fVar1)) {
     fVar2 = FLOAT_00108e54;
   }
-  *(float *)(param_2 + 0x14) = fVar2;
+  *(float *)(pixel + 0x14) = fVar2;
   return;
 }
 
 /* _gleModifyPixelR @ 0xe6560 (200 bytes) */
-void _gleModifyPixelR(int param_1,int param_2,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11)
+void _gleModifyPixelR(int glContext,int pixel,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11)
 {
   uint uVar1;
-  float fVar2;
+  float red;
   float fVar3;
   uint uVar4;
   
-  fVar2 = *(float *)(param_2 + 4) * *(float *)(param_1 + 0x31ec) + *(float *)(param_1 + 0x31e8);
-  if ((*(uint *)(param_1 + 0x3414) & 1) == 0) {
+  red = *(float *)(pixel + 4) * *(float *)(glContext + 0x31ec) + *(float *)(glContext + 0x31e8);
+  if ((*(uint *)(glContext + 0x3414) & 1) == 0) {
     fVar3 = FLOAT_00108e50;
-    if ((fVar2 < FLOAT_00108e50) || (fVar3 = FLOAT_00108e54, FLOAT_00108e54 < fVar2)) {
-      fVar2 = fVar3;
+    if ((red < FLOAT_00108e50) || (fVar3 = FLOAT_00108e54, FLOAT_00108e54 < red)) {
+      red = fVar3;
     }
   }
   else {
-    uVar4 = *(int *)(param_1 + 0x3288) - 1;
-    uVar1 = (uint)(int)(fVar2 * (float)((double)CONCAT44(0x43300000,uVar4 ^ 0x80000000) - DOUBLE_00108d58
+    uVar4 = *(int *)(glContext + 0x3288) - 1;
+    uVar1 = (uint)(int)(red * (float)((double)CONCAT44(0x43300000,uVar4 ^ 0x80000000) - DOUBLE_00108d58
                                   ) + FLOAT_00108e90);
     if (((int)uVar1 <= (int)uVar4) && (uVar4 = uVar1, (int)uVar1 < 0)) {
       uVar4 = 0;
     }
-    fVar2 = *(float *)(uVar4 * 4 + *(int *)(param_1 + 0x325c));
+    red = *(float *)(uVar4 * 4 + *(int *)(glContext + 0x325c));
   }
-  *(float *)(param_2 + 4) = fVar2;
+  *(float *)(pixel + 4) = red;
   return;
 }
 
 /* _gleModifyPixelG @ 0xe6628 (200 bytes) */
-void _gleModifyPixelG(int param_1,int param_2,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11)
+void _gleModifyPixelG(int glContext,int pixel,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11)
 {
   uint uVar1;
-  float fVar2;
+  float green;
   float fVar3;
   uint uVar4;
   
-  fVar2 = *(float *)(param_2 + 8) * *(float *)(param_1 + 0x31f4) + *(float *)(param_1 + 0x31f0);
-  if ((*(uint *)(param_1 + 0x3414) & 1) == 0) {
+  green = *(float *)(pixel + 8) * *(float *)(glContext + 0x31f4) + *(float *)(glContext + 0x31f0);
+  if ((*(uint *)(glContext + 0x3414) & 1) == 0) {
     fVar3 = FLOAT_00108e50;
-    if ((fVar2 < FLOAT_00108e50) || (fVar3 = FLOAT_00108e54, FLOAT_00108e54 < fVar2)) {
-      fVar2 = fVar3;
+    if ((green < FLOAT_00108e50) || (fVar3 = FLOAT_00108e54, FLOAT_00108e54 < green)) {
+      green = fVar3;
     }
   }
   else {
-    uVar4 = *(int *)(param_1 + 0x328c) - 1;
-    uVar1 = (uint)(int)(fVar2 * (float)((double)CONCAT44(0x43300000,uVar4 ^ 0x80000000) - DOUBLE_00108d58
+    uVar4 = *(int *)(glContext + 0x328c) - 1;
+    uVar1 = (uint)(int)(green * (float)((double)CONCAT44(0x43300000,uVar4 ^ 0x80000000) - DOUBLE_00108d58
                                   ) + FLOAT_00108e90);
     if (((int)uVar1 <= (int)uVar4) && (uVar4 = uVar1, (int)uVar1 < 0)) {
       uVar4 = 0;
     }
-    fVar2 = *(float *)(uVar4 * 4 + *(int *)(param_1 + 0x3260));
+    green = *(float *)(uVar4 * 4 + *(int *)(glContext + 0x3260));
   }
-  *(float *)(param_2 + 8) = fVar2;
+  *(float *)(pixel + 8) = green;
   return;
 }
 
 /* _gleModifyPixelB @ 0xe66f0 (200 bytes) */
-void _gleModifyPixelB(int param_1,int param_2,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11)
+void _gleModifyPixelB(int glContext,int pixel,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11)
 {
   uint uVar1;
-  float fVar2;
+  float blue;
   float fVar3;
   uint uVar4;
   
-  fVar2 = *(float *)(param_2 + 0xc) * *(float *)(param_1 + 0x31fc) + *(float *)(param_1 + 0x31f8);
-  if ((*(uint *)(param_1 + 0x3414) & 1) == 0) {
+  blue = *(float *)(pixel + 0xc) * *(float *)(glContext + 0x31fc) + *(float *)(glContext + 0x31f8);
+  if ((*(uint *)(glContext + 0x3414) & 1) == 0) {
     fVar3 = FLOAT_00108e50;
-    if ((fVar2 < FLOAT_00108e50) || (fVar3 = FLOAT_00108e54, FLOAT_00108e54 < fVar2)) {
-      fVar2 = fVar3;
+    if ((blue < FLOAT_00108e50) || (fVar3 = FLOAT_00108e54, FLOAT_00108e54 < blue)) {
+      blue = fVar3;
     }
   }
   else {
-    uVar4 = *(int *)(param_1 + 0x3290) - 1;
-    uVar1 = (uint)(int)(fVar2 * (float)((double)CONCAT44(0x43300000,uVar4 ^ 0x80000000) - DOUBLE_00108d58
+    uVar4 = *(int *)(glContext + 0x3290) - 1;
+    uVar1 = (uint)(int)(blue * (float)((double)CONCAT44(0x43300000,uVar4 ^ 0x80000000) - DOUBLE_00108d58
                                   ) + FLOAT_00108e90);
     if (((int)uVar1 <= (int)uVar4) && (uVar4 = uVar1, (int)uVar1 < 0)) {
       uVar4 = 0;
     }
-    fVar2 = *(float *)(uVar4 * 4 + *(int *)(param_1 + 0x3264));
+    blue = *(float *)(uVar4 * 4 + *(int *)(glContext + 0x3264));
   }
-  *(float *)(param_2 + 0xc) = fVar2;
+  *(float *)(pixel + 0xc) = blue;
   return;
 }
 
 /* _gleModifyPixelA @ 0xe67b8 (200 bytes) */
-void _gleModifyPixelA(int param_1,int param_2,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11)
+void _gleModifyPixelA(int glContext,int pixel,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11)
 {
   uint uVar1;
-  float fVar2;
+  float alpha;
   float fVar3;
   uint uVar4;
   
-  fVar2 = *(float *)(param_2 + 0x10) * *(float *)(param_1 + 0x3204) + *(float *)(param_1 + 0x3200);
-  if ((*(uint *)(param_1 + 0x3414) & 1) == 0) {
+  alpha = *(float *)(pixel + 0x10) * *(float *)(glContext + 0x3204) + *(float *)(glContext + 0x3200);
+  if ((*(uint *)(glContext + 0x3414) & 1) == 0) {
     fVar3 = FLOAT_00108e50;
-    if ((fVar2 < FLOAT_00108e50) || (fVar3 = FLOAT_00108e54, FLOAT_00108e54 < fVar2)) {
-      fVar2 = fVar3;
+    if ((alpha < FLOAT_00108e50) || (fVar3 = FLOAT_00108e54, FLOAT_00108e54 < alpha)) {
+      alpha = fVar3;
     }
   }
   else {
-    uVar4 = *(int *)(param_1 + 0x3294) - 1;
-    uVar1 = (uint)(int)(fVar2 * (float)((double)CONCAT44(0x43300000,uVar4 ^ 0x80000000) - DOUBLE_00108d58
+    uVar4 = *(int *)(glContext + 0x3294) - 1;
+    uVar1 = (uint)(int)(alpha * (float)((double)CONCAT44(0x43300000,uVar4 ^ 0x80000000) - DOUBLE_00108d58
                                   ) + FLOAT_00108e90);
     if (((int)uVar1 <= (int)uVar4) && (uVar4 = uVar1, (int)uVar1 < 0)) {
       uVar4 = 0;
     }
-    fVar2 = *(float *)(uVar4 * 4 + *(int *)(param_1 + 0x3268));
+    alpha = *(float *)(uVar4 * 4 + *(int *)(glContext + 0x3268));
   }
-  *(float *)(param_2 + 0x10) = fVar2;
+  *(float *)(pixel + 0x10) = alpha;
   return;
 }
 
 /* _gleModifyPixelRGB @ 0xe6880 (488 bytes) */
-void _gleModifyPixelRGB(param_1, param_2)
-  int param_1;
-  int param_2;
+void _gleModifyPixelRGB(glContext, pixel)
+  int glContext;
+  int pixel;
 {
   uint uVar1;
-  uint uVar2;
+  uint greenScaledIndex;
   uint uVar3;
-  float fVar4;
-  float fVar5;
-  float fVar6;
+  float red;
+  float green;
+  float blue;
   float fVar7;
   uint uVar8;
   uint uVar9;
-  uint uVar10;
+  uint greenMapIndex;
   
-  fVar4 = *(float *)(param_2 + 4) * *(float *)(param_1 + 0x31ec) + *(float *)(param_1 + 0x31e8);
-  fVar5 = *(float *)(param_2 + 8) * *(float *)(param_1 + 0x31f4) + *(float *)(param_1 + 0x31f0);
-  fVar6 = *(float *)(param_2 + 0xc) * *(float *)(param_1 + 0x31fc) + *(float *)(param_1 + 0x31f8);
-  if ((*(uint *)(param_1 + 0x3414) & 1) == 0) {
+  red = *(float *)(pixel + 4) * *(float *)(glContext + 0x31ec) + *(float *)(glContext + 0x31e8);
+  green = *(float *)(pixel + 8) * *(float *)(glContext + 0x31f4) + *(float *)(glContext + 0x31f0);
+  blue = *(float *)(pixel + 0xc) * *(float *)(glContext + 0x31fc) + *(float *)(glContext + 0x31f8);
+  if ((*(uint *)(glContext + 0x3414) & 1) == 0) {
     fVar7 = FLOAT_00108e50;
-    if ((fVar4 < FLOAT_00108e50) || (fVar7 = FLOAT_00108e54, FLOAT_00108e54 < fVar4)) {
-      fVar4 = fVar7;
+    if ((red < FLOAT_00108e50) || (fVar7 = FLOAT_00108e54, FLOAT_00108e54 < red)) {
+      red = fVar7;
     }
     fVar7 = FLOAT_00108e50;
-    if ((fVar5 < FLOAT_00108e50) || (fVar7 = FLOAT_00108e54, FLOAT_00108e54 < fVar5)) {
-      fVar5 = fVar7;
+    if ((green < FLOAT_00108e50) || (fVar7 = FLOAT_00108e54, FLOAT_00108e54 < green)) {
+      green = fVar7;
     }
     fVar7 = FLOAT_00108e50;
-    if ((fVar6 < FLOAT_00108e50) || (fVar7 = FLOAT_00108e54, FLOAT_00108e54 < fVar6)) {
-      fVar6 = fVar7;
+    if ((blue < FLOAT_00108e50) || (fVar7 = FLOAT_00108e54, FLOAT_00108e54 < blue)) {
+      blue = fVar7;
     }
   }
   else {
-    uVar9 = *(int *)(param_1 + 0x3288) - 1;
-    uVar10 = *(int *)(param_1 + 0x328c) - 1;
-    uVar8 = *(int *)(param_1 + 0x3290) - 1;
-    uVar1 = (uint)(int)(fVar4 * (float)((double)CONCAT44(0x43300000,uVar9 ^ 0x80000000) - DOUBLE_00108d58
+    uVar9 = *(int *)(glContext + 0x3288) - 1;
+    greenMapIndex = *(int *)(glContext + 0x328c) - 1;
+    uVar8 = *(int *)(glContext + 0x3290) - 1;
+    uVar1 = (uint)(int)(red * (float)((double)CONCAT44(0x43300000,uVar9 ^ 0x80000000) - DOUBLE_00108d58
                                   ) + FLOAT_00108e90);
-    uVar2 = (uint)(int)(fVar5 * (float)((double)CONCAT44(0x43300000,uVar10 ^ 0x80000000) -
+    greenScaledIndex = (uint)(int)(green * (float)((double)CONCAT44(0x43300000,greenMapIndex ^ 0x80000000) -
                                   DOUBLE_00108d58) + FLOAT_00108e90);
-    uVar3 = (uint)(int)(fVar6 * (float)((double)CONCAT44(0x43300000,uVar8 ^ 0x80000000) - DOUBLE_00108d58
+    uVar3 = (uint)(int)(blue * (float)((double)CONCAT44(0x43300000,uVar8 ^ 0x80000000) - DOUBLE_00108d58
                                   ) + FLOAT_00108e90);
     if (((int)uVar1 <= (int)uVar9) && (uVar9 = uVar1, (int)uVar1 < 0)) {
       uVar9 = 0;
     }
-    if (((int)uVar2 <= (int)uVar10) && (uVar10 = uVar2, (int)uVar2 < 0)) {
-      uVar10 = 0;
+    if (((int)greenScaledIndex <= (int)greenMapIndex) && (greenMapIndex = greenScaledIndex, (int)greenScaledIndex < 0)) {
+      greenMapIndex = 0;
     }
     if (((int)uVar3 <= (int)uVar8) && (uVar8 = uVar3, (int)uVar3 < 0)) {
       uVar8 = 0;
     }
-    fVar4 = *(float *)(uVar9 * 4 + *(int *)(param_1 + 0x325c));
-    fVar5 = *(float *)(uVar10 * 4 + *(int *)(param_1 + 0x3260));
-    fVar6 = *(float *)(uVar8 * 4 + *(int *)(param_1 + 0x3264));
+    red = *(float *)(uVar9 * 4 + *(int *)(glContext + 0x325c));
+    green = *(float *)(greenMapIndex * 4 + *(int *)(glContext + 0x3260));
+    blue = *(float *)(uVar8 * 4 + *(int *)(glContext + 0x3264));
   }
-  *(float *)(param_2 + 0xc) = fVar6;
-  *(float *)(param_2 + 4) = fVar4;
-  *(float *)(param_2 + 8) = fVar5;
+  *(float *)(pixel + 0xc) = blue;
+  *(float *)(pixel + 4) = red;
+  *(float *)(pixel + 8) = green;
   return;
 }
 
 /* _gleModifyPixelRGBA @ 0xe6a68 (636 bytes) */
-void _gleModifyPixelRGBA(param_1, param_2)
-  int param_1;
-  int param_2;
+void _gleModifyPixelRGBA(glContext, pixel)
+  int glContext;
+  int pixel;
 {
-  uint uVar1;
-  uint uVar2;
-  uint uVar3;
-  uint uVar4;
-  float fVar5;
-  float fVar6;
-  float fVar7;
-  float fVar8;
+  uint redScaledIndex;
+  uint greenScaledIndex;
+  uint blueScaledIndex;
+  uint alphaScaledIndex;
+  float red;
+  float green;
+  float blue;
+  float alpha;
   float fVar9;
-  uint uVar10;
-  uint uVar11;
-  uint uVar12;
-  uint uVar13;
+  uint alphaMapIndex;
+  uint blueMapIndex;
+  uint greenMapIndex;
+  uint redMapIndex;
   
-  fVar5 = *(float *)(param_2 + 4) * *(float *)(param_1 + 0x31ec) + *(float *)(param_1 + 0x31e8);
-  fVar6 = *(float *)(param_2 + 8) * *(float *)(param_1 + 0x31f4) + *(float *)(param_1 + 0x31f0);
-  fVar7 = *(float *)(param_2 + 0xc) * *(float *)(param_1 + 0x31fc) + *(float *)(param_1 + 0x31f8);
-  fVar8 = *(float *)(param_2 + 0x10) * *(float *)(param_1 + 0x3204) + *(float *)(param_1 + 0x3200);
-  if ((*(uint *)(param_1 + 0x3414) & 1) == 0) {
+  red = *(float *)(pixel + 4) * *(float *)(glContext + 0x31ec) + *(float *)(glContext + 0x31e8);
+  green = *(float *)(pixel + 8) * *(float *)(glContext + 0x31f4) + *(float *)(glContext + 0x31f0);
+  blue = *(float *)(pixel + 0xc) * *(float *)(glContext + 0x31fc) + *(float *)(glContext + 0x31f8);
+  alpha = *(float *)(pixel + 0x10) * *(float *)(glContext + 0x3204) + *(float *)(glContext + 0x3200);
+  if ((*(uint *)(glContext + 0x3414) & 1) == 0) {
     fVar9 = FLOAT_00108e50;
-    if ((fVar5 < FLOAT_00108e50) || (fVar9 = FLOAT_00108e54, FLOAT_00108e54 < fVar5)) {
-      fVar5 = fVar9;
+    if ((red < FLOAT_00108e50) || (fVar9 = FLOAT_00108e54, FLOAT_00108e54 < red)) {
+      red = fVar9;
     }
     fVar9 = FLOAT_00108e50;
-    if ((fVar6 < FLOAT_00108e50) || (fVar9 = FLOAT_00108e54, FLOAT_00108e54 < fVar6)) {
-      fVar6 = fVar9;
+    if ((green < FLOAT_00108e50) || (fVar9 = FLOAT_00108e54, FLOAT_00108e54 < green)) {
+      green = fVar9;
     }
     fVar9 = FLOAT_00108e50;
-    if ((fVar7 < FLOAT_00108e50) || (fVar9 = FLOAT_00108e54, FLOAT_00108e54 < fVar7)) {
-      fVar7 = fVar9;
+    if ((blue < FLOAT_00108e50) || (fVar9 = FLOAT_00108e54, FLOAT_00108e54 < blue)) {
+      blue = fVar9;
     }
     fVar9 = FLOAT_00108e50;
-    if ((fVar8 < FLOAT_00108e50) || (fVar9 = FLOAT_00108e54, FLOAT_00108e54 < fVar8)) {
-      fVar8 = fVar9;
+    if ((alpha < FLOAT_00108e50) || (fVar9 = FLOAT_00108e54, FLOAT_00108e54 < alpha)) {
+      alpha = fVar9;
     }
   }
   else {
-    uVar13 = *(int *)(param_1 + 0x3288) - 1;
-    uVar12 = *(int *)(param_1 + 0x328c) - 1;
-    uVar11 = *(int *)(param_1 + 0x3290) - 1;
-    uVar10 = *(int *)(param_1 + 0x3294) - 1;
-    uVar1 = (uint)(int)(fVar5 * (float)((double)CONCAT44(0x43300000,uVar13 ^ 0x80000000) -
+    redMapIndex = *(int *)(glContext + 0x3288) - 1;
+    greenMapIndex = *(int *)(glContext + 0x328c) - 1;
+    blueMapIndex = *(int *)(glContext + 0x3290) - 1;
+    alphaMapIndex = *(int *)(glContext + 0x3294) - 1;
+    redScaledIndex = (uint)(int)(red * (float)((double)CONCAT44(0x43300000,redMapIndex ^ 0x80000000) -
                                   DOUBLE_00108d58) + FLOAT_00108e90);
-    uVar2 = (uint)(int)(fVar6 * (float)((double)CONCAT44(0x43300000,uVar12 ^ 0x80000000) -
+    greenScaledIndex = (uint)(int)(green * (float)((double)CONCAT44(0x43300000,greenMapIndex ^ 0x80000000) -
                                   DOUBLE_00108d58) + FLOAT_00108e90);
-    uVar3 = (uint)(int)(fVar7 * (float)((double)CONCAT44(0x43300000,uVar11 ^ 0x80000000) -
+    blueScaledIndex = (uint)(int)(blue * (float)((double)CONCAT44(0x43300000,blueMapIndex ^ 0x80000000) -
                                   DOUBLE_00108d58) + FLOAT_00108e90);
-    uVar4 = (uint)(int)(fVar8 * (float)((double)CONCAT44(0x43300000,uVar10 ^ 0x80000000) -
+    alphaScaledIndex = (uint)(int)(alpha * (float)((double)CONCAT44(0x43300000,alphaMapIndex ^ 0x80000000) -
                                   DOUBLE_00108d58) + FLOAT_00108e90);
-    if (((int)uVar1 <= (int)uVar13) && (uVar13 = uVar1, (int)uVar1 < 0)) {
-      uVar13 = 0;
+    if (((int)redScaledIndex <= (int)redMapIndex) && (redMapIndex = redScaledIndex, (int)redScaledIndex < 0)) {
+      redMapIndex = 0;
     }
-    if (((int)uVar2 < (int)uVar12) && (uVar12 = uVar2, (int)uVar2 < 0)) {
-      uVar12 = 0;
+    if (((int)greenScaledIndex < (int)greenMapIndex) && (greenMapIndex = greenScaledIndex, (int)greenScaledIndex < 0)) {
+      greenMapIndex = 0;
     }
-    if (((int)uVar3 <= (int)uVar11) && (uVar11 = uVar3, (int)uVar3 < 0)) {
-      uVar11 = 0;
+    if (((int)blueScaledIndex <= (int)blueMapIndex) && (blueMapIndex = blueScaledIndex, (int)blueScaledIndex < 0)) {
+      blueMapIndex = 0;
     }
-    if (((int)uVar4 <= (int)uVar10) && (uVar10 = uVar4, (int)uVar4 < 0)) {
-      uVar10 = 0;
+    if (((int)alphaScaledIndex <= (int)alphaMapIndex) && (alphaMapIndex = alphaScaledIndex, (int)alphaScaledIndex < 0)) {
+      alphaMapIndex = 0;
     }
-    fVar5 = *(float *)(uVar13 * 4 + *(int *)(param_1 + 0x325c));
-    fVar6 = *(float *)(uVar12 * 4 + *(int *)(param_1 + 0x3260));
-    fVar7 = *(float *)(uVar11 * 4 + *(int *)(param_1 + 0x3264));
-    fVar8 = *(float *)(uVar10 * 4 + *(int *)(param_1 + 0x3268));
+    red = *(float *)(redMapIndex * 4 + *(int *)(glContext + 0x325c));
+    green = *(float *)(greenMapIndex * 4 + *(int *)(glContext + 0x3260));
+    blue = *(float *)(blueMapIndex * 4 + *(int *)(glContext + 0x3264));
+    alpha = *(float *)(alphaMapIndex * 4 + *(int *)(glContext + 0x3268));
   }
-  *(float *)(param_2 + 0x10) = fVar8;
-  *(float *)(param_2 + 4) = fVar5;
-  *(float *)(param_2 + 8) = fVar6;
-  *(float *)(param_2 + 0xc) = fVar7;
+  *(float *)(pixel + 0x10) = alpha;
+  *(float *)(pixel + 4) = red;
+  *(float *)(pixel + 8) = green;
+  *(float *)(pixel + 0xc) = blue;
   return;
 }
 
@@ -1164,216 +1164,216 @@ void _gleModifyPixelRGBAIndex(param_1, param_2)
 }
 
 /* _gleModifyPixelHILO @ 0xe6ddc (132 bytes) */
-void _gleModifyPixelHILO(int param_1,int param_2,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10)
+void _gleModifyPixelHILO(int glContext,int pixel,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10)
 {
-  float fVar1;
-  float fVar2;
+  float hi;
+  float lo;
   float fVar3;
   
-  fVar1 = *(float *)(param_2 + 0x20) * *(float *)(param_1 + 0x321c) + *(float *)(param_1 + 0x3218);
-  fVar2 = *(float *)(param_2 + 0x24) * *(float *)(param_1 + 0x3224) + *(float *)(param_1 + 0x3220);
+  hi = *(float *)(pixel + 0x20) * *(float *)(glContext + 0x321c) + *(float *)(glContext + 0x3218);
+  lo = *(float *)(pixel + 0x24) * *(float *)(glContext + 0x3224) + *(float *)(glContext + 0x3220);
   fVar3 = FLOAT_00108e54;
-  if ((FLOAT_00108e54 < fVar1) || (fVar3 = FLOAT_00108e58, fVar1 < FLOAT_00108e58)) {
-    fVar1 = fVar3;
+  if ((FLOAT_00108e54 < hi) || (fVar3 = FLOAT_00108e58, hi < FLOAT_00108e58)) {
+    hi = fVar3;
   }
   fVar3 = FLOAT_00108e54;
-  if ((FLOAT_00108e54 < fVar2) || (fVar3 = FLOAT_00108e58, fVar2 < FLOAT_00108e58)) {
-    fVar2 = fVar3;
+  if ((FLOAT_00108e54 < lo) || (fVar3 = FLOAT_00108e58, lo < FLOAT_00108e58)) {
+    lo = fVar3;
   }
-  *(float *)(param_2 + 0x24) = fVar2;
-  *(float *)(param_2 + 0x20) = fVar1;
+  *(float *)(pixel + 0x24) = lo;
+  *(float *)(pixel + 0x20) = hi;
   return;
 }
 
 /* _gleModifyPixelDSDTMagVib @ 0xe6e60 (252 bytes) */
-void _gleModifyPixelDSDTMagVib(int param_1,int param_2,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5)
+void _gleModifyPixelDSDTMagVib(int glContext,int pixel,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5)
 {
   float fVar1;
-  float fVar2;
+  float red;
   float fVar3;
-  float fVar4;
-  float fVar5;
+  float mag;
+  float dt;
   
-  fVar1 = *(float *)(param_2 + 0x28) * *(float *)(param_1 + 0x322c) + *(float *)(param_1 + 0x3228);
-  fVar5 = *(float *)(param_2 + 0x2c) * *(float *)(param_1 + 0x3234) + *(float *)(param_1 + 0x3230);
-  fVar4 = *(float *)(param_2 + 0x30) * *(float *)(param_1 + 0x323c) + *(float *)(param_1 + 0x3238);
-  fVar2 = *(float *)(param_2 + 4) * *(float *)(param_1 + 0x3244) + *(float *)(param_1 + 0x3240);
+  fVar1 = *(float *)(pixel + 0x28) * *(float *)(glContext + 0x322c) + *(float *)(glContext + 0x3228);
+  dt = *(float *)(pixel + 0x2c) * *(float *)(glContext + 0x3234) + *(float *)(glContext + 0x3230);
+  mag = *(float *)(pixel + 0x30) * *(float *)(glContext + 0x323c) + *(float *)(glContext + 0x3238);
+  red = *(float *)(pixel + 4) * *(float *)(glContext + 0x3244) + *(float *)(glContext + 0x3240);
   fVar3 = FLOAT_00108e54;
   if ((!(FLOAT_00108e54 < fVar1)) && (fVar3 = fVar1, fVar1 < FLOAT_00108e58)) {
     fVar3 = FLOAT_00108e58;
   }
   fVar1 = FLOAT_00108e54;
-  if ((FLOAT_00108e54 < fVar5) || (fVar1 = FLOAT_00108e58, fVar5 < FLOAT_00108e58)) {
-    fVar5 = fVar1;
+  if ((FLOAT_00108e54 < dt) || (fVar1 = FLOAT_00108e58, dt < FLOAT_00108e58)) {
+    dt = fVar1;
   }
   fVar1 = FLOAT_00108e54;
-  if ((FLOAT_00108e54 < fVar4) || (fVar1 = FLOAT_00108e50, fVar4 < FLOAT_00108e50)) {
-    fVar4 = fVar1;
+  if ((FLOAT_00108e54 < mag) || (fVar1 = FLOAT_00108e50, mag < FLOAT_00108e50)) {
+    mag = fVar1;
   }
   fVar1 = FLOAT_00108e54;
-  if ((FLOAT_00108e54 < fVar2) || (fVar1 = FLOAT_00108e50, fVar2 < FLOAT_00108e50)) {
-    fVar2 = fVar1;
+  if ((FLOAT_00108e54 < red) || (fVar1 = FLOAT_00108e50, red < FLOAT_00108e50)) {
+    red = fVar1;
   }
-  *(float *)(param_2 + 4) = fVar2;
-  *(float *)(param_2 + 0x28) = fVar3;
-  *(float *)(param_2 + 0x2c) = fVar5;
-  *(float *)(param_2 + 0x30) = fVar4;
+  *(float *)(pixel + 4) = red;
+  *(float *)(pixel + 0x28) = fVar3;
+  *(float *)(pixel + 0x2c) = dt;
+  *(float *)(pixel + 0x30) = mag;
   return;
 }
 
 /* _gleModifyPixelSignedRGBA @ 0xe6f5c (636 bytes) */
-void _gleModifyPixelSignedRGBA(param_1, param_2)
-  int param_1;
-  int param_2;
+void _gleModifyPixelSignedRGBA(glContext, pixel)
+  int glContext;
+  int pixel;
 {
-  uint uVar1;
-  uint uVar2;
-  uint uVar3;
-  uint uVar4;
-  float fVar5;
-  float fVar6;
-  float fVar7;
-  float fVar8;
+  uint redScaledIndex;
+  uint greenScaledIndex;
+  uint blueScaledIndex;
+  uint alphaScaledIndex;
+  float red;
+  float green;
+  float blue;
+  float alpha;
   float fVar9;
-  uint uVar10;
-  uint uVar11;
-  uint uVar12;
-  uint uVar13;
+  uint alphaMapIndex;
+  uint blueMapIndex;
+  uint greenMapIndex;
+  uint redMapIndex;
   
-  fVar5 = *(float *)(param_2 + 4) * *(float *)(param_1 + 0x31ec) + *(float *)(param_1 + 0x31e8);
-  fVar6 = *(float *)(param_2 + 8) * *(float *)(param_1 + 0x31f4) + *(float *)(param_1 + 0x31f0);
-  fVar7 = *(float *)(param_2 + 0xc) * *(float *)(param_1 + 0x31fc) + *(float *)(param_1 + 0x31f8);
-  fVar8 = *(float *)(param_2 + 0x10) * *(float *)(param_1 + 0x3204) + *(float *)(param_1 + 0x3200);
-  if ((*(uint *)(param_1 + 0x3414) & 1) == 0) {
+  red = *(float *)(pixel + 4) * *(float *)(glContext + 0x31ec) + *(float *)(glContext + 0x31e8);
+  green = *(float *)(pixel + 8) * *(float *)(glContext + 0x31f4) + *(float *)(glContext + 0x31f0);
+  blue = *(float *)(pixel + 0xc) * *(float *)(glContext + 0x31fc) + *(float *)(glContext + 0x31f8);
+  alpha = *(float *)(pixel + 0x10) * *(float *)(glContext + 0x3204) + *(float *)(glContext + 0x3200);
+  if ((*(uint *)(glContext + 0x3414) & 1) == 0) {
     fVar9 = FLOAT_00108e58;
-    if ((fVar5 < FLOAT_00108e58) || (fVar9 = FLOAT_00108e54, FLOAT_00108e54 < fVar5)) {
-      fVar5 = fVar9;
+    if ((red < FLOAT_00108e58) || (fVar9 = FLOAT_00108e54, FLOAT_00108e54 < red)) {
+      red = fVar9;
     }
     fVar9 = FLOAT_00108e58;
-    if ((fVar6 < FLOAT_00108e58) || (fVar9 = FLOAT_00108e54, FLOAT_00108e54 < fVar6)) {
-      fVar6 = fVar9;
+    if ((green < FLOAT_00108e58) || (fVar9 = FLOAT_00108e54, FLOAT_00108e54 < green)) {
+      green = fVar9;
     }
     fVar9 = FLOAT_00108e58;
-    if ((fVar7 < FLOAT_00108e58) || (fVar9 = FLOAT_00108e54, FLOAT_00108e54 < fVar7)) {
-      fVar7 = fVar9;
+    if ((blue < FLOAT_00108e58) || (fVar9 = FLOAT_00108e54, FLOAT_00108e54 < blue)) {
+      blue = fVar9;
     }
     fVar9 = FLOAT_00108e58;
-    if ((fVar8 < FLOAT_00108e58) || (fVar9 = FLOAT_00108e54, FLOAT_00108e54 < fVar8)) {
-      fVar8 = fVar9;
+    if ((alpha < FLOAT_00108e58) || (fVar9 = FLOAT_00108e54, FLOAT_00108e54 < alpha)) {
+      alpha = fVar9;
     }
   }
   else {
-    uVar13 = *(int *)(param_1 + 0x3288) - 1;
-    uVar12 = *(int *)(param_1 + 0x328c) - 1;
-    uVar11 = *(int *)(param_1 + 0x3290) - 1;
-    uVar10 = *(int *)(param_1 + 0x3294) - 1;
-    uVar1 = (uint)(int)(fVar5 * (float)((double)CONCAT44(0x43300000,uVar13 ^ 0x80000000) -
+    redMapIndex = *(int *)(glContext + 0x3288) - 1;
+    greenMapIndex = *(int *)(glContext + 0x328c) - 1;
+    blueMapIndex = *(int *)(glContext + 0x3290) - 1;
+    alphaMapIndex = *(int *)(glContext + 0x3294) - 1;
+    redScaledIndex = (uint)(int)(red * (float)((double)CONCAT44(0x43300000,redMapIndex ^ 0x80000000) -
                                   DOUBLE_00108d58) + FLOAT_00108e90);
-    uVar2 = (uint)(int)(fVar6 * (float)((double)CONCAT44(0x43300000,uVar12 ^ 0x80000000) -
+    greenScaledIndex = (uint)(int)(green * (float)((double)CONCAT44(0x43300000,greenMapIndex ^ 0x80000000) -
                                   DOUBLE_00108d58) + FLOAT_00108e90);
-    uVar3 = (uint)(int)(fVar7 * (float)((double)CONCAT44(0x43300000,uVar11 ^ 0x80000000) -
+    blueScaledIndex = (uint)(int)(blue * (float)((double)CONCAT44(0x43300000,blueMapIndex ^ 0x80000000) -
                                   DOUBLE_00108d58) + FLOAT_00108e90);
-    uVar4 = (uint)(int)(fVar8 * (float)((double)CONCAT44(0x43300000,uVar10 ^ 0x80000000) -
+    alphaScaledIndex = (uint)(int)(alpha * (float)((double)CONCAT44(0x43300000,alphaMapIndex ^ 0x80000000) -
                                   DOUBLE_00108d58) + FLOAT_00108e90);
-    if (((int)uVar1 <= (int)uVar13) && (uVar13 = uVar1, (int)uVar1 < 0)) {
-      uVar13 = 0;
+    if (((int)redScaledIndex <= (int)redMapIndex) && (redMapIndex = redScaledIndex, (int)redScaledIndex < 0)) {
+      redMapIndex = 0;
     }
-    if (((int)uVar2 < (int)uVar12) && (uVar12 = uVar2, (int)uVar2 < 0)) {
-      uVar12 = 0;
+    if (((int)greenScaledIndex < (int)greenMapIndex) && (greenMapIndex = greenScaledIndex, (int)greenScaledIndex < 0)) {
+      greenMapIndex = 0;
     }
-    if (((int)uVar3 <= (int)uVar11) && (uVar11 = uVar3, (int)uVar3 < 0)) {
-      uVar11 = 0;
+    if (((int)blueScaledIndex <= (int)blueMapIndex) && (blueMapIndex = blueScaledIndex, (int)blueScaledIndex < 0)) {
+      blueMapIndex = 0;
     }
-    if (((int)uVar4 <= (int)uVar10) && (uVar10 = uVar4, (int)uVar4 < 0)) {
-      uVar10 = 0;
+    if (((int)alphaScaledIndex <= (int)alphaMapIndex) && (alphaMapIndex = alphaScaledIndex, (int)alphaScaledIndex < 0)) {
+      alphaMapIndex = 0;
     }
-    fVar5 = *(float *)(uVar13 * 4 + *(int *)(param_1 + 0x325c));
-    fVar6 = *(float *)(uVar12 * 4 + *(int *)(param_1 + 0x3260));
-    fVar7 = *(float *)(uVar11 * 4 + *(int *)(param_1 + 0x3264));
-    fVar8 = *(float *)(uVar10 * 4 + *(int *)(param_1 + 0x3268));
+    red = *(float *)(redMapIndex * 4 + *(int *)(glContext + 0x325c));
+    green = *(float *)(greenMapIndex * 4 + *(int *)(glContext + 0x3260));
+    blue = *(float *)(blueMapIndex * 4 + *(int *)(glContext + 0x3264));
+    alpha = *(float *)(alphaMapIndex * 4 + *(int *)(glContext + 0x3268));
   }
-  *(float *)(param_2 + 0x10) = fVar8;
-  *(float *)(param_2 + 4) = fVar5;
-  *(float *)(param_2 + 8) = fVar6;
-  *(float *)(param_2 + 0xc) = fVar7;
+  *(float *)(pixel + 0x10) = alpha;
+  *(float *)(pixel + 4) = red;
+  *(float *)(pixel + 8) = green;
+  *(float *)(pixel + 0xc) = blue;
   return;
 }
 
 /* _gleModifyPixelSignedRGB_UnsignedA @ 0xe71d8 (636 bytes) */
-void _gleModifyPixelSignedRGB_UnsignedA(param_1, param_2)
-  int param_1;
-  int param_2;
+void _gleModifyPixelSignedRGB_UnsignedA(glContext, pixel)
+  int glContext;
+  int pixel;
 {
-  uint uVar1;
-  uint uVar2;
-  uint uVar3;
-  uint uVar4;
-  float fVar5;
-  float fVar6;
-  float fVar7;
-  float fVar8;
+  uint redScaledIndex;
+  uint greenScaledIndex;
+  uint blueScaledIndex;
+  uint alphaScaledIndex;
+  float red;
+  float green;
+  float blue;
+  float alpha;
   float fVar9;
-  uint uVar10;
-  uint uVar11;
-  uint uVar12;
-  uint uVar13;
+  uint alphaMapIndex;
+  uint blueMapIndex;
+  uint greenMapIndex;
+  uint redMapIndex;
   
-  fVar5 = *(float *)(param_2 + 4) * *(float *)(param_1 + 0x31ec) + *(float *)(param_1 + 0x31e8);
-  fVar6 = *(float *)(param_2 + 8) * *(float *)(param_1 + 0x31f4) + *(float *)(param_1 + 0x31f0);
-  fVar7 = *(float *)(param_2 + 0xc) * *(float *)(param_1 + 0x31fc) + *(float *)(param_1 + 0x31f8);
-  fVar8 = *(float *)(param_2 + 0x10) * *(float *)(param_1 + 0x3204) + *(float *)(param_1 + 0x3200);
-  if ((*(uint *)(param_1 + 0x3414) & 1) == 0) {
+  red = *(float *)(pixel + 4) * *(float *)(glContext + 0x31ec) + *(float *)(glContext + 0x31e8);
+  green = *(float *)(pixel + 8) * *(float *)(glContext + 0x31f4) + *(float *)(glContext + 0x31f0);
+  blue = *(float *)(pixel + 0xc) * *(float *)(glContext + 0x31fc) + *(float *)(glContext + 0x31f8);
+  alpha = *(float *)(pixel + 0x10) * *(float *)(glContext + 0x3204) + *(float *)(glContext + 0x3200);
+  if ((*(uint *)(glContext + 0x3414) & 1) == 0) {
     fVar9 = FLOAT_00108e58;
-    if ((fVar5 < FLOAT_00108e58) || (fVar9 = FLOAT_00108e54, FLOAT_00108e54 < fVar5)) {
-      fVar5 = fVar9;
+    if ((red < FLOAT_00108e58) || (fVar9 = FLOAT_00108e54, FLOAT_00108e54 < red)) {
+      red = fVar9;
     }
     fVar9 = FLOAT_00108e58;
-    if ((fVar6 < FLOAT_00108e58) || (fVar9 = FLOAT_00108e54, FLOAT_00108e54 < fVar6)) {
-      fVar6 = fVar9;
+    if ((green < FLOAT_00108e58) || (fVar9 = FLOAT_00108e54, FLOAT_00108e54 < green)) {
+      green = fVar9;
     }
     fVar9 = FLOAT_00108e58;
-    if ((fVar7 < FLOAT_00108e58) || (fVar9 = FLOAT_00108e54, FLOAT_00108e54 < fVar7)) {
-      fVar7 = fVar9;
+    if ((blue < FLOAT_00108e58) || (fVar9 = FLOAT_00108e54, FLOAT_00108e54 < blue)) {
+      blue = fVar9;
     }
     fVar9 = FLOAT_00108e50;
-    if ((fVar8 < FLOAT_00108e50) || (fVar9 = FLOAT_00108e54, FLOAT_00108e54 < fVar8)) {
-      fVar8 = fVar9;
+    if ((alpha < FLOAT_00108e50) || (fVar9 = FLOAT_00108e54, FLOAT_00108e54 < alpha)) {
+      alpha = fVar9;
     }
   }
   else {
-    uVar13 = *(int *)(param_1 + 0x3288) - 1;
-    uVar12 = *(int *)(param_1 + 0x328c) - 1;
-    uVar11 = *(int *)(param_1 + 0x3290) - 1;
-    uVar10 = *(int *)(param_1 + 0x3294) - 1;
-    uVar1 = (uint)(int)(fVar5 * (float)((double)CONCAT44(0x43300000,uVar13 ^ 0x80000000) -
+    redMapIndex = *(int *)(glContext + 0x3288) - 1;
+    greenMapIndex = *(int *)(glContext + 0x328c) - 1;
+    blueMapIndex = *(int *)(glContext + 0x3290) - 1;
+    alphaMapIndex = *(int *)(glContext + 0x3294) - 1;
+    redScaledIndex = (uint)(int)(red * (float)((double)CONCAT44(0x43300000,redMapIndex ^ 0x80000000) -
                                   DOUBLE_00108d58) + FLOAT_00108e90);
-    uVar2 = (uint)(int)(fVar6 * (float)((double)CONCAT44(0x43300000,uVar12 ^ 0x80000000) -
+    greenScaledIndex = (uint)(int)(green * (float)((double)CONCAT44(0x43300000,greenMapIndex ^ 0x80000000) -
                                   DOUBLE_00108d58) + FLOAT_00108e90);
-    uVar3 = (uint)(int)(fVar7 * (float)((double)CONCAT44(0x43300000,uVar11 ^ 0x80000000) -
+    blueScaledIndex = (uint)(int)(blue * (float)((double)CONCAT44(0x43300000,blueMapIndex ^ 0x80000000) -
                                   DOUBLE_00108d58) + FLOAT_00108e90);
-    uVar4 = (uint)(int)(fVar8 * (float)((double)CONCAT44(0x43300000,uVar10 ^ 0x80000000) -
+    alphaScaledIndex = (uint)(int)(alpha * (float)((double)CONCAT44(0x43300000,alphaMapIndex ^ 0x80000000) -
                                   DOUBLE_00108d58) + FLOAT_00108e90);
-    if (((int)uVar1 <= (int)uVar13) && (uVar13 = uVar1, (int)uVar1 < 0)) {
-      uVar13 = 0;
+    if (((int)redScaledIndex <= (int)redMapIndex) && (redMapIndex = redScaledIndex, (int)redScaledIndex < 0)) {
+      redMapIndex = 0;
     }
-    if (((int)uVar2 < (int)uVar12) && (uVar12 = uVar2, (int)uVar2 < 0)) {
-      uVar12 = 0;
+    if (((int)greenScaledIndex < (int)greenMapIndex) && (greenMapIndex = greenScaledIndex, (int)greenScaledIndex < 0)) {
+      greenMapIndex = 0;
     }
-    if (((int)uVar3 <= (int)uVar11) && (uVar11 = uVar3, (int)uVar3 < 0)) {
-      uVar11 = 0;
+    if (((int)blueScaledIndex <= (int)blueMapIndex) && (blueMapIndex = blueScaledIndex, (int)blueScaledIndex < 0)) {
+      blueMapIndex = 0;
     }
-    if (((int)uVar4 <= (int)uVar10) && (uVar10 = uVar4, (int)uVar4 < 0)) {
-      uVar10 = 0;
+    if (((int)alphaScaledIndex <= (int)alphaMapIndex) && (alphaMapIndex = alphaScaledIndex, (int)alphaScaledIndex < 0)) {
+      alphaMapIndex = 0;
     }
-    fVar5 = *(float *)(uVar13 * 4 + *(int *)(param_1 + 0x325c));
-    fVar6 = *(float *)(uVar12 * 4 + *(int *)(param_1 + 0x3260));
-    fVar7 = *(float *)(uVar11 * 4 + *(int *)(param_1 + 0x3264));
-    fVar8 = *(float *)(uVar10 * 4 + *(int *)(param_1 + 0x3268));
+    red = *(float *)(redMapIndex * 4 + *(int *)(glContext + 0x325c));
+    green = *(float *)(greenMapIndex * 4 + *(int *)(glContext + 0x3260));
+    blue = *(float *)(blueMapIndex * 4 + *(int *)(glContext + 0x3264));
+    alpha = *(float *)(alphaMapIndex * 4 + *(int *)(glContext + 0x3268));
   }
-  *(float *)(param_2 + 0x10) = fVar8;
-  *(float *)(param_2 + 4) = fVar5;
-  *(float *)(param_2 + 8) = fVar6;
-  *(float *)(param_2 + 0xc) = fVar7;
+  *(float *)(pixel + 0x10) = alpha;
+  *(float *)(pixel + 4) = red;
+  *(float *)(pixel + 8) = green;
+  *(float *)(pixel + 0xc) = blue;
   return;
 }
 
@@ -1728,339 +1728,339 @@ int _gleSelectPixelInsertFunc(param_1, param_2)
 }
 
 /* _gleInsertPixel_RGBA_Byte @ 0xe7ee4 (124 bytes) */
-void _gleInsertPixel_RGBA_Byte(param_1, param_2)
-  int param_1;
-  undefined1 *param_2;
+void _gleInsertPixel_RGBA_Byte(pixel, dst)
+  int pixel;
+  undefined1 *dst;
 {
-  float fVar1;
+  float channelScale;
   
-  fVar1 = FLOAT_00108f6c;
-  *param_2 = (char)(int)(*(float *)(param_1 + 4) * FLOAT_00108f6c);
-  param_2[1] = (char)(int)(*(float *)(param_1 + 8) * fVar1);
-  param_2[2] = (char)(int)(*(float *)(param_1 + 0xc) * fVar1);
-  param_2[3] = (char)(int)(*(float *)(param_1 + 0x10) * fVar1);
+  channelScale = FLOAT_00108f6c;
+  *dst = (char)(int)(*(float *)(pixel + 4) * FLOAT_00108f6c);
+  dst[1] = (char)(int)(*(float *)(pixel + 8) * channelScale);
+  dst[2] = (char)(int)(*(float *)(pixel + 0xc) * channelScale);
+  dst[3] = (char)(int)(*(float *)(pixel + 0x10) * channelScale);
   return;
 }
 
 /* _gleInsertPixel_RGBA_Ubyte @ 0xe7f60 (124 bytes) */
-void _gleInsertPixel_RGBA_Ubyte(param_1, param_2)
-  int param_1;
-  undefined1 *param_2;
+void _gleInsertPixel_RGBA_Ubyte(pixel, dst)
+  int pixel;
+  undefined1 *dst;
 {
-  float fVar1;
+  float channelScale;
   
-  fVar1 = FLOAT_00108f70;
-  *param_2 = (char)(int)(*(float *)(param_1 + 4) * FLOAT_00108f70);
-  param_2[1] = (char)(int)(*(float *)(param_1 + 8) * fVar1);
-  param_2[2] = (char)(int)(*(float *)(param_1 + 0xc) * fVar1);
-  param_2[3] = (char)(int)(*(float *)(param_1 + 0x10) * fVar1);
+  channelScale = FLOAT_00108f70;
+  *dst = (char)(int)(*(float *)(pixel + 4) * FLOAT_00108f70);
+  dst[1] = (char)(int)(*(float *)(pixel + 8) * channelScale);
+  dst[2] = (char)(int)(*(float *)(pixel + 0xc) * channelScale);
+  dst[3] = (char)(int)(*(float *)(pixel + 0x10) * channelScale);
   return;
 }
 
 /* _gleInsertPixel_RGBA_Short @ 0xe7fdc (124 bytes) */
-void _gleInsertPixel_RGBA_Short(param_1, param_2)
-  int param_1;
-  undefined2 *param_2;
+void _gleInsertPixel_RGBA_Short(pixel, dst)
+  int pixel;
+  undefined2 *dst;
 {
-  float fVar1;
+  float channelScale;
   
-  fVar1 = FLOAT_00108f74;
-  *param_2 = (short)(int)(*(float *)(param_1 + 4) * FLOAT_00108f74);
-  param_2[1] = (short)(int)(*(float *)(param_1 + 8) * fVar1);
-  param_2[2] = (short)(int)(*(float *)(param_1 + 0xc) * fVar1);
-  param_2[3] = (short)(int)(*(float *)(param_1 + 0x10) * fVar1);
+  channelScale = FLOAT_00108f74;
+  *dst = (short)(int)(*(float *)(pixel + 4) * FLOAT_00108f74);
+  dst[1] = (short)(int)(*(float *)(pixel + 8) * channelScale);
+  dst[2] = (short)(int)(*(float *)(pixel + 0xc) * channelScale);
+  dst[3] = (short)(int)(*(float *)(pixel + 0x10) * channelScale);
   return;
 }
 
 /* _gleInsertPixel_RGBA_Ushort @ 0xe8058 (124 bytes) */
-void _gleInsertPixel_RGBA_Ushort(param_1, param_2)
-  int param_1;
-  undefined2 *param_2;
+void _gleInsertPixel_RGBA_Ushort(pixel, dst)
+  int pixel;
+  undefined2 *dst;
 {
-  float fVar1;
+  float channelScale;
   
-  fVar1 = FLOAT_00108ea0;
-  *param_2 = (short)(int)(*(float *)(param_1 + 4) * FLOAT_00108ea0);
-  param_2[1] = (short)(int)(*(float *)(param_1 + 8) * fVar1);
-  param_2[2] = (short)(int)(*(float *)(param_1 + 0xc) * fVar1);
-  param_2[3] = (short)(int)(*(float *)(param_1 + 0x10) * fVar1);
+  channelScale = FLOAT_00108ea0;
+  *dst = (short)(int)(*(float *)(pixel + 4) * FLOAT_00108ea0);
+  dst[1] = (short)(int)(*(float *)(pixel + 8) * channelScale);
+  dst[2] = (short)(int)(*(float *)(pixel + 0xc) * channelScale);
+  dst[3] = (short)(int)(*(float *)(pixel + 0x10) * channelScale);
   return;
 }
 
 /* _gleInsertPixel_RGBA_Int @ 0xe80d4 (124 bytes) */
-void _gleInsertPixel_RGBA_Int(int param_1,int *param_2,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleInsertPixel_RGBA_Int(int param_1,int *param_2,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  double dVar1;
+  double scaledChannel;
   
-  dVar1 = DOUBLE_00108d90;
+  scaledChannel = DOUBLE_00108d90;
   *param_2 = (int)((double)*(float *)(param_1 + 4) * DOUBLE_00108d90);
-  param_2[1] = (int)((double)*(float *)(param_1 + 8) * dVar1);
-  param_2[2] = (int)((double)*(float *)(param_1 + 0xc) * dVar1);
-  param_2[3] = (int)((double)*(float *)(param_1 + 0x10) * dVar1);
+  param_2[1] = (int)((double)*(float *)(param_1 + 8) * scaledChannel);
+  param_2[2] = (int)((double)*(float *)(param_1 + 0xc) * scaledChannel);
+  param_2[3] = (int)((double)*(float *)(param_1 + 0x10) * scaledChannel);
   return;
 }
 
 /* _gleInsertPixel_RGBA_Uint @ 0xe8150 (312 bytes) */
-void _gleInsertPixel_RGBA_Uint(param_1, param_2)
-  int param_1;
-  uint *param_2;
+void _gleInsertPixel_RGBA_Uint(pixel, dst)
+  int pixel;
+  uint *dst;
 {
-  uint uVar1;
-  double dVar2;
+  uint channelValue;
+  double scaledChannel;
   
-  dVar2 = (double)*(float *)(param_1 + 4) * DOUBLE_00108da8;
-  if (DOUBLE_00108d80 <= dVar2) {
-    uVar1 = (int)(dVar2 - DOUBLE_00108d80) ^ 0x80000000;
+  scaledChannel = (double)*(float *)(pixel + 4) * DOUBLE_00108da8;
+  if (DOUBLE_00108d80 <= scaledChannel) {
+    channelValue = (int)(scaledChannel - DOUBLE_00108d80) ^ 0x80000000;
   }
   else {
-    uVar1 = (uint)(int)dVar2;
+    channelValue = (uint)(int)scaledChannel;
   }
-  *param_2 = uVar1;
-  dVar2 = (double)*(float *)(param_1 + 8) * DOUBLE_00108da8;
-  if (DOUBLE_00108d80 <= dVar2) {
-    uVar1 = (int)(dVar2 - DOUBLE_00108d80) ^ 0x80000000;
-  }
-  else {
-    uVar1 = (uint)(int)dVar2;
-  }
-  param_2[1] = uVar1;
-  dVar2 = (double)*(float *)(param_1 + 0xc) * DOUBLE_00108da8;
-  if (DOUBLE_00108d80 <= dVar2) {
-    uVar1 = (int)(dVar2 - DOUBLE_00108d80) ^ 0x80000000;
+  *dst = channelValue;
+  scaledChannel = (double)*(float *)(pixel + 8) * DOUBLE_00108da8;
+  if (DOUBLE_00108d80 <= scaledChannel) {
+    channelValue = (int)(scaledChannel - DOUBLE_00108d80) ^ 0x80000000;
   }
   else {
-    uVar1 = (uint)(int)dVar2;
+    channelValue = (uint)(int)scaledChannel;
   }
-  param_2[2] = uVar1;
-  dVar2 = (double)*(float *)(param_1 + 0x10) * DOUBLE_00108da8;
-  if (DOUBLE_00108d80 <= dVar2) {
-    uVar1 = (int)(dVar2 - DOUBLE_00108d80) ^ 0x80000000;
+  dst[1] = channelValue;
+  scaledChannel = (double)*(float *)(pixel + 0xc) * DOUBLE_00108da8;
+  if (DOUBLE_00108d80 <= scaledChannel) {
+    channelValue = (int)(scaledChannel - DOUBLE_00108d80) ^ 0x80000000;
   }
   else {
-    uVar1 = (uint)(int)dVar2;
+    channelValue = (uint)(int)scaledChannel;
   }
-  param_2[3] = uVar1;
+  dst[2] = channelValue;
+  scaledChannel = (double)*(float *)(pixel + 0x10) * DOUBLE_00108da8;
+  if (DOUBLE_00108d80 <= scaledChannel) {
+    channelValue = (int)(scaledChannel - DOUBLE_00108d80) ^ 0x80000000;
+  }
+  else {
+    channelValue = (uint)(int)scaledChannel;
+  }
+  dst[3] = channelValue;
   return;
 }
 
 /* _gleInsertPixel_RGBA_Float @ 0xe8288 (36 bytes) */
-void _gleInsertPixel_RGBA_Float(param_1, param_2)
-  int param_1;
-  undefined4 *param_2;
+void _gleInsertPixel_RGBA_Float(pixel, dst)
+  int pixel;
+  undefined4 *dst;
 {
-  *param_2 = *(undefined4 *)(param_1 + 4);
-  param_2[1] = *(undefined4 *)(param_1 + 8);
-  param_2[2] = *(undefined4 *)(param_1 + 0xc);
-  param_2[3] = *(undefined4 *)(param_1 + 0x10);
+  *dst = *(undefined4 *)(pixel + 4);
+  dst[1] = *(undefined4 *)(pixel + 8);
+  dst[2] = *(undefined4 *)(pixel + 0xc);
+  dst[3] = *(undefined4 *)(pixel + 0x10);
   return;
 }
 
 /* _gleInsertPixel_RGBA_4444 @ 0xe82ac (140 bytes) */
-void _gleInsertPixel_RGBA_4444(param_1, param_2)
-  int param_1;
-  ushort *param_2;
+void _gleInsertPixel_RGBA_4444(pixel, dst)
+  int pixel;
+  ushort *dst;
 {
-  *param_2 = (ushort)(int)(*(float *)(param_1 + 4) * FLOAT_00108ea0) & 0xf000 |
-             (ushort)((uint)(int)(*(float *)(param_1 + 8) * FLOAT_00108ea0) >> 4) & 0xf00 |
-             (ushort)((uint)(int)(*(float *)(param_1 + 0xc) * FLOAT_00108ea0) >> 8) & 0xf0 |
-             (ushort)((uint)(int)(*(float *)(param_1 + 0x10) * FLOAT_00108ea0) >> 0xc) & 0xf;
+  *dst = (ushort)(int)(*(float *)(pixel + 4) * FLOAT_00108ea0) & 0xf000 |
+             (ushort)((uint)(int)(*(float *)(pixel + 8) * FLOAT_00108ea0) >> 4) & 0xf00 |
+             (ushort)((uint)(int)(*(float *)(pixel + 0xc) * FLOAT_00108ea0) >> 8) & 0xf0 |
+             (ushort)((uint)(int)(*(float *)(pixel + 0x10) * FLOAT_00108ea0) >> 0xc) & 0xf;
   return;
 }
 
 /* _gleInsertPixel_RGBA_4444Rev @ 0xe8338 (140 bytes) */
-void _gleInsertPixel_RGBA_4444Rev(param_1, param_2)
-  int param_1;
-  ushort *param_2;
+void _gleInsertPixel_RGBA_4444Rev(pixel, dst)
+  int pixel;
+  ushort *dst;
 {
-  *param_2 = (ushort)(int)(*(float *)(param_1 + 0x10) * FLOAT_00108ea0) & 0xf000 |
-             (ushort)((uint)(int)(*(float *)(param_1 + 0xc) * FLOAT_00108ea0) >> 4) & 0xf00 |
-             (ushort)((uint)(int)(*(float *)(param_1 + 8) * FLOAT_00108ea0) >> 8) & 0xf0 |
-             (ushort)((uint)(int)(*(float *)(param_1 + 4) * FLOAT_00108ea0) >> 0xc) & 0xf;
+  *dst = (ushort)(int)(*(float *)(pixel + 0x10) * FLOAT_00108ea0) & 0xf000 |
+             (ushort)((uint)(int)(*(float *)(pixel + 0xc) * FLOAT_00108ea0) >> 4) & 0xf00 |
+             (ushort)((uint)(int)(*(float *)(pixel + 8) * FLOAT_00108ea0) >> 8) & 0xf0 |
+             (ushort)((uint)(int)(*(float *)(pixel + 4) * FLOAT_00108ea0) >> 0xc) & 0xf;
   return;
 }
 
 /* _gleInsertPixel_RGBA_5551 @ 0xe83c4 (140 bytes) */
-void _gleInsertPixel_RGBA_5551(param_1, param_2)
-  int param_1;
-  ushort *param_2;
+void _gleInsertPixel_RGBA_5551(pixel, dst)
+  int pixel;
+  ushort *dst;
 {
-  *param_2 = (ushort)(int)(*(float *)(param_1 + 4) * FLOAT_00108ea0) & 0xf800 |
-             (ushort)((uint)(int)(*(float *)(param_1 + 8) * FLOAT_00108ea0) >> 5) & 0x7c0 |
-             (ushort)((uint)(int)(*(float *)(param_1 + 0xc) * FLOAT_00108ea0) >> 10) & 0x3e |
-             (ushort)((uint)(int)(*(float *)(param_1 + 0x10) * FLOAT_00108ea0) >> 0xf) & 1;
+  *dst = (ushort)(int)(*(float *)(pixel + 4) * FLOAT_00108ea0) & 0xf800 |
+             (ushort)((uint)(int)(*(float *)(pixel + 8) * FLOAT_00108ea0) >> 5) & 0x7c0 |
+             (ushort)((uint)(int)(*(float *)(pixel + 0xc) * FLOAT_00108ea0) >> 10) & 0x3e |
+             (ushort)((uint)(int)(*(float *)(pixel + 0x10) * FLOAT_00108ea0) >> 0xf) & 1;
   return;
 }
 
 /* _gleInsertPixel_RGBA_1555Rev @ 0xe8450 (140 bytes) */
-void _gleInsertPixel_RGBA_1555Rev(param_1, param_2)
-  int param_1;
-  ushort *param_2;
+void _gleInsertPixel_RGBA_1555Rev(pixel, dst)
+  int pixel;
+  ushort *dst;
 {
-  *param_2 = (ushort)(int)(*(float *)(param_1 + 0x10) * FLOAT_00108ea0) & 0x8000 |
-             (ushort)((uint)(int)(*(float *)(param_1 + 0xc) * FLOAT_00108ea0) >> 1) & 0x7c00 |
-             (ushort)((uint)(int)(*(float *)(param_1 + 8) * FLOAT_00108ea0) >> 6) & 0x3e0 |
-             (ushort)((uint)(int)(*(float *)(param_1 + 4) * FLOAT_00108ea0) >> 0xb) & 0x1f;
+  *dst = (ushort)(int)(*(float *)(pixel + 0x10) * FLOAT_00108ea0) & 0x8000 |
+             (ushort)((uint)(int)(*(float *)(pixel + 0xc) * FLOAT_00108ea0) >> 1) & 0x7c00 |
+             (ushort)((uint)(int)(*(float *)(pixel + 8) * FLOAT_00108ea0) >> 6) & 0x3e0 |
+             (ushort)((uint)(int)(*(float *)(pixel + 4) * FLOAT_00108ea0) >> 0xb) & 0x1f;
   return;
 }
 
 /* _gleInsertPixel_RGBA_8888 @ 0xe84dc (124 bytes) */
-void _gleInsertPixel_RGBA_8888(param_1, param_2)
-  int param_1;
-  undefined1 *param_2;
+void _gleInsertPixel_RGBA_8888(pixel, dst)
+  int pixel;
+  undefined1 *dst;
 {
-  float fVar1;
+  float channelScale;
   
-  fVar1 = FLOAT_00108f70;
-  *param_2 = (char)(int)(*(float *)(param_1 + 4) * FLOAT_00108f70);
-  param_2[1] = (char)(int)(*(float *)(param_1 + 8) * fVar1);
-  param_2[2] = (char)(int)(*(float *)(param_1 + 0xc) * fVar1);
-  param_2[3] = (char)(int)(*(float *)(param_1 + 0x10) * fVar1);
+  channelScale = FLOAT_00108f70;
+  *dst = (char)(int)(*(float *)(pixel + 4) * FLOAT_00108f70);
+  dst[1] = (char)(int)(*(float *)(pixel + 8) * channelScale);
+  dst[2] = (char)(int)(*(float *)(pixel + 0xc) * channelScale);
+  dst[3] = (char)(int)(*(float *)(pixel + 0x10) * channelScale);
   return;
 }
 
 /* _gleInsertPixel_RGBA_8888Rev @ 0xe8558 (124 bytes) */
-void _gleInsertPixel_RGBA_8888Rev(param_1, param_2)
-  int param_1;
-  undefined1 *param_2;
+void _gleInsertPixel_RGBA_8888Rev(pixel, dst)
+  int pixel;
+  undefined1 *dst;
 {
-  float fVar1;
+  float channelScale;
   
-  fVar1 = FLOAT_00108f70;
-  *param_2 = (char)(int)(*(float *)(param_1 + 0x10) * FLOAT_00108f70);
-  param_2[1] = (char)(int)(*(float *)(param_1 + 0xc) * fVar1);
-  param_2[2] = (char)(int)(*(float *)(param_1 + 8) * fVar1);
-  param_2[3] = (char)(int)(*(float *)(param_1 + 4) * fVar1);
+  channelScale = FLOAT_00108f70;
+  *dst = (char)(int)(*(float *)(pixel + 0x10) * FLOAT_00108f70);
+  dst[1] = (char)(int)(*(float *)(pixel + 0xc) * channelScale);
+  dst[2] = (char)(int)(*(float *)(pixel + 8) * channelScale);
+  dst[3] = (char)(int)(*(float *)(pixel + 4) * channelScale);
   return;
 }
 
 /* _gleInsertPixel_RGBA_1010102 @ 0xe85d4 (328 bytes) */
-void _gleInsertPixel_RGBA_1010102(param_1, param_2)
-  int param_1;
-  uint *param_2;
+void _gleInsertPixel_RGBA_1010102(pixel, dst)
+  int pixel;
+  uint *dst;
 {
-  uint uVar1;
-  uint uVar2;
-  uint uVar3;
-  uint uVar4;
-  double dVar5;
+  uint redBits;
+  uint greenBits;
+  uint blueBits;
+  uint alphaBits;
+  double scaledChannel;
   
-  dVar5 = (double)*(float *)(param_1 + 4) * DOUBLE_00108da8;
-  if (DOUBLE_00108d80 <= dVar5) {
-    uVar1 = (int)(dVar5 - DOUBLE_00108d80) ^ 0x80000000;
+  scaledChannel = (double)*(float *)(pixel + 4) * DOUBLE_00108da8;
+  if (DOUBLE_00108d80 <= scaledChannel) {
+    redBits = (int)(scaledChannel - DOUBLE_00108d80) ^ 0x80000000;
   }
   else {
-    uVar1 = (uint)(int)dVar5;
+    redBits = (uint)(int)scaledChannel;
   }
-  dVar5 = (double)*(float *)(param_1 + 8) * DOUBLE_00108da8;
-  if (DOUBLE_00108d80 <= dVar5) {
-    uVar2 = (int)(dVar5 - DOUBLE_00108d80) ^ 0x80000000;
-  }
-  else {
-    uVar2 = (uint)(int)dVar5;
-  }
-  dVar5 = (double)*(float *)(param_1 + 0xc) * DOUBLE_00108da8;
-  if (DOUBLE_00108d80 <= dVar5) {
-    uVar3 = (int)(dVar5 - DOUBLE_00108d80) ^ 0x80000000;
+  scaledChannel = (double)*(float *)(pixel + 8) * DOUBLE_00108da8;
+  if (DOUBLE_00108d80 <= scaledChannel) {
+    greenBits = (int)(scaledChannel - DOUBLE_00108d80) ^ 0x80000000;
   }
   else {
-    uVar3 = (uint)(int)dVar5;
+    greenBits = (uint)(int)scaledChannel;
   }
-  dVar5 = (double)*(float *)(param_1 + 0x10) * DOUBLE_00108da8;
-  if (DOUBLE_00108d80 <= dVar5) {
-    uVar4 = (int)(dVar5 - DOUBLE_00108d80) ^ 0x80000000;
+  scaledChannel = (double)*(float *)(pixel + 0xc) * DOUBLE_00108da8;
+  if (DOUBLE_00108d80 <= scaledChannel) {
+    blueBits = (int)(scaledChannel - DOUBLE_00108d80) ^ 0x80000000;
   }
   else {
-    uVar4 = (uint)(int)dVar5;
+    blueBits = (uint)(int)scaledChannel;
   }
-  *param_2 = uVar1 & 0xffc00000 | uVar2 >> 10 & 0x3ff000 | uVar3 >> 0x14 & 0xffc | uVar4 >> 0x1e;
+  scaledChannel = (double)*(float *)(pixel + 0x10) * DOUBLE_00108da8;
+  if (DOUBLE_00108d80 <= scaledChannel) {
+    alphaBits = (int)(scaledChannel - DOUBLE_00108d80) ^ 0x80000000;
+  }
+  else {
+    alphaBits = (uint)(int)scaledChannel;
+  }
+  *dst = redBits & 0xffc00000 | greenBits >> 10 & 0x3ff000 | blueBits >> 0x14 & 0xffc | alphaBits >> 0x1e;
   return;
 }
 
 /* _gleInsertPixel_RGBA_2101010Rev @ 0xe871c (328 bytes) */
-void _gleInsertPixel_RGBA_2101010Rev(param_1, param_2)
-  int param_1;
-  uint *param_2;
+void _gleInsertPixel_RGBA_2101010Rev(pixel, dst)
+  int pixel;
+  uint *dst;
 {
-  uint uVar1;
-  uint uVar2;
-  uint uVar3;
-  uint uVar4;
-  double dVar5;
+  uint alphaBits;
+  uint blueBits;
+  uint greenBits;
+  uint redBits;
+  double scaledChannel;
   
-  dVar5 = (double)*(float *)(param_1 + 0x10) * DOUBLE_00108da8;
-  if (DOUBLE_00108d80 <= dVar5) {
-    uVar1 = (int)(dVar5 - DOUBLE_00108d80) ^ 0x80000000;
+  scaledChannel = (double)*(float *)(pixel + 0x10) * DOUBLE_00108da8;
+  if (DOUBLE_00108d80 <= scaledChannel) {
+    alphaBits = (int)(scaledChannel - DOUBLE_00108d80) ^ 0x80000000;
   }
   else {
-    uVar1 = (uint)(int)dVar5;
+    alphaBits = (uint)(int)scaledChannel;
   }
-  dVar5 = (double)*(float *)(param_1 + 0xc) * DOUBLE_00108da8;
-  if (DOUBLE_00108d80 <= dVar5) {
-    uVar2 = (int)(dVar5 - DOUBLE_00108d80) ^ 0x80000000;
-  }
-  else {
-    uVar2 = (uint)(int)dVar5;
-  }
-  dVar5 = (double)*(float *)(param_1 + 8) * DOUBLE_00108da8;
-  if (DOUBLE_00108d80 <= dVar5) {
-    uVar3 = (int)(dVar5 - DOUBLE_00108d80) ^ 0x80000000;
+  scaledChannel = (double)*(float *)(pixel + 0xc) * DOUBLE_00108da8;
+  if (DOUBLE_00108d80 <= scaledChannel) {
+    blueBits = (int)(scaledChannel - DOUBLE_00108d80) ^ 0x80000000;
   }
   else {
-    uVar3 = (uint)(int)dVar5;
+    blueBits = (uint)(int)scaledChannel;
   }
-  dVar5 = (double)*(float *)(param_1 + 4) * DOUBLE_00108da8;
-  if (DOUBLE_00108d80 <= dVar5) {
-    uVar4 = (int)(dVar5 - DOUBLE_00108d80) ^ 0x80000000;
+  scaledChannel = (double)*(float *)(pixel + 8) * DOUBLE_00108da8;
+  if (DOUBLE_00108d80 <= scaledChannel) {
+    greenBits = (int)(scaledChannel - DOUBLE_00108d80) ^ 0x80000000;
   }
   else {
-    uVar4 = (uint)(int)dVar5;
+    greenBits = (uint)(int)scaledChannel;
   }
-  *param_2 = uVar1 & 0xc0000000 | uVar2 >> 2 & 0x3ff00000 | uVar3 >> 0xc & 0xffc00 | uVar4 >> 0x16;
+  scaledChannel = (double)*(float *)(pixel + 4) * DOUBLE_00108da8;
+  if (DOUBLE_00108d80 <= scaledChannel) {
+    redBits = (int)(scaledChannel - DOUBLE_00108d80) ^ 0x80000000;
+  }
+  else {
+    redBits = (uint)(int)scaledChannel;
+  }
+  *dst = alphaBits & 0xc0000000 | blueBits >> 2 & 0x3ff00000 | greenBits >> 0xc & 0xffc00 | redBits >> 0x16;
   return;
 }
 
 /* _gleInsertPixel_ABGR_EXT_Byte @ 0xe8864 (124 bytes) */
-void _gleInsertPixel_ABGR_EXT_Byte(param_1, param_2)
-  int param_1;
-  undefined1 *param_2;
+void _gleInsertPixel_ABGR_EXT_Byte(pixel, dst)
+  int pixel;
+  undefined1 *dst;
 {
-  float fVar1;
+  float channelScale;
   
-  fVar1 = FLOAT_00108f6c;
-  param_2[3] = (char)(int)(*(float *)(param_1 + 4) * FLOAT_00108f6c);
-  param_2[2] = (char)(int)(*(float *)(param_1 + 8) * fVar1);
-  param_2[1] = (char)(int)(*(float *)(param_1 + 0xc) * fVar1);
-  *param_2 = (char)(int)(*(float *)(param_1 + 0x10) * fVar1);
+  channelScale = FLOAT_00108f6c;
+  dst[3] = (char)(int)(*(float *)(pixel + 4) * FLOAT_00108f6c);
+  dst[2] = (char)(int)(*(float *)(pixel + 8) * channelScale);
+  dst[1] = (char)(int)(*(float *)(pixel + 0xc) * channelScale);
+  *dst = (char)(int)(*(float *)(pixel + 0x10) * channelScale);
   return;
 }
 
 /* _gleInsertPixel_ABGR_EXT_Ubyte @ 0xe88e0 (124 bytes) */
-void _gleInsertPixel_ABGR_EXT_Ubyte(param_1, param_2)
-  int param_1;
-  undefined1 *param_2;
+void _gleInsertPixel_ABGR_EXT_Ubyte(pixel, dst)
+  int pixel;
+  undefined1 *dst;
 {
-  float fVar1;
+  float channelScale;
   
-  fVar1 = FLOAT_00108f70;
-  param_2[3] = (char)(int)(*(float *)(param_1 + 4) * FLOAT_00108f70);
-  param_2[2] = (char)(int)(*(float *)(param_1 + 8) * fVar1);
-  param_2[1] = (char)(int)(*(float *)(param_1 + 0xc) * fVar1);
-  *param_2 = (char)(int)(*(float *)(param_1 + 0x10) * fVar1);
+  channelScale = FLOAT_00108f70;
+  dst[3] = (char)(int)(*(float *)(pixel + 4) * FLOAT_00108f70);
+  dst[2] = (char)(int)(*(float *)(pixel + 8) * channelScale);
+  dst[1] = (char)(int)(*(float *)(pixel + 0xc) * channelScale);
+  *dst = (char)(int)(*(float *)(pixel + 0x10) * channelScale);
   return;
 }
 
 /* _gleInsertPixel_ABGR_EXT_Short @ 0xe895c (124 bytes) */
-void _gleInsertPixel_ABGR_EXT_Short(param_1, param_2)
-  int param_1;
-  undefined2 *param_2;
+void _gleInsertPixel_ABGR_EXT_Short(pixel, dst)
+  int pixel;
+  undefined2 *dst;
 {
-  float fVar1;
+  float channelScale;
   
-  fVar1 = FLOAT_00108f74;
-  param_2[3] = (short)(int)(*(float *)(param_1 + 4) * FLOAT_00108f74);
-  param_2[2] = (short)(int)(*(float *)(param_1 + 8) * fVar1);
-  param_2[1] = (short)(int)(*(float *)(param_1 + 0xc) * fVar1);
-  *param_2 = (short)(int)(*(float *)(param_1 + 0x10) * fVar1);
+  channelScale = FLOAT_00108f74;
+  dst[3] = (short)(int)(*(float *)(pixel + 4) * FLOAT_00108f74);
+  dst[2] = (short)(int)(*(float *)(pixel + 8) * channelScale);
+  dst[1] = (short)(int)(*(float *)(pixel + 0xc) * channelScale);
+  *dst = (short)(int)(*(float *)(pixel + 0x10) * channelScale);
   return;
 }
 

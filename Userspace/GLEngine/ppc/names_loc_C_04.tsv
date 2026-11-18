@@ -1,0 +1,653 @@
+local	_gleMap1Vertex3dLoad	param_6	stride	CONFIRMED	glMap1d argument of the Load entry: control-point stride (in elements) advanced per point: src index += stride
+local	_gleMap1Vertex3dLoad	param_7	order	CONFIRMED	glMap1d argument of the Load entry: stored first in the output record (map[0] = order) and used as the point count of the copy loop
+local	_gleMap1Vertex3dLoad	param_8	points	CONFIRMED	glMap1d argument of the Load entry: source control-point array copied into the output record
+local	_gleMap1Vertex3dLoad	param_9	mapData	CONFIRMED	glMap1d argument of the Load entry: output evaluator record: [order, u1, u2, 1/(u2-u1)] followed by the converted control points
+local	_gleMap1Vertex3dLoad	dVar4	invUDelta	CONFIRMED	1.0 / (u2 - u1): reciprocal of the u domain length, stored in the output record
+local	_gleMap1Vertex4dLoad	param_6	stride	CONFIRMED	glMap1d argument of the Load entry: control-point stride (in elements) advanced per point: src index += stride
+local	_gleMap1Vertex4dLoad	param_7	order	CONFIRMED	glMap1d argument of the Load entry: stored first in the output record (map[0] = order) and used as the point count of the copy loop
+local	_gleMap1Vertex4dLoad	param_8	points	CONFIRMED	glMap1d argument of the Load entry: source control-point array copied into the output record
+local	_gleMap1Vertex4dLoad	param_9	mapData	CONFIRMED	glMap1d argument of the Load entry: output evaluator record: [order, u1, u2, 1/(u2-u1)] followed by the converted control points
+local	_gleMap1Vertex4dLoad	dVar4	invUDelta	CONFIRMED	1.0 / (u2 - u1): reciprocal of the u domain length, stored in the output record
+local	_gleMap1ColordLoad	param_6	stride	CONFIRMED	glMap1d argument of the Load entry: control-point stride (in elements) advanced per point: src index += stride
+local	_gleMap1ColordLoad	param_7	order	CONFIRMED	glMap1d argument of the Load entry: stored first in the output record (map[0] = order) and used as the point count of the copy loop
+local	_gleMap1ColordLoad	param_8	points	CONFIRMED	glMap1d argument of the Load entry: source control-point array copied into the output record
+local	_gleMap1ColordLoad	param_9	mapData	CONFIRMED	glMap1d argument of the Load entry: output evaluator record: [order, u1, u2, 1/(u2-u1)] followed by the converted control points
+local	_gleMap1ColordLoad	dVar4	invUDelta	CONFIRMED	1.0 / (u2 - u1): reciprocal of the u domain length, stored in the output record
+local	_gleMap1IndexdLoad	param_6	stride	CONFIRMED	glMap1d argument of the Load entry: control-point stride (in elements) advanced per point: src index += stride
+local	_gleMap1IndexdLoad	param_7	order	CONFIRMED	glMap1d argument of the Load entry: stored first in the output record (map[0] = order) and used as the point count of the copy loop
+local	_gleMap1IndexdLoad	param_8	points	CONFIRMED	glMap1d argument of the Load entry: source control-point array copied into the output record
+local	_gleMap1IndexdLoad	param_9	mapData	CONFIRMED	glMap1d argument of the Load entry: output evaluator record: [order, u1, u2, 1/(u2-u1)] followed by the converted control points
+local	_gleMap1NormaldLoad	param_6	stride	CONFIRMED	glMap1d argument of the Load entry: control-point stride (in elements) advanced per point: src index += stride
+local	_gleMap1NormaldLoad	param_7	order	CONFIRMED	glMap1d argument of the Load entry: stored first in the output record (map[0] = order) and used as the point count of the copy loop
+local	_gleMap1NormaldLoad	param_8	points	CONFIRMED	glMap1d argument of the Load entry: source control-point array copied into the output record
+local	_gleMap1NormaldLoad	param_9	mapData	CONFIRMED	glMap1d argument of the Load entry: output evaluator record: [order, u1, u2, 1/(u2-u1)] followed by the converted control points
+local	_gleMap1NormaldLoad	dVar4	invUDelta	CONFIRMED	1.0 / (u2 - u1): reciprocal of the u domain length, stored in the output record
+local	_gleMap1Texture1dLoad	param_6	stride	CONFIRMED	glMap1d argument of the Load entry: control-point stride (in elements) advanced per point: src index += stride
+local	_gleMap1Texture1dLoad	param_7	order	CONFIRMED	glMap1d argument of the Load entry: stored first in the output record (map[0] = order) and used as the point count of the copy loop
+local	_gleMap1Texture1dLoad	param_8	points	CONFIRMED	glMap1d argument of the Load entry: source control-point array copied into the output record
+local	_gleMap1Texture1dLoad	param_9	mapData	CONFIRMED	glMap1d argument of the Load entry: output evaluator record: [order, u1, u2, 1/(u2-u1)] followed by the converted control points
+local	_gleMap1Texture2dLoad	param_6	stride	CONFIRMED	glMap1d argument of the Load entry: control-point stride (in elements) advanced per point: src index += stride
+local	_gleMap1Texture2dLoad	param_7	order	CONFIRMED	glMap1d argument of the Load entry: stored first in the output record (map[0] = order) and used as the point count of the copy loop
+local	_gleMap1Texture2dLoad	param_8	points	CONFIRMED	glMap1d argument of the Load entry: source control-point array copied into the output record
+local	_gleMap1Texture2dLoad	param_9	mapData	CONFIRMED	glMap1d argument of the Load entry: output evaluator record: [order, u1, u2, 1/(u2-u1)] followed by the converted control points
+local	_gleMap1Texture2dLoad	dVar2	invUDelta	CONFIRMED	1.0 / (u2 - u1): reciprocal of the u domain length, stored in the output record
+local	_gleMap1Texture3dLoad	param_6	stride	CONFIRMED	glMap1d argument of the Load entry: control-point stride (in elements) advanced per point: src index += stride
+local	_gleMap1Texture3dLoad	param_7	order	CONFIRMED	glMap1d argument of the Load entry: stored first in the output record (map[0] = order) and used as the point count of the copy loop
+local	_gleMap1Texture3dLoad	param_8	points	CONFIRMED	glMap1d argument of the Load entry: source control-point array copied into the output record
+local	_gleMap1Texture3dLoad	param_9	mapData	CONFIRMED	glMap1d argument of the Load entry: output evaluator record: [order, u1, u2, 1/(u2-u1)] followed by the converted control points
+local	_gleMap1Texture3dLoad	dVar4	invUDelta	CONFIRMED	1.0 / (u2 - u1): reciprocal of the u domain length, stored in the output record
+local	_gleMap1Texture4dLoad	param_6	stride	CONFIRMED	glMap1d argument of the Load entry: control-point stride (in elements) advanced per point: src index += stride
+local	_gleMap1Texture4dLoad	param_7	order	CONFIRMED	glMap1d argument of the Load entry: stored first in the output record (map[0] = order) and used as the point count of the copy loop
+local	_gleMap1Texture4dLoad	param_8	points	CONFIRMED	glMap1d argument of the Load entry: source control-point array copied into the output record
+local	_gleMap1Texture4dLoad	param_9	mapData	CONFIRMED	glMap1d argument of the Load entry: output evaluator record: [order, u1, u2, 1/(u2-u1)] followed by the converted control points
+local	_gleMap1Texture4dLoad	dVar4	invUDelta	CONFIRMED	1.0 / (u2 - u1): reciprocal of the u domain length, stored in the output record
+local	_gleMap1VertexAttrib1dLoad	param_6	stride	CONFIRMED	glMap1d argument of the Load entry: control-point stride (in elements) advanced per point: src index += stride
+local	_gleMap1VertexAttrib1dLoad	param_7	order	CONFIRMED	glMap1d argument of the Load entry: stored first in the output record (map[0] = order) and used as the point count of the copy loop
+local	_gleMap1VertexAttrib1dLoad	param_8	points	CONFIRMED	glMap1d argument of the Load entry: source control-point array copied into the output record
+local	_gleMap1VertexAttrib1dLoad	param_9	mapData	CONFIRMED	glMap1d argument of the Load entry: output evaluator record: [order, u1, u2, 1/(u2-u1)] followed by the converted control points
+local	_gleMap1VertexAttrib2dLoad	param_6	stride	CONFIRMED	glMap1d argument of the Load entry: control-point stride (in elements) advanced per point: src index += stride
+local	_gleMap1VertexAttrib2dLoad	param_7	order	CONFIRMED	glMap1d argument of the Load entry: stored first in the output record (map[0] = order) and used as the point count of the copy loop
+local	_gleMap1VertexAttrib2dLoad	param_8	points	CONFIRMED	glMap1d argument of the Load entry: source control-point array copied into the output record
+local	_gleMap1VertexAttrib2dLoad	param_9	mapData	CONFIRMED	glMap1d argument of the Load entry: output evaluator record: [order, u1, u2, 1/(u2-u1)] followed by the converted control points
+local	_gleMap1VertexAttrib2dLoad	dVar2	invUDelta	CONFIRMED	1.0 / (u2 - u1): reciprocal of the u domain length, stored in the output record
+local	_gleMap1VertexAttrib3dLoad	param_6	stride	CONFIRMED	glMap1d argument of the Load entry: control-point stride (in elements) advanced per point: src index += stride
+local	_gleMap1VertexAttrib3dLoad	param_7	order	CONFIRMED	glMap1d argument of the Load entry: stored first in the output record (map[0] = order) and used as the point count of the copy loop
+local	_gleMap1VertexAttrib3dLoad	param_8	points	CONFIRMED	glMap1d argument of the Load entry: source control-point array copied into the output record
+local	_gleMap1VertexAttrib3dLoad	param_9	mapData	CONFIRMED	glMap1d argument of the Load entry: output evaluator record: [order, u1, u2, 1/(u2-u1)] followed by the converted control points
+local	_gleMap1VertexAttrib3dLoad	dVar4	invUDelta	CONFIRMED	1.0 / (u2 - u1): reciprocal of the u domain length, stored in the output record
+local	_gleMap1VertexAttrib4dLoad	param_6	stride	CONFIRMED	glMap1d argument of the Load entry: control-point stride (in elements) advanced per point: src index += stride
+local	_gleMap1VertexAttrib4dLoad	param_7	order	CONFIRMED	glMap1d argument of the Load entry: stored first in the output record (map[0] = order) and used as the point count of the copy loop
+local	_gleMap1VertexAttrib4dLoad	param_8	points	CONFIRMED	glMap1d argument of the Load entry: source control-point array copied into the output record
+local	_gleMap1VertexAttrib4dLoad	param_9	mapData	CONFIRMED	glMap1d argument of the Load entry: output evaluator record: [order, u1, u2, 1/(u2-u1)] followed by the converted control points
+local	_gleMap1VertexAttrib4dLoad	dVar4	invUDelta	CONFIRMED	1.0 / (u2 - u1): reciprocal of the u domain length, stored in the output record
+local	_gleMap1Vertex3fLoad	param_4	stride	CONFIRMED	glMap1f argument of the Load entry: control-point stride (in elements) advanced per point: src index += stride
+local	_gleMap1Vertex3fLoad	param_5	order	CONFIRMED	glMap1f argument of the Load entry: stored first in the output record (map[0] = order) and used as the point count of the copy loop
+local	_gleMap1Vertex3fLoad	param_6	points	CONFIRMED	glMap1f argument of the Load entry: source control-point array copied into the output record
+local	_gleMap1Vertex3fLoad	param_7	mapData	CONFIRMED	glMap1f argument of the Load entry: output evaluator record: [order, u1, u2, 1/(u2-u1)] followed by the converted control points
+local	_gleMap1Vertex3fLoad	fVar2	one	CONFIRMED	holds FLOAT_00108e54 = 1.0 (numerator of the reciprocals)
+local	_gleMap1Vertex4fLoad	param_4	stride	CONFIRMED	glMap1f argument of the Load entry: control-point stride (in elements) advanced per point: src index += stride
+local	_gleMap1Vertex4fLoad	param_5	order	CONFIRMED	glMap1f argument of the Load entry: stored first in the output record (map[0] = order) and used as the point count of the copy loop
+local	_gleMap1Vertex4fLoad	param_6	points	CONFIRMED	glMap1f argument of the Load entry: source control-point array copied into the output record
+local	_gleMap1Vertex4fLoad	param_7	mapData	CONFIRMED	glMap1f argument of the Load entry: output evaluator record: [order, u1, u2, 1/(u2-u1)] followed by the converted control points
+local	_gleMap1Vertex4fLoad	fVar2	one	CONFIRMED	holds FLOAT_00108e54 = 1.0 (numerator of the reciprocals)
+local	_gleMap1ColorfLoad	param_4	stride	CONFIRMED	glMap1f argument of the Load entry: control-point stride (in elements) advanced per point: src index += stride
+local	_gleMap1ColorfLoad	param_5	order	CONFIRMED	glMap1f argument of the Load entry: stored first in the output record (map[0] = order) and used as the point count of the copy loop
+local	_gleMap1ColorfLoad	param_6	points	CONFIRMED	glMap1f argument of the Load entry: source control-point array copied into the output record
+local	_gleMap1ColorfLoad	param_7	mapData	CONFIRMED	glMap1f argument of the Load entry: output evaluator record: [order, u1, u2, 1/(u2-u1)] followed by the converted control points
+local	_gleMap1ColorfLoad	fVar2	one	CONFIRMED	holds FLOAT_00108e54 = 1.0 (numerator of the reciprocals)
+local	_gleMap1IndexfLoad	param_4	stride	CONFIRMED	glMap1f argument of the Load entry: control-point stride (in elements) advanced per point: src index += stride
+local	_gleMap1IndexfLoad	param_5	order	CONFIRMED	glMap1f argument of the Load entry: stored first in the output record (map[0] = order) and used as the point count of the copy loop
+local	_gleMap1IndexfLoad	param_6	points	CONFIRMED	glMap1f argument of the Load entry: source control-point array copied into the output record
+local	_gleMap1IndexfLoad	param_7	mapData	CONFIRMED	glMap1f argument of the Load entry: output evaluator record: [order, u1, u2, 1/(u2-u1)] followed by the converted control points
+local	_gleMap1IndexfLoad	fVar2	one	CONFIRMED	holds FLOAT_00108e54 = 1.0 (numerator of the reciprocals)
+local	_gleMap1NormalfLoad	param_4	stride	CONFIRMED	glMap1f argument of the Load entry: control-point stride (in elements) advanced per point: src index += stride
+local	_gleMap1NormalfLoad	param_5	order	CONFIRMED	glMap1f argument of the Load entry: stored first in the output record (map[0] = order) and used as the point count of the copy loop
+local	_gleMap1NormalfLoad	param_6	points	CONFIRMED	glMap1f argument of the Load entry: source control-point array copied into the output record
+local	_gleMap1NormalfLoad	param_7	mapData	CONFIRMED	glMap1f argument of the Load entry: output evaluator record: [order, u1, u2, 1/(u2-u1)] followed by the converted control points
+local	_gleMap1NormalfLoad	fVar2	one	CONFIRMED	holds FLOAT_00108e54 = 1.0 (numerator of the reciprocals)
+local	_gleMap1Texture1fLoad	param_4	stride	CONFIRMED	glMap1f argument of the Load entry: control-point stride (in elements) advanced per point: src index += stride
+local	_gleMap1Texture1fLoad	param_5	order	CONFIRMED	glMap1f argument of the Load entry: stored first in the output record (map[0] = order) and used as the point count of the copy loop
+local	_gleMap1Texture1fLoad	param_6	points	CONFIRMED	glMap1f argument of the Load entry: source control-point array copied into the output record
+local	_gleMap1Texture1fLoad	param_7	mapData	CONFIRMED	glMap1f argument of the Load entry: output evaluator record: [order, u1, u2, 1/(u2-u1)] followed by the converted control points
+local	_gleMap1Texture1fLoad	fVar2	one	CONFIRMED	holds FLOAT_00108e54 = 1.0 (numerator of the reciprocals)
+local	_gleMap1Texture2fLoad	param_4	stride	CONFIRMED	glMap1f argument of the Load entry: control-point stride (in elements) advanced per point: src index += stride
+local	_gleMap1Texture2fLoad	param_5	order	CONFIRMED	glMap1f argument of the Load entry: stored first in the output record (map[0] = order) and used as the point count of the copy loop
+local	_gleMap1Texture2fLoad	param_6	points	CONFIRMED	glMap1f argument of the Load entry: source control-point array copied into the output record
+local	_gleMap1Texture2fLoad	param_7	mapData	CONFIRMED	glMap1f argument of the Load entry: output evaluator record: [order, u1, u2, 1/(u2-u1)] followed by the converted control points
+local	_gleMap1Texture2fLoad	fVar2	one	CONFIRMED	holds FLOAT_00108e54 = 1.0 (numerator of the reciprocals)
+local	_gleMap1Texture3fLoad	param_4	stride	CONFIRMED	glMap1f argument of the Load entry: control-point stride (in elements) advanced per point: src index += stride
+local	_gleMap1Texture3fLoad	param_5	order	CONFIRMED	glMap1f argument of the Load entry: stored first in the output record (map[0] = order) and used as the point count of the copy loop
+local	_gleMap1Texture3fLoad	param_6	points	CONFIRMED	glMap1f argument of the Load entry: source control-point array copied into the output record
+local	_gleMap1Texture3fLoad	param_7	mapData	CONFIRMED	glMap1f argument of the Load entry: output evaluator record: [order, u1, u2, 1/(u2-u1)] followed by the converted control points
+local	_gleMap1Texture3fLoad	fVar2	one	CONFIRMED	holds FLOAT_00108e54 = 1.0 (numerator of the reciprocals)
+local	_gleMap1Texture4fLoad	param_4	stride	CONFIRMED	glMap1f argument of the Load entry: control-point stride (in elements) advanced per point: src index += stride
+local	_gleMap1Texture4fLoad	param_5	order	CONFIRMED	glMap1f argument of the Load entry: stored first in the output record (map[0] = order) and used as the point count of the copy loop
+local	_gleMap1Texture4fLoad	param_6	points	CONFIRMED	glMap1f argument of the Load entry: source control-point array copied into the output record
+local	_gleMap1Texture4fLoad	param_7	mapData	CONFIRMED	glMap1f argument of the Load entry: output evaluator record: [order, u1, u2, 1/(u2-u1)] followed by the converted control points
+local	_gleMap1Texture4fLoad	fVar2	one	CONFIRMED	holds FLOAT_00108e54 = 1.0 (numerator of the reciprocals)
+local	_gleMap1VertexAttrib1fLoad	param_4	stride	CONFIRMED	glMap1f argument of the Load entry: control-point stride (in elements) advanced per point: src index += stride
+local	_gleMap1VertexAttrib1fLoad	param_5	order	CONFIRMED	glMap1f argument of the Load entry: stored first in the output record (map[0] = order) and used as the point count of the copy loop
+local	_gleMap1VertexAttrib1fLoad	param_6	points	CONFIRMED	glMap1f argument of the Load entry: source control-point array copied into the output record
+local	_gleMap1VertexAttrib1fLoad	param_7	mapData	CONFIRMED	glMap1f argument of the Load entry: output evaluator record: [order, u1, u2, 1/(u2-u1)] followed by the converted control points
+local	_gleMap1VertexAttrib1fLoad	fVar2	one	CONFIRMED	holds FLOAT_00108e54 = 1.0 (numerator of the reciprocals)
+local	_gleMap1VertexAttrib2fLoad	param_4	stride	CONFIRMED	glMap1f argument of the Load entry: control-point stride (in elements) advanced per point: src index += stride
+local	_gleMap1VertexAttrib2fLoad	param_5	order	CONFIRMED	glMap1f argument of the Load entry: stored first in the output record (map[0] = order) and used as the point count of the copy loop
+local	_gleMap1VertexAttrib2fLoad	param_6	points	CONFIRMED	glMap1f argument of the Load entry: source control-point array copied into the output record
+local	_gleMap1VertexAttrib2fLoad	param_7	mapData	CONFIRMED	glMap1f argument of the Load entry: output evaluator record: [order, u1, u2, 1/(u2-u1)] followed by the converted control points
+local	_gleMap1VertexAttrib2fLoad	fVar2	one	CONFIRMED	holds FLOAT_00108e54 = 1.0 (numerator of the reciprocals)
+local	_gleMap1VertexAttrib3fLoad	param_4	stride	CONFIRMED	glMap1f argument of the Load entry: control-point stride (in elements) advanced per point: src index += stride
+local	_gleMap1VertexAttrib3fLoad	param_5	order	CONFIRMED	glMap1f argument of the Load entry: stored first in the output record (map[0] = order) and used as the point count of the copy loop
+local	_gleMap1VertexAttrib3fLoad	param_6	points	CONFIRMED	glMap1f argument of the Load entry: source control-point array copied into the output record
+local	_gleMap1VertexAttrib3fLoad	param_7	mapData	CONFIRMED	glMap1f argument of the Load entry: output evaluator record: [order, u1, u2, 1/(u2-u1)] followed by the converted control points
+local	_gleMap1VertexAttrib3fLoad	fVar2	one	CONFIRMED	holds FLOAT_00108e54 = 1.0 (numerator of the reciprocals)
+local	_gleMap1VertexAttrib4fLoad	param_4	stride	CONFIRMED	glMap1f argument of the Load entry: control-point stride (in elements) advanced per point: src index += stride
+local	_gleMap1VertexAttrib4fLoad	param_5	order	CONFIRMED	glMap1f argument of the Load entry: stored first in the output record (map[0] = order) and used as the point count of the copy loop
+local	_gleMap1VertexAttrib4fLoad	param_6	points	CONFIRMED	glMap1f argument of the Load entry: source control-point array copied into the output record
+local	_gleMap1VertexAttrib4fLoad	param_7	mapData	CONFIRMED	glMap1f argument of the Load entry: output evaluator record: [order, u1, u2, 1/(u2-u1)] followed by the converted control points
+local	_gleMap1VertexAttrib4fLoad	fVar2	one	CONFIRMED	holds FLOAT_00108e54 = 1.0 (numerator of the reciprocals)
+local	_gleMap2Vertex3dLoad	param_6	ustride	CONFIRMED	glMap2d argument of the Load entry: advanced once per outer (u) step of the copy loop
+local	_gleMap2Vertex3dLoad	param_7	uorder	CONFIRMED	glMap2d argument of the Load entry: stored first in the output record (map[0]) and bounds the outer loop
+local	_gleMap2Vertex3dLoad	param_12	vstride	CONFIRMED	glMap2d argument of the Load entry: advanced once per inner (v) step of the copy loop
+local	_gleMap2Vertex3dLoad	param_13	vorder	CONFIRMED	glMap2d argument of the Load entry: stored second in the output record (map[1]) and bounds the inner loop
+local	_gleMap2Vertex3dLoad	param_14	points	CONFIRMED	glMap2d argument of the Load entry: source control-point array copied into the output record
+local	_gleMap2Vertex3dLoad	param_15	mapData	CONFIRMED	glMap2d argument of the Load entry: output evaluator record: [order, u1, u2, 1/(u2-u1)] followed by the converted control points
+local	_gleMap2Vertex3dLoad	dVar9	invUDelta	CONFIRMED	1.0 / (u2 - u1): reciprocal of the u domain length, stored in the output record
+local	_gleMap2Vertex4dLoad	param_6	ustride	CONFIRMED	glMap2d argument of the Load entry: advanced once per outer (u) step of the copy loop
+local	_gleMap2Vertex4dLoad	param_7	uorder	CONFIRMED	glMap2d argument of the Load entry: stored first in the output record (map[0]) and bounds the outer loop
+local	_gleMap2Vertex4dLoad	param_12	vstride	CONFIRMED	glMap2d argument of the Load entry: advanced once per inner (v) step of the copy loop
+local	_gleMap2Vertex4dLoad	param_13	vorder	CONFIRMED	glMap2d argument of the Load entry: stored second in the output record (map[1]) and bounds the inner loop
+local	_gleMap2Vertex4dLoad	param_14	points	CONFIRMED	glMap2d argument of the Load entry: source control-point array copied into the output record
+local	_gleMap2Vertex4dLoad	param_15	mapData	CONFIRMED	glMap2d argument of the Load entry: output evaluator record: [order, u1, u2, 1/(u2-u1)] followed by the converted control points
+local	_gleMap2Vertex4dLoad	dVar9	invUDelta	CONFIRMED	1.0 / (u2 - u1): reciprocal of the u domain length, stored in the output record
+local	_gleMap2ColordLoad	param_6	ustride	CONFIRMED	glMap2d argument of the Load entry: advanced once per outer (u) step of the copy loop
+local	_gleMap2ColordLoad	param_7	uorder	CONFIRMED	glMap2d argument of the Load entry: stored first in the output record (map[0]) and bounds the outer loop
+local	_gleMap2ColordLoad	param_12	vstride	CONFIRMED	glMap2d argument of the Load entry: advanced once per inner (v) step of the copy loop
+local	_gleMap2ColordLoad	param_13	vorder	CONFIRMED	glMap2d argument of the Load entry: stored second in the output record (map[1]) and bounds the inner loop
+local	_gleMap2ColordLoad	param_14	points	CONFIRMED	glMap2d argument of the Load entry: source control-point array copied into the output record
+local	_gleMap2ColordLoad	param_15	mapData	CONFIRMED	glMap2d argument of the Load entry: output evaluator record: [order, u1, u2, 1/(u2-u1)] followed by the converted control points
+local	_gleMap2ColordLoad	dVar9	invUDelta	CONFIRMED	1.0 / (u2 - u1): reciprocal of the u domain length, stored in the output record
+local	_gleMap2IndexdLoad	param_6	ustride	CONFIRMED	glMap2d argument of the Load entry: advanced once per outer (u) step of the copy loop
+local	_gleMap2IndexdLoad	param_7	uorder	CONFIRMED	glMap2d argument of the Load entry: stored first in the output record (map[0]) and bounds the outer loop
+local	_gleMap2IndexdLoad	param_12	vstride	CONFIRMED	glMap2d argument of the Load entry: advanced once per inner (v) step of the copy loop
+local	_gleMap2IndexdLoad	param_13	vorder	CONFIRMED	glMap2d argument of the Load entry: stored second in the output record (map[1]) and bounds the inner loop
+local	_gleMap2IndexdLoad	param_14	points	CONFIRMED	glMap2d argument of the Load entry: source control-point array copied into the output record
+local	_gleMap2IndexdLoad	param_15	mapData	CONFIRMED	glMap2d argument of the Load entry: output evaluator record: [order, u1, u2, 1/(u2-u1)] followed by the converted control points
+local	_gleMap2IndexdLoad	dVar8	invUDelta	CONFIRMED	1.0 / (u2 - u1): reciprocal of the u domain length, stored in the output record
+local	_gleMap2NormaldLoad	param_6	ustride	CONFIRMED	glMap2d argument of the Load entry: advanced once per outer (u) step of the copy loop
+local	_gleMap2NormaldLoad	param_7	uorder	CONFIRMED	glMap2d argument of the Load entry: stored first in the output record (map[0]) and bounds the outer loop
+local	_gleMap2NormaldLoad	param_12	vstride	CONFIRMED	glMap2d argument of the Load entry: advanced once per inner (v) step of the copy loop
+local	_gleMap2NormaldLoad	param_13	vorder	CONFIRMED	glMap2d argument of the Load entry: stored second in the output record (map[1]) and bounds the inner loop
+local	_gleMap2NormaldLoad	param_14	points	CONFIRMED	glMap2d argument of the Load entry: source control-point array copied into the output record
+local	_gleMap2NormaldLoad	param_15	mapData	CONFIRMED	glMap2d argument of the Load entry: output evaluator record: [order, u1, u2, 1/(u2-u1)] followed by the converted control points
+local	_gleMap2NormaldLoad	dVar9	invUDelta	CONFIRMED	1.0 / (u2 - u1): reciprocal of the u domain length, stored in the output record
+local	_gleMap2Texture1dLoad	param_6	ustride	CONFIRMED	glMap2d argument of the Load entry: advanced once per outer (u) step of the copy loop
+local	_gleMap2Texture1dLoad	param_7	uorder	CONFIRMED	glMap2d argument of the Load entry: stored first in the output record (map[0]) and bounds the outer loop
+local	_gleMap2Texture1dLoad	param_12	vstride	CONFIRMED	glMap2d argument of the Load entry: advanced once per inner (v) step of the copy loop
+local	_gleMap2Texture1dLoad	param_13	vorder	CONFIRMED	glMap2d argument of the Load entry: stored second in the output record (map[1]) and bounds the inner loop
+local	_gleMap2Texture1dLoad	param_14	points	CONFIRMED	glMap2d argument of the Load entry: source control-point array copied into the output record
+local	_gleMap2Texture1dLoad	param_15	mapData	CONFIRMED	glMap2d argument of the Load entry: output evaluator record: [order, u1, u2, 1/(u2-u1)] followed by the converted control points
+local	_gleMap2Texture1dLoad	dVar8	invUDelta	CONFIRMED	1.0 / (u2 - u1): reciprocal of the u domain length, stored in the output record
+local	_gleMap2Texture2dLoad	param_6	ustride	CONFIRMED	glMap2d argument of the Load entry: advanced once per outer (u) step of the copy loop
+local	_gleMap2Texture2dLoad	param_7	uorder	CONFIRMED	glMap2d argument of the Load entry: stored first in the output record (map[0]) and bounds the outer loop
+local	_gleMap2Texture2dLoad	param_12	vstride	CONFIRMED	glMap2d argument of the Load entry: advanced once per inner (v) step of the copy loop
+local	_gleMap2Texture2dLoad	param_13	vorder	CONFIRMED	glMap2d argument of the Load entry: stored second in the output record (map[1]) and bounds the inner loop
+local	_gleMap2Texture2dLoad	param_14	points	CONFIRMED	glMap2d argument of the Load entry: source control-point array copied into the output record
+local	_gleMap2Texture2dLoad	param_15	mapData	CONFIRMED	glMap2d argument of the Load entry: output evaluator record: [order, u1, u2, 1/(u2-u1)] followed by the converted control points
+local	_gleMap2Texture2dLoad	dVar10	invUDelta	CONFIRMED	1.0 / (u2 - u1): reciprocal of the u domain length, stored in the output record
+local	_gleMap2Texture3dLoad	param_6	ustride	CONFIRMED	glMap2d argument of the Load entry: advanced once per outer (u) step of the copy loop
+local	_gleMap2Texture3dLoad	param_7	uorder	CONFIRMED	glMap2d argument of the Load entry: stored first in the output record (map[0]) and bounds the outer loop
+local	_gleMap2Texture3dLoad	param_12	vstride	CONFIRMED	glMap2d argument of the Load entry: advanced once per inner (v) step of the copy loop
+local	_gleMap2Texture3dLoad	param_13	vorder	CONFIRMED	glMap2d argument of the Load entry: stored second in the output record (map[1]) and bounds the inner loop
+local	_gleMap2Texture3dLoad	param_14	points	CONFIRMED	glMap2d argument of the Load entry: source control-point array copied into the output record
+local	_gleMap2Texture3dLoad	param_15	mapData	CONFIRMED	glMap2d argument of the Load entry: output evaluator record: [order, u1, u2, 1/(u2-u1)] followed by the converted control points
+local	_gleMap2Texture3dLoad	dVar9	invUDelta	CONFIRMED	1.0 / (u2 - u1): reciprocal of the u domain length, stored in the output record
+local	_gleMap2Texture4dLoad	param_6	ustride	CONFIRMED	glMap2d argument of the Load entry: advanced once per outer (u) step of the copy loop
+local	_gleMap2Texture4dLoad	param_7	uorder	CONFIRMED	glMap2d argument of the Load entry: stored first in the output record (map[0]) and bounds the outer loop
+local	_gleMap2Texture4dLoad	param_12	vstride	CONFIRMED	glMap2d argument of the Load entry: advanced once per inner (v) step of the copy loop
+local	_gleMap2Texture4dLoad	param_13	vorder	CONFIRMED	glMap2d argument of the Load entry: stored second in the output record (map[1]) and bounds the inner loop
+local	_gleMap2Texture4dLoad	param_14	points	CONFIRMED	glMap2d argument of the Load entry: source control-point array copied into the output record
+local	_gleMap2Texture4dLoad	param_15	mapData	CONFIRMED	glMap2d argument of the Load entry: output evaluator record: [order, u1, u2, 1/(u2-u1)] followed by the converted control points
+local	_gleMap2Texture4dLoad	dVar9	invUDelta	CONFIRMED	1.0 / (u2 - u1): reciprocal of the u domain length, stored in the output record
+local	_gleMap2VertexAttrib1dLoad	param_6	ustride	CONFIRMED	glMap2d argument of the Load entry: advanced once per outer (u) step of the copy loop
+local	_gleMap2VertexAttrib1dLoad	param_7	uorder	CONFIRMED	glMap2d argument of the Load entry: stored first in the output record (map[0]) and bounds the outer loop
+local	_gleMap2VertexAttrib1dLoad	param_12	vstride	CONFIRMED	glMap2d argument of the Load entry: advanced once per inner (v) step of the copy loop
+local	_gleMap2VertexAttrib1dLoad	param_13	vorder	CONFIRMED	glMap2d argument of the Load entry: stored second in the output record (map[1]) and bounds the inner loop
+local	_gleMap2VertexAttrib1dLoad	param_14	points	CONFIRMED	glMap2d argument of the Load entry: source control-point array copied into the output record
+local	_gleMap2VertexAttrib1dLoad	param_15	mapData	CONFIRMED	glMap2d argument of the Load entry: output evaluator record: [order, u1, u2, 1/(u2-u1)] followed by the converted control points
+local	_gleMap2VertexAttrib1dLoad	dVar8	invUDelta	CONFIRMED	1.0 / (u2 - u1): reciprocal of the u domain length, stored in the output record
+local	_gleMap2VertexAttrib2dLoad	param_6	ustride	CONFIRMED	glMap2d argument of the Load entry: advanced once per outer (u) step of the copy loop
+local	_gleMap2VertexAttrib2dLoad	param_7	uorder	CONFIRMED	glMap2d argument of the Load entry: stored first in the output record (map[0]) and bounds the outer loop
+local	_gleMap2VertexAttrib2dLoad	param_12	vstride	CONFIRMED	glMap2d argument of the Load entry: advanced once per inner (v) step of the copy loop
+local	_gleMap2VertexAttrib2dLoad	param_13	vorder	CONFIRMED	glMap2d argument of the Load entry: stored second in the output record (map[1]) and bounds the inner loop
+local	_gleMap2VertexAttrib2dLoad	param_14	points	CONFIRMED	glMap2d argument of the Load entry: source control-point array copied into the output record
+local	_gleMap2VertexAttrib2dLoad	param_15	mapData	CONFIRMED	glMap2d argument of the Load entry: output evaluator record: [order, u1, u2, 1/(u2-u1)] followed by the converted control points
+local	_gleMap2VertexAttrib2dLoad	dVar10	invUDelta	CONFIRMED	1.0 / (u2 - u1): reciprocal of the u domain length, stored in the output record
+local	_gleMap2VertexAttrib3dLoad	param_6	ustride	CONFIRMED	glMap2d argument of the Load entry: advanced once per outer (u) step of the copy loop
+local	_gleMap2VertexAttrib3dLoad	param_7	uorder	CONFIRMED	glMap2d argument of the Load entry: stored first in the output record (map[0]) and bounds the outer loop
+local	_gleMap2VertexAttrib3dLoad	param_12	vstride	CONFIRMED	glMap2d argument of the Load entry: advanced once per inner (v) step of the copy loop
+local	_gleMap2VertexAttrib3dLoad	param_13	vorder	CONFIRMED	glMap2d argument of the Load entry: stored second in the output record (map[1]) and bounds the inner loop
+local	_gleMap2VertexAttrib3dLoad	param_14	points	CONFIRMED	glMap2d argument of the Load entry: source control-point array copied into the output record
+local	_gleMap2VertexAttrib3dLoad	param_15	mapData	CONFIRMED	glMap2d argument of the Load entry: output evaluator record: [order, u1, u2, 1/(u2-u1)] followed by the converted control points
+local	_gleMap2VertexAttrib3dLoad	dVar9	invUDelta	CONFIRMED	1.0 / (u2 - u1): reciprocal of the u domain length, stored in the output record
+local	_gleMap2VertexAttrib4dLoad	param_6	ustride	CONFIRMED	glMap2d argument of the Load entry: advanced once per outer (u) step of the copy loop
+local	_gleMap2VertexAttrib4dLoad	param_7	uorder	CONFIRMED	glMap2d argument of the Load entry: stored first in the output record (map[0]) and bounds the outer loop
+local	_gleMap2VertexAttrib4dLoad	param_12	vstride	CONFIRMED	glMap2d argument of the Load entry: advanced once per inner (v) step of the copy loop
+local	_gleMap2VertexAttrib4dLoad	param_13	vorder	CONFIRMED	glMap2d argument of the Load entry: stored second in the output record (map[1]) and bounds the inner loop
+local	_gleMap2VertexAttrib4dLoad	param_14	points	CONFIRMED	glMap2d argument of the Load entry: source control-point array copied into the output record
+local	_gleMap2VertexAttrib4dLoad	param_15	mapData	CONFIRMED	glMap2d argument of the Load entry: output evaluator record: [order, u1, u2, 1/(u2-u1)] followed by the converted control points
+local	_gleMap2VertexAttrib4dLoad	dVar9	invUDelta	CONFIRMED	1.0 / (u2 - u1): reciprocal of the u domain length, stored in the output record
+local	_gleMap2Vertex3fLoad	param_4	ustride	CONFIRMED	glMap2f argument of the Load entry: advanced once per outer (u) step of the copy loop
+local	_gleMap2Vertex3fLoad	param_5	uorder	CONFIRMED	glMap2f argument of the Load entry: stored first in the output record (map[0]) and bounds the outer loop
+local	_gleMap2Vertex3fLoad	param_8	vstride	CONFIRMED	glMap2f argument of the Load entry: advanced once per inner (v) step of the copy loop
+local	_gleMap2Vertex3fLoad	param_9	vorder	CONFIRMED	glMap2f argument of the Load entry: stored second in the output record (map[1]) and bounds the inner loop
+local	_gleMap2Vertex3fLoad	param_10	points	CONFIRMED	glMap2f argument of the Load entry: source control-point array copied into the output record
+local	_gleMap2Vertex3fLoad	param_11	mapData	CONFIRMED	glMap2f argument of the Load entry: output evaluator record: [order, u1, u2, 1/(u2-u1)] followed by the converted control points
+local	_gleMap2Vertex3fLoad	fVar2	invUDelta	CONFIRMED	1.0 / (u2 - u1): reciprocal of the u domain length, stored in the output record
+local	_gleMap2Vertex3fLoad	fVar3	one	CONFIRMED	holds FLOAT_00108e54 = 1.0 (numerator of the reciprocals)
+local	_gleMap2Vertex4fLoad	param_4	ustride	CONFIRMED	glMap2f argument of the Load entry: advanced once per outer (u) step of the copy loop
+local	_gleMap2Vertex4fLoad	param_5	uorder	CONFIRMED	glMap2f argument of the Load entry: stored first in the output record (map[0]) and bounds the outer loop
+local	_gleMap2Vertex4fLoad	param_8	vstride	CONFIRMED	glMap2f argument of the Load entry: advanced once per inner (v) step of the copy loop
+local	_gleMap2Vertex4fLoad	param_9	vorder	CONFIRMED	glMap2f argument of the Load entry: stored second in the output record (map[1]) and bounds the inner loop
+local	_gleMap2Vertex4fLoad	param_10	points	CONFIRMED	glMap2f argument of the Load entry: source control-point array copied into the output record
+local	_gleMap2Vertex4fLoad	param_11	mapData	CONFIRMED	glMap2f argument of the Load entry: output evaluator record: [order, u1, u2, 1/(u2-u1)] followed by the converted control points
+local	_gleMap2Vertex4fLoad	fVar2	invUDelta	CONFIRMED	1.0 / (u2 - u1): reciprocal of the u domain length, stored in the output record
+local	_gleMap2Vertex4fLoad	fVar3	one	CONFIRMED	holds FLOAT_00108e54 = 1.0 (numerator of the reciprocals)
+local	_gleMap2ColorfLoad	param_4	ustride	CONFIRMED	glMap2f argument of the Load entry: advanced once per outer (u) step of the copy loop
+local	_gleMap2ColorfLoad	param_5	uorder	CONFIRMED	glMap2f argument of the Load entry: stored first in the output record (map[0]) and bounds the outer loop
+local	_gleMap2ColorfLoad	param_8	vstride	CONFIRMED	glMap2f argument of the Load entry: advanced once per inner (v) step of the copy loop
+local	_gleMap2ColorfLoad	param_9	vorder	CONFIRMED	glMap2f argument of the Load entry: stored second in the output record (map[1]) and bounds the inner loop
+local	_gleMap2ColorfLoad	param_10	points	CONFIRMED	glMap2f argument of the Load entry: source control-point array copied into the output record
+local	_gleMap2ColorfLoad	param_11	mapData	CONFIRMED	glMap2f argument of the Load entry: output evaluator record: [order, u1, u2, 1/(u2-u1)] followed by the converted control points
+local	_gleMap2ColorfLoad	fVar2	invUDelta	CONFIRMED	1.0 / (u2 - u1): reciprocal of the u domain length, stored in the output record
+local	_gleMap2ColorfLoad	fVar3	one	CONFIRMED	holds FLOAT_00108e54 = 1.0 (numerator of the reciprocals)
+local	_gleMap2IndexfLoad	param_4	ustride	CONFIRMED	glMap2f argument of the Load entry: advanced once per outer (u) step of the copy loop
+local	_gleMap2IndexfLoad	param_5	uorder	CONFIRMED	glMap2f argument of the Load entry: stored first in the output record (map[0]) and bounds the outer loop
+local	_gleMap2IndexfLoad	param_8	vstride	CONFIRMED	glMap2f argument of the Load entry: advanced once per inner (v) step of the copy loop
+local	_gleMap2IndexfLoad	param_9	vorder	CONFIRMED	glMap2f argument of the Load entry: stored second in the output record (map[1]) and bounds the inner loop
+local	_gleMap2IndexfLoad	param_10	points	CONFIRMED	glMap2f argument of the Load entry: source control-point array copied into the output record
+local	_gleMap2IndexfLoad	param_11	mapData	CONFIRMED	glMap2f argument of the Load entry: output evaluator record: [order, u1, u2, 1/(u2-u1)] followed by the converted control points
+local	_gleMap2IndexfLoad	fVar2	invUDelta	CONFIRMED	1.0 / (u2 - u1): reciprocal of the u domain length, stored in the output record
+local	_gleMap2IndexfLoad	fVar3	one	CONFIRMED	holds FLOAT_00108e54 = 1.0 (numerator of the reciprocals)
+local	_gleMap2NormalfLoad	param_4	ustride	CONFIRMED	glMap2f argument of the Load entry: advanced once per outer (u) step of the copy loop
+local	_gleMap2NormalfLoad	param_5	uorder	CONFIRMED	glMap2f argument of the Load entry: stored first in the output record (map[0]) and bounds the outer loop
+local	_gleMap2NormalfLoad	param_8	vstride	CONFIRMED	glMap2f argument of the Load entry: advanced once per inner (v) step of the copy loop
+local	_gleMap2NormalfLoad	param_9	vorder	CONFIRMED	glMap2f argument of the Load entry: stored second in the output record (map[1]) and bounds the inner loop
+local	_gleMap2NormalfLoad	param_10	points	CONFIRMED	glMap2f argument of the Load entry: source control-point array copied into the output record
+local	_gleMap2NormalfLoad	param_11	mapData	CONFIRMED	glMap2f argument of the Load entry: output evaluator record: [order, u1, u2, 1/(u2-u1)] followed by the converted control points
+local	_gleMap2NormalfLoad	fVar2	invUDelta	CONFIRMED	1.0 / (u2 - u1): reciprocal of the u domain length, stored in the output record
+local	_gleMap2NormalfLoad	fVar3	one	CONFIRMED	holds FLOAT_00108e54 = 1.0 (numerator of the reciprocals)
+local	_gleMap2Texture1fLoad	param_4	ustride	CONFIRMED	glMap2f argument of the Load entry: advanced once per outer (u) step of the copy loop
+local	_gleMap2Texture1fLoad	param_5	uorder	CONFIRMED	glMap2f argument of the Load entry: stored first in the output record (map[0]) and bounds the outer loop
+local	_gleMap2Texture1fLoad	param_8	vstride	CONFIRMED	glMap2f argument of the Load entry: advanced once per inner (v) step of the copy loop
+local	_gleMap2Texture1fLoad	param_9	vorder	CONFIRMED	glMap2f argument of the Load entry: stored second in the output record (map[1]) and bounds the inner loop
+local	_gleMap2Texture1fLoad	param_10	points	CONFIRMED	glMap2f argument of the Load entry: source control-point array copied into the output record
+local	_gleMap2Texture1fLoad	param_11	mapData	CONFIRMED	glMap2f argument of the Load entry: output evaluator record: [order, u1, u2, 1/(u2-u1)] followed by the converted control points
+local	_gleMap2Texture1fLoad	fVar2	invUDelta	CONFIRMED	1.0 / (u2 - u1): reciprocal of the u domain length, stored in the output record
+local	_gleMap2Texture1fLoad	fVar3	one	CONFIRMED	holds FLOAT_00108e54 = 1.0 (numerator of the reciprocals)
+local	_gleMap2Texture2fLoad	param_4	ustride	CONFIRMED	glMap2f argument of the Load entry: advanced once per outer (u) step of the copy loop
+local	_gleMap2Texture2fLoad	param_5	uorder	CONFIRMED	glMap2f argument of the Load entry: stored first in the output record (map[0]) and bounds the outer loop
+local	_gleMap2Texture2fLoad	param_8	vstride	CONFIRMED	glMap2f argument of the Load entry: advanced once per inner (v) step of the copy loop
+local	_gleMap2Texture2fLoad	param_9	vorder	CONFIRMED	glMap2f argument of the Load entry: stored second in the output record (map[1]) and bounds the inner loop
+local	_gleMap2Texture2fLoad	param_10	points	CONFIRMED	glMap2f argument of the Load entry: source control-point array copied into the output record
+local	_gleMap2Texture2fLoad	param_11	mapData	CONFIRMED	glMap2f argument of the Load entry: output evaluator record: [order, u1, u2, 1/(u2-u1)] followed by the converted control points
+local	_gleMap2Texture2fLoad	fVar3	invUDelta	CONFIRMED	1.0 / (u2 - u1): reciprocal of the u domain length, stored in the output record
+local	_gleMap2Texture2fLoad	fVar4	one	CONFIRMED	holds FLOAT_00108e54 = 1.0 (numerator of the reciprocals)
+local	_gleMap2Texture3fLoad	param_4	ustride	CONFIRMED	glMap2f argument of the Load entry: advanced once per outer (u) step of the copy loop
+local	_gleMap2Texture3fLoad	param_5	uorder	CONFIRMED	glMap2f argument of the Load entry: stored first in the output record (map[0]) and bounds the outer loop
+local	_gleMap2Texture3fLoad	param_8	vstride	CONFIRMED	glMap2f argument of the Load entry: advanced once per inner (v) step of the copy loop
+local	_gleMap2Texture3fLoad	param_9	vorder	CONFIRMED	glMap2f argument of the Load entry: stored second in the output record (map[1]) and bounds the inner loop
+local	_gleMap2Texture3fLoad	param_10	points	CONFIRMED	glMap2f argument of the Load entry: source control-point array copied into the output record
+local	_gleMap2Texture3fLoad	param_11	mapData	CONFIRMED	glMap2f argument of the Load entry: output evaluator record: [order, u1, u2, 1/(u2-u1)] followed by the converted control points
+local	_gleMap2Texture3fLoad	fVar2	invUDelta	CONFIRMED	1.0 / (u2 - u1): reciprocal of the u domain length, stored in the output record
+local	_gleMap2Texture3fLoad	fVar3	one	CONFIRMED	holds FLOAT_00108e54 = 1.0 (numerator of the reciprocals)
+local	_gleMap2Texture4fLoad	param_4	ustride	CONFIRMED	glMap2f argument of the Load entry: advanced once per outer (u) step of the copy loop
+local	_gleMap2Texture4fLoad	param_5	uorder	CONFIRMED	glMap2f argument of the Load entry: stored first in the output record (map[0]) and bounds the outer loop
+local	_gleMap2Texture4fLoad	param_8	vstride	CONFIRMED	glMap2f argument of the Load entry: advanced once per inner (v) step of the copy loop
+local	_gleMap2Texture4fLoad	param_9	vorder	CONFIRMED	glMap2f argument of the Load entry: stored second in the output record (map[1]) and bounds the inner loop
+local	_gleMap2Texture4fLoad	param_10	points	CONFIRMED	glMap2f argument of the Load entry: source control-point array copied into the output record
+local	_gleMap2Texture4fLoad	param_11	mapData	CONFIRMED	glMap2f argument of the Load entry: output evaluator record: [order, u1, u2, 1/(u2-u1)] followed by the converted control points
+local	_gleMap2Texture4fLoad	fVar2	invUDelta	CONFIRMED	1.0 / (u2 - u1): reciprocal of the u domain length, stored in the output record
+local	_gleMap2Texture4fLoad	fVar3	one	CONFIRMED	holds FLOAT_00108e54 = 1.0 (numerator of the reciprocals)
+local	_gleMap2VertexAttrib1fLoad	param_4	ustride	CONFIRMED	glMap2f argument of the Load entry: advanced once per outer (u) step of the copy loop
+local	_gleMap2VertexAttrib1fLoad	param_5	uorder	CONFIRMED	glMap2f argument of the Load entry: stored first in the output record (map[0]) and bounds the outer loop
+local	_gleMap2VertexAttrib1fLoad	param_8	vstride	CONFIRMED	glMap2f argument of the Load entry: advanced once per inner (v) step of the copy loop
+local	_gleMap2VertexAttrib1fLoad	param_9	vorder	CONFIRMED	glMap2f argument of the Load entry: stored second in the output record (map[1]) and bounds the inner loop
+local	_gleMap2VertexAttrib1fLoad	param_10	points	CONFIRMED	glMap2f argument of the Load entry: source control-point array copied into the output record
+local	_gleMap2VertexAttrib1fLoad	param_11	mapData	CONFIRMED	glMap2f argument of the Load entry: output evaluator record: [order, u1, u2, 1/(u2-u1)] followed by the converted control points
+local	_gleMap2VertexAttrib1fLoad	fVar2	invUDelta	CONFIRMED	1.0 / (u2 - u1): reciprocal of the u domain length, stored in the output record
+local	_gleMap2VertexAttrib1fLoad	fVar3	one	CONFIRMED	holds FLOAT_00108e54 = 1.0 (numerator of the reciprocals)
+local	_gleMap2VertexAttrib2fLoad	param_4	ustride	CONFIRMED	glMap2f argument of the Load entry: advanced once per outer (u) step of the copy loop
+local	_gleMap2VertexAttrib2fLoad	param_5	uorder	CONFIRMED	glMap2f argument of the Load entry: stored first in the output record (map[0]) and bounds the outer loop
+local	_gleMap2VertexAttrib2fLoad	param_8	vstride	CONFIRMED	glMap2f argument of the Load entry: advanced once per inner (v) step of the copy loop
+local	_gleMap2VertexAttrib2fLoad	param_9	vorder	CONFIRMED	glMap2f argument of the Load entry: stored second in the output record (map[1]) and bounds the inner loop
+local	_gleMap2VertexAttrib2fLoad	param_10	points	CONFIRMED	glMap2f argument of the Load entry: source control-point array copied into the output record
+local	_gleMap2VertexAttrib2fLoad	param_11	mapData	CONFIRMED	glMap2f argument of the Load entry: output evaluator record: [order, u1, u2, 1/(u2-u1)] followed by the converted control points
+local	_gleMap2VertexAttrib2fLoad	fVar3	invUDelta	CONFIRMED	1.0 / (u2 - u1): reciprocal of the u domain length, stored in the output record
+local	_gleMap2VertexAttrib2fLoad	fVar4	one	CONFIRMED	holds FLOAT_00108e54 = 1.0 (numerator of the reciprocals)
+local	_gleMap2VertexAttrib3fLoad	param_4	ustride	CONFIRMED	glMap2f argument of the Load entry: advanced once per outer (u) step of the copy loop
+local	_gleMap2VertexAttrib3fLoad	param_5	uorder	CONFIRMED	glMap2f argument of the Load entry: stored first in the output record (map[0]) and bounds the outer loop
+local	_gleMap2VertexAttrib3fLoad	param_8	vstride	CONFIRMED	glMap2f argument of the Load entry: advanced once per inner (v) step of the copy loop
+local	_gleMap2VertexAttrib3fLoad	param_9	vorder	CONFIRMED	glMap2f argument of the Load entry: stored second in the output record (map[1]) and bounds the inner loop
+local	_gleMap2VertexAttrib3fLoad	param_10	points	CONFIRMED	glMap2f argument of the Load entry: source control-point array copied into the output record
+local	_gleMap2VertexAttrib3fLoad	param_11	mapData	CONFIRMED	glMap2f argument of the Load entry: output evaluator record: [order, u1, u2, 1/(u2-u1)] followed by the converted control points
+local	_gleMap2VertexAttrib3fLoad	fVar2	invUDelta	CONFIRMED	1.0 / (u2 - u1): reciprocal of the u domain length, stored in the output record
+local	_gleMap2VertexAttrib3fLoad	fVar3	one	CONFIRMED	holds FLOAT_00108e54 = 1.0 (numerator of the reciprocals)
+local	_gleMap2VertexAttrib4fLoad	param_4	ustride	CONFIRMED	glMap2f argument of the Load entry: advanced once per outer (u) step of the copy loop
+local	_gleMap2VertexAttrib4fLoad	param_5	uorder	CONFIRMED	glMap2f argument of the Load entry: stored first in the output record (map[0]) and bounds the outer loop
+local	_gleMap2VertexAttrib4fLoad	param_8	vstride	CONFIRMED	glMap2f argument of the Load entry: advanced once per inner (v) step of the copy loop
+local	_gleMap2VertexAttrib4fLoad	param_9	vorder	CONFIRMED	glMap2f argument of the Load entry: stored second in the output record (map[1]) and bounds the inner loop
+local	_gleMap2VertexAttrib4fLoad	param_10	points	CONFIRMED	glMap2f argument of the Load entry: source control-point array copied into the output record
+local	_gleMap2VertexAttrib4fLoad	param_11	mapData	CONFIRMED	glMap2f argument of the Load entry: output evaluator record: [order, u1, u2, 1/(u2-u1)] followed by the converted control points
+local	_gleMap2VertexAttrib4fLoad	fVar2	invUDelta	CONFIRMED	1.0 / (u2 - u1): reciprocal of the u domain length, stored in the output record
+local	_gleMap2VertexAttrib4fLoad	fVar3	one	CONFIRMED	holds FLOAT_00108e54 = 1.0 (numerator of the reciprocals)
+local	_gleByteFilter1	param_1	dst	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); written with the filtered result (*(T*)(dst + byteOffset) = average)
+local	_gleByteFilter1	param_2	src	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); first source sample: all taken samples are read at src + byteOffset + the offsets
+local	_gleByteFilter1	param_3	count	INFERRED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); loop bound: number of components (elements) filtered per call; scaled by the element size in the loop test
+local	_gleByteFilter1	param_4	offsetA	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); byte distance from a sample to its neighbour along axis 1: the 2 averaged samples are src+byteOffset plus every sum of the offsets
+local	_gleByteFilter1	iVar3	byteOffset	CONFIRMED	starts at 0 and advances by the element size per iteration; added to dst and src as a byte offset
+local	_gleByteFilter2	param_1	dst	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); written with the filtered result (*(T*)(dst + byteOffset) = average)
+local	_gleByteFilter2	param_2	src	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); first source sample: all taken samples are read at src + byteOffset + the offsets
+local	_gleByteFilter2	param_3	count	INFERRED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); loop bound: number of components (elements) filtered per call; scaled by the element size in the loop test
+local	_gleByteFilter2	param_4	offsetA	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); byte distance from a sample to its neighbour along axis 1: the 4 averaged samples are src+byteOffset plus every sum of the offsets
+local	_gleByteFilter2	param_5	offsetB	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); byte distance from a sample to its neighbour along axis 2: the 4 averaged samples are src+byteOffset plus every sum of the offsets
+local	_gleByteFilter2	iVar2	byteOffset	CONFIRMED	starts at 0 and advances by the element size per iteration; added to dst and src as a byte offset
+local	_gleByteFilter3	param_1	dst	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); written with the filtered result (*(T*)(dst + byteOffset) = average)
+local	_gleByteFilter3	param_2	src	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); first source sample: all taken samples are read at src + byteOffset + the offsets
+local	_gleByteFilter3	param_3	count	INFERRED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); loop bound: number of components (elements) filtered per call; scaled by the element size in the loop test
+local	_gleByteFilter3	param_4	offsetA	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); byte distance from a sample to its neighbour along axis 1: the 8 averaged samples are src+byteOffset plus every sum of the offsets
+local	_gleByteFilter3	param_5	offsetB	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); byte distance from a sample to its neighbour along axis 2: the 8 averaged samples are src+byteOffset plus every sum of the offsets
+local	_gleByteFilter3	param_6	offsetC	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); byte distance from a sample to its neighbour along axis 3: the 8 averaged samples are src+byteOffset plus every sum of the offsets
+local	_gleByteFilter3	iVar3	byteOffset	CONFIRMED	starts at 0 and advances by the element size per iteration; added to dst and src as a byte offset
+local	_gleUbyteFilter1	param_1	dst	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); written with the filtered result (*(T*)(dst + byteOffset) = average)
+local	_gleUbyteFilter1	param_2	src	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); first source sample: all taken samples are read at src + byteOffset + the offsets
+local	_gleUbyteFilter1	param_3	count	INFERRED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); loop bound: number of components (elements) filtered per call; scaled by the element size in the loop test
+local	_gleUbyteFilter1	param_4	offsetA	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); byte distance from a sample to its neighbour along axis 1: the 2 averaged samples are src+byteOffset plus every sum of the offsets
+local	_gleUbyteFilter1	iVar3	byteOffset	CONFIRMED	starts at 0 and advances by the element size per iteration; added to dst and src as a byte offset
+local	_gleUbyteFilter2	param_1	dst	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); written with the filtered result (*(T*)(dst + byteOffset) = average)
+local	_gleUbyteFilter2	param_2	src	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); first source sample: all taken samples are read at src + byteOffset + the offsets
+local	_gleUbyteFilter2	param_3	count	INFERRED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); loop bound: number of components (elements) filtered per call; scaled by the element size in the loop test
+local	_gleUbyteFilter2	param_4	offsetA	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); byte distance from a sample to its neighbour along axis 1: the 4 averaged samples are src+byteOffset plus every sum of the offsets
+local	_gleUbyteFilter2	param_5	offsetB	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); byte distance from a sample to its neighbour along axis 2: the 4 averaged samples are src+byteOffset plus every sum of the offsets
+local	_gleUbyteFilter2	iVar2	byteOffset	CONFIRMED	starts at 0 and advances by the element size per iteration; added to dst and src as a byte offset
+local	_gleUbyteFilter3	param_1	dst	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); written with the filtered result (*(T*)(dst + byteOffset) = average)
+local	_gleUbyteFilter3	param_2	src	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); first source sample: all taken samples are read at src + byteOffset + the offsets
+local	_gleUbyteFilter3	param_3	count	INFERRED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); loop bound: number of components (elements) filtered per call; scaled by the element size in the loop test
+local	_gleUbyteFilter3	param_4	offsetA	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); byte distance from a sample to its neighbour along axis 1: the 8 averaged samples are src+byteOffset plus every sum of the offsets
+local	_gleUbyteFilter3	param_5	offsetB	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); byte distance from a sample to its neighbour along axis 2: the 8 averaged samples are src+byteOffset plus every sum of the offsets
+local	_gleUbyteFilter3	param_6	offsetC	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); byte distance from a sample to its neighbour along axis 3: the 8 averaged samples are src+byteOffset plus every sum of the offsets
+local	_gleUbyteFilter3	iVar4	byteOffset	CONFIRMED	starts at 0 and advances by the element size per iteration; added to dst and src as a byte offset
+local	_gleShortFilter1	param_1	dst	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); written with the filtered result (*(T*)(dst + byteOffset) = average)
+local	_gleShortFilter1	param_2	src	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); first source sample: all taken samples are read at src + byteOffset + the offsets
+local	_gleShortFilter1	param_3	count	INFERRED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); loop bound: number of components (elements) filtered per call; scaled by the element size in the loop test
+local	_gleShortFilter1	param_4	offsetA	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); byte distance from a sample to its neighbour along axis 1: the 2 averaged samples are src+byteOffset plus every sum of the offsets
+local	_gleShortFilter1	iVar1	byteOffset	CONFIRMED	starts at 0 and advances by the element size per iteration; added to dst and src as a byte offset
+local	_gleShortFilter2	param_1	dst	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); written with the filtered result (*(T*)(dst + byteOffset) = average)
+local	_gleShortFilter2	param_2	src	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); first source sample: all taken samples are read at src + byteOffset + the offsets
+local	_gleShortFilter2	param_3	count	INFERRED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); loop bound: number of components (elements) filtered per call; scaled by the element size in the loop test
+local	_gleShortFilter2	param_4	offsetA	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); byte distance from a sample to its neighbour along axis 1: the 4 averaged samples are src+byteOffset plus every sum of the offsets
+local	_gleShortFilter2	param_5	offsetB	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); byte distance from a sample to its neighbour along axis 2: the 4 averaged samples are src+byteOffset plus every sum of the offsets
+local	_gleShortFilter2	iVar2	byteOffset	CONFIRMED	starts at 0 and advances by the element size per iteration; added to dst and src as a byte offset
+local	_gleShortFilter3	param_1	dst	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); written with the filtered result (*(T*)(dst + byteOffset) = average)
+local	_gleShortFilter3	param_2	src	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); first source sample: all taken samples are read at src + byteOffset + the offsets
+local	_gleShortFilter3	param_3	count	INFERRED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); loop bound: number of components (elements) filtered per call; scaled by the element size in the loop test
+local	_gleShortFilter3	param_4	offsetA	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); byte distance from a sample to its neighbour along axis 1: the 8 averaged samples are src+byteOffset plus every sum of the offsets
+local	_gleShortFilter3	param_5	offsetB	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); byte distance from a sample to its neighbour along axis 2: the 8 averaged samples are src+byteOffset plus every sum of the offsets
+local	_gleShortFilter3	param_6	offsetC	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); byte distance from a sample to its neighbour along axis 3: the 8 averaged samples are src+byteOffset plus every sum of the offsets
+local	_gleShortFilter3	iVar4	byteOffset	CONFIRMED	starts at 0 and advances by the element size per iteration; added to dst and src as a byte offset
+local	_gleFloatFilter1	param_1	dst	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); written with the filtered result (*(T*)(dst + byteOffset) = average)
+local	_gleFloatFilter1	param_2	src	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); first source sample: all taken samples are read at src + byteOffset + the offsets
+local	_gleFloatFilter1	param_3	count	INFERRED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); loop bound: number of components (elements) filtered per call; scaled by the element size in the loop test
+local	_gleFloatFilter1	param_4	offsetA	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); byte distance from a sample to its neighbour along axis 1: the 2 averaged samples are src+byteOffset plus every sum of the offsets
+local	_gleFloatFilter1	fVar1	weight	CONFIRMED	holds FLOAT_00108e90 = 0.5 = 1/number of samples averaged (the sum of the samples is multiplied by it)
+local	_gleFloatFilter1	iVar2	byteOffset	CONFIRMED	starts at 0 and advances by the element size per iteration; added to dst and src as a byte offset
+local	_gleFloatFilter1	uVar3	remaining	CONFIRMED	param_3 & 0x3fffffff: elements left, counted down once per iteration until zero
+local	_gleFloatFilter2	param_1	dst	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); written with the filtered result (*(T*)(dst + byteOffset) = average)
+local	_gleFloatFilter2	param_2	src	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); first source sample: all taken samples are read at src + byteOffset + the offsets
+local	_gleFloatFilter2	param_3	count	INFERRED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); loop bound: number of components (elements) filtered per call; scaled by the element size in the loop test
+local	_gleFloatFilter2	param_4	offsetA	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); byte distance from a sample to its neighbour along axis 1: the 4 averaged samples are src+byteOffset plus every sum of the offsets
+local	_gleFloatFilter2	param_5	offsetB	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); byte distance from a sample to its neighbour along axis 2: the 4 averaged samples are src+byteOffset plus every sum of the offsets
+local	_gleFloatFilter2	fVar1	weight	CONFIRMED	holds FLOAT_00108f88 = 0.25 = 1/number of samples averaged (the sum of the samples is multiplied by it)
+local	_gleFloatFilter2	iVar3	byteOffset	CONFIRMED	starts at 0 and advances by the element size per iteration; added to dst and src as a byte offset
+local	_gleFloatFilter2	uVar4	remaining	CONFIRMED	param_3 & 0x3fffffff: elements left, counted down once per iteration until zero
+local	_gleFloatFilter3	param_1	dst	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); written with the filtered result (*(T*)(dst + byteOffset) = average)
+local	_gleFloatFilter3	param_2	src	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); first source sample: all taken samples are read at src + byteOffset + the offsets
+local	_gleFloatFilter3	param_3	count	INFERRED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); loop bound: number of components (elements) filtered per call; scaled by the element size in the loop test
+local	_gleFloatFilter3	param_4	offsetA	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); byte distance from a sample to its neighbour along axis 1: the 8 averaged samples are src+byteOffset plus every sum of the offsets
+local	_gleFloatFilter3	param_5	offsetB	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); byte distance from a sample to its neighbour along axis 2: the 8 averaged samples are src+byteOffset plus every sum of the offsets
+local	_gleFloatFilter3	param_6	offsetC	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); byte distance from a sample to its neighbour along axis 3: the 8 averaged samples are src+byteOffset plus every sum of the offsets
+local	_gleFloatFilter3	fVar3	weight	CONFIRMED	holds FLOAT_00108f4c = 0.125 = 1/number of samples averaged (the sum of the samples is multiplied by it)
+local	_gleFloatFilter3	iVar5	byteOffset	CONFIRMED	starts at 0 and advances by the element size per iteration; added to dst and src as a byte offset
+local	_gleFloatFilter3	uVar7	remaining	CONFIRMED	param_3 & 0x3fffffff: elements left, counted down once per iteration until zero
+local	_gleHalfFloatFilter1	param_1	dst	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); written with the filtered result (*(T*)(dst + byteOffset) = average)
+local	_gleHalfFloatFilter1	param_2	src	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); first source sample: all taken samples are read at src + byteOffset + the offsets
+local	_gleHalfFloatFilter1	param_3	count	INFERRED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); loop bound: number of components (elements) filtered per call; scaled by the element size in the loop test
+local	_gleHalfFloatFilter1	param_4	offsetA	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); byte distance from a sample to its neighbour along axis 1: the 2 averaged samples are src+byteOffset plus every sum of the offsets
+local	_gleHalfFloatFilter1	fVar3	weight	CONFIRMED	holds FLOAT_00108e90 = 0.5 = 1/number of samples averaged (the sum of the samples is multiplied by it)
+local	_gleHalfFloatFilter1	iVar5	byteOffset	CONFIRMED	starts at 0 and advances by the element size per iteration; added to dst and src as a byte offset
+local	_gleHalfFloatFilter2	param_1	dst	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); written with the filtered result (*(T*)(dst + byteOffset) = average)
+local	_gleHalfFloatFilter2	param_2	src	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); first source sample: all taken samples are read at src + byteOffset + the offsets
+local	_gleHalfFloatFilter2	param_3	count	INFERRED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); loop bound: number of components (elements) filtered per call; scaled by the element size in the loop test
+local	_gleHalfFloatFilter2	param_4	offsetA	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); byte distance from a sample to its neighbour along axis 1: the 4 averaged samples are src+byteOffset plus every sum of the offsets
+local	_gleHalfFloatFilter2	param_5	offsetB	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); byte distance from a sample to its neighbour along axis 2: the 4 averaged samples are src+byteOffset plus every sum of the offsets
+local	_gleHalfFloatFilter2	fVar3	weight	CONFIRMED	holds FLOAT_00108f88 = 0.25 = 1/number of samples averaged (the sum of the samples is multiplied by it)
+local	_gleHalfFloatFilter2	iVar6	byteOffset	CONFIRMED	starts at 0 and advances by the element size per iteration; added to dst and src as a byte offset
+local	_gleHalfFloatFilter3	param_1	dst	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); written with the filtered result (*(T*)(dst + byteOffset) = average)
+local	_gleHalfFloatFilter3	param_2	src	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); first source sample: all taken samples are read at src + byteOffset + the offsets
+local	_gleHalfFloatFilter3	param_3	count	INFERRED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); loop bound: number of components (elements) filtered per call; scaled by the element size in the loop test
+local	_gleHalfFloatFilter3	param_4	offsetA	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); byte distance from a sample to its neighbour along axis 1: the 8 averaged samples are src+byteOffset plus every sum of the offsets
+local	_gleHalfFloatFilter3	param_5	offsetB	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); byte distance from a sample to its neighbour along axis 2: the 8 averaged samples are src+byteOffset plus every sum of the offsets
+local	_gleHalfFloatFilter3	param_6	offsetC	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); byte distance from a sample to its neighbour along axis 3: the 8 averaged samples are src+byteOffset plus every sum of the offsets
+local	_gleHalfFloatFilter3	fVar3	weight	CONFIRMED	holds FLOAT_00108f4c = 0.125 = 1/number of samples averaged (the sum of the samples is multiplied by it)
+local	_gleHalfFloatFilter3	iVar7	byteOffset	CONFIRMED	starts at 0 and advances by the element size per iteration; added to dst and src as a byte offset
+local	_gle332Filter1	param_1	dst	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); written with the filtered result (*(T*)(dst + byteOffset) = average)
+local	_gle332Filter1	param_2	src	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); first source sample: all taken samples are read at src + byteOffset + the offsets
+local	_gle332Filter1	param_4	offsetA	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); byte distance from a sample to its neighbour along axis 1: the 2 averaged samples are src+byteOffset plus every sum of the offsets
+local	_gle332Filter2	param_1	dst	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); written with the filtered result (*(T*)(dst + byteOffset) = average)
+local	_gle332Filter2	param_2	src	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); first source sample: all taken samples are read at src + byteOffset + the offsets
+local	_gle332Filter2	param_4	offsetA	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); byte distance from a sample to its neighbour along axis 1: the 4 averaged samples are src+byteOffset plus every sum of the offsets
+local	_gle332Filter2	param_5	offsetB	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); byte distance from a sample to its neighbour along axis 2: the 4 averaged samples are src+byteOffset plus every sum of the offsets
+local	_gle332Filter3	param_1	dst	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); written with the filtered result (*(T*)(dst + byteOffset) = average)
+local	_gle332Filter3	param_2	src	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); first source sample: all taken samples are read at src + byteOffset + the offsets
+local	_gle332Filter3	param_4	offsetA	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); byte distance from a sample to its neighbour along axis 1: the 8 averaged samples are src+byteOffset plus every sum of the offsets
+local	_gle332Filter3	param_5	offsetB	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); byte distance from a sample to its neighbour along axis 2: the 8 averaged samples are src+byteOffset plus every sum of the offsets
+local	_gle332Filter3	param_6	offsetC	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); byte distance from a sample to its neighbour along axis 3: the 8 averaged samples are src+byteOffset plus every sum of the offsets
+local	_gle233RevFilter1	param_1	dst	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); written with the filtered result (*(T*)(dst + byteOffset) = average)
+local	_gle233RevFilter1	param_2	src	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); first source sample: all taken samples are read at src + byteOffset + the offsets
+local	_gle233RevFilter1	param_4	offsetA	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); byte distance from a sample to its neighbour along axis 1: the 2 averaged samples are src+byteOffset plus every sum of the offsets
+local	_gle233RevFilter2	param_1	dst	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); written with the filtered result (*(T*)(dst + byteOffset) = average)
+local	_gle233RevFilter2	param_2	src	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); first source sample: all taken samples are read at src + byteOffset + the offsets
+local	_gle233RevFilter2	param_4	offsetA	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); byte distance from a sample to its neighbour along axis 1: the 4 averaged samples are src+byteOffset plus every sum of the offsets
+local	_gle233RevFilter2	param_5	offsetB	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); byte distance from a sample to its neighbour along axis 2: the 4 averaged samples are src+byteOffset plus every sum of the offsets
+local	_gle233RevFilter3	param_1	dst	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); written with the filtered result (*(T*)(dst + byteOffset) = average)
+local	_gle233RevFilter3	param_2	src	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); first source sample: all taken samples are read at src + byteOffset + the offsets
+local	_gle233RevFilter3	param_4	offsetA	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); byte distance from a sample to its neighbour along axis 1: the 8 averaged samples are src+byteOffset plus every sum of the offsets
+local	_gle233RevFilter3	param_5	offsetB	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); byte distance from a sample to its neighbour along axis 2: the 8 averaged samples are src+byteOffset plus every sum of the offsets
+local	_gle233RevFilter3	param_6	offsetC	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); byte distance from a sample to its neighbour along axis 3: the 8 averaged samples are src+byteOffset plus every sum of the offsets
+local	_gle565Filter1	param_1	dst	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); written with the filtered result (*(T*)(dst + byteOffset) = average)
+local	_gle565Filter1	param_2	src	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); first source sample: all taken samples are read at src + byteOffset + the offsets
+local	_gle565Filter1	param_4	offsetA	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); byte distance from a sample to its neighbour along axis 1: the 2 averaged samples are src+byteOffset plus every sum of the offsets
+local	_gle565Filter2	param_1	dst	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); written with the filtered result (*(T*)(dst + byteOffset) = average)
+local	_gle565Filter2	param_2	src	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); first source sample: all taken samples are read at src + byteOffset + the offsets
+local	_gle565Filter2	param_4	offsetA	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); byte distance from a sample to its neighbour along axis 1: the 4 averaged samples are src+byteOffset plus every sum of the offsets
+local	_gle565Filter2	param_5	offsetB	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); byte distance from a sample to its neighbour along axis 2: the 4 averaged samples are src+byteOffset plus every sum of the offsets
+local	_gle565Filter3	param_1	dst	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); written with the filtered result (*(T*)(dst + byteOffset) = average)
+local	_gle565Filter3	param_2	src	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); first source sample: all taken samples are read at src + byteOffset + the offsets
+local	_gle565Filter3	param_4	offsetA	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); byte distance from a sample to its neighbour along axis 1: the 8 averaged samples are src+byteOffset plus every sum of the offsets
+local	_gle565Filter3	param_5	offsetB	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); byte distance from a sample to its neighbour along axis 2: the 8 averaged samples are src+byteOffset plus every sum of the offsets
+local	_gle565Filter3	param_6	offsetC	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); byte distance from a sample to its neighbour along axis 3: the 8 averaged samples are src+byteOffset plus every sum of the offsets
+local	_gle4444Filter1	param_1	dst	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); written with the filtered result (*(T*)(dst + byteOffset) = average)
+local	_gle4444Filter1	param_2	src	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); first source sample: all taken samples are read at src + byteOffset + the offsets
+local	_gle4444Filter1	param_4	offsetA	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); byte distance from a sample to its neighbour along axis 1: the 2 averaged samples are src+byteOffset plus every sum of the offsets
+local	_gle4444Filter2	param_1	dst	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); written with the filtered result (*(T*)(dst + byteOffset) = average)
+local	_gle4444Filter2	param_2	src	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); first source sample: all taken samples are read at src + byteOffset + the offsets
+local	_gle4444Filter2	param_4	offsetA	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); byte distance from a sample to its neighbour along axis 1: the 4 averaged samples are src+byteOffset plus every sum of the offsets
+local	_gle4444Filter2	param_5	offsetB	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); byte distance from a sample to its neighbour along axis 2: the 4 averaged samples are src+byteOffset plus every sum of the offsets
+local	_gle4444Filter3	param_1	dst	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); written with the filtered result (*(T*)(dst + byteOffset) = average)
+local	_gle4444Filter3	param_2	src	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); first source sample: all taken samples are read at src + byteOffset + the offsets
+local	_gle4444Filter3	param_4	offsetA	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); byte distance from a sample to its neighbour along axis 1: the 8 averaged samples are src+byteOffset plus every sum of the offsets
+local	_gle4444Filter3	param_5	offsetB	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); byte distance from a sample to its neighbour along axis 2: the 8 averaged samples are src+byteOffset plus every sum of the offsets
+local	_gle4444Filter3	param_6	offsetC	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); byte distance from a sample to its neighbour along axis 3: the 8 averaged samples are src+byteOffset plus every sum of the offsets
+local	_gles8s8Filter1	param_1	dst	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); written with the filtered result (*(T*)(dst + byteOffset) = average)
+local	_gles8s8Filter1	param_2	src	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); first source sample: all taken samples are read at src + byteOffset + the offsets
+local	_gles8s8Filter1	param_4	offsetA	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); byte distance from a sample to its neighbour along axis 1: the 2 averaged samples are src+byteOffset plus every sum of the offsets
+local	_gles8s8Filter2	param_1	dst	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); written with the filtered result (*(T*)(dst + byteOffset) = average)
+local	_gles8s8Filter2	param_2	src	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); first source sample: all taken samples are read at src + byteOffset + the offsets
+local	_gles8s8Filter2	param_4	offsetA	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); byte distance from a sample to its neighbour along axis 1: the 4 averaged samples are src+byteOffset plus every sum of the offsets
+local	_gles8s8Filter2	param_5	offsetB	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); byte distance from a sample to its neighbour along axis 2: the 4 averaged samples are src+byteOffset plus every sum of the offsets
+local	_gles8s8Filter3	param_1	dst	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); written with the filtered result (*(T*)(dst + byteOffset) = average)
+local	_gles8s8Filter3	param_2	src	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); first source sample: all taken samples are read at src + byteOffset + the offsets
+local	_gles8s8Filter3	param_4	offsetA	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); byte distance from a sample to its neighbour along axis 1: the 8 averaged samples are src+byteOffset plus every sum of the offsets
+local	_gles8s8Filter3	param_5	offsetB	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); byte distance from a sample to its neighbour along axis 2: the 8 averaged samples are src+byteOffset plus every sum of the offsets
+local	_gles8s8Filter3	param_6	offsetC	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); byte distance from a sample to its neighbour along axis 3: the 8 averaged samples are src+byteOffset plus every sum of the offsets
+local	_gles16s16Filter1	param_1	dst	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); written with the filtered result (*(T*)(dst + byteOffset) = average)
+local	_gles16s16Filter1	param_2	src	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); first source sample: all taken samples are read at src + byteOffset + the offsets
+local	_gles16s16Filter1	param_4	offsetA	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); byte distance from a sample to its neighbour along axis 1: the 2 averaged samples are src+byteOffset plus every sum of the offsets
+local	_gles16s16Filter2	param_1	dst	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); written with the filtered result (*(T*)(dst + byteOffset) = average)
+local	_gles16s16Filter2	param_2	src	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); first source sample: all taken samples are read at src + byteOffset + the offsets
+local	_gles16s16Filter2	param_4	offsetA	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); byte distance from a sample to its neighbour along axis 1: the 4 averaged samples are src+byteOffset plus every sum of the offsets
+local	_gles16s16Filter2	param_5	offsetB	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); byte distance from a sample to its neighbour along axis 2: the 4 averaged samples are src+byteOffset plus every sum of the offsets
+local	_gles16s16Filter3	param_1	dst	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); written with the filtered result (*(T*)(dst + byteOffset) = average)
+local	_gles16s16Filter3	param_2	src	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); first source sample: all taken samples are read at src + byteOffset + the offsets
+local	_gles16s16Filter3	param_4	offsetA	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); byte distance from a sample to its neighbour along axis 1: the 8 averaged samples are src+byteOffset plus every sum of the offsets
+local	_gles16s16Filter3	param_5	offsetB	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); byte distance from a sample to its neighbour along axis 2: the 8 averaged samples are src+byteOffset plus every sum of the offsets
+local	_gles16s16Filter3	param_6	offsetC	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); byte distance from a sample to its neighbour along axis 3: the 8 averaged samples are src+byteOffset plus every sum of the offsets
+local	_gle1616Filter1	param_1	dst	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); written with the filtered result (*(T*)(dst + byteOffset) = average)
+local	_gle1616Filter1	param_2	src	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); first source sample: all taken samples are read at src + byteOffset + the offsets
+local	_gle1616Filter1	param_4	offsetA	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); byte distance from a sample to its neighbour along axis 1: the 2 averaged samples are src+byteOffset plus every sum of the offsets
+local	_gle1616Filter2	param_1	dst	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); written with the filtered result (*(T*)(dst + byteOffset) = average)
+local	_gle1616Filter2	param_2	src	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); first source sample: all taken samples are read at src + byteOffset + the offsets
+local	_gle1616Filter2	param_4	offsetA	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); byte distance from a sample to its neighbour along axis 1: the 4 averaged samples are src+byteOffset plus every sum of the offsets
+local	_gle1616Filter2	param_5	offsetB	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); byte distance from a sample to its neighbour along axis 2: the 4 averaged samples are src+byteOffset plus every sum of the offsets
+local	_gle1616Filter3	param_1	dst	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); written with the filtered result (*(T*)(dst + byteOffset) = average)
+local	_gle1616Filter3	param_2	src	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); first source sample: all taken samples are read at src + byteOffset + the offsets
+local	_gle1616Filter3	param_4	offsetA	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); byte distance from a sample to its neighbour along axis 1: the 8 averaged samples are src+byteOffset plus every sum of the offsets
+local	_gle1616Filter3	param_5	offsetB	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); byte distance from a sample to its neighbour along axis 2: the 8 averaged samples are src+byteOffset plus every sum of the offsets
+local	_gle1616Filter3	param_6	offsetC	CONFIRMED	mipmap box-filter entry chosen by _gleGenerateMipmapData through a function pointer (dst, src, count, offsets...); byte distance from a sample to its neighbour along axis 3: the 8 averaged samples are src+byteOffset plus every sum of the offsets
+local	_gleCheckTexImage1DArgs	param_2	target	CONFIRMED	argument 1 of the glTex*/glColorTable* entry this checks (GL prototype order): looked up with _gleLookUp*Texture*/_gleLookUp*ColorTable(glContext, p) as the GL target enum
+local	_gleCheckTexImage1DArgs	param_3	level	CONFIRMED	argument 2 of the glTex*/glColorTable* entry this checks (GL prototype order): compared > 14 (0xe < level) with GL_INVALID_VALUE (0x501) and used as level index (stride 0x18) into the texture level table
+local	_gleCheckTexImage1DArgs	param_4	internalformat	INFERRED	argument 3 of the glTex*/glColorTable* entry this checks (GL prototype order): GL internalformat argument: passed on as the internalformat of _gleCheckTexImageArgs / _gleCheckCompressedTexImageArgs (0x83f0.. S3TC range compare)
+local	_gleCheckTexImage1DArgs	param_5	width	CONFIRMED	argument 4 of the glTex*/glColorTable* entry this checks (GL prototype order): checked against the level width (level record +4 / +200) together with the offset, or minus 2*border against the maximum texture size
+local	_gleCheckTexImage1DArgs	param_6	border	CONFIRMED	argument 5 of the glTex*/glColorTable* entry this checks (GL prototype order): subtracted twice from the dimensions (dim + border * -2) before the size limit check
+local	_gleCheckTexImage1DArgs	param_7	format	CONFIRMED	argument 6 of the glTex*/glColorTable* entry this checks (GL prototype order): GL pixel/compressed format forwarded to the argument checker (_gleCheckTexImageArgs/_gleCheckTexSubImageArgs/_gleCheckCompressedTexImageArgs)
+local	_gleCheckTexImage1DArgs	param_8	type	CONFIRMED	argument 7 of the glTex*/glColorTable* entry this checks (GL prototype order): GL pixel type forwarded to _gleCheckTexImageArgs/_gleCheckTexSubImageArgs
+local	_gleCheckCopyTexImage1DArgs	param_2	target	CONFIRMED	argument 1 of the glTex*/glColorTable* entry this checks (GL prototype order): looked up with _gleLookUp*Texture*/_gleLookUp*ColorTable(glContext, p) as the GL target enum
+local	_gleCheckCopyTexImage1DArgs	param_3	level	CONFIRMED	argument 2 of the glTex*/glColorTable* entry this checks (GL prototype order): compared > 14 (0xe < level) with GL_INVALID_VALUE (0x501) and used as level index (stride 0x18) into the texture level table
+local	_gleCheckCopyTexImage1DArgs	param_4	internalformat	INFERRED	argument 3 of the glTex*/glColorTable* entry this checks (GL prototype order): GL internalformat argument: passed on as the internalformat of _gleCheckTexImageArgs / _gleCheckCompressedTexImageArgs (0x83f0.. S3TC range compare)
+local	_gleCheckCopyTexImage1DArgs	param_5	width	CONFIRMED	argument 4 of the glTex*/glColorTable* entry this checks (GL prototype order): checked against the level width (level record +4 / +200) together with the offset, or minus 2*border against the maximum texture size
+local	_gleCheckCopyTexImage1DArgs	param_6	border	CONFIRMED	argument 5 of the glTex*/glColorTable* entry this checks (GL prototype order): subtracted twice from the dimensions (dim + border * -2) before the size limit check
+local	_gleCheckColorTableArgs	param_1	glContext	CONFIRMED	dereferenced at +0x7574, the GL error word that receives 0x500/0x501/0x502, and passed first to every callee: the GL context (same slot as the siblings that already carry glContext)
+local	_gleCheckColorTableArgs	param_2	target	CONFIRMED	argument 1 of the glTex*/glColorTable* entry this checks (GL prototype order): looked up with _gleLookUp*Texture*/_gleLookUp*ColorTable(glContext, p) as the GL target enum
+local	_gleCheckColorTableArgs	param_3	internalformat	INFERRED	argument 2 of the glTex*/glColorTable* entry this checks (GL prototype order): GL internalformat argument: passed on as the internalformat of _gleCheckTexImageArgs / _gleCheckCompressedTexImageArgs (0x83f0.. S3TC range compare)
+local	_gleCheckColorTableArgs	param_4	width	CONFIRMED	argument 3 of the glTex*/glColorTable* entry this checks (GL prototype order): checked against the level width (level record +4 / +200) together with the offset, or minus 2*border against the maximum texture size
+local	_gleCheckColorTableArgs	param_5	format	CONFIRMED	argument 4 of the glTex*/glColorTable* entry this checks (GL prototype order): GL pixel/compressed format forwarded to the argument checker (_gleCheckTexImageArgs/_gleCheckTexSubImageArgs/_gleCheckCompressedTexImageArgs)
+local	_gleCheckColorTableArgs	param_6	type	CONFIRMED	argument 5 of the glTex*/glColorTable* entry this checks (GL prototype order): GL pixel type forwarded to _gleCheckTexImageArgs/_gleCheckTexSubImageArgs
+local	_gleCheckCopyColorTableArgs	param_1	glContext	CONFIRMED	dereferenced at +0x7574, the GL error word that receives 0x500/0x501/0x502, and passed first to every callee: the GL context (same slot as the siblings that already carry glContext)
+local	_gleCheckCopyColorTableArgs	param_2	target	CONFIRMED	argument 1 of the glTex*/glColorTable* entry this checks (GL prototype order): looked up with _gleLookUp*Texture*/_gleLookUp*ColorTable(glContext, p) as the GL target enum
+local	_gleCheckCopyColorTableArgs	param_3	internalformat	INFERRED	argument 2 of the glTex*/glColorTable* entry this checks (GL prototype order): GL internalformat argument: passed on as the internalformat of _gleCheckTexImageArgs / _gleCheckCompressedTexImageArgs (0x83f0.. S3TC range compare)
+local	_gleCheckCopyColorTableArgs	param_4	width	CONFIRMED	argument 3 of the glTex*/glColorTable* entry this checks (GL prototype order): checked against the level width (level record +4 / +200) together with the offset, or minus 2*border against the maximum texture size
+local	_gleCheckCompressedTexImage2DArgs	param_2	target	CONFIRMED	argument 1 of the glTex*/glColorTable* entry this checks (GL prototype order): looked up with _gleLookUp*Texture*/_gleLookUp*ColorTable(glContext, p) as the GL target enum
+local	_gleCheckCompressedTexImage2DArgs	param_3	level	CONFIRMED	argument 2 of the glTex*/glColorTable* entry this checks (GL prototype order): compared > 14 (0xe < level) with GL_INVALID_VALUE (0x501) and used as level index (stride 0x18) into the texture level table
+local	_gleCheckCompressedTexImage2DArgs	param_4	internalformat	INFERRED	argument 3 of the glTex*/glColorTable* entry this checks (GL prototype order): GL internalformat argument: passed on as the internalformat of _gleCheckTexImageArgs / _gleCheckCompressedTexImageArgs (0x83f0.. S3TC range compare)
+local	_gleCheckCompressedTexImage2DArgs	param_5	width	CONFIRMED	argument 4 of the glTex*/glColorTable* entry this checks (GL prototype order): checked against the level width (level record +4 / +200) together with the offset, or minus 2*border against the maximum texture size
+local	_gleCheckCompressedTexImage2DArgs	param_6	height	CONFIRMED	argument 5 of the glTex*/glColorTable* entry this checks (GL prototype order): checked against the level height (level record +6 / +0xca) together with the y offset
+local	_gleCheckCompressedTexImage2DArgs	param_7	border	CONFIRMED	argument 6 of the glTex*/glColorTable* entry this checks (GL prototype order): subtracted twice from the dimensions (dim + border * -2) before the size limit check
+local	_gleCheckCompressedTexImage2DArgs	param_8	imageSize	CONFIRMED	argument 7 of the glTex*/glColorTable* entry this checks (GL prototype order): compared with the computed compressed size ((width+3>>2)*(height+3>>2)*depth << shift) in _gleCheckCompressedTexImageArgs
+local	_gleCheckCompressedTexImage3DArgs	param_2	target	CONFIRMED	argument 1 of the glTex*/glColorTable* entry this checks (GL prototype order): looked up with _gleLookUp*Texture*/_gleLookUp*ColorTable(glContext, p) as the GL target enum
+local	_gleCheckCompressedTexImage3DArgs	param_3	level	CONFIRMED	argument 2 of the glTex*/glColorTable* entry this checks (GL prototype order): compared > 14 (0xe < level) with GL_INVALID_VALUE (0x501) and used as level index (stride 0x18) into the texture level table
+local	_gleCheckCompressedTexImage3DArgs	param_4	internalformat	INFERRED	argument 3 of the glTex*/glColorTable* entry this checks (GL prototype order): GL internalformat argument: passed on as the internalformat of _gleCheckTexImageArgs / _gleCheckCompressedTexImageArgs (0x83f0.. S3TC range compare)
+local	_gleCheckCompressedTexImage3DArgs	param_5	width	CONFIRMED	argument 4 of the glTex*/glColorTable* entry this checks (GL prototype order): checked against the level width (level record +4 / +200) together with the offset, or minus 2*border against the maximum texture size
+local	_gleCheckCompressedTexImage3DArgs	param_6	height	CONFIRMED	argument 5 of the glTex*/glColorTable* entry this checks (GL prototype order): checked against the level height (level record +6 / +0xca) together with the y offset
+local	_gleCheckCompressedTexImage3DArgs	param_7	depth	CONFIRMED	argument 6 of the glTex*/glColorTable* entry this checks (GL prototype order): checked against the level depth (level record +0xcc) together with the z offset
+local	_gleCheckCompressedTexImage3DArgs	param_8	border	CONFIRMED	argument 7 of the glTex*/glColorTable* entry this checks (GL prototype order): subtracted twice from the dimensions (dim + border * -2) before the size limit check
+local	_gleCheckCompressedTexImage3DArgs	param_9	imageSize	CONFIRMED	argument 8 of the glTex*/glColorTable* entry this checks (GL prototype order): compared with the computed compressed size ((width+3>>2)*(height+3>>2)*depth << shift) in _gleCheckCompressedTexImageArgs
+local	_gleCheckTexSubImage1DArgs	param_1	glContext	CONFIRMED	dereferenced at +0x7574, the GL error word that receives 0x500/0x501/0x502, and passed first to every callee: the GL context (same slot as the siblings that already carry glContext)
+local	_gleCheckTexSubImage1DArgs	param_2	target	CONFIRMED	argument 1 of the glTex*/glColorTable* entry this checks (GL prototype order): looked up with _gleLookUp*Texture*/_gleLookUp*ColorTable(glContext, p) as the GL target enum
+local	_gleCheckTexSubImage1DArgs	param_3	level	CONFIRMED	argument 2 of the glTex*/glColorTable* entry this checks (GL prototype order): compared > 14 (0xe < level) with GL_INVALID_VALUE (0x501) and used as level index (stride 0x18) into the texture level table
+local	_gleCheckTexSubImage1DArgs	param_4	xoffset	CONFIRMED	argument 3 of the glTex*/glColorTable* entry this checks (GL prototype order): range-checked with _gleCheckTexSubImageRange(…, xoffset, width, level width)
+local	_gleCheckTexSubImage1DArgs	param_5	width	CONFIRMED	argument 4 of the glTex*/glColorTable* entry this checks (GL prototype order): checked against the level width (level record +4 / +200) together with the offset, or minus 2*border against the maximum texture size
+local	_gleCheckTexSubImage1DArgs	param_6	format	CONFIRMED	argument 5 of the glTex*/glColorTable* entry this checks (GL prototype order): GL pixel/compressed format forwarded to the argument checker (_gleCheckTexImageArgs/_gleCheckTexSubImageArgs/_gleCheckCompressedTexImageArgs)
+local	_gleCheckTexSubImage1DArgs	param_7	type	CONFIRMED	argument 6 of the glTex*/glColorTable* entry this checks (GL prototype order): GL pixel type forwarded to _gleCheckTexImageArgs/_gleCheckTexSubImageArgs
+local	_gleCheckCopyTexSubImage1DArgs	param_1	glContext	CONFIRMED	dereferenced at +0x7574, the GL error word that receives 0x500/0x501/0x502, and passed first to every callee: the GL context (same slot as the siblings that already carry glContext)
+local	_gleCheckCopyTexSubImage1DArgs	param_2	target	CONFIRMED	argument 1 of the glTex*/glColorTable* entry this checks (GL prototype order): looked up with _gleLookUp*Texture*/_gleLookUp*ColorTable(glContext, p) as the GL target enum
+local	_gleCheckCopyTexSubImage1DArgs	param_3	level	CONFIRMED	argument 2 of the glTex*/glColorTable* entry this checks (GL prototype order): compared > 14 (0xe < level) with GL_INVALID_VALUE (0x501) and used as level index (stride 0x18) into the texture level table
+local	_gleCheckCopyTexSubImage1DArgs	param_4	xoffset	CONFIRMED	argument 3 of the glTex*/glColorTable* entry this checks (GL prototype order): range-checked with _gleCheckTexSubImageRange(…, xoffset, width, level width)
+local	_gleCheckCopyTexSubImage1DArgs	param_5	width	CONFIRMED	argument 4 of the glTex*/glColorTable* entry this checks (GL prototype order): checked against the level width (level record +4 / +200) together with the offset, or minus 2*border against the maximum texture size
+local	_gleCheckCopyTexSubImage2DArgs	param_1	glContext	CONFIRMED	dereferenced at +0x7574, the GL error word that receives 0x500/0x501/0x502, and passed first to every callee: the GL context (same slot as the siblings that already carry glContext)
+local	_gleCheckCopyTexSubImage2DArgs	param_2	target	CONFIRMED	argument 1 of the glTex*/glColorTable* entry this checks (GL prototype order): looked up with _gleLookUp*Texture*/_gleLookUp*ColorTable(glContext, p) as the GL target enum
+local	_gleCheckCopyTexSubImage2DArgs	param_3	level	CONFIRMED	argument 2 of the glTex*/glColorTable* entry this checks (GL prototype order): compared > 14 (0xe < level) with GL_INVALID_VALUE (0x501) and used as level index (stride 0x18) into the texture level table
+local	_gleCheckCopyTexSubImage2DArgs	param_4	xoffset	CONFIRMED	argument 3 of the glTex*/glColorTable* entry this checks (GL prototype order): range-checked with _gleCheckTexSubImageRange(…, xoffset, width, level width)
+local	_gleCheckCopyTexSubImage2DArgs	param_5	yoffset	CONFIRMED	argument 4 of the glTex*/glColorTable* entry this checks (GL prototype order): range-checked with _gleCheckTexSubImageRange(…, yoffset, height, level height)
+local	_gleCheckCopyTexSubImage2DArgs	param_6	width	CONFIRMED	argument 5 of the glTex*/glColorTable* entry this checks (GL prototype order): checked against the level width (level record +4 / +200) together with the offset, or minus 2*border against the maximum texture size
+local	_gleCheckCopyTexSubImage2DArgs	param_7	height	CONFIRMED	argument 6 of the glTex*/glColorTable* entry this checks (GL prototype order): checked against the level height (level record +6 / +0xca) together with the y offset
+local	_gleCheckTexSubImage3DArgs	param_1	glContext	CONFIRMED	dereferenced at +0x7574, the GL error word that receives 0x500/0x501/0x502, and passed first to every callee: the GL context (same slot as the siblings that already carry glContext)
+local	_gleCheckTexSubImage3DArgs	param_2	target	CONFIRMED	argument 1 of the glTex*/glColorTable* entry this checks (GL prototype order): looked up with _gleLookUp*Texture*/_gleLookUp*ColorTable(glContext, p) as the GL target enum
+local	_gleCheckTexSubImage3DArgs	param_3	level	CONFIRMED	argument 2 of the glTex*/glColorTable* entry this checks (GL prototype order): compared > 14 (0xe < level) with GL_INVALID_VALUE (0x501) and used as level index (stride 0x18) into the texture level table
+local	_gleCheckTexSubImage3DArgs	param_4	xoffset	CONFIRMED	argument 3 of the glTex*/glColorTable* entry this checks (GL prototype order): range-checked with _gleCheckTexSubImageRange(…, xoffset, width, level width)
+local	_gleCheckTexSubImage3DArgs	param_5	yoffset	CONFIRMED	argument 4 of the glTex*/glColorTable* entry this checks (GL prototype order): range-checked with _gleCheckTexSubImageRange(…, yoffset, height, level height)
+local	_gleCheckTexSubImage3DArgs	param_6	zoffset	CONFIRMED	argument 5 of the glTex*/glColorTable* entry this checks (GL prototype order): range-checked with _gleCheckTexSubImageRange(…, zoffset, depth, level depth)
+local	_gleCheckTexSubImage3DArgs	param_7	width	CONFIRMED	argument 6 of the glTex*/glColorTable* entry this checks (GL prototype order): checked against the level width (level record +4 / +200) together with the offset, or minus 2*border against the maximum texture size
+local	_gleCheckTexSubImage3DArgs	param_8	height	CONFIRMED	argument 7 of the glTex*/glColorTable* entry this checks (GL prototype order): checked against the level height (level record +6 / +0xca) together with the y offset
+local	_gleCheckTexSubImage3DArgs	param_9	depth	CONFIRMED	argument 8 of the glTex*/glColorTable* entry this checks (GL prototype order): checked against the level depth (level record +0xcc) together with the z offset
+local	_gleCheckTexSubImage3DArgs	param_10	format	CONFIRMED	argument 9 of the glTex*/glColorTable* entry this checks (GL prototype order): GL pixel/compressed format forwarded to the argument checker (_gleCheckTexImageArgs/_gleCheckTexSubImageArgs/_gleCheckCompressedTexImageArgs)
+local	_gleCheckTexSubImage3DArgs	param_11	type	CONFIRMED	argument 10 of the glTex*/glColorTable* entry this checks (GL prototype order): GL pixel type forwarded to _gleCheckTexImageArgs/_gleCheckTexSubImageArgs
+local	_gleCheckCopyTexSubImage3DArgs	param_1	glContext	CONFIRMED	dereferenced at +0x7574, the GL error word that receives 0x500/0x501/0x502, and passed first to every callee: the GL context (same slot as the siblings that already carry glContext)
+local	_gleCheckCopyTexSubImage3DArgs	param_2	target	CONFIRMED	argument 1 of the glTex*/glColorTable* entry this checks (GL prototype order): looked up with _gleLookUp*Texture*/_gleLookUp*ColorTable(glContext, p) as the GL target enum
+local	_gleCheckCopyTexSubImage3DArgs	param_3	level	CONFIRMED	argument 2 of the glTex*/glColorTable* entry this checks (GL prototype order): compared > 14 (0xe < level) with GL_INVALID_VALUE (0x501) and used as level index (stride 0x18) into the texture level table
+local	_gleCheckCopyTexSubImage3DArgs	param_4	xoffset	CONFIRMED	argument 3 of the glTex*/glColorTable* entry this checks (GL prototype order): range-checked with _gleCheckTexSubImageRange(…, xoffset, width, level width)
+local	_gleCheckCopyTexSubImage3DArgs	param_5	yoffset	CONFIRMED	argument 4 of the glTex*/glColorTable* entry this checks (GL prototype order): range-checked with _gleCheckTexSubImageRange(…, yoffset, height, level height)
+local	_gleCheckCopyTexSubImage3DArgs	param_6	zoffset	CONFIRMED	argument 5 of the glTex*/glColorTable* entry this checks (GL prototype order): range-checked with _gleCheckTexSubImageRange(…, zoffset, depth, level depth)
+local	_gleCheckCopyTexSubImage3DArgs	param_7	width	CONFIRMED	argument 6 of the glTex*/glColorTable* entry this checks (GL prototype order): checked against the level width (level record +4 / +200) together with the offset, or minus 2*border against the maximum texture size
+local	_gleCheckCopyTexSubImage3DArgs	param_8	height	CONFIRMED	argument 7 of the glTex*/glColorTable* entry this checks (GL prototype order): checked against the level height (level record +6 / +0xca) together with the y offset
+local	_gleCheckCopyTexSubImage3DArgs	param_9	depth	CONFIRMED	argument 8 of the glTex*/glColorTable* entry this checks (GL prototype order): checked against the level depth (level record +0xcc) together with the z offset
+local	_gleCheckCompressedTexSubImage2DArgs	param_1	glContext	CONFIRMED	dereferenced at +0x7574, the GL error word that receives 0x500/0x501/0x502, and passed first to every callee: the GL context (same slot as the siblings that already carry glContext)
+local	_gleCheckCompressedTexSubImage2DArgs	param_2	target	CONFIRMED	argument 1 of the glTex*/glColorTable* entry this checks (GL prototype order): looked up with _gleLookUp*Texture*/_gleLookUp*ColorTable(glContext, p) as the GL target enum
+local	_gleCheckCompressedTexSubImage2DArgs	param_3	level	CONFIRMED	argument 2 of the glTex*/glColorTable* entry this checks (GL prototype order): compared > 14 (0xe < level) with GL_INVALID_VALUE (0x501) and used as level index (stride 0x18) into the texture level table
+local	_gleCheckCompressedTexSubImage2DArgs	param_4	xoffset	CONFIRMED	argument 3 of the glTex*/glColorTable* entry this checks (GL prototype order): range-checked with _gleCheckTexSubImageRange(…, xoffset, width, level width)
+local	_gleCheckCompressedTexSubImage2DArgs	param_5	yoffset	CONFIRMED	argument 4 of the glTex*/glColorTable* entry this checks (GL prototype order): range-checked with _gleCheckTexSubImageRange(…, yoffset, height, level height)
+local	_gleCheckCompressedTexSubImage2DArgs	param_6	width	CONFIRMED	argument 5 of the glTex*/glColorTable* entry this checks (GL prototype order): checked against the level width (level record +4 / +200) together with the offset, or minus 2*border against the maximum texture size
+local	_gleCheckCompressedTexSubImage2DArgs	param_7	height	CONFIRMED	argument 6 of the glTex*/glColorTable* entry this checks (GL prototype order): checked against the level height (level record +6 / +0xca) together with the y offset
+local	_gleCheckCompressedTexSubImage2DArgs	param_8	format	CONFIRMED	argument 7 of the glTex*/glColorTable* entry this checks (GL prototype order): GL pixel/compressed format forwarded to the argument checker (_gleCheckTexImageArgs/_gleCheckTexSubImageArgs/_gleCheckCompressedTexImageArgs)
+local	_gleCheckCompressedTexSubImage2DArgs	param_9	imageSize	CONFIRMED	argument 8 of the glTex*/glColorTable* entry this checks (GL prototype order): compared with the computed compressed size ((width+3>>2)*(height+3>>2)*depth << shift) in _gleCheckCompressedTexImageArgs
+local	_gleCheckCompressedTexSubImage3DArgs	param_1	glContext	CONFIRMED	dereferenced at +0x7574, the GL error word that receives 0x500/0x501/0x502, and passed first to every callee: the GL context (same slot as the siblings that already carry glContext)
+local	_gleCheckCompressedTexSubImage3DArgs	param_2	target	CONFIRMED	argument 1 of the glTex*/glColorTable* entry this checks (GL prototype order): looked up with _gleLookUp*Texture*/_gleLookUp*ColorTable(glContext, p) as the GL target enum
+local	_gleCheckCompressedTexSubImage3DArgs	param_3	level	CONFIRMED	argument 2 of the glTex*/glColorTable* entry this checks (GL prototype order): compared > 14 (0xe < level) with GL_INVALID_VALUE (0x501) and used as level index (stride 0x18) into the texture level table
+local	_gleCheckCompressedTexSubImage3DArgs	param_4	xoffset	CONFIRMED	argument 3 of the glTex*/glColorTable* entry this checks (GL prototype order): range-checked with _gleCheckTexSubImageRange(…, xoffset, width, level width)
+local	_gleCheckCompressedTexSubImage3DArgs	param_5	yoffset	CONFIRMED	argument 4 of the glTex*/glColorTable* entry this checks (GL prototype order): range-checked with _gleCheckTexSubImageRange(…, yoffset, height, level height)
+local	_gleCheckCompressedTexSubImage3DArgs	param_6	zoffset	CONFIRMED	argument 5 of the glTex*/glColorTable* entry this checks (GL prototype order): range-checked with _gleCheckTexSubImageRange(…, zoffset, depth, level depth)
+local	_gleCheckCompressedTexSubImage3DArgs	param_7	width	CONFIRMED	argument 6 of the glTex*/glColorTable* entry this checks (GL prototype order): checked against the level width (level record +4 / +200) together with the offset, or minus 2*border against the maximum texture size
+local	_gleCheckCompressedTexSubImage3DArgs	param_8	height	CONFIRMED	argument 7 of the glTex*/glColorTable* entry this checks (GL prototype order): checked against the level height (level record +6 / +0xca) together with the y offset
+local	_gleCheckCompressedTexSubImage3DArgs	param_9	depth	CONFIRMED	argument 8 of the glTex*/glColorTable* entry this checks (GL prototype order): checked against the level depth (level record +0xcc) together with the z offset
+local	_gleCheckCompressedTexSubImage3DArgs	param_10	format	CONFIRMED	argument 9 of the glTex*/glColorTable* entry this checks (GL prototype order): GL pixel/compressed format forwarded to the argument checker (_gleCheckTexImageArgs/_gleCheckTexSubImageArgs/_gleCheckCompressedTexImageArgs)
+local	_gleCheckCompressedTexSubImage3DArgs	param_11	imageSize	CONFIRMED	argument 10 of the glTex*/glColorTable* entry this checks (GL prototype order): compared with the computed compressed size ((width+3>>2)*(height+3>>2)*depth << shift) in _gleCheckCompressedTexImageArgs
+local	_gleCheckColorSubTableArgs	param_1	glContext	CONFIRMED	dereferenced at +0x7574, the GL error word that receives 0x500/0x501/0x502, and passed first to every callee: the GL context (same slot as the siblings that already carry glContext)
+local	_gleCheckColorSubTableArgs	param_2	target	CONFIRMED	argument 1 of the glTex*/glColorTable* entry this checks (GL prototype order): looked up with _gleLookUp*Texture*/_gleLookUp*ColorTable(glContext, p) as the GL target enum
+local	_gleCheckColorSubTableArgs	param_3	start	INFERRED	argument 2 of the glTex*/glColorTable* entry this checks (GL prototype order): range-checked with _gleCheckTexSubImageRange(…, start, count, table width)
+local	_gleCheckColorSubTableArgs	param_4	count	INFERRED	argument 3 of the glTex*/glColorTable* entry this checks (GL prototype order): range-checked with _gleCheckTexSubImageRange(…, start, count, table width)
+local	_gleCheckColorSubTableArgs	param_5	format	CONFIRMED	argument 4 of the glTex*/glColorTable* entry this checks (GL prototype order): GL pixel/compressed format forwarded to the argument checker (_gleCheckTexImageArgs/_gleCheckTexSubImageArgs/_gleCheckCompressedTexImageArgs)
+local	_gleCheckColorSubTableArgs	param_6	type	CONFIRMED	argument 5 of the glTex*/glColorTable* entry this checks (GL prototype order): GL pixel type forwarded to _gleCheckTexImageArgs/_gleCheckTexSubImageArgs
+local	_gleCheckCopyColorSubTableArgs	param_1	glContext	CONFIRMED	dereferenced at +0x7574, the GL error word that receives 0x500/0x501/0x502, and passed first to every callee: the GL context (same slot as the siblings that already carry glContext)
+local	_gleCheckCopyColorSubTableArgs	param_2	target	CONFIRMED	argument 1 of the glTex*/glColorTable* entry this checks (GL prototype order): looked up with _gleLookUp*Texture*/_gleLookUp*ColorTable(glContext, p) as the GL target enum
+local	_gleCheckCopyColorSubTableArgs	param_3	start	INFERRED	argument 2 of the glTex*/glColorTable* entry this checks (GL prototype order): range-checked with _gleCheckTexSubImageRange(…, start, count, table width)
+local	_gleCheckCopyColorSubTableArgs	param_4	count	INFERRED	argument 3 of the glTex*/glColorTable* entry this checks (GL prototype order): range-checked with _gleCheckTexSubImageRange(…, start, count, table width)
+local	_gleCheckCompressedTexImageArgs	uVar1	errorCode	CONFIRMED	0x500/0x501/0x502 (GL_INVALID_ENUM/VALUE/OPERATION) stored to the context error word at +0x7574
+local	_gleCheckTexImage1DArgs	uVar1	errorCode	CONFIRMED	0x500/0x501/0x502 (GL_INVALID_ENUM/VALUE/OPERATION) stored to the context error word at +0x7574
+local	_gleCheckTexImage1DArgs	iVar3	texture	CONFIRMED	result of _gleLookUp*Texture*D(glContext, target): the texture object for the target (0 raises the error)
+local	_gleCheckCopyTexImage1DArgs	uVar1	errorCode	CONFIRMED	0x500/0x501/0x502 (GL_INVALID_ENUM/VALUE/OPERATION) stored to the context error word at +0x7574
+local	_gleCheckCopyTexImage1DArgs	iVar3	texture	CONFIRMED	result of _gleLookUp*Texture*D(glContext, target): the texture object for the target (0 raises the error)
+local	_gleCheckColorTableArgs	iVar2	colorTable	CONFIRMED	result of _gleLookUp*ColorTable(glContext, target)
+local	_gleCheckCopyColorTableArgs	iVar2	colorTable	CONFIRMED	result of _gleLookUp*ColorTable(glContext, target)
+local	_gleCheckCompressedTexImage2DArgs	uVar1	errorCode	CONFIRMED	0x500/0x501/0x502 (GL_INVALID_ENUM/VALUE/OPERATION) stored to the context error word at +0x7574
+local	_gleCheckCompressedTexImage2DArgs	iVar4	texture	CONFIRMED	result of _gleLookUp*Texture*D(glContext, target): the texture object for the target (0 raises the error)
+local	_gleCheckCompressedTexImage3DArgs	uVar1	errorCode	CONFIRMED	0x500/0x501/0x502 (GL_INVALID_ENUM/VALUE/OPERATION) stored to the context error word at +0x7574
+local	_gleCheckCompressedTexImage3DArgs	iVar3	texture	CONFIRMED	result of _gleLookUp*Texture*D(glContext, target): the texture object for the target (0 raises the error)
+local	_gleCheckTexSubImage1DArgs	uVar1	errorCode	CONFIRMED	0x500/0x501/0x502 (GL_INVALID_ENUM/VALUE/OPERATION) stored to the context error word at +0x7574
+local	_gleCheckTexSubImage1DArgs	iVar2	texture	CONFIRMED	result of _gleLookUp*Texture*D(glContext, target): the texture object for the target (0 raises the error)
+local	_gleCheckCopyTexSubImage1DArgs	uVar2	errorCode	CONFIRMED	0x500/0x501/0x502 (GL_INVALID_ENUM/VALUE/OPERATION) stored to the context error word at +0x7574
+local	_gleCheckCopyTexSubImage1DArgs	iVar4	texture	CONFIRMED	result of _gleLookUp*Texture*D(glContext, target): the texture object for the target (0 raises the error)
+local	_gleCheckCopyTexSubImage2DArgs	uVar2	errorCode	CONFIRMED	0x500/0x501/0x502 (GL_INVALID_ENUM/VALUE/OPERATION) stored to the context error word at +0x7574
+local	_gleCheckCopyTexSubImage2DArgs	iVar4	texture	CONFIRMED	result of _gleLookUp*Texture*D(glContext, target): the texture object for the target (0 raises the error)
+local	_gleCheckTexSubImage3DArgs	uVar1	errorCode	CONFIRMED	0x500/0x501/0x502 (GL_INVALID_ENUM/VALUE/OPERATION) stored to the context error word at +0x7574
+local	_gleCheckTexSubImage3DArgs	iVar2	texture	CONFIRMED	result of _gleLookUp*Texture*D(glContext, target): the texture object for the target (0 raises the error)
+local	_gleCheckCopyTexSubImage3DArgs	uVar2	errorCode	CONFIRMED	0x500/0x501/0x502 (GL_INVALID_ENUM/VALUE/OPERATION) stored to the context error word at +0x7574
+local	_gleCheckCopyTexSubImage3DArgs	iVar4	texture	CONFIRMED	result of _gleLookUp*Texture*D(glContext, target): the texture object for the target (0 raises the error)
+local	_gleCheckCompressedTexSubImage2DArgs	uVar1	errorCode	CONFIRMED	0x500/0x501/0x502 (GL_INVALID_ENUM/VALUE/OPERATION) stored to the context error word at +0x7574
+local	_gleCheckCompressedTexSubImage2DArgs	iVar2	texture	CONFIRMED	result of _gleLookUp*Texture*D(glContext, target): the texture object for the target (0 raises the error)
+local	_gleCheckCompressedTexSubImage3DArgs	uVar1	errorCode	CONFIRMED	0x500/0x501/0x502 (GL_INVALID_ENUM/VALUE/OPERATION) stored to the context error word at +0x7574
+local	_gleCheckCompressedTexSubImage3DArgs	iVar2	texture	CONFIRMED	result of _gleLookUp*Texture*D(glContext, target): the texture object for the target (0 raises the error)
+local	_gleCheckColorSubTableArgs	uVar1	errorCode	CONFIRMED	0x500/0x501/0x502 (GL_INVALID_ENUM/VALUE/OPERATION) stored to the context error word at +0x7574
+local	_gleCheckColorSubTableArgs	iVar2	colorTable	CONFIRMED	result of _gleLookUp*ColorTable(glContext, target)
+local	_gleCheckCopyColorSubTableArgs	uVar1	errorCode	CONFIRMED	0x500/0x501/0x502 (GL_INVALID_ENUM/VALUE/OPERATION) stored to the context error word at +0x7574
+local	_gleCheckCopyColorSubTableArgs	iVar2	colorTable	CONFIRMED	result of _gleLookUp*ColorTable(glContext, target)
+local	_gleCheckCompressedTexImageArgs	param_1	glContext	CONFIRMED	dereferenced at +0x7574 (GL error word); the callers pass their glContext first
+local	_gleCheckCompressedTexImageArgs	param_3	internalformat	CONFIRMED	compared against 0x83f0..0x83f3 (GL_COMPRESSED_RGB_S3TC_DXT1_EXT..DXT5) and 0x8837
+local	_gleCheckCompressedTexImageArgs	param_4	border	CONFIRMED	must be 0 (param_4 == 0) for a compressed image
+local	_gleCheckCompressedTexImageArgs	param_5	width	CONFIRMED	(width+3>>2) block count factor of the compressed size
+local	_gleCheckCompressedTexImageArgs	param_6	height	CONFIRMED	(height+3>>2) block count factor of the compressed size
+local	_gleCheckCompressedTexImageArgs	param_7	depth	CONFIRMED	multiplies the compressed size
+local	_gleCheckCompressedTexImageArgs	param_8	imageSize	CONFIRMED	compared with (width+3>>2)*(height+3>>2)*depth << shift: the caller-supplied compressed image size
+local	_gleCheckCompressedTexSubImageRange	param_1	glContext	CONFIRMED	dereferenced at +0x7574 (error word set to 0x501 on failure)
+local	_gleCheckCompressedTexSubImageRange	param_2	levelInfo	INFERRED	level record: byte +10 is the border, read as -border <= offset
+local	_gleCheckCompressedTexSubImageRange	param_3	offset	CONFIRMED	checked -border <= offset and offset+size <= levelSize+border; also aligned to alignMask
+local	_gleCheckCompressedTexSubImageRange	param_4	size	CONFIRMED	checked 0 <= size, offset+size <= levelSize+border; aligned to alignMask
+local	_gleCheckCompressedTexSubImageRange	param_5	levelSize	CONFIRMED	the level dimension (+4/+6/+0xc8..) the range must fit in
+local	_gleCheckCompressedTexSubImageRange	param_6	alignMask	CONFIRMED	offset & alignMask and size & alignMask must be 0 (compressed block alignment)

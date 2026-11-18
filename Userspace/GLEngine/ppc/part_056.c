@@ -4,11 +4,11 @@
 void _gleVPBeginQuadStripTCL(glContext)
   int glContext;
 {
-  undefined *puVar1;
+  undefined *vpFlushTriQuadStripTCL;
   
-  puVar1 = PTR__gleVPFlushTriQuadStripTCL_0011161c;
+  vpFlushTriQuadStripTCL = PTR__gleVPFlushTriQuadStripTCL_0011161c;
   *(undefined4 *)(glContext + 0x4858) = *(undefined4 *)(glContext + 0x4854);
-  *(undefined **)(glContext + 0x4a0c) = puVar1;
+  *(undefined **)(glContext + 0x4a0c) = vpFlushTriQuadStripTCL;
   *(undefined **)(glContext + 0x4a08) = PTR__gleRenderQuadStripTCLFunc_0011226c;
   return;
 }
@@ -17,15 +17,15 @@ void _gleVPBeginQuadStripTCL(glContext)
 void _gleVPBeginPolygonTCL(glContext)
   int glContext;
 {
-  undefined *puVar1;
-  undefined *puVar2;
+  undefined *vpFlushPolygonTCL;
+  undefined *renderPolygonTCLFunc;
   
   *(undefined1 *)(glContext + 0x4a18) = 0;
-  puVar2 = PTR__gleRenderPolygonTCLFunc_00112250;
-  puVar1 = PTR__gleVPFlushPolygonTCL_00111614;
+  renderPolygonTCLFunc = PTR__gleRenderPolygonTCLFunc_00112250;
+  vpFlushPolygonTCL = PTR__gleVPFlushPolygonTCL_00111614;
   *(undefined4 *)(glContext + 0x4858) = *(undefined4 *)(glContext + 0x4854);
-  *(undefined **)(glContext + 0x4a0c) = puVar1;
-  *(undefined **)(glContext + 0x4a08) = puVar2;
+  *(undefined **)(glContext + 0x4a0c) = vpFlushPolygonTCL;
+  *(undefined **)(glContext + 0x4a08) = renderPolygonTCLFunc;
   return;
 }
 
@@ -33,11 +33,11 @@ void _gleVPBeginPolygonTCL(glContext)
 void _gleVPBeginPointsTCLRDirty(glContext)
   int glContext;
 {
-  undefined *puVar1;
+  undefined *vpFlushAtomicTCLRDirty;
   
-  puVar1 = PTR__gleVPFlushAtomicTCLRDirty_00111610;
+  vpFlushAtomicTCLRDirty = PTR__gleVPFlushAtomicTCLRDirty_00111610;
   *(undefined4 *)(glContext + 0x4858) = *(undefined4 *)(glContext + 0x4854);
-  *(undefined **)(glContext + 0x4a0c) = puVar1;
+  *(undefined **)(glContext + 0x4a0c) = vpFlushAtomicTCLRDirty;
   *(undefined **)(glContext + 0x4a08) = PTR__gleRenderPointsTCLFunc_0011223c;
   return;
 }
@@ -46,11 +46,11 @@ void _gleVPBeginPointsTCLRDirty(glContext)
 void _gleVPBeginLinesTCLRDirty(glContext)
   int glContext;
 {
-  undefined *puVar1;
+  undefined *vpFlushAtomicTCLRDirty;
   
-  puVar1 = PTR__gleVPFlushAtomicTCLRDirty_00111610;
+  vpFlushAtomicTCLRDirty = PTR__gleVPFlushAtomicTCLRDirty_00111610;
   *(undefined4 *)(glContext + 0x4858) = *(undefined4 *)(glContext + 0x4854);
-  *(undefined **)(glContext + 0x4a0c) = puVar1;
+  *(undefined **)(glContext + 0x4a0c) = vpFlushAtomicTCLRDirty;
   *(undefined **)(glContext + 0x4a08) = PTR__gleRenderLinesTCLFunc_00112214;
   return;
 }
@@ -59,15 +59,15 @@ void _gleVPBeginLinesTCLRDirty(glContext)
 void _gleVPBeginLineLoopTCLRDirty(glContext)
   int glContext;
 {
-  undefined *puVar1;
-  undefined *puVar2;
+  undefined *vpFlushLineLoopTCLRDirty;
+  undefined *renderLineLoopTCLFunc;
   
   *(undefined1 *)(glContext + 0x4a18) = 0;
-  puVar2 = PTR__gleRenderLineLoopTCLFunc_001121d4;
-  puVar1 = PTR__gleVPFlushLineLoopTCLRDirty_0011160c;
+  renderLineLoopTCLFunc = PTR__gleRenderLineLoopTCLFunc_001121d4;
+  vpFlushLineLoopTCLRDirty = PTR__gleVPFlushLineLoopTCLRDirty_0011160c;
   *(undefined4 *)(glContext + 0x4858) = *(undefined4 *)(glContext + 0x4854);
-  *(undefined **)(glContext + 0x4a0c) = puVar1;
-  *(undefined **)(glContext + 0x4a08) = puVar2;
+  *(undefined **)(glContext + 0x4a0c) = vpFlushLineLoopTCLRDirty;
+  *(undefined **)(glContext + 0x4a08) = renderLineLoopTCLFunc;
   return;
 }
 
@@ -75,15 +75,15 @@ void _gleVPBeginLineLoopTCLRDirty(glContext)
 void _gleVPBeginLineStripTCLRDirty(glContext)
   int glContext;
 {
-  undefined *puVar1;
-  undefined *puVar2;
+  undefined *vpFlushLineStripTCLRDirty;
+  undefined *renderLineStripTCLFunc;
   
   *(undefined1 *)(glContext + 0x4a18) = 0;
-  puVar2 = PTR__gleRenderLineStripTCLFunc_001121f4;
-  puVar1 = PTR__gleVPFlushLineStripTCLRDirty_00111608;
+  renderLineStripTCLFunc = PTR__gleRenderLineStripTCLFunc_001121f4;
+  vpFlushLineStripTCLRDirty = PTR__gleVPFlushLineStripTCLRDirty_00111608;
   *(undefined4 *)(glContext + 0x4858) = *(undefined4 *)(glContext + 0x4854);
-  *(undefined **)(glContext + 0x4a0c) = puVar1;
-  *(undefined **)(glContext + 0x4a08) = puVar2;
+  *(undefined **)(glContext + 0x4a0c) = vpFlushLineStripTCLRDirty;
+  *(undefined **)(glContext + 0x4a08) = renderLineStripTCLFunc;
   return;
 }
 
@@ -91,11 +91,11 @@ void _gleVPBeginLineStripTCLRDirty(glContext)
 void _gleVPBeginTrianglesTCLRDirty(glContext)
   int glContext;
 {
-  undefined *puVar1;
+  undefined *vpFlushAtomicTCLRDirty;
   
-  puVar1 = PTR__gleVPFlushAtomicTCLRDirty_00111610;
+  vpFlushAtomicTCLRDirty = PTR__gleVPFlushAtomicTCLRDirty_00111610;
   *(undefined4 *)(glContext + 0x4858) = *(undefined4 *)(glContext + 0x4854);
-  *(undefined **)(glContext + 0x4a0c) = puVar1;
+  *(undefined **)(glContext + 0x4a0c) = vpFlushAtomicTCLRDirty;
   *(undefined **)(glContext + 0x4a08) = PTR__gleRenderTrianglesTCLFunc_001122d4;
   return;
 }
@@ -104,11 +104,11 @@ void _gleVPBeginTrianglesTCLRDirty(glContext)
 void _gleVPBeginTriangleStripTCLRDirty(glContext)
   int glContext;
 {
-  undefined *puVar1;
+  undefined *vpFlushTriQuadStripTCLRDirty;
   
-  puVar1 = PTR__gleVPFlushTriQuadStripTCLRDirty_00111604;
+  vpFlushTriQuadStripTCLRDirty = PTR__gleVPFlushTriQuadStripTCLRDirty_00111604;
   *(undefined4 *)(glContext + 0x4858) = *(undefined4 *)(glContext + 0x4854);
-  *(undefined **)(glContext + 0x4a0c) = puVar1;
+  *(undefined **)(glContext + 0x4a0c) = vpFlushTriQuadStripTCLRDirty;
   *(undefined **)(glContext + 0x4a08) = PTR__gleRenderTriangleStripTCLFunc_001122b8;
   return;
 }
@@ -117,11 +117,11 @@ void _gleVPBeginTriangleStripTCLRDirty(glContext)
 void _gleVPBeginTriangleFanTCLRDirty(glContext)
   int glContext;
 {
-  undefined *puVar1;
+  undefined *vpFlushTriangleFanTCLRDirty;
   
-  puVar1 = PTR__gleVPFlushTriangleFanTCLRDirty_00111600;
+  vpFlushTriangleFanTCLRDirty = PTR__gleVPFlushTriangleFanTCLRDirty_00111600;
   *(undefined4 *)(glContext + 0x4858) = *(undefined4 *)(glContext + 0x4854);
-  *(undefined **)(glContext + 0x4a0c) = puVar1;
+  *(undefined **)(glContext + 0x4a0c) = vpFlushTriangleFanTCLRDirty;
   *(undefined **)(glContext + 0x4a08) = PTR__gleRenderTriangleFanTCLFunc_00112298;
   return;
 }
@@ -130,11 +130,11 @@ void _gleVPBeginTriangleFanTCLRDirty(glContext)
 void _gleVPBeginQuadsTCLRDirty(glContext)
   int glContext;
 {
-  undefined *puVar1;
+  undefined *vpFlushAtomicTCLRDirty;
   
-  puVar1 = PTR__gleVPFlushAtomicTCLRDirty_00111610;
+  vpFlushAtomicTCLRDirty = PTR__gleVPFlushAtomicTCLRDirty_00111610;
   *(undefined4 *)(glContext + 0x4858) = *(undefined4 *)(glContext + 0x4854);
-  *(undefined **)(glContext + 0x4a0c) = puVar1;
+  *(undefined **)(glContext + 0x4a0c) = vpFlushAtomicTCLRDirty;
   *(undefined **)(glContext + 0x4a08) = PTR__gleRenderQuadsTCLFunc_00112280;
   return;
 }
@@ -143,11 +143,11 @@ void _gleVPBeginQuadsTCLRDirty(glContext)
 void _gleVPBeginQuadStripTCLRDirty(glContext)
   int glContext;
 {
-  undefined *puVar1;
+  undefined *vpFlushTriQuadStripTCLRDirty;
   
-  puVar1 = PTR__gleVPFlushTriQuadStripTCLRDirty_00111604;
+  vpFlushTriQuadStripTCLRDirty = PTR__gleVPFlushTriQuadStripTCLRDirty_00111604;
   *(undefined4 *)(glContext + 0x4858) = *(undefined4 *)(glContext + 0x4854);
-  *(undefined **)(glContext + 0x4a0c) = puVar1;
+  *(undefined **)(glContext + 0x4a0c) = vpFlushTriQuadStripTCLRDirty;
   *(undefined **)(glContext + 0x4a08) = PTR__gleRenderQuadStripTCLFunc_0011226c;
   return;
 }
@@ -156,15 +156,15 @@ void _gleVPBeginQuadStripTCLRDirty(glContext)
 void _gleVPBeginPolygonTCLRDirty(glContext)
   int glContext;
 {
-  undefined *puVar1;
-  undefined *puVar2;
+  undefined *vpFlushPolygonTCLRDirty;
+  undefined *renderPolygonTCLFunc;
   
   *(undefined1 *)(glContext + 0x4a18) = 0;
-  puVar2 = PTR__gleRenderPolygonTCLFunc_00112250;
-  puVar1 = PTR__gleVPFlushPolygonTCLRDirty_001115fc;
+  renderPolygonTCLFunc = PTR__gleRenderPolygonTCLFunc_00112250;
+  vpFlushPolygonTCLRDirty = PTR__gleVPFlushPolygonTCLRDirty_001115fc;
   *(undefined4 *)(glContext + 0x4858) = *(undefined4 *)(glContext + 0x4854);
-  *(undefined **)(glContext + 0x4a0c) = puVar1;
-  *(undefined **)(glContext + 0x4a08) = puVar2;
+  *(undefined **)(glContext + 0x4a0c) = vpFlushPolygonTCLRDirty;
+  *(undefined **)(glContext + 0x4a08) = renderPolygonTCLFunc;
   return;
 }
 
@@ -235,7 +235,7 @@ int _gleVPEmulate(glContext, param_2)
 }
 
 /* _gleSetWindowPos @ 0x107590 (424 bytes) */
-double _gleSetWindowPos(int glContext,float fparam_1,float fparam_2,double fparam_3)
+double _gleSetWindowPos(int glContext,float floatArg1,float floatArg2,double floatArg3)
 {
   undefined4 *puVar1;
   undefined4 uVar2;
@@ -254,16 +254,16 @@ double _gleSetWindowPos(int glContext,float fparam_1,float fparam_2,double fpara
   iVar6 = *(int *)(glContext + 0x4854);
   *(undefined4 *)(iVar6 + -0x184) = *(undefined4 *)(glContext + 0x2ec);
   *(undefined1 *)(iVar6 + -0x181) = 0;
-  *(float *)(glContext + 0x2e0) = (float)fparam_1;
-  *(float *)(glContext + 0x2e4) = (float)fparam_2;
-  if (fparam_3 < dVar10) {
+  *(float *)(glContext + 0x2e0) = (float)floatArg1;
+  *(float *)(glContext + 0x2e4) = (float)floatArg2;
+  if (floatArg3 < dVar10) {
     dVar10 = *(double *)(glContext + 0x1b90);
   }
-  else if (1.0 < fparam_3) {
+  else if (1.0 < floatArg3) {
     dVar10 = *(double *)(glContext + 0x1b98);
   }
   else {
-    dVar10 = fparam_3 * (*(double *)(glContext + 0x1b98) - *(double *)(glContext + 0x1b90)) +
+    dVar10 = floatArg3 * (*(double *)(glContext + 0x1b98) - *(double *)(glContext + 0x1b90)) +
              *(double *)(glContext + 0x1b90);
   }
   *(float *)(glContext + 0x2e8) = (float)dVar10;
@@ -406,23 +406,23 @@ double _gliSwitchPlugin(glContext, param_2)
   int param_2;
 {
   uint uVar1;
-  undefined *puVar2;
+  undefined *setClipInterpFunc;
   undefined4 uVar3;
   int iVar4;
-  double fparam_1;
+  double floatArg1;
   double fparam_1_00;
-  double in_f2;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
-  double in_stack_ffffffb8;
-  double in_stack_ffffffc0;
-  double in_stack_ffffffc8;
-  double in_stack_ffffffd0;
-  double in_stack_ffffffd8;
+  double incomingFpr2;
+  double incomingFpr3;
+  double incomingFpr4;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
+  double incomingStack_ffffffb8;
+  double incomingStack_ffffffc0;
+  double incomingStack_ffffffc8;
+  double incomingStack_ffffffd0;
+  double incomingStack_ffffffd8;
   
   _gleSynchronizePluginFramebuffer(glContext);
   _gleSynchronizePluginTextures(glContext);
@@ -438,14 +438,14 @@ double _gliSwitchPlugin(glContext, param_2)
   *(uint *)(glContext + 0x314) = *(uint *)(glContext + 0x314) | 0x3ffffff;
   *(uint *)(glContext + 0x318) = *(uint *)(glContext + 0x318) | 0xfffffffd;
   *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x7ffffff;
-  ((void (*)())_gleUpdateDepthRangeData)(glContext,fparam_1,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_stack_ffffffb8,
-             in_stack_ffffffc0,in_stack_ffffffc8,in_stack_ffffffd0,in_stack_ffffffd8);
+  ((void (*)())_gleUpdateDepthRangeData)(glContext,floatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffffb8,
+             incomingStack_ffffffc0,incomingStack_ffffffc8,incomingStack_ffffffd0,incomingStack_ffffffd8);
   _gleUpdatePolyMode(glContext);
-  ((void (*)())_gleUpdateViewScissorData)(glContext,fparam_1_00,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8);
+  ((void (*)())_gleUpdateViewScissorData)(glContext,fparam_1_00,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
   _gleUpdateTextureTransform(glContext);
-  puVar2 = PTR__gleSetClipInterpFunc_00112038;
+  setClipInterpFunc = PTR__gleSetClipInterpFunc_00112038;
   *(undefined **)(glContext + 0x49c8) = PTR__gleSetEyeInterpFunc_0011203c;
-  *(undefined **)(glContext + 0x49cc) = puVar2;
+  *(undefined **)(glContext + 0x49cc) = setClipInterpFunc;
   _gleUpdatePrimitiveData(glContext);
   uVar1 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0xc) == 0);
   *(undefined **)
@@ -461,32 +461,32 @@ double _gliSwitchPlugin(glContext, param_2)
 }
 
 /* _gliDetachRevert @ 0x1079fc (220 bytes) */
-void _gliDetachRevert(param_1)
-  int param_1;
+void _gliDetachRevert(glContext)
+  int glContext;
 {
   uint uVar1;
   uint uVar2;
   int iVar3;
   
-  uVar2 = (uint)*(byte *)(param_1 + 0x85a5);
-  if (uVar2 == *(byte *)(param_1 + 0x85a8)) {
+  uVar2 = (uint)*(byte *)(glContext + 0x85a5);
+  if (uVar2 == *(byte *)(glContext + 0x85a8)) {
     return;
   }
   if (uVar2 == 0xff) {
     return;
   }
-  uVar1 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x938) == 0);
+  uVar1 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x938) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar1 | *(uint *)(param_1 + 0x4684) & ~uVar1) + 0x938) =
+   ((*(uint *)(glContext + 0x4680) & uVar1 | *(uint *)(glContext + 0x4684) & ~uVar1) + 0x938) =
        PTR__glSwap_Exec_0011211c;
-  uVar1 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x168) == 0);
+  uVar1 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x168) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar1 | *(uint *)(param_1 + 0x4684) & ~uVar1) + 0x168) =
+   ((*(uint *)(glContext + 0x4680) & uVar1 | *(uint *)(glContext + 0x4684) & ~uVar1) + 0x168) =
        PTR__glFlush_Exec_00112118;
-  iVar3 = uVar2 * 0x2e0 + param_1;
-  uVar2 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x164) == 0);
+  iVar3 = uVar2 * 0x2e0 + glContext;
+  uVar2 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x164) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar2 | *(uint *)(param_1 + 0x4684) & ~uVar2) + 0x164) =
+   ((*(uint *)(glContext + 0x4680) & uVar2 | *(uint *)(glContext + 0x4684) & ~uVar2) + 0x164) =
        PTR__glFinish_Exec_00112114;
                     
                     
@@ -506,21 +506,21 @@ void _gliAttachDrawable(param_1, param_2, param_3, param_4)
 }
 
 /* _gliSwapBuffers @ 0x107ae0 (664 bytes) */
-void _gliSwapBuffers(int glContext,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8)
+void _gliSwapBuffers(int glContext,double fparam_1,double floatArg2,double floatArg3,double floatArg4,double floatArg5,double floatArg6,double floatArg7,double floatArg8)
 {
   bool bVar1;
   char cVar2;
   undefined4 uVar3;
   int *piVar4;
   int iVar5;
-  undefined4 in_r5;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
+  undefined4 incomingR5;
+  undefined4 incomingR6;
+  undefined4 incomingR7;
+  undefined4 incomingR8;
   int iVar6;
   uint uVar7;
   int *piVar8;
-  double extraout_f1;
+  double f1AfterCall;
   
   if (-1 < *(short *)(glContext + 0x4a10)) {
     if (*(int *)(glContext + 0x7574) != 0) {
@@ -535,15 +535,15 @@ void _gliSwapBuffers(int glContext,double fparam_1,double fparam_2,double fparam
   iVar6 = *(int *)(glContext + 0x50ac);
   if (iVar6 != 0 || (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
     _gleUpdateMatrixFunc(glContext);
-    fparam_1 = extraout_f1;
+    fparam_1 = f1AfterCall;
   }
   if (*(char *)(glContext + 0x4691) == '\0') goto LAB_00107d44;
   iVar5 = *(int *)(glContext + 0x744c);
   piVar8 = (int *)(glContext + 0x310);
   cVar2 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
   if ((iVar5 != 0) && (*(int *)(iVar5 + 0xec) != 0)) {
-    ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,iVar5 + 0x10,in_r5,in_r6,in_r7,in_r8,iVar6,fparam_1,fparam_2,fparam_3,
-               fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
+    ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,iVar5 + 0x10,incomingR5,incomingR6,incomingR7,incomingR8,iVar6,fparam_1,floatArg2,floatArg3,
+               floatArg4,floatArg5,floatArg6,floatArg7,floatArg8);
     *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000000;
   }
   if ((*(char *)(glContext + 0x4664) == '\0') && (*(int *)(glContext + 0x5430) == 0)) {

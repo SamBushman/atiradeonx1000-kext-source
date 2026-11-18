@@ -4,14 +4,14 @@
 void _gleBeginLinesRenderTCLRDirty(glContext)
   int glContext;
 {
-  undefined *puVar1;
-  undefined *puVar2;
+  undefined *flushAtomicTCLRDirtyFunc;
+  undefined *renderLinesTCLFunc;
   
-  puVar2 = PTR__gleRenderLinesTCLFunc_00112214;
-  puVar1 = PTR__gleFlushAtomicTCLRDirtyFunc_00112210;
+  renderLinesTCLFunc = PTR__gleRenderLinesTCLFunc_00112214;
+  flushAtomicTCLRDirtyFunc = PTR__gleFlushAtomicTCLRDirtyFunc_00112210;
   *(undefined4 *)(glContext + 0x486c) = 0;
-  *(undefined **)(glContext + 0x4a0c) = puVar1;
-  *(undefined **)(glContext + 0x4a08) = puVar2;
+  *(undefined **)(glContext + 0x4a0c) = flushAtomicTCLRDirtyFunc;
+  *(undefined **)(glContext + 0x4a08) = renderLinesTCLFunc;
   *(undefined4 *)(glContext + 0x4858) = *(undefined4 *)(glContext + 0x4854);
   return;
 }
@@ -36,15 +36,15 @@ void _gleBeginLinesSelectFeedback(glContext)
 void _gleBeginLineStripRenderSmooth(glContext)
   int glContext;
 {
-  undefined *puVar1;
-  undefined *puVar2;
+  undefined *renderSmoothLineStripFunc;
+  undefined *flushLineStripFunc;
   
   *(undefined1 *)(glContext + 0x4a18) = 0;
-  puVar2 = PTR__gleFlushLineStripFunc_00112204;
-  puVar1 = PTR__gleRenderSmoothLineStripFunc_00112200;
+  flushLineStripFunc = PTR__gleFlushLineStripFunc_00112204;
+  renderSmoothLineStripFunc = PTR__gleRenderSmoothLineStripFunc_00112200;
   *(undefined4 *)(glContext + 0x4858) = *(undefined4 *)(glContext + 0x4854);
-  *(undefined **)(glContext + 0x4a0c) = puVar2;
-  *(undefined **)(glContext + 0x4a08) = puVar1;
+  *(undefined **)(glContext + 0x4a0c) = flushLineStripFunc;
+  *(undefined **)(glContext + 0x4a08) = renderSmoothLineStripFunc;
   return;
 }
 
@@ -52,15 +52,15 @@ void _gleBeginLineStripRenderSmooth(glContext)
 void _gleBeginLineStripRenderFlat(glContext)
   int glContext;
 {
-  undefined *puVar1;
-  undefined *puVar2;
+  undefined *renderFlatLineStripFunc;
+  undefined *flushLineStripFunc;
   
   *(undefined1 *)(glContext + 0x4a18) = 0;
-  puVar2 = PTR__gleFlushLineStripFunc_00112204;
-  puVar1 = PTR__gleRenderFlatLineStripFunc_001121fc;
+  flushLineStripFunc = PTR__gleFlushLineStripFunc_00112204;
+  renderFlatLineStripFunc = PTR__gleRenderFlatLineStripFunc_001121fc;
   *(undefined4 *)(glContext + 0x4858) = *(undefined4 *)(glContext + 0x4854);
-  *(undefined **)(glContext + 0x4a0c) = puVar2;
-  *(undefined **)(glContext + 0x4a08) = puVar1;
+  *(undefined **)(glContext + 0x4a0c) = flushLineStripFunc;
+  *(undefined **)(glContext + 0x4a08) = renderFlatLineStripFunc;
   return;
 }
 
@@ -68,15 +68,15 @@ void _gleBeginLineStripRenderFlat(glContext)
 void _gleBeginLineStripRenderTCLRDirty(glContext)
   int glContext;
 {
-  undefined *puVar1;
-  undefined *puVar2;
+  undefined *flushLineStripTCLRDirtyFunc;
+  undefined *renderLineStripTCLFunc;
   
   *(undefined1 *)(glContext + 0x4a18) = 0;
-  puVar2 = PTR__gleRenderLineStripTCLFunc_001121f4;
-  puVar1 = PTR__gleFlushLineStripTCLRDirtyFunc_001121f0;
+  renderLineStripTCLFunc = PTR__gleRenderLineStripTCLFunc_001121f4;
+  flushLineStripTCLRDirtyFunc = PTR__gleFlushLineStripTCLRDirtyFunc_001121f0;
   *(undefined4 *)(glContext + 0x486c) = 0;
-  *(undefined **)(glContext + 0x4a0c) = puVar1;
-  *(undefined **)(glContext + 0x4a08) = puVar2;
+  *(undefined **)(glContext + 0x4a0c) = flushLineStripTCLRDirtyFunc;
+  *(undefined **)(glContext + 0x4a08) = renderLineStripTCLFunc;
   *(undefined4 *)(glContext + 0x4858) = *(undefined4 *)(glContext + 0x4854);
   return;
 }
@@ -101,15 +101,15 @@ void _gleBeginLineStripSelectFeedback(glContext)
 void _gleBeginLineLoopRenderSmooth(glContext)
   int glContext;
 {
-  undefined *puVar1;
-  undefined *puVar2;
+  undefined *renderSmoothLineLoopFunc;
+  undefined *flushLineLoopFunc;
   
   *(undefined1 *)(glContext + 0x4a18) = 0;
-  puVar2 = PTR__gleFlushLineLoopFunc_001121e4;
-  puVar1 = PTR__gleRenderSmoothLineLoopFunc_001121e0;
+  flushLineLoopFunc = PTR__gleFlushLineLoopFunc_001121e4;
+  renderSmoothLineLoopFunc = PTR__gleRenderSmoothLineLoopFunc_001121e0;
   *(undefined4 *)(glContext + 0x4858) = *(undefined4 *)(glContext + 0x4854);
-  *(undefined **)(glContext + 0x4a0c) = puVar2;
-  *(undefined **)(glContext + 0x4a08) = puVar1;
+  *(undefined **)(glContext + 0x4a0c) = flushLineLoopFunc;
+  *(undefined **)(glContext + 0x4a08) = renderSmoothLineLoopFunc;
   return;
 }
 
@@ -117,15 +117,15 @@ void _gleBeginLineLoopRenderSmooth(glContext)
 void _gleBeginLineLoopRenderFlat(glContext)
   int glContext;
 {
-  undefined *puVar1;
-  undefined *puVar2;
+  undefined *renderFlatLineLoopFunc;
+  undefined *flushLineLoopFunc;
   
   *(undefined1 *)(glContext + 0x4a18) = 0;
-  puVar2 = PTR__gleFlushLineLoopFunc_001121e4;
-  puVar1 = PTR__gleRenderFlatLineLoopFunc_001121dc;
+  flushLineLoopFunc = PTR__gleFlushLineLoopFunc_001121e4;
+  renderFlatLineLoopFunc = PTR__gleRenderFlatLineLoopFunc_001121dc;
   *(undefined4 *)(glContext + 0x4858) = *(undefined4 *)(glContext + 0x4854);
-  *(undefined **)(glContext + 0x4a0c) = puVar2;
-  *(undefined **)(glContext + 0x4a08) = puVar1;
+  *(undefined **)(glContext + 0x4a0c) = flushLineLoopFunc;
+  *(undefined **)(glContext + 0x4a08) = renderFlatLineLoopFunc;
   return;
 }
 
@@ -133,15 +133,15 @@ void _gleBeginLineLoopRenderFlat(glContext)
 void _gleBeginLineLoopRenderTCLRDirty(glContext)
   int glContext;
 {
-  undefined *puVar1;
-  undefined *puVar2;
+  undefined *flushLineLoopTCLRDirtyFunc;
+  undefined *renderLineLoopTCLFunc;
   
   *(undefined1 *)(glContext + 0x4a18) = 0;
-  puVar2 = PTR__gleRenderLineLoopTCLFunc_001121d4;
-  puVar1 = PTR__gleFlushLineLoopTCLRDirtyFunc_001121d0;
+  renderLineLoopTCLFunc = PTR__gleRenderLineLoopTCLFunc_001121d4;
+  flushLineLoopTCLRDirtyFunc = PTR__gleFlushLineLoopTCLRDirtyFunc_001121d0;
   *(undefined4 *)(glContext + 0x486c) = 0;
-  *(undefined **)(glContext + 0x4a0c) = puVar1;
-  *(undefined **)(glContext + 0x4a08) = puVar2;
+  *(undefined **)(glContext + 0x4a0c) = flushLineLoopTCLRDirtyFunc;
+  *(undefined **)(glContext + 0x4a08) = renderLineLoopTCLFunc;
   *(undefined4 *)(glContext + 0x4858) = *(undefined4 *)(glContext + 0x4854);
   return;
 }
@@ -216,7 +216,7 @@ LAB_000d7c68:
 }
 
 /* _gleClipLinesPlane @ 0xd7cb0 (360 bytes) */
-int _gleClipLinesPlane(int param_1,int *param_2,int param_3,double fparam_1)
+int _gleClipLinesPlane(int param_1,int *param_2,int param_3,double unusedFloatArg1)
 {
   float fVar1;
   float fVar2;
@@ -290,10 +290,10 @@ LAB_000d7dd0:
 }
 
 /* _gleFeedbackLinesFunc_body @ 0xd7e1c (776 bytes) */
-void _gleFeedbackLinesFunc_body(glContext, param_2, param_3)
+void _gleFeedbackLinesFunc_body(glContext, unusedArg2, unusedArg3)
   int glContext;
-  undefined4 param_2;
-  undefined4 param_3;
+  undefined4 unusedArg2;
+  undefined4 unusedArg3;
 {
   uint *puVar1;
   bool bVar2;
@@ -399,10 +399,10 @@ void _gleFeedbackLinesFunc_body(glContext, param_2, param_3)
 }
 
 /* _gleFeedbackLineStripFunc_body @ 0xd811c (828 bytes) */
-void _gleFeedbackLineStripFunc_body(glContext, param_2, param_3)
+void _gleFeedbackLineStripFunc_body(glContext, unusedArg2, unusedArg3)
   int glContext;
-  undefined4 param_2;
-  undefined4 param_3;
+  undefined4 unusedArg2;
+  undefined4 unusedArg3;
 {
   uint *puVar1;
   undefined4 uVar2;
@@ -415,7 +415,7 @@ void _gleFeedbackLineStripFunc_body(glContext, param_2, param_3)
   uint uVar9;
   uint *puVar10;
   double dVar11;
-  double extraout_f1;
+  double f1AfterCall;
   
   bVar5 = false;
   if ((*(char *)(glContext + 0x4664) != '\0') || (*(int *)(glContext + 0x5434) != 0)) {
@@ -511,7 +511,7 @@ void _gleFeedbackLineStripFunc_body(glContext, param_2, param_3)
         uVar8 = uVar8 + 0x100;
         puVar10 = puVar10 + 2;
         uVar9 = uVar9 + 0x100;
-        dVar11 = extraout_f1;
+        dVar11 = f1AfterCall;
       }
       iVar3 = (int)puVar10 - (int)puVar7 >> 2;
       if (((*(char *)(glContext + 0x4e18) == '\0') ||
@@ -580,7 +580,7 @@ void _gleFeedbackLineLoopFunc_body(glContext)
   uint *puVar13;
   uint uVar14;
   double dVar15;
-  double extraout_f1;
+  double f1AfterCall;
   
   bVar6 = false;
   if ((*(char *)(glContext + 0x4664) != '\0') || (*(int *)(glContext + 0x5434) != 0)) {
@@ -699,7 +699,7 @@ void _gleFeedbackLineLoopFunc_body(glContext)
         uVar14 = uVar14 + 0x100;
         puVar13 = puVar13 + 2;
         uVar12 = uVar12 + 0x100;
-        dVar15 = extraout_f1;
+        dVar15 = f1AfterCall;
       }
       iVar7 = (int)puVar13 - (int)puVar11 >> 2;
       if (((*(char *)(glContext + 0x4e18) == '\0') ||
@@ -761,7 +761,7 @@ void _gleRenderSmoothLinesFunc_body(glContext)
   uint uVar6;
   uint *puVar7;
   int iVar8;
-  double extraout_f1;
+  double f1AfterCall;
   double fparam_1;
   
   iVar3 = _gleTexEnableBits(glContext);
@@ -770,7 +770,7 @@ void _gleRenderSmoothLinesFunc_body(glContext)
   if ((1 < iVar8) &&
      (uVar4 = (**(code **)(glContext + 0x5060))(glContext,uVar6,iVar8), (uVar4 & 0xff00) == 0)) {
     bVar1 = iVar3 != 0;
-    fparam_1 = extraout_f1;
+    fparam_1 = f1AfterCall;
     if ((bVar1) && (*(char *)(glContext + 0x53e4) != '\0')) {
       fparam_1 = (double)(**(double ( **)(int,int,int))(glContext + 0x53dc))(glContext, uVar6, iVar8);
     }
@@ -847,9 +847,9 @@ void _gleRenderSmoothLineStripFunc_body(glContext)
   uint *puVar8;
   int iVar9;
   uint uVar10;
-  double extraout_f1;
+  double f1AfterCall;
   double fparam_1;
-  double extraout_f1_00;
+  double f1AfterCall1;
   
   iVar4 = _gleTexEnableBits(glContext);
   puVar8 = *(uint **)(glContext + 0x4854);
@@ -859,7 +859,7 @@ void _gleRenderSmoothLineStripFunc_body(glContext)
     return;
   }
   bVar1 = iVar4 != 0;
-  fparam_1 = extraout_f1;
+  fparam_1 = f1AfterCall;
   if ((bVar1) && (*(char *)(glContext + 0x53e4) != '\0')) {
     fparam_1 = (double)(**(double ( **)(int,int,int))(glContext + 0x53dc))(glContext, puVar8, iVar9);
   }
@@ -901,7 +901,7 @@ void _gleRenderSmoothLineStripFunc_body(glContext)
       uVar10 = uVar10 + 0x100;
       puVar7 = puVar7 + 2;
       puVar3 = puVar3 + 0x40;
-      fparam_1 = extraout_f1_00;
+      fparam_1 = f1AfterCall1;
     }
     iVar9 = (int)puVar7 - (int)puVar6 >> 2;
     if ((*(char *)(glContext + 0x4e18) != '\0') &&
@@ -943,9 +943,9 @@ void _gleRenderSmoothLineLoopFunc_body(glContext)
   uint *puVar12;
   int iVar13;
   uint uVar14;
-  double extraout_f1;
+  double f1AfterCall;
   double fparam_1;
-  double extraout_f1_00;
+  double f1AfterCall1;
   
   iVar5 = _gleTexEnableBits(glContext);
   puVar12 = *(uint **)(glContext + 0x4854);
@@ -978,7 +978,7 @@ void _gleRenderSmoothLineLoopFunc_body(glContext)
     return;
   }
   bVar1 = iVar5 != 0;
-  fparam_1 = extraout_f1;
+  fparam_1 = f1AfterCall;
   if ((bVar1) && (*(char *)(glContext + 0x53e4) != '\0')) {
     fparam_1 = (double)(**(double ( **)(int,int,int))(glContext + 0x53dc))(glContext, puVar12, iVar13);
   }
@@ -1020,7 +1020,7 @@ void _gleRenderSmoothLineLoopFunc_body(glContext)
       uVar14 = uVar14 + 0x100;
       puVar11 = puVar11 + 2;
       puVar7 = puVar7 + 0x40;
-      fparam_1 = extraout_f1_00;
+      fparam_1 = f1AfterCall1;
     }
     iVar13 = (int)puVar11 - (int)puVar10 >> 2;
     if ((*(char *)(glContext + 0x4e18) != '\0') &&
@@ -1055,7 +1055,7 @@ void _gleRenderFlatLinesFunc_body(glContext)
   int iVar6;
   uint uVar7;
   uint *puVar8;
-  double extraout_f1;
+  double f1AfterCall;
   double fparam_1;
   
   iVar2 = _gleTexEnableBits(glContext);
@@ -1064,7 +1064,7 @@ void _gleRenderFlatLinesFunc_body(glContext)
   if ((1 < iVar6) &&
      (uVar3 = (**(code **)(glContext + 0x5060))(glContext,uVar7,iVar6), (uVar3 & 0xff00) == 0)) {
     bVar1 = iVar2 != 0;
-    fparam_1 = extraout_f1;
+    fparam_1 = f1AfterCall;
     if ((bVar1) && (*(char *)(glContext + 0x53e4) != '\0')) {
       fparam_1 = (double)(**(double ( **)(int,int,int))(glContext + 0x53dc))(glContext, uVar7, iVar6);
     }
@@ -1143,9 +1143,9 @@ void _gleRenderFlatLineStripFunc_body(glContext)
   uint uVar8;
   uint *puVar9;
   uint *puVar10;
-  double extraout_f1;
+  double f1AfterCall;
   double fparam_1;
-  double extraout_f1_00;
+  double f1AfterCall1;
   
   iVar4 = _gleTexEnableBits(glContext);
   puVar9 = *(uint **)(glContext + 0x4854);
@@ -1155,7 +1155,7 @@ void _gleRenderFlatLineStripFunc_body(glContext)
     return;
   }
   bVar1 = iVar4 != 0;
-  fparam_1 = extraout_f1;
+  fparam_1 = f1AfterCall;
   if ((bVar1) && (*(char *)(glContext + 0x53e4) != '\0')) {
     fparam_1 = (double)(**(double ( **)(int,int,int))(glContext + 0x53dc))(glContext, puVar9, iVar7);
   }
@@ -1197,7 +1197,7 @@ void _gleRenderFlatLineStripFunc_body(glContext)
       uVar8 = uVar8 + 0x100;
       puVar10 = puVar10 + 2;
       puVar3 = puVar3 + 0x40;
-      fparam_1 = extraout_f1_00;
+      fparam_1 = f1AfterCall1;
     }
     iVar7 = (int)puVar10 - (int)puVar6 >> 2;
     if ((*(char *)(glContext + 0x4e18) != '\0') &&
@@ -1241,9 +1241,9 @@ void _gleRenderFlatLineLoopFunc_body(glContext)
   int iVar12;
   uint *puVar13;
   uint *puVar14;
-  double extraout_f1;
+  double f1AfterCall;
   double fparam_1;
-  double extraout_f1_00;
+  double f1AfterCall1;
   
   iVar5 = _gleTexEnableBits(glContext);
   puVar13 = *(uint **)(glContext + 0x4854);
@@ -1276,7 +1276,7 @@ void _gleRenderFlatLineLoopFunc_body(glContext)
     return;
   }
   bVar1 = iVar5 != 0;
-  fparam_1 = extraout_f1;
+  fparam_1 = f1AfterCall;
   if ((bVar1) && (*(char *)(glContext + 0x53e4) != '\0')) {
     fparam_1 = (double)(**(double ( **)(int,int,int))(glContext + 0x53dc))(glContext, puVar13, iVar12);
   }
@@ -1318,7 +1318,7 @@ void _gleRenderFlatLineLoopFunc_body(glContext)
       uVar11 = uVar11 + 0x100;
       puVar14 = puVar14 + 2;
       puVar7 = puVar7 + 0x40;
-      fparam_1 = extraout_f1_00;
+      fparam_1 = f1AfterCall1;
     }
     iVar12 = (int)puVar14 - (int)puVar10 >> 2;
     if ((*(char *)(glContext + 0x4e18) != '\0') &&
@@ -1354,7 +1354,7 @@ void _gleSelectLinesFunc(glContext)
   uint uVar5;
   uint uVar6;
   uint *puVar7;
-  double extraout_f1;
+  double f1AfterCall;
   double dVar8;
   
   bVar1 = false;
@@ -1366,7 +1366,7 @@ void _gleSelectLinesFunc(glContext)
       (uVar5 = (*(int *)(glContext + 0x4858) - uVar6) / (uint)(int)*(short *)(glContext + 0x487c),
       1 < (int)uVar5)) &&
      (uVar3 = (**(code **)(glContext + 0x5060))(glContext,uVar6,uVar5), (uVar3 & 0xff00) == 0)) {
-    dVar8 = extraout_f1;
+    dVar8 = f1AfterCall;
     if (bVar1) {
       uVar6 = *(uint *)(glContext + 0x4864);
     }
@@ -1413,9 +1413,9 @@ void _gleSelectLineStripFunc_body(glContext)
   uint *puVar5;
   uint uVar6;
   uint uVar7;
-  double extraout_f1;
+  double f1AfterCall;
   double dVar8;
-  double extraout_f1_00;
+  double f1AfterCall1;
   
   bVar1 = false;
   if ((*(char *)(glContext + 0x4664) != '\0') || (*(int *)(glContext + 0x5434) != 0)) {
@@ -1426,7 +1426,7 @@ void _gleSelectLineStripFunc_body(glContext)
       (uVar6 = (*(int *)(glContext + 0x4858) - uVar7) / (uint)(int)*(short *)(glContext + 0x487c),
       1 < (int)uVar6)) &&
      (uVar4 = (**(code **)(glContext + 0x5060))(glContext,uVar7,uVar6), (uVar4 & 0xff00) == 0)) {
-    dVar8 = extraout_f1;
+    dVar8 = f1AfterCall;
     if (bVar1) {
       uVar7 = *(uint *)(glContext + 0x4864);
     }
@@ -1453,7 +1453,7 @@ void _gleSelectLineStripFunc_body(glContext)
       uVar6 = uVar6 + 0x100;
       puVar2 = puVar2 + 2;
       uVar7 = uVar7 + 0x100;
-      dVar8 = extraout_f1_00;
+      dVar8 = f1AfterCall1;
     }
     iVar3 = (int)puVar2 - (int)puVar5 >> 2;
     if (((*(char *)(glContext + 0x4e18) == '\0') ||
@@ -1482,9 +1482,9 @@ void _gleSelectLineLoopFunc_body(glContext)
   uint *puVar9;
   uint uVar10;
   uint uVar11;
-  double extraout_f1;
+  double f1AfterCall;
   double dVar12;
-  double extraout_f1_00;
+  double f1AfterCall1;
   
   bVar2 = false;
   if ((*(char *)(glContext + 0x4664) != '\0') || (*(int *)(glContext + 0x5434) != 0)) {
@@ -1519,7 +1519,7 @@ void _gleSelectLineLoopFunc_body(glContext)
     }
     uVar5 = (**(code **)(glContext + 0x5060))(glContext,uVar10,uVar11);
     if ((uVar5 & 0xff00) == 0) {
-      dVar12 = extraout_f1;
+      dVar12 = f1AfterCall;
       if (bVar2) {
         uVar10 = *(uint *)(glContext + 0x4864);
       }
@@ -1546,7 +1546,7 @@ void _gleSelectLineLoopFunc_body(glContext)
         uVar11 = uVar11 + 0x100;
         puVar3 = puVar3 + 2;
         uVar10 = uVar10 + 0x100;
-        dVar12 = extraout_f1_00;
+        dVar12 = f1AfterCall1;
       }
       iVar6 = (int)puVar3 - (int)puVar9 >> 2;
       if (((*(char *)(glContext + 0x4e18) == '\0') ||
@@ -2306,9 +2306,9 @@ int _gleExecuteClippedVertexArray(param_1, param_2, param_3, param_4, param_5, p
   uint uVar2;
   byte bVar4;
   uint uVar3;
-  undefined4 extraout_r3;
+  undefined4 r3AfterCall;
   dword *pdVar5;
-  dword *extraout_r3_00;
+  dword *r3AfterCall1;
   uint uVar6;
   uint uVar7;
   dword *pdVar8;
@@ -2351,7 +2351,7 @@ int _gleExecuteClippedVertexArray(param_1, param_2, param_3, param_4, param_5, p
   pdStack0000002c = param_6;
   if ((undefined *)param_1[0x1420] == ((unsigned char *)0x00001101)) {
     ((void (*)())_gleExecuteTCLVertexArray)(param_1,param_2,param_3,param_4,param_5,param_6);
-    return (dword *)extraout_r3;
+    return (dword *)r3AfterCall;
   }
   if ((*(short *)((int)param_1 + 0x34d6) == 0x408) && (3 < param_2)) {
     return param_1;
@@ -3047,7 +3047,7 @@ LAB_000dbe44:
 switchD_000db0a0_default:
   if (local_6c != 0) {
     _free(pdStack0000002c);
-    pdVar5 = extraout_r3_00;
+    pdVar5 = r3AfterCall1;
   }
   return pdVar5;
 }
@@ -3131,14 +3131,14 @@ void _gleLightMaterialRGBAChange_F_D(glContext, param_2)
 }
 
 /* _gleLightMaterialShineChange_B @ 0xdc210 (180 bytes) */
-void _gleLightMaterialShineChange_B(int glContext,float fparam_1)
+void _gleLightMaterialShineChange_B(int glContext,float floatArg1)
 {
   byte bVar1;
   int iVar2;
   int iVar3;
   
   iVar2 = _glePushMaterial(glContext,1);
-  *(float *)(iVar2 + 0x40) = (float)fparam_1;
+  *(float *)(iVar2 + 0x40) = (float)floatArg1;
   *(ushort *)(iVar2 + 0x234) = *(ushort *)(iVar2 + 0x234) | 0x101;
   if (*(int *)(glContext + 0x5434) == 0) {
     bVar1 = *(byte *)(*(int *)(glContext + 0x5420) + 0x2ca);
@@ -3365,17 +3365,17 @@ void _gleInvertMatrix_601_body(param_1)
 {
   float fVar1;
   float fVar2;
-  float fVar3;
-  float fVar4;
+  float zero;
+  float one;
   int iVar5;
   float *pfVar6;
   int iVar7;
   int iVar8;
-  int iVar9;
-  int iVar10;
+  int pivotIndex;
+  int maxIndex;
   int iVar11;
   int iVar12;
-  float *pfVar13;
+  float *inverseMatrix;
   int iVar14;
   int iVar15;
   float local_50 [4];
@@ -3392,8 +3392,8 @@ void _gleInvertMatrix_601_body(param_1)
   float local_18;
   float local_14;
   
-  fVar4 = FLOAT_00108e54;
-  fVar3 = FLOAT_00108e50;
+  one = FLOAT_00108e54;
+  zero = FLOAT_00108e50;
   local_50[0] = *(float *)(param_1 + 0x1bc0);
   local_40 = *(float *)(param_1 + 0x1bc4);
   local_30 = *(float *)(param_1 + 0x1bc8);
@@ -3409,454 +3409,454 @@ void _gleInvertMatrix_601_body(param_1)
   local_50[3] = *(float *)(param_1 + 0x1bf0);
   local_34 = *(float *)(param_1 + 0x1bf4);
   local_24 = *(float *)(param_1 + 0x1bf8);
-  pfVar13 = (float *)(param_1 + 0x21c0);
+  inverseMatrix = (float *)(param_1 + 0x21c0);
   local_14 = *(float *)(param_1 + 0x1bfc);
   *(float *)(param_1 + 0x21c0) = FLOAT_00108e54;
-  *(float *)(param_1 + 0x21c4) = fVar3;
-  *(float *)(param_1 + 0x21c8) = fVar3;
-  *(float *)(param_1 + 0x21cc) = fVar3;
-  *(float *)(param_1 + 0x21d0) = fVar3;
-  *(float *)(param_1 + 0x21d4) = fVar4;
-  *(float *)(param_1 + 0x21d8) = fVar3;
-  *(float *)(param_1 + 0x21dc) = fVar3;
-  *(float *)(param_1 + 0x21e0) = fVar3;
-  *(float *)(param_1 + 0x21e4) = fVar3;
-  *(float *)(param_1 + 0x21e8) = fVar4;
-  *(float *)(param_1 + 0x21ec) = fVar3;
-  *(float *)(param_1 + 0x21f0) = fVar3;
-  *(float *)(param_1 + 0x21f4) = fVar3;
-  *(float *)(param_1 + 0x21f8) = fVar3;
-  *(float *)(param_1 + 0x21fc) = fVar4;
-  iVar9 = 0;
+  *(float *)(param_1 + 0x21c4) = zero;
+  *(float *)(param_1 + 0x21c8) = zero;
+  *(float *)(param_1 + 0x21cc) = zero;
+  *(float *)(param_1 + 0x21d0) = zero;
+  *(float *)(param_1 + 0x21d4) = one;
+  *(float *)(param_1 + 0x21d8) = zero;
+  *(float *)(param_1 + 0x21dc) = zero;
+  *(float *)(param_1 + 0x21e0) = zero;
+  *(float *)(param_1 + 0x21e4) = zero;
+  *(float *)(param_1 + 0x21e8) = one;
+  *(float *)(param_1 + 0x21ec) = zero;
+  *(float *)(param_1 + 0x21f0) = zero;
+  *(float *)(param_1 + 0x21f4) = zero;
+  *(float *)(param_1 + 0x21f8) = zero;
+  *(float *)(param_1 + 0x21fc) = one;
+  pivotIndex = 0;
   while( true ) {
-    iVar8 = iVar9 + 1;
-    fVar2 = local_50[iVar9 * 5];
-    iVar7 = iVar9 + 4;
-    iVar14 = iVar9 + 8;
-    iVar15 = iVar9 + 0xc;
-    iVar10 = iVar9;
+    iVar8 = pivotIndex + 1;
+    fVar2 = local_50[pivotIndex * 5];
+    iVar7 = pivotIndex + 4;
+    iVar14 = pivotIndex + 8;
+    iVar15 = pivotIndex + 0xc;
+    maxIndex = pivotIndex;
     if (iVar8 != 4) {
-      pfVar6 = local_50 + iVar9 * 4 + iVar8;
+      pfVar6 = local_50 + pivotIndex * 4 + iVar8;
       iVar5 = 4 - iVar8;
       iVar12 = iVar8;
       do {
         fVar1 = *pfVar6;
         pfVar6 = pfVar6 + 1;
         if (ABS(fVar2) < ABS(fVar1)) {
-          iVar10 = iVar12;
+          maxIndex = iVar12;
           fVar2 = fVar1;
         }
         iVar12 = iVar12 + 1;
         iVar5 = iVar5 + -1;
       } while (iVar5 != 0);
     }
-    if (iVar10 != iVar9) {
-      fVar1 = pfVar13[iVar9];
-      iVar12 = iVar10 + 4;
-      pfVar13[iVar9] = pfVar13[iVar10];
-      iVar5 = iVar10 + 8;
-      pfVar13[iVar10] = fVar1;
-      iVar11 = iVar10 + 0xc;
-      fVar1 = local_50[iVar9];
-      local_50[iVar9] = local_50[iVar10];
-      local_50[iVar10] = fVar1;
-      fVar1 = pfVar13[iVar7];
-      pfVar13[iVar7] = pfVar13[iVar12];
-      pfVar13[iVar12] = fVar1;
+    if (maxIndex != pivotIndex) {
+      fVar1 = inverseMatrix[pivotIndex];
+      iVar12 = maxIndex + 4;
+      inverseMatrix[pivotIndex] = inverseMatrix[maxIndex];
+      iVar5 = maxIndex + 8;
+      inverseMatrix[maxIndex] = fVar1;
+      iVar11 = maxIndex + 0xc;
+      fVar1 = local_50[pivotIndex];
+      local_50[pivotIndex] = local_50[maxIndex];
+      local_50[maxIndex] = fVar1;
+      fVar1 = inverseMatrix[iVar7];
+      inverseMatrix[iVar7] = inverseMatrix[iVar12];
+      inverseMatrix[iVar12] = fVar1;
       fVar1 = local_50[iVar7];
       local_50[iVar7] = local_50[iVar12];
       local_50[iVar12] = fVar1;
-      fVar1 = pfVar13[iVar14];
-      pfVar13[iVar14] = pfVar13[iVar5];
-      pfVar13[iVar5] = fVar1;
+      fVar1 = inverseMatrix[iVar14];
+      inverseMatrix[iVar14] = inverseMatrix[iVar5];
+      inverseMatrix[iVar5] = fVar1;
       fVar1 = local_50[iVar14];
       local_50[iVar14] = local_50[iVar5];
       local_50[iVar5] = fVar1;
-      fVar1 = pfVar13[iVar15];
-      pfVar13[iVar15] = pfVar13[iVar11];
-      pfVar13[iVar11] = fVar1;
+      fVar1 = inverseMatrix[iVar15];
+      inverseMatrix[iVar15] = inverseMatrix[iVar11];
+      inverseMatrix[iVar11] = fVar1;
       fVar1 = local_50[iVar15];
       local_50[iVar15] = local_50[iVar11];
       local_50[iVar11] = fVar1;
     }
-    if (fVar2 == fVar3) break;
-    fVar2 = fVar4 / fVar2;
-    local_50[iVar9] = local_50[iVar9] * fVar2;
-    pfVar13[iVar9] = pfVar13[iVar9] * fVar2;
+    if (fVar2 == zero) break;
+    fVar2 = one / fVar2;
+    local_50[pivotIndex] = local_50[pivotIndex] * fVar2;
+    inverseMatrix[pivotIndex] = inverseMatrix[pivotIndex] * fVar2;
     local_50[iVar7] = local_50[iVar7] * fVar2;
-    pfVar13[iVar7] = pfVar13[iVar7] * fVar2;
+    inverseMatrix[iVar7] = inverseMatrix[iVar7] * fVar2;
     local_50[iVar14] = local_50[iVar14] * fVar2;
-    pfVar13[iVar14] = pfVar13[iVar14] * fVar2;
+    inverseMatrix[iVar14] = inverseMatrix[iVar14] * fVar2;
     local_50[iVar15] = local_50[iVar15] * fVar2;
-    pfVar13[iVar15] = pfVar13[iVar15] * fVar2;
-    if (iVar9 != 0) {
-      fVar2 = local_50[iVar9 * 4];
-      local_50[0] = -(local_50[iVar9] * fVar2 - local_50[0]);
-      *pfVar13 = -(pfVar13[iVar9] * fVar2 - *pfVar13);
+    inverseMatrix[iVar15] = inverseMatrix[iVar15] * fVar2;
+    if (pivotIndex != 0) {
+      fVar2 = local_50[pivotIndex * 4];
+      local_50[0] = -(local_50[pivotIndex] * fVar2 - local_50[0]);
+      *inverseMatrix = -(inverseMatrix[pivotIndex] * fVar2 - *inverseMatrix);
       local_40 = -(local_50[iVar7] * fVar2 - local_40);
-      *(float *)(param_1 + 0x21d0) = -(pfVar13[iVar7] * fVar2 - *(float *)(param_1 + 0x21d0));
+      *(float *)(param_1 + 0x21d0) = -(inverseMatrix[iVar7] * fVar2 - *(float *)(param_1 + 0x21d0));
       local_30 = -(local_50[iVar14] * fVar2 - local_30);
-      *(float *)(param_1 + 0x21e0) = -(pfVar13[iVar14] * fVar2 - *(float *)(param_1 + 0x21e0));
+      *(float *)(param_1 + 0x21e0) = -(inverseMatrix[iVar14] * fVar2 - *(float *)(param_1 + 0x21e0));
       local_20 = -(local_50[iVar15] * fVar2 - local_20);
-      *(float *)(param_1 + 0x21f0) = -(pfVar13[iVar15] * fVar2 - *(float *)(param_1 + 0x21f0));
+      *(float *)(param_1 + 0x21f0) = -(inverseMatrix[iVar15] * fVar2 - *(float *)(param_1 + 0x21f0));
     }
-    if (iVar9 != 1) {
-      fVar2 = local_50[iVar9 * 4 + 1];
-      local_50[1] = -(local_50[iVar9] * fVar2 - local_50[1]);
-      *(float *)(param_1 + 0x21c4) = -(pfVar13[iVar9] * fVar2 - *(float *)(param_1 + 0x21c4));
+    if (pivotIndex != 1) {
+      fVar2 = local_50[pivotIndex * 4 + 1];
+      local_50[1] = -(local_50[pivotIndex] * fVar2 - local_50[1]);
+      *(float *)(param_1 + 0x21c4) = -(inverseMatrix[pivotIndex] * fVar2 - *(float *)(param_1 + 0x21c4));
       local_3c = -(local_50[iVar7] * fVar2 - local_3c);
-      *(float *)(param_1 + 0x21d4) = -(pfVar13[iVar7] * fVar2 - *(float *)(param_1 + 0x21d4));
+      *(float *)(param_1 + 0x21d4) = -(inverseMatrix[iVar7] * fVar2 - *(float *)(param_1 + 0x21d4));
       local_2c = -(local_50[iVar14] * fVar2 - local_2c);
-      *(float *)(param_1 + 0x21e4) = -(pfVar13[iVar14] * fVar2 - *(float *)(param_1 + 0x21e4));
+      *(float *)(param_1 + 0x21e4) = -(inverseMatrix[iVar14] * fVar2 - *(float *)(param_1 + 0x21e4));
       local_1c = -(local_50[iVar15] * fVar2 - local_1c);
-      *(float *)(param_1 + 0x21f4) = -(pfVar13[iVar15] * fVar2 - *(float *)(param_1 + 0x21f4));
+      *(float *)(param_1 + 0x21f4) = -(inverseMatrix[iVar15] * fVar2 - *(float *)(param_1 + 0x21f4));
     }
-    if (iVar9 != 2) {
-      fVar2 = local_50[iVar9 * 4 + 2];
-      local_50[2] = -(local_50[iVar9] * fVar2 - local_50[2]);
-      *(float *)(param_1 + 0x21c8) = -(pfVar13[iVar9] * fVar2 - *(float *)(param_1 + 0x21c8));
+    if (pivotIndex != 2) {
+      fVar2 = local_50[pivotIndex * 4 + 2];
+      local_50[2] = -(local_50[pivotIndex] * fVar2 - local_50[2]);
+      *(float *)(param_1 + 0x21c8) = -(inverseMatrix[pivotIndex] * fVar2 - *(float *)(param_1 + 0x21c8));
       local_38 = -(local_50[iVar7] * fVar2 - local_38);
-      *(float *)(param_1 + 0x21d8) = -(pfVar13[iVar7] * fVar2 - *(float *)(param_1 + 0x21d8));
+      *(float *)(param_1 + 0x21d8) = -(inverseMatrix[iVar7] * fVar2 - *(float *)(param_1 + 0x21d8));
       local_28 = -(local_50[iVar14] * fVar2 - local_28);
-      *(float *)(param_1 + 0x21e8) = -(pfVar13[iVar14] * fVar2 - *(float *)(param_1 + 0x21e8));
+      *(float *)(param_1 + 0x21e8) = -(inverseMatrix[iVar14] * fVar2 - *(float *)(param_1 + 0x21e8));
       local_18 = -(local_50[iVar15] * fVar2 - local_18);
-      *(float *)(param_1 + 0x21f8) = -(pfVar13[iVar15] * fVar2 - *(float *)(param_1 + 0x21f8));
+      *(float *)(param_1 + 0x21f8) = -(inverseMatrix[iVar15] * fVar2 - *(float *)(param_1 + 0x21f8));
     }
-    if (iVar9 != 3) {
-      fVar2 = local_50[iVar9 * 4 + 3];
-      local_50[3] = -(local_50[iVar9] * fVar2 - local_50[3]);
-      *(float *)(param_1 + 0x21cc) = -(pfVar13[iVar9] * fVar2 - *(float *)(param_1 + 0x21cc));
+    if (pivotIndex != 3) {
+      fVar2 = local_50[pivotIndex * 4 + 3];
+      local_50[3] = -(local_50[pivotIndex] * fVar2 - local_50[3]);
+      *(float *)(param_1 + 0x21cc) = -(inverseMatrix[pivotIndex] * fVar2 - *(float *)(param_1 + 0x21cc));
       local_34 = -(local_50[iVar7] * fVar2 - local_34);
-      *(float *)(param_1 + 0x21dc) = -(pfVar13[iVar7] * fVar2 - *(float *)(param_1 + 0x21dc));
+      *(float *)(param_1 + 0x21dc) = -(inverseMatrix[iVar7] * fVar2 - *(float *)(param_1 + 0x21dc));
       local_24 = -(local_50[iVar14] * fVar2 - local_24);
-      *(float *)(param_1 + 0x21ec) = -(pfVar13[iVar14] * fVar2 - *(float *)(param_1 + 0x21ec));
+      *(float *)(param_1 + 0x21ec) = -(inverseMatrix[iVar14] * fVar2 - *(float *)(param_1 + 0x21ec));
       local_14 = -(local_50[iVar15] * fVar2 - local_14);
-      *(float *)(param_1 + 0x21fc) = -(pfVar13[iVar15] * fVar2 - *(float *)(param_1 + 0x21fc));
+      *(float *)(param_1 + 0x21fc) = -(inverseMatrix[iVar15] * fVar2 - *(float *)(param_1 + 0x21fc));
     }
-    iVar9 = iVar8;
+    pivotIndex = iVar8;
     if (iVar8 == 4) {
       return;
     }
   }
-  *(float *)(param_1 + 0x21fc) = fVar4;
-  *(float *)(param_1 + 0x21f8) = fVar3;
-  *pfVar13 = fVar4;
-  *(float *)(param_1 + 0x21c4) = fVar3;
-  *(float *)(param_1 + 0x21c8) = fVar3;
-  *(float *)(param_1 + 0x21cc) = fVar3;
-  *(float *)(param_1 + 0x21d0) = fVar3;
-  *(float *)(param_1 + 0x21d4) = fVar4;
-  *(float *)(param_1 + 0x21d8) = fVar3;
-  *(float *)(param_1 + 0x21dc) = fVar3;
-  *(float *)(param_1 + 0x21e0) = fVar3;
-  *(float *)(param_1 + 0x21e4) = fVar3;
-  *(float *)(param_1 + 0x21e8) = fVar4;
-  *(float *)(param_1 + 0x21ec) = fVar3;
-  *(float *)(param_1 + 0x21f0) = fVar3;
-  *(float *)(param_1 + 0x21f4) = fVar3;
+  *(float *)(param_1 + 0x21fc) = one;
+  *(float *)(param_1 + 0x21f8) = zero;
+  *inverseMatrix = one;
+  *(float *)(param_1 + 0x21c4) = zero;
+  *(float *)(param_1 + 0x21c8) = zero;
+  *(float *)(param_1 + 0x21cc) = zero;
+  *(float *)(param_1 + 0x21d0) = zero;
+  *(float *)(param_1 + 0x21d4) = one;
+  *(float *)(param_1 + 0x21d8) = zero;
+  *(float *)(param_1 + 0x21dc) = zero;
+  *(float *)(param_1 + 0x21e0) = zero;
+  *(float *)(param_1 + 0x21e4) = zero;
+  *(float *)(param_1 + 0x21e8) = one;
+  *(float *)(param_1 + 0x21ec) = zero;
+  *(float *)(param_1 + 0x21f0) = zero;
+  *(float *)(param_1 + 0x21f4) = zero;
   return;
 }
 
 /* _gleLoadTransposeMatrixf @ 0xdcce0 (132 bytes) */
-int _gleLoadTransposeMatrixf(param_1, param_2)
-  undefined4 *param_1;
-  undefined4 *param_2;
+int _gleLoadTransposeMatrixf(srcMatrix, dstMatrix)
+  undefined4 *srcMatrix;
+  undefined4 *dstMatrix;
 {
-  *param_2 = *param_1;
-  param_2[1] = param_1[4];
-  param_2[2] = param_1[8];
-  param_2[3] = param_1[0xc];
-  param_2[4] = param_1[1];
-  param_2[5] = param_1[5];
-  param_2[6] = param_1[9];
-  param_2[7] = param_1[0xd];
-  param_2[8] = param_1[2];
-  param_2[9] = param_1[6];
-  param_2[10] = param_1[10];
-  param_2[0xb] = param_1[0xe];
-  param_2[0xc] = param_1[3];
-  param_2[0xd] = param_1[7];
-  param_2[0xe] = param_1[0xb];
-  param_2[0xf] = param_1[0xf];
+  *dstMatrix = *srcMatrix;
+  dstMatrix[1] = srcMatrix[4];
+  dstMatrix[2] = srcMatrix[8];
+  dstMatrix[3] = srcMatrix[0xc];
+  dstMatrix[4] = srcMatrix[1];
+  dstMatrix[5] = srcMatrix[5];
+  dstMatrix[6] = srcMatrix[9];
+  dstMatrix[7] = srcMatrix[0xd];
+  dstMatrix[8] = srcMatrix[2];
+  dstMatrix[9] = srcMatrix[6];
+  dstMatrix[10] = srcMatrix[10];
+  dstMatrix[0xb] = srcMatrix[0xe];
+  dstMatrix[0xc] = srcMatrix[3];
+  dstMatrix[0xd] = srcMatrix[7];
+  dstMatrix[0xe] = srcMatrix[0xb];
+  dstMatrix[0xf] = srcMatrix[0xf];
   return;
 }
 
 /* _gleLoadTransposeMatrixd @ 0xdcd64 (196 bytes) */
-int _gleLoadTransposeMatrixd(param_1, param_2)
-  double *param_1;
-  float *param_2;
+int _gleLoadTransposeMatrixd(srcMatrix, dstMatrix)
+  double *srcMatrix;
+  float *dstMatrix;
 {
-  *param_2 = (float)*param_1;
-  param_2[1] = (float)param_1[4];
-  param_2[2] = (float)param_1[8];
-  param_2[3] = (float)param_1[0xc];
-  param_2[4] = (float)param_1[1];
-  param_2[5] = (float)param_1[5];
-  param_2[6] = (float)param_1[9];
-  param_2[7] = (float)param_1[0xd];
-  param_2[8] = (float)param_1[2];
-  param_2[9] = (float)param_1[6];
-  param_2[10] = (float)param_1[10];
-  param_2[0xb] = (float)param_1[0xe];
-  param_2[0xc] = (float)param_1[3];
-  param_2[0xd] = (float)param_1[7];
-  param_2[0xe] = (float)param_1[0xb];
-  param_2[0xf] = (float)param_1[0xf];
+  *dstMatrix = (float)*srcMatrix;
+  dstMatrix[1] = (float)srcMatrix[4];
+  dstMatrix[2] = (float)srcMatrix[8];
+  dstMatrix[3] = (float)srcMatrix[0xc];
+  dstMatrix[4] = (float)srcMatrix[1];
+  dstMatrix[5] = (float)srcMatrix[5];
+  dstMatrix[6] = (float)srcMatrix[9];
+  dstMatrix[7] = (float)srcMatrix[0xd];
+  dstMatrix[8] = (float)srcMatrix[2];
+  dstMatrix[9] = (float)srcMatrix[6];
+  dstMatrix[10] = (float)srcMatrix[10];
+  dstMatrix[0xb] = (float)srcMatrix[0xe];
+  dstMatrix[0xc] = (float)srcMatrix[3];
+  dstMatrix[0xd] = (float)srcMatrix[7];
+  dstMatrix[0xe] = (float)srcMatrix[0xb];
+  dstMatrix[0xf] = (float)srcMatrix[0xf];
   return;
 }
 
 /* _gleGetMatrixf @ 0xdce28 (132 bytes) */
-void _gleGetMatrixf(param_1, param_2)
-  undefined4 *param_1;
-  undefined4 *param_2;
+void _gleGetMatrixf(srcMatrix, dstMatrix)
+  undefined4 *srcMatrix;
+  undefined4 *dstMatrix;
 {
-  *param_2 = *param_1;
-  param_2[1] = param_1[1];
-  param_2[2] = param_1[2];
-  param_2[3] = param_1[3];
-  param_2[4] = param_1[4];
-  param_2[5] = param_1[5];
-  param_2[6] = param_1[6];
-  param_2[7] = param_1[7];
-  param_2[8] = param_1[8];
-  param_2[9] = param_1[9];
-  param_2[10] = param_1[10];
-  param_2[0xb] = param_1[0xb];
-  param_2[0xc] = param_1[0xc];
-  param_2[0xd] = param_1[0xd];
-  param_2[0xe] = param_1[0xe];
-  param_2[0xf] = param_1[0xf];
+  *dstMatrix = *srcMatrix;
+  dstMatrix[1] = srcMatrix[1];
+  dstMatrix[2] = srcMatrix[2];
+  dstMatrix[3] = srcMatrix[3];
+  dstMatrix[4] = srcMatrix[4];
+  dstMatrix[5] = srcMatrix[5];
+  dstMatrix[6] = srcMatrix[6];
+  dstMatrix[7] = srcMatrix[7];
+  dstMatrix[8] = srcMatrix[8];
+  dstMatrix[9] = srcMatrix[9];
+  dstMatrix[10] = srcMatrix[10];
+  dstMatrix[0xb] = srcMatrix[0xb];
+  dstMatrix[0xc] = srcMatrix[0xc];
+  dstMatrix[0xd] = srcMatrix[0xd];
+  dstMatrix[0xe] = srcMatrix[0xe];
+  dstMatrix[0xf] = srcMatrix[0xf];
   return;
 }
 
 /* _gleGetTransposeMatrixf @ 0xdceac (132 bytes) */
-void _gleGetTransposeMatrixf(param_1, param_2)
-  undefined4 *param_1;
-  undefined4 *param_2;
+void _gleGetTransposeMatrixf(srcMatrix, dstMatrix)
+  undefined4 *srcMatrix;
+  undefined4 *dstMatrix;
 {
-  *param_2 = *param_1;
-  param_2[1] = param_1[4];
-  param_2[2] = param_1[8];
-  param_2[3] = param_1[0xc];
-  param_2[4] = param_1[1];
-  param_2[5] = param_1[5];
-  param_2[6] = param_1[9];
-  param_2[7] = param_1[0xd];
-  param_2[8] = param_1[2];
-  param_2[9] = param_1[6];
-  param_2[10] = param_1[10];
-  param_2[0xb] = param_1[0xe];
-  param_2[0xc] = param_1[3];
-  param_2[0xd] = param_1[7];
-  param_2[0xe] = param_1[0xb];
-  param_2[0xf] = param_1[0xf];
+  *dstMatrix = *srcMatrix;
+  dstMatrix[1] = srcMatrix[4];
+  dstMatrix[2] = srcMatrix[8];
+  dstMatrix[3] = srcMatrix[0xc];
+  dstMatrix[4] = srcMatrix[1];
+  dstMatrix[5] = srcMatrix[5];
+  dstMatrix[6] = srcMatrix[9];
+  dstMatrix[7] = srcMatrix[0xd];
+  dstMatrix[8] = srcMatrix[2];
+  dstMatrix[9] = srcMatrix[6];
+  dstMatrix[10] = srcMatrix[10];
+  dstMatrix[0xb] = srcMatrix[0xe];
+  dstMatrix[0xc] = srcMatrix[3];
+  dstMatrix[0xd] = srcMatrix[7];
+  dstMatrix[0xe] = srcMatrix[0xb];
+  dstMatrix[0xf] = srcMatrix[0xf];
   return;
 }
 
 /* _gleGetTransposeMatrixd @ 0xdcf30 (132 bytes) */
-void _gleGetTransposeMatrixd(param_1, param_2)
-  float *param_1;
-  double *param_2;
+void _gleGetTransposeMatrixd(srcMatrix, dstMatrix)
+  float *srcMatrix;
+  double *dstMatrix;
 {
-  *param_2 = (double)*param_1;
-  param_2[1] = (double)param_1[4];
-  param_2[2] = (double)param_1[8];
-  param_2[3] = (double)param_1[0xc];
-  param_2[4] = (double)param_1[1];
-  param_2[5] = (double)param_1[5];
-  param_2[6] = (double)param_1[9];
-  param_2[7] = (double)param_1[0xd];
-  param_2[8] = (double)param_1[2];
-  param_2[9] = (double)param_1[6];
-  param_2[10] = (double)param_1[10];
-  param_2[0xb] = (double)param_1[0xe];
-  param_2[0xc] = (double)param_1[3];
-  param_2[0xd] = (double)param_1[7];
-  param_2[0xe] = (double)param_1[0xb];
-  param_2[0xf] = (double)param_1[0xf];
+  *dstMatrix = (double)*srcMatrix;
+  dstMatrix[1] = (double)srcMatrix[4];
+  dstMatrix[2] = (double)srcMatrix[8];
+  dstMatrix[3] = (double)srcMatrix[0xc];
+  dstMatrix[4] = (double)srcMatrix[1];
+  dstMatrix[5] = (double)srcMatrix[5];
+  dstMatrix[6] = (double)srcMatrix[9];
+  dstMatrix[7] = (double)srcMatrix[0xd];
+  dstMatrix[8] = (double)srcMatrix[2];
+  dstMatrix[9] = (double)srcMatrix[6];
+  dstMatrix[10] = (double)srcMatrix[10];
+  dstMatrix[0xb] = (double)srcMatrix[0xe];
+  dstMatrix[0xc] = (double)srcMatrix[3];
+  dstMatrix[0xd] = (double)srcMatrix[7];
+  dstMatrix[0xe] = (double)srcMatrix[0xb];
+  dstMatrix[0xf] = (double)srcMatrix[0xf];
   return;
 }
 
 /* _gleMultTransposeMatrixf @ 0xdcfb4 (836 bytes) */
-void _gleMultTransposeMatrixf(param_1, param_2, param_3)
-  float *param_1;
-  float *param_2;
-  float *param_3;
+void _gleMultTransposeMatrixf(leftMatrix, rightMatrix, productMatrix)
+  float *leftMatrix;
+  float *rightMatrix;
+  float *productMatrix;
 {
-  *param_3 = param_1[0xc] * param_2[0xc] +
-             (param_1[8] * param_2[8] + (*param_1 * *param_2 + param_1[4] * param_2[4]));
-  param_3[4] = param_1[0xc] * param_2[0xd] +
-               (param_1[8] * param_2[9] + (*param_1 * param_2[1] + param_1[4] * param_2[5]));
-  param_3[8] = param_1[0xc] * param_2[0xe] +
-               (param_1[8] * param_2[10] + (*param_1 * param_2[2] + param_1[4] * param_2[6]));
-  param_3[0xc] = param_1[0xc] * param_2[0xf] +
-                 (param_1[8] * param_2[0xb] + (*param_1 * param_2[3] + param_1[4] * param_2[7]));
-  param_3[1] = param_1[0xd] * param_2[0xc] +
-               (param_1[9] * param_2[8] + (param_1[1] * *param_2 + param_1[5] * param_2[4]));
-  param_3[5] = param_1[0xd] * param_2[0xd] +
-               (param_1[9] * param_2[9] + (param_1[1] * param_2[1] + param_1[5] * param_2[5]));
-  param_3[9] = param_1[0xd] * param_2[0xe] +
-               (param_1[9] * param_2[10] + (param_1[1] * param_2[2] + param_1[5] * param_2[6]));
-  param_3[0xd] = param_1[0xd] * param_2[0xf] +
-                 (param_1[9] * param_2[0xb] + (param_1[1] * param_2[3] + param_1[5] * param_2[7]));
-  param_3[2] = param_1[0xe] * param_2[0xc] +
-               (param_1[10] * param_2[8] + (param_1[2] * *param_2 + param_1[6] * param_2[4]));
-  param_3[6] = param_1[0xe] * param_2[0xd] +
-               (param_1[10] * param_2[9] + (param_1[2] * param_2[1] + param_1[6] * param_2[5]));
-  param_3[10] = param_1[0xe] * param_2[0xe] +
-                (param_1[10] * param_2[10] + (param_1[2] * param_2[2] + param_1[6] * param_2[6]));
-  param_3[0xe] = param_1[0xe] * param_2[0xf] +
-                 (param_1[10] * param_2[0xb] + (param_1[2] * param_2[3] + param_1[6] * param_2[7]));
-  param_3[3] = param_1[0xf] * param_2[0xc] +
-               (param_1[0xb] * param_2[8] + (param_1[3] * *param_2 + param_1[7] * param_2[4]));
-  param_3[7] = param_1[0xf] * param_2[0xd] +
-               (param_1[0xb] * param_2[9] + (param_1[3] * param_2[1] + param_1[7] * param_2[5]));
-  param_3[0xb] = param_1[0xf] * param_2[0xe] +
-                 (param_1[0xb] * param_2[10] + (param_1[3] * param_2[2] + param_1[7] * param_2[6]));
-  param_3[0xf] = param_1[0xf] * param_2[0xf] +
-                 (param_1[0xb] * param_2[0xb] + (param_1[3] * param_2[3] + param_1[7] * param_2[7]));
+  *productMatrix = leftMatrix[0xc] * rightMatrix[0xc] +
+             (leftMatrix[8] * rightMatrix[8] + (*leftMatrix * *rightMatrix + leftMatrix[4] * rightMatrix[4]));
+  productMatrix[4] = leftMatrix[0xc] * rightMatrix[0xd] +
+               (leftMatrix[8] * rightMatrix[9] + (*leftMatrix * rightMatrix[1] + leftMatrix[4] * rightMatrix[5]));
+  productMatrix[8] = leftMatrix[0xc] * rightMatrix[0xe] +
+               (leftMatrix[8] * rightMatrix[10] + (*leftMatrix * rightMatrix[2] + leftMatrix[4] * rightMatrix[6]));
+  productMatrix[0xc] = leftMatrix[0xc] * rightMatrix[0xf] +
+                 (leftMatrix[8] * rightMatrix[0xb] + (*leftMatrix * rightMatrix[3] + leftMatrix[4] * rightMatrix[7]));
+  productMatrix[1] = leftMatrix[0xd] * rightMatrix[0xc] +
+               (leftMatrix[9] * rightMatrix[8] + (leftMatrix[1] * *rightMatrix + leftMatrix[5] * rightMatrix[4]));
+  productMatrix[5] = leftMatrix[0xd] * rightMatrix[0xd] +
+               (leftMatrix[9] * rightMatrix[9] + (leftMatrix[1] * rightMatrix[1] + leftMatrix[5] * rightMatrix[5]));
+  productMatrix[9] = leftMatrix[0xd] * rightMatrix[0xe] +
+               (leftMatrix[9] * rightMatrix[10] + (leftMatrix[1] * rightMatrix[2] + leftMatrix[5] * rightMatrix[6]));
+  productMatrix[0xd] = leftMatrix[0xd] * rightMatrix[0xf] +
+                 (leftMatrix[9] * rightMatrix[0xb] + (leftMatrix[1] * rightMatrix[3] + leftMatrix[5] * rightMatrix[7]));
+  productMatrix[2] = leftMatrix[0xe] * rightMatrix[0xc] +
+               (leftMatrix[10] * rightMatrix[8] + (leftMatrix[2] * *rightMatrix + leftMatrix[6] * rightMatrix[4]));
+  productMatrix[6] = leftMatrix[0xe] * rightMatrix[0xd] +
+               (leftMatrix[10] * rightMatrix[9] + (leftMatrix[2] * rightMatrix[1] + leftMatrix[6] * rightMatrix[5]));
+  productMatrix[10] = leftMatrix[0xe] * rightMatrix[0xe] +
+                (leftMatrix[10] * rightMatrix[10] + (leftMatrix[2] * rightMatrix[2] + leftMatrix[6] * rightMatrix[6]));
+  productMatrix[0xe] = leftMatrix[0xe] * rightMatrix[0xf] +
+                 (leftMatrix[10] * rightMatrix[0xb] + (leftMatrix[2] * rightMatrix[3] + leftMatrix[6] * rightMatrix[7]));
+  productMatrix[3] = leftMatrix[0xf] * rightMatrix[0xc] +
+               (leftMatrix[0xb] * rightMatrix[8] + (leftMatrix[3] * *rightMatrix + leftMatrix[7] * rightMatrix[4]));
+  productMatrix[7] = leftMatrix[0xf] * rightMatrix[0xd] +
+               (leftMatrix[0xb] * rightMatrix[9] + (leftMatrix[3] * rightMatrix[1] + leftMatrix[7] * rightMatrix[5]));
+  productMatrix[0xb] = leftMatrix[0xf] * rightMatrix[0xe] +
+                 (leftMatrix[0xb] * rightMatrix[10] + (leftMatrix[3] * rightMatrix[2] + leftMatrix[7] * rightMatrix[6]));
+  productMatrix[0xf] = leftMatrix[0xf] * rightMatrix[0xf] +
+                 (leftMatrix[0xb] * rightMatrix[0xb] + (leftMatrix[3] * rightMatrix[3] + leftMatrix[7] * rightMatrix[7]));
   return;
 }
 
 /* _gleMultTransposeMatrixd @ 0xdd2f8 (900 bytes) */
-void _gleMultTransposeMatrixd(param_1, param_2, param_3)
-  float *param_1;
-  double *param_2;
-  float *param_3;
+void _gleMultTransposeMatrixd(leftMatrix, rightMatrix, productMatrix)
+  float *leftMatrix;
+  double *rightMatrix;
+  float *productMatrix;
 {
-  *param_3 = (float)((double)param_1[0xc] * param_2[0xc] +
-                    ((double)param_1[8] * param_2[8] +
-                    ((double)*param_1 * *param_2 + (double)param_1[4] * param_2[4])));
-  param_3[4] = (float)((double)param_1[0xc] * param_2[0xd] +
-                      ((double)param_1[8] * param_2[9] +
-                      ((double)*param_1 * param_2[1] + (double)param_1[4] * param_2[5])));
-  param_3[8] = (float)((double)param_1[0xc] * param_2[0xe] +
-                      ((double)param_1[8] * param_2[10] +
-                      ((double)*param_1 * param_2[2] + (double)param_1[4] * param_2[6])));
-  param_3[0xc] = (float)((double)param_1[0xc] * param_2[0xf] +
-                        ((double)param_1[8] * param_2[0xb] +
-                        ((double)*param_1 * param_2[3] + (double)param_1[4] * param_2[7])));
-  param_3[1] = (float)((double)param_1[0xd] * param_2[0xc] +
-                      ((double)param_1[9] * param_2[8] +
-                      ((double)param_1[1] * *param_2 + (double)param_1[5] * param_2[4])));
-  param_3[5] = (float)((double)param_1[0xd] * param_2[0xd] +
-                      ((double)param_1[9] * param_2[9] +
-                      ((double)param_1[1] * param_2[1] + (double)param_1[5] * param_2[5])));
-  param_3[9] = (float)((double)param_1[0xd] * param_2[0xe] +
-                      ((double)param_1[9] * param_2[10] +
-                      ((double)param_1[1] * param_2[2] + (double)param_1[5] * param_2[6])));
-  param_3[0xd] = (float)((double)param_1[0xd] * param_2[0xf] +
-                        ((double)param_1[9] * param_2[0xb] +
-                        ((double)param_1[1] * param_2[3] + (double)param_1[5] * param_2[7])));
-  param_3[2] = (float)((double)param_1[0xe] * param_2[0xc] +
-                      ((double)param_1[10] * param_2[8] +
-                      ((double)param_1[2] * *param_2 + (double)param_1[6] * param_2[4])));
-  param_3[6] = (float)((double)param_1[0xe] * param_2[0xd] +
-                      ((double)param_1[10] * param_2[9] +
-                      ((double)param_1[2] * param_2[1] + (double)param_1[6] * param_2[5])));
-  param_3[10] = (float)((double)param_1[0xe] * param_2[0xe] +
-                       ((double)param_1[10] * param_2[10] +
-                       ((double)param_1[2] * param_2[2] + (double)param_1[6] * param_2[6])));
-  param_3[0xe] = (float)((double)param_1[0xe] * param_2[0xf] +
-                        ((double)param_1[10] * param_2[0xb] +
-                        ((double)param_1[2] * param_2[3] + (double)param_1[6] * param_2[7])));
-  param_3[3] = (float)((double)param_1[0xf] * param_2[0xc] +
-                      ((double)param_1[0xb] * param_2[8] +
-                      ((double)param_1[3] * *param_2 + (double)param_1[7] * param_2[4])));
-  param_3[7] = (float)((double)param_1[0xf] * param_2[0xd] +
-                      ((double)param_1[0xb] * param_2[9] +
-                      ((double)param_1[3] * param_2[1] + (double)param_1[7] * param_2[5])));
-  param_3[0xb] = (float)((double)param_1[0xf] * param_2[0xe] +
-                        ((double)param_1[0xb] * param_2[10] +
-                        ((double)param_1[3] * param_2[2] + (double)param_1[7] * param_2[6])));
-  param_3[0xf] = (float)((double)param_1[0xf] * param_2[0xf] +
-                        ((double)param_1[0xb] * param_2[0xb] +
-                        ((double)param_1[3] * param_2[3] + (double)param_1[7] * param_2[7])));
+  *productMatrix = (float)((double)leftMatrix[0xc] * rightMatrix[0xc] +
+                    ((double)leftMatrix[8] * rightMatrix[8] +
+                    ((double)*leftMatrix * *rightMatrix + (double)leftMatrix[4] * rightMatrix[4])));
+  productMatrix[4] = (float)((double)leftMatrix[0xc] * rightMatrix[0xd] +
+                      ((double)leftMatrix[8] * rightMatrix[9] +
+                      ((double)*leftMatrix * rightMatrix[1] + (double)leftMatrix[4] * rightMatrix[5])));
+  productMatrix[8] = (float)((double)leftMatrix[0xc] * rightMatrix[0xe] +
+                      ((double)leftMatrix[8] * rightMatrix[10] +
+                      ((double)*leftMatrix * rightMatrix[2] + (double)leftMatrix[4] * rightMatrix[6])));
+  productMatrix[0xc] = (float)((double)leftMatrix[0xc] * rightMatrix[0xf] +
+                        ((double)leftMatrix[8] * rightMatrix[0xb] +
+                        ((double)*leftMatrix * rightMatrix[3] + (double)leftMatrix[4] * rightMatrix[7])));
+  productMatrix[1] = (float)((double)leftMatrix[0xd] * rightMatrix[0xc] +
+                      ((double)leftMatrix[9] * rightMatrix[8] +
+                      ((double)leftMatrix[1] * *rightMatrix + (double)leftMatrix[5] * rightMatrix[4])));
+  productMatrix[5] = (float)((double)leftMatrix[0xd] * rightMatrix[0xd] +
+                      ((double)leftMatrix[9] * rightMatrix[9] +
+                      ((double)leftMatrix[1] * rightMatrix[1] + (double)leftMatrix[5] * rightMatrix[5])));
+  productMatrix[9] = (float)((double)leftMatrix[0xd] * rightMatrix[0xe] +
+                      ((double)leftMatrix[9] * rightMatrix[10] +
+                      ((double)leftMatrix[1] * rightMatrix[2] + (double)leftMatrix[5] * rightMatrix[6])));
+  productMatrix[0xd] = (float)((double)leftMatrix[0xd] * rightMatrix[0xf] +
+                        ((double)leftMatrix[9] * rightMatrix[0xb] +
+                        ((double)leftMatrix[1] * rightMatrix[3] + (double)leftMatrix[5] * rightMatrix[7])));
+  productMatrix[2] = (float)((double)leftMatrix[0xe] * rightMatrix[0xc] +
+                      ((double)leftMatrix[10] * rightMatrix[8] +
+                      ((double)leftMatrix[2] * *rightMatrix + (double)leftMatrix[6] * rightMatrix[4])));
+  productMatrix[6] = (float)((double)leftMatrix[0xe] * rightMatrix[0xd] +
+                      ((double)leftMatrix[10] * rightMatrix[9] +
+                      ((double)leftMatrix[2] * rightMatrix[1] + (double)leftMatrix[6] * rightMatrix[5])));
+  productMatrix[10] = (float)((double)leftMatrix[0xe] * rightMatrix[0xe] +
+                       ((double)leftMatrix[10] * rightMatrix[10] +
+                       ((double)leftMatrix[2] * rightMatrix[2] + (double)leftMatrix[6] * rightMatrix[6])));
+  productMatrix[0xe] = (float)((double)leftMatrix[0xe] * rightMatrix[0xf] +
+                        ((double)leftMatrix[10] * rightMatrix[0xb] +
+                        ((double)leftMatrix[2] * rightMatrix[3] + (double)leftMatrix[6] * rightMatrix[7])));
+  productMatrix[3] = (float)((double)leftMatrix[0xf] * rightMatrix[0xc] +
+                      ((double)leftMatrix[0xb] * rightMatrix[8] +
+                      ((double)leftMatrix[3] * *rightMatrix + (double)leftMatrix[7] * rightMatrix[4])));
+  productMatrix[7] = (float)((double)leftMatrix[0xf] * rightMatrix[0xd] +
+                      ((double)leftMatrix[0xb] * rightMatrix[9] +
+                      ((double)leftMatrix[3] * rightMatrix[1] + (double)leftMatrix[7] * rightMatrix[5])));
+  productMatrix[0xb] = (float)((double)leftMatrix[0xf] * rightMatrix[0xe] +
+                        ((double)leftMatrix[0xb] * rightMatrix[10] +
+                        ((double)leftMatrix[3] * rightMatrix[2] + (double)leftMatrix[7] * rightMatrix[6])));
+  productMatrix[0xf] = (float)((double)leftMatrix[0xf] * rightMatrix[0xf] +
+                        ((double)leftMatrix[0xb] * rightMatrix[0xb] +
+                        ((double)leftMatrix[3] * rightMatrix[3] + (double)leftMatrix[7] * rightMatrix[7])));
   return;
 }
 
 /* _gleMultTransposeMatrix @ 0xdd67c (836 bytes) */
-void _gleMultTransposeMatrix(param_1, param_2, param_3)
-  float *param_1;
-  float *param_2;
-  float *param_3;
+void _gleMultTransposeMatrix(leftMatrix, rightMatrix, productMatrix)
+  float *leftMatrix;
+  float *rightMatrix;
+  float *productMatrix;
 {
-  *param_3 = param_1[0xc] * param_2[0xc] +
-             (param_1[8] * param_2[8] + (*param_1 * *param_2 + param_1[4] * param_2[4]));
-  param_3[4] = param_1[0xc] * param_2[0xd] +
-               (param_1[8] * param_2[9] + (*param_1 * param_2[1] + param_1[4] * param_2[5]));
-  param_3[8] = param_1[0xc] * param_2[0xe] +
-               (param_1[8] * param_2[10] + (*param_1 * param_2[2] + param_1[4] * param_2[6]));
-  param_3[0xc] = param_1[0xc] * param_2[0xf] +
-                 (param_1[8] * param_2[0xb] + (*param_1 * param_2[3] + param_1[4] * param_2[7]));
-  param_3[1] = param_1[0xd] * param_2[0xc] +
-               (param_1[9] * param_2[8] + (param_1[1] * *param_2 + param_1[5] * param_2[4]));
-  param_3[5] = param_1[0xd] * param_2[0xd] +
-               (param_1[9] * param_2[9] + (param_1[1] * param_2[1] + param_1[5] * param_2[5]));
-  param_3[9] = param_1[0xd] * param_2[0xe] +
-               (param_1[9] * param_2[10] + (param_1[1] * param_2[2] + param_1[5] * param_2[6]));
-  param_3[0xd] = param_1[0xd] * param_2[0xf] +
-                 (param_1[9] * param_2[0xb] + (param_1[1] * param_2[3] + param_1[5] * param_2[7]));
-  param_3[2] = param_1[0xe] * param_2[0xc] +
-               (param_1[10] * param_2[8] + (param_1[2] * *param_2 + param_1[6] * param_2[4]));
-  param_3[6] = param_1[0xe] * param_2[0xd] +
-               (param_1[10] * param_2[9] + (param_1[2] * param_2[1] + param_1[6] * param_2[5]));
-  param_3[10] = param_1[0xe] * param_2[0xe] +
-                (param_1[10] * param_2[10] + (param_1[2] * param_2[2] + param_1[6] * param_2[6]));
-  param_3[0xe] = param_1[0xe] * param_2[0xf] +
-                 (param_1[10] * param_2[0xb] + (param_1[2] * param_2[3] + param_1[6] * param_2[7]));
-  param_3[3] = param_1[0xf] * param_2[0xc] +
-               (param_1[0xb] * param_2[8] + (param_1[3] * *param_2 + param_1[7] * param_2[4]));
-  param_3[7] = param_1[0xf] * param_2[0xd] +
-               (param_1[0xb] * param_2[9] + (param_1[3] * param_2[1] + param_1[7] * param_2[5]));
-  param_3[0xb] = param_1[0xf] * param_2[0xe] +
-                 (param_1[0xb] * param_2[10] + (param_1[3] * param_2[2] + param_1[7] * param_2[6]));
-  param_3[0xf] = param_1[0xf] * param_2[0xf] +
-                 (param_1[0xb] * param_2[0xb] + (param_1[3] * param_2[3] + param_1[7] * param_2[7]));
+  *productMatrix = leftMatrix[0xc] * rightMatrix[0xc] +
+             (leftMatrix[8] * rightMatrix[8] + (*leftMatrix * *rightMatrix + leftMatrix[4] * rightMatrix[4]));
+  productMatrix[4] = leftMatrix[0xc] * rightMatrix[0xd] +
+               (leftMatrix[8] * rightMatrix[9] + (*leftMatrix * rightMatrix[1] + leftMatrix[4] * rightMatrix[5]));
+  productMatrix[8] = leftMatrix[0xc] * rightMatrix[0xe] +
+               (leftMatrix[8] * rightMatrix[10] + (*leftMatrix * rightMatrix[2] + leftMatrix[4] * rightMatrix[6]));
+  productMatrix[0xc] = leftMatrix[0xc] * rightMatrix[0xf] +
+                 (leftMatrix[8] * rightMatrix[0xb] + (*leftMatrix * rightMatrix[3] + leftMatrix[4] * rightMatrix[7]));
+  productMatrix[1] = leftMatrix[0xd] * rightMatrix[0xc] +
+               (leftMatrix[9] * rightMatrix[8] + (leftMatrix[1] * *rightMatrix + leftMatrix[5] * rightMatrix[4]));
+  productMatrix[5] = leftMatrix[0xd] * rightMatrix[0xd] +
+               (leftMatrix[9] * rightMatrix[9] + (leftMatrix[1] * rightMatrix[1] + leftMatrix[5] * rightMatrix[5]));
+  productMatrix[9] = leftMatrix[0xd] * rightMatrix[0xe] +
+               (leftMatrix[9] * rightMatrix[10] + (leftMatrix[1] * rightMatrix[2] + leftMatrix[5] * rightMatrix[6]));
+  productMatrix[0xd] = leftMatrix[0xd] * rightMatrix[0xf] +
+                 (leftMatrix[9] * rightMatrix[0xb] + (leftMatrix[1] * rightMatrix[3] + leftMatrix[5] * rightMatrix[7]));
+  productMatrix[2] = leftMatrix[0xe] * rightMatrix[0xc] +
+               (leftMatrix[10] * rightMatrix[8] + (leftMatrix[2] * *rightMatrix + leftMatrix[6] * rightMatrix[4]));
+  productMatrix[6] = leftMatrix[0xe] * rightMatrix[0xd] +
+               (leftMatrix[10] * rightMatrix[9] + (leftMatrix[2] * rightMatrix[1] + leftMatrix[6] * rightMatrix[5]));
+  productMatrix[10] = leftMatrix[0xe] * rightMatrix[0xe] +
+                (leftMatrix[10] * rightMatrix[10] + (leftMatrix[2] * rightMatrix[2] + leftMatrix[6] * rightMatrix[6]));
+  productMatrix[0xe] = leftMatrix[0xe] * rightMatrix[0xf] +
+                 (leftMatrix[10] * rightMatrix[0xb] + (leftMatrix[2] * rightMatrix[3] + leftMatrix[6] * rightMatrix[7]));
+  productMatrix[3] = leftMatrix[0xf] * rightMatrix[0xc] +
+               (leftMatrix[0xb] * rightMatrix[8] + (leftMatrix[3] * *rightMatrix + leftMatrix[7] * rightMatrix[4]));
+  productMatrix[7] = leftMatrix[0xf] * rightMatrix[0xd] +
+               (leftMatrix[0xb] * rightMatrix[9] + (leftMatrix[3] * rightMatrix[1] + leftMatrix[7] * rightMatrix[5]));
+  productMatrix[0xb] = leftMatrix[0xf] * rightMatrix[0xe] +
+                 (leftMatrix[0xb] * rightMatrix[10] + (leftMatrix[3] * rightMatrix[2] + leftMatrix[7] * rightMatrix[6]));
+  productMatrix[0xf] = leftMatrix[0xf] * rightMatrix[0xf] +
+                 (leftMatrix[0xb] * rightMatrix[0xb] + (leftMatrix[3] * rightMatrix[3] + leftMatrix[7] * rightMatrix[7]));
   return;
 }
 
 /* _glePreEvaluate @ 0xdd9cc (164 bytes) */
-void _glePreEvaluate(undefined4 param_1,int param_2,undefined4 param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _glePreEvaluate(undefined4 unusedArg1,int order,undefined4 unusedArg3,float *coeffs,float u,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  double dVar1;
+  double newCoeff;
   int iVar2;
   int iVar3;
   int iVar4;
   int iVar5;
   float dVar6;
-  float dVar7;
+  float oneMinusU;
   
-  if (param_2 == 1) {
-    *param_4 = 1.0;
+  if (order == 1) {
+    *coeffs = 1.0;
     return;
   }
   dVar6 = (double)FLOAT_00108e54;
-  param_4[1] = (float)fparam_1;
-  dVar7 = (double)(dVar6 - fparam_1);
-  *param_4 = (dVar6 - fparam_1);
-  if (param_2 != 2) {
+  coeffs[1] = (float)u;
+  oneMinusU = (double)(dVar6 - u);
+  *coeffs = (dVar6 - u);
+  if (order != 2) {
     iVar5 = 2;
-    if (2 < param_2) {
+    if (2 < order) {
       do {
         iVar3 = 1;
-        dVar6 = (double)(*param_4 * fparam_1);
-        *param_4 = (dVar7 * *param_4);
+        dVar6 = (double)(*coeffs * u);
+        *coeffs = (oneMinusU * *coeffs);
         if (1 < iVar5) {
           iVar2 = iVar5 + -1;
           iVar4 = iVar3;
           do {
             iVar3 = iVar4 + 1;
-            dVar1 = (double)dVar7 * (double)param_4[iVar4] + (double)dVar6;
-            dVar6 = (double)(param_4[iVar4] * fparam_1);
-            param_4[iVar4] = (float)dVar1;
+            newCoeff = (double)oneMinusU * (double)coeffs[iVar4] + (double)dVar6;
+            dVar6 = (double)(coeffs[iVar4] * u);
+            coeffs[iVar4] = (float)newCoeff;
             iVar2 = iVar2 + -1;
             iVar4 = iVar3;
           } while (iVar2 != 0);
         }
         iVar5 = iVar5 + 1;
-        param_4[iVar3] = (float)(double)dVar6;
-      } while (iVar5 < param_2);
+        coeffs[iVar3] = (float)(double)dVar6;
+      } while (iVar5 < order);
       return;
     }
     return;
@@ -3865,7 +3865,7 @@ void _glePreEvaluate(undefined4 param_1,int param_2,undefined4 param_3,float *pa
 }
 
 /* _glePreEvaluateWithDeriv @ 0xdda70 (356 bytes) */
-void _glePreEvaluateWithDeriv(undefined4 param_1,int param_2,undefined4 param_3,float *param_4,float *param_5,float fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _glePreEvaluateWithDeriv(undefined4 unusedArg1,int param_2,undefined4 unusedArg3,float *param_4,float *param_5,float floatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
   double dVar1;
   float fVar2;
@@ -3878,7 +3878,7 @@ void _glePreEvaluateWithDeriv(undefined4 param_1,int param_2,undefined4 param_3,
   float dVar9;
   float dVar10;
   
-  fVar2 = (FLOAT_00108e54 - fparam_1);
+  fVar2 = (FLOAT_00108e54 - floatArg1);
   dVar9 = (double)fVar2;
   if (param_2 == 1) {
     *param_4 = FLOAT_00108e54;
@@ -3888,18 +3888,18 @@ void _glePreEvaluateWithDeriv(undefined4 param_1,int param_2,undefined4 param_3,
   if (param_2 == 2) {
     param_5[1] = FLOAT_00108e54;
     *param_5 = -1.0;
-    param_4[1] = (float)fparam_1;
+    param_4[1] = (float)floatArg1;
     *param_4 = fVar2;
     return;
   }
   iVar5 = param_2 + -1;
   iVar8 = 2;
   *param_4 = fVar2;
-  param_4[1] = (float)fparam_1;
+  param_4[1] = (float)floatArg1;
   if (2 < iVar5) {
     do {
       iVar4 = 1;
-      dVar10 = (double)(*param_4 * fparam_1);
+      dVar10 = (double)(*param_4 * floatArg1);
       *param_4 = (dVar9 * *param_4);
       if (1 < iVar8) {
         iVar3 = iVar8 + -1;
@@ -3907,7 +3907,7 @@ void _glePreEvaluateWithDeriv(undefined4 param_1,int param_2,undefined4 param_3,
         do {
           iVar4 = iVar6 + 1;
           dVar1 = (double)dVar9 * (double)param_4[iVar6] + (double)dVar10;
-          dVar10 = (double)(param_4[iVar6] * fparam_1);
+          dVar10 = (double)(param_4[iVar6] * floatArg1);
           param_4[iVar6] = (float)dVar1;
           iVar3 = iVar3 + -1;
           iVar6 = iVar4;
@@ -3934,7 +3934,7 @@ void _glePreEvaluateWithDeriv(undefined4 param_1,int param_2,undefined4 param_3,
   } while (iVar6 != 0);
   iVar4 = 1;
   param_5[iVar5 + 1] = param_4[iVar5];
-  dVar10 = (double)(*param_4 * fparam_1);
+  dVar10 = (double)(*param_4 * floatArg1);
   *param_4 = (dVar9 * *param_4);
   if (1 < iVar8) {
     iVar8 = iVar8 + -1;
@@ -3942,7 +3942,7 @@ void _glePreEvaluateWithDeriv(undefined4 param_1,int param_2,undefined4 param_3,
     do {
       iVar4 = iVar5 + 1;
       dVar1 = (double)dVar9 * (double)param_4[iVar5] + (double)dVar10;
-      dVar10 = (double)(param_4[iVar5] * fparam_1);
+      dVar10 = (double)(param_4[iVar5] * floatArg1);
       param_4[iVar5] = (float)dVar1;
       iVar8 = iVar8 + -1;
       iVar5 = iVar4;
@@ -3953,249 +3953,249 @@ void _glePreEvaluateWithDeriv(undefined4 param_1,int param_2,undefined4 param_3,
 }
 
 /* _gleEvalDomain1Color @ 0xddbd4 (244 bytes) */
-void _gleEvalDomain1Color(undefined4 param_1,int param_2,int param_3,undefined4 param_4,int param_5,int param_6,float fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,float fparam_12,float fparam_13)
+void _gleEvalDomain1Color(undefined4 param_1,int points,int order,undefined4 unusedArg4,int components,int out,float u,double floatArg2,double floatArg3,double floatArg4,double floatArg5,double floatArg6,double floatArg7,double floatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,float unusedFloatArg12,float unusedFloatArg13)
 {
-  float fVar1;
-  float fVar2;
-  int iVar3;
-  float *pfVar4;
-  float *pfVar5;
-  int iVar6;
-  int iVar7;
-  double in_stack_ffffff98;
-  double in_stack_ffffffa0;
-  double in_stack_ffffffa8;
-  double in_stack_ffffffb0;
-  double in_stack_ffffffb8;
+  float coeff;
+  float controlValue;
+  int componentByteOffset;
+  float *pointPtr;
+  float *coeffPtr;
+  int component;
+  int pointsRemaining;
+  double incomingStack_ffffff98;
+  double incomingStack_ffffffa0;
+  double incomingStack_ffffffa8;
+  double incomingStack_ffffffb0;
+  double incomingStack_ffffffb8;
   
-  if (((double)GH_U2F((unsigned int)_uvalue_c) != fparam_1) || (_uorder_c != param_3)) {
-    ((void (*)())_glePreEvaluate)(param_1,param_3,param_3,&_ucoeff_c,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,
-                    fparam_6,fparam_7,fparam_8,in_stack_ffffff98,in_stack_ffffffa0,in_stack_ffffffa8
-                    ,in_stack_ffffffb0,in_stack_ffffffb8);
-    _uvalue_c = GH_F2U((float)fparam_1);
+  if (((double)GH_U2F((unsigned int)_uvalue_c) != u) || (_uorder_c != order)) {
+    ((void (*)())_glePreEvaluate)(param_1,order,order,&_ucoeff_c,u,floatArg2,floatArg3,floatArg4,floatArg5,
+                    floatArg6,floatArg7,floatArg8,incomingStack_ffffff98,incomingStack_ffffffa0,incomingStack_ffffffa8
+                    ,incomingStack_ffffffb0,incomingStack_ffffffb8);
+    _uvalue_c = GH_F2U((float)u);
     _utype_c = 2;
-    _uorder_c = param_3;
+    _uorder_c = order;
   }
-  iVar6 = 0;
-  if (0 < param_5) {
+  component = 0;
+  if (0 < components) {
     do {
-      iVar3 = iVar6 * 4;
-      *(undefined4 *)(param_6 + iVar3) = 0;
-      pfVar4 = (float *)(param_2 + iVar3);
-      if (0 < param_3) {
-        pfVar5 = (float *)&_ucoeff_c;
-        iVar7 = param_3;
+      componentByteOffset = component * 4;
+      *(undefined4 *)(out + componentByteOffset) = 0;
+      pointPtr = (float *)(points + componentByteOffset);
+      if (0 < order) {
+        coeffPtr = (float *)&_ucoeff_c;
+        pointsRemaining = order;
         do {
-          fVar1 = *pfVar5;
-          pfVar5 = pfVar5 + 1;
-          fVar2 = *pfVar4;
-          pfVar4 = pfVar4 + param_5;
-          *(float *)(param_6 + iVar3) = fVar1 * fVar2 + *(float *)(param_6 + iVar3);
-          iVar7 = iVar7 + -1;
-        } while (iVar7 != 0);
+          coeff = *coeffPtr;
+          coeffPtr = coeffPtr + 1;
+          controlValue = *pointPtr;
+          pointPtr = pointPtr + components;
+          *(float *)(out + componentByteOffset) = coeff * controlValue + *(float *)(out + componentByteOffset);
+          pointsRemaining = pointsRemaining + -1;
+        } while (pointsRemaining != 0);
       }
-      iVar6 = iVar6 + 1;
-    } while (iVar6 < param_5);
+      component = component + 1;
+    } while (component < components);
   }
   return;
 }
 
 /* _gleEvalDomain1Coord @ 0xddcc8 (244 bytes) */
-void _gleEvalDomain1Coord(undefined4 param_1,int param_2,int param_3,undefined4 param_4,int param_5,int param_6,float fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,float fparam_12,float fparam_13)
+void _gleEvalDomain1Coord(undefined4 param_1,int points,int order,undefined4 unusedArg4,int components,int out,float u,double floatArg2,double floatArg3,double floatArg4,double floatArg5,double floatArg6,double floatArg7,double floatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,float unusedFloatArg12,float unusedFloatArg13)
 {
-  float fVar1;
-  float fVar2;
-  int iVar3;
-  float *pfVar4;
-  float *pfVar5;
-  int iVar6;
-  int iVar7;
-  double in_stack_ffffff98;
-  double in_stack_ffffffa0;
-  double in_stack_ffffffa8;
-  double in_stack_ffffffb0;
-  double in_stack_ffffffb8;
+  float coeff;
+  float controlValue;
+  int componentByteOffset;
+  float *pointPtr;
+  float *coeffPtr;
+  int component;
+  int pointsRemaining;
+  double incomingStack_ffffff98;
+  double incomingStack_ffffffa0;
+  double incomingStack_ffffffa8;
+  double incomingStack_ffffffb0;
+  double incomingStack_ffffffb8;
   
-  if (((double)GH_U2F((unsigned int)_uvalue_c) != fparam_1) || (_uorder_c != param_3)) {
-    ((void (*)())_glePreEvaluate)(param_1,param_3,param_3,&_ucoeff_c,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,
-                    fparam_6,fparam_7,fparam_8,in_stack_ffffff98,in_stack_ffffffa0,in_stack_ffffffa8
-                    ,in_stack_ffffffb0,in_stack_ffffffb8);
-    _uvalue_c = GH_F2U((float)fparam_1);
+  if (((double)GH_U2F((unsigned int)_uvalue_c) != u) || (_uorder_c != order)) {
+    ((void (*)())_glePreEvaluate)(param_1,order,order,&_ucoeff_c,u,floatArg2,floatArg3,floatArg4,floatArg5,
+                    floatArg6,floatArg7,floatArg8,incomingStack_ffffff98,incomingStack_ffffffa0,incomingStack_ffffffa8
+                    ,incomingStack_ffffffb0,incomingStack_ffffffb8);
+    _uvalue_c = GH_F2U((float)u);
     _utype_c = 2;
-    _uorder_c = param_3;
+    _uorder_c = order;
   }
-  iVar6 = 0;
-  if (0 < param_5) {
+  component = 0;
+  if (0 < components) {
     do {
-      iVar3 = iVar6 * 4;
-      *(undefined4 *)(param_6 + iVar3) = 0;
-      pfVar4 = (float *)(param_2 + iVar3);
-      if (0 < param_3) {
-        pfVar5 = (float *)&_ucoeff_c;
-        iVar7 = param_3;
+      componentByteOffset = component * 4;
+      *(undefined4 *)(out + componentByteOffset) = 0;
+      pointPtr = (float *)(points + componentByteOffset);
+      if (0 < order) {
+        coeffPtr = (float *)&_ucoeff_c;
+        pointsRemaining = order;
         do {
-          fVar1 = *pfVar5;
-          pfVar5 = pfVar5 + 1;
-          fVar2 = *pfVar4;
-          pfVar4 = pfVar4 + param_5;
-          *(float *)(param_6 + iVar3) = fVar1 * fVar2 + *(float *)(param_6 + iVar3);
-          iVar7 = iVar7 + -1;
-        } while (iVar7 != 0);
+          coeff = *coeffPtr;
+          coeffPtr = coeffPtr + 1;
+          controlValue = *pointPtr;
+          pointPtr = pointPtr + components;
+          *(float *)(out + componentByteOffset) = coeff * controlValue + *(float *)(out + componentByteOffset);
+          pointsRemaining = pointsRemaining + -1;
+        } while (pointsRemaining != 0);
       }
-      iVar6 = iVar6 + 1;
-    } while (iVar6 < param_5);
+      component = component + 1;
+    } while (component < components);
   }
   return;
 }
 
 /* _gleEvalDomain2Color @ 0xdddbc (420 bytes) */
-void _gleEvalDomain2Color(undefined4 param_1,int param_2,int param_3,int param_4,undefined4 param_5,undefined4 param_6,int param_7,int param_8,float fparam_1,float fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,float fparam_12,float fparam_13)
+void _gleEvalDomain2Color(undefined4 param_1,int points,int uorder,int vorder,undefined4 unusedArg5,undefined4 unusedArg6,int components,int out,float u,float v,double floatArg3,double floatArg4,double floatArg5,double floatArg6,double floatArg7,double floatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,float unusedFloatArg12,float unusedFloatArg13)
 {
-  float fVar1;
-  float fVar2;
-  int iVar3;
-  int iVar4;
-  float *pfVar5;
+  float vSum;
+  float controlValue;
+  int componentByteOffset;
+  int uRemaining;
+  float *vCoeffPtr;
   int iVar6;
-  float *pfVar7;
-  float *pfVar8;
-  int iVar9;
+  float *uCoeffPtr;
+  float *pointPtr;
+  int vRemaining;
   float dVar10;
-  double in_stack_ffffff88;
-  double in_stack_ffffff90;
-  double in_stack_ffffff98;
-  double in_stack_ffffffa0;
-  double in_stack_ffffffa8;
+  double incomingStack_ffffff88;
+  double incomingStack_ffffff90;
+  double incomingStack_ffffff98;
+  double incomingStack_ffffffa0;
+  double incomingStack_ffffffa8;
   
-  iVar6 = param_3;
-  dVar10 = fparam_2;
-  if (((double)GH_U2F((unsigned int)_uvalue_c) != fparam_1) || (_uorder_c != param_3)) {
-    ((void (*)())_glePreEvaluate)(param_1,param_3,param_3,&_ucoeff_c,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,
-                    fparam_6,fparam_7,fparam_8,in_stack_ffffff88,in_stack_ffffff90,in_stack_ffffff98
-                    ,in_stack_ffffffa0,in_stack_ffffffa8);
-    _uvalue_c = GH_F2U((float)fparam_1);
+  iVar6 = uorder;
+  dVar10 = v;
+  if (((double)GH_U2F((unsigned int)_uvalue_c) != u) || (_uorder_c != uorder)) {
+    ((void (*)())_glePreEvaluate)(param_1,uorder,uorder,&_ucoeff_c,u,v,floatArg3,floatArg4,floatArg5,
+                    floatArg6,floatArg7,floatArg8,incomingStack_ffffff88,incomingStack_ffffff90,incomingStack_ffffff98
+                    ,incomingStack_ffffffa0,incomingStack_ffffffa8);
+    _uvalue_c = GH_F2U((float)u);
     _utype_c = 2;
-    _uorder_c = param_3;
+    _uorder_c = uorder;
   }
-  if (((double)GH_U2F((unsigned int)_vvalue_c) != fparam_2) || (_vorder_c != param_4)) {
-    ((void (*)())_glePreEvaluate)(param_1,param_4,iVar6,&_vcoeff_c,fparam_2,(double)dVar10,fparam_3,fparam_4,fparam_5,
-                    fparam_6,fparam_7,fparam_8,in_stack_ffffff88,in_stack_ffffff90,in_stack_ffffff98
-                    ,in_stack_ffffffa0,in_stack_ffffffa8);
-    _vvalue_c = GH_F2U((float)fparam_2);
+  if (((double)GH_U2F((unsigned int)_vvalue_c) != v) || (_vorder_c != vorder)) {
+    ((void (*)())_glePreEvaluate)(param_1,vorder,iVar6,&_vcoeff_c,v,(double)dVar10,floatArg3,floatArg4,floatArg5,
+                    floatArg6,floatArg7,floatArg8,incomingStack_ffffff88,incomingStack_ffffff90,incomingStack_ffffff98
+                    ,incomingStack_ffffffa0,incomingStack_ffffffa8);
+    _vvalue_c = GH_F2U((float)v);
     _vtype_c = 2;
-    _vorder_c = param_4;
+    _vorder_c = vorder;
   }
   iVar6 = 0;
-  if (0 < param_7) {
+  if (0 < components) {
     do {
-      iVar3 = iVar6 * 4;
-      *(undefined4 *)(iVar3 + param_8) = 0;
-      pfVar8 = (float *)(param_2 + iVar3);
-      if (0 < param_3) {
-        pfVar7 = (float *)&_ucoeff_c;
-        iVar4 = param_3;
+      componentByteOffset = iVar6 * 4;
+      *(undefined4 *)(componentByteOffset + out) = 0;
+      pointPtr = (float *)(points + componentByteOffset);
+      if (0 < uorder) {
+        uCoeffPtr = (float *)&_ucoeff_c;
+        uRemaining = uorder;
         do {
-          fVar1 = *pfVar8;
-          pfVar8 = pfVar8 + param_7;
-          fVar1 = GH_U2F((unsigned int)_vcoeff_c) * fVar1;
-          if (1 < param_4) {
-            iVar9 = param_4 + -1;
-            pfVar5 = &_vcoeff_c;
+          vSum = *pointPtr;
+          pointPtr = pointPtr + components;
+          vSum = GH_U2F((unsigned int)_vcoeff_c) * vSum;
+          if (1 < vorder) {
+            vRemaining = vorder + -1;
+            vCoeffPtr = &_vcoeff_c;
             do {
-              pfVar5 = pfVar5 + 1;
-              fVar2 = *pfVar8;
-              pfVar8 = pfVar8 + param_7;
-              fVar1 = *pfVar5 * fVar2 + fVar1;
-              iVar9 = iVar9 + -1;
-            } while (iVar9 != 0);
+              vCoeffPtr = vCoeffPtr + 1;
+              controlValue = *pointPtr;
+              pointPtr = pointPtr + components;
+              vSum = *vCoeffPtr * controlValue + vSum;
+              vRemaining = vRemaining + -1;
+            } while (vRemaining != 0);
           }
-          fVar2 = *pfVar7;
-          iVar4 = iVar4 + -1;
-          pfVar7 = pfVar7 + 1;
-          *(float *)(iVar3 + param_8) = fVar2 * fVar1 + *(float *)(iVar3 + param_8);
-        } while (iVar4 != 0);
+          controlValue = *uCoeffPtr;
+          uRemaining = uRemaining + -1;
+          uCoeffPtr = uCoeffPtr + 1;
+          *(float *)(componentByteOffset + out) = controlValue * vSum + *(float *)(componentByteOffset + out);
+        } while (uRemaining != 0);
       }
       iVar6 = iVar6 + 1;
-    } while (iVar6 < param_7);
+    } while (iVar6 < components);
   }
   return;
 }
 
 /* _gleEvalDomain2Coord @ 0xddf60 (420 bytes) */
-void _gleEvalDomain2Coord(undefined4 param_1,int param_2,int param_3,int param_4,undefined4 param_5,undefined4 param_6,int param_7,int param_8,float fparam_1,float fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,float fparam_12,float fparam_13)
+void _gleEvalDomain2Coord(undefined4 param_1,int points,int uorder,int vorder,undefined4 unusedArg5,undefined4 unusedArg6,int components,int out,float u,float v,double floatArg3,double floatArg4,double floatArg5,double floatArg6,double floatArg7,double floatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,float unusedFloatArg12,float unusedFloatArg13)
 {
-  float fVar1;
-  float fVar2;
-  int iVar3;
-  int iVar4;
-  float *pfVar5;
+  float vSum;
+  float controlValue;
+  int componentByteOffset;
+  int uRemaining;
+  float *vCoeffPtr;
   int iVar6;
-  float *pfVar7;
-  float *pfVar8;
-  int iVar9;
+  float *uCoeffPtr;
+  float *pointPtr;
+  int vRemaining;
   float dVar10;
-  double in_stack_ffffff88;
-  double in_stack_ffffff90;
-  double in_stack_ffffff98;
-  double in_stack_ffffffa0;
-  double in_stack_ffffffa8;
+  double incomingStack_ffffff88;
+  double incomingStack_ffffff90;
+  double incomingStack_ffffff98;
+  double incomingStack_ffffffa0;
+  double incomingStack_ffffffa8;
   
-  iVar6 = param_3;
-  dVar10 = fparam_2;
-  if (((double)GH_U2F((unsigned int)_uvalue_c) != fparam_1) || (_uorder_c != param_3)) {
-    ((void (*)())_glePreEvaluate)(param_1,param_3,param_3,&_ucoeff_c,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,
-                    fparam_6,fparam_7,fparam_8,in_stack_ffffff88,in_stack_ffffff90,in_stack_ffffff98
-                    ,in_stack_ffffffa0,in_stack_ffffffa8);
-    _uvalue_c = GH_F2U((float)fparam_1);
+  iVar6 = uorder;
+  dVar10 = v;
+  if (((double)GH_U2F((unsigned int)_uvalue_c) != u) || (_uorder_c != uorder)) {
+    ((void (*)())_glePreEvaluate)(param_1,uorder,uorder,&_ucoeff_c,u,v,floatArg3,floatArg4,floatArg5,
+                    floatArg6,floatArg7,floatArg8,incomingStack_ffffff88,incomingStack_ffffff90,incomingStack_ffffff98
+                    ,incomingStack_ffffffa0,incomingStack_ffffffa8);
+    _uvalue_c = GH_F2U((float)u);
     _utype_c = 2;
-    _uorder_c = param_3;
+    _uorder_c = uorder;
   }
-  if (((double)GH_U2F((unsigned int)_vvalue_c) != fparam_2) || (_vorder_c != param_4)) {
-    ((void (*)())_glePreEvaluate)(param_1,param_4,iVar6,&_vcoeff_c,fparam_2,(double)dVar10,fparam_3,fparam_4,fparam_5,
-                    fparam_6,fparam_7,fparam_8,in_stack_ffffff88,in_stack_ffffff90,in_stack_ffffff98
-                    ,in_stack_ffffffa0,in_stack_ffffffa8);
-    _vvalue_c = GH_F2U((float)fparam_2);
+  if (((double)GH_U2F((unsigned int)_vvalue_c) != v) || (_vorder_c != vorder)) {
+    ((void (*)())_glePreEvaluate)(param_1,vorder,iVar6,&_vcoeff_c,v,(double)dVar10,floatArg3,floatArg4,floatArg5,
+                    floatArg6,floatArg7,floatArg8,incomingStack_ffffff88,incomingStack_ffffff90,incomingStack_ffffff98
+                    ,incomingStack_ffffffa0,incomingStack_ffffffa8);
+    _vvalue_c = GH_F2U((float)v);
     _vtype_c = 2;
-    _vorder_c = param_4;
+    _vorder_c = vorder;
   }
   iVar6 = 0;
-  if (0 < param_7) {
+  if (0 < components) {
     do {
-      iVar3 = iVar6 * 4;
-      *(undefined4 *)(iVar3 + param_8) = 0;
-      pfVar8 = (float *)(param_2 + iVar3);
-      if (0 < param_3) {
-        pfVar7 = (float *)&_ucoeff_c;
-        iVar4 = param_3;
+      componentByteOffset = iVar6 * 4;
+      *(undefined4 *)(componentByteOffset + out) = 0;
+      pointPtr = (float *)(points + componentByteOffset);
+      if (0 < uorder) {
+        uCoeffPtr = (float *)&_ucoeff_c;
+        uRemaining = uorder;
         do {
-          fVar1 = *pfVar8;
-          pfVar8 = pfVar8 + param_7;
-          fVar1 = GH_U2F((unsigned int)_vcoeff_c) * fVar1;
-          if (1 < param_4) {
-            iVar9 = param_4 + -1;
-            pfVar5 = &_vcoeff_c;
+          vSum = *pointPtr;
+          pointPtr = pointPtr + components;
+          vSum = GH_U2F((unsigned int)_vcoeff_c) * vSum;
+          if (1 < vorder) {
+            vRemaining = vorder + -1;
+            vCoeffPtr = &_vcoeff_c;
             do {
-              pfVar5 = pfVar5 + 1;
-              fVar2 = *pfVar8;
-              pfVar8 = pfVar8 + param_7;
-              fVar1 = *pfVar5 * fVar2 + fVar1;
-              iVar9 = iVar9 + -1;
-            } while (iVar9 != 0);
+              vCoeffPtr = vCoeffPtr + 1;
+              controlValue = *pointPtr;
+              pointPtr = pointPtr + components;
+              vSum = *vCoeffPtr * controlValue + vSum;
+              vRemaining = vRemaining + -1;
+            } while (vRemaining != 0);
           }
-          fVar2 = *pfVar7;
-          iVar4 = iVar4 + -1;
-          pfVar7 = pfVar7 + 1;
-          *(float *)(iVar3 + param_8) = fVar2 * fVar1 + *(float *)(iVar3 + param_8);
-        } while (iVar4 != 0);
+          controlValue = *uCoeffPtr;
+          uRemaining = uRemaining + -1;
+          uCoeffPtr = uCoeffPtr + 1;
+          *(float *)(componentByteOffset + out) = controlValue * vSum + *(float *)(componentByteOffset + out);
+        } while (uRemaining != 0);
       }
       iVar6 = iVar6 + 1;
-    } while (iVar6 < param_7);
+    } while (iVar6 < components);
   }
   return;
 }
 
 /* _gleEvalDomainDeriv2Coord @ 0xde104 (572 bytes) */
-void _gleEvalDomainDeriv2Coord(undefined4 param_1,int param_2,int param_3,int param_4,undefined4 param_5,undefined4 param_6,int param_7,int param_8,int param_9,int param_10,float fparam_1,float fparam_2,double fparam_3,double fparam_4,float fparam_5,float fparam_6,float fparam_7,float fparam_8,float fparam_9,float fparam_10,float fparam_11,float fparam_12,float fparam_13)
+void _gleEvalDomainDeriv2Coord(undefined4 param_1,int param_2,int param_3,int param_4,undefined4 unusedArg5,undefined4 unusedArg6,int param_7,int param_8,int param_9,int param_10,float floatArg1,float floatArg2,double floatArg3,double floatArg4,float floatArg5,float floatArg6,float floatArg7,float floatArg8,float unusedFloatArg9,float unusedFloatArg10,float unusedFloatArg11,float unusedFloatArg12,float unusedFloatArg13)
 {
   float fVar1;
   float fVar2;
@@ -4210,28 +4210,28 @@ void _gleEvalDomainDeriv2Coord(undefined4 param_1,int param_2,int param_3,int pa
   int iVar11;
   int iVar12;
   float dVar13;
-  double in_stack_ffffff78;
-  double in_stack_ffffff80;
-  double in_stack_ffffff88;
-  double in_stack_ffffff90;
-  double in_stack_ffffff98;
+  double incomingStack_ffffff78;
+  double incomingStack_ffffff80;
+  double incomingStack_ffffff88;
+  double incomingStack_ffffff90;
+  double incomingStack_ffffff98;
   
   iVar12 = param_3;
-  dVar13 = fparam_2;
-  if ((((double)GH_U2F((unsigned int)_uvalue_c) != fparam_1) || (_utype_c != 1)) || (_uorder_c != param_3)) {
-    ((void (*)())_glePreEvaluateWithDeriv)(param_1,param_3,param_3,&_ucoeff_c,&_ucoeffDeriv_c,fparam_1,fparam_2,fparam_3,
-               fparam_4,fparam_5,fparam_6,fparam_7,fparam_8,in_stack_ffffff78,in_stack_ffffff80,
-               in_stack_ffffff88,in_stack_ffffff90,in_stack_ffffff98);
+  dVar13 = floatArg2;
+  if ((((double)GH_U2F((unsigned int)_uvalue_c) != floatArg1) || (_utype_c != 1)) || (_uorder_c != param_3)) {
+    ((void (*)())_glePreEvaluateWithDeriv)(param_1,param_3,param_3,&_ucoeff_c,&_ucoeffDeriv_c,floatArg1,floatArg2,floatArg3,
+               floatArg4,floatArg5,floatArg6,floatArg7,floatArg8,incomingStack_ffffff78,incomingStack_ffffff80,
+               incomingStack_ffffff88,incomingStack_ffffff90,incomingStack_ffffff98);
     _utype_c = 1;
-    _uvalue_c = GH_F2U((float)fparam_1);
+    _uvalue_c = GH_F2U((float)floatArg1);
     _uorder_c = param_3;
   }
-  if ((((double)GH_U2F((unsigned int)_vvalue_c) != fparam_2) || (_vtype_c != 1)) || (_vorder_c != param_4)) {
-    ((void (*)())_glePreEvaluateWithDeriv)(param_1,param_4,iVar12,&_vcoeff_c,&_vcoeffDeriv_c,fparam_2,(double)dVar13,fparam_3,fparam_4,
-               fparam_5,fparam_6,fparam_7,fparam_8,in_stack_ffffff78,in_stack_ffffff80,
-               in_stack_ffffff88,in_stack_ffffff90,in_stack_ffffff98);
+  if ((((double)GH_U2F((unsigned int)_vvalue_c) != floatArg2) || (_vtype_c != 1)) || (_vorder_c != param_4)) {
+    ((void (*)())_glePreEvaluateWithDeriv)(param_1,param_4,iVar12,&_vcoeff_c,&_vcoeffDeriv_c,floatArg2,(double)dVar13,floatArg3,floatArg4,
+               floatArg5,floatArg6,floatArg7,floatArg8,incomingStack_ffffff78,incomingStack_ffffff80,
+               incomingStack_ffffff88,incomingStack_ffffff90,incomingStack_ffffff98);
     _vtype_c = 1;
-    _vvalue_c = GH_F2U((float)fparam_2);
+    _vvalue_c = GH_F2U((float)floatArg2);
     _vorder_c = param_4;
   }
   iVar12 = 0;
@@ -4366,30 +4366,30 @@ void _gleInitMap1Data(param_1)
 }
 
 /* _gleMap1Vertex3dLoad @ 0xde490 (144 bytes) */
-void _gleMap1Vertex3dLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,int param_6,int param_7,int param_8,int *param_9,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleMap1Vertex3dLoad(undefined4 unusedArg1,undefined4 unusedArg2,undefined4 unusedArg3,undefined4 unusedArg4,undefined4 unusedArg5,int stride,int order,int points,int *mapData,double u1,double u2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  int iVar1;
-  int iVar2;
-  int iVar3;
-  double dVar4;
+  int pointByteOffset;
+  int pointElementOffset;
+  int pointAddr;
+  double invUDelta;
   
-  iVar2 = 0;
-  dVar4 = DOUBLE_00108d68 / (fparam_2 - fparam_1);
-  *param_9 = param_7;
-  param_9[1] = (int)GH_F2U((float)fparam_1);
-  param_9[3] = (int)GH_F2U((float)dVar4);
-  param_9[2] = (int)GH_F2U((float)fparam_2);
-  if (0 < param_7) {
+  pointElementOffset = 0;
+  invUDelta = DOUBLE_00108d68 / (u2 - u1);
+  *mapData = order;
+  mapData[1] = (int)GH_F2U((float)u1);
+  mapData[3] = (int)GH_F2U((float)invUDelta);
+  mapData[2] = (int)GH_F2U((float)u2);
+  if (0 < order) {
     do {
-      iVar1 = iVar2 * 8;
-      iVar2 = iVar2 + param_6;
-      iVar3 = iVar1 + param_8;
-      param_9[4] = (int)GH_F2U((float)*(double *)(iVar1 + param_8));
-      param_9[5] = (int)GH_F2U((float)*(double *)(iVar3 + 8));
-      param_9[6] = (int)GH_F2U((float)*(double *)(iVar3 + 0x10));
-      param_9 = param_9 + 3;
-      param_7 = param_7 + -1;
-    } while (param_7 != 0);
+      pointByteOffset = pointElementOffset * 8;
+      pointElementOffset = pointElementOffset + stride;
+      pointAddr = pointByteOffset + points;
+      mapData[4] = (int)GH_F2U((float)*(double *)(pointByteOffset + points));
+      mapData[5] = (int)GH_F2U((float)*(double *)(pointAddr + 8));
+      mapData[6] = (int)GH_F2U((float)*(double *)(pointAddr + 0x10));
+      mapData = mapData + 3;
+      order = order + -1;
+    } while (order != 0);
     return;
   }
   return;

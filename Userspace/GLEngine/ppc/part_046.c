@@ -1,718 +1,718 @@
 #include "decls.h"
 
 /* _gleMap1Vertex4dLoad @ 0xde520 (156 bytes) */
-void _gleMap1Vertex4dLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,int param_6,int param_7,int param_8,int *param_9,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleMap1Vertex4dLoad(undefined4 unusedArg1,undefined4 unusedArg2,undefined4 unusedArg3,undefined4 unusedArg4,undefined4 unusedArg5,int stride,int order,int points,int *mapData,double u1,double u2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  int iVar1;
-  int iVar2;
-  int iVar3;
-  double dVar4;
+  int pointByteOffset;
+  int pointElementOffset;
+  int pointAddr;
+  double invUDelta;
   
-  iVar2 = 0;
-  dVar4 = DOUBLE_00108d68 / (fparam_2 - fparam_1);
-  *param_9 = param_7;
-  param_9[1] = (int)GH_F2U((float)fparam_1);
-  param_9[3] = (int)GH_F2U((float)dVar4);
-  param_9[2] = (int)GH_F2U((float)fparam_2);
-  if (0 < param_7) {
+  pointElementOffset = 0;
+  invUDelta = DOUBLE_00108d68 / (u2 - u1);
+  *mapData = order;
+  mapData[1] = (int)GH_F2U((float)u1);
+  mapData[3] = (int)GH_F2U((float)invUDelta);
+  mapData[2] = (int)GH_F2U((float)u2);
+  if (0 < order) {
     do {
-      iVar1 = iVar2 * 8;
-      iVar2 = iVar2 + param_6;
-      iVar3 = iVar1 + param_8;
-      param_9[4] = (int)GH_F2U((float)*(double *)(iVar1 + param_8));
-      param_9[5] = (int)GH_F2U((float)*(double *)(iVar3 + 8));
-      param_9[6] = (int)GH_F2U((float)*(double *)(iVar3 + 0x10));
-      param_9[7] = (int)GH_F2U((float)*(double *)(iVar3 + 0x18));
-      param_9 = param_9 + 4;
-      param_7 = param_7 + -1;
-    } while (param_7 != 0);
+      pointByteOffset = pointElementOffset * 8;
+      pointElementOffset = pointElementOffset + stride;
+      pointAddr = pointByteOffset + points;
+      mapData[4] = (int)GH_F2U((float)*(double *)(pointByteOffset + points));
+      mapData[5] = (int)GH_F2U((float)*(double *)(pointAddr + 8));
+      mapData[6] = (int)GH_F2U((float)*(double *)(pointAddr + 0x10));
+      mapData[7] = (int)GH_F2U((float)*(double *)(pointAddr + 0x18));
+      mapData = mapData + 4;
+      order = order + -1;
+    } while (order != 0);
     return;
   }
   return;
 }
 
 /* _gleMap1ColordLoad @ 0xde5bc (156 bytes) */
-void _gleMap1ColordLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,int param_6,int param_7,int param_8,int *param_9,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleMap1ColordLoad(undefined4 unusedArg1,undefined4 unusedArg2,undefined4 unusedArg3,undefined4 unusedArg4,undefined4 unusedArg5,int stride,int order,int points,int *mapData,double u1,double u2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  int iVar1;
-  int iVar2;
-  int iVar3;
-  double dVar4;
+  int pointByteOffset;
+  int pointElementOffset;
+  int pointAddr;
+  double invUDelta;
   
-  iVar2 = 0;
-  dVar4 = DOUBLE_00108d68 / (fparam_2 - fparam_1);
-  *param_9 = param_7;
-  param_9[1] = (int)GH_F2U((float)fparam_1);
-  param_9[3] = (int)GH_F2U((float)dVar4);
-  param_9[2] = (int)GH_F2U((float)fparam_2);
-  if (0 < param_7) {
+  pointElementOffset = 0;
+  invUDelta = DOUBLE_00108d68 / (u2 - u1);
+  *mapData = order;
+  mapData[1] = (int)GH_F2U((float)u1);
+  mapData[3] = (int)GH_F2U((float)invUDelta);
+  mapData[2] = (int)GH_F2U((float)u2);
+  if (0 < order) {
     do {
-      iVar1 = iVar2 * 8;
-      iVar2 = iVar2 + param_6;
-      iVar3 = iVar1 + param_8;
-      param_9[4] = (int)GH_F2U((float)*(double *)(iVar1 + param_8));
-      param_9[5] = (int)GH_F2U((float)*(double *)(iVar3 + 8));
-      param_9[6] = (int)GH_F2U((float)*(double *)(iVar3 + 0x10));
-      param_9[7] = (int)GH_F2U((float)*(double *)(iVar3 + 0x18));
-      param_9 = param_9 + 4;
-      param_7 = param_7 + -1;
-    } while (param_7 != 0);
+      pointByteOffset = pointElementOffset * 8;
+      pointElementOffset = pointElementOffset + stride;
+      pointAddr = pointByteOffset + points;
+      mapData[4] = (int)GH_F2U((float)*(double *)(pointByteOffset + points));
+      mapData[5] = (int)GH_F2U((float)*(double *)(pointAddr + 8));
+      mapData[6] = (int)GH_F2U((float)*(double *)(pointAddr + 0x10));
+      mapData[7] = (int)GH_F2U((float)*(double *)(pointAddr + 0x18));
+      mapData = mapData + 4;
+      order = order + -1;
+    } while (order != 0);
     return;
   }
   return;
 }
 
 /* _gleMap1IndexdLoad @ 0xde658 (112 bytes) */
-void _gleMap1IndexdLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,int param_6,int param_7,double *param_8,int *param_9,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleMap1IndexdLoad(undefined4 unusedArg1,undefined4 unusedArg2,undefined4 unusedArg3,undefined4 unusedArg4,undefined4 unusedArg5,int stride,int order,double *points,int *mapData,double u1,double u2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  float *pfVar1;
+  float *destPtr;
   double dVar2;
   
-  dVar2 = DOUBLE_00108d68 / (fparam_2 - fparam_1);
-  param_9[1] = (int)GH_F2U((float)fparam_1);
-  *param_9 = param_7;
-  param_9[2] = (int)GH_F2U((float)fparam_2);
-  param_9[3] = (int)GH_F2U((float)dVar2);
-  if (param_7 < 1) {
+  dVar2 = DOUBLE_00108d68 / (u2 - u1);
+  mapData[1] = (int)GH_F2U((float)u1);
+  *mapData = order;
+  mapData[2] = (int)GH_F2U((float)u2);
+  mapData[3] = (int)GH_F2U((float)dVar2);
+  if (order < 1) {
     return;
   }
-  pfVar1 = (float *)(param_9 + 4);
+  destPtr = (float *)(mapData + 4);
   do {
-    dVar2 = *param_8;
-    param_8 = param_8 + param_6;
-    *pfVar1 = (float)dVar2;
-    pfVar1 = pfVar1 + 1;
-    param_7 = param_7 + -1;
-  } while (param_7 != 0);
+    dVar2 = *points;
+    points = points + stride;
+    *destPtr = (float)dVar2;
+    destPtr = destPtr + 1;
+    order = order + -1;
+  } while (order != 0);
   return;
 }
 
 /* _gleMap1NormaldLoad @ 0xde6c8 (144 bytes) */
-void _gleMap1NormaldLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,int param_6,int param_7,int param_8,int *param_9,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleMap1NormaldLoad(undefined4 unusedArg1,undefined4 unusedArg2,undefined4 unusedArg3,undefined4 unusedArg4,undefined4 unusedArg5,int stride,int order,int points,int *mapData,double u1,double u2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  int iVar1;
-  int iVar2;
-  int iVar3;
-  double dVar4;
+  int pointByteOffset;
+  int pointElementOffset;
+  int pointAddr;
+  double invUDelta;
   
-  iVar2 = 0;
-  dVar4 = DOUBLE_00108d68 / (fparam_2 - fparam_1);
-  *param_9 = param_7;
-  param_9[1] = (int)GH_F2U((float)fparam_1);
-  param_9[3] = (int)GH_F2U((float)dVar4);
-  param_9[2] = (int)GH_F2U((float)fparam_2);
-  if (0 < param_7) {
+  pointElementOffset = 0;
+  invUDelta = DOUBLE_00108d68 / (u2 - u1);
+  *mapData = order;
+  mapData[1] = (int)GH_F2U((float)u1);
+  mapData[3] = (int)GH_F2U((float)invUDelta);
+  mapData[2] = (int)GH_F2U((float)u2);
+  if (0 < order) {
     do {
-      iVar1 = iVar2 * 8;
-      iVar2 = iVar2 + param_6;
-      iVar3 = iVar1 + param_8;
-      param_9[4] = (int)GH_F2U((float)*(double *)(iVar1 + param_8));
-      param_9[5] = (int)GH_F2U((float)*(double *)(iVar3 + 8));
-      param_9[6] = (int)GH_F2U((float)*(double *)(iVar3 + 0x10));
-      param_9 = param_9 + 3;
-      param_7 = param_7 + -1;
-    } while (param_7 != 0);
+      pointByteOffset = pointElementOffset * 8;
+      pointElementOffset = pointElementOffset + stride;
+      pointAddr = pointByteOffset + points;
+      mapData[4] = (int)GH_F2U((float)*(double *)(pointByteOffset + points));
+      mapData[5] = (int)GH_F2U((float)*(double *)(pointAddr + 8));
+      mapData[6] = (int)GH_F2U((float)*(double *)(pointAddr + 0x10));
+      mapData = mapData + 3;
+      order = order + -1;
+    } while (order != 0);
     return;
   }
   return;
 }
 
 /* _gleMap1Texture1dLoad @ 0xde758 (112 bytes) */
-void _gleMap1Texture1dLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,int param_6,int param_7,double *param_8,int *param_9,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleMap1Texture1dLoad(undefined4 unusedArg1,undefined4 unusedArg2,undefined4 unusedArg3,undefined4 unusedArg4,undefined4 unusedArg5,int stride,int order,double *points,int *mapData,double u1,double u2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  float *pfVar1;
+  float *destPtr;
   double dVar2;
   
-  dVar2 = DOUBLE_00108d68 / (fparam_2 - fparam_1);
-  param_9[1] = (int)GH_F2U((float)fparam_1);
-  *param_9 = param_7;
-  param_9[2] = (int)GH_F2U((float)fparam_2);
-  param_9[3] = (int)GH_F2U((float)dVar2);
-  if (param_7 < 1) {
+  dVar2 = DOUBLE_00108d68 / (u2 - u1);
+  mapData[1] = (int)GH_F2U((float)u1);
+  *mapData = order;
+  mapData[2] = (int)GH_F2U((float)u2);
+  mapData[3] = (int)GH_F2U((float)dVar2);
+  if (order < 1) {
     return;
   }
-  pfVar1 = (float *)(param_9 + 4);
+  destPtr = (float *)(mapData + 4);
   do {
-    dVar2 = *param_8;
-    param_8 = param_8 + param_6;
-    *pfVar1 = (float)dVar2;
-    pfVar1 = pfVar1 + 1;
-    param_7 = param_7 + -1;
-  } while (param_7 != 0);
+    dVar2 = *points;
+    points = points + stride;
+    *destPtr = (float)dVar2;
+    destPtr = destPtr + 1;
+    order = order + -1;
+  } while (order != 0);
   return;
 }
 
 /* _gleMap1Texture2dLoad @ 0xde7c8 (120 bytes) */
-void _gleMap1Texture2dLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,int param_6,int param_7,double *param_8,int *param_9,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleMap1Texture2dLoad(undefined4 unusedArg1,undefined4 unusedArg2,undefined4 unusedArg3,undefined4 unusedArg4,undefined4 unusedArg5,int stride,int order,double *points,int *mapData,double u1,double u2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  double *pdVar1;
-  double dVar2;
+  double *secondComponentPtr;
+  double invUDelta;
   
-  dVar2 = DOUBLE_00108d68 / (fparam_2 - fparam_1);
-  param_9[1] = (int)GH_F2U((float)fparam_1);
-  *param_9 = param_7;
-  param_9[2] = (int)GH_F2U((float)fparam_2);
-  param_9[3] = (int)GH_F2U((float)dVar2);
-  if (0 < param_7) {
+  invUDelta = DOUBLE_00108d68 / (u2 - u1);
+  mapData[1] = (int)GH_F2U((float)u1);
+  *mapData = order;
+  mapData[2] = (int)GH_F2U((float)u2);
+  mapData[3] = (int)GH_F2U((float)invUDelta);
+  if (0 < order) {
     do {
-      param_9[4] = (int)GH_F2U((float)*param_8);
-      pdVar1 = param_8 + 1;
-      param_8 = param_8 + param_6;
-      param_9[5] = (int)GH_F2U((float)*pdVar1);
-      param_9 = param_9 + 2;
-      param_7 = param_7 + -1;
-    } while (param_7 != 0);
+      mapData[4] = (int)GH_F2U((float)*points);
+      secondComponentPtr = points + 1;
+      points = points + stride;
+      mapData[5] = (int)GH_F2U((float)*secondComponentPtr);
+      mapData = mapData + 2;
+      order = order + -1;
+    } while (order != 0);
     return;
   }
   return;
 }
 
 /* _gleMap1Texture3dLoad @ 0xde840 (144 bytes) */
-void _gleMap1Texture3dLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,int param_6,int param_7,int param_8,int *param_9,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleMap1Texture3dLoad(undefined4 unusedArg1,undefined4 unusedArg2,undefined4 unusedArg3,undefined4 unusedArg4,undefined4 unusedArg5,int stride,int order,int points,int *mapData,double u1,double u2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  int iVar1;
-  int iVar2;
-  int iVar3;
-  double dVar4;
+  int pointByteOffset;
+  int pointElementOffset;
+  int pointAddr;
+  double invUDelta;
   
-  iVar2 = 0;
-  dVar4 = DOUBLE_00108d68 / (fparam_2 - fparam_1);
-  *param_9 = param_7;
-  param_9[1] = (int)GH_F2U((float)fparam_1);
-  param_9[3] = (int)GH_F2U((float)dVar4);
-  param_9[2] = (int)GH_F2U((float)fparam_2);
-  if (0 < param_7) {
+  pointElementOffset = 0;
+  invUDelta = DOUBLE_00108d68 / (u2 - u1);
+  *mapData = order;
+  mapData[1] = (int)GH_F2U((float)u1);
+  mapData[3] = (int)GH_F2U((float)invUDelta);
+  mapData[2] = (int)GH_F2U((float)u2);
+  if (0 < order) {
     do {
-      iVar1 = iVar2 * 8;
-      iVar2 = iVar2 + param_6;
-      iVar3 = iVar1 + param_8;
-      param_9[4] = (int)GH_F2U((float)*(double *)(iVar1 + param_8));
-      param_9[5] = (int)GH_F2U((float)*(double *)(iVar3 + 8));
-      param_9[6] = (int)GH_F2U((float)*(double *)(iVar3 + 0x10));
-      param_9 = param_9 + 3;
-      param_7 = param_7 + -1;
-    } while (param_7 != 0);
+      pointByteOffset = pointElementOffset * 8;
+      pointElementOffset = pointElementOffset + stride;
+      pointAddr = pointByteOffset + points;
+      mapData[4] = (int)GH_F2U((float)*(double *)(pointByteOffset + points));
+      mapData[5] = (int)GH_F2U((float)*(double *)(pointAddr + 8));
+      mapData[6] = (int)GH_F2U((float)*(double *)(pointAddr + 0x10));
+      mapData = mapData + 3;
+      order = order + -1;
+    } while (order != 0);
     return;
   }
   return;
 }
 
 /* _gleMap1Texture4dLoad @ 0xde8d0 (156 bytes) */
-void _gleMap1Texture4dLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,int param_6,int param_7,int param_8,int *param_9,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleMap1Texture4dLoad(undefined4 unusedArg1,undefined4 unusedArg2,undefined4 unusedArg3,undefined4 unusedArg4,undefined4 unusedArg5,int stride,int order,int points,int *mapData,double u1,double u2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  int iVar1;
-  int iVar2;
-  int iVar3;
-  double dVar4;
+  int pointByteOffset;
+  int pointElementOffset;
+  int pointAddr;
+  double invUDelta;
   
-  iVar2 = 0;
-  dVar4 = DOUBLE_00108d68 / (fparam_2 - fparam_1);
-  *param_9 = param_7;
-  param_9[1] = (int)GH_F2U((float)fparam_1);
-  param_9[3] = (int)GH_F2U((float)dVar4);
-  param_9[2] = (int)GH_F2U((float)fparam_2);
-  if (0 < param_7) {
+  pointElementOffset = 0;
+  invUDelta = DOUBLE_00108d68 / (u2 - u1);
+  *mapData = order;
+  mapData[1] = (int)GH_F2U((float)u1);
+  mapData[3] = (int)GH_F2U((float)invUDelta);
+  mapData[2] = (int)GH_F2U((float)u2);
+  if (0 < order) {
     do {
-      iVar1 = iVar2 * 8;
-      iVar2 = iVar2 + param_6;
-      iVar3 = iVar1 + param_8;
-      param_9[4] = (int)GH_F2U((float)*(double *)(iVar1 + param_8));
-      param_9[5] = (int)GH_F2U((float)*(double *)(iVar3 + 8));
-      param_9[6] = (int)GH_F2U((float)*(double *)(iVar3 + 0x10));
-      param_9[7] = (int)GH_F2U((float)*(double *)(iVar3 + 0x18));
-      param_9 = param_9 + 4;
-      param_7 = param_7 + -1;
-    } while (param_7 != 0);
+      pointByteOffset = pointElementOffset * 8;
+      pointElementOffset = pointElementOffset + stride;
+      pointAddr = pointByteOffset + points;
+      mapData[4] = (int)GH_F2U((float)*(double *)(pointByteOffset + points));
+      mapData[5] = (int)GH_F2U((float)*(double *)(pointAddr + 8));
+      mapData[6] = (int)GH_F2U((float)*(double *)(pointAddr + 0x10));
+      mapData[7] = (int)GH_F2U((float)*(double *)(pointAddr + 0x18));
+      mapData = mapData + 4;
+      order = order + -1;
+    } while (order != 0);
     return;
   }
   return;
 }
 
 /* _gleMap1VertexAttrib1dLoad @ 0xde96c (112 bytes) */
-void _gleMap1VertexAttrib1dLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,int param_6,int param_7,double *param_8,int *param_9,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleMap1VertexAttrib1dLoad(undefined4 unusedArg1,undefined4 unusedArg2,undefined4 unusedArg3,undefined4 unusedArg4,undefined4 unusedArg5,int stride,int order,double *points,int *mapData,double u1,double u2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  float *pfVar1;
+  float *destPtr;
   double dVar2;
   
-  dVar2 = DOUBLE_00108d68 / (fparam_2 - fparam_1);
-  param_9[1] = (int)GH_F2U((float)fparam_1);
-  *param_9 = param_7;
-  param_9[2] = (int)GH_F2U((float)fparam_2);
-  param_9[3] = (int)GH_F2U((float)dVar2);
-  if (param_7 < 1) {
+  dVar2 = DOUBLE_00108d68 / (u2 - u1);
+  mapData[1] = (int)GH_F2U((float)u1);
+  *mapData = order;
+  mapData[2] = (int)GH_F2U((float)u2);
+  mapData[3] = (int)GH_F2U((float)dVar2);
+  if (order < 1) {
     return;
   }
-  pfVar1 = (float *)(param_9 + 4);
+  destPtr = (float *)(mapData + 4);
   do {
-    dVar2 = *param_8;
-    param_8 = param_8 + param_6;
-    *pfVar1 = (float)dVar2;
-    pfVar1 = pfVar1 + 1;
-    param_7 = param_7 + -1;
-  } while (param_7 != 0);
+    dVar2 = *points;
+    points = points + stride;
+    *destPtr = (float)dVar2;
+    destPtr = destPtr + 1;
+    order = order + -1;
+  } while (order != 0);
   return;
 }
 
 /* _gleMap1VertexAttrib2dLoad @ 0xde9dc (120 bytes) */
-void _gleMap1VertexAttrib2dLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,int param_6,int param_7,double *param_8,int *param_9,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleMap1VertexAttrib2dLoad(undefined4 unusedArg1,undefined4 unusedArg2,undefined4 unusedArg3,undefined4 unusedArg4,undefined4 unusedArg5,int stride,int order,double *points,int *mapData,double u1,double u2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  double *pdVar1;
-  double dVar2;
+  double *secondComponentPtr;
+  double invUDelta;
   
-  dVar2 = DOUBLE_00108d68 / (fparam_2 - fparam_1);
-  param_9[1] = (int)GH_F2U((float)fparam_1);
-  *param_9 = param_7;
-  param_9[2] = (int)GH_F2U((float)fparam_2);
-  param_9[3] = (int)GH_F2U((float)dVar2);
-  if (0 < param_7) {
+  invUDelta = DOUBLE_00108d68 / (u2 - u1);
+  mapData[1] = (int)GH_F2U((float)u1);
+  *mapData = order;
+  mapData[2] = (int)GH_F2U((float)u2);
+  mapData[3] = (int)GH_F2U((float)invUDelta);
+  if (0 < order) {
     do {
-      param_9[4] = (int)GH_F2U((float)*param_8);
-      pdVar1 = param_8 + 1;
-      param_8 = param_8 + param_6;
-      param_9[5] = (int)GH_F2U((float)*pdVar1);
-      param_9 = param_9 + 2;
-      param_7 = param_7 + -1;
-    } while (param_7 != 0);
+      mapData[4] = (int)GH_F2U((float)*points);
+      secondComponentPtr = points + 1;
+      points = points + stride;
+      mapData[5] = (int)GH_F2U((float)*secondComponentPtr);
+      mapData = mapData + 2;
+      order = order + -1;
+    } while (order != 0);
     return;
   }
   return;
 }
 
 /* _gleMap1VertexAttrib3dLoad @ 0xdea54 (144 bytes) */
-void _gleMap1VertexAttrib3dLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,int param_6,int param_7,int param_8,int *param_9,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleMap1VertexAttrib3dLoad(undefined4 unusedArg1,undefined4 unusedArg2,undefined4 unusedArg3,undefined4 unusedArg4,undefined4 unusedArg5,int stride,int order,int points,int *mapData,double u1,double u2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  int iVar1;
-  int iVar2;
-  int iVar3;
-  double dVar4;
+  int pointByteOffset;
+  int pointElementOffset;
+  int pointAddr;
+  double invUDelta;
   
-  iVar2 = 0;
-  dVar4 = DOUBLE_00108d68 / (fparam_2 - fparam_1);
-  *param_9 = param_7;
-  param_9[1] = (int)GH_F2U((float)fparam_1);
-  param_9[3] = (int)GH_F2U((float)dVar4);
-  param_9[2] = (int)GH_F2U((float)fparam_2);
-  if (0 < param_7) {
+  pointElementOffset = 0;
+  invUDelta = DOUBLE_00108d68 / (u2 - u1);
+  *mapData = order;
+  mapData[1] = (int)GH_F2U((float)u1);
+  mapData[3] = (int)GH_F2U((float)invUDelta);
+  mapData[2] = (int)GH_F2U((float)u2);
+  if (0 < order) {
     do {
-      iVar1 = iVar2 * 8;
-      iVar2 = iVar2 + param_6;
-      iVar3 = iVar1 + param_8;
-      param_9[4] = (int)GH_F2U((float)*(double *)(iVar1 + param_8));
-      param_9[5] = (int)GH_F2U((float)*(double *)(iVar3 + 8));
-      param_9[6] = (int)GH_F2U((float)*(double *)(iVar3 + 0x10));
-      param_9 = param_9 + 3;
-      param_7 = param_7 + -1;
-    } while (param_7 != 0);
+      pointByteOffset = pointElementOffset * 8;
+      pointElementOffset = pointElementOffset + stride;
+      pointAddr = pointByteOffset + points;
+      mapData[4] = (int)GH_F2U((float)*(double *)(pointByteOffset + points));
+      mapData[5] = (int)GH_F2U((float)*(double *)(pointAddr + 8));
+      mapData[6] = (int)GH_F2U((float)*(double *)(pointAddr + 0x10));
+      mapData = mapData + 3;
+      order = order + -1;
+    } while (order != 0);
     return;
   }
   return;
 }
 
 /* _gleMap1VertexAttrib4dLoad @ 0xdeae4 (156 bytes) */
-void _gleMap1VertexAttrib4dLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,int param_6,int param_7,int param_8,int *param_9,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleMap1VertexAttrib4dLoad(undefined4 unusedArg1,undefined4 unusedArg2,undefined4 unusedArg3,undefined4 unusedArg4,undefined4 unusedArg5,int stride,int order,int points,int *mapData,double u1,double u2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  int iVar1;
-  int iVar2;
-  int iVar3;
-  double dVar4;
+  int pointByteOffset;
+  int pointElementOffset;
+  int pointAddr;
+  double invUDelta;
   
-  iVar2 = 0;
-  dVar4 = DOUBLE_00108d68 / (fparam_2 - fparam_1);
-  *param_9 = param_7;
-  param_9[1] = (int)GH_F2U((float)fparam_1);
-  param_9[3] = (int)GH_F2U((float)dVar4);
-  param_9[2] = (int)GH_F2U((float)fparam_2);
-  if (0 < param_7) {
+  pointElementOffset = 0;
+  invUDelta = DOUBLE_00108d68 / (u2 - u1);
+  *mapData = order;
+  mapData[1] = (int)GH_F2U((float)u1);
+  mapData[3] = (int)GH_F2U((float)invUDelta);
+  mapData[2] = (int)GH_F2U((float)u2);
+  if (0 < order) {
     do {
-      iVar1 = iVar2 * 8;
-      iVar2 = iVar2 + param_6;
-      iVar3 = iVar1 + param_8;
-      param_9[4] = (int)GH_F2U((float)*(double *)(iVar1 + param_8));
-      param_9[5] = (int)GH_F2U((float)*(double *)(iVar3 + 8));
-      param_9[6] = (int)GH_F2U((float)*(double *)(iVar3 + 0x10));
-      param_9[7] = (int)GH_F2U((float)*(double *)(iVar3 + 0x18));
-      param_9 = param_9 + 4;
-      param_7 = param_7 + -1;
-    } while (param_7 != 0);
+      pointByteOffset = pointElementOffset * 8;
+      pointElementOffset = pointElementOffset + stride;
+      pointAddr = pointByteOffset + points;
+      mapData[4] = (int)GH_F2U((float)*(double *)(pointByteOffset + points));
+      mapData[5] = (int)GH_F2U((float)*(double *)(pointAddr + 8));
+      mapData[6] = (int)GH_F2U((float)*(double *)(pointAddr + 0x10));
+      mapData[7] = (int)GH_F2U((float)*(double *)(pointAddr + 0x18));
+      mapData = mapData + 4;
+      order = order + -1;
+    } while (order != 0);
     return;
   }
   return;
 }
 
 /* _gleMap1Vertex3fLoad @ 0xdeb80 (112 bytes) */
-int _gleMap1Vertex3fLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,int param_4,int param_5,int param_6,int *param_7,float fparam_1,float fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+int _gleMap1Vertex3fLoad(undefined4 unusedArg1,undefined4 unusedArg2,undefined4 unusedArg3,int stride,int order,int points,int *mapData,float u1,float u2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  int iVar1;
-  float fVar2;
-  int iVar3;
-  int iVar4;
+  int pointByteOffset;
+  float one;
+  int pointElementOffset;
+  int pointAddr;
   
-  fVar2 = FLOAT_00108e54;
-  iVar3 = 0;
-  *param_7 = param_5;
-  param_7[1] = (int)GH_F2U((float)fparam_1);
-  param_7[2] = (int)GH_F2U((float)fparam_2);
-  param_7[3] = (int)GH_F2U((fVar2 / (fparam_2 - fparam_1)));
-  if (0 < param_5) {
+  one = FLOAT_00108e54;
+  pointElementOffset = 0;
+  *mapData = order;
+  mapData[1] = (int)GH_F2U((float)u1);
+  mapData[2] = (int)GH_F2U((float)u2);
+  mapData[3] = (int)GH_F2U((one / (u2 - u1)));
+  if (0 < order) {
     do {
-      iVar1 = iVar3 * 4;
-      iVar3 = iVar3 + param_4;
-      iVar4 = iVar1 + param_6;
-      param_7[4] = *(int *)(iVar1 + param_6);
-      param_7[5] = *(int *)(iVar4 + 4);
-      param_7[6] = *(int *)(iVar4 + 8);
-      param_7 = param_7 + 3;
-      param_5 = param_5 + -1;
-    } while (param_5 != 0);
+      pointByteOffset = pointElementOffset * 4;
+      pointElementOffset = pointElementOffset + stride;
+      pointAddr = pointByteOffset + points;
+      mapData[4] = *(int *)(pointByteOffset + points);
+      mapData[5] = *(int *)(pointAddr + 4);
+      mapData[6] = *(int *)(pointAddr + 8);
+      mapData = mapData + 3;
+      order = order + -1;
+    } while (order != 0);
     return;
   }
   return;
 }
 
 /* _gleMap1Vertex4fLoad @ 0xdebf0 (120 bytes) */
-int _gleMap1Vertex4fLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,int param_4,int param_5,int param_6,int *param_7,float fparam_1,float fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+int _gleMap1Vertex4fLoad(undefined4 unusedArg1,undefined4 unusedArg2,undefined4 unusedArg3,int stride,int order,int points,int *mapData,float u1,float u2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  int iVar1;
-  float fVar2;
-  int iVar3;
-  int iVar4;
+  int pointByteOffset;
+  float one;
+  int pointElementOffset;
+  int pointAddr;
   
-  fVar2 = FLOAT_00108e54;
-  iVar3 = 0;
-  *param_7 = param_5;
-  param_7[1] = (int)GH_F2U((float)fparam_1);
-  param_7[2] = (int)GH_F2U((float)fparam_2);
-  param_7[3] = (int)GH_F2U((fVar2 / (fparam_2 - fparam_1)));
-  if (0 < param_5) {
+  one = FLOAT_00108e54;
+  pointElementOffset = 0;
+  *mapData = order;
+  mapData[1] = (int)GH_F2U((float)u1);
+  mapData[2] = (int)GH_F2U((float)u2);
+  mapData[3] = (int)GH_F2U((one / (u2 - u1)));
+  if (0 < order) {
     do {
-      iVar1 = iVar3 * 4;
-      iVar3 = iVar3 + param_4;
-      iVar4 = iVar1 + param_6;
-      param_7[4] = *(int *)(iVar1 + param_6);
-      param_7[5] = *(int *)(iVar4 + 4);
-      param_7[6] = *(int *)(iVar4 + 8);
-      param_7[7] = *(int *)(iVar4 + 0xc);
-      param_7 = param_7 + 4;
-      param_5 = param_5 + -1;
-    } while (param_5 != 0);
+      pointByteOffset = pointElementOffset * 4;
+      pointElementOffset = pointElementOffset + stride;
+      pointAddr = pointByteOffset + points;
+      mapData[4] = *(int *)(pointByteOffset + points);
+      mapData[5] = *(int *)(pointAddr + 4);
+      mapData[6] = *(int *)(pointAddr + 8);
+      mapData[7] = *(int *)(pointAddr + 0xc);
+      mapData = mapData + 4;
+      order = order + -1;
+    } while (order != 0);
     return;
   }
   return;
 }
 
 /* _gleMap1ColorfLoad @ 0xdec68 (120 bytes) */
-int _gleMap1ColorfLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,int param_4,int param_5,int param_6,int *param_7,float fparam_1,float fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+int _gleMap1ColorfLoad(undefined4 unusedArg1,undefined4 unusedArg2,undefined4 unusedArg3,int stride,int order,int points,int *mapData,float u1,float u2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  int iVar1;
-  float fVar2;
-  int iVar3;
-  int iVar4;
+  int pointByteOffset;
+  float one;
+  int pointElementOffset;
+  int pointAddr;
   
-  fVar2 = FLOAT_00108e54;
-  iVar3 = 0;
-  *param_7 = param_5;
-  param_7[1] = (int)GH_F2U((float)fparam_1);
-  param_7[2] = (int)GH_F2U((float)fparam_2);
-  param_7[3] = (int)GH_F2U((fVar2 / (fparam_2 - fparam_1)));
-  if (0 < param_5) {
+  one = FLOAT_00108e54;
+  pointElementOffset = 0;
+  *mapData = order;
+  mapData[1] = (int)GH_F2U((float)u1);
+  mapData[2] = (int)GH_F2U((float)u2);
+  mapData[3] = (int)GH_F2U((one / (u2 - u1)));
+  if (0 < order) {
     do {
-      iVar1 = iVar3 * 4;
-      iVar3 = iVar3 + param_4;
-      iVar4 = iVar1 + param_6;
-      param_7[4] = *(int *)(iVar1 + param_6);
-      param_7[5] = *(int *)(iVar4 + 4);
-      param_7[6] = *(int *)(iVar4 + 8);
-      param_7[7] = *(int *)(iVar4 + 0xc);
-      param_7 = param_7 + 4;
-      param_5 = param_5 + -1;
-    } while (param_5 != 0);
+      pointByteOffset = pointElementOffset * 4;
+      pointElementOffset = pointElementOffset + stride;
+      pointAddr = pointByteOffset + points;
+      mapData[4] = *(int *)(pointByteOffset + points);
+      mapData[5] = *(int *)(pointAddr + 4);
+      mapData[6] = *(int *)(pointAddr + 8);
+      mapData[7] = *(int *)(pointAddr + 0xc);
+      mapData = mapData + 4;
+      order = order + -1;
+    } while (order != 0);
     return;
   }
   return;
 }
 
 /* _gleMap1IndexfLoad @ 0xdece0 (92 bytes) */
-int _gleMap1IndexfLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,int param_4,int param_5,int *param_6,int *param_7,float fparam_1,float fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+int _gleMap1IndexfLoad(undefined4 unusedArg1,undefined4 unusedArg2,undefined4 unusedArg3,int stride,int order,int *points,int *mapData,float u1,float u2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  int iVar1;
-  float fVar2;
-  int *piVar3;
+  int pointValue;
+  float one;
+  int *destPtr;
   
-  fVar2 = FLOAT_00108e54;
-  *param_7 = param_5;
-  param_7[1] = (int)GH_F2U((float)fparam_1);
-  param_7[2] = (int)GH_F2U((float)fparam_2);
-  param_7[3] = (int)GH_F2U((fVar2 / (fparam_2 - fparam_1)));
-  if (param_5 < 1) {
+  one = FLOAT_00108e54;
+  *mapData = order;
+  mapData[1] = (int)GH_F2U((float)u1);
+  mapData[2] = (int)GH_F2U((float)u2);
+  mapData[3] = (int)GH_F2U((one / (u2 - u1)));
+  if (order < 1) {
     return;
   }
-  piVar3 = param_7 + 4;
+  destPtr = mapData + 4;
   do {
-    iVar1 = *param_6;
-    param_6 = param_6 + param_4;
-    *piVar3 = iVar1;
-    piVar3 = piVar3 + 1;
-    param_5 = param_5 + -1;
-  } while (param_5 != 0);
+    pointValue = *points;
+    points = points + stride;
+    *destPtr = pointValue;
+    destPtr = destPtr + 1;
+    order = order + -1;
+  } while (order != 0);
   return;
 }
 
 /* _gleMap1NormalfLoad @ 0xded3c (112 bytes) */
-int _gleMap1NormalfLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,int param_4,int param_5,int param_6,int *param_7,float fparam_1,float fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+int _gleMap1NormalfLoad(undefined4 unusedArg1,undefined4 unusedArg2,undefined4 unusedArg3,int stride,int order,int points,int *mapData,float u1,float u2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  int iVar1;
-  float fVar2;
-  int iVar3;
-  int iVar4;
+  int pointByteOffset;
+  float one;
+  int pointElementOffset;
+  int pointAddr;
   
-  fVar2 = FLOAT_00108e54;
-  iVar3 = 0;
-  *param_7 = param_5;
-  param_7[1] = (int)GH_F2U((float)fparam_1);
-  param_7[2] = (int)GH_F2U((float)fparam_2);
-  param_7[3] = (int)GH_F2U((fVar2 / (fparam_2 - fparam_1)));
-  if (0 < param_5) {
+  one = FLOAT_00108e54;
+  pointElementOffset = 0;
+  *mapData = order;
+  mapData[1] = (int)GH_F2U((float)u1);
+  mapData[2] = (int)GH_F2U((float)u2);
+  mapData[3] = (int)GH_F2U((one / (u2 - u1)));
+  if (0 < order) {
     do {
-      iVar1 = iVar3 * 4;
-      iVar3 = iVar3 + param_4;
-      iVar4 = iVar1 + param_6;
-      param_7[4] = *(int *)(iVar1 + param_6);
-      param_7[5] = *(int *)(iVar4 + 4);
-      param_7[6] = *(int *)(iVar4 + 8);
-      param_7 = param_7 + 3;
-      param_5 = param_5 + -1;
-    } while (param_5 != 0);
+      pointByteOffset = pointElementOffset * 4;
+      pointElementOffset = pointElementOffset + stride;
+      pointAddr = pointByteOffset + points;
+      mapData[4] = *(int *)(pointByteOffset + points);
+      mapData[5] = *(int *)(pointAddr + 4);
+      mapData[6] = *(int *)(pointAddr + 8);
+      mapData = mapData + 3;
+      order = order + -1;
+    } while (order != 0);
     return;
   }
   return;
 }
 
 /* _gleMap1Texture1fLoad @ 0xdedac (92 bytes) */
-int _gleMap1Texture1fLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,int param_4,int param_5,int *param_6,int *param_7,float fparam_1,float fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+int _gleMap1Texture1fLoad(undefined4 unusedArg1,undefined4 unusedArg2,undefined4 unusedArg3,int stride,int order,int *points,int *mapData,float u1,float u2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  int iVar1;
-  float fVar2;
-  int *piVar3;
+  int pointValue;
+  float one;
+  int *destPtr;
   
-  fVar2 = FLOAT_00108e54;
-  *param_7 = param_5;
-  param_7[1] = (int)GH_F2U((float)fparam_1);
-  param_7[2] = (int)GH_F2U((float)fparam_2);
-  param_7[3] = (int)GH_F2U((fVar2 / (fparam_2 - fparam_1)));
-  if (param_5 < 1) {
+  one = FLOAT_00108e54;
+  *mapData = order;
+  mapData[1] = (int)GH_F2U((float)u1);
+  mapData[2] = (int)GH_F2U((float)u2);
+  mapData[3] = (int)GH_F2U((one / (u2 - u1)));
+  if (order < 1) {
     return;
   }
-  piVar3 = param_7 + 4;
+  destPtr = mapData + 4;
   do {
-    iVar1 = *param_6;
-    param_6 = param_6 + param_4;
-    *piVar3 = iVar1;
-    piVar3 = piVar3 + 1;
-    param_5 = param_5 + -1;
-  } while (param_5 != 0);
+    pointValue = *points;
+    points = points + stride;
+    *destPtr = pointValue;
+    destPtr = destPtr + 1;
+    order = order + -1;
+  } while (order != 0);
   return;
 }
 
 /* _gleMap1Texture2fLoad @ 0xdee08 (96 bytes) */
-int _gleMap1Texture2fLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,int param_4,int param_5,int *param_6,int *param_7,float fparam_1,float fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+int _gleMap1Texture2fLoad(undefined4 unusedArg1,undefined4 unusedArg2,undefined4 unusedArg3,int stride,int order,int *points,int *mapData,float u1,float u2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  int *piVar1;
-  float fVar2;
+  int *secondComponentPtr;
+  float one;
   
-  fVar2 = FLOAT_00108e54;
-  *param_7 = param_5;
-  param_7[1] = (int)GH_F2U((float)fparam_1);
-  param_7[2] = (int)GH_F2U((float)fparam_2);
-  param_7[3] = (int)GH_F2U((fVar2 / (fparam_2 - fparam_1)));
-  if (0 < param_5) {
+  one = FLOAT_00108e54;
+  *mapData = order;
+  mapData[1] = (int)GH_F2U((float)u1);
+  mapData[2] = (int)GH_F2U((float)u2);
+  mapData[3] = (int)GH_F2U((one / (u2 - u1)));
+  if (0 < order) {
     do {
-      param_7[4] = *param_6;
-      piVar1 = param_6 + 1;
-      param_6 = param_6 + param_4;
-      param_7[5] = *piVar1;
-      param_7 = param_7 + 2;
-      param_5 = param_5 + -1;
-    } while (param_5 != 0);
+      mapData[4] = *points;
+      secondComponentPtr = points + 1;
+      points = points + stride;
+      mapData[5] = *secondComponentPtr;
+      mapData = mapData + 2;
+      order = order + -1;
+    } while (order != 0);
     return;
   }
   return;
 }
 
 /* _gleMap1Texture3fLoad @ 0xdee68 (112 bytes) */
-int _gleMap1Texture3fLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,int param_4,int param_5,int param_6,int *param_7,float fparam_1,float fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+int _gleMap1Texture3fLoad(undefined4 unusedArg1,undefined4 unusedArg2,undefined4 unusedArg3,int stride,int order,int points,int *mapData,float u1,float u2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  int iVar1;
-  float fVar2;
-  int iVar3;
-  int iVar4;
+  int pointByteOffset;
+  float one;
+  int pointElementOffset;
+  int pointAddr;
   
-  fVar2 = FLOAT_00108e54;
-  iVar3 = 0;
-  *param_7 = param_5;
-  param_7[1] = (int)GH_F2U((float)fparam_1);
-  param_7[2] = (int)GH_F2U((float)fparam_2);
-  param_7[3] = (int)GH_F2U((fVar2 / (fparam_2 - fparam_1)));
-  if (0 < param_5) {
+  one = FLOAT_00108e54;
+  pointElementOffset = 0;
+  *mapData = order;
+  mapData[1] = (int)GH_F2U((float)u1);
+  mapData[2] = (int)GH_F2U((float)u2);
+  mapData[3] = (int)GH_F2U((one / (u2 - u1)));
+  if (0 < order) {
     do {
-      iVar1 = iVar3 * 4;
-      iVar3 = iVar3 + param_4;
-      iVar4 = iVar1 + param_6;
-      param_7[4] = *(int *)(iVar1 + param_6);
-      param_7[5] = *(int *)(iVar4 + 4);
-      param_7[6] = *(int *)(iVar4 + 8);
-      param_7 = param_7 + 3;
-      param_5 = param_5 + -1;
-    } while (param_5 != 0);
+      pointByteOffset = pointElementOffset * 4;
+      pointElementOffset = pointElementOffset + stride;
+      pointAddr = pointByteOffset + points;
+      mapData[4] = *(int *)(pointByteOffset + points);
+      mapData[5] = *(int *)(pointAddr + 4);
+      mapData[6] = *(int *)(pointAddr + 8);
+      mapData = mapData + 3;
+      order = order + -1;
+    } while (order != 0);
     return;
   }
   return;
 }
 
 /* _gleMap1Texture4fLoad @ 0xdeed8 (120 bytes) */
-int _gleMap1Texture4fLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,int param_4,int param_5,int param_6,int *param_7,float fparam_1,float fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+int _gleMap1Texture4fLoad(undefined4 unusedArg1,undefined4 unusedArg2,undefined4 unusedArg3,int stride,int order,int points,int *mapData,float u1,float u2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  int iVar1;
-  float fVar2;
-  int iVar3;
-  int iVar4;
+  int pointByteOffset;
+  float one;
+  int pointElementOffset;
+  int pointAddr;
   
-  fVar2 = FLOAT_00108e54;
-  iVar3 = 0;
-  *param_7 = param_5;
-  param_7[1] = (int)GH_F2U((float)fparam_1);
-  param_7[2] = (int)GH_F2U((float)fparam_2);
-  param_7[3] = (int)GH_F2U((fVar2 / (fparam_2 - fparam_1)));
-  if (0 < param_5) {
+  one = FLOAT_00108e54;
+  pointElementOffset = 0;
+  *mapData = order;
+  mapData[1] = (int)GH_F2U((float)u1);
+  mapData[2] = (int)GH_F2U((float)u2);
+  mapData[3] = (int)GH_F2U((one / (u2 - u1)));
+  if (0 < order) {
     do {
-      iVar1 = iVar3 * 4;
-      iVar3 = iVar3 + param_4;
-      iVar4 = iVar1 + param_6;
-      param_7[4] = *(int *)(iVar1 + param_6);
-      param_7[5] = *(int *)(iVar4 + 4);
-      param_7[6] = *(int *)(iVar4 + 8);
-      param_7[7] = *(int *)(iVar4 + 0xc);
-      param_7 = param_7 + 4;
-      param_5 = param_5 + -1;
-    } while (param_5 != 0);
+      pointByteOffset = pointElementOffset * 4;
+      pointElementOffset = pointElementOffset + stride;
+      pointAddr = pointByteOffset + points;
+      mapData[4] = *(int *)(pointByteOffset + points);
+      mapData[5] = *(int *)(pointAddr + 4);
+      mapData[6] = *(int *)(pointAddr + 8);
+      mapData[7] = *(int *)(pointAddr + 0xc);
+      mapData = mapData + 4;
+      order = order + -1;
+    } while (order != 0);
     return;
   }
   return;
 }
 
 /* _gleMap1VertexAttrib1fLoad @ 0xdef50 (92 bytes) */
-void _gleMap1VertexAttrib1fLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,int param_4,int param_5,int *param_6,int *param_7,float fparam_1,float fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleMap1VertexAttrib1fLoad(undefined4 unusedArg1,undefined4 unusedArg2,undefined4 unusedArg3,int stride,int order,int *points,int *mapData,float u1,float u2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  int iVar1;
-  float fVar2;
-  int *piVar3;
+  int pointValue;
+  float one;
+  int *destPtr;
   
-  fVar2 = FLOAT_00108e54;
-  *param_7 = param_5;
-  param_7[1] = (int)GH_F2U((float)fparam_1);
-  param_7[2] = (int)GH_F2U((float)fparam_2);
-  param_7[3] = (int)GH_F2U((fVar2 / (fparam_2 - fparam_1)));
-  if (param_5 < 1) {
+  one = FLOAT_00108e54;
+  *mapData = order;
+  mapData[1] = (int)GH_F2U((float)u1);
+  mapData[2] = (int)GH_F2U((float)u2);
+  mapData[3] = (int)GH_F2U((one / (u2 - u1)));
+  if (order < 1) {
     return;
   }
-  piVar3 = param_7 + 4;
+  destPtr = mapData + 4;
   do {
-    iVar1 = *param_6;
-    param_6 = param_6 + param_4;
-    *piVar3 = iVar1;
-    piVar3 = piVar3 + 1;
-    param_5 = param_5 + -1;
-  } while (param_5 != 0);
+    pointValue = *points;
+    points = points + stride;
+    *destPtr = pointValue;
+    destPtr = destPtr + 1;
+    order = order + -1;
+  } while (order != 0);
   return;
 }
 
 /* _gleMap1VertexAttrib2fLoad @ 0xdefac (96 bytes) */
-void _gleMap1VertexAttrib2fLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,int param_4,int param_5,int *param_6,int *param_7,float fparam_1,float fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleMap1VertexAttrib2fLoad(undefined4 unusedArg1,undefined4 unusedArg2,undefined4 unusedArg3,int stride,int order,int *points,int *mapData,float u1,float u2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  int *piVar1;
-  float fVar2;
+  int *secondComponentPtr;
+  float one;
   
-  fVar2 = FLOAT_00108e54;
-  *param_7 = param_5;
-  param_7[1] = (int)GH_F2U((float)fparam_1);
-  param_7[2] = (int)GH_F2U((float)fparam_2);
-  param_7[3] = (int)GH_F2U((fVar2 / (fparam_2 - fparam_1)));
-  if (0 < param_5) {
+  one = FLOAT_00108e54;
+  *mapData = order;
+  mapData[1] = (int)GH_F2U((float)u1);
+  mapData[2] = (int)GH_F2U((float)u2);
+  mapData[3] = (int)GH_F2U((one / (u2 - u1)));
+  if (0 < order) {
     do {
-      param_7[4] = *param_6;
-      piVar1 = param_6 + 1;
-      param_6 = param_6 + param_4;
-      param_7[5] = *piVar1;
-      param_7 = param_7 + 2;
-      param_5 = param_5 + -1;
-    } while (param_5 != 0);
+      mapData[4] = *points;
+      secondComponentPtr = points + 1;
+      points = points + stride;
+      mapData[5] = *secondComponentPtr;
+      mapData = mapData + 2;
+      order = order + -1;
+    } while (order != 0);
     return;
   }
   return;
 }
 
 /* _gleMap1VertexAttrib3fLoad @ 0xdf00c (112 bytes) */
-void _gleMap1VertexAttrib3fLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,int param_4,int param_5,int param_6,int *param_7,float fparam_1,float fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleMap1VertexAttrib3fLoad(undefined4 unusedArg1,undefined4 unusedArg2,undefined4 unusedArg3,int stride,int order,int points,int *mapData,float u1,float u2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  int iVar1;
-  float fVar2;
-  int iVar3;
-  int iVar4;
+  int pointByteOffset;
+  float one;
+  int pointElementOffset;
+  int pointAddr;
   
-  fVar2 = FLOAT_00108e54;
-  iVar3 = 0;
-  *param_7 = param_5;
-  param_7[1] = (int)GH_F2U((float)fparam_1);
-  param_7[2] = (int)GH_F2U((float)fparam_2);
-  param_7[3] = (int)GH_F2U((fVar2 / (fparam_2 - fparam_1)));
-  if (0 < param_5) {
+  one = FLOAT_00108e54;
+  pointElementOffset = 0;
+  *mapData = order;
+  mapData[1] = (int)GH_F2U((float)u1);
+  mapData[2] = (int)GH_F2U((float)u2);
+  mapData[3] = (int)GH_F2U((one / (u2 - u1)));
+  if (0 < order) {
     do {
-      iVar1 = iVar3 * 4;
-      iVar3 = iVar3 + param_4;
-      iVar4 = iVar1 + param_6;
-      param_7[4] = *(int *)(iVar1 + param_6);
-      param_7[5] = *(int *)(iVar4 + 4);
-      param_7[6] = *(int *)(iVar4 + 8);
-      param_7 = param_7 + 3;
-      param_5 = param_5 + -1;
-    } while (param_5 != 0);
+      pointByteOffset = pointElementOffset * 4;
+      pointElementOffset = pointElementOffset + stride;
+      pointAddr = pointByteOffset + points;
+      mapData[4] = *(int *)(pointByteOffset + points);
+      mapData[5] = *(int *)(pointAddr + 4);
+      mapData[6] = *(int *)(pointAddr + 8);
+      mapData = mapData + 3;
+      order = order + -1;
+    } while (order != 0);
     return;
   }
   return;
 }
 
 /* _gleMap1VertexAttrib4fLoad @ 0xdf07c (120 bytes) */
-void _gleMap1VertexAttrib4fLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,int param_4,int param_5,int param_6,int *param_7,float fparam_1,float fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleMap1VertexAttrib4fLoad(undefined4 unusedArg1,undefined4 unusedArg2,undefined4 unusedArg3,int stride,int order,int points,int *mapData,float u1,float u2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  int iVar1;
-  float fVar2;
-  int iVar3;
-  int iVar4;
+  int pointByteOffset;
+  float one;
+  int pointElementOffset;
+  int pointAddr;
   
-  fVar2 = FLOAT_00108e54;
-  iVar3 = 0;
-  *param_7 = param_5;
-  param_7[1] = (int)GH_F2U((float)fparam_1);
-  param_7[2] = (int)GH_F2U((float)fparam_2);
-  param_7[3] = (int)GH_F2U((fVar2 / (fparam_2 - fparam_1)));
-  if (0 < param_5) {
+  one = FLOAT_00108e54;
+  pointElementOffset = 0;
+  *mapData = order;
+  mapData[1] = (int)GH_F2U((float)u1);
+  mapData[2] = (int)GH_F2U((float)u2);
+  mapData[3] = (int)GH_F2U((one / (u2 - u1)));
+  if (0 < order) {
     do {
-      iVar1 = iVar3 * 4;
-      iVar3 = iVar3 + param_4;
-      iVar4 = iVar1 + param_6;
-      param_7[4] = *(int *)(iVar1 + param_6);
-      param_7[5] = *(int *)(iVar4 + 4);
-      param_7[6] = *(int *)(iVar4 + 8);
-      param_7[7] = *(int *)(iVar4 + 0xc);
-      param_7 = param_7 + 4;
-      param_5 = param_5 + -1;
-    } while (param_5 != 0);
+      pointByteOffset = pointElementOffset * 4;
+      pointElementOffset = pointElementOffset + stride;
+      pointAddr = pointByteOffset + points;
+      mapData[4] = *(int *)(pointByteOffset + points);
+      mapData[5] = *(int *)(pointAddr + 4);
+      mapData[6] = *(int *)(pointAddr + 8);
+      mapData[7] = *(int *)(pointAddr + 0xc);
+      mapData = mapData + 4;
+      order = order + -1;
+    } while (order != 0);
     return;
   }
   return;
 }
 
 /* _gleEvalMap1 @ 0xdf0f4 (968 bytes) */
-void _gleEvalMap1(int glContext,float fparam_1)
+void _gleEvalMap1(int glContext,float floatArg1)
 {
   byte bVar1;
   float fVar2;
@@ -721,7 +721,7 @@ void _gleEvalMap1(int glContext,float fparam_1)
   undefined4 *puVar5;
   undefined4 *puVar6;
   undefined4 uVar7;
-  undefined4 in_r6;
+  undefined4 incomingR6;
   undefined4 uVar8;
   int iVar9;
   int iVar10;
@@ -732,18 +732,18 @@ void _gleEvalMap1(int glContext,float fparam_1)
   uint uVar15;
   byte *pbVar16;
   undefined4 *puVar17;
-  double in_f2;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
-  double in_stack_ffffff88;
-  double in_stack_ffffff90;
-  double in_stack_ffffff98;
-  double in_stack_ffffffa0;
-  double in_stack_ffffffa8;
+  double incomingFpr2;
+  double incomingFpr3;
+  double incomingFpr4;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
+  double incomingStack_ffffff88;
+  double incomingStack_ffffff90;
+  double incomingStack_ffffff98;
+  double incomingStack_ffffffa0;
+  double incomingStack_ffffffa8;
   
   puVar4 = (undefined4 *)_gleGetMapData(glContext);
   if (*(short *)(glContext + 0x4a10) < 0) {
@@ -758,16 +758,16 @@ void _gleEvalMap1(int glContext,float fparam_1)
   iVar11 = iVar10;
   if (*(char *)(glContext + 0x7515) != '\0') {
     iVar11 = iVar10 + 0xc;
-    ((void (*)())_gleEvalDomain1Coord)(glContext,puVar4 + 0x52,puVar4[0x4e],in_r6,3,iVar10,
-               (double)((float)(fparam_1 - (double)GH_U2F((unsigned int)(puVar4[0x4f]))) * GH_U2F((unsigned int)(puVar4[0x51]))),in_f2
-               ,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_stack_ffffff88,in_stack_ffffff90,
-               in_stack_ffffff98,in_stack_ffffffa0,in_stack_ffffffa8);
+    ((void (*)())_gleEvalDomain1Coord)(glContext,puVar4 + 0x52,puVar4[0x4e],incomingR6,3,iVar10,
+               (double)((float)(floatArg1 - (double)GH_U2F((unsigned int)(puVar4[0x4f]))) * GH_U2F((unsigned int)(puVar4[0x51]))),incomingFpr2
+               ,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffff88,incomingStack_ffffff90,
+               incomingStack_ffffff98,incomingStack_ffffffa0,incomingStack_ffffffa8);
   }
   if (*(char *)(glContext + 0x7516) != '\0') {
-    ((void (*)())_gleEvalDomain1Color)(glContext,puVar4 + 0x74,puVar4[0x70],in_r6,4,iVar11,
-               (double)((float)(fparam_1 - (double)GH_U2F((unsigned int)(puVar4[0x71]))) * GH_U2F((unsigned int)(puVar4[0x73]))),in_f2
-               ,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_stack_ffffff88,in_stack_ffffff90,
-               in_stack_ffffff98,in_stack_ffffffa0,in_stack_ffffffa8);
+    ((void (*)())_gleEvalDomain1Color)(glContext,puVar4 + 0x74,puVar4[0x70],incomingR6,4,iVar11,
+               (double)((float)(floatArg1 - (double)GH_U2F((unsigned int)(puVar4[0x71]))) * GH_U2F((unsigned int)(puVar4[0x73]))),incomingFpr2
+               ,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffff88,incomingStack_ffffff90,
+               incomingStack_ffffff98,incomingStack_ffffffa0,incomingStack_ffffffa8);
     if (*(char *)(glContext + 0x4df8) != '\0') {
       (**(code **)(glContext + 0x4de0))(glContext,iVar11);
     }
@@ -782,10 +782,10 @@ void _gleEvalMap1(int glContext,float fparam_1)
     uVar8 = 2;
     iVar10 = iVar11 + 8;
 LAB_000df2c8:
-    ((void (*)())_gleEvalDomain1Coord)(glContext,puVar5,uVar7,in_r6,uVar8,iVar11,
-               (double)((fparam_1 - fVar2) * fVar3),in_f2,in_f3,in_f4,in_f5,in_f6,
-               in_f7,in_f8,in_stack_ffffff88,in_stack_ffffff90,in_stack_ffffff98,in_stack_ffffffa0,
-               in_stack_ffffffa8);
+    ((void (*)())_gleEvalDomain1Coord)(glContext,puVar5,uVar7,incomingR6,uVar8,iVar11,
+               (double)((floatArg1 - fVar2) * fVar3),incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,
+               incomingFpr7,incomingFpr8,incomingStack_ffffff88,incomingStack_ffffff90,incomingStack_ffffff98,incomingStack_ffffffa0,
+               incomingStack_ffffffa8);
     iVar11 = iVar10;
   }
   else if (bVar1 < 9) {
@@ -802,19 +802,19 @@ LAB_000df2c8:
   else {
     if (bVar1 == 0xc) {
       iVar10 = iVar11 + 0xc;
-      ((void (*)())_gleEvalDomain1Coord)(glContext,puVar4 + 0xd4,puVar4[0xd0],in_r6,3,iVar11,
-                 (double)((float)(fparam_1 - (double)GH_U2F((unsigned int)(puVar4[0xd1]))) * GH_U2F((unsigned int)(puVar4[0xd3]))),
-                 in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_stack_ffffff88,in_stack_ffffff90,
-                 in_stack_ffffff98,in_stack_ffffffa0,in_stack_ffffffa8);
+      ((void (*)())_gleEvalDomain1Coord)(glContext,puVar4 + 0xd4,puVar4[0xd0],incomingR6,3,iVar11,
+                 (double)((float)(floatArg1 - (double)GH_U2F((unsigned int)(puVar4[0xd1]))) * GH_U2F((unsigned int)(puVar4[0xd3]))),
+                 incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffff88,incomingStack_ffffff90,
+                 incomingStack_ffffff98,incomingStack_ffffffa0,incomingStack_ffffffa8);
       uVar15 = *(uint *)(glContext + 0x486c) | 1;
     }
     else {
       if (bVar1 != 0x10) goto LAB_000df2d0;
       iVar10 = iVar11 + 0x10;
-      ((void (*)())_gleEvalDomain1Coord)(glContext,puVar4 + 0xf6,puVar4[0xf2],in_r6,4,iVar11,
-                 (double)((float)(fparam_1 - (double)GH_U2F((unsigned int)(puVar4[0xf3]))) * GH_U2F((unsigned int)(puVar4[0xf5]))),
-                 in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_stack_ffffff88,in_stack_ffffff90,
-                 in_stack_ffffff98,in_stack_ffffffa0,in_stack_ffffffa8);
+      ((void (*)())_gleEvalDomain1Coord)(glContext,puVar4 + 0xf6,puVar4[0xf2],incomingR6,4,iVar11,
+                 (double)((float)(floatArg1 - (double)GH_U2F((unsigned int)(puVar4[0xf3]))) * GH_U2F((unsigned int)(puVar4[0xf5]))),
+                 incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffff88,incomingStack_ffffff90,
+                 incomingStack_ffffff98,incomingStack_ffffffa0,incomingStack_ffffffa8);
       uVar15 = *(uint *)(glContext + 0x486c) | 3;
     }
     *(uint *)(glContext + 0x486c) = uVar15;
@@ -834,22 +834,22 @@ LAB_000df2d0:
       pbVar16 = pbVar16 + 1;
       if (bVar1 == 8) {
         fVar2 = GH_U2F((unsigned int)(puVar17[0xb2d]));
-        fVar3 = (float)(fparam_1 - (double)GH_U2F((unsigned int)(puVar17[0xb2b])));
+        fVar3 = (float)(floatArg1 - (double)GH_U2F((unsigned int)(puVar17[0xb2b])));
         uVar7 = puVar17[0xb2a];
         uVar8 = 2;
         iVar10 = iVar11 + 8;
         puVar6 = puVar13;
 LAB_000df3c0:
-        ((void (*)())_gleEvalDomain1Coord)(glContext,puVar6,uVar7,in_r6,uVar8,iVar11,(double)(fVar3 * fVar2),in_f2,in_f3,in_f4
-                   ,in_f5,in_f6,in_f7,in_f8,in_stack_ffffff88,in_stack_ffffff90,in_stack_ffffff98,
-                   in_stack_ffffffa0,in_stack_ffffffa8);
+        ((void (*)())_gleEvalDomain1Coord)(glContext,puVar6,uVar7,incomingR6,uVar8,iVar11,(double)(fVar3 * fVar2),incomingFpr2,incomingFpr3,incomingFpr4
+                   ,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffff88,incomingStack_ffffff90,incomingStack_ffffff98,
+                   incomingStack_ffffffa0,incomingStack_ffffffa8);
         iVar11 = iVar10;
       }
       else {
         if (8 < bVar1) {
           if (bVar1 == 0xc) {
             fVar2 = GH_U2F((unsigned int)(puVar17[0xb2d]));
-            fVar3 = (float)(fparam_1 - (double)GH_U2F((unsigned int)(puVar17[0xb2b])));
+            fVar3 = (float)(floatArg1 - (double)GH_U2F((unsigned int)(puVar17[0xb2b])));
             uVar7 = puVar17[0xb2a];
             uVar8 = 3;
             iVar10 = iVar11 + 0xc;
@@ -858,7 +858,7 @@ LAB_000df3c0:
           else {
             if (bVar1 != 0x10) goto LAB_000df3c8;
             fVar2 = GH_U2F((unsigned int)(puVar17[0xb2d]));
-            fVar3 = (float)(fparam_1 - (double)GH_U2F((unsigned int)(puVar17[0xb2b])));
+            fVar3 = (float)(floatArg1 - (double)GH_U2F((unsigned int)(puVar17[0xb2b])));
             uVar7 = puVar17[0xb2a];
             uVar8 = 4;
             iVar10 = iVar11 + 0x10;
@@ -868,7 +868,7 @@ LAB_000df3c0:
         }
         if (bVar1 == 4) {
           fVar2 = GH_U2F((unsigned int)(puVar17[0xb2d]));
-          fVar3 = (float)(fparam_1 - (double)GH_U2F((unsigned int)(puVar17[0xb2b])));
+          fVar3 = (float)(floatArg1 - (double)GH_U2F((unsigned int)(puVar17[0xb2b])));
           uVar7 = puVar17[0xb2a];
           uVar8 = 1;
           iVar10 = iVar11 + 4;
@@ -910,10 +910,10 @@ LAB_000df3c8:
     puVar4 = puVar4 + 0x26;
     uVar8 = 4;
   }
-  ((void (*)())_gleEvalDomain1Coord)(glContext,puVar4,uVar7,in_r6,uVar8,iVar11,
-             (double)((fparam_1 - fVar2) * fVar3),in_f2,in_f3,in_f4,in_f5,in_f6,in_f7
-             ,in_f8,in_stack_ffffff88,in_stack_ffffff90,in_stack_ffffff98,in_stack_ffffffa0,
-             in_stack_ffffffa8);
+  ((void (*)())_gleEvalDomain1Coord)(glContext,puVar4,uVar7,incomingR6,uVar8,iVar11,
+             (double)((floatArg1 - fVar2) * fVar3),incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7
+             ,incomingFpr8,incomingStack_ffffff88,incomingStack_ffffff90,incomingStack_ffffff98,incomingStack_ffffffa0,
+             incomingStack_ffffffa8);
 LAB_000df478:
   *(int *)(glContext + 0x48ec) = glContext + 0x7508;
   uVar7 = (**(code **)(glContext + 0x4898))(glContext,*(undefined4 *)(glContext + 0x4860),iVar9);
@@ -923,8 +923,8 @@ LAB_000df478:
 }
 
 /* _gleComputeFirstPartial @ 0xdf4bc (108 bytes) */
-void _gleComputeFirstPartial(param_1, param_2, param_3, param_4)
-  undefined4 param_1;
+void _gleComputeFirstPartial(unusedArg1, param_2, param_3, param_4)
+  undefined4 unusedArg1;
   float *param_2;
   float *param_3;
   float *param_4;
@@ -1079,1336 +1079,1336 @@ void _gleInitMap2Data(param_1)
 }
 
 /* _gleMap2Vertex3dLoad @ 0xdf718 (244 bytes) */
-void _gleMap2Vertex3dLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,int param_6,int param_7,undefined4 param_8,undefined4 param_9,undefined4 param_10,undefined4 param_11,int param_12,int param_13,int param_14,int *param_15,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleMap2Vertex3dLoad(undefined4 unusedArg1,undefined4 unusedArg2,undefined4 unusedArg3,undefined4 unusedArg4,undefined4 unusedArg5,int ustride,int uorder,undefined4 unusedArg8,undefined4 unusedArg9,undefined4 unusedArg10,undefined4 unusedArg11,int vstride,int vorder,int points,int *mapData,double u1,double u2,double v1,double v2,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  double *pdVar1;
-  double dVar2;
-  double *pdVar3;
-  int iVar4;
-  int iVar5;
-  int iVar6;
-  int *piVar7;
-  int iVar8;
-  double dVar9;
+  double *lastComponentPtr;
+  double one;
+  double *pointPtr;
+  int uIndex;
+  int uElementOffset;
+  int destRecord;
+  int *destPtr;
+  int vRemaining;
+  double invUDelta;
   
-  dVar2 = DOUBLE_00108d68;
-  iVar4 = 0;
-  dVar9 = DOUBLE_00108d68 / (fparam_2 - fparam_1);
-  *param_15 = param_7;
-  iVar5 = 0;
-  param_15[1] = param_13;
-  param_15[6] = (int)GH_F2U((float)dVar9);
-  param_15[7] = (int)GH_F2U((float)(dVar2 / (fparam_4 - fparam_3)));
-  param_15[2] = (int)GH_F2U((float)fparam_1);
-  param_15[3] = (int)GH_F2U((float)fparam_2);
-  param_15[4] = (int)GH_F2U((float)fparam_3);
-  param_15[5] = (int)GH_F2U((float)fparam_4);
-  if (0 < param_7) {
-    iVar6 = 0;
+  one = DOUBLE_00108d68;
+  uIndex = 0;
+  invUDelta = DOUBLE_00108d68 / (u2 - u1);
+  *mapData = uorder;
+  uElementOffset = 0;
+  mapData[1] = vorder;
+  mapData[6] = (int)GH_F2U((float)invUDelta);
+  mapData[7] = (int)GH_F2U((float)(one / (v2 - v1)));
+  mapData[2] = (int)GH_F2U((float)u1);
+  mapData[3] = (int)GH_F2U((float)u2);
+  mapData[4] = (int)GH_F2U((float)v1);
+  mapData[5] = (int)GH_F2U((float)v2);
+  if (0 < uorder) {
+    destRecord = 0;
     do {
-      if (0 < param_13) {
-        pdVar3 = (double *)(iVar5 * 8 + param_14);
-        piVar7 = param_15 + iVar6 * 3;
-        iVar8 = param_13;
+      if (0 < vorder) {
+        pointPtr = (double *)(uElementOffset * 8 + points);
+        destPtr = mapData + destRecord * 3;
+        vRemaining = vorder;
         do {
-          piVar7[8] = (int)GH_F2U((float)*pdVar3);
-          piVar7[9] = (int)GH_F2U((float)pdVar3[1]);
-          pdVar1 = pdVar3 + 2;
-          pdVar3 = pdVar3 + param_12;
-          piVar7[10] = (int)GH_F2U((float)*pdVar1);
-          piVar7 = piVar7 + 3;
-          iVar8 = iVar8 + -1;
-        } while (iVar8 != 0);
+          destPtr[8] = (int)GH_F2U((float)*pointPtr);
+          destPtr[9] = (int)GH_F2U((float)pointPtr[1]);
+          lastComponentPtr = pointPtr + 2;
+          pointPtr = pointPtr + vstride;
+          destPtr[10] = (int)GH_F2U((float)*lastComponentPtr);
+          destPtr = destPtr + 3;
+          vRemaining = vRemaining + -1;
+        } while (vRemaining != 0);
       }
-      iVar4 = iVar4 + 1;
-      iVar6 = iVar6 + param_13;
-      iVar5 = iVar5 + param_6;
-    } while (iVar4 < param_7);
+      uIndex = uIndex + 1;
+      destRecord = destRecord + vorder;
+      uElementOffset = uElementOffset + ustride;
+    } while (uIndex < uorder);
   }
   return;
 }
 
 /* _gleMap2Vertex4dLoad @ 0xdf80c (256 bytes) */
-void _gleMap2Vertex4dLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,int param_6,int param_7,undefined4 param_8,undefined4 param_9,undefined4 param_10,undefined4 param_11,int param_12,int param_13,int param_14,int *param_15,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleMap2Vertex4dLoad(undefined4 unusedArg1,undefined4 unusedArg2,undefined4 unusedArg3,undefined4 unusedArg4,undefined4 unusedArg5,int ustride,int uorder,undefined4 unusedArg8,undefined4 unusedArg9,undefined4 unusedArg10,undefined4 unusedArg11,int vstride,int vorder,int points,int *mapData,double u1,double u2,double v1,double v2,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  double *pdVar1;
-  double dVar2;
-  double *pdVar3;
-  int iVar4;
-  int iVar5;
-  int iVar6;
-  int *piVar7;
-  int iVar8;
-  double dVar9;
+  double *lastComponentPtr;
+  double one;
+  double *pointPtr;
+  int uIndex;
+  int uElementOffset;
+  int destRecord;
+  int *destPtr;
+  int vRemaining;
+  double invUDelta;
   
-  dVar2 = DOUBLE_00108d68;
-  iVar4 = 0;
-  dVar9 = DOUBLE_00108d68 / (fparam_2 - fparam_1);
-  *param_15 = param_7;
-  iVar5 = 0;
-  param_15[1] = param_13;
-  param_15[6] = (int)GH_F2U((float)dVar9);
-  param_15[7] = (int)GH_F2U((float)(dVar2 / (fparam_4 - fparam_3)));
-  param_15[2] = (int)GH_F2U((float)fparam_1);
-  param_15[3] = (int)GH_F2U((float)fparam_2);
-  param_15[4] = (int)GH_F2U((float)fparam_3);
-  param_15[5] = (int)GH_F2U((float)fparam_4);
-  if (0 < param_7) {
-    iVar6 = 0;
+  one = DOUBLE_00108d68;
+  uIndex = 0;
+  invUDelta = DOUBLE_00108d68 / (u2 - u1);
+  *mapData = uorder;
+  uElementOffset = 0;
+  mapData[1] = vorder;
+  mapData[6] = (int)GH_F2U((float)invUDelta);
+  mapData[7] = (int)GH_F2U((float)(one / (v2 - v1)));
+  mapData[2] = (int)GH_F2U((float)u1);
+  mapData[3] = (int)GH_F2U((float)u2);
+  mapData[4] = (int)GH_F2U((float)v1);
+  mapData[5] = (int)GH_F2U((float)v2);
+  if (0 < uorder) {
+    destRecord = 0;
     do {
-      if (0 < param_13) {
-        piVar7 = param_15 + iVar6 * 4;
-        pdVar3 = (double *)(iVar5 * 8 + param_14);
-        iVar8 = param_13;
+      if (0 < vorder) {
+        destPtr = mapData + destRecord * 4;
+        pointPtr = (double *)(uElementOffset * 8 + points);
+        vRemaining = vorder;
         do {
-          piVar7[8] = (int)GH_F2U((float)*pdVar3);
-          piVar7[9] = (int)GH_F2U((float)pdVar3[1]);
-          piVar7[10] = (int)GH_F2U((float)pdVar3[2]);
-          pdVar1 = pdVar3 + 3;
-          pdVar3 = pdVar3 + param_12;
-          piVar7[0xb] = (int)GH_F2U((float)*pdVar1);
-          piVar7 = piVar7 + 4;
-          iVar8 = iVar8 + -1;
-        } while (iVar8 != 0);
+          destPtr[8] = (int)GH_F2U((float)*pointPtr);
+          destPtr[9] = (int)GH_F2U((float)pointPtr[1]);
+          destPtr[10] = (int)GH_F2U((float)pointPtr[2]);
+          lastComponentPtr = pointPtr + 3;
+          pointPtr = pointPtr + vstride;
+          destPtr[0xb] = (int)GH_F2U((float)*lastComponentPtr);
+          destPtr = destPtr + 4;
+          vRemaining = vRemaining + -1;
+        } while (vRemaining != 0);
       }
-      iVar4 = iVar4 + 1;
-      iVar6 = iVar6 + param_13;
-      iVar5 = iVar5 + param_6;
-    } while (iVar4 < param_7);
+      uIndex = uIndex + 1;
+      destRecord = destRecord + vorder;
+      uElementOffset = uElementOffset + ustride;
+    } while (uIndex < uorder);
   }
   return;
 }
 
 /* _gleMap2ColordLoad @ 0xdf90c (256 bytes) */
-void _gleMap2ColordLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,int param_6,int param_7,undefined4 param_8,undefined4 param_9,undefined4 param_10,undefined4 param_11,int param_12,int param_13,int param_14,int *param_15,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleMap2ColordLoad(undefined4 unusedArg1,undefined4 unusedArg2,undefined4 unusedArg3,undefined4 unusedArg4,undefined4 unusedArg5,int ustride,int uorder,undefined4 unusedArg8,undefined4 unusedArg9,undefined4 unusedArg10,undefined4 unusedArg11,int vstride,int vorder,int points,int *mapData,double u1,double u2,double v1,double v2,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  double *pdVar1;
-  double dVar2;
-  double *pdVar3;
-  int iVar4;
-  int iVar5;
-  int iVar6;
-  int *piVar7;
-  int iVar8;
-  double dVar9;
+  double *lastComponentPtr;
+  double one;
+  double *pointPtr;
+  int uIndex;
+  int uElementOffset;
+  int destRecord;
+  int *destPtr;
+  int vRemaining;
+  double invUDelta;
   
-  dVar2 = DOUBLE_00108d68;
-  iVar4 = 0;
-  dVar9 = DOUBLE_00108d68 / (fparam_2 - fparam_1);
-  *param_15 = param_7;
-  iVar5 = 0;
-  param_15[1] = param_13;
-  param_15[6] = (int)GH_F2U((float)dVar9);
-  param_15[7] = (int)GH_F2U((float)(dVar2 / (fparam_4 - fparam_3)));
-  param_15[2] = (int)GH_F2U((float)fparam_1);
-  param_15[3] = (int)GH_F2U((float)fparam_2);
-  param_15[4] = (int)GH_F2U((float)fparam_3);
-  param_15[5] = (int)GH_F2U((float)fparam_4);
-  if (0 < param_7) {
-    iVar6 = 0;
+  one = DOUBLE_00108d68;
+  uIndex = 0;
+  invUDelta = DOUBLE_00108d68 / (u2 - u1);
+  *mapData = uorder;
+  uElementOffset = 0;
+  mapData[1] = vorder;
+  mapData[6] = (int)GH_F2U((float)invUDelta);
+  mapData[7] = (int)GH_F2U((float)(one / (v2 - v1)));
+  mapData[2] = (int)GH_F2U((float)u1);
+  mapData[3] = (int)GH_F2U((float)u2);
+  mapData[4] = (int)GH_F2U((float)v1);
+  mapData[5] = (int)GH_F2U((float)v2);
+  if (0 < uorder) {
+    destRecord = 0;
     do {
-      if (0 < param_13) {
-        piVar7 = param_15 + iVar6 * 4;
-        pdVar3 = (double *)(iVar5 * 8 + param_14);
-        iVar8 = param_13;
+      if (0 < vorder) {
+        destPtr = mapData + destRecord * 4;
+        pointPtr = (double *)(uElementOffset * 8 + points);
+        vRemaining = vorder;
         do {
-          piVar7[8] = (int)GH_F2U((float)*pdVar3);
-          piVar7[9] = (int)GH_F2U((float)pdVar3[1]);
-          piVar7[10] = (int)GH_F2U((float)pdVar3[2]);
-          pdVar1 = pdVar3 + 3;
-          pdVar3 = pdVar3 + param_12;
-          piVar7[0xb] = (int)GH_F2U((float)*pdVar1);
-          piVar7 = piVar7 + 4;
-          iVar8 = iVar8 + -1;
-        } while (iVar8 != 0);
+          destPtr[8] = (int)GH_F2U((float)*pointPtr);
+          destPtr[9] = (int)GH_F2U((float)pointPtr[1]);
+          destPtr[10] = (int)GH_F2U((float)pointPtr[2]);
+          lastComponentPtr = pointPtr + 3;
+          pointPtr = pointPtr + vstride;
+          destPtr[0xb] = (int)GH_F2U((float)*lastComponentPtr);
+          destPtr = destPtr + 4;
+          vRemaining = vRemaining + -1;
+        } while (vRemaining != 0);
       }
-      iVar4 = iVar4 + 1;
-      iVar6 = iVar6 + param_13;
-      iVar5 = iVar5 + param_6;
-    } while (iVar4 < param_7);
+      uIndex = uIndex + 1;
+      destRecord = destRecord + vorder;
+      uElementOffset = uElementOffset + ustride;
+    } while (uIndex < uorder);
   }
   return;
 }
 
 /* _gleMap2IndexdLoad @ 0xdfa0c (224 bytes) */
-void _gleMap2IndexdLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,int param_6,int param_7,undefined4 param_8,undefined4 param_9,undefined4 param_10,undefined4 param_11,int param_12,int param_13,int param_14,int *param_15,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleMap2IndexdLoad(undefined4 unusedArg1,undefined4 unusedArg2,undefined4 unusedArg3,undefined4 unusedArg4,undefined4 unusedArg5,int ustride,int uorder,undefined4 unusedArg8,undefined4 unusedArg9,undefined4 unusedArg10,undefined4 unusedArg11,int vstride,int vorder,int points,int *mapData,double u1,double u2,double v1,double v2,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
   float *pfVar1;
-  int iVar2;
-  int iVar3;
-  int iVar4;
-  double *pdVar5;
-  int iVar6;
+  int uIndex;
+  int uElementOffset;
+  int destRecord;
+  double *pointPtr;
+  int vRemaining;
   double dVar7;
-  double dVar8;
+  double invUDelta;
   
   dVar7 = DOUBLE_00108d68;
-  iVar2 = 0;
-  dVar8 = DOUBLE_00108d68 / (fparam_2 - fparam_1);
-  *param_15 = param_7;
-  iVar3 = 0;
-  param_15[1] = param_13;
-  param_15[6] = (int)GH_F2U((float)dVar8);
-  param_15[7] = (int)GH_F2U((float)(dVar7 / (fparam_4 - fparam_3)));
-  param_15[2] = (int)GH_F2U((float)fparam_1);
-  param_15[3] = (int)GH_F2U((float)fparam_2);
-  param_15[4] = (int)GH_F2U((float)fparam_3);
-  param_15[5] = (int)GH_F2U((float)fparam_4);
-  if (0 < param_7) {
-    iVar4 = 0;
+  uIndex = 0;
+  invUDelta = DOUBLE_00108d68 / (u2 - u1);
+  *mapData = uorder;
+  uElementOffset = 0;
+  mapData[1] = vorder;
+  mapData[6] = (int)GH_F2U((float)invUDelta);
+  mapData[7] = (int)GH_F2U((float)(dVar7 / (v2 - v1)));
+  mapData[2] = (int)GH_F2U((float)u1);
+  mapData[3] = (int)GH_F2U((float)u2);
+  mapData[4] = (int)GH_F2U((float)v1);
+  mapData[5] = (int)GH_F2U((float)v2);
+  if (0 < uorder) {
+    destRecord = 0;
     do {
-      if (0 < param_13) {
-        pdVar5 = (double *)(iVar3 * 8 + param_14);
-        pfVar1 = (float *)(param_15 + iVar4 + 8);
-        iVar6 = param_13;
+      if (0 < vorder) {
+        pointPtr = (double *)(uElementOffset * 8 + points);
+        pfVar1 = (float *)(mapData + destRecord + 8);
+        vRemaining = vorder;
         do {
-          dVar7 = *pdVar5;
-          pdVar5 = pdVar5 + param_12;
+          dVar7 = *pointPtr;
+          pointPtr = pointPtr + vstride;
           *pfVar1 = (float)dVar7;
           pfVar1 = pfVar1 + 1;
-          iVar6 = iVar6 + -1;
-        } while (iVar6 != 0);
+          vRemaining = vRemaining + -1;
+        } while (vRemaining != 0);
       }
-      iVar2 = iVar2 + 1;
-      iVar4 = iVar4 + param_13;
-      iVar3 = iVar3 + param_6;
-    } while (iVar2 < param_7);
+      uIndex = uIndex + 1;
+      destRecord = destRecord + vorder;
+      uElementOffset = uElementOffset + ustride;
+    } while (uIndex < uorder);
   }
   return;
 }
 
 /* _gleMap2NormaldLoad @ 0xdfaec (244 bytes) */
-void _gleMap2NormaldLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,int param_6,int param_7,undefined4 param_8,undefined4 param_9,undefined4 param_10,undefined4 param_11,int param_12,int param_13,int param_14,int *param_15,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleMap2NormaldLoad(undefined4 unusedArg1,undefined4 unusedArg2,undefined4 unusedArg3,undefined4 unusedArg4,undefined4 unusedArg5,int ustride,int uorder,undefined4 unusedArg8,undefined4 unusedArg9,undefined4 unusedArg10,undefined4 unusedArg11,int vstride,int vorder,int points,int *mapData,double u1,double u2,double v1,double v2,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  double *pdVar1;
-  double dVar2;
-  double *pdVar3;
-  int iVar4;
-  int iVar5;
-  int iVar6;
-  int *piVar7;
-  int iVar8;
-  double dVar9;
+  double *lastComponentPtr;
+  double one;
+  double *pointPtr;
+  int uIndex;
+  int uElementOffset;
+  int destRecord;
+  int *destPtr;
+  int vRemaining;
+  double invUDelta;
   
-  dVar2 = DOUBLE_00108d68;
-  iVar4 = 0;
-  dVar9 = DOUBLE_00108d68 / (fparam_2 - fparam_1);
-  *param_15 = param_7;
-  iVar5 = 0;
-  param_15[1] = param_13;
-  param_15[6] = (int)GH_F2U((float)dVar9);
-  param_15[7] = (int)GH_F2U((float)(dVar2 / (fparam_4 - fparam_3)));
-  param_15[2] = (int)GH_F2U((float)fparam_1);
-  param_15[3] = (int)GH_F2U((float)fparam_2);
-  param_15[4] = (int)GH_F2U((float)fparam_3);
-  param_15[5] = (int)GH_F2U((float)fparam_4);
-  if (0 < param_7) {
-    iVar6 = 0;
+  one = DOUBLE_00108d68;
+  uIndex = 0;
+  invUDelta = DOUBLE_00108d68 / (u2 - u1);
+  *mapData = uorder;
+  uElementOffset = 0;
+  mapData[1] = vorder;
+  mapData[6] = (int)GH_F2U((float)invUDelta);
+  mapData[7] = (int)GH_F2U((float)(one / (v2 - v1)));
+  mapData[2] = (int)GH_F2U((float)u1);
+  mapData[3] = (int)GH_F2U((float)u2);
+  mapData[4] = (int)GH_F2U((float)v1);
+  mapData[5] = (int)GH_F2U((float)v2);
+  if (0 < uorder) {
+    destRecord = 0;
     do {
-      if (0 < param_13) {
-        pdVar3 = (double *)(iVar5 * 8 + param_14);
-        piVar7 = param_15 + iVar6 * 3;
-        iVar8 = param_13;
+      if (0 < vorder) {
+        pointPtr = (double *)(uElementOffset * 8 + points);
+        destPtr = mapData + destRecord * 3;
+        vRemaining = vorder;
         do {
-          piVar7[8] = (int)GH_F2U((float)*pdVar3);
-          piVar7[9] = (int)GH_F2U((float)pdVar3[1]);
-          pdVar1 = pdVar3 + 2;
-          pdVar3 = pdVar3 + param_12;
-          piVar7[10] = (int)GH_F2U((float)*pdVar1);
-          piVar7 = piVar7 + 3;
-          iVar8 = iVar8 + -1;
-        } while (iVar8 != 0);
+          destPtr[8] = (int)GH_F2U((float)*pointPtr);
+          destPtr[9] = (int)GH_F2U((float)pointPtr[1]);
+          lastComponentPtr = pointPtr + 2;
+          pointPtr = pointPtr + vstride;
+          destPtr[10] = (int)GH_F2U((float)*lastComponentPtr);
+          destPtr = destPtr + 3;
+          vRemaining = vRemaining + -1;
+        } while (vRemaining != 0);
       }
-      iVar4 = iVar4 + 1;
-      iVar6 = iVar6 + param_13;
-      iVar5 = iVar5 + param_6;
-    } while (iVar4 < param_7);
+      uIndex = uIndex + 1;
+      destRecord = destRecord + vorder;
+      uElementOffset = uElementOffset + ustride;
+    } while (uIndex < uorder);
   }
   return;
 }
 
 /* _gleMap2Texture1dLoad @ 0xdfbe0 (224 bytes) */
-void _gleMap2Texture1dLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,int param_6,int param_7,undefined4 param_8,undefined4 param_9,undefined4 param_10,undefined4 param_11,int param_12,int param_13,int param_14,int *param_15,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleMap2Texture1dLoad(undefined4 unusedArg1,undefined4 unusedArg2,undefined4 unusedArg3,undefined4 unusedArg4,undefined4 unusedArg5,int ustride,int uorder,undefined4 unusedArg8,undefined4 unusedArg9,undefined4 unusedArg10,undefined4 unusedArg11,int vstride,int vorder,int points,int *mapData,double u1,double u2,double v1,double v2,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
   float *pfVar1;
-  int iVar2;
-  int iVar3;
-  int iVar4;
-  double *pdVar5;
-  int iVar6;
+  int uIndex;
+  int uElementOffset;
+  int destRecord;
+  double *pointPtr;
+  int vRemaining;
   double dVar7;
-  double dVar8;
+  double invUDelta;
   
   dVar7 = DOUBLE_00108d68;
-  iVar2 = 0;
-  dVar8 = DOUBLE_00108d68 / (fparam_2 - fparam_1);
-  *param_15 = param_7;
-  iVar3 = 0;
-  param_15[1] = param_13;
-  param_15[6] = (int)GH_F2U((float)dVar8);
-  param_15[7] = (int)GH_F2U((float)(dVar7 / (fparam_4 - fparam_3)));
-  param_15[2] = (int)GH_F2U((float)fparam_1);
-  param_15[3] = (int)GH_F2U((float)fparam_2);
-  param_15[4] = (int)GH_F2U((float)fparam_3);
-  param_15[5] = (int)GH_F2U((float)fparam_4);
-  if (0 < param_7) {
-    iVar4 = 0;
+  uIndex = 0;
+  invUDelta = DOUBLE_00108d68 / (u2 - u1);
+  *mapData = uorder;
+  uElementOffset = 0;
+  mapData[1] = vorder;
+  mapData[6] = (int)GH_F2U((float)invUDelta);
+  mapData[7] = (int)GH_F2U((float)(dVar7 / (v2 - v1)));
+  mapData[2] = (int)GH_F2U((float)u1);
+  mapData[3] = (int)GH_F2U((float)u2);
+  mapData[4] = (int)GH_F2U((float)v1);
+  mapData[5] = (int)GH_F2U((float)v2);
+  if (0 < uorder) {
+    destRecord = 0;
     do {
-      if (0 < param_13) {
-        pdVar5 = (double *)(iVar3 * 8 + param_14);
-        pfVar1 = (float *)(param_15 + iVar4 + 8);
-        iVar6 = param_13;
+      if (0 < vorder) {
+        pointPtr = (double *)(uElementOffset * 8 + points);
+        pfVar1 = (float *)(mapData + destRecord + 8);
+        vRemaining = vorder;
         do {
-          dVar7 = *pdVar5;
-          pdVar5 = pdVar5 + param_12;
+          dVar7 = *pointPtr;
+          pointPtr = pointPtr + vstride;
           *pfVar1 = (float)dVar7;
           pfVar1 = pfVar1 + 1;
-          iVar6 = iVar6 + -1;
-        } while (iVar6 != 0);
+          vRemaining = vRemaining + -1;
+        } while (vRemaining != 0);
       }
-      iVar2 = iVar2 + 1;
-      iVar4 = iVar4 + param_13;
-      iVar3 = iVar3 + param_6;
-    } while (iVar2 < param_7);
+      uIndex = uIndex + 1;
+      destRecord = destRecord + vorder;
+      uElementOffset = uElementOffset + ustride;
+    } while (uIndex < uorder);
   }
   return;
 }
 
 /* _gleMap2Texture2dLoad @ 0xdfcc0 (252 bytes) */
-void _gleMap2Texture2dLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,int param_6,int param_7,undefined4 param_8,undefined4 param_9,undefined4 param_10,undefined4 param_11,int param_12,int param_13,int param_14,int *param_15,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleMap2Texture2dLoad(undefined4 unusedArg1,undefined4 unusedArg2,undefined4 unusedArg3,undefined4 unusedArg4,undefined4 unusedArg5,int ustride,int uorder,undefined4 unusedArg8,undefined4 unusedArg9,undefined4 unusedArg10,undefined4 unusedArg11,int vstride,int vorder,int points,int *mapData,double u1,double u2,double v1,double v2,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
   double *pdVar1;
   int iVar2;
-  int *piVar3;
-  int iVar4;
-  int iVar5;
+  int *destPtr;
+  int uElementOffset;
+  int destRecord;
   int iVar6;
   double *pdVar7;
-  int iVar8;
-  int iVar9;
-  double dVar10;
+  int uIndex;
+  int vRemaining;
+  double invUDelta;
   double dVar11;
   
   dVar11 = DOUBLE_00108d68;
-  iVar8 = 0;
-  dVar10 = DOUBLE_00108d68 / (fparam_2 - fparam_1);
-  *param_15 = param_7;
-  param_15[1] = param_13;
-  iVar4 = 0;
-  param_15[6] = (int)GH_F2U((float)dVar10);
-  param_15[7] = (int)GH_F2U((float)(dVar11 / (fparam_4 - fparam_3)));
-  param_15[2] = (int)GH_F2U((float)fparam_1);
-  param_15[3] = (int)GH_F2U((float)fparam_2);
-  param_15[4] = (int)GH_F2U((float)fparam_3);
-  param_15[5] = (int)GH_F2U((float)fparam_4);
-  if (0 < param_7) {
-    iVar5 = 0;
-    iVar6 = param_14;
+  uIndex = 0;
+  invUDelta = DOUBLE_00108d68 / (u2 - u1);
+  *mapData = uorder;
+  mapData[1] = vorder;
+  uElementOffset = 0;
+  mapData[6] = (int)GH_F2U((float)invUDelta);
+  mapData[7] = (int)GH_F2U((float)(dVar11 / (v2 - v1)));
+  mapData[2] = (int)GH_F2U((float)u1);
+  mapData[3] = (int)GH_F2U((float)u2);
+  mapData[4] = (int)GH_F2U((float)v1);
+  mapData[5] = (int)GH_F2U((float)v2);
+  if (0 < uorder) {
+    destRecord = 0;
+    iVar6 = points;
     do {
-      if (0 < param_13) {
-        piVar3 = param_15 + iVar5 * 2;
+      if (0 < vorder) {
+        destPtr = mapData + destRecord * 2;
         pdVar7 = (double *)(iVar6 + 8);
-        iVar2 = iVar4 << 3;
-        iVar9 = param_13;
+        iVar2 = uElementOffset << 3;
+        vRemaining = vorder;
         do {
-          pdVar1 = (double *)(param_14 + iVar2);
-          iVar2 = iVar2 + param_12 * 8;
-          piVar3[8] = (int)GH_F2U((float)*pdVar1);
+          pdVar1 = (double *)(points + iVar2);
+          iVar2 = iVar2 + vstride * 8;
+          destPtr[8] = (int)GH_F2U((float)*pdVar1);
           dVar11 = *pdVar7;
-          pdVar7 = pdVar7 + param_12;
-          piVar3[9] = (int)GH_F2U((float)dVar11);
-          piVar3 = piVar3 + 2;
-          iVar9 = iVar9 + -1;
-        } while (iVar9 != 0);
+          pdVar7 = pdVar7 + vstride;
+          destPtr[9] = (int)GH_F2U((float)dVar11);
+          destPtr = destPtr + 2;
+          vRemaining = vRemaining + -1;
+        } while (vRemaining != 0);
       }
-      iVar8 = iVar8 + 1;
-      iVar6 = iVar6 + param_6 * 8;
-      iVar5 = iVar5 + param_13;
-      iVar4 = iVar4 + param_6;
-    } while (iVar8 < param_7);
+      uIndex = uIndex + 1;
+      iVar6 = iVar6 + ustride * 8;
+      destRecord = destRecord + vorder;
+      uElementOffset = uElementOffset + ustride;
+    } while (uIndex < uorder);
   }
   return;
 }
 
 /* _gleMap2Texture3dLoad @ 0xdfdbc (244 bytes) */
-void _gleMap2Texture3dLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,int param_6,int param_7,undefined4 param_8,undefined4 param_9,undefined4 param_10,undefined4 param_11,int param_12,int param_13,int param_14,int *param_15,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleMap2Texture3dLoad(undefined4 unusedArg1,undefined4 unusedArg2,undefined4 unusedArg3,undefined4 unusedArg4,undefined4 unusedArg5,int ustride,int uorder,undefined4 unusedArg8,undefined4 unusedArg9,undefined4 unusedArg10,undefined4 unusedArg11,int vstride,int vorder,int points,int *mapData,double u1,double u2,double v1,double v2,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  double *pdVar1;
-  double dVar2;
-  double *pdVar3;
-  int iVar4;
-  int iVar5;
-  int iVar6;
-  int *piVar7;
-  int iVar8;
-  double dVar9;
+  double *lastComponentPtr;
+  double one;
+  double *pointPtr;
+  int uIndex;
+  int uElementOffset;
+  int destRecord;
+  int *destPtr;
+  int vRemaining;
+  double invUDelta;
   
-  dVar2 = DOUBLE_00108d68;
-  iVar4 = 0;
-  dVar9 = DOUBLE_00108d68 / (fparam_2 - fparam_1);
-  *param_15 = param_7;
-  iVar5 = 0;
-  param_15[1] = param_13;
-  param_15[6] = (int)GH_F2U((float)dVar9);
-  param_15[7] = (int)GH_F2U((float)(dVar2 / (fparam_4 - fparam_3)));
-  param_15[2] = (int)GH_F2U((float)fparam_1);
-  param_15[3] = (int)GH_F2U((float)fparam_2);
-  param_15[4] = (int)GH_F2U((float)fparam_3);
-  param_15[5] = (int)GH_F2U((float)fparam_4);
-  if (0 < param_7) {
-    iVar6 = 0;
+  one = DOUBLE_00108d68;
+  uIndex = 0;
+  invUDelta = DOUBLE_00108d68 / (u2 - u1);
+  *mapData = uorder;
+  uElementOffset = 0;
+  mapData[1] = vorder;
+  mapData[6] = (int)GH_F2U((float)invUDelta);
+  mapData[7] = (int)GH_F2U((float)(one / (v2 - v1)));
+  mapData[2] = (int)GH_F2U((float)u1);
+  mapData[3] = (int)GH_F2U((float)u2);
+  mapData[4] = (int)GH_F2U((float)v1);
+  mapData[5] = (int)GH_F2U((float)v2);
+  if (0 < uorder) {
+    destRecord = 0;
     do {
-      if (0 < param_13) {
-        pdVar3 = (double *)(iVar5 * 8 + param_14);
-        piVar7 = param_15 + iVar6 * 3;
-        iVar8 = param_13;
+      if (0 < vorder) {
+        pointPtr = (double *)(uElementOffset * 8 + points);
+        destPtr = mapData + destRecord * 3;
+        vRemaining = vorder;
         do {
-          piVar7[8] = (int)GH_F2U((float)*pdVar3);
-          piVar7[9] = (int)GH_F2U((float)pdVar3[1]);
-          pdVar1 = pdVar3 + 2;
-          pdVar3 = pdVar3 + param_12;
-          piVar7[10] = (int)GH_F2U((float)*pdVar1);
-          piVar7 = piVar7 + 3;
-          iVar8 = iVar8 + -1;
-        } while (iVar8 != 0);
+          destPtr[8] = (int)GH_F2U((float)*pointPtr);
+          destPtr[9] = (int)GH_F2U((float)pointPtr[1]);
+          lastComponentPtr = pointPtr + 2;
+          pointPtr = pointPtr + vstride;
+          destPtr[10] = (int)GH_F2U((float)*lastComponentPtr);
+          destPtr = destPtr + 3;
+          vRemaining = vRemaining + -1;
+        } while (vRemaining != 0);
       }
-      iVar4 = iVar4 + 1;
-      iVar6 = iVar6 + param_13;
-      iVar5 = iVar5 + param_6;
-    } while (iVar4 < param_7);
+      uIndex = uIndex + 1;
+      destRecord = destRecord + vorder;
+      uElementOffset = uElementOffset + ustride;
+    } while (uIndex < uorder);
   }
   return;
 }
 
 /* _gleMap2Texture4dLoad @ 0xdfeb0 (256 bytes) */
-void _gleMap2Texture4dLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,int param_6,int param_7,undefined4 param_8,undefined4 param_9,undefined4 param_10,undefined4 param_11,int param_12,int param_13,int param_14,int *param_15,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleMap2Texture4dLoad(undefined4 unusedArg1,undefined4 unusedArg2,undefined4 unusedArg3,undefined4 unusedArg4,undefined4 unusedArg5,int ustride,int uorder,undefined4 unusedArg8,undefined4 unusedArg9,undefined4 unusedArg10,undefined4 unusedArg11,int vstride,int vorder,int points,int *mapData,double u1,double u2,double v1,double v2,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  double *pdVar1;
-  double dVar2;
-  double *pdVar3;
-  int iVar4;
-  int iVar5;
-  int iVar6;
-  int *piVar7;
-  int iVar8;
-  double dVar9;
+  double *lastComponentPtr;
+  double one;
+  double *pointPtr;
+  int uIndex;
+  int uElementOffset;
+  int destRecord;
+  int *destPtr;
+  int vRemaining;
+  double invUDelta;
   
-  dVar2 = DOUBLE_00108d68;
-  iVar4 = 0;
-  dVar9 = DOUBLE_00108d68 / (fparam_2 - fparam_1);
-  *param_15 = param_7;
-  iVar5 = 0;
-  param_15[1] = param_13;
-  param_15[6] = (int)GH_F2U((float)dVar9);
-  param_15[7] = (int)GH_F2U((float)(dVar2 / (fparam_4 - fparam_3)));
-  param_15[2] = (int)GH_F2U((float)fparam_1);
-  param_15[3] = (int)GH_F2U((float)fparam_2);
-  param_15[4] = (int)GH_F2U((float)fparam_3);
-  param_15[5] = (int)GH_F2U((float)fparam_4);
-  if (0 < param_7) {
-    iVar6 = 0;
+  one = DOUBLE_00108d68;
+  uIndex = 0;
+  invUDelta = DOUBLE_00108d68 / (u2 - u1);
+  *mapData = uorder;
+  uElementOffset = 0;
+  mapData[1] = vorder;
+  mapData[6] = (int)GH_F2U((float)invUDelta);
+  mapData[7] = (int)GH_F2U((float)(one / (v2 - v1)));
+  mapData[2] = (int)GH_F2U((float)u1);
+  mapData[3] = (int)GH_F2U((float)u2);
+  mapData[4] = (int)GH_F2U((float)v1);
+  mapData[5] = (int)GH_F2U((float)v2);
+  if (0 < uorder) {
+    destRecord = 0;
     do {
-      if (0 < param_13) {
-        piVar7 = param_15 + iVar6 * 4;
-        pdVar3 = (double *)(iVar5 * 8 + param_14);
-        iVar8 = param_13;
+      if (0 < vorder) {
+        destPtr = mapData + destRecord * 4;
+        pointPtr = (double *)(uElementOffset * 8 + points);
+        vRemaining = vorder;
         do {
-          piVar7[8] = (int)GH_F2U((float)*pdVar3);
-          piVar7[9] = (int)GH_F2U((float)pdVar3[1]);
-          piVar7[10] = (int)GH_F2U((float)pdVar3[2]);
-          pdVar1 = pdVar3 + 3;
-          pdVar3 = pdVar3 + param_12;
-          piVar7[0xb] = (int)GH_F2U((float)*pdVar1);
-          piVar7 = piVar7 + 4;
-          iVar8 = iVar8 + -1;
-        } while (iVar8 != 0);
+          destPtr[8] = (int)GH_F2U((float)*pointPtr);
+          destPtr[9] = (int)GH_F2U((float)pointPtr[1]);
+          destPtr[10] = (int)GH_F2U((float)pointPtr[2]);
+          lastComponentPtr = pointPtr + 3;
+          pointPtr = pointPtr + vstride;
+          destPtr[0xb] = (int)GH_F2U((float)*lastComponentPtr);
+          destPtr = destPtr + 4;
+          vRemaining = vRemaining + -1;
+        } while (vRemaining != 0);
       }
-      iVar4 = iVar4 + 1;
-      iVar6 = iVar6 + param_13;
-      iVar5 = iVar5 + param_6;
-    } while (iVar4 < param_7);
+      uIndex = uIndex + 1;
+      destRecord = destRecord + vorder;
+      uElementOffset = uElementOffset + ustride;
+    } while (uIndex < uorder);
   }
   return;
 }
 
 /* _gleMap2VertexAttrib1dLoad @ 0xdffb0 (224 bytes) */
-void _gleMap2VertexAttrib1dLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,int param_6,int param_7,undefined4 param_8,undefined4 param_9,undefined4 param_10,undefined4 param_11,int param_12,int param_13,int param_14,int *param_15,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleMap2VertexAttrib1dLoad(undefined4 unusedArg1,undefined4 unusedArg2,undefined4 unusedArg3,undefined4 unusedArg4,undefined4 unusedArg5,int ustride,int uorder,undefined4 unusedArg8,undefined4 unusedArg9,undefined4 unusedArg10,undefined4 unusedArg11,int vstride,int vorder,int points,int *mapData,double u1,double u2,double v1,double v2,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
   float *pfVar1;
-  int iVar2;
-  int iVar3;
-  int iVar4;
-  double *pdVar5;
-  int iVar6;
+  int uIndex;
+  int uElementOffset;
+  int destRecord;
+  double *pointPtr;
+  int vRemaining;
   double dVar7;
-  double dVar8;
+  double invUDelta;
   
   dVar7 = DOUBLE_00108d68;
-  iVar2 = 0;
-  dVar8 = DOUBLE_00108d68 / (fparam_2 - fparam_1);
-  *param_15 = param_7;
-  iVar3 = 0;
-  param_15[1] = param_13;
-  param_15[6] = (int)GH_F2U((float)dVar8);
-  param_15[7] = (int)GH_F2U((float)(dVar7 / (fparam_4 - fparam_3)));
-  param_15[2] = (int)GH_F2U((float)fparam_1);
-  param_15[3] = (int)GH_F2U((float)fparam_2);
-  param_15[4] = (int)GH_F2U((float)fparam_3);
-  param_15[5] = (int)GH_F2U((float)fparam_4);
-  if (0 < param_7) {
-    iVar4 = 0;
+  uIndex = 0;
+  invUDelta = DOUBLE_00108d68 / (u2 - u1);
+  *mapData = uorder;
+  uElementOffset = 0;
+  mapData[1] = vorder;
+  mapData[6] = (int)GH_F2U((float)invUDelta);
+  mapData[7] = (int)GH_F2U((float)(dVar7 / (v2 - v1)));
+  mapData[2] = (int)GH_F2U((float)u1);
+  mapData[3] = (int)GH_F2U((float)u2);
+  mapData[4] = (int)GH_F2U((float)v1);
+  mapData[5] = (int)GH_F2U((float)v2);
+  if (0 < uorder) {
+    destRecord = 0;
     do {
-      if (0 < param_13) {
-        pdVar5 = (double *)(iVar3 * 8 + param_14);
-        pfVar1 = (float *)(param_15 + iVar4 + 8);
-        iVar6 = param_13;
+      if (0 < vorder) {
+        pointPtr = (double *)(uElementOffset * 8 + points);
+        pfVar1 = (float *)(mapData + destRecord + 8);
+        vRemaining = vorder;
         do {
-          dVar7 = *pdVar5;
-          pdVar5 = pdVar5 + param_12;
+          dVar7 = *pointPtr;
+          pointPtr = pointPtr + vstride;
           *pfVar1 = (float)dVar7;
           pfVar1 = pfVar1 + 1;
-          iVar6 = iVar6 + -1;
-        } while (iVar6 != 0);
+          vRemaining = vRemaining + -1;
+        } while (vRemaining != 0);
       }
-      iVar2 = iVar2 + 1;
-      iVar4 = iVar4 + param_13;
-      iVar3 = iVar3 + param_6;
-    } while (iVar2 < param_7);
+      uIndex = uIndex + 1;
+      destRecord = destRecord + vorder;
+      uElementOffset = uElementOffset + ustride;
+    } while (uIndex < uorder);
   }
   return;
 }
 
 /* _gleMap2VertexAttrib2dLoad @ 0xe0090 (252 bytes) */
-void _gleMap2VertexAttrib2dLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,int param_6,int param_7,undefined4 param_8,undefined4 param_9,undefined4 param_10,undefined4 param_11,int param_12,int param_13,int param_14,int *param_15,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleMap2VertexAttrib2dLoad(undefined4 unusedArg1,undefined4 unusedArg2,undefined4 unusedArg3,undefined4 unusedArg4,undefined4 unusedArg5,int ustride,int uorder,undefined4 unusedArg8,undefined4 unusedArg9,undefined4 unusedArg10,undefined4 unusedArg11,int vstride,int vorder,int points,int *mapData,double u1,double u2,double v1,double v2,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
   double *pdVar1;
   int iVar2;
-  int *piVar3;
-  int iVar4;
-  int iVar5;
+  int *destPtr;
+  int uElementOffset;
+  int destRecord;
   int iVar6;
   double *pdVar7;
-  int iVar8;
-  int iVar9;
-  double dVar10;
+  int uIndex;
+  int vRemaining;
+  double invUDelta;
   double dVar11;
   
   dVar11 = DOUBLE_00108d68;
-  iVar8 = 0;
-  dVar10 = DOUBLE_00108d68 / (fparam_2 - fparam_1);
-  *param_15 = param_7;
-  param_15[1] = param_13;
-  iVar4 = 0;
-  param_15[6] = (int)GH_F2U((float)dVar10);
-  param_15[7] = (int)GH_F2U((float)(dVar11 / (fparam_4 - fparam_3)));
-  param_15[2] = (int)GH_F2U((float)fparam_1);
-  param_15[3] = (int)GH_F2U((float)fparam_2);
-  param_15[4] = (int)GH_F2U((float)fparam_3);
-  param_15[5] = (int)GH_F2U((float)fparam_4);
-  if (0 < param_7) {
-    iVar5 = 0;
-    iVar6 = param_14;
+  uIndex = 0;
+  invUDelta = DOUBLE_00108d68 / (u2 - u1);
+  *mapData = uorder;
+  mapData[1] = vorder;
+  uElementOffset = 0;
+  mapData[6] = (int)GH_F2U((float)invUDelta);
+  mapData[7] = (int)GH_F2U((float)(dVar11 / (v2 - v1)));
+  mapData[2] = (int)GH_F2U((float)u1);
+  mapData[3] = (int)GH_F2U((float)u2);
+  mapData[4] = (int)GH_F2U((float)v1);
+  mapData[5] = (int)GH_F2U((float)v2);
+  if (0 < uorder) {
+    destRecord = 0;
+    iVar6 = points;
     do {
-      if (0 < param_13) {
-        piVar3 = param_15 + iVar5 * 2;
+      if (0 < vorder) {
+        destPtr = mapData + destRecord * 2;
         pdVar7 = (double *)(iVar6 + 8);
-        iVar2 = iVar4 << 3;
-        iVar9 = param_13;
+        iVar2 = uElementOffset << 3;
+        vRemaining = vorder;
         do {
-          pdVar1 = (double *)(param_14 + iVar2);
-          iVar2 = iVar2 + param_12 * 8;
-          piVar3[8] = (int)GH_F2U((float)*pdVar1);
+          pdVar1 = (double *)(points + iVar2);
+          iVar2 = iVar2 + vstride * 8;
+          destPtr[8] = (int)GH_F2U((float)*pdVar1);
           dVar11 = *pdVar7;
-          pdVar7 = pdVar7 + param_12;
-          piVar3[9] = (int)GH_F2U((float)dVar11);
-          piVar3 = piVar3 + 2;
-          iVar9 = iVar9 + -1;
-        } while (iVar9 != 0);
+          pdVar7 = pdVar7 + vstride;
+          destPtr[9] = (int)GH_F2U((float)dVar11);
+          destPtr = destPtr + 2;
+          vRemaining = vRemaining + -1;
+        } while (vRemaining != 0);
       }
-      iVar8 = iVar8 + 1;
-      iVar6 = iVar6 + param_6 * 8;
-      iVar5 = iVar5 + param_13;
-      iVar4 = iVar4 + param_6;
-    } while (iVar8 < param_7);
+      uIndex = uIndex + 1;
+      iVar6 = iVar6 + ustride * 8;
+      destRecord = destRecord + vorder;
+      uElementOffset = uElementOffset + ustride;
+    } while (uIndex < uorder);
   }
   return;
 }
 
 /* _gleMap2VertexAttrib3dLoad @ 0xe018c (244 bytes) */
-void _gleMap2VertexAttrib3dLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,int param_6,int param_7,undefined4 param_8,undefined4 param_9,undefined4 param_10,undefined4 param_11,int param_12,int param_13,int param_14,int *param_15,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleMap2VertexAttrib3dLoad(undefined4 unusedArg1,undefined4 unusedArg2,undefined4 unusedArg3,undefined4 unusedArg4,undefined4 unusedArg5,int ustride,int uorder,undefined4 unusedArg8,undefined4 unusedArg9,undefined4 unusedArg10,undefined4 unusedArg11,int vstride,int vorder,int points,int *mapData,double u1,double u2,double v1,double v2,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  double *pdVar1;
-  double dVar2;
-  double *pdVar3;
-  int iVar4;
-  int iVar5;
-  int iVar6;
-  int *piVar7;
-  int iVar8;
-  double dVar9;
+  double *lastComponentPtr;
+  double one;
+  double *pointPtr;
+  int uIndex;
+  int uElementOffset;
+  int destRecord;
+  int *destPtr;
+  int vRemaining;
+  double invUDelta;
   
-  dVar2 = DOUBLE_00108d68;
-  iVar4 = 0;
-  dVar9 = DOUBLE_00108d68 / (fparam_2 - fparam_1);
-  *param_15 = param_7;
-  iVar5 = 0;
-  param_15[1] = param_13;
-  param_15[6] = (int)GH_F2U((float)dVar9);
-  param_15[7] = (int)GH_F2U((float)(dVar2 / (fparam_4 - fparam_3)));
-  param_15[2] = (int)GH_F2U((float)fparam_1);
-  param_15[3] = (int)GH_F2U((float)fparam_2);
-  param_15[4] = (int)GH_F2U((float)fparam_3);
-  param_15[5] = (int)GH_F2U((float)fparam_4);
-  if (0 < param_7) {
-    iVar6 = 0;
+  one = DOUBLE_00108d68;
+  uIndex = 0;
+  invUDelta = DOUBLE_00108d68 / (u2 - u1);
+  *mapData = uorder;
+  uElementOffset = 0;
+  mapData[1] = vorder;
+  mapData[6] = (int)GH_F2U((float)invUDelta);
+  mapData[7] = (int)GH_F2U((float)(one / (v2 - v1)));
+  mapData[2] = (int)GH_F2U((float)u1);
+  mapData[3] = (int)GH_F2U((float)u2);
+  mapData[4] = (int)GH_F2U((float)v1);
+  mapData[5] = (int)GH_F2U((float)v2);
+  if (0 < uorder) {
+    destRecord = 0;
     do {
-      if (0 < param_13) {
-        pdVar3 = (double *)(iVar5 * 8 + param_14);
-        piVar7 = param_15 + iVar6 * 3;
-        iVar8 = param_13;
+      if (0 < vorder) {
+        pointPtr = (double *)(uElementOffset * 8 + points);
+        destPtr = mapData + destRecord * 3;
+        vRemaining = vorder;
         do {
-          piVar7[8] = (int)GH_F2U((float)*pdVar3);
-          piVar7[9] = (int)GH_F2U((float)pdVar3[1]);
-          pdVar1 = pdVar3 + 2;
-          pdVar3 = pdVar3 + param_12;
-          piVar7[10] = (int)GH_F2U((float)*pdVar1);
-          piVar7 = piVar7 + 3;
-          iVar8 = iVar8 + -1;
-        } while (iVar8 != 0);
+          destPtr[8] = (int)GH_F2U((float)*pointPtr);
+          destPtr[9] = (int)GH_F2U((float)pointPtr[1]);
+          lastComponentPtr = pointPtr + 2;
+          pointPtr = pointPtr + vstride;
+          destPtr[10] = (int)GH_F2U((float)*lastComponentPtr);
+          destPtr = destPtr + 3;
+          vRemaining = vRemaining + -1;
+        } while (vRemaining != 0);
       }
-      iVar4 = iVar4 + 1;
-      iVar6 = iVar6 + param_13;
-      iVar5 = iVar5 + param_6;
-    } while (iVar4 < param_7);
+      uIndex = uIndex + 1;
+      destRecord = destRecord + vorder;
+      uElementOffset = uElementOffset + ustride;
+    } while (uIndex < uorder);
   }
   return;
 }
 
 /* _gleMap2VertexAttrib4dLoad @ 0xe0280 (256 bytes) */
-void _gleMap2VertexAttrib4dLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,int param_6,int param_7,undefined4 param_8,undefined4 param_9,undefined4 param_10,undefined4 param_11,int param_12,int param_13,int param_14,int *param_15,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleMap2VertexAttrib4dLoad(undefined4 unusedArg1,undefined4 unusedArg2,undefined4 unusedArg3,undefined4 unusedArg4,undefined4 unusedArg5,int ustride,int uorder,undefined4 unusedArg8,undefined4 unusedArg9,undefined4 unusedArg10,undefined4 unusedArg11,int vstride,int vorder,int points,int *mapData,double u1,double u2,double v1,double v2,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  double *pdVar1;
-  double dVar2;
-  double *pdVar3;
-  int iVar4;
-  int iVar5;
-  int iVar6;
-  int *piVar7;
-  int iVar8;
-  double dVar9;
+  double *lastComponentPtr;
+  double one;
+  double *pointPtr;
+  int uIndex;
+  int uElementOffset;
+  int destRecord;
+  int *destPtr;
+  int vRemaining;
+  double invUDelta;
   
-  dVar2 = DOUBLE_00108d68;
-  iVar4 = 0;
-  dVar9 = DOUBLE_00108d68 / (fparam_2 - fparam_1);
-  *param_15 = param_7;
-  iVar5 = 0;
-  param_15[1] = param_13;
-  param_15[6] = (int)GH_F2U((float)dVar9);
-  param_15[7] = (int)GH_F2U((float)(dVar2 / (fparam_4 - fparam_3)));
-  param_15[2] = (int)GH_F2U((float)fparam_1);
-  param_15[3] = (int)GH_F2U((float)fparam_2);
-  param_15[4] = (int)GH_F2U((float)fparam_3);
-  param_15[5] = (int)GH_F2U((float)fparam_4);
-  if (0 < param_7) {
-    iVar6 = 0;
+  one = DOUBLE_00108d68;
+  uIndex = 0;
+  invUDelta = DOUBLE_00108d68 / (u2 - u1);
+  *mapData = uorder;
+  uElementOffset = 0;
+  mapData[1] = vorder;
+  mapData[6] = (int)GH_F2U((float)invUDelta);
+  mapData[7] = (int)GH_F2U((float)(one / (v2 - v1)));
+  mapData[2] = (int)GH_F2U((float)u1);
+  mapData[3] = (int)GH_F2U((float)u2);
+  mapData[4] = (int)GH_F2U((float)v1);
+  mapData[5] = (int)GH_F2U((float)v2);
+  if (0 < uorder) {
+    destRecord = 0;
     do {
-      if (0 < param_13) {
-        piVar7 = param_15 + iVar6 * 4;
-        pdVar3 = (double *)(iVar5 * 8 + param_14);
-        iVar8 = param_13;
+      if (0 < vorder) {
+        destPtr = mapData + destRecord * 4;
+        pointPtr = (double *)(uElementOffset * 8 + points);
+        vRemaining = vorder;
         do {
-          piVar7[8] = (int)GH_F2U((float)*pdVar3);
-          piVar7[9] = (int)GH_F2U((float)pdVar3[1]);
-          piVar7[10] = (int)GH_F2U((float)pdVar3[2]);
-          pdVar1 = pdVar3 + 3;
-          pdVar3 = pdVar3 + param_12;
-          piVar7[0xb] = (int)GH_F2U((float)*pdVar1);
-          piVar7 = piVar7 + 4;
-          iVar8 = iVar8 + -1;
-        } while (iVar8 != 0);
+          destPtr[8] = (int)GH_F2U((float)*pointPtr);
+          destPtr[9] = (int)GH_F2U((float)pointPtr[1]);
+          destPtr[10] = (int)GH_F2U((float)pointPtr[2]);
+          lastComponentPtr = pointPtr + 3;
+          pointPtr = pointPtr + vstride;
+          destPtr[0xb] = (int)GH_F2U((float)*lastComponentPtr);
+          destPtr = destPtr + 4;
+          vRemaining = vRemaining + -1;
+        } while (vRemaining != 0);
       }
-      iVar4 = iVar4 + 1;
-      iVar6 = iVar6 + param_13;
-      iVar5 = iVar5 + param_6;
-    } while (iVar4 < param_7);
+      uIndex = uIndex + 1;
+      destRecord = destRecord + vorder;
+      uElementOffset = uElementOffset + ustride;
+    } while (uIndex < uorder);
   }
   return;
 }
 
 /* _gleMap2Vertex3fLoad @ 0xe0380 (204 bytes) */
-void _gleMap2Vertex3fLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,int param_4,int param_5,undefined4 param_6,undefined4 param_7,int param_8,int param_9,int param_10,int *param_11,float fparam_1,float fparam_2,float fparam_3,float fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleMap2Vertex3fLoad(undefined4 unusedArg1,undefined4 unusedArg2,undefined4 unusedArg3,int ustride,int uorder,undefined4 unusedArg6,undefined4 unusedArg7,int vstride,int vorder,int points,int *mapData,float u1,float u2,float v1,float v2,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  int *piVar1;
-  float fVar2;
-  float fVar3;
-  int *piVar4;
-  int iVar5;
-  int iVar6;
-  int *piVar7;
-  int iVar8;
-  int iVar9;
+  int *lastComponentPtr;
+  float invUDelta;
+  float one;
+  int *pointPtr;
+  int uIndex;
+  int uElementOffset;
+  int *destPtr;
+  int destRecord;
+  int vRemaining;
   
-  fVar3 = FLOAT_00108e54;
-  iVar5 = 0;
-  fVar2 = FLOAT_00108e54 / (fparam_2 - fparam_1);
-  *param_11 = param_5;
-  iVar6 = 0;
-  param_11[1] = param_9;
-  param_11[2] = (int)GH_F2U((float)fparam_1);
-  param_11[3] = (int)GH_F2U((float)fparam_2);
-  param_11[4] = (int)GH_F2U((float)fparam_3);
-  param_11[5] = (int)GH_F2U((float)fparam_4);
-  param_11[6] = (int)GH_F2U(fVar2);
-  param_11[7] = (int)GH_F2U((fVar3 / (fparam_4 - fparam_3)));
-  if (0 < param_5) {
-    iVar8 = 0;
+  one = FLOAT_00108e54;
+  uIndex = 0;
+  invUDelta = FLOAT_00108e54 / (u2 - u1);
+  *mapData = uorder;
+  uElementOffset = 0;
+  mapData[1] = vorder;
+  mapData[2] = (int)GH_F2U((float)u1);
+  mapData[3] = (int)GH_F2U((float)u2);
+  mapData[4] = (int)GH_F2U((float)v1);
+  mapData[5] = (int)GH_F2U((float)v2);
+  mapData[6] = (int)GH_F2U(invUDelta);
+  mapData[7] = (int)GH_F2U((one / (v2 - v1)));
+  if (0 < uorder) {
+    destRecord = 0;
     do {
-      if (0 < param_9) {
-        piVar4 = (int *)(iVar6 * 4 + param_10);
-        piVar7 = param_11 + iVar8 * 3;
-        iVar9 = param_9;
+      if (0 < vorder) {
+        pointPtr = (int *)(uElementOffset * 4 + points);
+        destPtr = mapData + destRecord * 3;
+        vRemaining = vorder;
         do {
-          piVar7[8] = *piVar4;
-          piVar7[9] = piVar4[1];
-          piVar1 = piVar4 + 2;
-          piVar4 = piVar4 + param_8;
-          piVar7[10] = *piVar1;
-          piVar7 = piVar7 + 3;
-          iVar9 = iVar9 + -1;
-        } while (iVar9 != 0);
+          destPtr[8] = *pointPtr;
+          destPtr[9] = pointPtr[1];
+          lastComponentPtr = pointPtr + 2;
+          pointPtr = pointPtr + vstride;
+          destPtr[10] = *lastComponentPtr;
+          destPtr = destPtr + 3;
+          vRemaining = vRemaining + -1;
+        } while (vRemaining != 0);
       }
-      iVar5 = iVar5 + 1;
-      iVar8 = iVar8 + param_9;
-      iVar6 = iVar6 + param_4;
-    } while (iVar5 < param_5);
+      uIndex = uIndex + 1;
+      destRecord = destRecord + vorder;
+      uElementOffset = uElementOffset + ustride;
+    } while (uIndex < uorder);
   }
   return;
 }
 
 /* _gleMap2Vertex4fLoad @ 0xe044c (212 bytes) */
-void _gleMap2Vertex4fLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,int param_4,int param_5,undefined4 param_6,undefined4 param_7,int param_8,int param_9,int param_10,int *param_11,float fparam_1,float fparam_2,float fparam_3,float fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleMap2Vertex4fLoad(undefined4 unusedArg1,undefined4 unusedArg2,undefined4 unusedArg3,int ustride,int uorder,undefined4 unusedArg6,undefined4 unusedArg7,int vstride,int vorder,int points,int *mapData,float u1,float u2,float v1,float v2,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  int *piVar1;
-  float fVar2;
-  float fVar3;
-  int *piVar4;
-  int iVar5;
-  int iVar6;
-  int *piVar7;
-  int iVar8;
-  int iVar9;
+  int *lastComponentPtr;
+  float invUDelta;
+  float one;
+  int *pointPtr;
+  int uIndex;
+  int uElementOffset;
+  int *destPtr;
+  int destRecord;
+  int vRemaining;
   
-  fVar3 = FLOAT_00108e54;
-  iVar5 = 0;
-  fVar2 = FLOAT_00108e54 / (fparam_2 - fparam_1);
-  *param_11 = param_5;
-  iVar6 = 0;
-  param_11[1] = param_9;
-  param_11[2] = (int)GH_F2U((float)fparam_1);
-  param_11[3] = (int)GH_F2U((float)fparam_2);
-  param_11[4] = (int)GH_F2U((float)fparam_3);
-  param_11[5] = (int)GH_F2U((float)fparam_4);
-  param_11[6] = (int)GH_F2U(fVar2);
-  param_11[7] = (int)GH_F2U((fVar3 / (fparam_4 - fparam_3)));
-  if (0 < param_5) {
-    iVar8 = 0;
+  one = FLOAT_00108e54;
+  uIndex = 0;
+  invUDelta = FLOAT_00108e54 / (u2 - u1);
+  *mapData = uorder;
+  uElementOffset = 0;
+  mapData[1] = vorder;
+  mapData[2] = (int)GH_F2U((float)u1);
+  mapData[3] = (int)GH_F2U((float)u2);
+  mapData[4] = (int)GH_F2U((float)v1);
+  mapData[5] = (int)GH_F2U((float)v2);
+  mapData[6] = (int)GH_F2U(invUDelta);
+  mapData[7] = (int)GH_F2U((one / (v2 - v1)));
+  if (0 < uorder) {
+    destRecord = 0;
     do {
-      if (0 < param_9) {
-        piVar7 = param_11 + iVar8 * 4;
-        piVar4 = (int *)(iVar6 * 4 + param_10);
-        iVar9 = param_9;
+      if (0 < vorder) {
+        destPtr = mapData + destRecord * 4;
+        pointPtr = (int *)(uElementOffset * 4 + points);
+        vRemaining = vorder;
         do {
-          piVar7[8] = *piVar4;
-          piVar7[9] = piVar4[1];
-          piVar7[10] = piVar4[2];
-          piVar1 = piVar4 + 3;
-          piVar4 = piVar4 + param_8;
-          piVar7[0xb] = *piVar1;
-          piVar7 = piVar7 + 4;
-          iVar9 = iVar9 + -1;
-        } while (iVar9 != 0);
+          destPtr[8] = *pointPtr;
+          destPtr[9] = pointPtr[1];
+          destPtr[10] = pointPtr[2];
+          lastComponentPtr = pointPtr + 3;
+          pointPtr = pointPtr + vstride;
+          destPtr[0xb] = *lastComponentPtr;
+          destPtr = destPtr + 4;
+          vRemaining = vRemaining + -1;
+        } while (vRemaining != 0);
       }
-      iVar5 = iVar5 + 1;
-      iVar8 = iVar8 + param_9;
-      iVar6 = iVar6 + param_4;
-    } while (iVar5 < param_5);
+      uIndex = uIndex + 1;
+      destRecord = destRecord + vorder;
+      uElementOffset = uElementOffset + ustride;
+    } while (uIndex < uorder);
   }
   return;
 }
 
 /* _gleMap2ColorfLoad @ 0xe0520 (212 bytes) */
-void _gleMap2ColorfLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,int param_4,int param_5,undefined4 param_6,undefined4 param_7,int param_8,int param_9,int param_10,int *param_11,float fparam_1,float fparam_2,float fparam_3,float fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleMap2ColorfLoad(undefined4 unusedArg1,undefined4 unusedArg2,undefined4 unusedArg3,int ustride,int uorder,undefined4 unusedArg6,undefined4 unusedArg7,int vstride,int vorder,int points,int *mapData,float u1,float u2,float v1,float v2,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  int *piVar1;
-  float fVar2;
-  float fVar3;
-  int *piVar4;
-  int iVar5;
-  int iVar6;
-  int *piVar7;
-  int iVar8;
-  int iVar9;
+  int *lastComponentPtr;
+  float invUDelta;
+  float one;
+  int *pointPtr;
+  int uIndex;
+  int uElementOffset;
+  int *destPtr;
+  int destRecord;
+  int vRemaining;
   
-  fVar3 = FLOAT_00108e54;
-  iVar5 = 0;
-  fVar2 = FLOAT_00108e54 / (fparam_2 - fparam_1);
-  *param_11 = param_5;
-  iVar6 = 0;
-  param_11[1] = param_9;
-  param_11[2] = (int)GH_F2U((float)fparam_1);
-  param_11[3] = (int)GH_F2U((float)fparam_2);
-  param_11[4] = (int)GH_F2U((float)fparam_3);
-  param_11[5] = (int)GH_F2U((float)fparam_4);
-  param_11[6] = (int)GH_F2U(fVar2);
-  param_11[7] = (int)GH_F2U((fVar3 / (fparam_4 - fparam_3)));
-  if (0 < param_5) {
-    iVar8 = 0;
+  one = FLOAT_00108e54;
+  uIndex = 0;
+  invUDelta = FLOAT_00108e54 / (u2 - u1);
+  *mapData = uorder;
+  uElementOffset = 0;
+  mapData[1] = vorder;
+  mapData[2] = (int)GH_F2U((float)u1);
+  mapData[3] = (int)GH_F2U((float)u2);
+  mapData[4] = (int)GH_F2U((float)v1);
+  mapData[5] = (int)GH_F2U((float)v2);
+  mapData[6] = (int)GH_F2U(invUDelta);
+  mapData[7] = (int)GH_F2U((one / (v2 - v1)));
+  if (0 < uorder) {
+    destRecord = 0;
     do {
-      if (0 < param_9) {
-        piVar7 = param_11 + iVar8 * 4;
-        piVar4 = (int *)(iVar6 * 4 + param_10);
-        iVar9 = param_9;
+      if (0 < vorder) {
+        destPtr = mapData + destRecord * 4;
+        pointPtr = (int *)(uElementOffset * 4 + points);
+        vRemaining = vorder;
         do {
-          piVar7[8] = *piVar4;
-          piVar7[9] = piVar4[1];
-          piVar7[10] = piVar4[2];
-          piVar1 = piVar4 + 3;
-          piVar4 = piVar4 + param_8;
-          piVar7[0xb] = *piVar1;
-          piVar7 = piVar7 + 4;
-          iVar9 = iVar9 + -1;
-        } while (iVar9 != 0);
+          destPtr[8] = *pointPtr;
+          destPtr[9] = pointPtr[1];
+          destPtr[10] = pointPtr[2];
+          lastComponentPtr = pointPtr + 3;
+          pointPtr = pointPtr + vstride;
+          destPtr[0xb] = *lastComponentPtr;
+          destPtr = destPtr + 4;
+          vRemaining = vRemaining + -1;
+        } while (vRemaining != 0);
       }
-      iVar5 = iVar5 + 1;
-      iVar8 = iVar8 + param_9;
-      iVar6 = iVar6 + param_4;
-    } while (iVar5 < param_5);
+      uIndex = uIndex + 1;
+      destRecord = destRecord + vorder;
+      uElementOffset = uElementOffset + ustride;
+    } while (uIndex < uorder);
   }
   return;
 }
 
 /* _gleMap2IndexfLoad @ 0xe05f4 (192 bytes) */
-void _gleMap2IndexfLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,int param_4,int param_5,undefined4 param_6,undefined4 param_7,int param_8,int param_9,int param_10,int *param_11,float fparam_1,float fparam_2,float fparam_3,float fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleMap2IndexfLoad(undefined4 unusedArg1,undefined4 unusedArg2,undefined4 unusedArg3,int ustride,int uorder,undefined4 unusedArg6,undefined4 unusedArg7,int vstride,int vorder,int points,int *mapData,float u1,float u2,float v1,float v2,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
   int iVar1;
-  float fVar2;
-  float fVar3;
+  float invUDelta;
+  float one;
   int *piVar4;
-  int iVar5;
-  int iVar6;
-  int *piVar7;
-  int iVar8;
-  int iVar9;
+  int uIndex;
+  int uElementOffset;
+  int *pointPtr;
+  int destRecord;
+  int vRemaining;
   
-  fVar3 = FLOAT_00108e54;
-  iVar5 = 0;
-  fVar2 = FLOAT_00108e54 / (fparam_2 - fparam_1);
-  *param_11 = param_5;
-  iVar6 = 0;
-  param_11[1] = param_9;
-  param_11[2] = (int)GH_F2U((float)fparam_1);
-  param_11[3] = (int)GH_F2U((float)fparam_2);
-  param_11[4] = (int)GH_F2U((float)fparam_3);
-  param_11[5] = (int)GH_F2U((float)fparam_4);
-  param_11[6] = (int)GH_F2U(fVar2);
-  param_11[7] = (int)GH_F2U((fVar3 / (fparam_4 - fparam_3)));
-  if (0 < param_5) {
-    iVar8 = 0;
+  one = FLOAT_00108e54;
+  uIndex = 0;
+  invUDelta = FLOAT_00108e54 / (u2 - u1);
+  *mapData = uorder;
+  uElementOffset = 0;
+  mapData[1] = vorder;
+  mapData[2] = (int)GH_F2U((float)u1);
+  mapData[3] = (int)GH_F2U((float)u2);
+  mapData[4] = (int)GH_F2U((float)v1);
+  mapData[5] = (int)GH_F2U((float)v2);
+  mapData[6] = (int)GH_F2U(invUDelta);
+  mapData[7] = (int)GH_F2U((one / (v2 - v1)));
+  if (0 < uorder) {
+    destRecord = 0;
     do {
-      if (0 < param_9) {
-        piVar7 = (int *)(iVar6 * 4 + param_10);
-        piVar4 = param_11 + iVar8 + 8;
-        iVar9 = param_9;
+      if (0 < vorder) {
+        pointPtr = (int *)(uElementOffset * 4 + points);
+        piVar4 = mapData + destRecord + 8;
+        vRemaining = vorder;
         do {
-          iVar1 = *piVar7;
-          piVar7 = piVar7 + param_8;
+          iVar1 = *pointPtr;
+          pointPtr = pointPtr + vstride;
           *piVar4 = iVar1;
           piVar4 = piVar4 + 1;
-          iVar9 = iVar9 + -1;
-        } while (iVar9 != 0);
+          vRemaining = vRemaining + -1;
+        } while (vRemaining != 0);
       }
-      iVar5 = iVar5 + 1;
-      iVar8 = iVar8 + param_9;
-      iVar6 = iVar6 + param_4;
-    } while (iVar5 < param_5);
+      uIndex = uIndex + 1;
+      destRecord = destRecord + vorder;
+      uElementOffset = uElementOffset + ustride;
+    } while (uIndex < uorder);
   }
   return;
 }
 
 /* _gleMap2NormalfLoad @ 0xe06b4 (204 bytes) */
-void _gleMap2NormalfLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,int param_4,int param_5,undefined4 param_6,undefined4 param_7,int param_8,int param_9,int param_10,int *param_11,float fparam_1,float fparam_2,float fparam_3,float fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleMap2NormalfLoad(undefined4 unusedArg1,undefined4 unusedArg2,undefined4 unusedArg3,int ustride,int uorder,undefined4 unusedArg6,undefined4 unusedArg7,int vstride,int vorder,int points,int *mapData,float u1,float u2,float v1,float v2,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  int *piVar1;
-  float fVar2;
-  float fVar3;
-  int *piVar4;
-  int iVar5;
-  int iVar6;
-  int *piVar7;
-  int iVar8;
-  int iVar9;
+  int *lastComponentPtr;
+  float invUDelta;
+  float one;
+  int *pointPtr;
+  int uIndex;
+  int uElementOffset;
+  int *destPtr;
+  int destRecord;
+  int vRemaining;
   
-  fVar3 = FLOAT_00108e54;
-  iVar5 = 0;
-  fVar2 = FLOAT_00108e54 / (fparam_2 - fparam_1);
-  *param_11 = param_5;
-  iVar6 = 0;
-  param_11[1] = param_9;
-  param_11[2] = (int)GH_F2U((float)fparam_1);
-  param_11[3] = (int)GH_F2U((float)fparam_2);
-  param_11[4] = (int)GH_F2U((float)fparam_3);
-  param_11[5] = (int)GH_F2U((float)fparam_4);
-  param_11[6] = (int)GH_F2U(fVar2);
-  param_11[7] = (int)GH_F2U((fVar3 / (fparam_4 - fparam_3)));
-  if (0 < param_5) {
-    iVar8 = 0;
+  one = FLOAT_00108e54;
+  uIndex = 0;
+  invUDelta = FLOAT_00108e54 / (u2 - u1);
+  *mapData = uorder;
+  uElementOffset = 0;
+  mapData[1] = vorder;
+  mapData[2] = (int)GH_F2U((float)u1);
+  mapData[3] = (int)GH_F2U((float)u2);
+  mapData[4] = (int)GH_F2U((float)v1);
+  mapData[5] = (int)GH_F2U((float)v2);
+  mapData[6] = (int)GH_F2U(invUDelta);
+  mapData[7] = (int)GH_F2U((one / (v2 - v1)));
+  if (0 < uorder) {
+    destRecord = 0;
     do {
-      if (0 < param_9) {
-        piVar4 = (int *)(iVar6 * 4 + param_10);
-        piVar7 = param_11 + iVar8 * 3;
-        iVar9 = param_9;
+      if (0 < vorder) {
+        pointPtr = (int *)(uElementOffset * 4 + points);
+        destPtr = mapData + destRecord * 3;
+        vRemaining = vorder;
         do {
-          piVar7[8] = *piVar4;
-          piVar7[9] = piVar4[1];
-          piVar1 = piVar4 + 2;
-          piVar4 = piVar4 + param_8;
-          piVar7[10] = *piVar1;
-          piVar7 = piVar7 + 3;
-          iVar9 = iVar9 + -1;
-        } while (iVar9 != 0);
+          destPtr[8] = *pointPtr;
+          destPtr[9] = pointPtr[1];
+          lastComponentPtr = pointPtr + 2;
+          pointPtr = pointPtr + vstride;
+          destPtr[10] = *lastComponentPtr;
+          destPtr = destPtr + 3;
+          vRemaining = vRemaining + -1;
+        } while (vRemaining != 0);
       }
-      iVar5 = iVar5 + 1;
-      iVar8 = iVar8 + param_9;
-      iVar6 = iVar6 + param_4;
-    } while (iVar5 < param_5);
+      uIndex = uIndex + 1;
+      destRecord = destRecord + vorder;
+      uElementOffset = uElementOffset + ustride;
+    } while (uIndex < uorder);
   }
   return;
 }
 
 /* _gleMap2Texture1fLoad @ 0xe0780 (192 bytes) */
-void _gleMap2Texture1fLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,int param_4,int param_5,undefined4 param_6,undefined4 param_7,int param_8,int param_9,int param_10,int *param_11,float fparam_1,float fparam_2,float fparam_3,float fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleMap2Texture1fLoad(undefined4 unusedArg1,undefined4 unusedArg2,undefined4 unusedArg3,int ustride,int uorder,undefined4 unusedArg6,undefined4 unusedArg7,int vstride,int vorder,int points,int *mapData,float u1,float u2,float v1,float v2,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
   int iVar1;
-  float fVar2;
-  float fVar3;
+  float invUDelta;
+  float one;
   int *piVar4;
-  int iVar5;
-  int iVar6;
-  int *piVar7;
-  int iVar8;
-  int iVar9;
+  int uIndex;
+  int uElementOffset;
+  int *pointPtr;
+  int destRecord;
+  int vRemaining;
   
-  fVar3 = FLOAT_00108e54;
-  iVar5 = 0;
-  fVar2 = FLOAT_00108e54 / (fparam_2 - fparam_1);
-  *param_11 = param_5;
-  iVar6 = 0;
-  param_11[1] = param_9;
-  param_11[2] = (int)GH_F2U((float)fparam_1);
-  param_11[3] = (int)GH_F2U((float)fparam_2);
-  param_11[4] = (int)GH_F2U((float)fparam_3);
-  param_11[5] = (int)GH_F2U((float)fparam_4);
-  param_11[6] = (int)GH_F2U(fVar2);
-  param_11[7] = (int)GH_F2U((fVar3 / (fparam_4 - fparam_3)));
-  if (0 < param_5) {
-    iVar8 = 0;
+  one = FLOAT_00108e54;
+  uIndex = 0;
+  invUDelta = FLOAT_00108e54 / (u2 - u1);
+  *mapData = uorder;
+  uElementOffset = 0;
+  mapData[1] = vorder;
+  mapData[2] = (int)GH_F2U((float)u1);
+  mapData[3] = (int)GH_F2U((float)u2);
+  mapData[4] = (int)GH_F2U((float)v1);
+  mapData[5] = (int)GH_F2U((float)v2);
+  mapData[6] = (int)GH_F2U(invUDelta);
+  mapData[7] = (int)GH_F2U((one / (v2 - v1)));
+  if (0 < uorder) {
+    destRecord = 0;
     do {
-      if (0 < param_9) {
-        piVar7 = (int *)(iVar6 * 4 + param_10);
-        piVar4 = param_11 + iVar8 + 8;
-        iVar9 = param_9;
+      if (0 < vorder) {
+        pointPtr = (int *)(uElementOffset * 4 + points);
+        piVar4 = mapData + destRecord + 8;
+        vRemaining = vorder;
         do {
-          iVar1 = *piVar7;
-          piVar7 = piVar7 + param_8;
+          iVar1 = *pointPtr;
+          pointPtr = pointPtr + vstride;
           *piVar4 = iVar1;
           piVar4 = piVar4 + 1;
-          iVar9 = iVar9 + -1;
-        } while (iVar9 != 0);
+          vRemaining = vRemaining + -1;
+        } while (vRemaining != 0);
       }
-      iVar5 = iVar5 + 1;
-      iVar8 = iVar8 + param_9;
-      iVar6 = iVar6 + param_4;
-    } while (iVar5 < param_5);
+      uIndex = uIndex + 1;
+      destRecord = destRecord + vorder;
+      uElementOffset = uElementOffset + ustride;
+    } while (uIndex < uorder);
   }
   return;
 }
 
 /* _gleMap2Texture2fLoad @ 0xe0840 (216 bytes) */
-void _gleMap2Texture2fLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,int param_4,int param_5,undefined4 param_6,undefined4 param_7,int param_8,int param_9,int param_10,int *param_11,float fparam_1,float fparam_2,float fparam_3,float fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleMap2Texture2fLoad(undefined4 unusedArg1,undefined4 unusedArg2,undefined4 unusedArg3,int ustride,int uorder,undefined4 unusedArg6,undefined4 unusedArg7,int vstride,int vorder,int points,int *mapData,float u1,float u2,float v1,float v2,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
   int iVar1;
   int *piVar2;
-  float fVar3;
-  float fVar4;
+  float invUDelta;
+  float one;
   int iVar5;
-  int *piVar6;
-  int iVar7;
-  int iVar8;
-  int iVar9;
+  int *destPtr;
+  int uElementOffset;
+  int destRecord;
+  int uIndex;
   int iVar10;
   int *piVar11;
-  int iVar12;
+  int vRemaining;
   
-  fVar4 = FLOAT_00108e54;
-  iVar9 = 0;
-  fVar3 = FLOAT_00108e54 / (fparam_2 - fparam_1);
-  iVar7 = 0;
-  *param_11 = param_5;
-  param_11[1] = param_9;
-  param_11[2] = (int)GH_F2U((float)fparam_1);
-  param_11[3] = (int)GH_F2U((float)fparam_2);
-  param_11[4] = (int)GH_F2U((float)fparam_3);
-  param_11[5] = (int)GH_F2U((float)fparam_4);
-  param_11[6] = (int)GH_F2U(fVar3);
-  param_11[7] = (int)GH_F2U((fVar4 / (fparam_4 - fparam_3)));
-  if (0 < param_5) {
-    iVar8 = 0;
-    iVar10 = param_10;
+  one = FLOAT_00108e54;
+  uIndex = 0;
+  invUDelta = FLOAT_00108e54 / (u2 - u1);
+  uElementOffset = 0;
+  *mapData = uorder;
+  mapData[1] = vorder;
+  mapData[2] = (int)GH_F2U((float)u1);
+  mapData[3] = (int)GH_F2U((float)u2);
+  mapData[4] = (int)GH_F2U((float)v1);
+  mapData[5] = (int)GH_F2U((float)v2);
+  mapData[6] = (int)GH_F2U(invUDelta);
+  mapData[7] = (int)GH_F2U((one / (v2 - v1)));
+  if (0 < uorder) {
+    destRecord = 0;
+    iVar10 = points;
     do {
-      if (0 < param_9) {
-        piVar6 = param_11 + iVar8 * 2;
+      if (0 < vorder) {
+        destPtr = mapData + destRecord * 2;
         piVar11 = (int *)(iVar10 + 4);
-        iVar5 = iVar7 << 2;
-        iVar12 = param_9;
+        iVar5 = uElementOffset << 2;
+        vRemaining = vorder;
         do {
-          piVar2 = (int *)(param_10 + iVar5);
-          iVar5 = iVar5 + param_8 * 4;
-          piVar6[8] = *piVar2;
+          piVar2 = (int *)(points + iVar5);
+          iVar5 = iVar5 + vstride * 4;
+          destPtr[8] = *piVar2;
           iVar1 = *piVar11;
-          piVar11 = piVar11 + param_8;
-          piVar6[9] = iVar1;
-          piVar6 = piVar6 + 2;
-          iVar12 = iVar12 + -1;
-        } while (iVar12 != 0);
+          piVar11 = piVar11 + vstride;
+          destPtr[9] = iVar1;
+          destPtr = destPtr + 2;
+          vRemaining = vRemaining + -1;
+        } while (vRemaining != 0);
       }
-      iVar9 = iVar9 + 1;
-      iVar10 = iVar10 + param_4 * 4;
-      iVar8 = iVar8 + param_9;
-      iVar7 = iVar7 + param_4;
-    } while (iVar9 < param_5);
+      uIndex = uIndex + 1;
+      iVar10 = iVar10 + ustride * 4;
+      destRecord = destRecord + vorder;
+      uElementOffset = uElementOffset + ustride;
+    } while (uIndex < uorder);
   }
   return;
 }
 
 /* _gleMap2Texture3fLoad @ 0xe0918 (204 bytes) */
-void _gleMap2Texture3fLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,int param_4,int param_5,undefined4 param_6,undefined4 param_7,int param_8,int param_9,int param_10,int *param_11,float fparam_1,float fparam_2,float fparam_3,float fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleMap2Texture3fLoad(undefined4 unusedArg1,undefined4 unusedArg2,undefined4 unusedArg3,int ustride,int uorder,undefined4 unusedArg6,undefined4 unusedArg7,int vstride,int vorder,int points,int *mapData,float u1,float u2,float v1,float v2,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  int *piVar1;
-  float fVar2;
-  float fVar3;
-  int *piVar4;
-  int iVar5;
-  int iVar6;
-  int *piVar7;
-  int iVar8;
-  int iVar9;
+  int *lastComponentPtr;
+  float invUDelta;
+  float one;
+  int *pointPtr;
+  int uIndex;
+  int uElementOffset;
+  int *destPtr;
+  int destRecord;
+  int vRemaining;
   
-  fVar3 = FLOAT_00108e54;
-  iVar5 = 0;
-  fVar2 = FLOAT_00108e54 / (fparam_2 - fparam_1);
-  *param_11 = param_5;
-  iVar6 = 0;
-  param_11[1] = param_9;
-  param_11[2] = (int)GH_F2U((float)fparam_1);
-  param_11[3] = (int)GH_F2U((float)fparam_2);
-  param_11[4] = (int)GH_F2U((float)fparam_3);
-  param_11[5] = (int)GH_F2U((float)fparam_4);
-  param_11[6] = (int)GH_F2U(fVar2);
-  param_11[7] = (int)GH_F2U((fVar3 / (fparam_4 - fparam_3)));
-  if (0 < param_5) {
-    iVar8 = 0;
+  one = FLOAT_00108e54;
+  uIndex = 0;
+  invUDelta = FLOAT_00108e54 / (u2 - u1);
+  *mapData = uorder;
+  uElementOffset = 0;
+  mapData[1] = vorder;
+  mapData[2] = (int)GH_F2U((float)u1);
+  mapData[3] = (int)GH_F2U((float)u2);
+  mapData[4] = (int)GH_F2U((float)v1);
+  mapData[5] = (int)GH_F2U((float)v2);
+  mapData[6] = (int)GH_F2U(invUDelta);
+  mapData[7] = (int)GH_F2U((one / (v2 - v1)));
+  if (0 < uorder) {
+    destRecord = 0;
     do {
-      if (0 < param_9) {
-        piVar4 = (int *)(iVar6 * 4 + param_10);
-        piVar7 = param_11 + iVar8 * 3;
-        iVar9 = param_9;
+      if (0 < vorder) {
+        pointPtr = (int *)(uElementOffset * 4 + points);
+        destPtr = mapData + destRecord * 3;
+        vRemaining = vorder;
         do {
-          piVar7[8] = *piVar4;
-          piVar7[9] = piVar4[1];
-          piVar1 = piVar4 + 2;
-          piVar4 = piVar4 + param_8;
-          piVar7[10] = *piVar1;
-          piVar7 = piVar7 + 3;
-          iVar9 = iVar9 + -1;
-        } while (iVar9 != 0);
+          destPtr[8] = *pointPtr;
+          destPtr[9] = pointPtr[1];
+          lastComponentPtr = pointPtr + 2;
+          pointPtr = pointPtr + vstride;
+          destPtr[10] = *lastComponentPtr;
+          destPtr = destPtr + 3;
+          vRemaining = vRemaining + -1;
+        } while (vRemaining != 0);
       }
-      iVar5 = iVar5 + 1;
-      iVar8 = iVar8 + param_9;
-      iVar6 = iVar6 + param_4;
-    } while (iVar5 < param_5);
+      uIndex = uIndex + 1;
+      destRecord = destRecord + vorder;
+      uElementOffset = uElementOffset + ustride;
+    } while (uIndex < uorder);
   }
   return;
 }
 
 /* _gleMap2Texture4fLoad @ 0xe09e4 (212 bytes) */
-void _gleMap2Texture4fLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,int param_4,int param_5,undefined4 param_6,undefined4 param_7,int param_8,int param_9,int param_10,int *param_11,float fparam_1,float fparam_2,float fparam_3,float fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleMap2Texture4fLoad(undefined4 unusedArg1,undefined4 unusedArg2,undefined4 unusedArg3,int ustride,int uorder,undefined4 unusedArg6,undefined4 unusedArg7,int vstride,int vorder,int points,int *mapData,float u1,float u2,float v1,float v2,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  int *piVar1;
-  float fVar2;
-  float fVar3;
-  int *piVar4;
-  int iVar5;
-  int iVar6;
-  int *piVar7;
-  int iVar8;
-  int iVar9;
+  int *lastComponentPtr;
+  float invUDelta;
+  float one;
+  int *pointPtr;
+  int uIndex;
+  int uElementOffset;
+  int *destPtr;
+  int destRecord;
+  int vRemaining;
   
-  fVar3 = FLOAT_00108e54;
-  iVar5 = 0;
-  fVar2 = FLOAT_00108e54 / (fparam_2 - fparam_1);
-  *param_11 = param_5;
-  iVar6 = 0;
-  param_11[1] = param_9;
-  param_11[2] = (int)GH_F2U((float)fparam_1);
-  param_11[3] = (int)GH_F2U((float)fparam_2);
-  param_11[4] = (int)GH_F2U((float)fparam_3);
-  param_11[5] = (int)GH_F2U((float)fparam_4);
-  param_11[6] = (int)GH_F2U(fVar2);
-  param_11[7] = (int)GH_F2U((fVar3 / (fparam_4 - fparam_3)));
-  if (0 < param_5) {
-    iVar8 = 0;
+  one = FLOAT_00108e54;
+  uIndex = 0;
+  invUDelta = FLOAT_00108e54 / (u2 - u1);
+  *mapData = uorder;
+  uElementOffset = 0;
+  mapData[1] = vorder;
+  mapData[2] = (int)GH_F2U((float)u1);
+  mapData[3] = (int)GH_F2U((float)u2);
+  mapData[4] = (int)GH_F2U((float)v1);
+  mapData[5] = (int)GH_F2U((float)v2);
+  mapData[6] = (int)GH_F2U(invUDelta);
+  mapData[7] = (int)GH_F2U((one / (v2 - v1)));
+  if (0 < uorder) {
+    destRecord = 0;
     do {
-      if (0 < param_9) {
-        piVar7 = param_11 + iVar8 * 4;
-        piVar4 = (int *)(iVar6 * 4 + param_10);
-        iVar9 = param_9;
+      if (0 < vorder) {
+        destPtr = mapData + destRecord * 4;
+        pointPtr = (int *)(uElementOffset * 4 + points);
+        vRemaining = vorder;
         do {
-          piVar7[8] = *piVar4;
-          piVar7[9] = piVar4[1];
-          piVar7[10] = piVar4[2];
-          piVar1 = piVar4 + 3;
-          piVar4 = piVar4 + param_8;
-          piVar7[0xb] = *piVar1;
-          piVar7 = piVar7 + 4;
-          iVar9 = iVar9 + -1;
-        } while (iVar9 != 0);
+          destPtr[8] = *pointPtr;
+          destPtr[9] = pointPtr[1];
+          destPtr[10] = pointPtr[2];
+          lastComponentPtr = pointPtr + 3;
+          pointPtr = pointPtr + vstride;
+          destPtr[0xb] = *lastComponentPtr;
+          destPtr = destPtr + 4;
+          vRemaining = vRemaining + -1;
+        } while (vRemaining != 0);
       }
-      iVar5 = iVar5 + 1;
-      iVar8 = iVar8 + param_9;
-      iVar6 = iVar6 + param_4;
-    } while (iVar5 < param_5);
+      uIndex = uIndex + 1;
+      destRecord = destRecord + vorder;
+      uElementOffset = uElementOffset + ustride;
+    } while (uIndex < uorder);
   }
   return;
 }
 
 /* _gleMap2VertexAttrib1fLoad @ 0xe0ab8 (192 bytes) */
-void _gleMap2VertexAttrib1fLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,int param_4,int param_5,undefined4 param_6,undefined4 param_7,int param_8,int param_9,int param_10,int *param_11,float fparam_1,float fparam_2,float fparam_3,float fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleMap2VertexAttrib1fLoad(undefined4 unusedArg1,undefined4 unusedArg2,undefined4 unusedArg3,int ustride,int uorder,undefined4 unusedArg6,undefined4 unusedArg7,int vstride,int vorder,int points,int *mapData,float u1,float u2,float v1,float v2,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
   int iVar1;
-  float fVar2;
-  float fVar3;
+  float invUDelta;
+  float one;
   int *piVar4;
-  int iVar5;
-  int iVar6;
-  int *piVar7;
-  int iVar8;
-  int iVar9;
+  int uIndex;
+  int uElementOffset;
+  int *pointPtr;
+  int destRecord;
+  int vRemaining;
   
-  fVar3 = FLOAT_00108e54;
-  iVar5 = 0;
-  fVar2 = FLOAT_00108e54 / (fparam_2 - fparam_1);
-  *param_11 = param_5;
-  iVar6 = 0;
-  param_11[1] = param_9;
-  param_11[2] = (int)GH_F2U((float)fparam_1);
-  param_11[3] = (int)GH_F2U((float)fparam_2);
-  param_11[4] = (int)GH_F2U((float)fparam_3);
-  param_11[5] = (int)GH_F2U((float)fparam_4);
-  param_11[6] = (int)GH_F2U(fVar2);
-  param_11[7] = (int)GH_F2U((fVar3 / (fparam_4 - fparam_3)));
-  if (0 < param_5) {
-    iVar8 = 0;
+  one = FLOAT_00108e54;
+  uIndex = 0;
+  invUDelta = FLOAT_00108e54 / (u2 - u1);
+  *mapData = uorder;
+  uElementOffset = 0;
+  mapData[1] = vorder;
+  mapData[2] = (int)GH_F2U((float)u1);
+  mapData[3] = (int)GH_F2U((float)u2);
+  mapData[4] = (int)GH_F2U((float)v1);
+  mapData[5] = (int)GH_F2U((float)v2);
+  mapData[6] = (int)GH_F2U(invUDelta);
+  mapData[7] = (int)GH_F2U((one / (v2 - v1)));
+  if (0 < uorder) {
+    destRecord = 0;
     do {
-      if (0 < param_9) {
-        piVar7 = (int *)(iVar6 * 4 + param_10);
-        piVar4 = param_11 + iVar8 + 8;
-        iVar9 = param_9;
+      if (0 < vorder) {
+        pointPtr = (int *)(uElementOffset * 4 + points);
+        piVar4 = mapData + destRecord + 8;
+        vRemaining = vorder;
         do {
-          iVar1 = *piVar7;
-          piVar7 = piVar7 + param_8;
+          iVar1 = *pointPtr;
+          pointPtr = pointPtr + vstride;
           *piVar4 = iVar1;
           piVar4 = piVar4 + 1;
-          iVar9 = iVar9 + -1;
-        } while (iVar9 != 0);
+          vRemaining = vRemaining + -1;
+        } while (vRemaining != 0);
       }
-      iVar5 = iVar5 + 1;
-      iVar8 = iVar8 + param_9;
-      iVar6 = iVar6 + param_4;
-    } while (iVar5 < param_5);
+      uIndex = uIndex + 1;
+      destRecord = destRecord + vorder;
+      uElementOffset = uElementOffset + ustride;
+    } while (uIndex < uorder);
   }
   return;
 }
 
 /* _gleMap2VertexAttrib2fLoad @ 0xe0b78 (216 bytes) */
-void _gleMap2VertexAttrib2fLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,int param_4,int param_5,undefined4 param_6,undefined4 param_7,int param_8,int param_9,int param_10,int *param_11,float fparam_1,float fparam_2,float fparam_3,float fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleMap2VertexAttrib2fLoad(undefined4 unusedArg1,undefined4 unusedArg2,undefined4 unusedArg3,int ustride,int uorder,undefined4 unusedArg6,undefined4 unusedArg7,int vstride,int vorder,int points,int *mapData,float u1,float u2,float v1,float v2,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
   int iVar1;
   int *piVar2;
-  float fVar3;
-  float fVar4;
+  float invUDelta;
+  float one;
   int iVar5;
-  int *piVar6;
-  int iVar7;
-  int iVar8;
-  int iVar9;
+  int *destPtr;
+  int uElementOffset;
+  int destRecord;
+  int uIndex;
   int iVar10;
   int *piVar11;
-  int iVar12;
+  int vRemaining;
   
-  fVar4 = FLOAT_00108e54;
-  iVar9 = 0;
-  fVar3 = FLOAT_00108e54 / (fparam_2 - fparam_1);
-  iVar7 = 0;
-  *param_11 = param_5;
-  param_11[1] = param_9;
-  param_11[2] = (int)GH_F2U((float)fparam_1);
-  param_11[3] = (int)GH_F2U((float)fparam_2);
-  param_11[4] = (int)GH_F2U((float)fparam_3);
-  param_11[5] = (int)GH_F2U((float)fparam_4);
-  param_11[6] = (int)GH_F2U(fVar3);
-  param_11[7] = (int)GH_F2U((fVar4 / (fparam_4 - fparam_3)));
-  if (0 < param_5) {
-    iVar8 = 0;
-    iVar10 = param_10;
+  one = FLOAT_00108e54;
+  uIndex = 0;
+  invUDelta = FLOAT_00108e54 / (u2 - u1);
+  uElementOffset = 0;
+  *mapData = uorder;
+  mapData[1] = vorder;
+  mapData[2] = (int)GH_F2U((float)u1);
+  mapData[3] = (int)GH_F2U((float)u2);
+  mapData[4] = (int)GH_F2U((float)v1);
+  mapData[5] = (int)GH_F2U((float)v2);
+  mapData[6] = (int)GH_F2U(invUDelta);
+  mapData[7] = (int)GH_F2U((one / (v2 - v1)));
+  if (0 < uorder) {
+    destRecord = 0;
+    iVar10 = points;
     do {
-      if (0 < param_9) {
-        piVar6 = param_11 + iVar8 * 2;
+      if (0 < vorder) {
+        destPtr = mapData + destRecord * 2;
         piVar11 = (int *)(iVar10 + 4);
-        iVar5 = iVar7 << 2;
-        iVar12 = param_9;
+        iVar5 = uElementOffset << 2;
+        vRemaining = vorder;
         do {
-          piVar2 = (int *)(param_10 + iVar5);
-          iVar5 = iVar5 + param_8 * 4;
-          piVar6[8] = *piVar2;
+          piVar2 = (int *)(points + iVar5);
+          iVar5 = iVar5 + vstride * 4;
+          destPtr[8] = *piVar2;
           iVar1 = *piVar11;
-          piVar11 = piVar11 + param_8;
-          piVar6[9] = iVar1;
-          piVar6 = piVar6 + 2;
-          iVar12 = iVar12 + -1;
-        } while (iVar12 != 0);
+          piVar11 = piVar11 + vstride;
+          destPtr[9] = iVar1;
+          destPtr = destPtr + 2;
+          vRemaining = vRemaining + -1;
+        } while (vRemaining != 0);
       }
-      iVar9 = iVar9 + 1;
-      iVar10 = iVar10 + param_4 * 4;
-      iVar8 = iVar8 + param_9;
-      iVar7 = iVar7 + param_4;
-    } while (iVar9 < param_5);
+      uIndex = uIndex + 1;
+      iVar10 = iVar10 + ustride * 4;
+      destRecord = destRecord + vorder;
+      uElementOffset = uElementOffset + ustride;
+    } while (uIndex < uorder);
   }
   return;
 }
 
 /* _gleMap2VertexAttrib3fLoad @ 0xe0c50 (204 bytes) */
-void _gleMap2VertexAttrib3fLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,int param_4,int param_5,undefined4 param_6,undefined4 param_7,int param_8,int param_9,int param_10,int *param_11,float fparam_1,float fparam_2,float fparam_3,float fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleMap2VertexAttrib3fLoad(undefined4 unusedArg1,undefined4 unusedArg2,undefined4 unusedArg3,int ustride,int uorder,undefined4 unusedArg6,undefined4 unusedArg7,int vstride,int vorder,int points,int *mapData,float u1,float u2,float v1,float v2,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  int *piVar1;
-  float fVar2;
-  float fVar3;
-  int *piVar4;
-  int iVar5;
-  int iVar6;
-  int *piVar7;
-  int iVar8;
-  int iVar9;
+  int *lastComponentPtr;
+  float invUDelta;
+  float one;
+  int *pointPtr;
+  int uIndex;
+  int uElementOffset;
+  int *destPtr;
+  int destRecord;
+  int vRemaining;
   
-  fVar3 = FLOAT_00108e54;
-  iVar5 = 0;
-  fVar2 = FLOAT_00108e54 / (fparam_2 - fparam_1);
-  *param_11 = param_5;
-  iVar6 = 0;
-  param_11[1] = param_9;
-  param_11[2] = (int)GH_F2U((float)fparam_1);
-  param_11[3] = (int)GH_F2U((float)fparam_2);
-  param_11[4] = (int)GH_F2U((float)fparam_3);
-  param_11[5] = (int)GH_F2U((float)fparam_4);
-  param_11[6] = (int)GH_F2U(fVar2);
-  param_11[7] = (int)GH_F2U((fVar3 / (fparam_4 - fparam_3)));
-  if (0 < param_5) {
-    iVar8 = 0;
+  one = FLOAT_00108e54;
+  uIndex = 0;
+  invUDelta = FLOAT_00108e54 / (u2 - u1);
+  *mapData = uorder;
+  uElementOffset = 0;
+  mapData[1] = vorder;
+  mapData[2] = (int)GH_F2U((float)u1);
+  mapData[3] = (int)GH_F2U((float)u2);
+  mapData[4] = (int)GH_F2U((float)v1);
+  mapData[5] = (int)GH_F2U((float)v2);
+  mapData[6] = (int)GH_F2U(invUDelta);
+  mapData[7] = (int)GH_F2U((one / (v2 - v1)));
+  if (0 < uorder) {
+    destRecord = 0;
     do {
-      if (0 < param_9) {
-        piVar4 = (int *)(iVar6 * 4 + param_10);
-        piVar7 = param_11 + iVar8 * 3;
-        iVar9 = param_9;
+      if (0 < vorder) {
+        pointPtr = (int *)(uElementOffset * 4 + points);
+        destPtr = mapData + destRecord * 3;
+        vRemaining = vorder;
         do {
-          piVar7[8] = *piVar4;
-          piVar7[9] = piVar4[1];
-          piVar1 = piVar4 + 2;
-          piVar4 = piVar4 + param_8;
-          piVar7[10] = *piVar1;
-          piVar7 = piVar7 + 3;
-          iVar9 = iVar9 + -1;
-        } while (iVar9 != 0);
+          destPtr[8] = *pointPtr;
+          destPtr[9] = pointPtr[1];
+          lastComponentPtr = pointPtr + 2;
+          pointPtr = pointPtr + vstride;
+          destPtr[10] = *lastComponentPtr;
+          destPtr = destPtr + 3;
+          vRemaining = vRemaining + -1;
+        } while (vRemaining != 0);
       }
-      iVar5 = iVar5 + 1;
-      iVar8 = iVar8 + param_9;
-      iVar6 = iVar6 + param_4;
-    } while (iVar5 < param_5);
+      uIndex = uIndex + 1;
+      destRecord = destRecord + vorder;
+      uElementOffset = uElementOffset + ustride;
+    } while (uIndex < uorder);
   }
   return;
 }
 
 /* _gleMap2VertexAttrib4fLoad @ 0xe0d1c (212 bytes) */
-void _gleMap2VertexAttrib4fLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,int param_4,int param_5,undefined4 param_6,undefined4 param_7,int param_8,int param_9,int param_10,int *param_11,float fparam_1,float fparam_2,float fparam_3,float fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleMap2VertexAttrib4fLoad(undefined4 unusedArg1,undefined4 unusedArg2,undefined4 unusedArg3,int ustride,int uorder,undefined4 unusedArg6,undefined4 unusedArg7,int vstride,int vorder,int points,int *mapData,float u1,float u2,float v1,float v2,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  int *piVar1;
-  float fVar2;
-  float fVar3;
-  int *piVar4;
-  int iVar5;
-  int iVar6;
-  int *piVar7;
-  int iVar8;
-  int iVar9;
+  int *lastComponentPtr;
+  float invUDelta;
+  float one;
+  int *pointPtr;
+  int uIndex;
+  int uElementOffset;
+  int *destPtr;
+  int destRecord;
+  int vRemaining;
   
-  fVar3 = FLOAT_00108e54;
-  iVar5 = 0;
-  fVar2 = FLOAT_00108e54 / (fparam_2 - fparam_1);
-  *param_11 = param_5;
-  iVar6 = 0;
-  param_11[1] = param_9;
-  param_11[2] = (int)GH_F2U((float)fparam_1);
-  param_11[3] = (int)GH_F2U((float)fparam_2);
-  param_11[4] = (int)GH_F2U((float)fparam_3);
-  param_11[5] = (int)GH_F2U((float)fparam_4);
-  param_11[6] = (int)GH_F2U(fVar2);
-  param_11[7] = (int)GH_F2U((fVar3 / (fparam_4 - fparam_3)));
-  if (0 < param_5) {
-    iVar8 = 0;
+  one = FLOAT_00108e54;
+  uIndex = 0;
+  invUDelta = FLOAT_00108e54 / (u2 - u1);
+  *mapData = uorder;
+  uElementOffset = 0;
+  mapData[1] = vorder;
+  mapData[2] = (int)GH_F2U((float)u1);
+  mapData[3] = (int)GH_F2U((float)u2);
+  mapData[4] = (int)GH_F2U((float)v1);
+  mapData[5] = (int)GH_F2U((float)v2);
+  mapData[6] = (int)GH_F2U(invUDelta);
+  mapData[7] = (int)GH_F2U((one / (v2 - v1)));
+  if (0 < uorder) {
+    destRecord = 0;
     do {
-      if (0 < param_9) {
-        piVar7 = param_11 + iVar8 * 4;
-        piVar4 = (int *)(iVar6 * 4 + param_10);
-        iVar9 = param_9;
+      if (0 < vorder) {
+        destPtr = mapData + destRecord * 4;
+        pointPtr = (int *)(uElementOffset * 4 + points);
+        vRemaining = vorder;
         do {
-          piVar7[8] = *piVar4;
-          piVar7[9] = piVar4[1];
-          piVar7[10] = piVar4[2];
-          piVar1 = piVar4 + 3;
-          piVar4 = piVar4 + param_8;
-          piVar7[0xb] = *piVar1;
-          piVar7 = piVar7 + 4;
-          iVar9 = iVar9 + -1;
-        } while (iVar9 != 0);
+          destPtr[8] = *pointPtr;
+          destPtr[9] = pointPtr[1];
+          destPtr[10] = pointPtr[2];
+          lastComponentPtr = pointPtr + 3;
+          pointPtr = pointPtr + vstride;
+          destPtr[0xb] = *lastComponentPtr;
+          destPtr = destPtr + 4;
+          vRemaining = vRemaining + -1;
+        } while (vRemaining != 0);
       }
-      iVar5 = iVar5 + 1;
-      iVar8 = iVar8 + param_9;
-      iVar6 = iVar6 + param_4;
-    } while (iVar5 < param_5);
+      uIndex = uIndex + 1;
+      destRecord = destRecord + vorder;
+      uElementOffset = uElementOffset + ustride;
+    } while (uIndex < uorder);
   }
   return;
 }
 
 /* _gleEvalMap2 @ 0xe0df0 (1504 bytes) */
-void _gleEvalMap2(int glContext,float fparam_1,float fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12)
+void _gleEvalMap2(int glContext,float floatArg1,float floatArg2,double floatArg3,double floatArg4,double floatArg5,double floatArg6,double floatArg7,double floatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12)
 {
   byte bVar1;
   float fVar2;
   float fVar3;
-  undefined *puVar4;
+  undefined *vectorNormalize;
   undefined4 uVar5;
   int iVar6;
   undefined4 uVar7;
-  undefined4 in_r7;
-  undefined4 in_r8;
+  undefined4 incomingR7;
+  undefined4 incomingR8;
   undefined4 uVar8;
   int iVar9;
   float *pfVar10;
@@ -2424,14 +2424,14 @@ void _gleEvalMap2(int glContext,float fparam_1,float fparam_2,double fparam_3,do
   byte *pbVar20;
   float dVar21;
   float dVar22;
-  double in_f9;
-  double in_f10;
+  double incomingFpr9;
+  double incomingFpr10;
   float dVar23;
-  double in_stack_ffffff48;
-  double in_stack_ffffff50;
-  double in_stack_ffffff58;
-  double in_stack_ffffff60;
-  double in_stack_ffffff68;
+  double incomingStack_ffffff48;
+  double incomingStack_ffffff50;
+  double incomingStack_ffffff58;
+  double incomingStack_ffffff60;
+  double incomingStack_ffffff68;
   float local_70;
   float local_6c;
   float local_68;
@@ -2453,25 +2453,25 @@ void _gleEvalMap2(int glContext,float fparam_1,float fparam_2,double fparam_3,do
   if (*(char *)(glContext + 0x7555) != '\0') {
     if (*(char *)(glContext + 0x74f2) == '\0') {
       ((void (*)())_gleEvalDomain2Coord)(glContext,iVar13 + 0xfc8,*(undefined4 *)(iVar13 + 0xfa8),
-                 *(undefined4 *)(iVar13 + 0xfac),in_r7,in_r8,3,pfVar10,
-                 (double)((fparam_1 - *(float *)(iVar13 + 0xfb0)) *
+                 *(undefined4 *)(iVar13 + 0xfac),incomingR7,incomingR8,3,pfVar10,
+                 (double)((floatArg1 - *(float *)(iVar13 + 0xfb0)) *
                          *(float *)(iVar13 + 0xfc0)),
-                 (double)((fparam_2 - *(float *)(iVar13 + 0xfb8)) *
-                         *(float *)(iVar13 + 0xfc4)),fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,
-                 fparam_8,in_stack_ffffff48,in_stack_ffffff50,in_stack_ffffff58,in_stack_ffffff60,
-                 in_stack_ffffff68);
+                 (double)((floatArg2 - *(float *)(iVar13 + 0xfb8)) *
+                         *(float *)(iVar13 + 0xfc4)),floatArg3,floatArg4,floatArg5,floatArg6,floatArg7,
+                 floatArg8,incomingStack_ffffff48,incomingStack_ffffff50,incomingStack_ffffff58,incomingStack_ffffff60,
+                 incomingStack_ffffff68);
     }
     pfVar12 = pfVar10 + 3;
   }
   if (*(char *)(glContext + 0x7556) != '\0') {
     ((void (*)())_gleEvalDomain2Color)(glContext,iVar13 + 0x1498,*(undefined4 *)(iVar13 + 0x1478),
-               *(undefined4 *)(iVar13 + 0x147c),in_r7,in_r8,4,pfVar12,
-               (double)((fparam_1 - *(float *)(iVar13 + 0x1480)) *
+               *(undefined4 *)(iVar13 + 0x147c),incomingR7,incomingR8,4,pfVar12,
+               (double)((floatArg1 - *(float *)(iVar13 + 0x1480)) *
                        *(float *)(iVar13 + 0x1490)),
-               (double)((fparam_2 - *(float *)(iVar13 + 0x1488)) *
-                       *(float *)(iVar13 + 0x1494)),fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,
-               fparam_8,in_stack_ffffff48,in_stack_ffffff50,in_stack_ffffff58,in_stack_ffffff60,
-               in_stack_ffffff68);
+               (double)((floatArg2 - *(float *)(iVar13 + 0x1488)) *
+                       *(float *)(iVar13 + 0x1494)),floatArg3,floatArg4,floatArg5,floatArg6,floatArg7,
+               floatArg8,incomingStack_ffffff48,incomingStack_ffffff50,incomingStack_ffffff58,incomingStack_ffffff60,
+               incomingStack_ffffff68);
     if (*(char *)(glContext + 0x4df8) != '\0') {
       (**(code **)(glContext + 0x4de0))(glContext,pfVar12);
     }
@@ -2481,24 +2481,24 @@ void _gleEvalMap2(int glContext,float fparam_1,float fparam_2,double fparam_3,do
   if (bVar1 == 8) {
     uVar5 = *(undefined4 *)(iVar13 + 0x1e38);
     iVar14 = iVar13 + 0x1e58;
-    fVar2 = (fparam_1 - *(float *)(iVar13 + 0x1e40)) * *(float *)(iVar13 + 0x1e50);
+    fVar2 = (floatArg1 - *(float *)(iVar13 + 0x1e40)) * *(float *)(iVar13 + 0x1e50);
     uVar7 = *(undefined4 *)(iVar13 + 0x1e3c);
-    fVar3 = (fparam_2 - *(float *)(iVar13 + 0x1e48)) * *(float *)(iVar13 + 0x1e54);
+    fVar3 = (floatArg2 - *(float *)(iVar13 + 0x1e48)) * *(float *)(iVar13 + 0x1e54);
     uVar8 = 2;
     pfVar11 = pfVar12 + 2;
 LAB_000e105c:
-    ((void (*)())_gleEvalDomain2Coord)(glContext,iVar14,uVar5,uVar7,in_r7,in_r8,uVar8,pfVar12,(double)fVar2,(double)fVar3,
-               fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,fparam_8,in_stack_ffffff48,
-               in_stack_ffffff50,in_stack_ffffff58,in_stack_ffffff60,in_stack_ffffff68);
+    ((void (*)())_gleEvalDomain2Coord)(glContext,iVar14,uVar5,uVar7,incomingR7,incomingR8,uVar8,pfVar12,(double)fVar2,(double)fVar3,
+               floatArg3,floatArg4,floatArg5,floatArg6,floatArg7,floatArg8,incomingStack_ffffff48,
+               incomingStack_ffffff50,incomingStack_ffffff58,incomingStack_ffffff60,incomingStack_ffffff68);
     pfVar12 = pfVar11;
   }
   else if (bVar1 < 9) {
     if (bVar1 == 4) {
       uVar5 = *(undefined4 *)(iVar13 + 0x1c88);
       iVar14 = iVar13 + 0x1ca8;
-      fVar2 = (fparam_1 - *(float *)(iVar13 + 0x1c90)) * *(float *)(iVar13 + 0x1ca0);
+      fVar2 = (floatArg1 - *(float *)(iVar13 + 0x1c90)) * *(float *)(iVar13 + 0x1ca0);
       uVar7 = *(undefined4 *)(iVar13 + 0x1c8c);
-      fVar3 = (fparam_2 - *(float *)(iVar13 + 0x1c98)) * *(float *)(iVar13 + 0x1ca4);
+      fVar3 = (floatArg2 - *(float *)(iVar13 + 0x1c98)) * *(float *)(iVar13 + 0x1ca4);
       uVar8 = 1;
       pfVar11 = pfVar12 + 1;
       goto LAB_000e105c;
@@ -2508,26 +2508,26 @@ LAB_000e105c:
     if (bVar1 == 0xc) {
       pfVar11 = pfVar12 + 3;
       ((void (*)())_gleEvalDomain2Coord)(glContext,iVar13 + 0x2198,*(undefined4 *)(iVar13 + 0x2178),
-                 *(undefined4 *)(iVar13 + 0x217c),in_r7,in_r8,3,pfVar12,
-                 (double)((fparam_1 - *(float *)(iVar13 + 0x2180)) *
+                 *(undefined4 *)(iVar13 + 0x217c),incomingR7,incomingR8,3,pfVar12,
+                 (double)((floatArg1 - *(float *)(iVar13 + 0x2180)) *
                          *(float *)(iVar13 + 0x2190)),
-                 (double)((fparam_2 - *(float *)(iVar13 + 0x2188)) *
-                         *(float *)(iVar13 + 0x2194)),fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,
-                 fparam_8,in_stack_ffffff48,in_stack_ffffff50,in_stack_ffffff58,in_stack_ffffff60,
-                 in_stack_ffffff68);
+                 (double)((floatArg2 - *(float *)(iVar13 + 0x2188)) *
+                         *(float *)(iVar13 + 0x2194)),floatArg3,floatArg4,floatArg5,floatArg6,floatArg7,
+                 floatArg8,incomingStack_ffffff48,incomingStack_ffffff50,incomingStack_ffffff58,incomingStack_ffffff60,
+                 incomingStack_ffffff68);
       uVar18 = *(uint *)(glContext + 0x486c) | 1;
     }
     else {
       if (bVar1 != 0x10) goto LAB_000e1060;
       pfVar11 = pfVar12 + 4;
       ((void (*)())_gleEvalDomain2Coord)(glContext,iVar13 + 0x2668,*(undefined4 *)(iVar13 + 0x2648),
-                 *(undefined4 *)(iVar13 + 0x264c),in_r7,in_r8,4,pfVar12,
-                 (double)((fparam_1 - *(float *)(iVar13 + 0x2650)) *
+                 *(undefined4 *)(iVar13 + 0x264c),incomingR7,incomingR8,4,pfVar12,
+                 (double)((floatArg1 - *(float *)(iVar13 + 0x2650)) *
                          *(float *)(iVar13 + 0x2660)),
-                 (double)((fparam_2 - *(float *)(iVar13 + 0x2658)) *
-                         *(float *)(iVar13 + 0x2664)),fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,
-                 fparam_8,in_stack_ffffff48,in_stack_ffffff50,in_stack_ffffff58,in_stack_ffffff60,
-                 in_stack_ffffff68);
+                 (double)((floatArg2 - *(float *)(iVar13 + 0x2658)) *
+                         *(float *)(iVar13 + 0x2664)),floatArg3,floatArg4,floatArg5,floatArg6,floatArg7,
+                 floatArg8,incomingStack_ffffff48,incomingStack_ffffff50,incomingStack_ffffff58,incomingStack_ffffff60,
+                 incomingStack_ffffff68);
       uVar18 = *(uint *)(glContext + 0x486c) | 3;
     }
     *(uint *)(glContext + 0x486c) = uVar18;
@@ -2547,28 +2547,28 @@ LAB_000e1060:
       pbVar20 = pbVar20 + 1;
       if (bVar1 == 8) {
         uVar5 = *(undefined4 *)(iVar19 + 0x37a8);
-        dVar21 = (double)((fparam_1 - *(float *)(iVar19 + 0x37b0)) *
+        dVar21 = (double)((floatArg1 - *(float *)(iVar19 + 0x37b0)) *
                          *(float *)(iVar19 + 0x37c0));
         uVar7 = *(undefined4 *)(iVar19 + 0x37ac);
-        dVar22 = (double)((fparam_2 - *(float *)(iVar19 + 0x37b8)) *
+        dVar22 = (double)((floatArg2 - *(float *)(iVar19 + 0x37b8)) *
                          *(float *)(iVar19 + 0x37c4));
         uVar8 = 2;
         pfVar11 = pfVar12 + 2;
         iVar6 = iVar15;
 LAB_000e11b0:
-        ((void (*)())_gleEvalDomain2Coord)(glContext,iVar6,uVar5,uVar7,in_r7,in_r8,uVar8,pfVar12,(double)dVar21,(double)dVar22,fparam_3,
-                   fparam_4,fparam_5,fparam_6,fparam_7,fparam_8,in_stack_ffffff48,in_stack_ffffff50,
-                   in_stack_ffffff58,in_stack_ffffff60,in_stack_ffffff68);
+        ((void (*)())_gleEvalDomain2Coord)(glContext,iVar6,uVar5,uVar7,incomingR7,incomingR8,uVar8,pfVar12,(double)dVar21,(double)dVar22,floatArg3,
+                   floatArg4,floatArg5,floatArg6,floatArg7,floatArg8,incomingStack_ffffff48,incomingStack_ffffff50,
+                   incomingStack_ffffff58,incomingStack_ffffff60,incomingStack_ffffff68);
         pfVar12 = pfVar11;
       }
       else {
         if (8 < bVar1) {
           if (bVar1 == 0xc) {
             uVar5 = *(undefined4 *)(iVar19 + 0x37a8);
-            dVar21 = (double)((fparam_1 - *(float *)(iVar19 + 0x37b0)) *
+            dVar21 = (double)((floatArg1 - *(float *)(iVar19 + 0x37b0)) *
                              *(float *)(iVar19 + 0x37c0));
             uVar7 = *(undefined4 *)(iVar19 + 0x37ac);
-            dVar22 = (double)((fparam_2 - *(float *)(iVar19 + 0x37b8)) *
+            dVar22 = (double)((floatArg2 - *(float *)(iVar19 + 0x37b8)) *
                              *(float *)(iVar19 + 0x37c4));
             uVar8 = 3;
             pfVar11 = pfVar12 + 3;
@@ -2577,10 +2577,10 @@ LAB_000e11b0:
           else {
             if (bVar1 != 0x10) goto LAB_000e11b4;
             uVar5 = *(undefined4 *)(iVar19 + 0x37a8);
-            dVar21 = (double)((fparam_1 - *(float *)(iVar19 + 0x37b0)) *
+            dVar21 = (double)((floatArg1 - *(float *)(iVar19 + 0x37b0)) *
                              *(float *)(iVar19 + 0x37c0));
             uVar7 = *(undefined4 *)(iVar19 + 0x37ac);
-            dVar22 = (double)((fparam_2 - *(float *)(iVar19 + 0x37b8)) *
+            dVar22 = (double)((floatArg2 - *(float *)(iVar19 + 0x37b8)) *
                              *(float *)(iVar19 + 0x37c4));
             uVar8 = 4;
             pfVar11 = pfVar12 + 4;
@@ -2590,10 +2590,10 @@ LAB_000e11b0:
         }
         if (bVar1 == 4) {
           uVar5 = *(undefined4 *)(iVar19 + 0x37a8);
-          dVar21 = (double)((fparam_1 - *(float *)(iVar19 + 0x37b0)) *
+          dVar21 = (double)((floatArg1 - *(float *)(iVar19 + 0x37b0)) *
                            *(float *)(iVar19 + 0x37c0));
           uVar7 = *(undefined4 *)(iVar19 + 0x37ac);
-          dVar22 = (double)((fparam_2 - *(float *)(iVar19 + 0x37b8)) *
+          dVar22 = (double)((floatArg2 - *(float *)(iVar19 + 0x37b8)) *
                            *(float *)(iVar19 + 0x37c4));
           uVar8 = 1;
           pfVar11 = pfVar12 + 1;
@@ -2611,8 +2611,8 @@ LAB_000e11b4:
     } while (uVar18 != 0);
   }
   if (*(char *)(glContext + 0x7554) == '\f') {
-    dVar23 = (double)(fparam_2 - *(float *)(iVar13 + 0x488));
-    dVar21 = (double)((fparam_1 - *(float *)(iVar13 + 0x480)) * *(float *)(iVar13 + 0x490));
+    dVar23 = (double)(floatArg2 - *(float *)(iVar13 + 0x488));
+    dVar21 = (double)((floatArg1 - *(float *)(iVar13 + 0x480)) * *(float *)(iVar13 + 0x490));
     dVar22 = (double)(dVar23 * *(float *)(iVar13 + 0x494));
     if (*(char *)(glContext + 0x74f2) == '\0') {
       uVar7 = *(undefined4 *)(iVar13 + 0x47c);
@@ -2620,14 +2620,14 @@ LAB_000e11b4:
       iVar13 = iVar13 + 0x498;
       uVar8 = 3;
 LAB_000e1350:
-      ((void (*)())_gleEvalDomain2Coord)(glContext,iVar13,uVar5,uVar7,in_r7,in_r8,uVar8,pfVar12,(double)dVar21,(double)dVar22,fparam_3,
-                 fparam_4,fparam_5,fparam_6,fparam_7,fparam_8,in_stack_ffffff48,in_stack_ffffff50,
-                 in_stack_ffffff58,in_stack_ffffff60,in_stack_ffffff68);
+      ((void (*)())_gleEvalDomain2Coord)(glContext,iVar13,uVar5,uVar7,incomingR7,incomingR8,uVar8,pfVar12,(double)dVar21,(double)dVar22,floatArg3,
+                 floatArg4,floatArg5,floatArg6,floatArg7,floatArg8,incomingStack_ffffff48,incomingStack_ffffff50,
+                 incomingStack_ffffff58,incomingStack_ffffff60,incomingStack_ffffff68);
       goto LAB_000e1388;
     }
     ((void (*)())_gleEvalDomainDeriv2Coord)(glContext,iVar13 + 0x498,*(undefined4 *)(iVar13 + 0x478),
-               *(undefined4 *)(iVar13 + 0x47c),in_r7,in_r8,3,&local_70,&local_60,pfVar12,(double)dVar21,
-               (double)dVar22,fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,fparam_8,in_f9,in_f10,
+               *(undefined4 *)(iVar13 + 0x47c),incomingR7,incomingR8,3,&local_70,&local_60,pfVar12,(double)dVar21,
+               (double)dVar22,floatArg3,floatArg4,floatArg5,floatArg6,floatArg7,floatArg8,incomingFpr9,incomingFpr10,
                (double)*(float *)(iVar13 + 0x494),(double)*(float *)(iVar13 + 0x490),(double)dVar23);
   }
   else {
@@ -2642,8 +2642,8 @@ LAB_000e1350:
       }
       goto LAB_000e1388;
     }
-    dVar23 = (double)(fparam_2 - *(float *)(iVar13 + 0x958));
-    dVar21 = (double)((fparam_1 - *(float *)(iVar13 + 0x950)) * *(float *)(iVar13 + 0x960));
+    dVar23 = (double)(floatArg2 - *(float *)(iVar13 + 0x958));
+    dVar21 = (double)((floatArg1 - *(float *)(iVar13 + 0x950)) * *(float *)(iVar13 + 0x960));
     dVar22 = (double)(dVar23 * *(float *)(iVar13 + 0x964));
     if (*(char *)(glContext + 0x74f2) == '\0') {
       uVar7 = *(undefined4 *)(iVar13 + 0x94c);
@@ -2653,16 +2653,16 @@ LAB_000e1350:
       goto LAB_000e1350;
     }
     ((void (*)())_gleEvalDomainDeriv2Coord)(glContext,iVar13 + 0x968,*(undefined4 *)(iVar13 + 0x948),
-               *(undefined4 *)(iVar13 + 0x94c),in_r7,in_r8,4,&local_70,&local_60,pfVar12,(double)dVar21,
-               (double)dVar22,fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,fparam_8,in_f9,in_f10,
+               *(undefined4 *)(iVar13 + 0x94c),incomingR7,incomingR8,4,&local_70,&local_60,pfVar12,(double)dVar21,
+               (double)dVar22,floatArg3,floatArg4,floatArg5,floatArg6,floatArg7,floatArg8,incomingFpr9,incomingFpr10,
                (double)*(float *)(iVar13 + 0x964),(double)*(float *)(iVar13 + 0x960),(double)dVar23);
     ((void (*)())_gleComputeFirstPartial)(glContext,pfVar12,&local_70,&local_60);
   }
-  puVar4 = PTR__gleVectorNormalize_00112064;
+  vectorNormalize = PTR__gleVectorNormalize_00112064;
   *pfVar10 = local_6c * local_58 - local_68 * local_5c;
   pfVar10[1] = local_68 * local_60 - local_70 * local_58;
   pfVar10[2] = local_70 * local_5c - local_6c * local_60;
-  (**(code **)puVar4)(glContext,pfVar10,pfVar10);
+  (**(code **)vectorNormalize)(glContext,pfVar10,pfVar10);
 LAB_000e1388:
   *(int *)(glContext + 0x48ec) = glContext + 0x7548;
   uVar5 = (**(code **)(glContext + 0x489c))(glContext,*(undefined4 *)(glContext + 0x4860),iVar9);
@@ -2707,16 +2707,16 @@ int _gleCreateQueryObject(glContext, param_2)
 {
   int *piVar1;
   undefined4 *puVar2;
-  undefined *puVar3;
+  undefined *freeQueryObject;
   undefined4 *puVar4;
   undefined4 *puVar5;
   int iVar6;
   int iVar7;
   
   puVar5 = (undefined4 *)_malloc(0x30);
-  puVar3 = PTR__gleFreeQueryObject_00110e8c;
+  freeQueryObject = PTR__gleFreeQueryObject_00110e8c;
   puVar5[2] = 1;
-  puVar5[3] = puVar3;
+  puVar5[3] = freeQueryObject;
   puVar5[1] = param_2;
   puVar4 = puVar5 + 4;
   *puVar5 = 0;
@@ -2902,7 +2902,7 @@ LAB_000e18b8:
 }
 
 /* _gle_dtostr @ 0xe18ec (1096 bytes) */
-char * _gle_dtostr(undefined4 param_1,undefined4 param_2,char *param_3,uint param_4,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+char * _gle_dtostr(undefined4 unusedArg1,undefined4 unusedArg2,char *param_3,uint param_4,double fparam_1,double fparam_2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
   char *pcVar1;
   char cVar2;

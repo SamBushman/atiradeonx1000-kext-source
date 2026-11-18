@@ -29,10 +29,10 @@ void _gleMultiVtxTextureCoordGenNormalSTR(param_1, param_2, param_3, param_4)
 }
 
 /* _gleTextureImageCopy @ 0xf7410 (260 bytes) */
-void _gleTextureImageCopy(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  int param_1;
+void _gleTextureImageCopy(glContext, param_2, unusedArg3, param_4, param_5, param_6, param_7)
+  int glContext;
   int param_2;
-  undefined4 param_3;
+  undefined4 unusedArg3;
   undefined4 param_4;
   undefined4 param_5;
   undefined4 param_6;
@@ -46,38 +46,38 @@ void _gleTextureImageCopy(param_1, param_2, param_3, param_4, param_5, param_6, 
   undefined4 uVar6;
   undefined4 uVar7;
   
-  uVar5 = *(undefined4 *)(param_1 + 0x31b0);
-  *(uint *)(param_1 + 0x31b0) = (uint)*(ushort *)(param_2 + 0xc);
-  uVar4 = *(undefined4 *)(param_1 + 0x31c8);
-  uVar3 = *(undefined4 *)(param_1 + 0x31c0);
-  uVar6 = *(undefined4 *)(0x31b4 + param_1);
-  uVar7 = *(undefined4 *)(param_1 + 0x31b8);
-  *(uint *)(0x31b4 + param_1) = (uint)*(ushort *)(param_2 + 0xe);
-  uVar2 = *(undefined4 *)(param_1 + 0x31bc);
-  uVar1 = *(undefined4 *)(param_1 + 0x31c4);
-  *(undefined1 *)(param_1 + 0x31c8) = 0;
-  *(undefined1 *)(param_1 + 0x31c9) = 0;
-  *(undefined4 *)(param_1 + 0x31b8) = 0;
-  *(undefined4 *)(param_1 + 0x31bc) = 0;
-  *(undefined4 *)(param_1 + 0x31c0) = 0;
-  *(undefined4 *)(param_1 + 0x31c4) = 1;
-  (**(code **)(param_1 + 0x46a0))
-            (*(undefined4 *)(param_1 + 0x4688),param_4,param_5,param_6,param_7,
+  uVar5 = *(undefined4 *)(glContext + 0x31b0);
+  *(uint *)(glContext + 0x31b0) = (uint)*(ushort *)(param_2 + 0xc);
+  uVar4 = *(undefined4 *)(glContext + 0x31c8);
+  uVar3 = *(undefined4 *)(glContext + 0x31c0);
+  uVar6 = *(undefined4 *)(0x31b4 + glContext);
+  uVar7 = *(undefined4 *)(glContext + 0x31b8);
+  *(uint *)(0x31b4 + glContext) = (uint)*(ushort *)(param_2 + 0xe);
+  uVar2 = *(undefined4 *)(glContext + 0x31bc);
+  uVar1 = *(undefined4 *)(glContext + 0x31c4);
+  *(undefined1 *)(glContext + 0x31c8) = 0;
+  *(undefined1 *)(glContext + 0x31c9) = 0;
+  *(undefined4 *)(glContext + 0x31b8) = 0;
+  *(undefined4 *)(glContext + 0x31bc) = 0;
+  *(undefined4 *)(glContext + 0x31c0) = 0;
+  *(undefined4 *)(glContext + 0x31c4) = 1;
+  (**(code **)(glContext + 0x46a0))
+            (*(undefined4 *)(glContext + 0x4688),param_4,param_5,param_6,param_7,
              *(undefined2 *)(param_2 + 0x10),*(undefined2 *)(param_2 + 0x12),
              *(undefined4 *)(param_2 + 0x14));
-  *(undefined4 *)(param_1 + 0x31b0) = uVar5;
-  *(undefined4 *)(param_1 + 0x31c8) = uVar4;
-  *(undefined4 *)(0x31b4 + param_1) = uVar6;
-  *(undefined4 *)(param_1 + 0x31b8) = uVar7;
-  *(undefined4 *)(param_1 + 0x31bc) = uVar2;
-  *(undefined4 *)(param_1 + 0x31c0) = uVar3;
-  *(undefined4 *)(param_1 + 0x31c4) = uVar1;
+  *(undefined4 *)(glContext + 0x31b0) = uVar5;
+  *(undefined4 *)(glContext + 0x31c8) = uVar4;
+  *(undefined4 *)(0x31b4 + glContext) = uVar6;
+  *(undefined4 *)(glContext + 0x31b8) = uVar7;
+  *(undefined4 *)(glContext + 0x31bc) = uVar2;
+  *(undefined4 *)(glContext + 0x31c0) = uVar3;
+  *(undefined4 *)(glContext + 0x31c4) = uVar1;
   return;
 }
 
 /* _gleTextureSubImageCopy @ 0xf7514 (348 bytes) */
-void _gleTextureSubImageCopy(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9)
-  int param_1;
+void _gleTextureSubImageCopy(glContext, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9)
+  int glContext;
   int param_2;
   int param_3;
   int param_4;
@@ -96,43 +96,43 @@ void _gleTextureSubImageCopy(param_1, param_2, param_3, param_4, param_5, param_
   undefined4 uVar7;
   undefined4 uVar8;
   
-  uVar7 = *(undefined4 *)(param_1 + 0x31b0);
-  *(uint *)(param_1 + 0x31b0) = (uint)*(ushort *)(param_2 + 0xc);
-  uVar8 = *(undefined4 *)(0x31b4 + param_1);
-  *(uint *)(0x31b4 + param_1) = (uint)*(ushort *)(param_2 + 0xe);
-  uVar4 = *(undefined4 *)(param_1 + 0x31b8);
-  uVar5 = *(undefined4 *)(param_1 + 0x31c8);
-  uVar2 = *(undefined4 *)(param_1 + 0x31bc);
-  uVar3 = *(undefined4 *)(param_1 + 0x31c0);
-  uVar6 = *(undefined4 *)(param_1 + 0x31c4);
+  uVar7 = *(undefined4 *)(glContext + 0x31b0);
+  *(uint *)(glContext + 0x31b0) = (uint)*(ushort *)(param_2 + 0xc);
+  uVar8 = *(undefined4 *)(0x31b4 + glContext);
+  *(uint *)(0x31b4 + glContext) = (uint)*(ushort *)(param_2 + 0xe);
+  uVar4 = *(undefined4 *)(glContext + 0x31b8);
+  uVar5 = *(undefined4 *)(glContext + 0x31c8);
+  uVar2 = *(undefined4 *)(glContext + 0x31bc);
+  uVar3 = *(undefined4 *)(glContext + 0x31c0);
+  uVar6 = *(undefined4 *)(glContext + 0x31c4);
   if ((*(ushort *)(param_2 + 8) < 2) && (param_5 == 0)) {
-    *(undefined4 *)(param_1 + 0x31c0) = 0;
+    *(undefined4 *)(glContext + 0x31c0) = 0;
   }
   else {
-    *(uint *)(param_1 + 0x31c0) = param_5 + (uint)*(byte *)(param_2 + 10);
+    *(uint *)(glContext + 0x31c0) = param_5 + (uint)*(byte *)(param_2 + 10);
   }
   if ((*(ushort *)(param_2 + 6) < 2) && (param_4 == 0)) {
-    *(undefined4 *)(param_1 + 0x31b8) = 0;
+    *(undefined4 *)(glContext + 0x31b8) = 0;
   }
   else {
-    *(uint *)(param_1 + 0x31b8) = param_4 + (uint)*(byte *)(param_2 + 10);
+    *(uint *)(glContext + 0x31b8) = param_4 + (uint)*(byte *)(param_2 + 10);
   }
   bVar1 = *(byte *)(param_2 + 10);
-  *(undefined4 *)(param_1 + 0x31c4) = 1;
-  *(undefined1 *)(param_1 + 0x31c9) = 0;
-  *(uint *)(param_1 + 0x31bc) = param_3 + (uint)bVar1;
-  *(undefined1 *)(param_1 + 0x31c8) = 0;
-  (**(code **)(param_1 + 0x46a0))
-            (*(undefined4 *)(param_1 + 0x4688),param_6,param_7,param_8,param_9,
+  *(undefined4 *)(glContext + 0x31c4) = 1;
+  *(undefined1 *)(glContext + 0x31c9) = 0;
+  *(uint *)(glContext + 0x31bc) = param_3 + (uint)bVar1;
+  *(undefined1 *)(glContext + 0x31c8) = 0;
+  (**(code **)(glContext + 0x46a0))
+            (*(undefined4 *)(glContext + 0x4688),param_6,param_7,param_8,param_9,
              *(undefined2 *)(param_2 + 0x10),*(undefined2 *)(param_2 + 0x12),
              *(undefined4 *)(param_2 + 0x14));
-  *(undefined4 *)(param_1 + 0x31b0) = uVar7;
-  *(undefined4 *)(param_1 + 0x31c8) = uVar5;
-  *(undefined4 *)(0x31b4 + param_1) = uVar8;
-  *(undefined4 *)(param_1 + 0x31b8) = uVar4;
-  *(undefined4 *)(param_1 + 0x31bc) = uVar2;
-  *(undefined4 *)(param_1 + 0x31c0) = uVar3;
-  *(undefined4 *)(param_1 + 0x31c4) = uVar6;
+  *(undefined4 *)(glContext + 0x31b0) = uVar7;
+  *(undefined4 *)(glContext + 0x31c8) = uVar5;
+  *(undefined4 *)(0x31b4 + glContext) = uVar8;
+  *(undefined4 *)(glContext + 0x31b8) = uVar4;
+  *(undefined4 *)(glContext + 0x31bc) = uVar2;
+  *(undefined4 *)(glContext + 0x31c0) = uVar3;
+  *(undefined4 *)(glContext + 0x31c4) = uVar6;
   return;
 }
 
@@ -155,272 +155,272 @@ void _gleNoopFilter3()
 }
 
 /* _gleByteFilter1 @ 0xf767c (60 bytes) */
-void _gleByteFilter1(param_1, param_2, param_3, param_4)
-  int param_1;
-  char *param_2;
-  int param_3;
-  int param_4;
+void _gleByteFilter1(dst, src, count, offsetA)
+  int dst;
+  char *src;
+  int count;
+  int offsetA;
 {
   char cVar1;
   char *pcVar2;
-  int iVar3;
+  int byteOffset;
   
-  iVar3 = 0;
-  if (0 < param_3) {
+  byteOffset = 0;
+  if (0 < count) {
     do {
-      cVar1 = *param_2;
-      pcVar2 = param_2 + param_4;
-      param_2 = param_2 + 1;
-      *(char *)(param_1 + iVar3) = (char)((int)cVar1 + (int)*pcVar2 >> 1);
-      iVar3 = iVar3 + 1;
-      param_3 = param_3 + -1;
-    } while (param_3 != 0);
+      cVar1 = *src;
+      pcVar2 = src + offsetA;
+      src = src + 1;
+      *(char *)(dst + byteOffset) = (char)((int)cVar1 + (int)*pcVar2 >> 1);
+      byteOffset = byteOffset + 1;
+      count = count + -1;
+    } while (count != 0);
     return;
   }
   return;
 }
 
 /* _gleByteFilter2 @ 0xf76b8 (96 bytes) */
-void _gleByteFilter2(param_1, param_2, param_3, param_4, param_5)
-  int param_1;
-  int param_2;
-  int param_3;
-  int param_4;
-  int param_5;
+void _gleByteFilter2(dst, src, count, offsetA, offsetB)
+  int dst;
+  int src;
+  int count;
+  int offsetA;
+  int offsetB;
 {
   char cVar1;
-  int iVar2;
+  int byteOffset;
   char *pcVar3;
   
-  iVar2 = 0;
-  if (param_3 < 1) {
+  byteOffset = 0;
+  if (count < 1) {
     return;
   }
-  pcVar3 = (char *)(param_2 + param_4 + param_5);
+  pcVar3 = (char *)(src + offsetA + offsetB);
   do {
     cVar1 = *pcVar3;
     pcVar3 = pcVar3 + 1;
-    *(char *)(param_1 + iVar2) =
-         (char)((int)*(char *)(param_2 + iVar2) + (int)*(char *)(param_2 + iVar2 + param_4) +
-                (int)*(char *)(param_2 + iVar2 + param_5) + (int)cVar1 >> 2);
-    iVar2 = iVar2 + 1;
-    param_3 = param_3 + -1;
-  } while (param_3 != 0);
+    *(char *)(dst + byteOffset) =
+         (char)((int)*(char *)(src + byteOffset) + (int)*(char *)(src + byteOffset + offsetA) +
+                (int)*(char *)(src + byteOffset + offsetB) + (int)cVar1 >> 2);
+    byteOffset = byteOffset + 1;
+    count = count + -1;
+  } while (count != 0);
   return;
 }
 
 /* _gleByteFilter3 @ 0xf7718 (176 bytes) */
-void _gleByteFilter3(param_1, param_2, param_3, param_4, param_5, param_6)
-  int param_1;
-  int param_2;
-  int param_3;
-  int param_4;
-  int param_5;
-  int param_6;
+void _gleByteFilter3(dst, src, count, offsetA, offsetB, offsetC)
+  int dst;
+  int src;
+  int count;
+  int offsetA;
+  int offsetB;
+  int offsetC;
 {
   char cVar1;
   char *pcVar2;
-  int iVar3;
+  int byteOffset;
   int iVar4;
   char *pcVar5;
   
-  iVar3 = 0;
-  if (0 < param_3) {
-    pcVar5 = (char *)(param_2 + param_5 + param_6);
+  byteOffset = 0;
+  if (0 < count) {
+    pcVar5 = (char *)(src + offsetB + offsetC);
     do {
-      iVar4 = param_2 + iVar3;
+      iVar4 = src + byteOffset;
       cVar1 = *pcVar5;
-      pcVar2 = pcVar5 + param_4;
+      pcVar2 = pcVar5 + offsetA;
       pcVar5 = pcVar5 + 1;
-      *(char *)(param_1 + iVar3) =
-           (char)((int)*(char *)(param_2 + iVar3) + (int)*(char *)(iVar4 + param_4) +
-                  (int)*(char *)(iVar4 + param_5) + (int)*(char *)(iVar4 + param_4 + param_5) +
-                  (int)*(char *)(iVar4 + param_6) + (int)*(char *)(iVar4 + param_4 + param_6) +
+      *(char *)(dst + byteOffset) =
+           (char)((int)*(char *)(src + byteOffset) + (int)*(char *)(iVar4 + offsetA) +
+                  (int)*(char *)(iVar4 + offsetB) + (int)*(char *)(iVar4 + offsetA + offsetB) +
+                  (int)*(char *)(iVar4 + offsetC) + (int)*(char *)(iVar4 + offsetA + offsetC) +
                   (int)cVar1 + (int)*pcVar2 >> 3);
-      iVar3 = iVar3 + 1;
-      param_3 = param_3 + -1;
-    } while (param_3 != 0);
+      byteOffset = byteOffset + 1;
+      count = count + -1;
+    } while (count != 0);
   }
   return;
 }
 
 /* _gleUbyteFilter1 @ 0xf77c8 (52 bytes) */
-void _gleUbyteFilter1(param_1, param_2, param_3, param_4)
-  int param_1;
-  byte *param_2;
-  int param_3;
-  int param_4;
+void _gleUbyteFilter1(dst, src, count, offsetA)
+  int dst;
+  byte *src;
+  int count;
+  int offsetA;
 {
   byte bVar1;
   byte *pbVar2;
-  int iVar3;
+  int byteOffset;
   
-  iVar3 = 0;
-  if (0 < param_3) {
+  byteOffset = 0;
+  if (0 < count) {
     do {
-      bVar1 = *param_2;
-      pbVar2 = param_2 + param_4;
-      param_2 = param_2 + 1;
-      *(char *)(param_1 + iVar3) = (char)((int)((uint)bVar1 + (uint)*pbVar2) >> 1);
-      iVar3 = iVar3 + 1;
-      param_3 = param_3 + -1;
-    } while (param_3 != 0);
+      bVar1 = *src;
+      pbVar2 = src + offsetA;
+      src = src + 1;
+      *(char *)(dst + byteOffset) = (char)((int)((uint)bVar1 + (uint)*pbVar2) >> 1);
+      byteOffset = byteOffset + 1;
+      count = count + -1;
+    } while (count != 0);
     return;
   }
   return;
 }
 
 /* _gleUbyteFilter2 @ 0xf77fc (80 bytes) */
-void _gleUbyteFilter2(param_1, param_2, param_3, param_4, param_5)
-  int param_1;
-  int param_2;
-  int param_3;
-  int param_4;
-  int param_5;
+void _gleUbyteFilter2(dst, src, count, offsetA, offsetB)
+  int dst;
+  int src;
+  int count;
+  int offsetA;
+  int offsetB;
 {
   byte bVar1;
-  int iVar2;
+  int byteOffset;
   byte *pbVar3;
   
-  iVar2 = 0;
-  if (param_3 < 1) {
+  byteOffset = 0;
+  if (count < 1) {
     return;
   }
-  pbVar3 = (byte *)(param_2 + param_4 + param_5);
+  pbVar3 = (byte *)(src + offsetA + offsetB);
   do {
     bVar1 = *pbVar3;
     pbVar3 = pbVar3 + 1;
-    *(char *)(param_1 + iVar2) =
-         (char)((int)((uint)*(byte *)(param_2 + iVar2) + (uint)*(byte *)(param_2 + iVar2 + param_4)
-                      + (uint)*(byte *)(param_2 + iVar2 + param_5) + (uint)bVar1) >> 2);
-    iVar2 = iVar2 + 1;
-    param_3 = param_3 + -1;
-  } while (param_3 != 0);
+    *(char *)(dst + byteOffset) =
+         (char)((int)((uint)*(byte *)(src + byteOffset) + (uint)*(byte *)(src + byteOffset + offsetA)
+                      + (uint)*(byte *)(src + byteOffset + offsetB) + (uint)bVar1) >> 2);
+    byteOffset = byteOffset + 1;
+    count = count + -1;
+  } while (count != 0);
   return;
 }
 
 /* _gleUbyteFilter3 @ 0xf784c (144 bytes) */
-void _gleUbyteFilter3(param_1, param_2, param_3, param_4, param_5, param_6)
-  int param_1;
-  int param_2;
-  int param_3;
-  int param_4;
-  int param_5;
-  int param_6;
+void _gleUbyteFilter3(dst, src, count, offsetA, offsetB, offsetC)
+  int dst;
+  int src;
+  int count;
+  int offsetA;
+  int offsetB;
+  int offsetC;
 {
   byte bVar1;
   byte *pbVar2;
   int iVar3;
-  int iVar4;
+  int byteOffset;
   byte *pbVar5;
   
-  iVar4 = 0;
-  if (0 < param_3) {
-    pbVar5 = (byte *)(param_2 + param_5 + param_6);
+  byteOffset = 0;
+  if (0 < count) {
+    pbVar5 = (byte *)(src + offsetB + offsetC);
     do {
-      iVar3 = param_2 + iVar4;
+      iVar3 = src + byteOffset;
       bVar1 = *pbVar5;
-      pbVar2 = pbVar5 + param_4;
+      pbVar2 = pbVar5 + offsetA;
       pbVar5 = pbVar5 + 1;
-      *(char *)(param_1 + iVar4) =
-           (char)((int)((uint)*(byte *)(param_2 + iVar4) + (uint)*(byte *)(iVar3 + param_4) +
-                        (uint)*(byte *)(iVar3 + param_5) +
-                        (uint)*(byte *)(iVar3 + param_4 + param_5) +
-                        (uint)*(byte *)(iVar3 + param_6) +
-                        (uint)*(byte *)(iVar3 + param_4 + param_6) + (uint)bVar1 + (uint)*pbVar2) >>
+      *(char *)(dst + byteOffset) =
+           (char)((int)((uint)*(byte *)(src + byteOffset) + (uint)*(byte *)(iVar3 + offsetA) +
+                        (uint)*(byte *)(iVar3 + offsetB) +
+                        (uint)*(byte *)(iVar3 + offsetA + offsetB) +
+                        (uint)*(byte *)(iVar3 + offsetC) +
+                        (uint)*(byte *)(iVar3 + offsetA + offsetC) + (uint)bVar1 + (uint)*pbVar2) >>
                  3);
-      iVar4 = iVar4 + 1;
-      param_3 = param_3 + -1;
-    } while (param_3 != 0);
+      byteOffset = byteOffset + 1;
+      count = count + -1;
+    } while (count != 0);
   }
   return;
 }
 
 /* _gleShortFilter1 @ 0xf78dc (60 bytes) */
-void _gleShortFilter1(param_1, param_2, param_3, param_4)
-  int param_1;
-  int param_2;
-  uint param_3;
-  int param_4;
+void _gleShortFilter1(dst, src, count, offsetA)
+  int dst;
+  int src;
+  uint count;
+  int offsetA;
 {
-  int iVar1;
+  int byteOffset;
   uint uVar2;
   
-  iVar1 = 0;
-  if ((int)(param_3 << 1) < 1) {
+  byteOffset = 0;
+  if ((int)(count << 1) < 1) {
     return;
   }
-  uVar2 = param_3 & 0x7fffffff;
+  uVar2 = count & 0x7fffffff;
   do {
-    *(short *)(param_1 + iVar1) =
-         (short)((int)*(short *)(param_2 + iVar1) + (int)*(short *)(param_2 + iVar1 + param_4) >> 1)
+    *(short *)(dst + byteOffset) =
+         (short)((int)*(short *)(src + byteOffset) + (int)*(short *)(src + byteOffset + offsetA) >> 1)
     ;
-    iVar1 = iVar1 + 2;
+    byteOffset = byteOffset + 2;
     uVar2 = uVar2 - 1;
   } while (uVar2 != 0);
   return;
 }
 
 /* _gleShortFilter2 @ 0xf7918 (80 bytes) */
-void _gleShortFilter2(param_1, param_2, param_3, param_4, param_5)
-  int param_1;
-  int param_2;
-  uint param_3;
-  int param_4;
-  int param_5;
+void _gleShortFilter2(dst, src, count, offsetA, offsetB)
+  int dst;
+  int src;
+  uint count;
+  int offsetA;
+  int offsetB;
 {
   int iVar1;
-  int iVar2;
+  int byteOffset;
   uint uVar3;
   
-  iVar2 = 0;
-  if ((int)(param_3 << 1) < 1) {
+  byteOffset = 0;
+  if ((int)(count << 1) < 1) {
     return;
   }
-  uVar3 = param_3 & 0x7fffffff;
+  uVar3 = count & 0x7fffffff;
   do {
-    iVar1 = param_2 + iVar2;
-    *(short *)(param_1 + iVar2) =
-         (short)((int)*(short *)(param_2 + iVar2) + (int)*(short *)(iVar1 + param_4) +
-                 (int)*(short *)(iVar1 + param_5) + (int)*(short *)(iVar1 + param_4 + param_5) >> 2)
+    iVar1 = src + byteOffset;
+    *(short *)(dst + byteOffset) =
+         (short)((int)*(short *)(src + byteOffset) + (int)*(short *)(iVar1 + offsetA) +
+                 (int)*(short *)(iVar1 + offsetB) + (int)*(short *)(iVar1 + offsetA + offsetB) >> 2)
     ;
-    iVar2 = iVar2 + 2;
+    byteOffset = byteOffset + 2;
     uVar3 = uVar3 - 1;
   } while (uVar3 != 0);
   return;
 }
 
 /* _gleShortFilter3 @ 0xf7968 (148 bytes) */
-void _gleShortFilter3(param_1, param_2, param_3, param_4, param_5, param_6)
-  int param_1;
-  int param_2;
-  uint param_3;
-  int param_4;
-  int param_5;
-  int param_6;
+void _gleShortFilter3(dst, src, count, offsetA, offsetB, offsetC)
+  int dst;
+  int src;
+  uint count;
+  int offsetA;
+  int offsetB;
+  int offsetC;
 {
   short sVar1;
   short *psVar2;
   int iVar3;
-  int iVar4;
+  int byteOffset;
   short *psVar5;
   uint uVar6;
   
-  iVar4 = 0;
-  if (0 < (int)(param_3 << 1)) {
-    uVar6 = param_3 & 0x7fffffff;
-    psVar5 = (short *)(param_2 + param_5 + param_6);
+  byteOffset = 0;
+  if (0 < (int)(count << 1)) {
+    uVar6 = count & 0x7fffffff;
+    psVar5 = (short *)(src + offsetB + offsetC);
     do {
-      iVar3 = param_2 + iVar4;
+      iVar3 = src + byteOffset;
       sVar1 = *psVar5;
-      psVar2 = (short *)((int)psVar5 + param_4);
+      psVar2 = (short *)((int)psVar5 + offsetA);
       psVar5 = psVar5 + 1;
-      *(short *)(param_1 + iVar4) =
-           (short)((int)*(short *)(param_2 + iVar4) + (int)*(short *)(iVar3 + param_4) +
-                   (int)*(short *)(iVar3 + param_5) + (int)*(short *)(iVar3 + param_4 + param_5) +
-                   (int)*(short *)(iVar3 + param_6) + (int)*(short *)(iVar3 + param_4 + param_6) +
+      *(short *)(dst + byteOffset) =
+           (short)((int)*(short *)(src + byteOffset) + (int)*(short *)(iVar3 + offsetA) +
+                   (int)*(short *)(iVar3 + offsetB) + (int)*(short *)(iVar3 + offsetA + offsetB) +
+                   (int)*(short *)(iVar3 + offsetC) + (int)*(short *)(iVar3 + offsetA + offsetC) +
                    (int)sVar1 + (int)*psVar2 >> 3);
-      iVar4 = iVar4 + 2;
+      byteOffset = byteOffset + 2;
       uVar6 = uVar6 - 1;
     } while (uVar6 != 0);
   }
@@ -428,128 +428,128 @@ void _gleShortFilter3(param_1, param_2, param_3, param_4, param_5, param_6)
 }
 
 /* _gleFloatFilter1 @ 0xf7db4 (84 bytes) */
-void _gleFloatFilter1(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  int param_1;
-  int param_2;
-  uint param_3;
-  int param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+void _gleFloatFilter1(dst, src, count, offsetA, unusedArg5, unusedArg6, unusedArg7)
+  int dst;
+  int src;
+  uint count;
+  int offsetA;
+  undefined4 unusedArg5;
+  undefined4 unusedArg6;
+  undefined4 unusedArg7;
 {
-  float fVar1;
-  int iVar2;
-  uint uVar3;
+  float weight;
+  int byteOffset;
+  uint remaining;
   
-  fVar1 = FLOAT_00108e90;
-  iVar2 = 0;
-  if ((int)(param_3 << 2) < 1) {
+  weight = FLOAT_00108e90;
+  byteOffset = 0;
+  if ((int)(count << 2) < 1) {
     return;
   }
-  uVar3 = param_3 & 0x3fffffff;
+  remaining = count & 0x3fffffff;
   do {
-    *(float *)(param_1 + iVar2) =
-         (*(float *)(param_2 + iVar2) + *(float *)(param_2 + iVar2 + param_4)) * fVar1;
-    iVar2 = iVar2 + 4;
-    uVar3 = uVar3 - 1;
-  } while (uVar3 != 0);
+    *(float *)(dst + byteOffset) =
+         (*(float *)(src + byteOffset) + *(float *)(src + byteOffset + offsetA)) * weight;
+    byteOffset = byteOffset + 4;
+    remaining = remaining - 1;
+  } while (remaining != 0);
   return;
 }
 
 /* _gleFloatFilter2 @ 0xf7e08 (104 bytes) */
-void _gleFloatFilter2(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  int param_1;
-  int param_2;
-  uint param_3;
-  int param_4;
-  int param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+void _gleFloatFilter2(dst, src, count, offsetA, offsetB, unusedArg6, unusedArg7)
+  int dst;
+  int src;
+  uint count;
+  int offsetA;
+  int offsetB;
+  undefined4 unusedArg6;
+  undefined4 unusedArg7;
 {
-  float fVar1;
+  float weight;
   int iVar2;
-  int iVar3;
-  uint uVar4;
+  int byteOffset;
+  uint remaining;
   
-  fVar1 = FLOAT_00108f88;
-  iVar3 = 0;
-  if ((int)(param_3 << 2) < 1) {
+  weight = FLOAT_00108f88;
+  byteOffset = 0;
+  if ((int)(count << 2) < 1) {
     return;
   }
-  uVar4 = param_3 & 0x3fffffff;
+  remaining = count & 0x3fffffff;
   do {
-    iVar2 = param_2 + iVar3;
-    *(float *)(param_1 + iVar3) =
-         (*(float *)(param_2 + iVar3) + *(float *)(iVar2 + param_4) + *(float *)(iVar2 + param_5) +
-         *(float *)(iVar2 + param_4 + param_5)) * fVar1;
-    iVar3 = iVar3 + 4;
-    uVar4 = uVar4 - 1;
-  } while (uVar4 != 0);
+    iVar2 = src + byteOffset;
+    *(float *)(dst + byteOffset) =
+         (*(float *)(src + byteOffset) + *(float *)(iVar2 + offsetA) + *(float *)(iVar2 + offsetB) +
+         *(float *)(iVar2 + offsetA + offsetB)) * weight;
+    byteOffset = byteOffset + 4;
+    remaining = remaining - 1;
+  } while (remaining != 0);
   return;
 }
 
 /* _gleFloatFilter3 @ 0xf7e70 (156 bytes) */
-void _gleFloatFilter3(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  int param_1;
-  int param_2;
-  uint param_3;
-  int param_4;
-  int param_5;
-  int param_6;
-  undefined4 param_7;
-  undefined4 param_8;
+void _gleFloatFilter3(dst, src, count, offsetA, offsetB, offsetC, unusedArg7, unusedArg8)
+  int dst;
+  int src;
+  uint count;
+  int offsetA;
+  int offsetB;
+  int offsetC;
+  undefined4 unusedArg7;
+  undefined4 unusedArg8;
 {
   float fVar1;
   float *pfVar2;
-  float fVar3;
+  float weight;
   int iVar4;
-  int iVar5;
+  int byteOffset;
   float *pfVar6;
-  uint uVar7;
+  uint remaining;
   
-  fVar3 = FLOAT_00108f4c;
-  iVar5 = 0;
-  if (0 < (int)(param_3 << 2)) {
-    uVar7 = param_3 & 0x3fffffff;
-    pfVar6 = (float *)(param_2 + param_5 + param_6);
+  weight = FLOAT_00108f4c;
+  byteOffset = 0;
+  if (0 < (int)(count << 2)) {
+    remaining = count & 0x3fffffff;
+    pfVar6 = (float *)(src + offsetB + offsetC);
     do {
-      iVar4 = param_2 + iVar5;
+      iVar4 = src + byteOffset;
       fVar1 = *pfVar6;
-      pfVar2 = (float *)((int)pfVar6 + param_4);
+      pfVar2 = (float *)((int)pfVar6 + offsetA);
       pfVar6 = pfVar6 + 1;
-      *(float *)(param_1 + iVar5) =
-           (*(float *)(param_2 + iVar5) + *(float *)(iVar4 + param_4) + *(float *)(iVar4 + param_5)
-            + *(float *)(iVar4 + param_4 + param_5) + *(float *)(iVar4 + param_6) +
-            *(float *)(iVar4 + param_4 + param_6) + fVar1 + *pfVar2) * fVar3;
-      iVar5 = iVar5 + 4;
-      uVar7 = uVar7 - 1;
-    } while (uVar7 != 0);
+      *(float *)(dst + byteOffset) =
+           (*(float *)(src + byteOffset) + *(float *)(iVar4 + offsetA) + *(float *)(iVar4 + offsetB)
+            + *(float *)(iVar4 + offsetA + offsetB) + *(float *)(iVar4 + offsetC) +
+            *(float *)(iVar4 + offsetA + offsetC) + fVar1 + *pfVar2) * weight;
+      byteOffset = byteOffset + 4;
+      remaining = remaining - 1;
+    } while (remaining != 0);
   }
   return;
 }
 
 /* _gleHalfFloatFilter1 @ 0xf7f0c (284 bytes) */
-void _gleHalfFloatFilter1(param_1, param_2, param_3, param_4)
-  int param_1;
-  int param_2;
-  int param_3;
-  int param_4;
+void _gleHalfFloatFilter1(dst, src, count, offsetA)
+  int dst;
+  int src;
+  int count;
+  int offsetA;
 {
   float fVar1;
   uint uVar2;
-  float fVar3;
+  float weight;
   ushort uVar4;
-  int iVar5;
+  int byteOffset;
   double dVar6;
   double dVar7;
   
-  fVar3 = FLOAT_00108e90;
-  iVar5 = 0;
-  if (0 < param_3 << 1) {
+  weight = FLOAT_00108e90;
+  byteOffset = 0;
+  if (0 < count << 1) {
     do {
-      dVar6 = (double)((double (*)())_gleHalfFloatToFloat)((uint)*(ushort *)(param_2 + iVar5));
-      dVar7 = (double)((double (*)())_gleHalfFloatToFloat)((uint)*(ushort *)(param_2 + iVar5 + param_4));
-      fVar1 = (float)(dVar6 + dVar7) * fVar3;
+      dVar6 = (double)((double (*)())_gleHalfFloatToFloat)((uint)*(ushort *)(src + byteOffset));
+      dVar7 = (double)((double (*)())_gleHalfFloatToFloat)((uint)*(ushort *)(src + byteOffset + offsetA));
+      fVar1 = (float)(dVar6 + dVar7) * weight;
       uVar2 = (uint)GH_F2U(fVar1) & 0x7f800000;
       uVar4 = (ushort)((uint)GH_F2U(fVar1) >> 0x10) & 0x8000;
       if (uVar2 < 0x47800000) {
@@ -568,42 +568,42 @@ void _gleHalfFloatFilter1(param_1, param_2, param_3, param_4)
       else {
         uVar4 = uVar4 | 0x7c00;
       }
-      *(ushort *)(param_1 + iVar5) = uVar4;
-      iVar5 = iVar5 + 2;
-    } while (iVar5 < param_3 << 1);
+      *(ushort *)(dst + byteOffset) = uVar4;
+      byteOffset = byteOffset + 2;
+    } while (byteOffset < count << 1);
   }
   return;
 }
 
 /* _gleHalfFloatFilter2 @ 0xf8028 (316 bytes) */
-void _gleHalfFloatFilter2(param_1, param_2, param_3, param_4, param_5)
-  int param_1;
-  int param_2;
-  int param_3;
-  int param_4;
-  int param_5;
+void _gleHalfFloatFilter2(dst, src, count, offsetA, offsetB)
+  int dst;
+  int src;
+  int count;
+  int offsetA;
+  int offsetB;
 {
   float fVar1;
   uint uVar2;
-  float fVar3;
+  float weight;
   ushort uVar4;
   int iVar5;
-  int iVar6;
+  int byteOffset;
   double dVar7;
   double dVar8;
   double dVar9;
   double dVar10;
   
-  fVar3 = FLOAT_00108f88;
-  iVar6 = 0;
-  if (0 < param_3 << 1) {
+  weight = FLOAT_00108f88;
+  byteOffset = 0;
+  if (0 < count << 1) {
     do {
-      iVar5 = param_2 + iVar6;
-      dVar7 = (double)((double (*)())_gleHalfFloatToFloat)((uint)*(ushort *)(param_2 + iVar6));
-      dVar8 = (double)((double (*)())_gleHalfFloatToFloat)((uint)*(ushort *)(iVar5 + param_4));
-      dVar9 = (double)((double (*)())_gleHalfFloatToFloat)((uint)*(ushort *)(iVar5 + param_5));
-      dVar10 = (double)((double (*)())_gleHalfFloatToFloat)((uint)*(ushort *)(iVar5 + param_4 + param_5));
-      fVar1 = (float)((double)(float)((double)(float)(dVar7 + dVar8) + dVar9) + dVar10) * fVar3;
+      iVar5 = src + byteOffset;
+      dVar7 = (double)((double (*)())_gleHalfFloatToFloat)((uint)*(ushort *)(src + byteOffset));
+      dVar8 = (double)((double (*)())_gleHalfFloatToFloat)((uint)*(ushort *)(iVar5 + offsetA));
+      dVar9 = (double)((double (*)())_gleHalfFloatToFloat)((uint)*(ushort *)(iVar5 + offsetB));
+      dVar10 = (double)((double (*)())_gleHalfFloatToFloat)((uint)*(ushort *)(iVar5 + offsetA + offsetB));
+      fVar1 = (float)((double)(float)((double)(float)(dVar7 + dVar8) + dVar9) + dVar10) * weight;
       uVar2 = (uint)GH_F2U(fVar1) & 0x7f800000;
       uVar4 = (ushort)((uint)GH_F2U(fVar1) >> 0x10) & 0x8000;
       if (uVar2 < 0x47800000) {
@@ -622,29 +622,29 @@ void _gleHalfFloatFilter2(param_1, param_2, param_3, param_4, param_5)
       else {
         uVar4 = uVar4 | 0x7c00;
       }
-      *(ushort *)(param_1 + iVar6) = uVar4;
-      iVar6 = iVar6 + 2;
-    } while (iVar6 < param_3 << 1);
+      *(ushort *)(dst + byteOffset) = uVar4;
+      byteOffset = byteOffset + 2;
+    } while (byteOffset < count << 1);
   }
   return;
 }
 
 /* _gleHalfFloatFilter3 @ 0xf8164 (380 bytes) */
-void _gleHalfFloatFilter3(param_1, param_2, param_3, param_4, param_5, param_6)
-  int param_1;
-  int param_2;
-  int param_3;
-  int param_4;
-  int param_5;
-  int param_6;
+void _gleHalfFloatFilter3(dst, src, count, offsetA, offsetB, offsetC)
+  int dst;
+  int src;
+  int count;
+  int offsetA;
+  int offsetB;
+  int offsetC;
 {
   float fVar1;
   uint uVar2;
-  float fVar3;
+  float weight;
   ushort uVar4;
   ushort *puVar5;
   int iVar6;
-  int iVar7;
+  int byteOffset;
   double dVar8;
   double dVar9;
   double dVar10;
@@ -654,24 +654,24 @@ void _gleHalfFloatFilter3(param_1, param_2, param_3, param_4, param_5, param_6)
   double dVar14;
   double dVar15;
   
-  fVar3 = FLOAT_00108f4c;
-  iVar7 = 0;
-  if (0 < param_3 << 1) {
-    puVar5 = (ushort *)(param_2 + param_5 + param_6);
+  weight = FLOAT_00108f4c;
+  byteOffset = 0;
+  if (0 < count << 1) {
+    puVar5 = (ushort *)(src + offsetB + offsetC);
     do {
-      iVar6 = param_2 + iVar7;
-      dVar8 = (double)((double (*)())_gleHalfFloatToFloat)((uint)*(ushort *)(param_2 + iVar7));
-      dVar9 = (double)((double (*)())_gleHalfFloatToFloat)((uint)*(ushort *)(iVar6 + param_4));
-      dVar10 = (double)((double (*)())_gleHalfFloatToFloat)((uint)*(ushort *)(iVar6 + param_5));
-      dVar11 = (double)((double (*)())_gleHalfFloatToFloat)((uint)*(ushort *)(iVar6 + param_4 + param_5));
-      dVar12 = (double)((double (*)())_gleHalfFloatToFloat)((uint)*(ushort *)(iVar6 + param_6));
-      dVar13 = (double)((double (*)())_gleHalfFloatToFloat)((uint)*(ushort *)(iVar6 + param_4 + param_6));
+      iVar6 = src + byteOffset;
+      dVar8 = (double)((double (*)())_gleHalfFloatToFloat)((uint)*(ushort *)(src + byteOffset));
+      dVar9 = (double)((double (*)())_gleHalfFloatToFloat)((uint)*(ushort *)(iVar6 + offsetA));
+      dVar10 = (double)((double (*)())_gleHalfFloatToFloat)((uint)*(ushort *)(iVar6 + offsetB));
+      dVar11 = (double)((double (*)())_gleHalfFloatToFloat)((uint)*(ushort *)(iVar6 + offsetA + offsetB));
+      dVar12 = (double)((double (*)())_gleHalfFloatToFloat)((uint)*(ushort *)(iVar6 + offsetC));
+      dVar13 = (double)((double (*)())_gleHalfFloatToFloat)((uint)*(ushort *)(iVar6 + offsetA + offsetC));
       dVar14 = (double)((double (*)())_gleHalfFloatToFloat)((uint)*puVar5);
-      dVar15 = (double)((double (*)())_gleHalfFloatToFloat)((uint)*(ushort *)((int)puVar5 + param_4));
+      dVar15 = (double)((double (*)())_gleHalfFloatToFloat)((uint)*(ushort *)((int)puVar5 + offsetA));
       fVar1 = (float)((double)(float)((double)(float)((double)(float)((double)(float)((double)(float
                                                   )((double)(float)(dVar8 + dVar9) + dVar10) +
                                                   dVar11) + dVar12) + dVar13) + dVar14) + dVar15) *
-              fVar3;
+              weight;
       uVar2 = (uint)GH_F2U(fVar1) & 0x7f800000;
       uVar4 = (ushort)((uint)GH_F2U(fVar1) >> 0x10) & 0x8000;
       if (uVar2 < 0x47800000) {
@@ -690,63 +690,63 @@ void _gleHalfFloatFilter3(param_1, param_2, param_3, param_4, param_5, param_6)
       else {
         uVar4 = uVar4 | 0x7c00;
       }
-      *(ushort *)(param_1 + iVar7) = uVar4;
-      iVar7 = iVar7 + 2;
+      *(ushort *)(dst + byteOffset) = uVar4;
+      byteOffset = byteOffset + 2;
       puVar5 = puVar5 + 1;
-    } while (iVar7 < param_3 << 1);
+    } while (byteOffset < count << 1);
   }
   return;
 }
 
 /* _gle332Filter1 @ 0xf82e0 (72 bytes) */
-void _gle332Filter1(param_1, param_2, param_3, param_4)
-  byte *param_1;
-  byte *param_2;
-  undefined4 param_3;
-  int param_4;
+void _gle332Filter1(dst, src, unusedArg3, offsetA)
+  byte *dst;
+  byte *src;
+  undefined4 unusedArg3;
+  int offsetA;
 {
   byte bVar1;
   byte bVar2;
   
-  bVar1 = *param_2;
-  bVar2 = param_2[param_4];
-  *param_1 = (byte)((bVar1 & 0xe0) + (bVar2 & 0xe0) >> 1) & 0xe0 |
+  bVar1 = *src;
+  bVar2 = src[offsetA];
+  *dst = (byte)((bVar1 & 0xe0) + (bVar2 & 0xe0) >> 1) & 0xe0 |
              (byte)((bVar1 & 0x1c) + (bVar2 & 0x1c) >> 1) & 0x1c |
              (byte)((bVar1 & 3) + (bVar2 & 3) >> 1);
   return;
 }
 
 /* _gle332Filter2 @ 0xf8328 (140 bytes) */
-void _gle332Filter2(param_1, param_2, param_3, param_4, param_5)
-  byte *param_1;
-  byte *param_2;
-  undefined4 param_3;
-  int param_4;
-  int param_5;
+void _gle332Filter2(dst, src, unusedArg3, offsetA, offsetB)
+  byte *dst;
+  byte *src;
+  undefined4 unusedArg3;
+  int offsetA;
+  int offsetB;
 {
   byte bVar1;
   byte bVar2;
   byte bVar3;
   byte bVar4;
   
-  bVar1 = *param_2;
-  bVar2 = param_2[param_4];
-  bVar3 = param_2[param_5];
-  bVar4 = param_2[param_5 + param_4];
-  *param_1 = (byte)((bVar1 & 0xe0) + (bVar2 & 0xe0) + (bVar3 & 0xe0) + (bVar4 & 0xe0) >> 2) & 0xe0 |
+  bVar1 = *src;
+  bVar2 = src[offsetA];
+  bVar3 = src[offsetB];
+  bVar4 = src[offsetB + offsetA];
+  *dst = (byte)((bVar1 & 0xe0) + (bVar2 & 0xe0) + (bVar3 & 0xe0) + (bVar4 & 0xe0) >> 2) & 0xe0 |
              (byte)((bVar1 & 0x1c) + (bVar2 & 0x1c) + (bVar3 & 0x1c) + (bVar4 & 0x1c) >> 2) & 0x1c |
              (byte)((bVar1 & 3) + (bVar2 & 3) + (bVar3 & 3) + (bVar4 & 3) >> 2) & 3;
   return;
 }
 
 /* _gle332Filter3 @ 0xf83b4 (260 bytes) */
-void _gle332Filter3(param_1, param_2, param_3, param_4, param_5, param_6)
-  byte *param_1;
-  byte *param_2;
-  undefined4 param_3;
-  int param_4;
-  int param_5;
-  int param_6;
+void _gle332Filter3(dst, src, unusedArg3, offsetA, offsetB, offsetC)
+  byte *dst;
+  byte *src;
+  undefined4 unusedArg3;
+  int offsetA;
+  int offsetB;
+  int offsetC;
 {
   byte bVar1;
   byte bVar2;
@@ -757,15 +757,15 @@ void _gle332Filter3(param_1, param_2, param_3, param_4, param_5, param_6)
   byte bVar7;
   byte bVar8;
   
-  bVar1 = *param_2;
-  bVar2 = param_2[param_4];
-  bVar3 = param_2[param_5];
-  bVar4 = param_2[param_5 + param_4];
-  bVar5 = param_2[param_6];
-  bVar6 = param_2[param_6 + param_4];
-  bVar7 = param_2[param_6 + param_5];
-  bVar8 = param_2[param_6 + param_5 + param_4];
-  *param_1 = (byte)((bVar1 & 0xe0) + (bVar2 & 0xe0) + (bVar3 & 0xe0) + (bVar4 & 0xe0) +
+  bVar1 = *src;
+  bVar2 = src[offsetA];
+  bVar3 = src[offsetB];
+  bVar4 = src[offsetB + offsetA];
+  bVar5 = src[offsetC];
+  bVar6 = src[offsetC + offsetA];
+  bVar7 = src[offsetC + offsetB];
+  bVar8 = src[offsetC + offsetB + offsetA];
+  *dst = (byte)((bVar1 & 0xe0) + (bVar2 & 0xe0) + (bVar3 & 0xe0) + (bVar4 & 0xe0) +
                     (bVar5 & 0xe0) + (bVar6 & 0xe0) + (bVar7 & 0xe0) + (bVar8 & 0xe0) >> 3) & 0xe0 |
              (byte)((bVar1 & 0x1c) + (bVar2 & 0x1c) + (bVar3 & 0x1c) + (bVar4 & 0x1c) +
                     (bVar5 & 0x1c) + (bVar6 & 0x1c) + (bVar7 & 0x1c) + (bVar8 & 0x1c) >> 3) & 0x1c |
@@ -775,54 +775,54 @@ void _gle332Filter3(param_1, param_2, param_3, param_4, param_5, param_6)
 }
 
 /* _gle233RevFilter1 @ 0xf84b8 (72 bytes) */
-void _gle233RevFilter1(param_1, param_2, param_3, param_4)
-  byte *param_1;
-  byte *param_2;
-  undefined4 param_3;
-  int param_4;
+void _gle233RevFilter1(dst, src, unusedArg3, offsetA)
+  byte *dst;
+  byte *src;
+  undefined4 unusedArg3;
+  int offsetA;
 {
   byte bVar1;
   byte bVar2;
   
-  bVar1 = *param_2;
-  bVar2 = param_2[param_4];
-  *param_1 = (byte)((bVar1 & 7) + (bVar2 & 7) >> 1) |
+  bVar1 = *src;
+  bVar2 = src[offsetA];
+  *dst = (byte)((bVar1 & 7) + (bVar2 & 7) >> 1) |
              (byte)((bVar1 & 0x38) + (bVar2 & 0x38) >> 1) & 0x38 |
              (byte)((bVar1 & 0xc0) + (bVar2 & 0xc0) >> 1) & 0xc0;
   return;
 }
 
 /* _gle233RevFilter2 @ 0xf8500 (140 bytes) */
-void _gle233RevFilter2(param_1, param_2, param_3, param_4, param_5)
-  byte *param_1;
-  byte *param_2;
-  undefined4 param_3;
-  int param_4;
-  int param_5;
+void _gle233RevFilter2(dst, src, unusedArg3, offsetA, offsetB)
+  byte *dst;
+  byte *src;
+  undefined4 unusedArg3;
+  int offsetA;
+  int offsetB;
 {
   byte bVar1;
   byte bVar2;
   byte bVar3;
   byte bVar4;
   
-  bVar1 = *param_2;
-  bVar2 = param_2[param_4];
-  bVar3 = param_2[param_5];
-  bVar4 = param_2[param_5 + param_4];
-  *param_1 = (byte)((bVar1 & 7) + (bVar2 & 7) + (bVar3 & 7) + (bVar4 & 7) >> 2) & 7 |
+  bVar1 = *src;
+  bVar2 = src[offsetA];
+  bVar3 = src[offsetB];
+  bVar4 = src[offsetB + offsetA];
+  *dst = (byte)((bVar1 & 7) + (bVar2 & 7) + (bVar3 & 7) + (bVar4 & 7) >> 2) & 7 |
              (byte)((bVar1 & 0x38) + (bVar2 & 0x38) + (bVar3 & 0x38) + (bVar4 & 0x38) >> 2) & 0x38 |
              (byte)((bVar1 & 0xc0) + (bVar2 & 0xc0) + (bVar3 & 0xc0) + (bVar4 & 0xc0) >> 2) & 0xc0;
   return;
 }
 
 /* _gle233RevFilter3 @ 0xf858c (260 bytes) */
-void _gle233RevFilter3(param_1, param_2, param_3, param_4, param_5, param_6)
-  byte *param_1;
-  byte *param_2;
-  undefined4 param_3;
-  int param_4;
-  int param_5;
-  int param_6;
+void _gle233RevFilter3(dst, src, unusedArg3, offsetA, offsetB, offsetC)
+  byte *dst;
+  byte *src;
+  undefined4 unusedArg3;
+  int offsetA;
+  int offsetB;
+  int offsetC;
 {
   byte bVar1;
   byte bVar2;
@@ -833,15 +833,15 @@ void _gle233RevFilter3(param_1, param_2, param_3, param_4, param_5, param_6)
   byte bVar7;
   byte bVar8;
   
-  bVar1 = *param_2;
-  bVar2 = param_2[param_4];
-  bVar3 = param_2[param_5];
-  bVar4 = param_2[param_5 + param_4];
-  bVar5 = param_2[param_6];
-  bVar6 = param_2[param_6 + param_4];
-  bVar7 = param_2[param_6 + param_5];
-  bVar8 = param_2[param_6 + param_5 + param_4];
-  *param_1 = (byte)((bVar1 & 7) + (bVar2 & 7) + (bVar3 & 7) + (bVar4 & 7) + (bVar5 & 7) +
+  bVar1 = *src;
+  bVar2 = src[offsetA];
+  bVar3 = src[offsetB];
+  bVar4 = src[offsetB + offsetA];
+  bVar5 = src[offsetC];
+  bVar6 = src[offsetC + offsetA];
+  bVar7 = src[offsetC + offsetB];
+  bVar8 = src[offsetC + offsetB + offsetA];
+  *dst = (byte)((bVar1 & 7) + (bVar2 & 7) + (bVar3 & 7) + (bVar4 & 7) + (bVar5 & 7) +
                     (bVar6 & 7) + (bVar7 & 7) + (bVar8 & 7) >> 3) & 7 |
              (byte)((bVar1 & 0x38) + (bVar2 & 0x38) + (bVar3 & 0x38) + (bVar4 & 0x38) +
                     (bVar5 & 0x38) + (bVar6 & 0x38) + (bVar7 & 0x38) + (bVar8 & 0x38) >> 3) & 0x38 |
@@ -851,41 +851,41 @@ void _gle233RevFilter3(param_1, param_2, param_3, param_4, param_5, param_6)
 }
 
 /* _gle565Filter1 @ 0xf8690 (72 bytes) */
-void _gle565Filter1(param_1, param_2, param_3, param_4)
-  ushort *param_1;
-  ushort *param_2;
-  undefined4 param_3;
-  int param_4;
+void _gle565Filter1(dst, src, unusedArg3, offsetA)
+  ushort *dst;
+  ushort *src;
+  undefined4 unusedArg3;
+  int offsetA;
 {
   ushort uVar1;
   ushort uVar2;
   
-  uVar1 = *param_2;
-  uVar2 = *(ushort *)((int)param_2 + param_4);
-  *param_1 = (ushort)((uVar1 & 0xf800) + (uVar2 & 0xf800) >> 1) & 0xf800 |
+  uVar1 = *src;
+  uVar2 = *(ushort *)((int)src + offsetA);
+  *dst = (ushort)((uVar1 & 0xf800) + (uVar2 & 0xf800) >> 1) & 0xf800 |
              (ushort)((uVar1 & 0x7e0) + (uVar2 & 0x7e0) >> 1) & 0x7e0 |
              (ushort)((uVar1 & 0x1f) + (uVar2 & 0x1f) >> 1);
   return;
 }
 
 /* _gle565Filter2 @ 0xf86d8 (140 bytes) */
-void _gle565Filter2(param_1, param_2, param_3, param_4, param_5)
-  ushort *param_1;
-  ushort *param_2;
-  undefined4 param_3;
-  int param_4;
-  int param_5;
+void _gle565Filter2(dst, src, unusedArg3, offsetA, offsetB)
+  ushort *dst;
+  ushort *src;
+  undefined4 unusedArg3;
+  int offsetA;
+  int offsetB;
 {
   ushort uVar1;
   ushort uVar2;
   ushort uVar3;
   ushort uVar4;
   
-  uVar1 = *param_2;
-  uVar2 = *(ushort *)((int)param_2 + param_4);
-  uVar3 = *(ushort *)((int)param_2 + param_5);
-  uVar4 = *(ushort *)((int)param_2 + param_5 + param_4);
-  *param_1 = (ushort)((uVar1 & 0xf800) + (uVar2 & 0xf800) + (uVar3 & 0xf800) + (uVar4 & 0xf800) >> 2
+  uVar1 = *src;
+  uVar2 = *(ushort *)((int)src + offsetA);
+  uVar3 = *(ushort *)((int)src + offsetB);
+  uVar4 = *(ushort *)((int)src + offsetB + offsetA);
+  *dst = (ushort)((uVar1 & 0xf800) + (uVar2 & 0xf800) + (uVar3 & 0xf800) + (uVar4 & 0xf800) >> 2
                      ) & 0xf800 |
              (ushort)((uVar1 & 0x7e0) + (uVar2 & 0x7e0) + (uVar3 & 0x7e0) + (uVar4 & 0x7e0) >> 2) &
              0x7e0 | (ushort)((uVar1 & 0x1f) + (uVar2 & 0x1f) + (uVar3 & 0x1f) + (uVar4 & 0x1f) >> 2
@@ -894,13 +894,13 @@ void _gle565Filter2(param_1, param_2, param_3, param_4, param_5)
 }
 
 /* _gle565Filter3 @ 0xf8764 (260 bytes) */
-void _gle565Filter3(param_1, param_2, param_3, param_4, param_5, param_6)
-  ushort *param_1;
-  ushort *param_2;
-  undefined4 param_3;
-  int param_4;
-  int param_5;
-  int param_6;
+void _gle565Filter3(dst, src, unusedArg3, offsetA, offsetB, offsetC)
+  ushort *dst;
+  ushort *src;
+  undefined4 unusedArg3;
+  int offsetA;
+  int offsetB;
+  int offsetC;
 {
   ushort uVar1;
   ushort uVar2;
@@ -911,15 +911,15 @@ void _gle565Filter3(param_1, param_2, param_3, param_4, param_5, param_6)
   ushort uVar7;
   ushort uVar8;
   
-  uVar1 = *param_2;
-  uVar2 = *(ushort *)((int)param_2 + param_4);
-  uVar3 = *(ushort *)((int)param_2 + param_5);
-  uVar4 = *(ushort *)((int)param_2 + param_5 + param_4);
-  uVar5 = *(ushort *)((int)param_2 + param_6);
-  uVar6 = *(ushort *)((int)param_2 + param_6 + param_4);
-  uVar7 = *(ushort *)((int)param_2 + param_6 + param_5);
-  uVar8 = *(ushort *)((int)param_2 + param_6 + param_5 + param_4);
-  *param_1 = (ushort)((uVar1 & 0xf800) + (uVar2 & 0xf800) + (uVar3 & 0xf800) + (uVar4 & 0xf800) +
+  uVar1 = *src;
+  uVar2 = *(ushort *)((int)src + offsetA);
+  uVar3 = *(ushort *)((int)src + offsetB);
+  uVar4 = *(ushort *)((int)src + offsetB + offsetA);
+  uVar5 = *(ushort *)((int)src + offsetC);
+  uVar6 = *(ushort *)((int)src + offsetC + offsetA);
+  uVar7 = *(ushort *)((int)src + offsetC + offsetB);
+  uVar8 = *(ushort *)((int)src + offsetC + offsetB + offsetA);
+  *dst = (ushort)((uVar1 & 0xf800) + (uVar2 & 0xf800) + (uVar3 & 0xf800) + (uVar4 & 0xf800) +
                       (uVar5 & 0xf800) + (uVar6 & 0xf800) + (uVar7 & 0xf800) + (uVar8 & 0xf800) >> 3
                      ) & 0xf800 |
              (ushort)((uVar1 & 0x7e0) + (uVar2 & 0x7e0) + (uVar3 & 0x7e0) + (uVar4 & 0x7e0) +
@@ -931,18 +931,18 @@ void _gle565Filter3(param_1, param_2, param_3, param_4, param_5, param_6)
 }
 
 /* _gle4444Filter1 @ 0xf8868 (92 bytes) */
-void _gle4444Filter1(param_1, param_2, param_3, param_4)
-  ushort *param_1;
-  ushort *param_2;
-  undefined4 param_3;
-  int param_4;
+void _gle4444Filter1(dst, src, unusedArg3, offsetA)
+  ushort *dst;
+  ushort *src;
+  undefined4 unusedArg3;
+  int offsetA;
 {
   ushort uVar1;
   ushort uVar2;
   
-  uVar1 = *param_2;
-  uVar2 = *(ushort *)((int)param_2 + param_4);
-  *param_1 = (ushort)((uVar1 & 0xf000) + (uVar2 & 0xf000) >> 1) & 0xf000 |
+  uVar1 = *src;
+  uVar2 = *(ushort *)((int)src + offsetA);
+  *dst = (ushort)((uVar1 & 0xf000) + (uVar2 & 0xf000) >> 1) & 0xf000 |
              (ushort)((uVar1 & 0xf00) + (uVar2 & 0xf00) >> 1) & 0xf00 |
              (ushort)((uVar1 & 0xf0) + (uVar2 & 0xf0) >> 1) & 0xf0 |
              (ushort)((uVar1 & 0xf) + (uVar2 & 0xf) >> 1);
@@ -950,23 +950,23 @@ void _gle4444Filter1(param_1, param_2, param_3, param_4)
 }
 
 /* _gle4444Filter2 @ 0xf88c4 (176 bytes) */
-void _gle4444Filter2(param_1, param_2, param_3, param_4, param_5)
-  ushort *param_1;
-  ushort *param_2;
-  undefined4 param_3;
-  int param_4;
-  int param_5;
+void _gle4444Filter2(dst, src, unusedArg3, offsetA, offsetB)
+  ushort *dst;
+  ushort *src;
+  undefined4 unusedArg3;
+  int offsetA;
+  int offsetB;
 {
   ushort uVar1;
   ushort uVar2;
   ushort uVar3;
   ushort uVar4;
   
-  uVar1 = *param_2;
-  uVar2 = *(ushort *)((int)param_2 + param_4);
-  uVar3 = *(ushort *)((int)param_2 + param_5);
-  uVar4 = *(ushort *)((int)param_2 + param_5 + param_4);
-  *param_1 = (ushort)((uVar1 & 0xf000) + (uVar2 & 0xf000) + (uVar3 & 0xf000) + (uVar4 & 0xf000) >> 2
+  uVar1 = *src;
+  uVar2 = *(ushort *)((int)src + offsetA);
+  uVar3 = *(ushort *)((int)src + offsetB);
+  uVar4 = *(ushort *)((int)src + offsetB + offsetA);
+  *dst = (ushort)((uVar1 & 0xf000) + (uVar2 & 0xf000) + (uVar3 & 0xf000) + (uVar4 & 0xf000) >> 2
                      ) & 0xf000 |
              (ushort)((uVar1 & 0xf00) + (uVar2 & 0xf00) + (uVar3 & 0xf00) + (uVar4 & 0xf00) >> 2) &
              0xf00 | (ushort)((uVar1 & 0xf0) + (uVar2 & 0xf0) + (uVar3 & 0xf0) + (uVar4 & 0xf0) >> 2
@@ -976,13 +976,13 @@ void _gle4444Filter2(param_1, param_2, param_3, param_4, param_5)
 }
 
 /* _gle4444Filter3 @ 0xf8974 (328 bytes) */
-void _gle4444Filter3(param_1, param_2, param_3, param_4, param_5, param_6)
-  ushort *param_1;
-  ushort *param_2;
-  undefined4 param_3;
-  int param_4;
-  int param_5;
-  int param_6;
+void _gle4444Filter3(dst, src, unusedArg3, offsetA, offsetB, offsetC)
+  ushort *dst;
+  ushort *src;
+  undefined4 unusedArg3;
+  int offsetA;
+  int offsetB;
+  int offsetC;
 {
   ushort uVar1;
   ushort uVar2;
@@ -993,15 +993,15 @@ void _gle4444Filter3(param_1, param_2, param_3, param_4, param_5, param_6)
   ushort uVar7;
   ushort uVar8;
   
-  uVar1 = *param_2;
-  uVar2 = *(ushort *)((int)param_2 + param_4);
-  uVar3 = *(ushort *)((int)param_2 + param_5);
-  uVar4 = *(ushort *)((int)param_2 + param_5 + param_4);
-  uVar5 = *(ushort *)((int)param_2 + param_6);
-  uVar6 = *(ushort *)((int)param_2 + param_6 + param_4);
-  uVar7 = *(ushort *)((int)param_2 + param_6 + param_5);
-  uVar8 = *(ushort *)((int)param_2 + param_6 + param_5 + param_4);
-  *param_1 = (ushort)((uVar1 & 0xf000) + (uVar2 & 0xf000) + (uVar3 & 0xf000) + (uVar4 & 0xf000) +
+  uVar1 = *src;
+  uVar2 = *(ushort *)((int)src + offsetA);
+  uVar3 = *(ushort *)((int)src + offsetB);
+  uVar4 = *(ushort *)((int)src + offsetB + offsetA);
+  uVar5 = *(ushort *)((int)src + offsetC);
+  uVar6 = *(ushort *)((int)src + offsetC + offsetA);
+  uVar7 = *(ushort *)((int)src + offsetC + offsetB);
+  uVar8 = *(ushort *)((int)src + offsetC + offsetB + offsetA);
+  *dst = (ushort)((uVar1 & 0xf000) + (uVar2 & 0xf000) + (uVar3 & 0xf000) + (uVar4 & 0xf000) +
                       (uVar5 & 0xf000) + (uVar6 & 0xf000) + (uVar7 & 0xf000) + (uVar8 & 0xf000) >> 3
                      ) & 0xf000 |
              (ushort)((uVar1 & 0xf00) + (uVar2 & 0xf00) + (uVar3 & 0xf00) + (uVar4 & 0xf00) +
@@ -1015,190 +1015,190 @@ void _gle4444Filter3(param_1, param_2, param_3, param_4, param_5, param_6)
 }
 
 /* _gles8s8Filter1 @ 0xfa1e8 (60 bytes) */
-void _gles8s8Filter1(param_1, param_2, param_3, param_4)
-  ushort *param_1;
-  undefined2 *param_2;
-  undefined4 param_3;
-  int param_4;
+void _gles8s8Filter1(dst, src, unusedArg3, offsetA)
+  ushort *dst;
+  undefined2 *src;
+  undefined4 unusedArg3;
+  int offsetA;
 {
-  *param_1 = ((short)(char)((ushort)*param_2 >> 8) +
-             (short)(char)((ushort)*(undefined2 *)((int)param_2 + param_4) >> 8)) * 0x80 & 0xff00U |
-             (ushort)((uint)((int)(char)*param_2 +
-                            (int)(char)*(undefined2 *)((int)param_2 + param_4)) >> 1) & 0xff;
+  *dst = ((short)(char)((ushort)*src >> 8) +
+             (short)(char)((ushort)*(undefined2 *)((int)src + offsetA) >> 8)) * 0x80 & 0xff00U |
+             (ushort)((uint)((int)(char)*src +
+                            (int)(char)*(undefined2 *)((int)src + offsetA)) >> 1) & 0xff;
   return;
 }
 
 /* _gles8s8Filter2 @ 0xfa224 (112 bytes) */
-void _gles8s8Filter2(param_1, param_2, param_3, param_4, param_5)
-  ushort *param_1;
-  undefined2 *param_2;
-  undefined4 param_3;
-  int param_4;
-  int param_5;
+void _gles8s8Filter2(dst, src, unusedArg3, offsetA, offsetB)
+  ushort *dst;
+  undefined2 *src;
+  undefined4 unusedArg3;
+  int offsetA;
+  int offsetB;
 {
   undefined2 uVar1;
   
-  uVar1 = *(undefined2 *)((int)param_2 + param_5 + param_4);
-  *param_1 = ((short)(char)((ushort)*param_2 >> 8) +
-              (short)(char)((ushort)*(undefined2 *)((int)param_2 + param_4) >> 8) +
-              (short)(char)((ushort)*(undefined2 *)((int)param_2 + param_5) >> 8) +
+  uVar1 = *(undefined2 *)((int)src + offsetB + offsetA);
+  *dst = ((short)(char)((ushort)*src >> 8) +
+              (short)(char)((ushort)*(undefined2 *)((int)src + offsetA) >> 8) +
+              (short)(char)((ushort)*(undefined2 *)((int)src + offsetB) >> 8) +
              (short)(char)((ushort)uVar1 >> 8)) * 0x80 & 0xff00U |
-             (ushort)((uint)((int)(char)*param_2 +
-                             (int)(char)*(undefined2 *)((int)param_2 + param_4) +
-                             (int)(char)*(undefined2 *)((int)param_2 + param_5) + (int)(char)uVar1)
+             (ushort)((uint)((int)(char)*src +
+                             (int)(char)*(undefined2 *)((int)src + offsetA) +
+                             (int)(char)*(undefined2 *)((int)src + offsetB) + (int)(char)uVar1)
                      >> 1) & 0xff;
   return;
 }
 
 /* _gles8s8Filter3 @ 0xfa294 (224 bytes) */
-void _gles8s8Filter3(param_1, param_2, param_3, param_4, param_5, param_6)
-  ushort *param_1;
-  undefined2 *param_2;
-  undefined4 param_3;
-  int param_4;
-  int param_5;
-  int param_6;
+void _gles8s8Filter3(dst, src, unusedArg3, offsetA, offsetB, offsetC)
+  ushort *dst;
+  undefined2 *src;
+  undefined4 unusedArg3;
+  int offsetA;
+  int offsetB;
+  int offsetC;
 {
   undefined2 uVar1;
   undefined2 uVar2;
   undefined2 uVar3;
   undefined2 uVar4;
   
-  uVar1 = *(undefined2 *)((int)param_2 + param_5 + param_4);
-  uVar2 = *(undefined2 *)((int)param_2 + param_6 + param_4);
-  uVar3 = *(undefined2 *)((int)param_2 + param_6 + param_5);
-  uVar4 = *(undefined2 *)((int)param_2 + param_6 + param_5 + param_4);
-  *param_1 = ((short)(char)((ushort)*param_2 >> 8) +
-              (short)(char)((ushort)*(undefined2 *)((int)param_2 + param_4) >> 8) +
-              (short)(char)((ushort)*(undefined2 *)((int)param_2 + param_5) >> 8) +
+  uVar1 = *(undefined2 *)((int)src + offsetB + offsetA);
+  uVar2 = *(undefined2 *)((int)src + offsetC + offsetA);
+  uVar3 = *(undefined2 *)((int)src + offsetC + offsetB);
+  uVar4 = *(undefined2 *)((int)src + offsetC + offsetB + offsetA);
+  *dst = ((short)(char)((ushort)*src >> 8) +
+              (short)(char)((ushort)*(undefined2 *)((int)src + offsetA) >> 8) +
+              (short)(char)((ushort)*(undefined2 *)((int)src + offsetB) >> 8) +
               (short)(char)((ushort)uVar1 >> 8) +
-              (short)(char)((ushort)*(undefined2 *)((int)param_2 + param_6) >> 8) +
+              (short)(char)((ushort)*(undefined2 *)((int)src + offsetC) >> 8) +
               (short)(char)((ushort)uVar2 >> 8) + (short)(char)((ushort)uVar3 >> 8) +
              (short)(char)((ushort)uVar4 >> 8)) * 0x80 & 0xff00U |
-             (ushort)((uint)((int)(char)*param_2 +
-                             (int)(char)*(undefined2 *)((int)param_2 + param_4) +
-                             (int)(char)*(undefined2 *)((int)param_2 + param_5) + (int)(char)uVar1 +
-                             (int)(char)*(undefined2 *)((int)param_2 + param_6) + (int)(char)uVar2 +
+             (ushort)((uint)((int)(char)*src +
+                             (int)(char)*(undefined2 *)((int)src + offsetA) +
+                             (int)(char)*(undefined2 *)((int)src + offsetB) + (int)(char)uVar1 +
+                             (int)(char)*(undefined2 *)((int)src + offsetC) + (int)(char)uVar2 +
                              (int)(char)uVar3 + (int)(char)uVar4) >> 1) & 0xff;
   return;
 }
 
 /* _gles16s16Filter1 @ 0xfa374 (52 bytes) */
-void _gles16s16Filter1(param_1, param_2, param_3, param_4)
-  uint *param_1;
-  int *param_2;
-  undefined4 param_3;
-  int param_4;
+void _gles16s16Filter1(dst, src, unusedArg3, offsetA)
+  uint *dst;
+  int *src;
+  undefined4 unusedArg3;
+  int offsetA;
 {
-  *param_1 = ((*param_2 >> 0x10) + (*(int *)((int)param_2 + param_4) >> 0x10)) * 0x8000 &
+  *dst = ((*src >> 0x10) + (*(int *)((int)src + offsetA) >> 0x10)) * 0x8000 &
              0xffff0000U |
-             (uint)((int)(short)*param_2 + (int)(short)*(int *)((int)param_2 + param_4)) >> 1 &
+             (uint)((int)(short)*src + (int)(short)*(int *)((int)src + offsetA)) >> 1 &
              0xffff;
   return;
 }
 
 /* _gles16s16Filter2 @ 0xfa3a8 (96 bytes) */
-void _gles16s16Filter2(param_1, param_2, param_3, param_4, param_5)
-  uint *param_1;
-  int *param_2;
-  undefined4 param_3;
-  int param_4;
-  int param_5;
+void _gles16s16Filter2(dst, src, unusedArg3, offsetA, offsetB)
+  uint *dst;
+  int *src;
+  undefined4 unusedArg3;
+  int offsetA;
+  int offsetB;
 {
   int iVar1;
   
-  iVar1 = *(int *)((int)param_2 + param_5 + param_4);
-  *param_1 = ((*param_2 >> 0x10) + (*(int *)((int)param_2 + param_4) >> 0x10) +
-              (*(int *)((int)param_2 + param_5) >> 0x10) + (iVar1 >> 0x10)) * 0x8000 & 0xffff0000U |
-             (uint)((int)(short)*param_2 + (int)(short)*(int *)((int)param_2 + param_4) +
-                    (int)(short)*(int *)((int)param_2 + param_5) + (int)(short)iVar1) >> 1 & 0xffff;
+  iVar1 = *(int *)((int)src + offsetB + offsetA);
+  *dst = ((*src >> 0x10) + (*(int *)((int)src + offsetA) >> 0x10) +
+              (*(int *)((int)src + offsetB) >> 0x10) + (iVar1 >> 0x10)) * 0x8000 & 0xffff0000U |
+             (uint)((int)(short)*src + (int)(short)*(int *)((int)src + offsetA) +
+                    (int)(short)*(int *)((int)src + offsetB) + (int)(short)iVar1) >> 1 & 0xffff;
   return;
 }
 
 /* _gles16s16Filter3 @ 0xfa408 (192 bytes) */
-void _gles16s16Filter3(param_1, param_2, param_3, param_4, param_5, param_6)
-  uint *param_1;
-  int *param_2;
-  undefined4 param_3;
-  int param_4;
-  int param_5;
-  int param_6;
+void _gles16s16Filter3(dst, src, unusedArg3, offsetA, offsetB, offsetC)
+  uint *dst;
+  int *src;
+  undefined4 unusedArg3;
+  int offsetA;
+  int offsetB;
+  int offsetC;
 {
   int iVar1;
   int iVar2;
   int iVar3;
   int iVar4;
   
-  iVar1 = *(int *)((int)param_2 + param_5 + param_4);
-  iVar2 = *(int *)((int)param_2 + param_6 + param_4);
-  iVar3 = *(int *)((int)param_2 + param_6 + param_5);
-  iVar4 = *(int *)((int)param_2 + param_6 + param_5 + param_4);
-  *param_1 = ((*param_2 >> 0x10) + (*(int *)((int)param_2 + param_4) >> 0x10) +
-              (*(int *)((int)param_2 + param_5) >> 0x10) + (iVar1 >> 0x10) +
-              (*(int *)((int)param_2 + param_6) >> 0x10) + (iVar2 >> 0x10) + (iVar3 >> 0x10) +
+  iVar1 = *(int *)((int)src + offsetB + offsetA);
+  iVar2 = *(int *)((int)src + offsetC + offsetA);
+  iVar3 = *(int *)((int)src + offsetC + offsetB);
+  iVar4 = *(int *)((int)src + offsetC + offsetB + offsetA);
+  *dst = ((*src >> 0x10) + (*(int *)((int)src + offsetA) >> 0x10) +
+              (*(int *)((int)src + offsetB) >> 0x10) + (iVar1 >> 0x10) +
+              (*(int *)((int)src + offsetC) >> 0x10) + (iVar2 >> 0x10) + (iVar3 >> 0x10) +
              (iVar4 >> 0x10)) * 0x8000 & 0xffff0000U |
-             (uint)((int)(short)*param_2 + (int)(short)*(int *)((int)param_2 + param_4) +
-                    (int)(short)*(int *)((int)param_2 + param_5) + (int)(short)iVar1 +
-                    (int)(short)*(int *)((int)param_2 + param_6) + (int)(short)iVar2 +
+             (uint)((int)(short)*src + (int)(short)*(int *)((int)src + offsetA) +
+                    (int)(short)*(int *)((int)src + offsetB) + (int)(short)iVar1 +
+                    (int)(short)*(int *)((int)src + offsetC) + (int)(short)iVar2 +
                     (int)(short)iVar3 + (int)(short)iVar4) >> 1 & 0xffff;
   return;
 }
 
 /* _gle1616Filter1 @ 0xfa4c8 (52 bytes) */
-void _gle1616Filter1(param_1, param_2, param_3, param_4)
-  uint *param_1;
-  uint *param_2;
-  undefined4 param_3;
-  int param_4;
+void _gle1616Filter1(dst, src, unusedArg3, offsetA)
+  uint *dst;
+  uint *src;
+  undefined4 unusedArg3;
+  int offsetA;
 {
-  *param_1 = ((*param_2 >> 0x10) + (*(uint *)((int)param_2 + param_4) >> 0x10)) * 0x8000 &
-             0xffff0000 | (*param_2 & 0xffff) + (*(uint *)((int)param_2 + param_4) & 0xffff) >> 1;
+  *dst = ((*src >> 0x10) + (*(uint *)((int)src + offsetA) >> 0x10)) * 0x8000 &
+             0xffff0000 | (*src & 0xffff) + (*(uint *)((int)src + offsetA) & 0xffff) >> 1;
   return;
 }
 
 /* _gle1616Filter2 @ 0xfa4fc (96 bytes) */
-void _gle1616Filter2(param_1, param_2, param_3, param_4, param_5)
-  uint *param_1;
-  uint *param_2;
-  undefined4 param_3;
-  int param_4;
-  int param_5;
+void _gle1616Filter2(dst, src, unusedArg3, offsetA, offsetB)
+  uint *dst;
+  uint *src;
+  undefined4 unusedArg3;
+  int offsetA;
+  int offsetB;
 {
   uint uVar1;
   
-  uVar1 = *(uint *)((int)param_2 + param_5 + param_4);
-  *param_1 = ((*param_2 >> 0x10) + (*(uint *)((int)param_2 + param_4) >> 0x10) +
-              (*(uint *)((int)param_2 + param_5) >> 0x10) + (uVar1 >> 0x10)) * 0x8000 & 0xffff0000 |
-             (*param_2 & 0xffff) + (*(uint *)((int)param_2 + param_4) & 0xffff) +
-             (*(uint *)((int)param_2 + param_5) & 0xffff) + (uVar1 & 0xffff) >> 1 & 0xffff;
+  uVar1 = *(uint *)((int)src + offsetB + offsetA);
+  *dst = ((*src >> 0x10) + (*(uint *)((int)src + offsetA) >> 0x10) +
+              (*(uint *)((int)src + offsetB) >> 0x10) + (uVar1 >> 0x10)) * 0x8000 & 0xffff0000 |
+             (*src & 0xffff) + (*(uint *)((int)src + offsetA) & 0xffff) +
+             (*(uint *)((int)src + offsetB) & 0xffff) + (uVar1 & 0xffff) >> 1 & 0xffff;
   return;
 }
 
 /* _gle1616Filter3 @ 0xfa55c (192 bytes) */
-void _gle1616Filter3(param_1, param_2, param_3, param_4, param_5, param_6)
-  uint *param_1;
-  uint *param_2;
-  undefined4 param_3;
-  int param_4;
-  int param_5;
-  int param_6;
+void _gle1616Filter3(dst, src, unusedArg3, offsetA, offsetB, offsetC)
+  uint *dst;
+  uint *src;
+  undefined4 unusedArg3;
+  int offsetA;
+  int offsetB;
+  int offsetC;
 {
   uint uVar1;
   uint uVar2;
   uint uVar3;
   uint uVar4;
   
-  uVar1 = *(uint *)((int)param_2 + param_5 + param_4);
-  uVar2 = *(uint *)((int)param_2 + param_6 + param_4);
-  uVar3 = *(uint *)((int)param_2 + param_6 + param_5);
-  uVar4 = *(uint *)((int)param_2 + param_6 + param_5 + param_4);
-  *param_1 = ((*param_2 >> 0x10) + (*(uint *)((int)param_2 + param_4) >> 0x10) +
-              (*(uint *)((int)param_2 + param_5) >> 0x10) + (uVar1 >> 0x10) +
-              (*(uint *)((int)param_2 + param_6) >> 0x10) + (uVar2 >> 0x10) + (uVar3 >> 0x10) +
+  uVar1 = *(uint *)((int)src + offsetB + offsetA);
+  uVar2 = *(uint *)((int)src + offsetC + offsetA);
+  uVar3 = *(uint *)((int)src + offsetC + offsetB);
+  uVar4 = *(uint *)((int)src + offsetC + offsetB + offsetA);
+  *dst = ((*src >> 0x10) + (*(uint *)((int)src + offsetA) >> 0x10) +
+              (*(uint *)((int)src + offsetB) >> 0x10) + (uVar1 >> 0x10) +
+              (*(uint *)((int)src + offsetC) >> 0x10) + (uVar2 >> 0x10) + (uVar3 >> 0x10) +
              (uVar4 >> 0x10)) * 0x8000 & 0xffff0000 |
-             (*param_2 & 0xffff) + (*(uint *)((int)param_2 + param_4) & 0xffff) +
-             (*(uint *)((int)param_2 + param_5) & 0xffff) + (uVar1 & 0xffff) +
-             (*(uint *)((int)param_2 + param_6) & 0xffff) + (uVar2 & 0xffff) + (uVar3 & 0xffff) +
+             (*src & 0xffff) + (*(uint *)((int)src + offsetA) & 0xffff) +
+             (*(uint *)((int)src + offsetB) & 0xffff) + (uVar1 & 0xffff) +
+             (*(uint *)((int)src + offsetC) & 0xffff) + (uVar2 & 0xffff) + (uVar3 & 0xffff) +
              (uVar4 & 0xffff) >> 1 & 0xffff;
   return;
 }
@@ -1225,9 +1225,9 @@ void _gleGenerateMipmapData(param_1, param_2, param_3, param_4, param_5)
   undefined4 uVar12;
   undefined1 *puVar13;
   undefined1 *puVar14;
-  int in_r8;
+  int incomingR8;
   undefined *puVar15;
-  int in_r10;
+  int incomingR10;
   int iVar16;
   int iVar17;
   code *pcVar18;
@@ -1396,10 +1396,10 @@ LAB_000faa98:
             uVar12 = _gleRowBytes((uint)*(ushort *)(local_d0 + 0x10),0,
                                   (uint)*(ushort *)(local_d0 + 0xc));
             _glgConvertType((uint)*(ushort *)(local_d0 + 0x10),0,auStack_1a8,auStack_1a4,param_5,
-                            in_r8,puVar15,in_r10);
+                            incomingR8,puVar15,incomingR10);
             puVar13 = auStack_198;
             puVar14 = auStack_194;
-            _glgConvertType(0x1908,0x8035,puVar13,puVar14,param_5,in_r8,puVar15,in_r10);
+            _glgConvertType(0x1908,0x8035,puVar13,puVar14,param_5,incomingR8,puVar15,incomingR10);
             local_190 = 2;
             local_184 = (uint)*(ushort *)(local_d0 + 4);
             local_180 = (uint)*(ushort *)(local_d0 + 6);
@@ -1410,8 +1410,8 @@ LAB_000faa98:
             local_19c = uVar11;
             local_18c = uVar28;
             local_188 = uVar28;
-            _glgProcessPixels(iStack00000018 + 0x31a8,&local_1b0,puVar13,puVar14,param_5,in_r8,
-                              iStack00000018,in_r10);
+            _glgProcessPixels(iStack00000018 + 0x31a8,&local_1b0,puVar13,puVar14,param_5,incomingR8,
+                              iStack00000018,incomingR10);
             iVar9 = 4;
             goto LAB_000facc8;
           }
@@ -1676,11 +1676,11 @@ LAB_000facc8:
             uVar11 = _gleRowBytes(0x1908,0x8035,(uint)*(ushort *)(iVar23 + 4));
             uVar12 = _gleRowBytes((uint)*(ushort *)(iVar23 + 0x10),0,(uint)*(ushort *)(iVar23 + 0xc)
                                  );
-            _glgConvertType(0x1908,0x8035,auStack_138,auStack_134,param_5,in_r8,iVar9,in_r10);
+            _glgConvertType(0x1908,0x8035,auStack_138,auStack_134,param_5,incomingR8,iVar9,incomingR10);
             puVar13 = auStack_128;
             puVar14 = auStack_124;
-            _glgConvertType((uint)*(ushort *)(iVar23 + 0x10),0,auStack_128,auStack_124,param_5,in_r8
-                            ,iVar9,in_r10);
+            _glgConvertType((uint)*(ushort *)(iVar23 + 0x10),0,auStack_128,auStack_124,param_5,incomingR8
+                            ,iVar9,incomingR10);
             local_11c = 0;
             local_120 = 2;
             local_118 = 0;
@@ -1692,7 +1692,7 @@ LAB_000facc8:
             local_d4 = 0;
             local_13c = uVar11;
             local_12c = uVar12;
-            _glgProcessPixels(iVar20,&local_140,puVar13,puVar14,param_5,in_r8,iVar9,in_r10);
+            _glgProcessPixels(iVar20,&local_140,puVar13,puVar14,param_5,incomingR8,iVar9,incomingR10);
             _free(local_b4);
             local_cc = local_cc + -1;
           } while (local_cc != 0);
@@ -1812,18 +1812,18 @@ LAB_000facc8:
         (*pcVar18)(iVar27,iVar26 - iVar9,iVar7,iVar9,iVar21);
       }
       uVar5 = *(ushort *)(iVar8 + 200);
-      in_r10 = 0;
+      incomingR10 = 0;
       uVar28 = 1;
       uVar6 = *(ushort *)(iVar8 + 0xca);
 LAB_000fb8d8:
       uVar36 = (uint)uVar6;
-      in_r8 = local_a0;
+      incomingR8 = local_a0;
       iVar23 = local_a0;
 LAB_000fb8dc:
       param_5 = local_cc;
       _gleModifyPluginTextureLevel
-                (iStack00000018,iStack0000001c,iVar8 + 0xc4,iStack00000020,local_cc,in_r8,iVar23,
-                 in_r10,(uint)uVar5,uVar36,uVar28);
+                (iStack00000018,iStack0000001c,iVar8 + 0xc4,iStack00000020,local_cc,incomingR8,iVar23,
+                 incomingR10,(uint)uVar5,uVar36,uVar28);
     }
     else if (bVar2) {
       if (local_bc == 3) {
@@ -2061,7 +2061,7 @@ LAB_000fb8dc:
         uVar5 = *(ushort *)(iVar8 + 200);
         uVar6 = *(ushort *)(iVar8 + 0xca);
         uVar28 = (uint)*(ushort *)(iVar8 + 0xcc);
-        in_r10 = local_a0;
+        incomingR10 = local_a0;
         goto LAB_000fb8d8;
       }
     }
@@ -2091,10 +2091,10 @@ LAB_000fb8dc:
         (*local_b0)(iVar21,iVar26 - iVar9,iVar7,iVar9);
       }
       uVar5 = *(ushort *)(iVar8 + 200);
-      in_r10 = 0;
+      incomingR10 = 0;
       uVar28 = 1;
       uVar36 = 1;
-      in_r8 = local_c0 >> 1;
+      incomingR8 = local_c0 >> 1;
       iVar23 = 0;
       goto LAB_000fb8dc;
     }
@@ -2389,94 +2389,94 @@ double _gleHalfFloatToFloat(uint param_1)
 }
 
 /* _gleLookUpTexture1D @ 0xfc10c (72 bytes) */
-int _gleLookUpTexture1D(param_1, param_2)
-  int param_1;
+int _gleLookUpTexture1D(glContext, param_2)
+  int glContext;
   int param_2;
 {
   if (param_2 == 0xde0) {
-    return *(int *)(*(int *)(param_1 + 0x53d4) * 0x14 + param_1 + 0x5164) + 0x10;
+    return *(int *)(*(int *)(glContext + 0x53d4) * 0x14 + glContext + 0x5164) + 0x10;
   }
   if (param_2 != 0x8063) {
     return 0;
   }
-  return *(int *)(param_1 + 0x52b8) + 0x10;
+  return *(int *)(glContext + 0x52b8) + 0x10;
 }
 
 /* _gleLookUpNonProxyTexture1D @ 0xfc154 (40 bytes) */
-int _gleLookUpNonProxyTexture1D(param_1, param_2)
-  int param_1;
+int _gleLookUpNonProxyTexture1D(glContext, param_2)
+  int glContext;
   int param_2;
 {
   if (param_2 != 0xde0) {
     return 0;
   }
-  return *(int *)(*(int *)(param_1 + 0x53d4) * 0x14 + param_1 + 0x5164) + 0x10;
+  return *(int *)(*(int *)(glContext + 0x53d4) * 0x14 + glContext + 0x5164) + 0x10;
 }
 
 /* _gleLookUpNonProxyTexture3D @ 0xfc17c (48 bytes) */
-int _gleLookUpNonProxyTexture3D(param_1, param_2)
-  int param_1;
+int _gleLookUpNonProxyTexture3D(glContext, param_2)
+  int glContext;
   int param_2;
 {
   if (param_2 != 0x806f) {
     return 0;
   }
-  return *(int *)(*(int *)(param_1 + 0x53d4) * 0x14 + param_1 + 0x5158) + 0x10;
+  return *(int *)(*(int *)(glContext + 0x53d4) * 0x14 + glContext + 0x5158) + 0x10;
 }
 
 /* _gleLookUpColorTable @ 0xfc1ac (544 bytes) */
-int _gleLookUpColorTable(param_1, param_2)
-  int param_1;
+int _gleLookUpColorTable(glContext, param_2)
+  int glContext;
   uint param_2;
 {
   int iVar1;
   
-  iVar1 = *(int *)(param_1 + 0x53d4);
+  iVar1 = *(int *)(glContext + 0x53d4);
   if (param_2 == 0x80d2) {
-    iVar1 = *(int *)(param_1 + 0x52c4);
+    iVar1 = *(int *)(glContext + 0x52c4);
     goto LAB_000fc364;
   }
   if (param_2 < 0x80d3) {
     if (param_2 == 0x8064) {
-      iVar1 = *(int *)(param_1 + 0x52b4);
+      iVar1 = *(int *)(glContext + 0x52b4);
     }
     else {
       if (param_2 < 0x8065) {
         if (param_2 != 0xde1) {
           if (param_2 < 0xde2) {
             if (param_2 == 0xde0) {
-              iVar1 = *(int *)(iVar1 * 0x14 + param_1 + 0x5164);
+              iVar1 = *(int *)(iVar1 * 0x14 + glContext + 0x5164);
               goto LAB_000fc320;
             }
           }
           else if (param_2 == 0x8063) {
-            iVar1 = *(int *)(param_1 + 0x52b8);
+            iVar1 = *(int *)(glContext + 0x52b8);
             goto LAB_000fc364;
           }
           return 0;
         }
-        iVar1 = *(int *)(iVar1 * 0x14 + param_1 + 0x5160);
+        iVar1 = *(int *)(iVar1 * 0x14 + glContext + 0x5160);
         goto LAB_000fc320;
       }
       if (param_2 == 0x8070) {
-        iVar1 = *(int *)(param_1 + 0x52ac);
+        iVar1 = *(int *)(glContext + 0x52ac);
       }
       else {
         if (param_2 < 0x8071) {
           if (param_2 != 0x806f) {
             return 0;
           }
-          iVar1 = *(int *)(iVar1 * 0x14 + param_1 + 0x5158);
+          iVar1 = *(int *)(iVar1 * 0x14 + glContext + 0x5158);
           goto LAB_000fc320;
         }
         if (param_2 == 0x80d0) {
-          iVar1 = *(int *)(param_1 + 0x52bc);
+          iVar1 = *(int *)(glContext + 0x52bc);
         }
         else {
           if (param_2 != 0x80d1) {
             return 0;
           }
-          iVar1 = *(int *)(param_1 + 0x52c0);
+          iVar1 = *(int *)(glContext + 0x52c0);
         }
       }
     }
@@ -2486,103 +2486,103 @@ LAB_000fc364:
   if (param_2 != 0x84f5) {
     if (param_2 < 0x84f6) {
       if (param_2 == 0x80d4) {
-        iVar1 = *(int *)(param_1 + 0x52cc);
+        iVar1 = *(int *)(glContext + 0x52cc);
       }
       else if (param_2 < 0x80d4) {
-        iVar1 = *(int *)(param_1 + 0x52c8);
+        iVar1 = *(int *)(glContext + 0x52c8);
       }
       else {
         if (param_2 != 0x80d5) {
           if (param_2 != 0x81fb) {
             return 0;
           }
-          iVar1 = *(int *)(iVar1 * 4 + param_1 + 0x52d4);
+          iVar1 = *(int *)(iVar1 * 4 + glContext + 0x52d4);
           goto LAB_000fc320;
         }
-        iVar1 = *(int *)(param_1 + 0x52d0);
+        iVar1 = *(int *)(glContext + 0x52d0);
       }
       goto LAB_000fc364;
     }
     if (param_2 == 0x8513) {
-      iVar1 = *(int *)(iVar1 * 0x14 + param_1 + 0x5154);
+      iVar1 = *(int *)(iVar1 * 0x14 + glContext + 0x5154);
       goto LAB_000fc320;
     }
     if (param_2 < 0x8514) {
       if (param_2 != 0x84f7) {
         return 0;
       }
-      iVar1 = *(int *)(param_1 + 0x52b0);
+      iVar1 = *(int *)(glContext + 0x52b0);
       goto LAB_000fc364;
     }
     if (param_2 == 0x851b) {
-      iVar1 = *(int *)(param_1 + 0x52a8);
+      iVar1 = *(int *)(glContext + 0x52a8);
       goto LAB_000fc364;
     }
     if (param_2 != 0x85b3) {
       return 0;
     }
   }
-  iVar1 = *(int *)(iVar1 * 0x14 + param_1 + 0x515c);
+  iVar1 = *(int *)(iVar1 * 0x14 + glContext + 0x515c);
 LAB_000fc320:
   return iVar1 + 0x10;
 }
 
 /* _gleLookUpNonProxyColorTable @ 0xfc3cc (324 bytes) */
-int _gleLookUpNonProxyColorTable(param_1, param_2)
-  int param_1;
+int _gleLookUpNonProxyColorTable(glContext, param_2)
+  int glContext;
   uint param_2;
 {
   int iVar1;
   
-  iVar1 = *(int *)(param_1 + 0x53d4);
+  iVar1 = *(int *)(glContext + 0x53d4);
   if (param_2 == 0x80d1) {
-    iVar1 = *(int *)(param_1 + 0x52c0);
+    iVar1 = *(int *)(glContext + 0x52c0);
 LAB_000fc4f8:
     return iVar1 + 0x10;
   }
   if (param_2 < 0x80d2) {
     if (param_2 == 0xde1) {
-      iVar1 = *(int *)(iVar1 * 0x14 + param_1 + 0x5160);
+      iVar1 = *(int *)(iVar1 * 0x14 + glContext + 0x5160);
     }
     else if (param_2 < 0xde2) {
       if (param_2 != 0xde0) {
         return 0;
       }
-      iVar1 = *(int *)(iVar1 * 0x14 + param_1 + 0x5164);
+      iVar1 = *(int *)(iVar1 * 0x14 + glContext + 0x5164);
     }
     else {
       if (param_2 != 0x806f) {
         if (param_2 != 0x80d0) {
           return 0;
         }
-        iVar1 = *(int *)(param_1 + 0x52bc);
+        iVar1 = *(int *)(glContext + 0x52bc);
         goto LAB_000fc4f8;
       }
-      iVar1 = *(int *)(iVar1 * 0x14 + param_1 + 0x5158);
+      iVar1 = *(int *)(iVar1 * 0x14 + glContext + 0x5158);
     }
     goto LAB_000fc4a4;
   }
   if (param_2 != 0x84f5) {
     if (param_2 < 0x84f6) {
       if (param_2 == 0x80d2) {
-        iVar1 = *(int *)(param_1 + 0x52c4);
+        iVar1 = *(int *)(glContext + 0x52c4);
         goto LAB_000fc4f8;
       }
       if (param_2 != 0x81fb) {
         return 0;
       }
-      iVar1 = *(int *)(iVar1 * 4 + param_1 + 0x52d4);
+      iVar1 = *(int *)(iVar1 * 4 + glContext + 0x52d4);
       goto LAB_000fc4a4;
     }
     if (param_2 == 0x8513) {
-      iVar1 = *(int *)(iVar1 * 0x14 + param_1 + 0x5154);
+      iVar1 = *(int *)(iVar1 * 0x14 + glContext + 0x5154);
       goto LAB_000fc4a4;
     }
     if (param_2 != 0x85b3) {
       return 0;
     }
   }
-  iVar1 = *(int *)(iVar1 * 0x14 + param_1 + 0x515c);
+  iVar1 = *(int *)(iVar1 * 0x14 + glContext + 0x515c);
 LAB_000fc4a4:
   return iVar1 + 0x10;
 }
@@ -2650,17 +2650,17 @@ void _gleReclaimTextureObjectResources(glContext)
 }
 
 /* _gleCompressedTextureImagePut @ 0xfc668 (252 bytes) */
-int _gleCompressedTextureImagePut(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11)
-  undefined4 param_1;
+int _gleCompressedTextureImagePut(unusedArg1, param_2, param_3, param_4, unusedArg5, param_6, param_7, param_8, param_9, unusedArg10, param_11)
+  undefined4 unusedArg1;
   int param_2;
   int param_3;
   int param_4;
-  undefined4 param_5;
+  undefined4 unusedArg5;
   int param_6;
   int param_7;
   int param_8;
   uint param_9;
-  undefined4 param_10;
+  undefined4 unusedArg10;
   int param_11;
 {
   ushort uVar1;
@@ -2705,1180 +2705,1180 @@ int _gleCompressedTextureImagePut(param_1, param_2, param_3, param_4, param_5, p
 }
 
 /* _gleTextureImagePut_FastByte @ 0xfc764 (6052 bytes) */
-int _gleTextureImagePut_FastByte(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11)
-  undefined4 param_1;
-  int param_2;
-  int param_3;
-  byte *param_4;
-  byte *param_5;
-  int param_6;
-  undefined4 param_7;
-  int param_8;
-  int param_9;
-  undefined4 param_10;
-  int param_11;
+int _gleTextureImagePut_FastByte(unusedArg1, width, height, src, dst, srcRowStride, unusedArg7, dstRowSkip, dstRowStride, dstFormat, srcFormat)
+  undefined4 unusedArg1;
+  int width;
+  int height;
+  byte *src;
+  byte *dst;
+  int srcRowStride;
+  undefined4 unusedArg7;
+  int dstRowSkip;
+  int dstRowStride;
+  undefined4 dstFormat;
+  int srcFormat;
 {
-  byte *pbVar1;
-  byte bVar2;
+  byte *srcComponent;
+  byte srcValue;
   int iVar3;
   byte *pbVar4;
-  byte *pbVar5;
-  uint uVar6;
+  byte *dstRowEnd;
+  uint pixelsLeft;
   
-  iVar3 = _gleComponents(param_10);
-  pbVar5 = param_5 + param_2 * iVar3;
-  switch(param_10) {
+  iVar3 = _gleComponents(dstFormat);
+  dstRowEnd = dst + width * iVar3;
+  switch(dstFormat) {
   case 0x1900:
-    if (param_11 != 0x1900) {
+    if (srcFormat != 0x1900) {
       return 0;
     }
-    if (0 < param_3) {
+    if (0 < height) {
       do {
-        if (param_5 < pbVar5) {
-          iVar3 = (int)pbVar5 - (int)param_5;
-          pbVar4 = param_4;
+        if (dst < dstRowEnd) {
+          iVar3 = (int)dstRowEnd - (int)dst;
+          pbVar4 = src;
           do {
-            bVar2 = *pbVar4;
+            srcValue = *pbVar4;
             pbVar4 = pbVar4 + 1;
-            *param_5 = bVar2 << 1 | bVar2 >> 6 & 1;
-            param_5 = param_5 + 1;
+            *dst = srcValue << 1 | srcValue >> 6 & 1;
+            dst = dst + 1;
             iVar3 = iVar3 + -1;
           } while (iVar3 != 0);
         }
-        param_3 = param_3 + -1;
-        param_4 = param_4 + param_6;
-        param_5 = param_5 + param_8;
-        pbVar5 = pbVar5 + param_9;
-      } while (param_3 != 0);
+        height = height + -1;
+        src = src + srcRowStride;
+        dst = dst + dstRowSkip;
+        dstRowEnd = dstRowEnd + dstRowStride;
+      } while (height != 0);
     }
     break;
   default:
     return 0;
   case 0x1906:
-    if (param_11 == 0x1908) {
-      if (0 < param_3) {
+    if (srcFormat == 0x1908) {
+      if (0 < height) {
         do {
-          if (param_5 < pbVar5) {
-            iVar3 = (int)pbVar5 - (int)param_5;
-            pbVar4 = param_4 + 3;
+          if (dst < dstRowEnd) {
+            iVar3 = (int)dstRowEnd - (int)dst;
+            pbVar4 = src + 3;
             do {
-              bVar2 = *pbVar4;
+              srcValue = *pbVar4;
               pbVar4 = pbVar4 + 4;
-              *param_5 = bVar2 << 1 | bVar2 >> 6 & 1;
-              param_5 = param_5 + 1;
+              *dst = srcValue << 1 | srcValue >> 6 & 1;
+              dst = dst + 1;
               iVar3 = iVar3 + -1;
             } while (iVar3 != 0);
           }
-          param_3 = param_3 + -1;
-          param_4 = param_4 + param_6;
-          param_5 = param_5 + param_8;
-          pbVar5 = pbVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = src + srcRowStride;
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
-    else if (param_11 < 0x1909) {
-      if (param_11 == 0x1906) {
-        if (0 < param_3) {
+    else if (srcFormat < 0x1909) {
+      if (srcFormat == 0x1906) {
+        if (0 < height) {
           do {
-            if (param_5 < pbVar5) {
-              iVar3 = (int)pbVar5 - (int)param_5;
-              pbVar4 = param_4;
+            if (dst < dstRowEnd) {
+              iVar3 = (int)dstRowEnd - (int)dst;
+              pbVar4 = src;
               do {
-                bVar2 = *pbVar4;
+                srcValue = *pbVar4;
                 pbVar4 = pbVar4 + 1;
-                *param_5 = bVar2 << 1 | bVar2 >> 6 & 1;
-                param_5 = param_5 + 1;
+                *dst = srcValue << 1 | srcValue >> 6 & 1;
+                dst = dst + 1;
                 iVar3 = iVar3 + -1;
               } while (iVar3 != 0);
             }
-            param_3 = param_3 + -1;
-            param_4 = param_4 + param_6;
-            param_5 = param_5 + param_8;
-            pbVar5 = pbVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = src + srcRowStride;
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
-      else if (param_11 < 0x1907) {
-        if (param_11 < 0x1903) {
+      else if (srcFormat < 0x1907) {
+        if (srcFormat < 0x1903) {
           return 0;
         }
-        if (0 < param_3) {
+        if (0 < height) {
           do {
-            if (param_5 < pbVar5) {
-              iVar3 = (int)pbVar5 - (int)param_5;
+            if (dst < dstRowEnd) {
+              iVar3 = (int)dstRowEnd - (int)dst;
               do {
-                *param_5 = 0xff;
-                param_5 = param_5 + 1;
+                *dst = 0xff;
+                dst = dst + 1;
                 iVar3 = iVar3 + -1;
               } while (iVar3 != 0);
             }
-            param_3 = param_3 + -1;
-            param_5 = param_5 + param_8;
-            pbVar5 = pbVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
-      else if (0 < param_3) {
+      else if (0 < height) {
         do {
-          if (param_5 < pbVar5) {
-            iVar3 = (int)pbVar5 - (int)param_5;
+          if (dst < dstRowEnd) {
+            iVar3 = (int)dstRowEnd - (int)dst;
             do {
-              *param_5 = 0xff;
-              param_5 = param_5 + 1;
+              *dst = 0xff;
+              dst = dst + 1;
               iVar3 = iVar3 + -1;
             } while (iVar3 != 0);
           }
-          param_3 = param_3 + -1;
-          param_5 = param_5 + param_8;
-          pbVar5 = pbVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
-    else if (param_11 == 0x8000) {
-      if (0 < param_3) {
+    else if (srcFormat == 0x8000) {
+      if (0 < height) {
         do {
-          if (param_5 < pbVar5) {
-            iVar3 = (int)pbVar5 - (int)param_5;
-            pbVar4 = param_4;
+          if (dst < dstRowEnd) {
+            iVar3 = (int)dstRowEnd - (int)dst;
+            pbVar4 = src;
             do {
-              bVar2 = *pbVar4;
+              srcValue = *pbVar4;
               pbVar4 = pbVar4 + 4;
-              *param_5 = bVar2 << 1 | bVar2 >> 6 & 1;
-              param_5 = param_5 + 1;
+              *dst = srcValue << 1 | srcValue >> 6 & 1;
+              dst = dst + 1;
               iVar3 = iVar3 + -1;
             } while (iVar3 != 0);
           }
-          param_3 = param_3 + -1;
-          param_4 = param_4 + param_6;
-          param_5 = param_5 + param_8;
-          pbVar5 = pbVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = src + srcRowStride;
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
-    else if (param_11 < 0x8001) {
-      if (param_11 == 0x1909) {
-        if (0 < param_3) {
+    else if (srcFormat < 0x8001) {
+      if (srcFormat == 0x1909) {
+        if (0 < height) {
           do {
-            if (param_5 < pbVar5) {
-              iVar3 = (int)pbVar5 - (int)param_5;
+            if (dst < dstRowEnd) {
+              iVar3 = (int)dstRowEnd - (int)dst;
               do {
-                *param_5 = 0xff;
-                param_5 = param_5 + 1;
+                *dst = 0xff;
+                dst = dst + 1;
                 iVar3 = iVar3 + -1;
               } while (iVar3 != 0);
             }
-            param_3 = param_3 + -1;
-            param_5 = param_5 + param_8;
-            pbVar5 = pbVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
       else {
-        if (param_11 != 0x190a) {
+        if (srcFormat != 0x190a) {
           return 0;
         }
-        if (0 < param_3) {
+        if (0 < height) {
           do {
-            if (param_5 < pbVar5) {
-              iVar3 = (int)pbVar5 - (int)param_5;
-              pbVar4 = param_4 + 1;
+            if (dst < dstRowEnd) {
+              iVar3 = (int)dstRowEnd - (int)dst;
+              pbVar4 = src + 1;
               do {
-                bVar2 = *pbVar4;
+                srcValue = *pbVar4;
                 pbVar4 = pbVar4 + 2;
-                *param_5 = bVar2 << 1 | bVar2 >> 6 & 1;
-                param_5 = param_5 + 1;
+                *dst = srcValue << 1 | srcValue >> 6 & 1;
+                dst = dst + 1;
                 iVar3 = iVar3 + -1;
               } while (iVar3 != 0);
             }
-            param_3 = param_3 + -1;
-            param_4 = param_4 + param_6;
-            param_5 = param_5 + param_8;
-            pbVar5 = pbVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = src + srcRowStride;
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
     }
-    else if (param_11 == 0x80e0) {
-      if (0 < param_3) {
+    else if (srcFormat == 0x80e0) {
+      if (0 < height) {
         do {
-          if (param_5 < pbVar5) {
-            iVar3 = (int)pbVar5 - (int)param_5;
+          if (dst < dstRowEnd) {
+            iVar3 = (int)dstRowEnd - (int)dst;
             do {
-              *param_5 = 0xff;
-              param_5 = param_5 + 1;
+              *dst = 0xff;
+              dst = dst + 1;
               iVar3 = iVar3 + -1;
             } while (iVar3 != 0);
           }
-          param_3 = param_3 + -1;
-          param_5 = param_5 + param_8;
-          pbVar5 = pbVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
     else {
-      if (param_11 != 0x80e1) {
+      if (srcFormat != 0x80e1) {
         return 0;
       }
-      if (0 < param_3) {
+      if (0 < height) {
         do {
-          if (param_5 < pbVar5) {
-            iVar3 = (int)pbVar5 - (int)param_5;
-            pbVar4 = param_4 + 3;
+          if (dst < dstRowEnd) {
+            iVar3 = (int)dstRowEnd - (int)dst;
+            pbVar4 = src + 3;
             do {
-              bVar2 = *pbVar4;
+              srcValue = *pbVar4;
               pbVar4 = pbVar4 + 4;
-              *param_5 = bVar2 << 1 | bVar2 >> 6 & 1;
-              param_5 = param_5 + 1;
+              *dst = srcValue << 1 | srcValue >> 6 & 1;
+              dst = dst + 1;
               iVar3 = iVar3 + -1;
             } while (iVar3 != 0);
           }
-          param_3 = param_3 + -1;
-          param_4 = param_4 + param_6;
-          param_5 = param_5 + param_8;
-          pbVar5 = pbVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = src + srcRowStride;
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
     break;
   case 0x1907:
-    if (param_11 == 0x1908) {
-      pbVar4 = param_4;
-      if (0 < param_3) {
+    if (srcFormat == 0x1908) {
+      pbVar4 = src;
+      if (0 < height) {
         do {
-          for (; param_5 < pbVar5; param_5 = param_5 + 3) {
-            *param_5 = *param_4 << 1 | *param_4 >> 6 & 1;
-            param_5[1] = param_4[1] << 1 | param_4[1] >> 6 & 1;
-            pbVar1 = param_4 + 2;
-            param_4 = param_4 + 4;
-            param_5[2] = *pbVar1 << 1 | *pbVar1 >> 6 & 1;
+          for (; dst < dstRowEnd; dst = dst + 3) {
+            *dst = *src << 1 | *src >> 6 & 1;
+            dst[1] = src[1] << 1 | src[1] >> 6 & 1;
+            srcComponent = src + 2;
+            src = src + 4;
+            dst[2] = *srcComponent << 1 | *srcComponent >> 6 & 1;
           }
-          param_3 = param_3 + -1;
-          param_4 = pbVar4 + param_6;
-          param_5 = param_5 + param_8;
-          pbVar5 = pbVar5 + param_9;
-          pbVar4 = param_4;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = pbVar4 + srcRowStride;
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+          pbVar4 = src;
+        } while (height != 0);
       }
     }
-    else if (param_11 < 0x1909) {
-      if (param_11 == 0x1905) {
-        pbVar4 = param_4;
-        if (0 < param_3) {
+    else if (srcFormat < 0x1909) {
+      if (srcFormat == 0x1905) {
+        pbVar4 = src;
+        if (0 < height) {
           do {
-            for (; param_5 < pbVar5; param_5 = param_5 + 3) {
-              *param_5 = 0;
-              param_5[1] = 0;
-              bVar2 = *param_4;
-              param_4 = param_4 + 1;
-              param_5[2] = bVar2 << 1 | bVar2 >> 6 & 1;
+            for (; dst < dstRowEnd; dst = dst + 3) {
+              *dst = 0;
+              dst[1] = 0;
+              srcValue = *src;
+              src = src + 1;
+              dst[2] = srcValue << 1 | srcValue >> 6 & 1;
             }
-            param_3 = param_3 + -1;
-            param_4 = pbVar4 + param_6;
-            param_5 = param_5 + param_8;
-            pbVar5 = pbVar5 + param_9;
-            pbVar4 = param_4;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = pbVar4 + srcRowStride;
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+            pbVar4 = src;
+          } while (height != 0);
         }
       }
-      else if (param_11 < 0x1906) {
-        if (param_11 == 0x1903) {
-          pbVar4 = param_4;
-          if (0 < param_3) {
+      else if (srcFormat < 0x1906) {
+        if (srcFormat == 0x1903) {
+          pbVar4 = src;
+          if (0 < height) {
             do {
-              for (; param_5 < pbVar5; param_5 = param_5 + 3) {
-                bVar2 = *param_4;
-                param_4 = param_4 + 1;
-                param_5[1] = 0;
-                param_5[2] = 0;
-                *param_5 = bVar2 << 1 | bVar2 >> 6 & 1;
+              for (; dst < dstRowEnd; dst = dst + 3) {
+                srcValue = *src;
+                src = src + 1;
+                dst[1] = 0;
+                dst[2] = 0;
+                *dst = srcValue << 1 | srcValue >> 6 & 1;
               }
-              param_3 = param_3 + -1;
-              param_4 = pbVar4 + param_6;
-              param_5 = param_5 + param_8;
-              pbVar5 = pbVar5 + param_9;
-              pbVar4 = param_4;
-            } while (param_3 != 0);
+              height = height + -1;
+              src = pbVar4 + srcRowStride;
+              dst = dst + dstRowSkip;
+              dstRowEnd = dstRowEnd + dstRowStride;
+              pbVar4 = src;
+            } while (height != 0);
           }
         }
         else {
-          if (param_11 != 0x1904) {
+          if (srcFormat != 0x1904) {
             return 0;
           }
-          pbVar4 = param_4;
-          if (0 < param_3) {
+          pbVar4 = src;
+          if (0 < height) {
             do {
-              for (; param_5 < pbVar5; param_5 = param_5 + 3) {
-                *param_5 = 0;
-                bVar2 = *param_4;
-                param_4 = param_4 + 1;
-                param_5[2] = 0;
-                param_5[1] = bVar2 << 1 | bVar2 >> 6 & 1;
+              for (; dst < dstRowEnd; dst = dst + 3) {
+                *dst = 0;
+                srcValue = *src;
+                src = src + 1;
+                dst[2] = 0;
+                dst[1] = srcValue << 1 | srcValue >> 6 & 1;
               }
-              param_3 = param_3 + -1;
-              param_4 = pbVar4 + param_6;
-              param_5 = param_5 + param_8;
-              pbVar5 = pbVar5 + param_9;
-              pbVar4 = param_4;
-            } while (param_3 != 0);
+              height = height + -1;
+              src = pbVar4 + srcRowStride;
+              dst = dst + dstRowSkip;
+              dstRowEnd = dstRowEnd + dstRowStride;
+              pbVar4 = src;
+            } while (height != 0);
           }
         }
       }
-      else if (param_11 == 0x1906) {
-        if (0 < param_3) {
+      else if (srcFormat == 0x1906) {
+        if (0 < height) {
           do {
-            for (; param_5 < pbVar5; param_5 = param_5 + 3) {
-              *param_5 = 0;
-              param_5[1] = 0;
-              param_5[2] = 0;
+            for (; dst < dstRowEnd; dst = dst + 3) {
+              *dst = 0;
+              dst[1] = 0;
+              dst[2] = 0;
             }
-            param_3 = param_3 + -1;
-            param_5 = param_5 + param_8;
-            pbVar5 = pbVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
       else {
-        if (param_11 != 0x1907) {
+        if (srcFormat != 0x1907) {
           return 0;
         }
-        pbVar4 = param_4;
-        if (0 < param_3) {
+        pbVar4 = src;
+        if (0 < height) {
           do {
-            for (; param_5 < pbVar5; param_5 = param_5 + 3) {
-              *param_5 = *param_4 << 1 | *param_4 >> 6 & 1;
-              param_5[1] = param_4[1] << 1 | param_4[1] >> 6 & 1;
-              pbVar1 = param_4 + 2;
-              param_4 = param_4 + 3;
-              param_5[2] = *pbVar1 << 1 | *pbVar1 >> 6 & 1;
+            for (; dst < dstRowEnd; dst = dst + 3) {
+              *dst = *src << 1 | *src >> 6 & 1;
+              dst[1] = src[1] << 1 | src[1] >> 6 & 1;
+              srcComponent = src + 2;
+              src = src + 3;
+              dst[2] = *srcComponent << 1 | *srcComponent >> 6 & 1;
             }
-            param_3 = param_3 + -1;
-            param_4 = pbVar4 + param_6;
-            param_5 = param_5 + param_8;
-            pbVar5 = pbVar5 + param_9;
-            pbVar4 = param_4;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = pbVar4 + srcRowStride;
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+            pbVar4 = src;
+          } while (height != 0);
         }
       }
     }
-    else if (param_11 == 0x8000) {
-      if (0 < param_3) {
+    else if (srcFormat == 0x8000) {
+      if (0 < height) {
         do {
-          if (param_5 < pbVar5) {
-            pbVar4 = param_4 + 1;
+          if (dst < dstRowEnd) {
+            pbVar4 = src + 1;
             do {
-              *param_5 = pbVar4[2] << 1 | pbVar4[2] >> 6 & 1;
-              param_5[1] = pbVar4[1] << 1 | pbVar4[1] >> 6 & 1;
-              bVar2 = *pbVar4;
+              *dst = pbVar4[2] << 1 | pbVar4[2] >> 6 & 1;
+              dst[1] = pbVar4[1] << 1 | pbVar4[1] >> 6 & 1;
+              srcValue = *pbVar4;
               pbVar4 = pbVar4 + 4;
-              param_5[2] = bVar2 << 1 | bVar2 >> 6 & 1;
-              param_5 = param_5 + 3;
-            } while (param_5 < pbVar5);
+              dst[2] = srcValue << 1 | srcValue >> 6 & 1;
+              dst = dst + 3;
+            } while (dst < dstRowEnd);
           }
-          param_3 = param_3 + -1;
-          param_4 = param_4 + param_6;
-          param_5 = param_5 + param_8;
-          pbVar5 = pbVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = src + srcRowStride;
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
-    else if (param_11 < 0x8001) {
-      if (param_11 == 0x1909) {
-        pbVar4 = param_4;
-        if (0 < param_3) {
+    else if (srcFormat < 0x8001) {
+      if (srcFormat == 0x1909) {
+        pbVar4 = src;
+        if (0 < height) {
           do {
-            for (; param_5 < pbVar5; param_5 = param_5 + 3) {
-              bVar2 = *param_4;
-              param_4 = param_4 + 1;
-              *param_5 = bVar2 << 1 | bVar2 >> 6 & 1;
-              param_5[2] = *param_5;
-              param_5[1] = *param_5;
+            for (; dst < dstRowEnd; dst = dst + 3) {
+              srcValue = *src;
+              src = src + 1;
+              *dst = srcValue << 1 | srcValue >> 6 & 1;
+              dst[2] = *dst;
+              dst[1] = *dst;
             }
-            param_3 = param_3 + -1;
-            param_4 = pbVar4 + param_6;
-            param_5 = param_5 + param_8;
-            pbVar5 = pbVar5 + param_9;
-            pbVar4 = param_4;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = pbVar4 + srcRowStride;
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+            pbVar4 = src;
+          } while (height != 0);
         }
       }
       else {
-        if (param_11 != 0x190a) {
+        if (srcFormat != 0x190a) {
           return 0;
         }
-        pbVar4 = param_4;
-        if (0 < param_3) {
+        pbVar4 = src;
+        if (0 < height) {
           do {
-            for (; param_5 < pbVar5; param_5 = param_5 + 3) {
-              bVar2 = *param_4;
-              param_4 = param_4 + 2;
-              *param_5 = bVar2 << 1 | bVar2 >> 6 & 1;
-              param_5[2] = *param_5;
-              param_5[1] = *param_5;
+            for (; dst < dstRowEnd; dst = dst + 3) {
+              srcValue = *src;
+              src = src + 2;
+              *dst = srcValue << 1 | srcValue >> 6 & 1;
+              dst[2] = *dst;
+              dst[1] = *dst;
             }
-            param_3 = param_3 + -1;
-            param_4 = pbVar4 + param_6;
-            param_5 = param_5 + param_8;
-            pbVar5 = pbVar5 + param_9;
-            pbVar4 = param_4;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = pbVar4 + srcRowStride;
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+            pbVar4 = src;
+          } while (height != 0);
         }
       }
     }
-    else if (param_11 == 0x80e0) {
-      pbVar4 = param_4;
-      if (0 < param_3) {
+    else if (srcFormat == 0x80e0) {
+      pbVar4 = src;
+      if (0 < height) {
         do {
-          for (; param_5 < pbVar5; param_5 = param_5 + 3) {
-            *param_5 = param_4[2] << 1 | param_4[2] >> 6 & 1;
-            param_5[1] = param_4[1] << 1 | param_4[1] >> 6 & 1;
-            bVar2 = *param_4;
-            param_4 = param_4 + 3;
-            param_5[2] = bVar2 << 1 | bVar2 >> 6 & 1;
+          for (; dst < dstRowEnd; dst = dst + 3) {
+            *dst = src[2] << 1 | src[2] >> 6 & 1;
+            dst[1] = src[1] << 1 | src[1] >> 6 & 1;
+            srcValue = *src;
+            src = src + 3;
+            dst[2] = srcValue << 1 | srcValue >> 6 & 1;
           }
-          param_3 = param_3 + -1;
-          param_4 = pbVar4 + param_6;
-          param_5 = param_5 + param_8;
-          pbVar5 = pbVar5 + param_9;
-          pbVar4 = param_4;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = pbVar4 + srcRowStride;
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+          pbVar4 = src;
+        } while (height != 0);
       }
     }
     else {
-      if (param_11 != 0x80e1) {
+      if (srcFormat != 0x80e1) {
         return 0;
       }
-      pbVar4 = param_4;
-      if (0 < param_3) {
+      pbVar4 = src;
+      if (0 < height) {
         do {
-          for (; param_5 < pbVar5; param_5 = param_5 + 3) {
-            *param_5 = param_4[2] << 1 | param_4[2] >> 6 & 1;
-            param_5[1] = param_4[1] << 1 | param_4[1] >> 6 & 1;
-            bVar2 = *param_4;
-            param_4 = param_4 + 4;
-            param_5[2] = bVar2 << 1 | bVar2 >> 6 & 1;
+          for (; dst < dstRowEnd; dst = dst + 3) {
+            *dst = src[2] << 1 | src[2] >> 6 & 1;
+            dst[1] = src[1] << 1 | src[1] >> 6 & 1;
+            srcValue = *src;
+            src = src + 4;
+            dst[2] = srcValue << 1 | srcValue >> 6 & 1;
           }
-          param_3 = param_3 + -1;
-          param_4 = pbVar4 + param_6;
-          param_5 = param_5 + param_8;
-          pbVar5 = pbVar5 + param_9;
-          pbVar4 = param_4;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = pbVar4 + srcRowStride;
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+          pbVar4 = src;
+        } while (height != 0);
       }
     }
     break;
   case 0x1908:
-    if (param_11 == 0x1908) {
-      if (0 < param_3) {
+    if (srcFormat == 0x1908) {
+      if (0 < height) {
         do {
-          if (param_5 < pbVar5) {
-            uVar6 = (uint)(pbVar5 + (3 - (int)param_5)) >> 2;
-            pbVar4 = param_4;
+          if (dst < dstRowEnd) {
+            pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
+            pbVar4 = src;
             do {
-              *param_5 = *pbVar4 << 1 | *pbVar4 >> 6 & 1;
-              param_5[1] = pbVar4[1] << 1 | pbVar4[1] >> 6 & 1;
-              param_5[2] = pbVar4[2] << 1 | pbVar4[2] >> 6 & 1;
-              pbVar1 = pbVar4 + 3;
+              *dst = *pbVar4 << 1 | *pbVar4 >> 6 & 1;
+              dst[1] = pbVar4[1] << 1 | pbVar4[1] >> 6 & 1;
+              dst[2] = pbVar4[2] << 1 | pbVar4[2] >> 6 & 1;
+              srcComponent = pbVar4 + 3;
               pbVar4 = pbVar4 + 4;
-              param_5[3] = *pbVar1 << 1 | *pbVar1 >> 6 & 1;
-              param_5 = param_5 + 4;
-              uVar6 = uVar6 - 1;
-            } while (uVar6 != 0);
+              dst[3] = *srcComponent << 1 | *srcComponent >> 6 & 1;
+              dst = dst + 4;
+              pixelsLeft = pixelsLeft - 1;
+            } while (pixelsLeft != 0);
           }
-          param_3 = param_3 + -1;
-          param_4 = param_4 + param_6;
-          param_5 = param_5 + param_8;
-          pbVar5 = pbVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = src + srcRowStride;
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
-    else if (param_11 < 0x1909) {
-      if (param_11 == 0x1905) {
-        if (0 < param_3) {
+    else if (srcFormat < 0x1909) {
+      if (srcFormat == 0x1905) {
+        if (0 < height) {
           do {
-            if (param_5 < pbVar5) {
-              uVar6 = (uint)(pbVar5 + (3 - (int)param_5)) >> 2;
-              pbVar4 = param_4;
+            if (dst < dstRowEnd) {
+              pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
+              pbVar4 = src;
               do {
-                *param_5 = 0;
-                param_5[1] = 0;
-                bVar2 = *pbVar4;
+                *dst = 0;
+                dst[1] = 0;
+                srcValue = *pbVar4;
                 pbVar4 = pbVar4 + 1;
-                param_5[3] = 0xff;
-                param_5[2] = bVar2 << 1 | bVar2 >> 6 & 1;
-                param_5 = param_5 + 4;
-                uVar6 = uVar6 - 1;
-              } while (uVar6 != 0);
+                dst[3] = 0xff;
+                dst[2] = srcValue << 1 | srcValue >> 6 & 1;
+                dst = dst + 4;
+                pixelsLeft = pixelsLeft - 1;
+              } while (pixelsLeft != 0);
             }
-            param_3 = param_3 + -1;
-            param_4 = param_4 + param_6;
-            param_5 = param_5 + param_8;
-            pbVar5 = pbVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = src + srcRowStride;
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
-      else if (param_11 < 0x1906) {
-        if (param_11 == 0x1903) {
-          if (0 < param_3) {
+      else if (srcFormat < 0x1906) {
+        if (srcFormat == 0x1903) {
+          if (0 < height) {
             do {
-              if (param_5 < pbVar5) {
-                uVar6 = (uint)(pbVar5 + (3 - (int)param_5)) >> 2;
-                pbVar4 = param_4;
+              if (dst < dstRowEnd) {
+                pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
+                pbVar4 = src;
                 do {
-                  bVar2 = *pbVar4;
+                  srcValue = *pbVar4;
                   pbVar4 = pbVar4 + 1;
-                  param_5[1] = 0;
-                  param_5[2] = 0;
-                  *param_5 = bVar2 << 1 | bVar2 >> 6 & 1;
-                  param_5[3] = 0xff;
-                  param_5 = param_5 + 4;
-                  uVar6 = uVar6 - 1;
-                } while (uVar6 != 0);
+                  dst[1] = 0;
+                  dst[2] = 0;
+                  *dst = srcValue << 1 | srcValue >> 6 & 1;
+                  dst[3] = 0xff;
+                  dst = dst + 4;
+                  pixelsLeft = pixelsLeft - 1;
+                } while (pixelsLeft != 0);
               }
-              param_3 = param_3 + -1;
-              param_4 = param_4 + param_6;
-              param_5 = param_5 + param_8;
-              pbVar5 = pbVar5 + param_9;
-            } while (param_3 != 0);
+              height = height + -1;
+              src = src + srcRowStride;
+              dst = dst + dstRowSkip;
+              dstRowEnd = dstRowEnd + dstRowStride;
+            } while (height != 0);
           }
         }
         else {
-          if (param_11 != 0x1904) {
+          if (srcFormat != 0x1904) {
             return 0;
           }
-          if (0 < param_3) {
+          if (0 < height) {
             do {
-              if (param_5 < pbVar5) {
-                uVar6 = (uint)(pbVar5 + (3 - (int)param_5)) >> 2;
-                pbVar4 = param_4;
+              if (dst < dstRowEnd) {
+                pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
+                pbVar4 = src;
                 do {
-                  *param_5 = 0;
-                  bVar2 = *pbVar4;
+                  *dst = 0;
+                  srcValue = *pbVar4;
                   pbVar4 = pbVar4 + 1;
-                  param_5[2] = 0;
-                  param_5[3] = 0xff;
-                  param_5[1] = bVar2 << 1 | bVar2 >> 6 & 1;
-                  param_5 = param_5 + 4;
-                  uVar6 = uVar6 - 1;
-                } while (uVar6 != 0);
+                  dst[2] = 0;
+                  dst[3] = 0xff;
+                  dst[1] = srcValue << 1 | srcValue >> 6 & 1;
+                  dst = dst + 4;
+                  pixelsLeft = pixelsLeft - 1;
+                } while (pixelsLeft != 0);
               }
-              param_3 = param_3 + -1;
-              param_4 = param_4 + param_6;
-              param_5 = param_5 + param_8;
-              pbVar5 = pbVar5 + param_9;
-            } while (param_3 != 0);
+              height = height + -1;
+              src = src + srcRowStride;
+              dst = dst + dstRowSkip;
+              dstRowEnd = dstRowEnd + dstRowStride;
+            } while (height != 0);
           }
         }
       }
-      else if (param_11 == 0x1906) {
-        if (0 < param_3) {
+      else if (srcFormat == 0x1906) {
+        if (0 < height) {
           do {
-            if (param_5 < pbVar5) {
-              uVar6 = (uint)(pbVar5 + (3 - (int)param_5)) >> 2;
-              pbVar4 = param_4;
+            if (dst < dstRowEnd) {
+              pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
+              pbVar4 = src;
               do {
-                *param_5 = 0;
-                param_5[1] = 0;
-                param_5[2] = 0;
-                bVar2 = *pbVar4;
+                *dst = 0;
+                dst[1] = 0;
+                dst[2] = 0;
+                srcValue = *pbVar4;
                 pbVar4 = pbVar4 + 1;
-                param_5[3] = bVar2 << 1 | bVar2 >> 6 & 1;
-                param_5 = param_5 + 4;
-                uVar6 = uVar6 - 1;
-              } while (uVar6 != 0);
+                dst[3] = srcValue << 1 | srcValue >> 6 & 1;
+                dst = dst + 4;
+                pixelsLeft = pixelsLeft - 1;
+              } while (pixelsLeft != 0);
             }
-            param_3 = param_3 + -1;
-            param_4 = param_4 + param_6;
-            param_5 = param_5 + param_8;
-            pbVar5 = pbVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = src + srcRowStride;
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
       else {
-        if (param_11 != 0x1907) {
+        if (srcFormat != 0x1907) {
           return 0;
         }
-        if (0 < param_3) {
+        if (0 < height) {
           do {
-            if (param_5 < pbVar5) {
-              uVar6 = (uint)(pbVar5 + (3 - (int)param_5)) >> 2;
-              pbVar4 = param_4;
+            if (dst < dstRowEnd) {
+              pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
+              pbVar4 = src;
               do {
-                *param_5 = *pbVar4 << 1 | *pbVar4 >> 6 & 1;
-                param_5[1] = pbVar4[1] << 1 | pbVar4[1] >> 6 & 1;
-                bVar2 = pbVar4[2];
+                *dst = *pbVar4 << 1 | *pbVar4 >> 6 & 1;
+                dst[1] = pbVar4[1] << 1 | pbVar4[1] >> 6 & 1;
+                srcValue = pbVar4[2];
                 pbVar4 = pbVar4 + 3;
-                param_5[3] = 0xff;
-                param_5[2] = bVar2 << 1 | bVar2 >> 6 & 1;
-                param_5 = param_5 + 4;
-                uVar6 = uVar6 - 1;
-              } while (uVar6 != 0);
+                dst[3] = 0xff;
+                dst[2] = srcValue << 1 | srcValue >> 6 & 1;
+                dst = dst + 4;
+                pixelsLeft = pixelsLeft - 1;
+              } while (pixelsLeft != 0);
             }
-            param_3 = param_3 + -1;
-            param_4 = param_4 + param_6;
-            param_5 = param_5 + param_8;
-            pbVar5 = pbVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = src + srcRowStride;
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
     }
-    else if (param_11 == 0x8000) {
-      if (0 < param_3) {
+    else if (srcFormat == 0x8000) {
+      if (0 < height) {
         do {
-          if (param_5 < pbVar5) {
-            uVar6 = (uint)(pbVar5 + (3 - (int)param_5)) >> 2;
-            pbVar4 = param_4;
+          if (dst < dstRowEnd) {
+            pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
+            pbVar4 = src;
             do {
-              *param_5 = pbVar4[3] << 1 | pbVar4[3] >> 6 & 1;
-              param_5[1] = pbVar4[2] << 1 | pbVar4[2] >> 6 & 1;
-              param_5[2] = pbVar4[1] << 1 | pbVar4[1] >> 6 & 1;
-              bVar2 = *pbVar4;
+              *dst = pbVar4[3] << 1 | pbVar4[3] >> 6 & 1;
+              dst[1] = pbVar4[2] << 1 | pbVar4[2] >> 6 & 1;
+              dst[2] = pbVar4[1] << 1 | pbVar4[1] >> 6 & 1;
+              srcValue = *pbVar4;
               pbVar4 = pbVar4 + 4;
-              param_5[3] = bVar2 << 1 | bVar2 >> 6 & 1;
-              param_5 = param_5 + 4;
-              uVar6 = uVar6 - 1;
-            } while (uVar6 != 0);
+              dst[3] = srcValue << 1 | srcValue >> 6 & 1;
+              dst = dst + 4;
+              pixelsLeft = pixelsLeft - 1;
+            } while (pixelsLeft != 0);
           }
-          param_3 = param_3 + -1;
-          param_4 = param_4 + param_6;
-          param_5 = param_5 + param_8;
-          pbVar5 = pbVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = src + srcRowStride;
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
-    else if (param_11 < 0x8001) {
-      if (param_11 == 0x1909) {
-        if (0 < param_3) {
+    else if (srcFormat < 0x8001) {
+      if (srcFormat == 0x1909) {
+        if (0 < height) {
           do {
-            if (param_5 < pbVar5) {
-              uVar6 = (uint)(pbVar5 + (3 - (int)param_5)) >> 2;
-              pbVar4 = param_4;
+            if (dst < dstRowEnd) {
+              pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
+              pbVar4 = src;
               do {
-                bVar2 = *pbVar4;
+                srcValue = *pbVar4;
                 pbVar4 = pbVar4 + 1;
-                param_5[3] = 0xff;
-                *param_5 = bVar2 << 1 | bVar2 >> 6 & 1;
-                param_5[2] = *param_5;
-                param_5[1] = *param_5;
-                param_5 = param_5 + 4;
-                uVar6 = uVar6 - 1;
-              } while (uVar6 != 0);
+                dst[3] = 0xff;
+                *dst = srcValue << 1 | srcValue >> 6 & 1;
+                dst[2] = *dst;
+                dst[1] = *dst;
+                dst = dst + 4;
+                pixelsLeft = pixelsLeft - 1;
+              } while (pixelsLeft != 0);
             }
-            param_3 = param_3 + -1;
-            param_4 = param_4 + param_6;
-            param_5 = param_5 + param_8;
-            pbVar5 = pbVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = src + srcRowStride;
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
       else {
-        if (param_11 != 0x190a) {
+        if (srcFormat != 0x190a) {
           return 0;
         }
-        if (0 < param_3) {
+        if (0 < height) {
           do {
-            if (param_5 < pbVar5) {
-              uVar6 = (uint)(pbVar5 + (3 - (int)param_5)) >> 2;
-              pbVar4 = param_4;
+            if (dst < dstRowEnd) {
+              pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
+              pbVar4 = src;
               do {
-                *param_5 = *pbVar4 << 1 | *pbVar4 >> 6 & 1;
-                param_5[2] = *param_5;
-                param_5[1] = *param_5;
-                pbVar1 = pbVar4 + 1;
+                *dst = *pbVar4 << 1 | *pbVar4 >> 6 & 1;
+                dst[2] = *dst;
+                dst[1] = *dst;
+                srcComponent = pbVar4 + 1;
                 pbVar4 = pbVar4 + 2;
-                param_5[3] = *pbVar1 << 1 | *pbVar1 >> 6 & 1;
-                param_5 = param_5 + 4;
-                uVar6 = uVar6 - 1;
-              } while (uVar6 != 0);
+                dst[3] = *srcComponent << 1 | *srcComponent >> 6 & 1;
+                dst = dst + 4;
+                pixelsLeft = pixelsLeft - 1;
+              } while (pixelsLeft != 0);
             }
-            param_3 = param_3 + -1;
-            param_4 = param_4 + param_6;
-            param_5 = param_5 + param_8;
-            pbVar5 = pbVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = src + srcRowStride;
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
     }
-    else if (param_11 == 0x80e0) {
-      if (0 < param_3) {
+    else if (srcFormat == 0x80e0) {
+      if (0 < height) {
         do {
-          if (param_5 < pbVar5) {
-            uVar6 = (uint)(pbVar5 + (3 - (int)param_5)) >> 2;
-            pbVar4 = param_4;
+          if (dst < dstRowEnd) {
+            pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
+            pbVar4 = src;
             do {
-              *param_5 = pbVar4[2] << 1 | pbVar4[2] >> 6 & 1;
-              param_5[1] = pbVar4[1] << 1 | pbVar4[1] >> 6 & 1;
-              bVar2 = *pbVar4;
+              *dst = pbVar4[2] << 1 | pbVar4[2] >> 6 & 1;
+              dst[1] = pbVar4[1] << 1 | pbVar4[1] >> 6 & 1;
+              srcValue = *pbVar4;
               pbVar4 = pbVar4 + 3;
-              param_5[3] = 0xff;
-              param_5[2] = bVar2 << 1 | bVar2 >> 6 & 1;
-              param_5 = param_5 + 4;
-              uVar6 = uVar6 - 1;
-            } while (uVar6 != 0);
+              dst[3] = 0xff;
+              dst[2] = srcValue << 1 | srcValue >> 6 & 1;
+              dst = dst + 4;
+              pixelsLeft = pixelsLeft - 1;
+            } while (pixelsLeft != 0);
           }
-          param_3 = param_3 + -1;
-          param_4 = param_4 + param_6;
-          param_5 = param_5 + param_8;
-          pbVar5 = pbVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = src + srcRowStride;
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
     else {
-      if (param_11 != 0x80e1) {
+      if (srcFormat != 0x80e1) {
         return 0;
       }
-      if (0 < param_3) {
+      if (0 < height) {
         do {
-          if (param_5 < pbVar5) {
-            uVar6 = (uint)(pbVar5 + (3 - (int)param_5)) >> 2;
-            pbVar4 = param_4;
+          if (dst < dstRowEnd) {
+            pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
+            pbVar4 = src;
             do {
-              *param_5 = pbVar4[2] << 1 | pbVar4[2] >> 6 & 1;
-              param_5[1] = pbVar4[1] << 1 | pbVar4[1] >> 6 & 1;
-              param_5[2] = *pbVar4 << 1 | *pbVar4 >> 6 & 1;
-              pbVar1 = pbVar4 + 3;
+              *dst = pbVar4[2] << 1 | pbVar4[2] >> 6 & 1;
+              dst[1] = pbVar4[1] << 1 | pbVar4[1] >> 6 & 1;
+              dst[2] = *pbVar4 << 1 | *pbVar4 >> 6 & 1;
+              srcComponent = pbVar4 + 3;
               pbVar4 = pbVar4 + 4;
-              param_5[3] = *pbVar1 << 1 | *pbVar1 >> 6 & 1;
-              param_5 = param_5 + 4;
-              uVar6 = uVar6 - 1;
-            } while (uVar6 != 0);
+              dst[3] = *srcComponent << 1 | *srcComponent >> 6 & 1;
+              dst = dst + 4;
+              pixelsLeft = pixelsLeft - 1;
+            } while (pixelsLeft != 0);
           }
-          param_3 = param_3 + -1;
-          param_4 = param_4 + param_6;
-          param_5 = param_5 + param_8;
-          pbVar5 = pbVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = src + srcRowStride;
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
     break;
   case 0x1909:
-    if (param_11 == 0x1908) {
-      if (0 < param_3) {
+    if (srcFormat == 0x1908) {
+      if (0 < height) {
         do {
-          if (param_5 < pbVar5) {
-            iVar3 = (int)pbVar5 - (int)param_5;
-            pbVar4 = param_4;
+          if (dst < dstRowEnd) {
+            iVar3 = (int)dstRowEnd - (int)dst;
+            pbVar4 = src;
             do {
-              bVar2 = *pbVar4;
+              srcValue = *pbVar4;
               pbVar4 = pbVar4 + 4;
-              *param_5 = bVar2 << 1 | bVar2 >> 6 & 1;
-              param_5 = param_5 + 1;
+              *dst = srcValue << 1 | srcValue >> 6 & 1;
+              dst = dst + 1;
               iVar3 = iVar3 + -1;
             } while (iVar3 != 0);
           }
-          param_3 = param_3 + -1;
-          param_4 = param_4 + param_6;
-          param_5 = param_5 + param_8;
-          pbVar5 = pbVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = src + srcRowStride;
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
-    else if (param_11 < 0x1909) {
-      if (param_11 < 0x1907) {
-        if (param_11 < 0x1904) {
-          if (param_11 != 0x1903) {
+    else if (srcFormat < 0x1909) {
+      if (srcFormat < 0x1907) {
+        if (srcFormat < 0x1904) {
+          if (srcFormat != 0x1903) {
             return 0;
           }
-          if (0 < param_3) {
+          if (0 < height) {
             do {
-              if (param_5 < pbVar5) {
-                iVar3 = (int)pbVar5 - (int)param_5;
-                pbVar4 = param_4;
+              if (dst < dstRowEnd) {
+                iVar3 = (int)dstRowEnd - (int)dst;
+                pbVar4 = src;
                 do {
-                  bVar2 = *pbVar4;
+                  srcValue = *pbVar4;
                   pbVar4 = pbVar4 + 1;
-                  *param_5 = bVar2 << 1 | bVar2 >> 6 & 1;
-                  param_5 = param_5 + 1;
+                  *dst = srcValue << 1 | srcValue >> 6 & 1;
+                  dst = dst + 1;
                   iVar3 = iVar3 + -1;
                 } while (iVar3 != 0);
               }
-              param_3 = param_3 + -1;
-              param_4 = param_4 + param_6;
-              param_5 = param_5 + param_8;
-              pbVar5 = pbVar5 + param_9;
-            } while (param_3 != 0);
+              height = height + -1;
+              src = src + srcRowStride;
+              dst = dst + dstRowSkip;
+              dstRowEnd = dstRowEnd + dstRowStride;
+            } while (height != 0);
           }
         }
-        else if (0 < param_3) {
+        else if (0 < height) {
           do {
-            if (param_5 < pbVar5) {
-              iVar3 = (int)pbVar5 - (int)param_5;
+            if (dst < dstRowEnd) {
+              iVar3 = (int)dstRowEnd - (int)dst;
               do {
-                *param_5 = 0;
-                param_5 = param_5 + 1;
+                *dst = 0;
+                dst = dst + 1;
                 iVar3 = iVar3 + -1;
               } while (iVar3 != 0);
             }
-            param_3 = param_3 + -1;
-            param_5 = param_5 + param_8;
-            pbVar5 = pbVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
-      else if (0 < param_3) {
+      else if (0 < height) {
         do {
-          if (param_5 < pbVar5) {
-            iVar3 = (int)pbVar5 - (int)param_5;
-            pbVar4 = param_4;
+          if (dst < dstRowEnd) {
+            iVar3 = (int)dstRowEnd - (int)dst;
+            pbVar4 = src;
             do {
-              bVar2 = *pbVar4;
+              srcValue = *pbVar4;
               pbVar4 = pbVar4 + 3;
-              *param_5 = bVar2 << 1 | bVar2 >> 6 & 1;
-              param_5 = param_5 + 1;
+              *dst = srcValue << 1 | srcValue >> 6 & 1;
+              dst = dst + 1;
               iVar3 = iVar3 + -1;
             } while (iVar3 != 0);
           }
-          param_3 = param_3 + -1;
-          param_4 = param_4 + param_6;
-          param_5 = param_5 + param_8;
-          pbVar5 = pbVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = src + srcRowStride;
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
-    else if (param_11 == 0x8000) {
-      if (0 < param_3) {
+    else if (srcFormat == 0x8000) {
+      if (0 < height) {
         do {
-          if (param_5 < pbVar5) {
-            iVar3 = (int)pbVar5 - (int)param_5;
-            pbVar4 = param_4 + 3;
+          if (dst < dstRowEnd) {
+            iVar3 = (int)dstRowEnd - (int)dst;
+            pbVar4 = src + 3;
             do {
-              bVar2 = *pbVar4;
+              srcValue = *pbVar4;
               pbVar4 = pbVar4 + 4;
-              *param_5 = bVar2 << 1 | bVar2 >> 6 & 1;
-              param_5 = param_5 + 1;
+              *dst = srcValue << 1 | srcValue >> 6 & 1;
+              dst = dst + 1;
               iVar3 = iVar3 + -1;
             } while (iVar3 != 0);
           }
-          param_3 = param_3 + -1;
-          param_4 = param_4 + param_6;
-          param_5 = param_5 + param_8;
-          pbVar5 = pbVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = src + srcRowStride;
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
-    else if (param_11 < 0x8001) {
-      if (param_11 == 0x1909) {
-        if (0 < param_3) {
+    else if (srcFormat < 0x8001) {
+      if (srcFormat == 0x1909) {
+        if (0 < height) {
           do {
-            if (param_5 < pbVar5) {
-              iVar3 = (int)pbVar5 - (int)param_5;
-              pbVar4 = param_4;
+            if (dst < dstRowEnd) {
+              iVar3 = (int)dstRowEnd - (int)dst;
+              pbVar4 = src;
               do {
-                bVar2 = *pbVar4;
+                srcValue = *pbVar4;
                 pbVar4 = pbVar4 + 1;
-                *param_5 = bVar2 << 1 | bVar2 >> 6 & 1;
-                param_5 = param_5 + 1;
+                *dst = srcValue << 1 | srcValue >> 6 & 1;
+                dst = dst + 1;
                 iVar3 = iVar3 + -1;
               } while (iVar3 != 0);
             }
-            param_3 = param_3 + -1;
-            param_4 = param_4 + param_6;
-            param_5 = param_5 + param_8;
-            pbVar5 = pbVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = src + srcRowStride;
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
       else {
-        if (param_11 != 0x190a) {
+        if (srcFormat != 0x190a) {
           return 0;
         }
-        if (0 < param_3) {
+        if (0 < height) {
           do {
-            if (param_5 < pbVar5) {
-              iVar3 = (int)pbVar5 - (int)param_5;
-              pbVar4 = param_4;
+            if (dst < dstRowEnd) {
+              iVar3 = (int)dstRowEnd - (int)dst;
+              pbVar4 = src;
               do {
-                bVar2 = *pbVar4;
+                srcValue = *pbVar4;
                 pbVar4 = pbVar4 + 2;
-                *param_5 = bVar2 << 1 | bVar2 >> 6 & 1;
-                param_5 = param_5 + 1;
+                *dst = srcValue << 1 | srcValue >> 6 & 1;
+                dst = dst + 1;
                 iVar3 = iVar3 + -1;
               } while (iVar3 != 0);
             }
-            param_3 = param_3 + -1;
-            param_4 = param_4 + param_6;
-            param_5 = param_5 + param_8;
-            pbVar5 = pbVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = src + srcRowStride;
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
     }
-    else if (param_11 == 0x80e0) {
-      if (0 < param_3) {
+    else if (srcFormat == 0x80e0) {
+      if (0 < height) {
         do {
-          if (param_5 < pbVar5) {
-            iVar3 = (int)pbVar5 - (int)param_5;
-            pbVar4 = param_4 + 2;
+          if (dst < dstRowEnd) {
+            iVar3 = (int)dstRowEnd - (int)dst;
+            pbVar4 = src + 2;
             do {
-              bVar2 = *pbVar4;
+              srcValue = *pbVar4;
               pbVar4 = pbVar4 + 3;
-              *param_5 = bVar2 << 1 | bVar2 >> 6 & 1;
-              param_5 = param_5 + 1;
+              *dst = srcValue << 1 | srcValue >> 6 & 1;
+              dst = dst + 1;
               iVar3 = iVar3 + -1;
             } while (iVar3 != 0);
           }
-          param_3 = param_3 + -1;
-          param_4 = param_4 + param_6;
-          param_5 = param_5 + param_8;
-          pbVar5 = pbVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = src + srcRowStride;
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
     else {
-      if (param_11 != 0x80e1) {
+      if (srcFormat != 0x80e1) {
         return 0;
       }
-      if (0 < param_3) {
+      if (0 < height) {
         do {
-          if (param_5 < pbVar5) {
-            iVar3 = (int)pbVar5 - (int)param_5;
-            pbVar4 = param_4 + 2;
+          if (dst < dstRowEnd) {
+            iVar3 = (int)dstRowEnd - (int)dst;
+            pbVar4 = src + 2;
             do {
-              bVar2 = *pbVar4;
+              srcValue = *pbVar4;
               pbVar4 = pbVar4 + 4;
-              *param_5 = bVar2 << 1 | bVar2 >> 6 & 1;
-              param_5 = param_5 + 1;
+              *dst = srcValue << 1 | srcValue >> 6 & 1;
+              dst = dst + 1;
               iVar3 = iVar3 + -1;
             } while (iVar3 != 0);
           }
-          param_3 = param_3 + -1;
-          param_4 = param_4 + param_6;
-          param_5 = param_5 + param_8;
-          pbVar5 = pbVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = src + srcRowStride;
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
     break;
   case 0x190a:
-    if (param_11 == 0x1908) {
-      if (0 < param_3) {
+    if (srcFormat == 0x1908) {
+      if (0 < height) {
         do {
-          if (param_5 < pbVar5) {
-            uVar6 = (uint)(pbVar5 + (1 - (int)param_5)) >> 1;
-            pbVar4 = param_4;
+          if (dst < dstRowEnd) {
+            pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
+            pbVar4 = src;
             do {
-              *param_5 = *pbVar4 << 1 | *pbVar4 >> 6 & 1;
-              pbVar1 = pbVar4 + 3;
+              *dst = *pbVar4 << 1 | *pbVar4 >> 6 & 1;
+              srcComponent = pbVar4 + 3;
               pbVar4 = pbVar4 + 4;
-              param_5[1] = *pbVar1 << 1 | *pbVar1 >> 6 & 1;
-              param_5 = param_5 + 2;
-              uVar6 = uVar6 - 1;
-            } while (uVar6 != 0);
+              dst[1] = *srcComponent << 1 | *srcComponent >> 6 & 1;
+              dst = dst + 2;
+              pixelsLeft = pixelsLeft - 1;
+            } while (pixelsLeft != 0);
           }
-          param_3 = param_3 + -1;
-          param_4 = param_4 + param_6;
-          param_5 = param_5 + param_8;
-          pbVar5 = pbVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = src + srcRowStride;
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
-    else if (param_11 < 0x1909) {
-      if (param_11 < 0x1906) {
-        if (param_11 < 0x1904) {
-          if (param_11 != 0x1903) {
+    else if (srcFormat < 0x1909) {
+      if (srcFormat < 0x1906) {
+        if (srcFormat < 0x1904) {
+          if (srcFormat != 0x1903) {
             return 0;
           }
-          if (0 < param_3) {
+          if (0 < height) {
             do {
-              if (param_5 < pbVar5) {
-                uVar6 = (uint)(pbVar5 + (1 - (int)param_5)) >> 1;
-                pbVar4 = param_4;
+              if (dst < dstRowEnd) {
+                pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
+                pbVar4 = src;
                 do {
-                  bVar2 = *pbVar4;
+                  srcValue = *pbVar4;
                   pbVar4 = pbVar4 + 1;
-                  param_5[1] = 0xff;
-                  *param_5 = bVar2 << 1 | bVar2 >> 6 & 1;
-                  param_5 = param_5 + 2;
-                  uVar6 = uVar6 - 1;
-                } while (uVar6 != 0);
+                  dst[1] = 0xff;
+                  *dst = srcValue << 1 | srcValue >> 6 & 1;
+                  dst = dst + 2;
+                  pixelsLeft = pixelsLeft - 1;
+                } while (pixelsLeft != 0);
               }
-              param_3 = param_3 + -1;
-              param_4 = param_4 + param_6;
-              param_5 = param_5 + param_8;
-              pbVar5 = pbVar5 + param_9;
-            } while (param_3 != 0);
+              height = height + -1;
+              src = src + srcRowStride;
+              dst = dst + dstRowSkip;
+              dstRowEnd = dstRowEnd + dstRowStride;
+            } while (height != 0);
           }
         }
-        else if (0 < param_3) {
+        else if (0 < height) {
           do {
-            if (param_5 < pbVar5) {
-              uVar6 = (uint)(pbVar5 + (1 - (int)param_5)) >> 1;
+            if (dst < dstRowEnd) {
+              pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
               do {
-                *param_5 = 0;
-                param_5[1] = 0xff;
-                param_5 = param_5 + 2;
-                uVar6 = uVar6 - 1;
-              } while (uVar6 != 0);
+                *dst = 0;
+                dst[1] = 0xff;
+                dst = dst + 2;
+                pixelsLeft = pixelsLeft - 1;
+              } while (pixelsLeft != 0);
             }
-            param_3 = param_3 + -1;
-            param_5 = param_5 + param_8;
-            pbVar5 = pbVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
-      else if (param_11 == 0x1906) {
-        if (0 < param_3) {
+      else if (srcFormat == 0x1906) {
+        if (0 < height) {
           do {
-            if (param_5 < pbVar5) {
-              uVar6 = (uint)(pbVar5 + (1 - (int)param_5)) >> 1;
-              pbVar4 = param_4;
+            if (dst < dstRowEnd) {
+              pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
+              pbVar4 = src;
               do {
-                *param_5 = 0;
-                bVar2 = *pbVar4;
+                *dst = 0;
+                srcValue = *pbVar4;
                 pbVar4 = pbVar4 + 1;
-                param_5[1] = bVar2 << 1 | bVar2 >> 6 & 1;
-                param_5 = param_5 + 2;
-                uVar6 = uVar6 - 1;
-              } while (uVar6 != 0);
+                dst[1] = srcValue << 1 | srcValue >> 6 & 1;
+                dst = dst + 2;
+                pixelsLeft = pixelsLeft - 1;
+              } while (pixelsLeft != 0);
             }
-            param_3 = param_3 + -1;
-            param_4 = param_4 + param_6;
-            param_5 = param_5 + param_8;
-            pbVar5 = pbVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = src + srcRowStride;
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
       else {
-        if (param_11 != 0x1907) {
+        if (srcFormat != 0x1907) {
           return 0;
         }
-        if (0 < param_3) {
+        if (0 < height) {
           do {
-            if (param_5 < pbVar5) {
-              uVar6 = (uint)(pbVar5 + (1 - (int)param_5)) >> 1;
-              pbVar4 = param_4;
+            if (dst < dstRowEnd) {
+              pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
+              pbVar4 = src;
               do {
-                bVar2 = *pbVar4;
+                srcValue = *pbVar4;
                 pbVar4 = pbVar4 + 3;
-                param_5[1] = 0xff;
-                *param_5 = bVar2 << 1 | bVar2 >> 6 & 1;
-                param_5 = param_5 + 2;
-                uVar6 = uVar6 - 1;
-              } while (uVar6 != 0);
+                dst[1] = 0xff;
+                *dst = srcValue << 1 | srcValue >> 6 & 1;
+                dst = dst + 2;
+                pixelsLeft = pixelsLeft - 1;
+              } while (pixelsLeft != 0);
             }
-            param_3 = param_3 + -1;
-            param_4 = param_4 + param_6;
-            param_5 = param_5 + param_8;
-            pbVar5 = pbVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = src + srcRowStride;
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
     }
-    else if (param_11 == 0x8000) {
-      if (0 < param_3) {
+    else if (srcFormat == 0x8000) {
+      if (0 < height) {
         do {
-          if (param_5 < pbVar5) {
-            uVar6 = (uint)(pbVar5 + (1 - (int)param_5)) >> 1;
-            pbVar4 = param_4;
+          if (dst < dstRowEnd) {
+            pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
+            pbVar4 = src;
             do {
-              *param_5 = pbVar4[3] << 1 | pbVar4[3] >> 6 & 1;
-              bVar2 = *pbVar4;
+              *dst = pbVar4[3] << 1 | pbVar4[3] >> 6 & 1;
+              srcValue = *pbVar4;
               pbVar4 = pbVar4 + 4;
-              param_5[1] = bVar2 << 1 | bVar2 >> 6 & 1;
-              param_5 = param_5 + 2;
-              uVar6 = uVar6 - 1;
-            } while (uVar6 != 0);
+              dst[1] = srcValue << 1 | srcValue >> 6 & 1;
+              dst = dst + 2;
+              pixelsLeft = pixelsLeft - 1;
+            } while (pixelsLeft != 0);
           }
-          param_3 = param_3 + -1;
-          param_4 = param_4 + param_6;
-          param_5 = param_5 + param_8;
-          pbVar5 = pbVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = src + srcRowStride;
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
-    else if (param_11 < 0x8001) {
-      if (param_11 == 0x1909) {
-        if (0 < param_3) {
+    else if (srcFormat < 0x8001) {
+      if (srcFormat == 0x1909) {
+        if (0 < height) {
           do {
-            if (param_5 < pbVar5) {
-              uVar6 = (uint)(pbVar5 + (1 - (int)param_5)) >> 1;
-              pbVar4 = param_4;
+            if (dst < dstRowEnd) {
+              pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
+              pbVar4 = src;
               do {
-                bVar2 = *pbVar4;
+                srcValue = *pbVar4;
                 pbVar4 = pbVar4 + 1;
-                param_5[1] = 0xff;
-                *param_5 = bVar2 << 1 | bVar2 >> 6 & 1;
-                param_5 = param_5 + 2;
-                uVar6 = uVar6 - 1;
-              } while (uVar6 != 0);
+                dst[1] = 0xff;
+                *dst = srcValue << 1 | srcValue >> 6 & 1;
+                dst = dst + 2;
+                pixelsLeft = pixelsLeft - 1;
+              } while (pixelsLeft != 0);
             }
-            param_3 = param_3 + -1;
-            param_4 = param_4 + param_6;
-            param_5 = param_5 + param_8;
-            pbVar5 = pbVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = src + srcRowStride;
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
       else {
-        if (param_11 != 0x190a) {
+        if (srcFormat != 0x190a) {
           return 0;
         }
-        if (0 < param_3) {
+        if (0 < height) {
           do {
-            if (param_5 < pbVar5) {
-              uVar6 = (uint)(pbVar5 + (1 - (int)param_5)) >> 1;
-              pbVar4 = param_4;
+            if (dst < dstRowEnd) {
+              pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
+              pbVar4 = src;
               do {
-                *param_5 = *pbVar4 << 1 | *pbVar4 >> 6 & 1;
-                pbVar1 = pbVar4 + 1;
+                *dst = *pbVar4 << 1 | *pbVar4 >> 6 & 1;
+                srcComponent = pbVar4 + 1;
                 pbVar4 = pbVar4 + 2;
-                param_5[1] = *pbVar1 << 1 | *pbVar1 >> 6 & 1;
-                param_5 = param_5 + 2;
-                uVar6 = uVar6 - 1;
-              } while (uVar6 != 0);
+                dst[1] = *srcComponent << 1 | *srcComponent >> 6 & 1;
+                dst = dst + 2;
+                pixelsLeft = pixelsLeft - 1;
+              } while (pixelsLeft != 0);
             }
-            param_3 = param_3 + -1;
-            param_4 = param_4 + param_6;
-            param_5 = param_5 + param_8;
-            pbVar5 = pbVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = src + srcRowStride;
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
     }
-    else if (param_11 == 0x80e0) {
-      if (0 < param_3) {
+    else if (srcFormat == 0x80e0) {
+      if (0 < height) {
         do {
-          if (param_5 < pbVar5) {
-            pbVar4 = param_4 + 2;
-            uVar6 = (uint)(pbVar5 + (1 - (int)param_5)) >> 1;
+          if (dst < dstRowEnd) {
+            pbVar4 = src + 2;
+            pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
             do {
-              bVar2 = *pbVar4;
+              srcValue = *pbVar4;
               pbVar4 = pbVar4 + 3;
-              param_5[1] = 0xff;
-              *param_5 = bVar2 << 1 | bVar2 >> 6 & 1;
-              param_5 = param_5 + 2;
-              uVar6 = uVar6 - 1;
-            } while (uVar6 != 0);
+              dst[1] = 0xff;
+              *dst = srcValue << 1 | srcValue >> 6 & 1;
+              dst = dst + 2;
+              pixelsLeft = pixelsLeft - 1;
+            } while (pixelsLeft != 0);
           }
-          param_3 = param_3 + -1;
-          param_4 = param_4 + param_6;
-          param_5 = param_5 + param_8;
-          pbVar5 = pbVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = src + srcRowStride;
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
     else {
-      if (param_11 != 0x80e1) {
+      if (srcFormat != 0x80e1) {
         return 0;
       }
-      if (0 < param_3) {
+      if (0 < height) {
         do {
-          if (param_5 < pbVar5) {
-            pbVar4 = param_4 + 3;
-            uVar6 = (uint)(pbVar5 + (1 - (int)param_5)) >> 1;
+          if (dst < dstRowEnd) {
+            pbVar4 = src + 3;
+            pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
             do {
-              *param_5 = pbVar4[-1] << 1 | pbVar4[-1] >> 6 & 1;
-              bVar2 = *pbVar4;
+              *dst = pbVar4[-1] << 1 | pbVar4[-1] >> 6 & 1;
+              srcValue = *pbVar4;
               pbVar4 = pbVar4 + 4;
-              param_5[1] = bVar2 << 1 | bVar2 >> 6 & 1;
-              param_5 = param_5 + 2;
-              uVar6 = uVar6 - 1;
-            } while (uVar6 != 0);
+              dst[1] = srcValue << 1 | srcValue >> 6 & 1;
+              dst = dst + 2;
+              pixelsLeft = pixelsLeft - 1;
+            } while (pixelsLeft != 0);
           }
-          param_3 = param_3 + -1;
-          param_4 = param_4 + param_6;
-          param_5 = param_5 + param_8;
-          pbVar5 = pbVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = src + srcRowStride;
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
   }
@@ -3886,1178 +3886,1178 @@ int _gleTextureImagePut_FastByte(param_1, param_2, param_3, param_4, param_5, pa
 }
 
 /* _gleTextureImagePut_FastShort @ 0xfdf34 (5476 bytes) */
-int _gleTextureImagePut_FastShort(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11)
-  undefined4 param_1;
-  int param_2;
-  int param_3;
-  ushort *param_4;
-  undefined1 *param_5;
-  int param_6;
-  undefined4 param_7;
-  int param_8;
-  int param_9;
-  undefined4 param_10;
-  int param_11;
+int _gleTextureImagePut_FastShort(unusedArg1, width, height, src, dst, srcRowStride, unusedArg7, dstRowSkip, dstRowStride, dstFormat, srcFormat)
+  undefined4 unusedArg1;
+  int width;
+  int height;
+  ushort *src;
+  undefined1 *dst;
+  int srcRowStride;
+  undefined4 unusedArg7;
+  int dstRowSkip;
+  int dstRowStride;
+  undefined4 dstFormat;
+  int srcFormat;
 {
-  ushort *puVar1;
-  ushort uVar2;
+  ushort *srcComponent;
+  ushort srcValue;
   ushort *puVar3;
   int iVar4;
-  undefined1 *puVar5;
-  uint uVar6;
+  undefined1 *dstRowEnd;
+  uint pixelsLeft;
   
-  iVar4 = _gleComponents(param_10);
-  puVar5 = param_5 + param_2 * iVar4;
-  switch(param_10) {
+  iVar4 = _gleComponents(dstFormat);
+  dstRowEnd = dst + width * iVar4;
+  switch(dstFormat) {
   case 0x1900:
-    if (param_11 != 0x1900) {
+    if (srcFormat != 0x1900) {
       return 0;
     }
-    if (0 < param_3) {
+    if (0 < height) {
       do {
-        if (param_5 < puVar5) {
-          iVar4 = (int)puVar5 - (int)param_5;
-          puVar3 = param_4;
+        if (dst < dstRowEnd) {
+          iVar4 = (int)dstRowEnd - (int)dst;
+          puVar3 = src;
           do {
-            uVar2 = *puVar3;
+            srcValue = *puVar3;
             puVar3 = puVar3 + 1;
-            *param_5 = (char)(uVar2 >> 7);
-            param_5 = param_5 + 1;
+            *dst = (char)(srcValue >> 7);
+            dst = dst + 1;
             iVar4 = iVar4 + -1;
           } while (iVar4 != 0);
         }
-        param_3 = param_3 + -1;
-        param_4 = (ushort *)((int)param_4 + param_6);
-        param_5 = param_5 + param_8;
-        puVar5 = puVar5 + param_9;
-      } while (param_3 != 0);
+        height = height + -1;
+        src = (ushort *)((int)src + srcRowStride);
+        dst = dst + dstRowSkip;
+        dstRowEnd = dstRowEnd + dstRowStride;
+      } while (height != 0);
     }
     break;
   default:
     return 0;
   case 0x1906:
-    if (param_11 == 0x1908) {
-      if (0 < param_3) {
+    if (srcFormat == 0x1908) {
+      if (0 < height) {
         do {
-          if (param_5 < puVar5) {
-            iVar4 = (int)puVar5 - (int)param_5;
-            puVar3 = param_4;
+          if (dst < dstRowEnd) {
+            iVar4 = (int)dstRowEnd - (int)dst;
+            puVar3 = src;
             do {
-              puVar1 = puVar3 + 3;
+              srcComponent = puVar3 + 3;
               puVar3 = puVar3 + 4;
-              *param_5 = (char)(*puVar1 >> 7);
-              param_5 = param_5 + 1;
+              *dst = (char)(*srcComponent >> 7);
+              dst = dst + 1;
               iVar4 = iVar4 + -1;
             } while (iVar4 != 0);
           }
-          param_3 = param_3 + -1;
-          param_4 = (ushort *)((int)param_4 + param_6);
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = (ushort *)((int)src + srcRowStride);
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
-    else if (param_11 < 0x1909) {
-      if (param_11 == 0x1906) {
-        if (0 < param_3) {
+    else if (srcFormat < 0x1909) {
+      if (srcFormat == 0x1906) {
+        if (0 < height) {
           do {
-            if (param_5 < puVar5) {
-              iVar4 = (int)puVar5 - (int)param_5;
-              puVar3 = param_4;
+            if (dst < dstRowEnd) {
+              iVar4 = (int)dstRowEnd - (int)dst;
+              puVar3 = src;
               do {
-                uVar2 = *puVar3;
+                srcValue = *puVar3;
                 puVar3 = puVar3 + 1;
-                *param_5 = (char)(uVar2 >> 7);
-                param_5 = param_5 + 1;
+                *dst = (char)(srcValue >> 7);
+                dst = dst + 1;
                 iVar4 = iVar4 + -1;
               } while (iVar4 != 0);
             }
-            param_3 = param_3 + -1;
-            param_4 = (ushort *)((int)param_4 + param_6);
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = (ushort *)((int)src + srcRowStride);
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
-      else if (param_11 < 0x1907) {
-        if (param_11 < 0x1903) {
+      else if (srcFormat < 0x1907) {
+        if (srcFormat < 0x1903) {
           return 0;
         }
-        if (0 < param_3) {
+        if (0 < height) {
           do {
-            if (param_5 < puVar5) {
-              iVar4 = (int)puVar5 - (int)param_5;
+            if (dst < dstRowEnd) {
+              iVar4 = (int)dstRowEnd - (int)dst;
               do {
-                *param_5 = 0xff;
-                param_5 = param_5 + 1;
+                *dst = 0xff;
+                dst = dst + 1;
                 iVar4 = iVar4 + -1;
               } while (iVar4 != 0);
             }
-            param_3 = param_3 + -1;
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
-      else if (0 < param_3) {
+      else if (0 < height) {
         do {
-          if (param_5 < puVar5) {
-            iVar4 = (int)puVar5 - (int)param_5;
+          if (dst < dstRowEnd) {
+            iVar4 = (int)dstRowEnd - (int)dst;
             do {
-              *param_5 = 0xff;
-              param_5 = param_5 + 1;
+              *dst = 0xff;
+              dst = dst + 1;
               iVar4 = iVar4 + -1;
             } while (iVar4 != 0);
           }
-          param_3 = param_3 + -1;
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
-    else if (param_11 == 0x8000) {
-      if (0 < param_3) {
+    else if (srcFormat == 0x8000) {
+      if (0 < height) {
         do {
-          if (param_5 < puVar5) {
-            iVar4 = (int)puVar5 - (int)param_5;
-            puVar3 = param_4;
+          if (dst < dstRowEnd) {
+            iVar4 = (int)dstRowEnd - (int)dst;
+            puVar3 = src;
             do {
-              uVar2 = *puVar3;
+              srcValue = *puVar3;
               puVar3 = puVar3 + 4;
-              *param_5 = (char)(uVar2 >> 7);
-              param_5 = param_5 + 1;
+              *dst = (char)(srcValue >> 7);
+              dst = dst + 1;
               iVar4 = iVar4 + -1;
             } while (iVar4 != 0);
           }
-          param_3 = param_3 + -1;
-          param_4 = (ushort *)((int)param_4 + param_6);
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = (ushort *)((int)src + srcRowStride);
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
-    else if (param_11 < 0x8001) {
-      if (param_11 == 0x1909) {
-        if (0 < param_3) {
+    else if (srcFormat < 0x8001) {
+      if (srcFormat == 0x1909) {
+        if (0 < height) {
           do {
-            if (param_5 < puVar5) {
-              iVar4 = (int)puVar5 - (int)param_5;
+            if (dst < dstRowEnd) {
+              iVar4 = (int)dstRowEnd - (int)dst;
               do {
-                *param_5 = 0xff;
-                param_5 = param_5 + 1;
+                *dst = 0xff;
+                dst = dst + 1;
                 iVar4 = iVar4 + -1;
               } while (iVar4 != 0);
             }
-            param_3 = param_3 + -1;
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
       else {
-        if (param_11 != 0x190a) {
+        if (srcFormat != 0x190a) {
           return 0;
         }
-        if (0 < param_3) {
+        if (0 < height) {
           do {
-            if (param_5 < puVar5) {
-              iVar4 = (int)puVar5 - (int)param_5;
-              puVar3 = param_4;
+            if (dst < dstRowEnd) {
+              iVar4 = (int)dstRowEnd - (int)dst;
+              puVar3 = src;
               do {
-                puVar1 = puVar3 + 1;
+                srcComponent = puVar3 + 1;
                 puVar3 = puVar3 + 2;
-                *param_5 = (char)(*puVar1 >> 7);
-                param_5 = param_5 + 1;
+                *dst = (char)(*srcComponent >> 7);
+                dst = dst + 1;
                 iVar4 = iVar4 + -1;
               } while (iVar4 != 0);
             }
-            param_3 = param_3 + -1;
-            param_4 = (ushort *)((int)param_4 + param_6);
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = (ushort *)((int)src + srcRowStride);
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
     }
-    else if (param_11 == 0x80e0) {
-      if (0 < param_3) {
+    else if (srcFormat == 0x80e0) {
+      if (0 < height) {
         do {
-          if (param_5 < puVar5) {
-            iVar4 = (int)puVar5 - (int)param_5;
+          if (dst < dstRowEnd) {
+            iVar4 = (int)dstRowEnd - (int)dst;
             do {
-              *param_5 = 0xff;
-              param_5 = param_5 + 1;
+              *dst = 0xff;
+              dst = dst + 1;
               iVar4 = iVar4 + -1;
             } while (iVar4 != 0);
           }
-          param_3 = param_3 + -1;
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
     else {
-      if (param_11 != 0x80e1) {
+      if (srcFormat != 0x80e1) {
         return 0;
       }
-      if (0 < param_3) {
+      if (0 < height) {
         do {
-          if (param_5 < puVar5) {
-            iVar4 = (int)puVar5 - (int)param_5;
-            puVar3 = param_4;
+          if (dst < dstRowEnd) {
+            iVar4 = (int)dstRowEnd - (int)dst;
+            puVar3 = src;
             do {
-              puVar1 = puVar3 + 3;
+              srcComponent = puVar3 + 3;
               puVar3 = puVar3 + 4;
-              *param_5 = (char)(*puVar1 >> 7);
-              param_5 = param_5 + 1;
+              *dst = (char)(*srcComponent >> 7);
+              dst = dst + 1;
               iVar4 = iVar4 + -1;
             } while (iVar4 != 0);
           }
-          param_3 = param_3 + -1;
-          param_4 = (ushort *)((int)param_4 + param_6);
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = (ushort *)((int)src + srcRowStride);
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
     break;
   case 0x1907:
-    if (param_11 == 0x1908) {
-      puVar3 = param_4;
-      if (0 < param_3) {
+    if (srcFormat == 0x1908) {
+      puVar3 = src;
+      if (0 < height) {
         do {
-          for (; param_5 < puVar5; param_5 = param_5 + 3) {
-            *param_5 = (char)(*param_4 >> 7);
-            param_5[1] = (char)(param_4[1] >> 7);
-            puVar1 = param_4 + 2;
-            param_4 = param_4 + 4;
-            param_5[2] = (char)(*puVar1 >> 7);
+          for (; dst < dstRowEnd; dst = dst + 3) {
+            *dst = (char)(*src >> 7);
+            dst[1] = (char)(src[1] >> 7);
+            srcComponent = src + 2;
+            src = src + 4;
+            dst[2] = (char)(*srcComponent >> 7);
           }
-          param_3 = param_3 + -1;
-          param_4 = (ushort *)((int)puVar3 + param_6);
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-          puVar3 = param_4;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = (ushort *)((int)puVar3 + srcRowStride);
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+          puVar3 = src;
+        } while (height != 0);
       }
     }
-    else if (param_11 < 0x1909) {
-      if (param_11 == 0x1905) {
-        puVar3 = param_4;
-        if (0 < param_3) {
+    else if (srcFormat < 0x1909) {
+      if (srcFormat == 0x1905) {
+        puVar3 = src;
+        if (0 < height) {
           do {
-            for (; param_5 < puVar5; param_5 = param_5 + 3) {
-              *param_5 = 0;
-              param_5[1] = 0;
-              uVar2 = *param_4;
-              param_4 = param_4 + 1;
-              param_5[2] = (char)(uVar2 >> 7);
+            for (; dst < dstRowEnd; dst = dst + 3) {
+              *dst = 0;
+              dst[1] = 0;
+              srcValue = *src;
+              src = src + 1;
+              dst[2] = (char)(srcValue >> 7);
             }
-            param_3 = param_3 + -1;
-            param_4 = (ushort *)((int)puVar3 + param_6);
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-            puVar3 = param_4;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = (ushort *)((int)puVar3 + srcRowStride);
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+            puVar3 = src;
+          } while (height != 0);
         }
       }
-      else if (param_11 < 0x1906) {
-        if (param_11 == 0x1903) {
-          puVar3 = param_4;
-          if (0 < param_3) {
+      else if (srcFormat < 0x1906) {
+        if (srcFormat == 0x1903) {
+          puVar3 = src;
+          if (0 < height) {
             do {
-              for (; param_5 < puVar5; param_5 = param_5 + 3) {
-                uVar2 = *param_4;
-                param_4 = param_4 + 1;
-                param_5[1] = 0;
-                param_5[2] = 0;
-                *param_5 = (char)(uVar2 >> 7);
+              for (; dst < dstRowEnd; dst = dst + 3) {
+                srcValue = *src;
+                src = src + 1;
+                dst[1] = 0;
+                dst[2] = 0;
+                *dst = (char)(srcValue >> 7);
               }
-              param_3 = param_3 + -1;
-              param_4 = (ushort *)((int)puVar3 + param_6);
-              param_5 = param_5 + param_8;
-              puVar5 = puVar5 + param_9;
-              puVar3 = param_4;
-            } while (param_3 != 0);
+              height = height + -1;
+              src = (ushort *)((int)puVar3 + srcRowStride);
+              dst = dst + dstRowSkip;
+              dstRowEnd = dstRowEnd + dstRowStride;
+              puVar3 = src;
+            } while (height != 0);
           }
         }
         else {
-          if (param_11 != 0x1904) {
+          if (srcFormat != 0x1904) {
             return 0;
           }
-          puVar3 = param_4;
-          if (0 < param_3) {
+          puVar3 = src;
+          if (0 < height) {
             do {
-              for (; param_5 < puVar5; param_5 = param_5 + 3) {
-                *param_5 = 0;
-                uVar2 = *param_4;
-                param_4 = param_4 + 1;
-                param_5[2] = 0;
-                param_5[1] = (char)(uVar2 >> 7);
+              for (; dst < dstRowEnd; dst = dst + 3) {
+                *dst = 0;
+                srcValue = *src;
+                src = src + 1;
+                dst[2] = 0;
+                dst[1] = (char)(srcValue >> 7);
               }
-              param_3 = param_3 + -1;
-              param_4 = (ushort *)((int)puVar3 + param_6);
-              param_5 = param_5 + param_8;
-              puVar5 = puVar5 + param_9;
-              puVar3 = param_4;
-            } while (param_3 != 0);
+              height = height + -1;
+              src = (ushort *)((int)puVar3 + srcRowStride);
+              dst = dst + dstRowSkip;
+              dstRowEnd = dstRowEnd + dstRowStride;
+              puVar3 = src;
+            } while (height != 0);
           }
         }
       }
-      else if (param_11 == 0x1906) {
-        if (0 < param_3) {
+      else if (srcFormat == 0x1906) {
+        if (0 < height) {
           do {
-            for (; param_5 < puVar5; param_5 = param_5 + 3) {
-              *param_5 = 0;
-              param_5[1] = 0;
-              param_5[2] = 0;
+            for (; dst < dstRowEnd; dst = dst + 3) {
+              *dst = 0;
+              dst[1] = 0;
+              dst[2] = 0;
             }
-            param_3 = param_3 + -1;
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
       else {
-        if (param_11 != 0x1907) {
+        if (srcFormat != 0x1907) {
           return 0;
         }
-        puVar3 = param_4;
-        if (0 < param_3) {
+        puVar3 = src;
+        if (0 < height) {
           do {
-            for (; param_5 < puVar5; param_5 = param_5 + 3) {
-              *param_5 = (char)(*param_4 >> 7);
-              param_5[1] = (char)(param_4[1] >> 7);
-              puVar1 = param_4 + 2;
-              param_4 = param_4 + 3;
-              param_5[2] = (char)(*puVar1 >> 7);
+            for (; dst < dstRowEnd; dst = dst + 3) {
+              *dst = (char)(*src >> 7);
+              dst[1] = (char)(src[1] >> 7);
+              srcComponent = src + 2;
+              src = src + 3;
+              dst[2] = (char)(*srcComponent >> 7);
             }
-            param_3 = param_3 + -1;
-            param_4 = (ushort *)((int)puVar3 + param_6);
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-            puVar3 = param_4;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = (ushort *)((int)puVar3 + srcRowStride);
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+            puVar3 = src;
+          } while (height != 0);
         }
       }
     }
-    else if (param_11 == 0x8000) {
-      puVar3 = param_4;
-      if (0 < param_3) {
+    else if (srcFormat == 0x8000) {
+      puVar3 = src;
+      if (0 < height) {
         do {
-          for (; param_5 < puVar5; param_5 = param_5 + 3) {
-            *param_5 = (char)(param_4[3] >> 7);
-            param_5[1] = (char)(param_4[2] >> 7);
-            puVar1 = param_4 + 1;
-            param_4 = param_4 + 4;
-            param_5[2] = (char)(*puVar1 >> 7);
+          for (; dst < dstRowEnd; dst = dst + 3) {
+            *dst = (char)(src[3] >> 7);
+            dst[1] = (char)(src[2] >> 7);
+            srcComponent = src + 1;
+            src = src + 4;
+            dst[2] = (char)(*srcComponent >> 7);
           }
-          param_3 = param_3 + -1;
-          param_4 = (ushort *)((int)puVar3 + param_6);
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-          puVar3 = param_4;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = (ushort *)((int)puVar3 + srcRowStride);
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+          puVar3 = src;
+        } while (height != 0);
       }
     }
-    else if (param_11 < 0x8001) {
-      if (param_11 == 0x1909) {
-        puVar3 = param_4;
-        if (0 < param_3) {
+    else if (srcFormat < 0x8001) {
+      if (srcFormat == 0x1909) {
+        puVar3 = src;
+        if (0 < height) {
           do {
-            for (; param_5 < puVar5; param_5 = param_5 + 3) {
-              uVar2 = *param_4;
-              param_4 = param_4 + 1;
-              *param_5 = (char)(uVar2 >> 7);
-              param_5[2] = *param_5;
-              param_5[1] = *param_5;
+            for (; dst < dstRowEnd; dst = dst + 3) {
+              srcValue = *src;
+              src = src + 1;
+              *dst = (char)(srcValue >> 7);
+              dst[2] = *dst;
+              dst[1] = *dst;
             }
-            param_3 = param_3 + -1;
-            param_4 = (ushort *)((int)puVar3 + param_6);
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-            puVar3 = param_4;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = (ushort *)((int)puVar3 + srcRowStride);
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+            puVar3 = src;
+          } while (height != 0);
         }
       }
       else {
-        if (param_11 != 0x190a) {
+        if (srcFormat != 0x190a) {
           return 0;
         }
-        puVar3 = param_4;
-        if (0 < param_3) {
+        puVar3 = src;
+        if (0 < height) {
           do {
-            for (; param_5 < puVar5; param_5 = param_5 + 3) {
-              uVar2 = *param_4;
-              param_4 = param_4 + 2;
-              *param_5 = (char)(uVar2 >> 7);
-              param_5[2] = *param_5;
-              param_5[1] = *param_5;
+            for (; dst < dstRowEnd; dst = dst + 3) {
+              srcValue = *src;
+              src = src + 2;
+              *dst = (char)(srcValue >> 7);
+              dst[2] = *dst;
+              dst[1] = *dst;
             }
-            param_3 = param_3 + -1;
-            param_4 = (ushort *)((int)puVar3 + param_6);
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-            puVar3 = param_4;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = (ushort *)((int)puVar3 + srcRowStride);
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+            puVar3 = src;
+          } while (height != 0);
         }
       }
     }
-    else if (param_11 == 0x80e0) {
-      puVar3 = param_4;
-      if (0 < param_3) {
+    else if (srcFormat == 0x80e0) {
+      puVar3 = src;
+      if (0 < height) {
         do {
-          for (; param_5 < puVar5; param_5 = param_5 + 3) {
-            *param_5 = (char)(param_4[2] >> 7);
-            param_5[1] = (char)(param_4[1] >> 7);
-            uVar2 = *param_4;
-            param_4 = param_4 + 3;
-            param_5[2] = (char)(uVar2 >> 7);
+          for (; dst < dstRowEnd; dst = dst + 3) {
+            *dst = (char)(src[2] >> 7);
+            dst[1] = (char)(src[1] >> 7);
+            srcValue = *src;
+            src = src + 3;
+            dst[2] = (char)(srcValue >> 7);
           }
-          param_3 = param_3 + -1;
-          param_4 = (ushort *)((int)puVar3 + param_6);
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-          puVar3 = param_4;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = (ushort *)((int)puVar3 + srcRowStride);
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+          puVar3 = src;
+        } while (height != 0);
       }
     }
     else {
-      if (param_11 != 0x80e1) {
+      if (srcFormat != 0x80e1) {
         return 0;
       }
-      puVar3 = param_4;
-      if (0 < param_3) {
+      puVar3 = src;
+      if (0 < height) {
         do {
-          for (; param_5 < puVar5; param_5 = param_5 + 3) {
-            *param_5 = (char)(param_4[2] >> 7);
-            param_5[1] = (char)(param_4[1] >> 7);
-            uVar2 = *param_4;
-            param_4 = param_4 + 4;
-            param_5[2] = (char)(uVar2 >> 7);
+          for (; dst < dstRowEnd; dst = dst + 3) {
+            *dst = (char)(src[2] >> 7);
+            dst[1] = (char)(src[1] >> 7);
+            srcValue = *src;
+            src = src + 4;
+            dst[2] = (char)(srcValue >> 7);
           }
-          param_3 = param_3 + -1;
-          param_4 = (ushort *)((int)puVar3 + param_6);
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-          puVar3 = param_4;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = (ushort *)((int)puVar3 + srcRowStride);
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+          puVar3 = src;
+        } while (height != 0);
       }
     }
     break;
   case 0x1908:
-    if (param_11 == 0x1908) {
-      if (0 < param_3) {
+    if (srcFormat == 0x1908) {
+      if (0 < height) {
         do {
-          if (param_5 < puVar5) {
-            uVar6 = (uint)(puVar5 + (3 - (int)param_5)) >> 2;
-            puVar3 = param_4;
+          if (dst < dstRowEnd) {
+            pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
+            puVar3 = src;
             do {
-              *param_5 = (char)(*puVar3 >> 7);
-              param_5[1] = (char)(puVar3[1] >> 7);
-              param_5[2] = (char)(puVar3[2] >> 7);
-              puVar1 = puVar3 + 3;
+              *dst = (char)(*puVar3 >> 7);
+              dst[1] = (char)(puVar3[1] >> 7);
+              dst[2] = (char)(puVar3[2] >> 7);
+              srcComponent = puVar3 + 3;
               puVar3 = puVar3 + 4;
-              param_5[3] = (char)(*puVar1 >> 7);
-              param_5 = param_5 + 4;
-              uVar6 = uVar6 - 1;
-            } while (uVar6 != 0);
+              dst[3] = (char)(*srcComponent >> 7);
+              dst = dst + 4;
+              pixelsLeft = pixelsLeft - 1;
+            } while (pixelsLeft != 0);
           }
-          param_3 = param_3 + -1;
-          param_4 = (ushort *)((int)param_4 + param_6);
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = (ushort *)((int)src + srcRowStride);
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
-    else if (param_11 < 0x1909) {
-      if (param_11 == 0x1905) {
-        if (0 < param_3) {
+    else if (srcFormat < 0x1909) {
+      if (srcFormat == 0x1905) {
+        if (0 < height) {
           do {
-            if (param_5 < puVar5) {
-              uVar6 = (uint)(puVar5 + (3 - (int)param_5)) >> 2;
-              puVar3 = param_4;
+            if (dst < dstRowEnd) {
+              pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
+              puVar3 = src;
               do {
-                *param_5 = 0;
-                param_5[1] = 0;
-                uVar2 = *puVar3;
+                *dst = 0;
+                dst[1] = 0;
+                srcValue = *puVar3;
                 puVar3 = puVar3 + 1;
-                param_5[3] = 0xff;
-                param_5[2] = (char)(uVar2 >> 7);
-                param_5 = param_5 + 4;
-                uVar6 = uVar6 - 1;
-              } while (uVar6 != 0);
+                dst[3] = 0xff;
+                dst[2] = (char)(srcValue >> 7);
+                dst = dst + 4;
+                pixelsLeft = pixelsLeft - 1;
+              } while (pixelsLeft != 0);
             }
-            param_3 = param_3 + -1;
-            param_4 = (ushort *)((int)param_4 + param_6);
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = (ushort *)((int)src + srcRowStride);
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
-      else if (param_11 < 0x1906) {
-        if (param_11 == 0x1903) {
-          if (0 < param_3) {
+      else if (srcFormat < 0x1906) {
+        if (srcFormat == 0x1903) {
+          if (0 < height) {
             do {
-              if (param_5 < puVar5) {
-                uVar6 = (uint)(puVar5 + (3 - (int)param_5)) >> 2;
-                puVar3 = param_4;
+              if (dst < dstRowEnd) {
+                pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
+                puVar3 = src;
                 do {
-                  uVar2 = *puVar3;
+                  srcValue = *puVar3;
                   puVar3 = puVar3 + 1;
-                  param_5[1] = 0;
-                  param_5[2] = 0;
-                  *param_5 = (char)(uVar2 >> 7);
-                  param_5[3] = 0xff;
-                  param_5 = param_5 + 4;
-                  uVar6 = uVar6 - 1;
-                } while (uVar6 != 0);
+                  dst[1] = 0;
+                  dst[2] = 0;
+                  *dst = (char)(srcValue >> 7);
+                  dst[3] = 0xff;
+                  dst = dst + 4;
+                  pixelsLeft = pixelsLeft - 1;
+                } while (pixelsLeft != 0);
               }
-              param_3 = param_3 + -1;
-              param_4 = (ushort *)((int)param_4 + param_6);
-              param_5 = param_5 + param_8;
-              puVar5 = puVar5 + param_9;
-            } while (param_3 != 0);
+              height = height + -1;
+              src = (ushort *)((int)src + srcRowStride);
+              dst = dst + dstRowSkip;
+              dstRowEnd = dstRowEnd + dstRowStride;
+            } while (height != 0);
           }
         }
         else {
-          if (param_11 != 0x1904) {
+          if (srcFormat != 0x1904) {
             return 0;
           }
-          if (0 < param_3) {
+          if (0 < height) {
             do {
-              if (param_5 < puVar5) {
-                uVar6 = (uint)(puVar5 + (3 - (int)param_5)) >> 2;
-                puVar3 = param_4;
+              if (dst < dstRowEnd) {
+                pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
+                puVar3 = src;
                 do {
-                  *param_5 = 0;
-                  uVar2 = *puVar3;
+                  *dst = 0;
+                  srcValue = *puVar3;
                   puVar3 = puVar3 + 1;
-                  param_5[2] = 0;
-                  param_5[3] = 0xff;
-                  param_5[1] = (char)(uVar2 >> 7);
-                  param_5 = param_5 + 4;
-                  uVar6 = uVar6 - 1;
-                } while (uVar6 != 0);
+                  dst[2] = 0;
+                  dst[3] = 0xff;
+                  dst[1] = (char)(srcValue >> 7);
+                  dst = dst + 4;
+                  pixelsLeft = pixelsLeft - 1;
+                } while (pixelsLeft != 0);
               }
-              param_3 = param_3 + -1;
-              param_4 = (ushort *)((int)param_4 + param_6);
-              param_5 = param_5 + param_8;
-              puVar5 = puVar5 + param_9;
-            } while (param_3 != 0);
+              height = height + -1;
+              src = (ushort *)((int)src + srcRowStride);
+              dst = dst + dstRowSkip;
+              dstRowEnd = dstRowEnd + dstRowStride;
+            } while (height != 0);
           }
         }
       }
-      else if (param_11 == 0x1906) {
-        if (0 < param_3) {
+      else if (srcFormat == 0x1906) {
+        if (0 < height) {
           do {
-            if (param_5 < puVar5) {
-              uVar6 = (uint)(puVar5 + (3 - (int)param_5)) >> 2;
-              puVar3 = param_4;
+            if (dst < dstRowEnd) {
+              pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
+              puVar3 = src;
               do {
-                *param_5 = 0;
-                param_5[1] = 0;
-                param_5[2] = 0;
-                uVar2 = *puVar3;
+                *dst = 0;
+                dst[1] = 0;
+                dst[2] = 0;
+                srcValue = *puVar3;
                 puVar3 = puVar3 + 1;
-                param_5[3] = (char)(uVar2 >> 7);
-                param_5 = param_5 + 4;
-                uVar6 = uVar6 - 1;
-              } while (uVar6 != 0);
+                dst[3] = (char)(srcValue >> 7);
+                dst = dst + 4;
+                pixelsLeft = pixelsLeft - 1;
+              } while (pixelsLeft != 0);
             }
-            param_3 = param_3 + -1;
-            param_4 = (ushort *)((int)param_4 + param_6);
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = (ushort *)((int)src + srcRowStride);
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
       else {
-        if (param_11 != 0x1907) {
+        if (srcFormat != 0x1907) {
           return 0;
         }
-        if (0 < param_3) {
+        if (0 < height) {
           do {
-            if (param_5 < puVar5) {
-              uVar6 = (uint)(puVar5 + (3 - (int)param_5)) >> 2;
-              puVar3 = param_4;
+            if (dst < dstRowEnd) {
+              pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
+              puVar3 = src;
               do {
-                *param_5 = (char)(*puVar3 >> 7);
-                param_5[1] = (char)(puVar3[1] >> 7);
-                uVar2 = puVar3[2];
+                *dst = (char)(*puVar3 >> 7);
+                dst[1] = (char)(puVar3[1] >> 7);
+                srcValue = puVar3[2];
                 puVar3 = puVar3 + 3;
-                param_5[3] = 0xff;
-                param_5[2] = (char)(uVar2 >> 7);
-                param_5 = param_5 + 4;
-                uVar6 = uVar6 - 1;
-              } while (uVar6 != 0);
+                dst[3] = 0xff;
+                dst[2] = (char)(srcValue >> 7);
+                dst = dst + 4;
+                pixelsLeft = pixelsLeft - 1;
+              } while (pixelsLeft != 0);
             }
-            param_3 = param_3 + -1;
-            param_4 = (ushort *)((int)param_4 + param_6);
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = (ushort *)((int)src + srcRowStride);
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
     }
-    else if (param_11 == 0x8000) {
-      if (0 < param_3) {
+    else if (srcFormat == 0x8000) {
+      if (0 < height) {
         do {
-          if (param_5 < puVar5) {
-            uVar6 = (uint)(puVar5 + (3 - (int)param_5)) >> 2;
-            puVar3 = param_4;
+          if (dst < dstRowEnd) {
+            pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
+            puVar3 = src;
             do {
-              *param_5 = (char)(puVar3[3] >> 7);
-              param_5[1] = (char)(puVar3[2] >> 7);
-              param_5[2] = (char)(puVar3[1] >> 7);
-              uVar2 = *puVar3;
+              *dst = (char)(puVar3[3] >> 7);
+              dst[1] = (char)(puVar3[2] >> 7);
+              dst[2] = (char)(puVar3[1] >> 7);
+              srcValue = *puVar3;
               puVar3 = puVar3 + 4;
-              param_5[3] = (char)(uVar2 >> 7);
-              param_5 = param_5 + 4;
-              uVar6 = uVar6 - 1;
-            } while (uVar6 != 0);
+              dst[3] = (char)(srcValue >> 7);
+              dst = dst + 4;
+              pixelsLeft = pixelsLeft - 1;
+            } while (pixelsLeft != 0);
           }
-          param_3 = param_3 + -1;
-          param_4 = (ushort *)((int)param_4 + param_6);
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = (ushort *)((int)src + srcRowStride);
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
-    else if (param_11 < 0x8001) {
-      if (param_11 == 0x1909) {
-        if (0 < param_3) {
+    else if (srcFormat < 0x8001) {
+      if (srcFormat == 0x1909) {
+        if (0 < height) {
           do {
-            if (param_5 < puVar5) {
-              uVar6 = (uint)(puVar5 + (3 - (int)param_5)) >> 2;
-              puVar3 = param_4;
+            if (dst < dstRowEnd) {
+              pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
+              puVar3 = src;
               do {
-                uVar2 = *puVar3;
+                srcValue = *puVar3;
                 puVar3 = puVar3 + 1;
-                param_5[3] = 0xff;
-                *param_5 = (char)(uVar2 >> 7);
-                param_5[2] = *param_5;
-                param_5[1] = *param_5;
-                param_5 = param_5 + 4;
-                uVar6 = uVar6 - 1;
-              } while (uVar6 != 0);
+                dst[3] = 0xff;
+                *dst = (char)(srcValue >> 7);
+                dst[2] = *dst;
+                dst[1] = *dst;
+                dst = dst + 4;
+                pixelsLeft = pixelsLeft - 1;
+              } while (pixelsLeft != 0);
             }
-            param_3 = param_3 + -1;
-            param_4 = (ushort *)((int)param_4 + param_6);
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = (ushort *)((int)src + srcRowStride);
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
       else {
-        if (param_11 != 0x190a) {
+        if (srcFormat != 0x190a) {
           return 0;
         }
-        if (0 < param_3) {
+        if (0 < height) {
           do {
-            if (param_5 < puVar5) {
-              uVar6 = (uint)(puVar5 + (3 - (int)param_5)) >> 2;
-              puVar3 = param_4;
+            if (dst < dstRowEnd) {
+              pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
+              puVar3 = src;
               do {
-                *param_5 = (char)(*puVar3 >> 7);
-                param_5[2] = *param_5;
-                param_5[1] = *param_5;
-                puVar1 = puVar3 + 1;
+                *dst = (char)(*puVar3 >> 7);
+                dst[2] = *dst;
+                dst[1] = *dst;
+                srcComponent = puVar3 + 1;
                 puVar3 = puVar3 + 2;
-                param_5[3] = (char)(*puVar1 >> 7);
-                param_5 = param_5 + 4;
-                uVar6 = uVar6 - 1;
-              } while (uVar6 != 0);
+                dst[3] = (char)(*srcComponent >> 7);
+                dst = dst + 4;
+                pixelsLeft = pixelsLeft - 1;
+              } while (pixelsLeft != 0);
             }
-            param_3 = param_3 + -1;
-            param_4 = (ushort *)((int)param_4 + param_6);
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = (ushort *)((int)src + srcRowStride);
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
     }
-    else if (param_11 == 0x80e0) {
-      if (0 < param_3) {
+    else if (srcFormat == 0x80e0) {
+      if (0 < height) {
         do {
-          if (param_5 < puVar5) {
-            uVar6 = (uint)(puVar5 + (3 - (int)param_5)) >> 2;
-            puVar3 = param_4;
+          if (dst < dstRowEnd) {
+            pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
+            puVar3 = src;
             do {
-              *param_5 = (char)(puVar3[2] >> 7);
-              param_5[1] = (char)(puVar3[1] >> 7);
-              uVar2 = *puVar3;
+              *dst = (char)(puVar3[2] >> 7);
+              dst[1] = (char)(puVar3[1] >> 7);
+              srcValue = *puVar3;
               puVar3 = puVar3 + 3;
-              param_5[3] = 0xff;
-              param_5[2] = (char)(uVar2 >> 7);
-              param_5 = param_5 + 4;
-              uVar6 = uVar6 - 1;
-            } while (uVar6 != 0);
+              dst[3] = 0xff;
+              dst[2] = (char)(srcValue >> 7);
+              dst = dst + 4;
+              pixelsLeft = pixelsLeft - 1;
+            } while (pixelsLeft != 0);
           }
-          param_3 = param_3 + -1;
-          param_4 = (ushort *)((int)param_4 + param_6);
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = (ushort *)((int)src + srcRowStride);
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
     else {
-      if (param_11 != 0x80e1) {
+      if (srcFormat != 0x80e1) {
         return 0;
       }
-      if (0 < param_3) {
+      if (0 < height) {
         do {
-          if (param_5 < puVar5) {
-            uVar6 = (uint)(puVar5 + (3 - (int)param_5)) >> 2;
-            puVar3 = param_4;
+          if (dst < dstRowEnd) {
+            pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
+            puVar3 = src;
             do {
-              *param_5 = (char)(puVar3[2] >> 7);
-              param_5[1] = (char)(puVar3[1] >> 7);
-              param_5[2] = (char)(*puVar3 >> 7);
-              puVar1 = puVar3 + 3;
+              *dst = (char)(puVar3[2] >> 7);
+              dst[1] = (char)(puVar3[1] >> 7);
+              dst[2] = (char)(*puVar3 >> 7);
+              srcComponent = puVar3 + 3;
               puVar3 = puVar3 + 4;
-              param_5[3] = (char)(*puVar1 >> 7);
-              param_5 = param_5 + 4;
-              uVar6 = uVar6 - 1;
-            } while (uVar6 != 0);
+              dst[3] = (char)(*srcComponent >> 7);
+              dst = dst + 4;
+              pixelsLeft = pixelsLeft - 1;
+            } while (pixelsLeft != 0);
           }
-          param_3 = param_3 + -1;
-          param_4 = (ushort *)((int)param_4 + param_6);
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = (ushort *)((int)src + srcRowStride);
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
     break;
   case 0x1909:
-    if (param_11 == 0x1908) {
-      if (0 < param_3) {
+    if (srcFormat == 0x1908) {
+      if (0 < height) {
         do {
-          if (param_5 < puVar5) {
-            iVar4 = (int)puVar5 - (int)param_5;
-            puVar3 = param_4;
+          if (dst < dstRowEnd) {
+            iVar4 = (int)dstRowEnd - (int)dst;
+            puVar3 = src;
             do {
-              uVar2 = *puVar3;
+              srcValue = *puVar3;
               puVar3 = puVar3 + 4;
-              *param_5 = (char)(uVar2 >> 7);
-              param_5 = param_5 + 1;
+              *dst = (char)(srcValue >> 7);
+              dst = dst + 1;
               iVar4 = iVar4 + -1;
             } while (iVar4 != 0);
           }
-          param_3 = param_3 + -1;
-          param_4 = (ushort *)((int)param_4 + param_6);
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = (ushort *)((int)src + srcRowStride);
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
-    else if (param_11 < 0x1909) {
-      if (param_11 < 0x1907) {
-        if (param_11 < 0x1904) {
-          if (param_11 != 0x1903) {
+    else if (srcFormat < 0x1909) {
+      if (srcFormat < 0x1907) {
+        if (srcFormat < 0x1904) {
+          if (srcFormat != 0x1903) {
             return 0;
           }
-          if (0 < param_3) {
+          if (0 < height) {
             do {
-              if (param_5 < puVar5) {
-                iVar4 = (int)puVar5 - (int)param_5;
-                puVar3 = param_4;
+              if (dst < dstRowEnd) {
+                iVar4 = (int)dstRowEnd - (int)dst;
+                puVar3 = src;
                 do {
-                  uVar2 = *puVar3;
+                  srcValue = *puVar3;
                   puVar3 = puVar3 + 1;
-                  *param_5 = (char)(uVar2 >> 7);
-                  param_5 = param_5 + 1;
+                  *dst = (char)(srcValue >> 7);
+                  dst = dst + 1;
                   iVar4 = iVar4 + -1;
                 } while (iVar4 != 0);
               }
-              param_3 = param_3 + -1;
-              param_4 = (ushort *)((int)param_4 + param_6);
-              param_5 = param_5 + param_8;
-              puVar5 = puVar5 + param_9;
-            } while (param_3 != 0);
+              height = height + -1;
+              src = (ushort *)((int)src + srcRowStride);
+              dst = dst + dstRowSkip;
+              dstRowEnd = dstRowEnd + dstRowStride;
+            } while (height != 0);
           }
         }
-        else if (0 < param_3) {
+        else if (0 < height) {
           do {
-            if (param_5 < puVar5) {
-              iVar4 = (int)puVar5 - (int)param_5;
+            if (dst < dstRowEnd) {
+              iVar4 = (int)dstRowEnd - (int)dst;
               do {
-                *param_5 = 0;
-                param_5 = param_5 + 1;
+                *dst = 0;
+                dst = dst + 1;
                 iVar4 = iVar4 + -1;
               } while (iVar4 != 0);
             }
-            param_3 = param_3 + -1;
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
-      else if (0 < param_3) {
+      else if (0 < height) {
         do {
-          if (param_5 < puVar5) {
-            iVar4 = (int)puVar5 - (int)param_5;
-            puVar3 = param_4;
+          if (dst < dstRowEnd) {
+            iVar4 = (int)dstRowEnd - (int)dst;
+            puVar3 = src;
             do {
-              uVar2 = *puVar3;
+              srcValue = *puVar3;
               puVar3 = puVar3 + 3;
-              *param_5 = (char)(uVar2 >> 7);
-              param_5 = param_5 + 1;
+              *dst = (char)(srcValue >> 7);
+              dst = dst + 1;
               iVar4 = iVar4 + -1;
             } while (iVar4 != 0);
           }
-          param_3 = param_3 + -1;
-          param_4 = (ushort *)((int)param_4 + param_6);
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = (ushort *)((int)src + srcRowStride);
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
-    else if (param_11 == 0x8000) {
-      if (0 < param_3) {
+    else if (srcFormat == 0x8000) {
+      if (0 < height) {
         do {
-          if (param_5 < puVar5) {
-            iVar4 = (int)puVar5 - (int)param_5;
-            puVar3 = param_4;
+          if (dst < dstRowEnd) {
+            iVar4 = (int)dstRowEnd - (int)dst;
+            puVar3 = src;
             do {
-              puVar1 = puVar3 + 3;
+              srcComponent = puVar3 + 3;
               puVar3 = puVar3 + 4;
-              *param_5 = (char)(*puVar1 >> 7);
-              param_5 = param_5 + 1;
+              *dst = (char)(*srcComponent >> 7);
+              dst = dst + 1;
               iVar4 = iVar4 + -1;
             } while (iVar4 != 0);
           }
-          param_3 = param_3 + -1;
-          param_4 = (ushort *)((int)param_4 + param_6);
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = (ushort *)((int)src + srcRowStride);
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
-    else if (param_11 < 0x8001) {
-      if (param_11 == 0x1909) {
-        if (0 < param_3) {
+    else if (srcFormat < 0x8001) {
+      if (srcFormat == 0x1909) {
+        if (0 < height) {
           do {
-            if (param_5 < puVar5) {
-              iVar4 = (int)puVar5 - (int)param_5;
-              puVar3 = param_4;
+            if (dst < dstRowEnd) {
+              iVar4 = (int)dstRowEnd - (int)dst;
+              puVar3 = src;
               do {
-                uVar2 = *puVar3;
+                srcValue = *puVar3;
                 puVar3 = puVar3 + 1;
-                *param_5 = (char)(uVar2 >> 7);
-                param_5 = param_5 + 1;
+                *dst = (char)(srcValue >> 7);
+                dst = dst + 1;
                 iVar4 = iVar4 + -1;
               } while (iVar4 != 0);
             }
-            param_3 = param_3 + -1;
-            param_4 = (ushort *)((int)param_4 + param_6);
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = (ushort *)((int)src + srcRowStride);
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
       else {
-        if (param_11 != 0x190a) {
+        if (srcFormat != 0x190a) {
           return 0;
         }
-        if (0 < param_3) {
+        if (0 < height) {
           do {
-            if (param_5 < puVar5) {
-              iVar4 = (int)puVar5 - (int)param_5;
-              puVar3 = param_4;
+            if (dst < dstRowEnd) {
+              iVar4 = (int)dstRowEnd - (int)dst;
+              puVar3 = src;
               do {
-                uVar2 = *puVar3;
+                srcValue = *puVar3;
                 puVar3 = puVar3 + 2;
-                *param_5 = (char)(uVar2 >> 7);
-                param_5 = param_5 + 1;
+                *dst = (char)(srcValue >> 7);
+                dst = dst + 1;
                 iVar4 = iVar4 + -1;
               } while (iVar4 != 0);
             }
-            param_3 = param_3 + -1;
-            param_4 = (ushort *)((int)param_4 + param_6);
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = (ushort *)((int)src + srcRowStride);
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
     }
-    else if (param_11 == 0x80e0) {
-      if (0 < param_3) {
+    else if (srcFormat == 0x80e0) {
+      if (0 < height) {
         do {
-          if (param_5 < puVar5) {
-            iVar4 = (int)puVar5 - (int)param_5;
-            puVar3 = param_4;
+          if (dst < dstRowEnd) {
+            iVar4 = (int)dstRowEnd - (int)dst;
+            puVar3 = src;
             do {
-              puVar1 = puVar3 + 2;
+              srcComponent = puVar3 + 2;
               puVar3 = puVar3 + 3;
-              *param_5 = (char)(*puVar1 >> 7);
-              param_5 = param_5 + 1;
+              *dst = (char)(*srcComponent >> 7);
+              dst = dst + 1;
               iVar4 = iVar4 + -1;
             } while (iVar4 != 0);
           }
-          param_3 = param_3 + -1;
-          param_4 = (ushort *)((int)param_4 + param_6);
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = (ushort *)((int)src + srcRowStride);
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
     else {
-      if (param_11 != 0x80e1) {
+      if (srcFormat != 0x80e1) {
         return 0;
       }
-      if (0 < param_3) {
+      if (0 < height) {
         do {
-          if (param_5 < puVar5) {
-            iVar4 = (int)puVar5 - (int)param_5;
-            puVar3 = param_4;
+          if (dst < dstRowEnd) {
+            iVar4 = (int)dstRowEnd - (int)dst;
+            puVar3 = src;
             do {
-              puVar1 = puVar3 + 2;
+              srcComponent = puVar3 + 2;
               puVar3 = puVar3 + 4;
-              *param_5 = (char)(*puVar1 >> 7);
-              param_5 = param_5 + 1;
+              *dst = (char)(*srcComponent >> 7);
+              dst = dst + 1;
               iVar4 = iVar4 + -1;
             } while (iVar4 != 0);
           }
-          param_3 = param_3 + -1;
-          param_4 = (ushort *)((int)param_4 + param_6);
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = (ushort *)((int)src + srcRowStride);
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
     break;
   case 0x190a:
-    if (param_11 == 0x1908) {
-      if (0 < param_3) {
+    if (srcFormat == 0x1908) {
+      if (0 < height) {
         do {
-          if (param_5 < puVar5) {
-            uVar6 = (uint)(puVar5 + (1 - (int)param_5)) >> 1;
-            puVar3 = param_4;
+          if (dst < dstRowEnd) {
+            pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
+            puVar3 = src;
             do {
-              *param_5 = (char)(*puVar3 >> 7);
-              puVar1 = puVar3 + 3;
+              *dst = (char)(*puVar3 >> 7);
+              srcComponent = puVar3 + 3;
               puVar3 = puVar3 + 4;
-              param_5[1] = (char)(*puVar1 >> 7);
-              param_5 = param_5 + 2;
-              uVar6 = uVar6 - 1;
-            } while (uVar6 != 0);
+              dst[1] = (char)(*srcComponent >> 7);
+              dst = dst + 2;
+              pixelsLeft = pixelsLeft - 1;
+            } while (pixelsLeft != 0);
           }
-          param_3 = param_3 + -1;
-          param_4 = (ushort *)((int)param_4 + param_6);
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = (ushort *)((int)src + srcRowStride);
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
-    else if (param_11 < 0x1909) {
-      if (param_11 < 0x1906) {
-        if (param_11 < 0x1904) {
-          if (param_11 != 0x1903) {
+    else if (srcFormat < 0x1909) {
+      if (srcFormat < 0x1906) {
+        if (srcFormat < 0x1904) {
+          if (srcFormat != 0x1903) {
             return 0;
           }
-          if (0 < param_3) {
+          if (0 < height) {
             do {
-              if (param_5 < puVar5) {
-                uVar6 = (uint)(puVar5 + (1 - (int)param_5)) >> 1;
-                puVar3 = param_4;
+              if (dst < dstRowEnd) {
+                pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
+                puVar3 = src;
                 do {
-                  uVar2 = *puVar3;
+                  srcValue = *puVar3;
                   puVar3 = puVar3 + 1;
-                  param_5[1] = 0xff;
-                  *param_5 = (char)(uVar2 >> 7);
-                  param_5 = param_5 + 2;
-                  uVar6 = uVar6 - 1;
-                } while (uVar6 != 0);
+                  dst[1] = 0xff;
+                  *dst = (char)(srcValue >> 7);
+                  dst = dst + 2;
+                  pixelsLeft = pixelsLeft - 1;
+                } while (pixelsLeft != 0);
               }
-              param_3 = param_3 + -1;
-              param_4 = (ushort *)((int)param_4 + param_6);
-              param_5 = param_5 + param_8;
-              puVar5 = puVar5 + param_9;
-            } while (param_3 != 0);
+              height = height + -1;
+              src = (ushort *)((int)src + srcRowStride);
+              dst = dst + dstRowSkip;
+              dstRowEnd = dstRowEnd + dstRowStride;
+            } while (height != 0);
           }
         }
-        else if (0 < param_3) {
+        else if (0 < height) {
           do {
-            if (param_5 < puVar5) {
-              uVar6 = (uint)(puVar5 + (1 - (int)param_5)) >> 1;
+            if (dst < dstRowEnd) {
+              pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
               do {
-                *param_5 = 0;
-                param_5[1] = 0xff;
-                param_5 = param_5 + 2;
-                uVar6 = uVar6 - 1;
-              } while (uVar6 != 0);
+                *dst = 0;
+                dst[1] = 0xff;
+                dst = dst + 2;
+                pixelsLeft = pixelsLeft - 1;
+              } while (pixelsLeft != 0);
             }
-            param_3 = param_3 + -1;
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
-      else if (param_11 == 0x1906) {
-        if (0 < param_3) {
+      else if (srcFormat == 0x1906) {
+        if (0 < height) {
           do {
-            if (param_5 < puVar5) {
-              uVar6 = (uint)(puVar5 + (1 - (int)param_5)) >> 1;
-              puVar3 = param_4;
+            if (dst < dstRowEnd) {
+              pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
+              puVar3 = src;
               do {
-                *param_5 = 0;
-                uVar2 = *puVar3;
+                *dst = 0;
+                srcValue = *puVar3;
                 puVar3 = puVar3 + 1;
-                param_5[1] = (char)(uVar2 >> 7);
-                param_5 = param_5 + 2;
-                uVar6 = uVar6 - 1;
-              } while (uVar6 != 0);
+                dst[1] = (char)(srcValue >> 7);
+                dst = dst + 2;
+                pixelsLeft = pixelsLeft - 1;
+              } while (pixelsLeft != 0);
             }
-            param_3 = param_3 + -1;
-            param_4 = (ushort *)((int)param_4 + param_6);
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = (ushort *)((int)src + srcRowStride);
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
       else {
-        if (param_11 != 0x1907) {
+        if (srcFormat != 0x1907) {
           return 0;
         }
-        if (0 < param_3) {
+        if (0 < height) {
           do {
-            if (param_5 < puVar5) {
-              uVar6 = (uint)(puVar5 + (1 - (int)param_5)) >> 1;
-              puVar3 = param_4;
+            if (dst < dstRowEnd) {
+              pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
+              puVar3 = src;
               do {
-                uVar2 = *puVar3;
+                srcValue = *puVar3;
                 puVar3 = puVar3 + 3;
-                param_5[1] = 0xff;
-                *param_5 = (char)(uVar2 >> 7);
-                param_5 = param_5 + 2;
-                uVar6 = uVar6 - 1;
-              } while (uVar6 != 0);
+                dst[1] = 0xff;
+                *dst = (char)(srcValue >> 7);
+                dst = dst + 2;
+                pixelsLeft = pixelsLeft - 1;
+              } while (pixelsLeft != 0);
             }
-            param_3 = param_3 + -1;
-            param_4 = (ushort *)((int)param_4 + param_6);
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = (ushort *)((int)src + srcRowStride);
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
     }
-    else if (param_11 == 0x8000) {
-      if (0 < param_3) {
+    else if (srcFormat == 0x8000) {
+      if (0 < height) {
         do {
-          if (param_5 < puVar5) {
-            uVar6 = (uint)(puVar5 + (1 - (int)param_5)) >> 1;
-            puVar3 = param_4;
+          if (dst < dstRowEnd) {
+            pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
+            puVar3 = src;
             do {
-              *param_5 = (char)(puVar3[3] >> 7);
-              uVar2 = *puVar3;
+              *dst = (char)(puVar3[3] >> 7);
+              srcValue = *puVar3;
               puVar3 = puVar3 + 4;
-              param_5[1] = (char)(uVar2 >> 7);
-              param_5 = param_5 + 2;
-              uVar6 = uVar6 - 1;
-            } while (uVar6 != 0);
+              dst[1] = (char)(srcValue >> 7);
+              dst = dst + 2;
+              pixelsLeft = pixelsLeft - 1;
+            } while (pixelsLeft != 0);
           }
-          param_3 = param_3 + -1;
-          param_4 = (ushort *)((int)param_4 + param_6);
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = (ushort *)((int)src + srcRowStride);
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
-    else if (param_11 < 0x8001) {
-      if (param_11 == 0x1909) {
-        if (0 < param_3) {
+    else if (srcFormat < 0x8001) {
+      if (srcFormat == 0x1909) {
+        if (0 < height) {
           do {
-            if (param_5 < puVar5) {
-              uVar6 = (uint)(puVar5 + (1 - (int)param_5)) >> 1;
-              puVar3 = param_4;
+            if (dst < dstRowEnd) {
+              pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
+              puVar3 = src;
               do {
-                uVar2 = *puVar3;
+                srcValue = *puVar3;
                 puVar3 = puVar3 + 1;
-                param_5[1] = 0xff;
-                *param_5 = (char)(uVar2 >> 7);
-                param_5 = param_5 + 2;
-                uVar6 = uVar6 - 1;
-              } while (uVar6 != 0);
+                dst[1] = 0xff;
+                *dst = (char)(srcValue >> 7);
+                dst = dst + 2;
+                pixelsLeft = pixelsLeft - 1;
+              } while (pixelsLeft != 0);
             }
-            param_3 = param_3 + -1;
-            param_4 = (ushort *)((int)param_4 + param_6);
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = (ushort *)((int)src + srcRowStride);
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
       else {
-        if (param_11 != 0x190a) {
+        if (srcFormat != 0x190a) {
           return 0;
         }
-        if (0 < param_3) {
+        if (0 < height) {
           do {
-            if (param_5 < puVar5) {
-              uVar6 = (uint)(puVar5 + (1 - (int)param_5)) >> 1;
-              puVar3 = param_4;
+            if (dst < dstRowEnd) {
+              pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
+              puVar3 = src;
               do {
-                *param_5 = (char)(*puVar3 >> 7);
-                puVar1 = puVar3 + 1;
+                *dst = (char)(*puVar3 >> 7);
+                srcComponent = puVar3 + 1;
                 puVar3 = puVar3 + 2;
-                param_5[1] = (char)(*puVar1 >> 7);
-                param_5 = param_5 + 2;
-                uVar6 = uVar6 - 1;
-              } while (uVar6 != 0);
+                dst[1] = (char)(*srcComponent >> 7);
+                dst = dst + 2;
+                pixelsLeft = pixelsLeft - 1;
+              } while (pixelsLeft != 0);
             }
-            param_3 = param_3 + -1;
-            param_4 = (ushort *)((int)param_4 + param_6);
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = (ushort *)((int)src + srcRowStride);
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
     }
-    else if (param_11 == 0x80e0) {
-      if (0 < param_3) {
+    else if (srcFormat == 0x80e0) {
+      if (0 < height) {
         do {
-          if (param_5 < puVar5) {
-            uVar6 = (uint)(puVar5 + (1 - (int)param_5)) >> 1;
-            puVar3 = param_4;
+          if (dst < dstRowEnd) {
+            pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
+            puVar3 = src;
             do {
-              uVar2 = puVar3[2];
+              srcValue = puVar3[2];
               puVar3 = puVar3 + 3;
-              param_5[1] = 0xff;
-              *param_5 = (char)(uVar2 >> 7);
-              param_5 = param_5 + 2;
-              uVar6 = uVar6 - 1;
-            } while (uVar6 != 0);
+              dst[1] = 0xff;
+              *dst = (char)(srcValue >> 7);
+              dst = dst + 2;
+              pixelsLeft = pixelsLeft - 1;
+            } while (pixelsLeft != 0);
           }
-          param_3 = param_3 + -1;
-          param_4 = (ushort *)((int)param_4 + param_6);
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = (ushort *)((int)src + srcRowStride);
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
     else {
-      if (param_11 != 0x80e1) {
+      if (srcFormat != 0x80e1) {
         return 0;
       }
-      if (0 < param_3) {
+      if (0 < height) {
         do {
-          if (param_5 < puVar5) {
-            uVar6 = (uint)(puVar5 + (1 - (int)param_5)) >> 1;
-            puVar3 = param_4;
+          if (dst < dstRowEnd) {
+            pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
+            puVar3 = src;
             do {
-              *param_5 = (char)(puVar3[2] >> 7);
-              puVar1 = puVar3 + 3;
+              *dst = (char)(puVar3[2] >> 7);
+              srcComponent = puVar3 + 3;
               puVar3 = puVar3 + 4;
-              param_5[1] = (char)(*puVar1 >> 7);
-              param_5 = param_5 + 2;
-              uVar6 = uVar6 - 1;
-            } while (uVar6 != 0);
+              dst[1] = (char)(*srcComponent >> 7);
+              dst = dst + 2;
+              pixelsLeft = pixelsLeft - 1;
+            } while (pixelsLeft != 0);
           }
-          param_3 = param_3 + -1;
-          param_4 = (ushort *)((int)param_4 + param_6);
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = (ushort *)((int)src + srcRowStride);
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
   }
@@ -5065,1178 +5065,1178 @@ int _gleTextureImagePut_FastShort(param_1, param_2, param_3, param_4, param_5, p
 }
 
 /* _gleTextureImagePut_FastUshort @ 0xff4c4 (5476 bytes) */
-int _gleTextureImagePut_FastUshort(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11)
-  undefined4 param_1;
-  int param_2;
-  int param_3;
-  undefined2 *param_4;
-  undefined1 *param_5;
-  int param_6;
-  undefined4 param_7;
-  int param_8;
-  int param_9;
-  undefined4 param_10;
-  int param_11;
+int _gleTextureImagePut_FastUshort(unusedArg1, width, height, src, dst, srcRowStride, unusedArg7, dstRowSkip, dstRowStride, dstFormat, srcFormat)
+  undefined4 unusedArg1;
+  int width;
+  int height;
+  undefined2 *src;
+  undefined1 *dst;
+  int srcRowStride;
+  undefined4 unusedArg7;
+  int dstRowSkip;
+  int dstRowStride;
+  undefined4 dstFormat;
+  int srcFormat;
 {
-  undefined2 *puVar1;
-  undefined2 uVar2;
+  undefined2 *srcComponent;
+  undefined2 srcValue;
   undefined2 *puVar3;
   int iVar4;
-  undefined1 *puVar5;
-  uint uVar6;
+  undefined1 *dstRowEnd;
+  uint pixelsLeft;
   
-  iVar4 = _gleComponents(param_10);
-  puVar5 = param_5 + param_2 * iVar4;
-  switch(param_10) {
+  iVar4 = _gleComponents(dstFormat);
+  dstRowEnd = dst + width * iVar4;
+  switch(dstFormat) {
   case 0x1900:
-    if (param_11 != 0x1900) {
+    if (srcFormat != 0x1900) {
       return 0;
     }
-    if (0 < param_3) {
+    if (0 < height) {
       do {
-        if (param_5 < puVar5) {
-          iVar4 = (int)puVar5 - (int)param_5;
-          puVar3 = param_4;
+        if (dst < dstRowEnd) {
+          iVar4 = (int)dstRowEnd - (int)dst;
+          puVar3 = src;
           do {
-            uVar2 = *puVar3;
+            srcValue = *puVar3;
             puVar3 = puVar3 + 1;
-            *param_5 = (char)((ushort)uVar2 >> 8);
-            param_5 = param_5 + 1;
+            *dst = (char)((ushort)srcValue >> 8);
+            dst = dst + 1;
             iVar4 = iVar4 + -1;
           } while (iVar4 != 0);
         }
-        param_3 = param_3 + -1;
-        param_4 = (undefined2 *)((int)param_4 + param_6);
-        param_5 = param_5 + param_8;
-        puVar5 = puVar5 + param_9;
-      } while (param_3 != 0);
+        height = height + -1;
+        src = (undefined2 *)((int)src + srcRowStride);
+        dst = dst + dstRowSkip;
+        dstRowEnd = dstRowEnd + dstRowStride;
+      } while (height != 0);
     }
     break;
   default:
     return 0;
   case 0x1906:
-    if (param_11 == 0x1908) {
-      if (0 < param_3) {
+    if (srcFormat == 0x1908) {
+      if (0 < height) {
         do {
-          if (param_5 < puVar5) {
-            iVar4 = (int)puVar5 - (int)param_5;
-            puVar3 = param_4;
+          if (dst < dstRowEnd) {
+            iVar4 = (int)dstRowEnd - (int)dst;
+            puVar3 = src;
             do {
-              puVar1 = puVar3 + 3;
+              srcComponent = puVar3 + 3;
               puVar3 = puVar3 + 4;
-              *param_5 = (char)((ushort)*puVar1 >> 8);
-              param_5 = param_5 + 1;
+              *dst = (char)((ushort)*srcComponent >> 8);
+              dst = dst + 1;
               iVar4 = iVar4 + -1;
             } while (iVar4 != 0);
           }
-          param_3 = param_3 + -1;
-          param_4 = (undefined2 *)((int)param_4 + param_6);
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = (undefined2 *)((int)src + srcRowStride);
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
-    else if (param_11 < 0x1909) {
-      if (param_11 == 0x1906) {
-        if (0 < param_3) {
+    else if (srcFormat < 0x1909) {
+      if (srcFormat == 0x1906) {
+        if (0 < height) {
           do {
-            if (param_5 < puVar5) {
-              iVar4 = (int)puVar5 - (int)param_5;
-              puVar3 = param_4;
+            if (dst < dstRowEnd) {
+              iVar4 = (int)dstRowEnd - (int)dst;
+              puVar3 = src;
               do {
-                uVar2 = *puVar3;
+                srcValue = *puVar3;
                 puVar3 = puVar3 + 1;
-                *param_5 = (char)((ushort)uVar2 >> 8);
-                param_5 = param_5 + 1;
+                *dst = (char)((ushort)srcValue >> 8);
+                dst = dst + 1;
                 iVar4 = iVar4 + -1;
               } while (iVar4 != 0);
             }
-            param_3 = param_3 + -1;
-            param_4 = (undefined2 *)((int)param_4 + param_6);
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = (undefined2 *)((int)src + srcRowStride);
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
-      else if (param_11 < 0x1907) {
-        if (param_11 < 0x1903) {
+      else if (srcFormat < 0x1907) {
+        if (srcFormat < 0x1903) {
           return 0;
         }
-        if (0 < param_3) {
+        if (0 < height) {
           do {
-            if (param_5 < puVar5) {
-              iVar4 = (int)puVar5 - (int)param_5;
+            if (dst < dstRowEnd) {
+              iVar4 = (int)dstRowEnd - (int)dst;
               do {
-                *param_5 = 0xff;
-                param_5 = param_5 + 1;
+                *dst = 0xff;
+                dst = dst + 1;
                 iVar4 = iVar4 + -1;
               } while (iVar4 != 0);
             }
-            param_3 = param_3 + -1;
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
-      else if (0 < param_3) {
+      else if (0 < height) {
         do {
-          if (param_5 < puVar5) {
-            iVar4 = (int)puVar5 - (int)param_5;
+          if (dst < dstRowEnd) {
+            iVar4 = (int)dstRowEnd - (int)dst;
             do {
-              *param_5 = 0xff;
-              param_5 = param_5 + 1;
+              *dst = 0xff;
+              dst = dst + 1;
               iVar4 = iVar4 + -1;
             } while (iVar4 != 0);
           }
-          param_3 = param_3 + -1;
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
-    else if (param_11 == 0x8000) {
-      if (0 < param_3) {
+    else if (srcFormat == 0x8000) {
+      if (0 < height) {
         do {
-          if (param_5 < puVar5) {
-            iVar4 = (int)puVar5 - (int)param_5;
-            puVar3 = param_4;
+          if (dst < dstRowEnd) {
+            iVar4 = (int)dstRowEnd - (int)dst;
+            puVar3 = src;
             do {
-              uVar2 = *puVar3;
+              srcValue = *puVar3;
               puVar3 = puVar3 + 4;
-              *param_5 = (char)((ushort)uVar2 >> 8);
-              param_5 = param_5 + 1;
+              *dst = (char)((ushort)srcValue >> 8);
+              dst = dst + 1;
               iVar4 = iVar4 + -1;
             } while (iVar4 != 0);
           }
-          param_3 = param_3 + -1;
-          param_4 = (undefined2 *)((int)param_4 + param_6);
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = (undefined2 *)((int)src + srcRowStride);
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
-    else if (param_11 < 0x8001) {
-      if (param_11 == 0x1909) {
-        if (0 < param_3) {
+    else if (srcFormat < 0x8001) {
+      if (srcFormat == 0x1909) {
+        if (0 < height) {
           do {
-            if (param_5 < puVar5) {
-              iVar4 = (int)puVar5 - (int)param_5;
+            if (dst < dstRowEnd) {
+              iVar4 = (int)dstRowEnd - (int)dst;
               do {
-                *param_5 = 0xff;
-                param_5 = param_5 + 1;
+                *dst = 0xff;
+                dst = dst + 1;
                 iVar4 = iVar4 + -1;
               } while (iVar4 != 0);
             }
-            param_3 = param_3 + -1;
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
       else {
-        if (param_11 != 0x190a) {
+        if (srcFormat != 0x190a) {
           return 0;
         }
-        if (0 < param_3) {
+        if (0 < height) {
           do {
-            if (param_5 < puVar5) {
-              iVar4 = (int)puVar5 - (int)param_5;
-              puVar3 = param_4;
+            if (dst < dstRowEnd) {
+              iVar4 = (int)dstRowEnd - (int)dst;
+              puVar3 = src;
               do {
-                puVar1 = puVar3 + 1;
+                srcComponent = puVar3 + 1;
                 puVar3 = puVar3 + 2;
-                *param_5 = (char)((ushort)*puVar1 >> 8);
-                param_5 = param_5 + 1;
+                *dst = (char)((ushort)*srcComponent >> 8);
+                dst = dst + 1;
                 iVar4 = iVar4 + -1;
               } while (iVar4 != 0);
             }
-            param_3 = param_3 + -1;
-            param_4 = (undefined2 *)((int)param_4 + param_6);
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = (undefined2 *)((int)src + srcRowStride);
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
     }
-    else if (param_11 == 0x80e0) {
-      if (0 < param_3) {
+    else if (srcFormat == 0x80e0) {
+      if (0 < height) {
         do {
-          if (param_5 < puVar5) {
-            iVar4 = (int)puVar5 - (int)param_5;
+          if (dst < dstRowEnd) {
+            iVar4 = (int)dstRowEnd - (int)dst;
             do {
-              *param_5 = 0xff;
-              param_5 = param_5 + 1;
+              *dst = 0xff;
+              dst = dst + 1;
               iVar4 = iVar4 + -1;
             } while (iVar4 != 0);
           }
-          param_3 = param_3 + -1;
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
     else {
-      if (param_11 != 0x80e1) {
+      if (srcFormat != 0x80e1) {
         return 0;
       }
-      if (0 < param_3) {
+      if (0 < height) {
         do {
-          if (param_5 < puVar5) {
-            iVar4 = (int)puVar5 - (int)param_5;
-            puVar3 = param_4;
+          if (dst < dstRowEnd) {
+            iVar4 = (int)dstRowEnd - (int)dst;
+            puVar3 = src;
             do {
-              puVar1 = puVar3 + 3;
+              srcComponent = puVar3 + 3;
               puVar3 = puVar3 + 4;
-              *param_5 = (char)((ushort)*puVar1 >> 8);
-              param_5 = param_5 + 1;
+              *dst = (char)((ushort)*srcComponent >> 8);
+              dst = dst + 1;
               iVar4 = iVar4 + -1;
             } while (iVar4 != 0);
           }
-          param_3 = param_3 + -1;
-          param_4 = (undefined2 *)((int)param_4 + param_6);
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = (undefined2 *)((int)src + srcRowStride);
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
     break;
   case 0x1907:
-    if (param_11 == 0x1908) {
-      puVar3 = param_4;
-      if (0 < param_3) {
+    if (srcFormat == 0x1908) {
+      puVar3 = src;
+      if (0 < height) {
         do {
-          for (; param_5 < puVar5; param_5 = param_5 + 3) {
-            *param_5 = (char)((ushort)*param_4 >> 8);
-            param_5[1] = (char)((ushort)param_4[1] >> 8);
-            puVar1 = param_4 + 2;
-            param_4 = param_4 + 4;
-            param_5[2] = (char)((ushort)*puVar1 >> 8);
+          for (; dst < dstRowEnd; dst = dst + 3) {
+            *dst = (char)((ushort)*src >> 8);
+            dst[1] = (char)((ushort)src[1] >> 8);
+            srcComponent = src + 2;
+            src = src + 4;
+            dst[2] = (char)((ushort)*srcComponent >> 8);
           }
-          param_3 = param_3 + -1;
-          param_4 = (undefined2 *)((int)puVar3 + param_6);
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-          puVar3 = param_4;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = (undefined2 *)((int)puVar3 + srcRowStride);
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+          puVar3 = src;
+        } while (height != 0);
       }
     }
-    else if (param_11 < 0x1909) {
-      if (param_11 == 0x1905) {
-        puVar3 = param_4;
-        if (0 < param_3) {
+    else if (srcFormat < 0x1909) {
+      if (srcFormat == 0x1905) {
+        puVar3 = src;
+        if (0 < height) {
           do {
-            for (; param_5 < puVar5; param_5 = param_5 + 3) {
-              *param_5 = 0;
-              param_5[1] = 0;
-              uVar2 = *param_4;
-              param_4 = param_4 + 1;
-              param_5[2] = (char)((ushort)uVar2 >> 8);
+            for (; dst < dstRowEnd; dst = dst + 3) {
+              *dst = 0;
+              dst[1] = 0;
+              srcValue = *src;
+              src = src + 1;
+              dst[2] = (char)((ushort)srcValue >> 8);
             }
-            param_3 = param_3 + -1;
-            param_4 = (undefined2 *)((int)puVar3 + param_6);
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-            puVar3 = param_4;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = (undefined2 *)((int)puVar3 + srcRowStride);
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+            puVar3 = src;
+          } while (height != 0);
         }
       }
-      else if (param_11 < 0x1906) {
-        if (param_11 == 0x1903) {
-          puVar3 = param_4;
-          if (0 < param_3) {
+      else if (srcFormat < 0x1906) {
+        if (srcFormat == 0x1903) {
+          puVar3 = src;
+          if (0 < height) {
             do {
-              for (; param_5 < puVar5; param_5 = param_5 + 3) {
-                uVar2 = *param_4;
-                param_4 = param_4 + 1;
-                param_5[1] = 0;
-                param_5[2] = 0;
-                *param_5 = (char)((ushort)uVar2 >> 8);
+              for (; dst < dstRowEnd; dst = dst + 3) {
+                srcValue = *src;
+                src = src + 1;
+                dst[1] = 0;
+                dst[2] = 0;
+                *dst = (char)((ushort)srcValue >> 8);
               }
-              param_3 = param_3 + -1;
-              param_4 = (undefined2 *)((int)puVar3 + param_6);
-              param_5 = param_5 + param_8;
-              puVar5 = puVar5 + param_9;
-              puVar3 = param_4;
-            } while (param_3 != 0);
+              height = height + -1;
+              src = (undefined2 *)((int)puVar3 + srcRowStride);
+              dst = dst + dstRowSkip;
+              dstRowEnd = dstRowEnd + dstRowStride;
+              puVar3 = src;
+            } while (height != 0);
           }
         }
         else {
-          if (param_11 != 0x1904) {
+          if (srcFormat != 0x1904) {
             return 0;
           }
-          puVar3 = param_4;
-          if (0 < param_3) {
+          puVar3 = src;
+          if (0 < height) {
             do {
-              for (; param_5 < puVar5; param_5 = param_5 + 3) {
-                *param_5 = 0;
-                uVar2 = *param_4;
-                param_4 = param_4 + 1;
-                param_5[2] = 0;
-                param_5[1] = (char)((ushort)uVar2 >> 8);
+              for (; dst < dstRowEnd; dst = dst + 3) {
+                *dst = 0;
+                srcValue = *src;
+                src = src + 1;
+                dst[2] = 0;
+                dst[1] = (char)((ushort)srcValue >> 8);
               }
-              param_3 = param_3 + -1;
-              param_4 = (undefined2 *)((int)puVar3 + param_6);
-              param_5 = param_5 + param_8;
-              puVar5 = puVar5 + param_9;
-              puVar3 = param_4;
-            } while (param_3 != 0);
+              height = height + -1;
+              src = (undefined2 *)((int)puVar3 + srcRowStride);
+              dst = dst + dstRowSkip;
+              dstRowEnd = dstRowEnd + dstRowStride;
+              puVar3 = src;
+            } while (height != 0);
           }
         }
       }
-      else if (param_11 == 0x1906) {
-        if (0 < param_3) {
+      else if (srcFormat == 0x1906) {
+        if (0 < height) {
           do {
-            for (; param_5 < puVar5; param_5 = param_5 + 3) {
-              *param_5 = 0;
-              param_5[1] = 0;
-              param_5[2] = 0;
+            for (; dst < dstRowEnd; dst = dst + 3) {
+              *dst = 0;
+              dst[1] = 0;
+              dst[2] = 0;
             }
-            param_3 = param_3 + -1;
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
       else {
-        if (param_11 != 0x1907) {
+        if (srcFormat != 0x1907) {
           return 0;
         }
-        puVar3 = param_4;
-        if (0 < param_3) {
+        puVar3 = src;
+        if (0 < height) {
           do {
-            for (; param_5 < puVar5; param_5 = param_5 + 3) {
-              *param_5 = (char)((ushort)*param_4 >> 8);
-              param_5[1] = (char)((ushort)param_4[1] >> 8);
-              puVar1 = param_4 + 2;
-              param_4 = param_4 + 3;
-              param_5[2] = (char)((ushort)*puVar1 >> 8);
+            for (; dst < dstRowEnd; dst = dst + 3) {
+              *dst = (char)((ushort)*src >> 8);
+              dst[1] = (char)((ushort)src[1] >> 8);
+              srcComponent = src + 2;
+              src = src + 3;
+              dst[2] = (char)((ushort)*srcComponent >> 8);
             }
-            param_3 = param_3 + -1;
-            param_4 = (undefined2 *)((int)puVar3 + param_6);
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-            puVar3 = param_4;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = (undefined2 *)((int)puVar3 + srcRowStride);
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+            puVar3 = src;
+          } while (height != 0);
         }
       }
     }
-    else if (param_11 == 0x8000) {
-      puVar3 = param_4;
-      if (0 < param_3) {
+    else if (srcFormat == 0x8000) {
+      puVar3 = src;
+      if (0 < height) {
         do {
-          for (; param_5 < puVar5; param_5 = param_5 + 3) {
-            *param_5 = (char)((ushort)param_4[3] >> 8);
-            param_5[1] = (char)((ushort)param_4[2] >> 8);
-            puVar1 = param_4 + 1;
-            param_4 = param_4 + 4;
-            param_5[2] = (char)((ushort)*puVar1 >> 8);
+          for (; dst < dstRowEnd; dst = dst + 3) {
+            *dst = (char)((ushort)src[3] >> 8);
+            dst[1] = (char)((ushort)src[2] >> 8);
+            srcComponent = src + 1;
+            src = src + 4;
+            dst[2] = (char)((ushort)*srcComponent >> 8);
           }
-          param_3 = param_3 + -1;
-          param_4 = (undefined2 *)((int)puVar3 + param_6);
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-          puVar3 = param_4;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = (undefined2 *)((int)puVar3 + srcRowStride);
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+          puVar3 = src;
+        } while (height != 0);
       }
     }
-    else if (param_11 < 0x8001) {
-      if (param_11 == 0x1909) {
-        puVar3 = param_4;
-        if (0 < param_3) {
+    else if (srcFormat < 0x8001) {
+      if (srcFormat == 0x1909) {
+        puVar3 = src;
+        if (0 < height) {
           do {
-            for (; param_5 < puVar5; param_5 = param_5 + 3) {
-              uVar2 = *param_4;
-              param_4 = param_4 + 1;
-              *param_5 = (char)((ushort)uVar2 >> 8);
-              param_5[2] = *param_5;
-              param_5[1] = *param_5;
+            for (; dst < dstRowEnd; dst = dst + 3) {
+              srcValue = *src;
+              src = src + 1;
+              *dst = (char)((ushort)srcValue >> 8);
+              dst[2] = *dst;
+              dst[1] = *dst;
             }
-            param_3 = param_3 + -1;
-            param_4 = (undefined2 *)((int)puVar3 + param_6);
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-            puVar3 = param_4;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = (undefined2 *)((int)puVar3 + srcRowStride);
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+            puVar3 = src;
+          } while (height != 0);
         }
       }
       else {
-        if (param_11 != 0x190a) {
+        if (srcFormat != 0x190a) {
           return 0;
         }
-        puVar3 = param_4;
-        if (0 < param_3) {
+        puVar3 = src;
+        if (0 < height) {
           do {
-            for (; param_5 < puVar5; param_5 = param_5 + 3) {
-              uVar2 = *param_4;
-              param_4 = param_4 + 2;
-              *param_5 = (char)((ushort)uVar2 >> 8);
-              param_5[2] = *param_5;
-              param_5[1] = *param_5;
+            for (; dst < dstRowEnd; dst = dst + 3) {
+              srcValue = *src;
+              src = src + 2;
+              *dst = (char)((ushort)srcValue >> 8);
+              dst[2] = *dst;
+              dst[1] = *dst;
             }
-            param_3 = param_3 + -1;
-            param_4 = (undefined2 *)((int)puVar3 + param_6);
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-            puVar3 = param_4;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = (undefined2 *)((int)puVar3 + srcRowStride);
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+            puVar3 = src;
+          } while (height != 0);
         }
       }
     }
-    else if (param_11 == 0x80e0) {
-      puVar3 = param_4;
-      if (0 < param_3) {
+    else if (srcFormat == 0x80e0) {
+      puVar3 = src;
+      if (0 < height) {
         do {
-          for (; param_5 < puVar5; param_5 = param_5 + 3) {
-            *param_5 = (char)((ushort)param_4[2] >> 8);
-            param_5[1] = (char)((ushort)param_4[1] >> 8);
-            uVar2 = *param_4;
-            param_4 = param_4 + 3;
-            param_5[2] = (char)((ushort)uVar2 >> 8);
+          for (; dst < dstRowEnd; dst = dst + 3) {
+            *dst = (char)((ushort)src[2] >> 8);
+            dst[1] = (char)((ushort)src[1] >> 8);
+            srcValue = *src;
+            src = src + 3;
+            dst[2] = (char)((ushort)srcValue >> 8);
           }
-          param_3 = param_3 + -1;
-          param_4 = (undefined2 *)((int)puVar3 + param_6);
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-          puVar3 = param_4;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = (undefined2 *)((int)puVar3 + srcRowStride);
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+          puVar3 = src;
+        } while (height != 0);
       }
     }
     else {
-      if (param_11 != 0x80e1) {
+      if (srcFormat != 0x80e1) {
         return 0;
       }
-      puVar3 = param_4;
-      if (0 < param_3) {
+      puVar3 = src;
+      if (0 < height) {
         do {
-          for (; param_5 < puVar5; param_5 = param_5 + 3) {
-            *param_5 = (char)((ushort)param_4[2] >> 8);
-            param_5[1] = (char)((ushort)param_4[1] >> 8);
-            uVar2 = *param_4;
-            param_4 = param_4 + 4;
-            param_5[2] = (char)((ushort)uVar2 >> 8);
+          for (; dst < dstRowEnd; dst = dst + 3) {
+            *dst = (char)((ushort)src[2] >> 8);
+            dst[1] = (char)((ushort)src[1] >> 8);
+            srcValue = *src;
+            src = src + 4;
+            dst[2] = (char)((ushort)srcValue >> 8);
           }
-          param_3 = param_3 + -1;
-          param_4 = (undefined2 *)((int)puVar3 + param_6);
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-          puVar3 = param_4;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = (undefined2 *)((int)puVar3 + srcRowStride);
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+          puVar3 = src;
+        } while (height != 0);
       }
     }
     break;
   case 0x1908:
-    if (param_11 == 0x1908) {
-      if (0 < param_3) {
+    if (srcFormat == 0x1908) {
+      if (0 < height) {
         do {
-          if (param_5 < puVar5) {
-            uVar6 = (uint)(puVar5 + (3 - (int)param_5)) >> 2;
-            puVar3 = param_4;
+          if (dst < dstRowEnd) {
+            pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
+            puVar3 = src;
             do {
-              *param_5 = (char)((ushort)*puVar3 >> 8);
-              param_5[1] = (char)((ushort)puVar3[1] >> 8);
-              param_5[2] = (char)((ushort)puVar3[2] >> 8);
-              puVar1 = puVar3 + 3;
+              *dst = (char)((ushort)*puVar3 >> 8);
+              dst[1] = (char)((ushort)puVar3[1] >> 8);
+              dst[2] = (char)((ushort)puVar3[2] >> 8);
+              srcComponent = puVar3 + 3;
               puVar3 = puVar3 + 4;
-              param_5[3] = (char)((ushort)*puVar1 >> 8);
-              param_5 = param_5 + 4;
-              uVar6 = uVar6 - 1;
-            } while (uVar6 != 0);
+              dst[3] = (char)((ushort)*srcComponent >> 8);
+              dst = dst + 4;
+              pixelsLeft = pixelsLeft - 1;
+            } while (pixelsLeft != 0);
           }
-          param_3 = param_3 + -1;
-          param_4 = (undefined2 *)((int)param_4 + param_6);
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = (undefined2 *)((int)src + srcRowStride);
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
-    else if (param_11 < 0x1909) {
-      if (param_11 == 0x1905) {
-        if (0 < param_3) {
+    else if (srcFormat < 0x1909) {
+      if (srcFormat == 0x1905) {
+        if (0 < height) {
           do {
-            if (param_5 < puVar5) {
-              uVar6 = (uint)(puVar5 + (3 - (int)param_5)) >> 2;
-              puVar3 = param_4;
+            if (dst < dstRowEnd) {
+              pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
+              puVar3 = src;
               do {
-                *param_5 = 0;
-                param_5[1] = 0;
-                uVar2 = *puVar3;
+                *dst = 0;
+                dst[1] = 0;
+                srcValue = *puVar3;
                 puVar3 = puVar3 + 1;
-                param_5[3] = 0xff;
-                param_5[2] = (char)((ushort)uVar2 >> 8);
-                param_5 = param_5 + 4;
-                uVar6 = uVar6 - 1;
-              } while (uVar6 != 0);
+                dst[3] = 0xff;
+                dst[2] = (char)((ushort)srcValue >> 8);
+                dst = dst + 4;
+                pixelsLeft = pixelsLeft - 1;
+              } while (pixelsLeft != 0);
             }
-            param_3 = param_3 + -1;
-            param_4 = (undefined2 *)((int)param_4 + param_6);
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = (undefined2 *)((int)src + srcRowStride);
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
-      else if (param_11 < 0x1906) {
-        if (param_11 == 0x1903) {
-          if (0 < param_3) {
+      else if (srcFormat < 0x1906) {
+        if (srcFormat == 0x1903) {
+          if (0 < height) {
             do {
-              if (param_5 < puVar5) {
-                uVar6 = (uint)(puVar5 + (3 - (int)param_5)) >> 2;
-                puVar3 = param_4;
+              if (dst < dstRowEnd) {
+                pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
+                puVar3 = src;
                 do {
-                  uVar2 = *puVar3;
+                  srcValue = *puVar3;
                   puVar3 = puVar3 + 1;
-                  param_5[1] = 0;
-                  param_5[2] = 0;
-                  *param_5 = (char)((ushort)uVar2 >> 8);
-                  param_5[3] = 0xff;
-                  param_5 = param_5 + 4;
-                  uVar6 = uVar6 - 1;
-                } while (uVar6 != 0);
+                  dst[1] = 0;
+                  dst[2] = 0;
+                  *dst = (char)((ushort)srcValue >> 8);
+                  dst[3] = 0xff;
+                  dst = dst + 4;
+                  pixelsLeft = pixelsLeft - 1;
+                } while (pixelsLeft != 0);
               }
-              param_3 = param_3 + -1;
-              param_4 = (undefined2 *)((int)param_4 + param_6);
-              param_5 = param_5 + param_8;
-              puVar5 = puVar5 + param_9;
-            } while (param_3 != 0);
+              height = height + -1;
+              src = (undefined2 *)((int)src + srcRowStride);
+              dst = dst + dstRowSkip;
+              dstRowEnd = dstRowEnd + dstRowStride;
+            } while (height != 0);
           }
         }
         else {
-          if (param_11 != 0x1904) {
+          if (srcFormat != 0x1904) {
             return 0;
           }
-          if (0 < param_3) {
+          if (0 < height) {
             do {
-              if (param_5 < puVar5) {
-                uVar6 = (uint)(puVar5 + (3 - (int)param_5)) >> 2;
-                puVar3 = param_4;
+              if (dst < dstRowEnd) {
+                pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
+                puVar3 = src;
                 do {
-                  *param_5 = 0;
-                  uVar2 = *puVar3;
+                  *dst = 0;
+                  srcValue = *puVar3;
                   puVar3 = puVar3 + 1;
-                  param_5[2] = 0;
-                  param_5[3] = 0xff;
-                  param_5[1] = (char)((ushort)uVar2 >> 8);
-                  param_5 = param_5 + 4;
-                  uVar6 = uVar6 - 1;
-                } while (uVar6 != 0);
+                  dst[2] = 0;
+                  dst[3] = 0xff;
+                  dst[1] = (char)((ushort)srcValue >> 8);
+                  dst = dst + 4;
+                  pixelsLeft = pixelsLeft - 1;
+                } while (pixelsLeft != 0);
               }
-              param_3 = param_3 + -1;
-              param_4 = (undefined2 *)((int)param_4 + param_6);
-              param_5 = param_5 + param_8;
-              puVar5 = puVar5 + param_9;
-            } while (param_3 != 0);
+              height = height + -1;
+              src = (undefined2 *)((int)src + srcRowStride);
+              dst = dst + dstRowSkip;
+              dstRowEnd = dstRowEnd + dstRowStride;
+            } while (height != 0);
           }
         }
       }
-      else if (param_11 == 0x1906) {
-        if (0 < param_3) {
+      else if (srcFormat == 0x1906) {
+        if (0 < height) {
           do {
-            if (param_5 < puVar5) {
-              uVar6 = (uint)(puVar5 + (3 - (int)param_5)) >> 2;
-              puVar3 = param_4;
+            if (dst < dstRowEnd) {
+              pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
+              puVar3 = src;
               do {
-                *param_5 = 0;
-                param_5[1] = 0;
-                param_5[2] = 0;
-                uVar2 = *puVar3;
+                *dst = 0;
+                dst[1] = 0;
+                dst[2] = 0;
+                srcValue = *puVar3;
                 puVar3 = puVar3 + 1;
-                param_5[3] = (char)((ushort)uVar2 >> 8);
-                param_5 = param_5 + 4;
-                uVar6 = uVar6 - 1;
-              } while (uVar6 != 0);
+                dst[3] = (char)((ushort)srcValue >> 8);
+                dst = dst + 4;
+                pixelsLeft = pixelsLeft - 1;
+              } while (pixelsLeft != 0);
             }
-            param_3 = param_3 + -1;
-            param_4 = (undefined2 *)((int)param_4 + param_6);
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = (undefined2 *)((int)src + srcRowStride);
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
       else {
-        if (param_11 != 0x1907) {
+        if (srcFormat != 0x1907) {
           return 0;
         }
-        if (0 < param_3) {
+        if (0 < height) {
           do {
-            if (param_5 < puVar5) {
-              uVar6 = (uint)(puVar5 + (3 - (int)param_5)) >> 2;
-              puVar3 = param_4;
+            if (dst < dstRowEnd) {
+              pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
+              puVar3 = src;
               do {
-                *param_5 = (char)((ushort)*puVar3 >> 8);
-                param_5[1] = (char)((ushort)puVar3[1] >> 8);
-                uVar2 = puVar3[2];
+                *dst = (char)((ushort)*puVar3 >> 8);
+                dst[1] = (char)((ushort)puVar3[1] >> 8);
+                srcValue = puVar3[2];
                 puVar3 = puVar3 + 3;
-                param_5[3] = 0xff;
-                param_5[2] = (char)((ushort)uVar2 >> 8);
-                param_5 = param_5 + 4;
-                uVar6 = uVar6 - 1;
-              } while (uVar6 != 0);
+                dst[3] = 0xff;
+                dst[2] = (char)((ushort)srcValue >> 8);
+                dst = dst + 4;
+                pixelsLeft = pixelsLeft - 1;
+              } while (pixelsLeft != 0);
             }
-            param_3 = param_3 + -1;
-            param_4 = (undefined2 *)((int)param_4 + param_6);
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = (undefined2 *)((int)src + srcRowStride);
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
     }
-    else if (param_11 == 0x8000) {
-      if (0 < param_3) {
+    else if (srcFormat == 0x8000) {
+      if (0 < height) {
         do {
-          if (param_5 < puVar5) {
-            uVar6 = (uint)(puVar5 + (3 - (int)param_5)) >> 2;
-            puVar3 = param_4;
+          if (dst < dstRowEnd) {
+            pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
+            puVar3 = src;
             do {
-              *param_5 = (char)((ushort)puVar3[3] >> 8);
-              param_5[1] = (char)((ushort)puVar3[2] >> 8);
-              param_5[2] = (char)((ushort)puVar3[1] >> 8);
-              uVar2 = *puVar3;
+              *dst = (char)((ushort)puVar3[3] >> 8);
+              dst[1] = (char)((ushort)puVar3[2] >> 8);
+              dst[2] = (char)((ushort)puVar3[1] >> 8);
+              srcValue = *puVar3;
               puVar3 = puVar3 + 4;
-              param_5[3] = (char)((ushort)uVar2 >> 8);
-              param_5 = param_5 + 4;
-              uVar6 = uVar6 - 1;
-            } while (uVar6 != 0);
+              dst[3] = (char)((ushort)srcValue >> 8);
+              dst = dst + 4;
+              pixelsLeft = pixelsLeft - 1;
+            } while (pixelsLeft != 0);
           }
-          param_3 = param_3 + -1;
-          param_4 = (undefined2 *)((int)param_4 + param_6);
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = (undefined2 *)((int)src + srcRowStride);
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
-    else if (param_11 < 0x8001) {
-      if (param_11 == 0x1909) {
-        if (0 < param_3) {
+    else if (srcFormat < 0x8001) {
+      if (srcFormat == 0x1909) {
+        if (0 < height) {
           do {
-            if (param_5 < puVar5) {
-              uVar6 = (uint)(puVar5 + (3 - (int)param_5)) >> 2;
-              puVar3 = param_4;
+            if (dst < dstRowEnd) {
+              pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
+              puVar3 = src;
               do {
-                uVar2 = *puVar3;
+                srcValue = *puVar3;
                 puVar3 = puVar3 + 1;
-                param_5[3] = 0xff;
-                *param_5 = (char)((ushort)uVar2 >> 8);
-                param_5[2] = *param_5;
-                param_5[1] = *param_5;
-                param_5 = param_5 + 4;
-                uVar6 = uVar6 - 1;
-              } while (uVar6 != 0);
+                dst[3] = 0xff;
+                *dst = (char)((ushort)srcValue >> 8);
+                dst[2] = *dst;
+                dst[1] = *dst;
+                dst = dst + 4;
+                pixelsLeft = pixelsLeft - 1;
+              } while (pixelsLeft != 0);
             }
-            param_3 = param_3 + -1;
-            param_4 = (undefined2 *)((int)param_4 + param_6);
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = (undefined2 *)((int)src + srcRowStride);
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
       else {
-        if (param_11 != 0x190a) {
+        if (srcFormat != 0x190a) {
           return 0;
         }
-        if (0 < param_3) {
+        if (0 < height) {
           do {
-            if (param_5 < puVar5) {
-              uVar6 = (uint)(puVar5 + (3 - (int)param_5)) >> 2;
-              puVar3 = param_4;
+            if (dst < dstRowEnd) {
+              pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
+              puVar3 = src;
               do {
-                *param_5 = (char)((ushort)*puVar3 >> 8);
-                param_5[2] = *param_5;
-                param_5[1] = *param_5;
-                puVar1 = puVar3 + 1;
+                *dst = (char)((ushort)*puVar3 >> 8);
+                dst[2] = *dst;
+                dst[1] = *dst;
+                srcComponent = puVar3 + 1;
                 puVar3 = puVar3 + 2;
-                param_5[3] = (char)((ushort)*puVar1 >> 8);
-                param_5 = param_5 + 4;
-                uVar6 = uVar6 - 1;
-              } while (uVar6 != 0);
+                dst[3] = (char)((ushort)*srcComponent >> 8);
+                dst = dst + 4;
+                pixelsLeft = pixelsLeft - 1;
+              } while (pixelsLeft != 0);
             }
-            param_3 = param_3 + -1;
-            param_4 = (undefined2 *)((int)param_4 + param_6);
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = (undefined2 *)((int)src + srcRowStride);
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
     }
-    else if (param_11 == 0x80e0) {
-      if (0 < param_3) {
+    else if (srcFormat == 0x80e0) {
+      if (0 < height) {
         do {
-          if (param_5 < puVar5) {
-            uVar6 = (uint)(puVar5 + (3 - (int)param_5)) >> 2;
-            puVar3 = param_4;
+          if (dst < dstRowEnd) {
+            pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
+            puVar3 = src;
             do {
-              *param_5 = (char)((ushort)puVar3[2] >> 8);
-              param_5[1] = (char)((ushort)puVar3[1] >> 8);
-              uVar2 = *puVar3;
+              *dst = (char)((ushort)puVar3[2] >> 8);
+              dst[1] = (char)((ushort)puVar3[1] >> 8);
+              srcValue = *puVar3;
               puVar3 = puVar3 + 3;
-              param_5[3] = 0xff;
-              param_5[2] = (char)((ushort)uVar2 >> 8);
-              param_5 = param_5 + 4;
-              uVar6 = uVar6 - 1;
-            } while (uVar6 != 0);
+              dst[3] = 0xff;
+              dst[2] = (char)((ushort)srcValue >> 8);
+              dst = dst + 4;
+              pixelsLeft = pixelsLeft - 1;
+            } while (pixelsLeft != 0);
           }
-          param_3 = param_3 + -1;
-          param_4 = (undefined2 *)((int)param_4 + param_6);
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = (undefined2 *)((int)src + srcRowStride);
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
     else {
-      if (param_11 != 0x80e1) {
+      if (srcFormat != 0x80e1) {
         return 0;
       }
-      if (0 < param_3) {
+      if (0 < height) {
         do {
-          if (param_5 < puVar5) {
-            uVar6 = (uint)(puVar5 + (3 - (int)param_5)) >> 2;
-            puVar3 = param_4;
+          if (dst < dstRowEnd) {
+            pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
+            puVar3 = src;
             do {
-              *param_5 = (char)((ushort)puVar3[2] >> 8);
-              param_5[1] = (char)((ushort)puVar3[1] >> 8);
-              param_5[2] = (char)((ushort)*puVar3 >> 8);
-              puVar1 = puVar3 + 3;
+              *dst = (char)((ushort)puVar3[2] >> 8);
+              dst[1] = (char)((ushort)puVar3[1] >> 8);
+              dst[2] = (char)((ushort)*puVar3 >> 8);
+              srcComponent = puVar3 + 3;
               puVar3 = puVar3 + 4;
-              param_5[3] = (char)((ushort)*puVar1 >> 8);
-              param_5 = param_5 + 4;
-              uVar6 = uVar6 - 1;
-            } while (uVar6 != 0);
+              dst[3] = (char)((ushort)*srcComponent >> 8);
+              dst = dst + 4;
+              pixelsLeft = pixelsLeft - 1;
+            } while (pixelsLeft != 0);
           }
-          param_3 = param_3 + -1;
-          param_4 = (undefined2 *)((int)param_4 + param_6);
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = (undefined2 *)((int)src + srcRowStride);
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
     break;
   case 0x1909:
-    if (param_11 == 0x1908) {
-      if (0 < param_3) {
+    if (srcFormat == 0x1908) {
+      if (0 < height) {
         do {
-          if (param_5 < puVar5) {
-            iVar4 = (int)puVar5 - (int)param_5;
-            puVar3 = param_4;
+          if (dst < dstRowEnd) {
+            iVar4 = (int)dstRowEnd - (int)dst;
+            puVar3 = src;
             do {
-              uVar2 = *puVar3;
+              srcValue = *puVar3;
               puVar3 = puVar3 + 4;
-              *param_5 = (char)((ushort)uVar2 >> 8);
-              param_5 = param_5 + 1;
+              *dst = (char)((ushort)srcValue >> 8);
+              dst = dst + 1;
               iVar4 = iVar4 + -1;
             } while (iVar4 != 0);
           }
-          param_3 = param_3 + -1;
-          param_4 = (undefined2 *)((int)param_4 + param_6);
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = (undefined2 *)((int)src + srcRowStride);
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
-    else if (param_11 < 0x1909) {
-      if (param_11 < 0x1907) {
-        if (param_11 < 0x1904) {
-          if (param_11 != 0x1903) {
+    else if (srcFormat < 0x1909) {
+      if (srcFormat < 0x1907) {
+        if (srcFormat < 0x1904) {
+          if (srcFormat != 0x1903) {
             return 0;
           }
-          if (0 < param_3) {
+          if (0 < height) {
             do {
-              if (param_5 < puVar5) {
-                iVar4 = (int)puVar5 - (int)param_5;
-                puVar3 = param_4;
+              if (dst < dstRowEnd) {
+                iVar4 = (int)dstRowEnd - (int)dst;
+                puVar3 = src;
                 do {
-                  uVar2 = *puVar3;
+                  srcValue = *puVar3;
                   puVar3 = puVar3 + 1;
-                  *param_5 = (char)((ushort)uVar2 >> 8);
-                  param_5 = param_5 + 1;
+                  *dst = (char)((ushort)srcValue >> 8);
+                  dst = dst + 1;
                   iVar4 = iVar4 + -1;
                 } while (iVar4 != 0);
               }
-              param_3 = param_3 + -1;
-              param_4 = (undefined2 *)((int)param_4 + param_6);
-              param_5 = param_5 + param_8;
-              puVar5 = puVar5 + param_9;
-            } while (param_3 != 0);
+              height = height + -1;
+              src = (undefined2 *)((int)src + srcRowStride);
+              dst = dst + dstRowSkip;
+              dstRowEnd = dstRowEnd + dstRowStride;
+            } while (height != 0);
           }
         }
-        else if (0 < param_3) {
+        else if (0 < height) {
           do {
-            if (param_5 < puVar5) {
-              iVar4 = (int)puVar5 - (int)param_5;
+            if (dst < dstRowEnd) {
+              iVar4 = (int)dstRowEnd - (int)dst;
               do {
-                *param_5 = 0;
-                param_5 = param_5 + 1;
+                *dst = 0;
+                dst = dst + 1;
                 iVar4 = iVar4 + -1;
               } while (iVar4 != 0);
             }
-            param_3 = param_3 + -1;
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
-      else if (0 < param_3) {
+      else if (0 < height) {
         do {
-          if (param_5 < puVar5) {
-            iVar4 = (int)puVar5 - (int)param_5;
-            puVar3 = param_4;
+          if (dst < dstRowEnd) {
+            iVar4 = (int)dstRowEnd - (int)dst;
+            puVar3 = src;
             do {
-              uVar2 = *puVar3;
+              srcValue = *puVar3;
               puVar3 = puVar3 + 3;
-              *param_5 = (char)((ushort)uVar2 >> 8);
-              param_5 = param_5 + 1;
+              *dst = (char)((ushort)srcValue >> 8);
+              dst = dst + 1;
               iVar4 = iVar4 + -1;
             } while (iVar4 != 0);
           }
-          param_3 = param_3 + -1;
-          param_4 = (undefined2 *)((int)param_4 + param_6);
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = (undefined2 *)((int)src + srcRowStride);
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
-    else if (param_11 == 0x8000) {
-      if (0 < param_3) {
+    else if (srcFormat == 0x8000) {
+      if (0 < height) {
         do {
-          if (param_5 < puVar5) {
-            iVar4 = (int)puVar5 - (int)param_5;
-            puVar3 = param_4;
+          if (dst < dstRowEnd) {
+            iVar4 = (int)dstRowEnd - (int)dst;
+            puVar3 = src;
             do {
-              puVar1 = puVar3 + 3;
+              srcComponent = puVar3 + 3;
               puVar3 = puVar3 + 4;
-              *param_5 = (char)((ushort)*puVar1 >> 8);
-              param_5 = param_5 + 1;
+              *dst = (char)((ushort)*srcComponent >> 8);
+              dst = dst + 1;
               iVar4 = iVar4 + -1;
             } while (iVar4 != 0);
           }
-          param_3 = param_3 + -1;
-          param_4 = (undefined2 *)((int)param_4 + param_6);
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = (undefined2 *)((int)src + srcRowStride);
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
-    else if (param_11 < 0x8001) {
-      if (param_11 == 0x1909) {
-        if (0 < param_3) {
+    else if (srcFormat < 0x8001) {
+      if (srcFormat == 0x1909) {
+        if (0 < height) {
           do {
-            if (param_5 < puVar5) {
-              iVar4 = (int)puVar5 - (int)param_5;
-              puVar3 = param_4;
+            if (dst < dstRowEnd) {
+              iVar4 = (int)dstRowEnd - (int)dst;
+              puVar3 = src;
               do {
-                uVar2 = *puVar3;
+                srcValue = *puVar3;
                 puVar3 = puVar3 + 1;
-                *param_5 = (char)((ushort)uVar2 >> 8);
-                param_5 = param_5 + 1;
+                *dst = (char)((ushort)srcValue >> 8);
+                dst = dst + 1;
                 iVar4 = iVar4 + -1;
               } while (iVar4 != 0);
             }
-            param_3 = param_3 + -1;
-            param_4 = (undefined2 *)((int)param_4 + param_6);
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = (undefined2 *)((int)src + srcRowStride);
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
       else {
-        if (param_11 != 0x190a) {
+        if (srcFormat != 0x190a) {
           return 0;
         }
-        if (0 < param_3) {
+        if (0 < height) {
           do {
-            if (param_5 < puVar5) {
-              iVar4 = (int)puVar5 - (int)param_5;
-              puVar3 = param_4;
+            if (dst < dstRowEnd) {
+              iVar4 = (int)dstRowEnd - (int)dst;
+              puVar3 = src;
               do {
-                uVar2 = *puVar3;
+                srcValue = *puVar3;
                 puVar3 = puVar3 + 2;
-                *param_5 = (char)((ushort)uVar2 >> 8);
-                param_5 = param_5 + 1;
+                *dst = (char)((ushort)srcValue >> 8);
+                dst = dst + 1;
                 iVar4 = iVar4 + -1;
               } while (iVar4 != 0);
             }
-            param_3 = param_3 + -1;
-            param_4 = (undefined2 *)((int)param_4 + param_6);
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = (undefined2 *)((int)src + srcRowStride);
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
     }
-    else if (param_11 == 0x80e0) {
-      if (0 < param_3) {
+    else if (srcFormat == 0x80e0) {
+      if (0 < height) {
         do {
-          if (param_5 < puVar5) {
-            iVar4 = (int)puVar5 - (int)param_5;
-            puVar3 = param_4;
+          if (dst < dstRowEnd) {
+            iVar4 = (int)dstRowEnd - (int)dst;
+            puVar3 = src;
             do {
-              puVar1 = puVar3 + 2;
+              srcComponent = puVar3 + 2;
               puVar3 = puVar3 + 3;
-              *param_5 = (char)((ushort)*puVar1 >> 8);
-              param_5 = param_5 + 1;
+              *dst = (char)((ushort)*srcComponent >> 8);
+              dst = dst + 1;
               iVar4 = iVar4 + -1;
             } while (iVar4 != 0);
           }
-          param_3 = param_3 + -1;
-          param_4 = (undefined2 *)((int)param_4 + param_6);
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = (undefined2 *)((int)src + srcRowStride);
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
     else {
-      if (param_11 != 0x80e1) {
+      if (srcFormat != 0x80e1) {
         return 0;
       }
-      if (0 < param_3) {
+      if (0 < height) {
         do {
-          if (param_5 < puVar5) {
-            iVar4 = (int)puVar5 - (int)param_5;
-            puVar3 = param_4;
+          if (dst < dstRowEnd) {
+            iVar4 = (int)dstRowEnd - (int)dst;
+            puVar3 = src;
             do {
-              puVar1 = puVar3 + 2;
+              srcComponent = puVar3 + 2;
               puVar3 = puVar3 + 4;
-              *param_5 = (char)((ushort)*puVar1 >> 8);
-              param_5 = param_5 + 1;
+              *dst = (char)((ushort)*srcComponent >> 8);
+              dst = dst + 1;
               iVar4 = iVar4 + -1;
             } while (iVar4 != 0);
           }
-          param_3 = param_3 + -1;
-          param_4 = (undefined2 *)((int)param_4 + param_6);
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = (undefined2 *)((int)src + srcRowStride);
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
     break;
   case 0x190a:
-    if (param_11 == 0x1908) {
-      if (0 < param_3) {
+    if (srcFormat == 0x1908) {
+      if (0 < height) {
         do {
-          if (param_5 < puVar5) {
-            uVar6 = (uint)(puVar5 + (1 - (int)param_5)) >> 1;
-            puVar3 = param_4;
+          if (dst < dstRowEnd) {
+            pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
+            puVar3 = src;
             do {
-              *param_5 = (char)((ushort)*puVar3 >> 8);
-              puVar1 = puVar3 + 3;
+              *dst = (char)((ushort)*puVar3 >> 8);
+              srcComponent = puVar3 + 3;
               puVar3 = puVar3 + 4;
-              param_5[1] = (char)((ushort)*puVar1 >> 8);
-              param_5 = param_5 + 2;
-              uVar6 = uVar6 - 1;
-            } while (uVar6 != 0);
+              dst[1] = (char)((ushort)*srcComponent >> 8);
+              dst = dst + 2;
+              pixelsLeft = pixelsLeft - 1;
+            } while (pixelsLeft != 0);
           }
-          param_3 = param_3 + -1;
-          param_4 = (undefined2 *)((int)param_4 + param_6);
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = (undefined2 *)((int)src + srcRowStride);
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
-    else if (param_11 < 0x1909) {
-      if (param_11 < 0x1906) {
-        if (param_11 < 0x1904) {
-          if (param_11 != 0x1903) {
+    else if (srcFormat < 0x1909) {
+      if (srcFormat < 0x1906) {
+        if (srcFormat < 0x1904) {
+          if (srcFormat != 0x1903) {
             return 0;
           }
-          if (0 < param_3) {
+          if (0 < height) {
             do {
-              if (param_5 < puVar5) {
-                uVar6 = (uint)(puVar5 + (1 - (int)param_5)) >> 1;
-                puVar3 = param_4;
+              if (dst < dstRowEnd) {
+                pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
+                puVar3 = src;
                 do {
-                  uVar2 = *puVar3;
+                  srcValue = *puVar3;
                   puVar3 = puVar3 + 1;
-                  param_5[1] = 0xff;
-                  *param_5 = (char)((ushort)uVar2 >> 8);
-                  param_5 = param_5 + 2;
-                  uVar6 = uVar6 - 1;
-                } while (uVar6 != 0);
+                  dst[1] = 0xff;
+                  *dst = (char)((ushort)srcValue >> 8);
+                  dst = dst + 2;
+                  pixelsLeft = pixelsLeft - 1;
+                } while (pixelsLeft != 0);
               }
-              param_3 = param_3 + -1;
-              param_4 = (undefined2 *)((int)param_4 + param_6);
-              param_5 = param_5 + param_8;
-              puVar5 = puVar5 + param_9;
-            } while (param_3 != 0);
+              height = height + -1;
+              src = (undefined2 *)((int)src + srcRowStride);
+              dst = dst + dstRowSkip;
+              dstRowEnd = dstRowEnd + dstRowStride;
+            } while (height != 0);
           }
         }
-        else if (0 < param_3) {
+        else if (0 < height) {
           do {
-            if (param_5 < puVar5) {
-              uVar6 = (uint)(puVar5 + (1 - (int)param_5)) >> 1;
+            if (dst < dstRowEnd) {
+              pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
               do {
-                *param_5 = 0;
-                param_5[1] = 0xff;
-                param_5 = param_5 + 2;
-                uVar6 = uVar6 - 1;
-              } while (uVar6 != 0);
+                *dst = 0;
+                dst[1] = 0xff;
+                dst = dst + 2;
+                pixelsLeft = pixelsLeft - 1;
+              } while (pixelsLeft != 0);
             }
-            param_3 = param_3 + -1;
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
-      else if (param_11 == 0x1906) {
-        if (0 < param_3) {
+      else if (srcFormat == 0x1906) {
+        if (0 < height) {
           do {
-            if (param_5 < puVar5) {
-              uVar6 = (uint)(puVar5 + (1 - (int)param_5)) >> 1;
-              puVar3 = param_4;
+            if (dst < dstRowEnd) {
+              pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
+              puVar3 = src;
               do {
-                *param_5 = 0;
-                uVar2 = *puVar3;
+                *dst = 0;
+                srcValue = *puVar3;
                 puVar3 = puVar3 + 1;
-                param_5[1] = (char)((ushort)uVar2 >> 8);
-                param_5 = param_5 + 2;
-                uVar6 = uVar6 - 1;
-              } while (uVar6 != 0);
+                dst[1] = (char)((ushort)srcValue >> 8);
+                dst = dst + 2;
+                pixelsLeft = pixelsLeft - 1;
+              } while (pixelsLeft != 0);
             }
-            param_3 = param_3 + -1;
-            param_4 = (undefined2 *)((int)param_4 + param_6);
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = (undefined2 *)((int)src + srcRowStride);
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
       else {
-        if (param_11 != 0x1907) {
+        if (srcFormat != 0x1907) {
           return 0;
         }
-        if (0 < param_3) {
+        if (0 < height) {
           do {
-            if (param_5 < puVar5) {
-              uVar6 = (uint)(puVar5 + (1 - (int)param_5)) >> 1;
-              puVar3 = param_4;
+            if (dst < dstRowEnd) {
+              pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
+              puVar3 = src;
               do {
-                uVar2 = *puVar3;
+                srcValue = *puVar3;
                 puVar3 = puVar3 + 3;
-                param_5[1] = 0xff;
-                *param_5 = (char)((ushort)uVar2 >> 8);
-                param_5 = param_5 + 2;
-                uVar6 = uVar6 - 1;
-              } while (uVar6 != 0);
+                dst[1] = 0xff;
+                *dst = (char)((ushort)srcValue >> 8);
+                dst = dst + 2;
+                pixelsLeft = pixelsLeft - 1;
+              } while (pixelsLeft != 0);
             }
-            param_3 = param_3 + -1;
-            param_4 = (undefined2 *)((int)param_4 + param_6);
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = (undefined2 *)((int)src + srcRowStride);
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
     }
-    else if (param_11 == 0x8000) {
-      if (0 < param_3) {
+    else if (srcFormat == 0x8000) {
+      if (0 < height) {
         do {
-          if (param_5 < puVar5) {
-            uVar6 = (uint)(puVar5 + (1 - (int)param_5)) >> 1;
-            puVar3 = param_4;
+          if (dst < dstRowEnd) {
+            pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
+            puVar3 = src;
             do {
-              *param_5 = (char)((ushort)puVar3[3] >> 8);
-              uVar2 = *puVar3;
+              *dst = (char)((ushort)puVar3[3] >> 8);
+              srcValue = *puVar3;
               puVar3 = puVar3 + 4;
-              param_5[1] = (char)((ushort)uVar2 >> 8);
-              param_5 = param_5 + 2;
-              uVar6 = uVar6 - 1;
-            } while (uVar6 != 0);
+              dst[1] = (char)((ushort)srcValue >> 8);
+              dst = dst + 2;
+              pixelsLeft = pixelsLeft - 1;
+            } while (pixelsLeft != 0);
           }
-          param_3 = param_3 + -1;
-          param_4 = (undefined2 *)((int)param_4 + param_6);
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = (undefined2 *)((int)src + srcRowStride);
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
-    else if (param_11 < 0x8001) {
-      if (param_11 == 0x1909) {
-        if (0 < param_3) {
+    else if (srcFormat < 0x8001) {
+      if (srcFormat == 0x1909) {
+        if (0 < height) {
           do {
-            if (param_5 < puVar5) {
-              uVar6 = (uint)(puVar5 + (1 - (int)param_5)) >> 1;
-              puVar3 = param_4;
+            if (dst < dstRowEnd) {
+              pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
+              puVar3 = src;
               do {
-                uVar2 = *puVar3;
+                srcValue = *puVar3;
                 puVar3 = puVar3 + 1;
-                param_5[1] = 0xff;
-                *param_5 = (char)((ushort)uVar2 >> 8);
-                param_5 = param_5 + 2;
-                uVar6 = uVar6 - 1;
-              } while (uVar6 != 0);
+                dst[1] = 0xff;
+                *dst = (char)((ushort)srcValue >> 8);
+                dst = dst + 2;
+                pixelsLeft = pixelsLeft - 1;
+              } while (pixelsLeft != 0);
             }
-            param_3 = param_3 + -1;
-            param_4 = (undefined2 *)((int)param_4 + param_6);
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = (undefined2 *)((int)src + srcRowStride);
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
       else {
-        if (param_11 != 0x190a) {
+        if (srcFormat != 0x190a) {
           return 0;
         }
-        if (0 < param_3) {
+        if (0 < height) {
           do {
-            if (param_5 < puVar5) {
-              uVar6 = (uint)(puVar5 + (1 - (int)param_5)) >> 1;
-              puVar3 = param_4;
+            if (dst < dstRowEnd) {
+              pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
+              puVar3 = src;
               do {
-                *param_5 = (char)((ushort)*puVar3 >> 8);
-                puVar1 = puVar3 + 1;
+                *dst = (char)((ushort)*puVar3 >> 8);
+                srcComponent = puVar3 + 1;
                 puVar3 = puVar3 + 2;
-                param_5[1] = (char)((ushort)*puVar1 >> 8);
-                param_5 = param_5 + 2;
-                uVar6 = uVar6 - 1;
-              } while (uVar6 != 0);
+                dst[1] = (char)((ushort)*srcComponent >> 8);
+                dst = dst + 2;
+                pixelsLeft = pixelsLeft - 1;
+              } while (pixelsLeft != 0);
             }
-            param_3 = param_3 + -1;
-            param_4 = (undefined2 *)((int)param_4 + param_6);
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = (undefined2 *)((int)src + srcRowStride);
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
     }
-    else if (param_11 == 0x80e0) {
-      if (0 < param_3) {
+    else if (srcFormat == 0x80e0) {
+      if (0 < height) {
         do {
-          if (param_5 < puVar5) {
-            uVar6 = (uint)(puVar5 + (1 - (int)param_5)) >> 1;
-            puVar3 = param_4;
+          if (dst < dstRowEnd) {
+            pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
+            puVar3 = src;
             do {
-              uVar2 = puVar3[2];
+              srcValue = puVar3[2];
               puVar3 = puVar3 + 3;
-              param_5[1] = 0xff;
-              *param_5 = (char)((ushort)uVar2 >> 8);
-              param_5 = param_5 + 2;
-              uVar6 = uVar6 - 1;
-            } while (uVar6 != 0);
+              dst[1] = 0xff;
+              *dst = (char)((ushort)srcValue >> 8);
+              dst = dst + 2;
+              pixelsLeft = pixelsLeft - 1;
+            } while (pixelsLeft != 0);
           }
-          param_3 = param_3 + -1;
-          param_4 = (undefined2 *)((int)param_4 + param_6);
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = (undefined2 *)((int)src + srcRowStride);
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
     else {
-      if (param_11 != 0x80e1) {
+      if (srcFormat != 0x80e1) {
         return 0;
       }
-      if (0 < param_3) {
+      if (0 < height) {
         do {
-          if (param_5 < puVar5) {
-            uVar6 = (uint)(puVar5 + (1 - (int)param_5)) >> 1;
-            puVar3 = param_4;
+          if (dst < dstRowEnd) {
+            pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
+            puVar3 = src;
             do {
-              *param_5 = (char)((ushort)puVar3[2] >> 8);
-              puVar1 = puVar3 + 3;
+              *dst = (char)((ushort)puVar3[2] >> 8);
+              srcComponent = puVar3 + 3;
               puVar3 = puVar3 + 4;
-              param_5[1] = (char)((ushort)*puVar1 >> 8);
-              param_5 = param_5 + 2;
-              uVar6 = uVar6 - 1;
-            } while (uVar6 != 0);
+              dst[1] = (char)((ushort)*srcComponent >> 8);
+              dst = dst + 2;
+              pixelsLeft = pixelsLeft - 1;
+            } while (pixelsLeft != 0);
           }
-          param_3 = param_3 + -1;
-          param_4 = (undefined2 *)((int)param_4 + param_6);
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = (undefined2 *)((int)src + srcRowStride);
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
   }
@@ -6244,1178 +6244,1178 @@ int _gleTextureImagePut_FastUshort(param_1, param_2, param_3, param_4, param_5, 
 }
 
 /* _gleTextureImagePut_FastInt @ 0x100a54 (5476 bytes) */
-int _gleTextureImagePut_FastInt(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11)
-  undefined4 param_1;
-  int param_2;
-  int param_3;
-  uint *param_4;
-  undefined1 *param_5;
-  int param_6;
-  undefined4 param_7;
-  int param_8;
-  int param_9;
-  undefined4 param_10;
-  int param_11;
+int _gleTextureImagePut_FastInt(unusedArg1, width, height, src, dst, srcRowStride, unusedArg7, dstRowSkip, dstRowStride, dstFormat, srcFormat)
+  undefined4 unusedArg1;
+  int width;
+  int height;
+  uint *src;
+  undefined1 *dst;
+  int srcRowStride;
+  undefined4 unusedArg7;
+  int dstRowSkip;
+  int dstRowStride;
+  undefined4 dstFormat;
+  int srcFormat;
 {
-  uint *puVar1;
+  uint *srcComponent;
   uint uVar2;
   uint *puVar3;
   int iVar4;
-  undefined1 *puVar5;
+  undefined1 *dstRowEnd;
   uint uVar6;
   
-  iVar4 = _gleComponents(param_10);
-  puVar5 = param_5 + param_2 * iVar4;
-  switch(param_10) {
+  iVar4 = _gleComponents(dstFormat);
+  dstRowEnd = dst + width * iVar4;
+  switch(dstFormat) {
   case 0x1900:
-    if (param_11 != 0x1900) {
+    if (srcFormat != 0x1900) {
       return 0;
     }
-    if (0 < param_3) {
+    if (0 < height) {
       do {
-        if (param_5 < puVar5) {
-          iVar4 = (int)puVar5 - (int)param_5;
-          puVar3 = param_4;
+        if (dst < dstRowEnd) {
+          iVar4 = (int)dstRowEnd - (int)dst;
+          puVar3 = src;
           do {
             uVar6 = *puVar3;
             puVar3 = puVar3 + 1;
-            *param_5 = (char)(uVar6 >> 0x17);
-            param_5 = param_5 + 1;
+            *dst = (char)(uVar6 >> 0x17);
+            dst = dst + 1;
             iVar4 = iVar4 + -1;
           } while (iVar4 != 0);
         }
-        param_3 = param_3 + -1;
-        param_4 = (uint *)((int)param_4 + param_6);
-        param_5 = param_5 + param_8;
-        puVar5 = puVar5 + param_9;
-      } while (param_3 != 0);
+        height = height + -1;
+        src = (uint *)((int)src + srcRowStride);
+        dst = dst + dstRowSkip;
+        dstRowEnd = dstRowEnd + dstRowStride;
+      } while (height != 0);
     }
     break;
   default:
     return 0;
   case 0x1906:
-    if (param_11 == 0x1908) {
-      if (0 < param_3) {
+    if (srcFormat == 0x1908) {
+      if (0 < height) {
         do {
-          if (param_5 < puVar5) {
-            iVar4 = (int)puVar5 - (int)param_5;
-            puVar3 = param_4;
+          if (dst < dstRowEnd) {
+            iVar4 = (int)dstRowEnd - (int)dst;
+            puVar3 = src;
             do {
-              puVar1 = puVar3 + 3;
+              srcComponent = puVar3 + 3;
               puVar3 = puVar3 + 4;
-              *param_5 = (char)(*puVar1 >> 0x17);
-              param_5 = param_5 + 1;
+              *dst = (char)(*srcComponent >> 0x17);
+              dst = dst + 1;
               iVar4 = iVar4 + -1;
             } while (iVar4 != 0);
           }
-          param_3 = param_3 + -1;
-          param_4 = (uint *)((int)param_4 + param_6);
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = (uint *)((int)src + srcRowStride);
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
-    else if (param_11 < 0x1909) {
-      if (param_11 == 0x1906) {
-        if (0 < param_3) {
+    else if (srcFormat < 0x1909) {
+      if (srcFormat == 0x1906) {
+        if (0 < height) {
           do {
-            if (param_5 < puVar5) {
-              iVar4 = (int)puVar5 - (int)param_5;
-              puVar3 = param_4;
+            if (dst < dstRowEnd) {
+              iVar4 = (int)dstRowEnd - (int)dst;
+              puVar3 = src;
               do {
                 uVar6 = *puVar3;
                 puVar3 = puVar3 + 1;
-                *param_5 = (char)(uVar6 >> 0x17);
-                param_5 = param_5 + 1;
+                *dst = (char)(uVar6 >> 0x17);
+                dst = dst + 1;
                 iVar4 = iVar4 + -1;
               } while (iVar4 != 0);
             }
-            param_3 = param_3 + -1;
-            param_4 = (uint *)((int)param_4 + param_6);
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = (uint *)((int)src + srcRowStride);
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
-      else if (param_11 < 0x1907) {
-        if (param_11 < 0x1903) {
+      else if (srcFormat < 0x1907) {
+        if (srcFormat < 0x1903) {
           return 0;
         }
-        if (0 < param_3) {
+        if (0 < height) {
           do {
-            if (param_5 < puVar5) {
-              iVar4 = (int)puVar5 - (int)param_5;
+            if (dst < dstRowEnd) {
+              iVar4 = (int)dstRowEnd - (int)dst;
               do {
-                *param_5 = 0xff;
-                param_5 = param_5 + 1;
+                *dst = 0xff;
+                dst = dst + 1;
                 iVar4 = iVar4 + -1;
               } while (iVar4 != 0);
             }
-            param_3 = param_3 + -1;
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
-      else if (0 < param_3) {
+      else if (0 < height) {
         do {
-          if (param_5 < puVar5) {
-            iVar4 = (int)puVar5 - (int)param_5;
+          if (dst < dstRowEnd) {
+            iVar4 = (int)dstRowEnd - (int)dst;
             do {
-              *param_5 = 0xff;
-              param_5 = param_5 + 1;
+              *dst = 0xff;
+              dst = dst + 1;
               iVar4 = iVar4 + -1;
             } while (iVar4 != 0);
           }
-          param_3 = param_3 + -1;
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
-    else if (param_11 == 0x8000) {
-      if (0 < param_3) {
+    else if (srcFormat == 0x8000) {
+      if (0 < height) {
         do {
-          if (param_5 < puVar5) {
-            iVar4 = (int)puVar5 - (int)param_5;
-            puVar3 = param_4;
+          if (dst < dstRowEnd) {
+            iVar4 = (int)dstRowEnd - (int)dst;
+            puVar3 = src;
             do {
               uVar6 = *puVar3;
               puVar3 = puVar3 + 4;
-              *param_5 = (char)(uVar6 >> 0x17);
-              param_5 = param_5 + 1;
+              *dst = (char)(uVar6 >> 0x17);
+              dst = dst + 1;
               iVar4 = iVar4 + -1;
             } while (iVar4 != 0);
           }
-          param_3 = param_3 + -1;
-          param_4 = (uint *)((int)param_4 + param_6);
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = (uint *)((int)src + srcRowStride);
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
-    else if (param_11 < 0x8001) {
-      if (param_11 == 0x1909) {
-        if (0 < param_3) {
+    else if (srcFormat < 0x8001) {
+      if (srcFormat == 0x1909) {
+        if (0 < height) {
           do {
-            if (param_5 < puVar5) {
-              iVar4 = (int)puVar5 - (int)param_5;
+            if (dst < dstRowEnd) {
+              iVar4 = (int)dstRowEnd - (int)dst;
               do {
-                *param_5 = 0xff;
-                param_5 = param_5 + 1;
+                *dst = 0xff;
+                dst = dst + 1;
                 iVar4 = iVar4 + -1;
               } while (iVar4 != 0);
             }
-            param_3 = param_3 + -1;
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
       else {
-        if (param_11 != 0x190a) {
+        if (srcFormat != 0x190a) {
           return 0;
         }
-        if (0 < param_3) {
+        if (0 < height) {
           do {
-            if (param_5 < puVar5) {
-              iVar4 = (int)puVar5 - (int)param_5;
-              puVar3 = param_4;
+            if (dst < dstRowEnd) {
+              iVar4 = (int)dstRowEnd - (int)dst;
+              puVar3 = src;
               do {
-                puVar1 = puVar3 + 1;
+                srcComponent = puVar3 + 1;
                 puVar3 = puVar3 + 2;
-                *param_5 = (char)(*puVar1 >> 0x17);
-                param_5 = param_5 + 1;
+                *dst = (char)(*srcComponent >> 0x17);
+                dst = dst + 1;
                 iVar4 = iVar4 + -1;
               } while (iVar4 != 0);
             }
-            param_3 = param_3 + -1;
-            param_4 = (uint *)((int)param_4 + param_6);
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = (uint *)((int)src + srcRowStride);
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
     }
-    else if (param_11 == 0x80e0) {
-      if (0 < param_3) {
+    else if (srcFormat == 0x80e0) {
+      if (0 < height) {
         do {
-          if (param_5 < puVar5) {
-            iVar4 = (int)puVar5 - (int)param_5;
+          if (dst < dstRowEnd) {
+            iVar4 = (int)dstRowEnd - (int)dst;
             do {
-              *param_5 = 0xff;
-              param_5 = param_5 + 1;
+              *dst = 0xff;
+              dst = dst + 1;
               iVar4 = iVar4 + -1;
             } while (iVar4 != 0);
           }
-          param_3 = param_3 + -1;
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
     else {
-      if (param_11 != 0x80e1) {
+      if (srcFormat != 0x80e1) {
         return 0;
       }
-      if (0 < param_3) {
+      if (0 < height) {
         do {
-          if (param_5 < puVar5) {
-            iVar4 = (int)puVar5 - (int)param_5;
-            puVar3 = param_4;
+          if (dst < dstRowEnd) {
+            iVar4 = (int)dstRowEnd - (int)dst;
+            puVar3 = src;
             do {
-              puVar1 = puVar3 + 3;
+              srcComponent = puVar3 + 3;
               puVar3 = puVar3 + 4;
-              *param_5 = (char)(*puVar1 >> 0x17);
-              param_5 = param_5 + 1;
+              *dst = (char)(*srcComponent >> 0x17);
+              dst = dst + 1;
               iVar4 = iVar4 + -1;
             } while (iVar4 != 0);
           }
-          param_3 = param_3 + -1;
-          param_4 = (uint *)((int)param_4 + param_6);
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = (uint *)((int)src + srcRowStride);
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
     break;
   case 0x1907:
-    if (param_11 == 0x1908) {
-      puVar3 = param_4;
-      if (0 < param_3) {
+    if (srcFormat == 0x1908) {
+      puVar3 = src;
+      if (0 < height) {
         do {
-          for (; param_5 < puVar5; param_5 = param_5 + 3) {
-            *param_5 = (char)(*param_4 >> 0x17);
-            param_5[1] = (char)(param_4[1] >> 0x17);
-            puVar1 = param_4 + 2;
-            param_4 = param_4 + 4;
-            param_5[2] = (char)(*puVar1 >> 0x17);
+          for (; dst < dstRowEnd; dst = dst + 3) {
+            *dst = (char)(*src >> 0x17);
+            dst[1] = (char)(src[1] >> 0x17);
+            srcComponent = src + 2;
+            src = src + 4;
+            dst[2] = (char)(*srcComponent >> 0x17);
           }
-          param_3 = param_3 + -1;
-          param_4 = (uint *)((int)puVar3 + param_6);
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-          puVar3 = param_4;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = (uint *)((int)puVar3 + srcRowStride);
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+          puVar3 = src;
+        } while (height != 0);
       }
     }
-    else if (param_11 < 0x1909) {
-      if (param_11 == 0x1905) {
-        puVar3 = param_4;
-        if (0 < param_3) {
+    else if (srcFormat < 0x1909) {
+      if (srcFormat == 0x1905) {
+        puVar3 = src;
+        if (0 < height) {
           do {
-            for (; param_5 < puVar5; param_5 = param_5 + 3) {
-              *param_5 = 0;
-              param_5[1] = 0;
-              uVar6 = *param_4;
-              param_4 = param_4 + 1;
-              param_5[2] = (char)(uVar6 >> 0x17);
+            for (; dst < dstRowEnd; dst = dst + 3) {
+              *dst = 0;
+              dst[1] = 0;
+              uVar6 = *src;
+              src = src + 1;
+              dst[2] = (char)(uVar6 >> 0x17);
             }
-            param_3 = param_3 + -1;
-            param_4 = (uint *)((int)puVar3 + param_6);
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-            puVar3 = param_4;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = (uint *)((int)puVar3 + srcRowStride);
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+            puVar3 = src;
+          } while (height != 0);
         }
       }
-      else if (param_11 < 0x1906) {
-        if (param_11 == 0x1903) {
-          puVar3 = param_4;
-          if (0 < param_3) {
+      else if (srcFormat < 0x1906) {
+        if (srcFormat == 0x1903) {
+          puVar3 = src;
+          if (0 < height) {
             do {
-              for (; param_5 < puVar5; param_5 = param_5 + 3) {
-                uVar6 = *param_4;
-                param_4 = param_4 + 1;
-                param_5[1] = 0;
-                param_5[2] = 0;
-                *param_5 = (char)(uVar6 >> 0x17);
+              for (; dst < dstRowEnd; dst = dst + 3) {
+                uVar6 = *src;
+                src = src + 1;
+                dst[1] = 0;
+                dst[2] = 0;
+                *dst = (char)(uVar6 >> 0x17);
               }
-              param_3 = param_3 + -1;
-              param_4 = (uint *)((int)puVar3 + param_6);
-              param_5 = param_5 + param_8;
-              puVar5 = puVar5 + param_9;
-              puVar3 = param_4;
-            } while (param_3 != 0);
+              height = height + -1;
+              src = (uint *)((int)puVar3 + srcRowStride);
+              dst = dst + dstRowSkip;
+              dstRowEnd = dstRowEnd + dstRowStride;
+              puVar3 = src;
+            } while (height != 0);
           }
         }
         else {
-          if (param_11 != 0x1904) {
+          if (srcFormat != 0x1904) {
             return 0;
           }
-          puVar3 = param_4;
-          if (0 < param_3) {
+          puVar3 = src;
+          if (0 < height) {
             do {
-              for (; param_5 < puVar5; param_5 = param_5 + 3) {
-                *param_5 = 0;
-                uVar6 = *param_4;
-                param_4 = param_4 + 1;
-                param_5[2] = 0;
-                param_5[1] = (char)(uVar6 >> 0x17);
+              for (; dst < dstRowEnd; dst = dst + 3) {
+                *dst = 0;
+                uVar6 = *src;
+                src = src + 1;
+                dst[2] = 0;
+                dst[1] = (char)(uVar6 >> 0x17);
               }
-              param_3 = param_3 + -1;
-              param_4 = (uint *)((int)puVar3 + param_6);
-              param_5 = param_5 + param_8;
-              puVar5 = puVar5 + param_9;
-              puVar3 = param_4;
-            } while (param_3 != 0);
+              height = height + -1;
+              src = (uint *)((int)puVar3 + srcRowStride);
+              dst = dst + dstRowSkip;
+              dstRowEnd = dstRowEnd + dstRowStride;
+              puVar3 = src;
+            } while (height != 0);
           }
         }
       }
-      else if (param_11 == 0x1906) {
-        if (0 < param_3) {
+      else if (srcFormat == 0x1906) {
+        if (0 < height) {
           do {
-            for (; param_5 < puVar5; param_5 = param_5 + 3) {
-              *param_5 = 0;
-              param_5[1] = 0;
-              param_5[2] = 0;
+            for (; dst < dstRowEnd; dst = dst + 3) {
+              *dst = 0;
+              dst[1] = 0;
+              dst[2] = 0;
             }
-            param_3 = param_3 + -1;
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
       else {
-        if (param_11 != 0x1907) {
+        if (srcFormat != 0x1907) {
           return 0;
         }
-        puVar3 = param_4;
-        if (0 < param_3) {
+        puVar3 = src;
+        if (0 < height) {
           do {
-            for (; param_5 < puVar5; param_5 = param_5 + 3) {
-              *param_5 = (char)(*param_4 >> 0x17);
-              param_5[1] = (char)(param_4[1] >> 0x17);
-              puVar1 = param_4 + 2;
-              param_4 = param_4 + 3;
-              param_5[2] = (char)(*puVar1 >> 0x17);
+            for (; dst < dstRowEnd; dst = dst + 3) {
+              *dst = (char)(*src >> 0x17);
+              dst[1] = (char)(src[1] >> 0x17);
+              srcComponent = src + 2;
+              src = src + 3;
+              dst[2] = (char)(*srcComponent >> 0x17);
             }
-            param_3 = param_3 + -1;
-            param_4 = (uint *)((int)puVar3 + param_6);
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-            puVar3 = param_4;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = (uint *)((int)puVar3 + srcRowStride);
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+            puVar3 = src;
+          } while (height != 0);
         }
       }
     }
-    else if (param_11 == 0x8000) {
-      puVar3 = param_4;
-      if (0 < param_3) {
+    else if (srcFormat == 0x8000) {
+      puVar3 = src;
+      if (0 < height) {
         do {
-          for (; param_5 < puVar5; param_5 = param_5 + 3) {
-            *param_5 = (char)(param_4[3] >> 0x17);
-            param_5[1] = (char)(param_4[2] >> 0x17);
-            puVar1 = param_4 + 1;
-            param_4 = param_4 + 4;
-            param_5[2] = (char)(*puVar1 >> 0x17);
+          for (; dst < dstRowEnd; dst = dst + 3) {
+            *dst = (char)(src[3] >> 0x17);
+            dst[1] = (char)(src[2] >> 0x17);
+            srcComponent = src + 1;
+            src = src + 4;
+            dst[2] = (char)(*srcComponent >> 0x17);
           }
-          param_3 = param_3 + -1;
-          param_4 = (uint *)((int)puVar3 + param_6);
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-          puVar3 = param_4;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = (uint *)((int)puVar3 + srcRowStride);
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+          puVar3 = src;
+        } while (height != 0);
       }
     }
-    else if (param_11 < 0x8001) {
-      if (param_11 == 0x1909) {
-        puVar3 = param_4;
-        if (0 < param_3) {
+    else if (srcFormat < 0x8001) {
+      if (srcFormat == 0x1909) {
+        puVar3 = src;
+        if (0 < height) {
           do {
-            for (; param_5 < puVar5; param_5 = param_5 + 3) {
-              uVar6 = *param_4;
-              param_4 = param_4 + 1;
-              *param_5 = (char)(uVar6 >> 0x17);
-              param_5[2] = *param_5;
-              param_5[1] = *param_5;
+            for (; dst < dstRowEnd; dst = dst + 3) {
+              uVar6 = *src;
+              src = src + 1;
+              *dst = (char)(uVar6 >> 0x17);
+              dst[2] = *dst;
+              dst[1] = *dst;
             }
-            param_3 = param_3 + -1;
-            param_4 = (uint *)((int)puVar3 + param_6);
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-            puVar3 = param_4;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = (uint *)((int)puVar3 + srcRowStride);
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+            puVar3 = src;
+          } while (height != 0);
         }
       }
       else {
-        if (param_11 != 0x190a) {
+        if (srcFormat != 0x190a) {
           return 0;
         }
-        puVar3 = param_4;
-        if (0 < param_3) {
+        puVar3 = src;
+        if (0 < height) {
           do {
-            for (; param_5 < puVar5; param_5 = param_5 + 3) {
-              uVar6 = *param_4;
-              param_4 = param_4 + 2;
-              *param_5 = (char)(uVar6 >> 0x17);
-              param_5[2] = *param_5;
-              param_5[1] = *param_5;
+            for (; dst < dstRowEnd; dst = dst + 3) {
+              uVar6 = *src;
+              src = src + 2;
+              *dst = (char)(uVar6 >> 0x17);
+              dst[2] = *dst;
+              dst[1] = *dst;
             }
-            param_3 = param_3 + -1;
-            param_4 = (uint *)((int)puVar3 + param_6);
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-            puVar3 = param_4;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = (uint *)((int)puVar3 + srcRowStride);
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+            puVar3 = src;
+          } while (height != 0);
         }
       }
     }
-    else if (param_11 == 0x80e0) {
-      puVar3 = param_4;
-      if (0 < param_3) {
+    else if (srcFormat == 0x80e0) {
+      puVar3 = src;
+      if (0 < height) {
         do {
-          for (; param_5 < puVar5; param_5 = param_5 + 3) {
-            *param_5 = (char)(param_4[2] >> 0x17);
-            param_5[1] = (char)(param_4[1] >> 0x17);
-            uVar6 = *param_4;
-            param_4 = param_4 + 3;
-            param_5[2] = (char)(uVar6 >> 0x17);
+          for (; dst < dstRowEnd; dst = dst + 3) {
+            *dst = (char)(src[2] >> 0x17);
+            dst[1] = (char)(src[1] >> 0x17);
+            uVar6 = *src;
+            src = src + 3;
+            dst[2] = (char)(uVar6 >> 0x17);
           }
-          param_3 = param_3 + -1;
-          param_4 = (uint *)((int)puVar3 + param_6);
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-          puVar3 = param_4;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = (uint *)((int)puVar3 + srcRowStride);
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+          puVar3 = src;
+        } while (height != 0);
       }
     }
     else {
-      if (param_11 != 0x80e1) {
+      if (srcFormat != 0x80e1) {
         return 0;
       }
-      puVar3 = param_4;
-      if (0 < param_3) {
+      puVar3 = src;
+      if (0 < height) {
         do {
-          for (; param_5 < puVar5; param_5 = param_5 + 3) {
-            *param_5 = (char)(param_4[2] >> 0x17);
-            param_5[1] = (char)(param_4[1] >> 0x17);
-            uVar6 = *param_4;
-            param_4 = param_4 + 4;
-            param_5[2] = (char)(uVar6 >> 0x17);
+          for (; dst < dstRowEnd; dst = dst + 3) {
+            *dst = (char)(src[2] >> 0x17);
+            dst[1] = (char)(src[1] >> 0x17);
+            uVar6 = *src;
+            src = src + 4;
+            dst[2] = (char)(uVar6 >> 0x17);
           }
-          param_3 = param_3 + -1;
-          param_4 = (uint *)((int)puVar3 + param_6);
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-          puVar3 = param_4;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = (uint *)((int)puVar3 + srcRowStride);
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+          puVar3 = src;
+        } while (height != 0);
       }
     }
     break;
   case 0x1908:
-    if (param_11 == 0x1908) {
-      if (0 < param_3) {
+    if (srcFormat == 0x1908) {
+      if (0 < height) {
         do {
-          if (param_5 < puVar5) {
-            uVar6 = (uint)(puVar5 + (3 - (int)param_5)) >> 2;
-            puVar3 = param_4;
+          if (dst < dstRowEnd) {
+            uVar6 = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
+            puVar3 = src;
             do {
-              *param_5 = (char)(*puVar3 >> 0x17);
-              param_5[1] = (char)(puVar3[1] >> 0x17);
-              param_5[2] = (char)(puVar3[2] >> 0x17);
-              puVar1 = puVar3 + 3;
+              *dst = (char)(*puVar3 >> 0x17);
+              dst[1] = (char)(puVar3[1] >> 0x17);
+              dst[2] = (char)(puVar3[2] >> 0x17);
+              srcComponent = puVar3 + 3;
               puVar3 = puVar3 + 4;
-              param_5[3] = (char)(*puVar1 >> 0x17);
-              param_5 = param_5 + 4;
+              dst[3] = (char)(*srcComponent >> 0x17);
+              dst = dst + 4;
               uVar6 = uVar6 - 1;
             } while (uVar6 != 0);
           }
-          param_3 = param_3 + -1;
-          param_4 = (uint *)((int)param_4 + param_6);
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = (uint *)((int)src + srcRowStride);
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
-    else if (param_11 < 0x1909) {
-      if (param_11 == 0x1905) {
-        if (0 < param_3) {
+    else if (srcFormat < 0x1909) {
+      if (srcFormat == 0x1905) {
+        if (0 < height) {
           do {
-            if (param_5 < puVar5) {
-              uVar6 = (uint)(puVar5 + (3 - (int)param_5)) >> 2;
-              puVar3 = param_4;
+            if (dst < dstRowEnd) {
+              uVar6 = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
+              puVar3 = src;
               do {
-                *param_5 = 0;
-                param_5[1] = 0;
+                *dst = 0;
+                dst[1] = 0;
                 uVar2 = *puVar3;
                 puVar3 = puVar3 + 1;
-                param_5[3] = 0xff;
-                param_5[2] = (char)(uVar2 >> 0x17);
-                param_5 = param_5 + 4;
+                dst[3] = 0xff;
+                dst[2] = (char)(uVar2 >> 0x17);
+                dst = dst + 4;
                 uVar6 = uVar6 - 1;
               } while (uVar6 != 0);
             }
-            param_3 = param_3 + -1;
-            param_4 = (uint *)((int)param_4 + param_6);
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = (uint *)((int)src + srcRowStride);
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
-      else if (param_11 < 0x1906) {
-        if (param_11 == 0x1903) {
-          if (0 < param_3) {
+      else if (srcFormat < 0x1906) {
+        if (srcFormat == 0x1903) {
+          if (0 < height) {
             do {
-              if (param_5 < puVar5) {
-                uVar6 = (uint)(puVar5 + (3 - (int)param_5)) >> 2;
-                puVar3 = param_4;
+              if (dst < dstRowEnd) {
+                uVar6 = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
+                puVar3 = src;
                 do {
                   uVar2 = *puVar3;
                   puVar3 = puVar3 + 1;
-                  param_5[1] = 0;
-                  param_5[2] = 0;
-                  *param_5 = (char)(uVar2 >> 0x17);
-                  param_5[3] = 0xff;
-                  param_5 = param_5 + 4;
+                  dst[1] = 0;
+                  dst[2] = 0;
+                  *dst = (char)(uVar2 >> 0x17);
+                  dst[3] = 0xff;
+                  dst = dst + 4;
                   uVar6 = uVar6 - 1;
                 } while (uVar6 != 0);
               }
-              param_3 = param_3 + -1;
-              param_4 = (uint *)((int)param_4 + param_6);
-              param_5 = param_5 + param_8;
-              puVar5 = puVar5 + param_9;
-            } while (param_3 != 0);
+              height = height + -1;
+              src = (uint *)((int)src + srcRowStride);
+              dst = dst + dstRowSkip;
+              dstRowEnd = dstRowEnd + dstRowStride;
+            } while (height != 0);
           }
         }
         else {
-          if (param_11 != 0x1904) {
+          if (srcFormat != 0x1904) {
             return 0;
           }
-          if (0 < param_3) {
+          if (0 < height) {
             do {
-              if (param_5 < puVar5) {
-                uVar6 = (uint)(puVar5 + (3 - (int)param_5)) >> 2;
-                puVar3 = param_4;
+              if (dst < dstRowEnd) {
+                uVar6 = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
+                puVar3 = src;
                 do {
-                  *param_5 = 0;
+                  *dst = 0;
                   uVar2 = *puVar3;
                   puVar3 = puVar3 + 1;
-                  param_5[2] = 0;
-                  param_5[3] = 0xff;
-                  param_5[1] = (char)(uVar2 >> 0x17);
-                  param_5 = param_5 + 4;
+                  dst[2] = 0;
+                  dst[3] = 0xff;
+                  dst[1] = (char)(uVar2 >> 0x17);
+                  dst = dst + 4;
                   uVar6 = uVar6 - 1;
                 } while (uVar6 != 0);
               }
-              param_3 = param_3 + -1;
-              param_4 = (uint *)((int)param_4 + param_6);
-              param_5 = param_5 + param_8;
-              puVar5 = puVar5 + param_9;
-            } while (param_3 != 0);
+              height = height + -1;
+              src = (uint *)((int)src + srcRowStride);
+              dst = dst + dstRowSkip;
+              dstRowEnd = dstRowEnd + dstRowStride;
+            } while (height != 0);
           }
         }
       }
-      else if (param_11 == 0x1906) {
-        if (0 < param_3) {
+      else if (srcFormat == 0x1906) {
+        if (0 < height) {
           do {
-            if (param_5 < puVar5) {
-              uVar6 = (uint)(puVar5 + (3 - (int)param_5)) >> 2;
-              puVar3 = param_4;
+            if (dst < dstRowEnd) {
+              uVar6 = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
+              puVar3 = src;
               do {
-                *param_5 = 0;
-                param_5[1] = 0;
-                param_5[2] = 0;
+                *dst = 0;
+                dst[1] = 0;
+                dst[2] = 0;
                 uVar2 = *puVar3;
                 puVar3 = puVar3 + 1;
-                param_5[3] = (char)(uVar2 >> 0x17);
-                param_5 = param_5 + 4;
+                dst[3] = (char)(uVar2 >> 0x17);
+                dst = dst + 4;
                 uVar6 = uVar6 - 1;
               } while (uVar6 != 0);
             }
-            param_3 = param_3 + -1;
-            param_4 = (uint *)((int)param_4 + param_6);
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = (uint *)((int)src + srcRowStride);
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
       else {
-        if (param_11 != 0x1907) {
+        if (srcFormat != 0x1907) {
           return 0;
         }
-        if (0 < param_3) {
+        if (0 < height) {
           do {
-            if (param_5 < puVar5) {
-              uVar6 = (uint)(puVar5 + (3 - (int)param_5)) >> 2;
-              puVar3 = param_4;
+            if (dst < dstRowEnd) {
+              uVar6 = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
+              puVar3 = src;
               do {
-                *param_5 = (char)(*puVar3 >> 0x17);
-                param_5[1] = (char)(puVar3[1] >> 0x17);
+                *dst = (char)(*puVar3 >> 0x17);
+                dst[1] = (char)(puVar3[1] >> 0x17);
                 uVar2 = puVar3[2];
                 puVar3 = puVar3 + 3;
-                param_5[3] = 0xff;
-                param_5[2] = (char)(uVar2 >> 0x17);
-                param_5 = param_5 + 4;
+                dst[3] = 0xff;
+                dst[2] = (char)(uVar2 >> 0x17);
+                dst = dst + 4;
                 uVar6 = uVar6 - 1;
               } while (uVar6 != 0);
             }
-            param_3 = param_3 + -1;
-            param_4 = (uint *)((int)param_4 + param_6);
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = (uint *)((int)src + srcRowStride);
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
     }
-    else if (param_11 == 0x8000) {
-      if (0 < param_3) {
+    else if (srcFormat == 0x8000) {
+      if (0 < height) {
         do {
-          if (param_5 < puVar5) {
-            uVar6 = (uint)(puVar5 + (3 - (int)param_5)) >> 2;
-            puVar3 = param_4;
+          if (dst < dstRowEnd) {
+            uVar6 = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
+            puVar3 = src;
             do {
-              *param_5 = (char)(puVar3[3] >> 0x17);
-              param_5[1] = (char)(puVar3[2] >> 0x17);
-              param_5[2] = (char)(puVar3[1] >> 0x17);
+              *dst = (char)(puVar3[3] >> 0x17);
+              dst[1] = (char)(puVar3[2] >> 0x17);
+              dst[2] = (char)(puVar3[1] >> 0x17);
               uVar2 = *puVar3;
               puVar3 = puVar3 + 4;
-              param_5[3] = (char)(uVar2 >> 0x17);
-              param_5 = param_5 + 4;
+              dst[3] = (char)(uVar2 >> 0x17);
+              dst = dst + 4;
               uVar6 = uVar6 - 1;
             } while (uVar6 != 0);
           }
-          param_3 = param_3 + -1;
-          param_4 = (uint *)((int)param_4 + param_6);
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = (uint *)((int)src + srcRowStride);
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
-    else if (param_11 < 0x8001) {
-      if (param_11 == 0x1909) {
-        if (0 < param_3) {
+    else if (srcFormat < 0x8001) {
+      if (srcFormat == 0x1909) {
+        if (0 < height) {
           do {
-            if (param_5 < puVar5) {
-              uVar6 = (uint)(puVar5 + (3 - (int)param_5)) >> 2;
-              puVar3 = param_4;
+            if (dst < dstRowEnd) {
+              uVar6 = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
+              puVar3 = src;
               do {
                 uVar2 = *puVar3;
                 puVar3 = puVar3 + 1;
-                param_5[3] = 0xff;
-                *param_5 = (char)(uVar2 >> 0x17);
-                param_5[2] = *param_5;
-                param_5[1] = *param_5;
-                param_5 = param_5 + 4;
+                dst[3] = 0xff;
+                *dst = (char)(uVar2 >> 0x17);
+                dst[2] = *dst;
+                dst[1] = *dst;
+                dst = dst + 4;
                 uVar6 = uVar6 - 1;
               } while (uVar6 != 0);
             }
-            param_3 = param_3 + -1;
-            param_4 = (uint *)((int)param_4 + param_6);
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = (uint *)((int)src + srcRowStride);
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
       else {
-        if (param_11 != 0x190a) {
+        if (srcFormat != 0x190a) {
           return 0;
         }
-        if (0 < param_3) {
+        if (0 < height) {
           do {
-            if (param_5 < puVar5) {
-              uVar6 = (uint)(puVar5 + (3 - (int)param_5)) >> 2;
-              puVar3 = param_4;
+            if (dst < dstRowEnd) {
+              uVar6 = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
+              puVar3 = src;
               do {
-                *param_5 = (char)(*puVar3 >> 0x17);
-                param_5[2] = *param_5;
-                param_5[1] = *param_5;
-                puVar1 = puVar3 + 1;
+                *dst = (char)(*puVar3 >> 0x17);
+                dst[2] = *dst;
+                dst[1] = *dst;
+                srcComponent = puVar3 + 1;
                 puVar3 = puVar3 + 2;
-                param_5[3] = (char)(*puVar1 >> 0x17);
-                param_5 = param_5 + 4;
+                dst[3] = (char)(*srcComponent >> 0x17);
+                dst = dst + 4;
                 uVar6 = uVar6 - 1;
               } while (uVar6 != 0);
             }
-            param_3 = param_3 + -1;
-            param_4 = (uint *)((int)param_4 + param_6);
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = (uint *)((int)src + srcRowStride);
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
     }
-    else if (param_11 == 0x80e0) {
-      if (0 < param_3) {
+    else if (srcFormat == 0x80e0) {
+      if (0 < height) {
         do {
-          if (param_5 < puVar5) {
-            uVar6 = (uint)(puVar5 + (3 - (int)param_5)) >> 2;
-            puVar3 = param_4;
+          if (dst < dstRowEnd) {
+            uVar6 = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
+            puVar3 = src;
             do {
-              *param_5 = (char)(puVar3[2] >> 0x17);
-              param_5[1] = (char)(puVar3[1] >> 0x17);
+              *dst = (char)(puVar3[2] >> 0x17);
+              dst[1] = (char)(puVar3[1] >> 0x17);
               uVar2 = *puVar3;
               puVar3 = puVar3 + 3;
-              param_5[3] = 0xff;
-              param_5[2] = (char)(uVar2 >> 0x17);
-              param_5 = param_5 + 4;
+              dst[3] = 0xff;
+              dst[2] = (char)(uVar2 >> 0x17);
+              dst = dst + 4;
               uVar6 = uVar6 - 1;
             } while (uVar6 != 0);
           }
-          param_3 = param_3 + -1;
-          param_4 = (uint *)((int)param_4 + param_6);
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = (uint *)((int)src + srcRowStride);
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
     else {
-      if (param_11 != 0x80e1) {
+      if (srcFormat != 0x80e1) {
         return 0;
       }
-      if (0 < param_3) {
+      if (0 < height) {
         do {
-          if (param_5 < puVar5) {
-            uVar6 = (uint)(puVar5 + (3 - (int)param_5)) >> 2;
-            puVar3 = param_4;
+          if (dst < dstRowEnd) {
+            uVar6 = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
+            puVar3 = src;
             do {
-              *param_5 = (char)(puVar3[2] >> 0x17);
-              param_5[1] = (char)(puVar3[1] >> 0x17);
-              param_5[2] = (char)(*puVar3 >> 0x17);
-              puVar1 = puVar3 + 3;
+              *dst = (char)(puVar3[2] >> 0x17);
+              dst[1] = (char)(puVar3[1] >> 0x17);
+              dst[2] = (char)(*puVar3 >> 0x17);
+              srcComponent = puVar3 + 3;
               puVar3 = puVar3 + 4;
-              param_5[3] = (char)(*puVar1 >> 0x17);
-              param_5 = param_5 + 4;
+              dst[3] = (char)(*srcComponent >> 0x17);
+              dst = dst + 4;
               uVar6 = uVar6 - 1;
             } while (uVar6 != 0);
           }
-          param_3 = param_3 + -1;
-          param_4 = (uint *)((int)param_4 + param_6);
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = (uint *)((int)src + srcRowStride);
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
     break;
   case 0x1909:
-    if (param_11 == 0x1908) {
-      if (0 < param_3) {
+    if (srcFormat == 0x1908) {
+      if (0 < height) {
         do {
-          if (param_5 < puVar5) {
-            iVar4 = (int)puVar5 - (int)param_5;
-            puVar3 = param_4;
+          if (dst < dstRowEnd) {
+            iVar4 = (int)dstRowEnd - (int)dst;
+            puVar3 = src;
             do {
               uVar6 = *puVar3;
               puVar3 = puVar3 + 4;
-              *param_5 = (char)(uVar6 >> 0x17);
-              param_5 = param_5 + 1;
+              *dst = (char)(uVar6 >> 0x17);
+              dst = dst + 1;
               iVar4 = iVar4 + -1;
             } while (iVar4 != 0);
           }
-          param_3 = param_3 + -1;
-          param_4 = (uint *)((int)param_4 + param_6);
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = (uint *)((int)src + srcRowStride);
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
-    else if (param_11 < 0x1909) {
-      if (param_11 < 0x1907) {
-        if (param_11 < 0x1904) {
-          if (param_11 != 0x1903) {
+    else if (srcFormat < 0x1909) {
+      if (srcFormat < 0x1907) {
+        if (srcFormat < 0x1904) {
+          if (srcFormat != 0x1903) {
             return 0;
           }
-          if (0 < param_3) {
+          if (0 < height) {
             do {
-              if (param_5 < puVar5) {
-                iVar4 = (int)puVar5 - (int)param_5;
-                puVar3 = param_4;
+              if (dst < dstRowEnd) {
+                iVar4 = (int)dstRowEnd - (int)dst;
+                puVar3 = src;
                 do {
                   uVar6 = *puVar3;
                   puVar3 = puVar3 + 1;
-                  *param_5 = (char)(uVar6 >> 0x17);
-                  param_5 = param_5 + 1;
+                  *dst = (char)(uVar6 >> 0x17);
+                  dst = dst + 1;
                   iVar4 = iVar4 + -1;
                 } while (iVar4 != 0);
               }
-              param_3 = param_3 + -1;
-              param_4 = (uint *)((int)param_4 + param_6);
-              param_5 = param_5 + param_8;
-              puVar5 = puVar5 + param_9;
-            } while (param_3 != 0);
+              height = height + -1;
+              src = (uint *)((int)src + srcRowStride);
+              dst = dst + dstRowSkip;
+              dstRowEnd = dstRowEnd + dstRowStride;
+            } while (height != 0);
           }
         }
-        else if (0 < param_3) {
+        else if (0 < height) {
           do {
-            if (param_5 < puVar5) {
-              iVar4 = (int)puVar5 - (int)param_5;
+            if (dst < dstRowEnd) {
+              iVar4 = (int)dstRowEnd - (int)dst;
               do {
-                *param_5 = 0;
-                param_5 = param_5 + 1;
+                *dst = 0;
+                dst = dst + 1;
                 iVar4 = iVar4 + -1;
               } while (iVar4 != 0);
             }
-            param_3 = param_3 + -1;
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
-      else if (0 < param_3) {
+      else if (0 < height) {
         do {
-          if (param_5 < puVar5) {
-            iVar4 = (int)puVar5 - (int)param_5;
-            puVar3 = param_4;
+          if (dst < dstRowEnd) {
+            iVar4 = (int)dstRowEnd - (int)dst;
+            puVar3 = src;
             do {
               uVar6 = *puVar3;
               puVar3 = puVar3 + 3;
-              *param_5 = (char)(uVar6 >> 0x17);
-              param_5 = param_5 + 1;
+              *dst = (char)(uVar6 >> 0x17);
+              dst = dst + 1;
               iVar4 = iVar4 + -1;
             } while (iVar4 != 0);
           }
-          param_3 = param_3 + -1;
-          param_4 = (uint *)((int)param_4 + param_6);
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = (uint *)((int)src + srcRowStride);
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
-    else if (param_11 == 0x8000) {
-      if (0 < param_3) {
+    else if (srcFormat == 0x8000) {
+      if (0 < height) {
         do {
-          if (param_5 < puVar5) {
-            iVar4 = (int)puVar5 - (int)param_5;
-            puVar3 = param_4;
+          if (dst < dstRowEnd) {
+            iVar4 = (int)dstRowEnd - (int)dst;
+            puVar3 = src;
             do {
-              puVar1 = puVar3 + 3;
+              srcComponent = puVar3 + 3;
               puVar3 = puVar3 + 4;
-              *param_5 = (char)(*puVar1 >> 0x17);
-              param_5 = param_5 + 1;
+              *dst = (char)(*srcComponent >> 0x17);
+              dst = dst + 1;
               iVar4 = iVar4 + -1;
             } while (iVar4 != 0);
           }
-          param_3 = param_3 + -1;
-          param_4 = (uint *)((int)param_4 + param_6);
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = (uint *)((int)src + srcRowStride);
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
-    else if (param_11 < 0x8001) {
-      if (param_11 == 0x1909) {
-        if (0 < param_3) {
+    else if (srcFormat < 0x8001) {
+      if (srcFormat == 0x1909) {
+        if (0 < height) {
           do {
-            if (param_5 < puVar5) {
-              iVar4 = (int)puVar5 - (int)param_5;
-              puVar3 = param_4;
+            if (dst < dstRowEnd) {
+              iVar4 = (int)dstRowEnd - (int)dst;
+              puVar3 = src;
               do {
                 uVar6 = *puVar3;
                 puVar3 = puVar3 + 1;
-                *param_5 = (char)(uVar6 >> 0x17);
-                param_5 = param_5 + 1;
+                *dst = (char)(uVar6 >> 0x17);
+                dst = dst + 1;
                 iVar4 = iVar4 + -1;
               } while (iVar4 != 0);
             }
-            param_3 = param_3 + -1;
-            param_4 = (uint *)((int)param_4 + param_6);
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = (uint *)((int)src + srcRowStride);
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
       else {
-        if (param_11 != 0x190a) {
+        if (srcFormat != 0x190a) {
           return 0;
         }
-        if (0 < param_3) {
+        if (0 < height) {
           do {
-            if (param_5 < puVar5) {
-              iVar4 = (int)puVar5 - (int)param_5;
-              puVar3 = param_4;
+            if (dst < dstRowEnd) {
+              iVar4 = (int)dstRowEnd - (int)dst;
+              puVar3 = src;
               do {
                 uVar6 = *puVar3;
                 puVar3 = puVar3 + 2;
-                *param_5 = (char)(uVar6 >> 0x17);
-                param_5 = param_5 + 1;
+                *dst = (char)(uVar6 >> 0x17);
+                dst = dst + 1;
                 iVar4 = iVar4 + -1;
               } while (iVar4 != 0);
             }
-            param_3 = param_3 + -1;
-            param_4 = (uint *)((int)param_4 + param_6);
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = (uint *)((int)src + srcRowStride);
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
     }
-    else if (param_11 == 0x80e0) {
-      if (0 < param_3) {
+    else if (srcFormat == 0x80e0) {
+      if (0 < height) {
         do {
-          if (param_5 < puVar5) {
-            iVar4 = (int)puVar5 - (int)param_5;
-            puVar3 = param_4;
+          if (dst < dstRowEnd) {
+            iVar4 = (int)dstRowEnd - (int)dst;
+            puVar3 = src;
             do {
-              puVar1 = puVar3 + 2;
+              srcComponent = puVar3 + 2;
               puVar3 = puVar3 + 3;
-              *param_5 = (char)(*puVar1 >> 0x17);
-              param_5 = param_5 + 1;
+              *dst = (char)(*srcComponent >> 0x17);
+              dst = dst + 1;
               iVar4 = iVar4 + -1;
             } while (iVar4 != 0);
           }
-          param_3 = param_3 + -1;
-          param_4 = (uint *)((int)param_4 + param_6);
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = (uint *)((int)src + srcRowStride);
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
     else {
-      if (param_11 != 0x80e1) {
+      if (srcFormat != 0x80e1) {
         return 0;
       }
-      if (0 < param_3) {
+      if (0 < height) {
         do {
-          if (param_5 < puVar5) {
-            iVar4 = (int)puVar5 - (int)param_5;
-            puVar3 = param_4;
+          if (dst < dstRowEnd) {
+            iVar4 = (int)dstRowEnd - (int)dst;
+            puVar3 = src;
             do {
-              puVar1 = puVar3 + 2;
+              srcComponent = puVar3 + 2;
               puVar3 = puVar3 + 4;
-              *param_5 = (char)(*puVar1 >> 0x17);
-              param_5 = param_5 + 1;
+              *dst = (char)(*srcComponent >> 0x17);
+              dst = dst + 1;
               iVar4 = iVar4 + -1;
             } while (iVar4 != 0);
           }
-          param_3 = param_3 + -1;
-          param_4 = (uint *)((int)param_4 + param_6);
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = (uint *)((int)src + srcRowStride);
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
     break;
   case 0x190a:
-    if (param_11 == 0x1908) {
-      if (0 < param_3) {
+    if (srcFormat == 0x1908) {
+      if (0 < height) {
         do {
-          if (param_5 < puVar5) {
-            uVar6 = (uint)(puVar5 + (1 - (int)param_5)) >> 1;
-            puVar3 = param_4;
+          if (dst < dstRowEnd) {
+            uVar6 = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
+            puVar3 = src;
             do {
-              *param_5 = (char)(*puVar3 >> 0x17);
-              puVar1 = puVar3 + 3;
+              *dst = (char)(*puVar3 >> 0x17);
+              srcComponent = puVar3 + 3;
               puVar3 = puVar3 + 4;
-              param_5[1] = (char)(*puVar1 >> 0x17);
-              param_5 = param_5 + 2;
+              dst[1] = (char)(*srcComponent >> 0x17);
+              dst = dst + 2;
               uVar6 = uVar6 - 1;
             } while (uVar6 != 0);
           }
-          param_3 = param_3 + -1;
-          param_4 = (uint *)((int)param_4 + param_6);
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = (uint *)((int)src + srcRowStride);
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
-    else if (param_11 < 0x1909) {
-      if (param_11 < 0x1906) {
-        if (param_11 < 0x1904) {
-          if (param_11 != 0x1903) {
+    else if (srcFormat < 0x1909) {
+      if (srcFormat < 0x1906) {
+        if (srcFormat < 0x1904) {
+          if (srcFormat != 0x1903) {
             return 0;
           }
-          if (0 < param_3) {
+          if (0 < height) {
             do {
-              if (param_5 < puVar5) {
-                uVar6 = (uint)(puVar5 + (1 - (int)param_5)) >> 1;
-                puVar3 = param_4;
+              if (dst < dstRowEnd) {
+                uVar6 = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
+                puVar3 = src;
                 do {
                   uVar2 = *puVar3;
                   puVar3 = puVar3 + 1;
-                  param_5[1] = 0xff;
-                  *param_5 = (char)(uVar2 >> 0x17);
-                  param_5 = param_5 + 2;
+                  dst[1] = 0xff;
+                  *dst = (char)(uVar2 >> 0x17);
+                  dst = dst + 2;
                   uVar6 = uVar6 - 1;
                 } while (uVar6 != 0);
               }
-              param_3 = param_3 + -1;
-              param_4 = (uint *)((int)param_4 + param_6);
-              param_5 = param_5 + param_8;
-              puVar5 = puVar5 + param_9;
-            } while (param_3 != 0);
+              height = height + -1;
+              src = (uint *)((int)src + srcRowStride);
+              dst = dst + dstRowSkip;
+              dstRowEnd = dstRowEnd + dstRowStride;
+            } while (height != 0);
           }
         }
-        else if (0 < param_3) {
+        else if (0 < height) {
           do {
-            if (param_5 < puVar5) {
-              uVar6 = (uint)(puVar5 + (1 - (int)param_5)) >> 1;
+            if (dst < dstRowEnd) {
+              uVar6 = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
               do {
-                *param_5 = 0;
-                param_5[1] = 0xff;
-                param_5 = param_5 + 2;
+                *dst = 0;
+                dst[1] = 0xff;
+                dst = dst + 2;
                 uVar6 = uVar6 - 1;
               } while (uVar6 != 0);
             }
-            param_3 = param_3 + -1;
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
-      else if (param_11 == 0x1906) {
-        if (0 < param_3) {
+      else if (srcFormat == 0x1906) {
+        if (0 < height) {
           do {
-            if (param_5 < puVar5) {
-              uVar6 = (uint)(puVar5 + (1 - (int)param_5)) >> 1;
-              puVar3 = param_4;
+            if (dst < dstRowEnd) {
+              uVar6 = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
+              puVar3 = src;
               do {
-                *param_5 = 0;
+                *dst = 0;
                 uVar2 = *puVar3;
                 puVar3 = puVar3 + 1;
-                param_5[1] = (char)(uVar2 >> 0x17);
-                param_5 = param_5 + 2;
+                dst[1] = (char)(uVar2 >> 0x17);
+                dst = dst + 2;
                 uVar6 = uVar6 - 1;
               } while (uVar6 != 0);
             }
-            param_3 = param_3 + -1;
-            param_4 = (uint *)((int)param_4 + param_6);
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = (uint *)((int)src + srcRowStride);
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
       else {
-        if (param_11 != 0x1907) {
+        if (srcFormat != 0x1907) {
           return 0;
         }
-        if (0 < param_3) {
+        if (0 < height) {
           do {
-            if (param_5 < puVar5) {
-              uVar6 = (uint)(puVar5 + (1 - (int)param_5)) >> 1;
-              puVar3 = param_4;
+            if (dst < dstRowEnd) {
+              uVar6 = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
+              puVar3 = src;
               do {
                 uVar2 = *puVar3;
                 puVar3 = puVar3 + 3;
-                param_5[1] = 0xff;
-                *param_5 = (char)(uVar2 >> 0x17);
-                param_5 = param_5 + 2;
+                dst[1] = 0xff;
+                *dst = (char)(uVar2 >> 0x17);
+                dst = dst + 2;
                 uVar6 = uVar6 - 1;
               } while (uVar6 != 0);
             }
-            param_3 = param_3 + -1;
-            param_4 = (uint *)((int)param_4 + param_6);
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = (uint *)((int)src + srcRowStride);
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
     }
-    else if (param_11 == 0x8000) {
-      if (0 < param_3) {
+    else if (srcFormat == 0x8000) {
+      if (0 < height) {
         do {
-          if (param_5 < puVar5) {
-            uVar6 = (uint)(puVar5 + (1 - (int)param_5)) >> 1;
-            puVar3 = param_4;
+          if (dst < dstRowEnd) {
+            uVar6 = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
+            puVar3 = src;
             do {
-              *param_5 = (char)(puVar3[3] >> 0x17);
+              *dst = (char)(puVar3[3] >> 0x17);
               uVar2 = *puVar3;
               puVar3 = puVar3 + 4;
-              param_5[1] = (char)(uVar2 >> 0x17);
-              param_5 = param_5 + 2;
+              dst[1] = (char)(uVar2 >> 0x17);
+              dst = dst + 2;
               uVar6 = uVar6 - 1;
             } while (uVar6 != 0);
           }
-          param_3 = param_3 + -1;
-          param_4 = (uint *)((int)param_4 + param_6);
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = (uint *)((int)src + srcRowStride);
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
-    else if (param_11 < 0x8001) {
-      if (param_11 == 0x1909) {
-        if (0 < param_3) {
+    else if (srcFormat < 0x8001) {
+      if (srcFormat == 0x1909) {
+        if (0 < height) {
           do {
-            if (param_5 < puVar5) {
-              uVar6 = (uint)(puVar5 + (1 - (int)param_5)) >> 1;
-              puVar3 = param_4;
+            if (dst < dstRowEnd) {
+              uVar6 = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
+              puVar3 = src;
               do {
                 uVar2 = *puVar3;
                 puVar3 = puVar3 + 1;
-                param_5[1] = 0xff;
-                *param_5 = (char)(uVar2 >> 0x17);
-                param_5 = param_5 + 2;
+                dst[1] = 0xff;
+                *dst = (char)(uVar2 >> 0x17);
+                dst = dst + 2;
                 uVar6 = uVar6 - 1;
               } while (uVar6 != 0);
             }
-            param_3 = param_3 + -1;
-            param_4 = (uint *)((int)param_4 + param_6);
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = (uint *)((int)src + srcRowStride);
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
       else {
-        if (param_11 != 0x190a) {
+        if (srcFormat != 0x190a) {
           return 0;
         }
-        if (0 < param_3) {
+        if (0 < height) {
           do {
-            if (param_5 < puVar5) {
-              uVar6 = (uint)(puVar5 + (1 - (int)param_5)) >> 1;
-              puVar3 = param_4;
+            if (dst < dstRowEnd) {
+              uVar6 = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
+              puVar3 = src;
               do {
-                *param_5 = (char)(*puVar3 >> 0x17);
-                puVar1 = puVar3 + 1;
+                *dst = (char)(*puVar3 >> 0x17);
+                srcComponent = puVar3 + 1;
                 puVar3 = puVar3 + 2;
-                param_5[1] = (char)(*puVar1 >> 0x17);
-                param_5 = param_5 + 2;
+                dst[1] = (char)(*srcComponent >> 0x17);
+                dst = dst + 2;
                 uVar6 = uVar6 - 1;
               } while (uVar6 != 0);
             }
-            param_3 = param_3 + -1;
-            param_4 = (uint *)((int)param_4 + param_6);
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = (uint *)((int)src + srcRowStride);
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
     }
-    else if (param_11 == 0x80e0) {
-      if (0 < param_3) {
+    else if (srcFormat == 0x80e0) {
+      if (0 < height) {
         do {
-          if (param_5 < puVar5) {
-            uVar6 = (uint)(puVar5 + (1 - (int)param_5)) >> 1;
-            puVar3 = param_4;
+          if (dst < dstRowEnd) {
+            uVar6 = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
+            puVar3 = src;
             do {
               uVar2 = puVar3[2];
               puVar3 = puVar3 + 3;
-              param_5[1] = 0xff;
-              *param_5 = (char)(uVar2 >> 0x17);
-              param_5 = param_5 + 2;
+              dst[1] = 0xff;
+              *dst = (char)(uVar2 >> 0x17);
+              dst = dst + 2;
               uVar6 = uVar6 - 1;
             } while (uVar6 != 0);
           }
-          param_3 = param_3 + -1;
-          param_4 = (uint *)((int)param_4 + param_6);
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = (uint *)((int)src + srcRowStride);
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
     else {
-      if (param_11 != 0x80e1) {
+      if (srcFormat != 0x80e1) {
         return 0;
       }
-      if (0 < param_3) {
+      if (0 < height) {
         do {
-          if (param_5 < puVar5) {
-            uVar6 = (uint)(puVar5 + (1 - (int)param_5)) >> 1;
-            puVar3 = param_4;
+          if (dst < dstRowEnd) {
+            uVar6 = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
+            puVar3 = src;
             do {
-              *param_5 = (char)(puVar3[2] >> 0x17);
-              puVar1 = puVar3 + 3;
+              *dst = (char)(puVar3[2] >> 0x17);
+              srcComponent = puVar3 + 3;
               puVar3 = puVar3 + 4;
-              param_5[1] = (char)(*puVar1 >> 0x17);
-              param_5 = param_5 + 2;
+              dst[1] = (char)(*srcComponent >> 0x17);
+              dst = dst + 2;
               uVar6 = uVar6 - 1;
             } while (uVar6 != 0);
           }
-          param_3 = param_3 + -1;
-          param_4 = (uint *)((int)param_4 + param_6);
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = (uint *)((int)src + srcRowStride);
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
   }
@@ -7423,1178 +7423,1178 @@ int _gleTextureImagePut_FastInt(param_1, param_2, param_3, param_4, param_5, par
 }
 
 /* _gleTextureImagePut_FastUint @ 0x101fe4 (5188 bytes) */
-int _gleTextureImagePut_FastUint(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11)
-  undefined4 param_1;
-  int param_2;
-  int param_3;
-  undefined1 *param_4;
-  undefined1 *param_5;
-  int param_6;
-  undefined4 param_7;
-  int param_8;
-  int param_9;
-  undefined4 param_10;
-  int param_11;
+int _gleTextureImagePut_FastUint(unusedArg1, width, height, src, dst, srcRowStride, unusedArg7, dstRowSkip, dstRowStride, dstFormat, srcFormat)
+  undefined4 unusedArg1;
+  int width;
+  int height;
+  undefined1 *src;
+  undefined1 *dst;
+  int srcRowStride;
+  undefined4 unusedArg7;
+  int dstRowSkip;
+  int dstRowStride;
+  undefined4 dstFormat;
+  int srcFormat;
 {
-  undefined1 *puVar1;
-  undefined1 uVar2;
+  undefined1 *srcComponent;
+  undefined1 srcValue;
   int iVar3;
   undefined1 *puVar4;
-  undefined1 *puVar5;
-  uint uVar6;
+  undefined1 *dstRowEnd;
+  uint pixelsLeft;
   
-  iVar3 = _gleComponents(param_10);
-  puVar5 = param_5 + param_2 * iVar3;
-  switch(param_10) {
+  iVar3 = _gleComponents(dstFormat);
+  dstRowEnd = dst + width * iVar3;
+  switch(dstFormat) {
   case 0x1900:
-    if (param_11 != 0x1900) {
+    if (srcFormat != 0x1900) {
       return 0;
     }
-    if (0 < param_3) {
+    if (0 < height) {
       do {
-        if (param_5 < puVar5) {
-          iVar3 = (int)puVar5 - (int)param_5;
-          puVar4 = param_4;
+        if (dst < dstRowEnd) {
+          iVar3 = (int)dstRowEnd - (int)dst;
+          puVar4 = src;
           do {
-            uVar2 = *puVar4;
+            srcValue = *puVar4;
             puVar4 = puVar4 + 4;
-            *param_5 = uVar2;
-            param_5 = param_5 + 1;
+            *dst = srcValue;
+            dst = dst + 1;
             iVar3 = iVar3 + -1;
           } while (iVar3 != 0);
         }
-        param_3 = param_3 + -1;
-        param_4 = param_4 + param_6;
-        param_5 = param_5 + param_8;
-        puVar5 = puVar5 + param_9;
-      } while (param_3 != 0);
+        height = height + -1;
+        src = src + srcRowStride;
+        dst = dst + dstRowSkip;
+        dstRowEnd = dstRowEnd + dstRowStride;
+      } while (height != 0);
     }
     break;
   default:
     return 0;
   case 0x1906:
-    if (param_11 == 0x1908) {
-      if (0 < param_3) {
+    if (srcFormat == 0x1908) {
+      if (0 < height) {
         do {
-          if (param_5 < puVar5) {
-            iVar3 = (int)puVar5 - (int)param_5;
-            puVar4 = param_4;
+          if (dst < dstRowEnd) {
+            iVar3 = (int)dstRowEnd - (int)dst;
+            puVar4 = src;
             do {
-              puVar1 = puVar4 + 0xc;
+              srcComponent = puVar4 + 0xc;
               puVar4 = puVar4 + 0x10;
-              *param_5 = *puVar1;
-              param_5 = param_5 + 1;
+              *dst = *srcComponent;
+              dst = dst + 1;
               iVar3 = iVar3 + -1;
             } while (iVar3 != 0);
           }
-          param_3 = param_3 + -1;
-          param_4 = param_4 + param_6;
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = src + srcRowStride;
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
-    else if (param_11 < 0x1909) {
-      if (param_11 == 0x1906) {
-        if (0 < param_3) {
+    else if (srcFormat < 0x1909) {
+      if (srcFormat == 0x1906) {
+        if (0 < height) {
           do {
-            if (param_5 < puVar5) {
-              iVar3 = (int)puVar5 - (int)param_5;
-              puVar4 = param_4;
+            if (dst < dstRowEnd) {
+              iVar3 = (int)dstRowEnd - (int)dst;
+              puVar4 = src;
               do {
-                uVar2 = *puVar4;
+                srcValue = *puVar4;
                 puVar4 = puVar4 + 4;
-                *param_5 = uVar2;
-                param_5 = param_5 + 1;
+                *dst = srcValue;
+                dst = dst + 1;
                 iVar3 = iVar3 + -1;
               } while (iVar3 != 0);
             }
-            param_3 = param_3 + -1;
-            param_4 = param_4 + param_6;
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = src + srcRowStride;
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
-      else if (param_11 < 0x1907) {
-        if (param_11 < 0x1903) {
+      else if (srcFormat < 0x1907) {
+        if (srcFormat < 0x1903) {
           return 0;
         }
-        if (0 < param_3) {
+        if (0 < height) {
           do {
-            if (param_5 < puVar5) {
-              iVar3 = (int)puVar5 - (int)param_5;
+            if (dst < dstRowEnd) {
+              iVar3 = (int)dstRowEnd - (int)dst;
               do {
-                *param_5 = 0xff;
-                param_5 = param_5 + 1;
+                *dst = 0xff;
+                dst = dst + 1;
                 iVar3 = iVar3 + -1;
               } while (iVar3 != 0);
             }
-            param_3 = param_3 + -1;
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
-      else if (0 < param_3) {
+      else if (0 < height) {
         do {
-          if (param_5 < puVar5) {
-            iVar3 = (int)puVar5 - (int)param_5;
+          if (dst < dstRowEnd) {
+            iVar3 = (int)dstRowEnd - (int)dst;
             do {
-              *param_5 = 0xff;
-              param_5 = param_5 + 1;
+              *dst = 0xff;
+              dst = dst + 1;
               iVar3 = iVar3 + -1;
             } while (iVar3 != 0);
           }
-          param_3 = param_3 + -1;
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
-    else if (param_11 == 0x8000) {
-      if (0 < param_3) {
+    else if (srcFormat == 0x8000) {
+      if (0 < height) {
         do {
-          if (param_5 < puVar5) {
-            iVar3 = (int)puVar5 - (int)param_5;
-            puVar4 = param_4;
+          if (dst < dstRowEnd) {
+            iVar3 = (int)dstRowEnd - (int)dst;
+            puVar4 = src;
             do {
-              uVar2 = *puVar4;
+              srcValue = *puVar4;
               puVar4 = puVar4 + 0x10;
-              *param_5 = uVar2;
-              param_5 = param_5 + 1;
+              *dst = srcValue;
+              dst = dst + 1;
               iVar3 = iVar3 + -1;
             } while (iVar3 != 0);
           }
-          param_3 = param_3 + -1;
-          param_4 = param_4 + param_6;
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = src + srcRowStride;
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
-    else if (param_11 < 0x8001) {
-      if (param_11 == 0x1909) {
-        if (0 < param_3) {
+    else if (srcFormat < 0x8001) {
+      if (srcFormat == 0x1909) {
+        if (0 < height) {
           do {
-            if (param_5 < puVar5) {
-              iVar3 = (int)puVar5 - (int)param_5;
+            if (dst < dstRowEnd) {
+              iVar3 = (int)dstRowEnd - (int)dst;
               do {
-                *param_5 = 0xff;
-                param_5 = param_5 + 1;
+                *dst = 0xff;
+                dst = dst + 1;
                 iVar3 = iVar3 + -1;
               } while (iVar3 != 0);
             }
-            param_3 = param_3 + -1;
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
       else {
-        if (param_11 != 0x190a) {
+        if (srcFormat != 0x190a) {
           return 0;
         }
-        if (0 < param_3) {
+        if (0 < height) {
           do {
-            if (param_5 < puVar5) {
-              iVar3 = (int)puVar5 - (int)param_5;
-              puVar4 = param_4;
+            if (dst < dstRowEnd) {
+              iVar3 = (int)dstRowEnd - (int)dst;
+              puVar4 = src;
               do {
-                puVar1 = puVar4 + 4;
+                srcComponent = puVar4 + 4;
                 puVar4 = puVar4 + 8;
-                *param_5 = *puVar1;
-                param_5 = param_5 + 1;
+                *dst = *srcComponent;
+                dst = dst + 1;
                 iVar3 = iVar3 + -1;
               } while (iVar3 != 0);
             }
-            param_3 = param_3 + -1;
-            param_4 = param_4 + param_6;
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = src + srcRowStride;
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
     }
-    else if (param_11 == 0x80e0) {
-      if (0 < param_3) {
+    else if (srcFormat == 0x80e0) {
+      if (0 < height) {
         do {
-          if (param_5 < puVar5) {
-            iVar3 = (int)puVar5 - (int)param_5;
+          if (dst < dstRowEnd) {
+            iVar3 = (int)dstRowEnd - (int)dst;
             do {
-              *param_5 = 0xff;
-              param_5 = param_5 + 1;
+              *dst = 0xff;
+              dst = dst + 1;
               iVar3 = iVar3 + -1;
             } while (iVar3 != 0);
           }
-          param_3 = param_3 + -1;
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
     else {
-      if (param_11 != 0x80e1) {
+      if (srcFormat != 0x80e1) {
         return 0;
       }
-      if (0 < param_3) {
+      if (0 < height) {
         do {
-          if (param_5 < puVar5) {
-            iVar3 = (int)puVar5 - (int)param_5;
-            puVar4 = param_4;
+          if (dst < dstRowEnd) {
+            iVar3 = (int)dstRowEnd - (int)dst;
+            puVar4 = src;
             do {
-              puVar1 = puVar4 + 0xc;
+              srcComponent = puVar4 + 0xc;
               puVar4 = puVar4 + 0x10;
-              *param_5 = *puVar1;
-              param_5 = param_5 + 1;
+              *dst = *srcComponent;
+              dst = dst + 1;
               iVar3 = iVar3 + -1;
             } while (iVar3 != 0);
           }
-          param_3 = param_3 + -1;
-          param_4 = param_4 + param_6;
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = src + srcRowStride;
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
     break;
   case 0x1907:
-    if (param_11 == 0x1908) {
-      puVar4 = param_4;
-      if (0 < param_3) {
+    if (srcFormat == 0x1908) {
+      puVar4 = src;
+      if (0 < height) {
         do {
-          for (; param_5 < puVar5; param_5 = param_5 + 3) {
-            *param_5 = *param_4;
-            param_5[1] = param_4[4];
-            puVar1 = param_4 + 8;
-            param_4 = param_4 + 0x10;
-            param_5[2] = *puVar1;
+          for (; dst < dstRowEnd; dst = dst + 3) {
+            *dst = *src;
+            dst[1] = src[4];
+            srcComponent = src + 8;
+            src = src + 0x10;
+            dst[2] = *srcComponent;
           }
-          param_3 = param_3 + -1;
-          param_4 = puVar4 + param_6;
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-          puVar4 = param_4;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = puVar4 + srcRowStride;
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+          puVar4 = src;
+        } while (height != 0);
       }
     }
-    else if (param_11 < 0x1909) {
-      if (param_11 == 0x1905) {
-        puVar4 = param_4;
-        if (0 < param_3) {
+    else if (srcFormat < 0x1909) {
+      if (srcFormat == 0x1905) {
+        puVar4 = src;
+        if (0 < height) {
           do {
-            for (; param_5 < puVar5; param_5 = param_5 + 3) {
-              *param_5 = 0;
-              param_5[1] = 0;
-              uVar2 = *param_4;
-              param_4 = param_4 + 4;
-              param_5[2] = uVar2;
+            for (; dst < dstRowEnd; dst = dst + 3) {
+              *dst = 0;
+              dst[1] = 0;
+              srcValue = *src;
+              src = src + 4;
+              dst[2] = srcValue;
             }
-            param_3 = param_3 + -1;
-            param_4 = puVar4 + param_6;
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-            puVar4 = param_4;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = puVar4 + srcRowStride;
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+            puVar4 = src;
+          } while (height != 0);
         }
       }
-      else if (param_11 < 0x1906) {
-        if (param_11 == 0x1903) {
-          puVar4 = param_4;
-          if (0 < param_3) {
+      else if (srcFormat < 0x1906) {
+        if (srcFormat == 0x1903) {
+          puVar4 = src;
+          if (0 < height) {
             do {
-              for (; param_5 < puVar5; param_5 = param_5 + 3) {
-                uVar2 = *param_4;
-                param_4 = param_4 + 4;
-                param_5[1] = 0;
-                *param_5 = uVar2;
-                param_5[2] = 0;
+              for (; dst < dstRowEnd; dst = dst + 3) {
+                srcValue = *src;
+                src = src + 4;
+                dst[1] = 0;
+                *dst = srcValue;
+                dst[2] = 0;
               }
-              param_3 = param_3 + -1;
-              param_4 = puVar4 + param_6;
-              param_5 = param_5 + param_8;
-              puVar5 = puVar5 + param_9;
-              puVar4 = param_4;
-            } while (param_3 != 0);
+              height = height + -1;
+              src = puVar4 + srcRowStride;
+              dst = dst + dstRowSkip;
+              dstRowEnd = dstRowEnd + dstRowStride;
+              puVar4 = src;
+            } while (height != 0);
           }
         }
         else {
-          if (param_11 != 0x1904) {
+          if (srcFormat != 0x1904) {
             return 0;
           }
-          puVar4 = param_4;
-          if (0 < param_3) {
+          puVar4 = src;
+          if (0 < height) {
             do {
-              for (; param_5 < puVar5; param_5 = param_5 + 3) {
-                *param_5 = 0;
-                uVar2 = *param_4;
-                param_4 = param_4 + 4;
-                param_5[2] = 0;
-                param_5[1] = uVar2;
+              for (; dst < dstRowEnd; dst = dst + 3) {
+                *dst = 0;
+                srcValue = *src;
+                src = src + 4;
+                dst[2] = 0;
+                dst[1] = srcValue;
               }
-              param_3 = param_3 + -1;
-              param_4 = puVar4 + param_6;
-              param_5 = param_5 + param_8;
-              puVar5 = puVar5 + param_9;
-              puVar4 = param_4;
-            } while (param_3 != 0);
+              height = height + -1;
+              src = puVar4 + srcRowStride;
+              dst = dst + dstRowSkip;
+              dstRowEnd = dstRowEnd + dstRowStride;
+              puVar4 = src;
+            } while (height != 0);
           }
         }
       }
-      else if (param_11 == 0x1906) {
-        if (0 < param_3) {
+      else if (srcFormat == 0x1906) {
+        if (0 < height) {
           do {
-            for (; param_5 < puVar5; param_5 = param_5 + 3) {
-              *param_5 = 0;
-              param_5[1] = 0;
-              param_5[2] = 0;
+            for (; dst < dstRowEnd; dst = dst + 3) {
+              *dst = 0;
+              dst[1] = 0;
+              dst[2] = 0;
             }
-            param_3 = param_3 + -1;
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
       else {
-        if (param_11 != 0x1907) {
+        if (srcFormat != 0x1907) {
           return 0;
         }
-        puVar4 = param_4;
-        if (0 < param_3) {
+        puVar4 = src;
+        if (0 < height) {
           do {
-            for (; param_5 < puVar5; param_5 = param_5 + 3) {
-              *param_5 = *param_4;
-              param_5[1] = param_4[4];
-              puVar1 = param_4 + 8;
-              param_4 = param_4 + 0xc;
-              param_5[2] = *puVar1;
+            for (; dst < dstRowEnd; dst = dst + 3) {
+              *dst = *src;
+              dst[1] = src[4];
+              srcComponent = src + 8;
+              src = src + 0xc;
+              dst[2] = *srcComponent;
             }
-            param_3 = param_3 + -1;
-            param_4 = puVar4 + param_6;
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-            puVar4 = param_4;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = puVar4 + srcRowStride;
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+            puVar4 = src;
+          } while (height != 0);
         }
       }
     }
-    else if (param_11 == 0x8000) {
-      puVar4 = param_4;
-      if (0 < param_3) {
+    else if (srcFormat == 0x8000) {
+      puVar4 = src;
+      if (0 < height) {
         do {
-          for (; param_5 < puVar5; param_5 = param_5 + 3) {
-            *param_5 = param_4[0xc];
-            param_5[1] = param_4[8];
-            puVar1 = param_4 + 4;
-            param_4 = param_4 + 0x10;
-            param_5[2] = *puVar1;
+          for (; dst < dstRowEnd; dst = dst + 3) {
+            *dst = src[0xc];
+            dst[1] = src[8];
+            srcComponent = src + 4;
+            src = src + 0x10;
+            dst[2] = *srcComponent;
           }
-          param_3 = param_3 + -1;
-          param_4 = puVar4 + param_6;
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-          puVar4 = param_4;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = puVar4 + srcRowStride;
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+          puVar4 = src;
+        } while (height != 0);
       }
     }
-    else if (param_11 < 0x8001) {
-      if (param_11 == 0x1909) {
-        puVar4 = param_4;
-        if (0 < param_3) {
+    else if (srcFormat < 0x8001) {
+      if (srcFormat == 0x1909) {
+        puVar4 = src;
+        if (0 < height) {
           do {
-            for (; param_5 < puVar5; param_5 = param_5 + 3) {
-              uVar2 = *param_4;
-              param_4 = param_4 + 4;
-              *param_5 = uVar2;
-              param_5[2] = *param_5;
-              param_5[1] = *param_5;
+            for (; dst < dstRowEnd; dst = dst + 3) {
+              srcValue = *src;
+              src = src + 4;
+              *dst = srcValue;
+              dst[2] = *dst;
+              dst[1] = *dst;
             }
-            param_3 = param_3 + -1;
-            param_4 = puVar4 + param_6;
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-            puVar4 = param_4;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = puVar4 + srcRowStride;
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+            puVar4 = src;
+          } while (height != 0);
         }
       }
       else {
-        if (param_11 != 0x190a) {
+        if (srcFormat != 0x190a) {
           return 0;
         }
-        puVar4 = param_4;
-        if (0 < param_3) {
+        puVar4 = src;
+        if (0 < height) {
           do {
-            for (; param_5 < puVar5; param_5 = param_5 + 3) {
-              uVar2 = *param_4;
-              param_4 = param_4 + 8;
-              *param_5 = uVar2;
-              param_5[2] = *param_5;
-              param_5[1] = *param_5;
+            for (; dst < dstRowEnd; dst = dst + 3) {
+              srcValue = *src;
+              src = src + 8;
+              *dst = srcValue;
+              dst[2] = *dst;
+              dst[1] = *dst;
             }
-            param_3 = param_3 + -1;
-            param_4 = puVar4 + param_6;
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-            puVar4 = param_4;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = puVar4 + srcRowStride;
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+            puVar4 = src;
+          } while (height != 0);
         }
       }
     }
-    else if (param_11 == 0x80e0) {
-      puVar4 = param_4;
-      if (0 < param_3) {
+    else if (srcFormat == 0x80e0) {
+      puVar4 = src;
+      if (0 < height) {
         do {
-          for (; param_5 < puVar5; param_5 = param_5 + 3) {
-            *param_5 = param_4[8];
-            param_5[1] = param_4[4];
-            uVar2 = *param_4;
-            param_4 = param_4 + 0xc;
-            param_5[2] = uVar2;
+          for (; dst < dstRowEnd; dst = dst + 3) {
+            *dst = src[8];
+            dst[1] = src[4];
+            srcValue = *src;
+            src = src + 0xc;
+            dst[2] = srcValue;
           }
-          param_3 = param_3 + -1;
-          param_4 = puVar4 + param_6;
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-          puVar4 = param_4;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = puVar4 + srcRowStride;
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+          puVar4 = src;
+        } while (height != 0);
       }
     }
     else {
-      if (param_11 != 0x80e1) {
+      if (srcFormat != 0x80e1) {
         return 0;
       }
-      puVar4 = param_4;
-      if (0 < param_3) {
+      puVar4 = src;
+      if (0 < height) {
         do {
-          for (; param_5 < puVar5; param_5 = param_5 + 3) {
-            *param_5 = param_4[8];
-            param_5[1] = param_4[4];
-            uVar2 = *param_4;
-            param_4 = param_4 + 0x10;
-            param_5[2] = uVar2;
+          for (; dst < dstRowEnd; dst = dst + 3) {
+            *dst = src[8];
+            dst[1] = src[4];
+            srcValue = *src;
+            src = src + 0x10;
+            dst[2] = srcValue;
           }
-          param_3 = param_3 + -1;
-          param_4 = puVar4 + param_6;
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-          puVar4 = param_4;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = puVar4 + srcRowStride;
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+          puVar4 = src;
+        } while (height != 0);
       }
     }
     break;
   case 0x1908:
-    if (param_11 == 0x1908) {
-      if (0 < param_3) {
+    if (srcFormat == 0x1908) {
+      if (0 < height) {
         do {
-          if (param_5 < puVar5) {
-            uVar6 = (uint)(puVar5 + (3 - (int)param_5)) >> 2;
-            puVar4 = param_4;
+          if (dst < dstRowEnd) {
+            pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
+            puVar4 = src;
             do {
-              *param_5 = *puVar4;
-              param_5[1] = puVar4[4];
-              param_5[2] = puVar4[8];
-              puVar1 = puVar4 + 0xc;
+              *dst = *puVar4;
+              dst[1] = puVar4[4];
+              dst[2] = puVar4[8];
+              srcComponent = puVar4 + 0xc;
               puVar4 = puVar4 + 0x10;
-              param_5[3] = *puVar1;
-              param_5 = param_5 + 4;
-              uVar6 = uVar6 - 1;
-            } while (uVar6 != 0);
+              dst[3] = *srcComponent;
+              dst = dst + 4;
+              pixelsLeft = pixelsLeft - 1;
+            } while (pixelsLeft != 0);
           }
-          param_3 = param_3 + -1;
-          param_4 = param_4 + param_6;
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = src + srcRowStride;
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
-    else if (param_11 < 0x1909) {
-      if (param_11 == 0x1905) {
-        if (0 < param_3) {
+    else if (srcFormat < 0x1909) {
+      if (srcFormat == 0x1905) {
+        if (0 < height) {
           do {
-            if (param_5 < puVar5) {
-              uVar6 = (uint)(puVar5 + (3 - (int)param_5)) >> 2;
-              puVar4 = param_4;
+            if (dst < dstRowEnd) {
+              pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
+              puVar4 = src;
               do {
-                *param_5 = 0;
-                param_5[1] = 0;
-                uVar2 = *puVar4;
+                *dst = 0;
+                dst[1] = 0;
+                srcValue = *puVar4;
                 puVar4 = puVar4 + 4;
-                param_5[3] = 0xff;
-                param_5[2] = uVar2;
-                param_5 = param_5 + 4;
-                uVar6 = uVar6 - 1;
-              } while (uVar6 != 0);
+                dst[3] = 0xff;
+                dst[2] = srcValue;
+                dst = dst + 4;
+                pixelsLeft = pixelsLeft - 1;
+              } while (pixelsLeft != 0);
             }
-            param_3 = param_3 + -1;
-            param_4 = param_4 + param_6;
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = src + srcRowStride;
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
-      else if (param_11 < 0x1906) {
-        if (param_11 == 0x1903) {
-          if (0 < param_3) {
+      else if (srcFormat < 0x1906) {
+        if (srcFormat == 0x1903) {
+          if (0 < height) {
             do {
-              if (param_5 < puVar5) {
-                uVar6 = (uint)(puVar5 + (3 - (int)param_5)) >> 2;
-                puVar4 = param_4;
+              if (dst < dstRowEnd) {
+                pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
+                puVar4 = src;
                 do {
-                  uVar2 = *puVar4;
+                  srcValue = *puVar4;
                   puVar4 = puVar4 + 4;
-                  param_5[1] = 0;
-                  *param_5 = uVar2;
-                  param_5[2] = 0;
-                  param_5[3] = 0xff;
-                  param_5 = param_5 + 4;
-                  uVar6 = uVar6 - 1;
-                } while (uVar6 != 0);
+                  dst[1] = 0;
+                  *dst = srcValue;
+                  dst[2] = 0;
+                  dst[3] = 0xff;
+                  dst = dst + 4;
+                  pixelsLeft = pixelsLeft - 1;
+                } while (pixelsLeft != 0);
               }
-              param_3 = param_3 + -1;
-              param_4 = param_4 + param_6;
-              param_5 = param_5 + param_8;
-              puVar5 = puVar5 + param_9;
-            } while (param_3 != 0);
+              height = height + -1;
+              src = src + srcRowStride;
+              dst = dst + dstRowSkip;
+              dstRowEnd = dstRowEnd + dstRowStride;
+            } while (height != 0);
           }
         }
         else {
-          if (param_11 != 0x1904) {
+          if (srcFormat != 0x1904) {
             return 0;
           }
-          if (0 < param_3) {
+          if (0 < height) {
             do {
-              if (param_5 < puVar5) {
-                uVar6 = (uint)(puVar5 + (3 - (int)param_5)) >> 2;
-                puVar4 = param_4;
+              if (dst < dstRowEnd) {
+                pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
+                puVar4 = src;
                 do {
-                  *param_5 = 0;
-                  uVar2 = *puVar4;
+                  *dst = 0;
+                  srcValue = *puVar4;
                   puVar4 = puVar4 + 4;
-                  param_5[2] = 0;
-                  param_5[1] = uVar2;
-                  param_5[3] = 0xff;
-                  param_5 = param_5 + 4;
-                  uVar6 = uVar6 - 1;
-                } while (uVar6 != 0);
+                  dst[2] = 0;
+                  dst[1] = srcValue;
+                  dst[3] = 0xff;
+                  dst = dst + 4;
+                  pixelsLeft = pixelsLeft - 1;
+                } while (pixelsLeft != 0);
               }
-              param_3 = param_3 + -1;
-              param_4 = param_4 + param_6;
-              param_5 = param_5 + param_8;
-              puVar5 = puVar5 + param_9;
-            } while (param_3 != 0);
+              height = height + -1;
+              src = src + srcRowStride;
+              dst = dst + dstRowSkip;
+              dstRowEnd = dstRowEnd + dstRowStride;
+            } while (height != 0);
           }
         }
       }
-      else if (param_11 == 0x1906) {
-        if (0 < param_3) {
+      else if (srcFormat == 0x1906) {
+        if (0 < height) {
           do {
-            if (param_5 < puVar5) {
-              uVar6 = (uint)(puVar5 + (3 - (int)param_5)) >> 2;
-              puVar4 = param_4;
+            if (dst < dstRowEnd) {
+              pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
+              puVar4 = src;
               do {
-                *param_5 = 0;
-                param_5[1] = 0;
-                param_5[2] = 0;
-                uVar2 = *puVar4;
+                *dst = 0;
+                dst[1] = 0;
+                dst[2] = 0;
+                srcValue = *puVar4;
                 puVar4 = puVar4 + 4;
-                param_5[3] = uVar2;
-                param_5 = param_5 + 4;
-                uVar6 = uVar6 - 1;
-              } while (uVar6 != 0);
+                dst[3] = srcValue;
+                dst = dst + 4;
+                pixelsLeft = pixelsLeft - 1;
+              } while (pixelsLeft != 0);
             }
-            param_3 = param_3 + -1;
-            param_4 = param_4 + param_6;
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = src + srcRowStride;
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
       else {
-        if (param_11 != 0x1907) {
+        if (srcFormat != 0x1907) {
           return 0;
         }
-        if (0 < param_3) {
+        if (0 < height) {
           do {
-            if (param_5 < puVar5) {
-              uVar6 = (uint)(puVar5 + (3 - (int)param_5)) >> 2;
-              puVar4 = param_4;
+            if (dst < dstRowEnd) {
+              pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
+              puVar4 = src;
               do {
-                *param_5 = *puVar4;
-                param_5[1] = puVar4[4];
-                uVar2 = puVar4[8];
+                *dst = *puVar4;
+                dst[1] = puVar4[4];
+                srcValue = puVar4[8];
                 puVar4 = puVar4 + 0xc;
-                param_5[3] = 0xff;
-                param_5[2] = uVar2;
-                param_5 = param_5 + 4;
-                uVar6 = uVar6 - 1;
-              } while (uVar6 != 0);
+                dst[3] = 0xff;
+                dst[2] = srcValue;
+                dst = dst + 4;
+                pixelsLeft = pixelsLeft - 1;
+              } while (pixelsLeft != 0);
             }
-            param_3 = param_3 + -1;
-            param_4 = param_4 + param_6;
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = src + srcRowStride;
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
     }
-    else if (param_11 == 0x8000) {
-      if (0 < param_3) {
+    else if (srcFormat == 0x8000) {
+      if (0 < height) {
         do {
-          if (param_5 < puVar5) {
-            uVar6 = (uint)(puVar5 + (3 - (int)param_5)) >> 2;
-            puVar4 = param_4;
+          if (dst < dstRowEnd) {
+            pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
+            puVar4 = src;
             do {
-              *param_5 = puVar4[0xc];
-              param_5[1] = puVar4[8];
-              param_5[2] = puVar4[4];
-              uVar2 = *puVar4;
+              *dst = puVar4[0xc];
+              dst[1] = puVar4[8];
+              dst[2] = puVar4[4];
+              srcValue = *puVar4;
               puVar4 = puVar4 + 0x10;
-              param_5[3] = uVar2;
-              param_5 = param_5 + 4;
-              uVar6 = uVar6 - 1;
-            } while (uVar6 != 0);
+              dst[3] = srcValue;
+              dst = dst + 4;
+              pixelsLeft = pixelsLeft - 1;
+            } while (pixelsLeft != 0);
           }
-          param_3 = param_3 + -1;
-          param_4 = param_4 + param_6;
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = src + srcRowStride;
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
-    else if (param_11 < 0x8001) {
-      if (param_11 == 0x1909) {
-        if (0 < param_3) {
+    else if (srcFormat < 0x8001) {
+      if (srcFormat == 0x1909) {
+        if (0 < height) {
           do {
-            if (param_5 < puVar5) {
-              uVar6 = (uint)(puVar5 + (3 - (int)param_5)) >> 2;
-              puVar4 = param_4;
+            if (dst < dstRowEnd) {
+              pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
+              puVar4 = src;
               do {
-                uVar2 = *puVar4;
+                srcValue = *puVar4;
                 puVar4 = puVar4 + 4;
-                param_5[3] = 0xff;
-                *param_5 = uVar2;
-                param_5[2] = *param_5;
-                param_5[1] = *param_5;
-                param_5 = param_5 + 4;
-                uVar6 = uVar6 - 1;
-              } while (uVar6 != 0);
+                dst[3] = 0xff;
+                *dst = srcValue;
+                dst[2] = *dst;
+                dst[1] = *dst;
+                dst = dst + 4;
+                pixelsLeft = pixelsLeft - 1;
+              } while (pixelsLeft != 0);
             }
-            param_3 = param_3 + -1;
-            param_4 = param_4 + param_6;
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = src + srcRowStride;
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
       else {
-        if (param_11 != 0x190a) {
+        if (srcFormat != 0x190a) {
           return 0;
         }
-        if (0 < param_3) {
+        if (0 < height) {
           do {
-            if (param_5 < puVar5) {
-              uVar6 = (uint)(puVar5 + (3 - (int)param_5)) >> 2;
-              puVar4 = param_4;
+            if (dst < dstRowEnd) {
+              pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
+              puVar4 = src;
               do {
-                *param_5 = *puVar4;
-                param_5[2] = *param_5;
-                param_5[1] = *param_5;
-                puVar1 = puVar4 + 4;
+                *dst = *puVar4;
+                dst[2] = *dst;
+                dst[1] = *dst;
+                srcComponent = puVar4 + 4;
                 puVar4 = puVar4 + 8;
-                param_5[3] = *puVar1;
-                param_5 = param_5 + 4;
-                uVar6 = uVar6 - 1;
-              } while (uVar6 != 0);
+                dst[3] = *srcComponent;
+                dst = dst + 4;
+                pixelsLeft = pixelsLeft - 1;
+              } while (pixelsLeft != 0);
             }
-            param_3 = param_3 + -1;
-            param_4 = param_4 + param_6;
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = src + srcRowStride;
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
     }
-    else if (param_11 == 0x80e0) {
-      if (0 < param_3) {
+    else if (srcFormat == 0x80e0) {
+      if (0 < height) {
         do {
-          if (param_5 < puVar5) {
-            uVar6 = (uint)(puVar5 + (3 - (int)param_5)) >> 2;
-            puVar4 = param_4;
+          if (dst < dstRowEnd) {
+            pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
+            puVar4 = src;
             do {
-              *param_5 = puVar4[8];
-              param_5[1] = puVar4[4];
-              uVar2 = *puVar4;
+              *dst = puVar4[8];
+              dst[1] = puVar4[4];
+              srcValue = *puVar4;
               puVar4 = puVar4 + 0xc;
-              param_5[3] = 0xff;
-              param_5[2] = uVar2;
-              param_5 = param_5 + 4;
-              uVar6 = uVar6 - 1;
-            } while (uVar6 != 0);
+              dst[3] = 0xff;
+              dst[2] = srcValue;
+              dst = dst + 4;
+              pixelsLeft = pixelsLeft - 1;
+            } while (pixelsLeft != 0);
           }
-          param_3 = param_3 + -1;
-          param_4 = param_4 + param_6;
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = src + srcRowStride;
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
     else {
-      if (param_11 != 0x80e1) {
+      if (srcFormat != 0x80e1) {
         return 0;
       }
-      if (0 < param_3) {
+      if (0 < height) {
         do {
-          if (param_5 < puVar5) {
-            uVar6 = (uint)(puVar5 + (3 - (int)param_5)) >> 2;
-            puVar4 = param_4;
+          if (dst < dstRowEnd) {
+            pixelsLeft = (uint)(dstRowEnd + (3 - (int)dst)) >> 2;
+            puVar4 = src;
             do {
-              *param_5 = puVar4[8];
-              param_5[1] = puVar4[4];
-              param_5[2] = *puVar4;
-              puVar1 = puVar4 + 0xc;
+              *dst = puVar4[8];
+              dst[1] = puVar4[4];
+              dst[2] = *puVar4;
+              srcComponent = puVar4 + 0xc;
               puVar4 = puVar4 + 0x10;
-              param_5[3] = *puVar1;
-              param_5 = param_5 + 4;
-              uVar6 = uVar6 - 1;
-            } while (uVar6 != 0);
+              dst[3] = *srcComponent;
+              dst = dst + 4;
+              pixelsLeft = pixelsLeft - 1;
+            } while (pixelsLeft != 0);
           }
-          param_3 = param_3 + -1;
-          param_4 = param_4 + param_6;
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = src + srcRowStride;
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
     break;
   case 0x1909:
-    if (param_11 == 0x1908) {
-      if (0 < param_3) {
+    if (srcFormat == 0x1908) {
+      if (0 < height) {
         do {
-          if (param_5 < puVar5) {
-            iVar3 = (int)puVar5 - (int)param_5;
-            puVar4 = param_4;
+          if (dst < dstRowEnd) {
+            iVar3 = (int)dstRowEnd - (int)dst;
+            puVar4 = src;
             do {
-              uVar2 = *puVar4;
+              srcValue = *puVar4;
               puVar4 = puVar4 + 0x10;
-              *param_5 = uVar2;
-              param_5 = param_5 + 1;
+              *dst = srcValue;
+              dst = dst + 1;
               iVar3 = iVar3 + -1;
             } while (iVar3 != 0);
           }
-          param_3 = param_3 + -1;
-          param_4 = param_4 + param_6;
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = src + srcRowStride;
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
-    else if (param_11 < 0x1909) {
-      if (param_11 < 0x1907) {
-        if (param_11 < 0x1904) {
-          if (param_11 != 0x1903) {
+    else if (srcFormat < 0x1909) {
+      if (srcFormat < 0x1907) {
+        if (srcFormat < 0x1904) {
+          if (srcFormat != 0x1903) {
             return 0;
           }
-          if (0 < param_3) {
+          if (0 < height) {
             do {
-              if (param_5 < puVar5) {
-                iVar3 = (int)puVar5 - (int)param_5;
-                puVar4 = param_4;
+              if (dst < dstRowEnd) {
+                iVar3 = (int)dstRowEnd - (int)dst;
+                puVar4 = src;
                 do {
-                  uVar2 = *puVar4;
+                  srcValue = *puVar4;
                   puVar4 = puVar4 + 4;
-                  *param_5 = uVar2;
-                  param_5 = param_5 + 1;
+                  *dst = srcValue;
+                  dst = dst + 1;
                   iVar3 = iVar3 + -1;
                 } while (iVar3 != 0);
               }
-              param_3 = param_3 + -1;
-              param_4 = param_4 + param_6;
-              param_5 = param_5 + param_8;
-              puVar5 = puVar5 + param_9;
-            } while (param_3 != 0);
+              height = height + -1;
+              src = src + srcRowStride;
+              dst = dst + dstRowSkip;
+              dstRowEnd = dstRowEnd + dstRowStride;
+            } while (height != 0);
           }
         }
-        else if (0 < param_3) {
+        else if (0 < height) {
           do {
-            if (param_5 < puVar5) {
-              iVar3 = (int)puVar5 - (int)param_5;
+            if (dst < dstRowEnd) {
+              iVar3 = (int)dstRowEnd - (int)dst;
               do {
-                *param_5 = 0;
-                param_5 = param_5 + 1;
+                *dst = 0;
+                dst = dst + 1;
                 iVar3 = iVar3 + -1;
               } while (iVar3 != 0);
             }
-            param_3 = param_3 + -1;
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
-      else if (0 < param_3) {
+      else if (0 < height) {
         do {
-          if (param_5 < puVar5) {
-            iVar3 = (int)puVar5 - (int)param_5;
-            puVar4 = param_4;
+          if (dst < dstRowEnd) {
+            iVar3 = (int)dstRowEnd - (int)dst;
+            puVar4 = src;
             do {
-              uVar2 = *puVar4;
+              srcValue = *puVar4;
               puVar4 = puVar4 + 0xc;
-              *param_5 = uVar2;
-              param_5 = param_5 + 1;
+              *dst = srcValue;
+              dst = dst + 1;
               iVar3 = iVar3 + -1;
             } while (iVar3 != 0);
           }
-          param_3 = param_3 + -1;
-          param_4 = param_4 + param_6;
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = src + srcRowStride;
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
-    else if (param_11 == 0x8000) {
-      if (0 < param_3) {
+    else if (srcFormat == 0x8000) {
+      if (0 < height) {
         do {
-          if (param_5 < puVar5) {
-            iVar3 = (int)puVar5 - (int)param_5;
-            puVar4 = param_4;
+          if (dst < dstRowEnd) {
+            iVar3 = (int)dstRowEnd - (int)dst;
+            puVar4 = src;
             do {
-              puVar1 = puVar4 + 0xc;
+              srcComponent = puVar4 + 0xc;
               puVar4 = puVar4 + 0x10;
-              *param_5 = *puVar1;
-              param_5 = param_5 + 1;
+              *dst = *srcComponent;
+              dst = dst + 1;
               iVar3 = iVar3 + -1;
             } while (iVar3 != 0);
           }
-          param_3 = param_3 + -1;
-          param_4 = param_4 + param_6;
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = src + srcRowStride;
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
-    else if (param_11 < 0x8001) {
-      if (param_11 == 0x1909) {
-        if (0 < param_3) {
+    else if (srcFormat < 0x8001) {
+      if (srcFormat == 0x1909) {
+        if (0 < height) {
           do {
-            if (param_5 < puVar5) {
-              iVar3 = (int)puVar5 - (int)param_5;
-              puVar4 = param_4;
+            if (dst < dstRowEnd) {
+              iVar3 = (int)dstRowEnd - (int)dst;
+              puVar4 = src;
               do {
-                uVar2 = *puVar4;
+                srcValue = *puVar4;
                 puVar4 = puVar4 + 4;
-                *param_5 = uVar2;
-                param_5 = param_5 + 1;
+                *dst = srcValue;
+                dst = dst + 1;
                 iVar3 = iVar3 + -1;
               } while (iVar3 != 0);
             }
-            param_3 = param_3 + -1;
-            param_4 = param_4 + param_6;
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = src + srcRowStride;
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
       else {
-        if (param_11 != 0x190a) {
+        if (srcFormat != 0x190a) {
           return 0;
         }
-        if (0 < param_3) {
+        if (0 < height) {
           do {
-            if (param_5 < puVar5) {
-              iVar3 = (int)puVar5 - (int)param_5;
-              puVar4 = param_4;
+            if (dst < dstRowEnd) {
+              iVar3 = (int)dstRowEnd - (int)dst;
+              puVar4 = src;
               do {
-                uVar2 = *puVar4;
+                srcValue = *puVar4;
                 puVar4 = puVar4 + 8;
-                *param_5 = uVar2;
-                param_5 = param_5 + 1;
+                *dst = srcValue;
+                dst = dst + 1;
                 iVar3 = iVar3 + -1;
               } while (iVar3 != 0);
             }
-            param_3 = param_3 + -1;
-            param_4 = param_4 + param_6;
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = src + srcRowStride;
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
     }
-    else if (param_11 == 0x80e0) {
-      if (0 < param_3) {
+    else if (srcFormat == 0x80e0) {
+      if (0 < height) {
         do {
-          if (param_5 < puVar5) {
-            iVar3 = (int)puVar5 - (int)param_5;
-            puVar4 = param_4;
+          if (dst < dstRowEnd) {
+            iVar3 = (int)dstRowEnd - (int)dst;
+            puVar4 = src;
             do {
-              puVar1 = puVar4 + 8;
+              srcComponent = puVar4 + 8;
               puVar4 = puVar4 + 0xc;
-              *param_5 = *puVar1;
-              param_5 = param_5 + 1;
+              *dst = *srcComponent;
+              dst = dst + 1;
               iVar3 = iVar3 + -1;
             } while (iVar3 != 0);
           }
-          param_3 = param_3 + -1;
-          param_4 = param_4 + param_6;
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = src + srcRowStride;
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
     else {
-      if (param_11 != 0x80e1) {
+      if (srcFormat != 0x80e1) {
         return 0;
       }
-      if (0 < param_3) {
+      if (0 < height) {
         do {
-          if (param_5 < puVar5) {
-            iVar3 = (int)puVar5 - (int)param_5;
-            puVar4 = param_4;
+          if (dst < dstRowEnd) {
+            iVar3 = (int)dstRowEnd - (int)dst;
+            puVar4 = src;
             do {
-              puVar1 = puVar4 + 8;
+              srcComponent = puVar4 + 8;
               puVar4 = puVar4 + 0x10;
-              *param_5 = *puVar1;
-              param_5 = param_5 + 1;
+              *dst = *srcComponent;
+              dst = dst + 1;
               iVar3 = iVar3 + -1;
             } while (iVar3 != 0);
           }
-          param_3 = param_3 + -1;
-          param_4 = param_4 + param_6;
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = src + srcRowStride;
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
     break;
   case 0x190a:
-    if (param_11 == 0x1908) {
-      if (0 < param_3) {
+    if (srcFormat == 0x1908) {
+      if (0 < height) {
         do {
-          if (param_5 < puVar5) {
-            uVar6 = (uint)(puVar5 + (1 - (int)param_5)) >> 1;
-            puVar4 = param_4;
+          if (dst < dstRowEnd) {
+            pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
+            puVar4 = src;
             do {
-              *param_5 = *puVar4;
-              puVar1 = puVar4 + 0xc;
+              *dst = *puVar4;
+              srcComponent = puVar4 + 0xc;
               puVar4 = puVar4 + 0x10;
-              param_5[1] = *puVar1;
-              param_5 = param_5 + 2;
-              uVar6 = uVar6 - 1;
-            } while (uVar6 != 0);
+              dst[1] = *srcComponent;
+              dst = dst + 2;
+              pixelsLeft = pixelsLeft - 1;
+            } while (pixelsLeft != 0);
           }
-          param_3 = param_3 + -1;
-          param_4 = param_4 + param_6;
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = src + srcRowStride;
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
-    else if (param_11 < 0x1909) {
-      if (param_11 < 0x1906) {
-        if (param_11 < 0x1904) {
-          if (param_11 != 0x1903) {
+    else if (srcFormat < 0x1909) {
+      if (srcFormat < 0x1906) {
+        if (srcFormat < 0x1904) {
+          if (srcFormat != 0x1903) {
             return 0;
           }
-          if (0 < param_3) {
+          if (0 < height) {
             do {
-              if (param_5 < puVar5) {
-                uVar6 = (uint)(puVar5 + (1 - (int)param_5)) >> 1;
-                puVar4 = param_4;
+              if (dst < dstRowEnd) {
+                pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
+                puVar4 = src;
                 do {
-                  uVar2 = *puVar4;
+                  srcValue = *puVar4;
                   puVar4 = puVar4 + 4;
-                  param_5[1] = 0xff;
-                  *param_5 = uVar2;
-                  param_5 = param_5 + 2;
-                  uVar6 = uVar6 - 1;
-                } while (uVar6 != 0);
+                  dst[1] = 0xff;
+                  *dst = srcValue;
+                  dst = dst + 2;
+                  pixelsLeft = pixelsLeft - 1;
+                } while (pixelsLeft != 0);
               }
-              param_3 = param_3 + -1;
-              param_4 = param_4 + param_6;
-              param_5 = param_5 + param_8;
-              puVar5 = puVar5 + param_9;
-            } while (param_3 != 0);
+              height = height + -1;
+              src = src + srcRowStride;
+              dst = dst + dstRowSkip;
+              dstRowEnd = dstRowEnd + dstRowStride;
+            } while (height != 0);
           }
         }
-        else if (0 < param_3) {
+        else if (0 < height) {
           do {
-            if (param_5 < puVar5) {
-              uVar6 = (uint)(puVar5 + (1 - (int)param_5)) >> 1;
+            if (dst < dstRowEnd) {
+              pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
               do {
-                *param_5 = 0;
-                param_5[1] = 0xff;
-                param_5 = param_5 + 2;
-                uVar6 = uVar6 - 1;
-              } while (uVar6 != 0);
+                *dst = 0;
+                dst[1] = 0xff;
+                dst = dst + 2;
+                pixelsLeft = pixelsLeft - 1;
+              } while (pixelsLeft != 0);
             }
-            param_3 = param_3 + -1;
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
-      else if (param_11 == 0x1906) {
-        if (0 < param_3) {
+      else if (srcFormat == 0x1906) {
+        if (0 < height) {
           do {
-            if (param_5 < puVar5) {
-              uVar6 = (uint)(puVar5 + (1 - (int)param_5)) >> 1;
-              puVar4 = param_4;
+            if (dst < dstRowEnd) {
+              pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
+              puVar4 = src;
               do {
-                *param_5 = 0;
-                uVar2 = *puVar4;
+                *dst = 0;
+                srcValue = *puVar4;
                 puVar4 = puVar4 + 4;
-                param_5[1] = uVar2;
-                param_5 = param_5 + 2;
-                uVar6 = uVar6 - 1;
-              } while (uVar6 != 0);
+                dst[1] = srcValue;
+                dst = dst + 2;
+                pixelsLeft = pixelsLeft - 1;
+              } while (pixelsLeft != 0);
             }
-            param_3 = param_3 + -1;
-            param_4 = param_4 + param_6;
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = src + srcRowStride;
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
       else {
-        if (param_11 != 0x1907) {
+        if (srcFormat != 0x1907) {
           return 0;
         }
-        if (0 < param_3) {
+        if (0 < height) {
           do {
-            if (param_5 < puVar5) {
-              uVar6 = (uint)(puVar5 + (1 - (int)param_5)) >> 1;
-              puVar4 = param_4;
+            if (dst < dstRowEnd) {
+              pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
+              puVar4 = src;
               do {
-                uVar2 = *puVar4;
+                srcValue = *puVar4;
                 puVar4 = puVar4 + 0xc;
-                param_5[1] = 0xff;
-                *param_5 = uVar2;
-                param_5 = param_5 + 2;
-                uVar6 = uVar6 - 1;
-              } while (uVar6 != 0);
+                dst[1] = 0xff;
+                *dst = srcValue;
+                dst = dst + 2;
+                pixelsLeft = pixelsLeft - 1;
+              } while (pixelsLeft != 0);
             }
-            param_3 = param_3 + -1;
-            param_4 = param_4 + param_6;
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = src + srcRowStride;
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
     }
-    else if (param_11 == 0x8000) {
-      if (0 < param_3) {
+    else if (srcFormat == 0x8000) {
+      if (0 < height) {
         do {
-          if (param_5 < puVar5) {
-            uVar6 = (uint)(puVar5 + (1 - (int)param_5)) >> 1;
-            puVar4 = param_4;
+          if (dst < dstRowEnd) {
+            pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
+            puVar4 = src;
             do {
-              *param_5 = puVar4[0xc];
-              uVar2 = *puVar4;
+              *dst = puVar4[0xc];
+              srcValue = *puVar4;
               puVar4 = puVar4 + 0x10;
-              param_5[1] = uVar2;
-              param_5 = param_5 + 2;
-              uVar6 = uVar6 - 1;
-            } while (uVar6 != 0);
+              dst[1] = srcValue;
+              dst = dst + 2;
+              pixelsLeft = pixelsLeft - 1;
+            } while (pixelsLeft != 0);
           }
-          param_3 = param_3 + -1;
-          param_4 = param_4 + param_6;
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = src + srcRowStride;
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
-    else if (param_11 < 0x8001) {
-      if (param_11 == 0x1909) {
-        if (0 < param_3) {
+    else if (srcFormat < 0x8001) {
+      if (srcFormat == 0x1909) {
+        if (0 < height) {
           do {
-            if (param_5 < puVar5) {
-              uVar6 = (uint)(puVar5 + (1 - (int)param_5)) >> 1;
-              puVar4 = param_4;
+            if (dst < dstRowEnd) {
+              pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
+              puVar4 = src;
               do {
-                uVar2 = *puVar4;
+                srcValue = *puVar4;
                 puVar4 = puVar4 + 4;
-                param_5[1] = 0xff;
-                *param_5 = uVar2;
-                param_5 = param_5 + 2;
-                uVar6 = uVar6 - 1;
-              } while (uVar6 != 0);
+                dst[1] = 0xff;
+                *dst = srcValue;
+                dst = dst + 2;
+                pixelsLeft = pixelsLeft - 1;
+              } while (pixelsLeft != 0);
             }
-            param_3 = param_3 + -1;
-            param_4 = param_4 + param_6;
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = src + srcRowStride;
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
       else {
-        if (param_11 != 0x190a) {
+        if (srcFormat != 0x190a) {
           return 0;
         }
-        if (0 < param_3) {
+        if (0 < height) {
           do {
-            if (param_5 < puVar5) {
-              uVar6 = (uint)(puVar5 + (1 - (int)param_5)) >> 1;
-              puVar4 = param_4;
+            if (dst < dstRowEnd) {
+              pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
+              puVar4 = src;
               do {
-                *param_5 = *puVar4;
-                puVar1 = puVar4 + 4;
+                *dst = *puVar4;
+                srcComponent = puVar4 + 4;
                 puVar4 = puVar4 + 8;
-                param_5[1] = *puVar1;
-                param_5 = param_5 + 2;
-                uVar6 = uVar6 - 1;
-              } while (uVar6 != 0);
+                dst[1] = *srcComponent;
+                dst = dst + 2;
+                pixelsLeft = pixelsLeft - 1;
+              } while (pixelsLeft != 0);
             }
-            param_3 = param_3 + -1;
-            param_4 = param_4 + param_6;
-            param_5 = param_5 + param_8;
-            puVar5 = puVar5 + param_9;
-          } while (param_3 != 0);
+            height = height + -1;
+            src = src + srcRowStride;
+            dst = dst + dstRowSkip;
+            dstRowEnd = dstRowEnd + dstRowStride;
+          } while (height != 0);
         }
       }
     }
-    else if (param_11 == 0x80e0) {
-      if (0 < param_3) {
+    else if (srcFormat == 0x80e0) {
+      if (0 < height) {
         do {
-          if (param_5 < puVar5) {
-            uVar6 = (uint)(puVar5 + (1 - (int)param_5)) >> 1;
-            puVar4 = param_4;
+          if (dst < dstRowEnd) {
+            pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
+            puVar4 = src;
             do {
-              uVar2 = puVar4[8];
+              srcValue = puVar4[8];
               puVar4 = puVar4 + 0xc;
-              param_5[1] = 0xff;
-              *param_5 = uVar2;
-              param_5 = param_5 + 2;
-              uVar6 = uVar6 - 1;
-            } while (uVar6 != 0);
+              dst[1] = 0xff;
+              *dst = srcValue;
+              dst = dst + 2;
+              pixelsLeft = pixelsLeft - 1;
+            } while (pixelsLeft != 0);
           }
-          param_3 = param_3 + -1;
-          param_4 = param_4 + param_6;
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = src + srcRowStride;
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
     else {
-      if (param_11 != 0x80e1) {
+      if (srcFormat != 0x80e1) {
         return 0;
       }
-      if (0 < param_3) {
+      if (0 < height) {
         do {
-          if (param_5 < puVar5) {
-            uVar6 = (uint)(puVar5 + (1 - (int)param_5)) >> 1;
-            puVar4 = param_4;
+          if (dst < dstRowEnd) {
+            pixelsLeft = (uint)(dstRowEnd + (1 - (int)dst)) >> 1;
+            puVar4 = src;
             do {
-              *param_5 = puVar4[8];
-              puVar1 = puVar4 + 0xc;
+              *dst = puVar4[8];
+              srcComponent = puVar4 + 0xc;
               puVar4 = puVar4 + 0x10;
-              param_5[1] = *puVar1;
-              param_5 = param_5 + 2;
-              uVar6 = uVar6 - 1;
-            } while (uVar6 != 0);
+              dst[1] = *srcComponent;
+              dst = dst + 2;
+              pixelsLeft = pixelsLeft - 1;
+            } while (pixelsLeft != 0);
           }
-          param_3 = param_3 + -1;
-          param_4 = param_4 + param_6;
-          param_5 = param_5 + param_8;
-          puVar5 = puVar5 + param_9;
-        } while (param_3 != 0);
+          height = height + -1;
+          src = src + srcRowStride;
+          dst = dst + dstRowSkip;
+          dstRowEnd = dstRowEnd + dstRowStride;
+        } while (height != 0);
       }
     }
   }
@@ -8602,14 +8602,14 @@ int _gleTextureImagePut_FastUint(param_1, param_2, param_3, param_4, param_5, pa
 }
 
 /* _gleCreateColorTableLevel @ 0x103454 (224 bytes) */
-int _gleCreateColorTableLevel(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+int _gleCreateColorTableLevel(param_1, param_2, param_3, param_4, param_5, unusedArg6, unusedArg7, param_8)
   undefined4 param_1;
   undefined4 param_2;
   int param_3;
   undefined4 param_4;
   int param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+  undefined4 unusedArg6;
+  undefined4 unusedArg7;
   int param_8;
 {
   undefined2 uVar2;

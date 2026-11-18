@@ -1,0 +1,65 @@
+local	_gleConvolutionFilter1D	param_3	internalformat	CONFIRMED	glConvolutionFilter1D argument: stored as the filter format (short at ctx+0x32ca/0x330a) and sizes the malloc via _glePixelBytes(internalformat, GL_FLOAT); also the destination format of _gleImagingUnpackData
+local	_gleConvolutionFilter1D	param_4	width	CONFIRMED	glConvolutionFilter1D argument: stored as the filter width and a factor of the malloc size
+local	_gleConvolutionFilter1D	param_5	format	INFERRED	glConvolutionFilter1D argument: forwarded as the source pixel format of _gleImagingUnpackData
+local	_gleConvolutionFilter1D	param_6	type	INFERRED	glConvolutionFilter1D argument: forwarded as the source pixel type of _gleImagingUnpackData
+local	_gleConvolutionFilter1D	param_7	image	CONFIRMED	glConvolutionFilter1D argument: source pixel data forwarded to _gleImagingUnpackData
+local	_gleConvolutionFilter1D	iVar1	bytesPerPixel	CONFIRMED	single definition: _glePixelBytes(internalformat, GL_FLOAT) = bytes per filter texel
+local	_gleConvolutionFilter1D	uVar2	filterData	CONFIRMED	single definition: malloc result stored at ctx+0x32cc/0x330c, destination of the unpack
+local	_gleConvolutionFilter2D	param_3	internalformat	CONFIRMED	glConvolutionFilter2D argument: stored as the filter format (short at ctx+0x32ca/0x330a) and sizes the malloc via _glePixelBytes(internalformat, GL_FLOAT); also the destination format of _gleImagingUnpackData
+local	_gleConvolutionFilter2D	param_4	width	CONFIRMED	glConvolutionFilter2D argument: stored as the filter width and a factor of the malloc size
+local	_gleConvolutionFilter2D	param_5	height	CONFIRMED	glConvolutionFilter2D argument: stored as the filter height and a factor of the malloc size
+local	_gleConvolutionFilter2D	param_6	format	INFERRED	glConvolutionFilter2D argument: forwarded as the source pixel format of _gleImagingUnpackData
+local	_gleConvolutionFilter2D	param_7	type	INFERRED	glConvolutionFilter2D argument: forwarded as the source pixel type of _gleImagingUnpackData
+local	_gleConvolutionFilter2D	param_8	image	CONFIRMED	glConvolutionFilter2D argument: source pixel data forwarded to _gleImagingUnpackData
+local	_gleConvolutionFilter2D	iVar1	bytesPerPixel	CONFIRMED	single definition: _glePixelBytes(internalformat, GL_FLOAT) = bytes per filter texel
+local	_gleConvolutionFilter2D	uVar2	filterData	CONFIRMED	single definition: malloc result stored at ctx+0x32cc/0x330c, destination of the unpack
+local	_gleSeparableFilter2D	param_3	internalformat	CONFIRMED	glSeparableFilter2D internalformat: stored as the filter format (ctx+0x334a) and size argument of _glePixelBytes(.., GL_FLOAT)
+local	_gleSeparableFilter2D	param_4	width	CONFIRMED	glSeparableFilter2D width: stored at ctx+0x3350; row filter length passed to the first _gleImagingUnpackData
+local	_gleSeparableFilter2D	param_5	height	CONFIRMED	glSeparableFilter2D height: stored at ctx+0x3354; column filter length passed to the second _gleImagingUnpackData
+local	_gleSeparableFilter2D	param_6	format	INFERRED	source pixel format forwarded to both _gleImagingUnpackData calls
+local	_gleSeparableFilter2D	param_7	type	INFERRED	source pixel type forwarded to both _gleImagingUnpackData calls
+local	_gleSeparableFilter2D	param_8	row	CONFIRMED	source data of the row filter: unpacked into the first width texels of the filter buffer
+local	_gleSeparableFilter2D	param_9	column	CONFIRMED	source data of the column filter: unpacked into the texels after the row filter
+local	_gleSeparableFilter2D	iVar2	filterData	CONFIRMED	malloc((width + height) * bytes) result stored at ctx+0x334c: row filter followed by column filter
+local	_gleGetSeparableFilter	param_3	format	INFERRED	destination pixel format forwarded to both _gleImagingPackData calls
+local	_gleGetSeparableFilter	param_4	type	INFERRED	destination pixel type forwarded to both _gleImagingPackData calls
+local	_gleGetSeparableFilter	param_5	row	CONFIRMED	destination of the row filter (first _gleImagingPackData call)
+local	_gleGetSeparableFilter	param_6	column	CONFIRMED	destination of the column filter (second _gleImagingPackData call, source offset by rowWidth * bytes)
+local	_gleGetSeparableFilter	iVar1	bytesPerPixel	CONFIRMED	single definition: _glePixelBytes(filter format, GL_FLOAT)
+local	_gleGetSeparableFilter	iVar2	rowWidth	CONFIRMED	single definition: the stored row-filter width ctx+0x3350
+local	_gleGetSeparableFilter	iVar3	filterData	CONFIRMED	single definition: the stored filter buffer ctx+0x334c
+local	_gleGetHistogram	param_3	reset	INFERRED	reset flag: nonzero resets the table after it was read (the early return on zero in GetMinmax; the final `param_3 != 0` loop in GetHistogram)
+local	_gleGetHistogram	param_4	format	CONFIRMED	compared against GL_RED..GL_LUMINANCE_ALPHA tokens (0x1903-0x190a etc.) and passed to _glePixelBytes / _gleSelectPixelInsertFunc together with type
+local	_gleGetHistogram	param_5	type	CONFIRMED	second argument of _glePixelBytes / _gleSelectPixelInsertFunc; GetHistogram compares it with GL_FLOAT (0x1406)
+local	_gleGetHistogram	param_6	values	CONFIRMED	destination buffer of the result: written through the selected pixel-insert function
+local	_gleGetMinmax	param_3	reset	INFERRED	reset flag: nonzero resets the table after it was read (the early return on zero in GetMinmax; the final `param_3 != 0` loop in GetHistogram)
+local	_gleGetMinmax	param_4	format	CONFIRMED	compared against GL_RED..GL_LUMINANCE_ALPHA tokens (0x1903-0x190a etc.) and passed to _glePixelBytes / _gleSelectPixelInsertFunc together with type
+local	_gleGetMinmax	param_5	type	CONFIRMED	second argument of _glePixelBytes / _gleSelectPixelInsertFunc; GetHistogram compares it with GL_FLOAT (0x1406)
+local	_gleGetMinmax	param_6	values	CONFIRMED	destination buffer of the result: written through the selected pixel-insert function
+local	_gleGetMinmax	puVar5	minmaxTable	INFERRED	ctx+0x337c (assigned once): 8 floats, min[4] followed by max[4], read for the result; when reset is set its entries are re-initialised (min = 1.0, max = 0.0 for the format channels)
+local	_gleGetMinmax	iVar3	pixelBytes	CONFIRMED	single definition: _glePixelBytes(format, type) = size of one result pixel (max is written at values + pixelBytes)
+local	_gleGetMinmax	pcVar4	insertFunc	CONFIRMED	single definition: _gleSelectPixelInsertFunc(format, type), called to write each result pixel
+local	_gleGetHistogram	pfVar27	histogramTable	INFERRED	single definition: ctx+0x3384, the histogram bin table read for the result
+local	_gleImagingScaleAndBias	param_2	scaleBias	CONFIRMED	8 floats {scaleR,biasR,scaleG,biasG,scaleB,biasB,scaleA,biasA}: each channel is computed as value * param_2[2c] + param_2[2c+1]; the early test compares it against the identity (1,0 pairs)
+local	_gleImagingScaleAndBias	param_3	pixels	CONFIRMED	float pixel buffer processed in place (*pfVar8 = scaled value)
+local	_gleImagingScaleAndBias	param_4	format	CONFIRMED	switched on GL_ALPHA/RGB/RGBA/... format tokens (0x1906, 0x1907, 0x1908 ...) and passed to _gleComponents
+local	_gleImagingScaleAndBias	param_5	startPixel	CONFIRMED	pixel offset into pixels: pfVar8 starts at param_3 + startPixel * components * 4
+local	_gleImagingScaleAndBias	param_6	pixelCount	CONFIRMED	loop bound of the per-pixel do/while (iVar7 < param_6)
+local	_gleImagingScaleAndBias	param_7	clamp	INFERRED	when nonzero each result is clamped into [0,1] (compare/select against FLOAT 0.0 and 1.0)
+local	_gleImagingScaleAndBias	iVar6	componentCount	CONFIRMED	single definition: _gleComponents(format), used to scale the start offset
+local	_gleImagingScaleAndBias	iVar7	pixelIndex	CONFIRMED	loop counter 0..pixelCount
+local	_gleImagingScaleAndBias	pfVar8	pixelPtr	CONFIRMED	cursor into pixels: starts at startPixel * components, advanced within each pixel and to the next pixel
+local	_gleEmptyImage	param_2	width	INFERRED	number of pixels per row: iVar6 falls back to it when UNPACK_ROW_LENGTH < 1, and scales the per-row bit count (width * components)
+local	_gleEmptyImage	param_3	height	INFERRED	row loop bound (do { ... } while (--height))
+local	_gleEmptyImage	param_4	format	CONFIRMED	argument of _gleComponents(format): components per pixel
+local	_gleEmptyImage	param_5	type	CONFIRMED	compared with 0x1a00 = GL_BITMAP: the bit-packed path
+local	_gleEmptyImage	param_6	source	INFERRED	linear source bytes consumed one byte at a time (param_6 = param_6 + 1) and merged into the image bits
+local	_gleEmptyImage	param_7	image	INFERRED	client image buffer written through pbVar12/pbVar20, addressed with the unpack pixel-store skip rows/pixels and row alignment
+local	_gleEmptyImage	cVar1	lsbFirst	INFERRED	single definition: ctx+0x31e5 = GL_UNPACK_LSB_FIRST (the unpack pixel-store field; the 0x31cc..0x31e5 group mirrors the pack group at 0x31b0..0x31c9 in _gleGetClientAttrib)
+local	_gleFillImage	param_2	width	INFERRED	number of pixels per row: iVar6 falls back to it when UNPACK_ROW_LENGTH < 1, and scales the per-row bit count (width * components)
+local	_gleFillImage	param_3	height	INFERRED	row loop bound (param_3 = param_3 - 1 per row)
+local	_gleFillImage	param_5	format	CONFIRMED	argument of _gleComponents(format): components per pixel
+local	_gleFillImage	param_6	type	CONFIRMED	compared with 0x1a00 = GL_BITMAP: the bit-packed path
+local	_gleFillImage	param_7	image	INFERRED	client image buffer read through pbVar18, addressed with the unpack pixel-store skip rows/pixels and row alignment
+local	_gleFillImage	param_8	dest	INFERRED	linear destination bytes written one byte at a time (*param_8 = ...; param_8 = param_8 + 1)
+local	_gleFillImage	cVar2	lsbFirst	INFERRED	single definition: ctx+0x31e5 = GL_UNPACK_LSB_FIRST (the unpack pixel-store field; the 0x31cc..0x31e5 group mirrors the pack group at 0x31b0..0x31c9 in _gleGetClientAttrib)

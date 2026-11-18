@@ -1,371 +1,371 @@
 #include "decls.h"
 
 /* _gleInsertPixel_A_Short @ 0xea224 (52 bytes) */
-void _gleInsertPixel_A_Short(param_1, param_2)
-  int param_1;
-  undefined2 *param_2;
+void _gleInsertPixel_A_Short(pixel, dst)
+  int pixel;
+  undefined2 *dst;
 {
-  *param_2 = (short)(int)(*(float *)(param_1 + 0x10) * FLOAT_00108f74);
+  *dst = (short)(int)(*(float *)(pixel + 0x10) * FLOAT_00108f74);
   return;
 }
 
 /* _gleInsertPixel_A_Ushort @ 0xea258 (52 bytes) */
-void _gleInsertPixel_A_Ushort(param_1, param_2)
-  int param_1;
-  undefined2 *param_2;
+void _gleInsertPixel_A_Ushort(pixel, dst)
+  int pixel;
+  undefined2 *dst;
 {
-  *param_2 = (short)(int)(*(float *)(param_1 + 0x10) * FLOAT_00108ea0);
+  *dst = (short)(int)(*(float *)(pixel + 0x10) * FLOAT_00108ea0);
   return;
 }
 
 /* _gleInsertPixel_A_Int @ 0xea28c (52 bytes) */
-void _gleInsertPixel_A_Int(param_1, param_2)
-  int param_1;
-  int *param_2;
+void _gleInsertPixel_A_Int(pixel, dst)
+  int pixel;
+  int *dst;
 {
-  *param_2 = (int)((double)*(float *)(param_1 + 0x10) * DOUBLE_00108d90);
+  *dst = (int)((double)*(float *)(pixel + 0x10) * DOUBLE_00108d90);
   return;
 }
 
 /* _gleInsertPixel_A_Uint @ 0xea2c0 (96 bytes) */
-void _gleInsertPixel_A_Uint(param_1, param_2)
-  int param_1;
-  uint *param_2;
+void _gleInsertPixel_A_Uint(pixel, dst)
+  int pixel;
+  uint *dst;
 {
-  uint uVar1;
-  double dVar2;
+  uint channelValue;
+  double scaledChannel;
   
-  dVar2 = (double)*(float *)(param_1 + 0x10) * DOUBLE_00108da8;
-  if (DOUBLE_00108d80 <= dVar2) {
-    uVar1 = (int)(dVar2 - DOUBLE_00108d80) ^ 0x80000000;
+  scaledChannel = (double)*(float *)(pixel + 0x10) * DOUBLE_00108da8;
+  if (DOUBLE_00108d80 <= scaledChannel) {
+    channelValue = (int)(scaledChannel - DOUBLE_00108d80) ^ 0x80000000;
   }
   else {
-    uVar1 = (uint)(int)dVar2;
+    channelValue = (uint)(int)scaledChannel;
   }
-  *param_2 = uVar1;
+  *dst = channelValue;
   return;
 }
 
 /* _gleInsertPixel_A_Float @ 0xea320 (12 bytes) */
-void _gleInsertPixel_A_Float(param_1, param_2)
-  int param_1;
-  undefined4 *param_2;
+void _gleInsertPixel_A_Float(pixel, dst)
+  int pixel;
+  undefined4 *dst;
 {
-  *param_2 = *(undefined4 *)(param_1 + 0x10);
+  *dst = *(undefined4 *)(pixel + 0x10);
   return;
 }
 
 /* _gleInsertPixel_L_Byte @ 0xea32c (52 bytes) */
-void _gleInsertPixel_L_Byte(param_1, param_2)
-  int param_1;
-  undefined1 *param_2;
+void _gleInsertPixel_L_Byte(pixel, dst)
+  int pixel;
+  undefined1 *dst;
 {
-  *param_2 = (char)(int)(*(float *)(param_1 + 4) * FLOAT_00108f6c);
+  *dst = (char)(int)(*(float *)(pixel + 4) * FLOAT_00108f6c);
   return;
 }
 
 /* _gleInsertPixel_L_Ubyte @ 0xea360 (52 bytes) */
-void _gleInsertPixel_L_Ubyte(param_1, param_2)
-  int param_1;
-  undefined1 *param_2;
+void _gleInsertPixel_L_Ubyte(pixel, dst)
+  int pixel;
+  undefined1 *dst;
 {
-  *param_2 = (char)(int)(*(float *)(param_1 + 4) * FLOAT_00108f70);
+  *dst = (char)(int)(*(float *)(pixel + 4) * FLOAT_00108f70);
   return;
 }
 
 /* _gleInsertPixel_L_Short @ 0xea394 (52 bytes) */
-void _gleInsertPixel_L_Short(param_1, param_2)
-  int param_1;
-  undefined2 *param_2;
+void _gleInsertPixel_L_Short(pixel, dst)
+  int pixel;
+  undefined2 *dst;
 {
-  *param_2 = (short)(int)(*(float *)(param_1 + 4) * FLOAT_00108f74);
+  *dst = (short)(int)(*(float *)(pixel + 4) * FLOAT_00108f74);
   return;
 }
 
 /* _gleInsertPixel_L_Ushort @ 0xea3c8 (52 bytes) */
-void _gleInsertPixel_L_Ushort(param_1, param_2)
-  int param_1;
-  undefined2 *param_2;
+void _gleInsertPixel_L_Ushort(pixel, dst)
+  int pixel;
+  undefined2 *dst;
 {
-  *param_2 = (short)(int)(*(float *)(param_1 + 4) * FLOAT_00108ea0);
+  *dst = (short)(int)(*(float *)(pixel + 4) * FLOAT_00108ea0);
   return;
 }
 
 /* _gleInsertPixel_L_Int @ 0xea3fc (52 bytes) */
-void _gleInsertPixel_L_Int(param_1, param_2)
-  int param_1;
-  int *param_2;
+void _gleInsertPixel_L_Int(pixel, dst)
+  int pixel;
+  int *dst;
 {
-  *param_2 = (int)((double)*(float *)(param_1 + 4) * DOUBLE_00108d90);
+  *dst = (int)((double)*(float *)(pixel + 4) * DOUBLE_00108d90);
   return;
 }
 
 /* _gleInsertPixel_L_Uint @ 0xea430 (96 bytes) */
-void _gleInsertPixel_L_Uint(param_1, param_2)
-  int param_1;
-  uint *param_2;
+void _gleInsertPixel_L_Uint(pixel, dst)
+  int pixel;
+  uint *dst;
 {
-  uint uVar1;
-  double dVar2;
+  uint channelValue;
+  double scaledChannel;
   
-  dVar2 = (double)*(float *)(param_1 + 4) * DOUBLE_00108da8;
-  if (DOUBLE_00108d80 <= dVar2) {
-    uVar1 = (int)(dVar2 - DOUBLE_00108d80) ^ 0x80000000;
+  scaledChannel = (double)*(float *)(pixel + 4) * DOUBLE_00108da8;
+  if (DOUBLE_00108d80 <= scaledChannel) {
+    channelValue = (int)(scaledChannel - DOUBLE_00108d80) ^ 0x80000000;
   }
   else {
-    uVar1 = (uint)(int)dVar2;
+    channelValue = (uint)(int)scaledChannel;
   }
-  *param_2 = uVar1;
+  *dst = channelValue;
   return;
 }
 
 /* _gleInsertPixel_L_Float @ 0xea490 (12 bytes) */
-void _gleInsertPixel_L_Float(param_1, param_2)
-  int param_1;
-  undefined4 *param_2;
+void _gleInsertPixel_L_Float(pixel, dst)
+  int pixel;
+  undefined4 *dst;
 {
-  *param_2 = *(undefined4 *)(param_1 + 4);
+  *dst = *(undefined4 *)(pixel + 4);
   return;
 }
 
 /* _gleInsertPixel_LA_Byte @ 0xea49c (76 bytes) */
-void _gleInsertPixel_LA_Byte(param_1, param_2)
-  int param_1;
-  undefined1 *param_2;
+void _gleInsertPixel_LA_Byte(pixel, dst)
+  int pixel;
+  undefined1 *dst;
 {
-  float fVar1;
+  float channelScale;
   
-  fVar1 = FLOAT_00108f6c;
-  *param_2 = (char)(int)(*(float *)(param_1 + 4) * FLOAT_00108f6c);
-  param_2[1] = (char)(int)(*(float *)(param_1 + 0x10) * fVar1);
+  channelScale = FLOAT_00108f6c;
+  *dst = (char)(int)(*(float *)(pixel + 4) * FLOAT_00108f6c);
+  dst[1] = (char)(int)(*(float *)(pixel + 0x10) * channelScale);
   return;
 }
 
 /* _gleInsertPixel_LA_Ubyte @ 0xea4e8 (76 bytes) */
-void _gleInsertPixel_LA_Ubyte(param_1, param_2)
-  int param_1;
-  undefined1 *param_2;
+void _gleInsertPixel_LA_Ubyte(pixel, dst)
+  int pixel;
+  undefined1 *dst;
 {
-  float fVar1;
+  float channelScale;
   
-  fVar1 = FLOAT_00108f70;
-  *param_2 = (char)(int)(*(float *)(param_1 + 4) * FLOAT_00108f70);
-  param_2[1] = (char)(int)(*(float *)(param_1 + 0x10) * fVar1);
+  channelScale = FLOAT_00108f70;
+  *dst = (char)(int)(*(float *)(pixel + 4) * FLOAT_00108f70);
+  dst[1] = (char)(int)(*(float *)(pixel + 0x10) * channelScale);
   return;
 }
 
 /* _gleInsertPixel_LA_Short @ 0xea534 (76 bytes) */
-void _gleInsertPixel_LA_Short(param_1, param_2)
-  int param_1;
-  undefined2 *param_2;
+void _gleInsertPixel_LA_Short(pixel, dst)
+  int pixel;
+  undefined2 *dst;
 {
-  float fVar1;
+  float channelScale;
   
-  fVar1 = FLOAT_00108f74;
-  *param_2 = (short)(int)(*(float *)(param_1 + 4) * FLOAT_00108f74);
-  param_2[1] = (short)(int)(*(float *)(param_1 + 0x10) * fVar1);
+  channelScale = FLOAT_00108f74;
+  *dst = (short)(int)(*(float *)(pixel + 4) * FLOAT_00108f74);
+  dst[1] = (short)(int)(*(float *)(pixel + 0x10) * channelScale);
   return;
 }
 
 /* _gleInsertPixel_LA_Ushort @ 0xea580 (76 bytes) */
-void _gleInsertPixel_LA_Ushort(param_1, param_2)
-  int param_1;
-  undefined2 *param_2;
+void _gleInsertPixel_LA_Ushort(pixel, dst)
+  int pixel;
+  undefined2 *dst;
 {
-  float fVar1;
+  float channelScale;
   
-  fVar1 = FLOAT_00108ea0;
-  *param_2 = (short)(int)(*(float *)(param_1 + 4) * FLOAT_00108ea0);
-  param_2[1] = (short)(int)(*(float *)(param_1 + 0x10) * fVar1);
+  channelScale = FLOAT_00108ea0;
+  *dst = (short)(int)(*(float *)(pixel + 4) * FLOAT_00108ea0);
+  dst[1] = (short)(int)(*(float *)(pixel + 0x10) * channelScale);
   return;
 }
 
 /* _gleInsertPixel_LA_Int @ 0xea5cc (76 bytes) */
-void _gleInsertPixel_LA_Int(param_1, param_2)
-  int param_1;
-  int *param_2;
+void _gleInsertPixel_LA_Int(pixel, dst)
+  int pixel;
+  int *dst;
 {
-  double dVar1;
+  double scaledChannel;
   
-  dVar1 = DOUBLE_00108d90;
-  *param_2 = (int)((double)*(float *)(param_1 + 4) * DOUBLE_00108d90);
-  param_2[1] = (int)((double)*(float *)(param_1 + 0x10) * dVar1);
+  scaledChannel = DOUBLE_00108d90;
+  *dst = (int)((double)*(float *)(pixel + 4) * DOUBLE_00108d90);
+  dst[1] = (int)((double)*(float *)(pixel + 0x10) * scaledChannel);
   return;
 }
 
 /* _gleInsertPixel_LA_Uint @ 0xea618 (168 bytes) */
-void _gleInsertPixel_LA_Uint(param_1, param_2)
-  int param_1;
-  uint *param_2;
+void _gleInsertPixel_LA_Uint(pixel, dst)
+  int pixel;
+  uint *dst;
 {
-  uint uVar1;
-  double dVar2;
+  uint channelValue;
+  double scaledChannel;
   
-  dVar2 = (double)*(float *)(param_1 + 4) * DOUBLE_00108da8;
-  if (DOUBLE_00108d80 <= dVar2) {
-    uVar1 = (int)(dVar2 - DOUBLE_00108d80) ^ 0x80000000;
+  scaledChannel = (double)*(float *)(pixel + 4) * DOUBLE_00108da8;
+  if (DOUBLE_00108d80 <= scaledChannel) {
+    channelValue = (int)(scaledChannel - DOUBLE_00108d80) ^ 0x80000000;
   }
   else {
-    uVar1 = (uint)(int)dVar2;
+    channelValue = (uint)(int)scaledChannel;
   }
-  *param_2 = uVar1;
-  dVar2 = (double)*(float *)(param_1 + 0x10) * DOUBLE_00108da8;
-  if (DOUBLE_00108d80 <= dVar2) {
-    uVar1 = (int)(dVar2 - DOUBLE_00108d80) ^ 0x80000000;
+  *dst = channelValue;
+  scaledChannel = (double)*(float *)(pixel + 0x10) * DOUBLE_00108da8;
+  if (DOUBLE_00108d80 <= scaledChannel) {
+    channelValue = (int)(scaledChannel - DOUBLE_00108d80) ^ 0x80000000;
   }
   else {
-    uVar1 = (uint)(int)dVar2;
+    channelValue = (uint)(int)scaledChannel;
   }
-  param_2[1] = uVar1;
+  dst[1] = channelValue;
   return;
 }
 
 /* _gleInsertPixel_LA_Float @ 0xea6c0 (20 bytes) */
-void _gleInsertPixel_LA_Float(param_1, param_2)
-  int param_1;
-  undefined4 *param_2;
+void _gleInsertPixel_LA_Float(pixel, dst)
+  int pixel;
+  undefined4 *dst;
 {
-  *param_2 = *(undefined4 *)(param_1 + 4);
-  param_2[1] = *(undefined4 *)(param_1 + 0x10);
+  *dst = *(undefined4 *)(pixel + 4);
+  dst[1] = *(undefined4 *)(pixel + 0x10);
   return;
 }
 
 /* _gleInsertPixel_Index_Byte @ 0xea6d4 (12 bytes) */
-void _gleInsertPixel_Index_Byte(param_1, param_2)
-  int param_1;
-  undefined1 *param_2;
+void _gleInsertPixel_Index_Byte(pixel, dst)
+  int pixel;
+  undefined1 *dst;
 {
-  *param_2 = *(undefined1 *)(param_1 + 0x1b);
+  *dst = *(undefined1 *)(pixel + 0x1b);
   return;
 }
 
 /* _gleInsertPixel_Index_Ubyte @ 0xea6e0 (12 bytes) */
-void _gleInsertPixel_Index_Ubyte(param_1, param_2)
-  int param_1;
-  undefined1 *param_2;
+void _gleInsertPixel_Index_Ubyte(pixel, dst)
+  int pixel;
+  undefined1 *dst;
 {
-  *param_2 = *(undefined1 *)(param_1 + 0x1b);
+  *dst = *(undefined1 *)(pixel + 0x1b);
   return;
 }
 
 /* _gleInsertPixel_Index_Short @ 0xea6ec (12 bytes) */
-void _gleInsertPixel_Index_Short(param_1, param_2)
-  int param_1;
-  undefined2 *param_2;
+void _gleInsertPixel_Index_Short(pixel, dst)
+  int pixel;
+  undefined2 *dst;
 {
-  *param_2 = *(undefined2 *)(param_1 + 0x1a);
+  *dst = *(undefined2 *)(pixel + 0x1a);
   return;
 }
 
 /* _gleInsertPixel_Index_Ushort @ 0xea6f8 (12 bytes) */
-void _gleInsertPixel_Index_Ushort(param_1, param_2)
-  int param_1;
-  undefined2 *param_2;
+void _gleInsertPixel_Index_Ushort(pixel, dst)
+  int pixel;
+  undefined2 *dst;
 {
-  *param_2 = *(undefined2 *)(param_1 + 0x1a);
+  *dst = *(undefined2 *)(pixel + 0x1a);
   return;
 }
 
 /* _gleInsertPixel_Index_Int @ 0xea704 (12 bytes) */
-void _gleInsertPixel_Index_Int(param_1, param_2)
-  int param_1;
-  undefined4 *param_2;
+void _gleInsertPixel_Index_Int(pixel, dst)
+  int pixel;
+  undefined4 *dst;
 {
-  *param_2 = *(undefined4 *)(param_1 + 0x18);
+  *dst = *(undefined4 *)(pixel + 0x18);
   return;
 }
 
 /* _gleInsertPixel_Index_Uint @ 0xea710 (12 bytes) */
-void _gleInsertPixel_Index_Uint(param_1, param_2)
-  int param_1;
-  undefined4 *param_2;
+void _gleInsertPixel_Index_Uint(pixel, dst)
+  int pixel;
+  undefined4 *dst;
 {
-  *param_2 = *(undefined4 *)(param_1 + 0x18);
+  *dst = *(undefined4 *)(pixel + 0x18);
   return;
 }
 
 /* _gleInsertPixel_Index_Float @ 0xea71c (104 bytes) */
-void _gleInsertPixel_Index_Float(param_1, param_2)
-  int param_1;
-  float *param_2;
+void _gleInsertPixel_Index_Float(pixel, dst)
+  int pixel;
+  float *dst;
 {
-  *param_2 = (float)((double)CONCAT44(0x43300000,*(uint *)(param_1 + 0x1c) ^ 0x80000000) -
+  *dst = (float)((double)CONCAT44(0x43300000,*(uint *)(pixel + 0x1c) ^ 0x80000000) -
                     DOUBLE_00108d58) * FLOAT_00108f78 +
-             (float)((double)CONCAT44(0x43300000,*(uint *)(param_1 + 0x18) ^ 0x80000000) -
+             (float)((double)CONCAT44(0x43300000,*(uint *)(pixel + 0x18) ^ 0x80000000) -
                     DOUBLE_00108d58);
   return;
 }
 
 /* _gleInsertPixel_Depth_Byte @ 0xea784 (52 bytes) */
-void _gleInsertPixel_Depth_Byte(param_1, param_2)
-  int param_1;
-  undefined1 *param_2;
+void _gleInsertPixel_Depth_Byte(pixel, dst)
+  int pixel;
+  undefined1 *dst;
 {
-  *param_2 = (char)(int)(*(float *)(param_1 + 0x14) * FLOAT_00108f6c);
+  *dst = (char)(int)(*(float *)(pixel + 0x14) * FLOAT_00108f6c);
   return;
 }
 
 /* _gleInsertPixel_Depth_Ubyte @ 0xea7b8 (52 bytes) */
-void _gleInsertPixel_Depth_Ubyte(param_1, param_2)
-  int param_1;
-  undefined1 *param_2;
+void _gleInsertPixel_Depth_Ubyte(pixel, dst)
+  int pixel;
+  undefined1 *dst;
 {
-  *param_2 = (char)(int)(*(float *)(param_1 + 0x14) * FLOAT_00108f70);
+  *dst = (char)(int)(*(float *)(pixel + 0x14) * FLOAT_00108f70);
   return;
 }
 
 /* _gleInsertPixel_Depth_Short @ 0xea7ec (52 bytes) */
-void _gleInsertPixel_Depth_Short(param_1, param_2)
-  int param_1;
-  undefined2 *param_2;
+void _gleInsertPixel_Depth_Short(pixel, dst)
+  int pixel;
+  undefined2 *dst;
 {
-  *param_2 = (short)(int)(*(float *)(param_1 + 0x14) * FLOAT_00108f74);
+  *dst = (short)(int)(*(float *)(pixel + 0x14) * FLOAT_00108f74);
   return;
 }
 
 /* _gleInsertPixel_Depth_Ushort @ 0xea820 (52 bytes) */
-void _gleInsertPixel_Depth_Ushort(param_1, param_2)
-  int param_1;
-  undefined2 *param_2;
+void _gleInsertPixel_Depth_Ushort(pixel, dst)
+  int pixel;
+  undefined2 *dst;
 {
-  *param_2 = (short)(int)(*(float *)(param_1 + 0x14) * FLOAT_00108ea0);
+  *dst = (short)(int)(*(float *)(pixel + 0x14) * FLOAT_00108ea0);
   return;
 }
 
 /* _gleInsertPixel_Depth_Int @ 0xea854 (52 bytes) */
-void _gleInsertPixel_Depth_Int(param_1, param_2)
-  int param_1;
-  int *param_2;
+void _gleInsertPixel_Depth_Int(pixel, dst)
+  int pixel;
+  int *dst;
 {
-  *param_2 = (int)((double)*(float *)(param_1 + 0x14) * DOUBLE_00108d90);
+  *dst = (int)((double)*(float *)(pixel + 0x14) * DOUBLE_00108d90);
   return;
 }
 
 /* _gleInsertPixel_Depth_Uint @ 0xea888 (96 bytes) */
-void _gleInsertPixel_Depth_Uint(param_1, param_2)
-  int param_1;
-  uint *param_2;
+void _gleInsertPixel_Depth_Uint(pixel, dst)
+  int pixel;
+  uint *dst;
 {
-  uint uVar1;
-  double dVar2;
+  uint channelValue;
+  double scaledChannel;
   
-  dVar2 = (double)*(float *)(param_1 + 0x14) * DOUBLE_00108da8;
-  if (DOUBLE_00108d80 <= dVar2) {
-    uVar1 = (int)(dVar2 - DOUBLE_00108d80) ^ 0x80000000;
+  scaledChannel = (double)*(float *)(pixel + 0x14) * DOUBLE_00108da8;
+  if (DOUBLE_00108d80 <= scaledChannel) {
+    channelValue = (int)(scaledChannel - DOUBLE_00108d80) ^ 0x80000000;
   }
   else {
-    uVar1 = (uint)(int)dVar2;
+    channelValue = (uint)(int)scaledChannel;
   }
-  *param_2 = uVar1;
+  *dst = channelValue;
   return;
 }
 
 /* _gleInsertPixel_Depth_Float @ 0xea8e8 (12 bytes) */
-void _gleInsertPixel_Depth_Float(param_1, param_2)
-  int param_1;
-  undefined4 *param_2;
+void _gleInsertPixel_Depth_Float(pixel, dst)
+  int pixel;
+  undefined4 *dst;
 {
-  *param_2 = *(undefined4 *)(param_1 + 0x14);
+  *dst = *(undefined4 *)(pixel + 0x14);
   return;
 }
 
@@ -373,11 +373,11 @@ void _gleInsertPixel_Depth_Float(param_1, param_2)
 void _gleBeginPointsRender(glContext)
   int glContext;
 {
-  undefined *puVar1;
+  undefined *flushAtomicFunc;
   
-  puVar1 = PTR__gleFlushAtomicFunc_00112224;
+  flushAtomicFunc = PTR__gleFlushAtomicFunc_00112224;
   *(undefined4 *)(glContext + 0x4858) = *(undefined4 *)(glContext + 0x4854);
-  *(undefined **)(glContext + 0x4a0c) = puVar1;
+  *(undefined **)(glContext + 0x4a0c) = flushAtomicFunc;
   *(undefined **)(glContext + 0x4a08) = PTR__gleRenderPointsFunc_00112240;
   return;
 }
@@ -386,11 +386,11 @@ void _gleBeginPointsRender(glContext)
 void _gleBeginPointsRenderTCL(glContext)
   int glContext;
 {
-  undefined *puVar1;
+  undefined *flushAtomicTCLFunc;
   
-  puVar1 = PTR__gleFlushAtomicTCLFunc_00112218;
+  flushAtomicTCLFunc = PTR__gleFlushAtomicTCLFunc_00112218;
   *(undefined4 *)(glContext + 0x4858) = *(undefined4 *)(glContext + 0x4854);
-  *(undefined **)(glContext + 0x4a0c) = puVar1;
+  *(undefined **)(glContext + 0x4a0c) = flushAtomicTCLFunc;
   *(undefined **)(glContext + 0x4a08) = PTR__gleRenderPointsTCLFunc_0011223c;
   return;
 }
@@ -399,14 +399,14 @@ void _gleBeginPointsRenderTCL(glContext)
 void _gleBeginPointsRenderTCLRDirty(glContext)
   int glContext;
 {
-  undefined *puVar1;
-  undefined *puVar2;
+  undefined *flushAtomicTCLRDirtyFunc;
+  undefined *renderPointsTCLFunc;
   
-  puVar2 = PTR__gleRenderPointsTCLFunc_0011223c;
-  puVar1 = PTR__gleFlushAtomicTCLRDirtyFunc_00112210;
+  renderPointsTCLFunc = PTR__gleRenderPointsTCLFunc_0011223c;
+  flushAtomicTCLRDirtyFunc = PTR__gleFlushAtomicTCLRDirtyFunc_00112210;
   *(undefined4 *)(glContext + 0x486c) = 0;
-  *(undefined **)(glContext + 0x4a0c) = puVar1;
-  *(undefined **)(glContext + 0x4a08) = puVar2;
+  *(undefined **)(glContext + 0x4a0c) = flushAtomicTCLRDirtyFunc;
+  *(undefined **)(glContext + 0x4a08) = renderPointsTCLFunc;
   *(undefined4 *)(glContext + 0x4858) = *(undefined4 *)(glContext + 0x4854);
   return;
 }
@@ -428,8 +428,8 @@ void _gleBeginPointsSelectFeedback(glContext)
 }
 
 /* _gleClipPoints @ 0xea9e4 (76 bytes) */
-int _gleClipPoints(param_1, param_2, param_3, param_4)
-  undefined4 param_1;
+int _gleClipPoints(unusedArg1, param_2, param_3, param_4)
+  undefined4 unusedArg1;
   uint param_2;
   int param_3;
   uint *param_4;
@@ -509,10 +509,10 @@ int _gleClipPointsPlane(param_1, param_2, param_3)
 }
 
 /* _gleFeedbackPointsFunc_body @ 0xeab28 (700 bytes) */
-void _gleFeedbackPointsFunc_body(glContext, param_2, param_3)
+void _gleFeedbackPointsFunc_body(glContext, unusedArg2, unusedArg3)
   int glContext;
-  undefined4 param_2;
-  undefined4 param_3;
+  undefined4 unusedArg2;
+  undefined4 unusedArg3;
 {
   bool bVar1;
   uint uVar2;
@@ -706,7 +706,7 @@ void _gleSelectPointsFunc(glContext)
 }
 
 /* _glePolyArea @ 0xeb1d8 (128 bytes) */
-double _glePolyArea(undefined4 param_1,float *param_2,int param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12)
+double _glePolyArea(undefined4 unusedArg1,float *param_2,int param_3,undefined4 unusedArg4,undefined4 unusedArg5,undefined4 unusedArg6,undefined4 unusedArg7,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12)
 {
   float fVar1;
   float fVar2;
@@ -742,7 +742,7 @@ double _glePolyArea(undefined4 param_1,float *param_2,int param_3,undefined4 par
 }
 
 /* _glePolyAreaPtr @ 0xeb258 (136 bytes) */
-double _glePolyAreaPtr(undefined4 param_1,undefined4 *param_2,int param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7)
+double _glePolyAreaPtr(undefined4 unusedArg1,undefined4 *param_2,int param_3,undefined4 unusedArg4,undefined4 unusedArg5,undefined4 unusedArg6,undefined4 unusedArg7)
 {
   float fVar1;
   float fVar2;
@@ -781,11 +781,11 @@ double _glePolyAreaPtr(undefined4 param_1,undefined4 *param_2,int param_3,undefi
 void _gleBeginTrianglesRenderSmooth(glContext)
   int glContext;
 {
-  undefined *puVar1;
+  undefined *flushAtomicFunc;
   
-  puVar1 = PTR__gleFlushAtomicFunc_00112224;
+  flushAtomicFunc = PTR__gleFlushAtomicFunc_00112224;
   *(undefined4 *)(glContext + 0x4858) = *(undefined4 *)(glContext + 0x4854);
-  *(undefined **)(glContext + 0x4a0c) = puVar1;
+  *(undefined **)(glContext + 0x4a0c) = flushAtomicFunc;
   *(undefined **)(glContext + 0x4a08) = PTR__gleRenderSmoothTrianglesFunc_001122dc;
   return;
 }
@@ -794,11 +794,11 @@ void _gleBeginTrianglesRenderSmooth(glContext)
 void _gleBeginTrianglesRenderFlat(glContext)
   int glContext;
 {
-  undefined *puVar1;
+  undefined *flushAtomicFunc;
   
-  puVar1 = PTR__gleFlushAtomicFunc_00112224;
+  flushAtomicFunc = PTR__gleFlushAtomicFunc_00112224;
   *(undefined4 *)(glContext + 0x4858) = *(undefined4 *)(glContext + 0x4854);
-  *(undefined **)(glContext + 0x4a0c) = puVar1;
+  *(undefined **)(glContext + 0x4a0c) = flushAtomicFunc;
   *(undefined **)(glContext + 0x4a08) = PTR__gleRenderFlatTrianglesFunc_001122d8;
   return;
 }
@@ -807,11 +807,11 @@ void _gleBeginTrianglesRenderFlat(glContext)
 void _gleBeginTrianglesRenderTCL(glContext)
   int glContext;
 {
-  undefined *puVar1;
+  undefined *flushAtomicTCLFunc;
   
-  puVar1 = PTR__gleFlushAtomicTCLFunc_00112218;
+  flushAtomicTCLFunc = PTR__gleFlushAtomicTCLFunc_00112218;
   *(undefined4 *)(glContext + 0x4858) = *(undefined4 *)(glContext + 0x4854);
-  *(undefined **)(glContext + 0x4a0c) = puVar1;
+  *(undefined **)(glContext + 0x4a0c) = flushAtomicTCLFunc;
   *(undefined **)(glContext + 0x4a08) = PTR__gleRenderTrianglesTCLFunc_001122d4;
   return;
 }
@@ -820,14 +820,14 @@ void _gleBeginTrianglesRenderTCL(glContext)
 void _gleBeginTrianglesRenderTCLRDirty(glContext)
   int glContext;
 {
-  undefined *puVar1;
-  undefined *puVar2;
+  undefined *flushAtomicTCLRDirtyFunc;
+  undefined *renderTrianglesTCLFunc;
   
-  puVar2 = PTR__gleRenderTrianglesTCLFunc_001122d4;
-  puVar1 = PTR__gleFlushAtomicTCLRDirtyFunc_00112210;
+  renderTrianglesTCLFunc = PTR__gleRenderTrianglesTCLFunc_001122d4;
+  flushAtomicTCLRDirtyFunc = PTR__gleFlushAtomicTCLRDirtyFunc_00112210;
   *(undefined4 *)(glContext + 0x486c) = 0;
-  *(undefined **)(glContext + 0x4a0c) = puVar1;
-  *(undefined **)(glContext + 0x4a08) = puVar2;
+  *(undefined **)(glContext + 0x4a0c) = flushAtomicTCLRDirtyFunc;
+  *(undefined **)(glContext + 0x4a08) = renderTrianglesTCLFunc;
   *(undefined4 *)(glContext + 0x4858) = *(undefined4 *)(glContext + 0x4854);
   return;
 }
@@ -852,11 +852,11 @@ void _gleBeginTrianglesSelectFeedback(glContext)
 void _gleBeginTriangleStripRenderSmooth(glContext)
   int glContext;
 {
-  undefined *puVar1;
+  undefined *flushTriQuadStripFunc;
   
-  puVar1 = PTR__gleFlushTriQuadStripFunc_001122c8;
+  flushTriQuadStripFunc = PTR__gleFlushTriQuadStripFunc_001122c8;
   *(undefined4 *)(glContext + 0x4858) = *(undefined4 *)(glContext + 0x4854);
-  *(undefined **)(glContext + 0x4a0c) = puVar1;
+  *(undefined **)(glContext + 0x4a0c) = flushTriQuadStripFunc;
   *(undefined **)(glContext + 0x4a08) = PTR__gleRenderSmoothTriangleStripFunc_001122c4;
   return;
 }
@@ -865,11 +865,11 @@ void _gleBeginTriangleStripRenderSmooth(glContext)
 void _gleBeginTriangleStripRenderFlat(glContext)
   int glContext;
 {
-  undefined *puVar1;
+  undefined *flushTriQuadStripFunc;
   
-  puVar1 = PTR__gleFlushTriQuadStripFunc_001122c8;
+  flushTriQuadStripFunc = PTR__gleFlushTriQuadStripFunc_001122c8;
   *(undefined4 *)(glContext + 0x4858) = *(undefined4 *)(glContext + 0x4854);
-  *(undefined **)(glContext + 0x4a0c) = puVar1;
+  *(undefined **)(glContext + 0x4a0c) = flushTriQuadStripFunc;
   *(undefined **)(glContext + 0x4a08) = PTR__gleRenderFlatTriangleStripFunc_001122c0;
   return;
 }
@@ -878,11 +878,11 @@ void _gleBeginTriangleStripRenderFlat(glContext)
 void _gleBeginTriangleStripRenderTCL(glContext)
   int glContext;
 {
-  undefined *puVar1;
+  undefined *flushTriQuadStripTCLFunc;
   
-  puVar1 = PTR__gleFlushTriQuadStripTCLFunc_001122bc;
+  flushTriQuadStripTCLFunc = PTR__gleFlushTriQuadStripTCLFunc_001122bc;
   *(undefined4 *)(glContext + 0x4858) = *(undefined4 *)(glContext + 0x4854);
-  *(undefined **)(glContext + 0x4a0c) = puVar1;
+  *(undefined **)(glContext + 0x4a0c) = flushTriQuadStripTCLFunc;
   *(undefined **)(glContext + 0x4a08) = PTR__gleRenderTriangleStripTCLFunc_001122b8;
   return;
 }
@@ -891,14 +891,14 @@ void _gleBeginTriangleStripRenderTCL(glContext)
 void _gleBeginTriangleStripRenderTCLRDirty(glContext)
   int glContext;
 {
-  undefined *puVar1;
-  undefined *puVar2;
+  undefined *flushTriQuadStripTCLRDirtyFunc;
+  undefined *renderTriangleStripTCLFunc;
   
-  puVar2 = PTR__gleRenderTriangleStripTCLFunc_001122b8;
-  puVar1 = PTR__gleFlushTriQuadStripTCLRDirtyFunc_001122b4;
+  renderTriangleStripTCLFunc = PTR__gleRenderTriangleStripTCLFunc_001122b8;
+  flushTriQuadStripTCLRDirtyFunc = PTR__gleFlushTriQuadStripTCLRDirtyFunc_001122b4;
   *(undefined4 *)(glContext + 0x486c) = 0;
-  *(undefined **)(glContext + 0x4a0c) = puVar1;
-  *(undefined **)(glContext + 0x4a08) = puVar2;
+  *(undefined **)(glContext + 0x4a0c) = flushTriQuadStripTCLRDirtyFunc;
+  *(undefined **)(glContext + 0x4a08) = renderTriangleStripTCLFunc;
   *(undefined4 *)(glContext + 0x4858) = *(undefined4 *)(glContext + 0x4854);
   return;
 }
@@ -923,11 +923,11 @@ void _gleBeginTriangleStripSelectFeedback(glContext)
 void _gleBeginTriangleFanRenderSmooth(glContext)
   int glContext;
 {
-  undefined *puVar1;
+  undefined *flushTriangleFanFunc;
   
-  puVar1 = PTR__gleFlushTriangleFanFunc_001122a8;
+  flushTriangleFanFunc = PTR__gleFlushTriangleFanFunc_001122a8;
   *(undefined4 *)(glContext + 0x4858) = *(undefined4 *)(glContext + 0x4854);
-  *(undefined **)(glContext + 0x4a0c) = puVar1;
+  *(undefined **)(glContext + 0x4a0c) = flushTriangleFanFunc;
   *(undefined **)(glContext + 0x4a08) = PTR__gleRenderSmoothTriangleFanFunc_001122a4;
   return;
 }
@@ -936,11 +936,11 @@ void _gleBeginTriangleFanRenderSmooth(glContext)
 void _gleBeginTriangleFanRenderFlat(glContext)
   int glContext;
 {
-  undefined *puVar1;
+  undefined *flushTriangleFanFunc;
   
-  puVar1 = PTR__gleFlushTriangleFanFunc_001122a8;
+  flushTriangleFanFunc = PTR__gleFlushTriangleFanFunc_001122a8;
   *(undefined4 *)(glContext + 0x4858) = *(undefined4 *)(glContext + 0x4854);
-  *(undefined **)(glContext + 0x4a0c) = puVar1;
+  *(undefined **)(glContext + 0x4a0c) = flushTriangleFanFunc;
   *(undefined **)(glContext + 0x4a08) = PTR__gleRenderFlatTriangleFanFunc_001122a0;
   return;
 }
@@ -949,11 +949,11 @@ void _gleBeginTriangleFanRenderFlat(glContext)
 void _gleBeginTriangleFanRenderTCL(glContext)
   int glContext;
 {
-  undefined *puVar1;
+  undefined *flushTriangleFanTCLFunc;
   
-  puVar1 = PTR__gleFlushTriangleFanTCLFunc_0011229c;
+  flushTriangleFanTCLFunc = PTR__gleFlushTriangleFanTCLFunc_0011229c;
   *(undefined4 *)(glContext + 0x4858) = *(undefined4 *)(glContext + 0x4854);
-  *(undefined **)(glContext + 0x4a0c) = puVar1;
+  *(undefined **)(glContext + 0x4a0c) = flushTriangleFanTCLFunc;
   *(undefined **)(glContext + 0x4a08) = PTR__gleRenderTriangleFanTCLFunc_00112298;
   return;
 }
@@ -962,14 +962,14 @@ void _gleBeginTriangleFanRenderTCL(glContext)
 void _gleBeginTriangleFanRenderTCLRDirty(glContext)
   int glContext;
 {
-  undefined *puVar1;
-  undefined *puVar2;
+  undefined *flushTriangleFanTCLRDirtyFunc;
+  undefined *renderTriangleFanTCLFunc;
   
-  puVar2 = PTR__gleRenderTriangleFanTCLFunc_00112298;
-  puVar1 = PTR__gleFlushTriangleFanTCLRDirtyFunc_00112294;
+  renderTriangleFanTCLFunc = PTR__gleRenderTriangleFanTCLFunc_00112298;
+  flushTriangleFanTCLRDirtyFunc = PTR__gleFlushTriangleFanTCLRDirtyFunc_00112294;
   *(undefined4 *)(glContext + 0x486c) = 0;
-  *(undefined **)(glContext + 0x4a0c) = puVar1;
-  *(undefined **)(glContext + 0x4a08) = puVar2;
+  *(undefined **)(glContext + 0x4a0c) = flushTriangleFanTCLRDirtyFunc;
+  *(undefined **)(glContext + 0x4a08) = renderTriangleFanTCLFunc;
   *(undefined4 *)(glContext + 0x4858) = *(undefined4 *)(glContext + 0x4854);
   return;
 }
@@ -994,11 +994,11 @@ void _gleBeginTriangleFanSelectFeedback(glContext)
 void _gleBeginQuadsRenderSmooth(glContext)
   int glContext;
 {
-  undefined *puVar1;
+  undefined *flushAtomicFunc;
   
-  puVar1 = PTR__gleFlushAtomicFunc_00112224;
+  flushAtomicFunc = PTR__gleFlushAtomicFunc_00112224;
   *(undefined4 *)(glContext + 0x4858) = *(undefined4 *)(glContext + 0x4854);
-  *(undefined **)(glContext + 0x4a0c) = puVar1;
+  *(undefined **)(glContext + 0x4a0c) = flushAtomicFunc;
   *(undefined **)(glContext + 0x4a08) = PTR__gleRenderSmoothQuadsFunc_00112288;
   return;
 }
