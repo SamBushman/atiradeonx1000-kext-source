@@ -1119,7 +1119,7 @@ void _glGetVertexAttribfvARB_Exec(glContext, index, pname, params)
   uint loopIndex;
   int iVar5;
   int remaining;
-  int iVar6;
+  int copyIndex;
   int byteOffset;
   int clientState;
   int mapData;
@@ -1128,8 +1128,8 @@ void _glGetVertexAttribfvARB_Exec(glContext, index, pname, params)
   int remaining2;
   double dVar8;
   double dVar9;
-  longlong lVar10;
-  uint uStack_2c;
+  longlong arrayEnableBit;
+  uint intToDoubleLowWord;
   
   if (0xf < index) {
     if (*(int *)(glContext + 0x7574) != 0) {
@@ -1151,20 +1151,20 @@ LAB_000b1220:
         if (pname < 0x8625) {
           if (pname == 0x8622) {
             clientState = *(int *)(glContext + 0x4a60);
-            lVar10 = ___ashldi3(1,0,index);
+            arrayEnableBit = ___ashldi3(1,0,index);
             fVar3 = 1.0;
-            if ((*(uint *)(clientState + 0x330) & (uint)((ulonglong)lVar10 >> 0x20)) == 0 &&
-                (*(uint *)(clientState + 0x334) & (uint)lVar10) == 0) {
+            if ((*(uint *)(clientState + 0x330) & (uint)((ulonglong)arrayEnableBit >> 0x20)) == 0 &&
+                (*(uint *)(clientState + 0x334) & (uint)arrayEnableBit) == 0) {
               fVar3 = 0.0;
             }
             *params = fVar3;
             return;
           }
           if (pname == 0x8623) {
-            uStack_2c = (uint)*(short *)(index * 0x18 + *(int *)(glContext + 0x4a60) + 0x1ba);
+            intToDoubleLowWord = (uint)*(short *)(index * 0x18 + *(int *)(glContext + 0x4a60) + 0x1ba);
 LAB_000b110c:
-            uStack_2c = uStack_2c ^ 0x80000000;
-            dVar8 = (double)CONCAT44(0x43300000,uStack_2c);
+            intToDoubleLowWord = intToDoubleLowWord ^ 0x80000000;
+            dVar8 = (double)CONCAT44(0x43300000,intToDoubleLowWord);
             goto LAB_000b11cc;
           }
         }
@@ -1188,7 +1188,7 @@ LAB_000b110c:
             goto LAB_000b1334;
           }
           if (pname < 0x8626) {
-            uStack_2c = *(ushort *)(index * 0x18 + *(int *)(glContext + 0x4a60) + 0x1b8) &
+            intToDoubleLowWord = *(ushort *)(index * 0x18 + *(int *)(glContext + 0x4a60) + 0x1b8) &
                         0xffff7fff;
             goto LAB_000b110c;
           }
@@ -1241,10 +1241,10 @@ LAB_000b1334:
           iVar5 = index * 0x660 + mapData;
           remaining3 = *(int *)(iVar5 + 0x37a8) * *(int *)(iVar5 + 0x37ac) *
                   (uint)*(byte *)(index + mapData + 0x9db8);
-          iVar6 = 0;
+          copyIndex = 0;
           for (; remaining3 != 0; remaining3 = remaining3 + -1) {
-            params[iVar6] = *(float *)(iVar5 + 0x37c8 + iVar6 * 4);
-            iVar6 = iVar6 + 1;
+            params[copyIndex] = *(float *)(iVar5 + 0x37c8 + copyIndex * 4);
+            copyIndex = copyIndex + 1;
           }
           return;
         }
@@ -1268,10 +1268,10 @@ LAB_000b1334:
           iVar5 = index * 0xb0 + mapData;
           remaining3 = *(int *)(iVar5 + 0x2ca8) *
                   (uint)(byte)((unsigned char *)0x9da8)[index + mapData];
-          iVar6 = 0;
+          copyIndex = 0;
           for (; remaining3 != 0; remaining3 = remaining3 + -1) {
-            params[iVar6] = *(float *)(iVar5 + 0x2cb8 + iVar6 * 4);
-            iVar6 = iVar6 + 1;
+            params[copyIndex] = *(float *)(iVar5 + 0x2cb8 + copyIndex * 4);
+            copyIndex = copyIndex + 1;
           }
           return;
         }

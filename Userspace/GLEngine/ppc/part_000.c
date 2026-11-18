@@ -1100,48 +1100,48 @@ int _gliDestroyRendererInfo(rendererInfo)
 }
 
 /* _gliDestroyPixelFormat @ 0x2c00 (208 bytes) */
-int _gliDestroyPixelFormat(param_1)
-  int *param_1;
+int _gliDestroyPixelFormat(pixelFormatNode)
+  int *pixelFormatNode;
 {
-  bool bVar1;
-  uint uVar2;
+  bool reachedListEnd;
+  uint scanNodeFlags;
   int iVar3;
-  uint uVar4;
-  int iVar5;
-  int iVar6;
-  int *piVar7;
+  uint nodeFlags;
+  int pluginDestroyResult;
+  int firstError;
+  int *nextGroupNode;
   
   iVar3 = 0x271e;
-  iVar6 = 0;
-  if (param_1 != (int *)0x0) {
+  firstError = 0;
+  if (pixelFormatNode != (int *)0x0) {
     do {
-      piVar7 = (int *)*param_1;
-      bVar1 = piVar7 == (int *)0x0;
-      if (bVar1) {
-        uVar4 = param_1[1];
+      nextGroupNode = (int *)*pixelFormatNode;
+      reachedListEnd = nextGroupNode == (int *)0x0;
+      if (reachedListEnd) {
+        nodeFlags = pixelFormatNode[1];
       }
       else {
-        uVar4 = param_1[1];
-        uVar2 = piVar7[1];
-        while ((uVar2 & 0xff00) == (uVar4 & 0xff00)) {
-          piVar7 = (int *)*piVar7;
-          bVar1 = piVar7 == (int *)0x0;
-          if (bVar1) break;
-          uVar2 = piVar7[1];
+        nodeFlags = pixelFormatNode[1];
+        scanNodeFlags = nextGroupNode[1];
+        while ((scanNodeFlags & 0xff00) == (nodeFlags & 0xff00)) {
+          nextGroupNode = (int *)*nextGroupNode;
+          reachedListEnd = nextGroupNode == (int *)0x0;
+          if (reachedListEnd) break;
+          scanNodeFlags = nextGroupNode[1];
         }
       }
-      iVar3 = ((int (*)())_glepGetPlugin)(uVar4 & 0xff00);
-      iVar5 = 0x271f;
+      iVar3 = ((int (*)())_glepGetPlugin)(nodeFlags & 0xff00);
+      pluginDestroyResult = 0x271f;
       if (iVar3 != 0) {
-        iVar5 = (**(code **)(iVar3 + 0x11c))(param_1);
+        pluginDestroyResult = (**(code **)(iVar3 + 0x11c))(pixelFormatNode);
       }
-      iVar3 = iVar6;
-      if ((iVar5 != 0) && (iVar6 == 0)) {
-        iVar3 = iVar5;
+      iVar3 = firstError;
+      if ((pluginDestroyResult != 0) && (firstError == 0)) {
+        iVar3 = pluginDestroyResult;
       }
-      iVar6 = iVar3;
-      param_1 = piVar7;
-    } while (!bVar1);
+      firstError = iVar3;
+      pixelFormatNode = nextGroupNode;
+    } while (!reachedListEnd);
   }
   return iVar3;
 }

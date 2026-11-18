@@ -2024,21 +2024,21 @@ int _glArrayElement_Comp(glContext, i)
   undefined4 i;
 {
   undefined1 uVar1;
-  uint uVar2;
+  uint enableWordHigh;
   undefined1 *srcCursor;
-  uint uVar4;
+  uint enableWordLow;
   undefined1 *dstCursor2;
   undefined4 uVar6;
   int clientState;
-  code *pcVar8;
-  int iVar9;
+  code *vertexToListFunc;
+  int listItemDataBytes;
   int remaining;
-  int iVar10;
-  int *dstCursor;
-  short *srcCursor2;
-  undefined1 *puVar13;
-  longlong lVar14;
-  undefined4 local_b0;
+  int attributeBitShift;
+  int *sizeSlotCursor;
+  short *arrayComponentCountCursor;
+  undefined1 *listItemData;
+  longlong attributeBit;
+  undefined4 attributeByteSizes;
   undefined1 auStack_34 [4];
   
   clientState = *(int *)(glContext + 0x4a60);
@@ -2049,34 +2049,34 @@ int _glArrayElement_Comp(glContext, i)
     *(undefined4 *)(glContext + 0x4978) = 0;
     *(undefined4 *)(glContext + 0x4890) = 0;
   }
-  uVar2 = *(uint *)(clientState + 0x330);
-  uVar4 = *(uint *)(clientState + 0x334);
-  dstCursor = &local_b0;
-  srcCursor2 = (short *)(clientState + 0x3a);
-  iVar9 = 0;
-  iVar10 = 0x10;
+  enableWordHigh = *(uint *)(clientState + 0x330);
+  enableWordLow = *(uint *)(clientState + 0x334);
+  sizeSlotCursor = &attributeByteSizes;
+  arrayComponentCountCursor = (short *)(clientState + 0x3a);
+  listItemDataBytes = 0;
+  attributeBitShift = 0x10;
   do {
-    lVar14 = ___ashldi3(0,1,iVar10);
-    if ((uVar2 & (uint)((ulonglong)lVar14 >> 0x20)) == 0 && (uVar4 & 0xff7fffff & (uint)lVar14) == 0
+    attributeBit = ___ashldi3(0,1,attributeBitShift);
+    if ((enableWordHigh & (uint)((ulonglong)attributeBit >> 0x20)) == 0 && (enableWordLow & 0xff7fffff & (uint)attributeBit) == 0
        ) {
-      *dstCursor = 0;
+      *sizeSlotCursor = 0;
     }
     else {
-      iVar9 = iVar9 + *srcCursor2 * 4;
-      *dstCursor = *srcCursor2 * 4;
+      listItemDataBytes = listItemDataBytes + *arrayComponentCountCursor * 4;
+      *sizeSlotCursor = *arrayComponentCountCursor * 4;
     }
-    dstCursor = dstCursor + 1;
-    iVar10 = iVar10 + 1;
-    srcCursor2 = srcCursor2 + 0xc;
-  } while ((int)dstCursor <= (int)auStack_34);
-  dstCursor2 = (undefined1 *)_gleAddListItem(glContext,PTR__glArrayElement_ListExec_00110450,iVar9 + 0x24)
+    sizeSlotCursor = sizeSlotCursor + 1;
+    attributeBitShift = attributeBitShift + 1;
+    arrayComponentCountCursor = arrayComponentCountCursor + 0xc;
+  } while ((int)sizeSlotCursor <= (int)auStack_34);
+  dstCursor2 = (undefined1 *)_gleAddListItem(glContext,PTR__glArrayElement_ListExec_00110450,listItemDataBytes + 0x24)
   ;
   uVar6 = 0;
   if (dstCursor2 != (undefined1 *)0x0) {
-    *(int *)(dstCursor2 + 0x20) = iVar9;
+    *(int *)(dstCursor2 + 0x20) = listItemDataBytes;
     remaining = 0x20;
-    srcCursor = (undefined1 *)((int)&local_b0 + 3);
-    puVar13 = dstCursor2 + 0x24;
+    srcCursor = (undefined1 *)((int)&attributeByteSizes + 3);
+    listItemData = dstCursor2 + 0x24;
     do {
       uVar1 = *srcCursor;
       srcCursor = srcCursor + 4;
@@ -2084,12 +2084,12 @@ int _glArrayElement_Comp(glContext, i)
       dstCursor2 = dstCursor2 + 1;
       remaining = remaining + -1;
     } while (remaining != 0);
-    pcVar8 = *(code **)(glContext + 0x488c);
-    if (pcVar8 == (code *)0x0) {
-      pcVar8 = (code *)_gleGetVertexToListFunc(glContext);
-      *(code **)(glContext + 0x488c) = pcVar8;
+    vertexToListFunc = *(code **)(glContext + 0x488c);
+    if (vertexToListFunc == (code *)0x0) {
+      vertexToListFunc = (code *)_gleGetVertexToListFunc(glContext);
+      *(code **)(glContext + 0x488c) = vertexToListFunc;
     }
-    uVar6 = (*pcVar8)(glContext,clientState + 0x30,puVar13,i);
+    uVar6 = (*vertexToListFunc)(glContext,clientState + 0x30,listItemData,i);
   }
   return uVar6;
 }

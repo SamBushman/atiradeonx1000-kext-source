@@ -1653,7 +1653,7 @@ void _glGetColorTable_Exec(glContext, target, format, type, table)
   undefined4 *userConvertBPtr;
   uint tableHeight;
   uint glContextByte31c8;
-  undefined1 *puVar11;
+  undefined1 *pixelBytesPtr;
   int *packOffsetPtr;
   int pixelPackBuffer;
   int bufferSize;
@@ -1673,10 +1673,10 @@ void _glGetColorTable_Exec(glContext, target, format, type, table)
   uint procHeight;
   undefined1 procEnd;
   undefined4 packRowBytes;
-  undefined1 auStack_5c [4];
-  undefined1 auStack_58 [4];
-  undefined1 auStack_54 [4];
-  undefined1 auStack_50 [4];
+  undefined1 rowPadding [4];
+  undefined1 imageBytes [4];
+  undefined1 imagePadding [4];
+  undefined1 pixelBytes [4];
   int packOffset;
   undefined4 tableConvertA;
   undefined4 tableConvertB;
@@ -1712,11 +1712,11 @@ LAB_0006138c:
                         (glContext,colorTable,colorTable + 0xac,0,0xffffffff,(uint)*(byte *)(glContext + 0x85a8));
             }
             tableHeight = (uint)*(ushort *)(colorTable + 0xb2);
-            puVar11 = auStack_50;
+            pixelBytesPtr = pixelBytes;
             packOffsetPtr = &packOffset;
             _glePixelPackSettings
                       (glContext,format,type,(uint)*(ushort *)(colorTable + 0xb0),tableHeight,
-                       glContext + 0x31b0,puVar11,packOffsetPtr,&packRowBytes,auStack_5c,auStack_58,auStack_54);
+                       glContext + 0x31b0,pixelBytesPtr,packOffsetPtr,&packRowBytes,rowPadding,imageBytes,imagePadding);
             if (((((*(byte *)(colorTable + 0xb7) & 1) == 0) ||
                  (table + packOffset != *(int *)(colorTable + 0xc0))) ||
                 (format != *(ushort *)(colorTable + 0xbc))) || (type != *(ushort *)(colorTable + 0xbe))) {
@@ -1732,10 +1732,10 @@ LAB_0006138c:
             rowBytes = _gleRowBytes((uint)*(ushort *)(colorTable + 0xbc),(uint)*(ushort *)(colorTable + 0xbe),
                                  (uint)*(ushort *)(colorTable + 0xb8));
             _glgConvertType((uint)*(ushort *)(colorTable + 0xbc),(uint)*(ushort *)(colorTable + 0xbe),
-                            &tableConvertA,&tableConvertB,tableHeight,glContextByte31c8,puVar11,packOffsetPtr);
+                            &tableConvertA,&tableConvertB,tableHeight,glContextByte31c8,pixelBytesPtr,packOffsetPtr);
             userConvertAPtr = &userConvertA;
             userConvertBPtr = userConvertB;
-            _glgConvertType(format,type,userConvertAPtr,userConvertBPtr,tableHeight,glContextByte31c8,puVar11,packOffsetPtr);
+            _glgConvertType(format,type,userConvertAPtr,userConvertBPtr,tableHeight,glContextByte31c8,pixelBytesPtr,packOffsetPtr);
             procSrcConvertA = tableConvertA;
             procSrcConvertB = tableConvertB;
             procDstRowBytes = packRowBytes;

@@ -902,30 +902,30 @@ void _gle565Filter3(dst, src, unusedArg3, offsetA, offsetB, offsetC)
   int offsetB;
   int offsetC;
 {
-  ushort uVar1;
-  ushort uVar2;
-  ushort uVar3;
-  ushort uVar4;
-  ushort uVar5;
-  ushort uVar6;
-  ushort uVar7;
-  ushort uVar8;
+  ushort texel0;
+  ushort texelA;
+  ushort texelB;
+  ushort texelAB;
+  ushort texelC;
+  ushort texelCA;
+  ushort texelCB;
+  ushort texelCAB;
   
-  uVar1 = *src;
-  uVar2 = *(ushort *)((int)src + offsetA);
-  uVar3 = *(ushort *)((int)src + offsetB);
-  uVar4 = *(ushort *)((int)src + offsetB + offsetA);
-  uVar5 = *(ushort *)((int)src + offsetC);
-  uVar6 = *(ushort *)((int)src + offsetC + offsetA);
-  uVar7 = *(ushort *)((int)src + offsetC + offsetB);
-  uVar8 = *(ushort *)((int)src + offsetC + offsetB + offsetA);
-  *dst = (ushort)((uVar1 & 0xf800) + (uVar2 & 0xf800) + (uVar3 & 0xf800) + (uVar4 & 0xf800) +
-                      (uVar5 & 0xf800) + (uVar6 & 0xf800) + (uVar7 & 0xf800) + (uVar8 & 0xf800) >> 3
+  texel0 = *src;
+  texelA = *(ushort *)((int)src + offsetA);
+  texelB = *(ushort *)((int)src + offsetB);
+  texelAB = *(ushort *)((int)src + offsetB + offsetA);
+  texelC = *(ushort *)((int)src + offsetC);
+  texelCA = *(ushort *)((int)src + offsetC + offsetA);
+  texelCB = *(ushort *)((int)src + offsetC + offsetB);
+  texelCAB = *(ushort *)((int)src + offsetC + offsetB + offsetA);
+  *dst = (ushort)((texel0 & 0xf800) + (texelA & 0xf800) + (texelB & 0xf800) + (texelAB & 0xf800) +
+                      (texelC & 0xf800) + (texelCA & 0xf800) + (texelCB & 0xf800) + (texelCAB & 0xf800) >> 3
                      ) & 0xf800 |
-             (ushort)((uVar1 & 0x7e0) + (uVar2 & 0x7e0) + (uVar3 & 0x7e0) + (uVar4 & 0x7e0) +
-                      (uVar5 & 0x7e0) + (uVar6 & 0x7e0) + (uVar7 & 0x7e0) + (uVar8 & 0x7e0) >> 3) &
-             0x7e0 | (ushort)((uVar1 & 0x1f) + (uVar2 & 0x1f) + (uVar3 & 0x1f) + (uVar4 & 0x1f) +
-                              (uVar5 & 0x1f) + (uVar6 & 0x1f) + (uVar7 & 0x1f) + (uVar8 & 0x1f) >> 3
+             (ushort)((texel0 & 0x7e0) + (texelA & 0x7e0) + (texelB & 0x7e0) + (texelAB & 0x7e0) +
+                      (texelC & 0x7e0) + (texelCA & 0x7e0) + (texelCB & 0x7e0) + (texelCAB & 0x7e0) >> 3) &
+             0x7e0 | (ushort)((texel0 & 0x1f) + (texelA & 0x1f) + (texelB & 0x1f) + (texelAB & 0x1f) +
+                              (texelC & 0x1f) + (texelCA & 0x1f) + (texelCB & 0x1f) + (texelCAB & 0x1f) >> 3
                              ) & 0x1f;
   return;
 }
