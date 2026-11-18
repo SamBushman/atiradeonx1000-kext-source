@@ -285,15 +285,15 @@ LAB_00006d54:
 void _gleUpdateState(glContext)
   int glContext;
 {
-  undefined *puVar1;
-  undefined1 uVar2;
-  undefined4 extraout_r4;
+  undefined *clipInterpFuncPtr;
+  undefined1 separateSpecular;
+  undefined4 r4AfterCall;
   undefined4 incomingR5;
   undefined4 incomingR6;
-  int iVar3;
-  int iVar4;
-  double extraout_f1;
-  double dVar5;
+  int rendererInfoWord10ThenLoopIndex;
+  int rendererInfoWordCThenNextIndex;
+  double f1AfterCall;
+  double lastF1Result;
   double forwardedFloatArg1;
   double incomingFpr2;
   double incomingFpr3;
@@ -308,8 +308,8 @@ void _gleUpdateState(glContext)
   double incomingStack_ffffffd0;
   double incomingStack_ffffffd8;
   
-  iVar3 = *(int *)(*(int *)(glContext + 0x468c) + 0x10);
-  iVar4 = *(int *)(*(int *)(glContext + 0x468c) + 0xc);
+  rendererInfoWord10ThenLoopIndex = *(int *)(*(int *)(glContext + 0x468c) + 0x10);
+  rendererInfoWordCThenNextIndex = *(int *)(*(int *)(glContext + 0x468c) + 0xc);
   *(uint *)(glContext + 0x314) = *(uint *)(glContext + 0x314) | 0x3ffffff;
   *(uint *)(glContext + 0x318) = *(uint *)(glContext + 0x318) | 0xfffffffd;
   *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x7ffffff;
@@ -318,53 +318,53 @@ void _gleUpdateState(glContext)
   *(undefined4 *)(glContext + 0x310) = 0xffffffff;
   if (((*(char *)(glContext + 0x30aa) == '\0') || (*(char *)(glContext + 0x4664) != '\0')) ||
      (*(int *)(glContext + 0x5434) != 0)) {
-    uVar2 = *(undefined1 *)(glContext + 0x4fea);
+    separateSpecular = *(undefined1 *)(glContext + 0x4fea);
   }
   else {
-    uVar2 = *(short *)(glContext + 0x30a8) == -0x7e06;
+    separateSpecular = *(short *)(glContext + 0x30a8) == -0x7e06;
   }
-  *(undefined1 *)(glContext + 0x316b) = uVar2;
-  if (iVar4 < *(int *)(glContext + 0x1ba8)) {
-    *(int *)(glContext + 0x1ba8) = iVar4;
+  *(undefined1 *)(glContext + 0x316b) = separateSpecular;
+  if (rendererInfoWordCThenNextIndex < *(int *)(glContext + 0x1ba8)) {
+    *(int *)(glContext + 0x1ba8) = rendererInfoWordCThenNextIndex;
   }
-  if (iVar3 < *(int *)(glContext + 0x1bac)) {
-    *(int *)(glContext + 0x1bac) = iVar3;
+  if (rendererInfoWord10ThenLoopIndex < *(int *)(glContext + 0x1bac)) {
+    *(int *)(glContext + 0x1bac) = rendererInfoWord10ThenLoopIndex;
   }
   ((void (*)())_gleUpdateLightColorChangeFunc)(glContext);
   ((void (*)())_gleSetColorMaterialEnable)(glContext);
   *(undefined1 *)(*(int *)(glContext + 0x4dd0) + 0x234) = 0x1f;
   *(undefined1 *)(*(int *)(glContext + 0x4dd4) + 0x234) = 0x1f;
-  iVar3 = 0;
-  dVar5 = extraout_f1;
+  rendererInfoWord10ThenLoopIndex = 0;
+  lastF1Result = f1AfterCall;
   do {
-    dVar5 = (double)((double (*)())_gleUpdateLightPosition)(glContext,iVar3,dVar5);
-    ((void (*)())_gleUpdateLightDirection)(glContext,iVar3,dVar5);
-    ((double (*)())_gleUpdateLightExponents)(glContext,iVar3);
-    iVar4 = iVar3 + 1;
-    dVar5 = (double)((double (*)())_gleUpdateLightAttenuation)(glContext,iVar3);
-    iVar3 = iVar4;
-  } while (iVar4 < 8);
+    lastF1Result = (double)((double (*)())_gleUpdateLightPosition)(glContext,rendererInfoWord10ThenLoopIndex,lastF1Result);
+    ((void (*)())_gleUpdateLightDirection)(glContext,rendererInfoWord10ThenLoopIndex,lastF1Result);
+    ((double (*)())_gleUpdateLightExponents)(glContext,rendererInfoWord10ThenLoopIndex);
+    rendererInfoWordCThenNextIndex = rendererInfoWord10ThenLoopIndex + 1;
+    lastF1Result = (double)((double (*)())_gleUpdateLightAttenuation)(glContext,rendererInfoWord10ThenLoopIndex);
+    rendererInfoWord10ThenLoopIndex = rendererInfoWordCThenNextIndex;
+  } while (rendererInfoWordCThenNextIndex < 8);
   ((void (*)())_gleUpdateInverseNeeds)(glContext);
   ((void (*)())_gleUpdateLightModel)(glContext);
-  ((void (*)())_gleUpdateClipPlane)(glContext,extraout_r4,incomingR5,incomingR6);
+  ((void (*)())_gleUpdateClipPlane)(glContext,r4AfterCall,incomingR5,incomingR6);
   ((void (*)())_gleUpdateMatrixMode)(glContext);
   ((int (*)())_gleUpdateMatrixFunc)(glContext);
   ((void (*)())_gleUpdateDepthRangeData)(glContext,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffffb8,
              incomingStack_ffffffc0,incomingStack_ffffffc8,incomingStack_ffffffd0,incomingStack_ffffffd8);
   ((void (*)())_gleUpdateTextureCoordGen)(glContext);
-  iVar3 = 0;
+  rendererInfoWord10ThenLoopIndex = 0;
   do {
-    iVar4 = iVar3 + 1;
-    ((int (*)())_gleUpdateTextureParams)(glContext,iVar3);
-    iVar3 = iVar4;
-  } while (iVar4 < 0x10);
+    rendererInfoWordCThenNextIndex = rendererInfoWord10ThenLoopIndex + 1;
+    ((int (*)())_gleUpdateTextureParams)(glContext,rendererInfoWord10ThenLoopIndex);
+    rendererInfoWord10ThenLoopIndex = rendererInfoWordCThenNextIndex;
+  } while (rendererInfoWordCThenNextIndex < 0x10);
   ((double (*)())_gleUpdateFogData)(glContext);
   ((void (*)())_gleUpdatePolyMode)(glContext);
-  dVar5 = (double)((double (*)())_gleUpdateEvalData)(glContext);
-  ((void (*)())_gleUpdateViewScissorData)(glContext,dVar5,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
-  puVar1 = PTR__gleSetClipInterpFunc_00112038;
+  lastF1Result = (double)((double (*)())_gleUpdateEvalData)(glContext);
+  ((void (*)())_gleUpdateViewScissorData)(glContext,lastF1Result,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
+  clipInterpFuncPtr = PTR__gleSetClipInterpFunc_00112038;
   *(undefined **)(glContext + 0x49c8) = PTR__gleSetEyeInterpFunc_0011203c;
-  *(undefined **)(glContext + 0x49cc) = puVar1;
+  *(undefined **)(glContext + 0x49cc) = clipInterpFuncPtr;
   ((void (*)())_gleSelectVertexAddMaterialFunc)(glContext);
   ((void (*)())_gleSelectVertexSubmitFunc)(glContext);
   return;
@@ -459,85 +459,85 @@ LAB_000071fc:
 void _gleSetColorMaterialEnable(glContext)
   int glContext;
 {
-  int iVar1;
+  int glColor4fvSlot;
   int glContextWord5408;
-  char cVar3;
-  undefined *puVar2;
-  uint uVar4;
+  char colorMaterialActive;
+  undefined *handlerPtr;
+  uint selectMaskThenDispatchTable;
   uint glContextWord4680;
   uint glContextPtr4684;
   
-  cVar3 = '\0';
+  colorMaterialActive = '\0';
   if ((((*(char *)(glContext + 0x7580) == '\0') && (*(char *)(glContext + 0x30ab) != '\0')) &&
       (*(char *)(glContext + 0x4664) == '\0')) && (*(int *)(glContext + 0x5434) == 0)) {
-    cVar3 = '\x01';
+    colorMaterialActive = '\x01';
   }
-  if (cVar3 == *(char *)(glContext + 0x4df8)) {
+  if (colorMaterialActive == *(char *)(glContext + 0x4df8)) {
     return;
   }
   glContextWord5408 = *(int *)(glContext + 0x5408);
-  *(char *)(glContext + 0x4df8) = cVar3;
+  *(char *)(glContext + 0x4df8) = colorMaterialActive;
   if (glContextWord5408 == 0) {
-    if (cVar3 == '\0') {
-      uVar4 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x54) == 0);
+    if (colorMaterialActive == '\0') {
+      selectMaskThenDispatchTable = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x54) == 0);
       *(undefined **)
-       ((*(uint *)(glContext + 0x4680) & uVar4 | *(uint *)(glContext + 0x4684) & ~uVar4) + 0x54) =
+       ((*(uint *)(glContext + 0x4680) & selectMaskThenDispatchTable | *(uint *)(glContext + 0x4684) & ~selectMaskThenDispatchTable) + 0x54) =
            PTR__glColor3f_NoColorMat_Exec_00112178;
-      uVar4 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x58) == 0);
+      selectMaskThenDispatchTable = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x58) == 0);
       *(undefined **)
-       ((*(uint *)(glContext + 0x4680) & uVar4 | *(uint *)(glContext + 0x4684) & ~uVar4) + 0x58) =
+       ((*(uint *)(glContext + 0x4680) & selectMaskThenDispatchTable | *(uint *)(glContext + 0x4684) & ~selectMaskThenDispatchTable) + 0x58) =
            PTR__glColor3fv_NoColorMat_Exec_00112174;
-      uVar4 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x94) == 0);
+      selectMaskThenDispatchTable = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x94) == 0);
       *(undefined **)
-       ((*(uint *)(glContext + 0x4680) & uVar4 | *(uint *)(glContext + 0x4684) & ~uVar4) + 0x94) =
+       ((*(uint *)(glContext + 0x4680) & selectMaskThenDispatchTable | *(uint *)(glContext + 0x4684) & ~selectMaskThenDispatchTable) + 0x94) =
            PTR__glColor4f_NoColorMat_Exec_00112170;
       glContextPtr4684 = *(uint *)(glContext + 0x4684);
       glContextWord4680 = *(uint *)(glContext + 0x4680);
-      iVar1 = *(int *)(glContextPtr4684 + 0x98);
-      puVar2 = PTR__glColor4fv_NoColorMat_Exec_0011216c;
+      glColor4fvSlot = *(int *)(glContextPtr4684 + 0x98);
+      handlerPtr = PTR__glColor4fv_NoColorMat_Exec_0011216c;
     }
     else {
-      uVar4 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x54) == 0);
+      selectMaskThenDispatchTable = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x54) == 0);
       *(undefined **)
-       ((*(uint *)(glContext + 0x4680) & uVar4 | *(uint *)(glContext + 0x4684) & ~uVar4) + 0x54) =
+       ((*(uint *)(glContext + 0x4680) & selectMaskThenDispatchTable | *(uint *)(glContext + 0x4684) & ~selectMaskThenDispatchTable) + 0x54) =
            PTR__glColor3f_ColorMat_Exec_00112188;
-      uVar4 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x58) == 0);
+      selectMaskThenDispatchTable = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x58) == 0);
       *(undefined **)
-       ((*(uint *)(glContext + 0x4680) & uVar4 | *(uint *)(glContext + 0x4684) & ~uVar4) + 0x58) =
+       ((*(uint *)(glContext + 0x4680) & selectMaskThenDispatchTable | *(uint *)(glContext + 0x4684) & ~selectMaskThenDispatchTable) + 0x58) =
            PTR__glColor3fv_ColorMat_Exec_00112184;
-      uVar4 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x94) == 0);
+      selectMaskThenDispatchTable = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x94) == 0);
       *(undefined **)
-       ((*(uint *)(glContext + 0x4680) & uVar4 | *(uint *)(glContext + 0x4684) & ~uVar4) + 0x94) =
+       ((*(uint *)(glContext + 0x4680) & selectMaskThenDispatchTable | *(uint *)(glContext + 0x4684) & ~selectMaskThenDispatchTable) + 0x94) =
            PTR__glColor4f_ColorMat_Exec_00112180;
       glContextPtr4684 = *(uint *)(glContext + 0x4684);
       glContextWord4680 = *(uint *)(glContext + 0x4680);
-      iVar1 = *(int *)(glContextPtr4684 + 0x98);
-      puVar2 = PTR__glColor4fv_ColorMat_Exec_0011217c;
+      glColor4fvSlot = *(int *)(glContextPtr4684 + 0x98);
+      handlerPtr = PTR__glColor4fv_ColorMat_Exec_0011217c;
     }
-    *(undefined **)((glContextWord4680 & -(uint)(iVar1 == 0) | glContextPtr4684 & ~-(uint)(iVar1 == 0)) + 0x98) = puVar2;
+    *(undefined **)((glContextWord4680 & -(uint)(glColor4fvSlot == 0) | glContextPtr4684 & ~-(uint)(glColor4fvSlot == 0)) + 0x98) = handlerPtr;
     glContextWord5408 = *(int *)(glContext + 0x5408);
   }
   if (glContextWord5408 != 0) goto LAB_00007490;
   if ((*(char *)(glContext + 0x7580) == '\0') || (*(int *)(glContext + 0x4e1c) != 0x1c00)) {
 LAB_00007464:
-    uVar4 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x128) == 0);
-    uVar4 = *(uint *)(glContext + 0x4680) & uVar4 | *(uint *)(glContext + 0x4684) & ~uVar4;
-    puVar2 = PTR__glEnd_Exec_00112164;
+    selectMaskThenDispatchTable = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x128) == 0);
+    selectMaskThenDispatchTable = *(uint *)(glContext + 0x4680) & selectMaskThenDispatchTable | *(uint *)(glContext + 0x4684) & ~selectMaskThenDispatchTable;
+    handlerPtr = PTR__glEnd_Exec_00112164;
   }
   else if (*(char *)(*(int *)(glContext + 0x468c) + 0x7a) == '\0') {
-    uVar4 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x128) == 0);
-    uVar4 = *(uint *)(glContext + 0x4680) & uVar4 | *(uint *)(glContext + 0x4684) & ~uVar4;
-    puVar2 = PTR__glEndRDirty_Exec_00112160;
+    selectMaskThenDispatchTable = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x128) == 0);
+    selectMaskThenDispatchTable = *(uint *)(glContext + 0x4680) & selectMaskThenDispatchTable | *(uint *)(glContext + 0x4684) & ~selectMaskThenDispatchTable;
+    handlerPtr = PTR__glEndRDirty_Exec_00112160;
   }
   else {
     if (*(char *)(glContext + 0x4df8) != '\0') goto LAB_00007464;
-    uVar4 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x128) == 0);
-    uVar4 = *(uint *)(glContext + 0x4680) & uVar4 | *(uint *)(glContext + 0x4684) & ~uVar4;
-    puVar2 = PTR__glEndNoMat_Exec_00112168;
+    selectMaskThenDispatchTable = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x128) == 0);
+    selectMaskThenDispatchTable = *(uint *)(glContext + 0x4680) & selectMaskThenDispatchTable | *(uint *)(glContext + 0x4684) & ~selectMaskThenDispatchTable;
+    handlerPtr = PTR__glEndNoMat_Exec_00112168;
   }
-  *(undefined **)(uVar4 + 0x128) = puVar2;
+  *(undefined **)(selectMaskThenDispatchTable + 0x128) = handlerPtr;
 LAB_00007490:
-  if (cVar3 == '\0') {
+  if (colorMaterialActive == '\0') {
     return;
   }
                     
@@ -759,65 +759,65 @@ void _gleUpdateLightDirection(int glContext,int param_2,double unusedFloatArg1)
 }
 
 /* _gleUpdateLightExponents @ 0x79d0 (424 bytes) */
-double _gleUpdateLightExponents(glContext, param_2)
+double _gleUpdateLightExponents(glContext, lightIndex)
   int glContext;
-  int param_2;
+  int lightIndex;
 {
   int remaining;
-  float fVar1;
+  float tableBaseReload;
   float float10;
-  int iVar3;
+  int lightRecord;
   undefined4 *dstCursor2;
   int remaining2;
-  int iVar6;
+  int lightCache;
   float *dstCursor;
-  double dVar8;
-  double dVar9;
-  float dVar10;
-  float dVar11;
+  double constantThenPowResult;
+  double logThenExpThenBaseThenPowThenSample;
+  float tableBase;
+  float floatOne;
   
-  iVar3 = glContext + param_2 * 0x80;
-  iVar6 = glContext + param_2 * 0x6c;
-  if (*(float *)(iVar3 + 0x286c) < FLOAT_00108e50) {
-    *(undefined1 *)(iVar6 + 0x4ada) = 0;
+  lightRecord = glContext + lightIndex * 0x80;
+  lightCache = glContext + lightIndex * 0x6c;
+  if (*(float *)(lightRecord + 0x286c) < FLOAT_00108e50) {
+    *(undefined1 *)(lightCache + 0x4ada) = 0;
   }
   else {
-    *(undefined1 *)(iVar6 + 0x4ada) = 1;
-    if (*(float *)(iVar6 + 0x4a94) != *(float *)(iVar3 + 0x287c)) {
-      *(float *)(iVar6 + 0x4a94) = *(float *)(iVar3 + 0x287c);
-      if (FLOAT_00108e80 < *(float *)(iVar3 + 0x287c)) {
-        dstCursor = (float *)(iVar6 + 0x4aa8);
-        dVar11 = (double)FLOAT_00108e54;
+    *(undefined1 *)(lightCache + 0x4ada) = 1;
+    if (*(float *)(lightCache + 0x4a94) != *(float *)(lightRecord + 0x287c)) {
+      *(float *)(lightCache + 0x4a94) = *(float *)(lightRecord + 0x287c);
+      if (FLOAT_00108e80 < *(float *)(lightRecord + 0x287c)) {
+        dstCursor = (float *)(lightCache + 0x4aa8);
+        floatOne = (double)FLOAT_00108e54;
         remaining2 = 9;
-        dVar9 = _log(DOUBLE_00108dd8);
+        logThenExpThenBaseThenPowThenSample = _log(DOUBLE_00108dd8);
         float10 = FLOAT_00108f44;
-        dVar9 = _exp(dVar9 / (double)*(float *)(iVar3 + 0x287c));
-        dVar10 = (double)(float)dVar9;
-        dVar8 = (double)FLOAT_00108f40;
-        *(float *)(iVar6 + 0x4a98) = (float)dVar9;
-        dVar9 = DOUBLE_00108de0;
-        *(float *)(iVar6 + 0x4aa0) = (float)(dVar8 / (double)dVar10);
-        *(float *)(iVar6 + 0x4a9c) = float10 / (dVar11 - dVar10);
-        dVar9 = _pow(dVar9,(double)*(float *)(iVar3 + 0x287c));
-        fVar1 = *(float *)(iVar6 + 0x4a98);
-        *(float *)(iVar6 + 0x4aa4) = (float)(dVar9 - DOUBLE_00108d68);
-        dVar9 = (double)fVar1;
+        logThenExpThenBaseThenPowThenSample = _exp(logThenExpThenBaseThenPowThenSample / (double)*(float *)(lightRecord + 0x287c));
+        tableBase = (double)(float)logThenExpThenBaseThenPowThenSample;
+        constantThenPowResult = (double)FLOAT_00108f40;
+        *(float *)(lightCache + 0x4a98) = (float)logThenExpThenBaseThenPowThenSample;
+        logThenExpThenBaseThenPowThenSample = DOUBLE_00108de0;
+        *(float *)(lightCache + 0x4aa0) = (float)(constantThenPowResult / (double)tableBase);
+        *(float *)(lightCache + 0x4a9c) = float10 / (floatOne - tableBase);
+        logThenExpThenBaseThenPowThenSample = _pow(logThenExpThenBaseThenPowThenSample,(double)*(float *)(lightRecord + 0x287c));
+        tableBaseReload = *(float *)(lightCache + 0x4a98);
+        *(float *)(lightCache + 0x4aa4) = (float)(logThenExpThenBaseThenPowThenSample - DOUBLE_00108d68);
+        logThenExpThenBaseThenPowThenSample = (double)tableBaseReload;
         do {
-          dVar8 = _pow(dVar9,(double)*(float *)(iVar3 + 0x287c));
+          constantThenPowResult = _pow(logThenExpThenBaseThenPowThenSample,(double)*(float *)(lightRecord + 0x287c));
           remaining2 = remaining2 + -1;
-          *dstCursor = (float)dVar8;
+          *dstCursor = (float)constantThenPowResult;
           dstCursor = dstCursor + 1;
-          dVar9 = (double)(float)(dVar9 + (double)((dVar11 - fVar1) / float10));
+          logThenExpThenBaseThenPowThenSample = (double)(float)(logThenExpThenBaseThenPowThenSample + (double)((floatOne - tableBaseReload) / float10));
         } while (-1 < remaining2);
-        *(undefined4 *)(iVar6 + 0x4ad0) = 0x3f800000;
+        *(undefined4 *)(lightCache + 0x4ad0) = 0x3f800000;
       }
       else {
         remaining = 0xb;
-        *(undefined4 *)(iVar6 + 0x4aa4) = 0x3f800000;
-        *(undefined4 *)(iVar6 + 0x4a98) = 0x3f800000;
-        dstCursor2 = (undefined4 *)(iVar6 + 0x4aa8);
-        *(undefined4 *)(iVar6 + 0x4a9c) = 0x3f800000;
-        *(undefined4 *)(iVar6 + 0x4aa0) = 0x3f800000;
+        *(undefined4 *)(lightCache + 0x4aa4) = 0x3f800000;
+        *(undefined4 *)(lightCache + 0x4a98) = 0x3f800000;
+        dstCursor2 = (undefined4 *)(lightCache + 0x4aa8);
+        *(undefined4 *)(lightCache + 0x4a9c) = 0x3f800000;
+        *(undefined4 *)(lightCache + 0x4aa0) = 0x3f800000;
         do {
           *dstCursor2 = 0x3f800000;
           dstCursor2 = dstCursor2 + 1;
@@ -826,7 +826,7 @@ double _gleUpdateLightExponents(glContext, param_2)
       }
     }
   }
-  ((void (*)())_gleUpdateLightFast)(glContext,param_2);
+  ((void (*)())_gleUpdateLightFast)(glContext,lightIndex);
   ((void (*)())_gleUpdateLightModelFunc)(glContext);
   return;
 }
@@ -1485,181 +1485,183 @@ void _gleUpdateDepthRangeData(int glContext,double unusedFloatArg1,double unused
 void _gleUpdateTextureCoordGen(glContext)
   int glContext;
 {
-  bool bVar1;
-  bool bVar2;
-  bool bVar3;
+  bool texGenEnabledR;
+  bool texGenEnabledS;
+  bool texGenEnabledT;
   char glContextByte53e6;
-  char cVar5;
-  ushort uVar6;
-  undefined *puVar7;
-  undefined *puVar8;
-  undefined *puVar9;
-  undefined *puVar10;
-  undefined *puVar11;
-  undefined *puVar12;
-  undefined *puVar13;
-  undefined *puVar14;
-  undefined *puVar15;
-  undefined *puVar16;
-  undefined *puVar17;
-  undefined *puVar18;
-  undefined *puVar19;
-  undefined *puVar20;
-  undefined *puVar21;
-  undefined *puVar22;
-  undefined *puVar23;
-  undefined *puVar24;
-  undefined *puVar25;
-  int iVar26;
+  char previousUnitFlag;
+  ushort genModeS;
+  undefined *multiVtxTexGenWrapEyeFunc;
+  undefined *multiVtxTexGenWrapObjectFunc;
+  undefined *multiVtxTexGenObjectSlowFunc;
+  undefined *vtxTexGenObjectSlowFunc;
+  undefined *multiVtxTexGenEyeSlowFunc;
+  undefined *vtxTexGenEyeSlowFunc;
+  undefined *multiVtxTexGenNormalSTRFunc;
+  undefined *vtxTexGenNormalSTRFunc;
+  undefined *multiVtxTexGenReflectSTFunc;
+  undefined *vtxTexGenReflectSTFunc;
+  undefined *multiVtxTexGenNormalSTFunc;
+  undefined *vtxTexGenNormalSTFunc;
+  undefined *multiVtxTexGenSphereSTFunc;
+  undefined *vtxTexGenSphereSTFunc;
+  undefined *multiVtxTexGenObjectSTFunc;
+  undefined *vtxTexGenObjectSTFunc;
+  undefined *multiVtxTexGenEyeSTFunc;
+  undefined *vtxTexGenEyeSTFunc;
+  undefined *multiVtxTexGenNoopFunc;
+  int texGenState;
   int loopIndex;
-  char *pcVar28;
-  undefined *puVar29;
-  int iVar30;
+  char *texGenFlagCursor;
+  undefined *vtxTexGenNoopFunc;
+  undefined *multiVtxTexGenSTRFunc;
+  undefined *vtxTexGenReflectSTRFunc;
+  int unitStateBase;
   int remaining;
   
-  puVar29 = PTR__gleVtxTextureCoordGenNoop_001114ac;
-  puVar25 = PTR__gleMultiVtxTextureCoordGenNoop_001114a8;
-  puVar24 = PTR__gleVtxTextureCoordGenEyeST_001114a4;
-  puVar23 = PTR__gleMultiVtxTextureCoordGenEyeST_001114a0;
-  puVar22 = PTR__gleVtxTextureCoordGenObjectST_0011149c;
-  puVar21 = PTR__gleMultiVtxTextureCoordGenObjectST_00111498;
-  puVar20 = PTR__gleVtxTextureCoordGenSphereST_00111494;
-  puVar19 = PTR__gleMultiVtxTextureCoordGenSphereST_00111490;
-  puVar18 = PTR__gleVtxTextureCoordGenNormalST_0011148c;
-  puVar17 = PTR__gleMultiVtxTextureCoordGenNormalST_00111488;
-  puVar16 = PTR__gleVtxTextureCoordGenReflectST_00111484;
-  puVar15 = PTR__gleMultiVtxTextureCoordGenReflectST_00111480;
-  puVar14 = PTR__gleVtxTextureCoordGenNormalSTR_0011147c;
-  puVar13 = PTR__gleMultiVtxTextureCoordGenNormalSTR_00111478;
-  puVar12 = PTR__gleVtxTextureCoordGenEyeSlow_0011146c;
-  puVar11 = PTR__gleMultiVtxTextureCoordGenEyeSlow_00111468;
-  puVar10 = PTR__gleVtxTextureCoordGenObjectSlow_00111464;
-  puVar9 = PTR__gleMultiVtxTextureCoordGenObjectSlow_00111460;
-  puVar8 = PTR__gleMultiVtxTextureCoordGenWrapObject_0011145c;
-  puVar7 = PTR__gleMultiVtxTextureCoordGenWrapEye_00111458;
+  vtxTexGenNoopFunc = PTR__gleVtxTextureCoordGenNoop_001114ac;
+  multiVtxTexGenNoopFunc = PTR__gleMultiVtxTextureCoordGenNoop_001114a8;
+  vtxTexGenEyeSTFunc = PTR__gleVtxTextureCoordGenEyeST_001114a4;
+  multiVtxTexGenEyeSTFunc = PTR__gleMultiVtxTextureCoordGenEyeST_001114a0;
+  vtxTexGenObjectSTFunc = PTR__gleVtxTextureCoordGenObjectST_0011149c;
+  multiVtxTexGenObjectSTFunc = PTR__gleMultiVtxTextureCoordGenObjectST_00111498;
+  vtxTexGenSphereSTFunc = PTR__gleVtxTextureCoordGenSphereST_00111494;
+  multiVtxTexGenSphereSTFunc = PTR__gleMultiVtxTextureCoordGenSphereST_00111490;
+  vtxTexGenNormalSTFunc = PTR__gleVtxTextureCoordGenNormalST_0011148c;
+  multiVtxTexGenNormalSTFunc = PTR__gleMultiVtxTextureCoordGenNormalST_00111488;
+  vtxTexGenReflectSTFunc = PTR__gleVtxTextureCoordGenReflectST_00111484;
+  multiVtxTexGenReflectSTFunc = PTR__gleMultiVtxTextureCoordGenReflectST_00111480;
+  vtxTexGenNormalSTRFunc = PTR__gleVtxTextureCoordGenNormalSTR_0011147c;
+  multiVtxTexGenNormalSTRFunc = PTR__gleMultiVtxTextureCoordGenNormalSTR_00111478;
+  vtxTexGenEyeSlowFunc = PTR__gleVtxTextureCoordGenEyeSlow_0011146c;
+  multiVtxTexGenEyeSlowFunc = PTR__gleMultiVtxTextureCoordGenEyeSlow_00111468;
+  vtxTexGenObjectSlowFunc = PTR__gleVtxTextureCoordGenObjectSlow_00111464;
+  multiVtxTexGenObjectSlowFunc = PTR__gleMultiVtxTextureCoordGenObjectSlow_00111460;
+  multiVtxTexGenWrapObjectFunc = PTR__gleMultiVtxTextureCoordGenWrapObject_0011145c;
+  multiVtxTexGenWrapEyeFunc = PTR__gleMultiVtxTextureCoordGenWrapEye_00111458;
   *(undefined **)(glContext + 0x53e0) = PTR__gleVtxTextureCoordGenNoop_001114ac;
   *(undefined1 *)(glContext + 0x53e4) = 0;
   loopIndex = 0;
   *(undefined1 *)(glContext + 0x53e5) = 0;
   glContextByte53e6 = *(char *)(glContext + 0x53e6);
-  iVar26 = glContext + 0x3d70;
+  texGenState = glContext + 0x3d70;
   *(undefined1 *)(glContext + 0x53e6) = 0;
-  *(undefined **)(glContext + 0x53dc) = puVar29;
-  pcVar28 = (char *)(glContext + 0x531c);
+  *(undefined **)(glContext + 0x53dc) = vtxTexGenNoopFunc;
+  texGenFlagCursor = (char *)(glContext + 0x531c);
   remaining = 8;
-  iVar30 = glContext;
+  unitStateBase = glContext;
   do {
-    *(undefined **)(pcVar28 + -8) = puVar25;
-    *(undefined **)(pcVar28 + -4) = puVar25;
-    cVar5 = *pcVar28;
-    if (((*(char *)(iVar26 + 8) == '\0') || (*(char *)(iVar26 + 9) == '\0')) ||
-       (*(char *)(iVar26 + 0xb) != '\0')) {
+    *(undefined **)(texGenFlagCursor + -8) = multiVtxTexGenNoopFunc;
+    *(undefined **)(texGenFlagCursor + -4) = multiVtxTexGenNoopFunc;
+    previousUnitFlag = *texGenFlagCursor;
+    if (((*(char *)(texGenState + 8) == '\0') || (*(char *)(texGenState + 9) == '\0')) ||
+       (*(char *)(texGenState + 0xb) != '\0')) {
 LAB_00008f68:
-      if (((*(char *)(iVar26 + 8) == '\0') && (*(char *)(iVar26 + 9) == '\0')) &&
-         ((*(char *)(iVar26 + 10) == '\0' && (*(char *)(iVar26 + 0xb) == '\0')))) {
-        *pcVar28 = '\0';
+      if (((*(char *)(texGenState + 8) == '\0') && (*(char *)(texGenState + 9) == '\0')) &&
+         ((*(char *)(texGenState + 10) == '\0' && (*(char *)(texGenState + 0xb) == '\0')))) {
+        *texGenFlagCursor = '\0';
       }
       else {
-        *pcVar28 = '\x01';
-        bVar2 = *(char *)(iVar26 + 8) != '\0';
-        if ((((((bVar2) && (*(short *)(iVar26 + -0x88) == 0x2402)) ||
-              ((bVar3 = *(char *)(iVar26 + 9) != '\0', bVar3 &&
-               (*(short *)(iVar30 + 0x3d0c) == 0x2402)))) ||
-             ((((bVar2 && (*(short *)(iVar30 + 0x3ce8) == -0x7aef)) ||
-               ((bVar3 && (*(short *)(iVar30 + 0x3d0c) == -0x7aef)))) ||
-              ((bVar1 = *(char *)(iVar26 + 10) != '\0', bVar1 &&
-               (*(short *)(iVar30 + 0x3d30) == -0x7aef)))))) ||
-            ((bVar2 && (*(short *)(iVar30 + 0x3ce8) == -0x7aee)))) ||
-           (((bVar3 && (*(short *)(iVar30 + 0x3d0c) == -0x7aee)) ||
-            ((bVar1 && (*(short *)(iVar30 + 0x3d30) == -0x7aee)))))) {
+        *texGenFlagCursor = '\x01';
+        texGenEnabledS = *(char *)(texGenState + 8) != '\0';
+        if ((((((texGenEnabledS) && (*(short *)(texGenState + -0x88) == 0x2402)) ||
+              ((texGenEnabledT = *(char *)(texGenState + 9) != '\0', texGenEnabledT &&
+               (*(short *)(unitStateBase + 0x3d0c) == 0x2402)))) ||
+             ((((texGenEnabledS && (*(short *)(unitStateBase + 0x3ce8) == -0x7aef)) ||
+               ((texGenEnabledT && (*(short *)(unitStateBase + 0x3d0c) == -0x7aef)))) ||
+              ((texGenEnabledR = *(char *)(texGenState + 10) != '\0', texGenEnabledR &&
+               (*(short *)(unitStateBase + 0x3d30) == -0x7aef)))))) ||
+            ((texGenEnabledS && (*(short *)(unitStateBase + 0x3ce8) == -0x7aee)))) ||
+           (((texGenEnabledT && (*(short *)(unitStateBase + 0x3d0c) == -0x7aee)) ||
+            ((texGenEnabledR && (*(short *)(unitStateBase + 0x3d30) == -0x7aee)))))) {
           *(undefined1 *)(glContext + 0x53e6) = 1;
 LAB_0000909c:
           *(undefined1 *)(glContext + 0x53e5) = 1;
-          *(undefined **)(glContext + 0x53e0) = puVar12;
-          *(undefined **)(pcVar28 + -4) = puVar11;
+          *(undefined **)(glContext + 0x53e0) = vtxTexGenEyeSlowFunc;
+          *(undefined **)(texGenFlagCursor + -4) = multiVtxTexGenEyeSlowFunc;
         }
-        else if ((((*(char *)(iVar26 + 8) != '\0') && (*(short *)(iVar26 + -0x88) == 0x2400)) ||
-                 (((*(char *)(iVar26 + 9) != '\0' && (*(short *)(iVar30 + 0x3d0c) == 0x2400)) ||
-                  ((*(char *)(iVar26 + 10) != '\0' && (*(short *)(iVar30 + 0x3d30) == 0x2400))))))
-                || ((*(char *)(iVar26 + 0xb) != '\0' && (*(short *)(iVar30 + 0x3d54) == 0x2400))))
+        else if ((((*(char *)(texGenState + 8) != '\0') && (*(short *)(texGenState + -0x88) == 0x2400)) ||
+                 (((*(char *)(texGenState + 9) != '\0' && (*(short *)(unitStateBase + 0x3d0c) == 0x2400)) ||
+                  ((*(char *)(texGenState + 10) != '\0' && (*(short *)(unitStateBase + 0x3d30) == 0x2400))))))
+                || ((*(char *)(texGenState + 0xb) != '\0' && (*(short *)(unitStateBase + 0x3d54) == 0x2400))))
         goto LAB_0000909c;
-        if (((((*(char *)(iVar26 + 8) != '\0') && (*(short *)(iVar26 + -0x88) == 0x2401)) ||
-             ((*(char *)(iVar26 + 9) != '\0' && (*(short *)(iVar30 + 0x3d0c) == 0x2401)))) ||
-            ((*(char *)(iVar26 + 10) != '\0' && (*(short *)(iVar30 + 0x3d30) == 0x2401)))) ||
-           ((*(char *)(iVar26 + 0xb) != '\0' && (*(short *)(iVar30 + 0x3d54) == 0x2401)))) {
+        if (((((*(char *)(texGenState + 8) != '\0') && (*(short *)(texGenState + -0x88) == 0x2401)) ||
+             ((*(char *)(texGenState + 9) != '\0' && (*(short *)(unitStateBase + 0x3d0c) == 0x2401)))) ||
+            ((*(char *)(texGenState + 10) != '\0' && (*(short *)(unitStateBase + 0x3d30) == 0x2401)))) ||
+           ((*(char *)(texGenState + 0xb) != '\0' && (*(short *)(unitStateBase + 0x3d54) == 0x2401)))) {
           *(undefined1 *)(glContext + 0x53e4) = 1;
-          *(undefined **)(glContext + 0x53dc) = puVar10;
-          *(undefined **)(pcVar28 + -8) = puVar9;
+          *(undefined **)(glContext + 0x53dc) = vtxTexGenObjectSlowFunc;
+          *(undefined **)(texGenFlagCursor + -8) = multiVtxTexGenObjectSlowFunc;
         }
       }
     }
     else {
-      *pcVar28 = '\x01';
-      puVar29 = PTR__gleVtxTextureCoordGenReflectSTR_00111474;
-      uVar6 = *(ushort *)(iVar26 + -0x88);
-      if (uVar6 != *(ushort *)(iVar26 + -100)) goto LAB_00008f68;
-      if (*(char *)(iVar26 + 10) == '\0') {
-        if (uVar6 == 0x2401) {
+      *texGenFlagCursor = '\x01';
+      vtxTexGenReflectSTRFunc = PTR__gleVtxTextureCoordGenReflectSTR_00111474;
+      genModeS = *(ushort *)(texGenState + -0x88);
+      if (genModeS != *(ushort *)(texGenState + -100)) goto LAB_00008f68;
+      if (*(char *)(texGenState + 10) == '\0') {
+        if (genModeS == 0x2401) {
           *(undefined1 *)(glContext + 0x53e4) = 1;
-          *(undefined **)(glContext + 0x53dc) = puVar22;
-          *(undefined **)(pcVar28 + -8) = puVar21;
+          *(undefined **)(glContext + 0x53dc) = vtxTexGenObjectSTFunc;
+          *(undefined **)(texGenFlagCursor + -8) = multiVtxTexGenObjectSTFunc;
         }
-        else if (uVar6 < 0x2402) {
-          if (uVar6 == 0x2400) {
+        else if (genModeS < 0x2402) {
+          if (genModeS == 0x2400) {
             *(undefined1 *)(glContext + 0x53e5) = 1;
-            *(undefined **)(glContext + 0x53e0) = puVar24;
-            *(undefined **)(pcVar28 + -4) = puVar23;
+            *(undefined **)(glContext + 0x53e0) = vtxTexGenEyeSTFunc;
+            *(undefined **)(texGenFlagCursor + -4) = multiVtxTexGenEyeSTFunc;
           }
           else {
 LAB_00008ef8:
             *(undefined1 *)(glContext + 0x53e5) = 1;
             *(undefined1 *)(glContext + 0x53e6) = 1;
-            *(undefined **)(glContext + 0x53e0) = puVar16;
-            *(undefined **)(pcVar28 + -4) = puVar15;
+            *(undefined **)(glContext + 0x53e0) = vtxTexGenReflectSTFunc;
+            *(undefined **)(texGenFlagCursor + -4) = multiVtxTexGenReflectSTFunc;
           }
         }
-        else if (uVar6 == 0x2402) {
+        else if (genModeS == 0x2402) {
           *(undefined1 *)(glContext + 0x53e6) = 1;
           *(undefined1 *)(glContext + 0x53e5) = 1;
-          *(undefined **)(glContext + 0x53e0) = puVar20;
-          *(undefined **)(pcVar28 + -4) = puVar19;
+          *(undefined **)(glContext + 0x53e0) = vtxTexGenSphereSTFunc;
+          *(undefined **)(texGenFlagCursor + -4) = multiVtxTexGenSphereSTFunc;
         }
         else {
-          if (uVar6 != 0x8511) goto LAB_00008ef8;
+          if (genModeS != 0x8511) goto LAB_00008ef8;
           *(undefined1 *)(glContext + 0x53e6) = 1;
           *(undefined1 *)(glContext + 0x53e5) = 1;
-          *(undefined **)(glContext + 0x53e0) = puVar18;
-          *(undefined **)(pcVar28 + -4) = puVar17;
+          *(undefined **)(glContext + 0x53e0) = vtxTexGenNormalSTFunc;
+          *(undefined **)(texGenFlagCursor + -4) = multiVtxTexGenNormalSTFunc;
         }
       }
       else {
-        if (uVar6 != *(ushort *)(iVar26 + -0x40)) goto LAB_00008f68;
-        if (uVar6 == 0x8511) {
-          *(undefined **)(glContext + 0x53e0) = puVar14;
+        if (genModeS != *(ushort *)(texGenState + -0x40)) goto LAB_00008f68;
+        if (genModeS == 0x8511) {
+          *(undefined **)(glContext + 0x53e0) = vtxTexGenNormalSTRFunc;
           *(undefined1 *)(glContext + 0x53e6) = 1;
-          puVar29 = puVar13;
+          multiVtxTexGenSTRFunc = multiVtxTexGenNormalSTRFunc;
         }
         else {
-          if (uVar6 != 0x8512) goto LAB_00008f68;
+          if (genModeS != 0x8512) goto LAB_00008f68;
           *(undefined1 *)(glContext + 0x53e6) = 1;
-          *(undefined **)(glContext + 0x53e0) = puVar29;
-          puVar29 = PTR__gleMultiVtxTextureCoordGenReflectSTR_00111470;
+          *(undefined **)(glContext + 0x53e0) = vtxTexGenReflectSTRFunc;
+          multiVtxTexGenSTRFunc = PTR__gleMultiVtxTextureCoordGenReflectSTR_00111470;
         }
         *(undefined1 *)(glContext + 0x53e5) = 1;
-        *(undefined **)(pcVar28 + -4) = puVar29;
+        *(undefined **)(texGenFlagCursor + -4) = multiVtxTexGenSTRFunc;
       }
     }
-    if ((loopIndex != 0) && (*pcVar28 != '\0')) {
-      *(undefined **)(glContext + 0x53dc) = puVar8;
-      *(undefined **)(glContext + 0x53e0) = puVar7;
+    if ((loopIndex != 0) && (*texGenFlagCursor != '\0')) {
+      *(undefined **)(glContext + 0x53dc) = multiVtxTexGenWrapObjectFunc;
+      *(undefined **)(glContext + 0x53e0) = multiVtxTexGenWrapEyeFunc;
     }
-    if (*pcVar28 != cVar5) {
+    if (*texGenFlagCursor != previousUnitFlag) {
       *(uint *)(glContext + 0x50ac) = *(uint *)(glContext + 0x50ac) | 1;
     }
     loopIndex = loopIndex + 1;
-    pcVar28 = pcVar28 + 0xc;
-    iVar30 = iVar30 + 0x94;
-    iVar26 = iVar26 + 0x94;
+    texGenFlagCursor = texGenFlagCursor + 0xc;
+    unitStateBase = unitStateBase + 0x94;
+    texGenState = texGenState + 0x94;
     remaining = remaining + -1;
     if (remaining == 0) {
       if (*(char *)(glContext + 0x53e6) == glContextByte53e6) {

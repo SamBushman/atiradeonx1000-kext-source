@@ -1,0 +1,968 @@
+local	_LFSParserParseInstruction	param_1	parser	CONFIRMED	the 0x46c-byte LFS parser object (_LFSParserCreate): current section at +0x19 (0 none, 1 constants, 2 prelim pass, 3 output pass), per-section flags at +0x3a/+0x4a/+0x5a, position words at +0xc/+0x10
+local	_LFSParserParseInstruction	local_120	partText	CONFIRMED	256-byte buffer the next token is read into by _LFSParserGetPart and compared with the keywords StartConstants/EndConstants/StartPrelimPass/EndPass/StartOutputPass/CONSTANT/PassTexCoord/SampleMap
+local	_LFSParserParseInstruction	local_20	savedPosition0	CONFIRMED	copy of parser+0xc taken before the first token is read; restored before the register-init / operation parse so it re-reads the keyword
+local	_LFSParserParseInstruction	local_1c	savedPosition1	CONFIRMED	copy of parser+0x10 taken before the first token is read; restored together with savedPosition0
+local	_LFSParserPreprocessString	param_2	sourceString	CONFIRMED	the shader source text: scanned twice, first to count the output size then to copy it
+local	_LFSParserPreprocessString	uVar3	sourceLength	CONFIRMED	strlen(sourceString)
+local	_LFSParserPreprocessString	uVar6	sourceIndex	CONFIRMED	read position in sourceString, advanced by local_40[0]
+local	_LFSParserPreprocessString	bVar2	inComment	CONFIRMED	set at a '#' character and cleared at the next newline (or terminator): the comment text is dropped
+local	_LFSParserPreprocessString	cVar1	currentChar	CONFIRMED	character at sourceIndex
+local	_LFSParserPreprocessString	iVar4	newlineFound	CONFIRMED	result of _LFSParserCheckForNewline while skipping a comment
+local	_LFSParserPreprocessString	puVar5	processedString	CONFIRMED	calloc'd output string (returned): comments removed and the punctuation [ ] = { } ; . , padded with spaces
+local	_LFSParserPreprocessString	puVar8	outputCursor	CONFIRMED	write position in processedString
+local	_LFSParserPreprocessString	local_40	sourceAdvance	CONFIRMED	local_40[0] = characters consumed at sourceIndex (1, or 2 when _LFSParserCheckForNewline sees a two-character newline)
+local	_LFSStreamChunkOutputDebugInfo	param_1	chunk	CONFIRMED	stream chunk record: byte 0 is the kind (1 registerinit, 2 operation, 3 constantbinding, 4 constant), words at +4.. hold its fields
+local	_LFSStreamChunkOutputDebugInfo	bVar1	chunkKind	CONFIRMED	chunk byte 0, selecting the printed block
+local	_LFSStreamChunkOutputDebugInfo	uVar8	sourceIndex	CONFIRMED	operation source variable number printed in sourcevar[%i], 0..2
+local	_LFSStreamChunkOutputDebugInfo	uVar9	nextSourceIndex	CONFIRMED	sourceIndex + 1, the loop test
+local	_LFSStreamChunkOutputDebugInfo	pbVar10	sourceVarCursor	CONFIRMED	chunk advanced by 0x10 per source variable (register type +0x18, index +0x1c, replicate +0x20, modifiers +0x24)
+local	_LFSStreamChunkOutputDebugInfo	pcVar6	lastFormat	CONFIRMED	format string of the final printf of the registerinit (selector) and constantbinding (localparameterindex) blocks
+local	_LFSStreamChunkOutputDebugInfo	uVar7	lastValue	CONFIRMED	value for that final printf, chunk +0x14
+local	_LFSStreamChunkOutputDebugInfo	dVar11	constantX	CONFIRMED	float at chunk +4 printed as the first constant component (declared float)
+local	_LFSStreamChunkOutputDebugInfo	dVar13	constantY	CONFIRMED	float at chunk +8, second constant component
+local	_LFSStreamChunkOutputDebugInfo	dVar12	constantZ	CONFIRMED	float at chunk +0xc, third constant component (the fourth, chunk +0x10, is passed directly)
+local	_evaluateImageUnits	piVar10	stageRecords	CONFIRMED	program + 0x20: the array of per-stage records (stage 0 at +0x20, stage 1 read from program+0x24)
+local	_evaluateImageUnits	iVar16	stageRecordThenImageUnit	INFERRED	the record of the current stage (image unit use counts at +0x2c, unit types at +0x6c, packed sampler type masks at +0x50c / +0x510), and in the uniform scan the image unit number read from the program's uniform table (program+0x4c, 0x10 bytes per uniform)
+local	_evaluateImageUnits	iVar17	typeInfoResultThenUnitCount	INFERRED	result of _ShGetUniformTypeInfo (non-zero when the uniform exists), later the number of image units of the current stage (0 for stage 0, 0x10 for stage 1)
+local	_evaluateImageUnits	iVar6	typeCursorThenStageRecordThenUseCount	INFERRED	cursor over the 16-bit unit types of a stage (stage record + 0x60 offset by +0xc), later the stage record in the uniform scan, and the use count of an image unit in the sampler mask loop
+local	_evaluateImageUnits	iVar2	unitLimitThenTypeOffsetThenSavedIndex	INFERRED	unit limit of the stage (0 or 0x10), the byte offset (unit * 2) of its type, and the index into the saved counts and types (stage * 0x10 + unit)
+local	_evaluateImageUnits	cVar3	stageUsedThenValidFlag	INFERRED	the byte of stagesUsed for the stage being scanned (non-zero: the uniform is used by the stage), and the program validity byte at program+0x3e re-read in the loop conditions
+local	_evaluateImageUnits	uVar1	unitType	CONFIRMED	the 16-bit uniform type of an image unit: copied between the saved types and the stage record, passed to _getIndexForGLSLSamplerType
+local	_evaluateImageUnits	uVar14	samplerMaskHigh	CONFIRMED	the packed sampler type mask word at stage record +0x50c with the nibble of the unit cleared, then ORed with the sampler index
+local	_evaluateImageUnits	uVar15	samplerMaskLow	CONFIRMED	the packed sampler type mask word at stage record +0x510 with the nibble of the unit cleared, then ORed with the sampler index
+local	_evaluateImageUnits	lVar18	nibbleMaskThenTypeBits	CONFIRMED	64-bit value from ___ashldi3: first the nibble mask 0xf << (unit * 4) to clear, then the sampler index << (unit * 4) to insert
+local	_glCopyColorSubTable_Exec	bVar1	rendererByte79IsZero	CONFIRMED	rendererInfoByte79 == 0: selects the mask 0x17000000 (instead of 0x17ffffff) for changeWord3 and omits the ctx+0x318 test
+local	_glCopyColorSubTable_Exec	uVar3	forwardedStart	INFERRED	copy of the start argument kept in a register and passed on as a stale argument of _gleUpdateFramebufferCompleteness
+local	_glCopyColorSubTable_Exec	uVar7	forwardedX	INFERRED	copy of the x argument kept in a register and passed on as a stale argument of _gleUpdateFramebufferCompleteness
+local	_glCopyColorSubTable_Exec	uVar8	forwardedY	INFERRED	copy of the y argument kept in a register and passed on as a stale argument of _gleUpdateFramebufferCompleteness
+local	_glCopyColorSubTable_Exec	iVar9	changeWordThenTableLevel	CONFIRMED	the change word read from the cursor over ctx+0x324 in the state validation, later the level record of the color table (colorTable + 0xac)
+local	_glCopyColorSubTable_Exec	iVar10	forwardedWidthThenColorTable	CONFIRMED	copy of the width argument passed on as a stale argument of _gleUpdateFramebufferCompleteness, later the color table returned by _gleCheckCopyColorSubTableArgs (zero returns)
+local	_glCopyColorSubTable_Exec	bVar5	tableFlags	CONFIRMED	byte +0xb7 of the color table: 0x10 = data present, 0x40 = plugin level that is uploaded first; ORed with 0x10 once the level is allocated
+local	_glCopyColorSubTable_Exec	iVar6	scaleBiasSettings	INFERRED	pointer to the scale and bias settings of the table target (ctx+0x33b0, +0x33d0 or +0x33f0), zero when the target is not one of the three color table targets
+local	_glCopyColorSubTable_Exec	uVar11	scaleBiasTarget	INFERRED	0x80d0 (GL_COLOR_TABLE) or 0x80d2 (GL_POST_COLOR_MATRIX_COLOR_TABLE): the target that belongs to the selected scaleBiasSettings; a different target clears it
+local	_glCopyColorSubTable_Exec	extraout_f1	f1AfterCall	INFERRED	Ghidra pseudo-register extraout_f1 (the value a call left in f1); no source-level role
+use	_glDetachObjectARB_Exec	piVar4	newAttachments	CONFIRMED	malloc((count - 1) * 4) array filled with every attachment except the detached one and stored back to the container at +0x44 (NULL when the last one is detached)	^\s*piVar4\ =\ \(int\ \*\)0x0;$	+1
+use	_glDetachObjectARB_Exec	piVar4	newAttachments	CONFIRMED	malloc((count - 1) * 4) array filled with every attachment except the detached one and stored back to the container at +0x44 (NULL when the last one is detached)	^\s*piVar4\ =\ \(int\ \*\)_malloc\(iVar9\ \*\ 4\ \+\ \-4\);$	+1
+use	_glDetachObjectARB_Exec	piVar4	newAttachments	CONFIRMED	malloc((count - 1) * 4) array filled with every attachment except the detached one and stored back to the container at +0x44 (NULL when the last one is detached)	^\s*piVar8\ =\ piVar4;$	+1
+use	_glDetachObjectARB_Exec	piVar4	newAttachments	CONFIRMED	malloc((count - 1) * 4) array filled with every attachment except the detached one and stored back to the container at +0x44 (NULL when the last one is detached)	^\s*\*\(int\ \*\*\)\(iVar5\ \+\ 0x44\)\ =\ piVar4;$	+1
+use	_glDetachObjectARB_Exec	iVar5	sharedStateThenContainerObject	CONFIRMED	ctx+0x5148 (shared state, mutex at +0x8028, hash table at +0x6018), then reassigned to _gleLookupHashObject(table, containerObj): the program object whose kind (+0x10) is 0x8b40 GL_PROGRAM_OBJECT_ARB	^\s*iVar5\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x5148\);$	+4
+use	_glDetachObjectARB_Exec	iVar5	sharedStateThenContainerObject	CONFIRMED	ctx+0x5148 (shared state, mutex at +0x8028, hash table at +0x6018), then reassigned to _gleLookupHashObject(table, containerObj): the program object whose kind (+0x10) is 0x8b40 GL_PROGRAM_OBJECT_ARB	^\s*iVar5\ =\ _gleLookupHashObject\(iVar5\ \+\ 0x6018,param_2\);$	+2
+use	_glDetachObjectARB_Exec	iVar5	sharedStateThenContainerObject	CONFIRMED	ctx+0x5148 (shared state, mutex at +0x8028, hash table at +0x6018), then reassigned to _gleLookupHashObject(table, containerObj): the program object whose kind (+0x10) is 0x8b40 GL_PROGRAM_OBJECT_ARB	^\s*if\ \(\*\(int\ \*\)\(iVar5\ \+\ 0x10\)\ ==\ 0x8b40\)\ \{$	+1
+use	_glDetachObjectARB_Exec	iVar5	sharedStateThenContainerObject	CONFIRMED	ctx+0x5148 (shared state, mutex at +0x8028, hash table at +0x6018), then reassigned to _gleLookupHashObject(table, containerObj): the program object whose kind (+0x10) is 0x8b40 GL_PROGRAM_OBJECT_ARB	^\s*iVar9\ =\ \*\(int\ \*\)\(iVar5\ \+\ 0x48\);$	+1
+use	_glDetachObjectARB_Exec	iVar5	sharedStateThenContainerObject	CONFIRMED	ctx+0x5148 (shared state, mutex at +0x8028, hash table at +0x6018), then reassigned to _gleLookupHashObject(table, containerObj): the program object whose kind (+0x10) is 0x8b40 GL_PROGRAM_OBJECT_ARB	^\s*piVar4\ =\ \*\(int\ \*\*\)\(iVar5\ \+\ 0x44\);$	+1
+use	_glDetachObjectARB_Exec	iVar5	sharedStateThenContainerObject	CONFIRMED	ctx+0x5148 (shared state, mutex at +0x8028, hash table at +0x6018), then reassigned to _gleLookupHashObject(table, containerObj): the program object whose kind (+0x10) is 0x8b40 GL_PROGRAM_OBJECT_ARB	^\s*iVar10\ =\ \*\(int\ \*\)\(iVar5\ \+\ 0x48\);$	+1
+use	_glDetachObjectARB_Exec	iVar5	sharedStateThenContainerObject	CONFIRMED	ctx+0x5148 (shared state, mutex at +0x8028, hash table at +0x6018), then reassigned to _gleLookupHashObject(table, containerObj): the program object whose kind (+0x10) is 0x8b40 GL_PROGRAM_OBJECT_ARB	^\s*iVar7\ =\ \*\(int\ \*\)\(iVar5\ \+\ 0x44\);$	+1
+use	_glDetachObjectARB_Exec	iVar5	sharedStateThenContainerObject	CONFIRMED	ctx+0x5148 (shared state, mutex at +0x8028, hash table at +0x6018), then reassigned to _gleLookupHashObject(table, containerObj): the program object whose kind (+0x10) is 0x8b40 GL_PROGRAM_OBJECT_ARB	^\s*iVar7\ =\ \*\(int\ \*\)\(iVar5\ \+\ 0x44\);$@2	+1
+use	_glDetachObjectARB_Exec	iVar5	sharedStateThenContainerObject	CONFIRMED	ctx+0x5148 (shared state, mutex at +0x8028, hash table at +0x6018), then reassigned to _gleLookupHashObject(table, containerObj): the program object whose kind (+0x10) is 0x8b40 GL_PROGRAM_OBJECT_ARB	^\s*iVar10\ =\ \*\(int\ \*\)\(iVar5\ \+\ 0x48\);$@2	+2
+use	_glDetachObjectARB_Exec	iVar5	sharedStateThenContainerObject	CONFIRMED	ctx+0x5148 (shared state, mutex at +0x8028, hash table at +0x6018), then reassigned to _gleLookupHashObject(table, containerObj): the program object whose kind (+0x10) is 0x8b40 GL_PROGRAM_OBJECT_ARB	^\s*\*\(int\ \*\)\(iVar5\ \+\ 0x48\)\ =\ iVar10\ \+\ \-1;$	+1
+use	_glDetachObjectARB_Exec	iVar5	sharedStateThenContainerObject	CONFIRMED	ctx+0x5148 (shared state, mutex at +0x8028, hash table at +0x6018), then reassigned to _gleLookupHashObject(table, containerObj): the program object whose kind (+0x10) is 0x8b40 GL_PROGRAM_OBJECT_ARB	^\s*\*\(int\ \*\*\)\(iVar5\ \+\ 0x44\)\ =\ piVar4;$	+1
+use	_glDetachObjectARB_Exec	iVar5	attachedRefCount	CONFIRMED	reference count of the attached object (hashObject+8) after the decrement; the object is deleted with _gleDeleteHashNameAndObject when it drops to 1	^\s*iVar5\ =\ \*\(int\ \*\)\(iVar6\ \+\ 8\)\ \+\ \-1;$	+3
+use	_glDetachObjectARB_Exec	iVar9	attachmentCount	CONFIRMED	number of attachments of the container (+0x48) before the detach	^\s*iVar9\ =\ \*\(int\ \*\)\(iVar5\ \+\ 0x48\);$	+1
+use	_glDetachObjectARB_Exec	iVar9	attachmentCount	CONFIRMED	number of attachments of the container (+0x48) before the detach	^\s*if\ \(0\ <\ iVar9\)\ \{$	+1
+use	_glDetachObjectARB_Exec	iVar9	attachmentCount	CONFIRMED	number of attachments of the container (+0x48) before the detach	^\s*if\ \(iVar9\ <=\ iVar10\)\ goto\ LAB_000875c8;$	+1
+use	_glDetachObjectARB_Exec	iVar9	attachmentCount	CONFIRMED	number of attachments of the container (+0x48) before the detach	^\s*if\ \(iVar9\ !=\ 1\)\ \{$	+2
+local	_glDetachObjectARB_Exec	bVar1	attachmentFound	CONFIRMED	set when the attached object is found in the container's attachment array; the detach proceeds only then
+local	_glDetachObjectARB_Exec	iVar3	attachmentEntry	CONFIRMED	entry of the container's attachment array (+0x44) compared with hashObject while the array is copied without the detached object
+local	_glDetachObjectARB_Exec	iVar7	oldAttachments	CONFIRMED	the container's attachment array pointer (+0x44) that is freed after the copy
+local	_glGetCompressedTexImage_Exec	iVar5	textureObject	CONFIRMED	result of _gleLookUpNonProxyTexture(glContext, target): format at +0x78, base level at +0x8d, max level at +0x8f; zero raises GL_INVALID_ENUM
+local	_glGetCompressedTexImage_Exec	iVar4	levelRecord	CONFIRMED	the level record: textureObject + face * 0x168 + lod * 0x18, width at +0xc8, height at +0xca, depth at +0xcc, flags at +0xcf, stored format and type at +0xd4 / +0xd6, data at +0xd8
+local	_glGetCompressedTexImage_Exec	bVar1	levelFlags	CONFIRMED	byte +0xcf of the level record: 0x20 = level defined, 0x40 = plugin level that is uploaded first, 0x10 = data present
+local	_glGetCompressedTexImage_Exec	uVar3	faceIndexThenHeight	CONFIRMED	cube map face (target - 0x8515, 0 for other targets) used to find the level record, later the level height (+0xca) passed on to the pixel conversion
+local	_glGetCompressedTexImage_Exec	iVar10	packSettings	CONFIRMED	ctx+0x31b0: the pixel pack settings passed to _glePixelPackSettings
+local	_glGetCompressedTexImage_Exec	iVar11	pixelPackBuffer	INFERRED	ctx+0x4a68: the pixel pack buffer binding; when set, the destination is an offset in the buffer (size at +0x38, data offset at +0x30, plugin buffer at +0x10)
+local	_glGetCompressedTexImage_Exec	puVar8	forwardedArg7	INFERRED	address of packPixelBytes kept live and forwarded as the stale seventh argument of the pixel conversion calls
+local	_glGetCompressedTexImage_Exec	piVar9	forwardedArg8	INFERRED	address of packOffset kept live and forwarded as the stale eighth argument of the pixel conversion calls
+local	_glGetCompressedTexImage_Exec	auStack_40	packPixelBytes	CONFIRMED	pixelBytesOut of _glePixelPackSettings: bytes per pixel
+local	_glGetCompressedTexImage_Exec	local_3c	packOffset	CONFIRMED	startOffsetOut of _glePixelPackSettings: byte offset of the first pixel, added to img
+local	_glGetCompressedTexImage_Exec	local_50	packedRowBytes	CONFIRMED	rowBytesOut of _glePixelPackSettings: bytes per row of the destination
+local	_glGetCompressedTexImage_Exec	auStack_4c	rowPadding	CONFIRMED	rowPaddingOut of _glePixelPackSettings (not read)
+local	_glGetCompressedTexImage_Exec	local_48	imageBytes	CONFIRMED	imageBytesOut of _glePixelPackSettings: bytes per image, checked against the pack buffer size
+local	_glGetCompressedTexImage_Exec	auStack_44	imagePadding	CONFIRMED	imagePaddingOut of _glePixelPackSettings (not read)
+local	_glGetCompressedTexImage_Exec	local_38	srcConvertDescAOut	CONFIRMED	first output of _glgConvertType for the stored level format and type (source description)
+local	_glGetCompressedTexImage_Exec	local_34	srcConvertDescBOut	CONFIRMED	second output of _glgConvertType for the stored level format and type (source description)
+local	_glGetCompressedTexImage_Exec	puVar6	dstConvertDescPtrA	CONFIRMED	address of dstConvertDescAOut passed as the first output of _glgConvertType for the texture format and forwarded to _glgProcessPixels
+local	_glGetCompressedTexImage_Exec	puVar7	dstConvertDescPtrB	CONFIRMED	address of dstConvertDescBOut passed as the second output of _glgConvertType for the texture format and forwarded to _glgProcessPixels
+local	_glGetCompressedTexImage_Exec	local_30	dstConvertDescAOut	CONFIRMED	first output of _glgConvertType for the texture format (destination description)
+local	_glGetCompressedTexImage_Exec	local_2c	dstConvertDescBOut	CONFIRMED	second output of _glgConvertType for the texture format (destination description)
+local	_glGetCompressedTexImage_Exec	local_c0	srcImagePtr	CONFIRMED	first word of the descriptor passed to _glgProcessPixels: the level data pointer (levelRecord+0xd8)
+local	_glGetCompressedTexImage_Exec	local_bc	srcRowBytes	CONFIRMED	descriptor word 1: bytes per row of the source, from _gleRowBytes of the stored format and type
+local	_glGetCompressedTexImage_Exec	local_b8	srcConvertDescA	CONFIRMED	descriptor word 2: copy of srcConvertDescAOut
+local	_glGetCompressedTexImage_Exec	local_b4	srcConvertDescB	CONFIRMED	descriptor word 3: copy of srcConvertDescBOut
+local	_glGetCompressedTexImage_Exec	local_b0	dstImagePtr	CONFIRMED	descriptor word 4: destination pointer img + packOffset
+local	_glGetCompressedTexImage_Exec	local_ac	dstRowBytes	CONFIRMED	descriptor word 5: bytes per row of the destination (packedRowBytes)
+local	_glGetCompressedTexImage_Exec	local_a8	dstConvertDescA	CONFIRMED	descriptor word 6: copy of dstConvertDescAOut
+local	_glGetCompressedTexImage_Exec	local_a4	dstConvertDescB	CONFIRMED	descriptor word 7: copy of dstConvertDescBOut
+local	_glGetCompressedTexImage_Exec	local_a0	unitCount	CONFIRMED	descriptor word 8: the constant 2, the same field the _glGetTexImage_Exec descriptor holds
+local	_glGetCompressedTexImage_Exec	local_9c	packSwapBytes	INFERRED	descriptor word 9: 1 when the byte at ctx+0x31c8 (the first flag of the pack settings) is non-zero
+local	_glGetCompressedTexImage_Exec	local_94	imageWidth	CONFIRMED	descriptor word 11: level width (+0xc8)
+local	_glGetCompressedTexImage_Exec	local_90	imageHeight	CONFIRMED	descriptor word 12: level height (+0xca), also passed as the stale seventh argument of _glgProcessPixels
+local	_glGetCompressedTexImage_Exec	local_54	processReserved	CONFIRMED	descriptor tail byte, set to 0 before the call
+use	_glGetLightiv_Exec	fVar1	roundBias	INFERRED	FLOAT_00108e90 loaded once and added to the float lights parameters before the (int) conversion	^\s*fVar1\ =\ FLOAT_00108e90;$	+1
+use	_glGetLightiv_Exec	fVar1	roundBias	INFERRED	FLOAT_00108e90 loaded once and added to the float lights parameters before the (int) conversion	^\s*param_4\[1\]\ =\ \(int\)\(\*\(float\ \*\)\(iVar4\ \+\ 0x2864\)\ \+\ fVar1\);$	+2
+use	_glGetLightiv_Exec	fVar1	lightParamValue	CONFIRMED	float parameter of the light (spot exponent 0x1205, cutoff 0x1206, constant 0x1207 / linear 0x1208 / quadratic 0x1209 attenuation) converted to the int result	^\s*fVar1\ =\ \*\(float\ \*\)\(iVar4\ \+\ 0x287c\);$	+1
+use	_glGetLightiv_Exec	fVar1	lightParamValue	CONFIRMED	float parameter of the light (spot exponent 0x1205, cutoff 0x1206, constant 0x1207 / linear 0x1208 / quadratic 0x1209 attenuation) converted to the int result	^\s*fVar1\ =\ \*\(float\ \*\)\(iVar4\ \+\ 0x2890\);$	+2
+use	_glGetLightiv_Exec	fVar1	lightParamValue	CONFIRMED	float parameter of the light (spot exponent 0x1205, cutoff 0x1206, constant 0x1207 / linear 0x1208 / quadratic 0x1209 attenuation) converted to the int result	^\s*fVar1\ =\ \*\(float\ \*\)\(iVar4\ \+\ 0x2870\);$	+1
+use	_glGetLightiv_Exec	fVar1	lightParamValue	CONFIRMED	float parameter of the light (spot exponent 0x1205, cutoff 0x1206, constant 0x1207 / linear 0x1208 / quadratic 0x1209 attenuation) converted to the int result	^\s*fVar1\ =\ \*\(float\ \*\)\(iVar4\ \+\ 0x2874\);$	+1
+use	_glGetLightiv_Exec	fVar1	lightParamValue	CONFIRMED	float parameter of the light (spot exponent 0x1205, cutoff 0x1206, constant 0x1207 / linear 0x1208 / quadratic 0x1209 attenuation) converted to the int result	^\s*fVar1\ =\ \*\(float\ \*\)\(iVar4\ \+\ 0x2878\);$	+1
+use	_glGetLightiv_Exec	fVar1	lightParamValue	CONFIRMED	float parameter of the light (spot exponent 0x1205, cutoff 0x1206, constant 0x1207 / linear 0x1208 / quadratic 0x1209 attenuation) converted to the int result	^\s*iVar4\ =\ \(int\)\(fVar1\ \+\ FLOAT_00108e90\);$	+1
+use	_glGetLightiv_Exec	iVar4	lightRecord	CONFIRMED	ctx + (light - 0x4000) * 0x80: record of GL_LIGHT0 + n (light is checked against GL_LIGHT0..GL_LIGHT7); +0x2820 ambient, +0x2830 diffuse, +0x2840 specular, +0x2850 position	^\s*iVar4\ =\ param_1\ \+\ \(param_2\ \-\ 0x4000U\)\ \*\ 0x80;$	+1
+use	_glGetLightiv_Exec	iVar4	lightRecord	CONFIRMED	ctx + (light - 0x4000) * 0x80: record of GL_LIGHT0 + n (light is checked against GL_LIGHT0..GL_LIGHT7); +0x2820 ambient, +0x2830 diffuse, +0x2840 specular, +0x2850 position	^\s*\*param_4\ =\ \(int\)\(\(double\)\*\(float\ \*\)\(iVar4\ \+\ 0x2820\)\ \*\ DOUBLE_00108d90\);$	+4
+use	_glGetLightiv_Exec	iVar4	lightRecord	CONFIRMED	ctx + (light - 0x4000) * 0x80: record of GL_LIGHT0 + n (light is checked against GL_LIGHT0..GL_LIGHT7); +0x2820 ambient, +0x2830 diffuse, +0x2840 specular, +0x2850 position	^\s*\*param_4\ =\ \(int\)\(\(double\)\*\(float\ \*\)\(iVar4\ \+\ 0x2830\)\ \*\ DOUBLE_00108d90\);$	+4
+use	_glGetLightiv_Exec	iVar4	lightRecord	CONFIRMED	ctx + (light - 0x4000) * 0x80: record of GL_LIGHT0 + n (light is checked against GL_LIGHT0..GL_LIGHT7); +0x2820 ambient, +0x2830 diffuse, +0x2840 specular, +0x2850 position	^\s*\*param_4\ =\ \(int\)\(\(double\)\*\(float\ \*\)\(iVar4\ \+\ 0x2840\)\ \*\ DOUBLE_00108d90\);$	+4
+use	_glGetLightiv_Exec	iVar4	lightRecord	CONFIRMED	ctx + (light - 0x4000) * 0x80: record of GL_LIGHT0 + n (light is checked against GL_LIGHT0..GL_LIGHT7); +0x2820 ambient, +0x2830 diffuse, +0x2840 specular, +0x2850 position	^\s*\*param_4\ =\ \(int\)\*\(float\ \*\)\(iVar4\ \+\ 0x2850\);$	+4
+use	_glGetLightiv_Exec	iVar4	lightRecord	CONFIRMED	ctx + (light - 0x4000) * 0x80: record of GL_LIGHT0 + n (light is checked against GL_LIGHT0..GL_LIGHT7); +0x2820 ambient, +0x2830 diffuse, +0x2840 specular, +0x2850 position	^\s*\*param_4\ =\ \(int\)\(\*\(float\ \*\)\(iVar4\ \+\ 0x2860\)\ \+\ FLOAT_00108e90\);$	+3
+use	_glGetLightiv_Exec	iVar4	lightRecord	CONFIRMED	ctx + (light - 0x4000) * 0x80: record of GL_LIGHT0 + n (light is checked against GL_LIGHT0..GL_LIGHT7); +0x2820 ambient, +0x2830 diffuse, +0x2840 specular, +0x2850 position	^\s*fVar1\ =\ \*\(float\ \*\)\(iVar4\ \+\ 0x287c\);$	+1
+use	_glGetLightiv_Exec	iVar4	lightRecord	CONFIRMED	ctx + (light - 0x4000) * 0x80: record of GL_LIGHT0 + n (light is checked against GL_LIGHT0..GL_LIGHT7); +0x2820 ambient, +0x2830 diffuse, +0x2840 specular, +0x2850 position	^\s*fVar1\ =\ \*\(float\ \*\)\(iVar4\ \+\ 0x2890\);$	+1
+use	_glGetLightiv_Exec	iVar4	lightRecord	CONFIRMED	ctx + (light - 0x4000) * 0x80: record of GL_LIGHT0 + n (light is checked against GL_LIGHT0..GL_LIGHT7); +0x2820 ambient, +0x2830 diffuse, +0x2840 specular, +0x2850 position	^\s*fVar1\ =\ \*\(float\ \*\)\(iVar4\ \+\ 0x2870\);$	+1
+use	_glGetLightiv_Exec	iVar4	lightRecord	CONFIRMED	ctx + (light - 0x4000) * 0x80: record of GL_LIGHT0 + n (light is checked against GL_LIGHT0..GL_LIGHT7); +0x2820 ambient, +0x2830 diffuse, +0x2840 specular, +0x2850 position	^\s*fVar1\ =\ \*\(float\ \*\)\(iVar4\ \+\ 0x2874\);$	+1
+use	_glGetLightiv_Exec	iVar4	lightRecord	CONFIRMED	ctx + (light - 0x4000) * 0x80: record of GL_LIGHT0 + n (light is checked against GL_LIGHT0..GL_LIGHT7); +0x2820 ambient, +0x2830 diffuse, +0x2840 specular, +0x2850 position	^\s*fVar1\ =\ \*\(float\ \*\)\(iVar4\ \+\ 0x2878\);$	+1
+use	_glGetLightiv_Exec	iVar4	spotCutoffInt	INFERRED	0xb4 = 180: the integer reported for GL_SPOT_CUTOFF when the stored cutoff is negative	^\s*iVar4\ =\ 0xb4;$	+1
+use	_glGetLightiv_Exec	iVar4	spotCutoffInt	INFERRED	0xb4 = 180: the integer reported for GL_SPOT_CUTOFF when the stored cutoff is negative	^\s*iVar4\ =\ \(int\)\(fVar1\ \+\ FLOAT_00108e90\);$	+1
+use	_glGetLightiv_Exec	iVar4	spotCutoffInt	INFERRED	0xb4 = 180: the integer reported for GL_SPOT_CUTOFF when the stored cutoff is negative	^\s*\*param_4\ =\ iVar4;$	+1
+local	_glGetLightiv_Exec	dVar2	colorToIntScale	INFERRED	DOUBLE_00108d90 loaded once: the scale applied to the colour floats (ambient, diffuse, specular) of the light before the (int) conversion
+local	_glGetLightiv_Exec	dVar5	fourthComponent	INFERRED	4th float of the colour or position (alpha / w) read for params[3]; scaled by colorToIntScale for the colours
+use	_glGetTexEnvfv_Exec	fVar3	constantParamValue	CONFIRMED	0.0 (GL_TEXTURE_SHADER_NV enable query with the unit disabled) or 1.0 (default result) stored to *params	^\s*fVar3\ =\ 0\.0;$	+1
+use	_glGetTexEnvfv_Exec	fVar3	constantParamValue	CONFIRMED	0.0 (GL_TEXTURE_SHADER_NV enable query with the unit disabled) or 1.0 (default result) stored to *params	^\s*fVar3\ =\ 1\.0;$	+1
+use	_glGetTexEnvfv_Exec	fVar3	constantParamValue	CONFIRMED	0.0 (GL_TEXTURE_SHADER_NV enable query with the unit disabled) or 1.0 (default result) stored to *params	^\s*\*param_4\ =\ fVar3;$	+1
+use	_glGetTexEnvfv_Exec	fVar3	floatParamValue	CONFIRMED	float parameter loaded from the unit state (+0x3558 / +0x355c / +0x3560 and so on) and stored to *params	^\s*fVar3\ =\ \*\(float\ \*\)\(uVar5\ \*\ 0x7c\ \+\ param_1\ \+\ 0x355c\);$	+1
+use	_glGetTexEnvfv_Exec	fVar3	floatParamValue	CONFIRMED	float parameter loaded from the unit state (+0x3558 / +0x355c / +0x3560 and so on) and stored to *params	^\s*fVar3\ =\ \*\(float\ \*\)\(uVar5\ \*\ 0x7c\ \+\ param_1\ \+\ 0x3558\);$	+1
+use	_glGetTexEnvfv_Exec	fVar3	floatParamValue	CONFIRMED	float parameter loaded from the unit state (+0x3558 / +0x355c / +0x3560 and so on) and stored to *params	^\s*fVar3\ =\ \*\(float\ \*\)\(uVar5\ \*\ 0x7c\ \+\ param_1\ \+\ 0x3560\);$	+1
+use	_glGetTexEnvfv_Exec	fVar3	floatParamValue	CONFIRMED	float parameter loaded from the unit state (+0x3558 / +0x355c / +0x3560 and so on) and stored to *params	^\s*fVar3\ =\ \*\(float\ \*\)\(iVar4\ \+\ 0x3598\);$	+1
+use	_glGetTexEnvfv_Exec	fVar3	floatParamValue	CONFIRMED	float parameter loaded from the unit state (+0x3558 / +0x355c / +0x3560 and so on) and stored to *params	^\s*fVar3\ =\ \*\(float\ \*\)\(iVar4\ \+\ 0x359c\);$	+1
+use	_glGetTexEnvfv_Exec	fVar3	floatParamValue	CONFIRMED	float parameter loaded from the unit state (+0x3558 / +0x355c / +0x3560 and so on) and stored to *params	^\s*\*param_4\ =\ fVar3;$@2	+1
+use	_glGetTexEnvfv_Exec	fVar3	paramsInput	INFERRED	*params read for pname 0x86d9: the value is stored as a 16-bit word into the unit state (+0x356c) and converted back for *params (the same in _glGetTexEnviv_Exec)	^\s*fVar3\ =\ \*param_4;$	+3
+use	_glGetTexEnvfv_Exec	fVar3	alphaComponent	INFERRED	fourth 16-bit component (unit state +0x3576, converted with the 2^23 magic) stored to params[3] for pname 0x86e0	^\s*fVar3\ =\ GH_U2F\(\(unsigned\ int\)\(\(\*\(ushort\ \*\)\(iVar4\ \+\ 0x3576\)\ \|\ 0x4b000000\)\)\)\ \-\ 8388608\.0;$	+1
+use	_glGetTexEnvfv_Exec	fVar3	alphaComponent	INFERRED	fourth 16-bit component (unit state +0x3576, converted with the 2^23 magic) stored to params[3] for pname 0x86e0	^\s*fVar3\ =\ \*\(float\ \*\)\(iVar4\ \+\ 0x3594\);$	+1
+use	_glGetTexEnvfv_Exec	fVar3	alphaComponent	INFERRED	fourth 16-bit component (unit state +0x3576, converted with the 2^23 magic) stored to params[3] for pname 0x86e0	^\s*param_4\[3\]\ =\ fVar3;$	+1
+local	_glGetTexEnvfv_Exec	uVar1	ushortParamValue	CONFIRMED	16-bit texture environment state word (iVar4+0x3564 / +0x356a) read for pname 0x86df / 0x86e4 and converted to the float result
+local	_glGetTexEnvfv_Exec	uVar5	activeTexUnitThenIntParamValue	CONFIRMED	ctx+0x53d4 (active texture unit; indexes the 0x7c-byte texture unit state records at ctx+0x3524), later overwritten with the integer parameter value that is converted to float for *params
+local	_glGetTexEnvfv_Exec	iVar4	texUnitState	CONFIRMED	ctx + activeTexUnit * 0x7c: the active texture unit's environment state record (same value as texUnitState in _glGetTexEnviv_Exec)
+local	_glGetTexLevelParameterfv_Exec_body	param_3	level	CONFIRMED	the level of detail: 0xe is the highest valid level (above it GL_INVALID_VALUE); selects the level record at textureObject + face * 0x168 + level * 0x18
+local	_glGetTexLevelParameterfv_Exec_body	param_4	pname	CONFIRMED	the queried parameter: 0x1000 (GL_TEXTURE_WIDTH), 0x1001 (height), 0x8071 (depth) and 0x1005 (border) are answered from the level record, the other accepted names (0x1003, 0x805c..0x8061, 0x869f..0x86a1, 0x884a) from the driver callback; also passed to the callback
+local	_glGetTexLevelParameterfv_Exec_body	param_5	params	CONFIRMED	the result pointer: receives the query value converted to a float
+local	_glGetTexLevelParameterfv_Exec_body	iVar7	textureObject	CONFIRMED	result of _gleLookUpTexture(glContext, target); the flags short at +0x24 bit 0x100 selects the driver query path, zero raises GL_INVALID_ENUM
+local	_glGetTexLevelParameterfv_Exec_body	iVar5	levelRecord	CONFIRMED	textureObject + face * 0x168 + level * 0x18: width at +0xc8, height at +0xca, depth at +0xcc, border at +0xce
+local	_glGetTexLevelParameterfv_Exec_body	uVar4	faceIndex	CONFIRMED	cube map face (target - 0x8515, 0 for other targets) passed to the driver query callback ctx+0x479c
+local	_glGetTexLevelParameterfv_Exec_body	local_38	queryResult	CONFIRMED	the query value (declared as an array, element 0 is used): the level width, height, depth or border, or 0xffffffff when the driver callback has to compute it
+local	_glGetTexLevelParameterfv_Exec_body	cVar2	rendererInfoByte79	CONFIRMED	byte +0x79 of the renderer info at ctx+0x468c (same load as in _gliSwapBuffers)
+local	_glGetTexLevelParameterfv_Exec_body	bVar1	rendererByte79IsZero	CONFIRMED	rendererInfoByte79 == 0: selects the mask 0x17000000 (instead of 0x17ffffff) for the dirty word and omits the ctx+0x318 test
+local	_glGetTexLevelParameterfv_Exec_body	iVar8	dirtyWord	CONFIRMED	the dirty word read from the cursor over ctx+0x324 (nine words); the first non-zero one sets bit 0x800000 in ctx+0x31c
+local	_glGetTexLevelParameterfv_Exec_body	uVar11	forwardedLevel	INFERRED	copy of param_3 kept in a register and passed on as a stale argument of _gleUpdateFramebufferCompleteness
+local	_glGetTexLevelParameterfv_Exec_body	puVar9	forwardedPname	INFERRED	copy of param_4 kept in a register and passed on as a stale argument of _gleUpdateFramebufferCompleteness
+local	_glGetTexLevelParameterfv_Exec_body	pfVar10	forwardedParams	INFERRED	copy of param_5 kept in a register and passed on as a stale argument of _gleUpdateFramebufferCompleteness
+local	_glGetTexLevelParameterfv_Exec_body	extraout_f1	f1AfterCall	INFERRED	Ghidra pseudo-register extraout_f1 (the value a call left in f1); no source-level role
+local	_glGetTexLevelParameterfv_Exec_body	extraout_f1_00	f1AfterCall1	INFERRED	Ghidra pseudo-register extraout_f1_00 (the value a call left in f1); no source-level role
+use	_glGetUniformfvARB_Exec	iVar4	sharedStateThenProgramObject	CONFIRMED	ctx+0x5148 (shared state, mutex at +0x8028, hash table at +0x6018), then reassigned to _gleLookupHashObject(table, programObj): the program object (kind +0x10 == 0x8b40 GL_PROGRAM_OBJECT_ARB, link status +0x3c, uniform count +0x30, shader handle +0x40)	^\s*iVar4\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x5148\);$	+4
+use	_glGetUniformfvARB_Exec	iVar4	sharedStateThenProgramObject	CONFIRMED	ctx+0x5148 (shared state, mutex at +0x8028, hash table at +0x6018), then reassigned to _gleLookupHashObject(table, programObj): the program object (kind +0x10 == 0x8b40 GL_PROGRAM_OBJECT_ARB, link status +0x3c, uniform count +0x30, shader handle +0x40)	^\s*iVar4\ =\ _gleLookupHashObject\(iVar4\ \+\ 0x6018,param_2\);$	+2
+use	_glGetUniformfvARB_Exec	iVar4	sharedStateThenProgramObject	CONFIRMED	ctx+0x5148 (shared state, mutex at +0x8028, hash table at +0x6018), then reassigned to _gleLookupHashObject(table, programObj): the program object (kind +0x10 == 0x8b40 GL_PROGRAM_OBJECT_ARB, link status +0x3c, uniform count +0x30, shader handle +0x40)	^\s*if\ \(\(\(\(\*\(int\ \*\)\(iVar4\ \+\ 0x10\)\ !=\ 0x8b40\)\ \|\|\ \(\*\(char\ \*\)\(iVar4\ \+\ 0x3c\)\ !=\ '\\x01'\)\)\ \|\|$	+6
+use	_glGetUniformfvARB_Exec	iVar4	sharedStateThenProgramObject	CONFIRMED	ctx+0x5148 (shared state, mutex at +0x8028, hash table at +0x6018), then reassigned to _gleLookupHashObject(table, programObj): the program object (kind +0x10 == 0x8b40 GL_PROGRAM_OBJECT_ARB, link status +0x3c, uniform count +0x30, shader handle +0x40)	^\s*iVar5\ =\ \*\(int\ \*\)\(iVar4\ \+\ 0x4c\);$	+1
+use	_glGetUniformfvARB_Exec	iVar5	uniformValues	INFERRED	program object +0x4c: the array of 0x10-byte uniform value records indexed by location	^\s*iVar5\ =\ \*\(int\ \*\)\(iVar4\ \+\ 0x4c\);$	+1
+use	_glGetUniformfvARB_Exec	iVar5	uniformValues	INFERRED	program object +0x4c: the array of 0x10-byte uniform value records indexed by location	^\s*puVar6\ =\ \(uint\ \*\)\(iVar5\ \+\ iVar4\);$	+1
+use	_glGetUniformfvARB_Exec	iVar5	uniformValues	INFERRED	program object +0x4c: the array of 0x10-byte uniform value records indexed by location	^\s*\*param_4\ =\ \*\(float\ \*\)\(iVar5\ \+\ iVar4\);$	+1
+use	_glGetUniformfvARB_Exec	iVar5	uniformValues	INFERRED	program object +0x4c: the array of 0x10-byte uniform value records indexed by location	^\s*\*param_4\ =\ \*\(float\ \*\)\(iVar5\ \+\ iVar4\);$@2	+1
+use	_glGetUniformfvARB_Exec	iVar5	uniformValues	INFERRED	program object +0x4c: the array of 0x10-byte uniform value records indexed by location	^\s*\*param_4\ =\ \*\(float\ \*\)\(iVar5\ \+\ iVar4\);$@3	+1
+use	_glGetUniformfvARB_Exec	iVar5	uniformValues	INFERRED	program object +0x4c: the array of 0x10-byte uniform value records indexed by location	^\s*\*param_4\ =\ \*\(float\ \*\)\(iVar5\ \+\ iVar4\);$@4	+1
+use	_glGetUniformfvARB_Exec	iVar5	uniformValues	INFERRED	program object +0x4c: the array of 0x10-byte uniform value records indexed by location	^\s*\*param_4\ =\ \*\(float\ \*\)\(iVar5\ \+\ iVar4\);$@5	+1
+use	_glGetUniformfvARB_Exec	iVar5	uniformValues	INFERRED	program object +0x4c: the array of 0x10-byte uniform value records indexed by location	^\s*\*param_4\ =\ \*\(float\ \*\)\(iVar5\ \+\ iVar4\);$@6	+1
+use	_glGetUniformfvARB_Exec	iVar5	uniformValues	INFERRED	program object +0x4c: the array of 0x10-byte uniform value records indexed by location	^\s*fVar1\ =\ \*\(float\ \*\)\(iVar5\ \+\ iVar4\);$	+1
+local	_glGetUniformfvARB_Exec	fVar1	lastComponent	CONFIRMED	float converted from the uniform's stored words (int via the 2^52 magic, or raw float bits via GH_U2F) for the last component, stored to params[n-1] at the shared tail
+local	_glGetUniformfvARB_Exec	dVar2	intToDoubleBias	CONFIRMED	holds DOUBLE_00108d58 = 4503601774854144.0 (the 0x43300000xxxxxxxx magic) subtracted after CONCAT44(0x43300000,x) to convert an integer to double
+local	_glGetUniformfvARB_Exec	puVar6	uniformValue	INFERRED	pointer to the value words of the uniform at location (uniformValues + location * 0x10), read as int or float bits
+local	_glGetVertexAttribdvARB_Exec	cVar1	mapSize	INFERRED	byte of the evaluator map tables (0x9da8 for 1-D, 0x9db8 for 2-D maps) for the attribute index: the number of components of the attribute map, returned for GL_VERTEX_ATTRIB_MAP1_SIZE_APPLE (0x8a02) and GL_VERTEX_ATTRIB_MAP2_SIZE_APPLE (0x8a06)
+local	_glGetVertexAttribdvARB_Exec	fVar2	srcComponent	CONFIRMED	the float read from the source cursor and stored to params as a double
+local	_glGetVertexAttribdvARB_Exec	uVar3	trueOrFalseHighWord	CONFIRMED	0x3ff00000 (the high word of the double 1.0) or 0: stored as the high word of params[0] for the boolean results (array enabled, normalized), with the low word 0
+local	_glGetVertexAttribdvARB_Exec	uVar4	srcWord	CONFIRMED	word read from the order table that is converted to double (xor 0x80000000 for the signed conversion)
+local	_glGetVertexAttribdvARB_Exec	iVar7	mapRecord	CONFIRMED	map record of the attribute: mapData + index * 0x660 (2-D maps, points at +0x37c8, orders at +0x37a8 / +0x37ac) or mapData + index * 0xb0 (1-D maps, points at +0x2cb8, order at +0x2ca8)
+local	_glGetVertexAttribdvARB_Exec	iVar9	mapDataThenElementsLeft	CONFIRMED	the evaluator map data returned by _gleGetMapData, later the number of coefficient elements (order * order * size) counted down while they are copied
+local	_glGetVertexAttribdvARB_Exec	pdVar8	lastParam	CONFIRMED	params + 1: the address of the second element of the two element result (domain or order), the loop ends when params passes it
+local	_glGetVertexAttribdvARB_Exec	dVar10	convertedValue	CONFIRMED	the integer result converted to a double: CONCAT44(0x43300000, word) minus the int-to-double bias
+local	_glGetVertexAttribdvARB_Exec	dVar11	signedOrUnsignedBias	CONFIRMED	the int-to-double bias subtracted from dVar10: DOUBLE_00108d58 for values converted as signed, DOUBLE_00108d70 for values converted as unsigned
+local	_glGetVertexAttribdvARB_Exec	lVar12	indexBit	CONFIRMED	1 << index (___ashldi3(1, 0, index)): the bit of the attribute in the 64-bit enabled arrays mask at clientState+0x330 / +0x334
+local	_glGetVertexAttribdvARB_Exec	uStack_1c	intConvertWord	CONFIRMED	low word of the int-to-double pair for a single result: the integer value (sign bit flipped with 0x80000000 for signed values)
+local	_glMaterialfv_Exec	fVar1	colorIndexSpecular	CONFIRMED	GL_COLOR_INDEXES (pname 0x1603): params[2], the specular colour index, times FLOAT_00108e5c; stored to the material record at +0x2f8
+local	_glMaterialfv_Exec	fVar2	colorIndexAmbient	CONFIRMED	GL_COLOR_INDEXES (pname 0x1603): params[0], the ambient colour index, times FLOAT_00108e5c; stored to the material record at +0x2f0
+local	_glMaterialfv_Exec	fVar3	colorIndexDiffuse	CONFIRMED	GL_COLOR_INDEXES (pname 0x1603): params[1], the diffuse colour index, times FLOAT_00108e5c; stored to the material record at +0x2f4
+local	_glMaterialfv_Exec	uVar6	firstFaceSlot	INFERRED	material slot index of the first face written: 0 front (GL_FRONT 0x404), 1 back (GL_BACK 0x405); the slot record is 0x10 bytes at ctx+0x2f0
+local	_glMaterialfv_Exec	uVar8	lastFaceSlot	INFERRED	material slot index of the last face written: 0 for GL_FRONT, 1 for GL_BACK and GL_FRONT_AND_BACK
+local	_glMaterialfv_Exec	iVar7	materialSlot	INFERRED	cursor over the 0x10-byte material colour index records of ctx+0x2f0 for the faces firstFaceSlot..lastFaceSlot
+local	_glMaterialfv_Exec	local_40	colorRed	CONFIRMED	params[0], first float of the 4-float vector copied from params and passed by address to _gleLightMaterialRGBAChange_*
+local	_glMaterialfv_Exec	local_3c	colorGreen	CONFIRMED	params[1], second float of the 4-float vector passed by address (&local_40) to _gleLightMaterialRGBAChange_*
+local	_glMaterialfv_Exec	local_38	colorBlue	CONFIRMED	params[2], third float of the 4-float vector passed by address (&local_40) to _gleLightMaterialRGBAChange_*
+local	_glMaterialfv_Exec	local_34	colorAlpha	CONFIRMED	params[3], fourth float of the 4-float vector passed by address (&local_40) to _gleLightMaterialRGBAChange_*
+local	_glMaterialfv_Exec	local_30	intToDoubleHigh	CONFIRMED	0x43300000: high word of the 2^52 magic double built with uStack_2c to convert the unsigned int ctx+0x468c+0xa0 (the shininess limit) to double
+local	_glMaterialfv_Exec	uStack_2c	maxShininessBiased	INFERRED	(*(ctx+0x468c)+0xa0) ^ 0x80000000: the maximum shininess limit with the sign bit flipped, the low word of the magic double (the 0x43300000xxxxxxxx idiom)
+local	_glMaterialfv_Exec	fparam_1_00	shininess	CONFIRMED	(double)params[0] for pname 0x1601 GL_SHININESS: range checked against 0 and the limit, passed to _gleLightMaterialShineChange_*
+use	_glRotateZ_Exec	fVar1	savedElement4	CONFIRMED	copy of matrix element 4 taken before element 4 is overwritten (current matrix, then the inverse matrix)	^\s*fVar1\ =\ pfVar3\[4\];$	+1
+use	_glRotateZ_Exec	fVar1	savedElement4	CONFIRMED	copy of matrix element 4 taken before element 4 is overwritten (current matrix, then the inverse matrix)	^\s*pfVar3\[4\]\ =\ \(fVar1\ \*\ fparam_2\ \-\ \(\*pfVar3\ \*\ fparam_1\)\);$	+2
+use	_glRotateZ_Exec	fVar1	savedElement4	CONFIRMED	copy of matrix element 4 taken before element 4 is overwritten (current matrix, then the inverse matrix)	^\s*fVar1\ =\ pfVar3\[4\];$@2	+1
+use	_glRotateZ_Exec	fVar1	savedElement4	CONFIRMED	copy of matrix element 4 taken before element 4 is overwritten (current matrix, then the inverse matrix)	^\s*pfVar3\[4\]\ =\ \(fVar1\ \*\ fparam_2\ \-\ \(\*pfVar3\ \*\ fparam_1\)\);$@2	+2
+use	_glRotateZ_Exec	fVar1	savedElement6	CONFIRMED	copy of matrix element 6 taken before element 6 is overwritten (current matrix, then the inverse matrix)	^\s*fVar1\ =\ pfVar3\[6\];$	+1
+use	_glRotateZ_Exec	fVar1	savedElement6	CONFIRMED	copy of matrix element 6 taken before element 6 is overwritten (current matrix, then the inverse matrix)	^\s*pfVar3\[6\]\ =\ \(fVar1\ \*\ fparam_2\ \-\ \(pfVar3\[2\]\ \*\ fparam_1\)\);$	+2
+use	_glRotateZ_Exec	fVar1	savedElement6	CONFIRMED	copy of matrix element 6 taken before element 6 is overwritten (current matrix, then the inverse matrix)	^\s*fVar1\ =\ pfVar3\[6\];$@2	+1
+use	_glRotateZ_Exec	fVar1	savedElement6	CONFIRMED	copy of matrix element 6 taken before element 6 is overwritten (current matrix, then the inverse matrix)	^\s*pfVar3\[6\]\ =\ \(fVar1\ \*\ fparam_2\ \-\ \(pfVar3\[2\]\ \*\ fparam_1\)\);$@2	+2
+use	_glRotateZ_Exec	fVar2	savedElement1	CONFIRMED	copy of matrix element 1 taken before element 1 is overwritten (current matrix, then the inverse matrix)	^\s*fVar2\ =\ pfVar3\[1\];$	+1
+use	_glRotateZ_Exec	fVar2	savedElement1	CONFIRMED	copy of matrix element 1 taken before element 1 is overwritten (current matrix, then the inverse matrix)	^\s*pfVar3\[1\]\ =\ \(fVar2\ \*\ fparam_2\ \+\ \(pfVar3\[5\]\ \*\ fparam_1\)\);$	+2
+use	_glRotateZ_Exec	fVar2	savedElement1	CONFIRMED	copy of matrix element 1 taken before element 1 is overwritten (current matrix, then the inverse matrix)	^\s*fVar2\ =\ pfVar3\[1\];$@2	+1
+use	_glRotateZ_Exec	fVar2	savedElement1	CONFIRMED	copy of matrix element 1 taken before element 1 is overwritten (current matrix, then the inverse matrix)	^\s*pfVar3\[1\]\ =\ \(fVar2\ \*\ fparam_2\ \+\ \(pfVar3\[5\]\ \*\ fparam_1\)\);$@2	+2
+use	_glRotateZ_Exec	fVar2	savedElement3	CONFIRMED	copy of matrix element 3 taken before element 3 is overwritten (current matrix, then the inverse matrix)	^\s*fVar2\ =\ pfVar3\[3\];$	+1
+use	_glRotateZ_Exec	fVar2	savedElement3	CONFIRMED	copy of matrix element 3 taken before element 3 is overwritten (current matrix, then the inverse matrix)	^\s*pfVar3\[3\]\ =\ \(fVar2\ \*\ fparam_2\ \+\ \(pfVar3\[7\]\ \*\ fparam_1\)\);$	+2
+use	_glRotateZ_Exec	fVar2	savedElement3	CONFIRMED	copy of matrix element 3 taken before element 3 is overwritten (current matrix, then the inverse matrix)	^\s*fVar2\ =\ pfVar3\[3\];$@2	+1
+use	_glRotateZ_Exec	fVar2	savedElement3	CONFIRMED	copy of matrix element 3 taken before element 3 is overwritten (current matrix, then the inverse matrix)	^\s*pfVar3\[3\]\ =\ \(fVar2\ \*\ fparam_2\ \+\ \(pfVar3\[7\]\ \*\ fparam_1\)\);$@2	+2
+local	_glRotateZ_Exec	fparam_1	sinAngle	CONFIRMED	rotation about z: element 4 becomes m4*c - m0*s and element 0 becomes m0*c + m4*s, so fparam_1 multiplies the cross terms (sine)
+local	_glRotateZ_Exec	fparam_2	cosAngle	CONFIRMED	rotation about z: the diagonal terms m0*fparam_2, m4*fparam_2, ... (cosine)
+local	_glRotateZ_Exec	uVar5	currentMatrixDirtyBits	INFERRED	word ctx+0x50a8 (dirty bits of the current matrix): OR-ed into the matrix-func-dirty word ctx+0x50ac and, masked with 0xff000003, into ctx+0x50b0
+local	_glShaderSourceARB_Exec_body	param_3	stringCount	CONFIRMED	the count argument of glShaderSourceARB: the number of source strings (the body returns without work when it is not positive)
+local	_glShaderSourceARB_Exec_body	param_4	strings	CONFIRMED	the string argument of glShaderSourceARB: the array of source string pointers
+local	_glShaderSourceARB_Exec_body	param_5	lengths	CONFIRMED	the length argument of glShaderSourceARB: per-string lengths; NULL or a negative entry means the string is NUL terminated
+local	_glShaderSourceARB_Exec_body	iVar6	sharedStateThenShaderObject	CONFIRMED	ctx+0x5148 (shared state: mutex at +0x8028, hash table at +0x6018), later the shader object found by _gleLookupHashObject for the handle (kind +0x10 must be 0x8b48, GL_SHADER_OBJECT_ARB)
+local	_glShaderSourceARB_Exec_body	iVar4	stringOffset	CONFIRMED	byte offset (string index * 4) into the strings and lengths arrays
+local	_glShaderSourceARB_Exec_body	iVar5	stringLength	CONFIRMED	length of the current string: the entry of lengths, or _strlen when lengths is NULL or the entry is negative
+local	_glShaderSourceARB_Exec_body	iVar9	totalLength	CONFIRMED	sum of the string lengths, the size of the source text; stored to shaderObject+0x28 (plus one when a newline is appended)
+local	_glShaderSourceARB_Exec_body	pcVar7	sourceBuffer	CONFIRMED	the _malloc'd buffer (totalLength + 2) that receives the concatenated source; stored to shaderObject+0x2c
+local	_glShaderSourceARB_Exec_body	pcVar8	writeCursorThenScanCursor	CONFIRMED	end of the text copied so far in sourceBuffer, later the cursor of the pass that converts carriage returns
+local	_glShaderSourceARB_Exec_body	bVar1	allStringsCopied	INFERRED	true when the copy loop went through all strings without stopping at a string that ended in NUL; only then is the buffer installed, otherwise it is freed
+local	_glShaderSourceARB_Exec_body	cVar2	currentChar	CONFIRMED	the character of sourceBuffer being examined by the carriage return conversion (CR LF becomes a space, a lone CR a newline)
+use	_glTexCoordPointer_Exec	iVar5	oldBufferObject	CONFIRMED	buffer object currently bound to this texcoord array (client state +0x350 + 4*slot); its reference count (+8) is decremented and the object freed at zero	^\s*iVar5\ =\ \*\(int\ \*\)\(iVar1\ \+\ iVar14\ \+\ 0x350\);$	+1
+use	_glTexCoordPointer_Exec	iVar5	oldBufferObject	CONFIRMED	buffer object currently bound to this texcoord array (client state +0x350 + 4*slot); its reference count (+8) is decremented and the object freed at zero	^\s*if\ \(iVar13\ !=\ iVar5\)\ \{$	+4
+use	_glTexCoordPointer_Exec	uVar2	copiedWord	INFERRED	word of the bound buffer object copied (srcCursor to dstCursor) into the per-unit table of every active texture unit	^\s*uVar2\ =\ \*puVar9;$	+1
+use	_glTexCoordPointer_Exec	uVar2	copiedWord	INFERRED	word of the bound buffer object copied (srcCursor to dstCursor) into the per-unit table of every active texture unit	^\s*\*puVar6\ =\ uVar2;$	+1
+use	_glTexCoordPointer_Exec	uVar2	clientWord350	INFERRED	client state word +0x350 read and written back unchanged around the +0x354 dirty bit update	^\s*uVar2\ =\ \*\(undefined4\ \*\)\(iVar8\ \+\ 0x350\);$	+1
+use	_glTexCoordPointer_Exec	uVar2	clientWord350	INFERRED	client state word +0x350 read and written back unchanged around the +0x354 dirty bit update	^\s*\*\(undefined4\ \*\)\(iVar8\ \+\ 0x350\)\ =\ uVar2;$	+1
+use	_glTexCoordPointer_Exec	uVar7	clientTextureUnitThenArrayBit	CONFIRMED	ctx+0x53d8 (client active texture unit), later overwritten with 0x1000000 << unit, the bit of this texcoord array in the client state change word +0x354	^\s*uVar7\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x53d8\);$	+1
+use	_glTexCoordPointer_Exec	uVar7	clientTextureUnitThenArrayBit	CONFIRMED	ctx+0x53d8 (client active texture unit), later overwritten with 0x1000000 << unit, the bit of this texcoord array in the client state change word +0x354	^\s*uVar11\ =\ \(uVar7\ \&\ 1\)\ \*\ \-4\ \+\ 4;$	+1
+use	_glTexCoordPointer_Exec	uVar7	clientTextureUnitThenArrayBit	CONFIRMED	ctx+0x53d8 (client active texture unit), later overwritten with 0x1000000 << unit, the bit of this texcoord array in the client state change word +0x354	^\s*uVar12\ =\ uVar7\ \+\ 8;$	+1
+use	_glTexCoordPointer_Exec	uVar7	clientTextureUnitThenArrayBit	CONFIRMED	ctx+0x53d8 (client active texture unit), later overwritten with 0x1000000 << unit, the bit of this texcoord array in the client state change word +0x354	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x497c\)\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x497c\)\ \|\ 8\ <<\ \(uVar7\ \&\ 0x3f\);$	+2
+use	_glTexCoordPointer_Exec	uVar7	clientTextureUnitThenArrayBit	CONFIRMED	ctx+0x53d8 (client active texture unit), later overwritten with 0x1000000 << unit, the bit of this texcoord array in the client state change word +0x354	^\s*\*\(uint\ \*\)\(iVar8\ \+\ 0x354\)\ =\ \*\(uint\ \*\)\(iVar8\ \+\ 0x354\)\ \|\ uVar7;$	+1
+use	_glTexCoordPointer_Exec	uVar7	clientTextureUnitThenArrayBit	CONFIRMED	ctx+0x53d8 (client active texture unit), later overwritten with 0x1000000 << unit, the bit of this texcoord array in the client state change word +0x354	^\s*if\ \(uVar7\ ==\ 0x800000\)\ \{$	+1
+use	_glTexCoordPointer_Exec	uVar7	clientTextureUnitThenArrayBit	CONFIRMED	ctx+0x53d8 (client active texture unit), later overwritten with 0x1000000 << unit, the bit of this texcoord array in the client state change word +0x354	^\s*\*\(uint\ \*\)\(iVar8\ \+\ 0x33c\)\ =\ \*\(uint\ \*\)\(iVar8\ \+\ 0x33c\)\ \&\ \~uVar7;$	+1
+use	_glTexCoordPointer_Exec	uVar7	clientTextureUnitThenArrayBit	CONFIRMED	ctx+0x53d8 (client active texture unit), later overwritten with 0x1000000 << unit, the bit of this texcoord array in the client state change word +0x354	^\s*\*\(uint\ \*\)\(iVar8\ \+\ 0x33c\)\ =\ \*\(uint\ \*\)\(iVar8\ \+\ 0x33c\)\ \|\ uVar7;$	+1
+use	_glTexCoordPointer_Exec	uVar7	clientDirtyWord354	INFERRED	client state word +0x354 reloaded and OR-ed with 0x10 after the buffer binding changed	^\s*uVar7\ =\ \*\(uint\ \*\)\(iVar8\ \+\ 0x354\);$	+1
+use	_glTexCoordPointer_Exec	uVar7	clientDirtyWord354	INFERRED	client state word +0x354 reloaded and OR-ed with 0x10 after the buffer binding changed	^\s*\*\(uint\ \*\)\(iVar8\ \+\ 0x354\)\ =\ uVar7\ \|\ 0x10;$	+1
+use	_glTexCoordPointer_Exec	uVar7	dispatchSelectMask	INFERRED	-(dispatch slot ctx+0x4684 word +0xc == 0): all ones selects between ctx+0x4680 and ctx+0x4684 for the glArrayElement dispatch slot	^\s*uVar7\ =\ \-\(uint\)\(\*\(int\ \*\)\(\*\(uint\ \*\)\(param_1\ \+\ 0x4684\)\ \+\ 0xc\)\ ==\ 0\);$	+1
+use	_glTexCoordPointer_Exec	uVar7	dispatchSelectMask	INFERRED	-(dispatch slot ctx+0x4684 word +0xc == 0): all ones selects between ctx+0x4680 and ctx+0x4684 for the glArrayElement dispatch slot	^\s*\(\(\*\(uint\ \*\)\(param_1\ \+\ 0x4680\)\ \&\ uVar7\ \|\ \*\(uint\ \*\)\(param_1\ \+\ 0x4684\)\ \&\ \~uVar7\)\ \+\ 0xc\)\ =$	+1
+use	_glTexCoordPointer_Exec	uVar7	shiftedFormatCode	CONFIRMED	array format code (type code + 4 * (size - 1)) shifted by formatNibbleShift: stored at arrayRecord+0x30 and merged into the packed format word ctx+0x49b0	^\s*uVar7\ =\ iVar8\ <<\ \(uVar11\ \&\ 0x3f\);$	+1
+use	_glTexCoordPointer_Exec	uVar7	shiftedFormatCode	CONFIRMED	array format code (type code + 4 * (size - 1)) shifted by formatNibbleShift: stored at arrayRecord+0x30 and merged into the packed format word ctx+0x49b0	^\s*uVar7\ =\ iVar14\ <<\ \(uVar11\ \&\ 0x3f\);$	+1
+use	_glTexCoordPointer_Exec	uVar7	shiftedFormatCode	CONFIRMED	array format code (type code + 4 * (size - 1)) shifted by formatNibbleShift: stored at arrayRecord+0x30 and merged into the packed format word ctx+0x49b0	^\s*\*\(uint\ \*\)\(iVar3\ \+\ 0x30\)\ =\ uVar7;$	+2
+use	_glTexCoordPointer_Exec	iVar8	typeCode	CONFIRMED	0 GL_SHORT (0x1402), 1 GL_INT (0x1404), 2 GL_FLOAT (0x1406), 3 GL_DOUBLE (0x140a); stored at arrayRecord+0x2d	^\s*iVar8\ =\ 1;$	+1
+use	_glTexCoordPointer_Exec	iVar8	typeCode	CONFIRMED	0 GL_SHORT (0x1402), 1 GL_INT (0x1404), 2 GL_FLOAT (0x1406), 3 GL_DOUBLE (0x140a); stored at arrayRecord+0x2d	^\s*iVar8\ =\ 0;$	+1
+use	_glTexCoordPointer_Exec	iVar8	typeCode	CONFIRMED	0 GL_SHORT (0x1402), 1 GL_INT (0x1404), 2 GL_FLOAT (0x1406), 3 GL_DOUBLE (0x140a); stored at arrayRecord+0x2d	^\s*iVar8\ =\ 2;$	+1
+use	_glTexCoordPointer_Exec	iVar8	typeCode	CONFIRMED	0 GL_SHORT (0x1402), 1 GL_INT (0x1404), 2 GL_FLOAT (0x1406), 3 GL_DOUBLE (0x140a); stored at arrayRecord+0x2d	^\s*iVar8\ =\ 3;$	+1
+use	_glTexCoordPointer_Exec	iVar8	typeCode	CONFIRMED	0 GL_SHORT (0x1402), 1 GL_INT (0x1404), 2 GL_FLOAT (0x1406), 3 GL_DOUBLE (0x140a); stored at arrayRecord+0x2d	^\s*\*\(char\ \*\)\(iVar3\ \+\ 0x2d\)\ =\ \(char\)iVar8;$	+1
+use	_glTexCoordPointer_Exec	iVar8	typeCode	CONFIRMED	0 GL_SHORT (0x1402), 1 GL_INT (0x1404), 2 GL_FLOAT (0x1406), 3 GL_DOUBLE (0x140a); stored at arrayRecord+0x2d	^\s*iVar14\ =\ iVar8\ \+\ 4;$	+1
+use	_glTexCoordPointer_Exec	iVar8	typeCode	CONFIRMED	0 GL_SHORT (0x1402), 1 GL_INT (0x1404), 2 GL_FLOAT (0x1406), 3 GL_DOUBLE (0x140a); stored at arrayRecord+0x2d	^\s*uVar7\ =\ iVar8\ <<\ \(uVar11\ \&\ 0x3f\);$	+1
+use	_glTexCoordPointer_Exec	iVar8	typeCode	CONFIRMED	0 GL_SHORT (0x1402), 1 GL_INT (0x1404), 2 GL_FLOAT (0x1406), 3 GL_DOUBLE (0x140a); stored at arrayRecord+0x2d	^\s*iVar14\ =\ iVar8\ \+\ 8;$	+1
+use	_glTexCoordPointer_Exec	iVar8	typeCode	CONFIRMED	0 GL_SHORT (0x1402), 1 GL_INT (0x1404), 2 GL_FLOAT (0x1406), 3 GL_DOUBLE (0x140a); stored at arrayRecord+0x2d	^\s*iVar14\ =\ iVar8\ \+\ 0xc;$	+1
+use	_glTexCoordPointer_Exec	iVar14	arrayRecords	CONFIRMED	clientState + 0x10: base of the 0x18-byte client array records	^\s*iVar14\ =\ iVar8\ \+\ 0x10;$	+1
+use	_glTexCoordPointer_Exec	iVar14	arrayRecords	CONFIRMED	clientState + 0x10: base of the 0x18-byte client array records	^\s*iVar3\ =\ iVar14\ \+\ uVar12\ \*\ 0x18;$	+1
+use	_glTexCoordPointer_Exec	iVar14	arrayRecords	CONFIRMED	clientState + 0x10: base of the 0x18-byte client array records	^\s*iVar5\ =\ \*\(int\ \*\)\(iVar1\ \+\ iVar14\ \+\ 0x350\);$	+1
+use	_glTexCoordPointer_Exec	iVar14	arrayRecords	CONFIRMED	clientState + 0x10: base of the 0x18-byte client array records	^\s*puVar6\ =\ \(undefined4\ \*\)\(uVar12\ \*\ 4\ \+\ iVar14\ \+\ 0x3d0\);$	+1
+use	_glTexCoordPointer_Exec	iVar14	arrayRecords	CONFIRMED	clientState + 0x10: base of the 0x18-byte client array records	^\s*puVar6\ =\ \(undefined4\ \*\)\(uVar12\ \*\ 4\ \+\ iVar14\ \+\ 0x3d0\);$@2	+1
+use	_glTexCoordPointer_Exec	iVar14	arrayRecords	CONFIRMED	clientState + 0x10: base of the 0x18-byte client array records	^\s*\*\(int\ \*\)\(iVar1\ \+\ iVar14\ \+\ 0x350\)\ =\ iVar13;$	+1
+use	_glTexCoordPointer_Exec	iVar14	elementSize	CONFIRMED	bytes per component of the array type: 4 (int / float), 2 (short), 8 (double); stored at arrayRecord+0x2c and used for the default stride	^\s*iVar14\ =\ 4;$	+1
+use	_glTexCoordPointer_Exec	iVar14	elementSize	CONFIRMED	bytes per component of the array type: 4 (int / float), 2 (short), 8 (double); stored at arrayRecord+0x2c and used for the default stride	^\s*iVar14\ =\ 2;$	+1
+use	_glTexCoordPointer_Exec	iVar14	elementSize	CONFIRMED	bytes per component of the array type: 4 (int / float), 2 (short), 8 (double); stored at arrayRecord+0x2c and used for the default stride	^\s*iVar14\ =\ 8;$	+1
+use	_glTexCoordPointer_Exec	iVar14	elementSize	CONFIRMED	bytes per component of the array type: 4 (int / float), 2 (short), 8 (double); stored at arrayRecord+0x2c and used for the default stride	^\s*\*\(char\ \*\)\(iVar3\ \+\ 0x2c\)\ =\ \(char\)iVar14;$	+1
+use	_glTexCoordPointer_Exec	iVar14	elementSize	CONFIRMED	bytes per component of the array type: 4 (int / float), 2 (short), 8 (double); stored at arrayRecord+0x2c and used for the default stride	^\s*param_4\ =\ param_2\ \*\ iVar14;$	+1
+use	_glTexCoordPointer_Exec	iVar14	sizeTypeCode	CONFIRMED	typeCode + 4 * (size - 1) for size 2, 3, 4: the format code merged into ctx+0x49b0	^\s*iVar14\ =\ iVar8\ \+\ 4;$	+1
+use	_glTexCoordPointer_Exec	iVar14	sizeTypeCode	CONFIRMED	typeCode + 4 * (size - 1) for size 2, 3, 4: the format code merged into ctx+0x49b0	^\s*iVar14\ =\ iVar8\ \+\ 8;$	+1
+use	_glTexCoordPointer_Exec	iVar14	sizeTypeCode	CONFIRMED	typeCode + 4 * (size - 1) for size 2, 3, 4: the format code merged into ctx+0x49b0	^\s*iVar14\ =\ iVar8\ \+\ 0xc;$	+1
+use	_glTexCoordPointer_Exec	iVar14	sizeTypeCode	CONFIRMED	typeCode + 4 * (size - 1) for size 2, 3, 4: the format code merged into ctx+0x49b0	^\s*uVar7\ =\ iVar14\ <<\ \(uVar11\ \&\ 0x3f\);$	+1
+local	_glTexCoordPointer_Exec	iVar4	newRefCount	CONFIRMED	reference count of oldBufferObject (+8) after the decrement; _gleFreeBufferObject is called when it reaches 0
+local	_glTexCoordPointer_Exec	iVar1	arraySlotOffset	INFERRED	arraySlot * 4: offset into the per-array tables of the client state (buffer objects at +0x350, array pointers at ctx+0x48f8)
+local	_glTexCoordPointer_Exec	iVar3	arrayRecord	CONFIRMED	client array record of this texcoord array: clientState + 0x10 + arraySlot * 0x18 (+0x20 pointer, +0x24 stride, +0x28 type, +0x2a size, +0x2c element bytes, +0x34 format word)
+local	_glTexCoordPointer_Exec	iVar13	boundBufferObject	INFERRED	buffer object bound to the client array target (client state +0x358, or +0x35c when the array bit is 0x800000)
+local	_glTexCoordPointer_Exec	uVar10	arrayFormatWord	CONFIRMED	stride << 7 | (type & 0xf) | (size & 3) << 4: compared with arrayRecord+0x34 to skip unchanged state
+local	_glTexCoordPointer_Exec	uVar11	formatNibbleShift	INFERRED	(unit & 1) * -4 + 4: bit position (4 or 0) of this unit's nibble in the packed texcoord format word ctx+0x49b0
+local	_glTexCoordPointer_Exec	uVar12	arraySlot	CONFIRMED	client active texture unit + 8: the slot of this texcoord array in the client array table (checked against 0x11)
+local	_gleAddVertexMaterial2Sided	param_1	glContext	CONFIRMED	the GL context: its material records start at ctx+0x2c20 (0x240 bytes each, front then back), its per-face list heads at ctx+0x4dd0 / +0x4dd4 and the list tail at ctx+0x4dd8
+local	_gleAddVertexMaterial2Sided	param_2	vertex	CONFIRMED	the vertex record: the front material pointer is at +0x74 and the back material pointer at +0x78 (the same slots _gleVtxLightRGBAFrontPtr and _gleVtxLightFastRGBABackPtr read)
+local	_gleAddVertexMaterial2Sided	piVar2	materialSlot	CONFIRMED	cursor over the two material pointers of the vertex (+0x74, then +0x78)
+local	_gleAddVertexMaterial2Sided	piVar6	listHeadSlot	CONFIRMED	cursor over the per-face list head pointers at ctx+0x4dd0 / +0x4dd4
+local	_gleAddVertexMaterial2Sided	iVar1	material	CONFIRMED	the material of the current face taken from materialSlot: its touched word (+0x1e0) is set to 1 and it is moved behind the list head when it is neither the context's own record nor already the head
+local	_gleAddVertexMaterial2Sided	iVar3	facesLeft	CONFIRMED	loop counter that starts at 1 and runs while it is not below 0: two turns, front and back
+local	_gleAddVertexMaterial2Sided	iVar4	contextMaterial	CONFIRMED	the context's own material record of the current face (ctx+0x2c20, advanced by 0x240 per face): such a material is never reordered
+local	_gleAddVertexMaterial2Sided	iVar5	nextLinkThenHeadNext	CONFIRMED	the material's next link (+0x23c) while it is unlinked, later the next link of the list head that the material is inserted before
+local	_gleAddVertexMaterial2Sided	iVar7	previousLinkThenListHead	CONFIRMED	the material's previous link (+0x238) while it is unlinked, later the list head (*listHeadSlot) behind which the material is inserted
+local	_gleBindPipelineProgram	param_2	pipelineStageIndex	INFERRED	0 = vertex program, 1 = fragment program (selects dirty words 0x31c|0x400000 vs |0x1000000 and counts 9/5 words); callers pass it as pipelineStageIndex/loopIndex; also indexes ctx+0x5420/+0x5428 and the 0xa30-byte per-stage state
+local	_gleBindPipelineProgram	iVar7	programObject	CONFIRMED	the program object being bound (looked up, created or the stage default): refcount at +8, stage at +0x4ca, embedded record at +0x10
+local	_gleBindPipelineProgram	iVar14	programRecord	CONFIRMED	programObject+0x10: the embedded record handed to _gleCreatePluginPipelineProgram / _glePPUpdateProgram, with its dirty mask at +0x18
+local	_gleBindPipelineProgram	iVar13	previousProgramObject	CONFIRMED	the object that was bound at ctx+0x5420+stage*4 before; its refcount is dropped at the end (freed at 0)
+local	_gleBindPipelineProgram	iVar9	stageStateOffset	CONFIRMED	stage * 0xa30: offset of the per-stage state inside the shared state (+0x8a74 / +0x8a98)
+local	_gleBindPipelineProgram	iVar2	wordOffset	CONFIRMED	loopIndex * 4 inside the dirty-word loop
+local	_gleBindPipelineProgram	uVar4	copiedWord	CONFIRMED	word copied from the program record (+0x4a8..) into the per-renderer table at ctx+0x886c+stage*4
+local	_gleBindPipelineProgram	puVar3	setClipInterpFunc	CONFIRMED	PTR__gleSetClipInterpFunc, stored at ctx+0x49cc
+local	_gleBuildProjectionTransformFuncAV	param_1	glContext	CONFIRMED	the GL context (matrix at ctx+0x27c0, function cache list at ctx+0x5088, matrix id at ctx+0x5084)
+local	_gleBuildProjectionTransformFuncAV	param_2	optionBits	INFERRED	variant bits of the generated code: 1 = w known to be 1, 2 = z known 0, 4 = w1 clip-code variant (set from the matrix id), 8 = no clip codes; they are part of the cache key (+0xc)
+local	_gleBuildProjectionTransformFuncAV	uVar2	matrixIdentifierThenClass	CONFIRMED	matrix identifier from _gleGenerateMatrixIdentifier (stored at ctx+0x5084), then reduced to the matrix class used as the cache key (+8): 0xbfeffbfe identity, 0x3fcff3fc diagonal, 0 full
+local	_gleBuildProjectionTransformFuncAV	uVar1	maskedMatrixIdentifier	CONFIRMED	matrixIdentifier & 0x3fcff3fc, compared with 0x3fcff3fc to detect a diagonal matrix
+local	_gleBuildProjectionTransformFuncAV	iVar3	cacheElem	CONFIRMED	function cache element created by _gleCreateFuncCacheElem(…,0xb8): key at +8/+0xc, code from +0x20
+local	_gleBuildProjectionTransformFuncAV	piVar13	cacheListHead	CONFIRMED	head of the function cache list at ctx+0x5088 (the entry is moved to the front on a hit)
+local	_gleBuildProjectionTransformFuncAV	uVar8	branchInstruction	CONFIRMED	result of _gleRTCBuildABranch, stored back into the patched instruction slot
+local	_gleBuildProjectionTransformFuncAV	iVar4	emittedWordCount	CONFIRMED	number of words of generated code, checked against the 0xb8 allocation and passed to _gleShrinkFuncCacheElem and the push-instructions callback
+local	_gleBuildProjectionTransformFuncAV	puVar6	pushInstructionsFunc	CONFIRMED	PTR__glePushInstructions: called with the generated code to make it executable
+local	_gleBuildProjectionTransformFuncNO	param_2	optionBits	INFERRED	variant bits: bit 1 forces the 0xff00 matrix-id mask, bit 8 added when ctx+0x5080 is 0x1101 and ctx+0x4e1c is 0x1c00; part of the cache key (+0xc)
+local	_gleBuildProjectionTransformFuncNO	uVar3	matrixIdentifierThenCacheKey	CONFIRMED	matrix identifier from _gleGenerateMatrixIdentifier (stored at ctx+0x5084), OR 0xff00 when bit 2 of optionBits is set, then used as the cache key (+8)
+local	_gleBuildProjectionTransformFuncNO	iVar4	cacheElem	CONFIRMED	function cache element created by _gleCreateFuncCacheElem(…,0x90): key at +8/+0xc, code from +0x20
+local	_gleBuildProjectionTransformFuncNO	piVar15	cacheListHead	CONFIRMED	head of the function cache list at ctx+0x5088
+local	_gleCalculateOptions	param_1	functionId	CONFIRMED	function-id record built by _gleSetFunctionIDToList: header word, then two ushort layout words per attribute
+local	_gleCalculateOptions	param_2	attributeCount	CONFIRMED	number of attributes in the record (the second ushort table starts at functionId+4+attributeCount*2)
+local	_gleCalculateOptions	uVar5	options	CONFIRMED	accumulated option bits returned (0x1/0x2, 0x4, 0x8..0x28, 0x40)
+local	_gleCalculateOptions	puVar7	selectorWordCursor	CONFIRMED	cursor over the first ushort table (attribute index << 10, size-1 << 8, word offset)
+local	_gleCalculateOptions	uVar1	attributeIndex	CONFIRMED	selector word >> 10: the attribute slot (6, below 0x2a, 0x2a-0x2b, higher)
+local	_gleCalculateOptions	uVar3	typeCode	CONFIRMED	4-bit element type code of the matching entry in the second ushort table (bits 10-13)
+local	_gleCalculateOptions	bVar2	typeAndSizeMatch	INFERRED	true when the type code and the selector size agree (types 0,1,8,9 with size 1, types 2,3,10,11 with size 2), so no conversion option is needed
+local	_gleCalculateOptions	uVar8	selectorComponentCount	CONFIRMED	(selector word >> 8 & 3) + 1: component count of the selector
+local	_gleCalculateOptions	iVar10	attribute6ByteOffset	INFERRED	(offset field of the slot-6 selector) * 4, set when its type is 0xe with size field 1; starts at -1
+local	_gleCalculateOptions	iVar11	highAttributeByteOffset	INFERRED	(offset field of the last selector with slot >= 0x2c) * 4; compared with attribute6ByteOffset to set option 0x40
+use	_gleCreateTextureLevel	iVar3	framebufferCursor	INFERRED	cursor over the per-attachment records (stride 0x20, +0xf8/+0xfc) of the current framebuffer object at ctx+0x744c, which are marked changed when the level was attached	^\s*iVar3\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x744c\)\ \+\ 0x10;$	+1
+use	_gleCreateTextureLevel	iVar3	framebufferCursor	INFERRED	cursor over the per-attachment records (stride 0x20, +0xf8/+0xfc) of the current framebuffer object at ctx+0x744c, which are marked changed when the level was attached	^\s*\*\(undefined4\ \*\)\(iVar3\ \+\ 0xf8\)\ =\ 1;$	+1
+use	_gleCreateTextureLevel	iVar3	framebufferCursor	INFERRED	cursor over the per-attachment records (stride 0x20, +0xf8/+0xfc) of the current framebuffer object at ctx+0x744c, which are marked changed when the level was attached	^\s*\*\(undefined4\ \*\)\(iVar3\ \+\ 0xfc\)\ =\ 0;$	+2
+use	_gleCreateTextureLevel	iVar3	allocResult	CONFIRMED	result of _gleAllocateTextureLevel: non-zero marks the level allocated (flag 0x10)	^\s*iVar3\ =\ _gleAllocateTextureLevel\(param_1,param_2,param_3\);$	+2
+local	_gleCreateTextureLevel	param_2	textureObject	INFERRED	passed unchanged to _gleAllocateTextureLevel(glContext, texture, level); +0x24 bit 0x100 selects the no-storage path
+local	_gleCreateTextureLevel	param_3	textureLevel	CONFIRMED	the level record: +0 reference count (incremented), +4 width, +6 height, +8 depth, +0xa border, +0xb flags, +0x10 format, +0x12 type, +0x14 data pointer; passed to _gleAllocateTextureLevel and _gleTexLevelStorage
+local	_gleCreateTextureLevel	param_5	width	CONFIRMED	stored as the 16-bit width at level+4 and passed as the width argument of _glePixelPackSettings(glContext, format, type, width, height, ..)
+local	_gleCreateTextureLevel	param_6	height	CONFIRMED	stored as the 16-bit height at level+6 and passed as the height argument of _glePixelPackSettings
+local	_gleCreateTextureLevel	param_7	depth	CONFIRMED	stored as the 16-bit depth at level+8; a zero width, height or depth clears the level
+local	_gleCreateTextureLevel	param_11	levelStorage	INFERRED	data pointer stored at level+0x14 when the generic path is taken (0 = no storage supplied); cleared when the pixel pack fast path is not usable
+local	_gleCreateTextureLevel	bVar1	levelFlagsBefore	INFERRED	flags byte of the level record (+0xb) on entry: bit 0x80 (a framebuffer-attached level) sets the framebuffer change flags and is kept in the new flags 0xa0 / 0xb1
+local	_gleCreateTextureLevel	bVar2	useGenericPath	INFERRED	true unless the client pixel data can be referenced in place (pack settings aligned, no pixel transfer); when true the level is described with _gleTexLevelStorage and allocated
+local	_gleCreateTextureLevel	uVar5	height16	CONFIRMED	(short)height stored at level+6 and as +0xe in the generic path
+local	_gleCreateTextureLevel	uVar6	width16	CONFIRMED	(short)width stored at level+4 and +0xc in the generic path
+local	_gleCreateTextureLevel	local_60	rowBytes	CONFIRMED	rowBytesOut of _glePixelPackSettings: bytes per row; compared with (rowBytes / pixelBytes) * pixelBytes
+local	_gleCreateTextureLevel	auStack_5c	rowPadding	CONFIRMED	rowPaddingOut argument of _glePixelPackSettings (not read)
+local	_gleCreateTextureLevel	local_58	imageBytes	CONFIRMED	imageBytesOut of _glePixelPackSettings: bytes per image; imageBytes / rowBytes is stored as the level's row count at +0xe
+local	_gleCreateTextureLevel	auStack_54	imagePadding	CONFIRMED	imagePaddingOut argument of _glePixelPackSettings (not read)
+local	_gleCreateTextureLevel	local_50	pixelBytes	CONFIRMED	pixelBytesOut of _glePixelPackSettings: bytes per pixel; rowBytes / pixelBytes is the row length stored at level+0xc
+local	_gleCreateTextureLevel	local_4c	startOffset	CONFIRMED	startOffsetOut of _glePixelPackSettings (element 0): byte offset of the first pixel, added to pixels
+local	_gleCullPolygonPtrStack	param_2	polygonListThenCursor	CONFIRMED	array of pointers to the polygon vertices (each to an x,y float pair); advanced one entry per loop turn so it ends as a cursor
+local	_gleCullPolygonPtrStack	param_3	vertexCount	CONFIRMED	number of vertex pointers (loop runs vertexCount-1 times)
+local	_gleCullPolygonPtrStack	param_4	backFacingOut	CONFIRMED	out: set to 1 when the polygon is back facing (callers store it in their backFacing local); written only when the polygon is not culled
+local	_gleCullPolygonPtrStack	pfVar8	firstPoint	CONFIRMED	x,y pair of the first vertex, reused for the closing edge term
+local	_gleCullPolygonPtrStack	fVar2	lastPointX	CONFIRMED	x of the most recently read vertex (starts as the first vertex x)
+local	_gleCullPolygonPtrStack	fVar3	lastPointY	CONFIRMED	y of the most recently read vertex (starts as the first vertex y)
+local	_gleCullPolygonPtrStack	fVar4	previousPointX	CONFIRMED	x of the vertex read in the previous turn
+local	_gleCullPolygonPtrStack	fVar5	previousPointY	CONFIRMED	y of the vertex read in the previous turn
+local	_gleCullPolygonPtrStack	fVar6	areaSum	CONFIRMED	shoelace sum (twice the signed polygon area) started at 0.0 (FLOAT_00108e50), closing term added in the final compare
+local	_gleCullPolygonPtrStack	iVar7	edgesLeft	CONFIRMED	loop counter, starts at vertexCount-1
+local	_gleCullPolygonPtrStack	uVar1	frontFacing	INFERRED	1 when the ctx+0x4fe1 winding flag equals (area > 0): the polygon faces front; backFacingOut receives frontFacing^1 (callers name it backFacing); compared with ctx+0x4fe3 to decide the cull
+local	_gleDecomposePrimitiveVertices	param_1	glContext	CONFIRMED	the GL context: the caller passes its glContext; ctx+0x7588 / ctx+0x758c hold the size and address of the scratch vertex buffer
+local	_gleDecomposePrimitiveVertices	param_2	attributeMap	INFERRED	descriptor (ctx+0x48d0 at the caller): byte 0 is the number of entries, byte 2 the input words per vertex, and from +4 one 16-bit entry per attribute (bits 10-15 destination slot, bits 8-9 component count - 1, bits 6-7 byte select, bits 0-5 source word index)
+local	_gleDecomposePrimitiveVertices	param_3	vertexCount	CONFIRMED	number of vertices to decompose: the caller passes (ctx+0x4858 - ctx+0x4868) / stride; counts the outer loop and sizes the scratch buffer (count << 8)
+local	_gleDecomposePrimitiveVertices	param_4	inputVerticesThenCursor	INFERRED	input vertex words (ctx+0x4868 at the caller), advanced by attributeMap byte 2 (words per input vertex) * 4 bytes after every vertex
+local	_gleDecomposePrimitiveVertices	param_5	outputVerticesThenCursor	INFERRED	output vertex records of 0x100 bytes (ctx+0x4854 at the caller), replaced by the scratch buffer ctx+0x758c when more than 0x24 vertices are decomposed, advanced by 0x100 per vertex
+local	_gleDecomposePrimitiveVertices	param_6	bufferReallocated	CONFIRMED	out flag (decomposeResultFlags at the caller): set to 1 when the scratch vertex buffer at ctx+0x758c was reallocated, which makes the caller continue with that buffer
+local	_gleDecomposePrimitiveVertices	bVar1	entryCount	CONFIRMED	byte 0 of attributeMap: the number of 16-bit attribute entries per vertex; bounds the inner loop
+local	_gleDecomposePrimitiveVertices	iVar2	entryOffsetThenSourceOffset	INFERRED	byte offset (entry index * 2) of the current attribute entry in attributeMap, in the byte select case reused as the source byte offset (source word index * 4)
+local	_gleDecomposePrimitiveVertices	uVar3	byteSelect	INFERRED	bits 6-7 of the attribute entry in the byte copy case (destination slot 6, written to byte +0x7c of the output record): 1 takes byte 0 of the source word, 3 takes byte 3, other values copy nothing
+local	_gleDecomposePrimitiveVertices	uVar5	selectedByte	CONFIRMED	the source byte chosen by byteSelect, stored to byte +0x7c of the output vertex record
+local	_gleDecomposePrimitiveVertices	uVar7	newBufferThenCopiedWord	INFERRED	the _malloc result of the scratch buffer (stored to ctx+0x758c), later the word being copied from the source to the output record
+local	_gleDrawArraysSyncState	param_2	arrayBatch	INFERRED	record of a drawn array batch: vertex count at +4, vertex stride at +8, per-attribute byte sizes at +0xd..+0x10 and the vertex data from +0x2c; its last vertex ((count - 1) * stride) is copied into the current vertex state of the context (normal ctx+0x2b0, color ctx+0x2a0, ...)
+local	_gleEvalMap2	iVar9	outputEnd	CONFIRMED	ctx+0x4858: the current end of the vertex buffer; passed with the output start to the ctx+0x489c hook, whose result is stored back to ctx+0x4858
+local	_gleEvalMap2	iVar14	controlPointsThenSlotPointsFor4Components	INFERRED	control points pointer of the color / texture-size-4 attribute maps (mapData+0x1ca8 or +0x1e58) passed to _gleEvalDomain2Coord, later one of four copies of the points pointer of the current generic slot map (starting at mapData+0x37c8, 0x660 bytes per slot) used for 4 component slots
+local	_gleEvalMap2	iVar15	slotPointsFor2Components	INFERRED	copy of the points pointer of the current generic slot map (mapData+0x37c8, advancing 0x660 per slot) that is used for 2 component slots (slot size byte 8)
+local	_gleEvalMap2	iVar16	slotPointsFor3Components	INFERRED	copy of the points pointer of the current generic slot map (mapData+0x37c8, advancing 0x660 per slot) that is used for 3 component slots (slot size byte 0xc)
+local	_gleEvalMap2	iVar17	slotPointsFor1Component	INFERRED	copy of the points pointer of the current generic slot map (mapData+0x37c8, advancing 0x660 per slot) that is used for 1 component slots (slot size byte 4)
+local	_gleFeedbackLineLoopFunc_body	bVar6	vertexProgramThenFixedFunctionThenNewLoop	INFERRED	three roles: true when ctx+0x4664 or ctx+0x5434 is set (vertex program path), then inverted to true for the fixed function path (selects the ctx+0x5060 callbacks over _gleVPEmulate), then reassigned to (ctx+0x4a18 == 0): the loop starts here, so the first segment uses the reset token
+local	_gleFeedbackLineLoopFunc_body	sVar9	vertexStride	CONFIRMED	ctx+0x487c: divisor of (bufferEnd - firstVertex) for the vertex count, byte size of the closing vertex copy (>> 3 doublewords) and the amount ctx+0x4858 grows by
+local	_gleFeedbackLineLoopFunc_body	uVar12	vertexCursor	INFERRED	vertex pointer: starts as ctx+0x4854 (first vertex), replaced by ctx+0x4864 on the _gleVPEmulate path, advanced through the segments, and finally the last vertex address (first + count * 0x100 - 0x100)
+local	_gleFeedbackLineLoopFunc_body	uVar14	vertexCountThenCopyCursor	INFERRED	vertex count ((ctx+0x4858 - ctx+0x4854) / stride, plus one for the closing vertex), later reused as the destination pointer (ctx+0x4858 or ctx+0x4854) of the per-segment vertex copies
+local	_gleFeedbackLineLoopFunc_body	iVar7	bufferEndThenVertexEndThenListCount	INFERRED	ctx+0x4858 (end of the vertex buffer where the closing vertex is copied), then first + count * 0x100 (end of the vertices), then the number of vertex pointers in polygonList ((listCursor - polygonList) >> 2)
+local	_gleFeedbackLineLoopFunc_body	iVar8	copyIndex	CONFIRMED	counter of the closing vertex copy; byte offset is copyIndex * 8
+local	_gleFeedbackLineLoopFunc_body	iVar4	doublewordsLeft	CONFIRMED	stride >> 3, counts down once per copied doubleword
+local	_gleFeedbackLineLoopFunc_body	iVar2	copyOffset	CONFIRMED	byte offset copyIndex * 8 of the doubleword being copied from the closing source vertex to the buffer end
+local	_gleFeedbackLineLoopFunc_body	uVar5	closeSourceThenClipFlagsThenSecondVertex	INFERRED	vertex that is copied as the closing vertex (the first vertex, or the previous one when ctx+0x4a18 is set), then the clip flags returned by the ctx+0x5060 callback / _gleVPEmulate (bits 8-15 reject, low byte = clip plane mask), then the second vertex (first + 0x100) of the unclipped path
+local	_gleFeedbackLineLoopFunc_body	uVar3	firstSegmentToken	CONFIRMED	0x707 (GL_LINE_RESET_TOKEN) or 0x702 (GL_LINE_TOKEN): token type of the first line segment, converted to double and passed to _gleFeedbackToken
+local	_gleFeedbackLineLoopFunc_body	uVar10	nextSegmentToken	CONFIRMED	0x702 (GL_LINE_TOKEN) or 0x707 (GL_LINE_RESET_TOKEN): token type of the later segments, converted to double and passed to _gleFeedbackToken
+local	_gleFeedbackLineLoopFunc_body	dVar15	intToDoubleBiasThenForwardedF1	INFERRED	DOUBLE_00108d70 (the 0x43300000 int-to-double bias) in the token paths, and the stale f1 left by the ctx+0x5074 callback / the copy loop forwarded to _gleClipLinesPlane
+local	_gleFeedbackLineLoopFunc_body	puVar13	listCursor	CONFIRMED	cursor in polygonList: advances 2 entries (vertex pair) per segment while it is filled, and while the segments are emitted
+local	_gleFeedbackLineLoopFunc_body	puVar1	pairSecondVertexSlot	CONFIRMED	address of the second entry of the vertex pair that was just emitted (listCursor + 1), read by _gleFeedbackHitRecord
+local	_gleFeedbackLineStripFunc_body	bVar5	vertexProgramThenFixedFunctionThenNewStrip	INFERRED	three roles: true when ctx+0x4664 or ctx+0x5434 is set, then inverted to the fixed function flag (true selects the ctx+0x5060.. callbacks, false _gleVPEmulate), then reassigned to (ctx+0x4a18 == 0): the strip starts here, so the first segment uses the reset token
+local	_gleFeedbackLineStripFunc_body	uVar9	vertexCursor	INFERRED	vertex pointer: starts as ctx+0x4854 (first vertex), replaced by ctx+0x4864 on the _gleVPEmulate path, advanced through the segments, and finally the last vertex address (first + count * 0x100 - 0x100)
+local	_gleFeedbackLineStripFunc_body	uVar4	clipFlagsThenSegmentStart	INFERRED	result of the ctx+0x5060 callback / _gleVPEmulate (bits 8-15 reject, low byte = clip plane mask), later reused as the second vertex (first + 0x100) and then as the first vertex of the segment being emitted
+local	_gleFeedbackLineStripFunc_body	uVar8	copyDestinationThenNextVertex	INFERRED	destination pointer (ctx+0x4858 or ctx+0x4854, advancing 0x100 per segment) of the vertex copies that make the segment pairs in polygonList, later the end vertex (segment start + 0x100) of the segment being emitted
+local	_gleFeedbackLineStripFunc_body	iVar3	vertexEndThenListCount	INFERRED	first vertex + vertexCount * 0x100 (end of the vertices), then the number of vertex pointers in polygonList ((listCursor - polygonList) >> 2), replaced by the count left after _gleClipLinesPlane/_gleClipLines
+local	_gleFeedbackLineStripFunc_body	uVar2	firstSegmentToken	CONFIRMED	0x707 (GL_LINE_RESET_TOKEN) or 0x702 (GL_LINE_TOKEN): token type of the first line segment, converted to double and passed to _gleFeedbackToken
+local	_gleFeedbackLineStripFunc_body	uVar6	nextSegmentToken	CONFIRMED	0x702 (GL_LINE_TOKEN) or 0x707 (GL_LINE_RESET_TOKEN): token type of the later segments, converted to double and passed to _gleFeedbackToken
+local	_gleFeedbackLineStripFunc_body	dVar11	intToDoubleBiasThenForwardedF1	INFERRED	DOUBLE_00108d70 (the 0x43300000 int-to-double bias) in the token paths, and the stale f1 left by the ctx+0x5074 callback / the copy loop forwarded to _gleClipLinesPlane
+local	_gleFeedbackLineStripFunc_body	puVar10	listCursor	CONFIRMED	write cursor of polygonList (2 entries per segment), later the read cursor advancing 2 entries per emitted segment
+local	_gleFeedbackLineStripFunc_body	puVar1	pairSecondVertexSlot	CONFIRMED	address of the second entry of the vertex pair that was just emitted (listCursor + 1), read by _gleFeedbackHitRecord
+local	_gleFeedbackLinesFunc_body	bVar2	vertexProgramThenFixedFunctionPath	INFERRED	true when ctx+0x4664 or ctx+0x5434 is set, then inverted at once: true selects the ctx+0x5060.. callbacks, false _gleVPEmulate
+local	_gleFeedbackLinesFunc_body	uVar8	vertexCursor	INFERRED	vertex pointer: starts as ctx+0x4854 (first vertex), replaced by ctx+0x4864 on the _gleVPEmulate path, then advanced 0x200 (two vertices) per line segment or by 0x100 while polygonList is filled
+local	_gleFeedbackLinesFunc_body	uVar7	vertexCountThenClippedCount	INFERRED	vertex count ((ctx+0x4858 - ctx+0x4854) / stride; fewer than 2 returns), replaced by the vertex count left after _gleClipLinesPlane/_gleClipLines
+local	_gleFeedbackLinesFunc_body	uVar4	clipFlags	INFERRED	result of the ctx+0x5060 callback / _gleVPEmulate: bits 8-15 non-zero reject, the low byte is the clip plane mask passed to _gleClipLines
+local	_gleFeedbackLinesFunc_body	iVar5	vertexEnd	CONFIRMED	first vertex + vertexCount * 0x100: end of the vertices; the segment loop runs while cursor < vertexEnd - 0x100
+local	_gleFeedbackLinesFunc_body	uVar3	vertexEndThenRemainingVertices	INFERRED	end of the vertices (cursor + count * 0x100), then the number of vertices ((end - cursor + 0xff) >> 8) counted down while polygonList is filled
+local	_gleFeedbackLinesFunc_body	puVar6	listCursor	CONFIRMED	write cursor of polygonList (one vertex pointer per vertex), then the read cursor advancing 2 entries (vertex pair) per emitted line segment
+local	_gleFeedbackLinesFunc_body	puVar1	pairSecondVertexSlot	CONFIRMED	address of the second entry of the vertex pair that was just emitted (listCursor + 1), read by _gleFeedbackHitRecord
+local	_gleFeedbackLinesFunc_body	dVar10	forwardedF1ThenIntToDoubleBias	INFERRED	f1 returned by the ctx+0x5074 callback, forwarded to _gleClipLinesPlane, later DOUBLE_00108d70 (the 0x43300000 int-to-double bias used to build the token value)
+local	_gleFeedbackPolygonFunc_body	cVar1	cullEnabled	INFERRED	char at ctx+0x4fe0: nonzero selects the culling calls (_gleCullPolygonStack / _gleCullPolygonPtrStack) and the per-facing polygon mode (same load as _gleFeedbackTrianglesFunc_body)
+local	_gleFeedbackPolygonFunc_body	bVar3	vertexProgramThenFixedFunctionPath	INFERRED	true when ctx+0x4664 or ctx+0x5434 is set, then inverted at once into fixedFunctionPath: true selects the ctx+0x5060.. callbacks, false _gleVPEmulate
+local	_gleFeedbackPolygonFunc_body	bVar4	lightingActive	INFERRED	fixedFunctionPath and ctx+0x30aa (lighting enabled)
+local	_gleFeedbackPolygonFunc_body	local_3c	backFacing	INFERRED	out parameter of _gleCullPolygonStack/_gleCullPolygonPtrStack (declared as an int array, only element 0 is used): non-zero when the polygon is back-facing; indexes the per-facing lighting tables and selects ctx+0x34d0/0x34d2
+local	_gleFeedbackPolygonFunc_body	local_40	clippedCount	CONFIRMED	out parameter of _gleClipPolyPlane/_gleClipPoly: vertex count of the clipped polygon, zero means nothing is left
+local	_gleFeedbackPolygonFunc_body	uVar7	clipFlagsThenFlipCount	INFERRED	result of the ctx+0x5060 callback / _gleVPEmulate (bits 8-15 reject, low byte = clip plane mask for _gleClipPoly), later reused as the remaining vertex count of the _gleVPFlipColors loop
+local	_gleFeedbackPolygonFunc_body	uVar13	vertexCountThenClippedCount	INFERRED	vertex count ((ctx+0x4858 - ctx+0x4854) / stride; fewer than 3 returns), replaced by clippedCount after a clip call that produced vertices
+local	_gleFeedbackPolygonFunc_body	uVar15	remainingVertices	CONFIRMED	counts down from the vertex count while the pointer list polygonList is filled
+local	_gleFeedbackPolygonFunc_body	iVar14	firstVertexThenCursorThenCullResultThenPolygonMode	INFERRED	vertex pointer: ctx+0x4854, replaced by ctx+0x4864 on the _gleVPEmulate path, advanced by 0x100 while polygonList is filled; in the other path it holds the cull result of _gleCullPolygonPtrStack and then the polygon mode (facePolygonMode - 0x1b00, 3 when ctx+0x4a18 is set for a line mode)
+local	_gleFeedbackPolygonFunc_body	iVar8	cullResultThenPolygonModeThenVertexPtr	INFERRED	result of _gleCullPolygonStack, then the polygon mode (facePolygonMode - 0x1b00, 3 when ctx+0x4a18 is set for a line mode) in the unclipped path, and in the clipped path the vertex pointer taken from the list for _gleVPFlipColors
+local	_gleFeedbackPolygonFunc_body	piVar6	listCursorThenClipDestThenFlipCursor	INFERRED	write cursor of polygonList while it is filled, then the destination list of the clip calls (spareList or the old polygonList), then the read cursor of the _gleVPFlipColors loop
+local	_gleFeedbackPolygonFunc_body	uVar9	planeClippedFlag	INFERRED	last argument of _gleClipPoly: 0 when no clip plane clipping was done, 1 after _gleClipPolyPlane filled the other list (the two lists are swapped then)
+local	_gleFeedbackPolygonFunc_body	pcVar10	lightingFunc	INFERRED	lighting callback: per facing from ctx+0x4de8 (unclipped path) or ctx+0x4df0 (pointer list path) when two-sided, else the single entry
+local	_gleFeedbackQuadStripFunc_body	cVar1	cullEnabled	INFERRED	char at ctx+0x4fe0: nonzero selects the culling path (_gleCullQuad / _gleCullPolygonPtrStack) and the per-facing polygon modes (same load as _gleFeedbackTriangleFanFunc_body)
+local	_gleFeedbackQuadStripFunc_body	bVar3	fixedFunctionPath	INFERRED	true when ctx+0x4664 is zero and ctx+0x5434 is zero (no vertex program path): transform with the ctx+0x5060.. function pointers instead of _gleVPEmulate (same test as _gleFeedbackTriangleFanFunc_body)
+local	_gleFeedbackQuadStripFunc_body	bVar5	lightingActive	INFERRED	fixedFunctionPath and ctx+0x30aa (lighting enabled)
+local	_gleFeedbackQuadStripFunc_body	uVar8	bufferEnd	INFERRED	ctx+0x485c (transformed buffer end) or ctx+0x4854 (buffer start): stored at ctx+0x4858 as the current end of the vertex buffer
+local	_gleFeedbackQuadStripFunc_body	uVar15	nextQuadStart	INFERRED	quadStart + 0x200: the start of the next quad, becomes quadStart after the current polygon is processed
+local	_gleFeedbackQuadStripFunc_body	uVar16	vertexCountThenLastQuadStart	INFERRED	vertex count ((end - start) / stride, ctx+0x4858/0x4854/0x487c), later overwritten with the last quad start (start + count * 0x100 - 0x400) in the culling path
+local	_gleFeedbackQuadStripFunc_body	dVar21	forwardedFloatArg1	INFERRED	f1 as last left by the callbacks, forwarded unchanged as the stale first FPR argument of the next call (same variable as in _gleFeedbackTriangleFanFunc_body)
+local	_gleFeedbackQuadStripFunc_body	local_4c	clipCount	CONFIRMED	int array: [0] receives the vertex count of the clipped polygon from _gleClipPolyPlane/_gleClipPoly; zero means nothing is left
+local	_gleFeedbackQuadStripFunc_body	bVar4	facingChanged	INFERRED	set when the back-facing value of the current quad differs from the previous one (previousBackFacing != backFacing); ends the current run
+local	_gleFeedbackQuadStripFunc_body	uVar7	quadStartThenRunStart	INFERRED	clipping path: first vertex of the current quad of the strip, advanced 2 vertices (0x200 bytes) per quad ({v0,v1,v3,v2} = {+0,+0x100,+0x300,+0x200}); culling path: first vertex of the current run of quads sharing one facing
+local	_gleFeedbackQuadStripFunc_body	uVar9	clipFlagsThenRunStartOrNextQuadStart	INFERRED	result of the ctx+0x5060 transform callback / _gleVPEmulate (bits 8-15 non-zero means reject, low byte is the clip plane mask passed to _gleClipPoly), later the loop-carried vertex pointer of the culling loop (run start, or vertexCursor + 0x200 while a quad is tested)
+local	_gleFeedbackQuadStripFunc_body	iVar10	cullResultThenBackFacing	INFERRED	result of _gleCullQuad / _gleCullPolygonPtrStack (nonzero = culled), later in the polygon path the back-facing value copied from backFacing
+local	_gleFeedbackQuadStripFunc_body	puVar11	oldPolygonListThenVertexPtrCursor	INFERRED	the list that does not hold the polygon after a clip call (swap partner of newPolygonList), later the cursor over the polygon vertex pointer list in the flag / _gleVPFlipColors loops
+local	_gleFeedbackQuadStripFunc_body	iVar13	previousBackFacingThenRemainingVertices	INFERRED	starts at -1 (no facing yet) and holds the backFacing of the last accepted quad (indexes ctx+0x4de8); in the polygon path it counts the polygon vertices still to process
+local	_gleFeedbackQuadStripFunc_body	puVar18	newPolygonList	INFERRED	the list that holds the polygon after the clip call (swap partner of the old list)
+local	_gleFeedbackQuads	param_2	firstVertexThenCursor	INFERRED	pointer to the first vertex of the quads (vertex records are 0x100 bytes apart); in fill mode it is advanced by 0x400 (one quad) per loop turn
+local	_gleFeedbackQuads	param_3	vertexCount	CONFIRMED	number of vertices; the loop limit is vertexCount - 4
+local	_gleFeedbackQuads	param_4	polygonMode	CONFIRMED	polygon mode relative to GL_POINT (facePolygonMode - 0x1b00 at the call sites): only the low two bits are used, 0 = point, 1 = line, 2 = fill
+local	_gleFeedbackQuads	uVar1	modeBits	CONFIRMED	polygonMode & 3, tested against 1 (line), 0 (point), 2 (fill)
+local	_gleFeedbackQuads	dVar2	intToDoubleBias	CONFIRMED	DOUBLE_00108d70, the 0x43300000 int-to-double bias used to convert the token type to a double
+local	_gleFeedbackQuads	iVar4	lastQuadIndex	CONFIRMED	vertexCount - 4: the highest vertex index at which a quad can start; bounds the loops
+local	_gleFeedbackQuads	iVar5	vertexIndex	CONFIRMED	index of the first vertex of the current quad; grows by 4 per quad (the vertex address is vertexIndex * 0x100 + firstVertex)
+local	_gleFeedbackQuads	uVar3	segmentTokenType	CONFIRMED	0x707 (GL_LINE_RESET_TOKEN) until the first edge of the quad has been emitted, then 0x702 (GL_LINE_TOKEN); converted to double and passed to _gleFeedbackToken
+local	_gleFeedbackQuads	iVar6	quadStartThenVerticesLeft	INFERRED	line mode: pointer to the start of the quad (advanced 0x400 per quad), whose last vertex's edge flag (+0x37c) closes the quad; point mode: counts the quad's vertices down from 3
+local	_gleFeedbackQuads	iVar7	edgeStartVertex	CONFIRMED	line mode: vertex that starts the edge being tested: its edge flag (byte +0x7c) must be set, and the edge goes to the vertex 0x100 bytes on
+local	_gleFeedbackQuads	iVar8	edgeCounterThenPointVertex	INFERRED	line mode: counts the first three edges of the quad down from 2; point mode: the vertex whose edge flag (+0x7c) is tested and which is emitted as a point
+local	_gleFeedbackQuadsFunc_body	bVar3	fixedFunctionPath	INFERRED	true when ctx+0x4664 is zero and ctx+0x5434 is zero (no vertex program path): transform with the ctx+0x5060.. function pointers instead of _gleVPEmulate (same test as _gleFeedbackTriangleFanFunc_body)
+local	_gleFeedbackQuadsFunc_body	bVar4	facingChanged	INFERRED	set when the back-facing value of the current quad differs from the previous one (previousBackFacing != backFacing); ends the current run
+local	_gleFeedbackQuadsFunc_body	bVar5	lightingActive	INFERRED	fixedFunctionPath and ctx+0x30aa (lighting enabled)
+local	_gleFeedbackQuadsFunc_body	bVar6	twoSidedLighting	INFERRED	lightingActive and ctx+0x30ac (two-sided lighting): the lighting function is picked by the facing
+local	_gleFeedbackQuadsFunc_body	uVar8	bufferEnd	INFERRED	ctx+0x485c (transformed buffer end) or ctx+0x4854 (buffer start): stored at ctx+0x4858 as the current end of the vertex buffer
+local	_gleFeedbackQuadsFunc_body	uVar17	nextRunStart	INFERRED	start of the next run: the current run start while quads are accepted, or the quad after a culled quad
+local	_gleFeedbackQuadsFunc_body	uVar18	runStart	INFERRED	first vertex of the current run of quads that share one facing; flushed with loopIndex vertices
+local	_gleFeedbackQuadsFunc_body	uVar19	vertexCursor	INFERRED	pointer to the current vertex: starts at ctx+0x4854 (first vertex) and advances 4 vertices (0x400 bytes) per quad
+local	_gleFeedbackQuadsFunc_body	uVar15	vertexCountThenLastQuadStart	INFERRED	vertex count ((end - start) / stride, ctx+0x4858/0x4854/0x487c), later overwritten with the last quad start (start + count * 0x100 - 0x400) in the culling path
+local	_gleFeedbackQuadsFunc_body	pcVar11	lightingFunc	INFERRED	lighting callback chosen from ctx+0x4de8 (quads) or ctx+0x4df0 (polygon), per facing when two-sided
+local	_gleFeedbackQuadsFunc_body	puVar16	polygonList	INFERRED	scratch polygon vertex-pointer list at ctx+0x4870 holding the 4 quad vertices, swapped with spareList by clipping
+local	_gleFeedbackQuadsFunc_body	puVar13	spareList	INFERRED	second scratch vertex-pointer list at ctx+0x4874, the destination of _gleClipPolyPlane/_gleClipPoly
+local	_gleFeedbackQuadsFunc_body	puVar7	newPolygonList	INFERRED	the list that holds the polygon after the clip call (swap partner)
+local	_gleFeedbackQuadsFunc_body	local_50	backFacing	CONFIRMED	int out parameter of _gleCullQuad/_gleCullPolygonPtrStack: nonzero when the polygon is back-facing
+local	_gleFeedbackQuadsFunc_body	local_4c	clipCount	CONFIRMED	int array: [0] receives the vertex count of the clipped polygon from _gleClipPolyPlane/_gleClipPoly; zero means nothing is left
+local	_gleFeedbackQuadsFunc_body	dVar22	forwardedFloatArg1	INFERRED	f1 as last left by the callbacks, forwarded unchanged as the stale first FPR argument of the next call (same variable as in _gleFeedbackTriangleFanFunc_body)
+local	_gleFeedbackQuadsFunc_body	extraout_f1	f1AfterCall	INFERRED	Ghidra pseudo-register extraout_f1 (the value a call left behind; no source-level role)
+local	_gleFeedbackQuadsFunc_body	extraout_f1_00	f1AfterCall1	INFERRED	Ghidra pseudo-register extraout_f1_00 (the value a call left behind; no source-level role)
+local	_gleFeedbackQuadsFunc_body	uVar2	facePolygonMode	CONFIRMED	ctx+0x34d0 (front) or ctx+0x34d2 (back) polygon mode; minus 0x1b00 (GL_POINT) it is the mode argument of _gleFeedbackQuads/_gleFeedbackPolygonPtr
+local	_gleFeedbackQuadsFunc_body	uVar9	clipFlagsThenResumeCursor	INFERRED	result of the ctx+0x5060 transform callback / _gleVPEmulate (bits 8-15 non-zero means reject, low byte is the clip plane mask passed to _gleClipPoly), later reused as the vertex pointer where the culling loop resumes (start of the quad after the run just drawn)
+local	_gleFeedbackQuadsFunc_body	iVar10	cullResultThenBackFacing	INFERRED	result of _gleCullQuad / _gleCullPolygonPtrStack (nonzero = culled), later in the polygon path the back-facing value copied from backFacing
+local	_gleFeedbackQuadsFunc_body	iVar12	previousBackFacingThenVertexArrayEnd	INFERRED	starts at -1 (no facing yet) and holds the backFacing of the last accepted quad (indexes the per-facing lighting table at ctx+0x4de8); in the clipping path it is overwritten with start + vertexCount * 0x100, the end of the vertex array
+local	_gleFeedbackTriangleStrip	param_2	firstVertexThenCursor	INFERRED	pointer to the first vertex of the triangle strip (vertex records are 0x100 bytes apart); advanced by 0x200 (two triangles) per loop turn
+local	_gleFeedbackTriangleStrip	param_3	vertexCount	CONFIRMED	number of vertices; the loop limit is vertexCount - 3
+local	_gleFeedbackTriangleStrip	param_4	polygonMode	CONFIRMED	polygon mode relative to GL_POINT (facePolygonMode - 0x1b00 at the call sites): only the low two bits are used, 0 = point, 1 = line, 2 = fill
+local	_gleFeedbackTriangleStrip	uVar2	modeBits	CONFIRMED	polygonMode & 3, tested against 1 (line), 0 (point), 2 (fill)
+local	_gleFeedbackTriangleStrip	iVar3	lastTriangleIndex	CONFIRMED	vertexCount - 3: the highest vertex index at which a triangle can start; bounds the loop and the second-triangle test
+local	_gleFeedbackTriangleStrip	iVar4	pairIndex	CONFIRMED	starts at 0 and grows by 2 per loop turn (two triangles per turn); compared with lastTriangleIndex
+local	_gleFeedbackTriangleStrip	bVar1	hasSecondTriangle	CONFIRMED	true when a second triangle follows the first one in this turn (pairIndex < lastTriangleIndex); controls the extra three vertices emitted
+local	_gleFeedbackTriangleStrip	dVar7	primitiveToken	INFERRED	token value emitted before each primitive: FLOAT_00108f28 in point mode, FLOAT_00108f34 for the later line segments of line mode, FLOAT_00108f30 in fill mode
+local	_gleFeedbackTriangleStrip	iVar5	thirdVertex	CONFIRMED	line mode: pointer to the third vertex of the triangle (first vertex + 0x200), which becomes the next first vertex
+local	_gleFeedbackTriangleStrip	iVar6	secondOrThirdVertex	INFERRED	line mode: second vertex (first vertex + 0x100); point and fill mode: third vertex (first vertex + 0x200), which becomes the next first vertex
+local	_gleFeedbackTrianglesFunc_body	bVar3	fixedFunctionPath	INFERRED	true when ctx+0x4664 is zero and ctx+0x5434 is zero (no vertex program path): transform with the ctx+0x5060.. function pointers instead of _gleVPEmulate (same test as _gleFeedbackTriangleFanFunc_body)
+local	_gleFeedbackTrianglesFunc_body	bVar4	facingChanged	INFERRED	set when the back-facing value of the current triangle differs from the previous one (previousBackFacing != backFacing); ends the current run
+local	_gleFeedbackTrianglesFunc_body	bVar5	lightingActive	INFERRED	fixedFunctionPath and ctx+0x30aa (lighting enabled)
+local	_gleFeedbackTrianglesFunc_body	uVar8	bufferEnd	INFERRED	ctx+0x485c (transformed buffer end) or ctx+0x4854 (buffer start): stored at ctx+0x4858 as the current end of the vertex buffer
+local	_gleFeedbackTrianglesFunc_body	uVar17	nextRunStart	INFERRED	start of the next run: the current run start while triangles are accepted, or the triangle after a culled triangle
+local	_gleFeedbackTrianglesFunc_body	uVar18	runStart	INFERRED	first vertex of the current run of triangles that share one facing; flushed with loopIndex vertices
+local	_gleFeedbackTrianglesFunc_body	uVar19	vertexCursor	INFERRED	pointer to the current vertex: starts at ctx+0x4854 (first vertex) and advances 3 vertices (0x300 bytes) per triangle
+local	_gleFeedbackTrianglesFunc_body	uVar15	vertexCountThenLastTriangleStart	INFERRED	vertex count ((end - start) / stride, ctx+0x4858/0x4854/0x487c), later overwritten with the last triangle start (start + count * 0x100 - 0x300) in the culling path
+local	_gleFeedbackTrianglesFunc_body	pcVar11	lightingFunc	INFERRED	lighting callback chosen from ctx+0x4de8 (triangles) or ctx+0x4df0 (polygon), per facing when two-sided
+local	_gleFeedbackTrianglesFunc_body	local_4c	clipCount	CONFIRMED	int array: [0] receives the vertex count of the clipped polygon from _gleClipPolyPlane/_gleClipPoly; zero means nothing is left
+local	_gleFeedbackTrianglesFunc_body	dVar22	forwardedFloatArg1	INFERRED	f1 as last left by the callbacks, forwarded unchanged as the stale first FPR argument of the next call (same variable as in _gleFeedbackTriangleFanFunc_body)
+local	_gleFeedbackTrianglesFunc_body	extraout_f1	f1AfterCall	INFERRED	Ghidra pseudo-register extraout_f1 (the value a call left behind; no source-level role)
+local	_gleFeedbackTrianglesFunc_body	cVar1	cullEnabled	INFERRED	char at ctx+0x4fe0: nonzero selects the culling path (_gleCullTriangle / _gleCullPolygonPtrStack) and the per-facing polygon modes (same load as _gleFeedbackTriangleFanFunc_body)
+local	_gleFeedbackTrianglesFunc_body	uVar9	clipFlagsThenResumeCursor	INFERRED	result of the ctx+0x5060 transform callback / _gleVPEmulate (bits 8-15 non-zero means reject, low byte is the clip plane mask passed to _gleClipPoly), later the vertex pointer where the culling loop resumes
+local	_gleFeedbackTrianglesFunc_body	iVar10	cullResultThenBackFacing	INFERRED	result of _gleCullTriangle / _gleCullPolygonPtrStack (nonzero = culled), later in the polygon path the back-facing value copied from backFacing
+local	_gleFeedbackTrianglesFunc_body	iVar12	previousBackFacingThenVertexArrayEnd	INFERRED	starts at -1 (no facing yet) and holds the backFacing of the last accepted triangle (indexes ctx+0x4de8); in the clipping path it is overwritten with start + vertexCount * 0x100, the end of the vertex array
+local	_gleFeedbackTrianglesFunc_body	puVar14	oldPolygonListThenVertexPtrCursor	INFERRED	the list that does not hold the polygon after a clip call (swap partner of newPolygonList), later the cursor over the polygon vertex pointer list in the _gleVPFlipColors loop
+local	_gleFeedbackTrianglesFunc_body	puVar7	newPolygonList	INFERRED	the list that holds the polygon after the clip call (swap partner of the old list)
+local	_gleFeedbackTrianglesFunc_body	iVar21	remainingVertices	INFERRED	count down of the polygon vertices still to pass to _gleVPFlipColors
+local	_gleGetClientAttrib	iVar2	clientArrays	CONFIRMED	ctx+0x4a60: the client vertex array state (array records of 0x18 bytes from +0x10, buffer object pointers from +0x358)
+local	_gleGetClientAttrib	iVar5	arrayRecord	INFERRED	the current client array record: clientArrays + 0x10, advancing 0x18 per array (size at +0x2a, type at +0x28, stride at +0x24, pointer at +0x20)
+local	_gleGetClientAttrib	puVar1	recordPointerSlot	INFERRED	address of the pointer field (+0x20) of the current array record, read into the saved entry
+local	_gleGetClientAttrib	puVar6	savedEntryThenBufferNameCursor	INFERRED	cursor over the 4-word saved entries (record words +0x2a, +0x28, +0x24, +0x20 after the first word) of the 32 arrays, later the cursor over the saved buffer names starting at savedState + 0x86 words
+local	_gleGetClientAttrib	piVar3	bufferObjectSlot	CONFIRMED	cursor over the 32 buffer object pointers of the arrays (clientArrays + 0x360, advancing 4 bytes)
+local	_gleGetClientAttrib	iVar7	bufferObject	CONFIRMED	the buffer object bound to the current array, or zero; its name is the word at +4
+local	_gleGetClientAttrib	uVar4	bufferName	CONFIRMED	name (object+4) of a buffer object, or 0 when none is bound; stored to the saved state
+local	_gleInitGLDState	fVar1	defaultAmbientLevel	INFERRED	literal FLOAT_00108f80 stored as the RGB of the scene ambient color (ctx+0x24b0..0x24b8) and of the material ambient colors (record +0x28c0..0x28c8): the GL default ambient level
+local	_gleInitGLDState	fVar2	defaultDiffuseLevel	INFERRED	literal FLOAT_00108f84 stored as the RGB of the material diffuse colors (record +0x28d0..0x28d8): the GL default diffuse level
+local	_gleInitGLDState	iVar6	portionRecord	INFERRED	record of one portion of a general combiner stage: ctx + stage * 0x80 + portion * 0x30 (8 stages, 2 portions); its +0x3ec0.. fields are initialised to the NV_register_combiners enumerants 0x852c (GL_PRIMARY_COLOR_NV), 0x8537 (GL_EXPAND_NORMAL_NV), 0x8530 (GL_DISCARD_NV) and 0x852e (GL_SPARE0_NV)
+local	_gleInitGLDState	iVar10	portionVariablesBase	INFERRED	base of the four 8-byte variable entries of the current portion (ctx + stage * 0x80 + portion * 0x30); the entries are written through variableCursor from +0x3ec4
+local	_gleInitGLDState	puVar4	variableCursor	CONFIRMED	cursor over the four 8-byte variable entries of the current portion: writes the component usage at -2 and the 0x8536 (GL_UNSIGNED_IDENTITY_NV) mapping at +0, advancing 8 bytes
+local	_gleInitGLDState	uVar3	componentUsage	CONFIRMED	0x1906 (GL_ALPHA) for portion 0 and 0x1907 (GL_RGB) for portion 1: written to each variable entry of the portion
+local	_gleInvertMatrix_601_body	param_1	glContext	CONFIRMED	the GL context: the source matrix is read from ctx+0x1bc0 (16 floats) and the inverse is written to ctx+0x21c0 (_gleInvertMatrix_601_body stores it at ctx+0x4ff0 via the caller)
+local	_gleInvertMatrix_601_body	fVar2	pivotThenReciprocal	CONFIRMED	largest-magnitude candidate (the pivot) found in the column scan; compared with zero (singular exit) and then replaced by one/pivot to scale the pivot row
+local	_gleMultiVtxTextureCoordGenEyeSlow	iVar13	unitOffsetThenUnitState	CONFIRMED	texUnit * 0x94: the offset of the unit's texgen state, later glContext added (the unit state pointer for the Q coordinate)
+local	_gleMultiVtxTextureCoordGenEyeSlow	uVar14	vertexEndThenRemaining	CONFIRMED	end of the vertices (start + vertexCount * 0x100) for the loop bounds, finally reused as the down counter of the Q coordinate loop
+local	_gleMultiVtxTextureCoordGenEyeSlow	puVar1	normalComponentPtr	CONFIRMED	address of the normal component copied by normal map generation: vertex+0x40 (S), +0x44 (T) or +0x48 (R)
+local	_gleMultiVtxTextureCoordGenEyeSlow	pfVar2	eyeYOrNormalYPtr	CONFIRMED	address of the vertex eye y (+0x24) in the eye linear loops, or of the normal y (+0x44) in the reflection map loops
+local	_gleMultiVtxTextureCoordGenEyeSlow	pfVar3	eyeXOrNormalXPtr	CONFIRMED	address of the vertex eye x (+0x20) in the eye linear loops, or of the normal x (+0x40) in the reflection map loops
+local	_gleMultiVtxTextureCoordGenEyeSlow	pfVar4	eyeZOrNormalZPtr	CONFIRMED	address of the vertex eye z (+0x28) in the eye linear loops, or of the normal z (+0x48) in the reflection map loops
+local	_gleMultiVtxTextureCoordGenEyeSlow	pfVar5	eyeWPtr	CONFIRMED	address of the vertex eye w (+0x2c) in the eye linear loops
+local	_gleMultiVtxTextureCoordGenEyeSlow	fVar6	normalDotEyeDirection	CONFIRMED	dot product of the vertex normal and the normalized eye vector, used in the reflection map formula u - 2 (n . u) n
+local	_gleMultiVtxTextureCoordGenEyeSlow	fStack_40	eyeDirectionX	CONFIRMED	x of the normalized eye position vector, written by the vector normalize call that is given vertex+0x20 and the address of this variable
+local	_gleMultiVtxTextureCoordGenEyeSlow	fStack_3c	eyeDirectionY	CONFIRMED	y of the normalized eye position vector (the float after eyeDirectionX in the normalize output)
+local	_gleMultiVtxTextureCoordGenEyeSlow	fStack_38	eyeDirectionZ	CONFIRMED	z of the normalized eye position vector (the float after eyeDirectionY in the normalize output)
+local	_gleMultiVtxTextureCoordGenEyeSlow	uStack_50	sphereMapS	CONFIRMED	first output of _gleSphereGenST (s of the sphere map), stored to the unit's S slot (vertex+0x80 + texUnit * 0x10)
+local	_gleMultiVtxTextureCoordGenEyeSlow	uStack_4c	sphereMapT	CONFIRMED	second output of _gleSphereGenST (t of the sphere map, the word after sphereMapS), stored to the T slot (+0x84)
+local	_glePPParse	param_2	programRecord	INFERRED	the pipeline program record (glProgramStringARB passes pipelineProgramObject+0x10): +0x00 the PPStream, +0x04 the source text, +0x4bc (word 0x12f) the packed program, +0x4d4 (word 0x135) the emulator program
+local	_glePPParse	param_3	programKind	CONFIRMED	0 for the GL_VERTEX_PROGRAM_ARB (0x8620) call site and 1 for GL_FRAGMENT_PROGRAM_ARB (0x8804) in the glProgramStringARB body; param_3 == 1 selects the fragment limits block and parser mode
+local	_glePPParse	bVar1	isFragmentProgram	CONFIRMED	bVar1 = (programKind == 1): the fragment program call site passes 1; it selects the 0x80 limits and the texture-operation counts
+local	_glePPParse	bVar2	pruneSucceeded	INFERRED	bVar2 = (status of the last _glePPPrune* call == 0); a failed prune jumps to the _PPParserBuildErrorString path
+local	_glePPParse	sVar3	oldFirstOrdinal	INFERRED	low half of word 0 of a parameter-array chunk before it is replaced by the renumbered value (arrayFirstOrdinal of the parser); the chunk's end value is adjusted by the difference
+local	_glePPParse	uVar4	rendererWord11a	INFERRED	every definition is the ushort at (glContext+0x468c)+0x11a (positional name; no field row); bit 0 picks the DP4 or MUL/MAD position-invariant sequence, bit 1 disables it
+local	_glePPParse	piVar7	opListCopy	INFERRED	_PPStreamChunkListCreateFromChunkList(opList): a copy of the operation chunk list, walked in lockstep with it and attached with _PPStreamAttachOperationsChunkList
+local	_glePPParse	piVar8	paramArrayListCopy	INFERRED	_PPStreamChunkListCreateFromChunkList(paramArrayList): a copy of the parameter-array chunk list, attached with _PPStreamAttachParamBindingArraysChunkList
+local	_glePPParse	puVar9	fillerChunk	INFERRED	calloc(0x1c) chunk of type 3 (parameter binding) with its register number set to each missing ordinal: fills the gaps of the sorted parameter list
+local	_glePPParse	uVar10	chunkCopy	INFERRED	_PPStreamChunkCreateFromChunk(paramChunk): copy of a parameter chunk appended to the rebuilt list
+local	_glePPParse	uVar11	texOperationCount	INFERRED	result of _PPStreamGetTexOperationCount, stored to program record +0x4de (half word) for fragment programs
+local	_glePPParse	piVar18	paramArrayList	CONFIRMED	*(stream+0x14) is the parameter-array chunk list (chunk type 5, _PPStreamAddParamBindingArray stores to stream+0x14)
+local	_glePPParse	piVar19	opList	CONFIRMED	*(stream+0x20) is the operation chunk list (chunk type 8, _PPStreamAddOperation stores to stream+0x20)
+local	_glePPParse	piVar20	paramBindingList	CONFIRMED	*(stream+0x10) is the parameter-binding chunk list (chunk type 3, _PPStreamAddParamBinding stores to stream+0x10)
+local	_glePPParse	local_60	paramBindingCount	CONFIRMED	count written by _PPStreamChunkListGetStream(paramBindingList, 0, &count) and used to size the calloc of 8-byte entries and as loop bound
+local	_glePPParse	local_5c	paramArrayCount	CONFIRMED	count written by _PPStreamChunkListGetStream(paramArrayList, 0, &count) and used to size the second calloc of 8-byte entries
+local	_glePPParse	local_58	packedEntryCount	INFERRED	array whose element 0 receives the entry count of _PPStreamGetStream(stream, 0, ..) and sizes the _gleVecAlloc (count << 3) of the packed program
+local	_glePPParse	local_110	limitsWord0ThenAttribBindingWord0	INFERRED	stack overlay: first word of the 15-word parser limits block copied to parser+0x450 (0x80 fragment / 0x100 vertex), later word 0 of an attribute-binding chunk of kind 1 copied for the position-invariant operations
+local	_glePPParse	local_10c	limitsWord1ThenAttribBindingWord1	INFERRED	stack overlay: limits word 1 (0x80 / 0x100), later word 1 of the attribute-binding chunk (its low half is the register number used as an operation source)
+local	_glePPParse	local_108	limitsWord2	CONFIRMED	word 2 of the parser limits block: constant 8, copied with the 0x3c byte memcpy to parser+0x450
+local	_glePPParse	local_104	limitsWord3	CONFIRMED	word 3 of the parser limits block: constant 0x8000
+local	_glePPParse	local_100	limitsWord4ThenOutputBindingWord0	INFERRED	stack overlay: limits word 4 (0x100), later word 0 of the output binding passed to _PPStreamAddOutputBinding (kind 1)
+local	_glePPParse	local_fc	limitsWord5ThenOutputBindingWord1	INFERRED	stack overlay: limits word 5 (0x80 / 0x100), later word 1 of the same output binding (low half = register number, used as operation source)
+local	_glePPParse	local_f8	limitsWord6	CONFIRMED	word 6 of the parser limits block: 0x40 fragment / 0x20 vertex
+local	_glePPParse	local_f4	limitsWord7	CONFIRMED	word 7 of the parser limits block: 0 fragment / 2 vertex
+local	_glePPParse	local_f0	limitsWord8ThenParamBindingWord0	INFERRED	stack overlay: limits word 8 (8), later word 0 of the parameter binding passed to _PPStreamAddParamBinding
+local	_glePPParse	local_ec	limitsWord9ThenParamBindingWord1	INFERRED	stack overlay: limits word 9 (0x10), later word 1 of the parameter binding (low half = register number: the last of four matrix rows)
+local	_glePPParse	local_e8	limitsWord10ThenParamBindingWord2	INFERRED	stack overlay: limits word 10 (4), later word 2 of the parameter binding (zeroed)
+local	_glePPParse	local_e4	limitsWord11ThenParamBindingWord3	INFERRED	stack overlay: limits word 11 (1), later word 3 of the parameter binding (zeroed)
+local	_glePPParse	local_e0	limitsWord12	CONFIRMED	word 12 of the parser limits block: constant 6
+local	_glePPParse	local_dc	limitsWord13	CONFIRMED	word 13 of the parser limits block: constant 8
+local	_glePPParse	local_d8	limitsWord14	CONFIRMED	word 14 of the parser limits block: 0 fragment / 0x10 vertex
+local	_glePPParse	local_90	tempUsageWord0	CONFIRMED	word 0 of the temp usage record passed to _PPStreamAddTempUsage (4 words, chunk type 0)
+local	_glePPParse	local_8c	tempUsageWord1	CONFIRMED	word 1 of the temp usage record (low half = register number: next free temp, used as operation operand)
+local	_glePPParse	local_88	tempUsageWord2	CONFIRMED	word 2 of the temp usage record passed to _PPStreamAddTempUsage
+local	_glePPParse	local_84	tempUsageWord3	CONFIRMED	word 3 of the temp usage record passed to _PPStreamAddTempUsage
+local	_glePPParse	local_80	outputBinding2Word0	CONFIRMED	word 0 of the second output binding passed to _PPStreamAddOutputBinding (kind 8)
+local	_glePPParse	local_7c	outputBinding2Word1	CONFIRMED	word 1 of the second output binding (low half = register number)
+local	_glePPParse	local_70	paramBinding2Word0	CONFIRMED	word 0 of the second parameter binding record passed to _PPStreamAddParamBinding (loop of four with the 0x300 bit)
+local	_glePPParse	local_6c	paramBinding2Word1	CONFIRMED	word 1 of the second parameter binding (low half = register number of the matrix row)
+local	_glePPParse	local_68	paramBinding2Word2	CONFIRMED	word 2 of the second parameter binding record (zeroed)
+local	_glePPParse	local_64	paramBinding2Word3	CONFIRMED	word 3 of the second parameter binding record (zeroed)
+local	_glePPParse	local_d0	operationWord0	CONFIRMED	word 0 of the 14-word operation record (0x38 bytes at &local_d0) passed to _PPStreamAddOperation
+local	_glePPParse	local_cc	operationWord1	CONFIRMED	word 1 of the 14-word operation record (0x38 bytes at &local_d0) passed to _PPStreamAddOperation
+local	_glePPParse	local_c8	operationWord2	CONFIRMED	word 2 of the 14-word operation record (0x38 bytes at &local_d0) passed to _PPStreamAddOperation
+local	_glePPParse	local_c4	operationWord3	CONFIRMED	word 3 of the 14-word operation record (0x38 bytes at &local_d0) passed to _PPStreamAddOperation
+local	_glePPParse	local_c0	operationWord4	CONFIRMED	word 4 of the 14-word operation record (0x38 bytes at &local_d0) passed to _PPStreamAddOperation
+local	_glePPParse	local_bc	operationWord5	CONFIRMED	word 5 of the 14-word operation record (0x38 bytes at &local_d0) passed to _PPStreamAddOperation
+local	_glePPParse	local_b8	operationWord6	CONFIRMED	word 6 of the 14-word operation record (0x38 bytes at &local_d0) passed to _PPStreamAddOperation
+local	_glePPParse	local_b4	operationWord7	CONFIRMED	word 7 of the 14-word operation record (0x38 bytes at &local_d0) passed to _PPStreamAddOperation
+local	_glePPParse	local_b0	operationWord8	CONFIRMED	word 8 of the 14-word operation record (0x38 bytes at &local_d0) passed to _PPStreamAddOperation
+local	_glePPParse	local_ac	operationWord9	CONFIRMED	word 9 of the 14-word operation record (0x38 bytes at &local_d0) passed to _PPStreamAddOperation
+local	_glePPParse	local_a8	operationWord10	CONFIRMED	word 10 of the 14-word operation record (0x38 bytes at &local_d0) passed to _PPStreamAddOperation
+local	_glePPParse	local_a4	operationWord11	CONFIRMED	word 11 of the 14-word operation record (0x38 bytes at &local_d0) passed to _PPStreamAddOperation
+local	_glePPParse	local_a0	operationWord12	CONFIRMED	word 12 of the 14-word operation record (0x38 bytes at &local_d0) passed to _PPStreamAddOperation
+local	_glePPParse	local_9c	operationWord13	CONFIRMED	word 13 of the 14-word operation record (0x38 bytes at &local_d0) passed to _PPStreamAddOperation
+local	_glePPParse	iVar17	oldStreamThenParser	INFERRED	*programRecord (the previous PPStream, released with _PPStreamFree) then reassigned to the _PPParserCreate result used with _PPParserAttachString/Stream/Parse and freed with _PPParserFree
+local	_glePPParse	iVar22	sourceTextThenStream	INFERRED	programRecord[1] (the program source passed to _PPParserAttachString), then reassigned to the _PPStreamCreate result attached to the parser and the program record
+local	_glePPUpdateProgram	param_2	programRecord	CONFIRMED	the embedded program record (programObject+0x10) as named by the callers: lookup tables from +0x48, bit table at +0x18, flags +0x4b8/+0x4ba, compiled stream at +0x4bc
+local	_glePPUpdateProgram	uVar4	fillValue	CONFIRMED	0x100 (0x80 when +0x4ba is nonzero): the memset value for the 0x450-byte slot tables at +0x48 (truncated to a byte)
+local	_glePPUpdateProgram	iVar2	compiledStream	INFERRED	pointer at programRecord+0x4bc: the compiled instruction stream; its +0x28 is the descriptor count and +0x2c a word offset of the descriptor table
+local	_glePPUpdateProgram	iVar3	descriptorTableWordOffset	INFERRED	compiledStream+0x2c: base (in 8-byte units) of the descriptor table indexed by loopIndex*8
+local	_glePPUpdateProgram	iVar5	descriptorCount	INFERRED	compiledStream+0x28: loop limit
+local	_glePPUpdateProgram	iVar7	usedBitsWord	CONFIRMED	word of the bit table at programRecord+0x18 that holds bit loopIndex (index>>5)*4
+local	_glePPUpdateProgram	uVar9	descriptorIndexByte	CONFIRMED	low byte of loopIndex: the value stored into every slot table entry to point back at the descriptor
+local	_glePolyAreaPtr	param_2	vertexPtrs	CONFIRMED	array of pointers to the polygon vertices; each points at the window x,y float pair of the vertex
+local	_glePolyAreaPtr	param_3	vertexCount	CONFIRMED	number of entries in vertexPtrs (the end pointer param_2+param_3 bounds the loop)
+local	_glePolyAreaPtr	pfVar7	firstPoint	CONFIRMED	the x,y pair of the first vertex (*vertexPtrs), used again for the closing edge term
+local	_glePolyAreaPtr	puVar8	nextVertexSlot	CONFIRMED	cursor over vertexPtrs, starts at the second entry
+local	_glePolyAreaPtr	pfVar6	currentPoint	CONFIRMED	x,y pair of the vertex taken from nextVertexSlot in this turn
+local	_glePolyAreaPtr	fVar1	lastPointX	CONFIRMED	x of the most recently read vertex (starts as the first vertex x, so it also feeds the closing term)
+local	_glePolyAreaPtr	fVar2	lastPointY	CONFIRMED	y of the most recently read vertex (starts as the first vertex y)
+local	_glePolyAreaPtr	fVar4	previousPointX	CONFIRMED	x of the vertex read in the previous turn
+local	_glePolyAreaPtr	fVar5	previousPointY	CONFIRMED	y of the vertex read in the previous turn
+local	_glePolyAreaPtr	fVar3	areaSum	CONFIRMED	running shoelace sum of previousX*y - x*previousY, started at 0.0 (FLOAT_00108e50); the closing term is added at return, so the result is twice the signed area
+local	_glePolyAreaPtr	uVar9	verticesLeft	CONFIRMED	loop count: (end - nextVertexSlot + 3) / 4 = vertexCount - 1 iterations
+local	_gleReleaseSharedState	puVar4	sharedStateThenRecordCursor	CONFIRMED	ctx+0x5148: the shared state (mutex at +0x8028, reference count at +0x8020, eight hash tables of 0x1004 bytes); later advanced by 0x10000 and walked in steps of 0xa30 over the two cached buffers freed at -0x7560
+local	_gleReleaseSharedState	iVar3	referenceCountBefore	CONFIRMED	shared state reference count (+0x8020) before the decrement; below 2 means this context held the last reference and the state is torn down
+local	_gleReleaseSharedState	puVar2	tableCursor	CONFIRMED	the hash table block being emptied: shared state + table index * 0x1004 (its range list head is at +0x1000)
+local	_gleReleaseSharedState	iVar5	bucketOffset	CONFIRMED	byte offset (table index * 0x1004 + bucket * 4) of the hash bucket being emptied; 0x400 buckets per table
+local	_gleReleaseSharedState	piVar6	objectOrRangeNode	CONFIRMED	first an object of the bucket chain (next at +0, destroy callback at +12, called with glContext and the object), then a range list node that is freed
+local	_gleReleaseSharedState	piVar7	nextObjectOrRangeNode	CONFIRMED	the next entry of the chain read before the current one is destroyed or freed
+local	_gleReleaseSharedState	uVar1	releasedLastReference	CONFIRMED	return value: 1 when the last reference was released and the shared state was torn down, 0 otherwise
+local	_gleRemoveHashName	param_1	nameTable	CONFIRMED	one hash table block of the shared state: its list of name ranges starts at +0x1000 (nodes of next, first name, count)
+local	_gleRemoveHashName	param_2	name	CONFIRMED	the name to remove from the ranges of the table; the function returns 1 when a range contained it, 0 otherwise
+local	_gleRemoveHashName	uVar2	nameAfter	CONFIRMED	name + 1: the first name of the second half when a range is split
+local	_gleRemoveHashName	uVar4	rangeStart	CONFIRMED	first name of the current range node (node+4)
+local	_gleRemoveHashName	uVar5	rangeEnd	CONFIRMED	rangeStart + count (node+8): one past the last name of the current range
+local	_gleRemoveHashName	puVar6	currentNode	CONFIRMED	the range node under inspection (next link at +0, first name at +4, count at +8)
+local	_gleRemoveHashName	puVar7	nextNode	CONFIRMED	the node after currentNode (currentNode+0), read while the walk advances
+local	_gleRemoveHashName	puVar3	previousLink	CONFIRMED	address of the link that points to currentNode: nameTable+0x1000 for the first node, otherwise the previous node; rewritten when a one-name range is removed
+local	_gleRemoveHashName	uVar1	savedNextLink	CONFIRMED	the next link of currentNode copied into the new node when the range is split in two
+local	_gleRenderFlatLineLoopFunc_body	cVar2	loopContinued	INFERRED	char at ctx+0x4a18: non-zero when the line loop continues one already in progress (the closing vertex copy then comes from the vertex before the first one); passed to the draw callback as (loopContinued == 0), the loop starts here flag
+local	_gleRenderFlatLineLoopFunc_body	sVar4	vertexStride	CONFIRMED	ctx+0x487c: byte size of a vertex record, the closing vertex copy is stride >> 3 doublewords and the buffer end grows by it
+local	_gleRenderFlatLineLoopFunc_body	iVar3	doublewordsLeft	CONFIRMED	stride >> 3, counts down once per copied doubleword of the closing vertex
+local	_gleRenderFlatLineLoopFunc_body	iVar9	copyIndex	CONFIRMED	counter of the closing vertex copy; byte offset is copyIndex * 8
+local	_gleRenderFlatLineLoopFunc_body	iVar8	bufferEnd	CONFIRMED	ctx+0x4858: end of the vertex buffer where the closing vertex is copied; ctx+0x4858 is advanced by the stride afterwards
+local	_gleRenderFlatLineLoopFunc_body	puVar7	closeSourceThenVertexCursor	INFERRED	vertex that is copied as the closing vertex (the first vertex, or the one before it when the loop is continued), later the cursor over the vertices while the segment pairs are built
+local	_gleRenderFlatLineLoopFunc_body	iVar12	vertexCountThenListCount	INFERRED	vertex count ((ctx+0x4858 - ctx+0x4854) >> 8, plus one for the closing vertex), then the number of vertex pointers in polygonList ((listCursor - polygonList) >> 2), replaced by the count left after _gleClipLinesPlane/_gleClipLines
+local	_gleRenderFlatLineLoopFunc_body	puVar13	firstVertexThenListCursor	INFERRED	first vertex (ctx+0x4854) passed to the ctx+0x5060.. callbacks, later the cursor over the second vertex slots of polygonList in the lighting loop
+local	_gleRenderFlatLineLoopFunc_body	puVar14	listCursor	CONFIRMED	write cursor of polygonList: two entries (vertex pair) per line segment
+local	_gleRenderFlatLineLoopFunc_body	uVar11	copyDestination	CONFIRMED	destination (ctx+0x4858, advancing 0x100 per segment) of the vertex copies that make the second vertex of each segment pair
+local	_gleRenderFlatLineLoopFunc_body	UNRECOVERED_JUMPTABLE	drawCallback	CONFIRMED	ctx+0x46b8 (lines from the vertex array) or ctx+0x46dc (lines from the pointer list), called with ctx+0x4688, the vertices, their count and the loop starts here flag
+local	_gleRenderFlatLineLoopFunc_body	fparam_1	forwardedFloatArg1	INFERRED	f1 as last left by the callbacks / the copy loop, forwarded unchanged to _gleClipLinesPlane
+local	_gleRenderFlatLinesFunc_body	uVar3	secondVertexCursor	CONFIRMED	in the lighting loop: the second vertex of each line pair (first vertex + 0x100, advancing 0x200), passed with count 1 to the ctx+0x4de8 lighting function
+local	_gleRenderFlatLinesFunc_body	uVar5	vertexEndThenRemainingVertices	INFERRED	end of the vertices (first + count * 0x100), then the number of vertices ((end - cursor + 0xff) >> 8) counted down while polygonList is filled
+local	_gleRenderFlatLinesFunc_body	iVar6	vertexCountThenListCount	INFERRED	vertex count ((ctx+0x4858 - ctx+0x4854) >> 8; fewer than 2 returns), replaced by the vertex count left after _gleClipLinesPlane/_gleClipLines
+local	_gleRenderFlatLinesFunc_body	puVar8	listCursorThenSecondSlotCursor	INFERRED	write cursor of polygonList (one vertex pointer per vertex), later the cursor over its second slots (polygonList + 1, advancing 2) in the lighting loop
+local	_gleRenderFlatLinesFunc_body	fparam_1	forwardedFloatArg1	INFERRED	f1 as last left by the callbacks, forwarded unchanged to _gleClipLinesPlane
+local	_gleRenderSmoothLineStripFunc_body	cVar2	stripContinued	INFERRED	char at ctx+0x4a18: non-zero when the line strip continues one already in progress; passed to the draw callback as (stripContinued == 0), the strip starts here flag
+local	_gleRenderSmoothLineStripFunc_body	puVar3	vertexCursor	CONFIRMED	cursor over the vertices (advances 0x100 bytes) while the segment pairs of polygonList are built
+local	_gleRenderSmoothLineStripFunc_body	puVar8	firstVertex	CONFIRMED	ctx+0x4854: first vertex, passed to the ctx+0x5060.. callbacks and the draw callback
+local	_gleRenderSmoothLineStripFunc_body	puVar7	listCursor	CONFIRMED	write cursor of polygonList: two entries (vertex pair) per line segment
+local	_gleRenderSmoothLineStripFunc_body	iVar9	vertexCountThenListCount	INFERRED	vertex count ((ctx+0x4858 - ctx+0x4854) >> 8; fewer than 2 returns), then the number of vertex pointers in polygonList ((listCursor - polygonList) >> 2), replaced by the count left after _gleClipLinesPlane/_gleClipLines
+local	_gleRenderSmoothLineStripFunc_body	uVar10	copyDestination	CONFIRMED	destination (ctx+0x4858, advancing 0x100 per segment) of the vertex copies that make the second vertex of each segment pair
+local	_gleRenderSmoothLineStripFunc_body	UNRECOVERED_JUMPTABLE	drawCallback	CONFIRMED	ctx+0x46b8 (lines from the vertex array) or ctx+0x46dc (lines from the pointer list), called with ctx+0x4688, the vertices, their count and the strip starts here flag
+local	_gleRenderSmoothLineStripFunc_body	fparam_1	forwardedFloatArg1	INFERRED	f1 as last left by the callbacks / the copy loop, forwarded unchanged to _gleClipLinesPlane
+local	_gleRenderSmoothTrianglesFunc_body	bVar1	facingChanged	INFERRED	set when the back-facing value of the current triangle differs from the previous one (previousBackFacing != backFacing); ends the current run
+local	_gleRenderSmoothTrianglesFunc_body	bVar2	lightingActive	CONFIRMED	ctx+0x30aa (lighting enabled) as a bool: selects the ctx+0x5068 callback and the ctx+0x4de8 / ctx+0x4df0 lighting functions
+local	_gleRenderSmoothTrianglesFunc_body	local_40	backFacing	CONFIRMED	int out parameter of _gleCullTriangle/_gleCullPolygonPtrStack: nonzero when the polygon is back-facing; selects ctx+0x34d0 / ctx+0x34d2 and the per-facing lighting table
+local	_gleRenderSmoothTrianglesFunc_body	local_3c	clipCount	CONFIRMED	int array: [0] receives the vertex count of the clipped polygon from _gleClipPolyPlane/_gleClipPoly; zero means nothing is left
+local	_gleRenderSmoothTrianglesFunc_body	iVar8	texEnableBitsThenRunCountThenCullResultThenBackFacing	INFERRED	result of _gleTexEnableBits (non-zero: texturing), then the vertex count of the current run of triangles (+3 per accepted triangle), later the result of _gleCullPolygonPtrStack and then the back-facing value copied from backFacing
+local	_gleRenderSmoothTrianglesFunc_body	uVar9	lastTriangleStart	CONFIRMED	vertex array start + vertexCount * 0x100 - 0x300: the last address at which a triangle can start; bounds the culling loop
+local	_gleRenderSmoothTrianglesFunc_body	uVar15	runStart	INFERRED	first vertex of the current run of triangles that share one facing; passed to the lighting function and the ctx+0x46c4 draw callback with the run's vertex count
+local	_gleRenderSmoothTrianglesFunc_body	uVar17	nextRunStartThenLastTriangleStart	INFERRED	start of the next run (the current run start while triangles are accepted, or the triangle after a culled one), later the last triangle start (start + count * 0x100 - 0x300) of the clipping path
+local	_gleRenderSmoothTrianglesFunc_body	iVar18	cullResult	CONFIRMED	result of _gleCullTriangle: nonzero = culled
+local	_gleRenderSmoothTrianglesFunc_body	iVar11	previousBackFacingThenPolygonVertexCount	INFERRED	starts at -1 (no facing yet) and holds the backFacing of the last accepted triangle; in the clipping path it is the vertex count of the polygon (3, then the count after clipping)
+local	_gleRenderSmoothTrianglesFunc_body	puVar7	newPolygonList	INFERRED	the list that holds the polygon after the _gleClipPolyPlane call (swap partner of the old list)
+local	_gleRenderSmoothTrianglesFunc_body	puVar13	oldPolygonList	INFERRED	the list that does not hold the polygon after a clip call (swap partner of newPolygonList)
+local	_gleRenderSmoothTrianglesFunc_body	pcVar10	lightingFunc	INFERRED	lighting callback: per facing from ctx+0x4de8 (triangle runs) or ctx+0x4df0 (pointer list) when two-sided, else the single entry
+local	_gleRenderSmoothTrianglesFunc_body	dVar19	forwardedFloatArg1	INFERRED	f1 as last left by the callbacks, forwarded unchanged as the stale first FPR argument of the next call
+local	_gleRenderSmoothTrianglesFunc_body	extraout_f1_00	f1AfterCall1	INFERRED	Ghidra pseudo-register extraout_f1_00 (the value a call left behind; no source-level role)
+local	_gleSelectLineLoopFunc_body	bVar2	vertexProgramPath	INFERRED	true when ctx+0x4664 or ctx+0x5434 is set: the transformed vertices are taken from ctx+0x4864 and the line copies go to ctx+0x4854 instead of ctx+0x4858
+local	_gleSelectLineLoopFunc_body	sVar7	vertexStride	CONFIRMED	ctx+0x487c: divisor of (ctx+0x4858 - first vertex) for the vertex count, byte size of the closing vertex copy (>> 3 doublewords) and the amount ctx+0x4858 grows by
+local	_gleSelectLineLoopFunc_body	iVar4	doublewordsLeft	CONFIRMED	stride >> 3, counts down once per copied doubleword of the closing vertex
+local	_gleSelectLineLoopFunc_body	iVar8	copyIndex	CONFIRMED	counter of the closing vertex copy; byte offset is copyIndex * 8
+local	_gleSelectLineLoopFunc_body	iVar1	copyOffset	CONFIRMED	byte offset copyIndex * 8 of the doubleword being copied from the closing source vertex to the buffer end
+local	_gleSelectLineLoopFunc_body	uVar5	closeSource	CONFIRMED	vertex copied as the closing vertex: the first vertex, or the one before it (first - 0x100) when ctx+0x4a18 is set
+local	_gleSelectLineLoopFunc_body	iVar6	bufferEndThenVertexEndThenListCount	INFERRED	ctx+0x4858 (end of the vertex buffer where the closing vertex is copied), then first + count * 0x100 (end of the vertices), then the number of vertex pointers in polygonList ((listCursor - polygonList) >> 2), replaced by the count left after _gleClipLinesPlane/_gleClipLines
+local	_gleSelectLineLoopFunc_body	uVar11	vertexCountThenCopyDestination	INFERRED	vertex count ((ctx+0x4858 - ctx+0x4854) / stride, plus one for the closing vertex), later the destination pointer (ctx+0x4854 or ctx+0x4858, advancing 0x100) of the per-segment vertex copies
+local	_gleSelectLineLoopFunc_body	puVar3	listCursor	CONFIRMED	write cursor of polygonList: two entries (vertex pair) per line segment
+local	_gleSelectLineLoopFunc_body	dVar12	forwardedFloatArg1	INFERRED	f1 as last left by the ctx+0x5064 callback / the copy loop, forwarded unchanged to _gleClipLinesPlane
+local	_gleSelectQuadStripFunc_body	bVar2	vertexProgramThenFixedFunctionPath	INFERRED	true when ctx+0x4664 or ctx+0x5434 is set, then inverted at once: true selects the ctx+0x5064 callback instead of the vertex program data at ctx+0x4864
+local	_gleSelectQuadStripFunc_body	bVar3	facingChanged	INFERRED	set when the back-facing value of the current quad differs from the previous one (previousBackFacing != backFacing); ends the current run
+local	_gleSelectQuadStripFunc_body	bVar4	flipColorsNeeded	INFERRED	not fixedFunctionPath and ctx+0x4666 is non-zero: the vertex colors are passed to _gleVPFlipColors with the run's facing
+local	_gleSelectQuadStripFunc_body	uVar6	bufferEnd	INFERRED	ctx+0x485c (transformed buffer end) or ctx+0x4854 (buffer start): stored at ctx+0x4858 as the current end of the vertex buffer
+local	_gleSelectQuadStripFunc_body	uVar7	nextQuadStartThenRunStart	INFERRED	start of the next quad of the strip (cursor + 0x200) in the culling loop, then the saved start of the current run
+local	_gleSelectQuadStripFunc_body	uVar12	runStartThenNextQuadStart	INFERRED	first vertex of the current run of quads that share one facing (passed to _gleSelectQuadStrip and _gleVPFlipColors); in the clipping path the start of the next quad (cursor + 0x200)
+local	_gleSelectQuadStripFunc_body	uVar13	vertexCountThenLastQuadStart	INFERRED	vertex count ((ctx+0x4858 - ctx+0x4854) / stride; fewer than 4 returns), then overwritten with the last quad start (start + count * 0x100 - 0x400)
+local	_gleSelectQuadStripFunc_body	iVar8	cullResultThenFlipCount	INFERRED	result of _gleCullQuad (nonzero = culled), later the remaining vertex count of the _gleVPFlipColors loop
+local	_gleSelectQuadStripFunc_body	iVar14	runVertexCountThenCullResultThenBackFacing	INFERRED	vertex count of the current run (grows by 2 per accepted quad, plus the closing pair, passed to _gleSelectQuadStrip), later the result of _gleCullPolygonPtrStack and then the back-facing value copied from backFacing
+local	_gleSelectQuadStripFunc_body	puVar5	newPolygonList	INFERRED	the list that holds the polygon after the _gleClipPolyPlane call (swap partner of the old list)
+local	_gleSelectQuadStripFunc_body	puVar11	oldPolygonListThenVertexPtrCursor	INFERRED	the list that does not hold the polygon after a clip call (swap partner of newPolygonList), later the cursor over the polygon vertex pointer list in the _gleVPFlipColors loop
+local	_gleSelectQuadStripFunc_body	dVar17	forwardedFloatArg1	INFERRED	f1 as last left by the callbacks, forwarded unchanged as the stale first FPR argument of the next call (same variable as in the _gleFeedback*Func_body functions)
+local	_gleSelectQuadStripFunc_body	local_4c	clipCount	CONFIRMED	int array: [0] receives the vertex count of the clipped polygon from _gleClipPolyPlane/_gleClipPoly; zero means nothing is left
+local	_gleSelectQuadsFunc_body	bVar2	vertexProgramThenFixedFunctionPath	INFERRED	true when ctx+0x4664 or ctx+0x5434 is set, then inverted at once: true selects the ctx+0x5064 callback instead of _gleVPEmulate-style vertex program data (ctx+0x4864)
+local	_gleSelectQuadsFunc_body	bVar3	facingChanged	INFERRED	set when the back-facing value of the current quad differs from the previous one (previousBackFacing != backFacing); ends the current run
+local	_gleSelectQuadsFunc_body	bVar4	flipColorsNeeded	INFERRED	not fixedFunctionPath and ctx+0x4666 is non-zero: the vertex colors are passed to _gleVPFlipColors with the run's facing
+local	_gleSelectQuadsFunc_body	uVar6	bufferEnd	INFERRED	ctx+0x485c (transformed buffer end) or ctx+0x4854 (buffer start): stored at ctx+0x4858 as the current end of the vertex buffer
+local	_gleSelectQuadsFunc_body	uVar7	nextRunStartThenResumeCursor	INFERRED	start of the next run (the current run start while quads are accepted, or the quad after a culled quad), finally the cursor where the outer loop resumes (end of the run just handled)
+local	_gleSelectQuadsFunc_body	uVar14	runStart	INFERRED	first vertex of the current run of quads that share one facing; passed to _gleSelectQuads and _gleVPFlipColors with runVertexCount vertices
+local	_gleSelectQuadsFunc_body	uVar12	vertexCountThenLastQuadStart	INFERRED	vertex count ((ctx+0x4858 - ctx+0x4854) / stride; fewer than 4 returns), then overwritten with the last quad start (start + count * 0x100 - 0x400)
+local	_gleSelectQuadsFunc_body	iVar8	cullResultThenFlipCount	INFERRED	result of _gleCullQuad (nonzero = culled), later the remaining vertex count of the _gleVPFlipColors loop
+local	_gleSelectQuadsFunc_body	iVar16	runVertexCountThenCullResultThenBackFacing	INFERRED	vertex count of the current run (grows by 4 per accepted quad, passed to _gleSelectQuads), later the result of _gleCullPolygonPtrStack and then the back-facing value copied from backFacing
+local	_gleSelectQuadsFunc_body	puVar5	newPolygonList	INFERRED	the list that holds the polygon after the _gleClipPolyPlane call (swap partner of the old list)
+local	_gleSelectQuadsFunc_body	puVar11	oldPolygonListThenVertexPtrCursor	INFERRED	the list that does not hold the polygon after a clip call (swap partner of newPolygonList), later the cursor over the polygon vertex pointer list in the _gleVPFlipColors loop
+local	_gleSelectQuadsFunc_body	dVar17	forwardedFloatArg1	INFERRED	f1 as last left by the callbacks, forwarded unchanged as the stale first FPR argument of the next call (same variable as in the _gleFeedback*Func_body functions)
+local	_gleSelectQuadsFunc_body	extraout_f1_00	f1AfterCall1	INFERRED	Ghidra pseudo-register extraout_f1_00 (the value a call left behind; no source-level role)
+local	_gleSelectQuadsFunc_body	local_4c	clipCount	CONFIRMED	int array: [0] receives the vertex count of the clipped polygon from _gleClipPolyPlane/_gleClipPoly; zero means nothing is left
+local	_gleSetAttrib	puVar3	vertexEvalFuncPtr	CONFIRMED	temporary holding one of the PTR__gleSetVertexEval1Func / PTR__gleSetVertexEval2Func literal-pool pointers that is stored to ctx+0x4898 or ctx+0x489c
+local	_gleSetAttrib	iVar16	pipelineStageIndex	INFERRED	loop index 0..1 over the pipeline program slots: passed as the second argument of _gleBindPipelineProgram together with the saved program name
+local	_gleSetAttrib	iVar7	nextPipelineStageIndex	CONFIRMED	pipelineStageIndex + 1, the loop continues while it is below 2
+local	_gleSetAttrib	iVar27	textureTargetIndex	INFERRED	loop index 0..4 over the five texture target records of one unit (records of 0x16 words in the saved attribute buffer): the second argument of _gleBindTexture
+local	_gleSetAttrib	uVar15	callResult	CONFIRMED	result of the last _gleCopyPixelMapf / _gleBindPipelineProgram / _pthread_mutex_unlock call, returned by the cases that end with it
+local	_gleSetColorMaterialEnable	cVar3	colorMaterialActive	INFERRED	new value of the flag at ctx+0x4df8: 1 when ctx+0x7580 is zero, ctx+0x30ab (color material enable) is set and no vertex program is active (ctx+0x4664 and ctx+0x5434 are zero); the function returns early when it equals the stored flag
+local	_gleSetColorMaterialEnable	iVar1	glColor4fvSlot	INFERRED	current content of the glColor4fv entry (+0x98) of the dispatch table at ctx+0x4684: zero selects the table at ctx+0x4680 as the one that receives the new entry
+local	_gleSetColorMaterialEnable	puVar2	handlerPtr	CONFIRMED	the literal-pool pointer of the handler to install: the glColor4fv NoColorMat / ColorMat handler, or the glEnd / glEndRDirty / glEndNoMat handler
+local	_gleSetColorMaterialEnable	uVar4	selectMaskThenDispatchTable	INFERRED	all-ones mask when the entry of the table at ctx+0x4684 is zero, then the dispatch table chosen by (ctx+0x4680 & mask) | (ctx+0x4684 & ~mask) whose entry is overwritten with handlerPtr
+local	_gleSetFunctionIDToList	param_2	arrayState	INFERRED	state record whose words +0x300/+0x304 are a 64-bit enabled-attribute mask and whose 0x18-byte per-attribute records (from +0x8: type ushort, +0xa: size short, +0x4: word) are packed into the function id; note param_1 (glContext) only supplies the element type at +0x48dc
+local	_gleSetFunctionIDToList	param_3	functionIdOut	INFERRED	output: header word (flag 0x800000 from +0x31c, enabled count << 0x18, element type << 0x10, size << 6) followed by two ushort layout words per enabled attribute
+local	_gleSetFunctionIDToList	uVar7	enabledMaskHigh	CONFIRMED	word at arrayState+0x300: tested against the high word of the 64-bit bit (1 << (i+0x10))
+local	_gleSetFunctionIDToList	uVar4	enabledMaskLow	CONFIRMED	word at arrayState+0x304 with bit 0x800000 cleared: tested against the low word of the 64-bit bit
+local	_gleSetFunctionIDToList	lVar13	attributeBit	CONFIRMED	64-bit value 1 << (index+0x10) from ___ashldi3, split into high/low words for the mask tests
+local	_gleSetFunctionIDToList	puVar11	layoutWordCursor	INFERRED	write cursor (2 bytes per attribute) of the second layout word: index/size-1/offset bits
+local	_gleSetFunctionIDToList	uVar6	elementTypeCode	CONFIRMED	a GL type enum mapped to a 4-bit code: 0x1400..0x1406 -> 0..6, 0x140a -> 7, 0x9400..0x9405 -> 8.., else 0xe
+local	_gleSetFunctionIDToList	uVar8	glType	CONFIRMED	ushort at the attribute record +8: its GL type enum
+local	_gleSetFunctionIDToList	sVar1	componentCount	INFERRED	short at the attribute record +0xa (size 1..4); multiplied by 4 to advance the byte offset
+local	_gleSetFunctionIDToList	sVar3	componentCountMinusOne	INFERRED	componentCount - 1, shifted into the layout words
+local	_gleSetFunctionIDToList	uVar2	wordOffset	CONFIRMED	accumulated byte offset >> 2 (offset of this attribute in words)
+use	_gleSetRasterPos	fVar3	eyeY	INFERRED	y row of the position times the 4x4 matrix at ctx+0x1cc0 (columns 1, 5, 9, 13); stored as word 1 of the eye position (rasterVertex+0x24)	^\s*fVar3\ =\ \(fparam_4\ \*\ \*\(float\ \*\)\(param_1\ \+\ 0x1cf4\)\ \+\ \(fparam_3\ \*\ \*\(float\ \*\)\(param_1\ \+\ 0x1ce4\)\ \+\ \(fparam_1\ \*\ \*\(float\ \*\)\(param_1\ \+\ 0x1cc4\)\ \+\ \(fparam_2\ \*\ \*\(float\ \*\)\(param_1\ \+\ 0x1cd4\)\)\)\)\);$	+1
+use	_gleSetRasterPos	fVar3	eyeY	INFERRED	y row of the position times the 4x4 matrix at ctx+0x1cc0 (columns 1, 5, 9, 13); stored as word 1 of the eye position (rasterVertex+0x24)	^\s*\(fVar5\ \*\ \*\(float\ \*\)\(param_1\ \+\ 0x1cac\)\ \+$	+2
+use	_gleSetRasterPos	fVar3	eyeY	INFERRED	y row of the position times the 4x4 matrix at ctx+0x1cc0 (columns 1, 5, 9, 13); stored as word 1 of the eye position (rasterVertex+0x24)	^\s*\(fVar5\ \*\ \*\(float\ \*\)\(param_1\ \+\ 0x1ca0\)\ \+$	+2
+use	_gleSetRasterPos	fVar3	eyeY	INFERRED	y row of the position times the 4x4 matrix at ctx+0x1cc0 (columns 1, 5, 9, 13); stored as word 1 of the eye position (rasterVertex+0x24)	^\s*\(fVar5\ \*\ \*\(float\ \*\)\(param_1\ \+\ 0x1ca8\)\ \+$	+2
+use	_gleSetRasterPos	fVar3	eyeY	INFERRED	y row of the position times the 4x4 matrix at ctx+0x1cc0 (columns 1, 5, 9, 13); stored as word 1 of the eye position (rasterVertex+0x24)	^\s*\(fVar5\ \*\ \*\(float\ \*\)\(param_1\ \+\ 0x1ca4\)\ \+$	+2
+use	_gleSetRasterPos	fVar3	eyeY	INFERRED	y row of the position times the 4x4 matrix at ctx+0x1cc0 (columns 1, 5, 9, 13); stored as word 1 of the eye position (rasterVertex+0x24)	^\s*if\ \(fVar6\ \*\ \*\(float\ \*\)\(iVar15\ \+\ 0x4198\)\ \+$	+4
+use	_gleSetRasterPos	fVar3	eyeY	INFERRED	y row of the position times the 4x4 matrix at ctx+0x1cc0 (columns 1, 5, 9, 13); stored as word 1 of the eye position (rasterVertex+0x24)	^\s*\*\(float\ \*\)\(iVar14\ \+\ \-0x1dc\)\ =\ fVar3;$	+1
+use	_gleSetRasterPos	fVar3	inverseClipW	INFERRED	1.0 / clipW when |clipW| is large enough (wLargeEnough), otherwise a +/- large constant; stored at rasterVertex+0xc (the 1/w word) and multiplied into the clip x/y/z to get the window coordinates	^\s*fVar3\ =\ FLOAT_00108e54\ /\ fVar12;$	+1
+use	_gleSetRasterPos	fVar3	inverseClipW	INFERRED	1.0 / clipW when |clipW| is large enough (wLargeEnough), otherwise a +/- large constant; stored at rasterVertex+0xc (the 1/w word) and multiplied into the clip x/y/z to get the window coordinates	^\s*fVar3\ =\ FLOAT_00108f7c;$	+1
+use	_gleSetRasterPos	fVar3	inverseClipW	INFERRED	1.0 / clipW when |clipW| is large enough (wLargeEnough), otherwise a +/- large constant; stored at rasterVertex+0xc (the 1/w word) and multiplied into the clip x/y/z to get the window coordinates	^\s*fVar3\ =\ FLOAT_00108eb4;$	+1
+use	_gleSetRasterPos	fVar3	inverseClipW	INFERRED	1.0 / clipW when |clipW| is large enough (wLargeEnough), otherwise a +/- large constant; stored at rasterVertex+0xc (the 1/w word) and multiplied into the clip x/y/z to get the window coordinates	^\s*\*\(float\ \*\)\(param_1\ \+\ 0x4a2c\)\ \*\ fVar11\ \*\ fVar3\ \+\ \*\(float\ \*\)\(param_1\ \+\ 0x4a30\);$	+1
+use	_gleSetRasterPos	fVar3	inverseClipW	INFERRED	1.0 / clipW when |clipW| is large enough (wLargeEnough), otherwise a +/- large constant; stored at rasterVertex+0xc (the 1/w word) and multiplied into the clip x/y/z to get the window coordinates	^\s*\*\(float\ \*\)\(param_1\ \+\ 0x4a34\)\ \*\ fVar9\ \*\ fVar3\ \+\ \*\(float\ \*\)\(param_1\ \+\ 19000\);$	+1
+use	_gleSetRasterPos	fVar3	inverseClipW	INFERRED	1.0 / clipW when |clipW| is large enough (wLargeEnough), otherwise a +/- large constant; stored at rasterVertex+0xc (the 1/w word) and multiplied into the clip x/y/z to get the window coordinates	^\s*\*\(float\ \*\)\(param_1\ \+\ 0x4a3c\)\ \*\ fVar10\ \*\ fVar3\ \+\ \*\(float\ \*\)\(param_1\ \+\ 0x4a40\);$	+2
+use	_gleSetRasterPos	fVar4	eyeX	INFERRED	x row of the position times the 4x4 matrix at ctx+0x1cc0 (columns 0, 4, 8, 12), stored as word 0 of the eye position (rasterVertex+0x20)	^\s*fVar4\ =\ \(fparam_4\ \*\ \*\(float\ \*\)\(param_1\ \+\ 0x1cf0\)\ \+\ \(fparam_3\ \*\ \*\(float\ \*\)\(param_1\ \+\ 0x1ce0\)\ \+\ \(fparam_1\ \*\ \*\(float\ \*\)\(param_1\ \+\ 0x1cc0\)\ \+\ \(fparam_2\ \*\ \*\(float\ \*\)\(param_1\ \+\ 0x1cd0\)\)\)\)\);$	+1
+use	_gleSetRasterPos	fVar4	eyeX	INFERRED	x row of the position times the 4x4 matrix at ctx+0x1cc0 (columns 0, 4, 8, 12), stored as word 0 of the eye position (rasterVertex+0x20)	^\s*\(fVar5\ \*\ \*\(float\ \*\)\(param_1\ \+\ 0x1cac\)\ \+$	+2
+use	_gleSetRasterPos	fVar4	eyeX	INFERRED	x row of the position times the 4x4 matrix at ctx+0x1cc0 (columns 0, 4, 8, 12), stored as word 0 of the eye position (rasterVertex+0x20)	^\s*\(fVar5\ \*\ \*\(float\ \*\)\(param_1\ \+\ 0x1ca0\)\ \+$	+2
+use	_gleSetRasterPos	fVar4	eyeX	INFERRED	x row of the position times the 4x4 matrix at ctx+0x1cc0 (columns 0, 4, 8, 12), stored as word 0 of the eye position (rasterVertex+0x20)	^\s*\(fVar5\ \*\ \*\(float\ \*\)\(param_1\ \+\ 0x1ca8\)\ \+$	+2
+use	_gleSetRasterPos	fVar4	eyeX	INFERRED	x row of the position times the 4x4 matrix at ctx+0x1cc0 (columns 0, 4, 8, 12), stored as word 0 of the eye position (rasterVertex+0x20)	^\s*\(fVar5\ \*\ \*\(float\ \*\)\(param_1\ \+\ 0x1ca4\)\ \+$	+2
+use	_gleSetRasterPos	fVar4	eyeX	INFERRED	x row of the position times the 4x4 matrix at ctx+0x1cc0 (columns 0, 4, 8, 12), stored as word 0 of the eye position (rasterVertex+0x20)	^\s*if\ \(fVar6\ \*\ \*\(float\ \*\)\(iVar15\ \+\ 0x4198\)\ \+$	+4
+use	_gleSetRasterPos	fVar4	eyeX	INFERRED	x row of the position times the 4x4 matrix at ctx+0x1cc0 (columns 0, 4, 8, 12), stored as word 0 of the eye position (rasterVertex+0x20)	^\s*\*\(float\ \*\)\(iVar14\ \+\ \-0x1e0\)\ =\ fVar4;$	+1
+use	_gleSetRasterPos	fVar5	eyeZ	INFERRED	z row of the position times the matrix at ctx+0x1cc0 (columns 2, 6, 10, 14), stored as word 2 of the eye position	^\s*fVar5\ =\ \(fparam_4\ \*\ \*\(float\ \*\)\(param_1\ \+\ 0x1cf8\)\ \+\ \(fparam_3\ \*\ \*\(float\ \*\)\(param_1\ \+\ 0x1ce8\)\ \+\ \(fparam_1\ \*\ \*\(float\ \*\)\(0x1cc8\ \+\ param_1\)\ \+\ \(fparam_2\ \*\ \*\(float\ \*\)\(param_1\ \+\ 0x1cd8\)\)\)\)\);$	+1
+use	_gleSetRasterPos	fVar5	eyeZ	INFERRED	z row of the position times the matrix at ctx+0x1cc0 (columns 2, 6, 10, 14), stored as word 2 of the eye position	^\s*\(fVar5\ \*\ \*\(float\ \*\)\(param_1\ \+\ 0x1cac\)\ \+$	+2
+use	_gleSetRasterPos	fVar5	eyeZ	INFERRED	z row of the position times the matrix at ctx+0x1cc0 (columns 2, 6, 10, 14), stored as word 2 of the eye position	^\s*\(fVar5\ \*\ \*\(float\ \*\)\(param_1\ \+\ 0x1ca0\)\ \+$	+2
+use	_gleSetRasterPos	fVar5	eyeZ	INFERRED	z row of the position times the matrix at ctx+0x1cc0 (columns 2, 6, 10, 14), stored as word 2 of the eye position	^\s*\(fVar5\ \*\ \*\(float\ \*\)\(param_1\ \+\ 0x1ca8\)\ \+$	+2
+use	_gleSetRasterPos	fVar5	eyeZ	INFERRED	z row of the position times the matrix at ctx+0x1cc0 (columns 2, 6, 10, 14), stored as word 2 of the eye position	^\s*\(fVar5\ \*\ \*\(float\ \*\)\(param_1\ \+\ 0x1ca4\)\ \+$	+2
+use	_gleSetRasterPos	fVar5	eyeZ	INFERRED	z row of the position times the matrix at ctx+0x1cc0 (columns 2, 6, 10, 14), stored as word 2 of the eye position	^\s*if\ \(fVar6\ \*\ \*\(float\ \*\)\(iVar15\ \+\ 0x4198\)\ \+$	+4
+use	_gleSetRasterPos	fVar5	eyeZ	INFERRED	z row of the position times the matrix at ctx+0x1cc0 (columns 2, 6, 10, 14), stored as word 2 of the eye position	^\s*\*\(float\ \*\)\(iVar14\ \+\ \-0x1d8\)\ =\ fVar5;$	+1
+use	_gleSetRasterPos	uVar17	texCoordWord1	INFERRED	word 1 of the current texture coordinate record being copied	^\s*uVar17\ =\ \*\(undefined4\ \*\)\(iVar15\ \+\ 0x124\);$	+1
+use	_gleSetRasterPos	uVar17	texCoordWord1	INFERRED	word 1 of the current texture coordinate record being copied	^\s*\*\(undefined4\ \*\)\(iVar18\ \+\ 0x84\)\ =\ uVar17;$	+1
+use	_gleSetRasterPos	iVar15	texCoordCursor	INFERRED	source cursor over the 8 current texture coordinate records (ctx+0x120, step 0x10)	^\s*iVar15\ =\ param_1;$	+1
+use	_gleSetRasterPos	iVar15	texCoordCursor	INFERRED	source cursor over the 8 current texture coordinate records (ctx+0x120, step 0x10)	^\s*puVar1\ =\ \(undefined4\ \*\)\(iVar15\ \+\ 0x120\);$	+5
+use	_gleSetRasterPos	iVar15	clipPlaneRecord	INFERRED	ctx + planeIndex * 0x10: the user clip plane equation (+0x418c..+0x4198) tested against the eye position	^\s*iVar15\ =\ \*piVar16;$	+1
+use	_gleSetRasterPos	iVar15	clipPlaneRecord	INFERRED	ctx + planeIndex * 0x10: the user clip plane equation (+0x418c..+0x4198) tested against the eye position	^\s*iVar15\ =\ param_1\ \+\ iVar15\ \*\ 0x10;$	+5
+use	_gleSetRasterPos	iVar18	texCoordDst	INFERRED	destination cursor over the texture coordinate words of the raster vertex (+0x80, step 0x10)	^\s*iVar18\ =\ iVar19;$	+1
+use	_gleSetRasterPos	iVar18	texCoordDst	INFERRED	destination cursor over the texture coordinate words of the raster vertex (+0x80, step 0x10)	^\s*\*\(undefined4\ \*\)\(iVar18\ \+\ 0x80\)\ =\ \*puVar1;$	+5
+local	_gleSetRasterPos	fparam_1	x	CONFIRMED	glRasterPos4f x: first operand of the position multiplied by the modelview matrix at ctx+0x1cc0
+local	_gleSetRasterPos	fparam_2	y	CONFIRMED	glRasterPos4f y: second operand of the same transform
+local	_gleSetRasterPos	fparam_3	z	CONFIRMED	glRasterPos4f z: third operand of the same transform
+local	_gleSetRasterPos	fparam_4	w	CONFIRMED	glRasterPos4f w: fourth operand of the same transform
+local	_gleSetRasterPos	fVar6	eyeW	INFERRED	w row of the position times the matrix at ctx+0x1cc0 (columns 3, 7, 11, 15), stored as word 3 of the eye position
+local	_gleSetRasterPos	fVar9	clipY	INFERRED	eye position times the matrix at ctx+0x1c80 columns 1, 5, 9, 13: clip y, stored at rasterVertex+0x14
+local	_gleSetRasterPos	fVar10	clipZ	INFERRED	eye position times the matrix at ctx+0x1c80 columns 2, 6, 10, 14: clip z, stored in the vertex record
+local	_gleSetRasterPos	fVar11	clipX	INFERRED	eye position times the matrix at ctx+0x1c80 columns 0, 4, 8, 12: clip x, stored in the vertex record
+local	_gleSetRasterPos	fVar12	clipW	INFERRED	eye position times the matrix at ctx+0x1c80 columns 3, 7, 11, 15: clip w; the clip volume tests compare x, y, z against +/- clipW
+local	_gleSetRasterPos	fVar13	negClipW	CONFIRMED	-clipW: lower bound of the clip volume tests (clip x, y, z < -w rejects the raster position)
+local	_gleSetRasterPos	bVar2	wLargeEnough	INFERRED	true when clipW is outside the small epsilon interval around zero (compared with FLOAT_00108e80 / FLOAT_00108f3c); then inverseClipW = 1 / clipW
+local	_gleSetRasterPos	puVar1	texCoordSrc	INFERRED	address of current texture coordinate record i at ctx+0x120+0x10*i (8 records of 4 words copied into the raster vertex at +0x80)
+local	_gleSetRasterPos	uVar7	texCoordWord2	INFERRED	word 2 of the current texture coordinate record being copied
+local	_gleSetRasterPos	uVar8	texCoordWord3	INFERRED	word 3 of the current texture coordinate record being copied
+local	_gleSetRasterPos	iVar19	rasterVertex	INFERRED	vertex record (ctx+0x4854 minus 0x200) filled by this function and passed as vertex pointer with count 1 to the transform / lighting / fog callbacks and to _gleSelectHit
+local	_gleSetRasterPos	dVar21	fogFactor	INFERRED	result of the fog function at ctx+0x4fe4 applied to the eye z (or the current fog coordinate when ctx+0x3166 == 0x8451 GL_FOG_COORDINATE_EXT); stored as a float at rasterVertex+0x4c
+local	_gleSetWindowPos	iVar6	vertexBufferStart	CONFIRMED	ctx+0x4854: the vertex buffer start; the window position vertex record lives 0x200 bytes before it (iVar6 - 0x200 is passed to _gleSelectHit)
+local	_gleSetWindowPos	fVar5	floatZero	CONFIRMED	FLOAT_00108e50 (0.0), stored to the record at -0x1d8 (offset 0x28) when the short at ctx+0x3166 is not 0x8451 (otherwise the current value at ctx+0x2cc is stored there)
+local	_gleSetWindowPos	dVar10	floatZeroThenWindowZThenFogThenHitResult	INFERRED	FLOAT_00108e50 as a double, then the window z (clamped to the depth range at ctx+0x1b90 / ctx+0x1b98 and stored at ctx+0x2e8), then the result of the ctx+0x4fe4 fog callback, finally the result of _gleSelectHit that is returned
+local	_gleSetWindowPos	puVar1	texCoordSourcePtr	CONFIRMED	address of the current texture coordinate set (ctx + 0x120 + 0x10 * unit) copied into the window position record
+local	_gleSetWindowPos	uVar2	normalYThenTexCoordT	INFERRED	word at ctx+0x2b4 (current normal y) copied to the record normal, later the second word of the texture coordinate set being copied
+local	_gleSetWindowPos	uVar3	normalZThenTexCoordR	INFERRED	word at ctx+0x2b8 (current normal z) copied to the record normal, later the third word of the texture coordinate set being copied
+local	_gleSetWindowPos	uVar4	texCoordQ	CONFIRMED	fourth word of the texture coordinate set being copied (source offset 300)
+local	_gleSetWindowPos	iVar7	recordTexCoordCursor	CONFIRMED	destination in the window position record: starts at record + 0x80 (the first texture coordinate slot) and advances 0x10 per unit
+local	_gleSetWindowPos	iVar8	texCoordSetCursor	CONFIRMED	read cursor over the eight current texture coordinate sets at ctx+0x120, advancing 0x10 per unit
+local	_gleSetWindowPos	iVar9	unitsLeft	CONFIRMED	counts the eight texture coordinate sets down from 8
+local	_gleSphereGenST	param_1	glContext	CONFIRMED	forwarded as the first argument of the vector normalize call; _gleVtxTextureCoordGenEyeSlow passes its glContext
+local	_gleSphereGenST	param_2	eyePosition	CONFIRMED	vector that is normalized into local_30..local_28: callers pass vertex+0x20 (the eye-space position)
+local	_gleSphereGenST	param_3	normal	CONFIRMED	pointer to the vertex normal (x, y, z): callers pass vertex+0x40
+local	_gleSphereGenST	param_4	stOut	CONFIRMED	output array: [0] receives s and [1] receives t of the sphere map coordinate (callers store them to vertex+0x80 / +0x84); 0.5, 0.5 when the reflection vector is degenerate
+local	_gleSphereGenST	local_30	eyeDirectionX	CONFIRMED	x of the normalized eye vector
+local	_gleSphereGenST	local_2c	eyeDirectionY	CONFIRMED	y of the normalized eye vector
+local	_gleSphereGenST	local_28	eyeDirectionZ	CONFIRMED	z of the normalized eye vector
+local	_gleSphereGenST	dVar3	reflectX	CONFIRMED	x of the reflection vector u - 2 (n . u) n
+local	_gleSphereGenST	dVar4	reflectY	CONFIRMED	y of the reflection vector u - 2 (n . u) n
+local	_gleSphereGenST	fVar1	dotThenDoubledThenReflectZPlusOneThenLengthSquared	CONFIRMED	four roles in sequence: n . u, then 2 (n . u), then reflectZ + 1.0, then rx^2 + ry^2 + (rz + 1)^2
+local	_gleSphereGenST	dVar5	lengthSquaredThenNewtonTermThenOffset	INFERRED	the squared length as a double, then the Newton step term (DOUBLE_00108e40 minus dVar6) of the reciprocal square root refinement, finally FLOAT_00108e90 added to the scaled coordinates
+local	_gleSphereGenST	dVar2	inverseLength	INFERRED	reciprocal of sqrt(length squared): 0.0 for a non-positive length, 1.0 when the length squared is 1.0, otherwise the refined estimate of 0x5f375a00 - (bits >> 1) followed by a Newton step; the coordinates are scaled by it
+local	_gleSphereGenST	dVar6	estimateProduct	INFERRED	length squared times the reciprocal square root estimate squared: the quantity the Newton step corrects
+local	_gleSwitchRenderersReadBuffers	param_2	rendererIndex	INFERRED	index (callers pass the byte at ctx+0x85a5 / +0x85a6) into the 0x2e0-byte per-renderer records at ctx+0x85ec; a nonzero word there selects whether a depth buffer is also read back
+local	_gleSwitchRenderersReadBuffers	param_3	copyContextData	CONFIRMED	same readback record as _gleSwitchRenderersWriteBuffers' copyContextData: [0]=height, [1]=width, [2]=malloc'd 4-byte color pixels, [4]=malloc'd 4-byte depth pixels
+local	_gleSwitchRenderersReadBuffers	iVar3	readWidth	CONFIRMED	ctx+0x1ba8 stored to copyContextData[1] and passed as the width of the readback call (0,0,width,height,0x80e1,0x8367,buffer)
+local	_gleSwitchRenderersReadBuffers	uVar2	dirtyBitsAfterRead	CONFIRMED	ctx+0x310 dirty bits after the read, OR-ed with 0x200000 when the saved words are restored
+local	_gleSwitchRenderersReadBuffers	auStack_90	recoveryStateBuffer	CONFIRMED	80-byte state buffer filled by _gleRecoverySaveState and consumed by _gleRecoveryRestoreState
+local	_gleSwitchRenderersReadBuffers	local_40	savedWord0	CONFIRMED	saved ctx+0x31b0 (restored after the read; sibling _gleSwitchRenderersWriteBuffers saves ctx+0x31cc..)
+local	_gleSwitchRenderersReadBuffers	local_3c	savedWord1	CONFIRMED	saved ctx+0x31b4
+local	_gleSwitchRenderersReadBuffers	local_38	savedWord2	CONFIRMED	saved ctx+0x31b8
+local	_gleSwitchRenderersReadBuffers	local_34	savedWord3	CONFIRMED	saved ctx+0x31bc
+local	_gleSwitchRenderersReadBuffers	local_30	savedWord4	CONFIRMED	saved ctx+0x31c0
+local	_gleSwitchRenderersReadBuffers	local_2c	savedWord5	CONFIRMED	saved ctx+0x31c4 (forced to 1 during the read)
+local	_gleSwitchRenderersReadBuffers	local_28	savedWord6	CONFIRMED	saved ctx+0x31c8 (its three bytes are cleared during the read)
+local	_gleTextureImagePut_Fast	iVar4	levelRowBytes	CONFIRMED	_gleRowBytes of the texture level (format +0x10, type +0x12, width +0xc): destination row stride in bytes, compared with the source row bytes and passed to _gleCopy
+local	_gleTextureImagePut_Fast	iVar6	levelRowComponents	CONFIRMED	components(level format) * level width (+0xc): destination components per row; the row skip is this minus components*width
+local	_gleTextureImagePut_Fast	iVar7	destPixels	CONFIRMED	level pixels (+0x14) advanced by pixelBytes * (levelWidth*yoffset + xoffset): first destination pixel
+local	_gleTextureImagePut_Fast	local_60	srcRowBytes	CONFIRMED	rowBytesOut of _glePixelPackSettings (third out parameter)
+local	_gleTextureImagePut_Fast	local_50	srcPixelBytes	CONFIRMED	pixelBytesOut of _glePixelPackSettings (first out parameter); times width gives the bytes copied per row
+local	_gleTextureImagePut_Fast	local_4c	srcStartThenPointer	CONFIRMED	startOffsetOut of _glePixelPackSettings (second out parameter), then turned into the first source pixel pointer by adding pixels
+local	_gleTextureImagePut_Fast	auStack_5c	srcRowPadding	CONFIRMED	rowPaddingOut of _glePixelPackSettings (fourth out parameter, unused here)
+local	_gleTextureImagePut_Fast	auStack_58	srcImageBytes	CONFIRMED	imageBytesOut of _glePixelPackSettings (fifth out parameter, unused here)
+local	_gleTextureImagePut_Fast	auStack_54	srcImagePadding	CONFIRMED	imagePaddingOut of _glePixelPackSettings (sixth out parameter, unused here)
+local	_gleTextureImagePut_Fast	uVar5	putResult	CONFIRMED	return value of the per-type _gleTextureImagePut_Fast<Type> helper, returned unchanged
+local	_gleTransformLightDirection	param_2	lightIndex	CONFIRMED	index of the light: the light record is at ctx + lightIndex * 0x80 and the value is forwarded to _gleUpdateLightDirection, which indexes the per-light cache the same way
+local	_gleTransformLightDirection	iVar7	lightRecord	CONFIRMED	ctx + lightIndex * 0x80: the light record whose vector (+0x2860..+0x2868), position (+0x2850..+0x2858) and w (+0x285c) are read
+local	_gleTransformLightDirection	fVar1	lightVectorXThenPositionalOffset	INFERRED	x component of the light vector (record +0x2860) before the transform; for a positional light reused as the scalar -(dot of the vector and the position) / w that is multiplied with the matrix column at ctx+0x22f0
+local	_gleTransformLightDirection	fVar2	lightVectorY	CONFIRMED	y component of the light vector read from record +0x2864 before it is transformed
+local	_gleTransformLightDirection	fVar3	lightVectorZ	CONFIRMED	z component of the light vector read from record +0x2868 before it is transformed
+local	_gleTransformLightDirection	fVar6	transformedX	CONFIRMED	x of the vector transformed by the matrix at ctx+0x22c0..+0x22e0; stored to record +0x2860
+local	_gleTransformLightDirection	fVar5	transformedY	CONFIRMED	y of the vector transformed by the matrix at ctx+0x22c4..+0x22e4; stored to record +0x2864
+local	_gleTransformLightDirection	fVar4	transformedZ	CONFIRMED	z of the vector transformed by the matrix at ctx+0x22c8..+0x22e8; stored to record +0x2868
+local	_gleTransformLightDirection	bVar8	positionalLight	INFERRED	record w (+0x285c) is not equal to FLOAT_00108e50 (0.0): the adjustment for a positional light is applied
+local	_gleTransformNormalBlend	param_2	vertexArrayThenCursor	CONFIRMED	address of the first 0x100-byte vertex record; the final copy/normalize loops advance it, so it ends as a cursor
+local	_gleTransformNormalBlend	param_3	vertexCount	CONFIRMED	number of vertex records (the byte span is vertexCount*0x100)
+local	_gleTransformNormalBlend	bVar1	blendUnitCount	INFERRED	byte at ctx+0x4660: number of blend matrices (units) summed per vertex; weights are read at vertex+0x60+unit*4 and matrices at ctx+0x22c0+unit*0x40
+local	_gleTransformNormalBlend	iVar13	vertexBytes	CONFIRMED	vertexCount * 0x100: byte span of the vertex array
+local	_gleTransformNormalBlend	iVar15	blendMatrixCursor	CONFIRMED	ctx + unit*0x40: current blend matrix (rows at +0x22c0/+0x22d0/+0x22e0)
+local	_gleTransformNormalBlend	uVar17	vertexCursor	CONFIRMED	vertex record being processed in the accumulate loops
+local	_gleTransformNormalBlend	uVar18	verticesLeft	CONFIRMED	loop counter: ceil(span/0x100)
+local	_gleTransformNormalBlend	fVar2	matrix00	CONFIRMED	blend matrix element at +0x22c0 (row 0, column 0)
+local	_gleTransformNormalBlend	fVar3	matrix01	CONFIRMED	blend matrix element at +0x22c4
+local	_gleTransformNormalBlend	fVar4	matrix10	CONFIRMED	blend matrix element at +0x22d0
+local	_gleTransformNormalBlend	fVar5	matrix11	CONFIRMED	blend matrix element at +0x22d4
+local	_gleTransformNormalBlend	fVar6	matrix12	CONFIRMED	blend matrix element at +0x22d8
+local	_gleTransformNormalBlend	fVar7	matrix20	CONFIRMED	blend matrix element at +0x22e0
+local	_gleTransformNormalBlend	fVar8	matrix21	CONFIRMED	blend matrix element at +0x22e4
+local	_gleTransformNormalBlend	fVar9	matrix22	CONFIRMED	blend matrix element at +0x22e8
+local	_gleTransformNormalBlend	dVar19	normalX	CONFIRMED	vertex normal x (vertex+0x40); declared float despite the d prefix
+local	_gleTransformNormalBlend	fVar10	normalY	CONFIRMED	vertex normal y (vertex+0x44)
+local	_gleTransformNormalBlend	fVar11	normalZ	CONFIRMED	vertex normal z (vertex+0x48)
+local	_gleTransformNormalBlend	fVar12	blendWeight	CONFIRMED	blend weight of the current unit (vertex+0x60+unit*4) multiplying the transformed normal added into vertex+0xf0..+0xf8
+local	_gleUpdateDispatchCodeChange	param_2	dispatchModeBits	INFERRED	new mode bits: bit2 -> ctx+0x7581 (leaving it clears the renderer-switch path), bits0-1 -> ctx+0x7580 (color material / primitive data update), bit3 inverted -> ctx+0x759d (framebuffer operation funcs); cleared to 0 after a renderer switch so the later checks see no change
+local	_gleUpdateDispatchCodeChange	bVar1	rendererIndexByte	CONFIRMED	byte at ctx+0x85a5 (0xff = none): the renderer being switched to, compared with ctx+0x85a8
+local	_gleUpdateDispatchCodeChange	uVar5	rendererIndex	CONFIRMED	bVar1 widened: index of the 0x2e0-byte renderer record at ctx+0x85ec
+local	_gleUpdateDispatchCodeChange	iVar4	rendererRecord	CONFIRMED	ctx + rendererIndex*0x2e0: the renderer record whose +0x8884 vtable (+0x138 entry) and +0x85ac handle are called
+local	_gleUpdateDispatchCodeChange	local_40	copyContextWord0	CONFIRMED	word 0 of the five-word copy-context record zeroed before _gleSwitchRenderersReadBuffers and later freed by _gleFreeCopyContextData
+local	_gleUpdateDispatchCodeChange	local_3c	copyContextWord1	CONFIRMED	word 1 of the copy-context record (height/width slots filled by the read-back)
+local	_gleUpdateDispatchCodeChange	local_38	copyContextWord2	CONFIRMED	word 2 of the copy-context record (color pixel buffer)
+local	_gleUpdateDispatchCodeChange	local_34	copyContextWord3	CONFIRMED	word 3 of the copy-context record
+local	_gleUpdateDispatchCodeChange	local_30	copyContextWord4	CONFIRMED	word 4 of the copy-context record (depth pixel buffer)
+local	_gleUpdateDrawArraysFuncs	iVar1	multiDrawElementArraySlot	CONFIRMED	current content of the glMultiDrawElementArrayAPPLE entry (+0xa5c) of the dispatch table at ctx+0x4684: zero selects the table at ctx+0x4680 as the one that receives the new entry
+local	_gleUpdateDrawArraysFuncs	puVar2	handlerPtr	CONFIRMED	literal-pool pointer of the glMultiDrawElementArrayAPPLE handler to install (the _Exec or the _NoopExec variant)
+local	_gleUpdateDrawArraysFuncs	uVar3	selectMask	INFERRED	all-ones mask when the entry of the table at ctx+0x4684 is zero (the mask of (ctx+0x4680 & mask) | (ctx+0x4684 & ~mask) that picks the dispatch table whose entry is overwritten)
+local	_gleUpdateLightExponents	param_2	lightIndex	CONFIRMED	index of the light: the light record is at ctx + lightIndex * 0x80 and its cache record at ctx + lightIndex * 0x6c; forwarded to _gleUpdateLightFast
+local	_gleUpdateLightExponents	iVar3	lightRecord	CONFIRMED	ctx + lightIndex * 0x80: the light record (spot cutoff term at +0x286c, spot exponent at +0x287c)
+local	_gleUpdateLightExponents	iVar6	lightCache	CONFIRMED	ctx + lightIndex * 0x6c: the cached light record (spot flag at +0x4ada, cached exponent at +0x4a94, table values at +0x4a98..+0x4ad0)
+local	_gleUpdateLightExponents	dVar11	floatOne	CONFIRMED	FLOAT_00108e54 (1.0) as a double, the upper end of the table range
+local	_gleUpdateLightExponents	dVar10	tableBase	INFERRED	exp(log(DOUBLE_00108dd8) / exponent) rounded to float: the lower end of the spot exponent table, stored at lightCache+0x4a98
+local	_gleUpdateLightExponents	fVar1	tableBaseReload	CONFIRMED	the value just stored at lightCache+0x4a98 read back (tableBase), used for the table step
+local	_gleUpdateLightExponents	dVar8	constantThenPowResult	INFERRED	FLOAT_00108f40 divided by tableBase (stored at +0x4aa0), later the _pow result stored into the table entry
+local	_gleUpdateLightExponents	dVar9	logThenExpThenBaseThenPowThenSample	INFERRED	scratch double with five roles in sequence: the _log result, the _exp result, DOUBLE_00108de0 as the _pow base for the term at +0x4aa4, that _pow result, and finally the sample point x of the table loop (tableBase, advancing by (1.0 - tableBase) / FLOAT_00108f44)
+local	_gleUpdateState	puVar1	clipInterpFuncPtr	CONFIRMED	the PTR__gleSetClipInterpFunc literal-pool pointer stored to ctx+0x49cc (PTR__gleSetEyeInterpFunc is stored to ctx+0x49c8)
+local	_gleUpdateState	uVar2	separateSpecular	INFERRED	value stored at ctx+0x316b: when lighting is on without a vertex program, (short at ctx+0x30a8 == 0x81fa, GL_SEPARATE_SPECULAR_COLOR); otherwise the byte at ctx+0x4fea
+local	_gleUpdateState	extraout_r4	r4AfterCall	INFERRED	Ghidra pseudo-register extraout_r4 (the value a call left in r4), forwarded as a stale argument to _gleUpdateClipPlane; no source-level role
+local	_gleUpdateState	extraout_f1	f1AfterCall	INFERRED	Ghidra pseudo-register extraout_f1 (the value a call left in f1); starts the f1 chain of the light update loop
+local	_gleUpdateState	iVar3	rendererInfoWord10ThenLoopIndex	CONFIRMED	word +0x10 of the renderer info at ctx+0x468c, clamping ctx+0x1bac, then the index of the light loop (0..7) and of the texture parameter loop (0..0xf)
+local	_gleUpdateState	iVar4	rendererInfoWordCThenNextIndex	CONFIRMED	word +0xc of the renderer info at ctx+0x468c, clamping ctx+0x1ba8, then the next loop index (loop index + 1) of the light and texture loops
+local	_gleUpdateState	dVar5	lastF1Result	INFERRED	f1 value last returned by a callee (_gleUpdateLightPosition, _gleUpdateLightDirection, _gleUpdateEvalData), forwarded as the first float argument of the next call
+use	_gleUpdateTextureCoordGen	puVar29	vtxTexGenNoopFunc	CONFIRMED	PTR__gleVtxTextureCoordGenNoop: the no-op single-vertex texgen function, the default stored at ctx+0x53e0 and ctx+0x53dc	^\s*puVar29\ =\ PTR__gleVtxTextureCoordGenNoop_001114ac;$	+1
+use	_gleUpdateTextureCoordGen	puVar29	vtxTexGenNoopFunc	CONFIRMED	PTR__gleVtxTextureCoordGenNoop: the no-op single-vertex texgen function, the default stored at ctx+0x53e0 and ctx+0x53dc	^\s*\*\(undefined\ \*\*\)\(param_1\ \+\ 0x53dc\)\ =\ puVar29;$	+1
+use	_gleUpdateTextureCoordGen	puVar29	vtxTexGenReflectSTRFunc	CONFIRMED	PTR__gleVtxTextureCoordGenReflectSTR import slot: the single-vertex STR reflection-map texgen function stored at ctx+0x53e0	^\s*puVar29\ =\ PTR__gleVtxTextureCoordGenReflectSTR_00111474;$	+1
+use	_gleUpdateTextureCoordGen	puVar29	vtxTexGenReflectSTRFunc	CONFIRMED	PTR__gleVtxTextureCoordGenReflectSTR import slot: the single-vertex STR reflection-map texgen function stored at ctx+0x53e0	^\s*\*\(undefined\ \*\*\)\(param_1\ \+\ 0x53e0\)\ =\ puVar29;$	+1
+use	_gleUpdateTextureCoordGen	puVar29	multiVtxTexGenSTRFunc	CONFIRMED	the multi-unit STR texgen function (multiVtxTexGenNormalSTRFunc or PTR__gleMultiVtxTextureCoordGenReflectSTR) stored in the unit record at -4	^\s*puVar29\ =\ puVar13;$	+1
+use	_gleUpdateTextureCoordGen	puVar29	multiVtxTexGenSTRFunc	CONFIRMED	the multi-unit STR texgen function (multiVtxTexGenNormalSTRFunc or PTR__gleMultiVtxTextureCoordGenReflectSTR) stored in the unit record at -4	^\s*puVar29\ =\ PTR__gleMultiVtxTextureCoordGenReflectSTR_00111470;$	+1
+use	_gleUpdateTextureCoordGen	puVar29	multiVtxTexGenSTRFunc	CONFIRMED	the multi-unit STR texgen function (multiVtxTexGenNormalSTRFunc or PTR__gleMultiVtxTextureCoordGenReflectSTR) stored in the unit record at -4	^\s*\*\(undefined\ \*\*\)\(pcVar28\ \+\ \-4\)\ =\ puVar29;$	+1
+local	_gleUpdateTextureCoordGen	puVar25	multiVtxTexGenNoopFunc	CONFIRMED	the only definition is the import slot PTR__gleMultiVtxTextureCoordGenNoop_<addr>: the texture coordinate generation function _gleMultiVtxTextureCoordGenNoop, stored into the per-unit or ctx function pointers
+local	_gleUpdateTextureCoordGen	puVar24	vtxTexGenEyeSTFunc	CONFIRMED	the only definition is the import slot PTR__gleVtxTextureCoordGenEyeST_<addr>: the texture coordinate generation function _gleVtxTextureCoordGenEyeST, stored into the per-unit or ctx function pointers
+local	_gleUpdateTextureCoordGen	puVar23	multiVtxTexGenEyeSTFunc	CONFIRMED	the only definition is the import slot PTR__gleMultiVtxTextureCoordGenEyeST_<addr>: the texture coordinate generation function _gleMultiVtxTextureCoordGenEyeST, stored into the per-unit or ctx function pointers
+local	_gleUpdateTextureCoordGen	puVar22	vtxTexGenObjectSTFunc	CONFIRMED	the only definition is the import slot PTR__gleVtxTextureCoordGenObjectST_<addr>: the texture coordinate generation function _gleVtxTextureCoordGenObjectST, stored into the per-unit or ctx function pointers
+local	_gleUpdateTextureCoordGen	puVar21	multiVtxTexGenObjectSTFunc	CONFIRMED	the only definition is the import slot PTR__gleMultiVtxTextureCoordGenObjectST_<addr>: the texture coordinate generation function _gleMultiVtxTextureCoordGenObjectST, stored into the per-unit or ctx function pointers
+local	_gleUpdateTextureCoordGen	puVar20	vtxTexGenSphereSTFunc	CONFIRMED	the only definition is the import slot PTR__gleVtxTextureCoordGenSphereST_<addr>: the texture coordinate generation function _gleVtxTextureCoordGenSphereST, stored into the per-unit or ctx function pointers
+local	_gleUpdateTextureCoordGen	puVar19	multiVtxTexGenSphereSTFunc	CONFIRMED	the only definition is the import slot PTR__gleMultiVtxTextureCoordGenSphereST_<addr>: the texture coordinate generation function _gleMultiVtxTextureCoordGenSphereST, stored into the per-unit or ctx function pointers
+local	_gleUpdateTextureCoordGen	puVar18	vtxTexGenNormalSTFunc	CONFIRMED	the only definition is the import slot PTR__gleVtxTextureCoordGenNormalST_<addr>: the texture coordinate generation function _gleVtxTextureCoordGenNormalST, stored into the per-unit or ctx function pointers
+local	_gleUpdateTextureCoordGen	puVar17	multiVtxTexGenNormalSTFunc	CONFIRMED	the only definition is the import slot PTR__gleMultiVtxTextureCoordGenNormalST_<addr>: the texture coordinate generation function _gleMultiVtxTextureCoordGenNormalST, stored into the per-unit or ctx function pointers
+local	_gleUpdateTextureCoordGen	puVar16	vtxTexGenReflectSTFunc	CONFIRMED	the only definition is the import slot PTR__gleVtxTextureCoordGenReflectST_<addr>: the texture coordinate generation function _gleVtxTextureCoordGenReflectST, stored into the per-unit or ctx function pointers
+local	_gleUpdateTextureCoordGen	puVar15	multiVtxTexGenReflectSTFunc	CONFIRMED	the only definition is the import slot PTR__gleMultiVtxTextureCoordGenReflectST_<addr>: the texture coordinate generation function _gleMultiVtxTextureCoordGenReflectST, stored into the per-unit or ctx function pointers
+local	_gleUpdateTextureCoordGen	puVar14	vtxTexGenNormalSTRFunc	CONFIRMED	the only definition is the import slot PTR__gleVtxTextureCoordGenNormalSTR_<addr>: the texture coordinate generation function _gleVtxTextureCoordGenNormalSTR, stored into the per-unit or ctx function pointers
+local	_gleUpdateTextureCoordGen	puVar13	multiVtxTexGenNormalSTRFunc	CONFIRMED	the only definition is the import slot PTR__gleMultiVtxTextureCoordGenNormalSTR_<addr>: the texture coordinate generation function _gleMultiVtxTextureCoordGenNormalSTR, stored into the per-unit or ctx function pointers
+local	_gleUpdateTextureCoordGen	puVar12	vtxTexGenEyeSlowFunc	CONFIRMED	the only definition is the import slot PTR__gleVtxTextureCoordGenEyeSlow_<addr>: the texture coordinate generation function _gleVtxTextureCoordGenEyeSlow, stored into the per-unit or ctx function pointers
+local	_gleUpdateTextureCoordGen	puVar11	multiVtxTexGenEyeSlowFunc	CONFIRMED	the only definition is the import slot PTR__gleMultiVtxTextureCoordGenEyeSlow_<addr>: the texture coordinate generation function _gleMultiVtxTextureCoordGenEyeSlow, stored into the per-unit or ctx function pointers
+local	_gleUpdateTextureCoordGen	puVar10	vtxTexGenObjectSlowFunc	CONFIRMED	the only definition is the import slot PTR__gleVtxTextureCoordGenObjectSlow_<addr>: the texture coordinate generation function _gleVtxTextureCoordGenObjectSlow, stored into the per-unit or ctx function pointers
+local	_gleUpdateTextureCoordGen	puVar9	multiVtxTexGenObjectSlowFunc	CONFIRMED	the only definition is the import slot PTR__gleMultiVtxTextureCoordGenObjectSlow_<addr>: the texture coordinate generation function _gleMultiVtxTextureCoordGenObjectSlow, stored into the per-unit or ctx function pointers
+local	_gleUpdateTextureCoordGen	puVar8	multiVtxTexGenWrapObjectFunc	CONFIRMED	the only definition is the import slot PTR__gleMultiVtxTextureCoordGenWrapObject_<addr>: the texture coordinate generation function _gleMultiVtxTextureCoordGenWrapObject, stored into the per-unit or ctx function pointers
+local	_gleUpdateTextureCoordGen	puVar7	multiVtxTexGenWrapEyeFunc	CONFIRMED	the only definition is the import slot PTR__gleMultiVtxTextureCoordGenWrapEye_<addr>: the texture coordinate generation function _gleMultiVtxTextureCoordGenWrapEye, stored into the per-unit or ctx function pointers
+local	_gleUpdateTextureCoordGen	bVar1	texGenEnabledR	INFERRED	texgen state byte +0xa (GL_TEXTURE_GEN_R enable) of the unit: tested together with the S and T enables and the R generation mode
+local	_gleUpdateTextureCoordGen	bVar2	texGenEnabledS	INFERRED	texgen state byte +8 (GL_TEXTURE_GEN_S enable) of the unit
+local	_gleUpdateTextureCoordGen	bVar3	texGenEnabledT	INFERRED	texgen state byte +9 (GL_TEXTURE_GEN_T enable) of the unit
+local	_gleUpdateTextureCoordGen	cVar5	previousUnitFlag	CONFIRMED	the unit flag byte (*texGenFlagCursor) before this pass; when the new value differs, bit 0 of the matrix-func-dirty word ctx+0x50ac is set
+local	_gleUpdateTextureCoordGen	uVar6	genModeS	CONFIRMED	texgen mode of the S coordinate (0x2400 GL_EYE_LINEAR, 0x2401 GL_OBJECT_LINEAR, 0x2402 GL_SPHERE_MAP, 0x8511 GL_NORMAL_MAP, 0x8512 GL_REFLECTION_MAP) compared with the T mode (unit +0x3d0c) and the R mode (+0x3d30) before the S/T/R fast paths
+local	_gleUpdateTextureCoordGen	pcVar28	texGenFlagCursor	INFERRED	cursor over the 0xc-byte per-unit records at ctx+0x531c: flag byte at +0, the unit function pointers at -8 and -4 (single and multi texgen function)
+local	_gleUpdateTextureCoordGen	iVar26	texGenState	INFERRED	ctx+0x3d70 + unit * 0x94: the unit state whose bytes +8..+0xb are the S/T/R/Q texgen enables
+local	_gleUpdateTextureCoordGen	iVar30	unitStateBase	INFERRED	glContext + unit * 0x94: base for the per-unit mode fields at +0x3ce8 / +0x3d0c / +0x3d30 / +0x3d54 (S, T, R, Q modes)
+local	_gleVPFlushTriangleFan	iVar5	bufferStart	CONFIRMED	ctx+0x4854: start of the vertex buffer, where the first fan vertex is restored after the flush
+local	_gleVPFlushTriangleFan	iVar4	doublewordsPerVertex	CONFIRMED	ctx+0x487c >> 3: vertex stride in doublewords, the number of doublewords copied for one vertex
+local	_gleVPFlushTriangleFan	local_220	firstVertexCopy	CONFIRMED	saved copy of the first vertex (the fan centre) read from ctx+0x4854 before the flush
+local	_gleVPFlushTriangleFan	local_120	lastVertexCopy	CONFIRMED	saved copy of the last vertex (ctx+0x4858 - stride) read before the flush
+local	_gleVPFlushTriangleFan	puVar3	lastVertexSourceThenSecondSlot	INFERRED	address of the last vertex in the buffer (end - stride), advanced by the copy; later the second vertex slot (start + stride) where the last vertex is restored and which the new buffer end is derived from
+local	_gleVPFlushTriangleFan	iVar7	copyIndexThenCounter	INFERRED	doubleword index of the first-vertex save loop, later the down counter of the vertex copy loops
+local	_gleVPFlushTriangleFan	iVar6	counterThenCopyIndex	INFERRED	down counter of the first-vertex save loop, later the doubleword index of the first-vertex restore loop
+local	_gleVPFlushTriangleFan	puVar1	copyDestinationCursor	INFERRED	destination cursor of the doubleword copies: into lastVertexCopy while saving, into the second vertex slot while restoring
+local	_gleVPFlushTriangleFan	puVar2	restoreSourceCursor	CONFIRMED	read cursor over lastVertexCopy while the last vertex is restored
+local	_gleVPFlushTriangleFan	uVar8	copiedDoubleword	CONFIRMED	the doubleword being moved by the last-vertex copy loops
+local	_gleVPRenderPolygon	bVar1	vertexProgramTwoSide	INFERRED	byte at ctx+0x4666 (same load as vertexProgramTwoSide in _gleVPRenderQuads_body): when set the vertex colors are passed to _gleVPFlipColors with the polygon's facing
+local	_gleVPRenderPolygon	cVar2	faceTestNeeded	INFERRED	char at ctx+0x34de (same load as faceTestNeeded in _gleVPRenderQuads_body): non-zero selects the culling calls _gleCullPolygonStack / _gleCullPolygonPtrStack
+local	_gleVPRenderPolygon	uVar3	facePolygonMode	CONFIRMED	ctx+0x34d0 (front) or ctx+0x34d2 (back) polygon mode, chosen by the back-facing value; minus 0x1b00 (GL_POINT) it is the mode argument of the draw callback
+local	_gleVPRenderPolygon	local_3c	backFacing	INFERRED	out parameter of _gleCullPolygonStack/_gleCullPolygonPtrStack (declared as an int array, only element 0 is used): non-zero when the polygon is back-facing; selects ctx+0x34d0 / ctx+0x34d2 and is passed to _gleVPFlipColors
+local	_gleVPRenderPolygon	local_40	clippedCount	CONFIRMED	out parameter of _gleClipPolyPlane/_gleClipPoly: vertex count of the clipped polygon, zero means nothing is left
+local	_gleVPRenderPolygon	iVar5	texEnableBitsThenPolygonMode	INFERRED	result of _gleTexEnableBits (non-zero: texturing, selects the ctx+0x506c / 0x5074 callback), later the polygon mode (facePolygonMode - 0x1b00, 3 when ctx+0x4a18 is set for a line mode) passed to the draw callback
+local	_gleVPRenderPolygon	uVar6	clipFlagsThenFlipCount	INFERRED	result of _gleVPEmulate (bits 8-15 reject, low byte = clip plane mask for _gleClipPoly), later reused as the remaining vertex count of the _gleVPFlipColors loop
+local	_gleVPRenderPolygon	iVar7	cullResult	CONFIRMED	result of _gleCullPolygonStack: nonzero = culled, the function returns
+local	_gleVPRenderPolygon	uVar8	planeClippedFlag	INFERRED	last argument of _gleClipPoly: 0 when no clip plane clipping was done, 1 after _gleClipPolyPlane filled the other list (the two lists are then swapped)
+local	_gleVPRenderPolygon	pcVar9	drawCallback	CONFIRMED	ctx+0x46c0 (polygon from the vertex array) or ctx+0x46e0 (polygon from the pointer list), called with ctx+0x4688, the polygon, its vertex count and the polygon mode
+local	_gleVPRenderPolygon	piVar10	polygonList	INFERRED	scratch polygon vertex-pointer list at ctx+0x4870, filled with one pointer per vertex
+local	_gleVPRenderPolygon	piVar12	spareList	INFERRED	second scratch vertex-pointer list at ctx+0x4874, the destination of _gleClipPolyPlane/_gleClipPoly (swapped with polygonList)
+local	_gleVPRenderPolygon	piVar13	vertexArrayThenPolygonList	INFERRED	pointer to the transformed vertices (ctx+0x4864), advanced 0x100 bytes per vertex while polygonList is filled, then the list holding the polygon after clipping; the draw callback receives it
+local	_gleVPRenderPolygon	piVar4	listCursorThenFlipCursor	INFERRED	write cursor of polygonList while it is filled, later the read cursor of the _gleVPFlipColors loop
+local	_gleVPRenderPolygon	uVar11	vertexCountThenClippedCount	INFERRED	vertex count ((ctx+0x4858 - ctx+0x4854) / stride; fewer than 3 returns), replaced by clippedCount after a clip call that produced vertices
+local	_gleVPRenderPolygon	uVar14	remainingVertices	CONFIRMED	counts down from the vertex count while the pointer list polygonList is filled
+local	_gleVPRenderPolygon	fparam_1	forwardedFloatArg1	INFERRED	f1 as last left by the ctx+0x5074 callback, forwarded unchanged to _gleClipPolyPlane
+local	_gleVPRenderQuads_body	bVar4	facingChanged	INFERRED	set when the back-facing value of the current quad differs from the previous one (previousBackFacing != backFacing); ends the current run
+local	_gleVPRenderQuads_body	iVar6	texEnableBitsThenRunCountThenCullResultThenBackFacing	INFERRED	result of _gleTexEnableBits (non-zero: texturing, selects the ctx+0x506c / 0x5074 callback), then the vertex count of the current run of quads (+4 per accepted quad), later the result of _gleCullPolygonPtrStack and then the back-facing value copied from backFacing
+local	_gleVPRenderQuads_body	uVar13	vertexCountThenLastQuadStart	INFERRED	vertex count ((ctx+0x4858 - ctx+0x4854) / stride; fewer than 4 returns), then overwritten with the last quad start (start + count * 0x100 - 0x400)
+local	_gleVPRenderQuads_body	uVar16	vertexCursor	CONFIRMED	vertex pointer: starts as ctx+0x4864 (the vertices transformed by _gleVPEmulate) and advances 0x400 (one quad) at a time
+local	_gleVPRenderQuads_body	uVar15	runStart	INFERRED	first vertex of the current run of quads that share one facing; passed to _gleVPFlipColors and the ctx+0x46d0 draw callback with the run's vertex count
+local	_gleVPRenderQuads_body	uVar14	nextRunStart	INFERRED	start of the next run: the current run start while quads are accepted, or the quad after a culled quad
+local	_gleVPRenderQuads_body	uVar7	resumeCursor	INFERRED	vertex pointer where the outer loop resumes after a run: the quad that changed the facing, or the quad after a culled one
+local	_gleVPRenderQuads_body	iVar8	cullResultThenFlipCount	INFERRED	result of _gleCullQuad (nonzero = culled), later the remaining vertex count of the _gleVPFlipColors loop
+local	_gleVPRenderQuads_body	puVar5	newPolygonList	INFERRED	the list that holds the polygon after the _gleClipPolyPlane call (swap partner of the old list)
+local	_gleVPRenderQuads_body	puVar10	oldPolygonListThenVertexPtrCursor	INFERRED	the list that does not hold the polygon after a clip call (swap partner of newPolygonList), later the cursor over the polygon vertex pointer list in the _gleVPFlipColors loop
+local	_gleVPRenderQuads_body	dVar17	forwardedFloatArg1	INFERRED	f1 as last left by the callbacks, forwarded unchanged as the stale first FPR argument of the next call
+local	_gleVPRenderQuads_body	extraout_f1_00	f1AfterCall1	INFERRED	Ghidra pseudo-register extraout_f1_00 (the value a call left behind; no source-level role)
+local	_gleVPRenderQuads_body	local_4c	clipCount	CONFIRMED	int array: [0] receives the vertex count of the clipped polygon from _gleClipPolyPlane/_gleClipPoly; zero means nothing is left
+local	_gleVtxLightFastRGBABackPtr	iVar7	vertex	CONFIRMED	the vertex record taken from the pointer list: normal at +0x40, back material at +0x78, color output at +0x30..+0x3c, flags byte +0x7e (bit 4 = back color needs lighting, cleared here)
+local	_gleVtxLightFastRGBABackPtr	iVar8	lightProducts	CONFIRMED	material + 0x50 + lightIndex * 0x30: the per-light products of the material (diffuse at +0x10..+0x18, specular at +0x20..+0x28)
+local	_gleVtxLightFastRGBABackPtr	iVar10	lightCache	CONFIRMED	ctx + 0x4a70 + lightIndex * 0x6c: the cached record of the current light (direction at +0xc..+0x14)
+local	_gleVtxLightFastRGBABackPtr	dVar15	colorR	CONFIRMED	red accumulator: starts at the material value at +0x1e8, receives the light contributions and is stored to vertex+0x30
+local	_gleVtxLightFastRGBABackPtr	dVar14	colorG	CONFIRMED	green accumulator: starts at the material value at +0x1ec, receives the light contributions and is stored to vertex+0x34
+local	_gleVtxLightFastRGBABackPtr	dVar13	colorB	CONFIRMED	blue accumulator: starts at the material value at +0x1f0, receives the light contributions and is stored to vertex+0x38
+local	_gleVtxLightFastRGBABackPtr	dVar12	normalDotLight	CONFIRMED	dot product of the vertex normal (+0x40..+0x48) and the light direction at lightCache+0xc..+0x14; the light is used only when its negation is above zero (back facing)
+local	_gleVtxLightFastRGBABackPtr	fparam_8_00	normalZ	CONFIRMED	z of the vertex normal (vertex+0x48), also forwarded as the stale last FPR argument of _gleMaterialShinePow
+local	_gleVtxLightFastRGBABackPtr	fparam_1_00	negatedNormalDotHalf	CONFIRMED	minus the dot product of the vertex normal and the half vector at lightParams+0x60..+0x68: the specular input, used when above zero
+local	_gleVtxLightFastRGBABackPtr	dVar11	floatZeroThenShinePow	INFERRED	FLOAT_00108e50 (0.0) for the compares, later the result of _gleMaterialShinePow (specular power) that scales the specular products
+local	_gleVtxLightFastRGBABackPtr	iVar2	forwardedGlContext	INFERRED	glContext carried in a register across the calls: passed as the first argument of _gleMaterialShinePow
+local	_gleVtxLightFastRGBABackPtr	extraout_r3	r3AfterCall	INFERRED	Ghidra pseudo-register extraout_r3 (the value a call left in r3; no source-level role)
+local	_gleVtxLightRGBAFrontPtr	iVar14	vertex	CONFIRMED	the vertex record taken from the pointer list: eye position at +0x20, normal at +0x40, material at +0x74, color output at +0x30..+0x3c, flags byte +0x7e (bit 2 = needs lighting, cleared here)
+local	_gleVtxLightRGBAFrontPtr	pfVar7	eyePosition	CONFIRMED	pointer to the eye-space position used for the light vectors: vertex+0x20, or the locally divided copy when the eye w (vertex+0x2c) is not 1.0
+local	_gleVtxLightRGBAFrontPtr	local_e0	eyePositionX	CONFIRMED	vertex eye x (vertex+0x20) multiplied by 1/w, used when w is not 1.0
+local	_gleVtxLightRGBAFrontPtr	local_dc	eyePositionY	CONFIRMED	vertex eye y (vertex+0x24) multiplied by 1/w, used when w is not 1.0
+local	_gleVtxLightRGBAFrontPtr	local_d8	eyePositionZ	CONFIRMED	vertex eye z (vertex+0x28) multiplied by 1/w, used when w is not 1.0
+local	_gleVtxLightRGBAFrontPtr	fVar1	inverseWThenInverseDistance	INFERRED	1.0 / eye w (vertex+0x2c) for the position divide, later 1.0 / distance to the light, used by the quadratic attenuation terms
+local	_gleVtxLightRGBAFrontPtr	iVar4	forwardedGlContext	INFERRED	glContext carried in a register across the calls: passed as the first argument of _gleLightExponentPow and _gleMaterialShinePow (reassigned from the r3 value the call left behind)
+local	_gleVtxLightRGBAFrontPtr	extraout_r3	r3AfterCall	INFERRED	Ghidra pseudo-register extraout_r3 (the value a call left in r3; no source-level role)
+local	_gleVtxLightRGBAFrontPtr	extraout_f1	f1AfterCall	INFERRED	Ghidra pseudo-register extraout_f1 (the value a call left in f1; no source-level role)
+local	_gleVtxLightRGBAFrontPtr	dVar15	spotFactorThenSpecularPower	INFERRED	result of _gleLightExponentPow (spotlight term multiplied into lightAttenuation), later the result of _pow(specular dot product, material shininess at +0x40)
+local	_gleVtxLightRGBAFrontPtr	iStack00000020	vertexCountCopy	CONFIRMED	copy of the vertexCount argument kept in a stack slot: the loop ends when vertexIndex reaches it
+local	_gleVtxLightRGBAFrontPtr	local_ac	minLightDistancePtr	INFERRED	pointer to FLOAT_00108e80, the distance limit: a light closer than this (or with the flag at light+0x4adb) uses the stored attenuation at light+0x4ad4
+local	_gleVtxTextureCoordGenEyeSlow	uVar7	vertexEndThenRemaining	CONFIRMED	end of the vertices (start + vertexCount * 0x100) for the loop bounds, finally reused as the down counter of the Q coordinate loop
+local	_gleVtxTextureCoordGenEyeSlow	fVar1	normalDotEyeDirection	CONFIRMED	dot product of the vertex normal (+0x40..+0x48) and the normalized eye vector, used in the reflection map formula u - 2 (n . u) n
+local	_gleVtxTextureCoordGenEyeSlow	local_30	eyeDirectionX	CONFIRMED	x of the normalized eye position vector, written by the vector normalize call that is given vertex+0x20 and the address of this variable
+local	_gleVtxTextureCoordGenEyeSlow	local_2c	eyeDirectionY	CONFIRMED	y of the normalized eye position vector (the float after eyeDirectionX in the normalize output)
+local	_gleVtxTextureCoordGenEyeSlow	local_28	eyeDirectionZ	CONFIRMED	z of the normalized eye position vector (the float after eyeDirectionY in the normalize output)
+local	_gleVtxTextureCoordGenEyeSlow	local_40	sphereMapS	CONFIRMED	first output of _gleSphereGenST (s of the sphere map), stored to vertex+0x80
+local	_gleVtxTextureCoordGenEyeSlow	local_3c	sphereMapT	CONFIRMED	second output of _gleSphereGenST (t of the sphere map, the word after sphereMapS), stored to vertex+0x84
+local	_gliSwapBuffers	cVar2	rendererInfoByte79	CONFIRMED	byte +0x79 of the renderer info at ctx+0x468c (same load as in the other state validation prologues): non-zero selects the wider mask 0x17ffffff (instead of 0x17000000) for ctx+0x31c and also tests ctx+0x318 in the clean check
+local	_gliSwapBuffers	uVar3	errorCode	CONFIRMED	GL error to record: 0x502 (GL_INVALID_OPERATION) or 0x506 (GL_INVALID_FRAMEBUFFER_OPERATION_EXT), stored to ctx+0x7574 when no error is pending
+local	_gliSwapBuffers	piVar8	dirtyFlagWords	CONFIRMED	ctx+0x310: the 19 dirty state words that are tested and cleared (cleared in a loop of 0x13) once the state is validated
+local	_gliSwapBuffers	piVar4	dirtyWordCursor	CONFIRMED	cursor over the dirty words at ctx+0x324 (9 words); the first non-zero word sets bit 0x800000 in ctx+0x31c
+local	_gliSwapBuffers	iVar5	framebufferObjectThenDirtyWord	INFERRED	ctx+0x744c (the bound framebuffer object, checked at +0xec) and later the dirty word read through dirtyWordCursor
+local	_gliSwapBuffers	iVar6	matrixFuncDirtyThenCounter	INFERRED	ctx+0x50ac (matrix function dirty flag, tested together with ctx+0x505c & ctx+0x50b0), then the index of the dirty word scan and finally the down counter 0x13 of the dirty word clearing loop
+local	_gliSwapBuffers	uVar7	dirtyBitsThenDispatchFlags	INFERRED	ctx+0x31c dirty bits masked with 0x17000000 or 0x17ffffff for the clean test, later the flags returned by the ctx+0x4788 validation callback (bit 2 = vertex program, bit 3 = no software path), passed to _gleUpdateDispatchCodeChange
+local	_gliSwapBuffers	bVar1	stateIsCleanOrFlag	INFERRED	first (rendererInfoByte79 == 0), then the result of the clean test: true when all dirty words (ctx+0x310, +0x314, +0x318 masked, +0x320 and the masked ctx+0x31c) are zero, in which case no validation is needed

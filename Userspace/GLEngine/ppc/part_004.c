@@ -1171,66 +1171,66 @@ int _gleReleaseSharedState(glContext)
 {
   int remaining;
   int loopIndex;
-  undefined4 uVar1;
-  undefined *puVar2;
-  int iVar3;
-  undefined *puVar4;
-  int iVar5;
-  int *piVar6;
-  int *piVar7;
+  undefined4 releasedLastReference;
+  undefined *tableCursor;
+  int referenceCountBefore;
+  undefined *sharedStateThenRecordCursor;
+  int bucketOffset;
+  int *objectOrRangeNode;
+  int *nextObjectOrRangeNode;
   int remaining2;
   
-  puVar4 = *(undefined **)(glContext + 0x5148);
-  _pthread_mutex_lock(puVar4 + 0x8028);
-  iVar3 = *(int *)(puVar4 + 0x8020);
-  *(int *)(puVar4 + 0x8020) = iVar3 + -1;
-  _pthread_mutex_unlock(puVar4 + 0x8028);
-  uVar1 = 0;
-  if (iVar3 < 2) {
+  sharedStateThenRecordCursor = *(undefined **)(glContext + 0x5148);
+  _pthread_mutex_lock(sharedStateThenRecordCursor + 0x8028);
+  referenceCountBefore = *(int *)(sharedStateThenRecordCursor + 0x8020);
+  *(int *)(sharedStateThenRecordCursor + 0x8020) = referenceCountBefore + -1;
+  _pthread_mutex_unlock(sharedStateThenRecordCursor + 0x8028);
+  releasedLastReference = 0;
+  if (referenceCountBefore < 2) {
     loopIndex = 0;
     ((void (*)())_gleDetachShaderObjects)(glContext);
-    puVar2 = puVar4;
+    tableCursor = sharedStateThenRecordCursor;
     do {
       remaining2 = 0x3ff;
-      iVar5 = loopIndex * 0x1004;
+      bucketOffset = loopIndex * 0x1004;
       do {
-        piVar6 = *(int **)(puVar4 + iVar5);
-        if (piVar6 != (int *)0x0) {
-          *(undefined4 *)(puVar4 + iVar5) = 0;
+        objectOrRangeNode = *(int **)(sharedStateThenRecordCursor + bucketOffset);
+        if (objectOrRangeNode != (int *)0x0) {
+          *(undefined4 *)(sharedStateThenRecordCursor + bucketOffset) = 0;
           do {
-            piVar7 = (int *)*piVar6;
-            (*(code *)piVar6[3])(glContext,piVar6);
-            piVar6 = piVar7;
-          } while (piVar7 != (int *)0x0);
+            nextObjectOrRangeNode = (int *)*objectOrRangeNode;
+            (*(code *)objectOrRangeNode[3])(glContext,objectOrRangeNode);
+            objectOrRangeNode = nextObjectOrRangeNode;
+          } while (nextObjectOrRangeNode != (int *)0x0);
         }
         remaining2 = remaining2 + -1;
-        iVar5 = iVar5 + 4;
+        bucketOffset = bucketOffset + 4;
       } while (-1 < remaining2);
-      piVar6 = *(int **)(puVar2 + 0x1000);
-      if (piVar6 != (int *)0x0) {
-        *(undefined4 *)(puVar2 + 0x1000) = 0;
+      objectOrRangeNode = *(int **)(tableCursor + 0x1000);
+      if (objectOrRangeNode != (int *)0x0) {
+        *(undefined4 *)(tableCursor + 0x1000) = 0;
         do {
-          piVar7 = (int *)*piVar6;
-          _free(piVar6);
-          piVar6 = piVar7;
-        } while (piVar7 != (int *)0x0);
+          nextObjectOrRangeNode = (int *)*objectOrRangeNode;
+          _free(objectOrRangeNode);
+          objectOrRangeNode = nextObjectOrRangeNode;
+        } while (nextObjectOrRangeNode != (int *)0x0);
       }
       loopIndex = loopIndex + 1;
-      puVar2 = ((unsigned char *)0x00001004) + (int)puVar2;
+      tableCursor = ((unsigned char *)0x00001004) + (int)tableCursor;
     } while (loopIndex < 8);
-    puVar4 = puVar4 + 0x10000;
+    sharedStateThenRecordCursor = sharedStateThenRecordCursor + 0x10000;
     remaining = 1;
     do {
-      if (*(int *)(puVar4 + -0x7560) != 0) {
-        _free(*(int *)(puVar4 + -0x7560));
+      if (*(int *)(sharedStateThenRecordCursor + -0x7560) != 0) {
+        _free(*(int *)(sharedStateThenRecordCursor + -0x7560));
       }
       remaining = remaining + -1;
-      *(undefined4 *)(puVar4 + -0x7560) = 0;
-      puVar4 = puVar4 + 0xa30;
+      *(undefined4 *)(sharedStateThenRecordCursor + -0x7560) = 0;
+      sharedStateThenRecordCursor = sharedStateThenRecordCursor + 0xa30;
     } while (-1 < remaining);
-    uVar1 = 1;
+    releasedLastReference = 1;
   }
-  return uVar1;
+  return releasedLastReference;
 }
 
 /* _gleDetachShaderObjects @ 0x30af4 (144 bytes) */
@@ -1468,55 +1468,55 @@ int _gleDeleteHashNameAndObject(glContext, forwardedArg2, forwardedArg3)
 }
 
 /* _gleRemoveHashName @ 0x30f80 (228 bytes) */
-int _gleRemoveHashName(param_1, param_2)
-  int param_1;
-  uint param_2;
+int _gleRemoveHashName(nameTable, name)
+  int nameTable;
+  uint name;
 {
-  undefined4 uVar1;
-  uint uVar2;
-  undefined4 *puVar3;
+  undefined4 savedNextLink;
+  uint nameAfter;
+  undefined4 *previousLink;
   undefined4 *allocatedBlock;
-  uint uVar4;
-  uint uVar5;
-  undefined4 *puVar6;
-  undefined4 *puVar7;
+  uint rangeStart;
+  uint rangeEnd;
+  undefined4 *currentNode;
+  undefined4 *nextNode;
   
-  if (*(undefined4 **)(param_1 + 0x1000) != (undefined4 *)0x0) {
-    uVar2 = param_2 + 1;
-    puVar3 = (undefined4 *)(param_1 + 0x1000);
-    puVar6 = *(undefined4 **)(param_1 + 0x1000);
+  if (*(undefined4 **)(nameTable + 0x1000) != (undefined4 *)0x0) {
+    nameAfter = name + 1;
+    previousLink = (undefined4 *)(nameTable + 0x1000);
+    currentNode = *(undefined4 **)(nameTable + 0x1000);
     do {
-      uVar4 = puVar6[1];
-      uVar5 = uVar4 + puVar6[2];
-      if (param_2 < uVar4) {
+      rangeStart = currentNode[1];
+      rangeEnd = rangeStart + currentNode[2];
+      if (name < rangeStart) {
         return 0;
       }
-      if (param_2 < uVar5) {
-        if (uVar4 < param_2) {
-          puVar6[2] = param_2 - uVar4;
-          if (uVar2 < uVar5) {
+      if (name < rangeEnd) {
+        if (rangeStart < name) {
+          currentNode[2] = name - rangeStart;
+          if (nameAfter < rangeEnd) {
             allocatedBlock = (undefined4 *)_malloc(0xc);
-            uVar1 = *puVar6;
-            allocatedBlock[1] = uVar2;
-            *allocatedBlock = uVar1;
-            allocatedBlock[2] = (uVar5 - param_2) + -1;
-            *puVar6 = allocatedBlock;
+            savedNextLink = *currentNode;
+            allocatedBlock[1] = nameAfter;
+            *allocatedBlock = savedNextLink;
+            allocatedBlock[2] = (rangeEnd - name) + -1;
+            *currentNode = allocatedBlock;
           }
         }
-        else if (uVar2 < uVar5) {
-          puVar6[1] = uVar4 + 1;
-          puVar6[2] = (uVar5 - uVar4) + -1;
+        else if (nameAfter < rangeEnd) {
+          currentNode[1] = rangeStart + 1;
+          currentNode[2] = (rangeEnd - rangeStart) + -1;
         }
         else {
-          *puVar3 = *puVar6;
-          _free(puVar6);
+          *previousLink = *currentNode;
+          _free(currentNode);
         }
         return 1;
       }
-      puVar7 = (undefined4 *)*puVar6;
-      puVar3 = puVar6;
-      puVar6 = puVar7;
-    } while (puVar7 != (undefined4 *)0x0);
+      nextNode = (undefined4 *)*currentNode;
+      previousLink = currentNode;
+      currentNode = nextNode;
+    } while (nextNode != (undefined4 *)0x0);
   }
   return 0;
 }
@@ -2389,50 +2389,52 @@ void _glRotatef_Exec(int glContext,double angle,double x,double y,double z)
 }
 
 /* _glRotateZ_Exec @ 0x324c4 (372 bytes) */
-void _glRotateZ_Exec(int glContext,float fparam_1,float fparam_2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
+void _glRotateZ_Exec(int glContext,float sinAngle,float cosAngle,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  float fVar1;
-  float fVar2;
+  float savedElement4;
+  float savedElement6;
+  float savedElement1;
+  float savedElement3;
   float *currentMatrix;
   float *currentInverseMatrix;
   uint glContextWord50b0;
-  uint uVar5;
+  uint currentMatrixDirtyBits;
   
-  uVar5 = *(uint *)(glContext + 0x50a8);
+  currentMatrixDirtyBits = *(uint *)(glContext + 0x50a8);
   currentMatrix = *(float **)(glContext + 0x4fec);
   if ((*(short *)(glContext + 0x4a10) < 0) && (*(int *)(glContext + 0x4ff4) < 0x18)) {
-    fVar1 = currentMatrix[4];
-    fVar2 = currentMatrix[1];
-    currentMatrix[4] = (fVar1 * fparam_2 - (*currentMatrix * fparam_1));
-    *currentMatrix = (*currentMatrix * fparam_2 + (fVar1 * fparam_1));
-    fVar1 = currentMatrix[6];
-    currentMatrix[1] = (fVar2 * fparam_2 + (currentMatrix[5] * fparam_1));
-    currentMatrix[5] = (currentMatrix[5] * fparam_2 - (fVar2 * fparam_1));
-    fVar2 = currentMatrix[3];
-    currentMatrix[6] = (fVar1 * fparam_2 - (currentMatrix[2] * fparam_1));
-    currentMatrix[2] = (currentMatrix[2] * fparam_2 + (fVar1 * fparam_1));
-    currentMatrix[3] = (fVar2 * fparam_2 + (currentMatrix[7] * fparam_1));
-    currentMatrix[7] = (currentMatrix[7] * fparam_2 - (fVar2 * fparam_1));
+    savedElement4 = currentMatrix[4];
+    savedElement1 = currentMatrix[1];
+    currentMatrix[4] = (savedElement4 * cosAngle - (*currentMatrix * sinAngle));
+    *currentMatrix = (*currentMatrix * cosAngle + (savedElement4 * sinAngle));
+    savedElement6 = currentMatrix[6];
+    currentMatrix[1] = (savedElement1 * cosAngle + (currentMatrix[5] * sinAngle));
+    currentMatrix[5] = (currentMatrix[5] * cosAngle - (savedElement1 * sinAngle));
+    savedElement3 = currentMatrix[3];
+    currentMatrix[6] = (savedElement6 * cosAngle - (currentMatrix[2] * sinAngle));
+    currentMatrix[2] = (currentMatrix[2] * cosAngle + (savedElement6 * sinAngle));
+    currentMatrix[3] = (savedElement3 * cosAngle + (currentMatrix[7] * sinAngle));
+    currentMatrix[7] = (currentMatrix[7] * cosAngle - (savedElement3 * sinAngle));
     glContextWord50b0 = *(uint *)(glContext + 0x50b0);
-    *(uint *)(glContext + 0x50ac) = *(uint *)(glContext + 0x50ac) | uVar5;
-    if ((uVar5 & ~glContextWord50b0 & *(uint *)(glContext + 0x505c) & 0xfffffc) != 0) {
+    *(uint *)(glContext + 0x50ac) = *(uint *)(glContext + 0x50ac) | currentMatrixDirtyBits;
+    if ((currentMatrixDirtyBits & ~glContextWord50b0 & *(uint *)(glContext + 0x505c) & 0xfffffc) != 0) {
       currentInverseMatrix = *(float **)(glContext + 0x4ff0);
-      uVar5 = uVar5 & 0xff000003;
-      fVar1 = currentInverseMatrix[4];
-      fVar2 = currentInverseMatrix[1];
-      currentInverseMatrix[4] = (fVar1 * fparam_2 - (*currentInverseMatrix * fparam_1));
-      *currentInverseMatrix = (*currentInverseMatrix * fparam_2 + (fVar1 * fparam_1));
-      fVar1 = currentInverseMatrix[6];
-      currentInverseMatrix[1] = (fVar2 * fparam_2 + (currentInverseMatrix[5] * fparam_1));
-      currentInverseMatrix[5] = (currentInverseMatrix[5] * fparam_2 - (fVar2 * fparam_1));
-      fVar2 = currentInverseMatrix[3];
-      currentInverseMatrix[6] = (fVar1 * fparam_2 - (currentInverseMatrix[2] * fparam_1));
-      currentInverseMatrix[2] = (currentInverseMatrix[2] * fparam_2 + (fVar1 * fparam_1));
-      currentInverseMatrix[3] = (fVar2 * fparam_2 + (currentInverseMatrix[7] * fparam_1));
-      currentInverseMatrix[7] = (currentInverseMatrix[7] * fparam_2 - (fVar2 * fparam_1));
+      currentMatrixDirtyBits = currentMatrixDirtyBits & 0xff000003;
+      savedElement4 = currentInverseMatrix[4];
+      savedElement1 = currentInverseMatrix[1];
+      currentInverseMatrix[4] = (savedElement4 * cosAngle - (*currentInverseMatrix * sinAngle));
+      *currentInverseMatrix = (*currentInverseMatrix * cosAngle + (savedElement4 * sinAngle));
+      savedElement6 = currentInverseMatrix[6];
+      currentInverseMatrix[1] = (savedElement1 * cosAngle + (currentInverseMatrix[5] * sinAngle));
+      currentInverseMatrix[5] = (currentInverseMatrix[5] * cosAngle - (savedElement1 * sinAngle));
+      savedElement3 = currentInverseMatrix[3];
+      currentInverseMatrix[6] = (savedElement6 * cosAngle - (currentInverseMatrix[2] * sinAngle));
+      currentInverseMatrix[2] = (currentInverseMatrix[2] * cosAngle + (savedElement6 * sinAngle));
+      currentInverseMatrix[3] = (savedElement3 * cosAngle + (currentInverseMatrix[7] * sinAngle));
+      currentInverseMatrix[7] = (currentInverseMatrix[7] * cosAngle - (savedElement3 * sinAngle));
       glContextWord50b0 = *(uint *)(glContext + 0x50b0);
     }
-    *(uint *)(glContext + 0x50b0) = glContextWord50b0 | uVar5;
+    *(uint *)(glContext + 0x50b0) = glContextWord50b0 | currentMatrixDirtyBits;
     return;
   }
   if (*(int *)(glContext + 0x7574) != 0) {
@@ -2605,150 +2607,150 @@ LAB_00032a4c:
 /* _glMaterialfv_Exec @ 0x32a5c (1184 bytes) */
 void _glMaterialfv_Exec(int glContext,uint face,undefined *pname,float *params,double forwardedFloatArg1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
 {
-  float fVar1;
-  float fVar2;
-  float fVar3;
+  float colorIndexSpecular;
+  float colorIndexAmbient;
+  float colorIndexDiffuse;
   int remaining;
   undefined4 glErrorCode;
-  uint uVar6;
-  int iVar7;
-  uint uVar8;
-  double fparam_1_00;
-  float local_40;
-  float local_3c;
-  float local_38;
-  float local_34;
-  undefined4 local_30;
-  uint uStack_2c;
+  uint firstFaceSlot;
+  int materialSlot;
+  uint lastFaceSlot;
+  double shininess;
+  float colorRed;
+  float colorGreen;
+  float colorBlue;
+  float colorAlpha;
+  undefined4 intToDoubleHigh;
+  uint maxShininessBiased;
   
   if (((*(char *)(glContext + 0x7580) != '\0') && (-1 < *(short *)(glContext + 0x4a10))) &&
      (*(char *)(glContext + 0x4664) == '\0')) {
     ((undefined4 (*)())_gleForceToSoftwareTCL)(glContext,forwardedFloatArg1,forwardedFloatArg2,forwardedFloatArg3,forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
   }
   if (pname == (undefined *)0x1600) {
-    local_34 = params[3];
-    local_40 = *params;
-    local_3c = params[1];
-    local_38 = params[2];
+    colorAlpha = params[3];
+    colorRed = *params;
+    colorGreen = params[1];
+    colorBlue = params[2];
     if (face == 0x405) {
-      _gleLightMaterialRGBAChange_B_E(glContext,&local_40);
+      _gleLightMaterialRGBAChange_B_E(glContext,&colorRed);
       goto LAB_00032eb8;
     }
     if (face < 0x406) {
       if (face == 0x404) {
-        _gleLightMaterialRGBAChange_F_E(glContext,&local_40);
+        _gleLightMaterialRGBAChange_F_E(glContext,&colorRed);
         goto LAB_00032eb8;
       }
     }
     else if (face == 0x408) {
-      _gleLightMaterialRGBAChange_FB_E(glContext,&local_40);
+      _gleLightMaterialRGBAChange_FB_E(glContext,&colorRed);
       goto LAB_00032eb8;
     }
   }
   else if (pname < (undefined *)0x1601) {
     if (pname == ((unsigned char *)0x00001201)) {
-      local_34 = params[3];
-      local_40 = *params;
-      local_3c = params[1];
-      local_38 = params[2];
+      colorAlpha = params[3];
+      colorRed = *params;
+      colorGreen = params[1];
+      colorBlue = params[2];
       if (face == 0x405) {
-        _gleLightMaterialRGBAChange_B_D(glContext,&local_40);
+        _gleLightMaterialRGBAChange_B_D(glContext,&colorRed);
         goto LAB_00032eb8;
       }
       if (face < 0x406) {
         if (face == 0x404) {
-          _gleLightMaterialRGBAChange_F_D(glContext,&local_40);
+          _gleLightMaterialRGBAChange_F_D(glContext,&colorRed);
           goto LAB_00032eb8;
         }
       }
       else if (face == 0x408) {
-        _gleLightMaterialRGBAChange_FB_D(glContext,&local_40);
+        _gleLightMaterialRGBAChange_FB_D(glContext,&colorRed);
         goto LAB_00032eb8;
       }
     }
     else if (((unsigned char *)0x00001201) < pname) {
       if (pname == ((unsigned char *)0x00001202)) {
-        local_34 = params[3];
-        local_40 = *params;
-        local_3c = params[1];
-        local_38 = params[2];
+        colorAlpha = params[3];
+        colorRed = *params;
+        colorGreen = params[1];
+        colorBlue = params[2];
         if (face == 0x405) {
-          _gleLightMaterialRGBAChange_B_S(glContext,&local_40);
+          _gleLightMaterialRGBAChange_B_S(glContext,&colorRed);
           goto LAB_00032eb8;
         }
         if (face < 0x406) {
           if (face == 0x404) {
-            _gleLightMaterialRGBAChange_F_S(glContext,&local_40);
+            _gleLightMaterialRGBAChange_F_S(glContext,&colorRed);
             goto LAB_00032eb8;
           }
         }
         else if (face == 0x408) {
-          _gleLightMaterialRGBAChange_FB_S(glContext,&local_40);
+          _gleLightMaterialRGBAChange_FB_S(glContext,&colorRed);
           goto LAB_00032eb8;
         }
       }
     }
     else if (pname == ((unsigned char *)0x00001200)) {
-      local_34 = params[3];
-      local_40 = *params;
-      local_3c = params[1];
-      local_38 = params[2];
+      colorAlpha = params[3];
+      colorRed = *params;
+      colorGreen = params[1];
+      colorBlue = params[2];
       if (face == 0x405) {
-        _gleLightMaterialRGBAChange_B_A(glContext,&local_40);
+        _gleLightMaterialRGBAChange_B_A(glContext,&colorRed);
         goto LAB_00032eb8;
       }
       if (face < 0x406) {
         if (face == 0x404) {
-          _gleLightMaterialRGBAChange_F_A(glContext,&local_40);
+          _gleLightMaterialRGBAChange_F_A(glContext,&colorRed);
           goto LAB_00032eb8;
         }
       }
       else if (face == 0x408) {
-        _gleLightMaterialRGBAChange_FB_A(glContext,&local_40);
+        _gleLightMaterialRGBAChange_FB_A(glContext,&colorRed);
         goto LAB_00032eb8;
       }
     }
   }
   else if (pname == (undefined *)0x1602) {
-    local_34 = params[3];
-    local_40 = *params;
-    local_3c = params[1];
-    local_38 = params[2];
+    colorAlpha = params[3];
+    colorRed = *params;
+    colorGreen = params[1];
+    colorBlue = params[2];
     if (face == 0x405) {
-      _gleLightMaterialRGBAChange_B_AD(glContext,&local_40);
+      _gleLightMaterialRGBAChange_B_AD(glContext,&colorRed);
       goto LAB_00032eb8;
     }
     if (face < 0x406) {
       if (face == 0x404) {
-        _gleLightMaterialRGBAChange_F_AD(glContext,&local_40);
+        _gleLightMaterialRGBAChange_F_AD(glContext,&colorRed);
         goto LAB_00032eb8;
       }
     }
     else if (face == 0x408) {
-      _gleLightMaterialRGBAChange_FB_AD(glContext,&local_40);
+      _gleLightMaterialRGBAChange_FB_AD(glContext,&colorRed);
       goto LAB_00032eb8;
     }
   }
   else {
     if (pname < (undefined *)0x1602) {
-      fparam_1_00 = (double)*params;
-      if (!(fparam_1_00 < (double)FLOAT_00108e50)) {
-        local_30 = 0x43300000;
-        uStack_2c = *(uint *)(*(int *)(glContext + 0x468c) + 0xa0) ^ 0x80000000;
-        if (!((double)(float)((double)CONCAT44(0x43300000,uStack_2c) - DOUBLE_00108d58) <
-             fparam_1_00)) {
+      shininess = (double)*params;
+      if (!(shininess < (double)FLOAT_00108e50)) {
+        intToDoubleHigh = 0x43300000;
+        maxShininessBiased = *(uint *)(*(int *)(glContext + 0x468c) + 0xa0) ^ 0x80000000;
+        if (!((double)(float)((double)CONCAT44(0x43300000,maxShininessBiased) - DOUBLE_00108d58) <
+             shininess)) {
           if (face == 0x405) {
-            ((void (*)())_gleLightMaterialShineChange_B)(glContext,fparam_1_00);
+            ((void (*)())_gleLightMaterialShineChange_B)(glContext,shininess);
             goto LAB_00032eb8;
           }
           if (face < 0x406) {
             if (face == 0x404) {
-              ((void (*)())_gleLightMaterialShineChange_F)(glContext,fparam_1_00);
+              ((void (*)())_gleLightMaterialShineChange_F)(glContext,shininess);
               goto LAB_00032eb8;
             }
           }
           else if (face == 0x408) {
-            ((void (*)())_gleLightMaterialShineChange_FB)(glContext,fparam_1_00);
+            ((void (*)())_gleLightMaterialShineChange_FB)(glContext,shininess);
             goto LAB_00032eb8;
           }
           goto LAB_00032ea0;
@@ -2761,21 +2763,21 @@ void _glMaterialfv_Exec(int glContext,uint face,undefined *pname,float *params,d
       goto LAB_00032eb0;
     }
     if (pname == (undefined *)0x1603) {
-      fVar1 = params[2] * FLOAT_00108e5c;
-      fVar2 = *params * FLOAT_00108e5c;
-      fVar3 = params[1] * FLOAT_00108e5c;
+      colorIndexSpecular = params[2] * FLOAT_00108e5c;
+      colorIndexAmbient = *params * FLOAT_00108e5c;
+      colorIndexDiffuse = params[1] * FLOAT_00108e5c;
       if (face == 0x405) {
-        uVar8 = 1;
-        uVar6 = 1;
+        lastFaceSlot = 1;
+        firstFaceSlot = 1;
 LAB_00032e68:
-        if (uVar6 <= uVar8) {
-          remaining = (uVar8 + 1) - uVar6;
-          iVar7 = uVar6 * 0x10 + glContext;
+        if (firstFaceSlot <= lastFaceSlot) {
+          remaining = (lastFaceSlot + 1) - firstFaceSlot;
+          materialSlot = firstFaceSlot * 0x10 + glContext;
           do {
-            *(float *)(iVar7 + 0x2f0) = fVar2;
-            *(float *)(iVar7 + 0x2f4) = fVar3;
-            *(float *)(iVar7 + 0x2f8) = fVar1;
-            iVar7 = iVar7 + 0x10;
+            *(float *)(materialSlot + 0x2f0) = colorIndexAmbient;
+            *(float *)(materialSlot + 0x2f4) = colorIndexDiffuse;
+            *(float *)(materialSlot + 0x2f8) = colorIndexSpecular;
+            materialSlot = materialSlot + 0x10;
             remaining = remaining + -1;
           } while (remaining != 0);
         }
@@ -2788,14 +2790,14 @@ LAB_00032eb8:
       }
       if (face < 0x406) {
         if (face == 0x404) {
-          uVar8 = 0;
-          uVar6 = 0;
+          lastFaceSlot = 0;
+          firstFaceSlot = 0;
           goto LAB_00032e68;
         }
       }
       else if (face == 0x408) {
-        uVar6 = 0;
-        uVar8 = 1;
+        firstFaceSlot = 0;
+        lastFaceSlot = 1;
         goto LAB_00032e68;
       }
     }

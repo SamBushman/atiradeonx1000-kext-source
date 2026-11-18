@@ -1668,24 +1668,24 @@ void _gleVPRenderQuads_body(glContext)
   byte vertexProgramTwoSide;
   char faceTestNeeded;
   ushort facePolygonMode;
-  bool bVar4;
-  uint *puVar5;
-  int iVar6;
-  uint uVar7;
+  bool facingChanged;
+  uint *newPolygonList;
+  int texEnableBitsThenRunCountThenCullResultThenBackFacing;
+  uint resumeCursor;
   uint batchClipCodes;
-  int iVar8;
+  int cullResultThenFlipCount;
   uint *spareList;
-  uint *puVar10;
+  uint *oldPolygonListThenVertexPtrCursor;
   int iVar11;
   int polygonVertexCount;
   uint *polygonList;
-  uint uVar13;
-  uint uVar14;
-  uint uVar15;
-  uint uVar16;
+  uint vertexCountThenLastQuadStart;
+  uint nextRunStart;
+  uint runStart;
+  uint vertexCursor;
   double f1AfterCall;
-  double dVar17;
-  double extraout_f1_00;
+  double forwardedFloatArg1;
+  double f1AfterCall1;
   double f1AfterCall2;
   double incomingFpr2;
   double incomingFpr3;
@@ -1698,61 +1698,61 @@ void _gleVPRenderQuads_body(glContext)
   double incomingStack_ffffff80;
   double incomingStack_ffffff88;
   int backFacing;
-  int local_4c [5];
+  int clipCount [5];
   
   iVar11 = -1;
-  iVar6 = ((int (*)())_gleTexEnableBits)(glContext);
+  texEnableBitsThenRunCountThenCullResultThenBackFacing = ((int (*)())_gleTexEnableBits)(glContext);
   vertexProgramTwoSide = *(byte *)(glContext + 0x4666);
   faceTestNeeded = *(char *)(glContext + 0x34de);
   if ((((int)*(short *)(glContext + 0x487c) != 0) &&
-      (uVar13 = (uint)(*(int *)(glContext + 0x4858) - *(int *)(glContext + 0x4854)) /
-                (uint)(int)*(short *)(glContext + 0x487c), 3 < (int)uVar13)) &&
-     (batchClipCodes = _gleVPEmulate(glContext,uVar13), (batchClipCodes & 0xff00) == 0)) {
-    uVar16 = *(uint *)(glContext + 0x4864);
+      (vertexCountThenLastQuadStart = (uint)(*(int *)(glContext + 0x4858) - *(int *)(glContext + 0x4854)) /
+                (uint)(int)*(short *)(glContext + 0x487c), 3 < (int)vertexCountThenLastQuadStart)) &&
+     (batchClipCodes = _gleVPEmulate(glContext,vertexCountThenLastQuadStart), (batchClipCodes & 0xff00) == 0)) {
+    vertexCursor = *(uint *)(glContext + 0x4864);
     if (((batchClipCodes & 0xff) == 0) && (*(char *)(glContext + 0x4e18) == '\0')) {
-      dVar17 = f1AfterCall;
-      if (iVar6 != 0) {
-        dVar17 = (double)(**(double ( **)(int,int,int,int))(glContext + 0x506c))(glContext, uVar16, uVar13, 0);
+      forwardedFloatArg1 = f1AfterCall;
+      if (texEnableBitsThenRunCountThenCullResultThenBackFacing != 0) {
+        forwardedFloatArg1 = (double)(**(double ( **)(int,int,int,int))(glContext + 0x506c))(glContext, vertexCursor, vertexCountThenLastQuadStart, 0);
       }
       if (faceTestNeeded == '\0') {
         (**(code **)(glContext + 0x46d0))
-                  (*(undefined4 *)(glContext + 0x4688),uVar16,uVar13,
+                  (*(undefined4 *)(glContext + 0x4688),vertexCursor,vertexCountThenLastQuadStart,
                    *(ushort *)(glContext + 0x34d0) - 0x1b00);
       }
       else {
-        uVar13 = (uVar16 + uVar13 * 0x100) - 0x400;
+        vertexCountThenLastQuadStart = (vertexCursor + vertexCountThenLastQuadStart * 0x100) - 0x400;
         do {
-          bVar4 = false;
-          iVar6 = 0;
-          uVar7 = uVar16;
-          uVar15 = uVar16;
-          if (uVar16 <= uVar13) {
+          facingChanged = false;
+          texEnableBitsThenRunCountThenCullResultThenBackFacing = 0;
+          resumeCursor = vertexCursor;
+          runStart = vertexCursor;
+          if (vertexCursor <= vertexCountThenLastQuadStart) {
             do {
-              iVar8 = ((undefined4 (*)())_gleCullQuad)(glContext,uVar16,uVar16 + 0x100,uVar16 + 0x200,uVar16 + 0x300,
-                                   &backFacing,dVar17,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
+              cullResultThenFlipCount = ((undefined4 (*)())_gleCullQuad)(glContext,vertexCursor,vertexCursor + 0x100,vertexCursor + 0x200,vertexCursor + 0x300,
+                                   &backFacing,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
                                    incomingStack_ffffff78,incomingStack_ffffff80,incomingStack_ffffff88);
-              dVar17 = dVar17;
-              if (iVar8 == 0) {
+              forwardedFloatArg1 = forwardedFloatArg1;
+              if (cullResultThenFlipCount == 0) {
                 if (iVar11 != backFacing) {
-                  bVar4 = true;
+                  facingChanged = true;
                 }
-                if ((bVar4) && (uVar7 = uVar16, 0 < iVar6)) break;
-                iVar6 = iVar6 + 4;
+                if ((facingChanged) && (resumeCursor = vertexCursor, 0 < texEnableBitsThenRunCountThenCullResultThenBackFacing)) break;
+                texEnableBitsThenRunCountThenCullResultThenBackFacing = texEnableBitsThenRunCountThenCullResultThenBackFacing + 4;
                 iVar11 = backFacing;
-                uVar14 = uVar15;
+                nextRunStart = runStart;
               }
               else {
-                uVar14 = uVar16 + 0x400;
-                uVar7 = uVar14;
-                if (0 < iVar6) break;
+                nextRunStart = vertexCursor + 0x400;
+                resumeCursor = nextRunStart;
+                if (0 < texEnableBitsThenRunCountThenCullResultThenBackFacing) break;
               }
-              uVar16 = uVar16 + 0x400;
-              uVar7 = uVar16;
-              uVar15 = uVar14;
-            } while (uVar16 <= uVar13);
-            if (3 < iVar6) {
+              vertexCursor = vertexCursor + 0x400;
+              resumeCursor = vertexCursor;
+              runStart = nextRunStart;
+            } while (vertexCursor <= vertexCountThenLastQuadStart);
+            if (3 < texEnableBitsThenRunCountThenCullResultThenBackFacing) {
               if ((int)-(uint)vertexProgramTwoSide < 0) {
-                ((double (*)())_gleVPFlipColors)(glContext,uVar15,iVar6,iVar11);
+                ((double (*)())_gleVPFlipColors)(glContext,runStart,texEnableBitsThenRunCountThenCullResultThenBackFacing,iVar11);
               }
               if (iVar11 == 0) {
                 facePolygonMode = *(ushort *)(glContext + 0x34d0);
@@ -1760,72 +1760,72 @@ void _gleVPRenderQuads_body(glContext)
               else {
                 facePolygonMode = *(ushort *)(glContext + 0x34d2);
               }
-              dVar17 = (double)(**(double ( **)(int,int,int,int))(glContext + 0x46d0))
-                                         (*(undefined4 *)(glContext + 0x4688), uVar15, iVar6, facePolygonMode - 0x1b00);
+              forwardedFloatArg1 = (double)(**(double ( **)(int,int,int,int))(glContext + 0x46d0))
+                                         (*(undefined4 *)(glContext + 0x4688), runStart, texEnableBitsThenRunCountThenCullResultThenBackFacing, facePolygonMode - 0x1b00);
             }
           }
-          uVar16 = uVar7;
-        } while (uVar7 <= uVar13);
+          vertexCursor = resumeCursor;
+        } while (resumeCursor <= vertexCountThenLastQuadStart);
       }
     }
     else {
-      dVar17 = f1AfterCall;
-      if (iVar6 != 0) {
-        dVar17 = (double)(**(double ( **)(int,int,int,int))(glContext + 0x5074))(glContext, uVar16, uVar13, 0);
+      forwardedFloatArg1 = f1AfterCall;
+      if (texEnableBitsThenRunCountThenCullResultThenBackFacing != 0) {
+        forwardedFloatArg1 = (double)(**(double ( **)(int,int,int,int))(glContext + 0x5074))(glContext, vertexCursor, vertexCountThenLastQuadStart, 0);
       }
       polygonList = *(uint **)(glContext + 0x4870);
-      uVar13 = (uVar16 + uVar13 * 0x100) - 0x400;
+      vertexCountThenLastQuadStart = (vertexCursor + vertexCountThenLastQuadStart * 0x100) - 0x400;
       spareList = *(uint **)(glContext + 0x4874);
-      if (uVar16 <= uVar13) {
+      if (vertexCursor <= vertexCountThenLastQuadStart) {
         do {
-          polygonList[1] = uVar16 + 0x100;
-          polygonList[2] = uVar16 + 0x200;
-          polygonList[3] = uVar16 + 0x300;
-          *polygonList = uVar16;
+          polygonList[1] = vertexCursor + 0x100;
+          polygonList[2] = vertexCursor + 0x200;
+          polygonList[3] = vertexCursor + 0x300;
+          *polygonList = vertexCursor;
           *(undefined4 *)(glContext + 0x4858) = *(undefined4 *)(glContext + 0x4854);
-          puVar10 = spareList;
-          puVar5 = polygonList;
+          oldPolygonListThenVertexPtrCursor = spareList;
+          newPolygonList = polygonList;
           iVar11 = 4;
           if ((*(char *)(glContext + 0x4e18) == '\0') ||
-             (dVar17 = (double)((double (*)())_gleClipPolyPlane)(glContext,polygonList,4,spareList,local_4c,dVar17,incomingFpr2,
+             (forwardedFloatArg1 = (double)((double (*)())_gleClipPolyPlane)(glContext,polygonList,4,spareList,clipCount,forwardedFloatArg1,incomingFpr2,
                                                  incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
                                                  incomingStack_ffffff78,incomingStack_ffffff80),
-             puVar10 = polygonList, puVar5 = spareList, polygonVertexCount = local_4c[0], local_4c[0] != 0)) {
-            polygonList = puVar5;
-            spareList = puVar10;
+             oldPolygonListThenVertexPtrCursor = polygonList, newPolygonList = spareList, polygonVertexCount = clipCount[0], clipCount[0] != 0)) {
+            polygonList = newPolygonList;
+            spareList = oldPolygonListThenVertexPtrCursor;
             if ((batchClipCodes & 0xff) != 0) {
-              dVar17 = (double)_gleClipPoly(glContext,polygonList,polygonVertexCount,batchClipCodes & 0xff,puVar10,local_4c,1);
-              if (local_4c[0] == 0) goto LAB_00105a5c;
-              if (0 < local_4c[0]) {
+              forwardedFloatArg1 = (double)_gleClipPoly(glContext,polygonList,polygonVertexCount,batchClipCodes & 0xff,oldPolygonListThenVertexPtrCursor,clipCount,1);
+              if (clipCount[0] == 0) goto LAB_00105a5c;
+              if (0 < clipCount[0]) {
                 spareList = polygonList;
-                polygonList = puVar10;
-                polygonVertexCount = local_4c[0];
+                polygonList = oldPolygonListThenVertexPtrCursor;
+                polygonVertexCount = clipCount[0];
               }
             }
             if ((faceTestNeeded == '\0') ||
-               (iVar6 = _gleCullPolygonPtrStack(glContext,polygonList,polygonVertexCount,&backFacing),
-               dVar17 = f1AfterCall2, iVar6 == 0)) {
-              iVar6 = backFacing;
-              if (((int)-(uint)vertexProgramTwoSide < 0) && (puVar10 = polygonList, iVar8 = polygonVertexCount, 0 < polygonVertexCount)) {
+               (texEnableBitsThenRunCountThenCullResultThenBackFacing = _gleCullPolygonPtrStack(glContext,polygonList,polygonVertexCount,&backFacing),
+               forwardedFloatArg1 = f1AfterCall2, texEnableBitsThenRunCountThenCullResultThenBackFacing == 0)) {
+              texEnableBitsThenRunCountThenCullResultThenBackFacing = backFacing;
+              if (((int)-(uint)vertexProgramTwoSide < 0) && (oldPolygonListThenVertexPtrCursor = polygonList, cullResultThenFlipCount = polygonVertexCount, 0 < polygonVertexCount)) {
                 do {
-                  ((double (*)())_gleVPFlipColors)(glContext,*puVar10,1,iVar6);
-                  iVar8 = iVar8 + -1;
-                  puVar10 = puVar10 + 1;
-                } while (iVar8 != 0);
+                  ((double (*)())_gleVPFlipColors)(glContext,*oldPolygonListThenVertexPtrCursor,1,texEnableBitsThenRunCountThenCullResultThenBackFacing);
+                  cullResultThenFlipCount = cullResultThenFlipCount + -1;
+                  oldPolygonListThenVertexPtrCursor = oldPolygonListThenVertexPtrCursor + 1;
+                } while (cullResultThenFlipCount != 0);
               }
-              if (iVar6 == 0) {
+              if (texEnableBitsThenRunCountThenCullResultThenBackFacing == 0) {
                 facePolygonMode = *(ushort *)(glContext + 0x34d0);
               }
               else {
                 facePolygonMode = *(ushort *)(glContext + 0x34d2);
               }
-              dVar17 = (double)(**(double ( **)(int,int,int,int))(glContext + 0x46e0))
+              forwardedFloatArg1 = (double)(**(double ( **)(int,int,int,int))(glContext + 0x46e0))
                                          (*(undefined4 *)(glContext + 0x4688), polygonList, polygonVertexCount, facePolygonMode - 0x1b00);
             }
           }
 LAB_00105a5c:
-          uVar16 = uVar16 + 0x400;
-        } while (uVar16 <= uVar13);
+          vertexCursor = vertexCursor + 0x400;
+        } while (vertexCursor <= vertexCountThenLastQuadStart);
       }
     }
   }
@@ -2003,22 +2003,22 @@ LAB_00105dd4:
 void _gleVPRenderPolygon(glContext)
   int glContext;
 {
-  byte bVar1;
-  char cVar2;
-  ushort uVar3;
-  int *piVar4;
-  int iVar5;
-  uint uVar6;
-  int iVar7;
-  undefined4 uVar8;
-  code *pcVar9;
-  int *piVar10;
-  uint uVar11;
-  int *piVar12;
-  int *piVar13;
-  uint uVar14;
+  byte vertexProgramTwoSide;
+  char faceTestNeeded;
+  ushort facePolygonMode;
+  int *listCursorThenFlipCursor;
+  int texEnableBitsThenPolygonMode;
+  uint clipFlagsThenFlipCount;
+  int cullResult;
+  undefined4 planeClippedFlag;
+  code *drawCallback;
+  int *polygonList;
+  uint vertexCountThenClippedCount;
+  int *spareList;
+  int *vertexArrayThenPolygonList;
+  uint remainingVertices;
   double f1AfterCall;
-  double fparam_1;
+  double forwardedFloatArg1;
   double incomingFpr2;
   double incomingFpr3;
   double incomingFpr4;
@@ -2028,106 +2028,106 @@ void _gleVPRenderPolygon(glContext)
   double incomingFpr8;
   double incomingStack_ffffff88;
   double incomingStack_ffffff90;
-  uint local_40;
-  int local_3c [4];
+  uint clippedCount;
+  int backFacing [4];
   
-  local_3c[0] = 0;
-  iVar5 = ((int (*)())_gleTexEnableBits)(glContext);
-  bVar1 = *(byte *)(glContext + 0x4666);
-  cVar2 = *(char *)(glContext + 0x34de);
+  backFacing[0] = 0;
+  texEnableBitsThenPolygonMode = ((int (*)())_gleTexEnableBits)(glContext);
+  vertexProgramTwoSide = *(byte *)(glContext + 0x4666);
+  faceTestNeeded = *(char *)(glContext + 0x34de);
   if ((((int)*(short *)(glContext + 0x487c) != 0) &&
-      (uVar11 = (uint)(*(int *)(glContext + 0x4858) - *(int *)(glContext + 0x4854)) /
-                (uint)(int)*(short *)(glContext + 0x487c), 2 < (int)uVar11)) &&
-     (uVar6 = _gleVPEmulate(glContext,uVar11), (uVar6 & 0xff00) == 0)) {
-    piVar13 = *(int **)(glContext + 0x4864);
-    if (((uVar6 & 0xff) == 0) && (*(char *)(glContext + 0x4e18) == '\0')) {
-      if ((cVar2 != '\0') &&
-         (iVar7 = _gleCullPolygonStack(glContext,piVar13,uVar11,0,local_3c), iVar7 != 0)) {
+      (vertexCountThenClippedCount = (uint)(*(int *)(glContext + 0x4858) - *(int *)(glContext + 0x4854)) /
+                (uint)(int)*(short *)(glContext + 0x487c), 2 < (int)vertexCountThenClippedCount)) &&
+     (clipFlagsThenFlipCount = _gleVPEmulate(glContext,vertexCountThenClippedCount), (clipFlagsThenFlipCount & 0xff00) == 0)) {
+    vertexArrayThenPolygonList = *(int **)(glContext + 0x4864);
+    if (((clipFlagsThenFlipCount & 0xff) == 0) && (*(char *)(glContext + 0x4e18) == '\0')) {
+      if ((faceTestNeeded != '\0') &&
+         (cullResult = _gleCullPolygonStack(glContext,vertexArrayThenPolygonList,vertexCountThenClippedCount,0,backFacing), cullResult != 0)) {
         return;
       }
-      if (iVar5 != 0) {
-        (**(code **)(glContext + 0x506c))(glContext,piVar13,uVar11,0);
+      if (texEnableBitsThenPolygonMode != 0) {
+        (**(code **)(glContext + 0x506c))(glContext,vertexArrayThenPolygonList,vertexCountThenClippedCount,0);
       }
-      if (local_3c[0] == 0) {
-        uVar3 = *(ushort *)(glContext + 0x34d0);
+      if (backFacing[0] == 0) {
+        facePolygonMode = *(ushort *)(glContext + 0x34d0);
       }
       else {
-        uVar3 = *(ushort *)(glContext + 0x34d2);
+        facePolygonMode = *(ushort *)(glContext + 0x34d2);
       }
-      iVar5 = uVar3 - 0x1b00;
-      if ((*(char *)(glContext + 0x4a18) != '\0') && (iVar5 == 1)) {
-        iVar5 = 3;
+      texEnableBitsThenPolygonMode = facePolygonMode - 0x1b00;
+      if ((*(char *)(glContext + 0x4a18) != '\0') && (texEnableBitsThenPolygonMode == 1)) {
+        texEnableBitsThenPolygonMode = 3;
       }
-      if ((int)-(uint)bVar1 < 0) {
-        ((double (*)())_gleVPFlipColors)(glContext,piVar13,uVar11,local_3c[0]);
+      if ((int)-(uint)vertexProgramTwoSide < 0) {
+        ((double (*)())_gleVPFlipColors)(glContext,vertexArrayThenPolygonList,vertexCountThenClippedCount,backFacing[0]);
       }
-      pcVar9 = *(code **)(glContext + 0x46c0);
+      drawCallback = *(code **)(glContext + 0x46c0);
     }
     else {
-      fparam_1 = f1AfterCall;
-      if (iVar5 != 0) {
-        fparam_1 = (double)(**(double ( **)(int,int,int,int))(glContext + 0x5074))(glContext, piVar13, uVar11, 0);
+      forwardedFloatArg1 = f1AfterCall;
+      if (texEnableBitsThenPolygonMode != 0) {
+        forwardedFloatArg1 = (double)(**(double ( **)(int,int,int,int))(glContext + 0x5074))(glContext, vertexArrayThenPolygonList, vertexCountThenClippedCount, 0);
       }
-      piVar10 = *(int **)(glContext + 0x4870);
-      piVar12 = *(int **)(glContext + 0x4874);
-      piVar4 = piVar10;
-      uVar14 = uVar11;
-      if (0 < (int)uVar11) {
+      polygonList = *(int **)(glContext + 0x4870);
+      spareList = *(int **)(glContext + 0x4874);
+      listCursorThenFlipCursor = polygonList;
+      remainingVertices = vertexCountThenClippedCount;
+      if (0 < (int)vertexCountThenClippedCount) {
         do {
-          *piVar4 = (int)piVar13;
-          piVar13 = piVar13 + 0x40;
-          uVar14 = uVar14 - 1;
-          piVar4 = piVar4 + 1;
-        } while (uVar14 != 0);
+          *listCursorThenFlipCursor = (int)vertexArrayThenPolygonList;
+          vertexArrayThenPolygonList = vertexArrayThenPolygonList + 0x40;
+          remainingVertices = remainingVertices - 1;
+          listCursorThenFlipCursor = listCursorThenFlipCursor + 1;
+        } while (remainingVertices != 0);
       }
-      uVar8 = 0;
+      planeClippedFlag = 0;
       *(undefined4 *)(glContext + 0x4858) = *(undefined4 *)(glContext + 0x4854);
-      piVar13 = piVar10;
+      vertexArrayThenPolygonList = polygonList;
       if (*(char *)(glContext + 0x4e18) != '\0') {
-        ((double (*)())_gleClipPolyPlane)(glContext,piVar10,uVar11,piVar12,&local_40,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,
+        ((double (*)())_gleClipPolyPlane)(glContext,polygonList,vertexCountThenClippedCount,spareList,&clippedCount,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,
                           incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffff88,incomingStack_ffffff90);
-        if (local_40 == 0) {
+        if (clippedCount == 0) {
           return;
         }
-        uVar8 = 1;
-        piVar13 = piVar12;
-        uVar11 = local_40;
-        piVar12 = piVar10;
+        planeClippedFlag = 1;
+        vertexArrayThenPolygonList = spareList;
+        vertexCountThenClippedCount = clippedCount;
+        spareList = polygonList;
       }
-      if ((uVar6 & 0xff) != 0) {
-        _gleClipPoly(glContext,piVar13,uVar11,uVar6 & 0xff,piVar12,&local_40,uVar8);
-        if (local_40 == 0) {
+      if ((clipFlagsThenFlipCount & 0xff) != 0) {
+        _gleClipPoly(glContext,vertexArrayThenPolygonList,vertexCountThenClippedCount,clipFlagsThenFlipCount & 0xff,spareList,&clippedCount,planeClippedFlag);
+        if (clippedCount == 0) {
           return;
         }
-        if (0 < (int)local_40) {
-          piVar13 = piVar12;
-          uVar11 = local_40;
+        if (0 < (int)clippedCount) {
+          vertexArrayThenPolygonList = spareList;
+          vertexCountThenClippedCount = clippedCount;
         }
       }
-      if ((cVar2 != '\0') &&
-         (iVar5 = _gleCullPolygonPtrStack(glContext,piVar13,uVar11,local_3c), iVar5 != 0)) {
+      if ((faceTestNeeded != '\0') &&
+         (texEnableBitsThenPolygonMode = _gleCullPolygonPtrStack(glContext,vertexArrayThenPolygonList,vertexCountThenClippedCount,backFacing), texEnableBitsThenPolygonMode != 0)) {
         return;
       }
-      if (local_3c[0] == 0) {
-        uVar3 = *(ushort *)(glContext + 0x34d0);
+      if (backFacing[0] == 0) {
+        facePolygonMode = *(ushort *)(glContext + 0x34d0);
       }
       else {
-        uVar3 = *(ushort *)(glContext + 0x34d2);
+        facePolygonMode = *(ushort *)(glContext + 0x34d2);
       }
-      iVar5 = uVar3 - 0x1b00;
-      if ((*(char *)(glContext + 0x4a18) != '\0') && (iVar5 == 1)) {
-        iVar5 = 3;
+      texEnableBitsThenPolygonMode = facePolygonMode - 0x1b00;
+      if ((*(char *)(glContext + 0x4a18) != '\0') && (texEnableBitsThenPolygonMode == 1)) {
+        texEnableBitsThenPolygonMode = 3;
       }
-      if (((int)-(uint)bVar1 < 0) && (piVar4 = piVar13, uVar6 = uVar11, 0 < (int)uVar11)) {
+      if (((int)-(uint)vertexProgramTwoSide < 0) && (listCursorThenFlipCursor = vertexArrayThenPolygonList, clipFlagsThenFlipCount = vertexCountThenClippedCount, 0 < (int)vertexCountThenClippedCount)) {
         do {
-          ((double (*)())_gleVPFlipColors)(glContext,*piVar4,1,local_3c[0]);
-          uVar6 = uVar6 - 1;
-          piVar4 = piVar4 + 1;
-        } while (uVar6 != 0);
+          ((double (*)())_gleVPFlipColors)(glContext,*listCursorThenFlipCursor,1,backFacing[0]);
+          clipFlagsThenFlipCount = clipFlagsThenFlipCount - 1;
+          listCursorThenFlipCursor = listCursorThenFlipCursor + 1;
+        } while (clipFlagsThenFlipCount != 0);
       }
-      pcVar9 = *(code **)(glContext + 0x46e0);
+      drawCallback = *(code **)(glContext + 0x46e0);
     }
-    (*pcVar9)(*(undefined4 *)(glContext + 0x4688),piVar13,uVar11,iVar5);
+    (*drawCallback)(*(undefined4 *)(glContext + 0x4688),vertexArrayThenPolygonList,vertexCountThenClippedCount,texEnableBitsThenPolygonMode);
   }
   return;
 }
@@ -2468,56 +2468,56 @@ void _gleVPFlushTriQuadStripTCLRDirty(int glContext,double floatArg1,double floa
 void _gleVPFlushTriangleFan(glContext)
   int glContext;
 {
-  undefined8 *puVar1;
-  undefined8 *puVar2;
-  undefined8 *puVar3;
-  int iVar4;
-  int iVar5;
-  int iVar6;
-  int iVar7;
-  undefined8 uVar8;
-  undefined8 local_220 [32];
-  undefined8 local_120 [33];
+  undefined8 *copyDestinationCursor;
+  undefined8 *restoreSourceCursor;
+  undefined8 *lastVertexSourceThenSecondSlot;
+  int doublewordsPerVertex;
+  int bufferStart;
+  int counterThenCopyIndex;
+  int copyIndexThenCounter;
+  undefined8 copiedDoubleword;
+  undefined8 firstVertexCopy [32];
+  undefined8 lastVertexCopy [33];
   
-  iVar5 = *(int *)(glContext + 0x4854);
-  iVar4 = (int)*(short *)(glContext + 0x487c) >> 3;
-  puVar3 = (undefined8 *)(*(int *)(glContext + 0x4858) + iVar4 * -8);
-  iVar7 = 0;
-  for (iVar6 = iVar4; iVar6 != 0; iVar6 = iVar6 + -1) {
-    local_220[iVar7] = *(undefined8 *)(iVar5 + iVar7 * 8);
-    iVar7 = iVar7 + 1;
+  bufferStart = *(int *)(glContext + 0x4854);
+  doublewordsPerVertex = (int)*(short *)(glContext + 0x487c) >> 3;
+  lastVertexSourceThenSecondSlot = (undefined8 *)(*(int *)(glContext + 0x4858) + doublewordsPerVertex * -8);
+  copyIndexThenCounter = 0;
+  for (counterThenCopyIndex = doublewordsPerVertex; counterThenCopyIndex != 0; counterThenCopyIndex = counterThenCopyIndex + -1) {
+    firstVertexCopy[copyIndexThenCounter] = *(undefined8 *)(bufferStart + copyIndexThenCounter * 8);
+    copyIndexThenCounter = copyIndexThenCounter + 1;
   }
-  if (iVar4 != 0) {
-    puVar1 = local_120;
-    iVar7 = iVar4;
+  if (doublewordsPerVertex != 0) {
+    copyDestinationCursor = lastVertexCopy;
+    copyIndexThenCounter = doublewordsPerVertex;
     do {
-      uVar8 = *puVar3;
-      puVar3 = puVar3 + 1;
-      *puVar1 = uVar8;
-      puVar1 = puVar1 + 1;
-      iVar7 = iVar7 + -1;
-    } while (iVar7 != 0);
+      copiedDoubleword = *lastVertexSourceThenSecondSlot;
+      lastVertexSourceThenSecondSlot = lastVertexSourceThenSecondSlot + 1;
+      *copyDestinationCursor = copiedDoubleword;
+      copyDestinationCursor = copyDestinationCursor + 1;
+      copyIndexThenCounter = copyIndexThenCounter + -1;
+    } while (copyIndexThenCounter != 0);
   }
   (**(code **)(glContext + 0x4a08))(glContext);
-  iVar6 = 0;
-  for (iVar7 = iVar4; iVar7 != 0; iVar7 = iVar7 + -1) {
-    *(undefined8 *)(iVar5 + iVar6 * 8) = local_220[iVar6];
-    iVar6 = iVar6 + 1;
+  counterThenCopyIndex = 0;
+  for (copyIndexThenCounter = doublewordsPerVertex; copyIndexThenCounter != 0; copyIndexThenCounter = copyIndexThenCounter + -1) {
+    *(undefined8 *)(bufferStart + counterThenCopyIndex * 8) = firstVertexCopy[counterThenCopyIndex];
+    counterThenCopyIndex = counterThenCopyIndex + 1;
   }
-  puVar3 = (undefined8 *)(iVar5 + iVar4 * 8);
-  if (iVar4 != 0) {
-    puVar2 = local_120;
-    puVar1 = puVar3;
-    iVar7 = iVar4;
+  lastVertexSourceThenSecondSlot = (undefined8 *)(bufferStart + doublewordsPerVertex * 8);
+  if (doublewordsPerVertex != 0) {
+    restoreSourceCursor = lastVertexCopy;
+    copyDestinationCursor = lastVertexSourceThenSecondSlot;
+    copyIndexThenCounter = doublewordsPerVertex;
     do {
-      uVar8 = *puVar2;
-      puVar2 = puVar2 + 1;
-      *puVar1 = uVar8;
-      puVar1 = puVar1 + 1;
-      iVar7 = iVar7 + -1;
-    } while (iVar7 != 0);
+      copiedDoubleword = *restoreSourceCursor;
+      restoreSourceCursor = restoreSourceCursor + 1;
+      *copyDestinationCursor = copiedDoubleword;
+      copyDestinationCursor = copyDestinationCursor + 1;
+      copyIndexThenCounter = copyIndexThenCounter + -1;
+    } while (copyIndexThenCounter != 0);
   }
-  *(undefined8 **)(glContext + 0x4858) = puVar3 + iVar4;
+  *(undefined8 **)(glContext + 0x4858) = lastVertexSourceThenSecondSlot + doublewordsPerVertex;
   return;
 }
 

@@ -2163,12 +2163,12 @@ void _gleInitGLDState(glContext)
   int remaining3;
   int remaining2;
   int remaining;
-  float fVar1;
-  float fVar2;
-  undefined2 uVar3;
-  undefined2 *puVar4;
+  float defaultAmbientLevel;
+  float defaultDiffuseLevel;
+  undefined2 componentUsage;
+  undefined2 *variableCursor;
   undefined1 *dstCursor;
-  int iVar6;
+  int portionRecord;
   undefined4 *dstCursor2;
   int matrixArrayCursorB;
   int iVar9;
@@ -2179,7 +2179,7 @@ void _gleInitGLDState(glContext)
   int texGenUnitCursor;
   int texEnvUnitCursor;
   int stencilFaceCursor;
-  int iVar10;
+  int portionVariablesBase;
   int remaining9;
   
   *(undefined1 *)(glContext + 0x2d66) = 0;
@@ -2601,7 +2601,7 @@ void _gleInitGLDState(glContext)
     *(undefined4 *)(clipPlaneCursor + 0x3e30) = 0;
     *(undefined4 *)(clipPlaneCursor + 0x3e34) = 0;
     *(undefined4 *)(clipPlaneCursor + 0x3e38) = 0;
-    fVar1 = FLOAT_00108f80;
+    defaultAmbientLevel = FLOAT_00108f80;
     clipPlaneCursor = clipPlaneCursor + 0x10;
     remaining4 = remaining4 + -1;
   } while (remaining4 != 0);
@@ -2615,9 +2615,9 @@ void _gleInitGLDState(glContext)
   *(undefined1 *)(glContext + 0x2d4d) = 0;
   *(undefined1 *)(glContext + 0x2d4c) = 0;
   *(undefined1 *)(glContext + 0x2d4b) = 0;
-  *(float *)(glContext + 0x24b8) = fVar1;
-  *(float *)(glContext + 0x24b0) = fVar1;
-  *(float *)(glContext + 0x24b4) = fVar1;
+  *(float *)(glContext + 0x24b8) = defaultAmbientLevel;
+  *(float *)(glContext + 0x24b0) = defaultAmbientLevel;
+  *(float *)(glContext + 0x24b4) = defaultAmbientLevel;
   *(undefined4 *)(glContext + 0x24bc) = 0x3f800000;
   lightCursor = glContext;
   do {
@@ -2662,8 +2662,8 @@ void _gleInitGLDState(glContext)
     *(undefined4 *)(lightCursor + 0x2528) = 0x3f800000;
     *(undefined4 *)(lightCursor + 0x252c) = 0x3f800000;
     *(undefined4 *)(lightCursor + 0x2530) = 0x43340000;
-    fVar2 = FLOAT_00108f84;
-    fVar1 = FLOAT_00108f80;
+    defaultDiffuseLevel = FLOAT_00108f84;
+    defaultAmbientLevel = FLOAT_00108f80;
     lightCursor = lightCursor + 0x80;
     remaining5 = remaining5 + -1;
   } while (remaining5 != 0);
@@ -2688,13 +2688,13 @@ void _gleInitGLDState(glContext)
   *(undefined4 *)(glContext + 0x1858) = 0x3f800000;
   materialCursor = glContext;
   do {
-    *(float *)(materialCursor + 0x28c0) = fVar1;
-    *(float *)(materialCursor + 0x28c4) = fVar1;
-    *(float *)(materialCursor + 0x28c8) = fVar1;
+    *(float *)(materialCursor + 0x28c0) = defaultAmbientLevel;
+    *(float *)(materialCursor + 0x28c4) = defaultAmbientLevel;
+    *(float *)(materialCursor + 0x28c8) = defaultAmbientLevel;
     *(undefined4 *)(materialCursor + 0x28cc) = 0x3f800000;
-    *(float *)(materialCursor + 0x28d0) = fVar2;
-    *(float *)(materialCursor + 0x28d4) = fVar2;
-    *(float *)(materialCursor + 0x28d8) = fVar2;
+    *(float *)(materialCursor + 0x28d0) = defaultDiffuseLevel;
+    *(float *)(materialCursor + 0x28d4) = defaultDiffuseLevel;
+    *(float *)(materialCursor + 0x28d8) = defaultDiffuseLevel;
     *(undefined4 *)(materialCursor + 0x28dc) = 0x3f800000;
     *(undefined4 *)(materialCursor + 0x28e0) = 0;
     *(undefined4 *)(materialCursor + 0x28e4) = 0;
@@ -2725,39 +2725,39 @@ void _gleInitGLDState(glContext)
   loopIndex2 = 0;
   do {
     loopIndex = 0;
-    iVar6 = loopIndex2 * 0x80 + glContext;
-    iVar10 = iVar6;
+    portionRecord = loopIndex2 * 0x80 + glContext;
+    portionVariablesBase = portionRecord;
     do {
       remaining9 = 4;
-      puVar4 = (undefined2 *)(iVar10 + 0x3ec4);
+      variableCursor = (undefined2 *)(portionVariablesBase + 0x3ec4);
       do {
         if (loopIndex == 0) {
-          uVar3 = 0x1906;
+          componentUsage = 0x1906;
         }
         else {
-          uVar3 = 0x1907;
+          componentUsage = 0x1907;
         }
-        puVar4[-1] = uVar3;
-        *puVar4 = 0x8536;
-        puVar4 = puVar4 + 4;
+        variableCursor[-1] = componentUsage;
+        *variableCursor = 0x8536;
+        variableCursor = variableCursor + 4;
         remaining9 = remaining9 + -1;
       } while (remaining9 != 0);
       loopIndex = loopIndex + 1;
-      *(undefined2 *)(iVar6 + 0x3ec0) = 0x852c;
-      *(undefined2 *)(iVar6 + 0x3ec8) = 0;
-      *(undefined2 *)(iVar6 + 0x3ecc) = 0x8537;
-      iVar10 = iVar10 + 0x30;
-      *(undefined2 *)(iVar6 + 0x3ed0) = 0;
-      *(undefined2 *)(iVar6 + 0x3ed8) = 0;
-      *(undefined1 *)(iVar6 + 0x3ee0) = 0;
-      *(undefined1 *)(iVar6 + 0x3ee1) = 0;
-      *(undefined1 *)(iVar6 + 0x3ee2) = 0;
-      *(undefined2 *)(iVar6 + 0x3ee4) = 0;
-      *(undefined2 *)(iVar6 + 0x3ee6) = 0;
-      *(undefined2 *)(iVar6 + 0x3ee8) = 0x8530;
-      *(undefined2 *)(iVar6 + 0x3eea) = 0x8530;
-      *(undefined2 *)(iVar6 + 0x3eec) = 0x852e;
-      iVar6 = iVar6 + 0x30;
+      *(undefined2 *)(portionRecord + 0x3ec0) = 0x852c;
+      *(undefined2 *)(portionRecord + 0x3ec8) = 0;
+      *(undefined2 *)(portionRecord + 0x3ecc) = 0x8537;
+      portionVariablesBase = portionVariablesBase + 0x30;
+      *(undefined2 *)(portionRecord + 0x3ed0) = 0;
+      *(undefined2 *)(portionRecord + 0x3ed8) = 0;
+      *(undefined1 *)(portionRecord + 0x3ee0) = 0;
+      *(undefined1 *)(portionRecord + 0x3ee1) = 0;
+      *(undefined1 *)(portionRecord + 0x3ee2) = 0;
+      *(undefined2 *)(portionRecord + 0x3ee4) = 0;
+      *(undefined2 *)(portionRecord + 0x3ee6) = 0;
+      *(undefined2 *)(portionRecord + 0x3ee8) = 0x8530;
+      *(undefined2 *)(portionRecord + 0x3eea) = 0x8530;
+      *(undefined2 *)(portionRecord + 0x3eec) = 0x852e;
+      portionRecord = portionRecord + 0x30;
     } while (loopIndex < 2);
     loopIndex2 = loopIndex2 + 1;
   } while (loopIndex2 < 8);

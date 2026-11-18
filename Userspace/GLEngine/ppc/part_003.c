@@ -2683,79 +2683,79 @@ LAB_0002279c:
 }
 
 /* _gleBindPipelineProgram @ 0x22820 (644 bytes) */
-int _gleBindPipelineProgram(glContext, param_2, program)
+int _gleBindPipelineProgram(glContext, pipelineStageIndex, program)
   int glContext;
-  uint param_2;
+  uint pipelineStageIndex;
   int program;
 {
   int loopIndex2;
   int remaining;
   char glContextByte85a4;
-  int iVar2;
-  undefined *puVar3;
-  undefined4 uVar4;
+  int wordOffset;
+  undefined *setClipInterpFunc;
+  undefined4 copiedWord;
   int sharedState;
   uint uVar6;
-  int iVar7;
+  int programObject;
   undefined4 *srcCursor;
-  int iVar9;
+  int stageStateOffset;
   int loopIndex;
   undefined4 *dstCursor;
   int iVar12;
-  int iVar13;
-  int iVar14;
+  int previousProgramObject;
+  int programRecord;
   
   iVar12 = *(int *)(glContext + 0x5148) + 0x4010;
   if (program == 0) {
-    iVar12 = param_2 * 4;
-    iVar7 = *(int *)(iVar12 + glContext + 0x5428);
-    iVar14 = iVar7 + 0x10;
+    iVar12 = pipelineStageIndex * 4;
+    programObject = *(int *)(iVar12 + glContext + 0x5428);
+    programRecord = programObject + 0x10;
   }
   else {
-    iVar7 = _gleLookupHashObject(iVar12,program);
-    if (iVar7 == 0) {
-      iVar7 = _gleCreatePipelineProgramObject(glContext,param_2,program);
-      iVar14 = iVar7 + 0x10;
-      _gleCreatePluginPipelineProgram(glContext,iVar14);
-      _gleAddHashNameAndObject(glContext,iVar12,iVar7);
+    programObject = _gleLookupHashObject(iVar12,program);
+    if (programObject == 0) {
+      programObject = _gleCreatePipelineProgramObject(glContext,pipelineStageIndex,program);
+      programRecord = programObject + 0x10;
+      _gleCreatePluginPipelineProgram(glContext,programRecord);
+      _gleAddHashNameAndObject(glContext,iVar12,programObject);
     }
     else {
-      if (*(ushort *)(iVar7 + 0x4ca) != param_2) {
+      if (*(ushort *)(programObject + 0x4ca) != pipelineStageIndex) {
         if (*(int *)(glContext + 0x7574) != 0) {
           return;
         }
         *(undefined4 *)(glContext + 0x7574) = 0x502;
         return;
       }
-      iVar14 = iVar7 + 0x10;
+      programRecord = programObject + 0x10;
     }
-    iVar12 = param_2 << 2;
+    iVar12 = pipelineStageIndex << 2;
   }
   **(undefined1 **)(glContext + 0x5418) = 0;
   loopIndex2 = 0;
   *(undefined4 *)(glContext + 0x541c) = 0xffffffff;
-  *(int *)(iVar7 + 8) = *(int *)(iVar7 + 8) + 1;
+  *(int *)(programObject + 8) = *(int *)(programObject + 8) + 1;
   glContextByte85a4 = *(char *)(glContext + 0x85a4);
-  iVar13 = *(int *)(iVar12 + glContext + 0x5420);
-  *(int *)(iVar12 + glContext + 0x5420) = iVar7;
+  previousProgramObject = *(int *)(iVar12 + glContext + 0x5420);
+  *(int *)(iVar12 + glContext + 0x5420) = programObject;
   if (glContextByte85a4 != '\0') {
-    srcCursor = (undefined4 *)(iVar7 + 0x4a8);
-    dstCursor = (undefined4 *)(param_2 * 4 + glContext + 0x886c);
+    srcCursor = (undefined4 *)(programObject + 0x4a8);
+    dstCursor = (undefined4 *)(pipelineStageIndex * 4 + glContext + 0x886c);
     do {
-      uVar4 = *srcCursor;
+      copiedWord = *srcCursor;
       loopIndex2 = loopIndex2 + 1;
       srcCursor = srcCursor + 1;
-      *dstCursor = uVar4;
+      *dstCursor = copiedWord;
       dstCursor = dstCursor + 0xb8;
     } while (loopIndex2 < (int)(uint)*(byte *)(glContext + 0x85a4));
   }
-  if (param_2 == 0) {
+  if (pipelineStageIndex == 0) {
     remaining = 9;
     iVar12 = 5;
     uVar6 = *(uint *)(glContext + 0x31c) | 0x400000;
   }
   else {
-    if (param_2 != 1) {
+    if (pipelineStageIndex != 1) {
       remaining = 0;
       iVar12 = 0;
       goto LAB_0002299c;
@@ -2766,10 +2766,10 @@ int _gleBindPipelineProgram(glContext, param_2, program)
   }
   *(uint *)(glContext + 0x31c) = uVar6;
 LAB_0002299c:
-  iVar9 = param_2 * 0xa30;
-  if (*(int *)(iVar9 + *(int *)(glContext + 0x5148) + 0x8a98) != *(int *)(iVar14 + 0x14)) {
-    ((void (*)())_glePPUpdateProgram)(glContext,iVar14);
-    *(undefined4 *)(iVar14 + 0x14) = *(undefined4 *)(iVar9 + *(int *)(glContext + 0x5148) + 0x8a98);
+  stageStateOffset = pipelineStageIndex * 0xa30;
+  if (*(int *)(stageStateOffset + *(int *)(glContext + 0x5148) + 0x8a98) != *(int *)(programRecord + 0x14)) {
+    ((void (*)())_glePPUpdateProgram)(glContext,programRecord);
+    *(undefined4 *)(programRecord + 0x14) = *(undefined4 *)(stageStateOffset + *(int *)(glContext + 0x5148) + 0x8a98);
   }
   _gleUpdateInverseNeeds(glContext);
   loopIndex = 0;
@@ -2777,26 +2777,26 @@ LAB_0002299c:
     sharedState = *(int *)(glContext + 0x5148);
     iVar12 = iVar12 * 4 + glContext;
     do {
-      iVar2 = loopIndex * 4;
+      wordOffset = loopIndex * 4;
       loopIndex = loopIndex + 1;
       uVar6 = *(uint *)(iVar12 + 0x310) |
-              *(uint *)(iVar2 + iVar14 + 0x18) &
-              (*(uint *)(iVar2 + sharedState + iVar9 + 0x8a74) | ~*(uint *)(iVar2 + iVar13 + 0x28));
+              *(uint *)(wordOffset + programRecord + 0x18) &
+              (*(uint *)(wordOffset + sharedState + stageStateOffset + 0x8a74) | ~*(uint *)(wordOffset + previousProgramObject + 0x28));
       *(uint *)(iVar12 + 0x310) = uVar6;
-      *(uint *)(iVar12 + 0x310) = uVar6 & *(uint *)(iVar2 + iVar14 + 0x18);
+      *(uint *)(iVar12 + 0x310) = uVar6 & *(uint *)(wordOffset + programRecord + 0x18);
       iVar12 = iVar12 + 4;
       remaining = remaining + -1;
     } while (remaining != 0);
   }
-  iVar12 = *(int *)(iVar13 + 8) + -1;
-  *(int *)(iVar13 + 8) = iVar12;
+  iVar12 = *(int *)(previousProgramObject + 8) + -1;
+  *(int *)(previousProgramObject + 8) = iVar12;
   if (iVar12 == 0) {
-    _gleFreePipelineProgramObject(glContext,iVar13);
+    _gleFreePipelineProgramObject(glContext,previousProgramObject);
   }
   _gleSelectVertexSubmitFunc(glContext);
-  puVar3 = PTR__gleSetClipInterpFunc_00112038;
+  setClipInterpFunc = PTR__gleSetClipInterpFunc_00112038;
   *(undefined **)(glContext + 0x49c8) = PTR__gleSetEyeInterpFunc_0011203c;
-  *(undefined **)(glContext + 0x49cc) = puVar3;
+  *(undefined **)(glContext + 0x49cc) = setClipInterpFunc;
   return;
 }
 
@@ -2965,169 +2965,169 @@ LAB_00022bb8:
 }
 
 /* _glePPParse @ 0x22dc0 (4884 bytes) */
-void _glePPParse(glContext, param_2, param_3)
+void _glePPParse(glContext, programRecord, programKind)
   int glContext;
-  int *param_2;
-  int param_3;
+  int *programRecord;
+  int programKind;
 {
   int allocatedBlock;
-  bool bVar1;
-  bool bVar2;
-  short sVar3;
-  ushort uVar4;
+  bool isFragmentProgram;
+  bool pruneSucceeded;
+  short oldFirstOrdinal;
+  ushort rendererWord11a;
   int iVar5;
   int allocatedBlock2;
-  int *piVar7;
-  int *piVar8;
-  undefined1 *puVar9;
-  undefined4 uVar10;
-  undefined2 uVar11;
+  int *opListCopy;
+  int *paramArrayListCopy;
+  undefined1 *fillerChunk;
+  undefined4 chunkCopy;
+  undefined2 texOperationCount;
   short sVar12;
   undefined4 *srcCursor;
   int iVar14;
   uint uVar15;
   int iVar16;
-  int iVar17;
-  int *piVar18;
-  int *piVar19;
-  int *piVar20;
+  int oldStreamThenParser;
+  int *paramArrayList;
+  int *opList;
+  int *paramBindingList;
   int iVar21;
-  int iVar22;
+  int sourceTextThenStream;
   uint uVar23;
   uint loopIndex;
   undefined4 uVar24;
-  uint local_110;
-  uint local_10c;
-  undefined4 local_108;
-  undefined4 local_104;
-  uint local_100;
-  undefined4 local_fc;
-  undefined4 local_f8;
-  undefined4 local_f4;
-  uint local_f0;
-  undefined4 local_ec;
-  undefined4 local_e8;
-  undefined4 local_e4;
-  undefined4 local_e0;
-  undefined4 local_dc;
-  undefined4 local_d8;
-  uint local_d0;
-  uint local_cc;
-  undefined4 local_c8;
-  uint local_c4;
-  uint local_c0;
-  uint local_bc;
-  uint local_b8;
-  uint local_b4;
-  uint local_b0;
-  uint local_ac;
-  uint local_a8;
-  uint local_a4;
-  uint local_a0;
-  uint local_9c;
-  uint local_90;
-  undefined4 local_8c;
-  uint local_88;
-  uint local_84;
-  uint local_80;
-  undefined4 local_7c;
-  uint local_70;
-  undefined4 local_6c;
-  undefined4 local_68;
-  undefined4 local_64;
-  uint local_60;
-  undefined4 local_5c;
-  int local_58 [5];
+  uint limitsWord0ThenAttribBindingWord0;
+  uint limitsWord1ThenAttribBindingWord1;
+  undefined4 limitsWord2;
+  undefined4 limitsWord3;
+  uint limitsWord4ThenOutputBindingWord0;
+  undefined4 limitsWord5ThenOutputBindingWord1;
+  undefined4 limitsWord6;
+  undefined4 limitsWord7;
+  uint limitsWord8ThenParamBindingWord0;
+  undefined4 limitsWord9ThenParamBindingWord1;
+  undefined4 limitsWord10ThenParamBindingWord2;
+  undefined4 limitsWord11ThenParamBindingWord3;
+  undefined4 limitsWord12;
+  undefined4 limitsWord13;
+  undefined4 limitsWord14;
+  uint operationWord0;
+  uint operationWord1;
+  undefined4 operationWord2;
+  uint operationWord3;
+  uint operationWord4;
+  uint operationWord5;
+  uint operationWord6;
+  uint operationWord7;
+  uint operationWord8;
+  uint operationWord9;
+  uint operationWord10;
+  uint operationWord11;
+  uint operationWord12;
+  uint operationWord13;
+  uint tempUsageWord0;
+  undefined4 tempUsageWord1;
+  uint tempUsageWord2;
+  uint tempUsageWord3;
+  uint outputBinding2Word0;
+  undefined4 outputBinding2Word1;
+  uint paramBinding2Word0;
+  undefined4 paramBinding2Word1;
+  undefined4 paramBinding2Word2;
+  undefined4 paramBinding2Word3;
+  uint paramBindingCount;
+  undefined4 paramArrayCount;
+  int packedEntryCount [5];
   
-  iVar22 = param_2[1];
-  iVar17 = *param_2;
-  if (param_2[0x12f] != 0) {
-    _gleVecFree(param_2[0x12f]);
-    param_2[0x12f] = 0;
+  sourceTextThenStream = programRecord[1];
+  oldStreamThenParser = *programRecord;
+  if (programRecord[0x12f] != 0) {
+    _gleVecFree(programRecord[0x12f]);
+    programRecord[0x12f] = 0;
   }
-  if (iVar17 != 0) {
-    _PPStreamFree(iVar17);
-    *param_2 = 0;
+  if (oldStreamThenParser != 0) {
+    _PPStreamFree(oldStreamThenParser);
+    *programRecord = 0;
   }
-  bVar1 = param_3 == 1;
-  iVar17 = _PPParserCreate(bVar1 << 1);
+  isFragmentProgram = programKind == 1;
+  oldStreamThenParser = _PPParserCreate(isFragmentProgram << 1);
   _PPParserInit();
-  if (bVar1) {
-    local_fc = 0x80;
-    local_f8 = 0x40;
-    local_f4 = 0;
-    local_110 = 0x80;
-    local_10c = 0x80;
-    local_d8 = 0;
+  if (isFragmentProgram) {
+    limitsWord5ThenOutputBindingWord1 = 0x80;
+    limitsWord6 = 0x40;
+    limitsWord7 = 0;
+    limitsWord0ThenAttribBindingWord0 = 0x80;
+    limitsWord1ThenAttribBindingWord1 = 0x80;
+    limitsWord14 = 0;
   }
   else {
-    local_d8 = 0x10;
-    local_fc = 0x100;
-    local_f8 = 0x20;
-    local_f4 = 2;
-    local_110 = 0x100;
-    local_10c = 0x100;
+    limitsWord14 = 0x10;
+    limitsWord5ThenOutputBindingWord1 = 0x100;
+    limitsWord6 = 0x20;
+    limitsWord7 = 2;
+    limitsWord0ThenAttribBindingWord0 = 0x100;
+    limitsWord1ThenAttribBindingWord1 = 0x100;
   }
-  local_100 = 0x100;
-  local_104 = 0x8000;
-  local_ec = 0x10;
-  local_e8 = 4;
-  local_e4 = 1;
-  local_e0 = 6;
-  local_dc = 8;
-  local_108 = 8;
-  local_f0 = 8;
-  _memcpy(iVar17 + 0x450,&local_110,0x3c);
-  _PPParserAttachString(iVar17,iVar22,1);
-  iVar22 = _PPStreamCreate();
-  _PPParserAttachStream(iVar17,iVar22);
-  iVar5 = _PPParserParse(iVar17);
+  limitsWord4ThenOutputBindingWord0 = 0x100;
+  limitsWord3 = 0x8000;
+  limitsWord9ThenParamBindingWord1 = 0x10;
+  limitsWord10ThenParamBindingWord2 = 4;
+  limitsWord11ThenParamBindingWord3 = 1;
+  limitsWord12 = 6;
+  limitsWord13 = 8;
+  limitsWord2 = 8;
+  limitsWord8ThenParamBindingWord0 = 8;
+  _memcpy(oldStreamThenParser + 0x450,&limitsWord0ThenAttribBindingWord0,0x3c);
+  _PPParserAttachString(oldStreamThenParser,sourceTextThenStream,1);
+  sourceTextThenStream = _PPStreamCreate();
+  _PPParserAttachStream(oldStreamThenParser,sourceTextThenStream);
+  iVar5 = _PPParserParse(oldStreamThenParser);
   if (iVar5 == 0) {
-    *(undefined8 *)(param_2 + 0x130) = *(undefined8 *)(iVar17 + 0x34);
-    iVar5 = ((int (*)())_glePPPruneParamArrays)(iVar17);
-    bVar2 = iVar5 == 0;
-    if (bVar2) {
-      iVar5 = ((int (*)())_glePPPruneAttribs)(iVar17);
-      bVar2 = iVar5 == 0;
-      if (!bVar2) goto LAB_00022f84;
-      iVar5 = ((int (*)())_glePPPruneOutputs)(iVar17);
-      bVar2 = iVar5 == 0;
-      if (!bVar2) goto LAB_00022f84;
-      iVar5 = ((int (*)())_glePPPruneLocals)(iVar17);
-      bVar2 = iVar5 == 0;
-      if (!bVar2) goto LAB_00022f84;
-      iVar5 = ((int (*)())_glePPPruneParams)(iVar17);
-      bVar2 = iVar5 == 0;
-      if (!bVar2) goto LAB_00022f84;
-      piVar20 = *(int **)(iVar22 + 0x10);
-      uVar24 = *(undefined4 *)(iVar22 + 0x14);
-      _PPStreamChunkListGetStream(piVar20,0,&local_60,iVar22);
-      _PPStreamChunkListGetStream(uVar24,0,&local_5c,iVar22);
-      allocatedBlock = _calloc(local_60,8);
-      allocatedBlock2 = _calloc(local_5c,8);
-      _PPStreamChunkListGetStream(piVar20,allocatedBlock,&local_60,iVar22);
-      _PPStreamChunkListGetStream(uVar24,allocatedBlock2,&local_5c,iVar22);
+    *(undefined8 *)(programRecord + 0x130) = *(undefined8 *)(oldStreamThenParser + 0x34);
+    iVar5 = ((int (*)())_glePPPruneParamArrays)(oldStreamThenParser);
+    pruneSucceeded = iVar5 == 0;
+    if (pruneSucceeded) {
+      iVar5 = ((int (*)())_glePPPruneAttribs)(oldStreamThenParser);
+      pruneSucceeded = iVar5 == 0;
+      if (!pruneSucceeded) goto LAB_00022f84;
+      iVar5 = ((int (*)())_glePPPruneOutputs)(oldStreamThenParser);
+      pruneSucceeded = iVar5 == 0;
+      if (!pruneSucceeded) goto LAB_00022f84;
+      iVar5 = ((int (*)())_glePPPruneLocals)(oldStreamThenParser);
+      pruneSucceeded = iVar5 == 0;
+      if (!pruneSucceeded) goto LAB_00022f84;
+      iVar5 = ((int (*)())_glePPPruneParams)(oldStreamThenParser);
+      pruneSucceeded = iVar5 == 0;
+      if (!pruneSucceeded) goto LAB_00022f84;
+      paramBindingList = *(int **)(sourceTextThenStream + 0x10);
+      uVar24 = *(undefined4 *)(sourceTextThenStream + 0x14);
+      _PPStreamChunkListGetStream(paramBindingList,0,&paramBindingCount,sourceTextThenStream);
+      _PPStreamChunkListGetStream(uVar24,0,&paramArrayCount,sourceTextThenStream);
+      allocatedBlock = _calloc(paramBindingCount,8);
+      allocatedBlock2 = _calloc(paramArrayCount,8);
+      _PPStreamChunkListGetStream(paramBindingList,allocatedBlock,&paramBindingCount,sourceTextThenStream);
+      _PPStreamChunkListGetStream(uVar24,allocatedBlock2,&paramArrayCount,sourceTextThenStream);
       if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
         _pthread_mutex_lock(*(int *)(glContext + 0x5148) + 0x8028);
       }
-      ((void (*)())_glePPLogParameters)(glContext,param_2,local_60,allocatedBlock,local_5c,allocatedBlock2);
+      ((void (*)())_glePPLogParameters)(glContext,programRecord,paramBindingCount,allocatedBlock,paramArrayCount,allocatedBlock2);
       if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
         _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);
       }
-      piVar19 = *(int **)(iVar22 + 0x20);
+      opList = *(int **)(sourceTextThenStream + 0x20);
       loopIndex = 0;
-      piVar18 = *(int **)(iVar22 + 0x14);
-      piVar7 = (int *)_PPStreamChunkListCreateFromChunkList(piVar19);
-      piVar8 = (int *)_PPStreamChunkListCreateFromChunkList(piVar18);
-      iVar21 = *piVar20;
-      if (local_60 != 0) {
+      paramArrayList = *(int **)(sourceTextThenStream + 0x14);
+      opListCopy = (int *)_PPStreamChunkListCreateFromChunkList(opList);
+      paramArrayListCopy = (int *)_PPStreamChunkListCreateFromChunkList(paramArrayList);
+      iVar21 = *paramBindingList;
+      if (paramBindingCount != 0) {
         srcCursor = (undefined4 *)(allocatedBlock + 4);
         do {
           uVar24 = *srcCursor;
           srcCursor = srcCursor + 2;
-          iVar14 = *piVar7;
+          iVar14 = *opListCopy;
           sVar12 = (short)uVar24;
-          for (iVar16 = *piVar19; iVar16 != 0; iVar16 = *(int *)(iVar16 + 8)) {
+          for (iVar16 = *opList; iVar16 != 0; iVar16 = *(int *)(iVar16 + 8)) {
             if ((((*(uint *)(iVar16 + 0xc) >> 0x1d != 0) &&
                  ((*(uint *)(iVar16 + 0xc) >> 0x12 & 0xff) != 0x4a)) &&
                 ((*(uint *)(iVar16 + 0x1c) >> 0x17 & 7) == 2)) &&
@@ -3147,37 +3147,37 @@ void _glePPParse(glContext, param_2, param_3)
             }
             iVar14 = *(int *)(iVar14 + 8);
           }
-          iVar14 = *piVar8;
-          for (iVar16 = *piVar18; iVar16 != 0; iVar16 = *(int *)(iVar16 + 8)) {
+          iVar14 = *paramArrayListCopy;
+          for (iVar16 = *paramArrayList; iVar16 != 0; iVar16 = *(int *)(iVar16 + 8)) {
             if (*(short *)(iVar16 + 0xe) == *(short *)(iVar21 + 0x12)) {
-              sVar3 = *(short *)(iVar14 + 0xe);
+              oldFirstOrdinal = *(short *)(iVar14 + 0xe);
               *(short *)(iVar14 + 0xe) = sVar12;
-              *(short *)(iVar14 + 0x12) = (*(short *)(iVar14 + 0x12) + sVar12) - sVar3;
+              *(short *)(iVar14 + 0x12) = (*(short *)(iVar14 + 0x12) + sVar12) - oldFirstOrdinal;
             }
             iVar14 = *(int *)(iVar14 + 8);
           }
           *(short *)(iVar21 + 0x12) = sVar12;
           loopIndex = loopIndex + 1;
           iVar21 = *(int *)(iVar21 + 8);
-        } while (loopIndex < local_60);
+        } while (loopIndex < paramBindingCount);
       }
       uVar23 = 0;
-      _PPStreamChunkListSort(piVar20);
-      iVar21 = *piVar20;
+      _PPStreamChunkListSort(paramBindingList);
+      iVar21 = *paramBindingList;
       uVar24 = _PPStreamChunkListCreate();
       for (; iVar21 != 0; iVar21 = *(int *)(iVar21 + 8)) {
         if ((*(ushort *)(iVar21 + 0x12) != 0) && (uVar23 < *(ushort *)(iVar21 + 0x12))) {
           do {
-            puVar9 = (undefined1 *)_calloc(0x1c,1);
-            *(uint *)(puVar9 + 0xc) = *(uint *)(puVar9 + 0xc) & 0xffe0ffff;
-            *(short *)(puVar9 + 0x12) = (short)uVar23;
+            fillerChunk = (undefined1 *)_calloc(0x1c,1);
+            *(uint *)(fillerChunk + 0xc) = *(uint *)(fillerChunk + 0xc) & 0xffe0ffff;
+            *(short *)(fillerChunk + 0x12) = (short)uVar23;
             uVar23 = uVar23 + 1;
-            *puVar9 = 3;
-            _PPStreamChunkListAddChunk(uVar24,puVar9);
+            *fillerChunk = 3;
+            _PPStreamChunkListAddChunk(uVar24,fillerChunk);
           } while (uVar23 < *(ushort *)(iVar21 + 0x12));
         }
-        uVar10 = _PPStreamChunkCreateFromChunk(iVar21);
-        _PPStreamChunkListAddChunk(uVar24,uVar10);
+        chunkCopy = _PPStreamChunkCreateFromChunk(iVar21);
+        _PPStreamChunkListAddChunk(uVar24,chunkCopy);
         uVar23 = *(ushort *)(iVar21 + 0x12) + 1;
       }
       if (allocatedBlock != 0) {
@@ -3186,357 +3186,357 @@ void _glePPParse(glContext, param_2, param_3)
       if (allocatedBlock2 != 0) {
         _free(allocatedBlock2);
       }
-      _PPStreamAttachOperationsChunkList(iVar22,piVar7);
-      _PPStreamAttachParamBindingsChunkList(iVar22,uVar24);
-      _PPStreamAttachParamBindingArraysChunkList(iVar22,piVar8);
-      _PPStreamGetStream(iVar22,0,local_58);
-      iVar5 = _gleVecAlloc(local_58[0] << 3);
-      _PPStreamGetStream(iVar22,iVar5,local_58);
-      *(undefined2 *)((int)param_2 + 0x46) = *(undefined2 *)(iVar5 + 0x12);
-      *(undefined2 *)((int)param_2 + 0x3e) = *(undefined2 *)(iVar5 + 0x1a);
-      *(undefined2 *)((int)param_2 + 0x42) = *(undefined2 *)(iVar5 + 0x22);
-      *(undefined2 *)(param_2 + 0x11) = *(undefined2 *)(iVar5 + 0x2a);
-      *(undefined2 *)(param_2 + 0x10) = *(undefined2 *)(iVar5 + 0x52);
-      if (bVar1) {
-        uVar11 = _PPStreamGetTexOperationCount(iVar22);
-        *(undefined2 *)((int)param_2 + 0x4de) = uVar11;
-        *(undefined2 *)(param_2 + 0x138) = 1;
-        *(short *)(param_2 + 0x137) = *(short *)(param_2 + 0x10) - *(short *)((int)param_2 + 0x4de);
+      _PPStreamAttachOperationsChunkList(sourceTextThenStream,opListCopy);
+      _PPStreamAttachParamBindingsChunkList(sourceTextThenStream,uVar24);
+      _PPStreamAttachParamBindingArraysChunkList(sourceTextThenStream,paramArrayListCopy);
+      _PPStreamGetStream(sourceTextThenStream,0,packedEntryCount);
+      iVar5 = _gleVecAlloc(packedEntryCount[0] << 3);
+      _PPStreamGetStream(sourceTextThenStream,iVar5,packedEntryCount);
+      *(undefined2 *)((int)programRecord + 0x46) = *(undefined2 *)(iVar5 + 0x12);
+      *(undefined2 *)((int)programRecord + 0x3e) = *(undefined2 *)(iVar5 + 0x1a);
+      *(undefined2 *)((int)programRecord + 0x42) = *(undefined2 *)(iVar5 + 0x22);
+      *(undefined2 *)(programRecord + 0x11) = *(undefined2 *)(iVar5 + 0x2a);
+      *(undefined2 *)(programRecord + 0x10) = *(undefined2 *)(iVar5 + 0x52);
+      if (isFragmentProgram) {
+        texOperationCount = _PPStreamGetTexOperationCount(sourceTextThenStream);
+        *(undefined2 *)((int)programRecord + 0x4de) = texOperationCount;
+        *(undefined2 *)(programRecord + 0x138) = 1;
+        *(short *)(programRecord + 0x137) = *(short *)(programRecord + 0x10) - *(short *)((int)programRecord + 0x4de);
       }
-      param_2[0x12f] = iVar5;
-      *param_2 = iVar22;
-      if (((*(byte *)(iVar17 + 0x442) & 1) != 0) &&
+      programRecord[0x12f] = iVar5;
+      *programRecord = sourceTextThenStream;
+      if (((*(byte *)(oldStreamThenParser + 0x442) & 1) != 0) &&
          ((*(ushort *)(*(int *)(glContext + 0x468c) + 0x11a) & 2) == 0)) {
-        for (iVar5 = **(int **)(iVar22 + 0x18); iVar5 != 0; iVar5 = *(int *)(iVar5 + 8)) {
-          local_110 = *(uint *)(iVar5 + 0xc);
-          local_10c = *(uint *)(iVar5 + 0x10);
-          if ((local_110 >> 0x10 & 0xf) == 1) break;
+        for (iVar5 = **(int **)(sourceTextThenStream + 0x18); iVar5 != 0; iVar5 = *(int *)(iVar5 + 8)) {
+          limitsWord0ThenAttribBindingWord0 = *(uint *)(iVar5 + 0xc);
+          limitsWord1ThenAttribBindingWord1 = *(uint *)(iVar5 + 0x10);
+          if ((limitsWord0ThenAttribBindingWord0 >> 0x10 & 0xf) == 1) break;
         }
-        uVar24 = *(undefined4 *)(iVar22 + 0x1c);
-        local_100 = 0;
+        uVar24 = *(undefined4 *)(sourceTextThenStream + 0x1c);
+        limitsWord4ThenOutputBindingWord0 = 0;
         loopIndex = 0;
-        local_fc = 0;
+        limitsWord5ThenOutputBindingWord1 = 0;
         sVar12 = _PPStreamChunkListGetMaxIndex(uVar24);
-        local_100 = local_100 & 0xfff0ffff | 0x10000;
-        local_fc = CONCAT22((*(unsigned short *)((unsigned char *)&(local_fc) + 0)),sVar12 + 1);
-        _PPStreamAddOutputBinding(iVar22,&local_100);
-        local_7c = 0;
-        local_80 = 0;
+        limitsWord4ThenOutputBindingWord0 = limitsWord4ThenOutputBindingWord0 & 0xfff0ffff | 0x10000;
+        limitsWord5ThenOutputBindingWord1 = CONCAT22((*(unsigned short *)((unsigned char *)&(limitsWord5ThenOutputBindingWord1) + 0)),sVar12 + 1);
+        _PPStreamAddOutputBinding(sourceTextThenStream,&limitsWord4ThenOutputBindingWord0);
+        outputBinding2Word1 = 0;
+        outputBinding2Word0 = 0;
         sVar12 = _PPStreamChunkListGetMaxIndex(uVar24);
-        local_80 = local_80 & 0xfff0ffff | 0x80000;
-        local_7c = CONCAT22((*(unsigned short *)((unsigned char *)&(local_7c) + 0)),sVar12 + 1);
-        _PPStreamAddOutputBinding(iVar22,&local_80);
-        uVar24 = *(undefined4 *)(iVar22 + 0x10);
+        outputBinding2Word0 = outputBinding2Word0 & 0xfff0ffff | 0x80000;
+        outputBinding2Word1 = CONCAT22((*(unsigned short *)((unsigned char *)&(outputBinding2Word1) + 0)),sVar12 + 1);
+        _PPStreamAddOutputBinding(sourceTextThenStream,&outputBinding2Word0);
+        uVar24 = *(undefined4 *)(sourceTextThenStream + 0x10);
         do {
-          local_f0 = 0;
-          local_ec = 0;
-          local_e8 = 0;
-          local_e4 = 0;
+          limitsWord8ThenParamBindingWord0 = 0;
+          limitsWord9ThenParamBindingWord1 = 0;
+          limitsWord10ThenParamBindingWord2 = 0;
+          limitsWord11ThenParamBindingWord3 = 0;
           sVar12 = _PPStreamChunkListGetMaxIndex(uVar24);
-          local_ec = CONCAT22((*(unsigned short *)((unsigned char *)&(local_ec) + 0)),sVar12 + 1);
+          limitsWord9ThenParamBindingWord1 = CONCAT22((*(unsigned short *)((unsigned char *)&(limitsWord9ThenParamBindingWord1) + 0)),sVar12 + 1);
           if ((*(ushort *)(*(int *)(glContext + 0x468c) + 0x11a) & 1) == 0) {
-            uVar15 = local_f0 & 0xffe03fff | 0x104000;
+            uVar15 = limitsWord8ThenParamBindingWord0 & 0xffe03fff | 0x104000;
           }
           else {
-            uVar15 = local_f0 & 0xffe03fff | 0x100000;
+            uVar15 = limitsWord8ThenParamBindingWord0 & 0xffe03fff | 0x100000;
           }
-          local_f0 = (loopIndex & 3) << 0xc | uVar15 & 0xffffc8ff;
+          limitsWord8ThenParamBindingWord0 = (loopIndex & 3) << 0xc | uVar15 & 0xffffc8ff;
           loopIndex = loopIndex + 1;
-          _PPStreamAddParamBinding(iVar22,&local_f0);
+          _PPStreamAddParamBinding(sourceTextThenStream,&limitsWord8ThenParamBindingWord0);
         } while (loopIndex < 4);
-        uVar24 = *(undefined4 *)(iVar22 + 0x10);
+        uVar24 = *(undefined4 *)(sourceTextThenStream + 0x10);
         loopIndex = 0;
         do {
-          local_70 = 0;
-          local_6c = 0;
-          local_68 = 0;
-          local_64 = 0;
+          paramBinding2Word0 = 0;
+          paramBinding2Word1 = 0;
+          paramBinding2Word2 = 0;
+          paramBinding2Word3 = 0;
           sVar12 = _PPStreamChunkListGetMaxIndex(uVar24);
-          local_6c = CONCAT22((*(unsigned short *)((unsigned char *)&(local_6c) + 0)),sVar12 + 1);
+          paramBinding2Word1 = CONCAT22((*(unsigned short *)((unsigned char *)&(paramBinding2Word1) + 0)),sVar12 + 1);
           if ((*(ushort *)(*(int *)(glContext + 0x468c) + 0x11a) & 1) == 0) {
-            uVar15 = local_70 & 0xffe03fff | 0x104000;
+            uVar15 = paramBinding2Word0 & 0xffe03fff | 0x104000;
           }
           else {
-            uVar15 = local_70 & 0xffe03fff | 0x100000;
+            uVar15 = paramBinding2Word0 & 0xffe03fff | 0x100000;
           }
-          local_70 = (loopIndex & 3) << 0xc | uVar15 & 0xffffc8ff | 0x300;
+          paramBinding2Word0 = (loopIndex & 3) << 0xc | uVar15 & 0xffffc8ff | 0x300;
           loopIndex = loopIndex + 1;
-          _PPStreamAddParamBinding(iVar22,&local_70);
+          _PPStreamAddParamBinding(sourceTextThenStream,&paramBinding2Word0);
         } while (loopIndex < 4);
-        uVar4 = *(ushort *)(*(int *)(glContext + 0x468c) + 0x11a);
-        uVar23 = uVar4 & 1;
-        if ((uVar4 & 1) == 0) {
-          local_90 = uVar23;
-          local_8c = uVar23;
-          local_88 = uVar23;
-          local_84 = uVar23;
+        rendererWord11a = *(ushort *)(*(int *)(glContext + 0x468c) + 0x11a);
+        uVar23 = rendererWord11a & 1;
+        if ((rendererWord11a & 1) == 0) {
+          tempUsageWord0 = uVar23;
+          tempUsageWord1 = uVar23;
+          tempUsageWord2 = uVar23;
+          tempUsageWord3 = uVar23;
           sVar12 = _PPStreamChunkListGetMaxIndex(uVar24);
-          local_8c = CONCAT22((*(unsigned short *)((unsigned char *)&(local_8c) + 0)),sVar12 + 1);
-          _PPStreamAddTempUsage(iVar22,&local_90);
-          local_d0 = uVar23 << 0x1a | 0x40880000;
-          local_c0 = uVar23 << 0x15 | 0x10d8000;
-          local_b8 = uVar23 << 0xf |
+          tempUsageWord1 = CONCAT22((*(unsigned short *)((unsigned char *)&(tempUsageWord1) + 0)),sVar12 + 1);
+          _PPStreamAddTempUsage(sourceTextThenStream,&tempUsageWord0);
+          operationWord0 = uVar23 << 0x1a | 0x40880000;
+          operationWord4 = uVar23 << 0x15 | 0x10d8000;
+          operationWord6 = uVar23 << 0xf |
                      uVar23 << 0x11 | uVar23 << 0x13 | uVar23 << 0x15 | uVar23 << 0x17;
-          local_c8 = 0x3e000;
-          local_c4 = local_8c & 0xffff;
-          local_bc = (uint)(ushort)((short)local_ec - 3);
-          local_b4 = local_10c & 0xffff;
-          local_cc = uVar23;
-          local_b0 = uVar23;
-          local_ac = uVar23;
-          local_a8 = uVar23;
-          local_a4 = uVar23;
-          local_a0 = uVar23;
-          local_9c = uVar23;
-          _PPStreamAddOperation(iVar22,&local_d0,0,0);
-          local_c0 = uVar23 << 0x15 | 0x10d8000;
-          local_b0 = uVar23 << 0x15 | 0x8d8000;
-          local_b8 = uVar23 << 0x17 | 0x2a8000;
-          local_c8 = 0x3e000;
-          local_d0 = 0x68fc0000;
-          local_bc = (uint)(ushort)((short)local_ec - 2);
-          local_b4 = local_10c & 0xffff;
-          local_c4 = local_8c & 0xffff;
-          local_ac = local_8c & 0xffff;
-          local_cc = uVar23;
-          local_a8 = uVar23;
-          local_a4 = uVar23;
-          local_a0 = uVar23;
-          local_9c = uVar23;
-          _PPStreamAddOperation(iVar22,&local_d0,0,0);
-          local_b8 = uVar23 << 0x17 | 0x550000;
-          local_c0 = uVar23 << 0x15 | 0x10d8000;
-          local_b0 = uVar23 << 0x15 | 0x8d8000;
-          local_d0 = 0x6cfc0000;
-          local_c8 = 0x3e000;
-          local_bc = (uint)(ushort)((short)local_ec - 1);
-          local_b4 = local_10c & 0xffff;
-          local_c4 = local_8c & 0xffff;
-          local_ac = local_8c & 0xffff;
-          local_cc = uVar23;
-          local_a8 = uVar23;
-          local_a4 = uVar23;
-          local_a0 = uVar23;
-          local_9c = uVar23;
-          _PPStreamAddOperation(iVar22,&local_d0,0,0);
-          local_c0 = uVar23 << 0x15 | 0x10d8000;
-          local_b0 = uVar23 << 0x15 | 0x8d8000;
-          local_b8 = uVar23 << 0x17 | 0x7f8000;
-          local_c8 = 0x7e000;
-          local_d0 = 0x6cfc0000;
-          local_c4 = local_fc & 0xffff;
-          local_bc = local_ec & 0xffff;
-          local_b4 = local_10c & 0xffff;
-          local_ac = local_8c & 0xffff;
-          local_cc = uVar23;
-          local_a8 = uVar23;
-          local_a4 = uVar23;
-          local_a0 = uVar23;
-          local_9c = uVar23;
-          _PPStreamAddOperation(iVar22,&local_d0,0,0);
-          local_c0 = uVar23 << 0x15 | 0x10d8000;
-          local_b8 = uVar23 << 0xf |
+          operationWord2 = 0x3e000;
+          operationWord3 = tempUsageWord1 & 0xffff;
+          operationWord5 = (uint)(ushort)((short)limitsWord9ThenParamBindingWord1 - 3);
+          operationWord7 = limitsWord1ThenAttribBindingWord1 & 0xffff;
+          operationWord1 = uVar23;
+          operationWord8 = uVar23;
+          operationWord9 = uVar23;
+          operationWord10 = uVar23;
+          operationWord11 = uVar23;
+          operationWord12 = uVar23;
+          operationWord13 = uVar23;
+          _PPStreamAddOperation(sourceTextThenStream,&operationWord0,0,0);
+          operationWord4 = uVar23 << 0x15 | 0x10d8000;
+          operationWord8 = uVar23 << 0x15 | 0x8d8000;
+          operationWord6 = uVar23 << 0x17 | 0x2a8000;
+          operationWord2 = 0x3e000;
+          operationWord0 = 0x68fc0000;
+          operationWord5 = (uint)(ushort)((short)limitsWord9ThenParamBindingWord1 - 2);
+          operationWord7 = limitsWord1ThenAttribBindingWord1 & 0xffff;
+          operationWord3 = tempUsageWord1 & 0xffff;
+          operationWord9 = tempUsageWord1 & 0xffff;
+          operationWord1 = uVar23;
+          operationWord10 = uVar23;
+          operationWord11 = uVar23;
+          operationWord12 = uVar23;
+          operationWord13 = uVar23;
+          _PPStreamAddOperation(sourceTextThenStream,&operationWord0,0,0);
+          operationWord6 = uVar23 << 0x17 | 0x550000;
+          operationWord4 = uVar23 << 0x15 | 0x10d8000;
+          operationWord8 = uVar23 << 0x15 | 0x8d8000;
+          operationWord0 = 0x6cfc0000;
+          operationWord2 = 0x3e000;
+          operationWord5 = (uint)(ushort)((short)limitsWord9ThenParamBindingWord1 - 1);
+          operationWord7 = limitsWord1ThenAttribBindingWord1 & 0xffff;
+          operationWord3 = tempUsageWord1 & 0xffff;
+          operationWord9 = tempUsageWord1 & 0xffff;
+          operationWord1 = uVar23;
+          operationWord10 = uVar23;
+          operationWord11 = uVar23;
+          operationWord12 = uVar23;
+          operationWord13 = uVar23;
+          _PPStreamAddOperation(sourceTextThenStream,&operationWord0,0,0);
+          operationWord4 = uVar23 << 0x15 | 0x10d8000;
+          operationWord8 = uVar23 << 0x15 | 0x8d8000;
+          operationWord6 = uVar23 << 0x17 | 0x7f8000;
+          operationWord2 = 0x7e000;
+          operationWord0 = 0x6cfc0000;
+          operationWord3 = limitsWord5ThenOutputBindingWord1 & 0xffff;
+          operationWord5 = limitsWord9ThenParamBindingWord1 & 0xffff;
+          operationWord7 = limitsWord1ThenAttribBindingWord1 & 0xffff;
+          operationWord9 = tempUsageWord1 & 0xffff;
+          operationWord1 = uVar23;
+          operationWord10 = uVar23;
+          operationWord11 = uVar23;
+          operationWord12 = uVar23;
+          operationWord13 = uVar23;
+          _PPStreamAddOperation(sourceTextThenStream,&operationWord0,0,0);
+          operationWord4 = uVar23 << 0x15 | 0x10d8000;
+          operationWord6 = uVar23 << 0xf |
                      uVar23 << 0x11 | uVar23 << 0x13 | uVar23 << 0x15 | uVar23 << 0x17;
-          local_d0 = 0x4c880000;
-          local_c8 = 0x3e000;
-          local_c4 = local_8c & 0xffff;
-          local_bc = (uint)(ushort)((*(unsigned short *)((unsigned char *)&(local_6c) + 2)) - 3);
-          local_b4 = local_10c & 0xffff;
-          local_cc = uVar23;
-          local_b0 = uVar23;
-          local_ac = uVar23;
-          local_a8 = uVar23;
-          local_a4 = uVar23;
-          local_a0 = uVar23;
-          local_9c = uVar23;
-          _PPStreamAddOperation(iVar22,&local_d0,0,0);
-          local_c0 = uVar23 << 0x15 | 0x10d8000;
-          local_b0 = uVar23 << 0x15 | 0x8d8000;
-          local_b8 = uVar23 << 0x17 | 0x2a8000;
-          local_c8 = 0x3e000;
-          local_d0 = 0x68fc0000;
-          local_bc = (uint)(ushort)((short)local_6c - 2);
-          local_b4 = local_10c & 0xffff;
-          local_c4 = local_8c & 0xffff;
-          local_ac = local_8c & 0xffff;
-          local_cc = uVar23;
-          local_a8 = uVar23;
-          local_a4 = uVar23;
-          local_a0 = uVar23;
-          local_9c = uVar23;
-          _PPStreamAddOperation(iVar22,&local_d0,0,0);
-          local_b8 = uVar23 << 0x17 | 0x550000;
-          local_c0 = uVar23 << 0x15 | 0x10d8000;
-          local_b0 = uVar23 << 0x15 | 0x8d8000;
-          local_d0 = 0x6cfc0000;
-          local_c8 = 0x3e000;
-          local_bc = (uint)(ushort)((short)local_6c - 1);
-          local_c4 = local_8c & 0xffff;
-          local_ac = local_8c & 0xffff;
-          local_b4 = local_10c & 0xffff;
-          local_cc = uVar23;
-          local_a8 = uVar23;
-          local_a4 = uVar23;
-          local_a0 = uVar23;
-          local_9c = uVar23;
-          _PPStreamAddOperation(iVar22,&local_d0,0,0);
-          local_c0 = uVar23 << 0x15 | 0x10d8000;
-          local_b8 = uVar23 << 0x17 | 0x7f8000;
-          local_b0 = uVar23 << 0x15 | 0x8d8000;
-          local_d0 = 0x6cfc0000;
-          local_c8 = 0x7e000;
-          local_ac = local_8c & 0xffff;
-          local_9c = uVar23;
+          operationWord0 = 0x4c880000;
+          operationWord2 = 0x3e000;
+          operationWord3 = tempUsageWord1 & 0xffff;
+          operationWord5 = (uint)(ushort)((*(unsigned short *)((unsigned char *)&(paramBinding2Word1) + 2)) - 3);
+          operationWord7 = limitsWord1ThenAttribBindingWord1 & 0xffff;
+          operationWord1 = uVar23;
+          operationWord8 = uVar23;
+          operationWord9 = uVar23;
+          operationWord10 = uVar23;
+          operationWord11 = uVar23;
+          operationWord12 = uVar23;
+          operationWord13 = uVar23;
+          _PPStreamAddOperation(sourceTextThenStream,&operationWord0,0,0);
+          operationWord4 = uVar23 << 0x15 | 0x10d8000;
+          operationWord8 = uVar23 << 0x15 | 0x8d8000;
+          operationWord6 = uVar23 << 0x17 | 0x2a8000;
+          operationWord2 = 0x3e000;
+          operationWord0 = 0x68fc0000;
+          operationWord5 = (uint)(ushort)((short)paramBinding2Word1 - 2);
+          operationWord7 = limitsWord1ThenAttribBindingWord1 & 0xffff;
+          operationWord3 = tempUsageWord1 & 0xffff;
+          operationWord9 = tempUsageWord1 & 0xffff;
+          operationWord1 = uVar23;
+          operationWord10 = uVar23;
+          operationWord11 = uVar23;
+          operationWord12 = uVar23;
+          operationWord13 = uVar23;
+          _PPStreamAddOperation(sourceTextThenStream,&operationWord0,0,0);
+          operationWord6 = uVar23 << 0x17 | 0x550000;
+          operationWord4 = uVar23 << 0x15 | 0x10d8000;
+          operationWord8 = uVar23 << 0x15 | 0x8d8000;
+          operationWord0 = 0x6cfc0000;
+          operationWord2 = 0x3e000;
+          operationWord5 = (uint)(ushort)((short)paramBinding2Word1 - 1);
+          operationWord3 = tempUsageWord1 & 0xffff;
+          operationWord9 = tempUsageWord1 & 0xffff;
+          operationWord7 = limitsWord1ThenAttribBindingWord1 & 0xffff;
+          operationWord1 = uVar23;
+          operationWord10 = uVar23;
+          operationWord11 = uVar23;
+          operationWord12 = uVar23;
+          operationWord13 = uVar23;
+          _PPStreamAddOperation(sourceTextThenStream,&operationWord0,0,0);
+          operationWord4 = uVar23 << 0x15 | 0x10d8000;
+          operationWord6 = uVar23 << 0x17 | 0x7f8000;
+          operationWord8 = uVar23 << 0x15 | 0x8d8000;
+          operationWord0 = 0x6cfc0000;
+          operationWord2 = 0x7e000;
+          operationWord9 = tempUsageWord1 & 0xffff;
+          operationWord13 = uVar23;
         }
         else {
-          local_d0 = 0x40a40000;
-          local_c8 = 0x62000;
-          local_c0 = 0x10d8000;
-          local_b8 = 0xd8000;
-          local_c4 = local_fc & 0xffff;
-          local_bc = (uint)(ushort)((short)local_ec - 3);
-          local_cc = 0;
-          local_b4 = local_10c & 0xffff;
-          local_b0 = 0;
-          local_ac = 0;
-          local_a8 = 0;
-          local_a4 = 0;
-          local_a0 = 0;
-          local_9c = 0;
-          _PPStreamAddOperation(iVar22,&local_d0,0,0);
-          local_d0 = 0x48a40000;
-          local_c8 = 0x64000;
-          local_c0 = 0x10d8000;
-          local_b8 = 0xd8000;
-          local_c4 = local_fc & 0xffff;
-          local_bc = (uint)(ushort)((short)local_ec - 2);
-          local_cc = 0;
-          local_b4 = local_10c & 0xffff;
-          local_b0 = 0;
-          local_ac = 0;
-          local_a8 = 0;
-          local_a4 = 0;
-          local_a0 = 0;
-          local_9c = 0;
-          _PPStreamAddOperation(iVar22,&local_d0,0,0);
-          local_d0 = 0x48a40000;
-          local_c8 = 0x68000;
-          local_c0 = 0x10d8000;
-          local_b8 = 0xd8000;
-          local_c4 = local_fc & 0xffff;
-          local_bc = (uint)(ushort)((short)local_ec - 1);
-          local_cc = 0;
-          local_b4 = local_10c & 0xffff;
-          local_b0 = 0;
-          local_ac = 0;
-          local_a8 = 0;
-          local_a4 = 0;
-          local_a0 = 0;
-          local_9c = 0;
-          _PPStreamAddOperation(iVar22,&local_d0,0,0);
-          local_d0 = 0x48a40000;
-          local_c8 = 0x70000;
-          local_c0 = 0x10d8000;
-          local_b8 = 0xd8000;
-          local_c4 = local_fc & 0xffff;
-          local_bc = local_ec & 0xffff;
-          local_cc = 0;
-          local_b4 = local_10c & 0xffff;
-          local_b0 = 0;
-          local_ac = 0;
-          local_a8 = 0;
-          local_a4 = 0;
-          local_a0 = 0;
-          local_9c = 0;
-          _PPStreamAddOperation(iVar22,&local_d0,0,0);
-          local_d0 = 0x48a40000;
-          local_c8 = 0x62000;
-          local_c0 = 0x10d8000;
-          local_b8 = 0xd8000;
-          local_c4 = local_7c & 0xffff;
-          local_bc = (uint)(ushort)((short)local_6c - 3);
-          local_cc = 0;
-          local_b4 = local_10c & 0xffff;
-          local_b0 = 0;
-          local_ac = 0;
-          local_a8 = 0;
-          local_a4 = 0;
-          local_a0 = 0;
-          local_9c = 0;
-          _PPStreamAddOperation(iVar22,&local_d0,0,0);
-          local_d0 = 0x48a40000;
-          local_c8 = 0x64000;
-          local_c0 = 0x10d8000;
-          local_b8 = 0xd8000;
-          local_c4 = local_7c & 0xffff;
-          local_bc = (uint)(ushort)((short)local_6c - 2);
-          local_cc = 0;
-          local_b4 = local_10c & 0xffff;
-          local_b0 = 0;
-          local_ac = 0;
-          local_a8 = 0;
-          local_a4 = 0;
-          local_a0 = 0;
-          local_9c = 0;
-          _PPStreamAddOperation(iVar22,&local_d0,0,0);
-          local_d0 = 0x48a40000;
-          local_c8 = 0x68000;
-          local_c0 = 0x10d8000;
-          local_b8 = 0xd8000;
-          local_bc = (uint)(ushort)((short)local_6c - 1);
-          local_c4 = local_7c & 0xffff;
-          local_b4 = local_10c & 0xffff;
-          local_cc = 0;
-          local_b0 = 0;
-          local_ac = 0;
-          local_a8 = 0;
-          local_a4 = 0;
-          local_a0 = 0;
-          local_9c = 0;
-          _PPStreamAddOperation(iVar22,&local_d0,0,0);
-          local_9c = 0;
-          local_d0 = 0x48a40000;
-          local_c8 = 0x70000;
-          local_c0 = 0x10d8000;
-          local_b8 = 0xd8000;
-          local_b0 = 0;
-          local_ac = 0;
+          operationWord0 = 0x40a40000;
+          operationWord2 = 0x62000;
+          operationWord4 = 0x10d8000;
+          operationWord6 = 0xd8000;
+          operationWord3 = limitsWord5ThenOutputBindingWord1 & 0xffff;
+          operationWord5 = (uint)(ushort)((short)limitsWord9ThenParamBindingWord1 - 3);
+          operationWord1 = 0;
+          operationWord7 = limitsWord1ThenAttribBindingWord1 & 0xffff;
+          operationWord8 = 0;
+          operationWord9 = 0;
+          operationWord10 = 0;
+          operationWord11 = 0;
+          operationWord12 = 0;
+          operationWord13 = 0;
+          _PPStreamAddOperation(sourceTextThenStream,&operationWord0,0,0);
+          operationWord0 = 0x48a40000;
+          operationWord2 = 0x64000;
+          operationWord4 = 0x10d8000;
+          operationWord6 = 0xd8000;
+          operationWord3 = limitsWord5ThenOutputBindingWord1 & 0xffff;
+          operationWord5 = (uint)(ushort)((short)limitsWord9ThenParamBindingWord1 - 2);
+          operationWord1 = 0;
+          operationWord7 = limitsWord1ThenAttribBindingWord1 & 0xffff;
+          operationWord8 = 0;
+          operationWord9 = 0;
+          operationWord10 = 0;
+          operationWord11 = 0;
+          operationWord12 = 0;
+          operationWord13 = 0;
+          _PPStreamAddOperation(sourceTextThenStream,&operationWord0,0,0);
+          operationWord0 = 0x48a40000;
+          operationWord2 = 0x68000;
+          operationWord4 = 0x10d8000;
+          operationWord6 = 0xd8000;
+          operationWord3 = limitsWord5ThenOutputBindingWord1 & 0xffff;
+          operationWord5 = (uint)(ushort)((short)limitsWord9ThenParamBindingWord1 - 1);
+          operationWord1 = 0;
+          operationWord7 = limitsWord1ThenAttribBindingWord1 & 0xffff;
+          operationWord8 = 0;
+          operationWord9 = 0;
+          operationWord10 = 0;
+          operationWord11 = 0;
+          operationWord12 = 0;
+          operationWord13 = 0;
+          _PPStreamAddOperation(sourceTextThenStream,&operationWord0,0,0);
+          operationWord0 = 0x48a40000;
+          operationWord2 = 0x70000;
+          operationWord4 = 0x10d8000;
+          operationWord6 = 0xd8000;
+          operationWord3 = limitsWord5ThenOutputBindingWord1 & 0xffff;
+          operationWord5 = limitsWord9ThenParamBindingWord1 & 0xffff;
+          operationWord1 = 0;
+          operationWord7 = limitsWord1ThenAttribBindingWord1 & 0xffff;
+          operationWord8 = 0;
+          operationWord9 = 0;
+          operationWord10 = 0;
+          operationWord11 = 0;
+          operationWord12 = 0;
+          operationWord13 = 0;
+          _PPStreamAddOperation(sourceTextThenStream,&operationWord0,0,0);
+          operationWord0 = 0x48a40000;
+          operationWord2 = 0x62000;
+          operationWord4 = 0x10d8000;
+          operationWord6 = 0xd8000;
+          operationWord3 = outputBinding2Word1 & 0xffff;
+          operationWord5 = (uint)(ushort)((short)paramBinding2Word1 - 3);
+          operationWord1 = 0;
+          operationWord7 = limitsWord1ThenAttribBindingWord1 & 0xffff;
+          operationWord8 = 0;
+          operationWord9 = 0;
+          operationWord10 = 0;
+          operationWord11 = 0;
+          operationWord12 = 0;
+          operationWord13 = 0;
+          _PPStreamAddOperation(sourceTextThenStream,&operationWord0,0,0);
+          operationWord0 = 0x48a40000;
+          operationWord2 = 0x64000;
+          operationWord4 = 0x10d8000;
+          operationWord6 = 0xd8000;
+          operationWord3 = outputBinding2Word1 & 0xffff;
+          operationWord5 = (uint)(ushort)((short)paramBinding2Word1 - 2);
+          operationWord1 = 0;
+          operationWord7 = limitsWord1ThenAttribBindingWord1 & 0xffff;
+          operationWord8 = 0;
+          operationWord9 = 0;
+          operationWord10 = 0;
+          operationWord11 = 0;
+          operationWord12 = 0;
+          operationWord13 = 0;
+          _PPStreamAddOperation(sourceTextThenStream,&operationWord0,0,0);
+          operationWord0 = 0x48a40000;
+          operationWord2 = 0x68000;
+          operationWord4 = 0x10d8000;
+          operationWord6 = 0xd8000;
+          operationWord5 = (uint)(ushort)((short)paramBinding2Word1 - 1);
+          operationWord3 = outputBinding2Word1 & 0xffff;
+          operationWord7 = limitsWord1ThenAttribBindingWord1 & 0xffff;
+          operationWord1 = 0;
+          operationWord8 = 0;
+          operationWord9 = 0;
+          operationWord10 = 0;
+          operationWord11 = 0;
+          operationWord12 = 0;
+          operationWord13 = 0;
+          _PPStreamAddOperation(sourceTextThenStream,&operationWord0,0,0);
+          operationWord13 = 0;
+          operationWord0 = 0x48a40000;
+          operationWord2 = 0x70000;
+          operationWord4 = 0x10d8000;
+          operationWord6 = 0xd8000;
+          operationWord8 = 0;
+          operationWord9 = 0;
         }
-        local_b4 = local_10c & 0xffff;
-        local_bc = local_6c & 0xffff;
-        local_c4 = local_7c & 0xffff;
-        local_cc = local_9c;
-        local_a8 = local_9c;
-        local_a4 = local_9c;
-        local_a0 = local_9c;
-        _PPStreamAddOperation(iVar22,&local_d0,0,0);
+        operationWord7 = limitsWord1ThenAttribBindingWord1 & 0xffff;
+        operationWord5 = paramBinding2Word1 & 0xffff;
+        operationWord3 = outputBinding2Word1 & 0xffff;
+        operationWord1 = operationWord13;
+        operationWord10 = operationWord13;
+        operationWord11 = operationWord13;
+        operationWord12 = operationWord13;
+        _PPStreamAddOperation(sourceTextThenStream,&operationWord0,0,0);
       }
-      if (param_3 == 0) {
+      if (programKind == 0) {
         iVar5 = _PPEmulatorProgramCreate();
-        ((void (*)())_PPEmulatorProgramSetupHandlesFromPPStream)(iVar5,glContext,iVar22);
-        _PPEmulatorProgramConvertFromPPStream(iVar5,iVar22);
-        if (param_2[0x135] != 0) {
-          _PPEmulatorProgramFree(param_2[0x135]);
+        ((void (*)())_PPEmulatorProgramSetupHandlesFromPPStream)(iVar5,glContext,sourceTextThenStream);
+        _PPEmulatorProgramConvertFromPPStream(iVar5,sourceTextThenStream);
+        if (programRecord[0x135] != 0) {
+          _PPEmulatorProgramFree(programRecord[0x135]);
         }
-        param_2[0x135] = iVar5;
+        programRecord[0x135] = iVar5;
       }
       **(undefined1 **)(glContext + 0x5418) = 0;
       *(undefined4 *)(glContext + 0x541c) = 0xffffffff;
     }
     else {
 LAB_00022f84:
-      _PPParserBuildErrorString(iVar17,iVar5,0);
+      _PPParserBuildErrorString(oldStreamThenParser,iVar5,0);
     }
-    if (bVar2) goto LAB_000240b0;
+    if (pruneSucceeded) goto LAB_000240b0;
   }
   if (*(int *)(glContext + 0x7574) == 0) {
     *(undefined4 *)(glContext + 0x7574) = 0x502;
   }
-  _strncpy(*(char **)(glContext + 0x5418),(char *)(iVar17 + 0x3c),0x600);
+  _strncpy(*(char **)(glContext + 0x5418),(char *)(oldStreamThenParser + 0x3c),0x600);
   *(undefined4 *)(glContext + 0x541c) = 0;
-  _PPParserAttachStream(iVar17,0);
+  _PPParserAttachStream(oldStreamThenParser,0);
 LAB_000240b0:
-  _PPParserFree(iVar17);
+  _PPParserFree(oldStreamThenParser);
   return;
 }
 
@@ -4559,71 +4559,71 @@ LAB_00025998:
 }
 
 /* _glePPUpdateProgram @ 0x25abc (1144 bytes) */
-void _glePPUpdateProgram(glContext, param_2)
+void _glePPUpdateProgram(glContext, programRecord)
   undefined4 glContext;
-  int param_2;
+  int programRecord;
 {
   uint uVar1;
-  int iVar2;
-  int iVar3;
-  undefined4 uVar4;
-  int iVar5;
+  int compiledStream;
+  int descriptorTableWordOffset;
+  undefined4 fillValue;
+  int descriptorCount;
   uint uVar6;
-  int iVar7;
+  int usedBitsWord;
   uint loopIndex;
-  undefined1 uVar9;
+  undefined1 descriptorIndexByte;
   uint uVar10;
   
-  uVar4 = 0x100;
-  if (*(short *)(param_2 + 0x4ba) != 0) {
-    uVar4 = 0x80;
+  fillValue = 0x100;
+  if (*(short *)(programRecord + 0x4ba) != 0) {
+    fillValue = 0x80;
   }
-  _memset(param_2 + 0x48,uVar4,0x450);
-  *(undefined4 *)(param_2 + 0x10) = 0;
-  if ((*(short *)(param_2 + 0x4b8) == -0x7e00) || (iVar2 = *(int *)(param_2 + 0x4bc), iVar2 == 0)) {
+  _memset(programRecord + 0x48,fillValue,0x450);
+  *(undefined4 *)(programRecord + 0x10) = 0;
+  if ((*(short *)(programRecord + 0x4b8) == -0x7e00) || (compiledStream = *(int *)(programRecord + 0x4bc), compiledStream == 0)) {
     return;
   }
-  iVar3 = *(int *)(iVar2 + 0x2c);
-  iVar5 = *(int *)(iVar2 + 0x28);
+  descriptorTableWordOffset = *(int *)(compiledStream + 0x2c);
+  descriptorCount = *(int *)(compiledStream + 0x28);
   loopIndex = 0;
-  if (iVar5 < 1) {
+  if (descriptorCount < 1) {
     return;
   }
   do {
-    uVar6 = *(uint *)(loopIndex * 8 + iVar2 + iVar3 * 8);
-    uVar9 = (undefined1)loopIndex;
+    uVar6 = *(uint *)(loopIndex * 8 + compiledStream + descriptorTableWordOffset * 8);
+    descriptorIndexByte = (undefined1)loopIndex;
     switch(uVar6 >> 0x10 & 0x1f) {
     default:
       goto switchD_00025bb0_caseD_0;
     case 1:
-      *(undefined1 *)((uVar6 & 0xffff) + param_2 + 0x48) = uVar9;
+      *(undefined1 *)((uVar6 & 0xffff) + programRecord + 0x48) = descriptorIndexByte;
       break;
     case 2:
-      *(undefined1 *)((uVar6 & 0xffff) + param_2 + 0x148) = uVar9;
+      *(undefined1 *)((uVar6 & 0xffff) + programRecord + 0x148) = descriptorIndexByte;
       break;
     case 3:
       uVar10 = uVar6 & 0xff;
       switch(uVar6 >> 8 & 0xf) {
       case 0:
-        *(undefined1 *)(uVar10 * 7 + param_2 + 0x248) = uVar9;
+        *(undefined1 *)(uVar10 * 7 + programRecord + 0x248) = descriptorIndexByte;
         break;
       case 1:
-        *(undefined1 *)(uVar10 * 7 + param_2 + 0x249) = uVar9;
+        *(undefined1 *)(uVar10 * 7 + programRecord + 0x249) = descriptorIndexByte;
         break;
       case 2:
-        *(undefined1 *)(uVar10 * 7 + param_2 + 0x24a) = uVar9;
+        *(undefined1 *)(uVar10 * 7 + programRecord + 0x24a) = descriptorIndexByte;
         break;
       case 3:
-        *(undefined1 *)(uVar10 * 7 + param_2 + 0x24b) = uVar9;
+        *(undefined1 *)(uVar10 * 7 + programRecord + 0x24b) = descriptorIndexByte;
         break;
       case 4:
-        *(undefined1 *)(uVar10 * 7 + param_2 + 0x24c) = uVar9;
+        *(undefined1 *)(uVar10 * 7 + programRecord + 0x24c) = descriptorIndexByte;
         break;
       case 5:
-        *(undefined1 *)(uVar10 * 7 + param_2 + 0x24d) = uVar9;
+        *(undefined1 *)(uVar10 * 7 + programRecord + 0x24d) = descriptorIndexByte;
         break;
       case 6:
-        *(undefined1 *)(uVar10 * 7 + param_2 + 0x24e) = uVar9;
+        *(undefined1 *)(uVar10 * 7 + programRecord + 0x24e) = descriptorIndexByte;
       }
       break;
     case 4:
@@ -4631,62 +4631,62 @@ void _glePPUpdateProgram(glContext, param_2)
       uVar10 = uVar6 & 0xff;
       uVar6 = uVar6 >> 8 & 1;
       if (uVar1 == 1) {
-        *(undefined1 *)(uVar10 * 6 + uVar6 * 3 + param_2 + 0x281) = uVar9;
+        *(undefined1 *)(uVar10 * 6 + uVar6 * 3 + programRecord + 0x281) = descriptorIndexByte;
       }
       else if (uVar1 < 2) {
         if (uVar1 == 0) {
-          *(undefined1 *)(uVar10 * 6 + uVar6 * 3 + param_2 + 0x280) = uVar9;
+          *(undefined1 *)(uVar10 * 6 + uVar6 * 3 + programRecord + 0x280) = descriptorIndexByte;
         }
       }
       else if (uVar1 == 2) {
-        *(undefined1 *)(uVar10 * 6 + uVar6 * 3 + param_2 + 0x282) = uVar9;
+        *(undefined1 *)(uVar10 * 6 + uVar6 * 3 + programRecord + 0x282) = descriptorIndexByte;
       }
       break;
     case 5:
       uVar10 = uVar6 & 1;
       switch(uVar6 >> 1 & 7) {
       case 0:
-        *(undefined1 *)(uVar10 * 6 + param_2 + 0x2b0) = uVar9;
+        *(undefined1 *)(uVar10 * 6 + programRecord + 0x2b0) = descriptorIndexByte;
         break;
       case 1:
-        *(undefined1 *)(uVar10 * 6 + param_2 + 0x2b1) = uVar9;
+        *(undefined1 *)(uVar10 * 6 + programRecord + 0x2b1) = descriptorIndexByte;
         break;
       case 2:
-        *(undefined1 *)(uVar10 * 6 + param_2 + 0x2b2) = uVar9;
+        *(undefined1 *)(uVar10 * 6 + programRecord + 0x2b2) = descriptorIndexByte;
         break;
       case 3:
-        *(undefined1 *)(uVar10 * 6 + param_2 + 0x2b3) = uVar9;
+        *(undefined1 *)(uVar10 * 6 + programRecord + 0x2b3) = descriptorIndexByte;
         break;
       case 4:
-        *(undefined1 *)(uVar10 * 6 + param_2 + 0x2b4) = uVar9;
+        *(undefined1 *)(uVar10 * 6 + programRecord + 0x2b4) = descriptorIndexByte;
         break;
       case 5:
-        *(undefined1 *)(uVar10 * 6 + param_2 + 0x2b5) = uVar9;
+        *(undefined1 *)(uVar10 * 6 + programRecord + 0x2b5) = descriptorIndexByte;
       }
       break;
     case 6:
-      *(undefined1 *)(param_2 + 0x314) = uVar9;
+      *(undefined1 *)(programRecord + 0x314) = descriptorIndexByte;
       break;
     case 7:
-      *(undefined1 *)((uVar6 & 0x1f) * 4 + param_2 + (uVar6 >> 5 & 7) + 700) = uVar9;
+      *(undefined1 *)((uVar6 & 0x1f) * 4 + programRecord + (uVar6 >> 5 & 7) + 700) = descriptorIndexByte;
       break;
     case 8:
-      *(undefined1 *)((uVar6 & 0x1f) * 4 + param_2 + (uVar6 >> 5 & 7) + 0x2dc) = uVar9;
+      *(undefined1 *)((uVar6 & 0x1f) * 4 + programRecord + (uVar6 >> 5 & 7) + 0x2dc) = descriptorIndexByte;
       break;
     case 10:
-      *(undefined1 *)((uVar6 & 0xff) + param_2 + 0x30c) = uVar9;
+      *(undefined1 *)((uVar6 & 0xff) + programRecord + 0x30c) = descriptorIndexByte;
       break;
     case 0xb:
-      *(undefined1 *)(param_2 + 0x312) = uVar9;
+      *(undefined1 *)(programRecord + 0x312) = descriptorIndexByte;
       break;
     case 0xc:
-      *(undefined1 *)(param_2 + 0x313) = uVar9;
+      *(undefined1 *)(programRecord + 0x313) = descriptorIndexByte;
       break;
     case 0xd:
-      *(undefined1 *)(param_2 + 0x315) = uVar9;
+      *(undefined1 *)(programRecord + 0x315) = descriptorIndexByte;
       break;
     case 0xe:
-      *(undefined1 *)(param_2 + 0x316) = uVar9;
+      *(undefined1 *)(programRecord + 0x316) = descriptorIndexByte;
       break;
     case 0x10:
       uVar10 = uVar6 & 0xff;
@@ -4717,32 +4717,32 @@ LAB_00025eec:
         uVar1 = uVar6 >> 0xe & 3;
         uVar6 = uVar6 >> 0xc & 3;
         if (uVar1 == 1) {
-          *(undefined1 *)(uVar10 * 4 + param_2 + uVar6 + 0x3d8) = uVar9;
+          *(undefined1 *)(uVar10 * 4 + programRecord + uVar6 + 0x3d8) = descriptorIndexByte;
         }
         else if (uVar1 < 2) {
           if (uVar1 == 0) {
-            *(undefined1 *)(uVar10 * 4 + param_2 + uVar6 + 0x318) = uVar9;
+            *(undefined1 *)(uVar10 * 4 + programRecord + uVar6 + 0x318) = descriptorIndexByte;
           }
         }
         else {
           if (uVar1 == 2) {
-            uVar1 = *(uint *)(param_2 + 0x10) | 1 << (uVar10 & 0x3f);
-            *(undefined1 *)(uVar10 * 4 + param_2 + uVar6 + 0x378) = uVar9;
+            uVar1 = *(uint *)(programRecord + 0x10) | 1 << (uVar10 & 0x3f);
+            *(undefined1 *)(uVar10 * 4 + programRecord + uVar6 + 0x378) = descriptorIndexByte;
           }
           else {
             if (uVar1 != 3) break;
-            uVar1 = *(uint *)(param_2 + 0x10) | 1 << (uVar10 & 0x3f);
-            *(undefined1 *)(uVar10 * 4 + param_2 + uVar6 + 0x438) = uVar9;
+            uVar1 = *(uint *)(programRecord + 0x10) | 1 << (uVar10 & 0x3f);
+            *(undefined1 *)(uVar10 * 4 + programRecord + uVar6 + 0x438) = descriptorIndexByte;
           }
-          *(uint *)(param_2 + 0x10) = uVar1;
+          *(uint *)(programRecord + 0x10) = uVar1;
         }
       }
     }
-    iVar7 = ((int)loopIndex >> 5) * 4 + param_2;
-    *(uint *)(iVar7 + 0x18) = *(uint *)(iVar7 + 0x18) | 1 << (loopIndex & 0x1f);
+    usedBitsWord = ((int)loopIndex >> 5) * 4 + programRecord;
+    *(uint *)(usedBitsWord + 0x18) = *(uint *)(usedBitsWord + 0x18) | 1 << (loopIndex & 0x1f);
 switchD_00025bb0_caseD_0:
     loopIndex = loopIndex + 1;
-    if (iVar5 <= (int)loopIndex) {
+    if (descriptorCount <= (int)loopIndex) {
       return;
     }
   } while( true );

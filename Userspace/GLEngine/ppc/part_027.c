@@ -1511,46 +1511,46 @@ void _glGetCompressedTexImage_Exec(glContext, target, lod, img)
   uint lod;
   int img;
 {
-  byte bVar1;
+  byte levelFlags;
   undefined4 glErrorCode;
   undefined4 rowBytes;
-  uint uVar3;
-  int iVar4;
-  int iVar5;
-  undefined4 *puVar6;
-  undefined4 *puVar7;
-  undefined1 *puVar8;
-  int *piVar9;
-  int iVar10;
-  int iVar11;
-  undefined4 local_c0;
-  undefined4 local_bc;
-  undefined4 local_b8;
-  undefined4 local_b4;
-  int local_b0;
-  undefined4 local_ac;
-  undefined4 local_a8;
-  undefined4 local_a4;
-  undefined4 local_a0;
-  uint local_9c;
+  uint faceIndexThenHeight;
+  int levelRecord;
+  int textureObject;
+  undefined4 *dstConvertDescPtrA;
+  undefined4 *dstConvertDescPtrB;
+  undefined1 *forwardedArg7;
+  int *forwardedArg8;
+  int packSettings;
+  int pixelPackBuffer;
+  undefined4 srcImagePtr;
+  undefined4 srcRowBytes;
+  undefined4 srcConvertDescA;
+  undefined4 srcConvertDescB;
+  int dstImagePtr;
+  undefined4 dstRowBytes;
+  undefined4 dstConvertDescA;
+  undefined4 dstConvertDescB;
+  undefined4 unitCount;
+  uint packSwapBytes;
   undefined4 local_98;
-  uint local_94;
-  uint local_90;
-  undefined1 local_54;
-  undefined4 local_50;
-  undefined1 auStack_4c [4];
-  int local_48;
-  undefined1 auStack_44 [4];
-  undefined1 auStack_40 [4];
-  int local_3c;
-  undefined4 local_38;
-  undefined4 local_34;
-  undefined4 local_30;
-  undefined4 local_2c [4];
+  uint imageWidth;
+  uint imageHeight;
+  undefined1 processReserved;
+  undefined4 packedRowBytes;
+  undefined1 rowPadding [4];
+  int imageBytes;
+  undefined1 imagePadding [4];
+  undefined1 packPixelBytes [4];
+  int packOffset;
+  undefined4 srcConvertDescAOut;
+  undefined4 srcConvertDescBOut;
+  undefined4 dstConvertDescAOut;
+  undefined4 dstConvertDescBOut [4];
   
-  iVar5 = _gleLookUpNonProxyTexture(glContext,target);
+  textureObject = _gleLookUpNonProxyTexture(glContext,target);
   if (*(short *)(glContext + 0x4a10) < 0) {
-    if (iVar5 == 0) {
+    if (textureObject == 0) {
       if (*(int *)(glContext + 0x7574) != 0) {
         return;
       }
@@ -1564,68 +1564,68 @@ void _glGetCompressedTexImage_Exec(glContext, target, lod, img)
       glErrorCode = 0x501;
       goto LAB_00092efc;
     }
-    uVar3 = target - 0x8515;
-    if (5 < uVar3) {
-      uVar3 = 0;
+    faceIndexThenHeight = target - 0x8515;
+    if (5 < faceIndexThenHeight) {
+      faceIndexThenHeight = 0;
     }
-    iVar4 = iVar5 + uVar3 * 0x168 + lod * 0x18;
-    bVar1 = *(byte *)(iVar4 + 0xcf);
-    if ((bVar1 & 0x20) == 0) {
+    levelRecord = textureObject + faceIndexThenHeight * 0x168 + lod * 0x18;
+    levelFlags = *(byte *)(levelRecord + 0xcf);
+    if ((levelFlags & 0x20) == 0) {
       return;
     }
-    if ((((int)lod < (int)(uint)*(byte *)(iVar5 + 0x8d)) ||
-        ((int)(uint)*(byte *)(iVar5 + 0x8f) < (int)lod)) || ((bVar1 & 0x40) == 0)) {
-      if ((bVar1 & 0x10) == 0) {
+    if ((((int)lod < (int)(uint)*(byte *)(textureObject + 0x8d)) ||
+        ((int)(uint)*(byte *)(textureObject + 0x8f) < (int)lod)) || ((levelFlags & 0x40) == 0)) {
+      if ((levelFlags & 0x10) == 0) {
         return;
       }
     }
     else {
       _gleUploadPluginTextureLevel
-                (glContext,iVar5,iVar4 + 0xc4,uVar3,lod,(uint)*(byte *)(glContext + 0x85a8));
+                (glContext,textureObject,levelRecord + 0xc4,faceIndexThenHeight,lod,(uint)*(byte *)(glContext + 0x85a8));
     }
-    uVar3 = (uint)*(ushort *)(iVar4 + 0xca);
-    iVar10 = glContext + 0x31b0;
-    puVar8 = auStack_40;
-    piVar9 = &local_3c;
+    faceIndexThenHeight = (uint)*(ushort *)(levelRecord + 0xca);
+    packSettings = glContext + 0x31b0;
+    forwardedArg7 = packPixelBytes;
+    forwardedArg8 = &packOffset;
     _glePixelPackSettings
-              (glContext,(uint)*(ushort *)(iVar5 + 0x78),0,(uint)*(ushort *)(iVar4 + 200),uVar3,iVar10
-               ,puVar8,piVar9,&local_50,auStack_4c,&local_48,auStack_44);
-    iVar11 = *(int *)(glContext + 0x4a68);
-    if (iVar11 == 0) {
+              (glContext,(uint)*(ushort *)(textureObject + 0x78),0,(uint)*(ushort *)(levelRecord + 200),faceIndexThenHeight,packSettings
+               ,forwardedArg7,forwardedArg8,&packedRowBytes,rowPadding,&imageBytes,imagePadding);
+    pixelPackBuffer = *(int *)(glContext + 0x4a68);
+    if (pixelPackBuffer == 0) {
 LAB_00092f24:
-      if ((((*(byte *)(iVar4 + 0xcf) & 1) != 0) && (img + local_3c == *(int *)(iVar4 + 0xd8)))
-         && (*(short *)(iVar4 + 0xd6) == 0)) {
+      if ((((*(byte *)(levelRecord + 0xcf) & 1) != 0) && (img + packOffset == *(int *)(levelRecord + 0xd8)))
+         && (*(short *)(levelRecord + 0xd6) == 0)) {
         return;
       }
-      local_9c = (uint)(*(char *)(glContext + 0x31c8) != '\0');
-      rowBytes = _gleRowBytes((uint)*(ushort *)(iVar4 + 0xd4),(uint)*(ushort *)(iVar4 + 0xd6),
-                           (uint)*(ushort *)(iVar4 + 0xd0));
-      _glgConvertType((uint)*(ushort *)(iVar4 + 0xd4),(uint)*(ushort *)(iVar4 + 0xd6),&local_38,
-                      &local_34,uVar3,iVar10,puVar8,piVar9);
-      puVar6 = &local_30;
-      puVar7 = local_2c;
-      _glgConvertType((uint)*(ushort *)(iVar5 + 0x78),0,puVar6,puVar7,uVar3,iVar10,puVar8,piVar9);
-      local_b8 = local_38;
-      local_b4 = local_34;
-      local_ac = local_50;
-      local_a8 = local_30;
-      local_a4 = local_2c[0];
+      packSwapBytes = (uint)(*(char *)(glContext + 0x31c8) != '\0');
+      rowBytes = _gleRowBytes((uint)*(ushort *)(levelRecord + 0xd4),(uint)*(ushort *)(levelRecord + 0xd6),
+                           (uint)*(ushort *)(levelRecord + 0xd0));
+      _glgConvertType((uint)*(ushort *)(levelRecord + 0xd4),(uint)*(ushort *)(levelRecord + 0xd6),&srcConvertDescAOut,
+                      &srcConvertDescBOut,faceIndexThenHeight,packSettings,forwardedArg7,forwardedArg8);
+      dstConvertDescPtrA = &dstConvertDescAOut;
+      dstConvertDescPtrB = dstConvertDescBOut;
+      _glgConvertType((uint)*(ushort *)(textureObject + 0x78),0,dstConvertDescPtrA,dstConvertDescPtrB,faceIndexThenHeight,packSettings,forwardedArg7,forwardedArg8);
+      srcConvertDescA = srcConvertDescAOut;
+      srcConvertDescB = srcConvertDescBOut;
+      dstRowBytes = packedRowBytes;
+      dstConvertDescA = dstConvertDescAOut;
+      dstConvertDescB = dstConvertDescBOut[0];
       local_98 = 1;
-      local_a0 = 2;
-      local_94 = (uint)*(ushort *)(iVar4 + 200);
-      local_90 = (uint)*(ushort *)(iVar4 + 0xca);
-      local_b0 = img + local_3c;
-      local_c0 = *(undefined4 *)(iVar4 + 0xd8);
-      local_54 = 0;
-      local_bc = rowBytes;
-      _glgProcessPixels(glContext + 0x31a8,&local_c0,puVar6,puVar7,uVar3,iVar10,local_90,piVar9);
+      unitCount = 2;
+      imageWidth = (uint)*(ushort *)(levelRecord + 200);
+      imageHeight = (uint)*(ushort *)(levelRecord + 0xca);
+      dstImagePtr = img + packOffset;
+      srcImagePtr = *(undefined4 *)(levelRecord + 0xd8);
+      processReserved = 0;
+      srcRowBytes = rowBytes;
+      _glgProcessPixels(glContext + 0x31a8,&srcImagePtr,dstConvertDescPtrA,dstConvertDescPtrB,faceIndexThenHeight,packSettings,imageHeight,forwardedArg8);
       return;
     }
-    if (local_48 + img <= *(int *)(iVar11 + 0x38)) {
-      if (*(int *)(iVar11 + 0x40) != 0) {
-        _gleSynchronizePluginBuffer(glContext,iVar11 + 0x10);
+    if (imageBytes + img <= *(int *)(pixelPackBuffer + 0x38)) {
+      if (*(int *)(pixelPackBuffer + 0x40) != 0) {
+        _gleSynchronizePluginBuffer(glContext,pixelPackBuffer + 0x10);
       }
-      img = img + *(int *)(iVar11 + 0x30);
+      img = img + *(int *)(pixelPackBuffer + 0x30);
       goto LAB_00092f24;
     }
   }

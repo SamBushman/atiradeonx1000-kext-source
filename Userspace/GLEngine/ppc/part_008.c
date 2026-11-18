@@ -1214,29 +1214,29 @@ void _gleFeedbackQuadsFunc_body(glContext)
   uint *cursor;
   int loopIndex;
   char glContextByte4fe0;
-  ushort uVar2;
-  bool bVar3;
-  bool bVar4;
-  bool bVar5;
-  bool bVar6;
-  uint *puVar7;
-  undefined4 uVar8;
-  uint uVar9;
-  int iVar10;
-  code *pcVar11;
-  int iVar12;
-  uint *puVar13;
+  ushort facePolygonMode;
+  bool fixedFunctionPath;
+  bool facingChanged;
+  bool lightingActive;
+  bool twoSidedLighting;
+  uint *newPolygonList;
+  undefined4 bufferEnd;
+  uint clipFlagsThenResumeCursor;
+  int cullResultThenBackFacing;
+  code *lightingFunc;
+  int previousBackFacingThenVertexArrayEnd;
+  uint *spareList;
   uint *puVar14;
-  uint uVar15;
-  uint *puVar16;
-  uint uVar17;
-  uint uVar18;
-  uint uVar19;
+  uint vertexCountThenLastQuadStart;
+  uint *polygonList;
+  uint nextRunStart;
+  uint runStart;
+  uint vertexCursor;
   int iVar20;
   int remaining;
-  double dVar22;
-  double extraout_f1;
-  double extraout_f1_00;
+  double forwardedFloatArg1;
+  double f1AfterCall;
+  double f1AfterCall1;
   double incomingFpr2;
   double incomingFpr3;
   double incomingFpr4;
@@ -1247,180 +1247,180 @@ void _gleFeedbackQuadsFunc_body(glContext)
   double incomingStack_ffffff78;
   double incomingStack_ffffff80;
   double incomingStack_ffffff88;
-  int local_50;
-  int local_4c [4];
+  int backFacing;
+  int clipCount [4];
   
-  iVar12 = -1;
-  bVar3 = false;
+  previousBackFacingThenVertexArrayEnd = -1;
+  fixedFunctionPath = false;
   if ((*(char *)(glContext + 0x4664) != '\0') || (*(int *)(glContext + 0x5434) != 0)) {
-    bVar3 = true;
+    fixedFunctionPath = true;
   }
-  bVar3 = !bVar3;
-  bVar5 = false;
-  if ((bVar3) && (*(char *)(glContext + 0x30aa) != '\0')) {
-    bVar5 = true;
+  fixedFunctionPath = !fixedFunctionPath;
+  lightingActive = false;
+  if ((fixedFunctionPath) && (*(char *)(glContext + 0x30aa) != '\0')) {
+    lightingActive = true;
   }
-  bVar6 = false;
-  if (((bVar3) && (*(char *)(glContext + 0x30aa) != '\0')) && (*(char *)(glContext + 0x30ac) != '\0')) {
-    bVar6 = true;
+  twoSidedLighting = false;
+  if (((fixedFunctionPath) && (*(char *)(glContext + 0x30aa) != '\0')) && (*(char *)(glContext + 0x30ac) != '\0')) {
+    twoSidedLighting = true;
   }
   glContextByte4fe0 = *(char *)(glContext + 0x4fe0);
-  uVar19 = *(uint *)(glContext + 0x4854);
+  vertexCursor = *(uint *)(glContext + 0x4854);
   if (((int)*(short *)(glContext + 0x487c) != 0) &&
-     (uVar15 = (*(int *)(glContext + 0x4858) - uVar19) / (uint)(int)*(short *)(glContext + 0x487c),
-     3 < (int)uVar15)) {
-    if (bVar3) {
-      uVar9 = (**(code **)(glContext + 0x5060))(glContext,uVar19,uVar15);
+     (vertexCountThenLastQuadStart = (*(int *)(glContext + 0x4858) - vertexCursor) / (uint)(int)*(short *)(glContext + 0x487c),
+     3 < (int)vertexCountThenLastQuadStart)) {
+    if (fixedFunctionPath) {
+      clipFlagsThenResumeCursor = (**(code **)(glContext + 0x5060))(glContext,vertexCursor,vertexCountThenLastQuadStart);
     }
     else {
-      uVar9 = _gleVPEmulate(glContext,uVar15);
+      clipFlagsThenResumeCursor = _gleVPEmulate(glContext,vertexCountThenLastQuadStart);
     }
-    if ((uVar9 & 0xff00) == 0) {
-      if (bVar3) {
+    if ((clipFlagsThenResumeCursor & 0xff00) == 0) {
+      if (fixedFunctionPath) {
         if (*(char *)(glContext + 0x53e4) != '\0') {
-          (**(code **)(glContext + 0x53dc))(glContext,uVar19,uVar15);
+          (**(code **)(glContext + 0x53dc))(glContext,vertexCursor,vertexCountThenLastQuadStart);
         }
         if (*(char *)(glContext + 0x50b4) != '\0') {
-          (**(code **)(glContext + 0x5064))(glContext,uVar19,uVar15);
+          (**(code **)(glContext + 0x5064))(glContext,vertexCursor,vertexCountThenLastQuadStart);
         }
-        if ((bVar5) || (*(char *)(glContext + 0x53e6) != '\0')) {
-          (**(code **)(glContext + 0x5068))(glContext,uVar19,uVar15);
+        if ((lightingActive) || (*(char *)(glContext + 0x53e6) != '\0')) {
+          (**(code **)(glContext + 0x5068))(glContext,vertexCursor,vertexCountThenLastQuadStart);
         }
         if (*(char *)(glContext + 0x53e5) != '\0') {
-          (**(code **)(glContext + 0x53e0))(glContext,uVar19,uVar15);
+          (**(code **)(glContext + 0x53e0))(glContext,vertexCursor,vertexCountThenLastQuadStart);
         }
       }
       else {
-        uVar19 = *(uint *)(glContext + 0x4864);
+        vertexCursor = *(uint *)(glContext + 0x4864);
       }
-      if (((uVar9 & 0xff) == 0) && (*(char *)(glContext + 0x4e18) == '\0')) {
-        dVar22 = (double)(**(double ( **)(int,int,int,int))(glContext + 0x506c))(glContext, uVar19, uVar15, 0);
+      if (((clipFlagsThenResumeCursor & 0xff) == 0) && (*(char *)(glContext + 0x4e18) == '\0')) {
+        forwardedFloatArg1 = (double)(**(double ( **)(int,int,int,int))(glContext + 0x506c))(glContext, vertexCursor, vertexCountThenLastQuadStart, 0);
         if (glContextByte4fe0 == '\0') {
-          if (bVar5) {
-            (**(code **)(glContext + 0x4de8))(glContext,uVar19,uVar15);
+          if (lightingActive) {
+            (**(code **)(glContext + 0x4de8))(glContext,vertexCursor,vertexCountThenLastQuadStart);
           }
-          _gleFeedbackQuads(glContext,uVar19,uVar15,*(ushort *)(glContext + 0x34d0) - 0x1b00);
+          _gleFeedbackQuads(glContext,vertexCursor,vertexCountThenLastQuadStart,*(ushort *)(glContext + 0x34d0) - 0x1b00);
         }
         else {
-          uVar15 = (uVar19 + uVar15 * 0x100) - 0x400;
+          vertexCountThenLastQuadStart = (vertexCursor + vertexCountThenLastQuadStart * 0x100) - 0x400;
           do {
-            bVar4 = false;
+            facingChanged = false;
             loopIndex = 0;
-            uVar9 = uVar19;
-            uVar18 = uVar19;
-            if (uVar19 <= uVar15) {
+            clipFlagsThenResumeCursor = vertexCursor;
+            runStart = vertexCursor;
+            if (vertexCursor <= vertexCountThenLastQuadStart) {
               do {
-                iVar10 = ((undefined4 (*)())_gleCullQuad)(glContext,uVar19,uVar19 + 0x100,uVar19 + 0x200,uVar19 + 0x300,
-                                      &local_50,dVar22,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
+                cullResultThenBackFacing = ((undefined4 (*)())_gleCullQuad)(glContext,vertexCursor,vertexCursor + 0x100,vertexCursor + 0x200,vertexCursor + 0x300,
+                                      &backFacing,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
                                       incomingStack_ffffff78,incomingStack_ffffff80,incomingStack_ffffff88);
-                dVar22 = dVar22;
-                if (iVar10 == 0) {
-                  if (iVar12 != local_50) {
-                    bVar4 = true;
+                forwardedFloatArg1 = forwardedFloatArg1;
+                if (cullResultThenBackFacing == 0) {
+                  if (previousBackFacingThenVertexArrayEnd != backFacing) {
+                    facingChanged = true;
                   }
-                  if ((bVar4) && (uVar9 = uVar19, 0 < loopIndex)) break;
+                  if ((facingChanged) && (clipFlagsThenResumeCursor = vertexCursor, 0 < loopIndex)) break;
                   loopIndex = loopIndex + 4;
-                  iVar12 = local_50;
-                  uVar17 = uVar18;
+                  previousBackFacingThenVertexArrayEnd = backFacing;
+                  nextRunStart = runStart;
                 }
                 else {
-                  uVar17 = uVar19 + 0x400;
-                  uVar9 = uVar17;
+                  nextRunStart = vertexCursor + 0x400;
+                  clipFlagsThenResumeCursor = nextRunStart;
                   if (0 < loopIndex) break;
                 }
-                uVar19 = uVar19 + 0x400;
-                uVar9 = uVar19;
-                uVar18 = uVar17;
-              } while (uVar19 <= uVar15);
+                vertexCursor = vertexCursor + 0x400;
+                clipFlagsThenResumeCursor = vertexCursor;
+                runStart = nextRunStart;
+              } while (vertexCursor <= vertexCountThenLastQuadStart);
               if (3 < loopIndex) {
-                if (bVar6) {
-                  pcVar11 = *(code **)(iVar12 * 4 + glContext + 0x4de8);
+                if (twoSidedLighting) {
+                  lightingFunc = *(code **)(previousBackFacingThenVertexArrayEnd * 4 + glContext + 0x4de8);
 LAB_00050bc0:
-                  (*pcVar11)(glContext,uVar18,loopIndex);
+                  (*lightingFunc)(glContext,runStart,loopIndex);
                 }
-                else if (bVar5) {
-                  pcVar11 = *(code **)(glContext + 0x4de8);
+                else if (lightingActive) {
+                  lightingFunc = *(code **)(glContext + 0x4de8);
                   goto LAB_00050bc0;
                 }
-                if ((!bVar3) && (bVar5)) {
-                  _gleVPFlipColors(glContext,uVar18,loopIndex,iVar12);
+                if ((!fixedFunctionPath) && (lightingActive)) {
+                  _gleVPFlipColors(glContext,runStart,loopIndex,previousBackFacingThenVertexArrayEnd);
                 }
-                if (iVar12 == 0) {
-                  uVar2 = *(ushort *)(glContext + 0x34d0);
+                if (previousBackFacingThenVertexArrayEnd == 0) {
+                  facePolygonMode = *(ushort *)(glContext + 0x34d0);
                 }
                 else {
-                  uVar2 = *(ushort *)(glContext + 0x34d2);
+                  facePolygonMode = *(ushort *)(glContext + 0x34d2);
                 }
-                dVar22 = (double)_gleFeedbackQuads(glContext,uVar18,loopIndex,uVar2 - 0x1b00);
+                forwardedFloatArg1 = (double)_gleFeedbackQuads(glContext,runStart,loopIndex,facePolygonMode - 0x1b00);
               }
             }
-            uVar19 = uVar9;
-          } while (uVar9 <= uVar15);
+            vertexCursor = clipFlagsThenResumeCursor;
+          } while (clipFlagsThenResumeCursor <= vertexCountThenLastQuadStart);
         }
       }
       else {
-        dVar22 = (double)(**(double ( **)(int,int,int,int))(glContext + 0x5074))(glContext, uVar19, uVar15, 0);
-        iVar12 = uVar19 + uVar15 * 0x100;
-        puVar16 = *(uint **)(glContext + 0x4870);
-        puVar13 = *(uint **)(glContext + 0x4874);
-        for (; uVar19 <= iVar12 - 0x400U; uVar19 = uVar19 + 0x400) {
-          puVar16[1] = uVar19 + 0x100;
-          puVar16[2] = uVar19 + 0x200;
-          puVar16[3] = uVar19 + 0x300;
-          *puVar16 = uVar19;
-          if (bVar3) {
-            uVar8 = *(undefined4 *)(glContext + 0x485c);
+        forwardedFloatArg1 = (double)(**(double ( **)(int,int,int,int))(glContext + 0x5074))(glContext, vertexCursor, vertexCountThenLastQuadStart, 0);
+        previousBackFacingThenVertexArrayEnd = vertexCursor + vertexCountThenLastQuadStart * 0x100;
+        polygonList = *(uint **)(glContext + 0x4870);
+        spareList = *(uint **)(glContext + 0x4874);
+        for (; vertexCursor <= previousBackFacingThenVertexArrayEnd - 0x400U; vertexCursor = vertexCursor + 0x400) {
+          polygonList[1] = vertexCursor + 0x100;
+          polygonList[2] = vertexCursor + 0x200;
+          polygonList[3] = vertexCursor + 0x300;
+          *polygonList = vertexCursor;
+          if (fixedFunctionPath) {
+            bufferEnd = *(undefined4 *)(glContext + 0x485c);
           }
           else {
-            uVar8 = *(undefined4 *)(glContext + 0x4854);
+            bufferEnd = *(undefined4 *)(glContext + 0x4854);
           }
-          *(undefined4 *)(glContext + 0x4858) = uVar8;
-          puVar14 = puVar13;
+          *(undefined4 *)(glContext + 0x4858) = bufferEnd;
+          puVar14 = spareList;
           iVar20 = 4;
-          puVar7 = puVar16;
+          newPolygonList = polygonList;
           if ((*(char *)(glContext + 0x4e18) == '\0') ||
-             (dVar22 = (double)((double (*)())_gleClipPolyPlane)(glContext,puVar16,4,puVar13,local_4c,dVar22,incomingFpr2,
+             (forwardedFloatArg1 = (double)((double (*)())_gleClipPolyPlane)(glContext,polygonList,4,spareList,clipCount,forwardedFloatArg1,incomingFpr2,
                                                  incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
                                                  incomingStack_ffffff78,incomingStack_ffffff80),
-             puVar14 = puVar16, iVar20 = local_4c[0], puVar7 = puVar13, local_4c[0] != 0)) {
-            puVar16 = puVar7;
-            puVar13 = puVar14;
-            if ((uVar9 & 0xff) != 0) {
-              dVar22 = (double)((double (*)())_gleClipPoly)(glContext,puVar16,iVar20,uVar9 & 0xff,puVar14,local_4c,1);
-              if (local_4c[0] == 0) goto LAB_00050ddc;
-              if (0 < local_4c[0]) {
-                puVar13 = puVar16;
-                iVar20 = local_4c[0];
-                puVar16 = puVar14;
+             puVar14 = polygonList, iVar20 = clipCount[0], newPolygonList = spareList, clipCount[0] != 0)) {
+            polygonList = newPolygonList;
+            spareList = puVar14;
+            if ((clipFlagsThenResumeCursor & 0xff) != 0) {
+              forwardedFloatArg1 = (double)((double (*)())_gleClipPoly)(glContext,polygonList,iVar20,clipFlagsThenResumeCursor & 0xff,puVar14,clipCount,1);
+              if (clipCount[0] == 0) goto LAB_00050ddc;
+              if (0 < clipCount[0]) {
+                spareList = polygonList;
+                iVar20 = clipCount[0];
+                polygonList = puVar14;
               }
             }
             if ((glContextByte4fe0 == '\0') ||
-               (iVar10 = _gleCullPolygonPtrStack(glContext,puVar16,iVar20,&local_50),
-               dVar22 = extraout_f1_00, iVar10 == 0)) {
-              iVar10 = local_50;
-              if (bVar6) {
-                pcVar11 = *(code **)(local_50 * 4 + glContext + 0x4df0);
+               (cullResultThenBackFacing = _gleCullPolygonPtrStack(glContext,polygonList,iVar20,&backFacing),
+               forwardedFloatArg1 = f1AfterCall1, cullResultThenBackFacing == 0)) {
+              cullResultThenBackFacing = backFacing;
+              if (twoSidedLighting) {
+                lightingFunc = *(code **)(backFacing * 4 + glContext + 0x4df0);
 LAB_00050d70:
-                (*pcVar11)(glContext,puVar16,iVar20);
+                (*lightingFunc)(glContext,polygonList,iVar20);
               }
-              else if (bVar5) {
-                pcVar11 = *(code **)(glContext + 0x4df0);
+              else if (lightingActive) {
+                lightingFunc = *(code **)(glContext + 0x4df0);
                 goto LAB_00050d70;
               }
-              if (((!bVar3) && (bVar5)) && (cursor = puVar16, remaining = iVar20, 0 < iVar20)) {
+              if (((!fixedFunctionPath) && (lightingActive)) && (cursor = polygonList, remaining = iVar20, 0 < iVar20)) {
                 do {
-                  _gleVPFlipColors(glContext,*cursor,1,iVar10);
+                  _gleVPFlipColors(glContext,*cursor,1,cullResultThenBackFacing);
                   remaining = remaining + -1;
                   cursor = cursor + 1;
                 } while (remaining != 0);
               }
-              if (iVar10 == 0) {
-                uVar2 = *(ushort *)(glContext + 0x34d0);
+              if (cullResultThenBackFacing == 0) {
+                facePolygonMode = *(ushort *)(glContext + 0x34d0);
               }
               else {
-                uVar2 = *(ushort *)(glContext + 0x34d2);
+                facePolygonMode = *(ushort *)(glContext + 0x34d2);
               }
-              dVar22 = (double)((double (*)())_gleFeedbackPolygonPtr)(glContext,puVar16,iVar20,uVar2 - 0x1b00);
+              forwardedFloatArg1 = (double)((double (*)())_gleFeedbackPolygonPtr)(glContext,polygonList,iVar20,facePolygonMode - 0x1b00);
             }
           }
 LAB_00050ddc: ;
@@ -1446,75 +1446,75 @@ void _gleSetProjectionFuncAll(param_1, forwardedArg2, forwardedArg3)
 }
 
 /* _gleBuildProjectionTransformFuncAV @ 0x50e6c (1208 bytes) */
-int _gleBuildProjectionTransformFuncAV(param_1, param_2)
-  int param_1;
-  uint param_2;
+int _gleBuildProjectionTransformFuncAV(glContext, optionBits)
+  int glContext;
+  uint optionBits;
 {
-  uint uVar1;
-  uint uVar2;
-  int iVar3;
-  int iVar4;
+  uint maskedMatrixIdentifier;
+  uint matrixIdentifierThenClass;
+  int cacheElem;
+  int emittedWordCount;
   int chunkWordCountThenCodeCursor;
   int chunkWordCount;
   int chunkWordCountThenCodeCursor2;
   int chunkWordCount2;
-  undefined *puVar6;
+  undefined *pushInstructionsFunc;
   undefined *codeChunk;
   int chunkWordCountThenCodeCursor3;
   int chunkWordCount3;
-  undefined4 uVar8;
+  undefined4 branchInstruction;
   undefined4 *puVar9;
   undefined4 *puVar10;
   undefined4 *puVar11;
   undefined4 *puVar12;
-  int *piVar13;
+  int *cacheListHead;
   int *piVar14;
   undefined4 *puVar15;
   undefined4 *puVar16;
   
   piVar14 = (int *)PTR__gleTransformProjectionBlend_00110a10;
-  if (*(char *)(param_1 + 0x4661) == '\0') {
-    uVar2 = (**(code **)PTR__gleGenerateMatrixIdentifier_00112060)(param_1,param_1 + 0x27c0);
-    *(uint *)(param_1 + 0x5084) = uVar2;
-    if (((param_2 & 1) != 0) && ((uVar2 & 0x3030303) == 0x3030302)) {
-      param_2 = param_2 | 4;
+  if (*(char *)(glContext + 0x4661) == '\0') {
+    matrixIdentifierThenClass = (**(code **)PTR__gleGenerateMatrixIdentifier_00112060)(glContext,glContext + 0x27c0);
+    *(uint *)(glContext + 0x5084) = matrixIdentifierThenClass;
+    if (((optionBits & 1) != 0) && ((matrixIdentifierThenClass & 0x3030303) == 0x3030302)) {
+      optionBits = optionBits | 4;
     }
-    if ((uVar2 != 0xbfeffbfe) &&
-       (uVar1 = uVar2 & 0x3fcff3fc, uVar2 = 0x3fcff3fc, uVar1 != 0x3fcff3fc)) {
-      uVar2 = 0;
+    if ((matrixIdentifierThenClass != 0xbfeffbfe) &&
+       (maskedMatrixIdentifier = matrixIdentifierThenClass & 0x3fcff3fc, matrixIdentifierThenClass = 0x3fcff3fc, maskedMatrixIdentifier != 0x3fcff3fc)) {
+      matrixIdentifierThenClass = 0;
     }
-    if (*(undefined **)(param_1 + 0x5080) == ((unsigned char *)0x00001101)) {
-      param_2 = param_2 | 8;
+    if (*(undefined **)(glContext + 0x5080) == ((unsigned char *)0x00001101)) {
+      optionBits = optionBits | 8;
     }
-    piVar13 = *(int **)(param_1 + 0x5088);
-    piVar14 = piVar13;
+    cacheListHead = *(int **)(glContext + 0x5088);
+    piVar14 = cacheListHead;
     do {
-      if (uVar2 == piVar14[2] && param_2 == piVar14[3]) {
-        if (piVar14 != piVar13) {
-          _gleMoveFuncCacheElem(piVar13,piVar14);
-          *(int **)(param_1 + 0x5088) = piVar14;
+      if (matrixIdentifierThenClass == piVar14[2] && optionBits == piVar14[3]) {
+        if (piVar14 != cacheListHead) {
+          _gleMoveFuncCacheElem(cacheListHead,piVar14);
+          *(int **)(glContext + 0x5088) = piVar14;
         }
         return piVar14 + 8;
       }
       piVar14 = (int *)*piVar14;
-    } while (piVar14 != piVar13);
-    iVar3 = _gleCreateFuncCacheElem(piVar14,0xb8);
+    } while (piVar14 != cacheListHead);
+    cacheElem = _gleCreateFuncCacheElem(piVar14,0xb8);
     piVar14 = (int *)PTR__gleRTCNoop_00112058;
-    if (iVar3 != 0) {
-      *(uint *)(iVar3 + 8) = uVar2;
-      *(uint *)(iVar3 + 0xc) = param_2;
-      if (*(short *)(param_1 + 0x508e) == *(short *)(param_1 + 0x508c)) {
-        _gleDeleteFuncCacheElem(*(undefined4 *)(iVar3 + 4));
+    if (cacheElem != 0) {
+      *(uint *)(cacheElem + 8) = matrixIdentifierThenClass;
+      *(uint *)(cacheElem + 0xc) = optionBits;
+      if (*(short *)(glContext + 0x508e) == *(short *)(glContext + 0x508c)) {
+        _gleDeleteFuncCacheElem(*(undefined4 *)(cacheElem + 4));
       }
       else {
-        *(short *)(param_1 + 0x508e) = *(short *)(param_1 + 0x508e) + 1;
+        *(short *)(glContext + 0x508e) = *(short *)(glContext + 0x508e) + 1;
       }
-      chunkWordCountThenCodeCursor = _gleRTCAddAChunk_c5ddc(&_glePrologAVRTC_10f938,iVar3 + 0x20);
-      chunkWordCountThenCodeCursor = iVar3 + 0x20 + chunkWordCountThenCodeCursor * 4;
-      if (uVar2 != 0xbfeffbfe) {
+      chunkWordCountThenCodeCursor = _gleRTCAddAChunk_c5ddc(&_glePrologAVRTC_10f938,cacheElem + 0x20);
+      chunkWordCountThenCodeCursor = cacheElem + 0x20 + chunkWordCountThenCodeCursor * 4;
+      if (matrixIdentifierThenClass != 0xbfeffbfe) {
         chunkWordCount2 = _gleRTCAddAChunk_c5ddc(&_gleLoadMatrixPtrRTC_10f758,chunkWordCountThenCodeCursor);
         chunkWordCountThenCodeCursor = chunkWordCountThenCodeCursor + chunkWordCount2 * 4;
-        if ((param_2 & 2) == 0) {
+        if ((optionBits & 2) == 0) {
           codeChunk = &_gleLoadMatrixVectorsRTC_10f9d0;
         }
         else {
@@ -1525,23 +1525,23 @@ int _gleBuildProjectionTransformFuncAV(param_1, param_2)
       }
       chunkWordCount2 = _gleRTCAddAChunk_c5ddc(&_gleLoadModelOffsetRTC,chunkWordCountThenCodeCursor);
       chunkWordCountThenCodeCursor = chunkWordCountThenCodeCursor + chunkWordCount2 * 4;
-      if (uVar2 == 0) {
-        if ((param_2 & 1) == 0) {
-          if ((param_2 & 2) == 0) {
+      if (matrixIdentifierThenClass == 0) {
+        if ((optionBits & 1) == 0) {
+          if ((optionBits & 2) == 0) {
             codeChunk = &_gleFullMatrixMultRTC_10fa18;
           }
           else {
             codeChunk = &_gleFullMatrixMultZ0RTC_10fa64;
           }
         }
-        else if ((param_2 & 2) == 0) {
+        else if ((optionBits & 2) == 0) {
           codeChunk = &_gleFullMatrixMultW1RTC_10faa0;
         }
         else {
           codeChunk = &_gleFullMatrixMultZ0W1RTC_10fadc;
         }
       }
-      else if (uVar2 == 0x3fcff3fc) {
+      else if (matrixIdentifierThenClass == 0x3fcff3fc) {
         chunkWordCount2 = _gleRTCAddAChunk_c5ddc(&_gleDiagMatrixSetupRTC_10fb08,chunkWordCountThenCodeCursor);
         chunkWordCountThenCodeCursor = chunkWordCountThenCodeCursor + chunkWordCount2 * 4;
         codeChunk = &_gleDiagMatrixMultRTC_10fb20;
@@ -1551,8 +1551,8 @@ int _gleBuildProjectionTransformFuncAV(param_1, param_2)
       }
       chunkWordCountThenCodeCursor2 = _gleRTCAddAChunk_c5ddc(codeChunk,chunkWordCountThenCodeCursor);
       chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor + chunkWordCountThenCodeCursor2 * 4;
-      if ((param_2 & 8) == 0) {
-        if ((param_2 & 4) == 0) {
+      if ((optionBits & 8) == 0) {
+        if ((optionBits & 4) == 0) {
           chunkWordCount3 = _gleRTCAddAChunk_c5ddc(&_gleCalcClipCode0AVRTC,chunkWordCountThenCodeCursor2);
           chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor2 + chunkWordCount3 * 4;
           chunkWordCountThenCodeCursor3 = _gleRTCAddAChunk_c5ddc(&_gleCalcClipCode1AVRTC,chunkWordCountThenCodeCursor2);
@@ -1576,21 +1576,21 @@ int _gleBuildProjectionTransformFuncAV(param_1, param_2)
         puVar11 = (undefined4 *)(chunkWordCountThenCodeCursor3 + -4);
         chunkWordCountThenCodeCursor2 = _gleRTCAddAChunk_c5ddc(&_gleCalcClipCode3AVRTC,chunkWordCountThenCodeCursor3);
         chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor3 + chunkWordCountThenCodeCursor2 * 4;
-        uVar8 = _gleRTCBuildABranch_c5dd0(*puVar10,chunkWordCountThenCodeCursor - (int)puVar10 >> 2);
-        *puVar10 = uVar8;
-        uVar8 = _gleRTCBuildABranch_c5dd0(*puVar12,chunkWordCountThenCodeCursor - (int)puVar12 >> 2);
-        *puVar12 = uVar8;
-        uVar8 = _gleRTCBuildABranch_c5dd0(*puVar15,chunkWordCountThenCodeCursor - (int)puVar15 >> 2);
-        *puVar15 = uVar8;
-        uVar8 = _gleRTCBuildABranch_c5dd0(*puVar16,chunkWordCountThenCodeCursor2 - (int)puVar16 >> 2);
-        *puVar16 = uVar8;
-        uVar8 = _gleRTCBuildABranch_c5dd0(*puVar9,chunkWordCountThenCodeCursor2 - (int)puVar9 >> 2);
-        *puVar9 = uVar8;
-        uVar8 = _gleRTCBuildABranch_c5dd0(*puVar11,chunkWordCountThenCodeCursor2 - (int)puVar11 >> 2);
-        *puVar11 = uVar8;
+        branchInstruction = _gleRTCBuildABranch_c5dd0(*puVar10,chunkWordCountThenCodeCursor - (int)puVar10 >> 2);
+        *puVar10 = branchInstruction;
+        branchInstruction = _gleRTCBuildABranch_c5dd0(*puVar12,chunkWordCountThenCodeCursor - (int)puVar12 >> 2);
+        *puVar12 = branchInstruction;
+        branchInstruction = _gleRTCBuildABranch_c5dd0(*puVar15,chunkWordCountThenCodeCursor - (int)puVar15 >> 2);
+        *puVar15 = branchInstruction;
+        branchInstruction = _gleRTCBuildABranch_c5dd0(*puVar16,chunkWordCountThenCodeCursor2 - (int)puVar16 >> 2);
+        *puVar16 = branchInstruction;
+        branchInstruction = _gleRTCBuildABranch_c5dd0(*puVar9,chunkWordCountThenCodeCursor2 - (int)puVar9 >> 2);
+        *puVar9 = branchInstruction;
+        branchInstruction = _gleRTCBuildABranch_c5dd0(*puVar11,chunkWordCountThenCodeCursor2 - (int)puVar11 >> 2);
+        *puVar11 = branchInstruction;
       }
       else {
-        if ((param_2 & 4) == 0) {
+        if ((optionBits & 4) == 0) {
           codeChunk = &_gleNoClipCodeAVRTC;
         }
         else {
@@ -1600,23 +1600,23 @@ int _gleBuildProjectionTransformFuncAV(param_1, param_2)
         chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor2 + chunkWordCount3 * 4;
       }
       puVar16 = (undefined4 *)(chunkWordCountThenCodeCursor2 + -4);
-      uVar8 = _gleRTCBuildABranch_c5dd0(*puVar16,chunkWordCountThenCodeCursor - (int)puVar16 >> 2);
-      *puVar16 = uVar8;
+      branchInstruction = _gleRTCBuildABranch_c5dd0(*puVar16,chunkWordCountThenCodeCursor - (int)puVar16 >> 2);
+      *puVar16 = branchInstruction;
       chunkWordCount = _gleRTCAddAChunk_c5ddc(&_gleCombineClipSumsAVRTC,chunkWordCountThenCodeCursor2);
       chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor2 + chunkWordCount * 4;
       chunkWordCount = _gleRTCAddAChunk_c5ddc(&_gleEpilogAVRTC_10f9c4,chunkWordCountThenCodeCursor2);
       puVar16 = (undefined4 *)(chunkWordCountThenCodeCursor2 + chunkWordCount * 4);
       *puVar16 = 0x4e800020;
-      iVar4 = (int)puVar16 + (-0x1c - iVar3) >> 2;
-      if (0xb8 < iVar4) {
+      emittedWordCount = (int)puVar16 + (-0x1c - cacheElem) >> 2;
+      if (0xb8 < emittedWordCount) {
                     
         _exit(1);
       }
-      iVar3 = _gleShrinkFuncCacheElem(iVar3,iVar4);
-      puVar6 = PTR__glePushInstructions_00112054;
-      *(int *)(param_1 + 0x5088) = iVar3;
-      (**(code **)puVar6)(iVar4,(int *)(iVar3 + 0x20));
-      piVar14 = (int *)(iVar3 + 0x20);
+      cacheElem = _gleShrinkFuncCacheElem(cacheElem,emittedWordCount);
+      pushInstructionsFunc = PTR__glePushInstructions_00112054;
+      *(int *)(glContext + 0x5088) = cacheElem;
+      (**(code **)pushInstructionsFunc)(emittedWordCount,(int *)(cacheElem + 0x20));
+      piVar14 = (int *)(cacheElem + 0x20);
     }
   }
   return piVar14;
@@ -3997,133 +3997,135 @@ LAB_000547a4:
 }
 
 /* _gleSetRasterPos @ 0x54834 (1524 bytes) */
-void _gleSetRasterPos(int glContext,float fparam_1,float fparam_2,float fparam_3,float fparam_4)
+void _gleSetRasterPos(int glContext,float x,float y,float z,float w)
 {
   float floatZero;
   int loopIndex;
-  undefined4 *puVar1;
-  bool bVar2;
-  float fVar3;
+  undefined4 *texCoordSrc;
+  bool wLargeEnough;
+  float eyeY;
+  float inverseClipW;
   float glContextFloat2b4;
-  float fVar4;
+  float eyeX;
   float glContextFloat2b0;
-  float fVar5;
+  float eyeZ;
   float glContextFloat2b8;
-  float fVar6;
-  undefined4 uVar7;
-  undefined4 uVar8;
-  float fVar9;
-  float fVar10;
-  float fVar11;
-  float fVar12;
-  float fVar13;
+  float eyeW;
+  undefined4 texCoordWord2;
+  undefined4 texCoordWord3;
+  float clipY;
+  float clipZ;
+  float clipX;
+  float clipW;
+  float negClipW;
   int glContextPtr4854;
-  int iVar15;
+  int texCoordCursor;
+  int clipPlaneRecord;
   int *srcCursor;
-  undefined4 uVar17;
+  undefined4 texCoordWord1;
   undefined4 glContextWord4864;
-  int iVar18;
+  int texCoordDst;
   int glContextWord48d0;
   int glContextWord4e1c;
-  int iVar19;
+  int rasterVertex;
   int remaining;
-  double dVar21;
+  double fogFactor;
   
   glContextPtr4854 = *(int *)(glContext + 0x4854);
   *(undefined1 *)(glContext + 0x2ef) = 0;
-  iVar19 = glContextPtr4854 + -0x200;
+  rasterVertex = glContextPtr4854 + -0x200;
   if ((*(char *)(glContext + 0x4664) == '\0') && (*(int *)(glContext + 0x5434) == 0)) {
     remaining = 8;
-    iVar18 = iVar19;
-    iVar15 = glContext;
+    texCoordDst = rasterVertex;
+    texCoordCursor = glContext;
     do {
-      puVar1 = (undefined4 *)(iVar15 + 0x120);
-      uVar17 = *(undefined4 *)(iVar15 + 0x124);
-      uVar7 = *(undefined4 *)(iVar15 + 0x128);
-      uVar8 = *(undefined4 *)(iVar15 + 300);
-      iVar15 = iVar15 + 0x10;
-      *(undefined4 *)(iVar18 + 0x80) = *puVar1;
-      *(undefined4 *)(iVar18 + 0x84) = uVar17;
-      *(undefined4 *)(iVar18 + 0x88) = uVar7;
-      *(undefined4 *)(iVar18 + 0x8c) = uVar8;
-      iVar18 = iVar18 + 0x10;
+      texCoordSrc = (undefined4 *)(texCoordCursor + 0x120);
+      texCoordWord1 = *(undefined4 *)(texCoordCursor + 0x124);
+      texCoordWord2 = *(undefined4 *)(texCoordCursor + 0x128);
+      texCoordWord3 = *(undefined4 *)(texCoordCursor + 300);
+      texCoordCursor = texCoordCursor + 0x10;
+      *(undefined4 *)(texCoordDst + 0x80) = *texCoordSrc;
+      *(undefined4 *)(texCoordDst + 0x84) = texCoordWord1;
+      *(undefined4 *)(texCoordDst + 0x88) = texCoordWord2;
+      *(undefined4 *)(texCoordDst + 0x8c) = texCoordWord3;
+      texCoordDst = texCoordDst + 0x10;
       remaining = remaining + -1;
     } while (remaining != 0);
     *(undefined4 *)(glContextPtr4854 + -0x184) = *(undefined4 *)(glContext + 0x2ec);
     if (*(char *)(glContext + 0x53e4) != '\0') {
-      *(float *)(glContextPtr4854 + -0x1e0) = (float)fparam_1;
-      *(float *)(glContextPtr4854 + -0x1dc) = (float)fparam_2;
-      *(float *)(glContextPtr4854 + -0x1d8) = (float)fparam_3;
-      *(float *)(glContextPtr4854 + -0x1d4) = (float)fparam_4;
-      (**(code **)(glContext + 0x53dc))(glContext,iVar19,1);
+      *(float *)(glContextPtr4854 + -0x1e0) = (float)x;
+      *(float *)(glContextPtr4854 + -0x1dc) = (float)y;
+      *(float *)(glContextPtr4854 + -0x1d8) = (float)z;
+      *(float *)(glContextPtr4854 + -0x1d4) = (float)w;
+      (**(code **)(glContext + 0x53dc))(glContext,rasterVertex,1);
     }
-    fVar3 = (fparam_4 * *(float *)(glContext + 0x1cf4) + (fparam_3 * *(float *)(glContext + 0x1ce4) + (fparam_1 * *(float *)(glContext + 0x1cc4) + (fparam_2 * *(float *)(glContext + 0x1cd4)))));
-    fVar4 = (fparam_4 * *(float *)(glContext + 0x1cf0) + (fparam_3 * *(float *)(glContext + 0x1ce0) + (fparam_1 * *(float *)(glContext + 0x1cc0) + (fparam_2 * *(float *)(glContext + 0x1cd0)))));
-    fVar5 = (fparam_4 * *(float *)(glContext + 0x1cf8) + (fparam_3 * *(float *)(glContext + 0x1ce8) + (fparam_1 * *(float *)(0x1cc8 + glContext) + (fparam_2 * *(float *)(glContext + 0x1cd8)))));
-    fVar6 = (fparam_4 * *(float *)(glContext + 0x1cfc) + (fparam_3 * *(float *)(glContext + 0x1cec) + (fparam_1 * *(float *)(glContext + 0x1ccc) + (fparam_2 * *(float *)(glContext + 0x1cdc)))));
-    fVar12 = fVar6 * *(float *)(glContext + 0x1cbc) +
-             (fVar5 * *(float *)(glContext + 0x1cac) +
-             (fVar4 * *(float *)(glContext + 0x1c8c) + fVar3 * *(float *)(glContext + 0x1c9c)));
-    fVar11 = fVar6 * *(float *)(glContext + 0x1cb0) +
-             (fVar5 * *(float *)(glContext + 0x1ca0) +
-             (fVar4 * *(float *)(glContext + 0x1c80) + fVar3 * *(float *)(glContext + 0x1c90)));
-    fVar10 = fVar6 * *(float *)(glContext + 0x1cb8) +
-             (fVar5 * *(float *)(glContext + 0x1ca8) +
-             (fVar4 * *(float *)(glContext + 0x1c88) + fVar3 * *(float *)(glContext + 0x1c98)));
-    fVar9 = fVar6 * *(float *)(glContext + 0x1cb4) +
-            (fVar5 * *(float *)(glContext + 0x1ca4) +
-            (fVar4 * *(float *)(glContext + 0x1c84) + fVar3 * *(float *)(glContext + 0x1c94)));
-    fVar13 = -fVar12;
+    eyeY = (w * *(float *)(glContext + 0x1cf4) + (z * *(float *)(glContext + 0x1ce4) + (x * *(float *)(glContext + 0x1cc4) + (y * *(float *)(glContext + 0x1cd4)))));
+    eyeX = (w * *(float *)(glContext + 0x1cf0) + (z * *(float *)(glContext + 0x1ce0) + (x * *(float *)(glContext + 0x1cc0) + (y * *(float *)(glContext + 0x1cd0)))));
+    eyeZ = (w * *(float *)(glContext + 0x1cf8) + (z * *(float *)(glContext + 0x1ce8) + (x * *(float *)(0x1cc8 + glContext) + (y * *(float *)(glContext + 0x1cd8)))));
+    eyeW = (w * *(float *)(glContext + 0x1cfc) + (z * *(float *)(glContext + 0x1cec) + (x * *(float *)(glContext + 0x1ccc) + (y * *(float *)(glContext + 0x1cdc)))));
+    clipW = eyeW * *(float *)(glContext + 0x1cbc) +
+             (eyeZ * *(float *)(glContext + 0x1cac) +
+             (eyeX * *(float *)(glContext + 0x1c8c) + eyeY * *(float *)(glContext + 0x1c9c)));
+    clipX = eyeW * *(float *)(glContext + 0x1cb0) +
+             (eyeZ * *(float *)(glContext + 0x1ca0) +
+             (eyeX * *(float *)(glContext + 0x1c80) + eyeY * *(float *)(glContext + 0x1c90)));
+    clipZ = eyeW * *(float *)(glContext + 0x1cb8) +
+             (eyeZ * *(float *)(glContext + 0x1ca8) +
+             (eyeX * *(float *)(glContext + 0x1c88) + eyeY * *(float *)(glContext + 0x1c98)));
+    clipY = eyeW * *(float *)(glContext + 0x1cb4) +
+            (eyeZ * *(float *)(glContext + 0x1ca4) +
+            (eyeX * *(float *)(glContext + 0x1c84) + eyeY * *(float *)(glContext + 0x1c94)));
+    negClipW = -clipW;
     if (((*(char *)(glContext + 0x50b5) == '\0') &&
-        ((((fVar11 < fVar13 || (fVar12 < fVar11)) || (fVar9 < fVar13)) || (fVar12 < fVar9)))) ||
-       ((fVar10 < fVar13 || (fVar12 < fVar10)))) goto LAB_00054e14;
+        ((((clipX < negClipW || (clipW < clipX)) || (clipY < negClipW)) || (clipW < clipY)))) ||
+       ((clipZ < negClipW || (clipW < clipZ)))) goto LAB_00054e14;
     if (*(char *)(glContext + 0x4e18) != '\0') {
       loopIndex = 0;
       if (0 < *(int *)(glContext + 0x4dfc)) {
         srcCursor = (int *)(glContext + 0x4e00);
         do {
-          iVar15 = *srcCursor;
+          clipPlaneRecord = *srcCursor;
           srcCursor = srcCursor + 1;
-          iVar15 = glContext + iVar15 * 0x10;
-          if (fVar6 * *(float *)(iVar15 + 0x4198) +
-              (fVar5 * *(float *)(iVar15 + 0x4194) +
-              (fVar4 * *(float *)(iVar15 + 0x418c) + fVar3 * *(float *)(iVar15 + 0x4190))) <
+          clipPlaneRecord = glContext + clipPlaneRecord * 0x10;
+          if (eyeW * *(float *)(clipPlaneRecord + 0x4198) +
+              (eyeZ * *(float *)(clipPlaneRecord + 0x4194) +
+              (eyeX * *(float *)(clipPlaneRecord + 0x418c) + eyeY * *(float *)(clipPlaneRecord + 0x4190))) <
               FLOAT_00108e50) goto LAB_00054e14;
           loopIndex = loopIndex + 1;
         } while (loopIndex < *(int *)(glContext + 0x4dfc));
       }
     }
-    *(float *)(glContextPtr4854 + -0x1e0) = fVar4;
+    *(float *)(glContextPtr4854 + -0x1e0) = eyeX;
     floatZero = FLOAT_00108e50;
-    *(float *)(glContextPtr4854 + -0x1dc) = fVar3;
-    *(float *)(glContextPtr4854 + -0x1d8) = fVar5;
-    *(float *)(glContextPtr4854 + -0x1d4) = fVar6;
-    *(float *)(glContextPtr4854 + -0x1f0) = fVar11;
-    *(float *)(glContextPtr4854 + -0x1ec) = fVar9;
-    *(float *)(glContextPtr4854 + -0x1e8) = fVar10;
-    *(float *)(glContextPtr4854 + -0x1e4) = fVar12;
-    if (floatZero <= fVar12) {
-      bVar2 = FLOAT_00108e80 <= fVar12;
+    *(float *)(glContextPtr4854 + -0x1dc) = eyeY;
+    *(float *)(glContextPtr4854 + -0x1d8) = eyeZ;
+    *(float *)(glContextPtr4854 + -0x1d4) = eyeW;
+    *(float *)(glContextPtr4854 + -0x1f0) = clipX;
+    *(float *)(glContextPtr4854 + -0x1ec) = clipY;
+    *(float *)(glContextPtr4854 + -0x1e8) = clipZ;
+    *(float *)(glContextPtr4854 + -0x1e4) = clipW;
+    if (floatZero <= clipW) {
+      wLargeEnough = FLOAT_00108e80 <= clipW;
     }
     else {
-      bVar2 = fVar12 <= FLOAT_00108f3c;
+      wLargeEnough = clipW <= FLOAT_00108f3c;
     }
-    if (bVar2) {
-      fVar3 = FLOAT_00108e54 / fVar12;
+    if (wLargeEnough) {
+      inverseClipW = FLOAT_00108e54 / clipW;
     }
     else {
-      fVar3 = FLOAT_00108f7c;
-      if (FLOAT_00108e50 <= fVar12) {
-        fVar3 = FLOAT_00108eb4;
+      inverseClipW = FLOAT_00108f7c;
+      if (FLOAT_00108e50 <= clipW) {
+        inverseClipW = FLOAT_00108eb4;
       }
     }
     *(float *)(glContext + 0x2e0) =
-         *(float *)(glContext + 0x4a2c) * fVar11 * fVar3 + *(float *)(glContext + 0x4a30);
+         *(float *)(glContext + 0x4a2c) * clipX * inverseClipW + *(float *)(glContext + 0x4a30);
     *(float *)(glContext + 0x2e4) =
-         *(float *)(glContext + 0x4a34) * fVar9 * fVar3 + *(float *)(glContext + 19000);
+         *(float *)(glContext + 0x4a34) * clipY * inverseClipW + *(float *)(glContext + 19000);
     *(float *)(glContext + 0x2e8) =
-         *(float *)(glContext + 0x4a3c) * fVar10 * fVar3 + *(float *)(glContext + 0x4a40);
-    *(float *)(glContextPtr4854 + -500) = fVar3;
+         *(float *)(glContext + 0x4a3c) * clipZ * inverseClipW + *(float *)(glContext + 0x4a40);
+    *(float *)(glContextPtr4854 + -500) = inverseClipW;
     if (*(int *)(glContext + 0x50ac) != 0 ||
         (*(uint *)(glContext + 0x50b0) & *(uint *)(glContext + 0x505c)) != 0) {
       _gleUpdateMatrixFunc(glContext);
@@ -4146,14 +4148,14 @@ void _gleSetRasterPos(int glContext,float fparam_1,float fparam_2,float fparam_3
       }
     }
     if (*(char *)(glContext + 0x53e5) != '\0') {
-      (**(code **)(glContext + 0x53e0))(glContext,iVar19,1);
+      (**(code **)(glContext + 0x53e0))(glContext,rasterVertex,1);
     }
-    (**(code **)(glContext + 0x506c))(glContext,iVar19,1,0);
+    (**(code **)(glContext + 0x506c))(glContext,rasterVertex,1,0);
     if (*(short *)(glContext + 0x3166) == -0x7baf) {
       *(undefined4 *)(glContextPtr4854 + -0x1d8) = *(undefined4 *)(glContext + 0x2cc);
     }
-    dVar21 = (double)(**(double ( **)(int,double))(glContext + 0x4fe4))(glContext, (double)*(float *)(glContextPtr4854 + -0x1d8));
-    *(float *)(glContextPtr4854 + -0x1b4) = (float)dVar21;
+    fogFactor = (double)(**(double ( **)(int,double))(glContext + 0x4fe4))(glContext, (double)*(float *)(glContextPtr4854 + -0x1d8));
+    *(float *)(glContextPtr4854 + -0x1b4) = (float)fogFactor;
     if (*(char *)(glContext + 0x30aa) == '\0') {
       *(undefined8 *)(glContextPtr4854 + -0x1d0) = *(undefined8 *)(glContext + 0x2a0);
       *(undefined8 *)(glContextPtr4854 + -0x1c8) = *(undefined8 *)(glContext + 0x2a8);
@@ -4163,7 +4165,7 @@ void _gleSetRasterPos(int glContext,float fparam_1,float fparam_2,float fparam_3
     else {
       *(undefined4 *)(glContextPtr4854 + -0x18c) = *(undefined4 *)(glContext + 0x4dd0);
       *(undefined4 *)(glContextPtr4854 + -0x188) = *(undefined4 *)(glContext + 0x4dd4);
-      (**(code **)(glContext + 0x4de8))(glContext,iVar19,1);
+      (**(code **)(glContext + 0x4de8))(glContext,rasterVertex,1);
     }
     glContextWord4e1c = *(int *)(glContext + 0x4e1c);
   }
@@ -4175,12 +4177,12 @@ void _gleSetRasterPos(int glContext,float fparam_1,float fparam_2,float fparam_3
       *(undefined4 *)(glContext + 0x48d0) = 0;
       _gleSelectVertexSubmitFunc(glContext);
     }
-    (**(int ( **)(int,double,double,double,double))(glContext + 0x4888))(glContext, fparam_1, fparam_2, fparam_3, fparam_4);
+    (**(int ( **)(int,double,double,double,double))(glContext + 0x4888))(glContext, x, y, z, w);
     if (glContextWord48d0 != 0) {
       *(int *)(glContext + 0x48d0) = glContextWord48d0;
       _gleSelectVertexSubmitFunc(glContext);
     }
-    *(int *)(glContext + 0x4864) = iVar19;
+    *(int *)(glContext + 0x4864) = rasterVertex;
     _gleVPEmulate(glContext,1);
     *(undefined4 *)(glContext + 0x4864) = glContextWord4864;
     glContextWord4e1c = *(int *)(glContext + 0x4e1c);
@@ -4195,7 +4197,7 @@ void _gleSetRasterPos(int glContext,float fparam_1,float fparam_2,float fparam_3
          *(float *)(glContext + 0x4a40);
   }
   if (glContextWord4e1c == 0x1c02) {
-    _gleSelectHit(glContext,iVar19);
+    _gleSelectHit(glContext,rasterVertex);
   }
   *(undefined1 *)(glContext + 0x2ef) = 1;
 LAB_00054e14:

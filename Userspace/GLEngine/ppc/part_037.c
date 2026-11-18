@@ -915,25 +915,25 @@ void _glGetVertexAttribdvARB_Exec(glContext, index, pname, params)
   uint pname;
   double *params;
 {
-  unsigned char cVar1;
-  float fVar2;
-  undefined4 uVar3;
+  unsigned char mapSize;
+  float srcComponent;
+  undefined4 trueOrFalseHighWord;
   undefined4 glErrorCode;
-  uint uVar4;
+  uint srcWord;
   float *srcCursor;
   uint *srcCursor2;
-  int iVar7;
+  int mapRecord;
   int remaining;
-  double *pdVar8;
-  int iVar9;
+  double *lastParam;
+  int mapDataThenElementsLeft;
   int remaining2;
   int clientState;
   int mapData;
-  double dVar10;
+  double convertedValue;
   double intToDoubleBias;
-  double dVar11;
-  longlong lVar12;
-  uint uStack_1c;
+  double signedOrUnsignedBias;
+  longlong indexBit;
+  uint intConvertWord;
   
   if (0xf < index) {
     if (*(int *)(glContext + 0x7574) != 0) {
@@ -944,15 +944,15 @@ void _glGetVertexAttribdvARB_Exec(glContext, index, pname, params)
   }
   if (pname == 0x8a02) {
     mapData = _gleGetMapData(glContext);
-    cVar1 = ((unsigned char *)0x9da8)[index + mapData];
+    mapSize = ((unsigned char *)0x9da8)[index + mapData];
 LAB_000b0dcc:
-    uStack_1c = (uint)(byte)cVar1;
+    intConvertWord = (uint)(byte)mapSize;
   }
   else {
     if (pname < 0x8a03) {
-      dVar11 = DOUBLE_00108d58;
+      signedOrUnsignedBias = DOUBLE_00108d58;
       if (pname == 0x8624) {
-        dVar10 = (double)CONCAT44(0x43300000,
+        convertedValue = (double)CONCAT44(0x43300000,
                                   *(uint *)(index * 0x18 + *(int *)(glContext + 0x4a60) + 0x1b4) ^
                                   0x80000000);
         goto LAB_000b0de4;
@@ -960,21 +960,21 @@ LAB_000b0dcc:
       if (pname < 0x8625) {
         if (pname == 0x8622) {
           clientState = *(int *)(glContext + 0x4a60);
-          lVar12 = ___ashldi3(1,0,index);
-          uVar3 = 0x3ff00000;
-          if ((*(uint *)(clientState + 0x330) & (uint)((ulonglong)lVar12 >> 0x20)) == 0 &&
-              (*(uint *)(clientState + 0x334) & (uint)lVar12) == 0) {
-            uVar3 = 0;
+          indexBit = ___ashldi3(1,0,index);
+          trueOrFalseHighWord = 0x3ff00000;
+          if ((*(uint *)(clientState + 0x330) & (uint)((ulonglong)indexBit >> 0x20)) == 0 &&
+              (*(uint *)(clientState + 0x334) & (uint)indexBit) == 0) {
+            trueOrFalseHighWord = 0;
           }
-          *(undefined4 *)params = uVar3;
+          *(undefined4 *)params = trueOrFalseHighWord;
           *(undefined4 *)((int)params + 4) = 0;
           return;
         }
         if (pname == 0x8623) {
-          uStack_1c = (uint)*(short *)(index * 0x18 + *(int *)(glContext + 0x4a60) + 0x1ba);
+          intConvertWord = (uint)*(short *)(index * 0x18 + *(int *)(glContext + 0x4a60) + 0x1ba);
 LAB_000b0cc8:
-          uStack_1c = uStack_1c ^ 0x80000000;
-          dVar10 = (double)CONCAT44(0x43300000,uStack_1c);
+          intConvertWord = intConvertWord ^ 0x80000000;
+          convertedValue = (double)CONCAT44(0x43300000,intConvertWord);
           goto LAB_000b0de4;
         }
       }
@@ -984,9 +984,9 @@ LAB_000b0cc8:
             remaining2 = 4;
             srcCursor = (float *)(glContext + index * 0x10 + 0x1a0);
             do {
-              fVar2 = *srcCursor;
+              srcComponent = *srcCursor;
               srcCursor = srcCursor + 1;
-              *params = (double)fVar2;
+              *params = (double)srcComponent;
               params = params + 1;
               remaining2 = remaining2 + -1;
             } while (remaining2 != 0);
@@ -999,15 +999,15 @@ LAB_000b0cc8:
           goto LAB_000b0ed8;
         }
         if (pname < 0x8626) {
-          uStack_1c = *(ushort *)(index * 0x18 + *(int *)(glContext + 0x4a60) + 0x1b8) & 0xffff7fff;
+          intConvertWord = *(ushort *)(index * 0x18 + *(int *)(glContext + 0x4a60) + 0x1b8) & 0xffff7fff;
           goto LAB_000b0cc8;
         }
         if (pname == 0x886a) {
-          uVar3 = 0x3ff00000;
+          trueOrFalseHighWord = 0x3ff00000;
           if (-1 < *(short *)(index * 0x18 + *(int *)(glContext + 0x4a60) + 0x1b8)) {
-            uVar3 = 0;
+            trueOrFalseHighWord = 0;
           }
-          *(undefined4 *)params = uVar3;
+          *(undefined4 *)params = trueOrFalseHighWord;
           *(undefined4 *)((int)params + 4) = 0;
           return;
         }
@@ -1023,7 +1023,7 @@ LAB_000b0ed8:
     }
     if (pname == 0x8a06) {
       mapData = _gleGetMapData(glContext);
-      cVar1 = *(code *)(index + mapData + 0x9db8);
+      mapSize = *(code *)(index + mapData + 0x9db8);
       goto LAB_000b0dcc;
     }
     if (0x8a06 < pname) {
@@ -1031,24 +1031,24 @@ LAB_000b0ed8:
         mapData = _gleGetMapData(glContext);
         intToDoubleBias = DOUBLE_00108d58;
         srcCursor2 = (uint *)(mapData + index * 0x660 + 0x37a8);
-        pdVar8 = params + 1;
+        lastParam = params + 1;
         do {
-          uVar4 = *srcCursor2;
+          srcWord = *srcCursor2;
           srcCursor2 = srcCursor2 + 1;
-          *params = (double)CONCAT44(0x43300000,uVar4 ^ 0x80000000) - intToDoubleBias;
+          *params = (double)CONCAT44(0x43300000,srcWord ^ 0x80000000) - intToDoubleBias;
           params = params + 1;
-        } while (params <= pdVar8);
+        } while (params <= lastParam);
         return;
       }
       if (pname < 0x8a08) {
-        iVar9 = _gleGetMapData(glContext);
-        iVar7 = index * 0x660 + iVar9;
-        srcCursor = (float *)(iVar7 + 0x37c8);
-        for (iVar9 = *(int *)(iVar7 + 0x37a8) * *(int *)(iVar7 + 0x37ac) *
-                     (uint)*(byte *)(index + iVar9 + 0x9db8); iVar9 != 0; iVar9 = iVar9 + -1) {
-          fVar2 = *srcCursor;
+        mapDataThenElementsLeft = _gleGetMapData(glContext);
+        mapRecord = index * 0x660 + mapDataThenElementsLeft;
+        srcCursor = (float *)(mapRecord + 0x37c8);
+        for (mapDataThenElementsLeft = *(int *)(mapRecord + 0x37a8) * *(int *)(mapRecord + 0x37ac) *
+                     (uint)*(byte *)(index + mapDataThenElementsLeft + 0x9db8); mapDataThenElementsLeft != 0; mapDataThenElementsLeft = mapDataThenElementsLeft + -1) {
+          srcComponent = *srcCursor;
           srcCursor = srcCursor + 1;
-          *params = (double)fVar2;
+          *params = (double)srcComponent;
           params = params + 1;
         }
         return;
@@ -1058,9 +1058,9 @@ LAB_000b0ed8:
         remaining = 4;
         srcCursor = (float *)(mapData + index * 0x660 + 0x37b0);
         do {
-          fVar2 = *srcCursor;
+          srcComponent = *srcCursor;
           srcCursor = srcCursor + 1;
-          *params = (double)fVar2;
+          *params = (double)srcComponent;
           params = params + 1;
           remaining = remaining + -1;
         } while (remaining != 0);
@@ -1070,37 +1070,37 @@ LAB_000b0ed8:
     }
     if (pname != 0x8a04) {
       if (pname < 0x8a05) {
-        iVar9 = _gleGetMapData(glContext);
-        iVar7 = index * 0xb0 + iVar9;
-        srcCursor = (float *)(iVar7 + 0x2cb8);
-        for (iVar9 = *(int *)(iVar7 + 0x2ca8) *
-                     (uint)(byte)((unsigned char *)0x9da8)[index + iVar9]; iVar9 != 0;
-            iVar9 = iVar9 + -1) {
-          fVar2 = *srcCursor;
+        mapDataThenElementsLeft = _gleGetMapData(glContext);
+        mapRecord = index * 0xb0 + mapDataThenElementsLeft;
+        srcCursor = (float *)(mapRecord + 0x2cb8);
+        for (mapDataThenElementsLeft = *(int *)(mapRecord + 0x2ca8) *
+                     (uint)(byte)((unsigned char *)0x9da8)[index + mapDataThenElementsLeft]; mapDataThenElementsLeft != 0;
+            mapDataThenElementsLeft = mapDataThenElementsLeft + -1) {
+          srcComponent = *srcCursor;
           srcCursor = srcCursor + 1;
-          *params = (double)fVar2;
+          *params = (double)srcComponent;
           params = params + 1;
         }
         return;
       }
       mapData = _gleGetMapData(glContext);
-      pdVar8 = params + 1;
+      lastParam = params + 1;
       srcCursor = (float *)(mapData + index * 0xb0 + 0x2cac);
       do {
-        fVar2 = *srcCursor;
+        srcComponent = *srcCursor;
         srcCursor = srcCursor + 1;
-        *params = (double)fVar2;
+        *params = (double)srcComponent;
         params = params + 1;
-      } while (params <= pdVar8);
+      } while (params <= lastParam);
       return;
     }
     mapData = _gleGetMapData(glContext);
-    uStack_1c = *(uint *)(index * 0xb0 + mapData + 0x2ca8);
+    intConvertWord = *(uint *)(index * 0xb0 + mapData + 0x2ca8);
   }
-  dVar10 = (double)CONCAT44(0x43300000,uStack_1c);
-  dVar11 = DOUBLE_00108d70;
+  convertedValue = (double)CONCAT44(0x43300000,intConvertWord);
+  signedOrUnsignedBias = DOUBLE_00108d70;
 LAB_000b0de4:
-  *params = dVar10 - dVar11;
+  *params = convertedValue - signedOrUnsignedBias;
   return;
 }
 

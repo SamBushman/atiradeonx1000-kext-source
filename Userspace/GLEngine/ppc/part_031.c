@@ -1872,13 +1872,16 @@ void _glTexEnviv_CompExec(glContext, target, pname, params)
 /* _glGetTexEnvfv_Exec @ 0x9ad1c (1248 bytes) */
 void _glGetTexEnvfv_Exec(int glContext,int target,uint pname,float *params,undefined4 unusedArg5,undefined4 unusedArg6,undefined4 unusedArg7,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  ushort uVar1;
+  ushort ushortParamValue;
   undefined4 glErrorCode;
-  float fVar3;
-  int iVar4;
-  uint uVar5;
+  float constantParamValue;
+  float alphaComponent;
+  float paramsInput;
+  float floatParamValue;
+  int texUnitState;
+  uint activeTexUnitThenIntParamValue;
   
-  uVar5 = *(uint *)(glContext + 0x53d4);
+  activeTexUnitThenIntParamValue = *(uint *)(glContext + 0x53d4);
   if (-1 < *(short *)(glContext + 0x4a10)) {
     if (*(int *)(glContext + 0x7574) != 0) {
       return;
@@ -1889,8 +1892,8 @@ void _glGetTexEnvfv_Exec(int glContext,int target,uint pname,float *params,undef
   if (target != 0x86de) {
     if (target == 0x8861) {
       if (pname == 0x8862) {
-        if ((*(uint *)(glContext + 0x3444) & 1 << (uVar5 & 0x3f)) == 0) {
-          fVar3 = 0.0;
+        if ((*(uint *)(glContext + 0x3444) & 1 << (activeTexUnitThenIntParamValue & 0x3f)) == 0) {
+          constantParamValue = 0.0;
           goto LAB_0009af54;
         }
         goto switchD_0009ad94_caseD_86dd;
@@ -1898,98 +1901,98 @@ void _glGetTexEnvfv_Exec(int glContext,int target,uint pname,float *params,undef
     }
     else if (target == 0x2300) {
       if (pname == 0x8582) {
-        uVar5 = (uint)*(ushort *)(uVar5 * 0x7c + glContext + 0x3544);
+        activeTexUnitThenIntParamValue = (uint)*(ushort *)(activeTexUnitThenIntParamValue * 0x7c + glContext + 0x3544);
         goto LAB_0009aec4;
       }
       if (pname < 0x8583) {
         if (pname == 0x8571) {
-          uVar5 = (uint)*(ushort *)(uVar5 * 0x7c + glContext + 0x353c);
+          activeTexUnitThenIntParamValue = (uint)*(ushort *)(activeTexUnitThenIntParamValue * 0x7c + glContext + 0x353c);
           goto LAB_0009aec4;
         }
         if (pname < 0x8572) {
           if (pname == 0x2200) {
-            uVar5 = (uint)*(ushort *)(uVar5 * 0x7c + glContext + 0x3538);
+            activeTexUnitThenIntParamValue = (uint)*(ushort *)(activeTexUnitThenIntParamValue * 0x7c + glContext + 0x3538);
             goto LAB_0009aec4;
           }
           if (pname < 0x2201) {
             if (pname == 0xd1c) {
-              fVar3 = *(float *)(uVar5 * 0x7c + glContext + 0x355c);
+              floatParamValue = *(float *)(activeTexUnitThenIntParamValue * 0x7c + glContext + 0x355c);
               goto LAB_0009aee8;
             }
           }
           else if (pname == 0x2201) {
-            iVar4 = glContext + uVar5 * 0x7c;
-            *params = *(float *)(iVar4 + 0x3524);
-            params[1] = *(float *)(iVar4 + 0x3528);
-            params[2] = *(float *)(iVar4 + 0x352c);
-            params[3] = *(float *)(iVar4 + 0x3530);
+            texUnitState = glContext + activeTexUnitThenIntParamValue * 0x7c;
+            *params = *(float *)(texUnitState + 0x3524);
+            params[1] = *(float *)(texUnitState + 0x3528);
+            params[2] = *(float *)(texUnitState + 0x352c);
+            params[3] = *(float *)(texUnitState + 0x3530);
             return;
           }
         }
         else {
           if (pname == 0x8573) {
-            fVar3 = *(float *)(uVar5 * 0x7c + glContext + 0x3558);
+            floatParamValue = *(float *)(activeTexUnitThenIntParamValue * 0x7c + glContext + 0x3558);
             goto LAB_0009aee8;
           }
           if (pname < 0x8573) {
-            uVar5 = (uint)*(ushort *)(uVar5 * 0x7c + glContext + 0x353e);
+            activeTexUnitThenIntParamValue = (uint)*(ushort *)(activeTexUnitThenIntParamValue * 0x7c + glContext + 0x353e);
             goto LAB_0009aec4;
           }
           if (pname == 0x8580) {
-            uVar5 = (uint)*(ushort *)(uVar5 * 0x7c + glContext + 0x3540);
+            activeTexUnitThenIntParamValue = (uint)*(ushort *)(activeTexUnitThenIntParamValue * 0x7c + glContext + 0x3540);
             goto LAB_0009aec4;
           }
           if (pname == 0x8581) {
-            uVar5 = (uint)*(ushort *)(uVar5 * 0x7c + glContext + 0x3542);
+            activeTexUnitThenIntParamValue = (uint)*(ushort *)(activeTexUnitThenIntParamValue * 0x7c + glContext + 0x3542);
             goto LAB_0009aec4;
           }
         }
       }
       else {
         if (pname == 0x8591) {
-          uVar5 = (uint)*(ushort *)(uVar5 * 0x7c + glContext + 0x354e);
+          activeTexUnitThenIntParamValue = (uint)*(ushort *)(activeTexUnitThenIntParamValue * 0x7c + glContext + 0x354e);
           goto LAB_0009aec4;
         }
         if (pname < 0x8592) {
           if (pname == 0x8589) {
-            uVar5 = (uint)*(ushort *)(uVar5 * 0x7c + glContext + 0x3548);
+            activeTexUnitThenIntParamValue = (uint)*(ushort *)(activeTexUnitThenIntParamValue * 0x7c + glContext + 0x3548);
             goto LAB_0009aec4;
           }
           if (pname < 0x858a) {
             if (pname == 0x8588) {
-              uVar5 = (uint)*(ushort *)(uVar5 * 0x7c + glContext + 0x3546);
+              activeTexUnitThenIntParamValue = (uint)*(ushort *)(activeTexUnitThenIntParamValue * 0x7c + glContext + 0x3546);
               goto LAB_0009aec4;
             }
           }
           else {
             if (pname == 0x858a) {
-              uVar5 = (uint)*(ushort *)(uVar5 * 0x7c + glContext + 0x354a);
+              activeTexUnitThenIntParamValue = (uint)*(ushort *)(activeTexUnitThenIntParamValue * 0x7c + glContext + 0x354a);
               goto LAB_0009aec4;
             }
             if (pname == 0x8590) {
-              uVar5 = (uint)*(ushort *)(uVar5 * 0x7c + glContext + 0x354c);
+              activeTexUnitThenIntParamValue = (uint)*(ushort *)(activeTexUnitThenIntParamValue * 0x7c + glContext + 0x354c);
               goto LAB_0009aec4;
             }
           }
         }
         else {
           if (pname == 0x8598) {
-            uVar5 = (uint)*(ushort *)(uVar5 * 0x7c + glContext + 0x3552);
+            activeTexUnitThenIntParamValue = (uint)*(ushort *)(activeTexUnitThenIntParamValue * 0x7c + glContext + 0x3552);
             goto LAB_0009aec4;
           }
           if (pname < 0x8599) {
             if (pname == 0x8592) {
-              uVar5 = (uint)*(ushort *)(uVar5 * 0x7c + glContext + 0x3550);
+              activeTexUnitThenIntParamValue = (uint)*(ushort *)(activeTexUnitThenIntParamValue * 0x7c + glContext + 0x3550);
               goto LAB_0009aec4;
             }
           }
           else {
             if (pname == 0x8599) {
-              uVar5 = (uint)*(ushort *)(uVar5 * 0x7c + glContext + 0x3554);
+              activeTexUnitThenIntParamValue = (uint)*(ushort *)(activeTexUnitThenIntParamValue * 0x7c + glContext + 0x3554);
               goto LAB_0009aec4;
             }
             if (pname == 0x859a) {
-              uVar5 = (uint)*(ushort *)(uVar5 * 0x7c + glContext + 0x3556);
+              activeTexUnitThenIntParamValue = (uint)*(ushort *)(activeTexUnitThenIntParamValue * 0x7c + glContext + 0x3556);
               goto LAB_0009aec4;
             }
           }
@@ -1997,7 +2000,7 @@ void _glGetTexEnvfv_Exec(int glContext,int target,uint pname,float *params,undef
       }
     }
     else if ((target == 0x8500) && (pname == 0x8501)) {
-      fVar3 = *(float *)(uVar5 * 0x7c + glContext + 0x3560);
+      floatParamValue = *(float *)(activeTexUnitThenIntParamValue * 0x7c + glContext + 0x3560);
       goto LAB_0009aee8;
     }
 switchD_0009ad94_caseD_86da:
@@ -2009,58 +2012,58 @@ LAB_0009af0c:
     *(undefined4 *)(glContext + 0x7574) = glErrorCode;
     return;
   }
-  iVar4 = glContext + uVar5 * 0x7c;
+  texUnitState = glContext + activeTexUnitThenIntParamValue * 0x7c;
   switch(pname) {
   case 0x86d9:
-    fVar3 = *params;
-    *(short *)(iVar4 + 0x356c) = (short)(int)fVar3;
-    uVar5 = (int)fVar3 & 0xffff;
+    paramsInput = *params;
+    *(short *)(texUnitState + 0x356c) = (short)(int)paramsInput;
+    activeTexUnitThenIntParamValue = (int)paramsInput & 0xffff;
     goto LAB_0009aec4;
   default:
     goto switchD_0009ad94_caseD_86da;
   case 0x86dd:
 switchD_0009ad94_caseD_86dd:
-    fVar3 = 1.0;
+    constantParamValue = 1.0;
 LAB_0009af54:
-    *params = fVar3;
+    *params = constantParamValue;
     return;
   case 0x86df:
-    uVar1 = *(ushort *)(iVar4 + 0x3564);
+    ushortParamValue = *(ushort *)(texUnitState + 0x3564);
     break;
   case 0x86e0:
-    *params = GH_U2F((unsigned int)((*(ushort *)(iVar4 + 0x3570) | 0x4b000000))) - 8388608.0;
-    params[1] = GH_U2F((unsigned int)((*(ushort *)(iVar4 + 0x3572) | 0x4b000000))) - 8388608.0;
-    params[2] = GH_U2F((unsigned int)((*(ushort *)(iVar4 + 0x3574) | 0x4b000000))) - 8388608.0;
-    fVar3 = GH_U2F((unsigned int)((*(ushort *)(iVar4 + 0x3576) | 0x4b000000))) - 8388608.0;
+    *params = GH_U2F((unsigned int)((*(ushort *)(texUnitState + 0x3570) | 0x4b000000))) - 8388608.0;
+    params[1] = GH_U2F((unsigned int)((*(ushort *)(texUnitState + 0x3572) | 0x4b000000))) - 8388608.0;
+    params[2] = GH_U2F((unsigned int)((*(ushort *)(texUnitState + 0x3574) | 0x4b000000))) - 8388608.0;
+    alphaComponent = GH_U2F((unsigned int)((*(ushort *)(texUnitState + 0x3576) | 0x4b000000))) - 8388608.0;
     goto LAB_0009ae78;
   case 0x86e1:
-    *params = *(float *)(iVar4 + 0x3588);
-    params[1] = *(float *)(iVar4 + 0x358c);
-    params[2] = *(float *)(iVar4 + 0x3590);
-    fVar3 = *(float *)(iVar4 + 0x3594);
+    *params = *(float *)(texUnitState + 0x3588);
+    params[1] = *(float *)(texUnitState + 0x358c);
+    params[2] = *(float *)(texUnitState + 0x3590);
+    alphaComponent = *(float *)(texUnitState + 0x3594);
 LAB_0009ae78:
-    params[3] = fVar3;
+    params[3] = alphaComponent;
     return;
   case 0x86e2:
-    fVar3 = *(float *)(iVar4 + 0x3598);
+    floatParamValue = *(float *)(texUnitState + 0x3598);
     goto LAB_0009aee8;
   case 0x86e3:
-    fVar3 = *(float *)(iVar4 + 0x359c);
+    floatParamValue = *(float *)(texUnitState + 0x359c);
 LAB_0009aee8:
-    *params = fVar3;
+    *params = floatParamValue;
     return;
   case 0x86e4:
-    uVar1 = *(ushort *)(iVar4 + 0x356a);
+    ushortParamValue = *(ushort *)(texUnitState + 0x356a);
     break;
   case 0x86e5:
-    *params = *(float *)(iVar4 + 0x357c);
-    params[1] = *(float *)(iVar4 + 0x3580);
-    params[2] = *(float *)(iVar4 + 0x3584);
+    *params = *(float *)(texUnitState + 0x357c);
+    params[1] = *(float *)(texUnitState + 0x3580);
+    params[2] = *(float *)(texUnitState + 0x3584);
     return;
   }
-  uVar5 = (uint)uVar1;
+  activeTexUnitThenIntParamValue = (uint)ushortParamValue;
 LAB_0009aec4:
-  *params = GH_U2F((unsigned int)((uVar5 | 0x4b000000))) - 8388608.0;
+  *params = GH_U2F((unsigned int)((activeTexUnitThenIntParamValue | 0x4b000000))) - 8388608.0;
   return;
 }
 

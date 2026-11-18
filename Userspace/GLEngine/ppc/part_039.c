@@ -227,132 +227,132 @@ int _glFinalCombinerInputNV_ListExec(glContext, listRecord)
 }
 
 /* _gleDecomposePrimitiveVertices @ 0xb46f4 (700 bytes) */
-void _gleDecomposePrimitiveVertices(param_1, param_2, param_3, param_4, param_5, param_6)
-  int param_1;
-  byte *param_2;
-  uint param_3;
-  int param_4;
-  int param_5;
-  undefined1 *param_6;
+void _gleDecomposePrimitiveVertices(glContext, attributeMap, vertexCount, inputVerticesThenCursor, outputVerticesThenCursor, bufferReallocated)
+  int glContext;
+  byte *attributeMap;
+  uint vertexCount;
+  int inputVerticesThenCursor;
+  int outputVerticesThenCursor;
+  undefined1 *bufferReallocated;
 {
-  byte bVar1;
-  int iVar2;
-  ushort uVar3;
+  byte entryCount;
+  int entryOffsetThenSourceOffset;
+  ushort byteSelect;
   int remaining;
-  undefined1 uVar5;
+  undefined1 selectedByte;
   undefined4 *srcCursor;
-  undefined4 uVar7;
+  undefined4 newBufferThenCopiedWord;
   int loopIndex;
   int loopIndex2;
   undefined4 *dstCursor;
   undefined4 *dstCursor2;
   
-  bVar1 = *param_2;
-  if (0x24 < (int)param_3) {
-    if (*(uint *)(param_1 + 0x7588) < param_3) {
-      if (*(int *)(param_1 + 0x758c) != 0) {
-        _free(*(int *)(param_1 + 0x758c));
+  entryCount = *attributeMap;
+  if (0x24 < (int)vertexCount) {
+    if (*(uint *)(glContext + 0x7588) < vertexCount) {
+      if (*(int *)(glContext + 0x758c) != 0) {
+        _free(*(int *)(glContext + 0x758c));
       }
-      uVar7 = _malloc(param_3 << 8);
-      *(undefined4 *)(param_1 + 0x758c) = uVar7;
-      *(uint *)(param_1 + 0x7588) = param_3;
-      *param_6 = 1;
+      newBufferThenCopiedWord = _malloc(vertexCount << 8);
+      *(undefined4 *)(glContext + 0x758c) = newBufferThenCopiedWord;
+      *(uint *)(glContext + 0x7588) = vertexCount;
+      *bufferReallocated = 1;
     }
-    param_5 = *(int *)(param_1 + 0x758c);
+    outputVerticesThenCursor = *(int *)(glContext + 0x758c);
   }
   loopIndex = 0;
-  if (0 < (int)param_3) {
+  if (0 < (int)vertexCount) {
     do {
       loopIndex2 = 0;
-      if (bVar1 != 0) {
+      if (entryCount != 0) {
         do {
-          iVar2 = loopIndex2 * 2;
-          switch((uint)(*(ushort *)(param_2 + iVar2 + 4) >> 10)) {
+          entryOffsetThenSourceOffset = loopIndex2 * 2;
+          switch((uint)(*(ushort *)(attributeMap + entryOffsetThenSourceOffset + 4) >> 10)) {
           case 0:
-            remaining = (*(ushort *)(param_2 + iVar2 + 4) >> 8 & 3) + 1;
+            remaining = (*(ushort *)(attributeMap + entryOffsetThenSourceOffset + 4) >> 8 & 3) + 1;
             if (remaining != 0) {
-              srcCursor = (undefined4 *)(param_4 + (*(ushort *)(param_2 + iVar2 + 4) & 0x3f) * 4);
-              dstCursor = (undefined4 *)(param_5 + 0x20);
+              srcCursor = (undefined4 *)(inputVerticesThenCursor + (*(ushort *)(attributeMap + entryOffsetThenSourceOffset + 4) & 0x3f) * 4);
+              dstCursor = (undefined4 *)(outputVerticesThenCursor + 0x20);
               do {
-                uVar7 = *srcCursor;
+                newBufferThenCopiedWord = *srcCursor;
                 srcCursor = srcCursor + 1;
-                *dstCursor = uVar7;
+                *dstCursor = newBufferThenCopiedWord;
                 dstCursor = dstCursor + 1;
                 remaining = remaining + -1;
               } while (remaining != 0);
             }
             break;
           case 1:
-            remaining = (*(ushort *)(param_2 + iVar2 + 4) >> 8 & 3) + 1;
+            remaining = (*(ushort *)(attributeMap + entryOffsetThenSourceOffset + 4) >> 8 & 3) + 1;
             if (remaining != 0) {
-              srcCursor = (undefined4 *)(param_4 + (*(ushort *)(param_2 + iVar2 + 4) & 0x3f) * 4);
-              dstCursor = (undefined4 *)(param_5 + 0x40);
+              srcCursor = (undefined4 *)(inputVerticesThenCursor + (*(ushort *)(attributeMap + entryOffsetThenSourceOffset + 4) & 0x3f) * 4);
+              dstCursor = (undefined4 *)(outputVerticesThenCursor + 0x40);
               do {
-                uVar7 = *srcCursor;
+                newBufferThenCopiedWord = *srcCursor;
                 srcCursor = srcCursor + 1;
-                *dstCursor = uVar7;
+                *dstCursor = newBufferThenCopiedWord;
                 dstCursor = dstCursor + 1;
                 remaining = remaining + -1;
               } while (remaining != 0);
             }
             break;
           case 2:
-            remaining = (*(ushort *)(param_2 + iVar2 + 4) >> 8 & 3) + 1;
+            remaining = (*(ushort *)(attributeMap + entryOffsetThenSourceOffset + 4) >> 8 & 3) + 1;
             if (remaining != 0) {
-              srcCursor = (undefined4 *)(param_4 + (*(ushort *)(param_2 + iVar2 + 4) & 0x3f) * 4);
-              dstCursor = (undefined4 *)(param_5 + 0x30);
+              srcCursor = (undefined4 *)(inputVerticesThenCursor + (*(ushort *)(attributeMap + entryOffsetThenSourceOffset + 4) & 0x3f) * 4);
+              dstCursor = (undefined4 *)(outputVerticesThenCursor + 0x30);
               do {
-                uVar7 = *srcCursor;
+                newBufferThenCopiedWord = *srcCursor;
                 srcCursor = srcCursor + 1;
-                *dstCursor = uVar7;
+                *dstCursor = newBufferThenCopiedWord;
                 dstCursor = dstCursor + 1;
                 remaining = remaining + -1;
               } while (remaining != 0);
             }
             break;
           case 3:
-            *(undefined4 *)(param_5 + 0x4c) =
-                 *(undefined4 *)(param_4 + (*(ushort *)(param_2 + iVar2 + 4) & 0x3f) * 4);
+            *(undefined4 *)(outputVerticesThenCursor + 0x4c) =
+                 *(undefined4 *)(inputVerticesThenCursor + (*(ushort *)(attributeMap + entryOffsetThenSourceOffset + 4) & 0x3f) * 4);
             break;
           case 4:
-            remaining = (*(ushort *)(param_2 + iVar2 + 4) >> 8 & 3) + 1;
+            remaining = (*(ushort *)(attributeMap + entryOffsetThenSourceOffset + 4) >> 8 & 3) + 1;
             if (remaining != 0) {
-              srcCursor = (undefined4 *)(param_4 + (*(ushort *)(param_2 + iVar2 + 4) & 0x3f) * 4);
-              dstCursor = (undefined4 *)(param_5 + 0x50);
+              srcCursor = (undefined4 *)(inputVerticesThenCursor + (*(ushort *)(attributeMap + entryOffsetThenSourceOffset + 4) & 0x3f) * 4);
+              dstCursor = (undefined4 *)(outputVerticesThenCursor + 0x50);
               do {
-                uVar7 = *srcCursor;
+                newBufferThenCopiedWord = *srcCursor;
                 srcCursor = srcCursor + 1;
-                *dstCursor = uVar7;
+                *dstCursor = newBufferThenCopiedWord;
                 dstCursor = dstCursor + 1;
                 remaining = remaining + -1;
               } while (remaining != 0);
             }
             break;
           case 5:
-            remaining = (*(ushort *)(param_2 + iVar2 + 4) >> 8 & 3) + 1;
+            remaining = (*(ushort *)(attributeMap + entryOffsetThenSourceOffset + 4) >> 8 & 3) + 1;
             if (remaining != 0) {
-              srcCursor = (undefined4 *)(param_4 + (*(ushort *)(param_2 + iVar2 + 4) & 0x3f) * 4);
-              dstCursor = (undefined4 *)(param_5 + 0x60);
+              srcCursor = (undefined4 *)(inputVerticesThenCursor + (*(ushort *)(attributeMap + entryOffsetThenSourceOffset + 4) & 0x3f) * 4);
+              dstCursor = (undefined4 *)(outputVerticesThenCursor + 0x60);
               do {
-                uVar7 = *srcCursor;
+                newBufferThenCopiedWord = *srcCursor;
                 srcCursor = srcCursor + 1;
-                *dstCursor = uVar7;
+                *dstCursor = newBufferThenCopiedWord;
                 dstCursor = dstCursor + 1;
                 remaining = remaining + -1;
               } while (remaining != 0);
             }
             break;
           case 6:
-            uVar3 = *(ushort *)(param_2 + iVar2 + 4) >> 6 & 3;
-            iVar2 = (*(ushort *)(param_2 + iVar2 + 4) & 0x3f) * 4;
-            if (uVar3 == 1) {
-              uVar5 = *(undefined1 *)(param_4 + iVar2);
+            byteSelect = *(ushort *)(attributeMap + entryOffsetThenSourceOffset + 4) >> 6 & 3;
+            entryOffsetThenSourceOffset = (*(ushort *)(attributeMap + entryOffsetThenSourceOffset + 4) & 0x3f) * 4;
+            if (byteSelect == 1) {
+              selectedByte = *(undefined1 *)(inputVerticesThenCursor + entryOffsetThenSourceOffset);
             }
             else {
-              if (uVar3 != 3) break;
-              uVar5 = *(undefined1 *)(param_4 + iVar2 + 3);
+              if (byteSelect != 3) break;
+              selectedByte = *(undefined1 *)(inputVerticesThenCursor + entryOffsetThenSourceOffset + 3);
             }
-            *(undefined1 *)(param_5 + 0x7c) = uVar5;
+            *(undefined1 *)(outputVerticesThenCursor + 0x7c) = selectedByte;
             break;
           case 8:
           case 9:
@@ -362,27 +362,27 @@ void _gleDecomposePrimitiveVertices(param_1, param_2, param_3, param_4, param_5,
           case 0xd:
           case 0xe:
           case 0xf:
-            remaining = (*(ushort *)(param_2 + iVar2 + 4) >> 8 & 3) + 1;
+            remaining = (*(ushort *)(attributeMap + entryOffsetThenSourceOffset + 4) >> 8 & 3) + 1;
             if (remaining != 0) {
               dstCursor2 = (undefined4 *)
-                        (((*(ushort *)(param_2 + iVar2 + 4) >> 10) - 8) * 0x10 + param_5 + 0x80);
-              srcCursor = (undefined4 *)(param_4 + (*(ushort *)(param_2 + iVar2 + 4) & 0x3f) * 4);
+                        (((*(ushort *)(attributeMap + entryOffsetThenSourceOffset + 4) >> 10) - 8) * 0x10 + outputVerticesThenCursor + 0x80);
+              srcCursor = (undefined4 *)(inputVerticesThenCursor + (*(ushort *)(attributeMap + entryOffsetThenSourceOffset + 4) & 0x3f) * 4);
               do {
-                uVar7 = *srcCursor;
+                newBufferThenCopiedWord = *srcCursor;
                 srcCursor = srcCursor + 1;
-                *dstCursor2 = uVar7;
+                *dstCursor2 = newBufferThenCopiedWord;
                 dstCursor2 = dstCursor2 + 1;
                 remaining = remaining + -1;
               } while (remaining != 0);
             }
           }
           loopIndex2 = loopIndex2 + 1;
-        } while (loopIndex2 < (int)(uint)bVar1);
+        } while (loopIndex2 < (int)(uint)entryCount);
       }
       loopIndex = loopIndex + 1;
-      param_5 = param_5 + 0x100;
-      param_4 = param_4 + (uint)param_2[2] * 4;
-    } while (loopIndex < (int)param_3);
+      outputVerticesThenCursor = outputVerticesThenCursor + 0x100;
+      inputVerticesThenCursor = inputVerticesThenCursor + (uint)attributeMap[2] * 4;
+    } while (loopIndex < (int)vertexCount);
   }
   return;
 }
@@ -630,76 +630,76 @@ LAB_000b4e5c:
 }
 
 /* _gleSetFunctionIDToList @ 0xb4eac (508 bytes) */
-void _gleSetFunctionIDToList(glContext, param_2, param_3)
+void _gleSetFunctionIDToList(glContext, arrayState, functionIdOut)
   int glContext;
-  int param_2;
-  uint *param_3;
+  int arrayState;
+  uint *functionIdOut;
 {
-  short sVar1;
-  ushort uVar2;
-  short sVar3;
-  uint uVar4;
+  short componentCount;
+  ushort wordOffset;
+  short componentCountMinusOne;
+  uint enabledMaskLow;
   uint uVar5;
-  uint uVar6;
-  uint uVar7;
-  uint uVar8;
+  uint elementTypeCode;
+  uint enabledMaskHigh;
+  uint glType;
   ushort *dstCursor;
   int loopIndex;
-  uint *puVar11;
+  uint *layoutWordCursor;
   int iVar12;
   int loopIndex2;
-  longlong lVar13;
+  longlong attributeBit;
   
-  *param_3 = 0;
-  if (*(char *)(param_2 + 0x31c) != '\0') {
-    *param_3 = 0x800000;
+  *functionIdOut = 0;
+  if (*(char *)(arrayState + 0x31c) != '\0') {
+    *functionIdOut = 0x800000;
   }
-  uVar7 = *(uint *)(param_2 + 0x300);
+  enabledMaskHigh = *(uint *)(arrayState + 0x300);
   loopIndex = 0;
   loopIndex2 = 0;
-  uVar4 = *(uint *)(param_2 + 0x304) & 0xff7fffff;
+  enabledMaskLow = *(uint *)(arrayState + 0x304) & 0xff7fffff;
   do {
-    lVar13 = ___ashldi3(0,1,loopIndex2 + 0x10);
-    if ((uVar7 & (uint)((ulonglong)lVar13 >> 0x20)) != 0 || (uVar4 & (uint)lVar13) != 0) {
+    attributeBit = ___ashldi3(0,1,loopIndex2 + 0x10);
+    if ((enabledMaskHigh & (uint)((ulonglong)attributeBit >> 0x20)) != 0 || (enabledMaskLow & (uint)attributeBit) != 0) {
       loopIndex = loopIndex + 1;
     }
     loopIndex2 = loopIndex2 + 1;
   } while (loopIndex2 < 0x20);
-  *param_3 = *param_3 | loopIndex << 0x18;
+  *functionIdOut = *functionIdOut | loopIndex << 0x18;
   iVar12 = *(int *)(glContext + 0x48dc);
   uVar5 = iVar12 - 0x1400;
   if (((6 < uVar5) && (uVar5 = 7, iVar12 != 0x140a)) &&
      (uVar5 = iVar12 - 0x93f8, 5 < iVar12 - 0x9400U)) {
     uVar5 = 0xe;
   }
-  dstCursor = (ushort *)((int)param_3 + loopIndex * 2 + 4);
-  *param_3 = *param_3 | (uVar5 & 0xf) << 0x10;
+  dstCursor = (ushort *)((int)functionIdOut + loopIndex * 2 + 4);
+  *functionIdOut = *functionIdOut | (uVar5 & 0xf) << 0x10;
   uVar5 = 0;
   loopIndex = 1;
-  puVar11 = param_3 + 1;
+  layoutWordCursor = functionIdOut + 1;
   while( true ) {
-    lVar13 = ___ashldi3(0,1,loopIndex + 0x10);
-    if ((uVar7 & (uint)((ulonglong)lVar13 >> 0x20)) != 0 || (uVar4 & (uint)lVar13) != 0) {
-      iVar12 = loopIndex * 0x18 + param_2;
-      uVar8 = (uint)*(ushort *)(iVar12 + 8);
-      uVar6 = uVar8 - 0x1400;
-      sVar1 = *(short *)(iVar12 + 10);
-      if (((6 < uVar6) && (uVar6 = 7, uVar8 != 0x140a)) &&
-         (uVar6 = uVar8 - 0x93f8, 5 < uVar8 - 0x9400)) {
-        uVar6 = 0xe;
+    attributeBit = ___ashldi3(0,1,loopIndex + 0x10);
+    if ((enabledMaskHigh & (uint)((ulonglong)attributeBit >> 0x20)) != 0 || (enabledMaskLow & (uint)attributeBit) != 0) {
+      iVar12 = loopIndex * 0x18 + arrayState;
+      glType = (uint)*(ushort *)(iVar12 + 8);
+      elementTypeCode = glType - 0x1400;
+      componentCount = *(short *)(iVar12 + 10);
+      if (((6 < elementTypeCode) && (elementTypeCode = 7, glType != 0x140a)) &&
+         (elementTypeCode = glType - 0x93f8, 5 < glType - 0x9400)) {
+        elementTypeCode = 0xe;
       }
-      sVar3 = (short)(sVar1 + -1);
-      *dstCursor = sVar3 * 0x4000 | (ushort)(uVar6 << 10) | (ushort)*(undefined4 *)(iVar12 + 4);
-      uVar2 = (ushort)((int)uVar5 >> 2);
+      componentCountMinusOne = (short)(componentCount + -1);
+      *dstCursor = componentCountMinusOne * 0x4000 | (ushort)(elementTypeCode << 10) | (ushort)*(undefined4 *)(iVar12 + 4);
+      wordOffset = (ushort)((int)uVar5 >> 2);
       if (loopIndex == 6) {
-        *(ushort *)puVar11 = sVar3 * 0x100 | 0x1800U | uVar2 | 0xc0;
+        *(ushort *)layoutWordCursor = componentCountMinusOne * 0x100 | 0x1800U | wordOffset | 0xc0;
       }
       else {
-        *(ushort *)puVar11 = (ushort)(loopIndex << 10) | sVar3 * 0x100 | uVar2;
+        *(ushort *)layoutWordCursor = (ushort)(loopIndex << 10) | componentCountMinusOne * 0x100 | wordOffset;
       }
       dstCursor = dstCursor + 1;
-      uVar5 = uVar5 + sVar1 * 4;
-      puVar11 = (uint *)((int)puVar11 + 2);
+      uVar5 = uVar5 + componentCount * 4;
+      layoutWordCursor = (uint *)((int)layoutWordCursor + 2);
     }
     if (loopIndex == 0) break;
     if (loopIndex < 0x1f) {
@@ -709,7 +709,7 @@ void _gleSetFunctionIDToList(glContext, param_2, param_3)
       loopIndex = 0;
     }
   }
-  *param_3 = *param_3 | (uVar5 & 0x3fc) << 6;
+  *functionIdOut = *functionIdOut | (uVar5 & 0x3fc) << 6;
   return;
 }
 

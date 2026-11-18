@@ -147,29 +147,30 @@ void _glDetachObjectARB_Exec(glContext, containerObj, attachedObj)
   undefined4 containerObj;
   undefined4 attachedObj;
 {
-  bool bVar1;
+  bool attachmentFound;
   undefined4 glErrorCode;
-  int iVar3;
-  int *piVar4;
+  int attachmentEntry;
+  int *newAttachments;
   int *srcCursor;
-  int iVar5;
+  int sharedStateThenContainerObject;
+  int attachedRefCount;
   int hashObject;
-  int iVar7;
+  int oldAttachments;
   int *dstCursor;
-  int iVar9;
+  int attachmentCount;
   int loopIndex;
   int iVar10;
   int loopIndex2;
   
-  bVar1 = false;
+  attachmentFound = false;
   if (*(short *)(glContext + 0x4a10) < 0) {
-    iVar5 = *(int *)(glContext + 0x5148);
-    if (*(char *)(iVar5 + 0x8024) != '\0') {
-      _pthread_mutex_lock(iVar5 + 0x8028);
-      iVar5 = *(int *)(glContext + 0x5148);
+    sharedStateThenContainerObject = *(int *)(glContext + 0x5148);
+    if (*(char *)(sharedStateThenContainerObject + 0x8024) != '\0') {
+      _pthread_mutex_lock(sharedStateThenContainerObject + 0x8028);
+      sharedStateThenContainerObject = *(int *)(glContext + 0x5148);
     }
-    iVar5 = _gleLookupHashObject(iVar5 + 0x6018,containerObj);
-    if (iVar5 == 0) {
+    sharedStateThenContainerObject = _gleLookupHashObject(sharedStateThenContainerObject + 0x6018,containerObj);
+    if (sharedStateThenContainerObject == 0) {
 LAB_00087554:
       if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
         _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);
@@ -180,54 +181,54 @@ LAB_00087554:
       glErrorCode = 0x501;
       goto LAB_000875fc;
     }
-    if (*(int *)(iVar5 + 0x10) == 0x8b40) {
+    if (*(int *)(sharedStateThenContainerObject + 0x10) == 0x8b40) {
       hashObject = _gleLookupHashObject(*(int *)(glContext + 0x5148) + 0x6018,attachedObj);
       if (hashObject == 0) goto LAB_00087554;
-      iVar9 = *(int *)(iVar5 + 0x48);
+      attachmentCount = *(int *)(sharedStateThenContainerObject + 0x48);
       loopIndex2 = 0;
-      if (0 < iVar9) {
-        srcCursor = *(int **)(iVar5 + 0x44);
+      if (0 < attachmentCount) {
+        srcCursor = *(int **)(sharedStateThenContainerObject + 0x44);
         do {
           if (hashObject == *srcCursor) {
-            bVar1 = true;
+            attachmentFound = true;
           }
           loopIndex2 = loopIndex2 + 1;
           srcCursor = srcCursor + 1;
-          if (iVar9 <= loopIndex2) goto LAB_000875c8;
-        } while (!bVar1);
+          if (attachmentCount <= loopIndex2) goto LAB_000875c8;
+        } while (!attachmentFound);
 LAB_00087604:
-        piVar4 = (int *)0x0;
+        newAttachments = (int *)0x0;
         iVar10 = 1;
-        if (iVar9 != 1) {
-          piVar4 = (int *)_malloc(iVar9 * 4 + -4);
-          iVar10 = *(int *)(iVar5 + 0x48);
+        if (attachmentCount != 1) {
+          newAttachments = (int *)_malloc(attachmentCount * 4 + -4);
+          iVar10 = *(int *)(sharedStateThenContainerObject + 0x48);
         }
         loopIndex = 0;
         if (iVar10 < 1) {
-          iVar7 = *(int *)(iVar5 + 0x44);
+          oldAttachments = *(int *)(sharedStateThenContainerObject + 0x44);
         }
         else {
-          iVar7 = *(int *)(iVar5 + 0x44);
-          dstCursor = piVar4;
+          oldAttachments = *(int *)(sharedStateThenContainerObject + 0x44);
+          dstCursor = newAttachments;
           do {
-            iVar3 = *(int *)(loopIndex * 4 + iVar7);
-            if (hashObject != iVar3) {
-              *dstCursor = iVar3;
+            attachmentEntry = *(int *)(loopIndex * 4 + oldAttachments);
+            if (hashObject != attachmentEntry) {
+              *dstCursor = attachmentEntry;
               dstCursor = dstCursor + 1;
-              iVar10 = *(int *)(iVar5 + 0x48);
-              iVar7 = *(int *)(iVar5 + 0x44);
+              iVar10 = *(int *)(sharedStateThenContainerObject + 0x48);
+              oldAttachments = *(int *)(sharedStateThenContainerObject + 0x44);
             }
             loopIndex = loopIndex + 1;
           } while (loopIndex < iVar10);
         }
-        *(int *)(iVar5 + 0x48) = iVar10 + -1;
-        if (iVar7 != 0) {
-          _free(iVar7);
+        *(int *)(sharedStateThenContainerObject + 0x48) = iVar10 + -1;
+        if (oldAttachments != 0) {
+          _free(oldAttachments);
         }
-        *(int **)(iVar5 + 0x44) = piVar4;
-        iVar5 = *(int *)(hashObject + 8) + -1;
-        *(int *)(hashObject + 8) = iVar5;
-        if (iVar5 == 1) {
+        *(int **)(sharedStateThenContainerObject + 0x44) = newAttachments;
+        attachedRefCount = *(int *)(hashObject + 8) + -1;
+        *(int *)(hashObject + 8) = attachedRefCount;
+        if (attachedRefCount == 1) {
           _gleDeleteHashNameAndObject(glContext,*(int *)(glContext + 0x5148) + 0x6018,attachedObj);
         }
         if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) == '\0') {
@@ -237,7 +238,7 @@ LAB_00087604:
         return;
       }
 LAB_000875c8:
-      if (bVar1) goto LAB_00087604;
+      if (attachmentFound) goto LAB_00087604;
     }
     if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
       _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);
@@ -282,113 +283,113 @@ int _glGetHandleARB_Exec(glContext, pname)
 }
 
 /* _glShaderSourceARB_Exec_body @ 0x87750 (716 bytes) */
-void _glShaderSourceARB_Exec_body(glContext, forwardedArg2, param_3, param_4, param_5)
+void _glShaderSourceARB_Exec_body(glContext, forwardedArg2, stringCount, strings, lengths)
   int glContext;
   undefined4 forwardedArg2;
-  int param_3;
-  int param_4;
-  int param_5;
+  int stringCount;
+  int strings;
+  int lengths;
 {
-  bool bVar1;
-  char cVar2;
+  bool allStringsCopied;
+  char currentChar;
   undefined4 glErrorCode;
-  int iVar4;
-  int iVar5;
-  int iVar6;
-  char *pcVar7;
-  char *pcVar8;
-  int iVar9;
+  int stringOffset;
+  int stringLength;
+  int sharedStateThenShaderObject;
+  char *sourceBuffer;
+  char *writeCursorThenScanCursor;
+  int totalLength;
   int loopIndex;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
-    if (0 < param_3) {
-      iVar6 = *(int *)(glContext + 0x5148);
-      if (*(char *)(iVar6 + 0x8024) != '\0') {
-        _pthread_mutex_lock(iVar6 + 0x8028);
-        iVar6 = *(int *)(glContext + 0x5148);
+    if (0 < stringCount) {
+      sharedStateThenShaderObject = *(int *)(glContext + 0x5148);
+      if (*(char *)(sharedStateThenShaderObject + 0x8024) != '\0') {
+        _pthread_mutex_lock(sharedStateThenShaderObject + 0x8028);
+        sharedStateThenShaderObject = *(int *)(glContext + 0x5148);
       }
-      iVar6 = _gleLookupHashObject(iVar6 + 0x6018,forwardedArg2);
-      if (iVar6 != 0) {
-        if (*(int *)(iVar6 + 0x10) != 0x8b48) {
+      sharedStateThenShaderObject = _gleLookupHashObject(sharedStateThenShaderObject + 0x6018,forwardedArg2);
+      if (sharedStateThenShaderObject != 0) {
+        if (*(int *)(sharedStateThenShaderObject + 0x10) != 0x8b48) {
           if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
             _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);
           }
           goto LAB_000877f0;
         }
-        iVar9 = 0;
+        totalLength = 0;
         loopIndex = 0;
-        if (0 < param_3) {
+        if (0 < stringCount) {
           do {
-            if (param_5 == 0) {
-              iVar4 = loopIndex << 2;
+            if (lengths == 0) {
+              stringOffset = loopIndex << 2;
 LAB_00087834:
-              iVar5 = _strlen(*(undefined4 *)(param_4 + iVar4));
+              stringLength = _strlen(*(undefined4 *)(strings + stringOffset));
             }
             else {
-              iVar4 = loopIndex * 4;
-              iVar5 = *(int *)(param_5 + iVar4);
-              if (iVar5 < 0) goto LAB_00087834;
+              stringOffset = loopIndex * 4;
+              stringLength = *(int *)(lengths + stringOffset);
+              if (stringLength < 0) goto LAB_00087834;
             }
-            iVar9 = iVar9 + iVar5;
+            totalLength = totalLength + stringLength;
             loopIndex = loopIndex + 1;
-          } while (loopIndex < param_3);
+          } while (loopIndex < stringCount);
         }
         loopIndex = 0;
-        bVar1 = param_3 == 0;
-        pcVar7 = (char *)_malloc(iVar9 + 2);
-        pcVar8 = pcVar7;
-        if (0 < param_3) {
+        allStringsCopied = stringCount == 0;
+        sourceBuffer = (char *)_malloc(totalLength + 2);
+        writeCursorThenScanCursor = sourceBuffer;
+        if (0 < stringCount) {
           do {
-            if (param_5 == 0) {
-              iVar4 = loopIndex << 2;
+            if (lengths == 0) {
+              stringOffset = loopIndex << 2;
 LAB_00087894:
-              pcVar8 = _stpcpy(pcVar8,*(char **)(param_4 + iVar4));
+              writeCursorThenScanCursor = _stpcpy(writeCursorThenScanCursor,*(char **)(strings + stringOffset));
             }
             else {
-              iVar4 = loopIndex * 4;
-              if ((int)*(size_t *)(iVar4 + param_5) < 0) goto LAB_00087894;
-              _strncpy(pcVar8,*(char **)(iVar4 + param_4),*(size_t *)(iVar4 + param_5));
-              pcVar8 = pcVar8 + *(int *)(iVar4 + param_5);
-              if (pcVar8[-1] == '\0') break;
+              stringOffset = loopIndex * 4;
+              if ((int)*(size_t *)(stringOffset + lengths) < 0) goto LAB_00087894;
+              _strncpy(writeCursorThenScanCursor,*(char **)(stringOffset + strings),*(size_t *)(stringOffset + lengths));
+              writeCursorThenScanCursor = writeCursorThenScanCursor + *(int *)(stringOffset + lengths);
+              if (writeCursorThenScanCursor[-1] == '\0') break;
             }
             loopIndex = loopIndex + 1;
-            bVar1 = loopIndex == param_3;
-          } while (loopIndex < param_3);
+            allStringsCopied = loopIndex == stringCount;
+          } while (loopIndex < stringCount);
         }
-        *pcVar8 = '\0';
-        if (bVar1) {
+        *writeCursorThenScanCursor = '\0';
+        if (allStringsCopied) {
           loopIndex = 0;
-          cVar2 = *pcVar7;
-          pcVar8 = pcVar7;
-          while (cVar2 != '\0') {
-            if ((cVar2 == '\r') && (pcVar8[1] == '\n')) {
-              *pcVar8 = ' ';
+          currentChar = *sourceBuffer;
+          writeCursorThenScanCursor = sourceBuffer;
+          while (currentChar != '\0') {
+            if ((currentChar == '\r') && (writeCursorThenScanCursor[1] == '\n')) {
+              *writeCursorThenScanCursor = ' ';
             }
-            else if (cVar2 == '\r') {
-              *pcVar8 = '\n';
+            else if (currentChar == '\r') {
+              *writeCursorThenScanCursor = '\n';
             }
-            pcVar8 = pcVar8 + 1;
+            writeCursorThenScanCursor = writeCursorThenScanCursor + 1;
             loopIndex = loopIndex + 1;
-            cVar2 = *pcVar8;
+            currentChar = *writeCursorThenScanCursor;
           }
-          if (pcVar7[loopIndex + -1] != '\n') {
-            iVar9 = iVar9 + 1;
-            pcVar7[loopIndex] = '\n';
-            pcVar7[loopIndex + 1] = '\0';
+          if (sourceBuffer[loopIndex + -1] != '\n') {
+            totalLength = totalLength + 1;
+            sourceBuffer[loopIndex] = '\n';
+            sourceBuffer[loopIndex + 1] = '\0';
           }
-          if (*(int *)(iVar6 + 0x2c) != 0) {
-            _free(*(int *)(iVar6 + 0x2c));
+          if (*(int *)(sharedStateThenShaderObject + 0x2c) != 0) {
+            _free(*(int *)(sharedStateThenShaderObject + 0x2c));
           }
-          *(char **)(iVar6 + 0x2c) = pcVar7;
-          *(undefined1 *)(iVar6 + 0x24) = 1;
-          *(int *)(iVar6 + 0x28) = iVar9;
+          *(char **)(sharedStateThenShaderObject + 0x2c) = sourceBuffer;
+          *(undefined1 *)(sharedStateThenShaderObject + 0x24) = 1;
+          *(int *)(sharedStateThenShaderObject + 0x28) = totalLength;
           if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) == '\0') {
             return;
           }
           _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);
           return;
         }
-        _free(pcVar7);
+        _free(sourceBuffer);
       }
       if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
         _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);
@@ -457,60 +458,60 @@ int _evaluateImageUnits(glContext, program)
   int glContext;
   int program;
 {
-  ushort uVar1;
-  int iVar2;
-  char cVar3;
+  ushort unitType;
+  int unitLimitThenTypeOffsetThenSavedIndex;
+  char stageUsedThenValidFlag;
   undefined4 samplerIndex;
   char *srcCursor;
-  int iVar6;
+  int typeCursorThenStageRecordThenUseCount;
   ushort *dstCursor2;
   ushort *srcCursor2;
   ushort *srcCursor3;
   int *dstCursor;
-  int *piVar10;
+  int *stageRecords;
   int loopIndex;
   uint loopIndex2;
   int *dstCursor3;
   int *srcCursor4;
-  uint uVar14;
-  uint uVar15;
-  int iVar16;
-  int iVar17;
+  uint samplerMaskHigh;
+  uint samplerMaskLow;
+  int stageRecordThenImageUnit;
+  int typeInfoResultThenUnitCount;
   int loopIndex3;
   int remaining;
-  longlong lVar18;
+  longlong nibbleMaskThenTypeBits;
   int savedCounts [32];
   ushort savedTypes [32];
   undefined4 uniformType;
   char stagesUsed [4];
   uint savedValidFlag;
   
-  piVar10 = (int *)(program + 0x20);
+  stageRecords = (int *)(program + 0x20);
   loopIndex = 0;
   savedValidFlag = (uint)*(byte *)(program + 0x3e);
   *(undefined1 *)(program + 0x3e) = 1;
   do {
     if (loopIndex == 0) {
-      iVar16 = *piVar10;
+      stageRecordThenImageUnit = *stageRecords;
       remaining = 0;
     }
     else {
-      iVar16 = *(int *)(program + 0x24);
+      stageRecordThenImageUnit = *(int *)(program + 0x24);
       remaining = 0x10;
     }
     if (remaining != 0) {
       dstCursor3 = savedCounts + loopIndex * 0x10;
       dstCursor2 = savedTypes + loopIndex * 0x10;
-      iVar6 = iVar16 + 0x60;
+      typeCursorThenStageRecordThenUseCount = stageRecordThenImageUnit + 0x60;
       do {
-        *dstCursor3 = *(int *)(iVar16 + 0x2c);
+        *dstCursor3 = *(int *)(stageRecordThenImageUnit + 0x2c);
         dstCursor3 = dstCursor3 + 1;
-        *dstCursor2 = *(ushort *)(iVar6 + 0xc);
+        *dstCursor2 = *(ushort *)(typeCursorThenStageRecordThenUseCount + 0xc);
         dstCursor2 = dstCursor2 + 1;
-        *(undefined4 *)(iVar16 + 0x2c) = 0;
-        iVar16 = iVar16 + 4;
-        *(undefined2 *)(iVar6 + 0xc) = 0;
-        iVar6 = iVar6 + 2;
+        *(undefined4 *)(stageRecordThenImageUnit + 0x2c) = 0;
+        stageRecordThenImageUnit = stageRecordThenImageUnit + 4;
+        *(undefined2 *)(typeCursorThenStageRecordThenUseCount + 0xc) = 0;
+        typeCursorThenStageRecordThenUseCount = typeCursorThenStageRecordThenUseCount + 2;
         remaining = remaining + -1;
       } while (remaining != 0);
     }
@@ -519,81 +520,81 @@ int _evaluateImageUnits(glContext, program)
   loopIndex = 0;
   if (*(int *)(program + 0x30) < 1) {
 LAB_00087d18:
-    cVar3 = *(char *)(program + 0x3e);
+    stageUsedThenValidFlag = *(char *)(program + 0x3e);
   }
   else {
-    cVar3 = *(char *)(program + 0x3e);
-    if (cVar3 == '\x01') {
+    stageUsedThenValidFlag = *(char *)(program + 0x3e);
+    if (stageUsedThenValidFlag == '\x01') {
       do {
         uniformType = 0;
         stagesUsed[0] = '\0';
         stagesUsed[1] = '\0';
-        iVar17 = _ShGetUniformTypeInfo(*(undefined4 *)(program + 0x40),loopIndex,0,&uniformType,stagesUsed);
-        if ((iVar17 != 0) && (uniformType - 0x8b5d < 8)) {
+        typeInfoResultThenUnitCount = _ShGetUniformTypeInfo(*(undefined4 *)(program + 0x40),loopIndex,0,&uniformType,stagesUsed);
+        if ((typeInfoResultThenUnitCount != 0) && (uniformType - 0x8b5d < 8)) {
           loopIndex3 = 0;
           srcCursor = stagesUsed;
           do {
-            cVar3 = *srcCursor;
+            stageUsedThenValidFlag = *srcCursor;
             srcCursor = srcCursor + 1;
-            if (cVar3 != '\0') {
-              iVar16 = *(int *)(*(int *)(program + 0x4c) + loopIndex * 0x10);
+            if (stageUsedThenValidFlag != '\0') {
+              stageRecordThenImageUnit = *(int *)(*(int *)(program + 0x4c) + loopIndex * 0x10);
               if (loopIndex3 == 0) {
-                iVar6 = *piVar10;
-                iVar2 = 0;
+                typeCursorThenStageRecordThenUseCount = *stageRecords;
+                unitLimitThenTypeOffsetThenSavedIndex = 0;
               }
               else {
-                iVar6 = *(int *)(program + 0x24);
-                iVar2 = 0x10;
+                typeCursorThenStageRecordThenUseCount = *(int *)(program + 0x24);
+                unitLimitThenTypeOffsetThenSavedIndex = 0x10;
               }
-              if ((iVar2 <= iVar16) || (iVar16 < 0)) {
+              if ((unitLimitThenTypeOffsetThenSavedIndex <= stageRecordThenImageUnit) || (stageRecordThenImageUnit < 0)) {
 LAB_00087ce4:
                 *(undefined1 *)(program + 0x3e) = 0;
                 break;
               }
-              if (*(int *)(iVar16 * 4 + iVar6 + 0x2c) < 1) {
-                iVar2 = iVar16 << 1;
+              if (*(int *)(stageRecordThenImageUnit * 4 + typeCursorThenStageRecordThenUseCount + 0x2c) < 1) {
+                unitLimitThenTypeOffsetThenSavedIndex = stageRecordThenImageUnit << 1;
               }
               else {
-                iVar2 = iVar16 * 2;
-                if (uniformType != *(ushort *)(iVar2 + iVar6 + 0x6c)) goto LAB_00087ce4;
+                unitLimitThenTypeOffsetThenSavedIndex = stageRecordThenImageUnit * 2;
+                if (uniformType != *(ushort *)(unitLimitThenTypeOffsetThenSavedIndex + typeCursorThenStageRecordThenUseCount + 0x6c)) goto LAB_00087ce4;
               }
-              iVar16 = iVar16 * 4 + iVar6;
-              *(int *)(iVar16 + 0x2c) = *(int *)(iVar16 + 0x2c) + 1;
-              *(undefined2 *)(iVar2 + iVar6 + 0x6c) = (*(unsigned short *)((unsigned char *)&(uniformType) + 2));
+              stageRecordThenImageUnit = stageRecordThenImageUnit * 4 + typeCursorThenStageRecordThenUseCount;
+              *(int *)(stageRecordThenImageUnit + 0x2c) = *(int *)(stageRecordThenImageUnit + 0x2c) + 1;
+              *(undefined2 *)(unitLimitThenTypeOffsetThenSavedIndex + typeCursorThenStageRecordThenUseCount + 0x6c) = (*(unsigned short *)((unsigned char *)&(uniformType) + 2));
             }
             loopIndex3 = loopIndex3 + 1;
           } while (loopIndex3 < 2);
         }
         loopIndex = loopIndex + 1;
         if (*(int *)(program + 0x30) <= loopIndex) goto LAB_00087d18;
-        cVar3 = *(char *)(program + 0x3e);
-      } while (cVar3 == '\x01');
+        stageUsedThenValidFlag = *(char *)(program + 0x3e);
+      } while (stageUsedThenValidFlag == '\x01');
     }
   }
-  if (cVar3 == '\0') {
+  if (stageUsedThenValidFlag == '\0') {
     loopIndex = 0;
     do {
       if (loopIndex == 0) {
-        iVar16 = *piVar10;
+        stageRecordThenImageUnit = *stageRecords;
         remaining = 0;
       }
       else {
-        iVar16 = *(int *)(program + 0x24);
+        stageRecordThenImageUnit = *(int *)(program + 0x24);
         remaining = 0x10;
       }
       if (remaining != 0) {
         srcCursor4 = savedCounts + loopIndex * 0x10;
         srcCursor3 = savedTypes + loopIndex * 0x10;
-        dstCursor = (int *)(iVar16 + 0x2c);
-        dstCursor2 = (ushort *)(iVar16 + 0x6c);
+        dstCursor = (int *)(stageRecordThenImageUnit + 0x2c);
+        dstCursor2 = (ushort *)(stageRecordThenImageUnit + 0x6c);
         do {
-          iVar16 = *srcCursor4;
+          stageRecordThenImageUnit = *srcCursor4;
           srcCursor4 = srcCursor4 + 1;
-          *dstCursor = iVar16;
+          *dstCursor = stageRecordThenImageUnit;
           dstCursor = dstCursor + 1;
-          uVar1 = *srcCursor3;
+          unitType = *srcCursor3;
           srcCursor3 = srcCursor3 + 1;
-          *dstCursor2 = uVar1;
+          *dstCursor2 = unitType;
           dstCursor2 = dstCursor2 + 1;
           remaining = remaining + -1;
         } while (remaining != 0);
@@ -605,42 +606,42 @@ LAB_00087ce4:
     loopIndex = 0;
     do {
       if (loopIndex == 0) {
-        iVar16 = *piVar10;
-        iVar17 = 0;
+        stageRecordThenImageUnit = *stageRecords;
+        typeInfoResultThenUnitCount = 0;
       }
       else {
-        iVar16 = *(int *)(program + 0x24);
-        iVar17 = 0x10;
+        stageRecordThenImageUnit = *(int *)(program + 0x24);
+        typeInfoResultThenUnitCount = 0x10;
       }
       loopIndex2 = 0;
-      *(undefined4 *)(iVar16 + 0x50c) = 0xffffffff;
-      *(undefined4 *)(iVar16 + 0x510) = 0xffffffff;
-      if (iVar17 != 0) {
-        srcCursor2 = (ushort *)(iVar16 + 0x6c);
-        srcCursor4 = (int *)(iVar16 + 0x2c);
+      *(undefined4 *)(stageRecordThenImageUnit + 0x50c) = 0xffffffff;
+      *(undefined4 *)(stageRecordThenImageUnit + 0x510) = 0xffffffff;
+      if (typeInfoResultThenUnitCount != 0) {
+        srcCursor2 = (ushort *)(stageRecordThenImageUnit + 0x6c);
+        srcCursor4 = (int *)(stageRecordThenImageUnit + 0x2c);
         do {
-          iVar6 = *srcCursor4;
+          typeCursorThenStageRecordThenUseCount = *srcCursor4;
           srcCursor4 = srcCursor4 + 1;
-          if (iVar6 != 0) {
-            lVar18 = ___ashldi3(0,0xf,loopIndex2 << 2);
-            uVar15 = *(uint *)(iVar16 + 0x510) & ~(uint)lVar18;
-            uVar14 = *(uint *)(iVar16 + 0x50c) & ~(uint)((ulonglong)lVar18 >> 0x20);
-            uVar1 = *srcCursor2;
-            *(uint *)(iVar16 + 0x50c) = uVar14;
-            *(uint *)(iVar16 + 0x510) = uVar15;
-            samplerIndex = _getIndexForGLSLSamplerType((uint)uVar1);
-            lVar18 = ___ashldi3(0,samplerIndex,loopIndex2 << 2);
-            *(uint *)(iVar16 + 0x50c) = uVar14 | (uint)((ulonglong)lVar18 >> 0x20);
-            *(uint *)(iVar16 + 0x510) = uVar15 | (uint)lVar18;
+          if (typeCursorThenStageRecordThenUseCount != 0) {
+            nibbleMaskThenTypeBits = ___ashldi3(0,0xf,loopIndex2 << 2);
+            samplerMaskLow = *(uint *)(stageRecordThenImageUnit + 0x510) & ~(uint)nibbleMaskThenTypeBits;
+            samplerMaskHigh = *(uint *)(stageRecordThenImageUnit + 0x50c) & ~(uint)((ulonglong)nibbleMaskThenTypeBits >> 0x20);
+            unitType = *srcCursor2;
+            *(uint *)(stageRecordThenImageUnit + 0x50c) = samplerMaskHigh;
+            *(uint *)(stageRecordThenImageUnit + 0x510) = samplerMaskLow;
+            samplerIndex = _getIndexForGLSLSamplerType((uint)unitType);
+            nibbleMaskThenTypeBits = ___ashldi3(0,samplerIndex,loopIndex2 << 2);
+            *(uint *)(stageRecordThenImageUnit + 0x50c) = samplerMaskHigh | (uint)((ulonglong)nibbleMaskThenTypeBits >> 0x20);
+            *(uint *)(stageRecordThenImageUnit + 0x510) = samplerMaskLow | (uint)nibbleMaskThenTypeBits;
           }
           if ((*(int *)(glContext + 0x5430) == program) &&
-             ((iVar2 = loopIndex * 0x10 + loopIndex2, iVar6 != savedCounts[iVar2] ||
-              ((iVar6 != 0 && (*srcCursor2 != savedTypes[iVar2])))))) {
+             ((unitLimitThenTypeOffsetThenSavedIndex = loopIndex * 0x10 + loopIndex2, typeCursorThenStageRecordThenUseCount != savedCounts[unitLimitThenTypeOffsetThenSavedIndex] ||
+              ((typeCursorThenStageRecordThenUseCount != 0 && (*srcCursor2 != savedTypes[unitLimitThenTypeOffsetThenSavedIndex])))))) {
             *(uint *)(glContext + 0x314) = *(uint *)(glContext + 0x314) | 1 << (loopIndex2 & 0x3f);
           }
           loopIndex2 = loopIndex2 + 1;
           srcCursor2 = srcCursor2 + 1;
-        } while ((int)loopIndex2 < iVar17);
+        } while ((int)loopIndex2 < typeInfoResultThenUnitCount);
       }
       loopIndex = loopIndex + 1;
     } while (loopIndex < 2);

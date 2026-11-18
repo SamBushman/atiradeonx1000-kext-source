@@ -2142,128 +2142,129 @@ LAB_0001939c:
 }
 
 /* _gleCreateTextureLevel @ 0x193ac (776 bytes) */
-int _gleCreateTextureLevel(glContext, param_2, param_3, internalformat, param_5, param_6, param_7, border, format, type, param_11, pixels)
+int _gleCreateTextureLevel(glContext, textureObject, textureLevel, internalformat, width, height, depth, border, format, type, levelStorage, pixels)
   int glContext;
-  int param_2;
-  int *param_3;
+  int textureObject;
+  int *textureLevel;
   int internalformat;
-  int param_5;
-  int param_6;
-  int param_7;
+  int width;
+  int height;
+  int depth;
   undefined4 border;
   int format;
   undefined4 type;
-  int param_11;
+  int levelStorage;
   int pixels;
 {
-  byte bVar1;
-  bool bVar2;
-  int iVar3;
+  byte levelFlagsBefore;
+  bool useGenericPath;
+  int framebufferCursor;
+  int allocResult;
   int loopIndex;
-  undefined2 uVar5;
-  undefined2 uVar6;
-  uint local_60;
-  undefined1 auStack_5c [4];
-  uint local_58;
-  undefined1 auStack_54 [4];
-  uint local_50;
-  int local_4c [5];
+  undefined2 height16;
+  undefined2 width16;
+  uint rowBytes;
+  undefined1 rowPadding [4];
+  uint imageBytes;
+  undefined1 imagePadding [4];
+  uint pixelBytes;
+  int startOffset [5];
   
-  bVar1 = *(byte *)((int)param_3 + 0xb);
-  if ((bVar1 & 0x80) != 0) {
+  levelFlagsBefore = *(byte *)((int)textureLevel + 0xb);
+  if ((levelFlagsBefore & 0x80) != 0) {
     loopIndex = 0;
-    iVar3 = *(int *)(glContext + 0x744c) + 0x10;
+    framebufferCursor = *(int *)(glContext + 0x744c) + 0x10;
     *(undefined4 *)(*(int *)(glContext + 0x744c) + 0xec) = 1;
     if (*(char *)(glContext + 0x85a4) != '\0') {
       do {
-        *(undefined4 *)(iVar3 + 0xf8) = 1;
+        *(undefined4 *)(framebufferCursor + 0xf8) = 1;
         loopIndex = loopIndex + 1;
-        *(undefined4 *)(iVar3 + 0xfc) = 0;
-        iVar3 = iVar3 + 0x20;
+        *(undefined4 *)(framebufferCursor + 0xfc) = 0;
+        framebufferCursor = framebufferCursor + 0x20;
       } while (loopIndex < (int)(uint)*(byte *)(glContext + 0x85a4));
     }
     *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000000;
   }
-  *param_3 = *param_3 + 1;
-  if (((param_5 != 0) && (param_6 != 0)) && (param_7 != 0)) {
-    uVar6 = (undefined2)param_5;
-    uVar5 = (undefined2)param_6;
-    if ((*(ushort *)(param_2 + 0x24) & 0x100) != 0) {
-      param_3[5] = 0;
-      *(undefined2 *)(param_3 + 1) = uVar6;
-      *(undefined2 *)((int)param_3 + 6) = uVar5;
-      *(short *)(param_3 + 2) = (short)param_7;
-      *(undefined1 *)((int)param_3 + 0xb) = 0x20;
-      *(char *)((int)param_3 + 10) = (char)border;
-      *(short *)(param_3 + 4) = (short)format;
-      *(short *)((int)param_3 + 0x12) = (short)type;
-      *(undefined2 *)((int)param_3 + 0xe) = 0;
+  *textureLevel = *textureLevel + 1;
+  if (((width != 0) && (height != 0)) && (depth != 0)) {
+    width16 = (undefined2)width;
+    height16 = (undefined2)height;
+    if ((*(ushort *)(textureObject + 0x24) & 0x100) != 0) {
+      textureLevel[5] = 0;
+      *(undefined2 *)(textureLevel + 1) = width16;
+      *(undefined2 *)((int)textureLevel + 6) = height16;
+      *(short *)(textureLevel + 2) = (short)depth;
+      *(undefined1 *)((int)textureLevel + 0xb) = 0x20;
+      *(char *)((int)textureLevel + 10) = (char)border;
+      *(short *)(textureLevel + 4) = (short)format;
+      *(short *)((int)textureLevel + 0x12) = (short)type;
+      *(undefined2 *)((int)textureLevel + 0xe) = 0;
       goto LAB_00019690;
     }
-    if ((((param_11 == 0) || ((format == 0x1900 && (5 < internalformat - 0x80e2U)))) ||
+    if ((((levelStorage == 0) || ((format == 0x1900 && (5 < internalformat - 0x80e2U)))) ||
         (*(char *)(glContext + 0x31e6) == '\0')) ||
        ((*(char *)(glContext + 0x31e4) != '\0' || ((*(uint *)(glContext + 0x3410) & 0x1ff) != 0)))) {
 LAB_000195c0:
-      param_11 = 0;
-      bVar2 = true;
+      levelStorage = 0;
+      useGenericPath = true;
     }
     else {
-      bVar2 = (*(uint *)(glContext + 0x3414) & 0xff0000) == 0;
-      if ((!bVar2) || ((*(uint *)(glContext + 0x3414) & 0xff1) != 0)) goto LAB_000195c0;
-      ((void (*)())_glePixelPackSettings)(glContext,format,type,param_5,param_6,glContext + 0x31cc,&local_50,local_4c,
-                 &local_60,auStack_5c,&local_58,auStack_54);
-      if (local_60 == (local_60 / local_50) * local_50) {
-        pixels = pixels + local_4c[0];
-        *(undefined1 *)((int)param_3 + 0xb) = 0x31;
-        if ((bVar1 & 0x80) != 0) {
-          *(undefined1 *)((int)param_3 + 0xb) = 0xb1;
+      useGenericPath = (*(uint *)(glContext + 0x3414) & 0xff0000) == 0;
+      if ((!useGenericPath) || ((*(uint *)(glContext + 0x3414) & 0xff1) != 0)) goto LAB_000195c0;
+      ((void (*)())_glePixelPackSettings)(glContext,format,type,width,height,glContext + 0x31cc,&pixelBytes,startOffset,
+                 &rowBytes,rowPadding,&imageBytes,imagePadding);
+      if (rowBytes == (rowBytes / pixelBytes) * pixelBytes) {
+        pixels = pixels + startOffset[0];
+        *(undefined1 *)((int)textureLevel + 0xb) = 0x31;
+        if ((levelFlagsBefore & 0x80) != 0) {
+          *(undefined1 *)((int)textureLevel + 0xb) = 0xb1;
         }
-        *(short *)(param_3 + 3) = (short)(local_60 / local_50);
-        param_3[5] = pixels;
-        *(short *)(param_3 + 4) = (short)format;
-        *(short *)((int)param_3 + 0x12) = (short)type;
-        *(short *)((int)param_3 + 0xe) = (short)(local_58 / local_60);
-        bVar2 = false;
+        *(short *)(textureLevel + 3) = (short)(rowBytes / pixelBytes);
+        textureLevel[5] = pixels;
+        *(short *)(textureLevel + 4) = (short)format;
+        *(short *)((int)textureLevel + 0x12) = (short)type;
+        *(short *)((int)textureLevel + 0xe) = (short)(imageBytes / rowBytes);
+        useGenericPath = false;
       }
       else {
-        param_11 = 0;
+        levelStorage = 0;
       }
     }
-    *(undefined2 *)(param_3 + 1) = uVar6;
-    *(undefined2 *)((int)param_3 + 6) = uVar5;
-    *(short *)(param_3 + 2) = (short)param_7;
-    *(char *)((int)param_3 + 10) = (char)border;
-    if (!bVar2) {
+    *(undefined2 *)(textureLevel + 1) = width16;
+    *(undefined2 *)((int)textureLevel + 6) = height16;
+    *(short *)(textureLevel + 2) = (short)depth;
+    *(char *)((int)textureLevel + 10) = (char)border;
+    if (!useGenericPath) {
       return 1;
     }
-    *(undefined1 *)((int)param_3 + 0xb) = 0x20;
-    if ((bVar1 & 0x80) != 0) {
-      *(undefined1 *)((int)param_3 + 0xb) = 0xa0;
+    *(undefined1 *)((int)textureLevel + 0xb) = 0x20;
+    if ((levelFlagsBefore & 0x80) != 0) {
+      *(undefined1 *)((int)textureLevel + 0xb) = 0xa0;
     }
-    *(undefined2 *)(param_3 + 3) = uVar6;
-    *(undefined2 *)((int)param_3 + 0xe) = uVar5;
-    param_3[5] = param_11;
-    _gleTexLevelStorage(glContext,internalformat,format,type,param_3 + 4,(int)param_3 + 0x12,border);
+    *(undefined2 *)(textureLevel + 3) = width16;
+    *(undefined2 *)((int)textureLevel + 0xe) = height16;
+    textureLevel[5] = levelStorage;
+    _gleTexLevelStorage(glContext,internalformat,format,type,textureLevel + 4,(int)textureLevel + 0x12,border);
     if (pixels == 0) {
       return 1;
     }
-    iVar3 = _gleAllocateTextureLevel(glContext,param_2,param_3);
-    if (iVar3 != 0) {
-      *(byte *)((int)param_3 + 0xb) = *(byte *)((int)param_3 + 0xb) | 0x10;
+    allocResult = _gleAllocateTextureLevel(glContext,textureObject,textureLevel);
+    if (allocResult != 0) {
+      *(byte *)((int)textureLevel + 0xb) = *(byte *)((int)textureLevel + 0xb) | 0x10;
       return 1;
     }
   }
-  param_3[5] = 0;
-  *(undefined2 *)((int)param_3 + 0xe) = 0;
-  *(undefined2 *)(param_3 + 1) = 0;
-  *(undefined2 *)((int)param_3 + 6) = 0;
-  *(undefined2 *)(param_3 + 2) = 0;
-  *(undefined1 *)((int)param_3 + 10) = 0;
-  *(undefined1 *)((int)param_3 + 0xb) = 0;
-  *(undefined2 *)(param_3 + 4) = 0;
-  *(undefined2 *)((int)param_3 + 0x12) = 0;
+  textureLevel[5] = 0;
+  *(undefined2 *)((int)textureLevel + 0xe) = 0;
+  *(undefined2 *)(textureLevel + 1) = 0;
+  *(undefined2 *)((int)textureLevel + 6) = 0;
+  *(undefined2 *)(textureLevel + 2) = 0;
+  *(undefined1 *)((int)textureLevel + 10) = 0;
+  *(undefined1 *)((int)textureLevel + 0xb) = 0;
+  *(undefined2 *)(textureLevel + 4) = 0;
+  *(undefined2 *)((int)textureLevel + 0x12) = 0;
 LAB_00019690:
-  *(undefined2 *)(param_3 + 3) = 0;
+  *(undefined2 *)(textureLevel + 3) = 0;
   return 0;
 }
 
@@ -2506,36 +2507,36 @@ int _gleTextureImagePut_Fast(glContext, textureLevel, xoffset, yoffset, width, h
   bool bVar1;
   int iVar2;
   int iVar3;
-  int iVar4;
-  undefined4 uVar5;
-  int iVar6;
-  int iVar7;
-  int local_60;
-  undefined1 auStack_5c [4];
-  undefined1 auStack_58 [4];
-  undefined1 auStack_54 [4];
-  int local_50;
-  int local_4c [6];
+  int levelRowBytes;
+  undefined4 putResult;
+  int levelRowComponents;
+  int destPixels;
+  int srcRowBytes;
+  undefined1 srcRowPadding [4];
+  undefined1 srcImageBytes [4];
+  undefined1 srcImagePadding [4];
+  int srcPixelBytes;
+  int srcStartThenPointer [6];
   
   iVar2 = ((int (*)())_gleComponents)((uint)*(ushort *)(textureLevel + 0x10));
   iVar3 = ((int (*)())_glePixelBytes)((uint)*(ushort *)(textureLevel + 0x10),(uint)*(ushort *)(textureLevel + 0x12));
-  iVar6 = iVar2 * (uint)*(ushort *)(textureLevel + 0xc);
-  iVar4 = ((int (*)())_gleRowBytes)((uint)*(ushort *)(textureLevel + 0x10),(uint)*(ushort *)(textureLevel + 0x12),
+  levelRowComponents = iVar2 * (uint)*(ushort *)(textureLevel + 0xc);
+  levelRowBytes = ((int (*)())_gleRowBytes)((uint)*(ushort *)(textureLevel + 0x10),(uint)*(ushort *)(textureLevel + 0x12),
                        (uint)*(ushort *)(textureLevel + 0xc));
-  iVar7 = *(int *)(textureLevel + 0x14) + iVar3 * ((uint)*(ushort *)(textureLevel + 0xc) * yoffset + xoffset);
-  ((void (*)())_glePixelPackSettings)(glContext,format,type,width,height,forwardedArg9,&local_50,local_4c,&local_60,auStack_5c
-             ,auStack_58,auStack_54);
+  destPixels = *(int *)(textureLevel + 0x14) + iVar3 * ((uint)*(ushort *)(textureLevel + 0xc) * yoffset + xoffset);
+  ((void (*)())_glePixelPackSettings)(glContext,format,type,width,height,forwardedArg9,&srcPixelBytes,srcStartThenPointer,&srcRowBytes,srcRowPadding
+             ,srcImageBytes,srcImagePadding);
   iVar3 = ((int (*)())_gleComponents)(format);
-  local_4c[0] = pixels + local_4c[0];
-  iVar2 = iVar6 - iVar2 * width;
+  srcStartThenPointer[0] = pixels + srcStartThenPointer[0];
+  iVar2 = levelRowComponents - iVar2 * width;
   iVar3 = iVar3 * width;
-  if ((local_4c[0] == iVar7) && (local_60 == iVar4)) {
+  if ((srcStartThenPointer[0] == destPixels) && (srcRowBytes == levelRowBytes)) {
     return 1;
   }
   if (type == 0x140b) {
 LAB_00019e6c:
     if ((*(ushort *)(textureLevel + 0x10) == format) && (*(ushort *)(textureLevel + 0x12) == type)) {
-      _gleCopy(local_4c[0],iVar7,width * local_50,height,local_60,iVar4);
+      _gleCopy(srcStartThenPointer[0],destPixels,width * srcPixelBytes,height,srcRowBytes,levelRowBytes);
       return 1;
     }
     return 0;
@@ -2543,38 +2544,38 @@ LAB_00019e6c:
   if (type < 0x140c) {
     if (type == 0x1403) {
       if (*(short *)(textureLevel + 0x12) == 0x1401) {
-        uVar5 = _gleTextureImagePut_FastUshort
-                          (glContext,width,height,local_4c[0],iVar7,local_60,iVar3,iVar2,iVar6,
+        putResult = _gleTextureImagePut_FastUshort
+                          (glContext,width,height,srcStartThenPointer[0],destPixels,srcRowBytes,iVar3,iVar2,levelRowComponents,
                            (uint)*(ushort *)(textureLevel + 0x10),format);
-        return uVar5;
+        return putResult;
       }
       return 0;
     }
     if (type < 0x1404) {
       if (type == 0x1401) {
         if (*(short *)(textureLevel + 0x12) == 0x1401) {
-          uVar5 = _gleTextureImagePut_FastUbyte
-                            (glContext,width,height,local_4c[0],iVar7,local_60,iVar3,iVar2,iVar6,
+          putResult = _gleTextureImagePut_FastUbyte
+                            (glContext,width,height,srcStartThenPointer[0],destPixels,srcRowBytes,iVar3,iVar2,levelRowComponents,
                              (uint)*(ushort *)(textureLevel + 0x10),format);
-          return uVar5;
+          return putResult;
         }
         return 0;
       }
       if (0x1401 < type) {
         if (*(short *)(textureLevel + 0x12) == 0x1401) {
-          uVar5 = _gleTextureImagePut_FastShort
-                            (glContext,width,height,local_4c[0],iVar7,local_60,iVar3,iVar2,iVar6,
+          putResult = _gleTextureImagePut_FastShort
+                            (glContext,width,height,srcStartThenPointer[0],destPixels,srcRowBytes,iVar3,iVar2,levelRowComponents,
                              (uint)*(ushort *)(textureLevel + 0x10),format);
-          return uVar5;
+          return putResult;
         }
         return 0;
       }
       if (type == 0x1400) {
         if (*(short *)(textureLevel + 0x12) == 0x1401) {
-          uVar5 = _gleTextureImagePut_FastByte
-                            (glContext,width,height,local_4c[0],iVar7,local_60,iVar3,iVar2,iVar6,
+          putResult = _gleTextureImagePut_FastByte
+                            (glContext,width,height,srcStartThenPointer[0],destPixels,srcRowBytes,iVar3,iVar2,levelRowComponents,
                              (uint)*(ushort *)(textureLevel + 0x10),format);
-          return uVar5;
+          return putResult;
         }
         return 0;
       }
@@ -2582,19 +2583,19 @@ LAB_00019e6c:
     else {
       if (type == 0x1405) {
         if (*(short *)(textureLevel + 0x12) == 0x1401) {
-          uVar5 = _gleTextureImagePut_FastUint
-                            (glContext,width,height,local_4c[0],iVar7,local_60,iVar3,iVar2,iVar6,
+          putResult = _gleTextureImagePut_FastUint
+                            (glContext,width,height,srcStartThenPointer[0],destPixels,srcRowBytes,iVar3,iVar2,levelRowComponents,
                              (uint)*(ushort *)(textureLevel + 0x10),format);
-          return uVar5;
+          return putResult;
         }
         return 0;
       }
       if (type < 0x1405) {
         if (*(short *)(textureLevel + 0x12) == 0x1401) {
-          uVar5 = _gleTextureImagePut_FastInt
-                            (glContext,width,height,local_4c[0],iVar7,local_60,iVar3,iVar2,iVar6,
+          putResult = _gleTextureImagePut_FastInt
+                            (glContext,width,height,srcStartThenPointer[0],destPixels,srcRowBytes,iVar3,iVar2,levelRowComponents,
                              (uint)*(ushort *)(textureLevel + 0x10),format);
-          return uVar5;
+          return putResult;
         }
         return 0;
       }
@@ -4629,9 +4630,9 @@ LAB_0001cd44:
 void _gleUpdateDrawArraysFuncs(glContext)
   int glContext;
 {
-  int iVar1;
-  undefined *puVar2;
-  uint uVar3;
+  int multiDrawElementArraySlot;
+  undefined *handlerPtr;
+  uint selectMask;
   uint glContextWord4680;
   uint glContextPtr4684;
   
@@ -4639,90 +4640,90 @@ void _gleUpdateDrawArraysFuncs(glContext)
     return;
   }
   if ((*(char *)(glContext + 0x759c) == '\0') || (*(char *)(glContext + 0x759d) == '\0')) {
-    uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0xc) == 0);
+    selectMask = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0xc) == 0);
     *(undefined **)
-     ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0xc) =
+     ((*(uint *)(glContext + 0x4680) & selectMask | *(uint *)(glContext + 0x4684) & ~selectMask) + 0xc) =
          PTR__glArrayElement_NoopExec_00112110;
-    uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x104) == 0);
+    selectMask = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x104) == 0);
     *(undefined **)
-     ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x104) =
+     ((*(uint *)(glContext + 0x4680) & selectMask | *(uint *)(glContext + 0x4684) & ~selectMask) + 0x104) =
          PTR__glDrawArrays_NoopExec_0011210c;
-    uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x10c) == 0);
+    selectMask = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x10c) == 0);
     *(undefined **)
-     ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x10c) =
+     ((*(uint *)(glContext + 0x4680) & selectMask | *(uint *)(glContext + 0x4684) & ~selectMask) + 0x10c) =
          PTR__glDrawElements_NoopExec_00112108;
-    uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x654) == 0);
+    selectMask = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x654) == 0);
     *(undefined **)
-     ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x654) =
+     ((*(uint *)(glContext + 0x4680) & selectMask | *(uint *)(glContext + 0x4684) & ~selectMask) + 0x654) =
          PTR__glDrawRangeElements_NoopExec_00112104;
-    uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x8dc) == 0);
+    selectMask = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x8dc) == 0);
     *(undefined **)
-     ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x8dc) =
+     ((*(uint *)(glContext + 0x4680) & selectMask | *(uint *)(glContext + 0x4684) & ~selectMask) + 0x8dc) =
          PTR__glMultiDrawArrays_NoopExec_00112100;
-    uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x8e0) == 0);
+    selectMask = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x8e0) == 0);
     *(undefined **)
-     ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x8e0) =
+     ((*(uint *)(glContext + 0x4680) & selectMask | *(uint *)(glContext + 0x4684) & ~selectMask) + 0x8e0) =
          PTR__glMultiDrawElements_NoopExec_001120fc;
-    uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x8b0) == 0);
+    selectMask = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x8b0) == 0);
     *(undefined **)
-     ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x8b0) =
+     ((*(uint *)(glContext + 0x4680) & selectMask | *(uint *)(glContext + 0x4684) & ~selectMask) + 0x8b0) =
          PTR__glDrawRangeElementArrayAPPLE_NoopExec_001120f8;
-    uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x8ac) == 0);
+    selectMask = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x8ac) == 0);
     *(undefined **)
-     ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x8ac) =
+     ((*(uint *)(glContext + 0x4680) & selectMask | *(uint *)(glContext + 0x4684) & ~selectMask) + 0x8ac) =
          PTR__glDrawElementArrayAPPLE_NoopExec_001120f4;
-    uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0xa60) == 0);
+    selectMask = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0xa60) == 0);
     *(undefined **)
-     ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0xa60) =
+     ((*(uint *)(glContext + 0x4680) & selectMask | *(uint *)(glContext + 0x4684) & ~selectMask) + 0xa60) =
          PTR__glMultiDrawRangeElementArrayAPPLE_NoopExec_001120f0;
     glContextPtr4684 = *(uint *)(glContext + 0x4684);
     glContextWord4680 = *(uint *)(glContext + 0x4680);
-    iVar1 = *(int *)(glContextPtr4684 + 0xa5c);
-    puVar2 = PTR__glMultiDrawElementArrayAPPLE_NoopExec_001120ec;
+    multiDrawElementArraySlot = *(int *)(glContextPtr4684 + 0xa5c);
+    handlerPtr = PTR__glMultiDrawElementArrayAPPLE_NoopExec_001120ec;
   }
   else {
-    uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0xc) == 0);
+    selectMask = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0xc) == 0);
     *(undefined **)
-     ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0xc) =
+     ((*(uint *)(glContext + 0x4680) & selectMask | *(uint *)(glContext + 0x4684) & ~selectMask) + 0xc) =
          PTR__glArrayElement_Exec_001120e8;
-    uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x104) == 0);
+    selectMask = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x104) == 0);
     *(undefined **)
-     ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x104) =
+     ((*(uint *)(glContext + 0x4680) & selectMask | *(uint *)(glContext + 0x4684) & ~selectMask) + 0x104) =
          PTR__glDrawArrays_Exec_001120e4;
-    uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x10c) == 0);
+    selectMask = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x10c) == 0);
     *(undefined **)
-     ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x10c) =
+     ((*(uint *)(glContext + 0x4680) & selectMask | *(uint *)(glContext + 0x4684) & ~selectMask) + 0x10c) =
          PTR__glDrawElements_Exec_001120e0;
-    uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x654) == 0);
+    selectMask = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x654) == 0);
     *(undefined **)
-     ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x654) =
+     ((*(uint *)(glContext + 0x4680) & selectMask | *(uint *)(glContext + 0x4684) & ~selectMask) + 0x654) =
          PTR__glDrawRangeElements_Exec_001120dc;
-    uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x8dc) == 0);
+    selectMask = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x8dc) == 0);
     *(undefined **)
-     ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x8dc) =
+     ((*(uint *)(glContext + 0x4680) & selectMask | *(uint *)(glContext + 0x4684) & ~selectMask) + 0x8dc) =
          PTR__glMultiDrawArrays_Exec_001120d8;
-    uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x8e0) == 0);
+    selectMask = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x8e0) == 0);
     *(undefined **)
-     ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x8e0) =
+     ((*(uint *)(glContext + 0x4680) & selectMask | *(uint *)(glContext + 0x4684) & ~selectMask) + 0x8e0) =
          PTR__glMultiDrawElements_Exec_001120d4;
-    uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x8b0) == 0);
+    selectMask = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x8b0) == 0);
     *(undefined **)
-     ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x8b0) =
+     ((*(uint *)(glContext + 0x4680) & selectMask | *(uint *)(glContext + 0x4684) & ~selectMask) + 0x8b0) =
          PTR__glDrawRangeElementArrayAPPLE_Exec_001120d0;
-    uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x8ac) == 0);
+    selectMask = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x8ac) == 0);
     *(undefined **)
-     ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x8ac) =
+     ((*(uint *)(glContext + 0x4680) & selectMask | *(uint *)(glContext + 0x4684) & ~selectMask) + 0x8ac) =
          PTR__glDrawElementArrayAPPLE_Exec_001120cc;
-    uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0xa60) == 0);
+    selectMask = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0xa60) == 0);
     *(undefined **)
-     ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0xa60) =
+     ((*(uint *)(glContext + 0x4680) & selectMask | *(uint *)(glContext + 0x4684) & ~selectMask) + 0xa60) =
          PTR__glMultiDrawRangeElementArrayAPPLE_Exec_001120c8;
     glContextPtr4684 = *(uint *)(glContext + 0x4684);
     glContextWord4680 = *(uint *)(glContext + 0x4680);
-    iVar1 = *(int *)(glContextPtr4684 + 0xa5c);
-    puVar2 = PTR__glMultiDrawElementArrayAPPLE_Exec_001120c4;
+    multiDrawElementArraySlot = *(int *)(glContextPtr4684 + 0xa5c);
+    handlerPtr = PTR__glMultiDrawElementArrayAPPLE_Exec_001120c4;
   }
-  *(undefined **)((glContextWord4680 & -(uint)(iVar1 == 0) | glContextPtr4684 & ~-(uint)(iVar1 == 0)) + 0xa5c) = puVar2;
+  *(undefined **)((glContextWord4680 & -(uint)(multiDrawElementArraySlot == 0) | glContextPtr4684 & ~-(uint)(multiDrawElementArraySlot == 0)) + 0xa5c) = handlerPtr;
   return;
 }
 
@@ -5353,93 +5354,93 @@ int _gleCreateFuncCacheElem(param_1, param_2)
 }
 
 /* _gleCalculateOptions @ 0x1df24 (468 bytes) */
-int _gleCalculateOptions(param_1, param_2)
-  uint *param_1;
-  int param_2;
+int _gleCalculateOptions(functionId, attributeCount)
+  uint *functionId;
+  int attributeCount;
 {
-  uint uVar1;
-  bool bVar2;
-  uint uVar3;
+  uint attributeIndex;
+  bool typeAndSizeMatch;
+  uint typeCode;
   ushort uVar4;
-  uint uVar5;
+  uint options;
   ushort *srcCursor;
-  uint *puVar7;
-  ushort uVar8;
+  uint *selectorWordCursor;
+  ushort selectorComponentCount;
   int loopIndex;
-  int iVar10;
-  int iVar11;
+  int attribute6ByteOffset;
+  int highAttributeByteOffset;
   int remaining;
   
-  uVar5 = 0;
-  iVar11 = 0;
-  iVar10 = -1;
+  options = 0;
+  highAttributeByteOffset = 0;
+  attribute6ByteOffset = -1;
   loopIndex = 0;
-  if (0 < param_2) {
-    srcCursor = (ushort *)((int)param_1 + param_2 * 2 + 4);
-    puVar7 = param_1 + 1;
-    remaining = param_2;
+  if (0 < attributeCount) {
+    srcCursor = (ushort *)((int)functionId + attributeCount * 2 + 4);
+    selectorWordCursor = functionId + 1;
+    remaining = attributeCount;
     do {
-      uVar4 = *(ushort *)puVar7;
-      uVar1 = (uint)(uVar4 >> 10);
-      if (uVar1 == 6) {
+      uVar4 = *(ushort *)selectorWordCursor;
+      attributeIndex = (uint)(uVar4 >> 10);
+      if (attributeIndex == 6) {
         if (((*srcCursor >> 10 & 0xf) == 0xe) && ((uVar4 >> 6 & 3) == 1)) {
-          iVar10 = (uVar4 & 0x3f) << 2;
+          attribute6ByteOffset = (uVar4 & 0x3f) << 2;
         }
       }
-      else if (uVar1 < 0x2a) {
-        bVar2 = false;
-        if (uVar1 < 0x20) {
-          uVar3 = *(ushort *)((int)param_1 + (param_2 + loopIndex) * 2 + 4) >> 10 & 0xf;
-          if ((uVar3 < 6) || (uVar3 - 8 < 6)) {
+      else if (attributeIndex < 0x2a) {
+        typeAndSizeMatch = false;
+        if (attributeIndex < 0x20) {
+          typeCode = *(ushort *)((int)functionId + (attributeCount + loopIndex) * 2 + 4) >> 10 & 0xf;
+          if ((typeCode < 6) || (typeCode - 8 < 6)) {
             uVar4 = uVar4 >> 6 & 3;
-            if ((((uVar3 < 2) || ((uVar3 == 8 || (uVar3 == 9)))) && (uVar4 == 1)) ||
-               ((((uVar3 - 2 < 2 || (uVar3 == 10)) || (uVar3 == 0xb)) && (uVar4 == 2)))) {
-              bVar2 = true;
+            if ((((typeCode < 2) || ((typeCode == 8 || (typeCode == 9)))) && (uVar4 == 1)) ||
+               ((((typeCode - 2 < 2 || (typeCode == 10)) || (typeCode == 0xb)) && (uVar4 == 2)))) {
+              typeAndSizeMatch = true;
             }
             else {
-              uVar5 = uVar5 | 4;
+              options = options | 4;
             }
           }
         }
         else {
-          uVar5 = uVar5 | 1 << (uVar1 & 1);
+          options = options | 1 << (attributeIndex & 1);
         }
-        uVar8 = (*(ushort *)puVar7 >> 8 & 3) + 1;
-        uVar4 = (*(ushort *)((int)param_1 + (param_2 + loopIndex) * 2 + 4) >> 0xe) + 1;
-        if ((uVar4 < uVar8) && (!bVar2)) {
-          if ((uVar1 == 5) || (uVar8 != 4)) {
-            uVar5 = uVar5 | 8;
+        selectorComponentCount = (*(ushort *)selectorWordCursor >> 8 & 3) + 1;
+        uVar4 = (*(ushort *)((int)functionId + (attributeCount + loopIndex) * 2 + 4) >> 0xe) + 1;
+        if ((uVar4 < selectorComponentCount) && (!typeAndSizeMatch)) {
+          if ((attributeIndex == 5) || (selectorComponentCount != 4)) {
+            options = options | 8;
           }
           else if (uVar4 == 3) {
-            uVar5 = uVar5 | 0x10;
+            options = options | 0x10;
           }
-          else if ((*param_1 & 0x200000) == 0) {
-            uVar5 = uVar5 | 0x18;
+          else if ((*functionId & 0x200000) == 0) {
+            options = options | 0x18;
           }
           else if (uVar4 == 2) {
-            uVar5 = uVar5 | 0x20;
+            options = options | 0x20;
           }
           else {
-            uVar5 = uVar5 | 0x28;
+            options = options | 0x28;
           }
         }
       }
-      else if (uVar1 < 0x2c) {
-        uVar5 = uVar5 | 1 << (uVar1 - 0x2a & 0x3f);
+      else if (attributeIndex < 0x2c) {
+        options = options | 1 << (attributeIndex - 0x2a & 0x3f);
       }
       else {
-        iVar11 = (uVar4 & 0x3f) << 2;
+        highAttributeByteOffset = (uVar4 & 0x3f) << 2;
       }
       loopIndex = loopIndex + 1;
       srcCursor = srcCursor + 1;
-      puVar7 = (uint *)((int)puVar7 + 2);
+      selectorWordCursor = (uint *)((int)selectorWordCursor + 2);
       remaining = remaining + -1;
     } while (remaining != 0);
   }
-  if (iVar10 == iVar11) {
-    uVar5 = uVar5 | 0x40;
+  if (attribute6ByteOffset == highAttributeByteOffset) {
+    options = options | 0x40;
   }
-  return uVar5;
+  return options;
 }
 
 /* _gleLoadForOptionsNO @ 0x1e0f8 (172 bytes) */

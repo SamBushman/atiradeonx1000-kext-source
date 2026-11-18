@@ -1620,14 +1620,14 @@ void _glGetUniformfvARB_Exec(glContext, programObj, location, params)
   int location;
   float *params;
 {
-  float fVar1;
-  double dVar2;
+  float lastComponent;
+  double intToDoubleBias;
   undefined4 glErrorCode;
-  int iVar4;
+  int sharedStateThenProgramObject;
   int locationValueOffset;
-  int iVar5;
+  int uniformValues;
   int typeInfoFound;
-  uint *puVar6;
+  uint *uniformValue;
   undefined1 auStack_38 [4];
   uint uniformType;
   undefined2 uniformStageUse [14];
@@ -1643,13 +1643,13 @@ LAB_0008f164:
     *(undefined4 *)(glContext + 0x7574) = glErrorCode;
     return;
   }
-  iVar4 = *(int *)(glContext + 0x5148);
-  if (*(char *)(iVar4 + 0x8024) != '\0') {
-    _pthread_mutex_lock(iVar4 + 0x8028);
-    iVar4 = *(int *)(glContext + 0x5148);
+  sharedStateThenProgramObject = *(int *)(glContext + 0x5148);
+  if (*(char *)(sharedStateThenProgramObject + 0x8024) != '\0') {
+    _pthread_mutex_lock(sharedStateThenProgramObject + 0x8028);
+    sharedStateThenProgramObject = *(int *)(glContext + 0x5148);
   }
-  iVar4 = _gleLookupHashObject(iVar4 + 0x6018,programObj);
-  if (iVar4 == 0) {
+  sharedStateThenProgramObject = _gleLookupHashObject(sharedStateThenProgramObject + 0x6018,programObj);
+  if (sharedStateThenProgramObject == 0) {
     if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
       _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);
     }
@@ -1659,100 +1659,100 @@ LAB_0008f164:
     glErrorCode = 0x501;
     goto LAB_0008f164;
   }
-  if ((((*(int *)(iVar4 + 0x10) != 0x8b40) || (*(char *)(iVar4 + 0x3c) != '\x01')) ||
-      (*(int *)(iVar4 + 0x30) <= location)) ||
+  if ((((*(int *)(sharedStateThenProgramObject + 0x10) != 0x8b40) || (*(char *)(sharedStateThenProgramObject + 0x3c) != '\x01')) ||
+      (*(int *)(sharedStateThenProgramObject + 0x30) <= location)) ||
      ((location == -1 ||
       (typeInfoFound = _ShGetUniformTypeInfo
-                         (*(undefined4 *)(iVar4 + 0x40),location,auStack_38,&uniformType,uniformStageUse),
-      dVar2 = DOUBLE_00108d58, typeInfoFound == 0)))) {
+                         (*(undefined4 *)(sharedStateThenProgramObject + 0x40),location,auStack_38,&uniformType,uniformStageUse),
+      intToDoubleBias = DOUBLE_00108d58, typeInfoFound == 0)))) {
     if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
       _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);
     }
     goto LAB_0008f154;
   }
-  iVar5 = *(int *)(iVar4 + 0x4c);
+  uniformValues = *(int *)(sharedStateThenProgramObject + 0x4c);
   locationValueOffset = location * 0x10;
-  puVar6 = (uint *)(iVar5 + locationValueOffset);
+  uniformValue = (uint *)(uniformValues + locationValueOffset);
   if (uniformType == 0x8b56) {
 LAB_0008f414:
-    fVar1 = (float)((double)CONCAT44(0x43300000,*puVar6 ^ 0x80000000) - DOUBLE_00108d58);
+    lastComponent = (float)((double)CONCAT44(0x43300000,*uniformValue ^ 0x80000000) - DOUBLE_00108d58);
   }
   else {
     if (0x8b56 < uniformType) {
       if (uniformType == 0x8b5a) {
-        *params = *(float *)(iVar5 + locationValueOffset);
-        params[1] = GH_U2F((unsigned int)(puVar6[1]));
-        params[2] = GH_U2F((unsigned int)(puVar6[4]));
-        fVar1 = GH_U2F((unsigned int)(puVar6[5]));
+        *params = *(float *)(uniformValues + locationValueOffset);
+        params[1] = GH_U2F((unsigned int)(uniformValue[1]));
+        params[2] = GH_U2F((unsigned int)(uniformValue[4]));
+        lastComponent = GH_U2F((unsigned int)(uniformValue[5]));
 LAB_0008f460:
-        params[3] = fVar1;
+        params[3] = lastComponent;
         goto LAB_0008f534;
       }
       if (uniformType < 0x8b5b) {
         if (uniformType != 0x8b58) {
           if (0x8b58 < uniformType) {
 LAB_0008f290:
-            *params = (float)((double)CONCAT44(0x43300000,*puVar6 ^ 0x80000000) - DOUBLE_00108d58);
-            params[1] = (float)((double)CONCAT44(0x43300000,puVar6[1] ^ 0x80000000) - dVar2);
-            params[2] = (float)((double)CONCAT44(0x43300000,puVar6[2] ^ 0x80000000) - dVar2);
-            params[3] = (float)((double)CONCAT44(0x43300000,puVar6[3] ^ 0x80000000) - dVar2);
+            *params = (float)((double)CONCAT44(0x43300000,*uniformValue ^ 0x80000000) - DOUBLE_00108d58);
+            params[1] = (float)((double)CONCAT44(0x43300000,uniformValue[1] ^ 0x80000000) - intToDoubleBias);
+            params[2] = (float)((double)CONCAT44(0x43300000,uniformValue[2] ^ 0x80000000) - intToDoubleBias);
+            params[3] = (float)((double)CONCAT44(0x43300000,uniformValue[3] ^ 0x80000000) - intToDoubleBias);
             goto LAB_0008f534;
           }
           goto LAB_0008f3bc;
         }
 LAB_0008f338:
-        *params = (float)((double)CONCAT44(0x43300000,*puVar6 ^ 0x80000000) - DOUBLE_00108d58);
-        params[1] = (float)((double)CONCAT44(0x43300000,puVar6[1] ^ 0x80000000) - dVar2);
-        fVar1 = (float)((double)CONCAT44(0x43300000,puVar6[2] ^ 0x80000000) - dVar2);
+        *params = (float)((double)CONCAT44(0x43300000,*uniformValue ^ 0x80000000) - DOUBLE_00108d58);
+        params[1] = (float)((double)CONCAT44(0x43300000,uniformValue[1] ^ 0x80000000) - intToDoubleBias);
+        lastComponent = (float)((double)CONCAT44(0x43300000,uniformValue[2] ^ 0x80000000) - intToDoubleBias);
         goto LAB_0008f3a0;
       }
       if (uniformType == 0x8b5c) {
-        *params = *(float *)(iVar5 + locationValueOffset);
-        params[1] = GH_U2F((unsigned int)(puVar6[1]));
-        params[2] = GH_U2F((unsigned int)(puVar6[2]));
-        params[3] = GH_U2F((unsigned int)(puVar6[3]));
-        params[4] = GH_U2F((unsigned int)(puVar6[4]));
-        params[5] = GH_U2F((unsigned int)(puVar6[5]));
-        params[6] = GH_U2F((unsigned int)(puVar6[6]));
-        params[7] = GH_U2F((unsigned int)(puVar6[7]));
-        params[8] = GH_U2F((unsigned int)(puVar6[8]));
-        params[9] = GH_U2F((unsigned int)(puVar6[9]));
-        params[10] = GH_U2F((unsigned int)(puVar6[10]));
-        params[0xb] = GH_U2F((unsigned int)(puVar6[0xb]));
-        params[0xc] = GH_U2F((unsigned int)(puVar6[0xc]));
-        params[0xd] = GH_U2F((unsigned int)(puVar6[0xd]));
-        params[0xe] = GH_U2F((unsigned int)(puVar6[0xe]));
-        params[0xf] = GH_U2F((unsigned int)(puVar6[0xf]));
+        *params = *(float *)(uniformValues + locationValueOffset);
+        params[1] = GH_U2F((unsigned int)(uniformValue[1]));
+        params[2] = GH_U2F((unsigned int)(uniformValue[2]));
+        params[3] = GH_U2F((unsigned int)(uniformValue[3]));
+        params[4] = GH_U2F((unsigned int)(uniformValue[4]));
+        params[5] = GH_U2F((unsigned int)(uniformValue[5]));
+        params[6] = GH_U2F((unsigned int)(uniformValue[6]));
+        params[7] = GH_U2F((unsigned int)(uniformValue[7]));
+        params[8] = GH_U2F((unsigned int)(uniformValue[8]));
+        params[9] = GH_U2F((unsigned int)(uniformValue[9]));
+        params[10] = GH_U2F((unsigned int)(uniformValue[10]));
+        params[0xb] = GH_U2F((unsigned int)(uniformValue[0xb]));
+        params[0xc] = GH_U2F((unsigned int)(uniformValue[0xc]));
+        params[0xd] = GH_U2F((unsigned int)(uniformValue[0xd]));
+        params[0xe] = GH_U2F((unsigned int)(uniformValue[0xe]));
+        params[0xf] = GH_U2F((unsigned int)(uniformValue[0xf]));
         goto LAB_0008f534;
       }
       if (uniformType < 0x8b5c) {
-        *params = *(float *)(iVar5 + locationValueOffset);
-        params[1] = GH_U2F((unsigned int)(puVar6[1]));
-        params[2] = GH_U2F((unsigned int)(puVar6[2]));
-        params[3] = GH_U2F((unsigned int)(puVar6[4]));
-        params[4] = GH_U2F((unsigned int)(puVar6[5]));
-        params[5] = GH_U2F((unsigned int)(puVar6[6]));
-        params[6] = GH_U2F((unsigned int)(puVar6[8]));
-        params[7] = GH_U2F((unsigned int)(puVar6[9]));
-        params[8] = GH_U2F((unsigned int)(puVar6[10]));
+        *params = *(float *)(uniformValues + locationValueOffset);
+        params[1] = GH_U2F((unsigned int)(uniformValue[1]));
+        params[2] = GH_U2F((unsigned int)(uniformValue[2]));
+        params[3] = GH_U2F((unsigned int)(uniformValue[4]));
+        params[4] = GH_U2F((unsigned int)(uniformValue[5]));
+        params[5] = GH_U2F((unsigned int)(uniformValue[6]));
+        params[6] = GH_U2F((unsigned int)(uniformValue[8]));
+        params[7] = GH_U2F((unsigned int)(uniformValue[9]));
+        params[8] = GH_U2F((unsigned int)(uniformValue[10]));
         goto LAB_0008f534;
       }
       if (0x8b64 < uniformType) goto LAB_0008f534;
       goto LAB_0008f414;
     }
     if (uniformType == 0x8b51) {
-      *params = *(float *)(iVar5 + locationValueOffset);
-      params[1] = GH_U2F((unsigned int)(puVar6[1]));
-      fVar1 = GH_U2F((unsigned int)(puVar6[2]));
+      *params = *(float *)(uniformValues + locationValueOffset);
+      params[1] = GH_U2F((unsigned int)(uniformValue[1]));
+      lastComponent = GH_U2F((unsigned int)(uniformValue[2]));
 LAB_0008f3a0:
-      params[2] = fVar1;
+      params[2] = lastComponent;
       goto LAB_0008f534;
     }
     if (0x8b51 < uniformType) {
       if (uniformType == 0x8b53) {
 LAB_0008f3bc:
-        *params = (float)((double)CONCAT44(0x43300000,*puVar6 ^ 0x80000000) - DOUBLE_00108d58);
-        params[1] = (float)((double)CONCAT44(0x43300000,puVar6[1] ^ 0x80000000) - dVar2);
+        *params = (float)((double)CONCAT44(0x43300000,*uniformValue ^ 0x80000000) - DOUBLE_00108d58);
+        params[1] = (float)((double)CONCAT44(0x43300000,uniformValue[1] ^ 0x80000000) - intToDoubleBias);
         goto LAB_0008f534;
       }
       if (0x8b52 < uniformType) {
@@ -1762,26 +1762,26 @@ LAB_0008f3bc:
         }
         goto LAB_0008f338;
       }
-      *params = *(float *)(iVar5 + locationValueOffset);
-      params[1] = GH_U2F((unsigned int)(puVar6[1]));
-      params[2] = GH_U2F((unsigned int)(puVar6[2]));
-      fVar1 = GH_U2F((unsigned int)(puVar6[3]));
+      *params = *(float *)(uniformValues + locationValueOffset);
+      params[1] = GH_U2F((unsigned int)(uniformValue[1]));
+      params[2] = GH_U2F((unsigned int)(uniformValue[2]));
+      lastComponent = GH_U2F((unsigned int)(uniformValue[3]));
       goto LAB_0008f460;
     }
     if (uniformType != 0x1406) {
       if (0x1406 < uniformType) {
         if (uniformType == 0x8b50) {
-          *params = *(float *)(iVar5 + locationValueOffset);
-          params[1] = GH_U2F((unsigned int)(puVar6[1]));
+          *params = *(float *)(uniformValues + locationValueOffset);
+          params[1] = GH_U2F((unsigned int)(uniformValue[1]));
         }
         goto LAB_0008f534;
       }
       if (uniformType != 0x1404) goto LAB_0008f534;
       goto LAB_0008f414;
     }
-    fVar1 = *(float *)(iVar5 + locationValueOffset);
+    lastComponent = *(float *)(uniformValues + locationValueOffset);
   }
-  *params = fVar1;
+  *params = lastComponent;
 LAB_0008f534:
   if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) == '\0') {
     return;

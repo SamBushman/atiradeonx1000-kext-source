@@ -4093,12 +4093,12 @@ int _gleSetAttrib(glContext, attribBit, attribBuffer)
   int remaining;
   float *srcPtr;
   undefined2 copiedHalf;
-  undefined *puVar3;
+  undefined *vertexEvalFuncPtr;
   uint copiedWord;
   char derivedByte;
   undefined1 copiedByte;
   undefined1 derivedByte2;
-  int iVar7;
+  int nextPipelineStageIndex;
   int dstCursor10;
   int glContextPtr4854;
   int dstCursor11;
@@ -4112,8 +4112,8 @@ int _gleSetAttrib(glContext, attribBit, attribBuffer)
   undefined1 *dstCursor13;
   undefined1 *srcCursor3;
   undefined1 *dstCursor2;
-  undefined4 uVar15;
-  int iVar16;
+  undefined4 callResult;
+  int pipelineStageIndex;
   int dstCursor4;
   undefined2 *dstCursor3;
   int dstCursor5;
@@ -4131,7 +4131,7 @@ int _gleSetAttrib(glContext, attribBit, attribBuffer)
   undefined4 *srcPtr4;
   undefined4 *srcCursor5;
   int dstCursor8;
-  int iVar27;
+  int textureTargetIndex;
   int dstCursor9;
   int remaining15;
   
@@ -4335,7 +4335,7 @@ int _gleSetAttrib(glContext, attribBit, attribBuffer)
         _gleCopyPixelMapf(attribBuffer + 0x50f,glContext + 0x325c,*(int *)(attribBuffer + 0xa15),glContext + 0x3288);
         _gleCopyPixelMapf(attribBuffer + 0x60f,glContext + 0x3260,*(int *)(attribBuffer + 0xa16),glContext + 0x328c);
         _gleCopyPixelMapf(attribBuffer + 0x70f,glContext + 0x3264,*(int *)(attribBuffer + 0xa17),glContext + 0x3290);
-        uVar15 = _gleCopyPixelMapf(attribBuffer + 0x80f,glContext + 0x3268,*(int *)(attribBuffer + 0xa18),glContext + 0x3294)
+        callResult = _gleCopyPixelMapf(attribBuffer + 0x80f,glContext + 0x3268,*(int *)(attribBuffer + 0xa18),glContext + 0x3294)
         ;
         if (*attribBuffer == FLOAT_00108e54) {
           copiedWord = *(uint *)(glContext + 0x3414) & 0xffffbfff;
@@ -4365,7 +4365,7 @@ int _gleSetAttrib(glContext, attribBit, attribBuffer)
           copiedWord = *(uint *)(glContext + 0x3414) | 2;
         }
         *(uint *)(glContext + 0x3414) = copiedWord;
-        return uVar15;
+        return callResult;
       }
       if (attribBit != (undefined *)0x40) {
         return glContext;
@@ -4546,12 +4546,12 @@ int _gleSetAttrib(glContext, attribBit, attribBuffer)
             _pthread_mutex_lock(*(int *)(glContext + 0x5148) + 0x8028);
           }
           srcCursor5 = (undefined4 *)((int)attribBuffer + loopIndex5 + 0x524);
-          iVar27 = 0;
+          textureTargetIndex = 0;
           do {
-            iVar23 = iVar27 + 1;
-            _gleBindTexture(glContext,iVar27,*srcCursor5,loopIndex);
+            iVar23 = textureTargetIndex + 1;
+            _gleBindTexture(glContext,textureTargetIndex,*srcCursor5,loopIndex);
             srcCursor5 = srcCursor5 + 0x16;
-            iVar27 = iVar23;
+            textureTargetIndex = iVar23;
           } while (iVar23 < 5);
           if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
             _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);
@@ -4819,9 +4819,9 @@ int _gleSetAttrib(glContext, attribBit, attribBuffer)
           derivedByte2 = 0;
         }
         *(undefined1 *)(glContext + 0x7554) = derivedByte2;
-        puVar3 = PTR__gleSetVertexEval2Func_00112068;
+        vertexEvalFuncPtr = PTR__gleSetVertexEval2Func_00112068;
         *(undefined **)(glContext + 0x4898) = PTR__gleSetVertexEval1Func_0011206c;
-        *(undefined **)(glContext + 0x489c) = puVar3;
+        *(undefined **)(glContext + 0x489c) = vertexEvalFuncPtr;
         return glContext;
       }
       if (attribBit != (undefined *)0x20000) {
@@ -4863,19 +4863,19 @@ int _gleSetAttrib(glContext, attribBit, attribBuffer)
       cursor12 = attribBuffer + 7;
       dstCursor2 = (undefined1 *)(glContext + 0x4664);
       srcCursor7 = attribBuffer + 0x809;
-      iVar16 = 0;
+      pipelineStageIndex = 0;
       do {
-        iVar7 = iVar16 + 1;
-        uVar15 = _gleBindPipelineProgram(glContext, iVar16, *(unsigned int *)cursor12);
+        nextPipelineStageIndex = pipelineStageIndex + 1;
+        callResult = _gleBindPipelineProgram(glContext, pipelineStageIndex, *(unsigned int *)cursor12);
         copiedByte = *(undefined1 *)srcCursor7;
         cursor12 = cursor12 + 1;
         srcCursor7 = (float *)((int)srcCursor7 + 1);
         *dstCursor2 = copiedByte;
         dstCursor2 = dstCursor2 + 8;
-        iVar16 = iVar7;
-      } while (iVar7 < 2);
+        pipelineStageIndex = nextPipelineStageIndex;
+      } while (nextPipelineStageIndex < 2);
       if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
-        uVar15 = _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);
+        callResult = _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);
       }
       dstCursor12 = *(float **)(glContext + 0x4668);
       remaining4 = 0x100;
@@ -4905,7 +4905,7 @@ int _gleSetAttrib(glContext, attribBit, attribBuffer)
       } while (remaining5 != 0);
       *(undefined1 *)(glContext + 0x4661) = *(undefined1 *)((int)attribBuffer + 0xe);
       *(undefined1 *)(glContext + 0x4660) = *(undefined1 *)((int)attribBuffer + 0xb);
-      return uVar15;
+      return callResult;
     }
     if (attribBit < ((unsigned char *)0x00001001)) {
       if (attribBit != (undefined *)0x800) {
@@ -5055,11 +5055,11 @@ int _gleSetAttrib(glContext, attribBit, attribBuffer)
       derivedByte2 = 0;
     }
     *(undefined1 *)(glContext + 0x7554) = derivedByte2;
-    puVar3 = PTR__gleSetVertexEval1Func_0011206c;
+    vertexEvalFuncPtr = PTR__gleSetVertexEval1Func_0011206c;
     dstCursor = (float *)(glContext + 0x3534);
     *(undefined **)(glContext + 0x489c) = PTR__gleSetVertexEval2Func_00112068;
     cursor15 = attribBuffer + 8;
-    *(undefined **)(glContext + 0x4898) = puVar3;
+    *(undefined **)(glContext + 0x4898) = vertexEvalFuncPtr;
     *(undefined1 *)(glContext + 0x343c) = *(undefined1 *)((int)attribBuffer + 0x9e);
     *(undefined1 *)(glContext + 0x343d) = *(undefined1 *)((int)attribBuffer + 0xae);
     remaining8 = 0x10;
@@ -5660,27 +5660,33 @@ void _glTexCoordPointer_Exec(glContext, size, type, stride, pointer)
   int loopIndex2;
   int loopIndex;
   undefined4 glErrorCode;
-  int iVar1;
-  undefined4 uVar2;
-  int iVar3;
-  int iVar4;
-  int iVar5;
+  int arraySlotOffset;
+  undefined4 copiedWord;
+  undefined4 clientWord350;
+  int arrayRecord;
+  int newRefCount;
+  int oldBufferObject;
   undefined4 *dstCursor;
-  uint uVar7;
-  int iVar8;
+  uint clientTextureUnitThenArrayBit;
+  uint shiftedFormatCode;
+  uint dispatchSelectMask;
+  uint clientDirtyWord354;
+  int typeCode;
   int clientState;
   undefined4 *srcCursor;
-  uint uVar10;
-  uint uVar11;
-  uint uVar12;
-  int iVar13;
-  int iVar14;
+  uint arrayFormatWord;
+  uint formatNibbleShift;
+  uint arraySlot;
+  int boundBufferObject;
+  int arrayRecords;
+  int sizeTypeCode;
+  int elementSize;
   
-  uVar7 = *(uint *)(glContext + 0x53d8);
+  clientTextureUnitThenArrayBit = *(uint *)(glContext + 0x53d8);
   clientState = *(int *)(glContext + 0x4a60);
-  uVar10 = stride << 7 | type & 0xf | (size & 3) << 4;
-  iVar14 = clientState + 0x10;
-  uVar11 = (uVar7 & 1) * -4 + 4;
+  arrayFormatWord = stride << 7 | type & 0xf | (size & 3) << 4;
+  arrayRecords = clientState + 0x10;
+  formatNibbleShift = (clientTextureUnitThenArrayBit & 1) * -4 + 4;
   if (-1 < *(short *)(glContext + 0x4a10)) {
     if (*(int *)(glContext + 0x7574) != 0) {
       return;
@@ -5688,36 +5694,36 @@ void _glTexCoordPointer_Exec(glContext, size, type, stride, pointer)
     glErrorCode = 0x502;
     goto LAB_0004d44c;
   }
-  uVar12 = uVar7 + 8;
-  if (uVar12 < 0x11) {
-    *(uint *)(glContext + 0x497c) = *(uint *)(glContext + 0x497c) | 8 << (uVar7 & 0x3f);
-    uVar7 = 0x1000000 << (uVar7 & 0x3f);
+  arraySlot = clientTextureUnitThenArrayBit + 8;
+  if (arraySlot < 0x11) {
+    *(uint *)(glContext + 0x497c) = *(uint *)(glContext + 0x497c) | 8 << (clientTextureUnitThenArrayBit & 0x3f);
+    clientTextureUnitThenArrayBit = 0x1000000 << (clientTextureUnitThenArrayBit & 0x3f);
     *(undefined4 *)(clientState + 0x350) = *(undefined4 *)(clientState + 0x350);
-    *(uint *)(clientState + 0x354) = *(uint *)(clientState + 0x354) | uVar7;
-    iVar3 = iVar14 + uVar12 * 0x18;
-    if (*(int *)(iVar3 + 0x20) != pointer) {
+    *(uint *)(clientState + 0x354) = *(uint *)(clientState + 0x354) | clientTextureUnitThenArrayBit;
+    arrayRecord = arrayRecords + arraySlot * 0x18;
+    if (*(int *)(arrayRecord + 0x20) != pointer) {
       *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x100000;
     }
-    iVar1 = uVar12 * 4;
-    *(int *)(iVar3 + 0x20) = pointer;
-    iVar5 = *(int *)(iVar1 + iVar14 + 0x350);
-    if (uVar7 == 0x800000) {
-      iVar13 = *(int *)(clientState + 0x35c);
+    arraySlotOffset = arraySlot * 4;
+    *(int *)(arrayRecord + 0x20) = pointer;
+    oldBufferObject = *(int *)(arraySlotOffset + arrayRecords + 0x350);
+    if (clientTextureUnitThenArrayBit == 0x800000) {
+      boundBufferObject = *(int *)(clientState + 0x35c);
     }
     else {
-      iVar13 = *(int *)(clientState + 0x358);
+      boundBufferObject = *(int *)(clientState + 0x358);
     }
-    if (iVar13 != iVar5) {
-      if ((iVar5 != 0) &&
-         (iVar4 = *(int *)(iVar5 + 8) + -1, *(int *)(iVar5 + 8) = iVar4, iVar4 == 0)) {
-        _gleFreeBufferObject(glContext,iVar5);
+    if (boundBufferObject != oldBufferObject) {
+      if ((oldBufferObject != 0) &&
+         (newRefCount = *(int *)(oldBufferObject + 8) + -1, *(int *)(oldBufferObject + 8) = newRefCount, newRefCount == 0)) {
+        _gleFreeBufferObject(glContext,oldBufferObject);
       }
-      if (iVar13 == 0) {
+      if (boundBufferObject == 0) {
         *(undefined4 *)(clientState + 0x338) = *(undefined4 *)(clientState + 0x338);
-        *(uint *)(clientState + 0x33c) = *(uint *)(clientState + 0x33c) & ~uVar7;
+        *(uint *)(clientState + 0x33c) = *(uint *)(clientState + 0x33c) & ~clientTextureUnitThenArrayBit;
         loopIndex = 0;
         if (*(char *)(glContext + 0x85a4) != '\0') {
-          dstCursor = (undefined4 *)(uVar12 * 4 + iVar14 + 0x3d0);
+          dstCursor = (undefined4 *)(arraySlot * 4 + arrayRecords + 0x3d0);
           do {
             *dstCursor = 0;
             loopIndex = loopIndex + 1;
@@ -5726,40 +5732,40 @@ void _glTexCoordPointer_Exec(glContext, size, type, stride, pointer)
         }
       }
       else {
-        *(int *)(iVar13 + 8) = *(int *)(iVar13 + 8) + 1;
+        *(int *)(boundBufferObject + 8) = *(int *)(boundBufferObject + 8) + 1;
         *(undefined4 *)(clientState + 0x338) = *(undefined4 *)(clientState + 0x338);
-        *(uint *)(clientState + 0x33c) = *(uint *)(clientState + 0x33c) | uVar7;
+        *(uint *)(clientState + 0x33c) = *(uint *)(clientState + 0x33c) | clientTextureUnitThenArrayBit;
         loopIndex2 = 0;
         if (*(char *)(glContext + 0x85a4) != '\0') {
-          srcCursor = (undefined4 *)(iVar13 + 0x10);
-          dstCursor = (undefined4 *)(uVar12 * 4 + iVar14 + 0x3d0);
+          srcCursor = (undefined4 *)(boundBufferObject + 0x10);
+          dstCursor = (undefined4 *)(arraySlot * 4 + arrayRecords + 0x3d0);
           do {
-            uVar2 = *srcCursor;
+            copiedWord = *srcCursor;
             loopIndex2 = loopIndex2 + 1;
             srcCursor = srcCursor + 1;
-            *dstCursor = uVar2;
+            *dstCursor = copiedWord;
             dstCursor = dstCursor + 0x23;
           } while (loopIndex2 < (int)(uint)*(byte *)(glContext + 0x85a4));
         }
       }
-      uVar2 = *(undefined4 *)(clientState + 0x350);
-      uVar7 = *(uint *)(clientState + 0x354);
-      *(int *)(iVar1 + iVar14 + 0x350) = iVar13;
-      *(undefined4 *)(clientState + 0x350) = uVar2;
-      *(uint *)(clientState + 0x354) = uVar7 | 0x10;
+      clientWord350 = *(undefined4 *)(clientState + 0x350);
+      clientDirtyWord354 = *(uint *)(clientState + 0x354);
+      *(int *)(arraySlotOffset + arrayRecords + 0x350) = boundBufferObject;
+      *(undefined4 *)(clientState + 0x350) = clientWord350;
+      *(uint *)(clientState + 0x354) = clientDirtyWord354 | 0x10;
     }
-    if (iVar13 != 0) {
-      pointer = pointer + *(int *)(iVar13 + 0x30);
+    if (boundBufferObject != 0) {
+      pointer = pointer + *(int *)(boundBufferObject + 0x30);
     }
-    *(int *)(iVar1 + glContext + 0x48f8) = pointer;
-    if (*(uint *)(iVar3 + 0x34) == uVar10) {
+    *(int *)(arraySlotOffset + glContext + 0x48f8) = pointer;
+    if (*(uint *)(arrayRecord + 0x34) == arrayFormatWord) {
       return;
     }
     if ((size - 1 < 4) && (-1 < stride)) {
       if (type == 0x1404) {
-        iVar8 = 1;
+        typeCode = 1;
 LAB_0004d428:
-        iVar14 = 4;
+        elementSize = 4;
       }
       else if (type < 0x1405) {
         if (type != 0x1402) {
@@ -5770,56 +5776,56 @@ LAB_0004d43c:
           glErrorCode = 0x500;
           goto LAB_0004d44c;
         }
-        iVar8 = 0;
-        iVar14 = 2;
+        typeCode = 0;
+        elementSize = 2;
       }
       else {
         if (type == 0x1406) {
-          iVar8 = 2;
+          typeCode = 2;
           goto LAB_0004d428;
         }
         if (type != 0x140a) goto LAB_0004d43c;
-        iVar8 = 3;
-        iVar14 = 8;
+        typeCode = 3;
+        elementSize = 8;
       }
-      *(short *)(iVar3 + 0x28) = (short)type;
-      *(char *)(iVar3 + 0x2c) = (char)iVar14;
-      *(short *)(iVar3 + 0x2a) = (short)size;
+      *(short *)(arrayRecord + 0x28) = (short)type;
+      *(char *)(arrayRecord + 0x2c) = (char)elementSize;
+      *(short *)(arrayRecord + 0x2a) = (short)size;
       if (stride < 1) {
-        stride = size * iVar14;
+        stride = size * elementSize;
       }
-      *(int *)(iVar3 + 0x24) = stride;
-      *(uint *)(iVar3 + 0x34) = uVar10;
+      *(int *)(arrayRecord + 0x24) = stride;
+      *(uint *)(arrayRecord + 0x34) = arrayFormatWord;
       *(undefined4 *)(glContext + 0x488c) = 0;
       *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x100000;
       *(undefined4 *)(glContext + 0x4890) = 0;
       *(undefined4 *)(glContext + 0x4894) = 0;
       if (*(int *)(glContext + 0x5408) == 0) {
-        uVar7 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0xc) == 0);
+        dispatchSelectMask = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0xc) == 0);
         *(undefined **)
-         ((*(uint *)(glContext + 0x4680) & uVar7 | *(uint *)(glContext + 0x4684) & ~uVar7) + 0xc) =
+         ((*(uint *)(glContext + 0x4680) & dispatchSelectMask | *(uint *)(glContext + 0x4684) & ~dispatchSelectMask) + 0xc) =
              PTR__glArrayElement_Exec_00110454;
       }
-      *(char *)(iVar3 + 0x2d) = (char)iVar8;
+      *(char *)(arrayRecord + 0x2d) = (char)typeCode;
       if (size == 2) {
-        iVar14 = iVar8 + 4;
+        sizeTypeCode = typeCode + 4;
       }
       else {
         if ((int)size < 3) {
-          uVar7 = iVar8 << (uVar11 & 0x3f);
+          shiftedFormatCode = typeCode << (formatNibbleShift & 0x3f);
           if (size == 1) goto LAB_0004d508;
         }
         else {
-          iVar14 = iVar8 + 8;
+          sizeTypeCode = typeCode + 8;
           if (size == 3) goto LAB_0004d504;
         }
-        iVar14 = iVar8 + 0xc;
+        sizeTypeCode = typeCode + 0xc;
       }
 LAB_0004d504:
-      uVar7 = iVar14 << (uVar11 & 0x3f);
+      shiftedFormatCode = sizeTypeCode << (formatNibbleShift & 0x3f);
 LAB_0004d508:
-      *(uint *)(iVar3 + 0x30) = uVar7;
-      *(uint *)(glContext + 0x49b0) = *(uint *)(glContext + 0x49b0) & ~(0xf << (uVar11 & 0x3f)) | uVar7;
+      *(uint *)(arrayRecord + 0x30) = shiftedFormatCode;
+      *(uint *)(glContext + 0x49b0) = *(uint *)(glContext + 0x49b0) & ~(0xf << (formatNibbleShift & 0x3f)) | shiftedFormatCode;
       return;
     }
   }

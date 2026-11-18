@@ -5480,9 +5480,9 @@ int _gleExecuteVertexArrayRange(glContext, forwardedArg2, forwardedArg3, forward
 }
 
 /* _gleDrawArraysSyncState @ 0x4500c (736 bytes) */
-void _gleDrawArraysSyncState(glContext, param_2)
+void _gleDrawArraysSyncState(glContext, arrayBatch)
   int glContext;
-  int param_2;
+  int arrayBatch;
 {
   int loopIndex2;
   int remaining2;
@@ -5505,10 +5505,10 @@ void _gleDrawArraysSyncState(glContext, param_2)
   undefined4 *puVar11;
   int remaining;
   
-  normalSize = *(byte *)(param_2 + 0xd);
+  normalSize = *(byte *)(arrayBatch + 0xd);
   glContextWord20 = *(undefined4 *)(glContext + 0x20);
   glContextWord24 = *(undefined4 *)(glContext + 0x24);
-  puVar11 = (undefined4 *)(param_2 + 0x2c + *(int *)(param_2 + 8) * (*(int *)(param_2 + 4) + -1));
+  puVar11 = (undefined4 *)(arrayBatch + 0x2c + *(int *)(arrayBatch + 8) * (*(int *)(arrayBatch + 4) + -1));
   if (normalSize != 0) {
     *(undefined4 *)(glContext + 0x2b0) = *puVar11;
     *(undefined4 *)(glContext + 0x2b4) = puVar11[1];
@@ -5516,7 +5516,7 @@ void _gleDrawArraysSyncState(glContext, param_2)
     puVar11 = (undefined4 *)((int)puVar11 + (uint)normalSize);
     *(undefined4 *)(glContext + 0x2b8) = *normalZ;
   }
-  colorSize = (uint)*(byte *)(param_2 + 0xe);
+  colorSize = (uint)*(byte *)(arrayBatch + 0xe);
   if (colorSize != 0) {
     *(undefined4 *)(glContext + 0x2a0) = *puVar11;
     *(undefined4 *)(glContext + 0x2a4) = puVar11[1];
@@ -5531,12 +5531,12 @@ void _gleDrawArraysSyncState(glContext, param_2)
       (**(code **)(glContext + 0x4de0))(glContext,glContext + 0x2a0);
     }
   }
-  if (*(byte *)(param_2 + 0xf) != 0) {
+  if (*(byte *)(arrayBatch + 0xf) != 0) {
     componentValue = *puVar11;
-    puVar11 = (undefined4 *)((int)puVar11 + (uint)*(byte *)(param_2 + 0xf));
+    puVar11 = (undefined4 *)((int)puVar11 + (uint)*(byte *)(arrayBatch + 0xf));
     *(undefined4 *)(glContext + 0x2cc) = componentValue;
   }
-  secondaryColorSize = *(byte *)(param_2 + 0x10);
+  secondaryColorSize = *(byte *)(arrayBatch + 0x10);
   if (secondaryColorSize != 0) {
     *(undefined4 *)(glContext + 0x2c0) = *puVar11;
     *(undefined4 *)(glContext + 0x2c4) = puVar11[1];
@@ -5544,7 +5544,7 @@ void _gleDrawArraysSyncState(glContext, param_2)
     puVar11 = (undefined4 *)((int)puVar11 + (uint)secondaryColorSize);
     *(undefined4 *)(glContext + 0x2c8) = *secondaryColorB;
   }
-  fogOrWeightSize = (uint)*(byte *)(param_2 + 0x11);
+  fogOrWeightSize = (uint)*(byte *)(arrayBatch + 0x11);
   if (fogOrWeightSize != 0) {
     *(undefined4 *)(glContext + 0x2d0) = *puVar11;
     componentValue = glContextWord20;
@@ -5564,14 +5564,14 @@ void _gleDrawArraysSyncState(glContext, param_2)
     *(undefined4 *)(glContext + 0x2dc) = componentValue;
     puVar11 = (undefined4 *)((int)puVar11 + fogOrWeightSize);
   }
-  if (*(byte *)(param_2 + 0x12) != 0) {
+  if (*(byte *)(arrayBatch + 0x12) != 0) {
     edgeFlagByte = *(undefined1 *)puVar11;
-    puVar11 = (undefined4 *)((int)puVar11 + (uint)*(byte *)(param_2 + 0x12));
+    puVar11 = (undefined4 *)((int)puVar11 + (uint)*(byte *)(arrayBatch + 0x12));
     *(undefined1 *)(glContext + 0x2ec) = edgeFlagByte;
   }
   remaining = 8;
   loopIndex2 = 0;
-  srcCursor = (byte *)(param_2 + 0x14);
+  srcCursor = (byte *)(arrayBatch + 0x14);
   texCoordCursor = glContext;
   do {
     texCoordSize = (uint)*srcCursor;
@@ -5606,7 +5606,7 @@ void _gleDrawArraysSyncState(glContext, param_2)
     texCoordCursor = texCoordCursor + 0x10;
     remaining = remaining + -1;
   } while (remaining != 0);
-  srcCursor = (byte *)(param_2 + 0x1d);
+  srcCursor = (byte *)(arrayBatch + 0x1d);
   remaining2 = 0xf;
   loopIndex = 0x11;
   attribCursor = glContext + 0x110;

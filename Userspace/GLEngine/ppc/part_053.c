@@ -1850,45 +1850,45 @@ int _gleCheckCopyColorSubTableArgs(glContext, target, start, count)
 }
 
 /* _gleSphereGenST @ 0xf5bf0 (356 bytes) */
-double _gleSphereGenST(undefined4 param_1,undefined4 param_2,float *param_3,float *param_4,double unusedFloatArg1)
+double _gleSphereGenST(undefined4 glContext,undefined4 eyePosition,float *normal,float *stOut,double unusedFloatArg1)
 {
-  float fVar1;
+  float dotThenDoubledThenReflectZPlusOneThenLengthSquared;
   undefined4 incomingR7;
   undefined4 incomingR8;
-  double dVar2;
-  float dVar3;
-  float dVar4;
-  float dVar5;
-  float dVar6;
-  float local_30;
-  float local_2c;
-  float local_28;
+  double inverseLength;
+  float reflectX;
+  float reflectY;
+  float lengthSquaredThenNewtonTermThenOffset;
+  float estimateProduct;
+  float eyeDirectionX;
+  float eyeDirectionY;
+  float eyeDirectionZ;
   
-  (**(code **)PTR__gleVectorNormalize_00112064)(param_1,param_2,&local_30,param_4,incomingR7,incomingR8);
-  fVar1 = param_3[2] * local_28 + (*param_3 * local_30 + param_3[1] * local_2c);
-  fVar1 = fVar1 + fVar1;
-  dVar4 = -(double)(param_3[1] * fVar1 - local_2c);
-  dVar3 = -(double)(*param_3 * fVar1 - local_30);
-  fVar1 = (-(param_3[2] * fVar1 - local_28) + FLOAT_00108e54);
-  fVar1 = fVar1 * fVar1 + (dVar3 * dVar3 + (dVar4 * dVar4));
-  dVar5 = (double)fVar1;
-  dVar2 = (double)FLOAT_00108e50;
-  if ((!((double)dVar5 <= (double)FLOAT_00108e50)) && (dVar2 = (double)dVar5, (double)dVar5 != (double)FLOAT_00108e54)) {
-    dVar2 = (double)GH_U2F((unsigned int)((0x5f375a00 - ((uint)GH_F2U(fVar1) >> 1))));
-    dVar6 = (double)(float)((double)(float)((double)dVar5 * dVar2) * dVar2);
-    dVar5 = (double)(float)(DOUBLE_00108e40 - (double)dVar6);
-    dVar2 = (double)(float)(dVar2 * DOUBLE_00108e38 * (double)dVar5 *
+  (**(code **)PTR__gleVectorNormalize_00112064)(glContext,eyePosition,&eyeDirectionX,stOut,incomingR7,incomingR8);
+  dotThenDoubledThenReflectZPlusOneThenLengthSquared = normal[2] * eyeDirectionZ + (*normal * eyeDirectionX + normal[1] * eyeDirectionY);
+  dotThenDoubledThenReflectZPlusOneThenLengthSquared = dotThenDoubledThenReflectZPlusOneThenLengthSquared + dotThenDoubledThenReflectZPlusOneThenLengthSquared;
+  reflectY = -(double)(normal[1] * dotThenDoubledThenReflectZPlusOneThenLengthSquared - eyeDirectionY);
+  reflectX = -(double)(*normal * dotThenDoubledThenReflectZPlusOneThenLengthSquared - eyeDirectionX);
+  dotThenDoubledThenReflectZPlusOneThenLengthSquared = (-(normal[2] * dotThenDoubledThenReflectZPlusOneThenLengthSquared - eyeDirectionZ) + FLOAT_00108e54);
+  dotThenDoubledThenReflectZPlusOneThenLengthSquared = dotThenDoubledThenReflectZPlusOneThenLengthSquared * dotThenDoubledThenReflectZPlusOneThenLengthSquared + (reflectX * reflectX + (reflectY * reflectY));
+  lengthSquaredThenNewtonTermThenOffset = (double)dotThenDoubledThenReflectZPlusOneThenLengthSquared;
+  inverseLength = (double)FLOAT_00108e50;
+  if ((!((double)lengthSquaredThenNewtonTermThenOffset <= (double)FLOAT_00108e50)) && (inverseLength = (double)lengthSquaredThenNewtonTermThenOffset, (double)lengthSquaredThenNewtonTermThenOffset != (double)FLOAT_00108e54)) {
+    inverseLength = (double)GH_U2F((unsigned int)((0x5f375a00 - ((uint)GH_F2U(dotThenDoubledThenReflectZPlusOneThenLengthSquared) >> 1))));
+    estimateProduct = (double)(float)((double)(float)((double)lengthSquaredThenNewtonTermThenOffset * inverseLength) * inverseLength);
+    lengthSquaredThenNewtonTermThenOffset = (double)(float)(DOUBLE_00108e40 - (double)estimateProduct);
+    inverseLength = (double)(float)(inverseLength * DOUBLE_00108e38 * (double)lengthSquaredThenNewtonTermThenOffset *
                            (DOUBLE_00108e48 -
-                           (double)((dVar6 * dVar5) * dVar5)));
+                           (double)((estimateProduct * lengthSquaredThenNewtonTermThenOffset) * lengthSquaredThenNewtonTermThenOffset)));
   }
-  if ((double)FLOAT_00108e80 < dVar2) {
-    dVar5 = (double)FLOAT_00108e90;
-    param_4[1] = (float)((double)dVar4 * dVar2 + (double)dVar5);
-    *param_4 = (float)((double)dVar3 * dVar2 + (double)dVar5);
+  if ((double)FLOAT_00108e80 < inverseLength) {
+    lengthSquaredThenNewtonTermThenOffset = (double)FLOAT_00108e90;
+    stOut[1] = (float)((double)reflectY * inverseLength + (double)lengthSquaredThenNewtonTermThenOffset);
+    *stOut = (float)((double)reflectX * inverseLength + (double)lengthSquaredThenNewtonTermThenOffset);
   }
   else {
-    param_4[1] = 0.5;
-    *param_4 = 0.5;
+    stOut[1] = 0.5;
+    *stOut = 0.5;
   }
   return;
 }
@@ -2003,7 +2003,7 @@ void _gleVtxTextureCoordGenObjectSlow(param_1, vertexStartThenCursor, vertexCoun
 /* _gleVtxTextureCoordGenEyeSlow @ 0xf5f48 (1288 bytes) */
 void _gleVtxTextureCoordGenEyeSlow(int glContext,uint vertexStartThenCursor,int vertexCount,double fparam_1)
 {
-  float fVar1;
+  float normalDotEyeDirection;
   float eyePlaneQD;
   float eyePlaneRD;
   float eyePlaneTD;
@@ -2022,25 +2022,25 @@ void _gleVtxTextureCoordGenEyeSlow(int glContext,uint vertexStartThenCursor,int 
   float eyePlaneTC;
   ushort texGenMode;
   undefined *vectorNormalize;
-  uint uVar7;
+  uint vertexEndThenRemaining;
   uint vertexCursor;
   uint vertexCursor2;
   uint remaining;
-  undefined4 local_40;
-  undefined4 local_3c;
-  float local_30;
-  float local_2c;
-  float local_28;
+  undefined4 sphereMapS;
+  undefined4 sphereMapT;
+  float eyeDirectionX;
+  float eyeDirectionY;
+  float eyeDirectionZ;
   
   vectorNormalize = PTR__gleVectorNormalize_00112064;
-  uVar7 = vertexStartThenCursor + vertexCount * 0x100;
+  vertexEndThenRemaining = vertexStartThenCursor + vertexCount * 0x100;
   if (*(char *)(glContext + 0x3d78) != '\0') {
     texGenMode = *(ushort *)(glContext + 0x3ce8);
     vertexCursor2 = vertexStartThenCursor;
     if (texGenMode == 0x2402) {
-      for (; vertexCursor2 < uVar7; vertexCursor2 = vertexCursor2 + 0x100) {
-        fparam_1 = (double)((double (*)())_gleSphereGenST)(glContext,vertexCursor2 + 0x20,vertexCursor2 + 0x40,&local_40,fparam_1);
-        *(undefined4 *)(vertexCursor2 + 0x80) = local_40;
+      for (; vertexCursor2 < vertexEndThenRemaining; vertexCursor2 = vertexCursor2 + 0x100) {
+        fparam_1 = (double)((double (*)())_gleSphereGenST)(glContext,vertexCursor2 + 0x20,vertexCursor2 + 0x40,&sphereMapS,fparam_1);
+        *(undefined4 *)(vertexCursor2 + 0x80) = sphereMapS;
       }
     }
     else if (texGenMode < 0x2403) {
@@ -2049,8 +2049,8 @@ void _gleVtxTextureCoordGenEyeSlow(int glContext,uint vertexStartThenCursor,int 
         eyePlaneSA = *(float *)(glContext + 0x3cec);
         eyePlaneSB = *(float *)(glContext + 0x3cf0);
         eyePlaneSC = *(float *)(glContext + 0x3cf4);
-        if (vertexStartThenCursor < uVar7) {
-          remaining = (uVar7 - vertexStartThenCursor) + 0xff >> 8;
+        if (vertexStartThenCursor < vertexEndThenRemaining) {
+          remaining = (vertexEndThenRemaining - vertexStartThenCursor) + 0xff >> 8;
           vertexCursor = vertexStartThenCursor;
           do {
             *(float *)(vertexCursor + 0x80) =
@@ -2064,8 +2064,8 @@ void _gleVtxTextureCoordGenEyeSlow(int glContext,uint vertexStartThenCursor,int 
       }
     }
     else if (texGenMode == 0x8511) {
-      if (vertexStartThenCursor < uVar7) {
-        remaining = (uVar7 - vertexStartThenCursor) + 0xff >> 8;
+      if (vertexStartThenCursor < vertexEndThenRemaining) {
+        remaining = (vertexEndThenRemaining - vertexStartThenCursor) + 0xff >> 8;
         vertexCursor = vertexStartThenCursor;
         do {
           *(undefined4 *)(vertexCursor + 0x80) = *(undefined4 *)(vertexCursor + 0x40);
@@ -2074,14 +2074,14 @@ void _gleVtxTextureCoordGenEyeSlow(int glContext,uint vertexStartThenCursor,int 
         } while (remaining != 0);
       }
     }
-    else if ((texGenMode == 0x8512) && (vertexStartThenCursor < uVar7)) {
+    else if ((texGenMode == 0x8512) && (vertexStartThenCursor < vertexEndThenRemaining)) {
       do {
-        fparam_1 = (double)(**(double ( **)(int,int,int))vectorNormalize)(glContext, vertexCursor2 + 0x20, &local_30);
-        fVar1 = *(float *)(vertexCursor2 + 0x48) * local_28 +
-                (*(float *)(vertexCursor2 + 0x40) * local_30 + *(float *)(vertexCursor2 + 0x44) * local_2c);
-        *(float *)(vertexCursor2 + 0x80) = -(*(float *)(vertexCursor2 + 0x40) * (fVar1 + fVar1) - local_30);
+        fparam_1 = (double)(**(double ( **)(int,int,int))vectorNormalize)(glContext, vertexCursor2 + 0x20, &eyeDirectionX);
+        normalDotEyeDirection = *(float *)(vertexCursor2 + 0x48) * eyeDirectionZ +
+                (*(float *)(vertexCursor2 + 0x40) * eyeDirectionX + *(float *)(vertexCursor2 + 0x44) * eyeDirectionY);
+        *(float *)(vertexCursor2 + 0x80) = -(*(float *)(vertexCursor2 + 0x40) * (normalDotEyeDirection + normalDotEyeDirection) - eyeDirectionX);
         vertexCursor2 = vertexCursor2 + 0x100;
-      } while (vertexCursor2 < uVar7);
+      } while (vertexCursor2 < vertexEndThenRemaining);
     }
   }
   vectorNormalize = PTR__gleVectorNormalize_00112064;
@@ -2089,9 +2089,9 @@ void _gleVtxTextureCoordGenEyeSlow(int glContext,uint vertexStartThenCursor,int 
     texGenMode = *(ushort *)(glContext + 0x3d0c);
     vertexCursor2 = vertexStartThenCursor;
     if (texGenMode == 0x2402) {
-      for (; vertexCursor2 < uVar7; vertexCursor2 = vertexCursor2 + 0x100) {
-        fparam_1 = (double)((double (*)())_gleSphereGenST)(glContext,vertexCursor2 + 0x20,vertexCursor2 + 0x40,&local_40,fparam_1);
-        *(undefined4 *)(vertexCursor2 + 0x84) = local_3c;
+      for (; vertexCursor2 < vertexEndThenRemaining; vertexCursor2 = vertexCursor2 + 0x100) {
+        fparam_1 = (double)((double (*)())_gleSphereGenST)(glContext,vertexCursor2 + 0x20,vertexCursor2 + 0x40,&sphereMapS,fparam_1);
+        *(undefined4 *)(vertexCursor2 + 0x84) = sphereMapT;
       }
     }
     else if (texGenMode < 0x2403) {
@@ -2100,8 +2100,8 @@ void _gleVtxTextureCoordGenEyeSlow(int glContext,uint vertexStartThenCursor,int 
         eyePlaneTA = *(float *)(glContext + 0x3d10);
         eyePlaneTB = *(float *)(glContext + 0x3d14);
         eyePlaneTC = *(float *)(glContext + 0x3d18);
-        if (vertexStartThenCursor < uVar7) {
-          remaining = (uVar7 - vertexStartThenCursor) + 0xff >> 8;
+        if (vertexStartThenCursor < vertexEndThenRemaining) {
+          remaining = (vertexEndThenRemaining - vertexStartThenCursor) + 0xff >> 8;
           vertexCursor = vertexStartThenCursor;
           do {
             *(float *)(vertexCursor + 0x84) =
@@ -2115,8 +2115,8 @@ void _gleVtxTextureCoordGenEyeSlow(int glContext,uint vertexStartThenCursor,int 
       }
     }
     else if (texGenMode == 0x8511) {
-      if (vertexStartThenCursor < uVar7) {
-        remaining = (uVar7 - vertexStartThenCursor) + 0xff >> 8;
+      if (vertexStartThenCursor < vertexEndThenRemaining) {
+        remaining = (vertexEndThenRemaining - vertexStartThenCursor) + 0xff >> 8;
         vertexCursor = vertexStartThenCursor;
         do {
           *(undefined4 *)(vertexCursor + 0x84) = *(undefined4 *)(vertexCursor + 0x44);
@@ -2125,22 +2125,22 @@ void _gleVtxTextureCoordGenEyeSlow(int glContext,uint vertexStartThenCursor,int 
         } while (remaining != 0);
       }
     }
-    else if ((texGenMode == 0x8512) && (vertexStartThenCursor < uVar7)) {
+    else if ((texGenMode == 0x8512) && (vertexStartThenCursor < vertexEndThenRemaining)) {
       do {
-        (**(code **)vectorNormalize)(glContext,vertexCursor2 + 0x20,&local_30);
-        fVar1 = *(float *)(vertexCursor2 + 0x48) * local_28 +
-                (*(float *)(vertexCursor2 + 0x40) * local_30 + *(float *)(vertexCursor2 + 0x44) * local_2c);
-        *(float *)(vertexCursor2 + 0x84) = -(*(float *)(vertexCursor2 + 0x44) * (fVar1 + fVar1) - local_2c);
+        (**(code **)vectorNormalize)(glContext,vertexCursor2 + 0x20,&eyeDirectionX);
+        normalDotEyeDirection = *(float *)(vertexCursor2 + 0x48) * eyeDirectionZ +
+                (*(float *)(vertexCursor2 + 0x40) * eyeDirectionX + *(float *)(vertexCursor2 + 0x44) * eyeDirectionY);
+        *(float *)(vertexCursor2 + 0x84) = -(*(float *)(vertexCursor2 + 0x44) * (normalDotEyeDirection + normalDotEyeDirection) - eyeDirectionY);
         vertexCursor2 = vertexCursor2 + 0x100;
-      } while (vertexCursor2 < uVar7);
+      } while (vertexCursor2 < vertexEndThenRemaining);
     }
   }
   vectorNormalize = PTR__gleVectorNormalize_00112064;
   if (*(char *)(glContext + 0x3d7a) != '\0') {
     texGenMode = *(ushort *)(glContext + 0x3d30);
     if (texGenMode == 0x8511) {
-      if (vertexStartThenCursor < uVar7) {
-        remaining = (uVar7 - vertexStartThenCursor) + 0xff >> 8;
+      if (vertexStartThenCursor < vertexEndThenRemaining) {
+        remaining = (vertexEndThenRemaining - vertexStartThenCursor) + 0xff >> 8;
         vertexCursor = vertexStartThenCursor;
         do {
           *(undefined4 *)(vertexCursor + 0x88) = *(undefined4 *)(vertexCursor + 0x48);
@@ -2155,8 +2155,8 @@ void _gleVtxTextureCoordGenEyeSlow(int glContext,uint vertexStartThenCursor,int 
         eyePlaneRA = *(float *)(glContext + 0x3d34);
         eyePlaneRB = *(float *)(glContext + 0x3d38);
         eyePlaneRC = *(float *)(glContext + 0x3d3c);
-        if (vertexStartThenCursor < uVar7) {
-          remaining = (uVar7 - vertexStartThenCursor) + 0xff >> 8;
+        if (vertexStartThenCursor < vertexEndThenRemaining) {
+          remaining = (vertexEndThenRemaining - vertexStartThenCursor) + 0xff >> 8;
           vertexCursor = vertexStartThenCursor;
           do {
             *(float *)(vertexCursor + 0x88) =
@@ -2169,15 +2169,15 @@ void _gleVtxTextureCoordGenEyeSlow(int glContext,uint vertexStartThenCursor,int 
         }
       }
     }
-    else if ((texGenMode == 0x8512) && (vertexStartThenCursor < uVar7)) {
+    else if ((texGenMode == 0x8512) && (vertexStartThenCursor < vertexEndThenRemaining)) {
       vertexCursor2 = vertexStartThenCursor;
       do {
-        (**(code **)vectorNormalize)(glContext,vertexCursor2 + 0x20,&local_30);
-        fVar1 = *(float *)(vertexCursor2 + 0x48) * local_28 +
-                (*(float *)(vertexCursor2 + 0x40) * local_30 + *(float *)(vertexCursor2 + 0x44) * local_2c);
-        *(float *)(vertexCursor2 + 0x88) = -(*(float *)(vertexCursor2 + 0x48) * (fVar1 + fVar1) - local_28);
+        (**(code **)vectorNormalize)(glContext,vertexCursor2 + 0x20,&eyeDirectionX);
+        normalDotEyeDirection = *(float *)(vertexCursor2 + 0x48) * eyeDirectionZ +
+                (*(float *)(vertexCursor2 + 0x40) * eyeDirectionX + *(float *)(vertexCursor2 + 0x44) * eyeDirectionY);
+        *(float *)(vertexCursor2 + 0x88) = -(*(float *)(vertexCursor2 + 0x48) * (normalDotEyeDirection + normalDotEyeDirection) - eyeDirectionZ);
         vertexCursor2 = vertexCursor2 + 0x100;
-      } while (vertexCursor2 < uVar7);
+      } while (vertexCursor2 < vertexEndThenRemaining);
     }
     *(uint *)(glContext + 0x486c) = *(uint *)(glContext + 0x486c) | 1;
   }
@@ -2187,16 +2187,16 @@ void _gleVtxTextureCoordGenEyeSlow(int glContext,uint vertexStartThenCursor,int 
       eyePlaneQA = *(float *)(glContext + 0x3d58);
       eyePlaneQB = *(float *)(glContext + 0x3d5c);
       eyePlaneQC = *(float *)(glContext + 0x3d60);
-      if (vertexStartThenCursor < uVar7) {
-        uVar7 = (uVar7 - vertexStartThenCursor) + 0xff >> 8;
+      if (vertexStartThenCursor < vertexEndThenRemaining) {
+        vertexEndThenRemaining = (vertexEndThenRemaining - vertexStartThenCursor) + 0xff >> 8;
         do {
           *(float *)(vertexStartThenCursor + 0x8c) =
                eyePlaneQD * *(float *)(vertexStartThenCursor + 0x2c) +
                (eyePlaneQC * *(float *)(vertexStartThenCursor + 0x28) +
                (eyePlaneQA * *(float *)(vertexStartThenCursor + 0x20) + eyePlaneQB * *(float *)(vertexStartThenCursor + 0x24)));
           vertexStartThenCursor = vertexStartThenCursor + 0x100;
-          uVar7 = uVar7 - 1;
-        } while (uVar7 != 0);
+          vertexEndThenRemaining = vertexEndThenRemaining - 1;
+        } while (vertexEndThenRemaining != 0);
       }
     }
     *(uint *)(glContext + 0x486c) = *(uint *)(glContext + 0x486c) | 2;
@@ -2578,12 +2578,12 @@ void _gleMultiVtxTextureCoordGenObjectSlow(param_1, vertexStartThenCursor, verte
 /* _gleMultiVtxTextureCoordGenEyeSlow @ 0xf6ac0 (1408 bytes) */
 void _gleMultiVtxTextureCoordGenEyeSlow(int glContext,uint vertexStartThenCursor,int vertexCount,int texUnit,double fparam_1)
 {
-  undefined4 *puVar1;
-  float *pfVar2;
-  float *pfVar3;
-  float *pfVar4;
-  float *pfVar5;
-  float fVar6;
+  undefined4 *normalComponentPtr;
+  float *eyeYOrNormalYPtr;
+  float *eyeXOrNormalXPtr;
+  float *eyeZOrNormalZPtr;
+  float *eyeWPtr;
+  float normalDotEyeDirection;
   float eyePlaneQA;
   float eyePlaneRA;
   float eyePlaneTA;
@@ -2604,33 +2604,33 @@ void _gleMultiVtxTextureCoordGenEyeSlow(int glContext,uint vertexStartThenCursor
   undefined *vectorNormalize;
   int unitState;
   int texCoordSlot;
-  int iVar13;
-  uint uVar14;
+  int unitOffsetThenUnitState;
+  uint vertexEndThenRemaining;
   uint vertexCursor;
   uint vertexCursor2;
   uint remaining;
-  undefined4 uStack_50;
-  undefined4 uStack_4c;
-  float fStack_40;
-  float fStack_3c;
-  float fStack_38;
+  undefined4 sphereMapS;
+  undefined4 sphereMapT;
+  float eyeDirectionX;
+  float eyeDirectionY;
+  float eyeDirectionZ;
   
   vectorNormalize = PTR__gleVectorNormalize_00112064;
-  iVar13 = texUnit * 0x94;
-  unitState = iVar13 + glContext;
-  uVar14 = vertexStartThenCursor + vertexCount * 0x100;
+  unitOffsetThenUnitState = texUnit * 0x94;
+  unitState = unitOffsetThenUnitState + glContext;
+  vertexEndThenRemaining = vertexStartThenCursor + vertexCount * 0x100;
   if (*(char *)(unitState + 0x3d78) != '\0') {
     texGenMode = *(ushort *)(unitState + 0x3ce8);
     if (texGenMode == 0x2402) {
-      if (vertexStartThenCursor < uVar14) {
+      if (vertexStartThenCursor < vertexEndThenRemaining) {
         vertexCursor2 = vertexStartThenCursor;
         do {
-          fparam_1 = (double)((double (*)())_gleSphereGenST)(glContext,vertexCursor2 + 0x20,vertexCursor2 + 0x40,&uStack_50,fparam_1
+          fparam_1 = (double)((double (*)())_gleSphereGenST)(glContext,vertexCursor2 + 0x20,vertexCursor2 + 0x40,&sphereMapS,fparam_1
                                             );
           texCoordSlot = texUnit * 0x10 + vertexCursor2;
           vertexCursor2 = vertexCursor2 + 0x100;
-          *(undefined4 *)(texCoordSlot + 0x80) = uStack_50;
-        } while (vertexCursor2 < uVar14);
+          *(undefined4 *)(texCoordSlot + 0x80) = sphereMapS;
+        } while (vertexCursor2 < vertexEndThenRemaining);
       }
     }
     else if (texGenMode < 0x2403) {
@@ -2639,64 +2639,64 @@ void _gleMultiVtxTextureCoordGenEyeSlow(int glContext,uint vertexStartThenCursor
         eyePlaneSD = *(float *)(unitState + 0x3cf8);
         eyePlaneSB = *(float *)(unitState + 0x3cf0);
         eyePlaneSC = *(float *)(unitState + 0x3cf4);
-        if (vertexStartThenCursor < uVar14) {
-          remaining = (uVar14 - vertexStartThenCursor) + 0xff >> 8;
+        if (vertexStartThenCursor < vertexEndThenRemaining) {
+          remaining = (vertexEndThenRemaining - vertexStartThenCursor) + 0xff >> 8;
           vertexCursor = vertexStartThenCursor;
           do {
-            pfVar2 = (float *)(vertexCursor + 0x24);
+            eyeYOrNormalYPtr = (float *)(vertexCursor + 0x24);
             texCoordSlot = texUnit * 0x10 + vertexCursor;
-            pfVar3 = (float *)(vertexCursor + 0x20);
-            pfVar4 = (float *)(vertexCursor + 0x28);
-            pfVar5 = (float *)(vertexCursor + 0x2c);
+            eyeXOrNormalXPtr = (float *)(vertexCursor + 0x20);
+            eyeZOrNormalZPtr = (float *)(vertexCursor + 0x28);
+            eyeWPtr = (float *)(vertexCursor + 0x2c);
             vertexCursor = vertexCursor + 0x100;
             *(float *)(texCoordSlot + 0x80) =
-                 eyePlaneSD * *pfVar5 + (eyePlaneSC * *pfVar4 + (eyePlaneSA * *pfVar3 + eyePlaneSB * *pfVar2));
+                 eyePlaneSD * *eyeWPtr + (eyePlaneSC * *eyeZOrNormalZPtr + (eyePlaneSA * *eyeXOrNormalXPtr + eyePlaneSB * *eyeYOrNormalYPtr));
             remaining = remaining - 1;
           } while (remaining != 0);
         }
       }
     }
     else if (texGenMode == 0x8511) {
-      if (vertexStartThenCursor < uVar14) {
-        remaining = (uVar14 - vertexStartThenCursor) + 0xff >> 8;
+      if (vertexStartThenCursor < vertexEndThenRemaining) {
+        remaining = (vertexEndThenRemaining - vertexStartThenCursor) + 0xff >> 8;
         vertexCursor = vertexStartThenCursor;
         do {
-          puVar1 = (undefined4 *)(vertexCursor + 0x40);
+          normalComponentPtr = (undefined4 *)(vertexCursor + 0x40);
           texCoordSlot = texUnit * 0x10 + vertexCursor;
           vertexCursor = vertexCursor + 0x100;
-          *(undefined4 *)(texCoordSlot + 0x80) = *puVar1;
+          *(undefined4 *)(texCoordSlot + 0x80) = *normalComponentPtr;
           remaining = remaining - 1;
         } while (remaining != 0);
       }
     }
-    else if ((texGenMode == 0x8512) && (vertexStartThenCursor < uVar14)) {
+    else if ((texGenMode == 0x8512) && (vertexStartThenCursor < vertexEndThenRemaining)) {
       vertexCursor2 = vertexStartThenCursor;
       do {
-        fparam_1 = (double)(**(double ( **)(int,int,int))vectorNormalize)(glContext, vertexCursor2 + 0x20, &fStack_40);
-        pfVar2 = (float *)(vertexCursor2 + 0x44);
+        fparam_1 = (double)(**(double ( **)(int,int,int))vectorNormalize)(glContext, vertexCursor2 + 0x20, &eyeDirectionX);
+        eyeYOrNormalYPtr = (float *)(vertexCursor2 + 0x44);
         texCoordSlot = texUnit * 0x10 + vertexCursor2;
-        pfVar3 = (float *)(vertexCursor2 + 0x40);
-        pfVar4 = (float *)(vertexCursor2 + 0x48);
+        eyeXOrNormalXPtr = (float *)(vertexCursor2 + 0x40);
+        eyeZOrNormalZPtr = (float *)(vertexCursor2 + 0x48);
         vertexCursor2 = vertexCursor2 + 0x100;
-        fVar6 = *pfVar4 * fStack_38 + (*pfVar3 * fStack_40 + *pfVar2 * fStack_3c);
-        *(float *)(texCoordSlot + 0x80) = -(*pfVar3 * (fVar6 + fVar6) - fStack_40);
-      } while (vertexCursor2 < uVar14);
+        normalDotEyeDirection = *eyeZOrNormalZPtr * eyeDirectionZ + (*eyeXOrNormalXPtr * eyeDirectionX + *eyeYOrNormalYPtr * eyeDirectionY);
+        *(float *)(texCoordSlot + 0x80) = -(*eyeXOrNormalXPtr * (normalDotEyeDirection + normalDotEyeDirection) - eyeDirectionX);
+      } while (vertexCursor2 < vertexEndThenRemaining);
     }
   }
   vectorNormalize = PTR__gleVectorNormalize_00112064;
-  unitState = iVar13 + glContext;
+  unitState = unitOffsetThenUnitState + glContext;
   if (*(char *)(unitState + 0x3d79) != '\0') {
     texGenMode = *(ushort *)(unitState + 0x3d0c);
     if (texGenMode == 0x2402) {
-      if (vertexStartThenCursor < uVar14) {
+      if (vertexStartThenCursor < vertexEndThenRemaining) {
         vertexCursor2 = vertexStartThenCursor;
         do {
-          fparam_1 = (double)((double (*)())_gleSphereGenST)(glContext,vertexCursor2 + 0x20,vertexCursor2 + 0x40,&uStack_50,fparam_1
+          fparam_1 = (double)((double (*)())_gleSphereGenST)(glContext,vertexCursor2 + 0x20,vertexCursor2 + 0x40,&sphereMapS,fparam_1
                                             );
           texCoordSlot = texUnit * 0x10 + vertexCursor2;
           vertexCursor2 = vertexCursor2 + 0x100;
-          *(undefined4 *)(texCoordSlot + 0x84) = uStack_4c;
-        } while (vertexCursor2 < uVar14);
+          *(undefined4 *)(texCoordSlot + 0x84) = sphereMapT;
+        } while (vertexCursor2 < vertexEndThenRemaining);
       }
     }
     else if (texGenMode < 0x2403) {
@@ -2705,63 +2705,63 @@ void _gleMultiVtxTextureCoordGenEyeSlow(int glContext,uint vertexStartThenCursor
         eyePlaneTD = *(float *)(unitState + 0x3d1c);
         eyePlaneTB = *(float *)(unitState + 0x3d14);
         eyePlaneTC = *(float *)(unitState + 0x3d18);
-        if (vertexStartThenCursor < uVar14) {
-          remaining = (uVar14 - vertexStartThenCursor) + 0xff >> 8;
+        if (vertexStartThenCursor < vertexEndThenRemaining) {
+          remaining = (vertexEndThenRemaining - vertexStartThenCursor) + 0xff >> 8;
           vertexCursor = vertexStartThenCursor;
           do {
-            pfVar2 = (float *)(vertexCursor + 0x24);
+            eyeYOrNormalYPtr = (float *)(vertexCursor + 0x24);
             texCoordSlot = texUnit * 0x10 + vertexCursor;
-            pfVar3 = (float *)(vertexCursor + 0x20);
-            pfVar4 = (float *)(vertexCursor + 0x28);
-            pfVar5 = (float *)(vertexCursor + 0x2c);
+            eyeXOrNormalXPtr = (float *)(vertexCursor + 0x20);
+            eyeZOrNormalZPtr = (float *)(vertexCursor + 0x28);
+            eyeWPtr = (float *)(vertexCursor + 0x2c);
             vertexCursor = vertexCursor + 0x100;
             *(float *)(texCoordSlot + 0x84) =
-                 eyePlaneTD * *pfVar5 + (eyePlaneTC * *pfVar4 + (eyePlaneTA * *pfVar3 + eyePlaneTB * *pfVar2));
+                 eyePlaneTD * *eyeWPtr + (eyePlaneTC * *eyeZOrNormalZPtr + (eyePlaneTA * *eyeXOrNormalXPtr + eyePlaneTB * *eyeYOrNormalYPtr));
             remaining = remaining - 1;
           } while (remaining != 0);
         }
       }
     }
     else if (texGenMode == 0x8511) {
-      if (vertexStartThenCursor < uVar14) {
-        remaining = (uVar14 - vertexStartThenCursor) + 0xff >> 8;
+      if (vertexStartThenCursor < vertexEndThenRemaining) {
+        remaining = (vertexEndThenRemaining - vertexStartThenCursor) + 0xff >> 8;
         vertexCursor = vertexStartThenCursor;
         do {
-          puVar1 = (undefined4 *)(vertexCursor + 0x44);
+          normalComponentPtr = (undefined4 *)(vertexCursor + 0x44);
           texCoordSlot = texUnit * 0x10 + vertexCursor;
           vertexCursor = vertexCursor + 0x100;
-          *(undefined4 *)(texCoordSlot + 0x84) = *puVar1;
+          *(undefined4 *)(texCoordSlot + 0x84) = *normalComponentPtr;
           remaining = remaining - 1;
         } while (remaining != 0);
       }
     }
-    else if ((texGenMode == 0x8512) && (vertexStartThenCursor < uVar14)) {
+    else if ((texGenMode == 0x8512) && (vertexStartThenCursor < vertexEndThenRemaining)) {
       vertexCursor2 = vertexStartThenCursor;
       do {
-        (**(code **)vectorNormalize)(glContext,vertexCursor2 + 0x20,&fStack_40);
-        pfVar2 = (float *)(vertexCursor2 + 0x44);
+        (**(code **)vectorNormalize)(glContext,vertexCursor2 + 0x20,&eyeDirectionX);
+        eyeYOrNormalYPtr = (float *)(vertexCursor2 + 0x44);
         texCoordSlot = texUnit * 0x10 + vertexCursor2;
-        pfVar3 = (float *)(vertexCursor2 + 0x40);
-        pfVar4 = (float *)(vertexCursor2 + 0x48);
+        eyeXOrNormalXPtr = (float *)(vertexCursor2 + 0x40);
+        eyeZOrNormalZPtr = (float *)(vertexCursor2 + 0x48);
         vertexCursor2 = vertexCursor2 + 0x100;
-        fVar6 = *pfVar4 * fStack_38 + (*pfVar3 * fStack_40 + *pfVar2 * fStack_3c);
-        *(float *)(texCoordSlot + 0x84) = -(*pfVar2 * (fVar6 + fVar6) - fStack_3c);
-      } while (vertexCursor2 < uVar14);
+        normalDotEyeDirection = *eyeZOrNormalZPtr * eyeDirectionZ + (*eyeXOrNormalXPtr * eyeDirectionX + *eyeYOrNormalYPtr * eyeDirectionY);
+        *(float *)(texCoordSlot + 0x84) = -(*eyeYOrNormalYPtr * (normalDotEyeDirection + normalDotEyeDirection) - eyeDirectionY);
+      } while (vertexCursor2 < vertexEndThenRemaining);
     }
   }
   vectorNormalize = PTR__gleVectorNormalize_00112064;
-  unitState = iVar13 + glContext;
+  unitState = unitOffsetThenUnitState + glContext;
   if (*(char *)(unitState + 0x3d7a) != '\0') {
     texGenMode = *(ushort *)(unitState + 0x3d30);
     if (texGenMode == 0x8511) {
-      if (vertexStartThenCursor < uVar14) {
-        remaining = (uVar14 - vertexStartThenCursor) + 0xff >> 8;
+      if (vertexStartThenCursor < vertexEndThenRemaining) {
+        remaining = (vertexEndThenRemaining - vertexStartThenCursor) + 0xff >> 8;
         vertexCursor = vertexStartThenCursor;
         do {
-          puVar1 = (undefined4 *)(vertexCursor + 0x48);
+          normalComponentPtr = (undefined4 *)(vertexCursor + 0x48);
           texCoordSlot = texUnit * 0x10 + vertexCursor;
           vertexCursor = vertexCursor + 0x100;
-          *(undefined4 *)(texCoordSlot + 0x88) = *puVar1;
+          *(undefined4 *)(texCoordSlot + 0x88) = *normalComponentPtr;
           remaining = remaining - 1;
         } while (remaining != 0);
       }
@@ -2772,58 +2772,58 @@ void _gleMultiVtxTextureCoordGenEyeSlow(int glContext,uint vertexStartThenCursor
         eyePlaneRD = *(float *)(unitState + 0x3d40);
         eyePlaneRB = *(float *)(unitState + 0x3d38);
         eyePlaneRC = *(float *)(unitState + 0x3d3c);
-        if (vertexStartThenCursor < uVar14) {
-          remaining = (uVar14 - vertexStartThenCursor) + 0xff >> 8;
+        if (vertexStartThenCursor < vertexEndThenRemaining) {
+          remaining = (vertexEndThenRemaining - vertexStartThenCursor) + 0xff >> 8;
           vertexCursor = vertexStartThenCursor;
           do {
-            pfVar2 = (float *)(vertexCursor + 0x24);
+            eyeYOrNormalYPtr = (float *)(vertexCursor + 0x24);
             texCoordSlot = texUnit * 0x10 + vertexCursor;
-            pfVar3 = (float *)(vertexCursor + 0x20);
-            pfVar4 = (float *)(vertexCursor + 0x28);
-            pfVar5 = (float *)(vertexCursor + 0x2c);
+            eyeXOrNormalXPtr = (float *)(vertexCursor + 0x20);
+            eyeZOrNormalZPtr = (float *)(vertexCursor + 0x28);
+            eyeWPtr = (float *)(vertexCursor + 0x2c);
             vertexCursor = vertexCursor + 0x100;
             *(float *)(texCoordSlot + 0x88) =
-                 eyePlaneRD * *pfVar5 + (eyePlaneRC * *pfVar4 + (eyePlaneRA * *pfVar3 + eyePlaneRB * *pfVar2));
+                 eyePlaneRD * *eyeWPtr + (eyePlaneRC * *eyeZOrNormalZPtr + (eyePlaneRA * *eyeXOrNormalXPtr + eyePlaneRB * *eyeYOrNormalYPtr));
             remaining = remaining - 1;
           } while (remaining != 0);
         }
       }
     }
-    else if ((texGenMode == 0x8512) && (vertexStartThenCursor < uVar14)) {
+    else if ((texGenMode == 0x8512) && (vertexStartThenCursor < vertexEndThenRemaining)) {
       vertexCursor2 = vertexStartThenCursor;
       do {
-        (**(code **)vectorNormalize)(glContext,vertexCursor2 + 0x20,&fStack_40);
-        pfVar2 = (float *)(vertexCursor2 + 0x44);
+        (**(code **)vectorNormalize)(glContext,vertexCursor2 + 0x20,&eyeDirectionX);
+        eyeYOrNormalYPtr = (float *)(vertexCursor2 + 0x44);
         texCoordSlot = texUnit * 0x10 + vertexCursor2;
-        pfVar3 = (float *)(vertexCursor2 + 0x40);
-        pfVar4 = (float *)(vertexCursor2 + 0x48);
+        eyeXOrNormalXPtr = (float *)(vertexCursor2 + 0x40);
+        eyeZOrNormalZPtr = (float *)(vertexCursor2 + 0x48);
         vertexCursor2 = vertexCursor2 + 0x100;
-        fVar6 = *pfVar4 * fStack_38 + (*pfVar3 * fStack_40 + *pfVar2 * fStack_3c);
-        *(float *)(texCoordSlot + 0x88) = -(*pfVar4 * (fVar6 + fVar6) - fStack_38);
-      } while (vertexCursor2 < uVar14);
+        normalDotEyeDirection = *eyeZOrNormalZPtr * eyeDirectionZ + (*eyeXOrNormalXPtr * eyeDirectionX + *eyeYOrNormalYPtr * eyeDirectionY);
+        *(float *)(texCoordSlot + 0x88) = -(*eyeZOrNormalZPtr * (normalDotEyeDirection + normalDotEyeDirection) - eyeDirectionZ);
+      } while (vertexCursor2 < vertexEndThenRemaining);
     }
     *(uint *)(glContext + 0x486c) = *(uint *)(glContext + 0x486c) | 1;
   }
-  iVar13 = iVar13 + glContext;
-  if (*(char *)(iVar13 + 0x3d7b) != '\0') {
-    if (*(short *)(iVar13 + 0x3d54) == 0x2400) {
-      eyePlaneQA = *(float *)(iVar13 + 0x3d58);
-      eyePlaneQD = *(float *)(iVar13 + 0x3d64);
-      eyePlaneQB = *(float *)(iVar13 + 0x3d5c);
-      eyePlaneQC = *(float *)(iVar13 + 0x3d60);
-      if (vertexStartThenCursor < uVar14) {
-        uVar14 = (uVar14 - vertexStartThenCursor) + 0xff >> 8;
+  unitOffsetThenUnitState = unitOffsetThenUnitState + glContext;
+  if (*(char *)(unitOffsetThenUnitState + 0x3d7b) != '\0') {
+    if (*(short *)(unitOffsetThenUnitState + 0x3d54) == 0x2400) {
+      eyePlaneQA = *(float *)(unitOffsetThenUnitState + 0x3d58);
+      eyePlaneQD = *(float *)(unitOffsetThenUnitState + 0x3d64);
+      eyePlaneQB = *(float *)(unitOffsetThenUnitState + 0x3d5c);
+      eyePlaneQC = *(float *)(unitOffsetThenUnitState + 0x3d60);
+      if (vertexStartThenCursor < vertexEndThenRemaining) {
+        vertexEndThenRemaining = (vertexEndThenRemaining - vertexStartThenCursor) + 0xff >> 8;
         do {
-          pfVar2 = (float *)(vertexStartThenCursor + 0x24);
+          eyeYOrNormalYPtr = (float *)(vertexStartThenCursor + 0x24);
           texCoordSlot = texUnit * 0x10 + vertexStartThenCursor;
-          pfVar3 = (float *)(vertexStartThenCursor + 0x20);
-          pfVar4 = (float *)(vertexStartThenCursor + 0x28);
-          pfVar5 = (float *)(vertexStartThenCursor + 0x2c);
+          eyeXOrNormalXPtr = (float *)(vertexStartThenCursor + 0x20);
+          eyeZOrNormalZPtr = (float *)(vertexStartThenCursor + 0x28);
+          eyeWPtr = (float *)(vertexStartThenCursor + 0x2c);
           vertexStartThenCursor = vertexStartThenCursor + 0x100;
           *(float *)(texCoordSlot + 0x8c) =
-               eyePlaneQD * *pfVar5 + (eyePlaneQC * *pfVar4 + (eyePlaneQA * *pfVar3 + eyePlaneQB * *pfVar2));
-          uVar14 = uVar14 - 1;
-        } while (uVar14 != 0);
+               eyePlaneQD * *eyeWPtr + (eyePlaneQC * *eyeZOrNormalZPtr + (eyePlaneQA * *eyeXOrNormalXPtr + eyePlaneQB * *eyeYOrNormalYPtr));
+          vertexEndThenRemaining = vertexEndThenRemaining - 1;
+        } while (vertexEndThenRemaining != 0);
       }
     }
     *(uint *)(glContext + 0x486c) = *(uint *)(glContext + 0x486c) | 2;

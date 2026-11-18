@@ -2418,15 +2418,15 @@ void _gleEvalMap2(int glContext,float floatArg1,float floatArg2,double floatArg3
   undefined4 incomingR7;
   undefined4 incomingR8;
   undefined4 components;
-  int iVar9;
+  int outputEnd;
   float *outStart;
   float *nextOut;
   float *out;
   int mapDataThenPoints;
-  int iVar14;
-  int iVar15;
-  int iVar16;
-  int iVar17;
+  int controlPointsThenSlotPointsFor4Components;
+  int slotPointsFor2Components;
+  int slotPointsFor3Components;
+  int slotPointsFor1Component;
   uint flagsUpdated;
   uint slotMask;
   int slotMapCursor;
@@ -2455,10 +2455,10 @@ void _gleEvalMap2(int glContext,float floatArg1,float floatArg2,double floatArg3
   if (*(short *)(glContext + 0x4a10) < 0) {
     return;
   }
-  iVar9 = *(int *)(glContext + 0x4858);
-  if (iVar9 == *(int *)(glContext + 0x485c)) {
+  outputEnd = *(int *)(glContext + 0x4858);
+  if (outputEnd == *(int *)(glContext + 0x485c)) {
     (**(code **)(glContext + 0x4a0c))(glContext);
-    iVar9 = *(int *)(glContext + 0x4858);
+    outputEnd = *(int *)(glContext + 0x4858);
   }
   outStart = *(float **)(glContext + 0x4860);
   out = outStart;
@@ -2492,14 +2492,14 @@ void _gleEvalMap2(int glContext,float floatArg1,float floatArg2,double floatArg3
   attribByteSize = *(byte *)(glContext + 0x755c);
   if (attribByteSize == 8) {
     uorder = *(undefined4 *)(mapDataThenPoints + 0x1e38);
-    iVar14 = mapDataThenPoints + 0x1e58;
+    controlPointsThenSlotPointsFor4Components = mapDataThenPoints + 0x1e58;
     uNormalized = (floatArg1 - *(float *)(mapDataThenPoints + 0x1e40)) * *(float *)(mapDataThenPoints + 0x1e50);
     vorder = *(undefined4 *)(mapDataThenPoints + 0x1e3c);
     vNormalized = (floatArg2 - *(float *)(mapDataThenPoints + 0x1e48)) * *(float *)(mapDataThenPoints + 0x1e54);
     components = 2;
     nextOut = out + 2;
 LAB_000e105c:
-    ((void (*)())_gleEvalDomain2Coord)(glContext,iVar14,uorder,vorder,incomingR7,incomingR8,components,out,(double)uNormalized,(double)vNormalized,
+    ((void (*)())_gleEvalDomain2Coord)(glContext,controlPointsThenSlotPointsFor4Components,uorder,vorder,incomingR7,incomingR8,components,out,(double)uNormalized,(double)vNormalized,
                floatArg3,floatArg4,floatArg5,floatArg6,floatArg7,floatArg8,incomingStack_ffffff48,
                incomingStack_ffffff50,incomingStack_ffffff58,incomingStack_ffffff60,incomingStack_ffffff68);
     out = nextOut;
@@ -2507,7 +2507,7 @@ LAB_000e105c:
   else if (attribByteSize < 9) {
     if (attribByteSize == 4) {
       uorder = *(undefined4 *)(mapDataThenPoints + 0x1c88);
-      iVar14 = mapDataThenPoints + 0x1ca8;
+      controlPointsThenSlotPointsFor4Components = mapDataThenPoints + 0x1ca8;
       uNormalized = (floatArg1 - *(float *)(mapDataThenPoints + 0x1c90)) * *(float *)(mapDataThenPoints + 0x1ca0);
       vorder = *(undefined4 *)(mapDataThenPoints + 0x1c8c);
       vNormalized = (floatArg2 - *(float *)(mapDataThenPoints + 0x1c98)) * *(float *)(mapDataThenPoints + 0x1ca4);
@@ -2548,11 +2548,11 @@ LAB_000e105c:
 LAB_000e1060:
   slotMask = *(uint *)(glContext + 0x74dc);
   if (slotMask != 0) {
-    iVar16 = mapDataThenPoints + 0x37c8;
+    slotPointsFor3Components = mapDataThenPoints + 0x37c8;
     sizeCursor = (byte *)(glContext + 0x7564);
-    iVar14 = iVar16;
-    iVar15 = iVar16;
-    iVar17 = iVar16;
+    controlPointsThenSlotPointsFor4Components = slotPointsFor3Components;
+    slotPointsFor2Components = slotPointsFor3Components;
+    slotPointsFor1Component = slotPointsFor3Components;
     slotMapCursor = mapDataThenPoints;
     do {
       slotByteSize = *sizeCursor;
@@ -2566,7 +2566,7 @@ LAB_000e1060:
                          *(float *)(slotMapCursor + 0x37c4));
         components = 2;
         nextOut = out + 2;
-        selectedPoints = iVar15;
+        selectedPoints = slotPointsFor2Components;
 LAB_000e11b0:
         ((void (*)())_gleEvalDomain2Coord)(glContext,selectedPoints,uorder,vorder,incomingR7,incomingR8,components,out,(double)slotUNormalized,(double)slotVNormalized,floatArg3,
                    floatArg4,floatArg5,floatArg6,floatArg7,floatArg8,incomingStack_ffffff48,incomingStack_ffffff50,
@@ -2584,7 +2584,7 @@ LAB_000e11b0:
                              *(float *)(slotMapCursor + 0x37c4));
             components = 3;
             nextOut = out + 3;
-            selectedPoints = iVar16;
+            selectedPoints = slotPointsFor3Components;
           }
           else {
             if (slotByteSize != 0x10) goto LAB_000e11b4;
@@ -2596,7 +2596,7 @@ LAB_000e11b0:
                              *(float *)(slotMapCursor + 0x37c4));
             components = 4;
             nextOut = out + 4;
-            selectedPoints = iVar14;
+            selectedPoints = controlPointsThenSlotPointsFor4Components;
           }
           goto LAB_000e11b0;
         }
@@ -2609,17 +2609,17 @@ LAB_000e11b0:
                            *(float *)(slotMapCursor + 0x37c4));
           components = 1;
           nextOut = out + 1;
-          selectedPoints = iVar17;
+          selectedPoints = slotPointsFor1Component;
           goto LAB_000e11b0;
         }
       }
 LAB_000e11b4:
       slotMask = slotMask >> 1;
-      iVar14 = iVar14 + 0x660;
-      iVar16 = iVar16 + 0x660;
-      iVar15 = iVar15 + 0x660;
+      controlPointsThenSlotPointsFor4Components = controlPointsThenSlotPointsFor4Components + 0x660;
+      slotPointsFor3Components = slotPointsFor3Components + 0x660;
+      slotPointsFor2Components = slotPointsFor2Components + 0x660;
       slotMapCursor = slotMapCursor + 0x660;
-      iVar17 = iVar17 + 0x660;
+      slotPointsFor1Component = slotPointsFor1Component + 0x660;
     } while (slotMask != 0);
   }
   if (*(char *)(glContext + 0x7554) == '\f') {
@@ -2677,7 +2677,7 @@ LAB_000e1350:
   (**(code **)vectorNormalize)(glContext,outStart,outStart);
 LAB_000e1388:
   *(int *)(glContext + 0x48ec) = glContext + 0x7548;
-  hookResult = (**(code **)(glContext + 0x489c))(glContext,*(undefined4 *)(glContext + 0x4860),iVar9);
+  hookResult = (**(code **)(glContext + 0x489c))(glContext,*(undefined4 *)(glContext + 0x4860),outputEnd);
   *(undefined4 *)(glContext + 0x48ec) = 0;
   *(undefined4 *)(glContext + 0x4858) = hookResult;
   return;

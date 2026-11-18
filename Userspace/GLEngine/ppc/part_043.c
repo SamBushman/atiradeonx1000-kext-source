@@ -345,181 +345,181 @@ double _gleFeedbackTriangleFan(glContext, param_2, param_3, param_4, param_5)
 }
 
 /* _gleFeedbackTriangleStrip @ 0xccc1c (764 bytes) */
-double _gleFeedbackTriangleStrip(glContext, param_2, param_3, param_4)
+double _gleFeedbackTriangleStrip(glContext, firstVertexThenCursor, vertexCount, polygonMode)
   undefined4 glContext;
-  int param_2;
-  int param_3;
-  uint param_4;
+  int firstVertexThenCursor;
+  int vertexCount;
+  uint polygonMode;
 {
-  bool bVar1;
-  uint uVar2;
-  int iVar3;
-  int iVar4;
-  int iVar5;
-  int iVar6;
-  float dVar7;
+  bool hasSecondTriangle;
+  uint modeBits;
+  int lastTriangleIndex;
+  int pairIndex;
+  int thirdVertex;
+  int secondOrThirdVertex;
+  float primitiveToken;
   
-  uVar2 = param_4 & 3;
-  iVar3 = param_3 + -3;
-  iVar4 = 0;
-  if (uVar2 == 1) {
-    bVar1 = 0 < iVar3;
-    if (-1 < iVar3) {
-      dVar7 = (double)FLOAT_00108f34;
+  modeBits = polygonMode & 3;
+  lastTriangleIndex = vertexCount + -3;
+  pairIndex = 0;
+  if (modeBits == 1) {
+    hasSecondTriangle = 0 < lastTriangleIndex;
+    if (-1 < lastTriangleIndex) {
+      primitiveToken = (double)FLOAT_00108f34;
       do {
-        iVar6 = param_2 + 0x100;
-        iVar5 = param_2 + 0x200;
+        secondOrThirdVertex = firstVertexThenCursor + 0x100;
+        thirdVertex = firstVertexThenCursor + 0x200;
         ((void (*)())_gleFeedbackToken)(glContext,(double)FLOAT_00108f2c);
-        _gleFeedbackHitRecord(glContext,param_2);
-        _gleFeedbackHitRecord(glContext,iVar6);
-        ((void (*)())_gleFeedbackToken)(glContext,(double)dVar7);
-        _gleFeedbackHitRecord(glContext,iVar6);
-        _gleFeedbackHitRecord(glContext,iVar5);
-        ((void (*)())_gleFeedbackToken)(glContext,(double)dVar7);
-        _gleFeedbackHitRecord(glContext,iVar5);
-        _gleFeedbackHitRecord(glContext,param_2);
-        if (bVar1) {
-          ((void (*)())_gleFeedbackToken)(glContext,(double)dVar7);
-          _gleFeedbackHitRecord(glContext,iVar5);
-          _gleFeedbackHitRecord(glContext,iVar6);
-          ((void (*)())_gleFeedbackToken)(glContext,(double)dVar7);
-          _gleFeedbackHitRecord(glContext,iVar6);
-          _gleFeedbackHitRecord(glContext,param_2 + 0x300);
-          ((void (*)())_gleFeedbackToken)(glContext,(double)dVar7);
-          _gleFeedbackHitRecord(glContext,param_2 + 0x300);
-          _gleFeedbackHitRecord(glContext,iVar5);
+        _gleFeedbackHitRecord(glContext,firstVertexThenCursor);
+        _gleFeedbackHitRecord(glContext,secondOrThirdVertex);
+        ((void (*)())_gleFeedbackToken)(glContext,(double)primitiveToken);
+        _gleFeedbackHitRecord(glContext,secondOrThirdVertex);
+        _gleFeedbackHitRecord(glContext,thirdVertex);
+        ((void (*)())_gleFeedbackToken)(glContext,(double)primitiveToken);
+        _gleFeedbackHitRecord(glContext,thirdVertex);
+        _gleFeedbackHitRecord(glContext,firstVertexThenCursor);
+        if (hasSecondTriangle) {
+          ((void (*)())_gleFeedbackToken)(glContext,(double)primitiveToken);
+          _gleFeedbackHitRecord(glContext,thirdVertex);
+          _gleFeedbackHitRecord(glContext,secondOrThirdVertex);
+          ((void (*)())_gleFeedbackToken)(glContext,(double)primitiveToken);
+          _gleFeedbackHitRecord(glContext,secondOrThirdVertex);
+          _gleFeedbackHitRecord(glContext,firstVertexThenCursor + 0x300);
+          ((void (*)())_gleFeedbackToken)(glContext,(double)primitiveToken);
+          _gleFeedbackHitRecord(glContext,firstVertexThenCursor + 0x300);
+          _gleFeedbackHitRecord(glContext,thirdVertex);
         }
-        iVar4 = iVar4 + 2;
-        bVar1 = iVar4 < iVar3;
-        param_2 = iVar5;
-      } while (iVar4 <= iVar3);
+        pairIndex = pairIndex + 2;
+        hasSecondTriangle = pairIndex < lastTriangleIndex;
+        firstVertexThenCursor = thirdVertex;
+      } while (pairIndex <= lastTriangleIndex);
     }
   }
-  else if (uVar2 == 0) {
-    bVar1 = 0 < iVar3;
-    if (-1 < iVar3) {
-      dVar7 = (double)FLOAT_00108f28;
+  else if (modeBits == 0) {
+    hasSecondTriangle = 0 < lastTriangleIndex;
+    if (-1 < lastTriangleIndex) {
+      primitiveToken = (double)FLOAT_00108f28;
       do {
-        iVar6 = param_2 + 0x200;
-        ((void (*)())_gleFeedbackToken)(glContext,(double)dVar7);
-        _gleFeedbackHitRecord(glContext,param_2);
-        ((void (*)())_gleFeedbackToken)(glContext,(double)dVar7);
-        _gleFeedbackHitRecord(glContext,param_2 + 0x100);
-        ((void (*)())_gleFeedbackToken)(glContext,(double)dVar7);
-        _gleFeedbackHitRecord(glContext,iVar6);
-        if (bVar1) {
-          ((void (*)())_gleFeedbackToken)(glContext,(double)dVar7);
-          _gleFeedbackHitRecord(glContext,iVar6);
-          ((void (*)())_gleFeedbackToken)(glContext,(double)dVar7);
-          _gleFeedbackHitRecord(glContext,param_2 + 0x100);
-          ((void (*)())_gleFeedbackToken)(glContext,(double)dVar7);
-          _gleFeedbackHitRecord(glContext,param_2 + 0x300);
+        secondOrThirdVertex = firstVertexThenCursor + 0x200;
+        ((void (*)())_gleFeedbackToken)(glContext,(double)primitiveToken);
+        _gleFeedbackHitRecord(glContext,firstVertexThenCursor);
+        ((void (*)())_gleFeedbackToken)(glContext,(double)primitiveToken);
+        _gleFeedbackHitRecord(glContext,firstVertexThenCursor + 0x100);
+        ((void (*)())_gleFeedbackToken)(glContext,(double)primitiveToken);
+        _gleFeedbackHitRecord(glContext,secondOrThirdVertex);
+        if (hasSecondTriangle) {
+          ((void (*)())_gleFeedbackToken)(glContext,(double)primitiveToken);
+          _gleFeedbackHitRecord(glContext,secondOrThirdVertex);
+          ((void (*)())_gleFeedbackToken)(glContext,(double)primitiveToken);
+          _gleFeedbackHitRecord(glContext,firstVertexThenCursor + 0x100);
+          ((void (*)())_gleFeedbackToken)(glContext,(double)primitiveToken);
+          _gleFeedbackHitRecord(glContext,firstVertexThenCursor + 0x300);
         }
-        iVar4 = iVar4 + 2;
-        bVar1 = iVar4 < iVar3;
-        param_2 = iVar6;
-      } while (iVar4 <= iVar3);
+        pairIndex = pairIndex + 2;
+        hasSecondTriangle = pairIndex < lastTriangleIndex;
+        firstVertexThenCursor = secondOrThirdVertex;
+      } while (pairIndex <= lastTriangleIndex);
     }
   }
-  else if ((uVar2 == 2) && (bVar1 = 0 < iVar3, -1 < iVar3)) {
-    dVar7 = (double)FLOAT_00108f30;
+  else if ((modeBits == 2) && (hasSecondTriangle = 0 < lastTriangleIndex, -1 < lastTriangleIndex)) {
+    primitiveToken = (double)FLOAT_00108f30;
     do {
-      iVar6 = param_2 + 0x200;
-      ((void (*)())_gleFeedbackToken)(glContext,(double)dVar7);
+      secondOrThirdVertex = firstVertexThenCursor + 0x200;
+      ((void (*)())_gleFeedbackToken)(glContext,(double)primitiveToken);
       ((void (*)())_gleFeedbackToken)(glContext,(double)FLOAT_00108f38);
-      _gleFeedbackHitRecord(glContext,param_2);
-      _gleFeedbackHitRecord(glContext,param_2 + 0x100);
-      _gleFeedbackHitRecord(glContext,iVar6);
-      if (bVar1) {
-        ((void (*)())_gleFeedbackToken)(glContext,(double)dVar7);
+      _gleFeedbackHitRecord(glContext,firstVertexThenCursor);
+      _gleFeedbackHitRecord(glContext,firstVertexThenCursor + 0x100);
+      _gleFeedbackHitRecord(glContext,secondOrThirdVertex);
+      if (hasSecondTriangle) {
+        ((void (*)())_gleFeedbackToken)(glContext,(double)primitiveToken);
         ((void (*)())_gleFeedbackToken)(glContext,(double)FLOAT_00108f38);
-        _gleFeedbackHitRecord(glContext,iVar6);
-        _gleFeedbackHitRecord(glContext,param_2 + 0x100);
-        _gleFeedbackHitRecord(glContext,param_2 + 0x300);
+        _gleFeedbackHitRecord(glContext,secondOrThirdVertex);
+        _gleFeedbackHitRecord(glContext,firstVertexThenCursor + 0x100);
+        _gleFeedbackHitRecord(glContext,firstVertexThenCursor + 0x300);
       }
-      iVar4 = iVar4 + 2;
-      bVar1 = iVar4 < iVar3;
-      param_2 = iVar6;
-    } while (iVar4 <= iVar3);
+      pairIndex = pairIndex + 2;
+      hasSecondTriangle = pairIndex < lastTriangleIndex;
+      firstVertexThenCursor = secondOrThirdVertex;
+    } while (pairIndex <= lastTriangleIndex);
   }
   return;
 }
 
 /* _gleFeedbackQuads @ 0xccf18 (508 bytes) */
-double _gleFeedbackQuads(glContext, param_2, param_3, param_4)
+double _gleFeedbackQuads(glContext, firstVertexThenCursor, vertexCount, polygonMode)
   undefined4 glContext;
-  int param_2;
-  int param_3;
-  uint param_4;
+  int firstVertexThenCursor;
+  int vertexCount;
+  uint polygonMode;
 {
-  uint uVar1;
-  double dVar2;
-  undefined4 uVar3;
-  int iVar4;
-  int iVar5;
-  int iVar6;
-  int iVar7;
-  int iVar8;
+  uint modeBits;
+  double intToDoubleBias;
+  undefined4 segmentTokenType;
+  int lastQuadIndex;
+  int vertexIndex;
+  int quadStartThenVerticesLeft;
+  int edgeStartVertex;
+  int edgeCounterThenPointVertex;
   
-  dVar2 = DOUBLE_00108d70;
-  uVar1 = param_4 & 3;
-  iVar4 = param_3 + -4;
-  iVar5 = 0;
-  if (uVar1 == 1) {
-    iVar6 = param_2;
-    if (-1 < iVar4) {
+  intToDoubleBias = DOUBLE_00108d70;
+  modeBits = polygonMode & 3;
+  lastQuadIndex = vertexCount + -4;
+  vertexIndex = 0;
+  if (modeBits == 1) {
+    quadStartThenVerticesLeft = firstVertexThenCursor;
+    if (-1 < lastQuadIndex) {
       do {
-        uVar3 = 0x707;
-        iVar7 = iVar5 * 0x100 + param_2;
-        iVar8 = 2;
+        segmentTokenType = 0x707;
+        edgeStartVertex = vertexIndex * 0x100 + firstVertexThenCursor;
+        edgeCounterThenPointVertex = 2;
         do {
-          if (*(char *)(iVar7 + 0x7c) != '\0') {
-            ((void (*)())_gleFeedbackToken)(glContext,(double)(float)((double)CONCAT44(0x43300000,uVar3) - dVar2));
-            _gleFeedbackHitRecord(glContext,iVar7);
-            _gleFeedbackHitRecord(glContext,iVar7 + 0x100);
-            uVar3 = 0x702;
+          if (*(char *)(edgeStartVertex + 0x7c) != '\0') {
+            ((void (*)())_gleFeedbackToken)(glContext,(double)(float)((double)CONCAT44(0x43300000,segmentTokenType) - intToDoubleBias));
+            _gleFeedbackHitRecord(glContext,edgeStartVertex);
+            _gleFeedbackHitRecord(glContext,edgeStartVertex + 0x100);
+            segmentTokenType = 0x702;
           }
-          iVar8 = iVar8 + -1;
-          iVar7 = iVar7 + 0x100;
-        } while (-1 < iVar8);
-        if (*(char *)(iVar6 + 0x37c) != '\0') {
-          ((void (*)())_gleFeedbackToken)(glContext,(double)(float)((double)CONCAT44(0x43300000,uVar3) - dVar2));
-          _gleFeedbackHitRecord(glContext,iVar6 + 0x300);
-          _gleFeedbackHitRecord(glContext,iVar6);
+          edgeCounterThenPointVertex = edgeCounterThenPointVertex + -1;
+          edgeStartVertex = edgeStartVertex + 0x100;
+        } while (-1 < edgeCounterThenPointVertex);
+        if (*(char *)(quadStartThenVerticesLeft + 0x37c) != '\0') {
+          ((void (*)())_gleFeedbackToken)(glContext,(double)(float)((double)CONCAT44(0x43300000,segmentTokenType) - intToDoubleBias));
+          _gleFeedbackHitRecord(glContext,quadStartThenVerticesLeft + 0x300);
+          _gleFeedbackHitRecord(glContext,quadStartThenVerticesLeft);
         }
-        iVar5 = iVar5 + 4;
-        iVar6 = iVar6 + 0x400;
-      } while (iVar5 <= iVar4);
+        vertexIndex = vertexIndex + 4;
+        quadStartThenVerticesLeft = quadStartThenVerticesLeft + 0x400;
+      } while (vertexIndex <= lastQuadIndex);
     }
   }
-  else if (uVar1 == 0) {
-    if (-1 < iVar4) {
+  else if (modeBits == 0) {
+    if (-1 < lastQuadIndex) {
       do {
-        iVar6 = 3;
-        iVar8 = iVar5 * 0x100 + param_2;
+        quadStartThenVerticesLeft = 3;
+        edgeCounterThenPointVertex = vertexIndex * 0x100 + firstVertexThenCursor;
         do {
-          if (*(char *)(iVar8 + 0x7c) != '\0') {
+          if (*(char *)(edgeCounterThenPointVertex + 0x7c) != '\0') {
             ((void (*)())_gleFeedbackToken)(glContext,(double)FLOAT_00108f28);
-            _gleFeedbackHitRecord(glContext,iVar8);
+            _gleFeedbackHitRecord(glContext,edgeCounterThenPointVertex);
           }
-          iVar6 = iVar6 + -1;
-          iVar8 = iVar8 + 0x100;
-        } while (-1 < iVar6);
-        iVar5 = iVar5 + 4;
-      } while (iVar5 <= iVar4);
+          quadStartThenVerticesLeft = quadStartThenVerticesLeft + -1;
+          edgeCounterThenPointVertex = edgeCounterThenPointVertex + 0x100;
+        } while (-1 < quadStartThenVerticesLeft);
+        vertexIndex = vertexIndex + 4;
+      } while (vertexIndex <= lastQuadIndex);
     }
   }
-  else if ((uVar1 == 2) && (-1 < iVar4)) {
+  else if ((modeBits == 2) && (-1 < lastQuadIndex)) {
     do {
-      iVar5 = iVar5 + 4;
+      vertexIndex = vertexIndex + 4;
       ((void (*)())_gleFeedbackToken)(glContext,(double)FLOAT_00108f30);
       ((void (*)())_gleFeedbackToken)(glContext,(double)FLOAT_00108ea8);
-      _gleFeedbackHitRecord(glContext,param_2);
-      _gleFeedbackHitRecord(glContext,param_2 + 0x100);
-      _gleFeedbackHitRecord(glContext,param_2 + 0x200);
-      _gleFeedbackHitRecord(glContext,param_2 + 0x300);
-      param_2 = param_2 + 0x400;
-    } while (iVar5 <= iVar4);
+      _gleFeedbackHitRecord(glContext,firstVertexThenCursor);
+      _gleFeedbackHitRecord(glContext,firstVertexThenCursor + 0x100);
+      _gleFeedbackHitRecord(glContext,firstVertexThenCursor + 0x200);
+      _gleFeedbackHitRecord(glContext,firstVertexThenCursor + 0x300);
+      firstVertexThenCursor = firstVertexThenCursor + 0x400;
+    } while (vertexIndex <= lastQuadIndex);
   }
   return;
 }
@@ -2022,101 +2022,101 @@ int _LFSParserCheckForNewline(unusedArg1, param_2, param_3, param_4, param_5)
 }
 
 /* _LFSParserPreprocessString @ 0xcf170 (568 bytes) */
-int _LFSParserPreprocessString(forwardedArg1, param_2)
+int _LFSParserPreprocessString(forwardedArg1, sourceString)
   undefined4 forwardedArg1;
-  int param_2;
+  int sourceString;
 {
-  char cVar1;
-  bool bVar2;
-  uint uVar3;
-  int iVar4;
-  undefined1 *puVar5;
-  uint uVar6;
+  char currentChar;
+  bool inComment;
+  uint sourceLength;
+  int newlineFound;
+  undefined1 *processedString;
+  uint sourceIndex;
   int iVar7;
-  undefined1 *puVar8;
-  int local_40 [5];
+  undefined1 *outputCursor;
+  int sourceAdvance [5];
   
-  uVar6 = 0;
-  uVar3 = _strlen(param_2);
-  bVar2 = false;
+  sourceIndex = 0;
+  sourceLength = _strlen(sourceString);
+  inComment = false;
   iVar7 = 0;
-  if (uVar3 != 0) {
+  if (sourceLength != 0) {
     do {
-      local_40[0] = 1;
-      if (bVar2) {
-        iVar4 = ((int (*)())_LFSParserCheckForNewline)(forwardedArg1,param_2,uVar6,uVar3,local_40);
-        if ((iVar4 != 0) || (*(char *)(param_2 + uVar6) == '\0')) {
-          bVar2 = false;
+      sourceAdvance[0] = 1;
+      if (inComment) {
+        newlineFound = ((int (*)())_LFSParserCheckForNewline)(forwardedArg1,sourceString,sourceIndex,sourceLength,sourceAdvance);
+        if ((newlineFound != 0) || (*(char *)(sourceString + sourceIndex) == '\0')) {
+          inComment = false;
         }
 LAB_000cf24c:
         iVar7 = iVar7 + 1;
       }
       else {
-        cVar1 = *(char *)(param_2 + uVar6);
-        if (cVar1 != '#') {
-          if (((((cVar1 == '[') || (cVar1 == ']')) || (cVar1 == '=')) ||
-              ((cVar1 == '{' || (cVar1 == '}')))) ||
-             ((cVar1 == ';' || ((cVar1 == '.' || (cVar1 == ',')))))) {
+        currentChar = *(char *)(sourceString + sourceIndex);
+        if (currentChar != '#') {
+          if (((((currentChar == '[') || (currentChar == ']')) || (currentChar == '=')) ||
+              ((currentChar == '{' || (currentChar == '}')))) ||
+             ((currentChar == ';' || ((currentChar == '.' || (currentChar == ',')))))) {
             iVar7 = iVar7 + 2;
           }
           goto LAB_000cf24c;
         }
-        bVar2 = true;
+        inComment = true;
       }
-      uVar6 = uVar6 + local_40[0];
-    } while (uVar6 < uVar3);
+      sourceIndex = sourceIndex + sourceAdvance[0];
+    } while (sourceIndex < sourceLength);
   }
-  uVar6 = 0;
-  puVar5 = (undefined1 *)_calloc(iVar7 + 1,1);
-  bVar2 = false;
-  puVar8 = puVar5;
-  if (uVar3 != 0) {
+  sourceIndex = 0;
+  processedString = (undefined1 *)_calloc(iVar7 + 1,1);
+  inComment = false;
+  outputCursor = processedString;
+  if (sourceLength != 0) {
     do {
-      local_40[0] = 1;
-      if (bVar2) {
-        iVar7 = ((int (*)())_LFSParserCheckForNewline)(forwardedArg1,param_2,uVar6,uVar3,local_40);
+      sourceAdvance[0] = 1;
+      if (inComment) {
+        iVar7 = ((int (*)())_LFSParserCheckForNewline)(forwardedArg1,sourceString,sourceIndex,sourceLength,sourceAdvance);
         if (iVar7 != 0) {
-          *puVar8 = 10;
-          bVar2 = false;
-          puVar8 = puVar8 + 1;
+          *outputCursor = 10;
+          inComment = false;
+          outputCursor = outputCursor + 1;
         }
-        if (*(char *)(param_2 + uVar6) == '\0') {
-          bVar2 = false;
-          *puVar8 = 0;
+        if (*(char *)(sourceString + sourceIndex) == '\0') {
+          inComment = false;
+          *outputCursor = 0;
           goto LAB_000cf37c;
         }
       }
       else {
-        cVar1 = *(char *)(param_2 + uVar6);
-        if (cVar1 == '#') {
-          bVar2 = true;
+        currentChar = *(char *)(sourceString + sourceIndex);
+        if (currentChar == '#') {
+          inComment = true;
         }
         else {
-          if ((((cVar1 == '[') || (cVar1 == ']')) || (cVar1 == '=')) ||
-             (((cVar1 == '{' || (cVar1 == '}')) ||
-              ((cVar1 == ';' || ((cVar1 == '.' || (cVar1 == ',')))))))) {
-            *puVar8 = 0x20;
-            puVar8[1] = cVar1;
-            puVar8 = puVar8 + 2;
-            *puVar8 = 0x20;
+          if ((((currentChar == '[') || (currentChar == ']')) || (currentChar == '=')) ||
+             (((currentChar == '{' || (currentChar == '}')) ||
+              ((currentChar == ';' || ((currentChar == '.' || (currentChar == ',')))))))) {
+            *outputCursor = 0x20;
+            outputCursor[1] = currentChar;
+            outputCursor = outputCursor + 2;
+            *outputCursor = 0x20;
           }
           else {
-            iVar7 = ((int (*)())_LFSParserCheckForNewline)(forwardedArg1,param_2,uVar6,uVar3,local_40);
+            iVar7 = ((int (*)())_LFSParserCheckForNewline)(forwardedArg1,sourceString,sourceIndex,sourceLength,sourceAdvance);
             if (iVar7 == 0) {
-              *puVar8 = *(undefined1 *)(param_2 + uVar6);
+              *outputCursor = *(undefined1 *)(sourceString + sourceIndex);
             }
             else {
-              *puVar8 = 10;
+              *outputCursor = 10;
             }
           }
 LAB_000cf37c:
-          puVar8 = puVar8 + 1;
+          outputCursor = outputCursor + 1;
         }
       }
-      uVar6 = uVar6 + local_40[0];
-    } while (uVar6 < uVar3);
+      sourceIndex = sourceIndex + sourceAdvance[0];
+    } while (sourceIndex < sourceLength);
   }
-  return puVar5;
+  return processedString;
 }
 
 /* _LFSParserAttachString @ 0xcf3a8 (252 bytes) */
@@ -3266,60 +3266,60 @@ int _LFSParserParseConstantBinding(parser)
 }
 
 /* _LFSParserParseInstruction @ 0xd0d54 (516 bytes) */
-int _LFSParserParseInstruction(param_1)
-  int param_1;
+int _LFSParserParseInstruction(parser)
+  int parser;
 {
   int iVar1;
-  char local_120 [256];
-  undefined4 local_20;
-  undefined4 local_1c;
+  char partText [256];
+  undefined4 savedPosition0;
+  undefined4 savedPosition1;
   
-  local_20 = *(undefined4 *)(param_1 + 0xc);
-  local_1c = *(undefined4 *)(param_1 + 0x10);
-  iVar1 = ((int (*)())_LFSParserGetPart)(param_1,local_120);
+  savedPosition0 = *(undefined4 *)(parser + 0xc);
+  savedPosition1 = *(undefined4 *)(parser + 0x10);
+  iVar1 = ((int (*)())_LFSParserGetPart)(parser,partText);
   if (iVar1 == 0) {
     return 1;
   }
-  iVar1 = _memcmp(local_120,"StartConstants",0xf);
+  iVar1 = _memcmp(partText,"StartConstants",0xf);
   if (iVar1 == 0) {
-    *(undefined1 *)(param_1 + 0x3a) = 1;
-    *(undefined1 *)(param_1 + 0x19) = 1;
+    *(undefined1 *)(parser + 0x3a) = 1;
+    *(undefined1 *)(parser + 0x19) = 1;
     goto LAB_000d0f14;
   }
-  iVar1 = _memcmp(local_120,"EndConstants",0xd);
+  iVar1 = _memcmp(partText,"EndConstants",0xd);
   if (iVar1 != 0) {
-    iVar1 = _memcmp(local_120,"StartPrelimPass",0x10);
+    iVar1 = _memcmp(partText,"StartPrelimPass",0x10);
     if (iVar1 == 0) {
-      *(undefined1 *)(param_1 + 0x19) = 2;
-      *(undefined1 *)(param_1 + 0x4a) = 1;
+      *(undefined1 *)(parser + 0x19) = 2;
+      *(undefined1 *)(parser + 0x4a) = 1;
       goto LAB_000d0f14;
     }
-    iVar1 = _memcmp(local_120,"EndPass",8);
+    iVar1 = _memcmp(partText,"EndPass",8);
     if (iVar1 != 0) {
-      iVar1 = _memcmp(local_120,"StartOutputPass",0x10);
+      iVar1 = _memcmp(partText,"StartOutputPass",0x10);
       if (iVar1 == 0) {
-        *(undefined1 *)(param_1 + 0x19) = 3;
-        *(undefined1 *)(param_1 + 0x5a) = 1;
+        *(undefined1 *)(parser + 0x19) = 3;
+        *(undefined1 *)(parser + 0x5a) = 1;
       }
       else {
-        iVar1 = _memcmp(local_120,"CONSTANT",9);
+        iVar1 = _memcmp(partText,"CONSTANT",9);
         if (iVar1 == 0) {
-          if (*(char *)(param_1 + 0x19) != '\x01') {
+          if (*(char *)(parser + 0x19) != '\x01') {
             return 0xd;
           }
-          iVar1 = ((int (*)())_LFSParserParseConstantBinding)(param_1);
+          iVar1 = ((int (*)())_LFSParserParseConstantBinding)(parser);
         }
         else {
-          iVar1 = _memcmp(local_120,"PassTexCoord",0xd);
-          if ((iVar1 == 0) || (iVar1 = _memcmp(local_120,"SampleMap",10), iVar1 == 0)) {
-            *(undefined4 *)(param_1 + 0x10) = local_1c;
-            *(undefined4 *)(param_1 + 0xc) = local_20;
-            iVar1 = ((int (*)())_LFSParserParseRegisterInit)(param_1);
+          iVar1 = _memcmp(partText,"PassTexCoord",0xd);
+          if ((iVar1 == 0) || (iVar1 = _memcmp(partText,"SampleMap",10), iVar1 == 0)) {
+            *(undefined4 *)(parser + 0x10) = savedPosition1;
+            *(undefined4 *)(parser + 0xc) = savedPosition0;
+            iVar1 = ((int (*)())_LFSParserParseRegisterInit)(parser);
           }
           else {
-            *(undefined4 *)(param_1 + 0x10) = local_1c;
-            *(undefined4 *)(param_1 + 0xc) = local_20;
-            iVar1 = ((int (*)())_LFSParserParseOperation)(param_1);
+            *(undefined4 *)(parser + 0x10) = savedPosition1;
+            *(undefined4 *)(parser + 0xc) = savedPosition0;
+            iVar1 = ((int (*)())_LFSParserParseOperation)(parser);
           }
         }
         if (iVar1 != 0) {
@@ -3329,13 +3329,13 @@ int _LFSParserParseInstruction(param_1)
       goto LAB_000d0f14;
     }
   }
-  *(undefined1 *)(param_1 + 0x19) = 0;
+  *(undefined1 *)(parser + 0x19) = 0;
 LAB_000d0f14:
-  iVar1 = ((int (*)())_LFSParserGetPart)(param_1,local_120);
+  iVar1 = ((int (*)())_LFSParserGetPart)(parser,partText);
   if (iVar1 == 0) {
     return 8;
   }
-  if (local_120[0] == ';') {
+  if (partText[0] == ';') {
     return 0;
   }
   return 2;
@@ -3629,96 +3629,96 @@ int _LFSStreamChunkCompare(param_1, param_2)
 }
 
 /* _LFSStreamChunkOutputDebugInfo @ 0xd15a8 (684 bytes) */
-void _LFSStreamChunkOutputDebugInfo(param_1)
-  byte *param_1;
+void _LFSStreamChunkOutputDebugInfo(chunk)
+  byte *chunk;
 {
-  byte bVar1;
+  byte chunkKind;
   undefined4 uVar2;
   undefined4 uVar3;
   undefined4 uVar4;
   undefined4 uVar5;
-  char *pcVar6;
-  undefined4 uVar7;
-  uint uVar8;
-  uint uVar9;
-  byte *pbVar10;
-  float dVar11;
-  float dVar12;
-  float dVar13;
+  char *lastFormat;
+  undefined4 lastValue;
+  uint sourceIndex;
+  uint nextSourceIndex;
+  byte *sourceVarCursor;
+  float constantX;
+  float constantZ;
+  float constantY;
   undefined4 local_30;
   undefined4 uStack_2c;
   
   _puts("LFSStreamChunk {");
-  bVar1 = *param_1;
-  if (bVar1 == 2) {
+  chunkKind = *chunk;
+  if (chunkKind == 2) {
     _puts("      operation {");
-    _printf("         type = 0x%lx;\n",*(undefined4 *)(param_1 + 4));
-    uVar8 = 0;
-    pbVar10 = param_1;
+    _printf("         type = 0x%lx;\n",*(undefined4 *)(chunk + 4));
+    sourceIndex = 0;
+    sourceVarCursor = chunk;
     do {
-      uVar9 = uVar8 + 1;
-      _printf("         sourcevar[%i] {\n",uVar8);
-      _printf("            registertype = 0x%lx;\n",*(undefined4 *)(pbVar10 + 0x18));
-      _printf("            registerindex = %i;\n",*(undefined4 *)(pbVar10 + 0x1c));
-      _printf("            replicate = 0x%lx;\n",*(undefined4 *)(pbVar10 + 0x20));
-      _printf("            modifiers = 0x%lx;\n",*(undefined4 *)(pbVar10 + 0x24));
+      nextSourceIndex = sourceIndex + 1;
+      _printf("         sourcevar[%i] {\n",sourceIndex);
+      _printf("            registertype = 0x%lx;\n",*(undefined4 *)(sourceVarCursor + 0x18));
+      _printf("            registerindex = %i;\n",*(undefined4 *)(sourceVarCursor + 0x1c));
+      _printf("            replicate = 0x%lx;\n",*(undefined4 *)(sourceVarCursor + 0x20));
+      _printf("            modifiers = 0x%lx;\n",*(undefined4 *)(sourceVarCursor + 0x24));
       _puts("         };");
-      pbVar10 = pbVar10 + 0x10;
-      uVar8 = uVar9;
-    } while (uVar9 < 3);
+      sourceVarCursor = sourceVarCursor + 0x10;
+      sourceIndex = nextSourceIndex;
+    } while (nextSourceIndex < 3);
     _puts("         destvar {");
-    _printf("            registertype = 0x%lx;\n",*(undefined4 *)(param_1 + 8));
-    _printf("            registerindex = %i;\n",*(undefined4 *)(param_1 + 0xc));
-    _printf("            mask = 0x%lx;\n",*(undefined4 *)(param_1 + 0x10));
-    _printf("            modifiers = 0x%lx;\n",*(undefined4 *)(param_1 + 0x14));
+    _printf("            registertype = 0x%lx;\n",*(undefined4 *)(chunk + 8));
+    _printf("            registerindex = %i;\n",*(undefined4 *)(chunk + 0xc));
+    _printf("            mask = 0x%lx;\n",*(undefined4 *)(chunk + 0x10));
+    _printf("            modifiers = 0x%lx;\n",*(undefined4 *)(chunk + 0x14));
     _puts("         };");
   }
   else {
-    if (bVar1 < 3) {
-      if (bVar1 != 1) goto LAB_000d1838;
+    if (chunkKind < 3) {
+      if (chunkKind != 1) goto LAB_000d1838;
       _puts("      registerinit {");
-      _printf("         type = 0x%lx;\n",*(undefined4 *)(param_1 + 4));
+      _printf("         type = 0x%lx;\n",*(undefined4 *)(chunk + 4));
       _puts("         source {");
-      _printf("            registertype = 0x%lx;\n",*(undefined4 *)(param_1 + 8));
-      _printf("            registerindex = %i;\n",*(undefined4 *)(param_1 + 0xc));
+      _printf("            registertype = 0x%lx;\n",*(undefined4 *)(chunk + 8));
+      _printf("            registerindex = %i;\n",*(undefined4 *)(chunk + 0xc));
       _puts("         };");
-      _printf("         destregisterindex = %i;\n",*(undefined4 *)(param_1 + 0x10));
-      uVar7 = *(undefined4 *)(param_1 + 0x14);
-      pcVar6 = "         selector = 0x%lx;\n";
+      _printf("         destregisterindex = %i;\n",*(undefined4 *)(chunk + 0x10));
+      lastValue = *(undefined4 *)(chunk + 0x14);
+      lastFormat = "         selector = 0x%lx;\n";
     }
     else {
-      if (bVar1 != 3) {
-        if (bVar1 == 4) {
-          dVar11 = (double)*(float *)(param_1 + 4);
-          dVar13 = (double)*(float *)(param_1 + 8);
-          dVar12 = (double)*(float *)(param_1 + 0xc);
-          local_30 = (undefined4)((ulonglong)(double)*(float *)(param_1 + 0x10) >> 0x20);
-          uVar7 = local_30;
-          local_30 = (undefined4)((ulonglong)(double)dVar11 >> 0x20);
+      if (chunkKind != 3) {
+        if (chunkKind == 4) {
+          constantX = (double)*(float *)(chunk + 4);
+          constantY = (double)*(float *)(chunk + 8);
+          constantZ = (double)*(float *)(chunk + 0xc);
+          local_30 = (undefined4)((ulonglong)(double)*(float *)(chunk + 0x10) >> 0x20);
+          lastValue = local_30;
+          local_30 = (undefined4)((ulonglong)(double)constantX >> 0x20);
           uVar2 = local_30;
-          uStack_2c = SUB84((double)dVar11,0);
+          uStack_2c = SUB84((double)constantX,0);
           uVar4 = uStack_2c;
-          local_30 = (undefined4)((ulonglong)(double)dVar13 >> 0x20);
+          local_30 = (undefined4)((ulonglong)(double)constantY >> 0x20);
           uVar3 = local_30;
-          uStack_2c = SUB84((double)dVar13,0);
+          uStack_2c = SUB84((double)constantY,0);
           uVar5 = uStack_2c;
-          local_30 = (undefined4)((ulonglong)(double)dVar12 >> 0x20);
-          uStack_2c = SUB84((double)dVar12,0);
-          _printf("      constant = { %f, %f, %f, %f }\n;",(double)dVar11,(double)dVar13,(double)dVar12,
-                  (double)*(float *)(param_1 + 0x10),uVar2,uVar4,uVar3,uVar5,local_30,uStack_2c,
-                  uVar7);
+          local_30 = (undefined4)((ulonglong)(double)constantZ >> 0x20);
+          uStack_2c = SUB84((double)constantZ,0);
+          _printf("      constant = { %f, %f, %f, %f }\n;",(double)constantX,(double)constantY,(double)constantZ,
+                  (double)*(float *)(chunk + 0x10),uVar2,uVar4,uVar3,uVar5,local_30,uStack_2c,
+                  lastValue);
         }
         goto LAB_000d1838;
       }
       _puts("      constantbinding {");
-      _printf("         type = 0x%lx;\n",*(undefined4 *)(param_1 + 4));
-      _printf("         constantindex = %i;\n",*(undefined4 *)(param_1 + 8));
-      _printf("         envparameterindex = %i;\n",*(undefined4 *)(param_1 + 0xc));
-      _printf("         inlineconstantindex = %i;\n",*(undefined4 *)(param_1 + 0x10));
-      uVar7 = *(undefined4 *)(param_1 + 0x14);
-      pcVar6 = "         localparameterindex = %i;\n";
+      _printf("         type = 0x%lx;\n",*(undefined4 *)(chunk + 4));
+      _printf("         constantindex = %i;\n",*(undefined4 *)(chunk + 8));
+      _printf("         envparameterindex = %i;\n",*(undefined4 *)(chunk + 0xc));
+      _printf("         inlineconstantindex = %i;\n",*(undefined4 *)(chunk + 0x10));
+      lastValue = *(undefined4 *)(chunk + 0x14);
+      lastFormat = "         localparameterindex = %i;\n";
     }
-    _printf(pcVar6,uVar7);
+    _printf(lastFormat,lastValue);
   }
   _puts("      };");
 LAB_000d1838:

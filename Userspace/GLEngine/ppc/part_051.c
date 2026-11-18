@@ -744,39 +744,39 @@ double _glePolyArea(undefined4 unusedArg1,float *param_2,int param_3,undefined4 
 }
 
 /* _glePolyAreaPtr @ 0xeb258 (136 bytes) */
-double _glePolyAreaPtr(undefined4 unusedArg1,undefined4 *param_2,int param_3,undefined4 unusedArg4,undefined4 unusedArg5,undefined4 unusedArg6,undefined4 unusedArg7)
+double _glePolyAreaPtr(undefined4 unusedArg1,undefined4 *vertexPtrs,int vertexCount,undefined4 unusedArg4,undefined4 unusedArg5,undefined4 unusedArg6,undefined4 unusedArg7)
 {
-  float fVar1;
-  float fVar2;
-  float fVar3;
-  float fVar4;
-  float fVar5;
-  float *pfVar6;
-  float *pfVar7;
-  undefined4 *puVar8;
-  uint uVar9;
+  float lastPointX;
+  float lastPointY;
+  float areaSum;
+  float previousPointX;
+  float previousPointY;
+  float *currentPoint;
+  float *firstPoint;
+  undefined4 *nextVertexSlot;
+  uint verticesLeft;
   
-  puVar8 = param_2 + 1;
-  pfVar7 = (float *)*param_2;
-  fVar1 = *pfVar7;
-  fVar2 = pfVar7[1];
-  fVar3 = FLOAT_00108e50;
-  if (puVar8 < param_2 + param_3) {
-    uVar9 = (uint)((int)(param_2 + param_3) + (3 - (int)puVar8)) >> 2;
-    fVar4 = fVar1;
-    fVar5 = fVar2;
+  nextVertexSlot = vertexPtrs + 1;
+  firstPoint = (float *)*vertexPtrs;
+  lastPointX = *firstPoint;
+  lastPointY = firstPoint[1];
+  areaSum = FLOAT_00108e50;
+  if (nextVertexSlot < vertexPtrs + vertexCount) {
+    verticesLeft = (uint)((int)(vertexPtrs + vertexCount) + (3 - (int)nextVertexSlot)) >> 2;
+    previousPointX = lastPointX;
+    previousPointY = lastPointY;
     do {
-      pfVar6 = (float *)*puVar8;
-      puVar8 = puVar8 + 1;
-      fVar1 = *pfVar6;
-      fVar2 = pfVar6[1];
-      fVar3 = fVar3 + ((fVar4 * fVar2 - fVar1 * fVar5));
-      uVar9 = uVar9 - 1;
-      fVar4 = fVar1;
-      fVar5 = fVar2;
-    } while (uVar9 != 0);
+      currentPoint = (float *)*nextVertexSlot;
+      nextVertexSlot = nextVertexSlot + 1;
+      lastPointX = *currentPoint;
+      lastPointY = currentPoint[1];
+      areaSum = areaSum + ((previousPointX * lastPointY - lastPointX * previousPointY));
+      verticesLeft = verticesLeft - 1;
+      previousPointX = lastPointX;
+      previousPointY = lastPointY;
+    } while (verticesLeft != 0);
   }
-  return (double)(fVar3 + ((fVar1 * pfVar7[1] - *pfVar7 * fVar2)));
+  return (double)(areaSum + ((lastPointX * firstPoint[1] - *firstPoint * lastPointY)));
 }
 
 /* _gleBeginTrianglesRenderSmooth @ 0xeb2e0 (52 bytes) */

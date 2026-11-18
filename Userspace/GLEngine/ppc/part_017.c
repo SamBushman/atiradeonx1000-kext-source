@@ -2419,14 +2419,16 @@ void _glGetLightiv_Exec(glContext, light, pname, params)
   undefined4 pname;
   int *params;
 {
-  float fVar1;
-  double dVar2;
+  float roundBias;
+  float lightParamValue;
+  double colorToIntScale;
   undefined4 glErrorCode;
-  int iVar4;
-  double dVar5;
+  int lightRecord;
+  int spotCutoffInt;
+  double fourthComponent;
   
-  fVar1 = FLOAT_00108e90;
-  dVar2 = DOUBLE_00108d90;
+  roundBias = FLOAT_00108e90;
+  colorToIntScale = DOUBLE_00108d90;
   if (-1 < *(short *)(glContext + 0x4a10)) {
     if (*(int *)(glContext + 0x7574) != 0) {
       return;
@@ -2444,66 +2446,66 @@ LAB_0006c96c:
     *(undefined4 *)(glContext + 0x7574) = glErrorCode;
     return;
   }
-  iVar4 = glContext + (light - 0x4000U) * 0x80;
+  lightRecord = glContext + (light - 0x4000U) * 0x80;
   switch(pname) {
   case 0x1200:
-    *params = (int)((double)*(float *)(iVar4 + 0x2820) * DOUBLE_00108d90);
-    params[1] = (int)((double)*(float *)(iVar4 + 0x2824) * dVar2);
-    params[2] = (int)((double)*(float *)(iVar4 + 0x2828) * dVar2);
-    dVar5 = (double)*(float *)(iVar4 + 0x282c);
+    *params = (int)((double)*(float *)(lightRecord + 0x2820) * DOUBLE_00108d90);
+    params[1] = (int)((double)*(float *)(lightRecord + 0x2824) * colorToIntScale);
+    params[2] = (int)((double)*(float *)(lightRecord + 0x2828) * colorToIntScale);
+    fourthComponent = (double)*(float *)(lightRecord + 0x282c);
     goto LAB_0006ca7c;
   case 0x1201:
-    *params = (int)((double)*(float *)(iVar4 + 0x2830) * DOUBLE_00108d90);
-    params[1] = (int)((double)*(float *)(iVar4 + 0x2834) * dVar2);
-    params[2] = (int)((double)*(float *)(iVar4 + 0x2838) * dVar2);
-    dVar5 = (double)*(float *)(iVar4 + 0x283c);
+    *params = (int)((double)*(float *)(lightRecord + 0x2830) * DOUBLE_00108d90);
+    params[1] = (int)((double)*(float *)(lightRecord + 0x2834) * colorToIntScale);
+    params[2] = (int)((double)*(float *)(lightRecord + 0x2838) * colorToIntScale);
+    fourthComponent = (double)*(float *)(lightRecord + 0x283c);
     goto LAB_0006ca7c;
   case 0x1202:
-    *params = (int)((double)*(float *)(iVar4 + 0x2840) * DOUBLE_00108d90);
-    params[1] = (int)((double)*(float *)(iVar4 + 0x2844) * dVar2);
-    params[2] = (int)((double)*(float *)(iVar4 + 0x2848) * dVar2);
-    dVar5 = (double)*(float *)(iVar4 + 0x284c);
+    *params = (int)((double)*(float *)(lightRecord + 0x2840) * DOUBLE_00108d90);
+    params[1] = (int)((double)*(float *)(lightRecord + 0x2844) * colorToIntScale);
+    params[2] = (int)((double)*(float *)(lightRecord + 0x2848) * colorToIntScale);
+    fourthComponent = (double)*(float *)(lightRecord + 0x284c);
 LAB_0006ca7c:
-    dVar5 = dVar5 * dVar2;
+    fourthComponent = fourthComponent * colorToIntScale;
 LAB_0006ca80:
-    params[3] = (int)dVar5;
+    params[3] = (int)fourthComponent;
     return;
   case 0x1203:
-    *params = (int)*(float *)(iVar4 + 0x2850);
-    params[1] = (int)*(float *)(iVar4 + 0x2854);
-    params[2] = (int)*(float *)(iVar4 + 0x2858);
-    dVar5 = (double)*(float *)(iVar4 + 0x285c);
+    *params = (int)*(float *)(lightRecord + 0x2850);
+    params[1] = (int)*(float *)(lightRecord + 0x2854);
+    params[2] = (int)*(float *)(lightRecord + 0x2858);
+    fourthComponent = (double)*(float *)(lightRecord + 0x285c);
     goto LAB_0006ca80;
   case 0x1204:
-    *params = (int)(*(float *)(iVar4 + 0x2860) + FLOAT_00108e90);
-    params[1] = (int)(*(float *)(iVar4 + 0x2864) + fVar1);
-    params[2] = (int)(*(float *)(iVar4 + 0x2868) + fVar1);
+    *params = (int)(*(float *)(lightRecord + 0x2860) + FLOAT_00108e90);
+    params[1] = (int)(*(float *)(lightRecord + 0x2864) + roundBias);
+    params[2] = (int)(*(float *)(lightRecord + 0x2868) + roundBias);
     return;
   case 0x1205:
-    fVar1 = *(float *)(iVar4 + 0x287c);
+    lightParamValue = *(float *)(lightRecord + 0x287c);
     break;
   case 0x1206:
-    fVar1 = *(float *)(iVar4 + 0x2890);
-    if (fVar1 < FLOAT_00108e50) {
-      iVar4 = 0xb4;
+    lightParamValue = *(float *)(lightRecord + 0x2890);
+    if (lightParamValue < FLOAT_00108e50) {
+      spotCutoffInt = 0xb4;
       goto LAB_0006cbd4;
     }
     break;
   case 0x1207:
-    fVar1 = *(float *)(iVar4 + 0x2870);
+    lightParamValue = *(float *)(lightRecord + 0x2870);
     break;
   case 0x1208:
-    fVar1 = *(float *)(iVar4 + 0x2874);
+    lightParamValue = *(float *)(lightRecord + 0x2874);
     break;
   case 0x1209:
-    fVar1 = *(float *)(iVar4 + 0x2878);
+    lightParamValue = *(float *)(lightRecord + 0x2878);
     break;
   default:
     goto switchD_0006c9a4_default;
   }
-  iVar4 = (int)(fVar1 + FLOAT_00108e90);
+  spotCutoffInt = (int)(lightParamValue + FLOAT_00108e90);
 LAB_0006cbd4:
-  *params = iVar4;
+  *params = spotCutoffInt;
   return;
 }
 

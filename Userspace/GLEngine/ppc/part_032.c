@@ -1,35 +1,35 @@
 #include "decls.h"
 
 /* _glGetTexLevelParameterfv_Exec_body @ 0x9dbfc (1068 bytes) */
-void _glGetTexLevelParameterfv_Exec_body(glContext, target, param_3, param_4, param_5)
+void _glGetTexLevelParameterfv_Exec_body(glContext, target, level, pname, params)
   int glContext;
   int target;
-  uint param_3;
-  undefined *param_4;
-  float *param_5;
+  uint level;
+  undefined *pname;
+  float *params;
 {
-  bool bVar1;
+  bool rendererByte79IsZero;
   bool stateClean;
-  char cVar2;
+  char rendererInfoByte79;
   undefined4 glErrorCode;
-  uint uVar4;
-  int iVar5;
+  uint faceIndex;
+  int levelRecord;
   int matrixFuncDirty;
   int remaining;
   int loopIndex;
   int *srcCursor;
-  int iVar7;
-  int iVar8;
+  int textureObject;
+  int dirtyWord;
   int framebufferObject;
-  undefined *puVar9;
-  float *pfVar10;
+  undefined *forwardedPname;
+  float *forwardedParams;
   undefined4 incomingR8;
-  uint uVar11;
+  uint forwardedLevel;
   uint dispatchFlags;
   uint dirtyWord3ThenMasked;
   int *dirtyFlagWords;
-  double extraout_f1;
-  double extraout_f1_00;
+  double f1AfterCall;
+  double f1AfterCall1;
   double fparam_1;
   double incomingFpr2;
   double incomingFpr3;
@@ -38,12 +38,12 @@ void _glGetTexLevelParameterfv_Exec_body(glContext, target, param_3, param_4, pa
   double incomingFpr6;
   double incomingFpr7;
   double incomingFpr8;
-  uint local_38 [5];
+  uint queryResult [5];
   
-  uVar11 = param_3;
-  puVar9 = param_4;
-  pfVar10 = param_5;
-  iVar7 = _gleLookUpTexture(glContext,target);
+  forwardedLevel = level;
+  forwardedPname = pname;
+  forwardedParams = params;
+  textureObject = _gleLookUpTexture(glContext,target);
   if (-1 < *(short *)(glContext + 0x4a10)) {
     if (*(int *)(glContext + 0x7574) != 0) {
       return;
@@ -51,32 +51,32 @@ void _glGetTexLevelParameterfv_Exec_body(glContext, target, param_3, param_4, pa
     glErrorCode = 0x502;
     goto LAB_0009dd64;
   }
-  if (iVar7 == 0) goto LAB_0009dd54;
-  if (0xe < param_3) {
+  if (textureObject == 0) goto LAB_0009dd54;
+  if (0xe < level) {
     if (*(int *)(glContext + 0x7574) != 0) {
       return;
     }
     glErrorCode = 0x501;
     goto LAB_0009dd64;
   }
-  uVar4 = target - 0x8515;
-  if (5 < uVar4) {
-    uVar4 = 0;
+  faceIndex = target - 0x8515;
+  if (5 < faceIndex) {
+    faceIndex = 0;
   }
-  iVar5 = iVar7 + uVar4 * 0x168 + param_3 * 0x18;
-  if ((undefined *)0x8061 < param_4) {
-    if (param_4 < (undefined *)0x86a2) {
-      if ((undefined *)0x869f < param_4) {
+  levelRecord = textureObject + faceIndex * 0x168 + level * 0x18;
+  if ((undefined *)0x8061 < pname) {
+    if (pname < (undefined *)0x86a2) {
+      if ((undefined *)0x869f < pname) {
 LAB_0009dd4c:
-        local_38[0] = 0xffffffff;
+        queryResult[0] = 0xffffffff;
         goto LAB_0009dd7c;
       }
-      if (param_4 == (undefined *)0x8071) {
-        local_38[0] = (uint)*(ushort *)(iVar5 + 0xcc);
+      if (pname == (undefined *)0x8071) {
+        queryResult[0] = (uint)*(ushort *)(levelRecord + 0xcc);
         goto LAB_0009dd7c;
       }
     }
-    else if (param_4 == (undefined *)0x884a) goto LAB_0009dd4c;
+    else if (pname == (undefined *)0x884a) goto LAB_0009dd4c;
 LAB_0009dd54:
     if (*(int *)(glContext + 0x7574) != 0) {
       return;
@@ -86,36 +86,36 @@ LAB_0009dd64:
     *(undefined4 *)(glContext + 0x7574) = glErrorCode;
     return;
   }
-  if ((undefined *)0x805b < param_4) goto LAB_0009dd4c;
-  if (param_4 != ((unsigned char *)0x00001001)) {
-    if (((unsigned char *)0x00001001) < param_4) {
-      if (param_4 == ((unsigned char *)0x00001003)) goto LAB_0009dd4c;
-      if (param_4 == ((unsigned char *)0x00001005)) {
-        local_38[0] = (uint)*(byte *)(iVar5 + 0xce);
+  if ((undefined *)0x805b < pname) goto LAB_0009dd4c;
+  if (pname != ((unsigned char *)0x00001001)) {
+    if (((unsigned char *)0x00001001) < pname) {
+      if (pname == ((unsigned char *)0x00001003)) goto LAB_0009dd4c;
+      if (pname == ((unsigned char *)0x00001005)) {
+        queryResult[0] = (uint)*(byte *)(levelRecord + 0xce);
         goto LAB_0009dd7c;
       }
     }
-    else if (param_4 == (undefined *)0x1000) {
-      local_38[0] = (uint)*(ushort *)(iVar5 + 200);
+    else if (pname == (undefined *)0x1000) {
+      queryResult[0] = (uint)*(ushort *)(levelRecord + 200);
       goto LAB_0009dd7c;
     }
     goto LAB_0009dd54;
   }
-  local_38[0] = (uint)*(ushort *)(iVar5 + 0xca);
+  queryResult[0] = (uint)*(ushort *)(levelRecord + 0xca);
 LAB_0009dd7c:
-  if ((*(ushort *)(iVar7 + 0x24) & 0x100) == 0) goto LAB_0009df84;
+  if ((*(ushort *)(textureObject + 0x24) & 0x100) == 0) goto LAB_0009df84;
   matrixFuncDirty = *(int *)(glContext + 0x50ac);
-  fparam_1 = extraout_f1;
+  fparam_1 = f1AfterCall;
   if (matrixFuncDirty != 0 || (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
     _gleUpdateMatrixFunc(glContext);
-    fparam_1 = extraout_f1_00;
+    fparam_1 = f1AfterCall1;
   }
   if (*(char *)(glContext + 0x4691) == '\0') goto LAB_0009df84;
   framebufferObject = *(int *)(glContext + 0x744c);
   dirtyFlagWords = (int *)(glContext + 0x310);
-  cVar2 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
+  rendererInfoByte79 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
   if ((framebufferObject != 0) && (*(int *)(framebufferObject + 0xec) != 0)) {
-    ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,uVar11,puVar9,pfVar10,incomingR8,matrixFuncDirty,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,
+    ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,forwardedLevel,forwardedPname,forwardedParams,incomingR8,matrixFuncDirty,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,
                incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
     *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000000;
   }
@@ -127,9 +127,9 @@ LAB_0009de7c:
     loopIndex = 0;
     srcCursor = (int *)(glContext + 0x324);
     do {
-      iVar8 = *srcCursor;
+      dirtyWord = *srcCursor;
       srcCursor = srcCursor + 1;
-      if (iVar8 != 0) {
+      if (dirtyWord != 0) {
         *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x800000;
         break;
       }
@@ -146,14 +146,14 @@ LAB_0009de7c:
       goto LAB_0009de7c;
     }
   }
-  bVar1 = cVar2 == '\0';
-  if (bVar1) {
+  rendererByte79IsZero = rendererInfoByte79 == '\0';
+  if (rendererByte79IsZero) {
     dirtyWord3ThenMasked = dirtyWord3ThenMasked & 0x17000000;
   }
   else {
     dirtyWord3ThenMasked = dirtyWord3ThenMasked & 0x17ffffff;
   }
-  if (bVar1) {
+  if (rendererByte79IsZero) {
     stateClean = ((*dirtyFlagWords == 0 && *(int *)(glContext + 0x314) == 0) && dirtyWord3ThenMasked == 0) &&
             *(int *)(glContext + 800) == 0;
   }
@@ -187,16 +187,16 @@ LAB_0009de7c:
     remaining = remaining + -1;
   } while (remaining != 0);
 LAB_0009df84:
-  if ((local_38[0] == 0xffffffff) || ((*(ushort *)(iVar7 + 0x24) & 0x100) != 0)) {
+  if ((queryResult[0] == 0xffffffff) || ((*(ushort *)(textureObject + 0x24) & 0x100) != 0)) {
     (**(code **)(glContext + 0x479c))
               (*(undefined4 *)(glContext + 0x4688),
-               *(undefined4 *)(iVar7 + (uint)*(byte *)(glContext + 0x85a8) * 4),uVar4,param_3,param_4,
-               local_38);
+               *(undefined4 *)(textureObject + (uint)*(byte *)(glContext + 0x85a8) * 4),faceIndex,level,pname,
+               queryResult);
   }
-  if ((param_4 == ((unsigned char *)0x00001003)) && (local_38[0] == 0)) {
-    local_38[0] = 1;
+  if ((pname == ((unsigned char *)0x00001003)) && (queryResult[0] == 0)) {
+    queryResult[0] = 1;
   }
-  *param_5 = (float)((double)CONCAT44(0x43300000,local_38[0] ^ 0x80000000) - DOUBLE_00108d58);
+  *params = (float)((double)CONCAT44(0x43300000,queryResult[0] ^ 0x80000000) - DOUBLE_00108d58);
   return;
 }
 
