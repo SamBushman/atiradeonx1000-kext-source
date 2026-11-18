@@ -1,0 +1,5 @@
+local	_glRotateZ_ListExec	incomingStack_ffffffb8	stackArgSlot_ffffffb8	INFERRED	stack-passed float argument word forwarded to _glRotateZ_Exec (an extra Ghidra argument: the stock Exec takes only ctx, f1, f2)
+local	_glRotateZ_ListExec	incomingStack_ffffffc0	stackArgSlot_ffffffc0	INFERRED	stack-passed float argument word forwarded to _glRotateZ_Exec (an extra Ghidra argument: the stock Exec takes only ctx, f1, f2)
+local	_glRotateZ_ListExec	incomingStack_ffffffc8	stackArgSlot_ffffffc8	INFERRED	stack-passed float argument word forwarded to _glRotateZ_Exec (an extra Ghidra argument: the stock Exec takes only ctx, f1, f2)
+local	_glRotateZ_ListExec	incomingStack_ffffffd0	stackArgSlot_ffffffd0	INFERRED	stack-passed float argument word forwarded to _glRotateZ_Exec (an extra Ghidra argument: the stock Exec takes only ctx, f1, f2)
+local	_glRotateZ_ListExec	incomingStack_ffffffd8	stackArgSlot_ffffffd8	INFERRED	stack-passed float argument word forwarded to _glRotateZ_Exec (an extra Ghidra argument: the stock Exec takes only ctx, f1, f2)

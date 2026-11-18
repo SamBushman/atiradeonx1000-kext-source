@@ -178,6 +178,17 @@ for _new_fn, _old_fn in _func_old.items():                  # rows keep the OLD 
 # offset; as a separate -O0 local it was only 8 bytes, and gldTextureFormatLookup (handed it as a 0x28-byte descriptor) wrote over the saved r29..r31.
 for _fn, _blocks in cfg.get('frame_blocks', {}).items():
     LOCAL_RENAMES[_fn].update(_blocks)
+# A variable renamed TWICE (a later naming row whose `old` is the corpus name an earlier row had already given: in_stack_ffffffb8 -> incomingStack_ffffffb8 ->
+# stackArgSlot_ffffffb8) must go back to the ORIGINAL Ghidra name: unrename_locals looks one step only, and `incomingStack_ffffffb8` (what the second row records as
+# the old name) matches STACK_RE although the Ghidra name `in_stack_ffffffb8` does not, so the second rename switched mirror_frame ON for the function and changed the
+# emitted code (naming round 5, gates O5_20/O5_32: 11 and 15 functions differed). Resolve every chain to its first name.
+for _fn, _m in LOCAL_RENAMES.items():
+    for _new, _old in list(_m.items()):
+        _seen = {_new}
+        while _old in _m and _old not in _seen:
+            _seen.add(_old)
+            _old = _m[_old]
+        _m[_new] = _old
 STACK_RE = re.compile(r'^(?:local|\w*Stack)_[0-9a-f]+(?:_buf)?$')
 VAR_DECL = re.compile(r'^\s+[A-Za-z_][\w *]*?\b[A-Za-z_]\w*(?:\s*\[[^\]]*\])?;\s*$')
 

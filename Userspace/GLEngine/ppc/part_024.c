@@ -283,15 +283,15 @@ void _glRectsv_CompExec(glContext, v1, v2)
 /* _glRotateZ_ListExec @ 0x8512c (44 bytes) */
 undefined4 _glRotateZ_ListExec(undefined4 glContext,float *listRecord,double unusedFloatArg1,double unusedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  double incomingStack_ffffffb8;
-  double incomingStack_ffffffc0;
-  double incomingStack_ffffffc8;
-  double incomingStack_ffffffd0;
-  double incomingStack_ffffffd8;
+  double stackArgSlot_ffffffb8;
+  double stackArgSlot_ffffffc0;
+  double stackArgSlot_ffffffc8;
+  double stackArgSlot_ffffffd0;
+  double stackArgSlot_ffffffd8;
   
   ((void (*)())_glRotateZ_Exec)(glContext,(double)*listRecord,(double)listRecord[1],forwardedFloatArg3,forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,
-                  forwardedFloatArg7,forwardedFloatArg8,incomingStack_ffffffb8,incomingStack_ffffffc0,incomingStack_ffffffc8,
-                  incomingStack_ffffffd0,incomingStack_ffffffd8);
+                  forwardedFloatArg7,forwardedFloatArg8,stackArgSlot_ffffffb8,stackArgSlot_ffffffc0,stackArgSlot_ffffffc8,
+                  stackArgSlot_ffffffd0,stackArgSlot_ffffffd8);
   return 8;
 }
 
