@@ -882,7 +882,7 @@ use	_glCopyTexSubImage1D_NoopExec	iVar5	loopIndex	INFERRED	counter: starts at a 
 use	_glCopyTexSubImage1D_NoopExec	iVar5	loopIndex	INFERRED	counter: starts at a constant, only incremented by 1 and compared against a bound	^\s*iVar5\ =\ iVar5\ \+\ 1;$	+2
 use	_glCopyTexSubImage1D_NoopExec	iVar5	remaining	INFERRED	down-counter: loaded with a count, decremented by 1 per iteration and tested against zero	^\s*iVar5\ =\ 0x13;$	+1
 use	_glCopyTexSubImage1D_NoopExec	iVar5	remaining	INFERRED	down-counter: loaded with a count, decremented by 1 per iteration and tested against zero	^\s*iVar5\ =\ iVar5\ \+\ \-1;$	+2
-local	_glCopyTexSubImage1D_NoopExec	piVar4	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through
+local	_glCopyTexSubImage1D_NoopExec	piVar4	dirtyBitArrayCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through
 use	_glCopyTexSubImage2D_Exec	iVar7	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*iVar7\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x744c\);$	+1
 use	_glCopyTexSubImage2D_Exec	iVar7	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*if\ \(\(iVar7\ !=\ 0\)\ \&\&\ \(\*\(int\ \*\)\(iVar7\ \+\ 0xec\)\ !=\ 0\)\)\ \{$	+3
 use	_glCopyTexSubImage2D_Exec	uVar4	glErrorCode	CONFIRMED	only assigned GL error constants (0x500..0x507) and stored to ctx+0x7574, the pending GL error word that glGetError_Exec returns and clears	^\s*uVar4\ =\ 0x506;$	+1

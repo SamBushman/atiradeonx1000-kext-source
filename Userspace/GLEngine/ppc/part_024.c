@@ -504,78 +504,79 @@ void _glRotateXYZ_Exec(int glContext,double angle,float x,float y,float z)
   float matrixElem8;
   float secondMatrixElem9;
   float matrixElem5;
-  float fVar11;
+  float oneMinusCosThenZXTermThenRotElem2;
   float rotElem8;
   float rotElem0;
   float rotElem4;
-  float fVar15;
-  float fVar16;
+  float xyTermThenRotElem3;
+  float yzTermThenRotElem5;
   float rotElem1;
   float rotElem7;
   float rotElem6;
-  uint uVar20;
-  uint uVar21;
+  uint glContextWord50b0;
+  uint matrixDirtyBits;
   float *currentMatrix;
   float *secondMatrix;
-  double dVar23;
+  double degreesToRadians;
+  double axisLengthThenInverseLength;
   double sinValue;
   
-  uVar21 = *(uint *)(glContext + 0x50a8);
+  matrixDirtyBits = *(uint *)(glContext + 0x50a8);
   currentMatrix = *(float **)(glContext + 0x4fec);
   one = *(float *)(glContext + 0x24);
   if ((*(short *)(glContext + 0x4a10) < 0) && (*(int *)(glContext + 0x4ff4) < 0x18)) {
-    dVar23 = (double)FLOAT_00108e84;
-    sinValue = _sin((double)(float)(angle * dVar23));
+    degreesToRadians = (double)FLOAT_00108e84;
+    sinValue = _sin((double)(float)(angle * degreesToRadians));
     sinAngle = (float)sinValue;
-    dVar23 = _cos((double)(float)(angle * dVar23));
-    cosAngle = (float)dVar23;
-    dVar23 = _sqrt((double)(z * z + (x * x + (y * y))));
-    fVar11 = one - cosAngle;
+    degreesToRadians = _cos((double)(float)(angle * degreesToRadians));
+    cosAngle = (float)degreesToRadians;
+    axisLengthThenInverseLength = _sqrt((double)(z * z + (x * x + (y * y))));
+    oneMinusCosThenZXTermThenRotElem2 = one - cosAngle;
     matrixElem4 = currentMatrix[4];
     matrixElem0 = *currentMatrix;
     matrixElem8 = currentMatrix[8];
-    dVar23 = (double)(one / (float)dVar23);
-    unitAxisZ = (float)(z * dVar23);
-    unitAxisX = (float)(x * dVar23);
-    unitAxisY = (float)(y * dVar23);
-    fVar15 = unitAxisX * unitAxisY * fVar11;
-    fVar16 = unitAxisY * unitAxisZ * fVar11;
+    axisLengthThenInverseLength = (double)(one / (float)axisLengthThenInverseLength);
+    unitAxisZ = (float)(z * axisLengthThenInverseLength);
+    unitAxisX = (float)(x * axisLengthThenInverseLength);
+    unitAxisY = (float)(y * axisLengthThenInverseLength);
+    xyTermThenRotElem3 = unitAxisX * unitAxisY * oneMinusCosThenZXTermThenRotElem2;
+    yzTermThenRotElem5 = unitAxisY * unitAxisZ * oneMinusCosThenZXTermThenRotElem2;
     rotElem4 = cosAngle * (one - unitAxisY * unitAxisY) + unitAxisY * unitAxisY;
-    rotElem7 = fVar16 - unitAxisX * sinAngle;
-    fVar11 = unitAxisZ * unitAxisX * fVar11;
-    rotElem1 = fVar15 + unitAxisZ * sinAngle;
-    fVar15 = fVar15 - unitAxisZ * sinAngle;
+    rotElem7 = yzTermThenRotElem5 - unitAxisX * sinAngle;
+    oneMinusCosThenZXTermThenRotElem2 = unitAxisZ * unitAxisX * oneMinusCosThenZXTermThenRotElem2;
+    rotElem1 = xyTermThenRotElem3 + unitAxisZ * sinAngle;
+    xyTermThenRotElem3 = xyTermThenRotElem3 - unitAxisZ * sinAngle;
     rotElem0 = cosAngle * (one - unitAxisX * unitAxisX) + unitAxisX * unitAxisX;
-    rotElem6 = fVar11 + unitAxisY * sinAngle;
+    rotElem6 = oneMinusCosThenZXTermThenRotElem2 + unitAxisY * sinAngle;
     matrixElem5 = currentMatrix[5];
     rotElem8 = cosAngle * (one - unitAxisZ * unitAxisZ) + unitAxisZ * unitAxisZ;
     matrixElem6 = currentMatrix[6];
-    fVar11 = fVar11 - unitAxisY * sinAngle;
-    fVar16 = fVar16 + unitAxisX * sinAngle;
+    oneMinusCosThenZXTermThenRotElem2 = oneMinusCosThenZXTermThenRotElem2 - unitAxisY * sinAngle;
+    yzTermThenRotElem5 = yzTermThenRotElem5 + unitAxisX * sinAngle;
     matrixElem1 = currentMatrix[1];
     matrixElem7 = currentMatrix[7];
     matrixElem2 = currentMatrix[2];
     matrixElem9 = currentMatrix[9];
     currentMatrix[8] = matrixElem8 * rotElem8 + (matrixElem0 * rotElem6 + matrixElem4 * rotElem7);
-    *currentMatrix = matrixElem8 * fVar11 + (matrixElem0 * rotElem0 + matrixElem4 * rotElem1);
-    currentMatrix[4] = matrixElem8 * fVar16 + (matrixElem0 * fVar15 + matrixElem4 * rotElem4);
+    *currentMatrix = matrixElem8 * oneMinusCosThenZXTermThenRotElem2 + (matrixElem0 * rotElem0 + matrixElem4 * rotElem1);
+    currentMatrix[4] = matrixElem8 * yzTermThenRotElem5 + (matrixElem0 * xyTermThenRotElem3 + matrixElem4 * rotElem4);
     matrixElem3 = currentMatrix[3];
     matrixElem10 = currentMatrix[10];
     currentMatrix[9] = matrixElem9 * rotElem8 + (matrixElem1 * rotElem6 + matrixElem5 * rotElem7);
-    currentMatrix[1] = matrixElem9 * fVar11 + (matrixElem1 * rotElem0 + matrixElem5 * rotElem1);
-    currentMatrix[5] = matrixElem9 * fVar16 + (matrixElem1 * fVar15 + matrixElem5 * rotElem4);
+    currentMatrix[1] = matrixElem9 * oneMinusCosThenZXTermThenRotElem2 + (matrixElem1 * rotElem0 + matrixElem5 * rotElem1);
+    currentMatrix[5] = matrixElem9 * yzTermThenRotElem5 + (matrixElem1 * xyTermThenRotElem3 + matrixElem5 * rotElem4);
     matrixElem11 = currentMatrix[0xb];
     currentMatrix[10] = matrixElem10 * rotElem8 + (matrixElem2 * rotElem6 + matrixElem6 * rotElem7);
-    currentMatrix[2] = matrixElem10 * fVar11 + (matrixElem2 * rotElem0 + matrixElem6 * rotElem1);
-    currentMatrix[6] = matrixElem10 * fVar16 + (matrixElem2 * fVar15 + matrixElem6 * rotElem4);
+    currentMatrix[2] = matrixElem10 * oneMinusCosThenZXTermThenRotElem2 + (matrixElem2 * rotElem0 + matrixElem6 * rotElem1);
+    currentMatrix[6] = matrixElem10 * yzTermThenRotElem5 + (matrixElem2 * xyTermThenRotElem3 + matrixElem6 * rotElem4);
     currentMatrix[0xb] = matrixElem11 * rotElem8 + (matrixElem3 * rotElem6 + matrixElem7 * rotElem7);
-    currentMatrix[3] = matrixElem11 * fVar11 + (matrixElem3 * rotElem0 + matrixElem7 * rotElem1);
-    currentMatrix[7] = matrixElem11 * fVar16 + (matrixElem3 * fVar15 + matrixElem7 * rotElem4);
-    uVar20 = *(uint *)(glContext + 0x50b0);
-    *(uint *)(glContext + 0x50ac) = *(uint *)(glContext + 0x50ac) | uVar21;
-    if ((uVar21 & ~uVar20 & *(uint *)(glContext + 0x505c) & 0xfffffc) != 0) {
+    currentMatrix[3] = matrixElem11 * oneMinusCosThenZXTermThenRotElem2 + (matrixElem3 * rotElem0 + matrixElem7 * rotElem1);
+    currentMatrix[7] = matrixElem11 * yzTermThenRotElem5 + (matrixElem3 * xyTermThenRotElem3 + matrixElem7 * rotElem4);
+    glContextWord50b0 = *(uint *)(glContext + 0x50b0);
+    *(uint *)(glContext + 0x50ac) = *(uint *)(glContext + 0x50ac) | matrixDirtyBits;
+    if ((matrixDirtyBits & ~glContextWord50b0 & *(uint *)(glContext + 0x505c) & 0xfffffc) != 0) {
       secondMatrix = *(float **)(glContext + 0x4ff0);
-      uVar21 = uVar21 & 0xff000003;
+      matrixDirtyBits = matrixDirtyBits & 0xff000003;
       secondMatrixElem4 = secondMatrix[4];
       secondMatrixElem0 = *secondMatrix;
       secondMatrixElem8 = secondMatrix[8];
@@ -586,23 +587,23 @@ void _glRotateXYZ_Exec(int glContext,double angle,float x,float y,float z)
       secondMatrixElem2 = secondMatrix[2];
       secondMatrixElem9 = secondMatrix[9];
       secondMatrix[8] = secondMatrixElem8 * rotElem8 + (secondMatrixElem0 * rotElem6 + secondMatrixElem4 * rotElem7);
-      *secondMatrix = secondMatrixElem8 * fVar11 + (secondMatrixElem0 * rotElem0 + secondMatrixElem4 * rotElem1);
-      secondMatrix[4] = secondMatrixElem8 * fVar16 + (secondMatrixElem0 * fVar15 + secondMatrixElem4 * rotElem4);
+      *secondMatrix = secondMatrixElem8 * oneMinusCosThenZXTermThenRotElem2 + (secondMatrixElem0 * rotElem0 + secondMatrixElem4 * rotElem1);
+      secondMatrix[4] = secondMatrixElem8 * yzTermThenRotElem5 + (secondMatrixElem0 * xyTermThenRotElem3 + secondMatrixElem4 * rotElem4);
       secondMatrixElem3 = secondMatrix[3];
       secondMatrixElem10 = secondMatrix[10];
       secondMatrix[9] = secondMatrixElem9 * rotElem8 + (secondMatrixElem1 * rotElem6 + secondMatrixElem5 * rotElem7);
-      secondMatrix[1] = secondMatrixElem9 * fVar11 + (secondMatrixElem1 * rotElem0 + secondMatrixElem5 * rotElem1);
-      secondMatrix[5] = secondMatrixElem9 * fVar16 + (secondMatrixElem1 * fVar15 + secondMatrixElem5 * rotElem4);
+      secondMatrix[1] = secondMatrixElem9 * oneMinusCosThenZXTermThenRotElem2 + (secondMatrixElem1 * rotElem0 + secondMatrixElem5 * rotElem1);
+      secondMatrix[5] = secondMatrixElem9 * yzTermThenRotElem5 + (secondMatrixElem1 * xyTermThenRotElem3 + secondMatrixElem5 * rotElem4);
       secondMatrixElem11 = secondMatrix[0xb];
       secondMatrix[10] = secondMatrixElem10 * rotElem8 + (secondMatrixElem2 * rotElem6 + secondMatrixElem6 * rotElem7);
-      secondMatrix[2] = secondMatrixElem10 * fVar11 + (secondMatrixElem2 * rotElem0 + secondMatrixElem6 * rotElem1);
-      secondMatrix[6] = secondMatrixElem10 * fVar16 + (secondMatrixElem2 * fVar15 + secondMatrixElem6 * rotElem4);
+      secondMatrix[2] = secondMatrixElem10 * oneMinusCosThenZXTermThenRotElem2 + (secondMatrixElem2 * rotElem0 + secondMatrixElem6 * rotElem1);
+      secondMatrix[6] = secondMatrixElem10 * yzTermThenRotElem5 + (secondMatrixElem2 * xyTermThenRotElem3 + secondMatrixElem6 * rotElem4);
       secondMatrix[0xb] = secondMatrixElem11 * rotElem8 + (secondMatrixElem3 * rotElem6 + secondMatrixElem7 * rotElem7);
-      secondMatrix[3] = secondMatrixElem11 * fVar11 + (secondMatrixElem3 * rotElem0 + secondMatrixElem7 * rotElem1);
-      secondMatrix[7] = secondMatrixElem11 * fVar16 + (secondMatrixElem3 * fVar15 + secondMatrixElem7 * rotElem4);
-      uVar20 = *(uint *)(glContext + 0x50b0);
+      secondMatrix[3] = secondMatrixElem11 * oneMinusCosThenZXTermThenRotElem2 + (secondMatrixElem3 * rotElem0 + secondMatrixElem7 * rotElem1);
+      secondMatrix[7] = secondMatrixElem11 * yzTermThenRotElem5 + (secondMatrixElem3 * xyTermThenRotElem3 + secondMatrixElem7 * rotElem4);
+      glContextWord50b0 = *(uint *)(glContext + 0x50b0);
     }
-    *(uint *)(glContext + 0x50b0) = uVar20 | uVar21;
+    *(uint *)(glContext + 0x50b0) = glContextWord50b0 | matrixDirtyBits;
   }
   else if (*(int *)(glContext + 0x7574) == 0) {
     *(undefined4 *)(glContext + 0x7574) = 0x502;
@@ -1181,58 +1182,58 @@ int _getIndexForGLSLSamplerType(samplerType)
 }
 
 /* _updateShaderState @ 0x865a8 (660 bytes) */
-void _updateShaderState(int glContext,int *param_2,uint param_3,int param_4,int param_5,double forwardedFloatArg1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
+void _updateShaderState(int glContext,int *stageRecordSlots,uint previousByte759c,int vertexStageHadProgram,int fragmentStageHadProgram,double forwardedFloatArg1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
 {
-  byte bVar1;
-  undefined4 uVar2;
-  int iVar3;
+  byte newByte759c;
+  undefined4 stageActiveFlag;
+  int rendererRecordCursor;
   int loopIndex2;
   int loopIndex;
   
-  if (param_2 == (int *)0x0) {
+  if (stageRecordSlots == (int *)0x0) {
     *(undefined1 *)(glContext + 0x759c) = 1;
     *(undefined4 *)(glContext + 0x5434) = 0;
     *(undefined4 *)(glContext + 0x5438) = 0;
-    if (param_3 != 0) {
-      if (param_4 != 0) {
+    if (previousByte759c != 0) {
+      if (vertexStageHadProgram != 0) {
         _gleVPDisable(glContext);
       }
-      if (param_5 != 0) {
+      if (fragmentStageHadProgram != 0) {
         _gleFPDisable(glContext);
       }
     }
-    if (param_3 != 1) {
+    if (previousByte759c != 1) {
       _gleUpdateDrawArraysFuncs(glContext);
     }
-    iVar3 = glContext + 0x10000;
+    rendererRecordCursor = glContext + 0x10000;
     loopIndex = 0;
     if (*(char *)(glContext + 0x85a4) != '\0') {
       do {
-        *(undefined4 *)(iVar3 + -0x7788) = 0;
+        *(undefined4 *)(rendererRecordCursor + -0x7788) = 0;
         loopIndex = loopIndex + 1;
-        *(undefined4 *)(iVar3 + -0x7784) = 0;
-        iVar3 = iVar3 + 0x2e0;
+        *(undefined4 *)(rendererRecordCursor + -0x7784) = 0;
+        rendererRecordCursor = rendererRecordCursor + 0x2e0;
       } while (loopIndex < (int)(uint)*(byte *)(glContext + 0x85a4));
     }
   }
   else {
-    bVar1 = *(byte *)((int)param_2 + 0x1e);
-    *(byte *)(glContext + 0x759c) = bVar1;
-    if ((*(char *)*param_2 == '\0') || (*(char *)((int)param_2 + 0x1e) == '\0')) {
-      uVar2 = 0;
+    newByte759c = *(byte *)((int)stageRecordSlots + 0x1e);
+    *(byte *)(glContext + 0x759c) = newByte759c;
+    if ((*(char *)*stageRecordSlots == '\0') || (*(char *)((int)stageRecordSlots + 0x1e) == '\0')) {
+      stageActiveFlag = 0;
     }
     else {
-      uVar2 = 1;
+      stageActiveFlag = 1;
     }
-    *(undefined4 *)(glContext + 0x5434) = uVar2;
-    if ((*(char *)param_2[1] == '\0') || (*(char *)((int)param_2 + 0x1e) == '\0')) {
-      uVar2 = 0;
+    *(undefined4 *)(glContext + 0x5434) = stageActiveFlag;
+    if ((*(char *)stageRecordSlots[1] == '\0') || (*(char *)((int)stageRecordSlots + 0x1e) == '\0')) {
+      stageActiveFlag = 0;
     }
     else {
-      uVar2 = 1;
+      stageActiveFlag = 1;
     }
-    *(undefined4 *)(glContext + 0x5438) = uVar2;
-    if (((*(int *)(glContext + 0x5434) == 0) || (param_3 == 0)) || (param_4 == 0)) {
+    *(undefined4 *)(glContext + 0x5438) = stageActiveFlag;
+    if (((*(int *)(glContext + 0x5434) == 0) || (previousByte759c == 0)) || (vertexStageHadProgram == 0)) {
       if (*(int *)(glContext + 0x5434) == 0) {
         _gleVPDisable(glContext);
       }
@@ -1245,7 +1246,7 @@ void _updateShaderState(int glContext,int *param_2,uint param_3,int param_4,int 
       ((void (*)())_gleVPChanged)(glContext,forwardedFloatArg1,forwardedFloatArg2,forwardedFloatArg3,forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8)
       ;
     }
-    if (((*(int *)(glContext + 0x5438) == 0) || (param_3 == 0)) || (param_5 == 0)) {
+    if (((*(int *)(glContext + 0x5438) == 0) || (previousByte759c == 0)) || (fragmentStageHadProgram == 0)) {
       if (*(int *)(glContext + 0x5438) == 0) {
         _gleFPDisable(glContext);
       }
@@ -1256,7 +1257,7 @@ void _updateShaderState(int glContext,int *param_2,uint param_3,int param_4,int 
     else {
       _gleFPChanged(glContext);
     }
-    if (bVar1 != param_3) {
+    if (newByte759c != previousByte759c) {
       _gleUpdateDrawArraysFuncs(glContext);
     }
     if ((*(int *)(glContext + 0x5434) != 0) || (*(int *)(glContext + 0x5438) != 0)) {
@@ -1270,14 +1271,14 @@ void _updateShaderState(int glContext,int *param_2,uint param_3,int param_4,int 
         }
         else {
           *(undefined4 *)(loopIndex2 * 0x2e0 + glContext + 0x8878) =
-               *(undefined4 *)(loopIndex2 * 4 + *param_2 + 0x4e4);
+               *(undefined4 *)(loopIndex2 * 4 + *stageRecordSlots + 0x4e4);
         }
         if (*(int *)(glContext + 0x5438) == 0) {
           *(undefined4 *)(loopIndex2 * 0x2e0 + glContext + 0x887c) = 0;
         }
         else {
           *(undefined4 *)(loopIndex2 * 0x2e0 + glContext + 0x887c) =
-               *(undefined4 *)(loopIndex2 * 4 + param_2[1] + 0x4e4);
+               *(undefined4 *)(loopIndex2 * 4 + stageRecordSlots[1] + 0x4e4);
         }
         loopIndex2 = loopIndex2 + 1;
       } while (loopIndex2 < (int)(uint)*(byte *)(glContext + 0x85a4));

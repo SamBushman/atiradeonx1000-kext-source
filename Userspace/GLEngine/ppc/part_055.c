@@ -366,24 +366,24 @@ int _gleSubmitVertexCopy(glContext, sourceData)
 }
 
 /* _gleForceToSoftwareTCL @ 0x103b38 (1520 bytes) */
-undefined4 _gleForceToSoftwareTCL(int glContext,double fparam_1,double floatArg2,double floatArg3,double floatArg4,double floatArg5,double floatArg6,double floatArg7,double floatArg8)
+undefined4 _gleForceToSoftwareTCL(int glContext,double forwardedFloatArg1ThenF1AfterCall,double floatArg2,double floatArg3,double floatArg4,double floatArg5,double floatArg6,double floatArg7,double floatArg8)
 {
   bool rendererInfoByte79Clear;
   bool stateClean;
   char rendererInfoByte79;
-  undefined1 uVar3;
+  undefined1 contextByte2ee;
   int *dirtyBitArrayCursor;
   undefined4 drawResult;
-  int iVar6;
+  int backMaterialRecord;
   int verticesLeft;
   int framebufferObject;
   int dirtyBitArrayWord;
   int incomingR5;
   undefined4 incomingR6;
   int incomingR7;
-  undefined1 *puVar7;
+  undefined1 *vertexByte7eCursor;
   char *incomingR8;
-  int iVar8;
+  int materialRecordThenLastVertexIndex;
   int matrixFuncDirty;
   int remaining;
   int loopIndex;
@@ -391,7 +391,7 @@ undefined4 _gleForceToSoftwareTCL(int glContext,double fparam_1,double floatArg2
   uint dispatchFlags;
   int vertexCursor;
   int copyVertexCount;
-  int iVar11;
+  int materialRecord;
   int vertexField30Cursor;
   int vertexCountThenRemaining;
   int copyVertexCursor;
@@ -423,21 +423,21 @@ undefined4 _gleForceToSoftwareTCL(int glContext,double fparam_1,double floatArg2
     incomingR6 = 0;
     incomingR5 = (int)*(short *)(glContext + 0x4a12);
     (**(code **)(glContext + 0x46ec))(*(undefined4 *)(glContext + 0x4688),2,incomingR5,0);
-    fparam_1 = f1AfterCall;
+    forwardedFloatArg1ThenF1AfterCall = f1AfterCall;
   }
   lastVertexIndex = vertexCountThenRemaining + -1;
   matrixFuncDirty = *(int *)(glContext + 0x50ac);
   *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x10000000;
   if (matrixFuncDirty != 0 || (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
     _gleUpdateMatrixFunc(glContext);
-    fparam_1 = f1AfterCall1;
+    forwardedFloatArg1ThenF1AfterCall = f1AfterCall1;
   }
   if (*(char *)(glContext + 0x4691) == '\0') goto LAB_00103dec;
   framebufferObject = *(int *)(glContext + 0x744c);
   dirtyFlagWords = (int *)(glContext + 0x310);
   rendererInfoByte79 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
   if ((framebufferObject != 0) && (*(int *)(framebufferObject + 0xec) != 0)) {
-    ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,incomingR5,incomingR6,incomingR7,incomingR8,matrixFuncDirty,fparam_1,floatArg2,floatArg3,
+    ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,incomingR5,incomingR6,incomingR7,incomingR8,matrixFuncDirty,forwardedFloatArg1ThenF1AfterCall,floatArg2,floatArg3,
                floatArg4,floatArg5,floatArg6,floatArg7,floatArg8);
     *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000000;
   }
@@ -512,42 +512,42 @@ LAB_00103dec:
   *(undefined4 *)(glContext + 0x4884) = *(undefined4 *)(glContext + 0x4888);
   if (*(char *)(glContext + 0x30aa) == '\0') {
     if (-1 < lastVertexIndex) {
-      puVar7 = (undefined1 *)(vertexCursor + 0x7e);
+      vertexByte7eCursor = (undefined1 *)(vertexCursor + 0x7e);
       do {
-        puVar7[-1] = *(undefined1 *)(glContext + 0x2ed);
-        *puVar7 = *(undefined1 *)(glContext + 0x2ee);
-        puVar7 = puVar7 + 0x100;
+        vertexByte7eCursor[-1] = *(undefined1 *)(glContext + 0x2ed);
+        *vertexByte7eCursor = *(undefined1 *)(glContext + 0x2ee);
+        vertexByte7eCursor = vertexByte7eCursor + 0x100;
         vertexCountThenRemaining = vertexCountThenRemaining + -1;
       } while (vertexCountThenRemaining != 0);
     }
   }
   else if (*(char *)(glContext + 0x4df8) == '\0') {
     if (*(char *)(glContext + 0x30ac) == '\0') {
-      iVar8 = *(int *)(glContext + 0x4dd0);
-      *(undefined4 *)(iVar8 + 0x1e0) = 1;
+      materialRecordThenLastVertexIndex = *(int *)(glContext + 0x4dd0);
+      *(undefined4 *)(materialRecordThenLastVertexIndex + 0x1e0) = 1;
       if (-1 < lastVertexIndex) {
         do {
           *(undefined1 *)(vertexCursor + 0x7d) = *(undefined1 *)(glContext + 0x2ed);
-          uVar3 = *(undefined1 *)(glContext + 0x2ee);
-          *(int *)(vertexCursor + 0x74) = iVar8;
-          *(undefined1 *)(vertexCursor + 0x7e) = uVar3;
+          contextByte2ee = *(undefined1 *)(glContext + 0x2ee);
+          *(int *)(vertexCursor + 0x74) = materialRecordThenLastVertexIndex;
+          *(undefined1 *)(vertexCursor + 0x7e) = contextByte2ee;
           vertexCursor = vertexCursor + 0x100;
           vertexCountThenRemaining = vertexCountThenRemaining + -1;
         } while (vertexCountThenRemaining != 0);
       }
     }
     else {
-      iVar8 = *(int *)(glContext + 0x4dd0);
-      iVar6 = *(int *)(glContext + 0x4dd4);
-      *(undefined4 *)(iVar8 + 0x1e0) = 1;
-      *(undefined4 *)(iVar6 + 0x1e0) = 1;
+      materialRecordThenLastVertexIndex = *(int *)(glContext + 0x4dd0);
+      backMaterialRecord = *(int *)(glContext + 0x4dd4);
+      *(undefined4 *)(materialRecordThenLastVertexIndex + 0x1e0) = 1;
+      *(undefined4 *)(backMaterialRecord + 0x1e0) = 1;
       if (-1 < lastVertexIndex) {
         do {
           *(undefined1 *)(vertexCursor + 0x7d) = *(undefined1 *)(glContext + 0x2ed);
-          uVar3 = *(undefined1 *)(glContext + 0x2ee);
-          *(int *)(vertexCursor + 0x74) = iVar8;
-          *(undefined1 *)(vertexCursor + 0x7e) = uVar3;
-          *(int *)(vertexCursor + 0x78) = iVar6;
+          contextByte2ee = *(undefined1 *)(glContext + 0x2ee);
+          *(int *)(vertexCursor + 0x74) = materialRecordThenLastVertexIndex;
+          *(undefined1 *)(vertexCursor + 0x7e) = contextByte2ee;
+          *(int *)(vertexCursor + 0x78) = backMaterialRecord;
           vertexCursor = vertexCursor + 0x100;
           vertexCountThenRemaining = vertexCountThenRemaining + -1;
         } while (vertexCountThenRemaining != 0);
@@ -558,16 +558,16 @@ LAB_00103dec:
     vertexField30Cursor = vertexCursor + 0x30;
     (**(code **)(glContext + 0x4de0))(glContext,vertexField30Cursor);
     if (*(char *)(glContext + 0x30ac) == '\0') {
-      iVar8 = 0;
+      materialRecordThenLastVertexIndex = 0;
       verticesLeft = lastVertexIndex;
       vertexLoopCursor = vertexCursor;
       if (0 < lastVertexIndex) {
         do {
           *(undefined1 *)(vertexLoopCursor + 0x7d) = *(undefined1 *)(glContext + 0x2ed);
           *(undefined1 *)(vertexLoopCursor + 0x7e) = *(undefined1 *)(glContext + 0x2ee);
-          iVar8 = *(int *)(glContext + 0x4dd0);
-          *(undefined4 *)(iVar8 + 0x1e0) = 1;
-          *(int *)(vertexLoopCursor + 0x74) = iVar8;
+          materialRecordThenLastVertexIndex = *(int *)(glContext + 0x4dd0);
+          *(undefined4 *)(materialRecordThenLastVertexIndex + 0x1e0) = 1;
+          *(int *)(vertexLoopCursor + 0x74) = materialRecordThenLastVertexIndex;
           if (((*(float *)(vertexLoopCursor + 0x30) != *(float *)(vertexLoopCursor + 0x130)) ||
               (*(float *)(vertexLoopCursor + 0x34) != *(float *)(vertexLoopCursor + 0x134))) ||
              ((*(float *)(vertexLoopCursor + 0x38) != *(float *)(vertexLoopCursor + 0x138) ||
@@ -576,28 +576,28 @@ LAB_00103dec:
           }
           verticesLeft = verticesLeft + -1;
           vertexField30Cursor = vertexField30Cursor + 0x100;
-          iVar8 = lastVertexIndex;
+          materialRecordThenLastVertexIndex = lastVertexIndex;
           vertexLoopCursor = vertexLoopCursor + 0x100;
         } while (verticesLeft != 0);
       }
-      iVar11 = *(int *)(glContext + 0x4dd0);
-      *(undefined4 *)(iVar11 + 0x1e0) = 1;
-      *(int *)(iVar8 * 0x100 + vertexCursor + 0x74) = iVar11;
+      materialRecord = *(int *)(glContext + 0x4dd0);
+      *(undefined4 *)(materialRecord + 0x1e0) = 1;
+      *(int *)(materialRecordThenLastVertexIndex * 0x100 + vertexCursor + 0x74) = materialRecord;
     }
     else {
-      iVar8 = 0;
+      materialRecordThenLastVertexIndex = 0;
       verticesLeft = lastVertexIndex;
       vertexLoopCursor = vertexCursor;
       if (0 < lastVertexIndex) {
         do {
           *(undefined1 *)(vertexLoopCursor + 0x7d) = *(undefined1 *)(glContext + 0x2ed);
           *(undefined1 *)(vertexLoopCursor + 0x7e) = *(undefined1 *)(glContext + 0x2ee);
-          iVar8 = *(int *)(glContext + 0x4dd0);
-          *(undefined4 *)(iVar8 + 0x1e0) = 1;
-          *(int *)(vertexLoopCursor + 0x74) = iVar8;
-          iVar8 = *(int *)(glContext + 0x4dd4);
-          *(undefined4 *)(iVar8 + 0x1e0) = 1;
-          *(int *)(vertexLoopCursor + 0x78) = iVar8;
+          materialRecordThenLastVertexIndex = *(int *)(glContext + 0x4dd0);
+          *(undefined4 *)(materialRecordThenLastVertexIndex + 0x1e0) = 1;
+          *(int *)(vertexLoopCursor + 0x74) = materialRecordThenLastVertexIndex;
+          materialRecordThenLastVertexIndex = *(int *)(glContext + 0x4dd4);
+          *(undefined4 *)(materialRecordThenLastVertexIndex + 0x1e0) = 1;
+          *(int *)(vertexLoopCursor + 0x78) = materialRecordThenLastVertexIndex;
           if (((*(float *)(vertexLoopCursor + 0x30) != *(float *)(vertexLoopCursor + 0x130)) ||
               (*(float *)(vertexLoopCursor + 0x34) != *(float *)(vertexLoopCursor + 0x134))) ||
              ((*(float *)(vertexLoopCursor + 0x38) != *(float *)(vertexLoopCursor + 0x138) ||
@@ -606,17 +606,17 @@ LAB_00103dec:
           }
           verticesLeft = verticesLeft + -1;
           vertexField30Cursor = vertexField30Cursor + 0x100;
-          iVar8 = lastVertexIndex;
+          materialRecordThenLastVertexIndex = lastVertexIndex;
           vertexLoopCursor = vertexLoopCursor + 0x100;
         } while (verticesLeft != 0);
       }
-      iVar11 = *(int *)(glContext + 0x4dd0);
-      vertexCursor = iVar8 * 0x100 + vertexCursor;
-      *(undefined4 *)(iVar11 + 0x1e0) = 1;
-      *(int *)(vertexCursor + 0x74) = iVar11;
-      iVar11 = *(int *)(glContext + 0x4dd4);
-      *(undefined4 *)(iVar11 + 0x1e0) = 1;
-      *(int *)(vertexCursor + 0x78) = iVar11;
+      materialRecord = *(int *)(glContext + 0x4dd0);
+      vertexCursor = materialRecordThenLastVertexIndex * 0x100 + vertexCursor;
+      *(undefined4 *)(materialRecord + 0x1e0) = 1;
+      *(int *)(vertexCursor + 0x74) = materialRecord;
+      materialRecord = *(int *)(glContext + 0x4dd4);
+      *(undefined4 *)(materialRecord + 0x1e0) = 1;
+      *(int *)(vertexCursor + 0x78) = materialRecord;
     }
   }
   if (decomposeResultFlags[0] == '\0') {

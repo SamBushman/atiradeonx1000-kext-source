@@ -601,45 +601,45 @@ int _gleTestFence(glContext, param_2, fence)
   int param_2;
   undefined4 fence;
 {
-  bool bVar1;
-  int iVar2;
+  bool previousRenderersComplete;
+  int fenceObject;
   int iVar3;
-  int iVar4;
-  int iVar5;
-  uint uVar6;
-  undefined4 *puVar7;
+  int allRenderersComplete;
+  int rendererRecordCursor;
+  uint rendererIndex;
+  undefined4 *rendererFenceHandlePtr;
   
   iVar3 = 1;
-  iVar4 = 0;
+  allRenderersComplete = 0;
   if (param_2 == 0) {
-    iVar2 = _gleLookupHashObject(glContext + 0x543c,fence);
-    iVar4 = iVar3;
-    if (iVar2 == 0) {
+    fenceObject = _gleLookupHashObject(glContext + 0x543c,fence);
+    allRenderersComplete = iVar3;
+    if (fenceObject == 0) {
       if (*(int *)(glContext + 0x7574) == 0) {
         *(undefined4 *)(glContext + 0x7574) = 0x502;
       }
     }
     else {
-      iVar5 = glContext + 0x10000;
-      uVar6 = 0;
+      rendererRecordCursor = glContext + 0x10000;
+      rendererIndex = 0;
       if (*(char *)(glContext + 0x85a4) != '\0') {
-        puVar7 = (undefined4 *)(iVar2 + 0x10);
+        rendererFenceHandlePtr = (undefined4 *)(fenceObject + 0x10);
         do {
-          bVar1 = iVar4 != 0;
-          iVar4 = 0;
-          if ((bVar1) &&
-             (iVar3 = (**(code **)(*(int *)(iVar5 + -0x777c) + 0x1c0))
-                                (*(undefined4 *)(iVar5 + -0x7a54),0,*puVar7), iVar3 != 0)) {
-            iVar4 = 1;
+          previousRenderersComplete = allRenderersComplete != 0;
+          allRenderersComplete = 0;
+          if ((previousRenderersComplete) &&
+             (iVar3 = (**(code **)(*(int *)(rendererRecordCursor + -0x777c) + 0x1c0))
+                                (*(undefined4 *)(rendererRecordCursor + -0x7a54),0,*rendererFenceHandlePtr), iVar3 != 0)) {
+            allRenderersComplete = 1;
           }
-          uVar6 = uVar6 + 1;
-          iVar5 = iVar5 + 0x2e0;
-          puVar7 = puVar7 + 1;
-        } while (uVar6 < *(byte *)(glContext + 0x85a4));
+          rendererIndex = rendererIndex + 1;
+          rendererRecordCursor = rendererRecordCursor + 0x2e0;
+          rendererFenceHandlePtr = rendererFenceHandlePtr + 1;
+        } while (rendererIndex < *(byte *)(glContext + 0x85a4));
       }
     }
   }
-  return iVar4;
+  return allRenderersComplete;
 }
 
 /* _gleFinishFence @ 0xcd410 (172 bytes) */

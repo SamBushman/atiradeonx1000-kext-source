@@ -216,7 +216,7 @@ int _glTexParameterF_Comp(glContext, target, pname, params)
   undefined *pname;
   undefined4 *params;
 {
-  undefined *puVar1;
+  undefined *pnameCandidateOrRangeOffset;
   undefined4 *listRecord;
   
   listRecord = (undefined4 *)_gleAddListItem(glContext,PTR__glTexParameterf_ListExec_001103f0,0x18);
@@ -240,17 +240,17 @@ LAB_0009e1ac:
       if (pname < ((unsigned char *)0x00001004)) {
         return listRecord;
       }
-      puVar1 = pname + -0x2800;
+      pnameCandidateOrRangeOffset = pname + -0x2800;
     }
     else {
       if (pname == (undefined *)0x80bf) goto LAB_0009e1a0;
       if (pname < (undefined *)0x80c0) {
-        puVar1 = (undefined *)0x8072;
+        pnameCandidateOrRangeOffset = (undefined *)0x8072;
         goto LAB_0009e198;
       }
-      puVar1 = pname + -0x813a;
+      pnameCandidateOrRangeOffset = pname + -0x813a;
     }
-    if ((undefined *)0x3 < puVar1) {
+    if ((undefined *)0x3 < pnameCandidateOrRangeOffset) {
       return listRecord;
     }
   }
@@ -259,10 +259,10 @@ LAB_0009e1ac:
     if (pname < (undefined *)0x85bd) {
       if (pname == (undefined *)0x8501) goto LAB_0009e1a0;
       if (pname < (undefined *)0x8502) {
-        puVar1 = (undefined *)0x84fe;
+        pnameCandidateOrRangeOffset = (undefined *)0x84fe;
       }
       else {
-        puVar1 = (undefined *)0x85b6;
+        pnameCandidateOrRangeOffset = (undefined *)0x85b6;
       }
     }
     else {
@@ -275,10 +275,10 @@ LAB_0009e1ac:
         }
         goto LAB_0009e1a0;
       }
-      puVar1 = (undefined *)0x8a7f;
+      pnameCandidateOrRangeOffset = (undefined *)0x8a7f;
     }
 LAB_0009e198:
-    if (pname != puVar1) {
+    if (pname != pnameCandidateOrRangeOffset) {
       return listRecord;
     }
   }

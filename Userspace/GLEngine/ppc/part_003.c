@@ -10852,74 +10852,74 @@ int _gleSelectPixelExtractFunc(format, type)
 }
 
 /* _gleSelectModifyPixelFunc @ 0x2efd0 (476 bytes) */
-int _gleSelectModifyPixelFunc(param_1, param_2)
-  int param_1;
-  uint param_2;
+int _gleSelectModifyPixelFunc(glContext, format)
+  int glContext;
+  uint format;
 {
-  bool bVar1;
-  int iVar2;
-  undefined *puVar3;
+  bool formatIsLuminanceAlphaThenBGRA;
+  int isIndexFormat;
+  undefined *modifyPixelFunc;
   
-  iVar2 = _gleIsIndex(param_2);
-  if (iVar2 == 0) {
-    if (param_2 == 0x1902) {
-      puVar3 = (undefined *)0x0;
-      if ((*(uint *)(param_1 + 0x3414) & 0x3000) != 0) {
-        puVar3 = PTR__gleModifyPixelDepth_00111200;
+  isIndexFormat = _gleIsIndex(format);
+  if (isIndexFormat == 0) {
+    if (format == 0x1902) {
+      modifyPixelFunc = (undefined *)0x0;
+      if ((*(uint *)(glContext + 0x3414) & 0x3000) != 0) {
+        modifyPixelFunc = PTR__gleModifyPixelDepth_00111200;
       }
     }
-    else if (param_2 == 0x86f4) {
-      puVar3 = (undefined *)0x0;
-      if ((*(uint *)(param_1 + 0x3418) & 0xf) != 0) {
-        puVar3 = PTR__gleModifyPixelHILO_001111fc;
+    else if (format == 0x86f4) {
+      modifyPixelFunc = (undefined *)0x0;
+      if ((*(uint *)(glContext + 0x3418) & 0xf) != 0) {
+        modifyPixelFunc = PTR__gleModifyPixelHILO_001111fc;
       }
     }
-    else if ((param_2 - 0x86f5 < 2) || (param_2 == 0x86dc)) {
-      puVar3 = (undefined *)0x0;
-      if ((*(uint *)(param_1 + 0x3418) & 0xff0) != 0) {
-        puVar3 = PTR__gleModifyPixelDSDTMagVib_001111f8;
+    else if ((format - 0x86f5 < 2) || (format == 0x86dc)) {
+      modifyPixelFunc = (undefined *)0x0;
+      if ((*(uint *)(glContext + 0x3418) & 0xff0) != 0) {
+        modifyPixelFunc = PTR__gleModifyPixelDSDTMagVib_001111f8;
       }
     }
     else {
-      puVar3 = (undefined *)0x0;
-      if (((*(uint *)(param_1 + 0x3414) & 0xff1) != 0) &&
-         (puVar3 = PTR__gleModifyPixelRGBA_001111f4, param_2 != 0x1908)) {
-        puVar3 = PTR__gleModifyPixelA_001111e0;
-        if (param_2 < 0x1909) {
-          if (param_2 == 0x1904) {
+      modifyPixelFunc = (undefined *)0x0;
+      if (((*(uint *)(glContext + 0x3414) & 0xff1) != 0) &&
+         (modifyPixelFunc = PTR__gleModifyPixelRGBA_001111f4, format != 0x1908)) {
+        modifyPixelFunc = PTR__gleModifyPixelA_001111e0;
+        if (format < 0x1909) {
+          if (format == 0x1904) {
             return PTR__gleModifyPixelG_001111e8;
           }
-          if (param_2 < 0x1905) {
-            if (param_2 == 0x1903) {
+          if (format < 0x1905) {
+            if (format == 0x1903) {
               return PTR__gleModifyPixelR_001111ec;
             }
           }
           else {
-            if (param_2 == 0x1905) {
+            if (format == 0x1905) {
               return PTR__gleModifyPixelB_001111e4;
             }
-            if (param_2 == 0x1907) {
+            if (format == 0x1907) {
               return PTR__gleModifyPixelRGB_001111f0;
             }
           }
         }
         else {
-          if (param_2 == 0x8000) {
+          if (format == 0x8000) {
             return PTR__gleModifyPixelRGBA_001111f4;
           }
-          if (param_2 < 0x8001) {
-            if (param_2 == 0x1909) {
+          if (format < 0x8001) {
+            if (format == 0x1909) {
               return PTR__gleModifyPixelRGB_001111f0;
             }
-            bVar1 = param_2 == 0x190a;
+            formatIsLuminanceAlphaThenBGRA = format == 0x190a;
           }
           else {
-            if (param_2 == 0x80e0) {
+            if (format == 0x80e0) {
               return PTR__gleModifyPixelRGB_001111f0;
             }
-            bVar1 = param_2 == 0x80e1;
+            formatIsLuminanceAlphaThenBGRA = format == 0x80e1;
           }
-          if (bVar1) {
+          if (formatIsLuminanceAlphaThenBGRA) {
             return PTR__gleModifyPixelRGBA_001111f4;
           }
         }
@@ -10927,12 +10927,12 @@ int _gleSelectModifyPixelFunc(param_1, param_2)
     }
   }
   else {
-    puVar3 = PTR__gleModifyPixelRGBAIndex_00111208;
-    if ((param_2 != 0x1900) && (puVar3 = (undefined *)0x0, (*(uint *)(param_1 + 0x3414) & 0xe) != 0)
+    modifyPixelFunc = PTR__gleModifyPixelRGBAIndex_00111208;
+    if ((format != 0x1900) && (modifyPixelFunc = (undefined *)0x0, (*(uint *)(glContext + 0x3414) & 0xe) != 0)
        ) {
-      puVar3 = PTR__gleModifyPixelStencil_00111204;
+      modifyPixelFunc = PTR__gleModifyPixelStencil_00111204;
     }
   }
-  return puVar3;
+  return modifyPixelFunc;
 }
 
