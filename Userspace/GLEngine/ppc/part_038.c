@@ -657,7 +657,7 @@ void _glCombinerStageParameterfvNV_Exec(glContext, stage, pname, params)
 {
   float fVar1;
   float floatZero;
-  float fVar2;
+  float alpha;
   float fVar3;
   float floatZero2;
   float fVar4;
@@ -665,14 +665,14 @@ void _glCombinerStageParameterfvNV_Exec(glContext, stage, pname, params)
   float fVar5;
   float floatZero4;
   undefined4 glErrorCode;
-  int iVar7;
+  int stageIndexThenConstantColorRecord;
   
-  iVar7 = stage + -0x8550;
+  stageIndexThenConstantColorRecord = stage + -0x8550;
   if (*(short *)(glContext + 0x4a10) < 0) {
-    if (((-1 < iVar7) && (iVar7 < *(int *)(*(int *)(glContext + 0x468c) + 0x98))) &&
+    if (((-1 < stageIndexThenConstantColorRecord) && (stageIndexThenConstantColorRecord < *(int *)(*(int *)(glContext + 0x468c) + 0x98))) &&
        (pname - 0x852aU < 2)) {
       fVar1 = *params;
-      fVar2 = params[3];
+      alpha = params[3];
       fVar3 = params[2];
       fVar4 = params[1];
       floatZero4 = FLOAT_00108e50;
@@ -688,14 +688,14 @@ void _glCombinerStageParameterfvNV_Exec(glContext, stage, pname, params)
         fVar4 = FLOAT_00108e54;
       }
       floatZero2 = FLOAT_00108e50;
-      if ((!(fVar2 < 0.0)) && (fVar3 = fVar2, 1.0 < fVar2)) {
+      if ((!(alpha < 0.0)) && (fVar3 = alpha, 1.0 < alpha)) {
         fVar3 = FLOAT_00108e54;
       }
-      iVar7 = (iVar7 * 8 + (pname - 0x852aU)) * 0x10 + glContext;
-      *(float *)(iVar7 + 0x428c) = fVar3;
-      *(float *)(iVar7 + 0x4280) = fVar5;
-      *(float *)(iVar7 + 0x4284) = fVar1;
-      *(float *)(iVar7 + 0x4288) = fVar4;
+      stageIndexThenConstantColorRecord = (stageIndexThenConstantColorRecord * 8 + (pname - 0x852aU)) * 0x10 + glContext;
+      *(float *)(stageIndexThenConstantColorRecord + 0x428c) = fVar3;
+      *(float *)(stageIndexThenConstantColorRecord + 0x4280) = fVar5;
+      *(float *)(stageIndexThenConstantColorRecord + 0x4284) = fVar1;
+      *(float *)(stageIndexThenConstantColorRecord + 0x4288) = fVar4;
       *(uint *)(glContext + 0x314) = *(uint *)(glContext + 0x314) | 0x1000000;
       return;
     }
@@ -738,18 +738,18 @@ void _glCombinerParameterivNV_Exec(int glContext,uint pname,uint *params,double 
   float floatZero2;
   float fVar3;
   float floatZero3;
-  float fVar4;
+  float alphaFloat;
   float fVar5;
   float floatZero4;
   undefined4 glErrorCode;
-  int iVar7;
-  uint uVar8;
+  int constantColorBase;
+  uint generalCombinerCount;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
     if (pname == 0x854e) {
-      uVar8 = *params;
-      if ((0 < (int)uVar8) && ((int)uVar8 <= *(int *)(*(int *)(glContext + 0x468c) + 0x98))) {
-        *(uint *)(glContext + 0x41fc) = uVar8;
+      generalCombinerCount = *params;
+      if ((0 < (int)generalCombinerCount) && ((int)generalCombinerCount <= *(int *)(*(int *)(glContext + 0x468c) + 0x98))) {
+        *(uint *)(glContext + 0x41fc) = generalCombinerCount;
         goto LAB_000b32e4;
       }
       if (*(int *)(glContext + 0x7574) != 0) {
@@ -763,7 +763,7 @@ void _glCombinerParameterivNV_Exec(int glContext,uint pname,uint *params,double 
           fVar1 = (float)((double)CONCAT44(0x43300000,*params ^ 0x80000000) - DOUBLE_00108d58);
           fVar2 = (float)((double)CONCAT44(0x43300000,params[1] ^ 0x80000000) - DOUBLE_00108d58);
           fVar3 = (float)((double)CONCAT44(0x43300000,params[2] ^ 0x80000000) - DOUBLE_00108d58);
-          fVar4 = (float)((double)CONCAT44(0x43300000,params[3] ^ 0x80000000) - DOUBLE_00108d58);
+          alphaFloat = (float)((double)CONCAT44(0x43300000,params[3] ^ 0x80000000) - DOUBLE_00108d58);
           floatZero4 = FLOAT_00108e50;
           if ((!(fVar1 < 0.0)) && (fVar5 = fVar1, 1.0 < fVar1)) {
             fVar5 = FLOAT_00108e54;
@@ -777,14 +777,14 @@ void _glCombinerParameterivNV_Exec(int glContext,uint pname,uint *params,double 
             fVar2 = FLOAT_00108e54;
           }
           floatZero3 = FLOAT_00108e50;
-          if ((!(fVar4 < 0.0)) && (fVar3 = fVar4, 1.0 < fVar4)) {
+          if ((!(alphaFloat < 0.0)) && (fVar3 = alphaFloat, 1.0 < alphaFloat)) {
             fVar3 = FLOAT_00108e54;
           }
-          iVar7 = (pname - 0x852a) * 0x10 + glContext;
-          *(float *)(iVar7 + 0x420c) = fVar3;
-          *(float *)(iVar7 + 0x4200) = fVar5;
-          *(float *)(iVar7 + 0x4204) = fVar1;
-          *(float *)(iVar7 + 0x4208) = fVar2;
+          constantColorBase = (pname - 0x852a) * 0x10 + glContext;
+          *(float *)(constantColorBase + 0x420c) = fVar3;
+          *(float *)(constantColorBase + 0x4200) = fVar5;
+          *(float *)(constantColorBase + 0x4204) = fVar1;
+          *(float *)(constantColorBase + 0x4208) = fVar2;
 LAB_000b32e4:
           *(uint *)(glContext + 0x314) = *(uint *)(glContext + 0x314) | 0x1000000;
           return;
