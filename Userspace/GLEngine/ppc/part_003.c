@@ -763,18 +763,18 @@ void _glDeleteTextures_Exec_body(glContext, n, textures)
   uint loopIndex3;
   int *cursor;
   undefined4 glErrorCode;
-  int iVar2;
+  int attachedObject;
   int sharedState;
   int framebufferObject;
   uint loopIndex4;
   int *srcCursor;
-  int *piVar6;
-  int iVar7;
+  int *framebufferAttachments;
+  int textureHashTable;
   int loopIndex;
-  int iVar9;
-  int iVar10;
+  int deleteRunStart;
+  int deleteRunEnd;
   uint loopIndex2;
-  int iVar12;
+  int unitRecordBaseThenTextureObject;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
     if (-1 < n) {
@@ -782,30 +782,30 @@ void _glDeleteTextures_Exec_body(glContext, n, textures)
         return;
       }
       sharedState = *(int *)(glContext + 0x5148);
-      piVar6 = (int *)0x0;
-      iVar7 = sharedState + 0x2008;
+      framebufferAttachments = (int *)0x0;
+      textureHashTable = sharedState + 0x2008;
       if (*(char *)(sharedState + 0x8024) != '\0') {
         _pthread_mutex_lock(sharedState + 0x8028);
       }
       framebufferObject = *(int *)(glContext + 0x744c);
       if (framebufferObject != 0) {
-        piVar6 = (int *)(framebufferObject + 0xd4);
+        framebufferAttachments = (int *)(framebufferObject + 0xd4);
       }
       loopIndex = 0;
-      iVar9 = *textures;
-      iVar10 = iVar9;
+      deleteRunStart = *textures;
+      deleteRunEnd = deleteRunStart;
       if (0 < n) {
         do {
           if (*textures == 0) {
-            ((void (*)())_gleDeleteHashNamesAndObjects)(glContext,iVar7,iVar9,iVar10 - iVar9);
-            iVar9 = textures[1];
-            iVar10 = iVar9 + -1;
+            ((void (*)())_gleDeleteHashNamesAndObjects)(glContext,textureHashTable,deleteRunStart,deleteRunEnd - deleteRunStart);
+            deleteRunStart = textures[1];
+            deleteRunEnd = deleteRunStart + -1;
           }
           else {
             loopIndex2 = 0;
-            iVar12 = glContext;
+            unitRecordBaseThenTextureObject = glContext;
             do {
-              srcCursor = (int *)(iVar12 + 0x5154);
+              srcCursor = (int *)(unitRecordBaseThenTextureObject + 0x5154);
               loopIndex4 = 0;
               do {
                 if (*(int *)(*srcCursor + 4) == *textures) {
@@ -816,32 +816,32 @@ void _glDeleteTextures_Exec_body(glContext, n, textures)
                 srcCursor = srcCursor + 1;
               } while (loopIndex4 < 5);
               loopIndex2 = loopIndex2 + 1;
-              iVar12 = iVar12 + 0x14;
+              unitRecordBaseThenTextureObject = unitRecordBaseThenTextureObject + 0x14;
             } while (loopIndex2 < 0x10);
-            if ((framebufferObject != 0) && (iVar12 = _gleLookupHashObject(iVar7,*textures), iVar12 != 0)) {
+            if ((framebufferObject != 0) && (unitRecordBaseThenTextureObject = _gleLookupHashObject(textureHashTable,*textures), unitRecordBaseThenTextureObject != 0)) {
               loopIndex3 = 0;
-              cursor = piVar6;
+              cursor = framebufferAttachments;
               do {
-                iVar2 = *cursor;
+                attachedObject = *cursor;
                 cursor = cursor + 1;
-                if (iVar12 == iVar2) {
+                if (unitRecordBaseThenTextureObject == attachedObject) {
                   _gleFramebufferTexture(glContext,loopIndex3,0,0,0,0,0);
                 }
                 loopIndex3 = loopIndex3 + 1;
               } while (loopIndex3 < 6);
             }
-            if (*textures != iVar10) {
-              ((void (*)())_gleDeleteHashNamesAndObjects)(glContext,iVar7,iVar9,iVar10 - iVar9);
-              iVar9 = *textures;
-              iVar10 = iVar9;
+            if (*textures != deleteRunEnd) {
+              ((void (*)())_gleDeleteHashNamesAndObjects)(glContext,textureHashTable,deleteRunStart,deleteRunEnd - deleteRunStart);
+              deleteRunStart = *textures;
+              deleteRunEnd = deleteRunStart;
             }
           }
           loopIndex = loopIndex + 1;
           textures = textures + 1;
-          iVar10 = iVar10 + 1;
+          deleteRunEnd = deleteRunEnd + 1;
         } while (loopIndex < n);
       }
-      ((void (*)())_gleDeleteHashNamesAndObjects)(glContext,iVar7,iVar9,iVar10 - iVar9);
+      ((void (*)())_gleDeleteHashNamesAndObjects)(glContext,textureHashTable,deleteRunStart,deleteRunEnd - deleteRunStart);
       if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) == '\0') {
         return;
       }

@@ -1180,50 +1180,50 @@ LAB_000b3a68:
 }
 
 /* _glGetCombinerOutputParameterfvNV_Exec_body @ 0xb3a84 (364 bytes) */
-void _glGetCombinerOutputParameterfvNV_Exec_body(int glContext,int param_2,int param_3,undefined4 param_4,float *param_5,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
+void _glGetCombinerOutputParameterfvNV_Exec_body(int glContext,int stage,int portion,undefined4 pname,float *params,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  int iVar1;
-  uint uVar2;
-  int iVar3;
+  int stageIndex;
+  uint parameterValue;
+  int portionIndex;
   
-  iVar1 = param_2 + 0x7ab0;
-  if ((-1 < iVar1) && (iVar1 < *(int *)(*(int *)(glContext + 0x468c) + 0x98))) {
-    if (param_3 == 0x1906) {
-      iVar3 = 0;
+  stageIndex = stage + 0x7ab0;
+  if ((-1 < stageIndex) && (stageIndex < *(int *)(*(int *)(glContext + 0x468c) + 0x98))) {
+    if (portion == 0x1906) {
+      portionIndex = 0;
     }
     else {
-      iVar3 = 1;
-      if (param_3 != 0x1907) goto switchD_000b3af0_default;
+      portionIndex = 1;
+      if (portion != 0x1907) goto switchD_000b3af0_default;
     }
-    switch(param_4) {
+    switch(pname) {
     case 0x8545:
-      uVar2 = (uint)*(byte *)(iVar1 * 0x80 + iVar3 * 0x30 + glContext + 0x4240);
+      parameterValue = (uint)*(byte *)(stageIndex * 0x80 + portionIndex * 0x30 + glContext + 0x4240);
       break;
     case 0x8546:
-      uVar2 = (uint)*(byte *)(iVar1 * 0x80 + iVar3 * 0x30 + glContext + 0x4241);
+      parameterValue = (uint)*(byte *)(stageIndex * 0x80 + portionIndex * 0x30 + glContext + 0x4241);
       break;
     case 0x8547:
-      uVar2 = (uint)*(byte *)(iVar1 * 0x80 + iVar3 * 0x30 + glContext + 0x4242);
+      parameterValue = (uint)*(byte *)(stageIndex * 0x80 + portionIndex * 0x30 + glContext + 0x4242);
       break;
     case 0x8548:
-      uVar2 = (uint)*(ushort *)(iVar1 * 0x80 + iVar3 * 0x30 + glContext + 0x4244);
+      parameterValue = (uint)*(ushort *)(stageIndex * 0x80 + portionIndex * 0x30 + glContext + 0x4244);
       break;
     case 0x8549:
-      uVar2 = (uint)*(ushort *)(iVar1 * 0x80 + iVar3 * 0x30 + glContext + 0x4246);
+      parameterValue = (uint)*(ushort *)(stageIndex * 0x80 + portionIndex * 0x30 + glContext + 0x4246);
       break;
     case 0x854a:
-      uVar2 = (uint)*(ushort *)(iVar1 * 0x80 + iVar3 * 0x30 + glContext + 0x4248);
+      parameterValue = (uint)*(ushort *)(stageIndex * 0x80 + portionIndex * 0x30 + glContext + 0x4248);
       break;
     case 0x854b:
-      uVar2 = (uint)*(ushort *)(iVar1 * 0x80 + iVar3 * 0x30 + glContext + 0x424a);
+      parameterValue = (uint)*(ushort *)(stageIndex * 0x80 + portionIndex * 0x30 + glContext + 0x424a);
       break;
     case 0x854c:
-      uVar2 = (uint)*(ushort *)(iVar1 * 0x80 + iVar3 * 0x30 + glContext + 0x424c);
+      parameterValue = (uint)*(ushort *)(stageIndex * 0x80 + portionIndex * 0x30 + glContext + 0x424c);
       break;
     default:
       goto switchD_000b3af0_default;
     }
-    *param_5 = GH_U2F((unsigned int)((uVar2 | 0x4b000000))) - 8388608.0;
+    *params = GH_U2F((unsigned int)((parameterValue | 0x4b000000))) - 8388608.0;
     return;
   }
 switchD_000b3af0_default:

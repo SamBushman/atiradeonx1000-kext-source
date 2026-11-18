@@ -23,51 +23,51 @@ int _gleCreateGlobalLevel(unusedArg1, textureLevel, width, height, depth, border
 }
 
 /* _gleSynchronizePluginTextureLevels @ 0x103574 (308 bytes) */
-void _gleSynchronizePluginTextureLevels(glContext, param_2)
+void _gleSynchronizePluginTextureLevels(glContext, textureObject)
   int glContext;
-  int param_2;
+  int textureObject;
 {
-  byte bVar1;
-  int iVar2;
-  int *piVar3;
-  int iVar4;
-  int iVar5;
-  int iVar6;
-  int iVar7;
+  byte faceCount;
+  int rendererHandleThenFaceIndex;
+  int *rendererHandleCursor;
+  int rendererIndex;
+  int faceByteOffset;
+  int level;
+  int textureLevel;
   
-  if (*(int *)(param_2 + 0x20) != 0) {
-    iVar4 = 0;
-    bVar1 = *(byte *)(param_2 + 0x90);
+  if (*(int *)(textureObject + 0x20) != 0) {
+    rendererIndex = 0;
+    faceCount = *(byte *)(textureObject + 0x90);
     if (*(byte *)(glContext + 0x85a4) != 0) {
-      piVar3 = (int *)(*(int *)(glContext + 0x5148) + 0x8054);
+      rendererHandleCursor = (int *)(*(int *)(glContext + 0x5148) + 0x8054);
       do {
-        iVar2 = *piVar3;
-        piVar3 = piVar3 + 1;
-        if (*(int *)(param_2 + 0x20) == iVar2) break;
-        iVar4 = iVar4 + 1;
-      } while (iVar4 < (int)(uint)*(byte *)(glContext + 0x85a4));
+        rendererHandleThenFaceIndex = *rendererHandleCursor;
+        rendererHandleCursor = rendererHandleCursor + 1;
+        if (*(int *)(textureObject + 0x20) == rendererHandleThenFaceIndex) break;
+        rendererIndex = rendererIndex + 1;
+      } while (rendererIndex < (int)(uint)*(byte *)(glContext + 0x85a4));
     }
-    iVar2 = 0;
-    if (bVar1 != 0) {
-      iVar5 = 0;
+    rendererHandleThenFaceIndex = 0;
+    if (faceCount != 0) {
+      faceByteOffset = 0;
       do {
-        iVar6 = -(uint)(iVar2 == 0);
-        iVar7 = (uint)(iVar2 == 0) * -0x18 + param_2 + iVar5 + 0xc4;
+        level = -(uint)(rendererHandleThenFaceIndex == 0);
+        textureLevel = (uint)(rendererHandleThenFaceIndex == 0) * -0x18 + textureObject + faceByteOffset + 0xc4;
         do {
-          if ((*(byte *)(iVar7 + 0xb) & 0x50) == 0x40) {
-            _gleUploadPluginTextureLevel(glContext,param_2,iVar7,iVar2,iVar6,iVar4);
+          if ((*(byte *)(textureLevel + 0xb) & 0x50) == 0x40) {
+            _gleUploadPluginTextureLevel(glContext,textureObject,textureLevel,rendererHandleThenFaceIndex,level,rendererIndex);
             _gleModifyPluginTextureLevel
-                      (glContext,param_2,iVar7,iVar2,iVar6,0,0,0,(uint)*(ushort *)(iVar7 + 4),
-                       (uint)*(ushort *)(iVar7 + 6),(uint)*(ushort *)(iVar7 + 8));
+                      (glContext,textureObject,textureLevel,rendererHandleThenFaceIndex,level,0,0,0,(uint)*(ushort *)(textureLevel + 4),
+                       (uint)*(ushort *)(textureLevel + 6),(uint)*(ushort *)(textureLevel + 8));
           }
-          iVar6 = iVar6 + 1;
-          iVar7 = iVar7 + 0x18;
-        } while (iVar6 < 0xf);
-        iVar2 = iVar2 + 1;
-        iVar5 = iVar5 + 0x168;
-      } while (iVar2 < (int)(uint)bVar1);
+          level = level + 1;
+          textureLevel = textureLevel + 0x18;
+        } while (level < 0xf);
+        rendererHandleThenFaceIndex = rendererHandleThenFaceIndex + 1;
+        faceByteOffset = faceByteOffset + 0x168;
+      } while (rendererHandleThenFaceIndex < (int)(uint)faceCount);
     }
-    *(undefined4 *)(param_2 + 0x20) = 0;
+    *(undefined4 *)(textureObject + 0x20) = 0;
   }
   return;
 }

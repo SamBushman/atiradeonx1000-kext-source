@@ -652,29 +652,29 @@ LAB_00087ce4:
 }
 
 /* _setImageUnit @ 0x87f00 (576 bytes) */
-double _setImageUnit(int glContext,int param_2,uint param_3,uint param_4,char *param_5,uint param_6,double fparam_1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
+double _setImageUnit(int glContext,int program,uint newUnit,uint oldUnit,char *uniformStageUse,uint uniformType,double fparam_1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
 {
-  char cVar1;
+  char stageUsedFlag;
   int iVar2;
   int iVar3;
-  undefined4 uVar4;
+  undefined4 samplerTypeIndex;
   int iVar5;
   int iVar6;
   int loopIndex;
-  int *piVar8;
-  uint uVar9;
-  uint uVar10;
-  int iVar11;
+  int *stageStates;
+  uint unitTypeBitsHigh;
+  uint unitTypeBitsLow;
+  int stageState;
   double fparam_1_00;
   double extraout_f1;
   longlong lVar12;
   
-  piVar8 = (int *)(param_2 + 0x20);
-  if (*(char *)(param_2 + 0x3e) == '\0') {
-    iVar3 = ((int (*)())_evaluateImageUnits)(glContext,param_2);
+  stageStates = (int *)(program + 0x20);
+  if (*(char *)(program + 0x3e) == '\0') {
+    iVar3 = ((int (*)())_evaluateImageUnits)(glContext,program);
     if (iVar3 != 0) {
-      ((void (*)())_updateShaderState)(glContext,piVar8,(uint)*(byte *)(glContext + 0x759c),
-                         (uint)**(byte **)(param_2 + 0x20),(uint)**(byte **)(param_2 + 0x24),
+      ((void (*)())_updateShaderState)(glContext,stageStates,(uint)*(byte *)(glContext + 0x759c),
+                         (uint)**(byte **)(program + 0x20),(uint)**(byte **)(program + 0x24),
                          fparam_1_00,forwardedFloatArg2,forwardedFloatArg3,forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8)
       ;
       return;
@@ -682,63 +682,63 @@ double _setImageUnit(int glContext,int param_2,uint param_3,uint param_4,char *p
   }
   else {
     loopIndex = 0;
-    iVar3 = param_3 * 4;
+    iVar3 = newUnit * 4;
     do {
-      cVar1 = *param_5;
-      param_5 = param_5 + 1;
-      if (cVar1 != '\0') {
+      stageUsedFlag = *uniformStageUse;
+      uniformStageUse = uniformStageUse + 1;
+      if (stageUsedFlag != '\0') {
         if (loopIndex == 0) {
-          iVar11 = *piVar8;
+          stageState = *stageStates;
           iVar5 = 0;
         }
         else {
-          iVar11 = *(int *)(param_2 + 0x24);
+          stageState = *(int *)(program + 0x24);
           iVar5 = 0x10;
         }
-        if ((iVar5 <= (int)param_3) || ((int)param_3 < 0)) {
+        if ((iVar5 <= (int)newUnit) || ((int)newUnit < 0)) {
 LAB_000880f8:
-          *(undefined1 *)(param_2 + 0x3e) = 0;
-          ((void (*)())_updateShaderState)(glContext,piVar8,(uint)*(byte *)(glContext + 0x759c),(uint)*(byte *)*piVar8
-                             ,(uint)**(byte **)(param_2 + 0x24),fparam_1,forwardedFloatArg2,forwardedFloatArg3,forwardedFloatArg4,
+          *(undefined1 *)(program + 0x3e) = 0;
+          ((void (*)())_updateShaderState)(glContext,stageStates,(uint)*(byte *)(glContext + 0x759c),(uint)*(byte *)*stageStates
+                             ,(uint)**(byte **)(program + 0x24),fparam_1,forwardedFloatArg2,forwardedFloatArg3,forwardedFloatArg4,
                              forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
           return;
         }
-        if (*(int *)(iVar3 + iVar11 + 0x2c) < 1) {
-          iVar6 = param_3 << 1;
+        if (*(int *)(iVar3 + stageState + 0x2c) < 1) {
+          iVar6 = newUnit << 1;
         }
         else {
-          iVar6 = param_3 * 2;
-          if (*(ushort *)(iVar6 + iVar11 + 0x6c) != param_6) goto LAB_000880f8;
+          iVar6 = newUnit * 2;
+          if (*(ushort *)(iVar6 + stageState + 0x6c) != uniformType) goto LAB_000880f8;
         }
-        iVar2 = *(int *)(iVar3 + iVar11 + 0x2c);
-        *(short *)(iVar6 + iVar11 + 0x6c) = (short)param_6;
-        *(int *)(iVar3 + iVar11 + 0x2c) = iVar2 + 1;
-        if ((int)param_4 < iVar5) {
-          if (*(int *)(glContext + 0x5430) == param_2) {
-            *(uint *)(glContext + 0x314) = *(uint *)(glContext + 0x314) | 1 << (param_4 & 0x3f);
+        iVar2 = *(int *)(iVar3 + stageState + 0x2c);
+        *(short *)(iVar6 + stageState + 0x6c) = (short)uniformType;
+        *(int *)(iVar3 + stageState + 0x2c) = iVar2 + 1;
+        if ((int)oldUnit < iVar5) {
+          if (*(int *)(glContext + 0x5430) == program) {
+            *(uint *)(glContext + 0x314) = *(uint *)(glContext + 0x314) | 1 << (oldUnit & 0x3f);
           }
-          iVar5 = param_4 * 4 + iVar11;
+          iVar5 = oldUnit * 4 + stageState;
           iVar6 = *(int *)(iVar5 + 0x2c) + -1;
           *(int *)(iVar5 + 0x2c) = iVar6;
           if (iVar6 == 0) {
-            lVar12 = ___ashldi3(0,0xf,param_4 * 4);
-            *(uint *)(iVar11 + 0x50c) =
-                 *(uint *)(iVar11 + 0x50c) | (uint)((ulonglong)lVar12 >> 0x20);
-            *(uint *)(iVar11 + 0x510) = *(uint *)(iVar11 + 0x510) | (uint)lVar12;
+            lVar12 = ___ashldi3(0,0xf,oldUnit * 4);
+            *(uint *)(stageState + 0x50c) =
+                 *(uint *)(stageState + 0x50c) | (uint)((ulonglong)lVar12 >> 0x20);
+            *(uint *)(stageState + 0x510) = *(uint *)(stageState + 0x510) | (uint)lVar12;
           }
         }
         lVar12 = ___ashldi3(0,0xf,iVar3);
-        uVar10 = *(uint *)(iVar11 + 0x510) & ~(uint)lVar12;
-        uVar9 = *(uint *)(iVar11 + 0x50c) & ~(uint)((ulonglong)lVar12 >> 0x20);
-        *(uint *)(iVar11 + 0x50c) = uVar9;
-        *(uint *)(iVar11 + 0x510) = uVar10;
-        uVar4 = _getIndexForGLSLSamplerType(param_6);
-        lVar12 = ___ashldi3(0,uVar4,iVar3);
-        *(uint *)(iVar11 + 0x50c) = uVar9 | (uint)((ulonglong)lVar12 >> 0x20);
-        *(uint *)(iVar11 + 0x510) = uVar10 | (uint)lVar12;
+        unitTypeBitsLow = *(uint *)(stageState + 0x510) & ~(uint)lVar12;
+        unitTypeBitsHigh = *(uint *)(stageState + 0x50c) & ~(uint)((ulonglong)lVar12 >> 0x20);
+        *(uint *)(stageState + 0x50c) = unitTypeBitsHigh;
+        *(uint *)(stageState + 0x510) = unitTypeBitsLow;
+        samplerTypeIndex = _getIndexForGLSLSamplerType(uniformType);
+        lVar12 = ___ashldi3(0,samplerTypeIndex,iVar3);
+        *(uint *)(stageState + 0x50c) = unitTypeBitsHigh | (uint)((ulonglong)lVar12 >> 0x20);
+        *(uint *)(stageState + 0x510) = unitTypeBitsLow | (uint)lVar12;
         fparam_1 = extraout_f1;
-        if (*(int *)(glContext + 0x5430) == param_2) {
-          *(uint *)(glContext + 0x314) = *(uint *)(glContext + 0x314) | 1 << (param_3 & 0x3f);
+        if (*(int *)(glContext + 0x5430) == program) {
+          *(uint *)(glContext + 0x314) = *(uint *)(glContext + 0x314) | 1 << (newUnit & 0x3f);
         }
       }
       loopIndex = loopIndex + 1;

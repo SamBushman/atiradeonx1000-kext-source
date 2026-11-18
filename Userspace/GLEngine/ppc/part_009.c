@@ -493,16 +493,16 @@ LAB_00055d50:
 }
 
 /* _gleUploadPluginTextureLevel @ 0x55ff4 (420 bytes) */
-void _gleUploadPluginTextureLevel(glContext, param_2, param_3, forwardedArg4, level, param_6)
+void _gleUploadPluginTextureLevel(glContext, textureObject, textureLevel, forwardedArg4, level, rendererIndex)
   int glContext;
-  int param_2;
-  int param_3;
+  int textureObject;
+  int textureLevel;
   undefined4 forwardedArg4;
   undefined4 level;
-  int param_6;
+  int rendererIndex;
 {
   ushort uVar1;
-  int iVar2;
+  int rendererSlot;
   undefined4 glContextWord31b0;
   undefined4 glContextWord31c8;
   undefined4 glContextWord31c4;
@@ -512,29 +512,29 @@ void _gleUploadPluginTextureLevel(glContext, param_2, param_3, forwardedArg4, le
   int iVar8;
   undefined4 a7;
   
-  if ((*(byte *)(param_3 + 0xb) & 1) == 0) {
-    iVar8 = *(int *)(param_3 + 0x14);
+  if ((*(byte *)(textureLevel + 0xb) & 1) == 0) {
+    iVar8 = *(int *)(textureLevel + 0x14);
     if (iVar8 == 0) {
-      iVar8 = _gleAllocateTextureLevel(glContext,param_2,param_3);
+      iVar8 = _gleAllocateTextureLevel(glContext,textureObject,textureLevel);
       if (iVar8 == 0) {
         return;
       }
-      iVar8 = *(int *)(param_3 + 0x14);
+      iVar8 = *(int *)(textureLevel + 0x14);
     }
-    iVar2 = param_6 * 0x2e0 + glContext;
-    (**(code **)(*(int *)(iVar2 + 0x8884) + 0x160))
-              (*(undefined4 *)(iVar2 + 0x85ac),*(undefined4 *)(param_2 + param_6 * 4),forwardedArg4,
+    rendererSlot = rendererIndex * 0x2e0 + glContext;
+    (**(code **)(*(int *)(rendererSlot + 0x8884) + 0x160))
+              (*(undefined4 *)(rendererSlot + 0x85ac),*(undefined4 *)(textureObject + rendererIndex * 4),forwardedArg4,
                level,iVar8);
-    if ((*(byte *)(param_3 + 0xb) & 0x80) == 0) {
-      *(byte *)(param_3 + 0xb) = *(byte *)(param_3 + 0xb) | 0x10;
-      *(byte *)(param_3 + 0xb) = *(byte *)(param_3 + 0xb) & 0xbf;
+    if ((*(byte *)(textureLevel + 0xb) & 0x80) == 0) {
+      *(byte *)(textureLevel + 0xb) = *(byte *)(textureLevel + 0xb) | 0x10;
+      *(byte *)(textureLevel + 0xb) = *(byte *)(textureLevel + 0xb) & 0xbf;
     }
   }
   else {
     glContextWord31b0 = *(undefined4 *)(glContext + 0x31b0);
-    *(uint *)(glContext + 0x31b0) = (uint)*(ushort *)(param_3 + 0xc);
-    uVar1 = *(ushort *)(param_3 + 0xe);
-    iVar8 = param_6 * 0x2e0 + glContext;
+    *(uint *)(glContext + 0x31b0) = (uint)*(ushort *)(textureLevel + 0xc);
+    uVar1 = *(ushort *)(textureLevel + 0xe);
+    iVar8 = rendererIndex * 0x2e0 + glContext;
     glContextWord31bc = *(undefined4 *)(glContext + 0x31bc);
     glContextWord31c0 = *(undefined4 *)(glContext + 0x31c0);
     glContextWord31c4 = *(undefined4 *)(glContext + 0x31c4);
@@ -547,11 +547,11 @@ void _gleUploadPluginTextureLevel(glContext, param_2, param_3, forwardedArg4, le
     *(undefined4 *)(glContext + 0x31b8) = 0;
     *(undefined4 *)(glContext + 0x31bc) = 0;
     (**(code **)(*(int *)(iVar8 + 0x8884) + 0x160))
-              (*(undefined4 *)(iVar8 + 0x85ac),*(undefined4 *)(param_2 + param_6 * 4),forwardedArg4,
-               level,*(undefined4 *)(param_3 + 0x14),a5,iVar8 + 0x10000,a7);
-    if ((*(byte *)(param_3 + 0xb) & 0x80) == 0) {
-      *(byte *)(param_3 + 0xb) = *(byte *)(param_3 + 0xb) | 0x10;
-      *(byte *)(param_3 + 0xb) = *(byte *)(param_3 + 0xb) & 0xbf;
+              (*(undefined4 *)(iVar8 + 0x85ac),*(undefined4 *)(textureObject + rendererIndex * 4),forwardedArg4,
+               level,*(undefined4 *)(textureLevel + 0x14),a5,iVar8 + 0x10000,a7);
+    if ((*(byte *)(textureLevel + 0xb) & 0x80) == 0) {
+      *(byte *)(textureLevel + 0xb) = *(byte *)(textureLevel + 0xb) | 0x10;
+      *(byte *)(textureLevel + 0xb) = *(byte *)(textureLevel + 0xb) & 0xbf;
     }
     *(undefined4 *)(glContext + 0x31c8) = glContextWord31c8;
     *(undefined4 *)(glContext + 0x31b0) = glContextWord31b0;
