@@ -4207,308 +4207,313 @@ LAB_00025008:
 }
 
 /* _PPEmulatorProgramSetupHandlesFromPPStream @ 0x25218 (844 bytes) */
-void _PPEmulatorProgramSetupHandlesFromPPStream(param_1, glContext, param_3)
-  int param_1;
+void _PPEmulatorProgramSetupHandlesFromPPStream(emulatorProgram, glContext, ppStream)
+  int emulatorProgram;
   undefined4 glContext;
-  int param_3;
+  int ppStream;
 {
   int loopIndex;
-  uint uVar1;
-  int iVar2;
-  int iVar3;
-  int iVar4;
-  int iVar5;
-  uint local_40;
-  undefined4 local_3c;
+  uint operandKind;
+  int resultHandleBank;
+  int parameterHandleBank;
+  int identityHandleBank;
+  int handleEntry;
+  int indexHandleBank;
+  int tempCountThenRemaining;
+  int parameterChunk;
+  int identityMappedChunk;
+  int resultChunk;
+  uint operandDescriptor;
+  undefined4 operandDescriptorWord2;
   undefined1 auStack_30 [4];
-  int local_2c;
-  undefined1 auStack_28 [4];
-  int local_24 [2];
+  int handleOffset;
+  undefined1 resultComponentStride [4];
+  int componentStride [2];
   
-  iVar5 = 0;
-  if (*(int *)(*(int *)(param_3 + 4) + 8) != 0) {
-    iVar5 = _PPStreamChunkListGetMaxIndex(*(int *)(param_3 + 4));
-    iVar5 = iVar5 + 1;
+  tempCountThenRemaining = 0;
+  if (*(int *)(*(int *)(ppStream + 4) + 8) != 0) {
+    tempCountThenRemaining = _PPStreamChunkListGetMaxIndex(*(int *)(ppStream + 4));
+    tempCountThenRemaining = tempCountThenRemaining + 1;
   }
   _PPEmulatorProgramInitialiseHandleBanks
-            (param_1,iVar5,*(undefined4 *)(*(int *)(param_3 + 0x1c) + 8),
-             *(undefined4 *)(*(int *)(param_3 + 0x18) + 8),
-             *(undefined4 *)(*(int *)(param_3 + 0x10) + 8));
+            (emulatorProgram,tempCountThenRemaining,*(undefined4 *)(*(int *)(ppStream + 0x1c) + 8),
+             *(undefined4 *)(*(int *)(ppStream + 0x18) + 8),
+             *(undefined4 *)(*(int *)(ppStream + 0x10) + 8));
   loopIndex = 0;
-  iVar4 = *(int *)(param_1 + 0x80);
-  for (; iVar5 != 0; iVar5 = iVar5 + -1) {
-    local_2c = loopIndex * 0x10;
+  indexHandleBank = *(int *)(emulatorProgram + 0x80);
+  for (; tempCountThenRemaining != 0; tempCountThenRemaining = tempCountThenRemaining + -1) {
+    handleOffset = loopIndex * 0x10;
     loopIndex = loopIndex + 1;
-    *(int *)(local_2c + iVar4) = local_2c;
-    iVar3 = local_2c + iVar4;
-    *(int *)(iVar3 + 4) = local_2c + 4;
-    *(int *)(iVar3 + 8) = local_2c + 8;
-    *(int *)(iVar3 + 0xc) = local_2c + 0xc;
+    *(int *)(handleOffset + indexHandleBank) = handleOffset;
+    handleEntry = handleOffset + indexHandleBank;
+    *(int *)(handleEntry + 4) = handleOffset + 4;
+    *(int *)(handleEntry + 8) = handleOffset + 8;
+    *(int *)(handleEntry + 0xc) = handleOffset + 0xc;
   }
-  iVar2 = *(int *)(param_1 + 0x8c);
-  for (iVar5 = **(int **)(param_3 + 0x1c); iVar5 != 0; iVar5 = *(int *)(iVar5 + 8)) {
-    _PPStreamChunkGetStream(&local_40,iVar5,param_3,auStack_30,0);
-    ((void (*)())_gleVPGetResultOffset)(glContext,local_40,local_3c,&local_2c,auStack_28);
-    *(int *)(iVar2 + (uint)*(ushort *)(iVar5 + 0x12) * 0x10) = local_2c;
-    *(int *)((uint)*(ushort *)(iVar5 + 0x12) * 0x10 + iVar2 + 4) = local_2c + 4;
-    *(int *)((uint)*(ushort *)(iVar5 + 0x12) * 0x10 + iVar2 + 8) = local_2c + 8;
-    *(int *)((uint)*(ushort *)(iVar5 + 0x12) * 0x10 + iVar2 + 0xc) = local_2c + 0xc;
+  resultHandleBank = *(int *)(emulatorProgram + 0x8c);
+  for (resultChunk = **(int **)(ppStream + 0x1c); resultChunk != 0; resultChunk = *(int *)(resultChunk + 8)) {
+    _PPStreamChunkGetStream(&operandDescriptor,resultChunk,ppStream,auStack_30,0);
+    ((void (*)())_gleVPGetResultOffset)(glContext,operandDescriptor,operandDescriptorWord2,&handleOffset,resultComponentStride);
+    *(int *)(resultHandleBank + (uint)*(ushort *)(resultChunk + 0x12) * 0x10) = handleOffset;
+    *(int *)((uint)*(ushort *)(resultChunk + 0x12) * 0x10 + resultHandleBank + 4) = handleOffset + 4;
+    *(int *)((uint)*(ushort *)(resultChunk + 0x12) * 0x10 + resultHandleBank + 8) = handleOffset + 8;
+    *(int *)((uint)*(ushort *)(resultChunk + 0x12) * 0x10 + resultHandleBank + 0xc) = handleOffset + 0xc;
   }
-  iVar2 = *(int *)(param_1 + 0x98);
-  for (iVar5 = **(int **)(param_3 + 0x18); iVar5 != 0; iVar5 = *(int *)(iVar5 + 8)) {
-    local_2c = (uint)*(ushort *)(iVar5 + 0x12) * 0x10;
-    *(int *)(iVar2 + (uint)*(ushort *)(iVar5 + 0x12) * 0x10) = local_2c;
-    *(int *)((uint)*(ushort *)(iVar5 + 0x12) * 0x10 + iVar2 + 4) = local_2c + 4;
-    *(int *)((uint)*(ushort *)(iVar5 + 0x12) * 0x10 + iVar2 + 8) = local_2c + 8;
-    *(int *)((uint)*(ushort *)(iVar5 + 0x12) * 0x10 + iVar2 + 0xc) = local_2c + 0xc;
+  identityHandleBank = *(int *)(emulatorProgram + 0x98);
+  for (identityMappedChunk = **(int **)(ppStream + 0x18); identityMappedChunk != 0; identityMappedChunk = *(int *)(identityMappedChunk + 8)) {
+    handleOffset = (uint)*(ushort *)(identityMappedChunk + 0x12) * 0x10;
+    *(int *)(identityHandleBank + (uint)*(ushort *)(identityMappedChunk + 0x12) * 0x10) = handleOffset;
+    *(int *)((uint)*(ushort *)(identityMappedChunk + 0x12) * 0x10 + identityHandleBank + 4) = handleOffset + 4;
+    *(int *)((uint)*(ushort *)(identityMappedChunk + 0x12) * 0x10 + identityHandleBank + 8) = handleOffset + 8;
+    *(int *)((uint)*(ushort *)(identityMappedChunk + 0x12) * 0x10 + identityHandleBank + 0xc) = handleOffset + 0xc;
   }
-  iVar2 = *(int *)(param_1 + 0xa4);
-  for (iVar5 = **(int **)(param_3 + 0x10); iVar5 != 0; iVar5 = *(int *)(iVar5 + 8)) {
-    uVar1 = *(uint *)(iVar5 + 0xc) >> 0x10 & 0x1f;
-    if ((uVar1 == 1) || (uVar1 == 0x11)) {
-      _PPStreamChunkGetStream(&local_40,iVar5,param_3,auStack_30,0);
-      local_2c = (local_40 & 0xffff) * 0x10;
-      *(int *)(iVar2 + (uint)*(ushort *)(iVar5 + 0x12) * 0x10) = local_2c;
-      *(int *)((uint)*(ushort *)(iVar5 + 0x12) * 0x10 + iVar2 + 4) = local_2c + 4;
-      *(int *)((uint)*(ushort *)(iVar5 + 0x12) * 0x10 + iVar2 + 8) = local_2c + 8;
-      *(int *)((uint)*(ushort *)(iVar5 + 0x12) * 0x10 + iVar2 + 0xc) = local_2c + 0xc;
+  parameterHandleBank = *(int *)(emulatorProgram + 0xa4);
+  for (parameterChunk = **(int **)(ppStream + 0x10); parameterChunk != 0; parameterChunk = *(int *)(parameterChunk + 8)) {
+    operandKind = *(uint *)(parameterChunk + 0xc) >> 0x10 & 0x1f;
+    if ((operandKind == 1) || (operandKind == 0x11)) {
+      _PPStreamChunkGetStream(&operandDescriptor,parameterChunk,ppStream,auStack_30,0);
+      handleOffset = (operandDescriptor & 0xffff) * 0x10;
+      *(int *)(parameterHandleBank + (uint)*(ushort *)(parameterChunk + 0x12) * 0x10) = handleOffset;
+      *(int *)((uint)*(ushort *)(parameterChunk + 0x12) * 0x10 + parameterHandleBank + 4) = handleOffset + 4;
+      *(int *)((uint)*(ushort *)(parameterChunk + 0x12) * 0x10 + parameterHandleBank + 8) = handleOffset + 8;
+      *(int *)((uint)*(ushort *)(parameterChunk + 0x12) * 0x10 + parameterHandleBank + 0xc) = handleOffset + 0xc;
     }
     else {
-      _PPStreamChunkGetStream(&local_40,iVar5,param_3,auStack_30,0);
-      ((void (*)())_gleVPGetParameterPtr)(glContext,local_40,local_3c,&local_2c,local_24);
-      *(int *)(iVar2 + (uint)*(ushort *)(iVar5 + 0x12) * 0x10) = local_2c;
-      *(int *)((uint)*(ushort *)(iVar5 + 0x12) * 0x10 + iVar2 + 4) = local_2c + local_24[0];
-      *(int *)((uint)*(ushort *)(iVar5 + 0x12) * 0x10 + iVar2 + 8) = local_2c + local_24[0] * 2;
-      *(int *)((uint)*(ushort *)(iVar5 + 0x12) * 0x10 + iVar2 + 0xc) = local_2c + local_24[0] * 3;
+      _PPStreamChunkGetStream(&operandDescriptor,parameterChunk,ppStream,auStack_30,0);
+      ((void (*)())_gleVPGetParameterPtr)(glContext,operandDescriptor,operandDescriptorWord2,&handleOffset,componentStride);
+      *(int *)(parameterHandleBank + (uint)*(ushort *)(parameterChunk + 0x12) * 0x10) = handleOffset;
+      *(int *)((uint)*(ushort *)(parameterChunk + 0x12) * 0x10 + parameterHandleBank + 4) = handleOffset + componentStride[0];
+      *(int *)((uint)*(ushort *)(parameterChunk + 0x12) * 0x10 + parameterHandleBank + 8) = handleOffset + componentStride[0] * 2;
+      *(int *)((uint)*(ushort *)(parameterChunk + 0x12) * 0x10 + parameterHandleBank + 0xc) = handleOffset + componentStride[0] * 3;
     }
   }
   return;
 }
 
 /* _gleVPGetResultOffset @ 0x25564 (204 bytes) */
-void _gleVPGetResultOffset(glContext, param_2, unusedArg3, param_4, param_5)
+void _gleVPGetResultOffset(glContext, operandDescriptor, unusedArg3, outOffset, outComponentStride)
   undefined4 glContext;
-  uint param_2;
+  uint operandDescriptor;
   undefined4 unusedArg3;
-  int *param_4;
-  undefined4 *param_5;
+  int *outOffset;
+  undefined4 *outComponentStride;
 {
-  int iVar1;
+  int vertexRecordOffset;
   
-  *param_5 = 4;
-  switch(param_2 >> 0x10 & 0xf) {
+  *outComponentStride = 4;
+  switch(operandDescriptor >> 0x10 & 0xf) {
   case 0:
   case 7:
     return;
   case 1:
-    iVar1 = 0x10;
+    vertexRecordOffset = 0x10;
     break;
   case 2:
-    iVar1 = 0x5c;
-    *param_5 = 1;
+    vertexRecordOffset = 0x5c;
+    *outComponentStride = 1;
     goto LAB_00025630;
   case 3:
-    *param_5 = 1;
-    *param_4 = 0x70;
+    *outComponentStride = 1;
+    *outOffset = 0x70;
     return;
   case 4:
-    if ((param_2 & 1) == 0) {
-      iVar1 = 0x30;
+    if ((operandDescriptor & 1) == 0) {
+      vertexRecordOffset = 0x30;
       break;
     }
   case 8:
-    iVar1 = 0x20;
+    vertexRecordOffset = 0x20;
     break;
   case 5:
-    *param_5 = 3;
-    if ((param_2 & 1) == 0) {
-      iVar1 = 0x50;
+    *outComponentStride = 3;
+    if ((operandDescriptor & 1) == 0) {
+      vertexRecordOffset = 0x50;
     }
     else {
-      iVar1 = 0x40;
+      vertexRecordOffset = 0x40;
     }
     break;
   case 6:
-    iVar1 = (param_2 & 0x1f) * 0x10 + 0x80;
+    vertexRecordOffset = (operandDescriptor & 0x1f) * 0x10 + 0x80;
 LAB_00025630:
-    *param_4 = iVar1;
+    *outOffset = vertexRecordOffset;
     return;
   default:
     return;
   }
-  *param_4 = iVar1;
+  *outOffset = vertexRecordOffset;
   return;
 }
 
 /* _gleVPGetParameterPtr @ 0x25654 (972 bytes) */
-void _gleVPGetParameterPtr(glContext, param_2, unusedArg3, param_4, param_5)
+void _gleVPGetParameterPtr(glContext, operandDescriptor, unusedArg3, outOffset, outComponentStride)
   undefined4 glContext;
-  uint param_2;
+  uint operandDescriptor;
   undefined4 unusedArg3;
-  int *param_4;
-  undefined4 *param_5;
+  int *outOffset;
+  undefined4 *outComponentStride;
 {
   uint uVar1;
-  int iVar2;
+  int contextOffset;
   uint uVar3;
   uint uVar4;
   
-  *param_5 = 4;
-  switch(param_2 >> 0x10 & 0x1f) {
+  *outComponentStride = 4;
+  switch(operandDescriptor >> 0x10 & 0x1f) {
   case 0:
   case 1:
   case 9:
   case 0x11:
     return;
   case 2:
-    iVar2 = (param_2 & 0xffff) * 0x10 + 0x10;
+    contextOffset = (operandDescriptor & 0xffff) * 0x10 + 0x10;
     break;
   case 3:
-    uVar1 = param_2 & 0xff;
-    switch(param_2 >> 8 & 0xf) {
+    uVar1 = operandDescriptor & 0xff;
+    switch(operandDescriptor >> 8 & 0xf) {
     case 0:
-      iVar2 = uVar1 * 0x80 + 0x24c0;
+      contextOffset = uVar1 * 0x80 + 0x24c0;
       break;
     case 1:
-      iVar2 = uVar1 * 0x80 + 0x24d0;
+      contextOffset = uVar1 * 0x80 + 0x24d0;
       break;
     case 2:
-      iVar2 = uVar1 * 0x80 + 0x24e0;
+      contextOffset = uVar1 * 0x80 + 0x24e0;
       break;
     case 3:
-      iVar2 = uVar1 * 0x80 + 0x24f0;
+      contextOffset = uVar1 * 0x80 + 0x24f0;
       break;
     case 4:
-      iVar2 = uVar1 * 0x80 + 0x2500;
+      contextOffset = uVar1 * 0x80 + 0x2500;
       break;
     case 5:
-      iVar2 = uVar1 * 0x80 + 0x2510;
+      contextOffset = uVar1 * 0x80 + 0x2510;
       break;
     case 6:
-      iVar2 = uVar1 * 0x80 + 0x2520;
+      contextOffset = uVar1 * 0x80 + 0x2520;
       break;
     case 7:
-      iVar2 = uVar1 * 0x80 + 0x2530;
+      contextOffset = uVar1 * 0x80 + 0x2530;
       break;
     default:
       return;
     }
     break;
   case 4:
-    uVar3 = param_2 >> 9 & 3;
-    uVar1 = param_2 & 0xff;
-    uVar4 = param_2 >> 8 & 1;
+    uVar3 = operandDescriptor >> 9 & 3;
+    uVar1 = operandDescriptor & 0xff;
+    uVar4 = operandDescriptor >> 8 & 1;
     if (uVar3 == 1) {
-      iVar2 = uVar4 * 0x240 + uVar1 * 0x30 + 0x2920;
+      contextOffset = uVar4 * 0x240 + uVar1 * 0x30 + 0x2920;
     }
     else if (uVar3 < 2) {
       if (uVar3 != 0) {
         return;
       }
-      iVar2 = uVar4 * 0x240 + uVar1 * 0x30 + 0x2910;
+      contextOffset = uVar4 * 0x240 + uVar1 * 0x30 + 0x2910;
     }
     else {
       if (uVar3 != 2) {
         return;
       }
-      iVar2 = uVar4 * 0x240 + uVar1 * 0x30 + 0x2930;
+      contextOffset = uVar4 * 0x240 + uVar1 * 0x30 + 0x2930;
     }
     break;
   case 5:
-    uVar1 = param_2 & 1;
-    switch(param_2 >> 1 & 7) {
+    uVar1 = operandDescriptor & 1;
+    switch(operandDescriptor >> 1 & 7) {
     case 0:
-      iVar2 = uVar1 * 0x240 + 0x28c0;
+      contextOffset = uVar1 * 0x240 + 0x28c0;
       break;
     case 1:
-      iVar2 = uVar1 * 0x240 + 0x28d0;
+      contextOffset = uVar1 * 0x240 + 0x28d0;
       break;
     case 2:
-      iVar2 = uVar1 * 0x240 + 0x28e0;
+      contextOffset = uVar1 * 0x240 + 0x28e0;
       break;
     case 3:
-      iVar2 = uVar1 * 0x240 + 0x28f0;
+      contextOffset = uVar1 * 0x240 + 0x28f0;
       break;
     case 4:
-      iVar2 = uVar1 * 0x240 + 0x2900;
+      contextOffset = uVar1 * 0x240 + 0x2900;
       break;
     case 5:
-      iVar2 = uVar1 * 0x240 + 0x2a90;
+      contextOffset = uVar1 * 0x240 + 0x2a90;
       break;
     default:
       return;
     }
     break;
   case 6:
-    iVar2 = 0x24b0;
+    contextOffset = 0x24b0;
     goto LAB_00025998;
   case 7:
-    uVar3 = param_2 >> 5 & 7;
-    uVar1 = param_2 & 0x1f;
+    uVar3 = operandDescriptor >> 5 & 7;
+    uVar1 = operandDescriptor & 0x1f;
     if (uVar3 == 1) {
-      iVar2 = uVar1 * 0x94 + 0x39b0;
+      contextOffset = uVar1 * 0x94 + 0x39b0;
     }
     else if (uVar3 < 2) {
       if (uVar3 != 0) {
         return;
       }
-      iVar2 = uVar1 * 0x94 + 0x398c;
+      contextOffset = uVar1 * 0x94 + 0x398c;
     }
     else if (uVar3 == 2) {
-      iVar2 = uVar1 * 0x94 + 0x39d4;
+      contextOffset = uVar1 * 0x94 + 0x39d4;
     }
     else {
       if (uVar3 != 3) {
         return;
       }
-      iVar2 = uVar1 * 0x94 + 0x39f8;
+      contextOffset = uVar1 * 0x94 + 0x39f8;
     }
     break;
   case 8:
-    uVar3 = param_2 >> 5 & 7;
-    uVar1 = param_2 & 0x1f;
+    uVar3 = operandDescriptor >> 5 & 7;
+    uVar1 = operandDescriptor & 0x1f;
     if (uVar3 == 1) {
-      iVar2 = uVar1 * 0x94 + 0x39c0;
+      contextOffset = uVar1 * 0x94 + 0x39c0;
     }
     else if (uVar3 < 2) {
       if (uVar3 != 0) {
         return;
       }
-      iVar2 = uVar1 * 0x94 + 0x399c;
+      contextOffset = uVar1 * 0x94 + 0x399c;
     }
     else if (uVar3 == 2) {
-      iVar2 = uVar1 * 0x94 + 0x39e4;
+      contextOffset = uVar1 * 0x94 + 0x39e4;
     }
     else {
       if (uVar3 != 3) {
         return;
       }
-      iVar2 = uVar1 * 0x94 + 0x3a08;
+      contextOffset = uVar1 * 0x94 + 0x3a08;
     }
     break;
   case 10:
-    iVar2 = (param_2 & 0xff) * 0x10 + 0x3e2c;
+    contextOffset = (operandDescriptor & 0xff) * 0x10 + 0x3e2c;
     break;
   case 0xb:
-    iVar2 = 0x2de0;
+    contextOffset = 0x2de0;
     goto LAB_00025998;
   case 0xc:
-    iVar2 = 0x2df0;
+    contextOffset = 0x2df0;
     goto LAB_00025998;
   case 0xd:
-    iVar2 = 0x30bc;
+    contextOffset = 0x30bc;
     goto LAB_00025998;
   case 0xe:
-    iVar2 = 0x30cc;
+    contextOffset = 0x30cc;
     goto LAB_00025998;
   case 0xf:
-    iVar2 = 0x1850;
+    contextOffset = 0x1850;
 LAB_00025998:
-    *param_4 = iVar2;
+    *outOffset = contextOffset;
     return;
   case 0x10:
-    uVar1 = param_2 & 0xff;
-    switch(param_2 >> 8 & 7) {
+    uVar1 = operandDescriptor & 0xff;
+    switch(operandDescriptor >> 8 & 7) {
     case 0:
       uVar1 = 0;
       break;
@@ -4527,34 +4532,34 @@ LAB_00025998:
     case 5:
       uVar1 = uVar1 + 8;
     }
-    if ((param_2 >> 0xe & 3) < 2) {
-      iVar2 = uVar1 * 0x40 + 0x1860;
+    if ((operandDescriptor >> 0xe & 3) < 2) {
+      contextOffset = uVar1 * 0x40 + 0x1860;
     }
     else {
-      iVar2 = uVar1 * 0x40 + 0x1e60;
+      contextOffset = uVar1 * 0x40 + 0x1e60;
     }
-    uVar1 = param_2 >> 0xe & 3;
-    *param_4 = iVar2;
-    uVar3 = param_2 >> 0xc & 3;
+    uVar1 = operandDescriptor >> 0xe & 3;
+    *outOffset = contextOffset;
+    uVar3 = operandDescriptor >> 0xc & 3;
     if (uVar1 < 3) {
       if (uVar1 != 0) {
-        iVar2 = *param_4 + uVar3 * 0x10;
+        contextOffset = *outOffset + uVar3 * 0x10;
         goto LAB_00025998;
       }
     }
     else if (uVar1 != 3) {
       return;
     }
-    *param_4 = *param_4 + uVar3 * 4;
-    *param_5 = 0x10;
+    *outOffset = *outOffset + uVar3 * 4;
+    *outComponentStride = 0x10;
     return;
   case 0x12:
-    *param_4 = 0x24a4;
+    *outOffset = 0x24a4;
     return;
   default:
     return;
   }
-  *param_4 = iVar2;
+  *outOffset = contextOffset;
   return;
 }
 

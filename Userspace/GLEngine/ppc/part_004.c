@@ -38,18 +38,42 @@ double _gleUpdateLightRGBASums(glContext, material, faceIndex)
   byte dirtyBitIndex;
   byte dirtyMask;
   float linkedMaterial;
-  float fVar4;
+  float sceneColorRed;
+  float materialSpecularG;
+  float materialDiffuseG;
+  float materialAmbientG;
+  float copiedTableEntry;
+  float linkedShininessCache1;
+  float powTableStartLoaded;
+  float linkedSceneGreen;
   float *srcCursor;
   int iVar6;
   int glContextWord5424;
   undefined4 uVar7;
   uint loopIndex2;
-  float fVar9;
-  float fVar10;
-  float fVar11;
+  float sceneColorGreen;
+  float lightSpecularB;
+  float lightDiffuseG;
+  float lightAmbientG;
+  float linkedShininessCache2;
+  float linkedAmbientSumBlue;
+  float sceneColorBlue;
+  float lightSpecularG;
+  float lightDiffuseB;
+  float lightAmbientB;
+  float linkedShininessCache3;
+  float linkedAmbientSumGreen;
+  float linkedSceneBlue;
+  float materialSpecularB;
+  float materialDiffuseB;
+  float materialAmbientB;
+  float linkedShininessCache4;
   float *cursor;
   undefined4 uVar13;
-  float fVar14;
+  float linkedAmbientSumRed;
+  float materialSpecularA;
+  float materialDiffuseA;
+  float materialAmbientA;
   int iVar15;
   int glContextWord54242;
   float linkedSceneAlpha;
@@ -61,7 +85,10 @@ double _gleUpdateLightRGBASums(glContext, material, faceIndex)
   int iVar22;
   int glContextWord54243;
   double dVar23;
-  double dVar24;
+  double powSample;
+  double powTableStartDouble;
+  double powTableX;
+  double powConstResult;
   float powTableStart;
   float shininess;
   float dVar27;
@@ -80,31 +107,31 @@ double _gleUpdateLightRGBASums(glContext, material, faceIndex)
   }
   if ((dirtyMask & 0xe) != 0) {
     if ((copyFromLinkedMask & 0xe) == 0xe) {
-      fVar4 = *(float *)((int)GH_F2U(linkedMaterial) + 0x1d4);
-      fVar11 = *(float *)((int)GH_F2U(linkedMaterial) + 0x1d8);
+      linkedSceneGreen = *(float *)((int)GH_F2U(linkedMaterial) + 0x1d4);
+      linkedSceneBlue = *(float *)((int)GH_F2U(linkedMaterial) + 0x1d8);
       linkedSceneAlpha = *(float *)((int)GH_F2U(linkedMaterial) + 0x1dc);
-      fVar14 = *(float *)((int)GH_F2U(linkedMaterial) + 0x1e8);
-      fVar10 = *(float *)((int)GH_F2U(linkedMaterial) + 0x1ec);
-      fVar9 = *(float *)((int)GH_F2U(linkedMaterial) + 0x1f0);
+      linkedAmbientSumRed = *(float *)((int)GH_F2U(linkedMaterial) + 0x1e8);
+      linkedAmbientSumGreen = *(float *)((int)GH_F2U(linkedMaterial) + 0x1ec);
+      linkedAmbientSumBlue = *(float *)((int)GH_F2U(linkedMaterial) + 0x1f0);
       material[0x74] = *(float *)((int)GH_F2U(linkedMaterial) + 0x1d0);
-      material[0x75] = fVar4;
-      material[0x76] = fVar11;
+      material[0x75] = linkedSceneGreen;
+      material[0x76] = linkedSceneBlue;
       material[0x77] = linkedSceneAlpha;
-      material[0x7a] = fVar14;
-      material[0x7b] = fVar10;
-      material[0x7c] = fVar9;
+      material[0x7a] = linkedAmbientSumRed;
+      material[0x7b] = linkedAmbientSumGreen;
+      material[0x7c] = linkedAmbientSumBlue;
     }
     else {
-      fVar4 = *(float *)(glContext + 0x2810) * *material + material[0xc];
-      fVar9 = *(float *)(glContext + 0x2814) * material[1] + material[0xd];
-      fVar10 = *(float *)(glContext + 0x2818) * material[2] + material[0xe];
-      material[0x7a] = fVar4;
+      sceneColorRed = *(float *)(glContext + 0x2810) * *material + material[0xc];
+      sceneColorGreen = *(float *)(glContext + 0x2814) * material[1] + material[0xd];
+      sceneColorBlue = *(float *)(glContext + 0x2818) * material[2] + material[0xe];
+      material[0x7a] = sceneColorRed;
       material[0x77] = material[7];
-      material[0x7b] = fVar9;
-      material[0x7c] = fVar10;
-      material[0x74] = fVar4;
-      material[0x75] = fVar9;
-      material[0x76] = fVar10;
+      material[0x7b] = sceneColorGreen;
+      material[0x7c] = sceneColorBlue;
+      material[0x74] = sceneColorRed;
+      material[0x75] = sceneColorGreen;
+      material[0x76] = sceneColorBlue;
       if (*(int *)(glContext + 0x5434) == 0) {
         dirtyBitIndex = *(byte *)(faceIndex * 6 + *(int *)(glContext + 0x5420) + 0x2c5);
       }
@@ -126,26 +153,26 @@ double _gleUpdateLightRGBASums(glContext, material, faceIndex)
       if ((double)FLOAT_00108e80 < (double)shininess) {
         dVar27 = (double)FLOAT_00108e54;
         loopIndex2 = 0;
-        dVar24 = _log(DOUBLE_00108dd8);
+        powTableStartDouble = _log(DOUBLE_00108dd8);
         float10 = FLOAT_00108f44;
         cursor2 = material + 0x82;
-        dVar24 = _exp(dVar24 / (double)shininess);
-        powTableStart = (double)(float)dVar24;
+        powTableStartDouble = _exp(powTableStartDouble / (double)shininess);
+        powTableStart = (double)(float)powTableStartDouble;
         dVar23 = (double)FLOAT_00108f40;
-        material[0x7e] = (float)dVar24;
-        dVar24 = DOUBLE_00108de0;
+        material[0x7e] = (float)powTableStartDouble;
+        powConstResult = DOUBLE_00108de0;
         material[0x80] = (float)(dVar23 / (double)powTableStart);
         material[0x7f] = float10 / (dVar27 - powTableStart);
-        dVar24 = _pow(dVar24,(double)shininess);
-        fVar4 = material[0x7e];
-        material[0x81] = (float)(dVar24 - DOUBLE_00108d68);
-        dVar24 = (double)fVar4;
+        powConstResult = _pow(powConstResult,(double)shininess);
+        powTableStartLoaded = material[0x7e];
+        material[0x81] = (float)(powConstResult - DOUBLE_00108d68);
+        powTableX = (double)powTableStartLoaded;
         do {
           loopIndex2 = loopIndex2 + 1;
-          dVar23 = _pow(dVar24,(double)shininess);
-          *cursor2 = (float)dVar23;
+          powSample = _pow(powTableX,(double)shininess);
+          *cursor2 = (float)powSample;
           cursor2 = cursor2 + 1;
-          dVar24 = (double)(float)(dVar24 + (double)((dVar27 - fVar4) / float10));
+          powTableX = (double)(float)(powTableX + (double)((dVar27 - powTableStartLoaded) / float10));
         } while (loopIndex2 < 10);
         material[0x8c] = 1.0;
       }
@@ -164,22 +191,22 @@ double _gleUpdateLightRGBASums(glContext, material, faceIndex)
       }
     }
     else {
-      fVar4 = *(float *)((int)GH_F2U(linkedMaterial) + 0x1f8);
+      linkedShininessCache1 = *(float *)((int)GH_F2U(linkedMaterial) + 0x1f8);
       remaining2 = 0xb;
-      fVar9 = *(float *)((int)GH_F2U(linkedMaterial) + 0x1fc);
+      linkedShininessCache2 = *(float *)((int)GH_F2U(linkedMaterial) + 0x1fc);
       cursor = material + 0x82;
-      fVar10 = *(float *)((int)GH_F2U(linkedMaterial) + 0x200);
+      linkedShininessCache3 = *(float *)((int)GH_F2U(linkedMaterial) + 0x200);
       srcCursor = (float *)((int)GH_F2U(linkedMaterial) + 0x208);
-      fVar11 = *(float *)((int)GH_F2U(linkedMaterial) + 0x204);
+      linkedShininessCache4 = *(float *)((int)GH_F2U(linkedMaterial) + 0x204);
       material[0x7d] = *(float *)((int)GH_F2U(linkedMaterial) + 500);
-      material[0x7e] = fVar4;
-      material[0x7f] = fVar9;
-      material[0x80] = fVar10;
-      material[0x81] = fVar11;
+      material[0x7e] = linkedShininessCache1;
+      material[0x7f] = linkedShininessCache2;
+      material[0x80] = linkedShininessCache3;
+      material[0x81] = linkedShininessCache4;
       do {
-        fVar4 = *srcCursor;
+        copiedTableEntry = *srcCursor;
         srcCursor = srcCursor + 1;
-        *cursor = fVar4;
+        *cursor = copiedTableEntry;
         cursor = cursor + 1;
         remaining2 = remaining2 + -1;
       } while (remaining2 != 0);
@@ -200,15 +227,15 @@ double _gleUpdateLightRGBASums(glContext, material, faceIndex)
       iVar6 = (int)GH_F2U(linkedMaterial) + loopIndex;
       if ((dirtyMask >> 2 & 1) != 0) {
         if ((copyFromLinkedMask & 4) == 0) {
-          fVar4 = material[1];
-          fVar9 = *(float *)(iVar22 + 0x2824);
-          fVar10 = *(float *)(iVar22 + 0x2828);
-          fVar11 = material[2];
-          fVar14 = material[3];
+          materialAmbientG = material[1];
+          lightAmbientG = *(float *)(iVar22 + 0x2824);
+          lightAmbientB = *(float *)(iVar22 + 0x2828);
+          materialAmbientB = material[2];
+          materialAmbientA = material[3];
           *(float *)((int)material + loopIndex + 0x50) = *(float *)(iVar22 + 0x2820) * *material;
-          *(float *)((int)material + loopIndex + 0x54) = fVar9 * fVar4;
-          *(float *)((int)material + loopIndex + 0x5c) = fVar14;
-          *(float *)((int)material + loopIndex + 0x58) = fVar10 * fVar11;
+          *(float *)((int)material + loopIndex + 0x54) = lightAmbientG * materialAmbientG;
+          *(float *)((int)material + loopIndex + 0x5c) = materialAmbientA;
+          *(float *)((int)material + loopIndex + 0x58) = lightAmbientB * materialAmbientB;
         }
         else {
           uVar13 = *(undefined4 *)(iVar6 + 0x58);
@@ -240,15 +267,15 @@ double _gleUpdateLightRGBASums(glContext, material, faceIndex)
       }
       if ((dirtyMask >> 3 & 1) != 0) {
         if ((copyFromLinkedMask & 8) == 0) {
-          fVar4 = material[5];
-          fVar9 = *(float *)(iVar22 + 0x2834);
-          fVar10 = *(float *)(iVar22 + 0x2838);
-          fVar11 = material[6];
-          fVar14 = material[7];
+          materialDiffuseG = material[5];
+          lightDiffuseG = *(float *)(iVar22 + 0x2834);
+          lightDiffuseB = *(float *)(iVar22 + 0x2838);
+          materialDiffuseB = material[6];
+          materialDiffuseA = material[7];
           *(float *)((int)material + loopIndex + 0x60) = *(float *)(iVar22 + 0x2830) * material[4];
-          *(float *)((int)material + loopIndex + 100) = fVar9 * fVar4;
-          *(float *)((int)material + loopIndex + 0x6c) = fVar14;
-          *(float *)((int)material + loopIndex + 0x68) = fVar10 * fVar11;
+          *(float *)((int)material + loopIndex + 100) = lightDiffuseG * materialDiffuseG;
+          *(float *)((int)material + loopIndex + 0x6c) = materialDiffuseA;
+          *(float *)((int)material + loopIndex + 0x68) = lightDiffuseB * materialDiffuseB;
         }
         else {
           uVar7 = *(undefined4 *)(iVar6 + 100);
@@ -275,15 +302,15 @@ double _gleUpdateLightRGBASums(glContext, material, faceIndex)
       }
       if ((dirtyMask & 0x10) != 0) {
         if ((copyFromLinkedMask >> 4 & 1) == 0) {
-          fVar4 = material[9];
-          fVar9 = *(float *)(iVar22 + 0x2848);
-          fVar10 = *(float *)(iVar22 + 0x2844);
-          fVar11 = material[10];
-          fVar14 = material[0xb];
+          materialSpecularG = material[9];
+          lightSpecularB = *(float *)(iVar22 + 0x2848);
+          lightSpecularG = *(float *)(iVar22 + 0x2844);
+          materialSpecularB = material[10];
+          materialSpecularA = material[0xb];
           *(float *)((int)material + loopIndex + 0x70) = *(float *)(iVar22 + 0x2840) * material[8];
-          *(float *)((int)material + loopIndex + 0x7c) = fVar14;
-          *(float *)((int)material + loopIndex + 0x74) = fVar10 * fVar4;
-          *(float *)((int)material + loopIndex + 0x78) = fVar9 * fVar11;
+          *(float *)((int)material + loopIndex + 0x7c) = materialSpecularA;
+          *(float *)((int)material + loopIndex + 0x74) = lightSpecularG * materialSpecularG;
+          *(float *)((int)material + loopIndex + 0x78) = lightSpecularB * materialSpecularB;
         }
         else {
           uVar7 = *(undefined4 *)(iVar6 + 0x70);
@@ -1808,17 +1835,20 @@ void _gleSetEnable_LINE_SMOOTH(param_1, unusedArg2, param_3)
 /* _glLightfv_Exec @ 0x31658 (1460 bytes) */
 void _glLightfv_Exec(int glContext,int light,undefined4 pname,float *params,double forwardedFloatArg1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8,double unusedFloatArg9,double unusedFloatArg10)
 {
-  byte bVar1;
-  float fVar2;
-  float fVar3;
-  float fVar4;
-  float fVar5;
+  byte dirtyBitIndex;
+  float positionY;
+  float positionZ;
+  float positionW;
+  float positionX;
+  float spotCutoffValue;
+  float spotExponentValue;
   undefined4 glErrorCode;
-  int iVar7;
+  int lightRecord;
+  int dirtyWord348Ptr;
   int glContextWord5424;
-  uint uVar8;
-  int iVar9;
-  uint uVar10;
+  uint dirtyBitIndex2;
+  int dirtyWord324Ptr;
+  uint lightIndex;
   double cosValue;
   double incomingStack_ffffffa8;
   double incomingStack_ffffffb0;
@@ -1830,8 +1860,8 @@ void _glLightfv_Exec(int glContext,int light,undefined4 pname,float *params,doub
     glErrorCode = 0x502;
     goto LAB_00031c00;
   }
-  uVar10 = light - 0x4000;
-  if (7 < uVar10) {
+  lightIndex = light - 0x4000;
+  if (7 < lightIndex) {
 switchD_000316d0_default:
     if (*(int *)(glContext + 0x7574) != 0) {
       return;
@@ -1839,162 +1869,162 @@ switchD_000316d0_default:
     glErrorCode = 0x500;
     goto LAB_00031c00;
   }
-  iVar7 = glContext + uVar10 * 0x80;
+  lightRecord = glContext + lightIndex * 0x80;
   switch(pname) {
   case 0x1200:
-    *(float *)(iVar7 + 0x2820) = *params;
-    *(float *)(iVar7 + 0x2824) = params[1];
-    *(float *)(iVar7 + 0x2828) = params[2];
-    *(float *)(iVar7 + 0x282c) = params[3];
+    *(float *)(lightRecord + 0x2820) = *params;
+    *(float *)(lightRecord + 0x2824) = params[1];
+    *(float *)(lightRecord + 0x2828) = params[2];
+    *(float *)(lightRecord + 0x282c) = params[3];
     *(byte *)(*(int *)(glContext + 0x4dd0) + 0x234) =
          *(byte *)(*(int *)(glContext + 0x4dd0) + 0x234) | 0x1e;
     *(byte *)(*(int *)(glContext + 0x4dd4) + 0x234) =
          *(byte *)(*(int *)(glContext + 0x4dd4) + 0x234) | 0x1e;
     if (*(int *)(glContext + 0x5434) == 0) {
-      bVar1 = *(byte *)(uVar10 * 7 + *(int *)(glContext + 0x5420) + 600);
+      dirtyBitIndex = *(byte *)(lightIndex * 7 + *(int *)(glContext + 0x5420) + 600);
     }
     else {
-      bVar1 = *(byte *)(uVar10 * 7 + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x28c);
+      dirtyBitIndex = *(byte *)(lightIndex * 7 + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x28c);
     }
-    iVar9 = (bVar1 >> 3 & 0x1c) + glContext;
+    dirtyWord324Ptr = (dirtyBitIndex >> 3 & 0x1c) + glContext;
     glContextWord5424 = *(int *)(glContext + 0x5424);
-    *(uint *)(iVar9 + 0x324) = *(uint *)(iVar9 + 0x324) | 1 << (bVar1 & 0x1f);
-    uVar8 = (uint)*(byte *)(uVar10 * 7 + glContextWord5424 + 600);
+    *(uint *)(dirtyWord324Ptr + 0x324) = *(uint *)(dirtyWord324Ptr + 0x324) | 1 << (dirtyBitIndex & 0x1f);
+    dirtyBitIndex2 = (uint)*(byte *)(lightIndex * 7 + glContextWord5424 + 600);
     break;
   case 0x1201:
-    *(float *)(iVar7 + 0x2830) = *params;
-    *(float *)(iVar7 + 0x2834) = params[1];
-    *(float *)(iVar7 + 0x2838) = params[2];
-    *(float *)(iVar7 + 0x283c) = params[3];
+    *(float *)(lightRecord + 0x2830) = *params;
+    *(float *)(lightRecord + 0x2834) = params[1];
+    *(float *)(lightRecord + 0x2838) = params[2];
+    *(float *)(lightRecord + 0x283c) = params[3];
     *(byte *)(*(int *)(glContext + 0x4dd0) + 0x234) =
          *(byte *)(*(int *)(glContext + 0x4dd0) + 0x234) | 0x1e;
     *(byte *)(*(int *)(glContext + 0x4dd4) + 0x234) =
          *(byte *)(*(int *)(glContext + 0x4dd4) + 0x234) | 0x1e;
     if (*(int *)(glContext + 0x5434) == 0) {
-      bVar1 = *(byte *)(uVar10 * 7 + *(int *)(glContext + 0x5420) + 0x259);
+      dirtyBitIndex = *(byte *)(lightIndex * 7 + *(int *)(glContext + 0x5420) + 0x259);
     }
     else {
-      bVar1 = *(byte *)(uVar10 * 7 + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x28d);
+      dirtyBitIndex = *(byte *)(lightIndex * 7 + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x28d);
     }
-    iVar9 = (bVar1 >> 3 & 0x1c) + glContext;
+    dirtyWord324Ptr = (dirtyBitIndex >> 3 & 0x1c) + glContext;
     glContextWord5424 = *(int *)(glContext + 0x5424);
-    *(uint *)(iVar9 + 0x324) = *(uint *)(iVar9 + 0x324) | 1 << (bVar1 & 0x1f);
-    uVar8 = (uint)*(byte *)(uVar10 * 7 + glContextWord5424 + 0x259);
+    *(uint *)(dirtyWord324Ptr + 0x324) = *(uint *)(dirtyWord324Ptr + 0x324) | 1 << (dirtyBitIndex & 0x1f);
+    dirtyBitIndex2 = (uint)*(byte *)(lightIndex * 7 + glContextWord5424 + 0x259);
     break;
   case 0x1202:
-    *(float *)(iVar7 + 0x2840) = *params;
-    *(float *)(iVar7 + 0x2844) = params[1];
-    *(float *)(iVar7 + 0x2848) = params[2];
-    *(float *)(iVar7 + 0x284c) = params[3];
+    *(float *)(lightRecord + 0x2840) = *params;
+    *(float *)(lightRecord + 0x2844) = params[1];
+    *(float *)(lightRecord + 0x2848) = params[2];
+    *(float *)(lightRecord + 0x284c) = params[3];
     *(byte *)(*(int *)(glContext + 0x4dd0) + 0x234) =
          *(byte *)(*(int *)(glContext + 0x4dd0) + 0x234) | 0x1e;
     *(byte *)(*(int *)(glContext + 0x4dd4) + 0x234) =
          *(byte *)(*(int *)(glContext + 0x4dd4) + 0x234) | 0x1e;
     if (*(int *)(glContext + 0x5434) == 0) {
-      bVar1 = *(byte *)(uVar10 * 7 + *(int *)(glContext + 0x5420) + 0x25a);
+      dirtyBitIndex = *(byte *)(lightIndex * 7 + *(int *)(glContext + 0x5420) + 0x25a);
     }
     else {
-      bVar1 = *(byte *)(uVar10 * 7 + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x28e);
+      dirtyBitIndex = *(byte *)(lightIndex * 7 + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x28e);
     }
-    iVar9 = (bVar1 >> 3 & 0x1c) + glContext;
+    dirtyWord324Ptr = (dirtyBitIndex >> 3 & 0x1c) + glContext;
     glContextWord5424 = *(int *)(glContext + 0x5424);
-    *(uint *)(iVar9 + 0x324) = *(uint *)(iVar9 + 0x324) | 1 << (bVar1 & 0x1f);
-    uVar8 = (uint)*(byte *)(uVar10 * 7 + glContextWord5424 + 0x25a);
+    *(uint *)(dirtyWord324Ptr + 0x324) = *(uint *)(dirtyWord324Ptr + 0x324) | 1 << (dirtyBitIndex & 0x1f);
+    dirtyBitIndex2 = (uint)*(byte *)(lightIndex * 7 + glContextWord5424 + 0x25a);
     break;
   case 0x1203:
-    fVar5 = *params;
-    *(float *)(iVar7 + 0x2850) = fVar5;
-    fVar2 = params[1];
-    *(float *)(iVar7 + 0x2854) = fVar2;
-    fVar3 = params[2];
-    *(float *)(iVar7 + 0x2858) = fVar3;
-    fVar4 = params[3];
-    *(float *)(iVar7 + 0x285c) = fVar4;
-    *(float *)(iVar7 + 0x2850) =
-         fVar4 * *(float *)(glContext + 0x1cf0) +
-         (fVar3 * *(float *)(glContext + 0x1ce0) +
-         (fVar5 * *(float *)(glContext + 0x1cc0) + fVar2 * *(float *)(glContext + 0x1cd0)));
-    *(float *)(iVar7 + 0x2854) =
-         fVar4 * *(float *)(glContext + 0x1cf4) +
-         (fVar3 * *(float *)(glContext + 0x1ce4) +
-         (fVar5 * *(float *)(glContext + 0x1cc4) + fVar2 * *(float *)(glContext + 0x1cd4)));
-    *(float *)(iVar7 + 0x2858) =
-         fVar4 * *(float *)(glContext + 0x1cf8) +
-         (fVar3 * *(float *)(glContext + 0x1ce8) +
-         (fVar5 * *(float *)(0x1cc8 + glContext) + fVar2 * *(float *)(glContext + 0x1cd8)));
-    *(float *)(iVar7 + 0x285c) =
-         fVar4 * *(float *)(glContext + 0x1cfc) +
-         (fVar3 * *(float *)(glContext + 0x1cec) +
-         (fVar5 * *(float *)(glContext + 0x1ccc) + fVar2 * *(float *)(glContext + 0x1cdc)));
-    ((double (*)())_gleUpdateLightPosition)(glContext,uVar10,forwardedFloatArg1);
+    positionX = *params;
+    *(float *)(lightRecord + 0x2850) = positionX;
+    positionY = params[1];
+    *(float *)(lightRecord + 0x2854) = positionY;
+    positionZ = params[2];
+    *(float *)(lightRecord + 0x2858) = positionZ;
+    positionW = params[3];
+    *(float *)(lightRecord + 0x285c) = positionW;
+    *(float *)(lightRecord + 0x2850) =
+         positionW * *(float *)(glContext + 0x1cf0) +
+         (positionZ * *(float *)(glContext + 0x1ce0) +
+         (positionX * *(float *)(glContext + 0x1cc0) + positionY * *(float *)(glContext + 0x1cd0)));
+    *(float *)(lightRecord + 0x2854) =
+         positionW * *(float *)(glContext + 0x1cf4) +
+         (positionZ * *(float *)(glContext + 0x1ce4) +
+         (positionX * *(float *)(glContext + 0x1cc4) + positionY * *(float *)(glContext + 0x1cd4)));
+    *(float *)(lightRecord + 0x2858) =
+         positionW * *(float *)(glContext + 0x1cf8) +
+         (positionZ * *(float *)(glContext + 0x1ce8) +
+         (positionX * *(float *)(0x1cc8 + glContext) + positionY * *(float *)(glContext + 0x1cd8)));
+    *(float *)(lightRecord + 0x285c) =
+         positionW * *(float *)(glContext + 0x1cfc) +
+         (positionZ * *(float *)(glContext + 0x1cec) +
+         (positionX * *(float *)(glContext + 0x1ccc) + positionY * *(float *)(glContext + 0x1cdc)));
+    ((double (*)())_gleUpdateLightPosition)(glContext,lightIndex,forwardedFloatArg1);
     goto LAB_00031c08;
   case 0x1204:
-    *(float *)(iVar7 + 0x2860) = *params;
-    *(float *)(iVar7 + 0x2864) = params[1];
-    *(float *)(iVar7 + 0x2868) = params[2];
-    ((void (*)())_gleTransformLightDirection)(glContext,uVar10,forwardedFloatArg1,forwardedFloatArg2,forwardedFloatArg3,forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,
+    *(float *)(lightRecord + 0x2860) = *params;
+    *(float *)(lightRecord + 0x2864) = params[1];
+    *(float *)(lightRecord + 0x2868) = params[2];
+    ((void (*)())_gleTransformLightDirection)(glContext,lightIndex,forwardedFloatArg1,forwardedFloatArg2,forwardedFloatArg3,forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,
                forwardedFloatArg8,incomingStack_ffffffa8,incomingStack_ffffffb0);
     goto LAB_00031c08;
   case 0x1205:
-    fVar5 = *params;
-    if ((fVar5 < FLOAT_00108e50) ||
+    spotExponentValue = *params;
+    if ((spotExponentValue < FLOAT_00108e50) ||
        ((float)((double)CONCAT44(0x43300000,
                                  *(uint *)(*(int *)(glContext + 0x468c) + 0xa4) ^ 0x80000000) -
-               DOUBLE_00108d58) < fVar5)) goto LAB_00031bc8;
-    *(float *)(iVar7 + 0x287c) = fVar5;
-    _gleUpdateLightExponents(glContext,uVar10);
+               DOUBLE_00108d58) < spotExponentValue)) goto LAB_00031bc8;
+    *(float *)(lightRecord + 0x287c) = spotExponentValue;
+    _gleUpdateLightExponents(glContext,lightIndex);
     if (*(int *)(glContext + 0x5434) == 0) {
-      bVar1 = *(byte *)(uVar10 * 7 + *(int *)(glContext + 0x5420) + 0x25d);
+      dirtyBitIndex = *(byte *)(lightIndex * 7 + *(int *)(glContext + 0x5420) + 0x25d);
     }
     else {
-      bVar1 = *(byte *)(uVar10 * 7 + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x291);
+      dirtyBitIndex = *(byte *)(lightIndex * 7 + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x291);
     }
-    iVar9 = (bVar1 >> 3 & 0x1c) + glContext;
+    dirtyWord324Ptr = (dirtyBitIndex >> 3 & 0x1c) + glContext;
     glContextWord5424 = *(int *)(glContext + 0x5424);
-    *(uint *)(iVar9 + 0x324) = *(uint *)(iVar9 + 0x324) | 1 << (bVar1 & 0x1f);
-    uVar8 = (uint)*(byte *)(uVar10 * 7 + glContextWord5424 + 0x25d);
+    *(uint *)(dirtyWord324Ptr + 0x324) = *(uint *)(dirtyWord324Ptr + 0x324) | 1 << (dirtyBitIndex & 0x1f);
+    dirtyBitIndex2 = (uint)*(byte *)(lightIndex * 7 + glContextWord5424 + 0x25d);
     break;
   case 0x1206:
-    fVar5 = *params;
-    if ((FLOAT_00108e50 <= fVar5) && (fVar5 <= FLOAT_00108e88)) {
-      *(float *)(iVar7 + 0x2890) = fVar5;
+    spotCutoffValue = *params;
+    if ((FLOAT_00108e50 <= spotCutoffValue) && (spotCutoffValue <= FLOAT_00108e88)) {
+      *(float *)(lightRecord + 0x2890) = spotCutoffValue;
       cosValue = _cos((double)(*params * FLOAT_00108e84));
-      *(float *)(iVar7 + 0x286c) = (float)cosValue;
+      *(float *)(lightRecord + 0x286c) = (float)cosValue;
     }
     else {
-      if (fVar5 != FLOAT_00108e8c) goto LAB_00031bc8;
-      *(undefined4 *)(iVar7 + 0x2890) = 0;
-      *(undefined4 *)(iVar7 + 0x286c) = 0xbf800000;
+      if (spotCutoffValue != FLOAT_00108e8c) goto LAB_00031bc8;
+      *(undefined4 *)(lightRecord + 0x2890) = 0;
+      *(undefined4 *)(lightRecord + 0x286c) = 0xbf800000;
     }
-    _gleUpdateLightExponents(glContext,uVar10);
+    _gleUpdateLightExponents(glContext,lightIndex);
     if (*(int *)(glContext + 0x5434) == 0) {
-      bVar1 = *(byte *)(uVar10 * 7 + *(int *)(glContext + 0x5420) + 0x25c);
+      dirtyBitIndex = *(byte *)(lightIndex * 7 + *(int *)(glContext + 0x5420) + 0x25c);
     }
     else {
-      bVar1 = *(byte *)(uVar10 * 7 + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x290);
+      dirtyBitIndex = *(byte *)(lightIndex * 7 + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x290);
     }
-    iVar9 = (bVar1 >> 3 & 0x1c) + glContext;
+    dirtyWord324Ptr = (dirtyBitIndex >> 3 & 0x1c) + glContext;
     glContextWord5424 = *(int *)(glContext + 0x5424);
-    *(uint *)(iVar9 + 0x324) = *(uint *)(iVar9 + 0x324) | 1 << (bVar1 & 0x1f);
-    uVar8 = (uint)*(byte *)(uVar10 * 7 + glContextWord5424 + 0x25c);
+    *(uint *)(dirtyWord324Ptr + 0x324) = *(uint *)(dirtyWord324Ptr + 0x324) | 1 << (dirtyBitIndex & 0x1f);
+    dirtyBitIndex2 = (uint)*(byte *)(lightIndex * 7 + glContextWord5424 + 0x25c);
     break;
   case 0x1207:
     if (!(*params < FLOAT_00108e50)) {
-      *(float *)(iVar7 + 0x2870) = *params;
+      *(float *)(lightRecord + 0x2870) = *params;
 LAB_00031be0:
-      _gleUpdateLightAttenuation(glContext,uVar10);
+      _gleUpdateLightAttenuation(glContext,lightIndex);
       goto LAB_00031c08;
     }
     goto LAB_00031bc8;
   case 0x1208:
     if (!(*params < FLOAT_00108e50)) {
-      *(float *)(iVar7 + 0x2874) = *params;
+      *(float *)(lightRecord + 0x2874) = *params;
       goto LAB_00031be0;
     }
     goto LAB_00031bc8;
   case 0x1209:
     if (!(*params < FLOAT_00108e50)) {
-      *(float *)(iVar7 + 0x2878) = *params;
+      *(float *)(lightRecord + 0x2878) = *params;
       goto LAB_00031be0;
     }
 LAB_00031bc8:
@@ -2008,10 +2038,10 @@ LAB_00031c00:
   default:
     goto switchD_000316d0_default;
   }
-  iVar7 = (uVar8 >> 3 & 0x1c) + glContext;
-  *(uint *)(iVar7 + 0x348) = *(uint *)(iVar7 + 0x348) | 1 << (uVar8 & 0x1f);
+  dirtyWord348Ptr = (dirtyBitIndex2 >> 3 & 0x1c) + glContext;
+  *(uint *)(dirtyWord348Ptr + 0x348) = *(uint *)(dirtyWord348Ptr + 0x348) | 1 << (dirtyBitIndex2 & 0x1f);
 LAB_00031c08:
-  *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 4 << (uVar10 * 2 & 0x3e);
+  *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 4 << (lightIndex * 2 & 0x3e);
   return;
 }
 
