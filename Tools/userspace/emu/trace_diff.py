@@ -44,6 +44,7 @@ HEAP_ON = os.environ.get('TD_HEAP', '0') == '1'
 # (GLDriver: the stock's own copy of `atexit` at 0x2748, built on keymgr, against the rebuilt's libSystem `atexit`): the stock function is run as a call-out of that name instead, so both images record the same call
 STOCK_HOOKS = {int(a, 16): n for a, n in (x.split(':') for x in os.environ.get('TD_STOCK_HOOKS', '').split(',') if x)}
 # TD_STOCK_ZERO_LOCAL=ADDR:SPOFF:SIZE,... (CONTROL, stock-image-relative hex address of an instruction after the function's `stwu`): before that instruction runs in the STOCK image, SIZE bytes at r1+SPOFF are set to 0. Used to prove that a stock/rebuilt difference is caused by a stock read of an uninitialised stack local (the rebuilt initialises it): with the local zeroed the row must come out identical (issue #306: ADDR=4d508 SPOFF=60 SIZE=2 for TPPStreamCompiler__getConstantAsSourceVar)
+GSEED = [x for x in os.environ.get('TD_GSEED', '').split(',') if x]
 REPAIR_FETCH = os.environ.get('TD_REPAIR_FETCH') == '1'      # TD_REPAIR_FETCH=1: pointer repair also treats a FETCH fault at a junk address loaded from the arena as a virtual-method slot (see repair_step)
 REAL_SPRINTF = os.environ.get('TD_SPRINTF') == '1'      # TD_SPRINTF=1: sprintf / snprintf write the formatted text (%d %i %u %x %X %c %s %%, width/zero pad) into the buffer instead of leaving it untouched (a pipeline that reads the text back would otherwise read uninitialised stack)
 BIND_SELF = os.environ.get('TD_BIND_SELF') == '1'      # TD_BIND_SELF=1 (pipeline_diff.py): a stock call through a dyld stub to a symbol the stock image itself defines (coalesced C++ template / inline instances) runs that definition, as dyld's flat binding does, instead of recording a call-out (the rebuilt links the same call directly)
@@ -540,7 +541,11 @@ class Sim:
             for za, zs in self.img.zero: uc.mem_write(za + self.slide, bytes(zs))
             if self.heap_used: uc.mem_write(HEAP, bytes(self.heap_used))
             self.heap_used = 0; self.heap_sizes = {}
-            uc.mem_write(ARENA, arena); uc.mem_write(RING, bytes(RING_SIZE)); uc.mem_write(RING + 0x10, struct.pack('>I', RING_SIZE // 4))
+            uc.mem_write(ARENA, arena)
+            for _n in GSEED:       # TD_GSEED=name,name: image globals the program initialises at run time (a pool allocator, the preprocessor state, ...) hold a pointer into the arena (the same value in both images)
+                if not hasattr(self, '_gs'): self._gs = {n_: a_ for a_, n_ in self.img.syms}
+                if _n in self._gs: uc.mem_write(self._gs[_n] + self.slide, struct.pack('>I', ARENA + 0x1000 + ((zlib.crc32(_n.encode()) % (ARENA_SIZE - 0x3000)) & ~0xf) + 0x100))
+            uc.mem_write(RING, bytes(RING_SIZE)); uc.mem_write(RING + 0x10, struct.pack('>I', RING_SIZE // 4))
             uc.mem_write(STACK, bytes([self.stackfill & 0xff]) * STACK_SIZE) if self.stackfill < 256 else uc.mem_write(STACK, struct.pack('>I', self.stackfill) * (STACK_SIZE // 4))
         self.sp0 = STACK + STACK_SIZE - 0x2000
         self.nstack = len(stackwords)
