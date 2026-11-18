@@ -5838,38 +5838,38 @@ void _gleFlushPolygonFunc(glContext)
 void _gleFlushPolygonTCLFunc(glContext)
   int glContext;
 {
-  int iVar1;
-  int iVar2;
-  undefined1 uVar3;
-  int iVar4;
-  int iVar5;
-  uint uVar6;
+  int copyOffset;
+  int bufferStartThenCopyDestination;
+  undefined1 savedVertexFlagByte;
+  int vertexStride;
+  int lastVertex;
+  uint remaining;
   
-  uVar3 = 0;
-  iVar4 = (int)*(short *)(glContext + 0x487c);
-  iVar5 = *(int *)(glContext + 0x4858) - iVar4;
+  savedVertexFlagByte = 0;
+  vertexStride = (int)*(short *)(glContext + 0x487c);
+  lastVertex = *(int *)(glContext + 0x4858) - vertexStride;
   if ((*(short *)(glContext + 0x34d2) == 0x1b01) || (*(short *)(glContext + 0x34d0) == 0x1b01)) {
-    uVar3 = *(undefined1 *)(iVar5 + *(short *)(glContext + 0x487e));
-    *(undefined1 *)(iVar5 + *(short *)(glContext + 0x487e)) = 0;
+    savedVertexFlagByte = *(undefined1 *)(lastVertex + *(short *)(glContext + 0x487e));
+    *(undefined1 *)(lastVertex + *(short *)(glContext + 0x487e)) = 0;
   }
   (**(code **)(glContext + 0x4a08))(glContext);
-  iVar2 = *(int *)(glContext + 0x4854);
+  bufferStartThenCopyDestination = *(int *)(glContext + 0x4854);
   *(undefined1 *)(glContext + 0x4a18) = 1;
   if ((*(short *)(glContext + 0x34d2) == 0x1b01) || (*(short *)(glContext + 0x34d0) == 0x1b01)) {
-    *(undefined1 *)(iVar5 + *(short *)(glContext + 0x487e)) = uVar3;
-    *(undefined1 *)(iVar2 + *(short *)(glContext + 0x487e)) = 0;
+    *(undefined1 *)(lastVertex + *(short *)(glContext + 0x487e)) = savedVertexFlagByte;
+    *(undefined1 *)(bufferStartThenCopyDestination + *(short *)(glContext + 0x487e)) = 0;
   }
-  iVar1 = 0;
-  iVar2 = iVar2 + iVar4;
-  if (0 < iVar4) {
-    uVar6 = iVar4 + 7U >> 3;
+  copyOffset = 0;
+  bufferStartThenCopyDestination = bufferStartThenCopyDestination + vertexStride;
+  if (0 < vertexStride) {
+    remaining = vertexStride + 7U >> 3;
     do {
-      *(undefined8 *)(iVar2 + iVar1) = *(undefined8 *)(iVar5 + iVar1);
-      iVar1 = iVar1 + 8;
-      uVar6 = uVar6 - 1;
-    } while (uVar6 != 0);
+      *(undefined8 *)(bufferStartThenCopyDestination + copyOffset) = *(undefined8 *)(lastVertex + copyOffset);
+      copyOffset = copyOffset + 8;
+      remaining = remaining - 1;
+    } while (remaining != 0);
   }
-  *(int *)(glContext + 0x4858) = iVar2 + iVar4;
+  *(int *)(glContext + 0x4858) = bufferStartThenCopyDestination + vertexStride;
   return;
 }
 

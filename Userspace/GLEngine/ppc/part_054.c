@@ -2373,37 +2373,37 @@ int _gleGenSurfaceMipmaps(glContext, param_2, param_3, param_4, param_5)
 }
 
 /* _gleHalfFloatToFloat @ 0xfc084 (136 bytes) */
-double _gleHalfFloatToFloat(uint param_1)
+double _gleHalfFloatToFloat(uint halfBits)
 {
   float fVar1;
-  uint uVar2;
-  uint uVar3;
-  uint uVar4;
+  uint mantissa;
+  uint exponentFieldThenFloatExponentBits;
+  uint signBit;
   
-  uVar3 = param_1 & 0x7c00;
-  uVar2 = param_1 & 0x3ff;
-  uVar4 = (param_1 & 0x8000) << 0x10;
-  if (uVar3 == 0x7c00) {
-    fVar1 = GH_U2F((unsigned int)((uVar4 | 0x7f800000)));
-    if (uVar2 != 0) {
-      fVar1 = GH_U2F((unsigned int)((uVar4 | 0x7fffffff)));
+  exponentFieldThenFloatExponentBits = halfBits & 0x7c00;
+  mantissa = halfBits & 0x3ff;
+  signBit = (halfBits & 0x8000) << 0x10;
+  if (exponentFieldThenFloatExponentBits == 0x7c00) {
+    fVar1 = GH_U2F((unsigned int)((signBit | 0x7f800000)));
+    if (mantissa != 0) {
+      fVar1 = GH_U2F((unsigned int)((signBit | 0x7fffffff)));
     }
   }
   else {
-    if (uVar3 == 0) {
-      uVar3 = 0;
-      if (uVar2 != 0) {
-        uVar3 = 0x38000000;
-        while (uVar2 = uVar2 << 1, (uVar2 & 0x400) == 0) {
-          uVar3 = uVar3 - 0x800000;
+    if (exponentFieldThenFloatExponentBits == 0) {
+      exponentFieldThenFloatExponentBits = 0;
+      if (mantissa != 0) {
+        exponentFieldThenFloatExponentBits = 0x38000000;
+        while (mantissa = mantissa << 1, (mantissa & 0x400) == 0) {
+          exponentFieldThenFloatExponentBits = exponentFieldThenFloatExponentBits - 0x800000;
         }
-        uVar2 = uVar2 & 0x3ff;
+        mantissa = mantissa & 0x3ff;
       }
     }
     else {
-      uVar3 = uVar3 * 0x2000 + 0x38000000;
+      exponentFieldThenFloatExponentBits = exponentFieldThenFloatExponentBits * 0x2000 + 0x38000000;
     }
-    fVar1 = GH_U2F((unsigned int)((uVar4 | uVar3 | uVar2 << 0xd)));
+    fVar1 = GH_U2F((unsigned int)((signBit | exponentFieldThenFloatExponentBits | mantissa << 0xd)));
   }
   return (double)fVar1;
 }

@@ -668,38 +668,38 @@ void _gleRenderPointsFunc_body(glContext)
 void _gleSelectPointsFunc(glContext)
   int glContext;
 {
-  bool bVar1;
-  uint uVar2;
-  undefined4 uVar3;
-  int iVar4;
-  uint uVar5;
+  bool vertexProgramPath;
+  uint batchClipCodes;
+  undefined4 pointList;
+  int vertexCursorThenPointCount;
+  uint vertexCount;
   
-  bVar1 = false;
+  vertexProgramPath = false;
   if ((*(char *)(glContext + 0x4664) != '\0') || (*(int *)(glContext + 0x5434) != 0)) {
-    bVar1 = true;
+    vertexProgramPath = true;
   }
-  iVar4 = *(int *)(glContext + 0x4854);
+  vertexCursorThenPointCount = *(int *)(glContext + 0x4854);
   if (((int)*(short *)(glContext + 0x487c) != 0) &&
-     (uVar5 = (uint)(*(int *)(glContext + 0x4858) - iVar4) / (uint)(int)*(short *)(glContext + 0x487c),
-     0 < (int)uVar5)) {
-    uVar2 = (**(code **)(glContext + 0x5060))(glContext,iVar4,uVar5);
-    if ((uVar2 & 0xff00) == 0) {
-      if (bVar1) {
-        iVar4 = *(int *)(glContext + 0x4864);
+     (vertexCount = (uint)(*(int *)(glContext + 0x4858) - vertexCursorThenPointCount) / (uint)(int)*(short *)(glContext + 0x487c),
+     0 < (int)vertexCount)) {
+    batchClipCodes = (**(code **)(glContext + 0x5060))(glContext,vertexCursorThenPointCount,vertexCount);
+    if ((batchClipCodes & 0xff00) == 0) {
+      if (vertexProgramPath) {
+        vertexCursorThenPointCount = *(int *)(glContext + 0x4864);
       }
       else if (*(char *)(glContext + 0x4e18) != '\0') {
-        (**(code **)(glContext + 0x5064))(glContext,iVar4,uVar5);
+        (**(code **)(glContext + 0x5064))(glContext,vertexCursorThenPointCount,vertexCount);
       }
-      if (((uVar2 & 0xff) == 0) && (*(char *)(glContext + 0x4e18) == '\0')) {
-        _gleSelectPoints(glContext,iVar4,uVar5);
+      if (((batchClipCodes & 0xff) == 0) && (*(char *)(glContext + 0x4e18) == '\0')) {
+        _gleSelectPoints(glContext,vertexCursorThenPointCount,vertexCount);
         return;
       }
-      uVar3 = *(undefined4 *)(glContext + 0x4870);
-      iVar4 = ((int (*)())_gleClipPoints)(glContext,iVar4,uVar5,uVar3);
-      if ((iVar4 != 0) &&
+      pointList = *(undefined4 *)(glContext + 0x4870);
+      vertexCursorThenPointCount = ((int (*)())_gleClipPoints)(glContext,vertexCursorThenPointCount,vertexCount,pointList);
+      if ((vertexCursorThenPointCount != 0) &&
          ((*(char *)(glContext + 0x4e18) == '\0' ||
-          (iVar4 = ((int (*)())_gleClipPointsPlane)(glContext,uVar3,iVar4), iVar4 != 0)))) {
-        _gleSelectPointsPtr(glContext,uVar3,iVar4);
+          (vertexCursorThenPointCount = ((int (*)())_gleClipPointsPlane)(glContext,pointList,vertexCursorThenPointCount), vertexCursorThenPointCount != 0)))) {
+        _gleSelectPointsPtr(glContext,pointList,vertexCursorThenPointCount);
         return;
       }
     }

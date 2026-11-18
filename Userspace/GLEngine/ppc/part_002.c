@@ -1039,37 +1039,37 @@ LAB_00017bb4:
 }
 
 /* _gleLookupHashObject @ 0x17bdc (120 bytes) */
-int _gleLookupHashObject(param_1, param_2)
-  int param_1;
-  uint param_2;
+int _gleLookupHashObject(hashTable, name)
+  int hashTable;
+  uint name;
 {
-  int *piVar1;
-  int *piVar2;
-  int iVar3;
-  int *piVar4;
+  int *previousNode;
+  int *node;
+  int bucketOffset;
+  int *bucketHead;
   
-  iVar3 = (param_2 & 0x3ff) * 4;
-  piVar4 = *(int **)(iVar3 + param_1);
-  if (piVar4 == (int *)0x0) {
+  bucketOffset = (name & 0x3ff) * 4;
+  bucketHead = *(int **)(bucketOffset + hashTable);
+  if (bucketHead == (int *)0x0) {
     return (int *)0x0;
   }
-  if (piVar4[1] != param_2) {
-    piVar1 = piVar4;
-    piVar2 = (int *)*piVar4;
+  if (bucketHead[1] != name) {
+    previousNode = bucketHead;
+    node = (int *)*bucketHead;
     while( true ) {
-      if (piVar2 == (int *)0x0) {
+      if (node == (int *)0x0) {
         return (int *)0x0;
       }
-      if (piVar2[1] == param_2) break;
-      piVar1 = piVar2;
-      piVar2 = (int *)*piVar2;
+      if (node[1] == name) break;
+      previousNode = node;
+      node = (int *)*node;
     }
-    *piVar1 = *piVar2;
-    *piVar2 = (int)piVar4;
-    *(int **)(iVar3 + param_1) = piVar2;
-    return piVar2;
+    *previousNode = *node;
+    *node = (int)bucketHead;
+    *(int **)(bucketOffset + hashTable) = node;
+    return node;
   }
-  return piVar4;
+  return bucketHead;
 }
 
 /* _gleAddHashNameAndObject @ 0x17c54 (76 bytes) */

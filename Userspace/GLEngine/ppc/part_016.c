@@ -503,43 +503,43 @@ undefined4 _glFrustum_ListExec(int glContext,float *recordedArgs,double unusedFl
 /* _glFrustum_Comp @ 0x68198 (408 bytes) */
 int _glFrustum_Comp(int glContext,double left,double right,double bottom,double top,double zNear,double zFar,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  float fVar1;
-  float fVar2;
-  float fVar3;
-  float fVar4;
+  float rightMinusLeft;
+  float topMinusBottom;
+  float nearMinusFar;
+  float deltaMagnitude;
   float *listRecord;
-  float dVar6;
+  float twoNear;
   
   if ((!(zNear <= DOUBLE_00108d60)) && (!(zFar <= DOUBLE_00108d60))) {
-    fVar1 = (float)(right - left);
-    fVar2 = (float)(top - bottom);
-    fVar3 = (float)(zNear - zFar);
-    fVar4 = fVar1;
-    if (!(0.0 <= fVar1)) {
-      fVar4 = -fVar1;
+    rightMinusLeft = (float)(right - left);
+    topMinusBottom = (float)(top - bottom);
+    nearMinusFar = (float)(zNear - zFar);
+    deltaMagnitude = rightMinusLeft;
+    if (!(0.0 <= rightMinusLeft)) {
+      deltaMagnitude = -rightMinusLeft;
     }
-    if (!(fVar4 < FLOAT_00108e80)) {
-      fVar4 = fVar2;
-      if (!(FLOAT_00108e50 <= fVar2)) {
-        fVar4 = -fVar2;
+    if (!(deltaMagnitude < FLOAT_00108e80)) {
+      deltaMagnitude = topMinusBottom;
+      if (!(FLOAT_00108e50 <= topMinusBottom)) {
+        deltaMagnitude = -topMinusBottom;
       }
-      if (!(fVar4 < FLOAT_00108e80)) {
-        fVar4 = fVar3;
-        if (!(FLOAT_00108e50 <= fVar3)) {
-          fVar4 = -fVar3;
+      if (!(deltaMagnitude < FLOAT_00108e80)) {
+        deltaMagnitude = nearMinusFar;
+        if (!(FLOAT_00108e50 <= nearMinusFar)) {
+          deltaMagnitude = -nearMinusFar;
         }
-        if (!(fVar4 < FLOAT_00108e80)) {
+        if (!(deltaMagnitude < FLOAT_00108e80)) {
           listRecord = (float *)_gleAddListItem(glContext,PTR__glFrustum_ListExec_00110104,0x18);
           if (listRecord == (float *)0x0) {
             return 0;
           }
-          dVar6 = (double)(float)(zNear + zNear);
-          *listRecord = (float)((double)dVar6 * (double)(1.0 / fVar1));
-          listRecord[2] = (float)((right + left) * (double)(1.0 / fVar1));
-          listRecord[3] = (float)((top + bottom) * (double)(1.0 / fVar2));
-          listRecord[4] = (float)((zFar + zNear) * (double)(1.0 / fVar3));
-          listRecord[5] = (float)(zFar * (double)dVar6 * (double)(1.0 / fVar3));
-          listRecord[1] = (float)((double)dVar6 * (double)(1.0 / fVar2));
+          twoNear = (double)(float)(zNear + zNear);
+          *listRecord = (float)((double)twoNear * (double)(1.0 / rightMinusLeft));
+          listRecord[2] = (float)((right + left) * (double)(1.0 / rightMinusLeft));
+          listRecord[3] = (float)((top + bottom) * (double)(1.0 / topMinusBottom));
+          listRecord[4] = (float)((zFar + zNear) * (double)(1.0 / nearMinusFar));
+          listRecord[5] = (float)(zFar * (double)twoNear * (double)(1.0 / nearMinusFar));
+          listRecord[1] = (float)((double)twoNear * (double)(1.0 / topMinusBottom));
           return (int)listRecord;
         }
       }

@@ -5831,45 +5831,45 @@ int _gleReinitFuncCache(glContext)
 }
 
 /* _gleDCBRealloc @ 0x12934 (256 bytes) */
-int _gleDCBRealloc(glContext, param_2)
-  int glContext;
-  int param_2;
+int _gleDCBRealloc(block, newSize)
+  int block;
+  int newSize;
 {
   int loopIndex;
-  int iVar1;
-  uint uVar2;
-  uint uVar3;
+  int byteOffset;
+  uint newOffset;
+  uint alignedBlock;
   int remaining;
   int reallocatedBlock;
   int remaining2;
-  uint uVar7;
+  uint oldOffset;
   
-  if (param_2 < 1) {
-    if (glContext != 0) {
-      _gleDCBFree(glContext);
+  if (newSize < 1) {
+    if (block != 0) {
+      _gleDCBFree(block);
     }
-    uVar3 = 0;
+    alignedBlock = 0;
   }
   else {
-    if (glContext == 0) {
-      uVar3 = _gleDCBAlloc(param_2);
-      return uVar3;
+    if (block == 0) {
+      alignedBlock = _gleDCBAlloc(newSize);
+      return alignedBlock;
     }
-    uVar7 = (uint)*(byte *)(glContext + -1);
-    reallocatedBlock = _realloc(glContext - uVar7,param_2 + 0x3fU & 0xffffffe0);
-    uVar3 = 0;
+    oldOffset = (uint)*(byte *)(block + -1);
+    reallocatedBlock = _realloc(block - oldOffset,newSize + 0x3fU & 0xffffffe0);
+    alignedBlock = 0;
     if (reallocatedBlock != 0) {
-      uVar3 = reallocatedBlock + 0x20U & 0xffffffe0;
-      uVar2 = uVar3 - reallocatedBlock & 0xff;
-      if (uVar2 != uVar7) {
-        remaining = param_2 + 3 >> 2;
-        if (uVar2 < uVar7) {
+      alignedBlock = reallocatedBlock + 0x20U & 0xffffffe0;
+      newOffset = alignedBlock - reallocatedBlock & 0xff;
+      if (newOffset != oldOffset) {
+        remaining = newSize + 3 >> 2;
+        if (newOffset < oldOffset) {
           loopIndex = 0;
           if (0 < remaining) {
             do {
-              iVar1 = loopIndex * 4;
+              byteOffset = loopIndex * 4;
               loopIndex = loopIndex + 1;
-              *(undefined4 *)(iVar1 + uVar3) = *(undefined4 *)(iVar1 + reallocatedBlock + uVar7);
+              *(undefined4 *)(byteOffset + alignedBlock) = *(undefined4 *)(byteOffset + reallocatedBlock + oldOffset);
               remaining = remaining + -1;
             } while (remaining != 0);
           }
@@ -5878,18 +5878,18 @@ int _gleDCBRealloc(glContext, param_2)
           remaining2 = remaining + -1;
           if (-1 < remaining2) {
             do {
-              iVar1 = remaining2 * 4;
+              byteOffset = remaining2 * 4;
               remaining2 = remaining2 + -1;
-              *(undefined4 *)(iVar1 + uVar3) = *(undefined4 *)(iVar1 + reallocatedBlock + uVar7);
+              *(undefined4 *)(byteOffset + alignedBlock) = *(undefined4 *)(byteOffset + reallocatedBlock + oldOffset);
               remaining = remaining + -1;
             } while (remaining != 0);
           }
         }
-        *(char *)(uVar3 - 1) = (char)(uVar3 - reallocatedBlock);
+        *(char *)(alignedBlock - 1) = (char)(alignedBlock - reallocatedBlock);
       }
     }
   }
-  return uVar3;
+  return alignedBlock;
 }
 
 /* _glGetIntegerv_Exec @ 0x12a34 (332 bytes) */

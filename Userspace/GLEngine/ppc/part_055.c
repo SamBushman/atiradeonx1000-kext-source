@@ -2303,30 +2303,31 @@ void _gleVPFlushLineLoopTCLRDirty(int glContext,double floatArg1,double floatArg
 void _gleVPFlushLineStrip(glContext)
   int glContext;
 {
-  int iVar1;
-  int iVar2;
-  int iVar3;
-  int iVar4;
-  int iVar5;
-  undefined8 local_110 [32];
+  int vertexStrideBytes;
+  int copyIndex;
+  int writeCursor;
+  int strideDwordsThenRemaining;
+  int remaining;
+  int bufferStart;
+  undefined8 savedLastVertex [32];
   
-  iVar4 = (int)*(short *)(glContext + 0x487c) >> 3;
-  iVar3 = *(int *)(glContext + 0x4858);
-  iVar1 = iVar4 * 8;
-  iVar2 = 0;
-  for (iVar5 = iVar4; iVar5 != 0; iVar5 = iVar5 + -1) {
-    local_110[iVar2] = *(undefined8 *)(iVar3 + iVar4 * -8 + iVar2 * 8);
-    iVar2 = iVar2 + 1;
+  strideDwordsThenRemaining = (int)*(short *)(glContext + 0x487c) >> 3;
+  writeCursor = *(int *)(glContext + 0x4858);
+  vertexStrideBytes = strideDwordsThenRemaining * 8;
+  copyIndex = 0;
+  for (remaining = strideDwordsThenRemaining; remaining != 0; remaining = remaining + -1) {
+    savedLastVertex[copyIndex] = *(undefined8 *)(writeCursor + strideDwordsThenRemaining * -8 + copyIndex * 8);
+    copyIndex = copyIndex + 1;
   }
   (**(code **)(glContext + 0x4a08))(glContext);
   *(undefined1 *)(glContext + 0x4a18) = 1;
-  iVar5 = *(int *)(glContext + 0x4854);
-  iVar2 = 0;
-  for (; iVar4 != 0; iVar4 = iVar4 + -1) {
-    *(undefined8 *)(iVar5 + iVar2 * 8) = local_110[iVar2];
-    iVar2 = iVar2 + 1;
+  bufferStart = *(int *)(glContext + 0x4854);
+  copyIndex = 0;
+  for (; strideDwordsThenRemaining != 0; strideDwordsThenRemaining = strideDwordsThenRemaining + -1) {
+    *(undefined8 *)(bufferStart + copyIndex * 8) = savedLastVertex[copyIndex];
+    copyIndex = copyIndex + 1;
   }
-  *(int *)(glContext + 0x4858) = iVar5 + iVar1;
+  *(int *)(glContext + 0x4858) = bufferStart + vertexStrideBytes;
   return;
 }
 

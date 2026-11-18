@@ -439,86 +439,87 @@ int _glColorTable_ListExec(glContext, recordedArgs)
   int glContext;
   uint *recordedArgs;
 {
-  byte bVar1;
-  ushort uVar2;
-  uint uVar3;
-  uint uVar4;
+  byte tableFlags;
+  ushort objectFlags;
+  uint nonProxyTarget;
+  uint target;
   int colorTable;
-  int iVar6;
-  int iVar7;
+  int createdColorTableLevel;
+  int recordSize;
   uint *pixels;
-  int iVar9;
+  int tableSlot;
+  int createdLevel;
   int textureLevel;
   
-  iVar7 = recordedArgs[5] + 0x18;
+  recordSize = recordedArgs[5] + 0x18;
   colorTable = _gleCheckColorTableArgs(glContext,*recordedArgs,recordedArgs[1],recordedArgs[2],recordedArgs[3],recordedArgs[4]);
   if (colorTable != 0) {
-    uVar2 = *(ushort *)(colorTable + 0x24);
-    if ((uVar2 & 0x3c00) != 0x1000) {
-      if ((uVar2 & 0x3c00) == 0) {
-        *(ushort *)(colorTable + 0x24) = uVar2 | 0x1000;
+    objectFlags = *(ushort *)(colorTable + 0x24);
+    if ((objectFlags & 0x3c00) != 0x1000) {
+      if ((objectFlags & 0x3c00) == 0) {
+        *(ushort *)(colorTable + 0x24) = objectFlags | 0x1000;
       }
-      else if ((uVar2 & 0xc00) != 0) {
+      else if ((objectFlags & 0xc00) != 0) {
         if (*(int *)(glContext + 0x7574) != 0) {
-          return iVar7;
+          return recordSize;
         }
         *(undefined4 *)(glContext + 0x7574) = 0x502;
-        return iVar7;
+        return recordSize;
       }
     }
     textureLevel = colorTable + 0xac;
     if ((*(byte *)(colorTable + 0xb7) & 0x20) != 0) {
       _gleDeletePluginTextureLevel(glContext,colorTable,textureLevel,0,0xffffffff);
       if (*(int *)(colorTable + 0xc0) != 0) {
-        bVar1 = *(byte *)(colorTable + 0xb7);
-        if ((bVar1 & 1) == 0) {
+        tableFlags = *(byte *)(colorTable + 0xb7);
+        if ((tableFlags & 1) == 0) {
           _gleFreeTextureLevel(glContext,colorTable,textureLevel);
-          bVar1 = *(byte *)(colorTable + 0xb7);
+          tableFlags = *(byte *)(colorTable + 0xb7);
         }
         else {
           *(undefined4 *)(colorTable + 0xc0) = 0;
         }
-        *(byte *)(colorTable + 0xb7) = bVar1 & 0xef;
+        *(byte *)(colorTable + 0xb7) = tableFlags & 0xef;
       }
       *(byte *)(colorTable + 0xb7) = *(byte *)(colorTable + 0xb7) & 0xdf;
     }
-    uVar4 = *recordedArgs;
-    iVar9 = glContext + 0x33d0;
-    if (uVar4 != 0x80d1) {
-      if (uVar4 < 0x80d2) {
-        iVar9 = glContext + 0x33b0;
-        uVar3 = 0x80d0;
+    target = *recordedArgs;
+    tableSlot = glContext + 0x33d0;
+    if (target != 0x80d1) {
+      if (target < 0x80d2) {
+        tableSlot = glContext + 0x33b0;
+        nonProxyTarget = 0x80d0;
       }
       else {
-        iVar9 = glContext + 0x33f0;
-        uVar3 = 0x80d2;
+        tableSlot = glContext + 0x33f0;
+        nonProxyTarget = 0x80d2;
       }
-      if (uVar4 != uVar3) {
-        iVar9 = 0;
+      if (target != nonProxyTarget) {
+        tableSlot = 0;
       }
     }
     pixels = recordedArgs + 6;
-    if (iVar9 == 0) {
-      iVar9 = _gleCreateTextureLevel
+    if (tableSlot == 0) {
+      createdLevel = _gleCreateTextureLevel
                         (glContext,colorTable,textureLevel,recordedArgs[1],recordedArgs[2],1,1,0,recordedArgs[3],recordedArgs[4],0,
                          pixels);
-      if (iVar9 != 0) {
+      if (createdLevel != 0) {
         _gleTextureImagePut(glContext,textureLevel,0,0,0,recordedArgs[2],1,1,recordedArgs[3],recordedArgs[4],0,0,pixels);
       }
       *(uint *)(glContext + 0x314) =
            *(uint *)(glContext + 0x314) | 1 << (*(uint *)(glContext + 0x53d4) & 0x3f);
     }
     else {
-      iVar6 = _gleCreateColorTableLevel
+      createdColorTableLevel = _gleCreateColorTableLevel
                         (glContext,colorTable,textureLevel,recordedArgs[1],recordedArgs[2],recordedArgs[3],recordedArgs[4],pixels);
-      if ((iVar6 != 0) && (pixels != (uint *)0x0)) {
-        _gleColorTable(glContext,iVar9,textureLevel,recordedArgs[2],recordedArgs[3],recordedArgs[4],pixels);
+      if ((createdColorTableLevel != 0) && (pixels != (uint *)0x0)) {
+        _gleColorTable(glContext,tableSlot,textureLevel,recordedArgs[2],recordedArgs[3],recordedArgs[4],pixels);
       }
       *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x40000000;
     }
     _gleCreatePluginTextureLevel(glContext,colorTable,textureLevel,0,0xffffffff,recordedArgs[1]);
   }
-  return iVar7;
+  return recordSize;
 }
 
 /* _glColorTable_Comp @ 0x5f888 (840 bytes) */

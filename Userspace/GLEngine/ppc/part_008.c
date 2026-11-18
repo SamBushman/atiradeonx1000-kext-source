@@ -139,58 +139,61 @@ void _glProgramEnvParameter4fvARB_Exec(glContext, target, index, params)
   uint index;
   undefined4 *params;
 {
-  byte bVar1;
-  uint uVar2;
+  byte dirtyBitIndex;
+  uint changeWord3WithBit;
+  uint expectedTarget;
   undefined4 glErrorCode;
-  int iVar4;
+  int dirtyWord348;
   int glContextWord5424;
-  int iVar5;
-  int iVar6;
+  int targetSlot;
+  int envParam;
+  int envParams;
+  int dirtyWord324;
   
   if (target == 0x8620) {
-    iVar5 = 0;
+    targetSlot = 0;
     if (index < 0x100) {
-      uVar2 = *(uint *)(glContext + 0x31c) | 0x800000;
+      changeWord3WithBit = *(uint *)(glContext + 0x31c) | 0x800000;
 LAB_0004f340:
-      *(uint *)(glContext + 0x31c) = uVar2;
+      *(uint *)(glContext + 0x31c) = changeWord3WithBit;
       if (*(int *)(glContext + 0x5434) == 0) {
-        bVar1 = *(byte *)(index + *(int *)(glContext + 0x5420) + 0x158);
+        dirtyBitIndex = *(byte *)(index + *(int *)(glContext + 0x5420) + 0x158);
       }
       else {
-        bVar1 = *(byte *)(index + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x18c);
+        dirtyBitIndex = *(byte *)(index + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x18c);
       }
-      iVar6 = (bVar1 >> 3 & 0x1c) + glContext;
+      dirtyWord324 = (dirtyBitIndex >> 3 & 0x1c) + glContext;
       glContextWord5424 = *(int *)(glContext + 0x5424);
-      *(uint *)(iVar6 + 0x324) = *(uint *)(iVar6 + 0x324) | 1 << (bVar1 & 0x1f);
-      bVar1 = *(byte *)(index + glContextWord5424 + 0x158);
-      iVar4 = (bVar1 >> 3 & 0x1c) + glContext;
-      *(uint *)(iVar4 + 0x348) = *(uint *)(iVar4 + 0x348) | 1 << (bVar1 & 0x1f);
-      iVar5 = *(int *)(iVar5 * 8 + glContext + 0x4668);
-      *(undefined4 *)(iVar5 + index * 0x10) = *params;
-      iVar5 = iVar5 + index * 0x10;
-      *(undefined4 *)(iVar5 + 4) = params[1];
-      *(undefined4 *)(iVar5 + 8) = params[2];
-      *(undefined4 *)(iVar5 + 0xc) = params[3];
+      *(uint *)(dirtyWord324 + 0x324) = *(uint *)(dirtyWord324 + 0x324) | 1 << (dirtyBitIndex & 0x1f);
+      dirtyBitIndex = *(byte *)(index + glContextWord5424 + 0x158);
+      dirtyWord348 = (dirtyBitIndex >> 3 & 0x1c) + glContext;
+      *(uint *)(dirtyWord348 + 0x348) = *(uint *)(dirtyWord348 + 0x348) | 1 << (dirtyBitIndex & 0x1f);
+      envParams = *(int *)(targetSlot * 8 + glContext + 0x4668);
+      *(undefined4 *)(envParams + index * 0x10) = *params;
+      envParam = envParams + index * 0x10;
+      *(undefined4 *)(envParam + 4) = params[1];
+      *(undefined4 *)(envParam + 8) = params[2];
+      *(undefined4 *)(envParam + 0xc) = params[3];
       return;
     }
   }
   else {
     if (target < 0x8621) {
-      uVar2 = 0x8200;
+      expectedTarget = 0x8200;
     }
     else {
-      uVar2 = 0x8804;
+      expectedTarget = 0x8804;
     }
-    if (target != uVar2) {
+    if (target != expectedTarget) {
       if (*(int *)(glContext + 0x7574) != 0) {
         return;
       }
       glErrorCode = 0x500;
       goto LAB_0004f338;
     }
-    iVar5 = 1;
+    targetSlot = 1;
     if (index < 0x80) {
-      uVar2 = *(uint *)(glContext + 0x31c) | 0x2000000;
+      changeWord3WithBit = *(uint *)(glContext + 0x31c) | 0x2000000;
       goto LAB_0004f340;
     }
   }

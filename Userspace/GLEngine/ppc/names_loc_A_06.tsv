@@ -64,7 +64,7 @@ local	_gleTextureImagePut_Fast	param_1	glContext	INFERRED	forwarded unchanged to
 local	_glePixelPackSettings	param_2	format	INFERRED	forwarded unchanged to parameter `format` of _glePixelBytes (2 call(s), unanimous)
 local	_glePixelPackSettings	param_3	type	INFERRED	forwarded unchanged to parameter `type` of _glePixelBytes (2 call(s), unanimous)
 local	_gleFreeTextureState	param_1	glContext	INFERRED	forwarded unchanged to parameter `glContext` of _gleFreeTextureObject (6 call(s), unanimous)
-local	_gleDCBRealloc	param_1	glContext	INFERRED	forwarded unchanged to parameter `glContext` of _gleDCBFree (1 call(s), unanimous)
+local	_gleDCBRealloc	param_1	block	INFERRED	block pointer passed to _gleDCBRealloc: the byte before it holds the offset back to the start of the malloc block (not a GL context; the caller _gleReinitFuncCache passes the function-cache list head)
 local	_gleOptimizeDisplayList	param_2	list	INFERRED	forwarded unchanged to parameter `list` of _gleNewList (1 call(s), unanimous)
 local	_gleOptimizedListFreeFunc	param_1	glContext	INFERRED	forwarded unchanged to parameter `glContext` of _gleFreeVertexArrayObject (1 call(s), unanimous)
 local	_gleAddListItemWithFree	param_1	glContext	INFERRED	forwarded unchanged to parameter `glContext` of _gleAddListItem (1 call(s), unanimous)

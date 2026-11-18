@@ -1641,8 +1641,8 @@ void _glMapVertexAttrib1fARB_Exec(int glContext,uint index,uint size,undefined4 
 {
   undefined4 glErrorCode;
   int mapData;
-  undefined4 extraout_r4;
-  uint uVar3;
+  undefined4 r4AfterCall;
+  uint sizeCopy;
   double incomingFpr3;
   double incomingFpr4;
   double incomingFpr5;
@@ -1655,13 +1655,13 @@ void _glMapVertexAttrib1fARB_Exec(int glContext,uint index,uint size,undefined4 
   double incomingStack_ffffffb0;
   double incomingStack_ffffffb8;
   
-  uVar3 = size;
+  sizeCopy = size;
   mapData = _gleGetMapData(glContext);
   if (*(short *)(glContext + 0x4a10) < 0) {
     if ((((index < 0x10) && (u1 != u2)) && (0 < order)) && (order < 0xb)) {
       if (size == 2) {
         if (1 < stride) {
-          ((void (*)())_gleMap1VertexAttrib2fLoad)(glContext,extraout_r4,uVar3,stride,order,points,
+          ((void (*)())_gleMap1VertexAttrib2fLoad)(glContext,r4AfterCall,sizeCopy,stride,order,points,
                      mapData + index * 0xb0 + 0x2ca8,u1,u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7
                      ,incomingFpr8,incomingStack_ffffff98,incomingStack_ffffffa0,incomingStack_ffffffa8,incomingStack_ffffffb0,
                      incomingStack_ffffffb8);
@@ -1670,7 +1670,7 @@ void _glMapVertexAttrib1fARB_Exec(int glContext,uint index,uint size,undefined4 
       }
       else if (size < 3) {
         if ((size == 1) && (0 < stride)) {
-          ((void (*)())_gleMap1VertexAttrib1fLoad)(glContext,extraout_r4,uVar3,stride,order,points,
+          ((void (*)())_gleMap1VertexAttrib1fLoad)(glContext,r4AfterCall,sizeCopy,stride,order,points,
                      mapData + index * 0xb0 + 0x2ca8,u1,u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7
                      ,incomingFpr8,incomingStack_ffffff98,incomingStack_ffffffa0,incomingStack_ffffffa8,incomingStack_ffffffb0,
                      incomingStack_ffffffb8);
@@ -1679,7 +1679,7 @@ void _glMapVertexAttrib1fARB_Exec(int glContext,uint index,uint size,undefined4 
       }
       else if (size == 3) {
         if (2 < stride) {
-          ((void (*)())_gleMap1VertexAttrib3fLoad)(glContext,extraout_r4,uVar3,stride,order,points,
+          ((void (*)())_gleMap1VertexAttrib3fLoad)(glContext,r4AfterCall,sizeCopy,stride,order,points,
                      mapData + index * 0xb0 + 0x2ca8,u1,u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7
                      ,incomingFpr8,incomingStack_ffffff98,incomingStack_ffffffa0,incomingStack_ffffffa8,incomingStack_ffffffb0,
                      incomingStack_ffffffb8);
@@ -1687,7 +1687,7 @@ void _glMapVertexAttrib1fARB_Exec(int glContext,uint index,uint size,undefined4 
         }
       }
       else if ((size == 4) && (3 < stride)) {
-        ((void (*)())_gleMap1VertexAttrib4fLoad)(glContext,extraout_r4,uVar3,stride,order,points,mapData + index * 0xb0 + 0x2ca8
+        ((void (*)())_gleMap1VertexAttrib4fLoad)(glContext,r4AfterCall,sizeCopy,stride,order,points,mapData + index * 0xb0 + 0x2ca8
                    ,u1,u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffff98,
                    incomingStack_ffffffa0,incomingStack_ffffffa8,incomingStack_ffffffb0,incomingStack_ffffffb8);
 LAB_0006f4c8:
