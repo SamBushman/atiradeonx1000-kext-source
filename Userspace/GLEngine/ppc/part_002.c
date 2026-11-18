@@ -2504,9 +2504,9 @@ int _gleTextureImagePut_Fast(glContext, textureLevel, xoffset, yoffset, width, h
   undefined4 forwardedArg9;
   int pixels;
 {
-  bool bVar1;
-  int iVar2;
-  int iVar3;
+  bool typeOutOfRange;
+  int levelComponentsThenRowPadding;
+  int levelPixelBytesThenSourceComponentsThenSourceRowComponents;
   int levelRowBytes;
   undefined4 putResult;
   int levelRowComponents;
@@ -2518,18 +2518,18 @@ int _gleTextureImagePut_Fast(glContext, textureLevel, xoffset, yoffset, width, h
   int srcPixelBytes;
   int srcStartThenPointer [6];
   
-  iVar2 = ((int (*)())_gleComponents)((uint)*(ushort *)(textureLevel + 0x10));
-  iVar3 = ((int (*)())_glePixelBytes)((uint)*(ushort *)(textureLevel + 0x10),(uint)*(ushort *)(textureLevel + 0x12));
-  levelRowComponents = iVar2 * (uint)*(ushort *)(textureLevel + 0xc);
+  levelComponentsThenRowPadding = ((int (*)())_gleComponents)((uint)*(ushort *)(textureLevel + 0x10));
+  levelPixelBytesThenSourceComponentsThenSourceRowComponents = ((int (*)())_glePixelBytes)((uint)*(ushort *)(textureLevel + 0x10),(uint)*(ushort *)(textureLevel + 0x12));
+  levelRowComponents = levelComponentsThenRowPadding * (uint)*(ushort *)(textureLevel + 0xc);
   levelRowBytes = ((int (*)())_gleRowBytes)((uint)*(ushort *)(textureLevel + 0x10),(uint)*(ushort *)(textureLevel + 0x12),
                        (uint)*(ushort *)(textureLevel + 0xc));
-  destPixels = *(int *)(textureLevel + 0x14) + iVar3 * ((uint)*(ushort *)(textureLevel + 0xc) * yoffset + xoffset);
+  destPixels = *(int *)(textureLevel + 0x14) + levelPixelBytesThenSourceComponentsThenSourceRowComponents * ((uint)*(ushort *)(textureLevel + 0xc) * yoffset + xoffset);
   ((void (*)())_glePixelPackSettings)(glContext,format,type,width,height,forwardedArg9,&srcPixelBytes,srcStartThenPointer,&srcRowBytes,srcRowPadding
              ,srcImageBytes,srcImagePadding);
-  iVar3 = ((int (*)())_gleComponents)(format);
+  levelPixelBytesThenSourceComponentsThenSourceRowComponents = ((int (*)())_gleComponents)(format);
   srcStartThenPointer[0] = pixels + srcStartThenPointer[0];
-  iVar2 = levelRowComponents - iVar2 * width;
-  iVar3 = iVar3 * width;
+  levelComponentsThenRowPadding = levelRowComponents - levelComponentsThenRowPadding * width;
+  levelPixelBytesThenSourceComponentsThenSourceRowComponents = levelPixelBytesThenSourceComponentsThenSourceRowComponents * width;
   if ((srcStartThenPointer[0] == destPixels) && (srcRowBytes == levelRowBytes)) {
     return 1;
   }
@@ -2545,7 +2545,7 @@ LAB_00019e6c:
     if (type == 0x1403) {
       if (*(short *)(textureLevel + 0x12) == 0x1401) {
         putResult = _gleTextureImagePut_FastUshort
-                          (glContext,width,height,srcStartThenPointer[0],destPixels,srcRowBytes,iVar3,iVar2,levelRowComponents,
+                          (glContext,width,height,srcStartThenPointer[0],destPixels,srcRowBytes,levelPixelBytesThenSourceComponentsThenSourceRowComponents,levelComponentsThenRowPadding,levelRowComponents,
                            (uint)*(ushort *)(textureLevel + 0x10),format);
         return putResult;
       }
@@ -2555,7 +2555,7 @@ LAB_00019e6c:
       if (type == 0x1401) {
         if (*(short *)(textureLevel + 0x12) == 0x1401) {
           putResult = _gleTextureImagePut_FastUbyte
-                            (glContext,width,height,srcStartThenPointer[0],destPixels,srcRowBytes,iVar3,iVar2,levelRowComponents,
+                            (glContext,width,height,srcStartThenPointer[0],destPixels,srcRowBytes,levelPixelBytesThenSourceComponentsThenSourceRowComponents,levelComponentsThenRowPadding,levelRowComponents,
                              (uint)*(ushort *)(textureLevel + 0x10),format);
           return putResult;
         }
@@ -2564,7 +2564,7 @@ LAB_00019e6c:
       if (0x1401 < type) {
         if (*(short *)(textureLevel + 0x12) == 0x1401) {
           putResult = _gleTextureImagePut_FastShort
-                            (glContext,width,height,srcStartThenPointer[0],destPixels,srcRowBytes,iVar3,iVar2,levelRowComponents,
+                            (glContext,width,height,srcStartThenPointer[0],destPixels,srcRowBytes,levelPixelBytesThenSourceComponentsThenSourceRowComponents,levelComponentsThenRowPadding,levelRowComponents,
                              (uint)*(ushort *)(textureLevel + 0x10),format);
           return putResult;
         }
@@ -2573,7 +2573,7 @@ LAB_00019e6c:
       if (type == 0x1400) {
         if (*(short *)(textureLevel + 0x12) == 0x1401) {
           putResult = _gleTextureImagePut_FastByte
-                            (glContext,width,height,srcStartThenPointer[0],destPixels,srcRowBytes,iVar3,iVar2,levelRowComponents,
+                            (glContext,width,height,srcStartThenPointer[0],destPixels,srcRowBytes,levelPixelBytesThenSourceComponentsThenSourceRowComponents,levelComponentsThenRowPadding,levelRowComponents,
                              (uint)*(ushort *)(textureLevel + 0x10),format);
           return putResult;
         }
@@ -2584,7 +2584,7 @@ LAB_00019e6c:
       if (type == 0x1405) {
         if (*(short *)(textureLevel + 0x12) == 0x1401) {
           putResult = _gleTextureImagePut_FastUint
-                            (glContext,width,height,srcStartThenPointer[0],destPixels,srcRowBytes,iVar3,iVar2,levelRowComponents,
+                            (glContext,width,height,srcStartThenPointer[0],destPixels,srcRowBytes,levelPixelBytesThenSourceComponentsThenSourceRowComponents,levelComponentsThenRowPadding,levelRowComponents,
                              (uint)*(ushort *)(textureLevel + 0x10),format);
           return putResult;
         }
@@ -2593,7 +2593,7 @@ LAB_00019e6c:
       if (type < 0x1405) {
         if (*(short *)(textureLevel + 0x12) == 0x1401) {
           putResult = _gleTextureImagePut_FastInt
-                            (glContext,width,height,srcStartThenPointer[0],destPixels,srcRowBytes,iVar3,iVar2,levelRowComponents,
+                            (glContext,width,height,srcStartThenPointer[0],destPixels,srcRowBytes,levelPixelBytesThenSourceComponentsThenSourceRowComponents,levelComponentsThenRowPadding,levelRowComponents,
                              (uint)*(ushort *)(textureLevel + 0x10),format);
           return putResult;
         }
@@ -2605,14 +2605,14 @@ LAB_00019e6c:
   else {
     if (type < 0x8369) {
       if (0x8361 < type) goto LAB_00019e6c;
-      bVar1 = 4 < type - 0x8032;
+      typeOutOfRange = 4 < type - 0x8032;
     }
     else {
       if (type < 0x85ba) goto LAB_00019eac;
       if (type < 0x85bc) goto LAB_00019e6c;
-      bVar1 = 1 < type - 0x86da;
+      typeOutOfRange = 1 < type - 0x86da;
     }
-    if (!bVar1) goto LAB_00019e6c;
+    if (!typeOutOfRange) goto LAB_00019e6c;
   }
 LAB_00019eac:
   if (*(int *)(glContext + 0x7574) != 0) {
@@ -5361,7 +5361,7 @@ int _gleCalculateOptions(functionId, attributeCount)
   uint attributeIndex;
   bool typeAndSizeMatch;
   uint typeCode;
-  ushort uVar4;
+  ushort selectorWordThenSelectorSizeThenSourceComponentCount;
   uint options;
   ushort *srcCursor;
   uint *selectorWordCursor;
@@ -5380,11 +5380,11 @@ int _gleCalculateOptions(functionId, attributeCount)
     selectorWordCursor = functionId + 1;
     remaining = attributeCount;
     do {
-      uVar4 = *(ushort *)selectorWordCursor;
-      attributeIndex = (uint)(uVar4 >> 10);
+      selectorWordThenSelectorSizeThenSourceComponentCount = *(ushort *)selectorWordCursor;
+      attributeIndex = (uint)(selectorWordThenSelectorSizeThenSourceComponentCount >> 10);
       if (attributeIndex == 6) {
-        if (((*srcCursor >> 10 & 0xf) == 0xe) && ((uVar4 >> 6 & 3) == 1)) {
-          attribute6ByteOffset = (uVar4 & 0x3f) << 2;
+        if (((*srcCursor >> 10 & 0xf) == 0xe) && ((selectorWordThenSelectorSizeThenSourceComponentCount >> 6 & 3) == 1)) {
+          attribute6ByteOffset = (selectorWordThenSelectorSizeThenSourceComponentCount & 0x3f) << 2;
         }
       }
       else if (attributeIndex < 0x2a) {
@@ -5392,9 +5392,9 @@ int _gleCalculateOptions(functionId, attributeCount)
         if (attributeIndex < 0x20) {
           typeCode = *(ushort *)((int)functionId + (attributeCount + loopIndex) * 2 + 4) >> 10 & 0xf;
           if ((typeCode < 6) || (typeCode - 8 < 6)) {
-            uVar4 = uVar4 >> 6 & 3;
-            if ((((typeCode < 2) || ((typeCode == 8 || (typeCode == 9)))) && (uVar4 == 1)) ||
-               ((((typeCode - 2 < 2 || (typeCode == 10)) || (typeCode == 0xb)) && (uVar4 == 2)))) {
+            selectorWordThenSelectorSizeThenSourceComponentCount = selectorWordThenSelectorSizeThenSourceComponentCount >> 6 & 3;
+            if ((((typeCode < 2) || ((typeCode == 8 || (typeCode == 9)))) && (selectorWordThenSelectorSizeThenSourceComponentCount == 1)) ||
+               ((((typeCode - 2 < 2 || (typeCode == 10)) || (typeCode == 0xb)) && (selectorWordThenSelectorSizeThenSourceComponentCount == 2)))) {
               typeAndSizeMatch = true;
             }
             else {
@@ -5406,18 +5406,18 @@ int _gleCalculateOptions(functionId, attributeCount)
           options = options | 1 << (attributeIndex & 1);
         }
         selectorComponentCount = (*(ushort *)selectorWordCursor >> 8 & 3) + 1;
-        uVar4 = (*(ushort *)((int)functionId + (attributeCount + loopIndex) * 2 + 4) >> 0xe) + 1;
-        if ((uVar4 < selectorComponentCount) && (!typeAndSizeMatch)) {
+        selectorWordThenSelectorSizeThenSourceComponentCount = (*(ushort *)((int)functionId + (attributeCount + loopIndex) * 2 + 4) >> 0xe) + 1;
+        if ((selectorWordThenSelectorSizeThenSourceComponentCount < selectorComponentCount) && (!typeAndSizeMatch)) {
           if ((attributeIndex == 5) || (selectorComponentCount != 4)) {
             options = options | 8;
           }
-          else if (uVar4 == 3) {
+          else if (selectorWordThenSelectorSizeThenSourceComponentCount == 3) {
             options = options | 0x10;
           }
           else if ((*functionId & 0x200000) == 0) {
             options = options | 0x18;
           }
-          else if (uVar4 == 2) {
+          else if (selectorWordThenSelectorSizeThenSourceComponentCount == 2) {
             options = options | 0x20;
           }
           else {
@@ -5429,7 +5429,7 @@ int _gleCalculateOptions(functionId, attributeCount)
         options = options | 1 << (attributeIndex - 0x2a & 0x3f);
       }
       else {
-        highAttributeByteOffset = (uVar4 & 0x3f) << 2;
+        highAttributeByteOffset = (selectorWordThenSelectorSizeThenSourceComponentCount & 0x3f) << 2;
       }
       loopIndex = loopIndex + 1;
       srcCursor = srcCursor + 1;

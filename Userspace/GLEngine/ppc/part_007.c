@@ -44,12 +44,12 @@ void _glReadBuffer_Exec(glContext, mode)
 {
   bool bVar1;
   undefined4 glErrorCode;
-  int iVar3;
+  int readFramebuffer;
   
   if (-1 < *(short *)(glContext + 0x4a10)) goto LAB_00045bb4;
   if (mode == 0x404) {
 LAB_00045abc:
-    iVar3 = 0;
+    readFramebuffer = 0;
     if (*(int *)(glContext + 0x744c) == 0) goto LAB_00045b84;
     goto LAB_00045bb4;
   }
@@ -67,8 +67,8 @@ LAB_00045aa4:
           goto LAB_00045abc;
         }
 LAB_00045b78:
-        iVar3 = *(int *)(glContext + 0x744c);
-        bVar1 = iVar3 == 0;
+        readFramebuffer = *(int *)(glContext + 0x744c);
+        bVar1 = readFramebuffer == 0;
       }
       else {
         if (mode == 0x402) goto LAB_00045acc;
@@ -76,16 +76,16 @@ LAB_00045b78:
         if ((*(int *)(glContext + 0x744c) != 0) || (*(char *)(glContext + 0x7582) == '\0'))
         goto LAB_00045bb4;
 LAB_00045b10:
-        iVar3 = 0;
+        readFramebuffer = 0;
         bVar1 = *(char *)(*(int *)(glContext + 0x468c) + 0x26) == '\0';
       }
       if (!bVar1) {
 LAB_00045b84:
-        if (iVar3 == 0) {
+        if (readFramebuffer == 0) {
           *(short *)(glContext + 0x3118) = (short)mode;
         }
         else {
-          *(short *)(iVar3 + 200) = (short)mode;
+          *(short *)(readFramebuffer + 200) = (short)mode;
           *(undefined4 *)(*(int *)(glContext + 0x744c) + 0xec) = 1;
         }
         *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x100;
@@ -102,7 +102,7 @@ LAB_00045b84:
       }
 LAB_00045acc:
       if (*(int *)(glContext + 0x744c) == 0) {
-        iVar3 = 0;
+        readFramebuffer = 0;
         if (*(char *)(glContext + 0x7582) != '\0') goto LAB_00045b84;
 LAB_00045b64:
         if (*(int *)(glContext + 0x7574) != 0) {
@@ -121,7 +121,7 @@ LAB_00045b44:
       }
       if ((*(int *)(glContext + 0x744c) == 0) &&
          (mode < *(int *)(*(int *)(glContext + 0x468c) + 0x54) + 0x409U)) {
-        iVar3 = 0;
+        readFramebuffer = 0;
         goto LAB_00045b84;
       }
     }

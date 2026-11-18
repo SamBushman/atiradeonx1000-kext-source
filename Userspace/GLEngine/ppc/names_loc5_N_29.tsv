@@ -1,0 +1,9 @@
+local	_gleInitDerivedState	puVar2	vertexEval2FuncThenEyeInterpFuncThenClipInterpFunc	CONFIRMED	_gleSetVertexEval2Func (stored at ctx+0x489c), then _gleSetEyeInterpFunc (ctx+0x49c8), then _gleSetClipInterpFunc (ctx+0x49cc)
+local	_gleInitDerivedState	puVar3	vertexSubmitFunc	CONFIRMED	PTR__gleSetVertexSubmitFunc stored at ctx+0x4888
+local	_gleInitDerivedState	iVar4	lightRecordCursor	INFERRED	glContext advanced by 0x6c for each of the 8 per-light records (flags at +0x4ada/+0x4adb, +0x4a94, +0x4ad4)
+local	_gleInitDerivedState	iVar6	faceMaterialRecord	INFERRED	record pointer read from the table at ctx+0x4dd0 (front, back); +500 and its flag bytes at +0x234..+0x236 are initialised
+local	_gleInitializeContext	iVar5	allocStatusThenListHead	CONFIRMED	status returned by _gleAllocVertexMachine/_gleAllocMaterials, then the address ctx+0x7468 written into the four self-linked list slots, then the status of _gleAllocVertexArrays/_gleAllocFunctions, which is returned
+local	_gleInitializeContext	puVar1	globalsStructPtr	CONFIRMED	PTR__gle_globals_struct stored at ctx+0x4674
+local	_gleCompileClippedVertexArray	iVar14	glContextThenCalleeResult	CONFIRMED	initial copy of glContext, then the compiled function's result, then the ctx+0x47cc callback result; returned
+local	_gleCompileClippedVertexArray	uVar13	lastBufferAddress	INFERRED	ctx+0x49a4 read before it is updated; passed as the second pointer to the compiled function
+local	_gleCompileClippedVertexArray	iVar10	nextElementIndexThenBufferAddress	CONFIRMED	next element index (ctx+0x4994 + word offset + 1), then buffer address (ctx+0x49a8 + index*stride or the allocation returned by callback ctx+0x47c4), stored at ctx+0x49a4 and passed to the compiled function

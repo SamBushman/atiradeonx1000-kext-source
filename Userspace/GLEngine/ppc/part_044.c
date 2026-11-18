@@ -1642,27 +1642,27 @@ void _gleSeparableFilter2D(glContext, unusedArg2, internalformat, width, height,
   undefined4 row;
   undefined4 column;
 {
-  int iVar1;
+  int pixelBytesThenColumnFilterData;
   int filterData;
   
-  iVar1 = _glePixelBytes(internalformat,0x1406);
+  pixelBytesThenColumnFilterData = _glePixelBytes(internalformat,0x1406);
   if (*(int *)(glContext + 0x334c) != 0) {
     _free(*(int *)(glContext + 0x334c));
   }
   *(int *)(glContext + 0x3350) = width;
   *(int *)(glContext + 0x3354) = height;
   if ((width != 0) && (height != 0)) {
-    filterData = _malloc((width + height) * iVar1);
+    filterData = _malloc((width + height) * pixelBytesThenColumnFilterData);
     *(int *)(glContext + 0x334c) = filterData;
     *(short *)(glContext + 0x334a) = (short)internalformat;
     *(int *)(glContext + 0x3350) = width;
     *(int *)(glContext + 0x3354) = height;
-    iVar1 = filterData + width * iVar1;
+    pixelBytesThenColumnFilterData = filterData + width * pixelBytesThenColumnFilterData;
     ((void (*)())_gleImagingUnpackData)(glContext,width,1,format,type,internalformat,0x1406,row,filterData);
-    ((void (*)())_gleImagingUnpackData)(glContext,height,1,format,type,internalformat,0x1406,column,iVar1);
+    ((void (*)())_gleImagingUnpackData)(glContext,height,1,format,type,internalformat,0x1406,column,pixelBytesThenColumnFilterData);
     ((void (*)())_gleImagingScaleAndBias)(glContext,glContext + 0x3328,*(undefined4 *)(glContext + 0x334c),
                (uint)*(ushort *)(glContext + 0x334a),0,width,0);
-    ((void (*)())_gleImagingScaleAndBias)(glContext,glContext + 0x3328,iVar1,(uint)*(ushort *)(glContext + 0x334a),0,height,0);
+    ((void (*)())_gleImagingScaleAndBias)(glContext,glContext + 0x3328,pixelBytesThenColumnFilterData,(uint)*(ushort *)(glContext + 0x334a),0,height,0);
     return;
   }
   *(undefined4 *)(glContext + 0x334c) = 0;

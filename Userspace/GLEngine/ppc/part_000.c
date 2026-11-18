@@ -1671,11 +1671,11 @@ int _gleInitializeContext(glContext)
 {
   int remaining2;
   int remaining;
-  undefined *puVar1;
+  undefined *globalsStructPtr;
   undefined4 *dstCursor;
   undefined2 *dstCursor2;
   int allocatedBlock;
-  int iVar5;
+  int allocStatusThenListHead;
   
   remaining = 0x13;
   *(undefined4 *)(glContext + 0x4730) = 0;
@@ -1687,31 +1687,31 @@ int _gleInitializeContext(glContext)
   *(undefined4 *)(glContext + 0x472c) = 0;
   do {
     *dstCursor = 0;
-    puVar1 = PTR__gle_globals_struct_00112070;
+    globalsStructPtr = PTR__gle_globals_struct_00112070;
     dstCursor = dstCursor + 1;
     remaining = remaining + -1;
   } while (remaining != 0);
   *(undefined1 *)(glContext + 0x7582) = *(undefined1 *)(*(int *)(glContext + 0x468c) + 0x25);
-  *(undefined **)(glContext + 0x4674) = puVar1;
+  *(undefined **)(glContext + 0x4674) = globalsStructPtr;
   *(undefined4 *)(glContext + 0x467c) = 0x3463a223;
   ((void (*)())_gleNullMemoryPointers)(glContext);
-  iVar5 = ((int (*)())_gleAllocVertexMachine)(glContext,0x24);
-  if ((iVar5 == 0) && (iVar5 = ((int (*)())_gleAllocMaterials)(glContext), iVar5 == 0)) {
+  allocStatusThenListHead = ((int (*)())_gleAllocVertexMachine)(glContext,0x24);
+  if ((allocStatusThenListHead == 0) && (allocStatusThenListHead = ((int (*)())_gleAllocMaterials)(glContext), allocStatusThenListHead == 0)) {
     ((void (*)())_gleShareEnableHashTable)(glContext);
-    iVar5 = glContext + 0x7468;
+    allocStatusThenListHead = glContext + 0x7468;
     *(undefined4 *)(glContext + 0x747c) = 0;
     *(undefined4 *)(glContext + 0x7478) = 0;
-    *(int *)(glContext + 0x7474) = iVar5;
-    *(int *)(glContext + 0x7470) = iVar5;
-    *(int *)(glContext + 0x746c) = iVar5;
-    *(int *)(glContext + 0x7468) = iVar5;
+    *(int *)(glContext + 0x7474) = allocStatusThenListHead;
+    *(int *)(glContext + 0x7470) = allocStatusThenListHead;
+    *(int *)(glContext + 0x746c) = allocStatusThenListHead;
+    *(int *)(glContext + 0x7468) = allocStatusThenListHead;
     *(undefined4 *)(glContext + 0x7454) = 0;
     *(undefined4 *)(glContext + 0x7464) = 0;
     *(undefined4 *)(glContext + 0x7458) = 0;
     *(undefined4 *)(glContext + 0x745c) = 0;
     *(undefined4 *)(glContext + 0x7460) = 0;
-    iVar5 = ((int (*)())_gleAllocVertexArrays)(glContext);
-    if ((iVar5 == 0) && (iVar5 = ((int (*)())_gleAllocFunctions)(glContext), iVar5 == 0)) {
+    allocStatusThenListHead = ((int (*)())_gleAllocVertexArrays)(glContext);
+    if ((allocStatusThenListHead == 0) && (allocStatusThenListHead = ((int (*)())_gleAllocFunctions)(glContext), allocStatusThenListHead == 0)) {
       ((void (*)())_gleInitConstants)(glContext);
       allocatedBlock = ((int (*)())_gleVecAlloc)(0x32c0);
       *(int *)(glContext + 0x4678) = allocatedBlock;
@@ -1751,7 +1751,7 @@ int _gleInitializeContext(glContext)
     }
   }
   _gleTerminateContext(glContext);
-  return iVar5;
+  return allocStatusThenListHead;
 }
 
 /* _gleNullMemoryPointers @ 0x3e94 (416 bytes) */
@@ -3020,11 +3020,11 @@ void _gleInitDerivedState(glContext)
   int remaining2;
   int remaining;
   float fVar1;
-  undefined *puVar2;
-  undefined *puVar3;
-  int iVar4;
+  undefined *vertexEval2FuncThenEyeInterpFuncThenClipInterpFunc;
+  undefined *vertexSubmitFunc;
+  int lightRecordCursor;
   undefined1 *dstCursor;
-  int iVar6;
+  int faceMaterialRecord;
   int glContextPtr4854;
   int *srcCursor;
   
@@ -3069,21 +3069,21 @@ void _gleInitDerivedState(glContext)
   *(undefined1 *)(glContext + 0x4fdc) = 0;
   do {
     remaining = remaining + -1;
-    iVar6 = *srcCursor;
+    faceMaterialRecord = *srcCursor;
     srcCursor = srcCursor + 1;
-    *(undefined4 *)(iVar6 + 500) = 0xbf800000;
-    *(undefined1 *)(iVar6 + 0x234) = 0x1f;
-    *(undefined1 *)(iVar6 + 0x235) = 0;
-    *(undefined1 *)(iVar6 + 0x236) = 0;
+    *(undefined4 *)(faceMaterialRecord + 500) = 0xbf800000;
+    *(undefined1 *)(faceMaterialRecord + 0x234) = 0x1f;
+    *(undefined1 *)(faceMaterialRecord + 0x235) = 0;
+    *(undefined1 *)(faceMaterialRecord + 0x236) = 0;
   } while (-1 < remaining);
   remaining3 = 8;
-  iVar4 = glContext;
+  lightRecordCursor = glContext;
   do {
-    *(undefined1 *)(iVar4 + 0x4ada) = 0;
-    *(undefined1 *)(iVar4 + 0x4adb) = 1;
-    *(undefined4 *)(iVar4 + 0x4a94) = 0xbf800000;
-    *(undefined4 *)(iVar4 + 0x4ad4) = 0x3f800000;
-    iVar4 = iVar4 + 0x6c;
+    *(undefined1 *)(lightRecordCursor + 0x4ada) = 0;
+    *(undefined1 *)(lightRecordCursor + 0x4adb) = 1;
+    *(undefined4 *)(lightRecordCursor + 0x4a94) = 0xbf800000;
+    *(undefined4 *)(lightRecordCursor + 0x4ad4) = 0x3f800000;
+    lightRecordCursor = lightRecordCursor + 0x6c;
     remaining3 = remaining3 + -1;
   } while (remaining3 != 0);
   *(undefined1 *)(glContext + 0x53e7) = 0;
@@ -3119,22 +3119,22 @@ void _gleInitDerivedState(glContext)
     *(undefined4 *)(dstCursor + -8) = 0;
     *(undefined4 *)(dstCursor + -4) = 0;
     *dstCursor = 0;
-    puVar2 = PTR__gleSetVertexEval2Func_00112068;
+    vertexEval2FuncThenEyeInterpFuncThenClipInterpFunc = PTR__gleSetVertexEval2Func_00112068;
     dstCursor = dstCursor + 0xc;
     remaining2 = remaining2 + -1;
   } while (remaining2 != 0);
   *(undefined **)(glContext + 0x4898) = PTR__gleSetVertexEval1Func_0011206c;
-  puVar3 = PTR__gleSetVertexSubmitFunc_0011242c;
-  *(undefined **)(glContext + 0x489c) = puVar2;
-  *(undefined **)(glContext + 0x4888) = puVar3;
-  puVar2 = PTR__gleSetEyeInterpFunc_0011203c;
+  vertexSubmitFunc = PTR__gleSetVertexSubmitFunc_0011242c;
+  *(undefined **)(glContext + 0x489c) = vertexEval2FuncThenEyeInterpFuncThenClipInterpFunc;
+  *(undefined **)(glContext + 0x4888) = vertexSubmitFunc;
+  vertexEval2FuncThenEyeInterpFuncThenClipInterpFunc = PTR__gleSetEyeInterpFunc_0011203c;
   *(undefined2 *)(glContext + 0x487e) = 0x7c;
-  *(undefined **)(glContext + 0x49c8) = puVar2;
-  puVar2 = PTR__gleSetClipInterpFunc_00112038;
+  *(undefined **)(glContext + 0x49c8) = vertexEval2FuncThenEyeInterpFuncThenClipInterpFunc;
+  vertexEval2FuncThenEyeInterpFuncThenClipInterpFunc = PTR__gleSetClipInterpFunc_00112038;
   fVar1 = FLOAT_00108e80;
   *(undefined4 *)(glContext + 0x4884) = *(undefined4 *)(glContext + 0xd8);
   *(undefined2 *)(glContext + 0x487c) = 0x100;
-  *(undefined **)(glContext + 0x49cc) = puVar2;
+  *(undefined **)(glContext + 0x49cc) = vertexEval2FuncThenEyeInterpFuncThenClipInterpFunc;
   *(float *)(glContext + 0x10c) = fVar1;
   *(undefined4 *)(glContext + 0x488c) = 0;
   *(undefined4 *)(glContext + 0x4890) = 0;

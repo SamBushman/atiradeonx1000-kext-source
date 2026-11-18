@@ -1,0 +1,10 @@
+local	_gleRenderSmoothLineLoopFunc_body	cVar2	glContextByte4a18	CONFIRMED	copy of the byte at ctx+0x4a18; (cVar2 == 0) is passed as the last argument of the flush call
+local	_gleRenderSmoothLineLoopFunc_body	puVar7	closingVertexSourceThenVertexCursor	CONFIRMED	batchStart-0x40 or batchStart selected by ctx+0x4a18 (source of the closing vertex copy), then the vertex cursor of the line-list loop starting at batchStart
+local	_gleRenderFlatLineStripFunc_body	cVar2	glContextByte4a18	CONFIRMED	copy of the byte at ctx+0x4a18; (cVar2 == 0) is passed as the last argument of the flush call
+local	_gleRenderFlatPolygonFunc_body	iVar7	texEnableBitsThenCullResultThenRemaining	CONFIRMED	_gleTexEnableBits result, then the _gleCullPolygonStack/_gleCullPolygonPtrStack results, then the countdown of the flip-colours loop
+local	_gleRenderFlatPolygonFunc_body	uVar9	computeClipCodes	CONFIRMED	0, or 1 after _gleClipPolyPlane produced the list; passed as the computeClipCodes argument of _gleClipPoly
+local	_glFinish_Exec	iVar6	rendererRecordCursor	CONFIRMED	glContext+0x10000, advanced by 0x2e0 per renderer; callbacks and handles are read at -0x777c and -0x7a54
+local	_glReadBuffer_Exec	iVar3	readFramebuffer	CONFIRMED	framebuffer object (ctx+0x744c) whose +200 receives the read buffer, or 0 when the window-system framebuffer is the read target (ctx+0x3118 receives it)
+local	_gleTextureImagePut_Fast	bVar1	typeOutOfRange	CONFIRMED	true when type is outside the packed-type range under test (0x8032-0x8036, then 0x86da-0x86db); false jumps to the accepted path
+local	_gleTextureImagePut_Fast	iVar2	levelComponentsThenRowPadding	CONFIRMED	_gleComponents of the level format, then levelRowComponents - components*width (destination row padding in components)
+local	_gleTextureImagePut_Fast	iVar3	levelPixelBytesThenSourceComponentsThenSourceRowComponents	CONFIRMED	_glePixelBytes of the level format/type, then _gleComponents(format), then that times width (source row components)

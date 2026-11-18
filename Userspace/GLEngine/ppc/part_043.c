@@ -154,15 +154,15 @@ void _gleFeedbackPolygon(glContext, firstVertex, vertexCount, polygonModeIndex)
   uint edgeStart;
   double intToDoubleBias;
   undefined4 lineToken;
-  uint uVar4;
+  uint polygonModeThenVertexEndThenLoopCursor;
   
   intToDoubleBias = DOUBLE_00108d70;
-  uVar4 = polygonModeIndex & 3;
+  polygonModeThenVertexEndThenLoopCursor = polygonModeIndex & 3;
   lineToken = 0x707;
-  if (uVar4 != 1) {
-    if (uVar4 == 0) {
-      uVar4 = firstVertex + vertexCount * 0x100;
-      for (; firstVertex < uVar4; firstVertex = firstVertex + 0x100) {
+  if (polygonModeThenVertexEndThenLoopCursor != 1) {
+    if (polygonModeThenVertexEndThenLoopCursor == 0) {
+      polygonModeThenVertexEndThenLoopCursor = firstVertex + vertexCount * 0x100;
+      for (; firstVertex < polygonModeThenVertexEndThenLoopCursor; firstVertex = firstVertex + 0x100) {
         if ((*(char *)(firstVertex + 0x7c) != '\0') && (*(char *)(firstVertex + 0x7d) == '\0')) {
           ((void (*)())_gleFeedbackToken)(glContext,(double)FLOAT_00108f28);
           _gleFeedbackHitRecord(glContext,firstVertex);
@@ -170,28 +170,28 @@ void _gleFeedbackPolygon(glContext, firstVertex, vertexCount, polygonModeIndex)
       }
       return;
     }
-    if (uVar4 == 2) {
+    if (polygonModeThenVertexEndThenLoopCursor == 2) {
       ((void (*)())_gleFeedbackToken)(glContext,(double)FLOAT_00108f30);
       ((void (*)())_gleFeedbackToken)(glContext,(double)(float)((double)CONCAT44(0x43300000,vertexCount ^ 0x80000000) -
                                                DOUBLE_00108d58));
-      uVar4 = firstVertex + vertexCount * 0x100;
-      for (; firstVertex < uVar4; firstVertex = firstVertex + 0x100) {
+      polygonModeThenVertexEndThenLoopCursor = firstVertex + vertexCount * 0x100;
+      for (; firstVertex < polygonModeThenVertexEndThenLoopCursor; firstVertex = firstVertex + 0x100) {
         _gleFeedbackHitRecord(glContext,firstVertex);
       }
       return;
     }
-    if (uVar4 != 3) {
+    if (polygonModeThenVertexEndThenLoopCursor != 3) {
       return;
     }
     lineToken = 0x702;
   }
-  uVar4 = firstVertex;
-  while (edgeStart = uVar4, edgeStart < (firstVertex + vertexCount * 0x100) - 0x100) {
-    uVar4 = edgeStart + 0x100;
+  polygonModeThenVertexEndThenLoopCursor = firstVertex;
+  while (edgeStart = polygonModeThenVertexEndThenLoopCursor, edgeStart < (firstVertex + vertexCount * 0x100) - 0x100) {
+    polygonModeThenVertexEndThenLoopCursor = edgeStart + 0x100;
     if (*(char *)(edgeStart + 0x7c) != '\0') {
       ((void (*)())_gleFeedbackToken)(glContext,(double)(float)((double)CONCAT44(0x43300000,lineToken) - intToDoubleBias));
       _gleFeedbackHitRecord(glContext,edgeStart);
-      _gleFeedbackHitRecord(glContext,uVar4);
+      _gleFeedbackHitRecord(glContext,polygonModeThenVertexEndThenLoopCursor);
       lineToken = 0x702;
     }
   }

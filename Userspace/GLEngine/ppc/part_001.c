@@ -5179,13 +5179,13 @@ int _glGetString_Exec(glContext, name)
 {
   undefined4 stringLength;
   char *cursor;
-  bool bVar1;
-  char cVar2;
+  bool nameMatches;
+  char copiedChar;
   undefined4 glErrorCode;
   undefined **cursor2;
-  char *pcVar5;
+  char *fxMatch;
   char *srcCursor;
-  char *pcVar6;
+  char *queriedString;
   char *dstCursor;
   uint loopIndex;
   
@@ -5202,12 +5202,12 @@ int _glGetString_Exec(glContext, name)
     do {
       cursor = *cursor2;
       cursor2 = cursor2 + 1;
-      cVar2 = *cursor;
-      while (cVar2 != '\0') {
-        *dstCursor = cVar2;
+      copiedChar = *cursor;
+      while (copiedChar != '\0') {
+        *dstCursor = copiedChar;
         dstCursor = dstCursor + 1;
         cursor = cursor + 1;
-        cVar2 = *cursor;
+        copiedChar = *cursor;
       }
       *dstCursor = ' ';
       dstCursor = dstCursor + 1;
@@ -5457,12 +5457,12 @@ int _glGetString_Exec(glContext, name)
           srcCursor = "GL_SGI_color_matrix";
         }
         if (srcCursor != (char *)0x0) {
-          cVar2 = *srcCursor;
-          while (cVar2 != '\0') {
-            *dstCursor = cVar2;
+          copiedChar = *srcCursor;
+          while (copiedChar != '\0') {
+            *dstCursor = copiedChar;
             dstCursor = dstCursor + 1;
             srcCursor = srcCursor + 1;
-            cVar2 = *srcCursor;
+            copiedChar = *srcCursor;
           }
           *dstCursor = ' ';
           dstCursor = dstCursor + 1;
@@ -5479,28 +5479,28 @@ LAB_000122ec:
   if (name < 0x1f04) {
     if (name == 0x1f01) {
       if (*(char *)(glContext + 0x7585) != '\0') {
-        pcVar6 = (char *)(**(code **)(glContext + 0x47bc))(*(undefined4 *)(glContext + 0x4688));
+        queriedString = (char *)(**(code **)(glContext + 0x47bc))(*(undefined4 *)(glContext + 0x4688));
         if (*(short *)((uint)*(byte *)(glContext + 0x85a8) * 0x2e0 + glContext + 0x888a) == 0x2402) {
-          return pcVar6;
+          return queriedString;
         }
-        pcVar5 = _strstr(pcVar6,"FX");
-        if (pcVar5 != (char *)0x0) {
-          stringLength = _strlen(pcVar6);
-          _memcpy(&_new_rend_str_0,pcVar6,stringLength);
-          (new_rend_str_0_byte1)[(int)pcVar5 - (int)pcVar6] = 0x78;
+        fxMatch = _strstr(queriedString,"FX");
+        if (fxMatch != (char *)0x0) {
+          stringLength = _strlen(queriedString);
+          _memcpy(&_new_rend_str_0,queriedString,stringLength);
+          (new_rend_str_0_byte1)[(int)fxMatch - (int)queriedString] = 0x78;
           return &_new_rend_str_0;
         }
-        return pcVar6;
+        return queriedString;
       }
       goto LAB_00011cf8;
     }
     if (0x1f01 < name) goto LAB_00011cf8;
-    bVar1 = name == 0x1f00;
+    nameMatches = name == 0x1f00;
 LAB_00011c44:
-    if (bVar1) {
+    if (nameMatches) {
 LAB_00011cf8:
-      pcVar6 = (char *)(**(code **)(glContext + 0x47bc))(*(undefined4 *)(glContext + 0x4688),name);
-      return pcVar6;
+      queriedString = (char *)(**(code **)(glContext + 0x47bc))(*(undefined4 *)(glContext + 0x4688),name);
+      return queriedString;
     }
   }
   else {
@@ -5508,7 +5508,7 @@ LAB_00011cf8:
       return *(char **)(glContext + 0x5418);
     }
     if (name < 0x8875) {
-      bVar1 = name == 0x1f04;
+      nameMatches = name == 0x1f04;
       goto LAB_00011c44;
     }
     if (name == 0x8b8c) {

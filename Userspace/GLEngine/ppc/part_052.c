@@ -1824,11 +1824,11 @@ void _gleRenderFlatPolygonFunc_body(glContext)
   bool twoSidedLighting;
   int *polygonListCursor;
   int *clipOutputList;
-  int iVar7;
+  int texEnableBitsThenCullResultThenRemaining;
   int polygonModeIndex;
   int lightFuncTableOffset;
   uint batchClipCodes;
-  undefined4 uVar9;
+  undefined4 computeClipCodes;
   code *drawPolygonFunc;
   int *spareList;
   char lightingPending;
@@ -1850,7 +1850,7 @@ void _gleRenderFlatPolygonFunc_body(glContext)
   int backFacing [3];
   
   backFacing[0] = 0;
-  iVar7 = _gleTexEnableBits(glContext);
+  texEnableBitsThenCullResultThenRemaining = _gleTexEnableBits(glContext);
   lightingPending = *(char *)(glContext + 0x30aa);
   twoSidedLighting = false;
   lightingEnabled = lightingPending != '\0';
@@ -1862,7 +1862,7 @@ void _gleRenderFlatPolygonFunc_body(glContext)
   polygonVertexCount = *(int *)(glContext + 0x4858) - (int)polygonVertices >> 8;
   if ((2 < polygonVertexCount) &&
      (batchClipCodes = (**(code **)(glContext + 0x5060))(glContext,polygonVertices,polygonVertexCount), (batchClipCodes & 0xff00) == 0)) {
-    texturingEnabled = iVar7 != 0;
+    texturingEnabled = texEnableBitsThenCullResultThenRemaining != 0;
     lastCalleeF1 = f1AfterCall;
     if ((texturingEnabled) && (*(char *)(glContext + 0x53e4) != '\0')) {
       lastCalleeF1 = (double)(**(double ( **)(int,int,int))(glContext + 0x53dc))(glContext, polygonVertices, polygonVertexCount);
@@ -1881,7 +1881,7 @@ void _gleRenderFlatPolygonFunc_body(glContext)
     }
     if (((batchClipCodes & 0xff) == 0) && (*(char *)(glContext + 0x4e18) == '\0')) {
       if ((faceTestNeeded != '\0') &&
-         (iVar7 = ((int (*)())_gleCullPolygonStack)(glContext,polygonVertices,polygonVertexCount,0,backFacing), iVar7 != 0)) {
+         (texEnableBitsThenCullResultThenRemaining = ((int (*)())_gleCullPolygonStack)(glContext,polygonVertices,polygonVertexCount,0,backFacing), texEnableBitsThenCullResultThenRemaining != 0)) {
         return;
       }
       if (texturingEnabled) {
@@ -1916,16 +1916,16 @@ void _gleRenderFlatPolygonFunc_body(glContext)
       polygonList = *(int **)(glContext + 0x4870);
       spareList = *(int **)(glContext + 0x4874);
       polygonListCursor = polygonList;
-      iVar7 = polygonVertexCount;
+      texEnableBitsThenCullResultThenRemaining = polygonVertexCount;
       if (0 < polygonVertexCount) {
         do {
           *polygonListCursor = (int)polygonVertices;
           polygonVertices = polygonVertices + 0x40;
-          iVar7 = iVar7 + -1;
+          texEnableBitsThenCullResultThenRemaining = texEnableBitsThenCullResultThenRemaining + -1;
           polygonListCursor = polygonListCursor + 1;
-        } while (iVar7 != 0);
+        } while (texEnableBitsThenCullResultThenRemaining != 0);
       }
-      uVar9 = 0;
+      computeClipCodes = 0;
       clipOutputList = spareList;
       if (*(char *)(glContext + 0x4e18) != '\0') {
         ((double (*)())_gleClipPolyPlane)(glContext,polygonList,polygonVertexCount,spareList,&clippedVertexCount,lastCalleeF1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,
@@ -1933,14 +1933,14 @@ void _gleRenderFlatPolygonFunc_body(glContext)
         if (clippedVertexCount == 0) {
           return;
         }
-        uVar9 = 1;
+        computeClipCodes = 1;
         clipOutputList = polygonList;
         polygonVertexCount = clippedVertexCount;
         polygonList = spareList;
       }
       polygonVertices = polygonList;
       if ((batchClipCodes & 0xff) != 0) {
-        _gleClipPoly(glContext,polygonList,polygonVertexCount,batchClipCodes & 0xff,clipOutputList,&clippedVertexCount,uVar9);
+        _gleClipPoly(glContext,polygonList,polygonVertexCount,batchClipCodes & 0xff,clipOutputList,&clippedVertexCount,computeClipCodes);
         if (clippedVertexCount == 0) {
           return;
         }
@@ -1950,7 +1950,7 @@ void _gleRenderFlatPolygonFunc_body(glContext)
         }
       }
       if ((faceTestNeeded != '\0') &&
-         (iVar7 = ((int (*)())_gleCullPolygonPtrStack)(glContext,polygonVertices,polygonVertexCount,backFacing), iVar7 != 0)) {
+         (texEnableBitsThenCullResultThenRemaining = ((int (*)())_gleCullPolygonPtrStack)(glContext,polygonVertices,polygonVertexCount,backFacing), texEnableBitsThenCullResultThenRemaining != 0)) {
         return;
       }
       if (lightingPending != '\0') {

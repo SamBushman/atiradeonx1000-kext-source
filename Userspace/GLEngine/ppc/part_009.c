@@ -17,7 +17,7 @@ void _glFinish_Exec(int glContext,double forwardedFloatArg1ThenCalleeResult,doub
   undefined4 incomingR6;
   undefined4 incomingR7;
   undefined4 incomingR8;
-  int iVar6;
+  int rendererRecordCursor;
   int matrixChangeBits;
   uint dispatchFlags;
   uint changeWord3;
@@ -117,13 +117,13 @@ LAB_00055708:
     loopIndex3 = 0;
     (**(code **)(glContext + 0x46f0))(*(undefined4 *)(glContext + 0x4688));
     if (*(char *)(glContext + 0x85a4) != '\0') {
-      iVar6 = glContext + 0x10000;
+      rendererRecordCursor = glContext + 0x10000;
       do {
         if (loopIndex3 != *(byte *)(glContext + 0x85a8)) {
-          (**(code **)(*(int *)(iVar6 + -0x777c) + 0x178))(*(undefined4 *)(iVar6 + -0x7a54));
+          (**(code **)(*(int *)(rendererRecordCursor + -0x777c) + 0x178))(*(undefined4 *)(rendererRecordCursor + -0x7a54));
         }
         loopIndex3 = loopIndex3 + 1;
-        iVar6 = iVar6 + 0x2e0;
+        rendererRecordCursor = rendererRecordCursor + 0x2e0;
       } while ((int)loopIndex3 < (int)(uint)*(byte *)(glContext + 0x85a4));
     }
   }

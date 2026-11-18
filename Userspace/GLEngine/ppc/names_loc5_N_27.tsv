@@ -1,0 +1,7 @@
+local	_gleFeedbackPolygon	uVar4	polygonModeThenVertexEndThenLoopCursor	CONFIRMED	polygonModeIndex&3 mode selector, then the end address of the vertex range (modes 0 and 2), then the line-loop vertex cursor/next vertex in the outline loop
+local	_gleCalculateOptions	uVar4	selectorWordThenSelectorSizeThenSourceComponentCount	CONFIRMED	16-bit selector word read from the function id, then its bits 6-7 (element size compared with the type code), then the source component count ((typeword>>14)+1) compared with the selector component count
+local	_glGetString_Exec	bVar1	nameMatches	CONFIRMED	true when name equals the enum under test (0x1f00, then 0x1f04)
+local	_glGetString_Exec	cVar2	copiedChar	CONFIRMED	character read from the source string and stored to the destination cursor until the terminator
+local	_glGetString_Exec	pcVar5	fxMatch	CONFIRMED	position of the substring "FX" inside the renderer string returned by the plugin
+local	_glGetString_Exec	pcVar6	queriedString	CONFIRMED	string returned by the plugin callback ctx+0x47bc; returned directly, or copied to patch "FX" to "x"
+local	_gleSeparableFilter2D	iVar1	pixelBytesThenColumnFilterData	CONFIRMED	_glePixelBytes(internalformat,0x1406) element size, then the address of the column filter data inside filterData (filterData + width*size)

@@ -930,12 +930,12 @@ void _gleRenderSmoothLineLoopFunc_body(glContext)
   int glContext;
 {
   bool texturingEnabled;
-  char cVar2;
+  char glContextByte4a18;
   int copyWordsLeft;
   short vertexStride;
   int texEnableBits;
   uint batchClipCodes;
-  uint *puVar7;
+  uint *closingVertexSourceThenVertexCursor;
   int batchEnd;
   int copyWordIndex;
   code *UNRECOVERED_JUMPTABLE;
@@ -956,16 +956,16 @@ void _gleRenderSmoothLineLoopFunc_body(glContext)
     if (vertexCount < 1) {
       return;
     }
-    puVar7 = batchStart + -0x40;
+    closingVertexSourceThenVertexCursor = batchStart + -0x40;
     if (*(char *)(glContext + 0x4a18) == '\0') {
-      puVar7 = batchStart;
+      closingVertexSourceThenVertexCursor = batchStart;
     }
     vertexStride = *(short *)(glContext + 0x487c);
     copyWordIndex = 0;
     copyWordsLeft = (int)vertexStride >> 3;
     if (0 < copyWordsLeft) {
       do {
-        *(undefined8 *)(copyWordIndex * 8 + batchEnd) = *(undefined8 *)(puVar7 + copyWordIndex * 2);
+        *(undefined8 *)(copyWordIndex * 8 + batchEnd) = *(undefined8 *)(closingVertexSourceThenVertexCursor + copyWordIndex * 2);
         copyWordsLeft = copyWordsLeft + -1;
         copyWordIndex = copyWordIndex + 1;
       } while (copyWordsLeft != 0);
@@ -999,7 +999,7 @@ void _gleRenderSmoothLineLoopFunc_body(glContext)
     if (*(char *)(glContext + 0x30aa) != '\0') {
       (**(code **)(glContext + 0x4de8))(glContext,batchStart,vertexCount);
     }
-    cVar2 = *(char *)(glContext + 0x4a18);
+    glContextByte4a18 = *(char *)(glContext + 0x4a18);
     UNRECOVERED_JUMPTABLE = *(code **)(glContext + 0x46b8);
     polygonList = batchStart;
   }
@@ -1012,15 +1012,15 @@ void _gleRenderSmoothLineLoopFunc_body(glContext)
     }
     polygonList = *(uint **)(glContext + 0x4870);
     copyDestination = *(uint *)(glContext + 0x4858);
-    puVar7 = batchStart;
+    closingVertexSourceThenVertexCursor = batchStart;
     listCursor = polygonList;
-    while (puVar7 < batchStart + vertexCount * 0x40 + -0x40) {
-      *listCursor = (uint)puVar7;
-      _memcpy(copyDestination,puVar7 + 0x40,0x100);
+    while (closingVertexSourceThenVertexCursor < batchStart + vertexCount * 0x40 + -0x40) {
+      *listCursor = (uint)closingVertexSourceThenVertexCursor;
+      _memcpy(copyDestination,closingVertexSourceThenVertexCursor + 0x40,0x100);
       listCursor[1] = copyDestination;
       copyDestination = copyDestination + 0x100;
       listCursor = listCursor + 2;
-      puVar7 = puVar7 + 0x40;
+      closingVertexSourceThenVertexCursor = closingVertexSourceThenVertexCursor + 0x40;
       lastCalleeF1 = f1AfterCall1;
     }
     vertexCount = (int)listCursor - (int)polygonList >> 2;
@@ -1035,12 +1035,12 @@ void _gleRenderSmoothLineLoopFunc_body(glContext)
     if (*(char *)(glContext + 0x30aa) != '\0') {
       (**(code **)(glContext + 0x4df0))(glContext,polygonList,vertexCount);
     }
-    cVar2 = *(char *)(glContext + 0x4a18);
+    glContextByte4a18 = *(char *)(glContext + 0x4a18);
     UNRECOVERED_JUMPTABLE = *(code **)(glContext + 0x46dc);
   }
                     
                     
-  (*UNRECOVERED_JUMPTABLE)(*(undefined4 *)(glContext + 0x4688),polygonList,vertexCount,cVar2 == '\0');
+  (*UNRECOVERED_JUMPTABLE)(*(undefined4 *)(glContext + 0x4688),polygonList,vertexCount,glContextByte4a18 == '\0');
   return;
 }
 
@@ -1135,7 +1135,7 @@ void _gleRenderFlatLineStripFunc_body(glContext)
   int glContext;
 {
   bool texturingEnabled;
-  char cVar2;
+  char glContextByte4a18;
   uint *sourceVertex;
   int texEnableBits;
   uint batchClipCodes;
@@ -1177,7 +1177,7 @@ void _gleRenderFlatLineStripFunc_body(glContext)
     if (*(char *)(glContext + 0x30aa) != '\0') {
       (**(code **)(glContext + 0x4de8))(glContext,vertexArrayThenLightCursor + 0x40,vertexCount + -1);
     }
-    cVar2 = *(char *)(glContext + 0x4a18);
+    glContextByte4a18 = *(char *)(glContext + 0x4a18);
     UNRECOVERED_JUMPTABLE = *(code **)(glContext + 0x46b8);
     polygonList = vertexArrayThenLightCursor;
   }
@@ -1215,12 +1215,12 @@ void _gleRenderFlatLineStripFunc_body(glContext)
         (**(code **)(glContext + 0x4df0))(glContext,vertexArrayThenLightCursor,1);
       }
     }
-    cVar2 = *(char *)(glContext + 0x4a18);
+    glContextByte4a18 = *(char *)(glContext + 0x4a18);
     UNRECOVERED_JUMPTABLE = *(code **)(glContext + 0x46dc);
   }
                     
                     
-  (*UNRECOVERED_JUMPTABLE)(*(undefined4 *)(glContext + 0x4688),polygonList,vertexCount,cVar2 == '\0');
+  (*UNRECOVERED_JUMPTABLE)(*(undefined4 *)(glContext + 0x4688),polygonList,vertexCount,glContextByte4a18 == '\0');
   return;
 }
 
@@ -2027,14 +2027,14 @@ int _gleCompileClippedVertexArray(glContext)
   int cursorByteOffset;
   undefined4 *interpCacheTail;
   undefined4 *compileCacheTail;
-  int iVar10;
+  int nextElementIndexThenBufferAddress;
   int indexArrayBase;
   int *interpCacheHead;
   int *compileNodePrev;
   int *interpNodePrev;
-  undefined4 uVar13;
+  undefined4 lastBufferAddress;
   undefined4 releaseResult;
-  int iVar14;
+  int glContextThenCalleeResult;
   int vertexCount;
   uint vertexStride;
   int oldBuffer;
@@ -2046,10 +2046,10 @@ int _gleCompileClippedVertexArray(glContext)
   int requestedSize [4];
   
   oldBuffer = 0;
-  iVar14 = glContext;
+  glContextThenCalleeResult = glContext;
   if (*(int *)(glContext + 0x49ac) != 0) {
     vertexCount = *(int *)(glContext + 0x4988);
-    uVar13 = *(undefined4 *)(glContext + 0x49a4);
+    lastBufferAddress = *(undefined4 *)(glContext + 0x49a4);
     cachedStride = *(ushort *)(glContext + 0x4990);
     formatFlagsThenCompileKey = *(uint *)(glContext + 0x4980);
     if (*(short *)(glContext + 0x4992) == 0) {
@@ -2070,9 +2070,9 @@ int _gleCompileClippedVertexArray(glContext)
       cursorByteOffset = (int)indexCursor - indexArrayBase;
     }
     interpKey = formatFlagsThenCompileKey & 0xffff;
-    iVar10 = *(int *)(glContext + 0x4994) + (cursorByteOffset >> 2) + 1;
+    nextElementIndexThenBufferAddress = *(int *)(glContext + 0x4994) + (cursorByteOffset >> 2) + 1;
     if (interpKey == formatFlagsThenCompileKey >> 0x10) {
-      remainingCapacity = *(int *)(glContext + 0x4998) - iVar10;
+      remainingCapacity = *(int *)(glContext + 0x4998) - nextElementIndexThenBufferAddress;
       vertexStride = (uint)cachedStride;
     }
     else {
@@ -2135,19 +2135,19 @@ LAB_000daa98:
     requestedSize[0] = vertexCount * 2 + 0x12;
     if (requestedSize[0] < remainingCapacity) {
       skipBufferRelease = true;
-      *(int *)(glContext + 0x4994) = iVar10;
-      iVar10 = *(int *)(glContext + 0x49a8) + iVar10 * vertexStride;
+      *(int *)(glContext + 0x4994) = nextElementIndexThenBufferAddress;
+      nextElementIndexThenBufferAddress = *(int *)(glContext + 0x49a8) + nextElementIndexThenBufferAddress * vertexStride;
     }
     else {
       oldBuffer = *(int *)(glContext + 0x49a8);
       skipBufferRelease = oldBuffer == 0;
       if (!skipBufferRelease) {
-        (**(code **)(glContext + 0x47c8))(*(undefined4 *)(glContext + 0x4688),oldBuffer,iVar10);
+        (**(code **)(glContext + 0x47c8))(*(undefined4 *)(glContext + 0x4688),oldBuffer,nextElementIndexThenBufferAddress);
       }
-      iVar10 = (**(code **)(glContext + 0x47c4))
+      nextElementIndexThenBufferAddress = (**(code **)(glContext + 0x47c4))
                          (*(undefined4 *)(glContext + 0x4688),*(undefined4 *)(glContext + 0x498c),
                           requestedSize);
-      if (iVar10 == 0) {
+      if (nextElementIndexThenBufferAddress == 0) {
         *(uint *)(glContext + 0x4980) = interpKey;
         *(undefined4 *)(glContext + 0x4998) = 0;
         *(undefined4 *)(glContext + 0x4994) = 0;
@@ -2161,9 +2161,9 @@ LAB_000daa98:
       }
       *(undefined4 *)(glContext + 0x4994) = 0;
       *(int *)(glContext + 0x4998) = requestedSize[0];
-      *(int *)(glContext + 0x49a8) = iVar10;
+      *(int *)(glContext + 0x49a8) = nextElementIndexThenBufferAddress;
     }
-    *(int *)(glContext + 0x49a4) = iVar10;
+    *(int *)(glContext + 0x49a4) = nextElementIndexThenBufferAddress;
     newIndexCursor = (int *)(*(int *)(glContext + 0x49a0) + vertexCount * 4);
     if (newIndexCursor <= indexCursor) {
       fillCount = (uint)((int)indexCursor + (4 - (int)newIndexCursor)) >> 2;
@@ -2222,13 +2222,13 @@ LAB_000daa98:
       compiledFunc = (code *)_gleBuildCompileFuncAV(glContext,formatFlagsThenCompileKey);
     }
 LAB_000dacc0:
-    iVar14 = (*compiledFunc)(glContext,iVar10,uVar13,vertexStride,(uint)cachedStride);
+    glContextThenCalleeResult = (*compiledFunc)(glContext,nextElementIndexThenBufferAddress,lastBufferAddress,vertexStride,(uint)cachedStride);
     *(uint *)(glContext + 0x497c) = ~*(uint *)(glContext + 0x4980) & 0x1f;
     if (!skipBufferRelease) {
-      iVar14 = (**(code **)(glContext + 0x47cc))(*(undefined4 *)(glContext + 0x4688),oldBuffer);
+      glContextThenCalleeResult = (**(code **)(glContext + 0x47cc))(*(undefined4 *)(glContext + 0x4688),oldBuffer);
     }
   }
-  return iVar14;
+  return glContextThenCalleeResult;
 }
 
 /* _gleCompileVertexArray @ 0xdad24 (20 bytes) */
