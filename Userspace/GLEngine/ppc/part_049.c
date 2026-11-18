@@ -815,36 +815,36 @@ void _gleModifyPixelStencil(glContext, pixel, unusedArg3, unusedArg4, unusedArg5
 {
   uint rightShiftCount;
   uint fractionCarryBits;
-  uint uVar2;
+  uint indexShiftThenCarryBits;
   uint indexInteger;
   int stencilValue;
   uint indexFraction;
   
-  uVar2 = *(uint *)(glContext + 0x3214);
+  indexShiftThenCarryBits = *(uint *)(glContext + 0x3214);
   indexFraction = *(uint *)(pixel + 0x1c);
   indexInteger = *(uint *)(pixel + 0x18);
-  if ((int)uVar2 < 1) {
-    if ((int)uVar2 < 0) {
-      rightShiftCount = -uVar2;
+  if ((int)indexShiftThenCarryBits < 1) {
+    if ((int)indexShiftThenCarryBits < 0) {
+      rightShiftCount = -indexShiftThenCarryBits;
       if ((int)rightShiftCount < 0xf) {
-        uVar2 = indexInteger << (uVar2 + 0xf & 0x3f);
+        indexShiftThenCarryBits = indexInteger << (indexShiftThenCarryBits + 0xf & 0x3f);
       }
       else {
-        uVar2 = (int)indexInteger >> (rightShiftCount - 0xf & 0x3f);
+        indexShiftThenCarryBits = (int)indexInteger >> (rightShiftCount - 0xf & 0x3f);
       }
       indexInteger = (int)indexInteger >> (rightShiftCount & 0x3f);
-      indexFraction = ((int)indexFraction >> (rightShiftCount & 0x3f) | uVar2) & 0x7fff;
+      indexFraction = ((int)indexFraction >> (rightShiftCount & 0x3f) | indexShiftThenCarryBits) & 0x7fff;
     }
   }
   else {
-    if ((int)uVar2 < 0xf) {
-      fractionCarryBits = (int)indexFraction >> (0xf - uVar2 & 0x3f);
+    if ((int)indexShiftThenCarryBits < 0xf) {
+      fractionCarryBits = (int)indexFraction >> (0xf - indexShiftThenCarryBits & 0x3f);
     }
     else {
-      fractionCarryBits = indexFraction << (uVar2 - 0xf & 0x3f);
+      fractionCarryBits = indexFraction << (indexShiftThenCarryBits - 0xf & 0x3f);
     }
-    indexInteger = indexInteger << (uVar2 & 0x3f) | fractionCarryBits;
-    indexFraction = indexFraction << (uVar2 & 0x3f);
+    indexInteger = indexInteger << (indexShiftThenCarryBits & 0x3f) | fractionCarryBits;
+    indexFraction = indexFraction << (indexShiftThenCarryBits & 0x3f);
   }
   stencilValue = indexInteger + *(int *)(glContext + 0x3210);
   if ((*(uint *)(glContext + 0x3414) & 2) != 0) {

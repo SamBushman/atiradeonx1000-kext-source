@@ -1491,7 +1491,7 @@ LAB_000ce630:
 }
 
 /* _gleCheckFramebufferStatus @ 0xce664 (1200 bytes) */
-int _gleCheckFramebufferStatus(int glContext,int framebufferRecord,int *param_3,undefined4 forwardedArg4,undefined4 forwardedArg5,undefined4 forwardedArg6,undefined4 forwardedArg7,double forwardedFloatArg1,double floatArg2,double floatArg3,double floatArg4,double floatArg5,double floatArg6,double floatArg7,double floatArg8)
+int _gleCheckFramebufferStatus(int glContext,int framebufferRecord,int *forwardedArg3ThenClearCursor,undefined4 forwardedArg4,undefined4 forwardedArg5,undefined4 forwardedArg6,undefined4 forwardedArg7,double forwardedFloatArg1,double floatArg2,double floatArg3,double floatArg4,double floatArg5,double floatArg6,double floatArg7,double floatArg8)
 {
   bool rendererInfoByte79Clear;
   bool stateClean;
@@ -1514,7 +1514,7 @@ int _gleCheckFramebufferStatus(int glContext,int framebufferRecord,int *param_3,
   double f1AfterCall4;
   
   if (*(int *)(framebufferRecord + 0xdc) != 0) {
-    ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferRecord,param_3,forwardedArg4,forwardedArg5,forwardedArg6,forwardedArg7,forwardedFloatArg1,floatArg2,floatArg3,
+    ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferRecord,forwardedArg3ThenClearCursor,forwardedArg4,forwardedArg5,forwardedArg6,forwardedArg7,forwardedFloatArg1,floatArg2,floatArg3,
                floatArg4,floatArg5,floatArg6,floatArg7,floatArg8);
     forwardedFloatArg1 = forwardedFloatArg1;
   }
@@ -1531,7 +1531,7 @@ int _gleCheckFramebufferStatus(int glContext,int framebufferRecord,int *param_3,
     dirtyFlagWords = (int *)(glContext + 0x310);
     rendererInfoByte79 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
     if ((framebufferObject != 0) && (*(int *)(framebufferObject + 0xec) != 0)) {
-      ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,param_3,forwardedArg4,forwardedArg5,forwardedArg6,matrixFuncDirty,forwardedFloatArg1,floatArg2,
+      ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,forwardedArg3ThenClearCursor,forwardedArg4,forwardedArg5,forwardedArg6,matrixFuncDirty,forwardedFloatArg1,floatArg2,
                  floatArg3,floatArg4,floatArg5,floatArg6,floatArg7,floatArg8);
       *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000000;
       forwardedFloatArg1 = forwardedFloatArg1;
@@ -1599,11 +1599,11 @@ LAB_000ce7a4:
       }
     }
     clearIndex = 0;
-    param_3 = dirtyFlagWords;
+    forwardedArg3ThenClearCursor = dirtyFlagWords;
     do {
       clearIndex = clearIndex + 1;
-      *param_3 = 0;
-      param_3 = param_3 + 1;
+      *forwardedArg3ThenClearCursor = 0;
+      forwardedArg3ThenClearCursor = forwardedArg3ThenClearCursor + 1;
     } while (clearIndex < 0x13);
   }
   if (-1 < *(int *)((uint)*(byte *)(glContext + 0x85a8) * 0x20 + framebufferRecord + 0xfc)) goto LAB_000cead8;
@@ -1617,7 +1617,7 @@ LAB_000ce7a4:
   dirtyFlagWords = (int *)(glContext + 0x310);
   rendererInfoByte79 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
   if ((framebufferObject != 0) && (*(int *)(framebufferObject + 0xec) != 0)) {
-    ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,param_3,forwardedArg4,forwardedArg5,forwardedArg6,matrixFuncDirty,forwardedFloatArg1,floatArg2,floatArg3
+    ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,forwardedArg3ThenClearCursor,forwardedArg4,forwardedArg5,forwardedArg6,matrixFuncDirty,forwardedFloatArg1,floatArg2,floatArg3
                ,floatArg4,floatArg5,floatArg6,floatArg7,floatArg8);
     *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000000;
   }

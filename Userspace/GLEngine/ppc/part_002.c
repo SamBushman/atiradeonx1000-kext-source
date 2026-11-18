@@ -2050,20 +2050,20 @@ int _gleCheckTexSubImageArgs(glContext, level, format, type)
   uint format;
   uint type;
 {
-  bool bVar1;
+  bool formatTypeTestResult;
   uint requiredFormat;
   undefined4 glErrorCode;
   
   if (type < 0x8365) {
     if (0x8361 < type) {
 LAB_00019314:
-      bVar1 = format == 0x1907;
+      formatTypeTestResult = format == 0x1907;
       goto LAB_0001933c;
     }
     if (type == 0x1a00) {
-      bVar1 = format == 0x1900;
+      formatTypeTestResult = format == 0x1900;
 LAB_00019368:
-      if (bVar1) goto LAB_00019380;
+      if (formatTypeTestResult) goto LAB_00019380;
 LAB_0001936c:
       if (*(int *)(glContext + 0x7574) != 0) {
         return 0;
@@ -2074,7 +2074,7 @@ LAB_0001936c:
     if (0x1a00 < type) {
       if (type == 0x8032) goto LAB_00019314;
       if (0x8031 < type) {
-        bVar1 = 0x8036 < type;
+        formatTypeTestResult = 0x8036 < type;
         goto LAB_000192a0;
       }
       goto LAB_0001936c;
@@ -2084,9 +2084,9 @@ LAB_0001936c:
       if (format < 0x8001) {
         if (format != 0x1900) {
           if (0x18ff < format) {
-            bVar1 = 8 < format - 0x1902;
+            formatTypeTestResult = 8 < format - 0x1902;
 LAB_0001930c:
-            if (!bVar1) goto LAB_00019380;
+            if (!formatTypeTestResult) goto LAB_00019380;
           }
           goto LAB_0001936c;
         }
@@ -2094,7 +2094,7 @@ LAB_0001930c:
       else {
         if (format < 0x80e0) goto LAB_0001936c;
         if (0x80e1 < format) {
-          bVar1 = 3 < format - 0x86f4;
+          formatTypeTestResult = 3 < format - 0x86f4;
           goto LAB_0001930c;
         }
       }
@@ -2103,24 +2103,24 @@ LAB_0001930c:
   else {
     if (0x85bb < type) {
       if (type - 0x86da < 2) {
-        bVar1 = format == 0x86f7;
+        formatTypeTestResult = format == 0x86f7;
         goto LAB_00019368;
       }
       goto LAB_0001936c;
     }
     if (type < 0x85ba) {
-      bVar1 = 0x8368 < type;
+      formatTypeTestResult = 0x8368 < type;
 LAB_000192a0:
-      if (bVar1) goto LAB_0001936c;
+      if (formatTypeTestResult) goto LAB_0001936c;
       if (format == 0x1908) goto LAB_00019380;
       requiredFormat = 0x80e1;
     }
     else {
       requiredFormat = 0x85b9;
     }
-    bVar1 = format == requiredFormat;
+    formatTypeTestResult = format == requiredFormat;
 LAB_0001933c:
-    if (!bVar1) {
+    if (!formatTypeTestResult) {
       if (*(int *)(glContext + 0x7574) != 0) {
         return 0;
       }

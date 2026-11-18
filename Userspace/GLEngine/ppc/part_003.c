@@ -2705,23 +2705,23 @@ int _gleBindPipelineProgram(glContext, pipelineStageIndex, program)
   int stageStateOffset;
   int loopIndex;
   undefined4 *dstCursor;
-  int iVar12;
+  int programHashThenStageOffsetThenCountThenRefCount;
   int previousProgramObject;
   int programRecord;
   
-  iVar12 = *(int *)(glContext + 0x5148) + 0x4010;
+  programHashThenStageOffsetThenCountThenRefCount = *(int *)(glContext + 0x5148) + 0x4010;
   if (program == 0) {
-    iVar12 = pipelineStageIndex * 4;
-    programObject = *(int *)(iVar12 + glContext + 0x5428);
+    programHashThenStageOffsetThenCountThenRefCount = pipelineStageIndex * 4;
+    programObject = *(int *)(programHashThenStageOffsetThenCountThenRefCount + glContext + 0x5428);
     programRecord = programObject + 0x10;
   }
   else {
-    programObject = _gleLookupHashObject(iVar12,program);
+    programObject = _gleLookupHashObject(programHashThenStageOffsetThenCountThenRefCount,program);
     if (programObject == 0) {
       programObject = _gleCreatePipelineProgramObject(glContext,pipelineStageIndex,program);
       programRecord = programObject + 0x10;
       _gleCreatePluginPipelineProgram(glContext,programRecord);
-      _gleAddHashNameAndObject(glContext,iVar12,programObject);
+      _gleAddHashNameAndObject(glContext,programHashThenStageOffsetThenCountThenRefCount,programObject);
     }
     else {
       if (*(ushort *)(programObject + 0x4ca) != pipelineStageIndex) {
@@ -2733,15 +2733,15 @@ int _gleBindPipelineProgram(glContext, pipelineStageIndex, program)
       }
       programRecord = programObject + 0x10;
     }
-    iVar12 = pipelineStageIndex << 2;
+    programHashThenStageOffsetThenCountThenRefCount = pipelineStageIndex << 2;
   }
   **(undefined1 **)(glContext + 0x5418) = 0;
   loopIndex2 = 0;
   *(undefined4 *)(glContext + 0x541c) = 0xffffffff;
   *(int *)(programObject + 8) = *(int *)(programObject + 8) + 1;
   glContextByte85a4 = *(char *)(glContext + 0x85a4);
-  previousProgramObject = *(int *)(iVar12 + glContext + 0x5420);
-  *(int *)(iVar12 + glContext + 0x5420) = programObject;
+  previousProgramObject = *(int *)(programHashThenStageOffsetThenCountThenRefCount + glContext + 0x5420);
+  *(int *)(programHashThenStageOffsetThenCountThenRefCount + glContext + 0x5420) = programObject;
   if (glContextByte85a4 != '\0') {
     srcCursor = (undefined4 *)(programObject + 0x4a8);
     dstCursor = (undefined4 *)(pipelineStageIndex * 4 + glContext + 0x886c);
@@ -2755,17 +2755,17 @@ int _gleBindPipelineProgram(glContext, pipelineStageIndex, program)
   }
   if (pipelineStageIndex == 0) {
     remaining = 9;
-    iVar12 = 5;
+    programHashThenStageOffsetThenCountThenRefCount = 5;
     newChangeWord = *(uint *)(glContext + 0x31c) | 0x400000;
   }
   else {
     if (pipelineStageIndex != 1) {
       remaining = 0;
-      iVar12 = 0;
+      programHashThenStageOffsetThenCountThenRefCount = 0;
       goto LAB_0002299c;
     }
     remaining = 5;
-    iVar12 = 0xe;
+    programHashThenStageOffsetThenCountThenRefCount = 0xe;
     newChangeWord = *(uint *)(glContext + 0x31c) | 0x1000000;
   }
   *(uint *)(glContext + 0x31c) = newChangeWord;
@@ -2779,22 +2779,22 @@ LAB_0002299c:
   loopIndex = 0;
   if (remaining != 0) {
     sharedState = *(int *)(glContext + 0x5148);
-    iVar12 = iVar12 * 4 + glContext;
+    programHashThenStageOffsetThenCountThenRefCount = programHashThenStageOffsetThenCountThenRefCount * 4 + glContext;
     do {
       wordOffset = loopIndex * 4;
       loopIndex = loopIndex + 1;
-      newChangeWord = *(uint *)(iVar12 + 0x310) |
+      newChangeWord = *(uint *)(programHashThenStageOffsetThenCountThenRefCount + 0x310) |
               *(uint *)(wordOffset + programRecord + 0x18) &
               (*(uint *)(wordOffset + sharedState + stageStateOffset + 0x8a74) | ~*(uint *)(wordOffset + previousProgramObject + 0x28));
-      *(uint *)(iVar12 + 0x310) = newChangeWord;
-      *(uint *)(iVar12 + 0x310) = newChangeWord & *(uint *)(wordOffset + programRecord + 0x18);
-      iVar12 = iVar12 + 4;
+      *(uint *)(programHashThenStageOffsetThenCountThenRefCount + 0x310) = newChangeWord;
+      *(uint *)(programHashThenStageOffsetThenCountThenRefCount + 0x310) = newChangeWord & *(uint *)(wordOffset + programRecord + 0x18);
+      programHashThenStageOffsetThenCountThenRefCount = programHashThenStageOffsetThenCountThenRefCount + 4;
       remaining = remaining + -1;
     } while (remaining != 0);
   }
-  iVar12 = *(int *)(previousProgramObject + 8) + -1;
-  *(int *)(previousProgramObject + 8) = iVar12;
-  if (iVar12 == 0) {
+  programHashThenStageOffsetThenCountThenRefCount = *(int *)(previousProgramObject + 8) + -1;
+  *(int *)(previousProgramObject + 8) = programHashThenStageOffsetThenCountThenRefCount;
+  if (programHashThenStageOffsetThenCountThenRefCount == 0) {
     _gleFreePipelineProgramObject(glContext,previousProgramObject);
   }
   _gleSelectVertexSubmitFunc(glContext);
