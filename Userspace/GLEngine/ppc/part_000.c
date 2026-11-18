@@ -518,25 +518,27 @@ int _glePreInitTOC()
 /* _glePreInitVectorTOC @ 0x1fcc (100 bytes) */
 void _glePreInitVectorTOC()
 {
-  undefined4 *puVar1;
-  undefined *puVar2;
+  undefined4 *vectorSlot10;
+  undefined4 *identityByteVector;
+  undefined4 *vectorSlot20;
+  undefined *tocStruct;
   
-  puVar2 = PTR__gle_rtc_toc_struct_0011205c;
-  puVar1 = (undefined4 *)((uint)(PTR__gle_rtc_toc_struct_0011205c + 0x10) & 0xfffffff0);
-  *puVar1 = 0x100004;
-  puVar1[1] = 0x10000;
-  puVar1[2] = 0x200008;
-  puVar1[3] = 0x20000;
-  puVar1 = (undefined4 *)((uint)(puVar2 + 0x20) & 0xfffffff0);
-  *puVar1 = 0x40;
-  puVar1[1] = 0x80;
-  puVar1[2] = 0;
-  puVar1[3] = 0;
-  puVar1 = (undefined4 *)((uint)puVar2 & 0xfffffff0);
-  *puVar1 = 0x3020100;
-  puVar1[1] = 0x7060504;
-  puVar1[2] = 0xb0a0908;
-  puVar1[3] = 0xf0e0d0c;
+  tocStruct = PTR__gle_rtc_toc_struct_0011205c;
+  vectorSlot10 = (undefined4 *)((uint)(PTR__gle_rtc_toc_struct_0011205c + 0x10) & 0xfffffff0);
+  *vectorSlot10 = 0x100004;
+  vectorSlot10[1] = 0x10000;
+  vectorSlot10[2] = 0x200008;
+  vectorSlot10[3] = 0x20000;
+  vectorSlot20 = (undefined4 *)((uint)(tocStruct + 0x20) & 0xfffffff0);
+  *vectorSlot20 = 0x40;
+  vectorSlot20[1] = 0x80;
+  vectorSlot20[2] = 0;
+  vectorSlot20[3] = 0;
+  identityByteVector = (undefined4 *)((uint)tocStruct & 0xfffffff0);
+  *identityByteVector = 0x3020100;
+  identityByteVector[1] = 0x7060504;
+  identityByteVector[2] = 0xb0a0908;
+  identityByteVector[3] = 0xf0e0d0c;
   return;
 }
 
@@ -1765,7 +1767,9 @@ void _gleNullMemoryPointers(glContext)
   int remaining2;
   int remaining;
   undefined4 *dstCursor;
-  int iVar2;
+  int pointerPairCursor;
+  int rendererRecordCursor;
+  int slotRecordCursor;
   int loopIndex2;
   int remaining5;
   
@@ -1794,30 +1798,30 @@ void _gleNullMemoryPointers(glContext)
   *(undefined4 *)(glContext + 0x48b8) = 0;
   *(undefined4 *)(glContext + 0x49d0) = 0;
   *(undefined4 *)(glContext + 0x49d8) = 0;
-  iVar2 = glContext;
+  pointerPairCursor = glContext;
   do {
-    *(undefined4 *)(iVar2 + 0x5420) = 0;
-    *(undefined4 *)(iVar2 + 0x5428) = 0;
-    iVar2 = iVar2 + 4;
-  } while (iVar2 <= glContext + 4);
-  iVar2 = glContext + 0x10000;
+    *(undefined4 *)(pointerPairCursor + 0x5420) = 0;
+    *(undefined4 *)(pointerPairCursor + 0x5428) = 0;
+    pointerPairCursor = pointerPairCursor + 4;
+  } while (pointerPairCursor <= glContext + 4);
+  rendererRecordCursor = glContext + 0x10000;
   loopIndex2 = 0;
   *(undefined4 *)(glContext + 0x5430) = 0;
   if (*(char *)(glContext + 0x85a4) != '\0') {
     do {
-      *(undefined4 *)(iVar2 + -0x7788) = 0;
+      *(undefined4 *)(rendererRecordCursor + -0x7788) = 0;
       loopIndex2 = loopIndex2 + 1;
-      *(undefined4 *)(iVar2 + -0x7784) = 0;
-      iVar2 = iVar2 + 0x2e0;
+      *(undefined4 *)(rendererRecordCursor + -0x7784) = 0;
+      rendererRecordCursor = rendererRecordCursor + 0x2e0;
     } while (loopIndex2 < (int)(uint)*(byte *)(glContext + 0x85a4));
   }
   loopIndex3 = 0;
   *(undefined4 *)(glContext + 0x7484) = 0;
   *(undefined4 *)(glContext + 0x4a60) = 0;
   *(undefined4 *)(glContext + 0x4a64) = 0;
-  iVar2 = glContext;
+  slotRecordCursor = glContext;
   do {
-    dstCursor = (undefined4 *)(iVar2 + 0x5154);
+    dstCursor = (undefined4 *)(slotRecordCursor + 0x5154);
     remaining5 = 5;
     do {
       *dstCursor = 0;
@@ -1825,7 +1829,7 @@ void _gleNullMemoryPointers(glContext)
       remaining5 = remaining5 + -1;
     } while (remaining5 != 0);
     loopIndex3 = loopIndex3 + 1;
-    iVar2 = iVar2 + 0x14;
+    slotRecordCursor = slotRecordCursor + 0x14;
   } while (loopIndex3 < 0x10);
   remaining2 = 0x10;
   dstCursor = (undefined4 *)(glContext + 0x52d4);
@@ -1835,19 +1839,19 @@ void _gleNullMemoryPointers(glContext)
     remaining2 = remaining2 + -1;
   } while (remaining2 != 0);
   remaining3 = 3;
-  iVar2 = glContext + 0x52b0;
+  pointerPairCursor = glContext + 0x52b0;
   do {
-    *(undefined4 *)(iVar2 + 0xc) = 0;
-    *(undefined4 *)(iVar2 + 0x18) = 0;
-    iVar2 = iVar2 + 4;
+    *(undefined4 *)(pointerPairCursor + 0xc) = 0;
+    *(undefined4 *)(pointerPairCursor + 0x18) = 0;
+    pointerPairCursor = pointerPairCursor + 4;
     remaining3 = remaining3 + -1;
   } while (remaining3 != 0);
   remaining4 = 5;
-  iVar2 = glContext;
+  pointerPairCursor = glContext;
   do {
-    *(undefined4 *)(iVar2 + 0x5294) = 0;
-    *(undefined4 *)(iVar2 + 0x52a8) = 0;
-    iVar2 = iVar2 + 4;
+    *(undefined4 *)(pointerPairCursor + 0x5294) = 0;
+    *(undefined4 *)(pointerPairCursor + 0x52a8) = 0;
+    pointerPairCursor = pointerPairCursor + 4;
     remaining4 = remaining4 + -1;
   } while (remaining4 != 0);
   loopIndex = 0;

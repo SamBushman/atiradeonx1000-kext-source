@@ -658,7 +658,7 @@ void _glDrawBuffer_Exec(glContext, mode, unusedArg3, unusedArg4, unusedArg5, unu
   int remaining;
   bool bVar1;
   char cVar2;
-  int iVar3;
+  int slotByteOffset;
   undefined4 glErrorCode;
   undefined2 *dstCursor;
   int framebufferObject;
@@ -749,9 +749,9 @@ LAB_00063184:
           remaining2 = 3;
           loopIndex = 1;
           do {
-            iVar3 = loopIndex * 2;
+            slotByteOffset = loopIndex * 2;
             loopIndex = loopIndex + 1;
-            *(undefined2 *)(iVar3 + *(int *)(glContext + 0x744c) + 0xc0) = 0;
+            *(undefined2 *)(slotByteOffset + *(int *)(glContext + 0x744c) + 0xc0) = 0;
             remaining2 = remaining2 + -1;
           } while (remaining2 != 0);
           *(undefined4 *)(*(int *)(glContext + 0x744c) + 0xec) = 1;

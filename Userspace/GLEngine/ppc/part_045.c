@@ -3081,19 +3081,19 @@ switchD_000db0a0_default:
 }
 
 /* _gleExecuteVertexArray @ 0xdc08c (20 bytes) */
-void _gleExecuteVertexArray(glContext, param_2, param_3, param_4, param_5, param_6)
+void _gleExecuteVertexArray(glContext, mode, first, count, indexType, indices)
   int glContext;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
+  undefined4 mode;
+  undefined4 first;
+  undefined4 count;
+  undefined4 indexType;
+  undefined4 indices;
 {
   if (*(char *)(glContext + 0x7580) != '\0') {
-    ((void (*)())_gleExecuteTCLVertexArray)(glContext,param_2,param_3,param_4,param_5,param_6);
+    ((void (*)())_gleExecuteTCLVertexArray)(glContext,mode,first,count,indexType,indices);
     return;
   }
-  ((int (*)())_gleExecuteClippedVertexArray)(glContext,param_2,param_3,param_4,param_5,param_6);
+  ((int (*)())_gleExecuteClippedVertexArray)(glContext,mode,first,count,indexType,indices);
   return;
 }
 

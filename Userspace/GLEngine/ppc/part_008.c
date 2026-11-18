@@ -1432,16 +1432,16 @@ LAB_00050ddc: ;
 }
 
 /* _gleSetProjectionFuncAll @ 0x50e04 (104 bytes) */
-void _gleSetProjectionFuncAll(param_1, forwardedArg2, forwardedArg3)
-  int param_1;
+void _gleSetProjectionFuncAll(glContext, forwardedArg2, forwardedArg3)
+  int glContext;
   undefined4 forwardedArg2;
   undefined4 forwardedArg3;
 {
-  code *pcVar1;
+  code *projectionFunc;
   
-  pcVar1 = (code *)(*_gleBuildProjectionTransformFunc)(param_1,0,forwardedArg3);
-  *(code **)(param_1 + 0x5060) = pcVar1;
-  (*pcVar1)(param_1,forwardedArg2,forwardedArg3);
+  projectionFunc = (code *)(*_gleBuildProjectionTransformFunc)(glContext,0,forwardedArg3);
+  *(code **)(glContext + 0x5060) = projectionFunc;
+  (*projectionFunc)(glContext,forwardedArg2,forwardedArg3);
   return;
 }
 

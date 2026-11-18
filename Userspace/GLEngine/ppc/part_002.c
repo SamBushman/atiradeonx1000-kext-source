@@ -2051,7 +2051,7 @@ int _gleCheckTexSubImageArgs(glContext, level, format, type)
   uint type;
 {
   bool bVar1;
-  uint uVar2;
+  uint requiredFormat;
   undefined4 glErrorCode;
   
   if (type < 0x8365) {
@@ -2113,12 +2113,12 @@ LAB_0001930c:
 LAB_000192a0:
       if (bVar1) goto LAB_0001936c;
       if (format == 0x1908) goto LAB_00019380;
-      uVar2 = 0x80e1;
+      requiredFormat = 0x80e1;
     }
     else {
-      uVar2 = 0x85b9;
+      requiredFormat = 0x85b9;
     }
-    bVar1 = format == uVar2;
+    bVar1 = format == requiredFormat;
 LAB_0001933c:
     if (!bVar1) {
       if (*(int *)(glContext + 0x7574) != 0) {
@@ -3353,17 +3353,17 @@ int _glTexParameterF_Exec(glContext, target, pname, params)
   undefined4 glErrorCode;
   bool isLegalEnum;
   float borderColorComponent;
-  float fVar3;
+  float clampUpperOrClampedShadowAmbient;
   uint legalEnum;
   int textureObject;
   undefined4 modifyFlag;
-  float fVar7;
+  float clampLowerOrParamValue;
   uint paramInt;
   float paramDouble;
   
   textureObject = ((int (*)())_gleLookUpNonProxyTexture)(glContext,target);
-  fVar3 = FLOAT_00108e54;
-  fVar7 = FLOAT_00108e50;
+  clampUpperOrClampedShadowAmbient = FLOAT_00108e54;
+  clampLowerOrParamValue = FLOAT_00108e50;
   modifyFlag = 0;
   if (*(short *)(glContext + 0x4a10) < 0) {
     if (textureObject == 0) goto LAB_0001b4fc;
@@ -3377,25 +3377,25 @@ LAB_0001b280:
       if (pname != (undefined *)0x2803) {
         if ((undefined *)0x2803 < pname) {
           if (pname == (undefined *)0x80bf) {
-            fVar7 = *params;
-            fVar3 = FLOAT_00108e50;
-            if ((fVar7 <= FLOAT_00108e50) || (fVar3 = FLOAT_00108e54, FLOAT_00108e54 <= fVar7)) {
-              *(float *)(textureObject + 0x68) = fVar3;
+            clampLowerOrParamValue = *params;
+            clampUpperOrClampedShadowAmbient = FLOAT_00108e50;
+            if ((clampLowerOrParamValue <= FLOAT_00108e50) || (clampUpperOrClampedShadowAmbient = FLOAT_00108e54, FLOAT_00108e54 <= clampLowerOrParamValue)) {
+              *(float *)(textureObject + 0x68) = clampUpperOrClampedShadowAmbient;
             }
             else {
-              *(float *)(textureObject + 0x68) = fVar7;
+              *(float *)(textureObject + 0x68) = clampLowerOrParamValue;
             }
           }
           else if (pname < (undefined *)0x80c0) {
             if (pname == (undefined *)0x8066) {
-              fVar7 = *params;
-              if (fVar7 < FLOAT_00108e50) {
-                fVar7 = 0.0;
+              clampLowerOrParamValue = *params;
+              if (clampLowerOrParamValue < FLOAT_00108e50) {
+                clampLowerOrParamValue = 0.0;
               }
-              else if (FLOAT_00108e54 < fVar7) {
-                fVar7 = 1.0;
+              else if (FLOAT_00108e54 < clampLowerOrParamValue) {
+                clampLowerOrParamValue = 1.0;
               }
-              *(float *)(textureObject + 0x28) = fVar7;
+              *(float *)(textureObject + 0x28) = clampLowerOrParamValue;
             }
             else {
               if (pname != (undefined *)0x8072) goto LAB_0001b4fc;
@@ -3468,29 +3468,29 @@ LAB_0001b228:
               *(float *)(textureObject + 0x40) = borderColorComponent;
             }
             borderColorComponent = params[1];
-            if (borderColorComponent < fVar7) {
-              *(float *)(textureObject + 0x44) = fVar7;
+            if (borderColorComponent < clampLowerOrParamValue) {
+              *(float *)(textureObject + 0x44) = clampLowerOrParamValue;
             }
-            else if (fVar3 < borderColorComponent) {
-              *(float *)(textureObject + 0x44) = fVar3;
+            else if (clampUpperOrClampedShadowAmbient < borderColorComponent) {
+              *(float *)(textureObject + 0x44) = clampUpperOrClampedShadowAmbient;
             }
             else {
               *(float *)(textureObject + 0x44) = borderColorComponent;
             }
             borderColorComponent = params[2];
-            if (borderColorComponent < fVar7) {
-              *(float *)(textureObject + 0x48) = fVar7;
+            if (borderColorComponent < clampLowerOrParamValue) {
+              *(float *)(textureObject + 0x48) = clampLowerOrParamValue;
             }
-            else if (fVar3 < borderColorComponent) {
-              *(float *)(textureObject + 0x48) = fVar3;
+            else if (clampUpperOrClampedShadowAmbient < borderColorComponent) {
+              *(float *)(textureObject + 0x48) = clampUpperOrClampedShadowAmbient;
             }
             else {
               *(float *)(textureObject + 0x48) = borderColorComponent;
             }
             borderColorComponent = params[3];
-            if (borderColorComponent < fVar7) goto LAB_0001af8c;
-            if (fVar3 < borderColorComponent) {
-              *(float *)(textureObject + 0x4c) = fVar3;
+            if (borderColorComponent < clampLowerOrParamValue) goto LAB_0001af8c;
+            if (clampUpperOrClampedShadowAmbient < borderColorComponent) {
+              *(float *)(textureObject + 0x4c) = clampUpperOrClampedShadowAmbient;
             }
             else {
               *(float *)(textureObject + 0x4c) = borderColorComponent;
@@ -3608,9 +3608,9 @@ LAB_0001b184:
             *(float *)(textureObject + 0x40) = *params;
             *(float *)(textureObject + 0x44) = params[1];
             *(float *)(textureObject + 0x48) = params[2];
-            fVar7 = params[3];
+            clampLowerOrParamValue = params[3];
 LAB_0001af8c:
-            *(float *)(textureObject + 0x4c) = fVar7;
+            *(float *)(textureObject + 0x4c) = clampLowerOrParamValue;
             goto LAB_0001b514;
           }
           if (pname == (undefined *)0x884b) {
@@ -4731,31 +4731,31 @@ void _gleUpdateDrawArraysFuncs(glContext)
 void _gleBeginPrimitiveTCLFunc(glContext)
   int glContext;
 {
-  short sVar1;
-  undefined *puVar2;
-  undefined *puVar3;
-  int iVar4;
-  int local_20 [5];
+  short vertexStride;
+  undefined *renderPrimitiveFunc;
+  undefined *flushPrimitiveFunc;
+  int vertexBuffer;
+  int vertexCapacity [5];
   
-  local_20[0] = *(int *)(glContext + 0x4a14);
+  vertexCapacity[0] = *(int *)(glContext + 0x4a14);
   *(undefined1 *)(glContext + 0x4a18) = 0;
-  if (local_20[0] == 0) {
-    sVar1 = *(short *)(glContext + 0x4880);
+  if (vertexCapacity[0] == 0) {
+    vertexStride = *(short *)(glContext + 0x4880);
   }
   else {
-    sVar1 = *(short *)(glContext + 0x4882);
+    vertexStride = *(short *)(glContext + 0x4882);
   }
-  iVar4 = (**(code **)(glContext + 0x46e8))
-                    (*(undefined4 *)(glContext + 0x4688),(int)*(short *)(glContext + 0x4a10),local_20);
-  puVar2 = PTR__gleRenderPrimitiveTCLFunc_001113cc;
+  vertexBuffer = (**(code **)(glContext + 0x46e8))
+                    (*(undefined4 *)(glContext + 0x4688),(int)*(short *)(glContext + 0x4a10),vertexCapacity);
+  renderPrimitiveFunc = PTR__gleRenderPrimitiveTCLFunc_001113cc;
   *(undefined2 *)(glContext + 0x4a12) = *(undefined2 *)(glContext + 0x4a10);
-  puVar3 = PTR__gleFlushPrimitiveTCLFunc_001113d0;
-  *(undefined **)(glContext + 0x4a08) = puVar2;
-  *(undefined **)(glContext + 0x4a0c) = puVar3;
-  *(int *)(glContext + 0x485c) = iVar4 + sVar1 * local_20[0];
-  *(short *)(glContext + 0x487c) = sVar1;
-  *(int *)(glContext + 0x4868) = iVar4;
-  *(int *)(glContext + 0x4858) = iVar4;
+  flushPrimitiveFunc = PTR__gleFlushPrimitiveTCLFunc_001113d0;
+  *(undefined **)(glContext + 0x4a08) = renderPrimitiveFunc;
+  *(undefined **)(glContext + 0x4a0c) = flushPrimitiveFunc;
+  *(int *)(glContext + 0x485c) = vertexBuffer + vertexStride * vertexCapacity[0];
+  *(short *)(glContext + 0x487c) = vertexStride;
+  *(int *)(glContext + 0x4868) = vertexBuffer;
+  *(int *)(glContext + 0x4858) = vertexBuffer;
   return;
 }
 

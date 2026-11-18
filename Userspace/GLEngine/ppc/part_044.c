@@ -742,14 +742,14 @@ void _gleImagingUnpackData(glContext, width, height, format, sourceType, interna
 }
 
 /* _gleImagingPackData @ 0xd2860 (312 bytes) */
-void _gleImagingPackData(glContext, rowWidth, height, format, type, param_6, param_7, filterData, dest)
+void _gleImagingPackData(glContext, rowWidth, height, format, type, dstFormat, dstType, filterData, dest)
   int glContext;
   int rowWidth;
   undefined4 height;
   undefined4 format;
   undefined4 type;
-  undefined4 param_6;
-  undefined4 param_7;
+  undefined4 dstFormat;
+  undefined4 dstType;
   undefined4 filterData;
   int dest;
 {
@@ -778,11 +778,11 @@ void _gleImagingPackData(glContext, rowWidth, height, format, type, param_6, par
   undefined1 auStack_48 [4];
   undefined1 auStack_44 [4];
   undefined1 auStack_40 [4];
-  int local_3c [6];
+  int packOffsetStorage [6];
   
   packState = glContext + 0x31b0;
   puVar5 = auStack_40;
-  packOffsets = local_3c;
+  packOffsets = packOffsetStorage;
   heightArg = height;
   _glePixelPackSettings
             (glContext,format,type,rowWidth,height,packState,puVar5,packOffsets,&packRowBytes,auStack_4c,
@@ -790,11 +790,11 @@ void _gleImagingPackData(glContext, rowWidth, height, format, type, param_6, par
   _glgConvertType(format,type,procSrcConvertA,procSrcConvertB,heightArg,packState,puVar5,packOffsets);
   dstConvertAPtr = procDstConvertA;
   dstConvertBPtr = procDstConvertB;
-  _glgConvertType(param_6,param_7,dstConvertAPtr,dstConvertBPtr,heightArg,packState,puVar5,packOffsets);
+  _glgConvertType(dstFormat,dstType,dstConvertAPtr,dstConvertBPtr,heightArg,packState,puVar5,packOffsets);
   procSrcAddress = filterData;
   procSrcRowBytes = _glePixelBytes(format,type);
   procSrcRowBytes = rowWidth * procSrcRowBytes;
-  procDstAddress = dest + local_3c[0];
+  procDstAddress = dest + packOffsetStorage[0];
   procMask = 5;
   procMode = 2;
   procDstRowBytes = packRowBytes;

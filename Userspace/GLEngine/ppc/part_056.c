@@ -464,33 +464,34 @@ double _gliSwitchPlugin(glContext, param_2)
 void _gliDetachRevert(glContext)
   int glContext;
 {
-  uint uVar1;
-  uint uVar2;
-  int iVar3;
+  uint dispatchSlotMask;
+  uint finishSlotMask;
+  uint alternateRendererIndex;
+  int rendererSlot;
   
-  uVar2 = (uint)*(byte *)(glContext + 0x85a5);
-  if (uVar2 == *(byte *)(glContext + 0x85a8)) {
+  alternateRendererIndex = (uint)*(byte *)(glContext + 0x85a5);
+  if (alternateRendererIndex == *(byte *)(glContext + 0x85a8)) {
     return;
   }
-  if (uVar2 == 0xff) {
+  if (alternateRendererIndex == 0xff) {
     return;
   }
-  uVar1 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x938) == 0);
+  dispatchSlotMask = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x938) == 0);
   *(undefined **)
-   ((*(uint *)(glContext + 0x4680) & uVar1 | *(uint *)(glContext + 0x4684) & ~uVar1) + 0x938) =
+   ((*(uint *)(glContext + 0x4680) & dispatchSlotMask | *(uint *)(glContext + 0x4684) & ~dispatchSlotMask) + 0x938) =
        PTR__glSwap_Exec_0011211c;
-  uVar1 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x168) == 0);
+  dispatchSlotMask = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x168) == 0);
   *(undefined **)
-   ((*(uint *)(glContext + 0x4680) & uVar1 | *(uint *)(glContext + 0x4684) & ~uVar1) + 0x168) =
+   ((*(uint *)(glContext + 0x4680) & dispatchSlotMask | *(uint *)(glContext + 0x4684) & ~dispatchSlotMask) + 0x168) =
        PTR__glFlush_Exec_00112118;
-  iVar3 = uVar2 * 0x2e0 + glContext;
-  uVar2 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x164) == 0);
+  rendererSlot = alternateRendererIndex * 0x2e0 + glContext;
+  finishSlotMask = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x164) == 0);
   *(undefined **)
-   ((*(uint *)(glContext + 0x4680) & uVar2 | *(uint *)(glContext + 0x4684) & ~uVar2) + 0x164) =
+   ((*(uint *)(glContext + 0x4680) & finishSlotMask | *(uint *)(glContext + 0x4684) & ~finishSlotMask) + 0x164) =
        PTR__glFinish_Exec_00112114;
                     
                     
-  (**(code **)(*(int *)(iVar3 + 0x8884) + 0x138))(*(undefined4 *)(iVar3 + 0x85ac),0,0,0);
+  (**(code **)(*(int *)(rendererSlot + 0x8884) + 0x138))(*(undefined4 *)(rendererSlot + 0x85ac),0,0,0);
   return;
 }
 

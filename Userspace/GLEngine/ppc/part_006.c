@@ -4624,13 +4624,13 @@ void _gleCallList(glContext, forwardedArg2)
   int glContext;
   undefined4 forwardedArg2;
 {
-  int iVar1;
+  int payloadBytes;
   int hashObject;
   undefined4 pixelPackBuffer;
   undefined4 pixelUnpackBuffer;
-  uint uVar4;
+  uint commandCount;
   uint loopIndex;
-  undefined4 *puVar6;
+  undefined4 *commandCursor;
   
   if (*(int *)(glContext + 0x540c) < 0x40) {
     *(int *)(glContext + 0x540c) = *(int *)(glContext + 0x540c) + 1;
@@ -4640,15 +4640,15 @@ void _gleCallList(glContext, forwardedArg2)
       pixelUnpackBuffer = *(undefined4 *)(glContext + 0x4a6c);
       loopIndex = 0;
       *(undefined4 *)(glContext + 0x4a68) = 0;
-      puVar6 = (undefined4 *)(hashObject + 0x2c);
+      commandCursor = (undefined4 *)(hashObject + 0x2c);
       *(undefined4 *)(glContext + 0x4a6c) = 0;
-      uVar4 = *(uint *)(hashObject + 0x10);
-      if (uVar4 != 0) {
+      commandCount = *(uint *)(hashObject + 0x10);
+      if (commandCount != 0) {
         do {
           loopIndex = loopIndex + 1;
-          iVar1 = (*(code *)*puVar6)(glContext,puVar6 + 1);
-          puVar6 = (undefined4 *)((int)(puVar6 + 1) + iVar1);
-        } while (loopIndex < uVar4);
+          payloadBytes = (*(code *)*commandCursor)(glContext,commandCursor + 1);
+          commandCursor = (undefined4 *)((int)(commandCursor + 1) + payloadBytes);
+        } while (loopIndex < commandCount);
       }
       *(undefined4 *)(glContext + 0x4a68) = pixelPackBuffer;
       *(undefined4 *)(glContext + 0x4a6c) = pixelUnpackBuffer;

@@ -2347,29 +2347,29 @@ int _gleGenMipmapsToLevel(glContext, textureObject, faceIndex, level, maxLevelLi
 }
 
 /* _gleGenSurfaceMipmaps @ 0xfbfe4 (160 bytes) */
-int _gleGenSurfaceMipmaps(glContext, param_2, param_3, param_4, param_5)
+int _gleGenSurfaceMipmaps(glContext, textureObject, face, lastLevel, generateOnRenderer)
   int glContext;
-  int param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  int param_5;
+  int textureObject;
+  undefined4 face;
+  undefined4 lastLevel;
+  int generateOnRenderer;
 {
-  undefined4 uVar1;
+  undefined4 mipmapsGenerated;
   
-  uVar1 = 0;
-  if ((*(ushort *)(param_2 + 0x24) & 0xf) != 2) {
-    ((int (*)())_gleGenerateEmptyMipmaps)(glContext,param_2,param_3,0,param_4,0,0x12);
-    uVar1 = 0;
-    if (*(int *)(param_2 + 0x2c) != 0) {
-      if (param_5 != 0) {
+  mipmapsGenerated = 0;
+  if ((*(ushort *)(textureObject + 0x24) & 0xf) != 2) {
+    ((int (*)())_gleGenerateEmptyMipmaps)(glContext,textureObject,face,0,lastLevel,0,0x12);
+    mipmapsGenerated = 0;
+    if (*(int *)(textureObject + 0x2c) != 0) {
+      if (generateOnRenderer != 0) {
         (**(code **)(glContext + 0x4714))
                   (*(undefined4 *)(glContext + 0x4688),
-                   *(undefined4 *)(param_2 + (uint)*(byte *)(glContext + 0x85a8) * 4),param_3);
+                   *(undefined4 *)(textureObject + (uint)*(byte *)(glContext + 0x85a8) * 4),face);
       }
-      uVar1 = 1;
+      mipmapsGenerated = 1;
     }
   }
-  return uVar1;
+  return mipmapsGenerated;
 }
 
 /* _gleHalfFloatToFloat @ 0xfc084 (136 bytes) */

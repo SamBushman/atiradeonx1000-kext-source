@@ -736,19 +736,19 @@ int _gleRTCAddAChunk_b50a8(srcCursor, dstCursor)
 }
 
 /* _gleArrayElemAddPrimitiveFlushFuncCall @ 0xb50d8 (104 bytes) */
-int _gleArrayElemAddPrimitiveFlushFuncCall(param_1, param_2)
-  uint *param_1;
-  uint param_2;
+int _gleArrayElemAddPrimitiveFlushFuncCall(codeCursor, addiImmediate)
+  uint *codeCursor;
+  uint addiImmediate;
 {
-  *param_1 = param_2 & 0xffff | 0x39250000;
-  param_1[1] = 0x91234858;
-  param_1[2] = 0x7d254b78;
-  param_1[3] = 0x8103485c;
-  param_1[4] = 0x81234a0c;
-  param_1[5] = 0x7d2903a6;
-  param_1[6] = 0x7c054000;
-  param_1[7] = 0x4d828c21;
-  return param_1 + 8;
+  *codeCursor = addiImmediate & 0xffff | 0x39250000;
+  codeCursor[1] = 0x91234858;
+  codeCursor[2] = 0x7d254b78;
+  codeCursor[3] = 0x8103485c;
+  codeCursor[4] = 0x81234a0c;
+  codeCursor[5] = 0x7d2903a6;
+  codeCursor[6] = 0x7c054000;
+  codeCursor[7] = 0x4d828c21;
+  return codeCursor + 8;
 }
 
 /* _gleSetVertexEval1Func @ 0xb5140 (100 bytes) */

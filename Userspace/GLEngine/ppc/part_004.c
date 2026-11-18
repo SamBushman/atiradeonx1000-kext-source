@@ -8,17 +8,17 @@ int _gleIsIndex(param_1)
 }
 
 /* _gleExtractPixel_RGBA_Ubyte @ 0x2f1c0 (176 bytes) */
-void _gleExtractPixel_RGBA_Ubyte(param_1, param_2)
-  int param_1;
-  byte *param_2;
+void _gleExtractPixel_RGBA_Ubyte(pixel, src)
+  int pixel;
+  byte *src;
 {
-  float fVar1;
+  float ubyteToFloatScale;
   
-  fVar1 = FLOAT_00108e78;
-  *(float *)(param_1 + 4) = (GH_U2F((unsigned int)((*param_2 | 0x4b000000))) - 8388608.0) * FLOAT_00108e78;
-  *(float *)(param_1 + 8) = (GH_U2F((unsigned int)((param_2[1] | 0x4b000000))) - 8388608.0) * fVar1;
-  *(float *)(param_1 + 0xc) = (GH_U2F((unsigned int)((param_2[2] | 0x4b000000))) - 8388608.0) * fVar1;
-  *(float *)(param_1 + 0x10) = (GH_U2F((unsigned int)((param_2[3] | 0x4b000000))) - 8388608.0) * fVar1;
+  ubyteToFloatScale = FLOAT_00108e78;
+  *(float *)(pixel + 4) = (GH_U2F((unsigned int)((*src | 0x4b000000))) - 8388608.0) * FLOAT_00108e78;
+  *(float *)(pixel + 8) = (GH_U2F((unsigned int)((src[1] | 0x4b000000))) - 8388608.0) * ubyteToFloatScale;
+  *(float *)(pixel + 0xc) = (GH_U2F((unsigned int)((src[2] | 0x4b000000))) - 8388608.0) * ubyteToFloatScale;
+  *(float *)(pixel + 0x10) = (GH_U2F((unsigned int)((src[3] | 0x4b000000))) - 8388608.0) * ubyteToFloatScale;
   return;
 }
 

@@ -813,7 +813,8 @@ void _gleModifyPixelStencil(glContext, pixel, unusedArg3, unusedArg4, unusedArg5
   undefined4 unusedArg7;
   undefined4 unusedArg8;
 {
-  uint uVar1;
+  uint rightShiftCount;
+  uint fractionCarryBits;
   uint uVar2;
   uint indexInteger;
   int stencilValue;
@@ -824,25 +825,25 @@ void _gleModifyPixelStencil(glContext, pixel, unusedArg3, unusedArg4, unusedArg5
   indexInteger = *(uint *)(pixel + 0x18);
   if ((int)uVar2 < 1) {
     if ((int)uVar2 < 0) {
-      uVar1 = -uVar2;
-      if ((int)uVar1 < 0xf) {
+      rightShiftCount = -uVar2;
+      if ((int)rightShiftCount < 0xf) {
         uVar2 = indexInteger << (uVar2 + 0xf & 0x3f);
       }
       else {
-        uVar2 = (int)indexInteger >> (uVar1 - 0xf & 0x3f);
+        uVar2 = (int)indexInteger >> (rightShiftCount - 0xf & 0x3f);
       }
-      indexInteger = (int)indexInteger >> (uVar1 & 0x3f);
-      indexFraction = ((int)indexFraction >> (uVar1 & 0x3f) | uVar2) & 0x7fff;
+      indexInteger = (int)indexInteger >> (rightShiftCount & 0x3f);
+      indexFraction = ((int)indexFraction >> (rightShiftCount & 0x3f) | uVar2) & 0x7fff;
     }
   }
   else {
     if ((int)uVar2 < 0xf) {
-      uVar1 = (int)indexFraction >> (0xf - uVar2 & 0x3f);
+      fractionCarryBits = (int)indexFraction >> (0xf - uVar2 & 0x3f);
     }
     else {
-      uVar1 = indexFraction << (uVar2 - 0xf & 0x3f);
+      fractionCarryBits = indexFraction << (uVar2 - 0xf & 0x3f);
     }
-    indexInteger = indexInteger << (uVar2 & 0x3f) | uVar1;
+    indexInteger = indexInteger << (uVar2 & 0x3f) | fractionCarryBits;
     indexFraction = indexFraction << (uVar2 & 0x3f);
   }
   stencilValue = indexInteger + *(int *)(glContext + 0x3210);
@@ -864,15 +865,15 @@ void _gleModifyPixelDepth(glContext, pixel)
   int glContext;
   int pixel;
 {
-  float fVar1;
-  float fVar2;
+  float scaledDepth;
+  float clampedDepth;
   
-  fVar1 = *(float *)(pixel + 0x14) * *(float *)(glContext + 0x320c) + *(float *)(glContext + 0x3208);
-  fVar2 = FLOAT_00108e50;
-  if ((!(fVar1 < FLOAT_00108e50)) && (fVar2 = fVar1, FLOAT_00108e54 < fVar1)) {
-    fVar2 = FLOAT_00108e54;
+  scaledDepth = *(float *)(pixel + 0x14) * *(float *)(glContext + 0x320c) + *(float *)(glContext + 0x3208);
+  clampedDepth = FLOAT_00108e50;
+  if ((!(scaledDepth < FLOAT_00108e50)) && (clampedDepth = scaledDepth, FLOAT_00108e54 < scaledDepth)) {
+    clampedDepth = FLOAT_00108e54;
   }
-  *(float *)(pixel + 0x14) = fVar2;
+  *(float *)(pixel + 0x14) = clampedDepth;
   return;
 }
 
@@ -1251,7 +1252,7 @@ void _gleModifyPixelSignedRGBA(glContext, pixel)
   float green;
   float blue;
   float alpha;
-  float fVar9;
+  float clampedChannel;
   uint alphaMapIndex;
   uint blueMapIndex;
   uint greenMapIndex;
@@ -1262,21 +1263,21 @@ void _gleModifyPixelSignedRGBA(glContext, pixel)
   blue = *(float *)(pixel + 0xc) * *(float *)(glContext + 0x31fc) + *(float *)(glContext + 0x31f8);
   alpha = *(float *)(pixel + 0x10) * *(float *)(glContext + 0x3204) + *(float *)(glContext + 0x3200);
   if ((*(uint *)(glContext + 0x3414) & 1) == 0) {
-    fVar9 = FLOAT_00108e58;
-    if ((red < FLOAT_00108e58) || (fVar9 = FLOAT_00108e54, FLOAT_00108e54 < red)) {
-      red = fVar9;
+    clampedChannel = FLOAT_00108e58;
+    if ((red < FLOAT_00108e58) || (clampedChannel = FLOAT_00108e54, FLOAT_00108e54 < red)) {
+      red = clampedChannel;
     }
-    fVar9 = FLOAT_00108e58;
-    if ((green < FLOAT_00108e58) || (fVar9 = FLOAT_00108e54, FLOAT_00108e54 < green)) {
-      green = fVar9;
+    clampedChannel = FLOAT_00108e58;
+    if ((green < FLOAT_00108e58) || (clampedChannel = FLOAT_00108e54, FLOAT_00108e54 < green)) {
+      green = clampedChannel;
     }
-    fVar9 = FLOAT_00108e58;
-    if ((blue < FLOAT_00108e58) || (fVar9 = FLOAT_00108e54, FLOAT_00108e54 < blue)) {
-      blue = fVar9;
+    clampedChannel = FLOAT_00108e58;
+    if ((blue < FLOAT_00108e58) || (clampedChannel = FLOAT_00108e54, FLOAT_00108e54 < blue)) {
+      blue = clampedChannel;
     }
-    fVar9 = FLOAT_00108e58;
-    if ((alpha < FLOAT_00108e58) || (fVar9 = FLOAT_00108e54, FLOAT_00108e54 < alpha)) {
-      alpha = fVar9;
+    clampedChannel = FLOAT_00108e58;
+    if ((alpha < FLOAT_00108e58) || (clampedChannel = FLOAT_00108e54, FLOAT_00108e54 < alpha)) {
+      alpha = clampedChannel;
     }
   }
   else {

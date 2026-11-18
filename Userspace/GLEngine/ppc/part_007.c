@@ -1104,39 +1104,39 @@ LAB_00046c3c:
 }
 
 /* _gleAllocateTextureLevel @ 0x46fe8 (196 bytes) */
-int _gleAllocateTextureLevel(glContext, param_2, param_3)
+int _gleAllocateTextureLevel(glContext, textureObject, levelRecord)
   int glContext;
-  int param_2;
-  int param_3;
+  int textureObject;
+  int levelRecord;
 {
-  undefined *puVar1;
-  undefined4 uVar2;
+  undefined *machTaskSelfRef;
+  undefined4 allocated;
   vm_size_t size;
-  vm_address_t local_20 [4];
+  vm_address_t allocation [4];
   
-  size = ((int (*)())_gleTextureLevelBytes)(glContext,param_3);
-  puVar1 = PTR_00112034;
-  uVar2 = 0;
+  size = ((int (*)())_gleTextureLevelBytes)(glContext,levelRecord);
+  machTaskSelfRef = PTR_00112034;
+  allocated = 0;
   if (size != 0) {
-    if (*(short *)(param_2 + 0x3e) == -0x7a43) {
-      local_20[0] = _malloc(size);
+    if (*(short *)(textureObject + 0x3e) == -0x7a43) {
+      allocation[0] = _malloc(size);
     }
     else {
-      *(byte *)(param_3 + 0xb) = *(byte *)(param_3 + 0xb) | 8;
-      _vm_allocate(*(vm_map_t *)puVar1,local_20,size,1);
+      *(byte *)(levelRecord + 0xb) = *(byte *)(levelRecord + 0xb) | 8;
+      _vm_allocate(*(vm_map_t *)machTaskSelfRef,allocation,size,1);
     }
-    if (local_20[0] == 0) {
+    if (allocation[0] == 0) {
       if (*(int *)(glContext + 0x7574) == 0) {
         *(undefined4 *)(glContext + 0x7574) = 0x505;
       }
-      uVar2 = 0;
+      allocated = 0;
     }
     else {
-      *(vm_address_t *)(param_3 + 0x14) = local_20[0];
-      uVar2 = 1;
+      *(vm_address_t *)(levelRecord + 0x14) = allocation[0];
+      allocated = 1;
     }
   }
-  return uVar2;
+  return allocated;
 }
 
 /* _gleTextureLevelBytes @ 0x470ac (140 bytes) */

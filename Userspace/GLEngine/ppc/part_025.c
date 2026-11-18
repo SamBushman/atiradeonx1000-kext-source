@@ -4067,28 +4067,28 @@ int _glUniform2ivARB_Comp(glContext, location, count, value)
   int count;
   undefined4 *value;
 {
-  undefined4 *puVar1;
-  undefined4 *puVar2;
+  undefined4 *recordCursor;
+  undefined4 *pairDestOrNull;
   int loopIndex;
   
-  puVar1 = (undefined4 *)
+  recordCursor = (undefined4 *)
            _gleAddListItem(glContext,PTR__glUniform2ivARB_ListExec_001102c8,count * 8 + 8);
-  puVar2 = (undefined4 *)0x0;
-  if (puVar1 != (undefined4 *)0x0) {
-    puVar1[1] = count;
+  pairDestOrNull = (undefined4 *)0x0;
+  if (recordCursor != (undefined4 *)0x0) {
+    recordCursor[1] = count;
     loopIndex = 0;
-    *puVar1 = location;
+    *recordCursor = location;
     while( true ) {
-      puVar2 = puVar1 + 2;
-      *puVar2 = *value;
-      puVar1[3] = value[1];
+      pairDestOrNull = recordCursor + 2;
+      *pairDestOrNull = *value;
+      recordCursor[3] = value[1];
       if (loopIndex == count + -1) break;
       value = value + 2;
       loopIndex = loopIndex + 1;
-      puVar1 = puVar2;
+      recordCursor = pairDestOrNull;
     }
   }
-  return puVar2;
+  return pairDestOrNull;
 }
 
 /* _glUniform1ivARB_Comp @ 0x8c584 (136 bytes) */

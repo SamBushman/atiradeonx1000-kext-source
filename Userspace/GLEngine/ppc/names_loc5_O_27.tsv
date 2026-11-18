@@ -1,0 +1,24 @@
+local	_gleCallList	iVar1	payloadBytes	INFERRED	value returned by the record's function; the cursor advances past the record's function pointer word plus this many payload bytes
+local	_gleCallList	uVar4	commandCount	INFERRED	word at display-list object +0x10: number of records executed by the loop
+local	_gleCallList	puVar6	commandCursor	INFERRED	walks the records from display-list object +0x2c; each record is a function pointer followed by its payload
+local	_glUniform2ivARB_Comp	puVar1	recordCursor	CONFIRMED	starts at the new list record (header location and count at +0/+4) and then advances one two-word value pair at a time
+local	_glUniform2ivARB_Comp	puVar2	pairDestOrNull	CONFIRMED	address of the pair just written (record+2 words), initially null; returned (null when the list item could not be allocated)
+local	_gleArrayElemAddPrimitiveFlushFuncCall	param_1	codeCursor	CONFIRMED	address where eight PowerPC instruction words are emitted; returned advanced by 8 words
+local	_gleArrayElemAddPrimitiveFlushFuncCall	param_2	addiImmediate	CONFIRMED	low 16 bits are or'ed into 0x39250000 (addi r9,r5,imm) as the immediate of the first emitted instruction
+local	_gleModifyPixelSignedRGBA	fVar9	clampedChannel	CONFIRMED	result of clamping red/green/blue/alpha to [0,1] (FLOAT_00108e58 = 0.0 or FLOAT_00108e54 = 1.0), assigned back to the channel
+local	_gleAddClientAttribElem	puVar2	attribElem	CONFIRMED	0x2c0-byte malloc'd stack element: +0 clientAttribBit, +4 copy of the client attributes, +0x2bc link to the previous element
+local	_gleAddClientAttribElem	piVar1	attribStackSlot	INFERRED	slot of the client attribute stack at *(ctx+0x5140) holding the element chain head; the new element is pushed there
+local	_gleRemoveClientAttribElem	param_1	glContext	INFERRED	first argument of _gleSetClientAttrib, the GL context (same role as in _gleAddClientAttribElem)
+local	_gleRemoveClientAttribElem	param_2	attribElem	CONFIRMED	element created by _gleAddClientAttribElem: +0 attribute bit, +4 attribute copy handed to _gleSetClientAttrib, then freed
+local	_gleSetProjectionFuncW1	param_2	forwardedArg2	CONFIRMED	forwarded unchanged to the projection function just built
+local	_gleSetProjectionFuncW1	param_3	forwardedArg3	CONFIRMED	forwarded to _gleBuildProjectionTransformFunc and to the projection function it returns
+local	_gleSetProjectionFuncW1	pcVar1	projectionFunc	CONFIRMED	function returned by _gleBuildProjectionTransformFunc; stored at ctx+0x5060 and called
+local	_gleSetProjectionFuncAll	param_1	glContext	INFERRED	dereferenced at ctx+0x5060 and passed on first to the built function, the GL context
+local	_gleSetProjectionFuncAll	pcVar1	projectionFunc	CONFIRMED	function returned by _gleBuildProjectionTransformFunc; stored at ctx+0x5060 and called
+local	_gleModelMatInvert	dVar3	invertResultOrRescaleFactor	INFERRED	f1 left by _gleInvertMatrix, replaced by the float-rounded reciprocal used to rescale the matrix; this is the returned value
+local	_gleModelMatInvert	dVar4	normalLengthThenRescaleFactor	INFERRED	sqrt of the sum of squares of ctx+0x22c8/0x22d8/0x22e8, then DOUBLE_00108d68 (1.0) divided by it: the rescale factor stored to ctx+0x2804
+local	_gleModifyPixelDepth	fVar1	scaledDepth	CONFIRMED	depth (pixel+0x14) times ctx+0x320c plus ctx+0x3208 (depth scale and bias)
+local	_gleModifyPixelDepth	fVar2	clampedDepth	CONFIRMED	scaled depth clamped to [0,1] (FLOAT_00108e50 = 0.0, FLOAT_00108e54 = 1.0), stored back to pixel+0x14
+local	_glGetIntegerv_Exec	iVar2	intValue	CONFIRMED	word copied from the state buffer to params when the state type is integer (0x1404)
+local	_glGetIntegerv_Exec	dVar5	stateValue	CONFIRMED	double read from the state buffer and multiplied by the scale before conversion to int
+local	_glGetIntegerv_Exec	dVar6	scaleOrStateValue	INFERRED	holds DOUBLE_00108d90 (the scale used for colour-type values) and, in the unscaled branch, the double read from the state buffer converted to int

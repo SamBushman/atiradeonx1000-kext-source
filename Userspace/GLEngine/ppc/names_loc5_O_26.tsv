@@ -1,0 +1,73 @@
+local	_glTexParameterF_Exec	fVar3	clampUpperOrClampedShadowAmbient	INFERRED	FLOAT_00108e54 = 1.0f kept as the upper clamp for the border-colour components (stored when a component exceeds it), and in the GL_SHADOW_AMBIENT_SGIX (0x80bf) case reassigned to the clamped value (0.0 or 1.0) stored to textureObject+0x68
+local	_glTexParameterF_Exec	fVar7	clampLowerOrParamValue	INFERRED	FLOAT_00108e50 = 0.0f kept as the lower clamp of the border-colour components, then reloaded with *params (shadow ambient 0x80bf / texture priority 0x8066, stored to +0x68 / +0x28) and with params[3] for GL_TEXTURE_BORDER_COLOR alpha (stored to +0x4c)
+use	_gleNullMemoryPointers	iVar2	pointerPairCursor	INFERRED	cursor stepping 4 bytes through parallel pointer arrays (ctx+0x5420/0x5428, +0x52b0+0xc/+0x18, +0x5294/+0x52a8) clearing two entries per step	^\s*iVar2\ =\ param_1;$	+1
+use	_gleNullMemoryPointers	iVar2	pointerPairCursor	INFERRED	cursor stepping 4 bytes through parallel pointer arrays (ctx+0x5420/0x5428, +0x52b0+0xc/+0x18, +0x5294/+0x52a8) clearing two entries per step	^\s*\*\(undefined4\ \*\)\(iVar2\ \+\ 0x5420\)\ =\ 0;$	+4
+use	_gleNullMemoryPointers	iVar2	pointerPairCursor	INFERRED	cursor stepping 4 bytes through parallel pointer arrays (ctx+0x5420/0x5428, +0x52b0+0xc/+0x18, +0x5294/+0x52a8) clearing two entries per step	^\s*iVar2\ =\ param_1\ \+\ 0x52b0;$	+1
+use	_gleNullMemoryPointers	iVar2	pointerPairCursor	INFERRED	cursor stepping 4 bytes through parallel pointer arrays (ctx+0x5420/0x5428, +0x52b0+0xc/+0x18, +0x5294/+0x52a8) clearing two entries per step	^\s*\*\(undefined4\ \*\)\(iVar2\ \+\ 0xc\)\ =\ 0;$	+3
+use	_gleNullMemoryPointers	iVar2	pointerPairCursor	INFERRED	cursor stepping 4 bytes through parallel pointer arrays (ctx+0x5420/0x5428, +0x52b0+0xc/+0x18, +0x5294/+0x52a8) clearing two entries per step	^\s*iVar2\ =\ param_1;$@3	+1
+use	_gleNullMemoryPointers	iVar2	pointerPairCursor	INFERRED	cursor stepping 4 bytes through parallel pointer arrays (ctx+0x5420/0x5428, +0x52b0+0xc/+0x18, +0x5294/+0x52a8) clearing two entries per step	^\s*\*\(undefined4\ \*\)\(iVar2\ \+\ 0x5294\)\ =\ 0;$	+3
+use	_gleNullMemoryPointers	iVar2	slotRecordCursor	INFERRED	cursor over 16 records of 5 words (stride 0x14) at ctx+0x5154, each cleared by the inner loop	^\s*iVar2\ =\ param_1;$@2	+1
+use	_gleNullMemoryPointers	iVar2	slotRecordCursor	INFERRED	cursor over 16 records of 5 words (stride 0x14) at ctx+0x5154, each cleared by the inner loop	^\s*puVar1\ =\ \(undefined4\ \*\)\(iVar2\ \+\ 0x5154\);$	+1
+use	_gleNullMemoryPointers	iVar2	slotRecordCursor	INFERRED	cursor over 16 records of 5 words (stride 0x14) at ctx+0x5154, each cleared by the inner loop	^\s*iVar2\ =\ iVar2\ \+\ 0x14;$	+1
+use	_gleNullMemoryPointers	iVar2	rendererRecordCursor	CONFIRMED	ctx+0x10000 plugin record cursor, stride 0x2e0, clearing the callback words at -0x7788/-0x7784, count byte ctx+0x85a4	^\s*iVar2\ =\ param_1\ \+\ 0x10000;$	+1
+use	_gleNullMemoryPointers	iVar2	rendererRecordCursor	CONFIRMED	ctx+0x10000 plugin record cursor, stride 0x2e0, clearing the callback words at -0x7788/-0x7784, count byte ctx+0x85a4	^\s*\*\(undefined4\ \*\)\(iVar2\ \+\ \-0x7788\)\ =\ 0;$	+1
+use	_gleNullMemoryPointers	iVar2	rendererRecordCursor	CONFIRMED	ctx+0x10000 plugin record cursor, stride 0x2e0, clearing the callback words at -0x7788/-0x7784, count byte ctx+0x85a4	^\s*\*\(undefined4\ \*\)\(iVar2\ \+\ \-0x7784\)\ =\ 0;$	+2
+local	_gleRevertSwapToPrimary	uVar3	currentRendererIndex	INFERRED	ctx byte 0x85a6: index of the renderer currently drawing, widened to uint; scales into the 0x2e0-byte renderer slots and is passed to _gleSwitchToRenderer
+local	_gleRevertSwapToPrimary	iVar1	rendererSlot	INFERRED	glContext + renderer index * 0x2e0: per-renderer slot (+0x8884 dispatch table, +0x85ac handle)
+local	_gleRevertSwapToPrimary	uVar2	freeResult	CONFIRMED	value returned by _gleFreeCopyContextData, returned unchanged
+local	_gleRevertSwapToPrimary	local_30	copyContextData	INFERRED	copy context data (5 words) filled by _gleSwitchRenderersReadBuffers and written back by _gleSwitchRenderersWriteBuffers
+local	_gleRevertSwapToPrimary	local_2c	copyContextData1	INFERRED	copy context data word 1, part of the 5-word block (+8/+0xc/+0x10 are malloc'd buffers freed by _gleFreeCopyContextData) filled by _gleSwitchRenderersReadBuffers and written back by _gleSwitchRenderersWriteBuffers
+local	_gleRevertSwapToPrimary	local_28	copyContextData2	INFERRED	copy context data word 2, part of the 5-word block (+8/+0xc/+0x10 are malloc'd buffers freed by _gleFreeCopyContextData) filled by _gleSwitchRenderersReadBuffers and written back by _gleSwitchRenderersWriteBuffers
+local	_gleRevertSwapToPrimary	local_24	copyContextData3	INFERRED	copy context data word 3, part of the 5-word block (+8/+0xc/+0x10 are malloc'd buffers freed by _gleFreeCopyContextData) filled by _gleSwitchRenderersReadBuffers and written back by _gleSwitchRenderersWriteBuffers
+local	_gleRevertSwapToPrimary	local_20	copyContextData4	INFERRED	copy context data word 4, part of the 5-word block (+8/+0xc/+0x10 are malloc'd buffers freed by _gleFreeCopyContextData) filled by _gleSwitchRenderersReadBuffers and written back by _gleSwitchRenderersWriteBuffers
+use	_gleMap2Texture2dLoad	dVar11	unitConstant	INFERRED	DOUBLE_00108d68 (1.0) used as numerator of the reciprocal parameter ranges 1/(u2-u1) and 1/(v2-v1)	^\s*dVar11\ =\ DOUBLE_00108d68;$	+1
+use	_gleMap2Texture2dLoad	dVar11	unitConstant	INFERRED	DOUBLE_00108d68 (1.0) used as numerator of the reciprocal parameter ranges 1/(u2-u1) and 1/(v2-v1)	^\s*param_15\[7\]\ =\ \(int\)GH_F2U\(\(float\)\(dVar11\ /\ \(fparam_4\ \-\ fparam_3\)\)\);$	+1
+use	_gleMap2Texture2dLoad	dVar11	pointT	CONFIRMED	second component (+8) of the current control point, converted to float and stored to destPtr[9]	^\s*dVar11\ =\ \*pdVar7;$	+1
+use	_gleMap2Texture2dLoad	dVar11	pointT	CONFIRMED	second component (+8) of the current control point, converted to float and stored to destPtr[9]	^\s*piVar3\[9\]\ =\ \(int\)GH_F2U\(\(float\)dVar11\);$	+1
+local	_gleMap2Texture2dLoad	pdVar1	pointSPtr	CONFIRMED	address of the first (s) component of the current control point in points; its value is stored to destPtr[8]
+local	_gleMap2Texture2dLoad	pdVar7	pointTPtr	CONFIRMED	address of the second (t) component of the current control point (points + u row + 8), stepped by vstride
+local	_gleMap2Texture2dLoad	iVar2	sByteOffset	CONFIRMED	byte offset of the current s component in points: uElementOffset*8, stepped by vstride*8
+local	_gleMap2Texture2dLoad	iVar6	uRowBase	CONFIRMED	points + uIndex*ustride*8: base address of the current u row
+local	_OffsetLimitImage3D	uVar1	bitCountOrAlignmentRemainder	CONFIRMED	temporary of two roles: (width bits + 7) before the >>3 round-up to bytes for GL_BITMAP rows, and rowStride & (alignment-1) for the row alignment padding
+local	_OffsetLimitImage3D	iVar7	pixelBytesThenLimitOffset	INFERRED	_glePixelBytes() result, multiplied by (skipPixels+width), replaced in the unskipped fast path by the whole-image byte size, and finally baseOffset+this is the returned limit; for GL_BITMAP it is the computed end offset directly
+local	_gleAllocateTextureLevel	param_2	textureObject	INFERRED	+0x3e holds the storage hint (-0x7a43 = 0x85bd, GL_STORAGE_PRIVATE_APPLE) that selects _malloc over _vm_allocate
+local	_gleAllocateTextureLevel	param_3	levelRecord	CONFIRMED	passed to _gleTextureLevelBytes for the size; +0x14 receives the allocated address, +0xb bit 3 marks vm_allocate'd storage
+local	_gleAllocateTextureLevel	puVar1	machTaskSelfRef	CONFIRMED	PTR_00112034, dereferenced as the vm_map_t (mach_task_self) argument of _vm_allocate
+local	_gleAllocateTextureLevel	uVar2	allocated	CONFIRMED	1 when the level data was allocated, 0 when the size is zero or the allocation failed
+local	_gleAllocateTextureLevel	local_20	allocation	CONFIRMED	address returned by _malloc or written by _vm_allocate; zero means failure (GL_OUT_OF_MEMORY 0x505)
+local	_gleGenSurfaceMipmaps	param_2	textureObject	CONFIRMED	passed as textureObject to _gleGenerateEmptyMipmaps; +0x24 low nibble, +0x2c, per-renderer handles at +4*index
+local	_gleGenSurfaceMipmaps	param_3	face	CONFIRMED	passed as the face parameter of _gleGenerateEmptyMipmaps and as the target of the renderer hook
+local	_gleGenSurfaceMipmaps	param_4	lastLevel	CONFIRMED	passed as the lastLevel parameter of _gleGenerateEmptyMipmaps
+local	_gleGenSurfaceMipmaps	param_5	generateOnRenderer	INFERRED	bit 15 of textureObject+0x6c (caller): when nonzero the renderer hook at ctx+0x4714 is called for the texture handle
+local	_gleGenSurfaceMipmaps	uVar1	mipmapsGenerated	CONFIRMED	1 when the surface has level data (textureObject+0x2c nonzero) and mipmaps were generated, else 0; returned
+local	_gleImagingPackData	param_6	dstFormat	CONFIRMED	passed as the format argument of the second _glgConvertType call (destination conversion), parallel to the format/type of the source
+local	_gleImagingPackData	param_7	dstType	CONFIRMED	passed as the type argument of the second _glgConvertType call (destination conversion)
+local	_gleImagingPackData	local_3c	packOffsetStorage	CONFIRMED	6-word buffer passed as packOffsets to _glePixelPackSettings; word 0 is added to dest as the destination address offset
+local	_gleBeginPrimitiveTCLFunc	sVar1	vertexStride	INFERRED	per-vertex size read from ctx+0x4880 / +0x4882, stored to ctx+0x487c and multiplied by the vertex count to form the buffer end ctx+0x485c
+local	_gleBeginPrimitiveTCLFunc	iVar4	vertexBuffer	INFERRED	buffer returned by the renderer hook at ctx+0x46e8; stored as cursor ctx+0x4858 and base ctx+0x4868
+local	_gleBeginPrimitiveTCLFunc	local_20	vertexCapacity	INFERRED	vertex count loaded from ctx+0x4a14 and passed by address to the renderer hook at ctx+0x46e8 (in/out); multiplied with the stride
+local	_gleBeginPrimitiveTCLFunc	puVar2	renderPrimitiveFunc	CONFIRMED	only assigned PTR__gleRenderPrimitiveTCLFunc: holds that function's address, stored to ctx+0x4a08
+local	_gleBeginPrimitiveTCLFunc	puVar3	flushPrimitiveFunc	CONFIRMED	only assigned PTR__gleFlushPrimitiveTCLFunc: holds that function's address, stored to ctx+0x4a0c
+local	_gleExecuteVertexArray	param_2	mode	CONFIRMED	forwarded unchanged as the mode parameter of _gleExecuteTCLVertexArray and _gleExecuteClippedVertexArray
+local	_gleExecuteVertexArray	param_3	first	CONFIRMED	forwarded unchanged as the firstThenNextSequentialIndex parameter of both callees
+local	_gleExecuteVertexArray	param_4	count	CONFIRMED	forwarded unchanged as the count parameter of both callees
+local	_gleExecuteVertexArray	param_5	indexType	CONFIRMED	forwarded unchanged as the indexType parameter of both callees
+local	_gleExecuteVertexArray	param_6	indices	CONFIRMED	forwarded unchanged as the indices parameter of both callees
+local	_gliDetachRevert	uVar1	dispatchSlotMask	CONFIRMED	-(ctx+0x4684 slot == 0): selects between ctx+0x4680 and ctx+0x4684 (dispatch slot idiom)
+use	_gliDetachRevert	uVar2	alternateRendererIndex	INFERRED	ctx byte 0x85a5 widened to uint: index of the alternate renderer; compared with 0x85a8 and 0xff, scales into the 0x2e0-byte renderer slots	^\s*uVar2\ =\ \(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x85a5\);$	+2
+use	_gliDetachRevert	uVar2	alternateRendererIndex	INFERRED	ctx byte 0x85a5 widened to uint: index of the alternate renderer; compared with 0x85a8 and 0xff, scales into the 0x2e0-byte renderer slots	^\s*if\ \(uVar2\ ==\ 0xff\)\ \{$	+1
+use	_gliDetachRevert	uVar2	alternateRendererIndex	INFERRED	ctx byte 0x85a5 widened to uint: index of the alternate renderer; compared with 0x85a8 and 0xff, scales into the 0x2e0-byte renderer slots	^\s*iVar3\ =\ uVar2\ \*\ 0x2e0\ \+\ param_1;$	+1
+use	_gliDetachRevert	uVar2	finishSlotMask	CONFIRMED	-(ctx+0x4684 slot +0x164 == 0): selects between ctx+0x4680 and ctx+0x4684 (dispatch slot idiom, glFinish entry +0x164)	^\s*uVar2\ =\ \-\(uint\)\(\*\(int\ \*\)\(\*\(uint\ \*\)\(param_1\ \+\ 0x4684\)\ \+\ 0x164\)\ ==\ 0\);$	+1
+use	_gliDetachRevert	uVar2	finishSlotMask	CONFIRMED	-(ctx+0x4684 slot +0x164 == 0): selects between ctx+0x4680 and ctx+0x4684 (dispatch slot idiom, glFinish entry +0x164)	^\s*\(\(\*\(uint\ \*\)\(param_1\ \+\ 0x4680\)\ \&\ uVar2\ \|\ \*\(uint\ \*\)\(param_1\ \+\ 0x4684\)\ \&\ \~uVar2\)\ \+\ 0x164\)\ =$	+1
+local	_gliDetachRevert	iVar3	rendererSlot	INFERRED	glContext + renderer index * 0x2e0: per-renderer slot (+0x8884 dispatch table, +0x85ac handle)
+local	_glDisableVertexAttribARB_Exec	param_2	attribIndex	CONFIRMED	attribute index: values >= 0x10 raise GL_INVALID_VALUE (0x501); indexes the 16 flag bytes at ctx+0x7524 / +0x7564 and bit-clears the mask
+local	_glDisableVertexAttribARB_Exec	param_3	attribSet	INFERRED	0x8a00 selects the flag bytes at ctx+0x7524 and mask ctx+0x74d8, 0x8a01 those at +0x7564 and +0x74dc; anything else is GL_INVALID_ENUM (0x500)
+local	_glDisableVertexAttribARB_Exec	uVar2	attribMask	INFERRED	mask word from ctx+0x74d8 / +0x74dc with bit attribIndex cleared before being stored back
+local	_gleExtractPixel_RGBA_Ubyte	param_1	pixel	CONFIRMED	destination: four floats are written at +4,+8,+0xc,+0x10 (same layout as the other _gleExtractPixel_* functions, parameter pixel)
+local	_gleExtractPixel_RGBA_Ubyte	param_2	src	CONFIRMED	source bytes R,G,B,A converted to float (same role as src in the other _gleExtractPixel_* functions)
+local	_gleExtractPixel_RGBA_Ubyte	fVar1	ubyteToFloatScale	INFERRED	FLOAT_00108e78 (the same constant scales every ubyte channel in _gleExtractPixel_R_Ubyte), multiplied after the 0x4b000000 magic-number conversion
+local	_gleCheckTexSubImageArgs	uVar2	requiredFormat	INFERRED	format that the packed type at hand requires: 0x80e1 (GL_BGRA) or 0x85b9 (YCbCr 422); compared with format
+use	_glePreInitVectorTOC	puVar1	vectorSlot10	INFERRED	16-byte aligned slot (toc_struct+0x10) filled with 0x100004, 0x10000, 0x200008, 0x20000	^\s*puVar1\ =\ \(undefined4\ \*\)\(\(uint\)\(PTR__gle_rtc_toc_struct_0011205c\ \+\ 0x10\)\ \&\ 0xfffffff0\);$	+5
+use	_glePreInitVectorTOC	puVar1	vectorSlot20	INFERRED	16-byte aligned slot (toc_struct+0x20) filled with 0x40, 0x80, 0, 0	^\s*puVar1\ =\ \(undefined4\ \*\)\(\(uint\)\(puVar2\ \+\ 0x20\)\ \&\ 0xfffffff0\);$	+5
+use	_glePreInitVectorTOC	puVar1	identityByteVector	CONFIRMED	16-byte aligned slot (toc_struct+0) filled with bytes 0x00..0x0f (0x03020100 ... 0x0f0e0d0c)	^\s*puVar1\ =\ \(undefined4\ \*\)\(\(uint\)puVar2\ \&\ 0xfffffff0\);$	+5
+local	_glePreInitVectorTOC	puVar2	tocStruct	CONFIRMED	PTR__gle_rtc_toc_struct: base of the runtime-constant TOC structure whose aligned slots are filled

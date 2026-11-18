@@ -785,28 +785,28 @@ int _glEnableVertexAttribARB_ListExec(glContext, listRecord)
 }
 
 /* _glDisableVertexAttribARB_Exec @ 0xb0880 (192 bytes) */
-void _glDisableVertexAttribARB_Exec(glContext, param_2, param_3)
+void _glDisableVertexAttribARB_Exec(glContext, attribIndex, attribSet)
   int glContext;
-  uint param_2;
-  int param_3;
+  uint attribIndex;
+  int attribSet;
 {
   undefined4 glErrorCode;
-  uint uVar2;
+  uint attribMask;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
-    if (param_2 < 0x10) {
-      if (param_3 == 0x8a00) {
-        uVar2 = *(uint *)(glContext + 0x74d8);
-        *(undefined1 *)(param_2 + glContext + 0x7524) = 0;
+    if (attribIndex < 0x10) {
+      if (attribSet == 0x8a00) {
+        attribMask = *(uint *)(glContext + 0x74d8);
+        *(undefined1 *)(attribIndex + glContext + 0x7524) = 0;
         *(uint *)(glContext + 0x74d8) =
-             uVar2 & (-2 << (param_2 & 0x1f) | 0xfffffffeU >> 0x20 - (param_2 & 0x1f));
+             attribMask & (-2 << (attribIndex & 0x1f) | 0xfffffffeU >> 0x20 - (attribIndex & 0x1f));
         return;
       }
-      if (param_3 == 0x8a01) {
-        uVar2 = *(uint *)(glContext + 0x74dc);
-        *(undefined1 *)(param_2 + glContext + 0x7564) = 0;
+      if (attribSet == 0x8a01) {
+        attribMask = *(uint *)(glContext + 0x74dc);
+        *(undefined1 *)(attribIndex + glContext + 0x7564) = 0;
         *(uint *)(glContext + 0x74dc) =
-             uVar2 & (-2 << (param_2 & 0x1f) | 0xfffffffeU >> 0x20 - (param_2 & 0x1f));
+             attribMask & (-2 << (attribIndex & 0x1f) | 0xfffffffeU >> 0x20 - (attribIndex & 0x1f));
         return;
       }
       if (*(int *)(glContext + 0x7574) != 0) {

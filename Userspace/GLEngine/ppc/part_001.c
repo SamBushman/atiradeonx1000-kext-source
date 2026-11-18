@@ -5900,11 +5900,11 @@ void _glGetIntegerv_Exec(glContext, pname, params)
   int *params;
 {
   undefined4 glErrorCode;
-  int iVar2;
+  int intValue;
   double *cursor;
   int remaining;
-  double dVar5;
-  double dVar6;
+  double stateValue;
+  double scaleOrStateValue;
   char stateFlagBytes [16];
   double stateValueBuffer [16];
   longlong doubleToIntScratch;
@@ -5913,7 +5913,7 @@ void _glGetIntegerv_Exec(glContext, pname, params)
   if (*(short *)(glContext + 0x4a10) < 0) {
     cursor = stateValueBuffer;
     remaining = ((int (*)())_gleGetState)(glContext,pname,cursor,valueType,stateFlagBytes);
-    dVar6 = DOUBLE_00108d90;
+    scaleOrStateValue = DOUBLE_00108d90;
     if (remaining == 0) {
       if (*(int *)(glContext + 0x7574) != 0) {
         return;
@@ -5927,9 +5927,9 @@ void _glGetIntegerv_Exec(glContext, pname, params)
           return;
         }
         do {
-          iVar2 = *(int *)cursor;
+          intValue = *(int *)cursor;
           cursor = cursor + 1;
-          *params = iVar2;
+          *params = intValue;
           params = params + 1;
           remaining = remaining + -1;
         } while (remaining != 0);
@@ -5940,10 +5940,10 @@ void _glGetIntegerv_Exec(glContext, pname, params)
           return;
         }
         do {
-          dVar6 = *cursor;
+          scaleOrStateValue = *cursor;
           cursor = cursor + 1;
-          doubleToIntScratch = (longlong)(int)dVar6;
-          *params = (int)dVar6;
+          doubleToIntScratch = (longlong)(int)scaleOrStateValue;
+          *params = (int)scaleOrStateValue;
           params = params + 1;
           remaining = remaining + -1;
         } while (remaining != 0);
@@ -5953,10 +5953,10 @@ void _glGetIntegerv_Exec(glContext, pname, params)
         return;
       }
       do {
-        dVar5 = *cursor;
+        stateValue = *cursor;
         cursor = cursor + 1;
-        doubleToIntScratch = (longlong)(int)(dVar5 * dVar6);
-        *params = (int)(dVar5 * dVar6);
+        doubleToIntScratch = (longlong)(int)(stateValue * scaleOrStateValue);
+        *params = (int)(stateValue * scaleOrStateValue);
         params = params + 1;
         remaining = remaining + -1;
       } while (remaining != 0);

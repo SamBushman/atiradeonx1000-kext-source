@@ -1383,52 +1383,53 @@ void _gleMap2Texture1dLoad(undefined4 unusedArg1,undefined4 unusedArg2,undefined
 /* _gleMap2Texture2dLoad @ 0xdfcc0 (252 bytes) */
 void _gleMap2Texture2dLoad(undefined4 unusedArg1,undefined4 unusedArg2,undefined4 unusedArg3,undefined4 unusedArg4,undefined4 unusedArg5,int ustride,int uorder,undefined4 unusedArg8,undefined4 unusedArg9,undefined4 unusedArg10,undefined4 unusedArg11,int vstride,int vorder,int points,int *mapData,double u1,double u2,double v1,double v2,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  double *pdVar1;
-  int iVar2;
+  double *pointSPtr;
+  int sByteOffset;
   int *destPtr;
   int uElementOffset;
   int destRecord;
-  int iVar6;
-  double *pdVar7;
+  int uRowBase;
+  double *pointTPtr;
   int uIndex;
   int vRemaining;
   double invUDelta;
-  double dVar11;
+  double unitConstant;
+  double pointT;
   
-  dVar11 = DOUBLE_00108d68;
+  unitConstant = DOUBLE_00108d68;
   uIndex = 0;
   invUDelta = DOUBLE_00108d68 / (u2 - u1);
   *mapData = uorder;
   mapData[1] = vorder;
   uElementOffset = 0;
   mapData[6] = (int)GH_F2U((float)invUDelta);
-  mapData[7] = (int)GH_F2U((float)(dVar11 / (v2 - v1)));
+  mapData[7] = (int)GH_F2U((float)(unitConstant / (v2 - v1)));
   mapData[2] = (int)GH_F2U((float)u1);
   mapData[3] = (int)GH_F2U((float)u2);
   mapData[4] = (int)GH_F2U((float)v1);
   mapData[5] = (int)GH_F2U((float)v2);
   if (0 < uorder) {
     destRecord = 0;
-    iVar6 = points;
+    uRowBase = points;
     do {
       if (0 < vorder) {
         destPtr = mapData + destRecord * 2;
-        pdVar7 = (double *)(iVar6 + 8);
-        iVar2 = uElementOffset << 3;
+        pointTPtr = (double *)(uRowBase + 8);
+        sByteOffset = uElementOffset << 3;
         vRemaining = vorder;
         do {
-          pdVar1 = (double *)(points + iVar2);
-          iVar2 = iVar2 + vstride * 8;
-          destPtr[8] = (int)GH_F2U((float)*pdVar1);
-          dVar11 = *pdVar7;
-          pdVar7 = pdVar7 + vstride;
-          destPtr[9] = (int)GH_F2U((float)dVar11);
+          pointSPtr = (double *)(points + sByteOffset);
+          sByteOffset = sByteOffset + vstride * 8;
+          destPtr[8] = (int)GH_F2U((float)*pointSPtr);
+          pointT = *pointTPtr;
+          pointTPtr = pointTPtr + vstride;
+          destPtr[9] = (int)GH_F2U((float)pointT);
           destPtr = destPtr + 2;
           vRemaining = vRemaining + -1;
         } while (vRemaining != 0);
       }
       uIndex = uIndex + 1;
-      iVar6 = iVar6 + ustride * 8;
+      uRowBase = uRowBase + ustride * 8;
       destRecord = destRecord + vorder;
       uElementOffset = uElementOffset + ustride;
     } while (uIndex < uorder);

@@ -163,18 +163,18 @@ int _glDrawElements_Comp(glContext, mode, count, type, indices)
   uint type;
   int indices;
 {
-  bool bVar1;
-  int iVar2;
-  undefined4 uVar3;
+  bool isValidIndexType;
+  int elementArrayBuffer;
+  undefined4 drawArraysOrElementsResult;
   
   if (type != 0x1403) {
     if (type < 0x1404) {
-      bVar1 = type == 0x1401;
+      isValidIndexType = type == 0x1401;
     }
     else {
-      bVar1 = type == 0x1405;
+      isValidIndexType = type == 0x1405;
     }
-    if (!bVar1) {
+    if (!isValidIndexType) {
       if (*(int *)(glContext + 0x7574) != 0) {
         return glContext;
       }
@@ -182,9 +182,9 @@ int _glDrawElements_Comp(glContext, mode, count, type, indices)
       return glContext;
     }
   }
-  iVar2 = *(int *)(*(int *)(glContext + 0x4a60) + 0x35c);
-  if (iVar2 != 0) {
-    indices = indices + *(int *)(iVar2 + 0x30);
+  elementArrayBuffer = *(int *)(*(int *)(glContext + 0x4a60) + 0x35c);
+  if (elementArrayBuffer != 0) {
+    indices = indices + *(int *)(elementArrayBuffer + 0x30);
   }
   *(int *)(glContext + 0x48d8) = indices;
   *(int *)(glContext + 0x4978) = indices;
@@ -193,8 +193,8 @@ int _glDrawElements_Comp(glContext, mode, count, type, indices)
     *(undefined4 *)(glContext + 0x488c) = 0;
     *(undefined4 *)(glContext + 0x4890) = 0;
   }
-  uVar3 = _gleDrawArraysOrElements_Comp(glContext,mode,0,count);
-  return uVar3;
+  drawArraysOrElementsResult = _gleDrawArraysOrElements_Comp(glContext,mode,0,count);
+  return drawArraysOrElementsResult;
 }
 
 /* _glDrawElements_IMM_Exec @ 0xa899c (136 bytes) */
@@ -311,17 +311,17 @@ void _glDrawElements_VAR_Exec(int glContext,undefined4 forwardedArg2,undefined4 
 /* _glDrawElements_CVA_Exec @ 0xa8b34 (136 bytes) */
 void _glDrawElements_CVA_Exec(int glContext,undefined4 forwardedArg2,undefined4 forwardedArg3,uint type,int indices,double forwardedFloatArg1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
 {
-  bool bVar1;
-  int iVar2;
+  bool isValidIndexType;
+  int elementArrayBuffer;
   
   if (type != 0x1403) {
     if (type < 0x1404) {
-      bVar1 = type == 0x1401;
+      isValidIndexType = type == 0x1401;
     }
     else {
-      bVar1 = type == 0x1405;
+      isValidIndexType = type == 0x1405;
     }
-    if (!bVar1) {
+    if (!isValidIndexType) {
       if (*(int *)(glContext + 0x7574) != 0) {
         return;
       }
@@ -334,9 +334,9 @@ void _glDrawElements_CVA_Exec(int glContext,undefined4 forwardedArg2,undefined4 
     *(undefined4 *)(glContext + 0x488c) = 0;
     *(undefined4 *)(glContext + 0x4890) = 0;
   }
-  iVar2 = *(int *)(*(int *)(glContext + 0x4a60) + 0x35c);
-  if (iVar2 != 0) {
-    indices = indices + *(int *)(iVar2 + 0x30);
+  elementArrayBuffer = *(int *)(*(int *)(glContext + 0x4a60) + 0x35c);
+  if (elementArrayBuffer != 0) {
+    indices = indices + *(int *)(elementArrayBuffer + 0x30);
   }
   *(int *)(glContext + 0x48d8) = indices;
   *(int *)(glContext + 0x4978) = indices;
@@ -348,17 +348,17 @@ void _glDrawElements_CVA_Exec(int glContext,undefined4 forwardedArg2,undefined4 
 /* _glDrawElements_STD_Exec @ 0xa8bbc (136 bytes) */
 void _glDrawElements_STD_Exec(int glContext,undefined4 forwardedArg2,undefined4 forwardedArg3,uint type,int indices,double forwardedFloatArg1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
 {
-  bool bVar1;
-  int iVar2;
+  bool isValidIndexType;
+  int elementArrayBuffer;
   
   if (type != 0x1403) {
     if (type < 0x1404) {
-      bVar1 = type == 0x1401;
+      isValidIndexType = type == 0x1401;
     }
     else {
-      bVar1 = type == 0x1405;
+      isValidIndexType = type == 0x1405;
     }
-    if (!bVar1) {
+    if (!isValidIndexType) {
       if (*(int *)(glContext + 0x7574) != 0) {
         return;
       }
@@ -371,9 +371,9 @@ void _glDrawElements_STD_Exec(int glContext,undefined4 forwardedArg2,undefined4 
     *(undefined4 *)(glContext + 0x488c) = 0;
     *(undefined4 *)(glContext + 0x4890) = 0;
   }
-  iVar2 = *(int *)(*(int *)(glContext + 0x4a60) + 0x35c);
-  if (iVar2 != 0) {
-    indices = indices + *(int *)(iVar2 + 0x30);
+  elementArrayBuffer = *(int *)(*(int *)(glContext + 0x4a60) + 0x35c);
+  if (elementArrayBuffer != 0) {
+    indices = indices + *(int *)(elementArrayBuffer + 0x30);
   }
   *(int *)(glContext + 0x48d8) = indices;
   *(int *)(glContext + 0x4978) = indices;
@@ -649,9 +649,9 @@ LAB_000a9058:
 /* _glDrawRangeElements_VBO_Exec @ 0xa90a8 (168 bytes) */
 void _glDrawRangeElements_VBO_Exec(int glContext,undefined4 forwardedArg2,uint start,uint end,undefined4 forwardedArg5,uint type,int indices,double forwardedFloatArg1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
 {
-  bool bVar1;
+  bool isValidIndexType;
   undefined4 glErrorCode;
-  int iVar3;
+  int elementArrayBuffer;
   
   if (end < start) {
     if (*(int *)(glContext + 0x7574) != 0) {
@@ -664,12 +664,12 @@ LAB_000a9100:
   }
   if (type != 0x1403) {
     if (type < 0x1404) {
-      bVar1 = type == 0x1401;
+      isValidIndexType = type == 0x1401;
     }
     else {
-      bVar1 = type == 0x1405;
+      isValidIndexType = type == 0x1405;
     }
-    if (!bVar1) {
+    if (!isValidIndexType) {
       if (*(int *)(glContext + 0x7574) != 0) {
         return;
       }
@@ -682,9 +682,9 @@ LAB_000a9100:
     *(undefined4 *)(glContext + 0x488c) = 0;
     *(undefined4 *)(glContext + 0x4890) = 0;
   }
-  iVar3 = *(int *)(*(int *)(glContext + 0x4a60) + 0x35c);
-  if (iVar3 != 0) {
-    indices = indices + *(int *)(iVar3 + 0x30);
+  elementArrayBuffer = *(int *)(*(int *)(glContext + 0x4a60) + 0x35c);
+  if (elementArrayBuffer != 0) {
+    indices = indices + *(int *)(elementArrayBuffer + 0x30);
   }
   *(int *)(glContext + 0x4978) = indices;
   *(int *)(glContext + 0x48d8) = indices;
@@ -790,9 +790,9 @@ LAB_000a9250:
 /* _glDrawRangeElements_Exec @ 0xa92a0 (168 bytes) */
 void _glDrawRangeElements_Exec(int glContext,undefined4 mode,uint start,uint end,undefined4 count,uint type,int indices,double forwardedFloatArg1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
 {
-  bool bVar1;
+  bool isValidIndexType;
   undefined4 glErrorCode;
-  int iVar3;
+  int elementArrayBuffer;
   
   if (end < start) {
     if (*(int *)(glContext + 0x7574) != 0) {
@@ -805,12 +805,12 @@ LAB_000a92f8:
   }
   if (type != 0x1403) {
     if (type < 0x1404) {
-      bVar1 = type == 0x1401;
+      isValidIndexType = type == 0x1401;
     }
     else {
-      bVar1 = type == 0x1405;
+      isValidIndexType = type == 0x1405;
     }
-    if (!bVar1) {
+    if (!isValidIndexType) {
       if (*(int *)(glContext + 0x7574) != 0) {
         return;
       }
@@ -818,9 +818,9 @@ LAB_000a92f8:
       goto LAB_000a92f8;
     }
   }
-  iVar3 = *(int *)(*(int *)(glContext + 0x4a60) + 0x35c);
-  if (iVar3 != 0) {
-    indices = indices + *(int *)(iVar3 + 0x30);
+  elementArrayBuffer = *(int *)(*(int *)(glContext + 0x4a60) + 0x35c);
+  if (elementArrayBuffer != 0) {
+    indices = indices + *(int *)(elementArrayBuffer + 0x30);
   }
   *(int *)(glContext + 0x48d8) = indices;
   *(int *)(glContext + 0x4978) = indices;
@@ -1419,15 +1419,15 @@ int _glDrawElementArrayAPPLE_Comp(glContext, mode, first, count)
 void _glDrawElementArrayAPPLE_Exec(int glContext,undefined4 mode,undefined4 first,undefined4 count,double forwardedFloatArg1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
 {
   int clientState;
-  int iVar2;
+  int indexPointer;
   
   clientState = *(int *)(glContext + 0x4a60);
-  iVar2 = *(int *)(clientState + 0xd8);
+  indexPointer = *(int *)(clientState + 0xd8);
   if (*(int *)(clientState + 0x35c) != 0) {
-    iVar2 = iVar2 + *(int *)(*(int *)(clientState + 0x35c) + 0x30);
+    indexPointer = indexPointer + *(int *)(*(int *)(clientState + 0x35c) + 0x30);
   }
-  *(int *)(glContext + 0x48d8) = iVar2;
-  *(int *)(glContext + 0x4978) = iVar2;
+  *(int *)(glContext + 0x48d8) = indexPointer;
+  *(int *)(glContext + 0x4978) = indexPointer;
   if ((uint)*(ushort *)(clientState + 0xe0) != *(uint *)(glContext + 0x48dc)) {
     *(uint *)(glContext + 0x48dc) = (uint)*(ushort *)(clientState + 0xe0);
     *(undefined4 *)(glContext + 0x488c) = 0;

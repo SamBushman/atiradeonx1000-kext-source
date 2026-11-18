@@ -258,31 +258,31 @@ double _gleModelMatInvert(int glContext)
 {
   int loopIndex;
   int remaining;
-  double dVar3;
-  double dVar4;
+  double invertResultOrRescaleFactor;
+  double normalLengthThenRescaleFactor;
   
   *(uint *)(glContext + 0x50b0) = *(uint *)(glContext + 0x50b0) & 0xffffffef;
-  dVar3 = (double)(*(double ( *)(int,int))_gleInvertMatrix)(glContext, 4);
+  invertResultOrRescaleFactor = (double)(*(double ( *)(int,int))_gleInvertMatrix)(glContext, 4);
   if (*(char *)(glContext + 0x280e) == '\0') {
     *(undefined4 *)(glContext + 0x2804) = 0x3f800000;
   }
   else {
-    dVar4 = _sqrt((double)(*(float *)(glContext + 0x22e8) * *(float *)(glContext + 0x22e8) +
+    normalLengthThenRescaleFactor = _sqrt((double)(*(float *)(glContext + 0x22e8) * *(float *)(glContext + 0x22e8) +
                           (*(float *)(glContext + 0x22d8) * *(float *)(glContext + 0x22d8) +
                           *(float *)(glContext + 0x22c8) * *(float *)(glContext + 0x22c8))));
     remaining = 0x10;
     loopIndex = 0;
-    dVar4 = DOUBLE_00108d68 / dVar4;
-    dVar3 = (double)(float)dVar4;
+    normalLengthThenRescaleFactor = DOUBLE_00108d68 / normalLengthThenRescaleFactor;
+    invertResultOrRescaleFactor = (double)(float)normalLengthThenRescaleFactor;
     do {
       *(float *)(loopIndex + glContext + 0x22c0) =
-           (float)((double)*(float *)(loopIndex + glContext + 0x22c0) * dVar3);
+           (float)((double)*(float *)(loopIndex + glContext + 0x22c0) * invertResultOrRescaleFactor);
       loopIndex = loopIndex + 4;
       remaining = remaining + -1;
     } while (remaining != 0);
-    *(float *)(glContext + 0x2804) = (float)dVar4;
+    *(float *)(glContext + 0x2804) = (float)normalLengthThenRescaleFactor;
   }
-  return dVar3;
+  return invertResultOrRescaleFactor;
 }
 
 /* _gleSetupInvertMatrix @ 0x33570 (80 bytes) */

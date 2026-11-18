@@ -513,16 +513,16 @@ int _gleRTCAddAChunk_c5ddc(srcCursor, dstCursor)
 }
 
 /* _gleSetProjectionFuncW1 @ 0xc5e0c (104 bytes) */
-void _gleSetProjectionFuncW1(glContext, param_2, param_3)
+void _gleSetProjectionFuncW1(glContext, forwardedArg2, forwardedArg3)
   int glContext;
-  undefined4 param_2;
-  undefined4 param_3;
+  undefined4 forwardedArg2;
+  undefined4 forwardedArg3;
 {
-  code *pcVar1;
+  code *projectionFunc;
   
-  pcVar1 = (code *)(*_gleBuildProjectionTransformFunc)(glContext,1,param_3);
-  *(code **)(glContext + 0x5060) = pcVar1;
-  (*pcVar1)(glContext,param_2,param_3);
+  projectionFunc = (code *)(*_gleBuildProjectionTransformFunc)(glContext,1,forwardedArg3);
+  *(code **)(glContext + 0x5060) = projectionFunc;
+  (*projectionFunc)(glContext,forwardedArg2,forwardedArg3);
   return;
 }
 
@@ -1320,32 +1320,32 @@ void _gleAddClientAttribElem(glContext, clientAttribBit)
   int glContext;
   undefined4 clientAttribBit;
 {
-  int *piVar1;
-  undefined4 *puVar2;
+  int *attribStackSlot;
+  undefined4 *attribElem;
   
-  puVar2 = (undefined4 *)_malloc(0x2c0);
-  if (puVar2 == (undefined4 *)0x0) {
+  attribElem = (undefined4 *)_malloc(0x2c0);
+  if (attribElem == (undefined4 *)0x0) {
     if (*(int *)(glContext + 0x7574) == 0) {
       *(undefined4 *)(glContext + 0x7574) = 0x505;
     }
   }
   else {
-    *puVar2 = clientAttribBit;
-    ((void (*)())_gleGetClientAttrib)(glContext,clientAttribBit,puVar2 + 1);
-    piVar1 = *(int **)(glContext + 0x5140);
-    puVar2[0xaf] = *piVar1;
-    *piVar1 = (int)puVar2;
+    *attribElem = clientAttribBit;
+    ((void (*)())_gleGetClientAttrib)(glContext,clientAttribBit,attribElem + 1);
+    attribStackSlot = *(int **)(glContext + 0x5140);
+    attribElem[0xaf] = *attribStackSlot;
+    *attribStackSlot = (int)attribElem;
   }
   return;
 }
 
 /* _gleRemoveClientAttribElem @ 0xc70ac (56 bytes) */
-void _gleRemoveClientAttribElem(param_1, param_2)
-  undefined4 param_1;
-  undefined4 *param_2;
+void _gleRemoveClientAttribElem(glContext, attribElem)
+  undefined4 glContext;
+  undefined4 *attribElem;
 {
-  ((void (*)())_gleSetClientAttrib)(param_1,*param_2,param_2 + 1);
-  _free(param_2);
+  ((void (*)())_gleSetClientAttrib)(glContext,*attribElem,attribElem + 1);
+  _free(attribElem);
   return;
 }
 
@@ -1932,13 +1932,13 @@ int _OffsetLimitImage3D(pixelStore, width, height, depth, format, type, baseOffs
   int baseOffset;
   int skipImages;
 {
-  uint uVar1;
+  uint bitCountOrAlignmentRemainder;
   uint rowStride;
   int skipRows;
   int alignment;
   int skipPixels;
   int imageHeight;
-  int iVar7;
+  int pixelBytesThenLimitOffset;
   int rowLength;
   
   skipRows = pixelStore[2];
@@ -1953,25 +1953,25 @@ int _OffsetLimitImage3D(pixelStore, width, height, depth, format, type, baseOffs
     if (imageHeight < 1) {
       imageHeight = height;
     }
-    uVar1 = rowLength + 7;
-    rowStride = ((int)uVar1 >> 3) + (uint)((int)uVar1 < 0 && (uVar1 & 7) != 0);
-    uVar1 = rowStride & alignment - 1U;
-    if (uVar1 != 0) {
-      rowStride = rowStride + (alignment - uVar1);
+    bitCountOrAlignmentRemainder = rowLength + 7;
+    rowStride = ((int)bitCountOrAlignmentRemainder >> 3) + (uint)((int)bitCountOrAlignmentRemainder < 0 && (bitCountOrAlignmentRemainder & 7) != 0);
+    bitCountOrAlignmentRemainder = rowStride & alignment - 1U;
+    if (bitCountOrAlignmentRemainder != 0) {
+      rowStride = rowStride + (alignment - bitCountOrAlignmentRemainder);
     }
-    uVar1 = skipPixels + width + 7;
-    iVar7 = baseOffset + imageHeight * rowStride * (skipImages + depth + -1) + rowStride * (skipRows + height + -1) +
-            ((int)uVar1 >> 3) + (uint)((int)uVar1 < 0 && (uVar1 & 7) != 0);
+    bitCountOrAlignmentRemainder = skipPixels + width + 7;
+    pixelBytesThenLimitOffset = baseOffset + imageHeight * rowStride * (skipImages + depth + -1) + rowStride * (skipRows + height + -1) +
+            ((int)bitCountOrAlignmentRemainder >> 3) + (uint)((int)bitCountOrAlignmentRemainder < 0 && (bitCountOrAlignmentRemainder & 7) != 0);
   }
   else {
-    iVar7 = _glePixelBytes(format,type);
+    pixelBytesThenLimitOffset = _glePixelBytes(format,type);
     if ((((rowLength == 0 && imageHeight == 0) && skipPixels == 0) && skipRows == 0) && skipPixels == 0) {
       rowStride = _gleRowBytes(format,type,width);
-      uVar1 = rowStride & alignment - 1U;
-      if (uVar1 != 0) {
-        rowStride = rowStride + (alignment - uVar1);
+      bitCountOrAlignmentRemainder = rowStride & alignment - 1U;
+      if (bitCountOrAlignmentRemainder != 0) {
+        rowStride = rowStride + (alignment - bitCountOrAlignmentRemainder);
       }
-      iVar7 = depth * height * rowStride;
+      pixelBytesThenLimitOffset = depth * height * rowStride;
     }
     else {
       if (rowLength < 1) {
@@ -1981,16 +1981,16 @@ int _OffsetLimitImage3D(pixelStore, width, height, depth, format, type, baseOffs
         imageHeight = height;
       }
       rowStride = _gleRowBytes(format,type,rowLength);
-      uVar1 = rowStride & alignment - 1U;
-      if (uVar1 != 0) {
-        rowStride = rowStride + (alignment - uVar1);
+      bitCountOrAlignmentRemainder = rowStride & alignment - 1U;
+      if (bitCountOrAlignmentRemainder != 0) {
+        rowStride = rowStride + (alignment - bitCountOrAlignmentRemainder);
       }
-      iVar7 = iVar7 * (skipPixels + width);
+      pixelBytesThenLimitOffset = pixelBytesThenLimitOffset * (skipPixels + width);
       baseOffset = baseOffset + imageHeight * rowStride * (skipImages + depth + -1) + rowStride * (skipRows + height + -1);
     }
-    iVar7 = baseOffset + iVar7;
+    pixelBytesThenLimitOffset = baseOffset + pixelBytesThenLimitOffset;
   }
-  return iVar7;
+  return pixelBytesThenLimitOffset;
 }
 
 /* _gleOffsetLimitImage3D @ 0xc7e10 (8 bytes) */
@@ -2405,9 +2405,9 @@ void _gleSwitchRenderersWriteBuffers(glContext, unusedArg2, copyContextData)
 int _gleRevertSwapToPrimary(glContext)
   int glContext;
 {
-  int iVar1;
-  undefined4 uVar2;
-  uint uVar3;
+  int rendererSlot;
+  undefined4 freeResult;
+  uint currentRendererIndex;
   double forwardedFloatArg1;
   double incomingFpr2;
   double incomingFpr3;
@@ -2416,28 +2416,28 @@ int _gleRevertSwapToPrimary(glContext)
   double incomingFpr6;
   double incomingFpr7;
   double incomingFpr8;
-  undefined4 local_30;
-  undefined4 local_2c;
-  undefined4 local_28;
-  undefined4 local_24;
-  undefined4 local_20;
+  undefined4 copyContextData;
+  undefined4 copyContextData1;
+  undefined4 copyContextData2;
+  undefined4 copyContextData3;
+  undefined4 copyContextData4;
   
-  uVar3 = (uint)*(byte *)(glContext + 0x85a6);
-  local_20 = 0;
-  local_30 = 0;
-  local_2c = 0;
-  local_28 = 0;
-  local_24 = 0;
-  ((void (*)())_gleSwitchRenderersReadBuffers)(glContext,(uint)*(byte *)(glContext + 0x85a5),&local_30);
-  iVar1 = uVar3 * 0x2e0 + glContext;
-  (**(code **)(*(int *)(iVar1 + 0x8884) + 0x138))
-            (*(undefined4 *)(iVar1 + 0x85ac),*(undefined4 *)(glContext + 0x484c),
+  currentRendererIndex = (uint)*(byte *)(glContext + 0x85a6);
+  copyContextData4 = 0;
+  copyContextData = 0;
+  copyContextData1 = 0;
+  copyContextData2 = 0;
+  copyContextData3 = 0;
+  ((void (*)())_gleSwitchRenderersReadBuffers)(glContext,(uint)*(byte *)(glContext + 0x85a5),&copyContextData);
+  rendererSlot = currentRendererIndex * 0x2e0 + glContext;
+  (**(code **)(*(int *)(rendererSlot + 0x8884) + 0x138))
+            (*(undefined4 *)(rendererSlot + 0x85ac),*(undefined4 *)(glContext + 0x484c),
              *(undefined4 *)(glContext + 0x4848),0);
-  forwardedFloatArg1 = (double)((int (*)())_gleSwitchToRenderer)(glContext,uVar3);
+  forwardedFloatArg1 = (double)((int (*)())_gleSwitchToRenderer)(glContext,currentRendererIndex);
   ((void (*)())_gleUpdateViewScissorData)(glContext,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
-  ((void (*)())_gleSwitchRenderersWriteBuffers)(glContext,uVar3,&local_30);
-  uVar2 = ((int (*)())_gleFreeCopyContextData)(&local_30);
-  return uVar2;
+  ((void (*)())_gleSwitchRenderersWriteBuffers)(glContext,currentRendererIndex,&copyContextData);
+  freeResult = ((int (*)())_gleFreeCopyContextData)(&copyContextData);
+  return freeResult;
 }
 
 /* _gleGetMapData @ 0xc8830 (88 bytes) */

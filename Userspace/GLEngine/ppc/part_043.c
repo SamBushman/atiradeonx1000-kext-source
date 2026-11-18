@@ -1509,7 +1509,7 @@ int _gleCheckFramebufferStatus(int glContext,int framebufferRecord,int *param_3,
   int *dirtyFlagWords;
   double f1AfterCall;
   double f1AfterCall1;
-  double extraout_f1_01;
+  double f1AfterCall2;
   double f1AfterCall3;
   double f1AfterCall4;
   
