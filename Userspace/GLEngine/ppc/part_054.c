@@ -2375,7 +2375,7 @@ int _gleGenSurfaceMipmaps(glContext, param_2, param_3, param_4, param_5)
 /* _gleHalfFloatToFloat @ 0xfc084 (136 bytes) */
 double _gleHalfFloatToFloat(uint halfBits)
 {
-  float fVar1;
+  float floatValue;
   uint mantissa;
   uint exponentFieldThenFloatExponentBits;
   uint signBit;
@@ -2384,9 +2384,9 @@ double _gleHalfFloatToFloat(uint halfBits)
   mantissa = halfBits & 0x3ff;
   signBit = (halfBits & 0x8000) << 0x10;
   if (exponentFieldThenFloatExponentBits == 0x7c00) {
-    fVar1 = GH_U2F((unsigned int)((signBit | 0x7f800000)));
+    floatValue = GH_U2F((unsigned int)((signBit | 0x7f800000)));
     if (mantissa != 0) {
-      fVar1 = GH_U2F((unsigned int)((signBit | 0x7fffffff)));
+      floatValue = GH_U2F((unsigned int)((signBit | 0x7fffffff)));
     }
   }
   else {
@@ -2403,9 +2403,9 @@ double _gleHalfFloatToFloat(uint halfBits)
     else {
       exponentFieldThenFloatExponentBits = exponentFieldThenFloatExponentBits * 0x2000 + 0x38000000;
     }
-    fVar1 = GH_U2F((unsigned int)((signBit | exponentFieldThenFloatExponentBits | mantissa << 0xd)));
+    floatValue = GH_U2F((unsigned int)((signBit | exponentFieldThenFloatExponentBits | mantissa << 0xd)));
   }
-  return (double)fVar1;
+  return (double)floatValue;
 }
 
 /* _gleLookUpTexture1D @ 0xfc10c (72 bytes) */

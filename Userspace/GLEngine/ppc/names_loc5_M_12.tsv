@@ -1,0 +1,17 @@
+local	_gleHalfFloatToFloat	fVar1	floatValue	CONFIRMED	the converted single-precision value built from sign, exponent and mantissa bits (infinity/NaN for exponent 0x1f); widened and returned
+local	_glGetPixelMapfv_Exec	dVar1	intToDoubleBias	CONFIRMED	DOUBLE_00108d58, the int-to-double conversion bias subtracted from the CONCAT44(0x43300000, value ^ 0x80000000) temporaries of the map values
+local	_gleColorTable	param_3	levelRecord	CONFIRMED	texture-level style record of the color table: internal format (ushort +0x10), type (ushort +0x12) and the image/pixel pointer (+0x14), passed to _gleImagingUnpackData and _gleImagingScaleAndBias (the callers pass a textureLevel / level record)
+local	_gleColorTable	param_4	width	CONFIRMED	number of table entries: the callers pass their width, used as the width of _gleImagingUnpackData and as the pixelCount of _gleImagingScaleAndBias
+local	_glEvalCoord2f_ListExec_body	fparam_2	v	INFERRED	the v evaluation coordinate (floating-point register f2) narrowed to float and passed as the second coordinate of _gleEvalMap2 (u is read from recordedArgs)
+local	_glDisableVertexAttribARB_Comp	param_2	attribIndex	CONFIRMED	generic vertex attribute index: recorded as the first word of the list record (the same value _glDisableVertexAttribARB_ListExec replays)
+local	_glDisableVertexAttribARB_Comp	param_3	mapTarget	INFERRED	0x8a00 or 0x8a01 (GL_VERTEX_ATTRIB_MAP1_APPLE / MAP2_APPLE of APPLE_vertex_program_evaluators), recorded as the second word of the list record
+local	_gleRemoveAttribElem	param_2	attribElement	CONFIRMED	saved attribute element: word 0 is the attribute bit, the attribute buffer follows at +4; it is applied with _gleSetAttrib and then freed
+local	_gleBeginLineStripRenderTCL	puVar1	renderFunc	CONFIRMED	PTR__gleRenderLineStripTCLFunc stored at ctx+0x4a08 as the per-primitive render function
+local	_gleBeginLineStripRenderTCL	puVar2	flushFunc	CONFIRMED	PTR__gleFlushLineStripTCLFunc stored at ctx+0x4a0c as the flush function
+local	_gleVPRenderLineStrip	fparam_1	f1AfterHookCall	INFERRED	Ghidra models the value left in f1 by the vertex-program and clip hooks (ctx+0x5074 and calls) as a double; only forwarded as the floating-point argument of _gleClipLinesPlane
+local	_glTexGenf_Exec	fparam_2	zeroComponent	CONFIRMED	FLOAT_00108e50 (0.0) widened to double: passed as the three unused trailing components of the vector argument of _glTexGen_Exec
+local	_glTexGend_Comp	fparam_2	zeroComponent	CONFIRMED	FLOAT_00108e50 (0.0) widened to double: passed as the three unused trailing components of the vector argument of _glTexGen_Comp
+local	_glLighti_Exec	fparam_1	incomingF1Returned	INFERRED	incoming floating-point register f1 (not used by this function), returned unchanged on the error paths as the double result
+local	_gleSetClipInterpFunc	pcVar1	interpolateFunc	CONFIRMED	interpolation function returned by _gleBuildInterpolateFunc(glContext, 1, ...): stored at ctx+0x49cc and called with (glContext, arg2..arg5)
+local	_glRotateY_Comp	fparam_1	sinAngle	CONFIRMED	sine of the rotation angle: the caller _glRotatef_CompExec passes (float)sin as the first value; recorded as listRecord[0]
+local	_glRotateY_Comp	fparam_2	cosAngle	CONFIRMED	cosine of the rotation angle: the caller _glRotatef_CompExec passes (float)cos as the second value; recorded as listRecord[1]

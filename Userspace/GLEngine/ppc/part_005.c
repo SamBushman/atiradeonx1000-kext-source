@@ -2840,15 +2840,15 @@ int _glBegin_Comp(glContext, mode)
 void _gleBeginLineStripRenderTCL(glContext)
   int glContext;
 {
-  undefined *puVar1;
-  undefined *puVar2;
+  undefined *renderFunc;
+  undefined *flushFunc;
   
   *(undefined1 *)(glContext + 0x4a18) = 0;
-  puVar2 = PTR__gleFlushLineStripTCLFunc_001121f8;
-  puVar1 = PTR__gleRenderLineStripTCLFunc_001121f4;
+  flushFunc = PTR__gleFlushLineStripTCLFunc_001121f8;
+  renderFunc = PTR__gleRenderLineStripTCLFunc_001121f4;
   *(undefined4 *)(glContext + 0x4858) = *(undefined4 *)(glContext + 0x4854);
-  *(undefined **)(glContext + 0x4a0c) = puVar2;
-  *(undefined **)(glContext + 0x4a08) = puVar1;
+  *(undefined **)(glContext + 0x4a0c) = flushFunc;
+  *(undefined **)(glContext + 0x4a08) = renderFunc;
   return;
 }
 

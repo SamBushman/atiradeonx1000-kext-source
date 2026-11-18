@@ -1,0 +1,2 @@
+local	_glGetError_Exec	iVar1	errorCodeThenRendererRecordThenRendererError	CONFIRMED	error recorded at ctx+0x7574 (read and cleared) or 0, then reassigned the per-renderer record ctx + rendererIndex * 0x2e0, then the error returned by the renderer's query function (dispatch +0x180); the final value is returned
+local	_gleSelectTrianglesFunc_body	dVar18	f1AfterHookCall	INFERRED	Ghidra models the value left in f1 by the per-polygon hooks and the clip/select calls as a double; only forwarded as the first floating-point argument of the _gleClip* and _gleSelect* helper calls

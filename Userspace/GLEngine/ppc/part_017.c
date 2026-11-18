@@ -1867,7 +1867,7 @@ int _glLighti_Comp(glContext, light, pname, param)
 }
 
 /* _glLighti_Exec @ 0x6b9e4 (756 bytes) */
-double _glLighti_Exec(int glContext,int light,undefined4 pname,uint param,double fparam_1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12)
+double _glLighti_Exec(int glContext,int light,undefined4 pname,uint param,double incomingF1Returned,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12)
 {
   float paramAsFloat;
   byte dirtyBitIndex;
@@ -1882,7 +1882,7 @@ double _glLighti_Exec(int glContext,int light,undefined4 pname,uint param,double
   
   if (-1 < *(short *)(glContext + 0x4a10)) {
     if (*(int *)(glContext + 0x7574) != 0) {
-      return fparam_1;
+      return incomingF1Returned;
     }
     glErrorCode = 0x502;
     goto LAB_0006bcb8;
@@ -1964,20 +1964,20 @@ LAB_0006bc98:
       goto switchD_0006ba80_default;
     }
     if (*(int *)(glContext + 0x7574) != 0) {
-      return fparam_1;
+      return incomingF1Returned;
     }
     glErrorCode = 0x501;
   }
   else {
 switchD_0006ba80_default:
     if (*(int *)(glContext + 0x7574) != 0) {
-      return fparam_1;
+      return incomingF1Returned;
     }
     glErrorCode = 0x500;
   }
 LAB_0006bcb8:
   *(undefined4 *)(glContext + 0x7574) = glErrorCode;
-  return fparam_1;
+  return incomingF1Returned;
 }
 
 /* _glLighti_CompExec @ 0x6bcec (72 bytes) */

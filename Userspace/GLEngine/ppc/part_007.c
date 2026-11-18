@@ -4036,12 +4036,12 @@ void _glPopAttrib_Exec(glContext)
 }
 
 /* _gleRemoveAttribElem @ 0x4ad00 (56 bytes) */
-void _gleRemoveAttribElem(glContext, param_2)
+void _gleRemoveAttribElem(glContext, attribElement)
   undefined4 glContext;
-  undefined4 *param_2;
+  undefined4 *attribElement;
 {
-  ((int (*)())_gleSetAttrib)(glContext,*param_2,param_2 + 1);
-  _free(param_2);
+  ((int (*)())_gleSetAttrib)(glContext,*attribElement,attribElement + 1);
+  _free(attribElement);
   return;
 }
 

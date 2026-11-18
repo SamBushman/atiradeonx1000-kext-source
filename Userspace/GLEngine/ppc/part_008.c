@@ -1846,11 +1846,11 @@ void _gleSetClipInterpFunc(glContext, forwardedArg2, forwardedArg3, forwardedArg
   undefined4 forwardedArg7;
   undefined4 forwardedArg8;
 {
-  code *pcVar1;
+  code *interpolateFunc;
   
-  pcVar1 = (code *)((int (*)())_gleBuildInterpolateFunc)(glContext,1,forwardedArg3,forwardedArg4,forwardedArg5,forwardedArg6,forwardedArg7,forwardedArg8);
-  *(code **)(glContext + 0x49cc) = pcVar1;
-  (*pcVar1)(glContext,forwardedArg2,forwardedArg3,forwardedArg4,forwardedArg5);
+  interpolateFunc = (code *)((int (*)())_gleBuildInterpolateFunc)(glContext,1,forwardedArg3,forwardedArg4,forwardedArg5,forwardedArg6,forwardedArg7,forwardedArg8);
+  *(code **)(glContext + 0x49cc) = interpolateFunc;
+  (*interpolateFunc)(glContext,forwardedArg2,forwardedArg3,forwardedArg4,forwardedArg5);
   return;
 }
 

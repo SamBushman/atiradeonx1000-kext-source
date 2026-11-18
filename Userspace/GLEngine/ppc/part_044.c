@@ -1694,19 +1694,19 @@ void _gleGetSeparableFilter(glContext, unusedArg2, format, type, row, column)
 }
 
 /* _gleColorTable @ 0xd4014 (128 bytes) */
-void _gleColorTable(glContext, scaleBias, param_3, param_4, format, type, table)
+void _gleColorTable(glContext, scaleBias, levelRecord, width, format, type, table)
   undefined4 glContext;
   undefined4 scaleBias;
-  int param_3;
-  undefined4 param_4;
+  int levelRecord;
+  undefined4 width;
   undefined4 format;
   undefined4 type;
   undefined4 table;
 {
-  ((void (*)())_gleImagingUnpackData)(glContext,param_4,1,format,type,(uint)*(ushort *)(param_3 + 0x10),
-             (uint)*(ushort *)(param_3 + 0x12),table,*(undefined4 *)(param_3 + 0x14));
-  ((void (*)())_gleImagingScaleAndBias)(glContext,scaleBias,*(undefined4 *)(param_3 + 0x14),(uint)*(ushort *)(param_3 + 0x10),0,
-             param_4,1);
+  ((void (*)())_gleImagingUnpackData)(glContext,width,1,format,type,(uint)*(ushort *)(levelRecord + 0x10),
+             (uint)*(ushort *)(levelRecord + 0x12),table,*(undefined4 *)(levelRecord + 0x14));
+  ((void (*)())_gleImagingScaleAndBias)(glContext,scaleBias,*(undefined4 *)(levelRecord + 0x14),(uint)*(ushort *)(levelRecord + 0x10),0,
+             width,1);
   return;
 }
 

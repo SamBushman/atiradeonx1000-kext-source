@@ -4451,14 +4451,14 @@ void _glRotated_CompExec(int glContext,double angle,double x,double y,double z)
 }
 
 /* _glRotateY_Comp @ 0x43a6c (100 bytes) */
-void _glRotateY_Comp(undefined4 glContext,float fparam_1,float fparam_2)
+void _glRotateY_Comp(undefined4 glContext,float sinAngle,float cosAngle)
 {
   float *listRecord;
   
   listRecord = (float *)_gleAddListItem(glContext,PTR__glRotateY_ListExec_0011028c,8);
   if (listRecord != (float *)0x0) {
-    listRecord[1] = (float)fparam_2;
-    *listRecord = (float)fparam_1;
+    listRecord[1] = (float)cosAngle;
+    *listRecord = (float)sinAngle;
   }
   return;
 }

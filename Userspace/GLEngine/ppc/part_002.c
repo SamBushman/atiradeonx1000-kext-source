@@ -3731,22 +3731,22 @@ LAB_0001b50c:
 int _glGetError_Exec(glContext)
   int glContext;
 {
-  int iVar1;
+  int errorCodeThenRendererRecordThenRendererError;
   uint rendererIndex;
   
   rendererIndex = 0;
   if (*(short *)(glContext + 0x4a10) < 0) {
-    iVar1 = *(int *)(glContext + 0x7574);
+    errorCodeThenRendererRecordThenRendererError = *(int *)(glContext + 0x7574);
     *(undefined4 *)(glContext + 0x7574) = 0;
-    if ((iVar1 == 0) && (*(char *)(glContext + 0x85a4) != '\0')) {
+    if ((errorCodeThenRendererRecordThenRendererError == 0) && (*(char *)(glContext + 0x85a4) != '\0')) {
       do {
-        iVar1 = rendererIndex * 0x2e0 + glContext;
-        iVar1 = (**(code **)(*(int *)(iVar1 + 0x8884) + 0x180))(*(undefined4 *)(iVar1 + 0x85ac));
+        errorCodeThenRendererRecordThenRendererError = rendererIndex * 0x2e0 + glContext;
+        errorCodeThenRendererRecordThenRendererError = (**(code **)(*(int *)(errorCodeThenRendererRecordThenRendererError + 0x8884) + 0x180))(*(undefined4 *)(errorCodeThenRendererRecordThenRendererError + 0x85ac));
         rendererIndex = rendererIndex + 1 & 0xff;
-        if (iVar1 != 0) {
-          return iVar1;
+        if (errorCodeThenRendererRecordThenRendererError != 0) {
+          return errorCodeThenRendererRecordThenRendererError;
         }
-        iVar1 = 0;
+        errorCodeThenRendererRecordThenRendererError = 0;
       } while (rendererIndex < *(byte *)(glContext + 0x85a4));
     }
   }
@@ -3754,9 +3754,9 @@ int _glGetError_Exec(glContext)
     if (*(int *)(glContext + 0x7574) == 0) {
       *(undefined4 *)(glContext + 0x7574) = 0x502;
     }
-    iVar1 = 0;
+    errorCodeThenRendererRecordThenRendererError = 0;
   }
-  return iVar1;
+  return errorCodeThenRendererRecordThenRendererError;
 }
 
 /* _glBlendFunc_Exec @ 0x1b5fc (168 bytes) */

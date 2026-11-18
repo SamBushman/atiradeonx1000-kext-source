@@ -832,17 +832,17 @@ void _glDisableVertexAttribARB_Exec(glContext, param_2, param_3)
 }
 
 /* _glDisableVertexAttribARB_Comp @ 0xb0940 (84 bytes) */
-int _glDisableVertexAttribARB_Comp(glContext, param_2, param_3)
+int _glDisableVertexAttribARB_Comp(glContext, attribIndex, mapTarget)
   undefined4 glContext;
-  undefined4 param_2;
-  undefined4 param_3;
+  undefined4 attribIndex;
+  undefined4 mapTarget;
 {
   undefined4 *listRecord;
   
   listRecord = (undefined4 *)_gleAddListItem(glContext,PTR__glDisableVertexAttribARB_ListExec_00110464,8);
   if (listRecord != (undefined4 *)0x0) {
-    listRecord[1] = param_3;
-    *listRecord = param_2;
+    listRecord[1] = mapTarget;
+    *listRecord = attribIndex;
   }
   return listRecord;
 }

@@ -2306,7 +2306,7 @@ void _glGetPixelMapfv_Exec(glContext, map, values)
   undefined4 map;
   uint values;
 {
-  double dVar1;
+  double intToDoubleBias;
   int mapSize;
   int byteOffset;
   undefined4 glErrorCode;
@@ -2361,7 +2361,7 @@ void _glGetPixelMapfv_Exec(glContext, map, values)
       }
       values = values + *(int *)(pixelPackBuffer + 0x30);
     }
-    dVar1 = DOUBLE_00108d58;
+    intToDoubleBias = DOUBLE_00108d58;
     switch(map) {
     case 0xc70:
       loopIndex = 0;
@@ -2372,7 +2372,7 @@ void _glGetPixelMapfv_Exec(glContext, map, values)
           *(float *)(byteOffset + values) =
                (float)((double)CONCAT44(0x43300000,
                                         *(uint *)(byteOffset + *(int *)(glContext + 0x3248)) ^ 0x80000000)
-                      - dVar1);
+                      - intToDoubleBias);
         } while (loopIndex < *(int *)(glContext + 0x3270));
       }
       break;
@@ -2385,7 +2385,7 @@ void _glGetPixelMapfv_Exec(glContext, map, values)
           *(float *)(byteOffset + values) =
                (float)((double)CONCAT44(0x43300000,
                                         *(uint *)(byteOffset + *(int *)(glContext + 0x326c)) ^ 0x80000000)
-                      - dVar1);
+                      - intToDoubleBias);
         } while (loopIndex < *(int *)(glContext + 0x3274));
       }
       break;

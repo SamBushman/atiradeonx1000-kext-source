@@ -32,14 +32,14 @@ void _glEvalCoord2dv_CompExec(glContext, u)
 }
 
 /* _glEvalCoord2f_ListExec_body @ 0x64c1c (48 bytes) */
-undefined4 _glEvalCoord2f_ListExec_body(undefined4 glContext,double *recordedArgs,double unusedFloatArg1,double fparam_2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12)
+undefined4 _glEvalCoord2f_ListExec_body(undefined4 glContext,double *recordedArgs,double unusedFloatArg1,double v,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12)
 {
   double incomingStack_ffffffb8;
   double incomingStack_ffffffc0;
   double incomingStack_ffffffc8;
   double incomingStack_ffffffd0;
   
-  ((void (*)())_gleEvalMap2)(glContext,(double)(float)(*recordedArgs),(double)(float)fparam_2,forwardedFloatArg3,forwardedFloatArg4,forwardedFloatArg5,
+  ((void (*)())_gleEvalMap2)(glContext,(double)(float)(*recordedArgs),(double)(float)v,forwardedFloatArg3,forwardedFloatArg4,forwardedFloatArg5,
                forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8,incomingStack_ffffffb8,incomingStack_ffffffc0,incomingStack_ffffffc8,
                incomingStack_ffffffd0);
   return 0x10;
