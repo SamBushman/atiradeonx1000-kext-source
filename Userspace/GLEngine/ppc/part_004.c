@@ -676,19 +676,19 @@ void _gleFreeVertexArrays(glContext)
 }
 
 /* _gleFreeFuncCache @ 0x2ff84 (68 bytes) */
-void _gleFreeFuncCache(param_1)
-  int *param_1;
+void _gleFreeFuncCache(firstElem)
+  int *firstElem;
 {
-  int *piVar1;
-  int *piVar2;
+  int *elem;
+  int *nextElem;
   
-  piVar1 = param_1;
-  if (param_1 != (int *)0x0) {
+  elem = firstElem;
+  if (firstElem != (int *)0x0) {
     do {
-      piVar2 = (int *)*piVar1;
-      ((void (*)())_gleDCBFree)(piVar1);
-      piVar1 = piVar2;
-    } while (piVar2 != param_1);
+      nextElem = (int *)*elem;
+      ((void (*)())_gleDCBFree)(elem);
+      elem = nextElem;
+    } while (nextElem != firstElem);
   }
   return;
 }
@@ -2127,16 +2127,16 @@ void _gleSetEnable_RESCALE_NORMAL_EXT(glContext, unusedArg2, param_3)
 }
 
 /* _glClear_Exec @ 0x31dcc (704 bytes) */
-void _glClear_Exec(int glContext,uint mask,double fparam_1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
+void _glClear_Exec(int glContext,uint mask,double forwardedF1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
 {
   int remaining;
   int loopIndex;
-  bool bVar1;
+  bool rendererInfoByte79IsZero;
   bool noStateChangePending;
   char rendererInfoByte79;
   undefined4 glErrorCode;
   int *srcCursor;
-  int iVar5;
+  int dirtyBitArrayWord;
   int framebufferObject;
   undefined4 incomingR5;
   undefined4 incomingR6;
@@ -2146,7 +2146,7 @@ void _glClear_Exec(int glContext,uint mask,double fparam_1,double forwardedFloat
   uint dispatchFlags;
   uint changeWord3;
   int *changeWordCursor;
-  double extraout_f1;
+  double f1AfterCall;
   
   if (-1 < *(short *)(glContext + 0x4a10)) {
     if (*(int *)(glContext + 0x7574) != 0) {
@@ -2168,14 +2168,14 @@ void _glClear_Exec(int glContext,uint mask,double fparam_1,double forwardedFloat
   matrixChangeBits = *(int *)(glContext + 0x50ac);
   if (matrixChangeBits != 0 || (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
     _gleUpdateMatrixFunc(glContext);
-    fparam_1 = extraout_f1;
+    forwardedF1 = f1AfterCall;
   }
   if (*(char *)(glContext + 0x4691) == '\0') goto LAB_00032054;
   framebufferObject = *(int *)(glContext + 0x744c);
   changeWordCursor = (int *)(glContext + 0x310);
   rendererInfoByte79 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
   if ((framebufferObject != 0) && (*(int *)(framebufferObject + 0xec) != 0)) {
-    ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,incomingR5,incomingR6,incomingR7,incomingR8,matrixChangeBits,fparam_1,forwardedFloatArg2,forwardedFloatArg3,
+    ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,incomingR5,incomingR6,incomingR7,incomingR8,matrixChangeBits,forwardedF1,forwardedFloatArg2,forwardedFloatArg3,
                forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
     *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000000;
   }
@@ -2187,9 +2187,9 @@ LAB_00031f2c:
     loopIndex = 0;
     srcCursor = (int *)(glContext + 0x324);
     do {
-      iVar5 = *srcCursor;
+      dirtyBitArrayWord = *srcCursor;
       srcCursor = srcCursor + 1;
-      if (iVar5 != 0) {
+      if (dirtyBitArrayWord != 0) {
         *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x800000;
         break;
       }
@@ -2206,14 +2206,14 @@ LAB_00031f2c:
       goto LAB_00031f2c;
     }
   }
-  bVar1 = rendererInfoByte79 == '\0';
-  if (bVar1) {
+  rendererInfoByte79IsZero = rendererInfoByte79 == '\0';
+  if (rendererInfoByte79IsZero) {
     changeWord3 = changeWord3 & 0x17000000;
   }
   else {
     changeWord3 = changeWord3 & 0x17ffffff;
   }
-  if (bVar1) {
+  if (rendererInfoByte79IsZero) {
     noStateChangePending = ((*changeWordCursor == 0 && *(int *)(glContext + 0x314) == 0) && changeWord3 == 0) &&
             *(int *)(glContext + 800) == 0;
   }

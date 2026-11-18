@@ -314,9 +314,9 @@ void _glUniformMatrix3fvARB_Exec(glContext, location, count, transpose, value)
   int loopIndex;
   int elementMapOffset;
   int rendererSlotOffset;
-  int iVar10;
+  int matrixOffset;
   int loopIndex2;
-  int iVar11;
+  int rowOffset;
   undefined4 uniformWord3;
   int constantRegisterFile;
   int stage0Record;
@@ -391,11 +391,11 @@ void _glUniformMatrix3fvARB_Exec(glContext, location, count, transpose, value)
       }
       loopIndex = 0;
       if (0 < uniformSize) {
-        iVar10 = location << 4;
+        matrixOffset = location << 4;
         do {
           remaining = 3;
           elementMapOffset = location << 2;
-          iVar11 = iVar10;
+          rowOffset = matrixOffset;
           do {
             stage0Record = *(int *)(currentProgram + 0x20);
             registerIndexThenOffset = *(int *)(elementMapOffset + *(int *)(stage0Record + 0x4e0));
@@ -403,12 +403,12 @@ void _glUniformMatrix3fvARB_Exec(glContext, location, count, transpose, value)
               registerIndexThenOffset = registerIndexThenOffset * 0x10;
               constantRegisterFile = *(int *)(stage0Record + 0x51c);
               stage0Updated = true;
-              uniformValueSlot = iVar11 + *(int *)(currentProgram + 0x4c);
+              uniformValueSlot = rowOffset + *(int *)(currentProgram + 0x4c);
               uniformWord3 = *(undefined4 *)(uniformValueSlot + 0xc);
               constantRegister = registerIndexThenOffset + constantRegisterFile;
               uniformWord1 = *(undefined4 *)(uniformValueSlot + 4);
               uniformWord2 = *(undefined4 *)(uniformValueSlot + 8);
-              *(undefined4 *)(registerIndexThenOffset + constantRegisterFile) = *(undefined4 *)(iVar11 + *(int *)(currentProgram + 0x4c));
+              *(undefined4 *)(registerIndexThenOffset + constantRegisterFile) = *(undefined4 *)(rowOffset + *(int *)(currentProgram + 0x4c));
               *(undefined4 *)(constantRegister + 0xc) = uniformWord3;
               *(undefined4 *)(constantRegister + 4) = uniformWord1;
               *(undefined4 *)(constantRegister + 8) = uniformWord2;
@@ -418,23 +418,23 @@ void _glUniformMatrix3fvARB_Exec(glContext, location, count, transpose, value)
               registerIndexThenOffset = registerIndexThenOffset * 0x10;
               constantRegisterFile = *(int *)(*(int *)(currentProgram + 0x24) + 0x51c);
               stage1Updated = true;
-              uniformValueSlot = iVar11 + *(int *)(currentProgram + 0x4c);
+              uniformValueSlot = rowOffset + *(int *)(currentProgram + 0x4c);
               uniformWord3 = *(undefined4 *)(uniformValueSlot + 0xc);
               constantRegister = registerIndexThenOffset + constantRegisterFile;
               uniformWord1 = *(undefined4 *)(uniformValueSlot + 4);
               uniformWord2 = *(undefined4 *)(uniformValueSlot + 8);
-              *(undefined4 *)(registerIndexThenOffset + constantRegisterFile) = *(undefined4 *)(iVar11 + *(int *)(currentProgram + 0x4c));
+              *(undefined4 *)(registerIndexThenOffset + constantRegisterFile) = *(undefined4 *)(rowOffset + *(int *)(currentProgram + 0x4c));
               *(undefined4 *)(constantRegister + 0xc) = uniformWord3;
               *(undefined4 *)(constantRegister + 4) = uniformWord1;
               *(undefined4 *)(constantRegister + 8) = uniformWord2;
             }
             elementMapOffset = elementMapOffset + 4;
-            iVar11 = iVar11 + 0x10;
+            rowOffset = rowOffset + 0x10;
             remaining = remaining + -1;
           } while (remaining != 0);
           loopIndex = loopIndex + 1;
           location = location + 3;
-          iVar10 = iVar10 + 0x30;
+          matrixOffset = matrixOffset + 0x30;
         } while (loopIndex < uniformSize);
       }
       *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x4000000;

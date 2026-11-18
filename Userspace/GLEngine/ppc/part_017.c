@@ -219,34 +219,34 @@ void _glConvolutionParameteriv_Exec(glContext, target, pname, params)
 {
   double intToDoubleMagic;
   undefined4 glErrorCode;
-  float *pfVar3;
+  float *convolutionState;
   
   intToDoubleMagic = DOUBLE_00108d58;
   if (*(short *)(glContext + 0x4a10) < 0) {
     if (target == 0x8011) {
-      pfVar3 = (float *)(glContext + 0x32d8);
+      convolutionState = (float *)(glContext + 0x32d8);
 LAB_000695f0:
       if (pname == 0x8015) {
-        pfVar3[5] = (float)((double)CONCAT44(0x43300000,*params ^ 0x80000000) - DOUBLE_00108d58);
-        pfVar3[7] = (float)((double)CONCAT44(0x43300000,params[1] ^ 0x80000000) - intToDoubleMagic);
-        pfVar3[9] = (float)((double)CONCAT44(0x43300000,params[2] ^ 0x80000000) - intToDoubleMagic);
-        pfVar3[0xb] = (float)((double)CONCAT44(0x43300000,params[3] ^ 0x80000000) - intToDoubleMagic);
+        convolutionState[5] = (float)((double)CONCAT44(0x43300000,*params ^ 0x80000000) - DOUBLE_00108d58);
+        convolutionState[7] = (float)((double)CONCAT44(0x43300000,params[1] ^ 0x80000000) - intToDoubleMagic);
+        convolutionState[9] = (float)((double)CONCAT44(0x43300000,params[2] ^ 0x80000000) - intToDoubleMagic);
+        convolutionState[0xb] = (float)((double)CONCAT44(0x43300000,params[3] ^ 0x80000000) - intToDoubleMagic);
         return;
       }
       if (pname < 0x8016) {
         if (pname == 0x8014) {
-          pfVar3[4] = (float)((double)CONCAT44(0x43300000,*params ^ 0x80000000) - DOUBLE_00108d58);
-          pfVar3[6] = (float)((double)CONCAT44(0x43300000,params[1] ^ 0x80000000) - intToDoubleMagic);
-          pfVar3[8] = (float)((double)CONCAT44(0x43300000,params[2] ^ 0x80000000) - intToDoubleMagic);
-          pfVar3[10] = (float)((double)CONCAT44(0x43300000,params[3] ^ 0x80000000) - intToDoubleMagic);
+          convolutionState[4] = (float)((double)CONCAT44(0x43300000,*params ^ 0x80000000) - DOUBLE_00108d58);
+          convolutionState[6] = (float)((double)CONCAT44(0x43300000,params[1] ^ 0x80000000) - intToDoubleMagic);
+          convolutionState[8] = (float)((double)CONCAT44(0x43300000,params[2] ^ 0x80000000) - intToDoubleMagic);
+          convolutionState[10] = (float)((double)CONCAT44(0x43300000,params[3] ^ 0x80000000) - intToDoubleMagic);
           return;
         }
       }
       else if (pname == 0x8154) {
-        *pfVar3 = (float)((double)CONCAT44(0x43300000,*params ^ 0x80000000) - DOUBLE_00108d58);
-        pfVar3[1] = (float)((double)CONCAT44(0x43300000,params[1] ^ 0x80000000) - intToDoubleMagic);
-        pfVar3[2] = (float)((double)CONCAT44(0x43300000,params[2] ^ 0x80000000) - intToDoubleMagic);
-        pfVar3[3] = (float)((double)CONCAT44(0x43300000,params[3] ^ 0x80000000) - intToDoubleMagic);
+        *convolutionState = (float)((double)CONCAT44(0x43300000,*params ^ 0x80000000) - DOUBLE_00108d58);
+        convolutionState[1] = (float)((double)CONCAT44(0x43300000,params[1] ^ 0x80000000) - intToDoubleMagic);
+        convolutionState[2] = (float)((double)CONCAT44(0x43300000,params[2] ^ 0x80000000) - intToDoubleMagic);
+        convolutionState[3] = (float)((double)CONCAT44(0x43300000,params[3] ^ 0x80000000) - intToDoubleMagic);
         return;
       }
       ((void (*)())_glConvolutionParameteri_Exec)(glContext,target,pname,*params);
@@ -254,12 +254,12 @@ LAB_000695f0:
     }
     if (target < 0x8012) {
       if (target == 0x8010) {
-        pfVar3 = (float *)(glContext + 0x3298);
+        convolutionState = (float *)(glContext + 0x3298);
         goto LAB_000695f0;
       }
     }
     else if (target == 0x8012) {
-      pfVar3 = (float *)(glContext + 0x3318);
+      convolutionState = (float *)(glContext + 0x3318);
       goto LAB_000695f0;
     }
     if (*(int *)(glContext + 0x7574) != 0) {

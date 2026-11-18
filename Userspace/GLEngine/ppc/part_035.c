@@ -51,11 +51,11 @@ double _glWeightusvARB_Exec(glContext, size, weights)
   int size;
   ushort *weights;
 {
-  ushort uVar1;
-  int iVar2;
+  ushort weightValue;
+  int slotByteOffset;
   float channelScale;
   float *dstCursor;
-  int iVar5;
+  int slotIndex;
   int remaining;
   
   channelScale = FLOAT_00108e74;
@@ -66,27 +66,27 @@ double _glWeightusvARB_Exec(glContext, size, weights)
     }
     return;
   }
-  iVar5 = 0;
+  slotIndex = 0;
   if (0 < size) {
     dstCursor = (float *)(glContext + 0x2d0);
     remaining = size;
     do {
-      uVar1 = *weights;
+      weightValue = *weights;
       weights = weights + 1;
-      *dstCursor = (GH_U2F((unsigned int)((uVar1 | 0x4b000000))) - 8388608.0) * channelScale;
+      *dstCursor = (GH_U2F((unsigned int)((weightValue | 0x4b000000))) - 8388608.0) * channelScale;
       dstCursor = dstCursor + 1;
       remaining = remaining + -1;
     } while (remaining != 0);
-    iVar5 = size;
+    slotIndex = size;
     if (3 < size) {
       return;
     }
   }
   do {
-    iVar2 = iVar5 * 4;
-    iVar5 = iVar5 + 1;
-    *(undefined4 *)(iVar2 + glContext + 0x2d0) = 0;
-  } while (iVar5 < 4);
+    slotByteOffset = slotIndex * 4;
+    slotIndex = slotIndex + 1;
+    *(undefined4 *)(slotByteOffset + glContext + 0x2d0) = 0;
+  } while (slotIndex < 4);
   return;
 }
 

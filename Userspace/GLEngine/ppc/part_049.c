@@ -907,26 +907,26 @@ void _gleModifyPixelR(int glContext,int pixel,double unusedFloatArg1,double unus
 /* _gleModifyPixelG @ 0xe6628 (200 bytes) */
 void _gleModifyPixelG(int glContext,int pixel,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11)
 {
-  uint uVar1;
+  uint scaledIndex;
   float green;
-  float fVar3;
-  uint uVar4;
+  float clampBound;
+  uint tableLastIndexThenIndex;
   
   green = *(float *)(pixel + 8) * *(float *)(glContext + 0x31f4) + *(float *)(glContext + 0x31f0);
   if ((*(uint *)(glContext + 0x3414) & 1) == 0) {
-    fVar3 = FLOAT_00108e50;
-    if ((green < FLOAT_00108e50) || (fVar3 = FLOAT_00108e54, FLOAT_00108e54 < green)) {
-      green = fVar3;
+    clampBound = FLOAT_00108e50;
+    if ((green < FLOAT_00108e50) || (clampBound = FLOAT_00108e54, FLOAT_00108e54 < green)) {
+      green = clampBound;
     }
   }
   else {
-    uVar4 = *(int *)(glContext + 0x328c) - 1;
-    uVar1 = (uint)(int)(green * (float)((double)CONCAT44(0x43300000,uVar4 ^ 0x80000000) - DOUBLE_00108d58
+    tableLastIndexThenIndex = *(int *)(glContext + 0x328c) - 1;
+    scaledIndex = (uint)(int)(green * (float)((double)CONCAT44(0x43300000,tableLastIndexThenIndex ^ 0x80000000) - DOUBLE_00108d58
                                   ) + FLOAT_00108e90);
-    if (((int)uVar1 <= (int)uVar4) && (uVar4 = uVar1, (int)uVar1 < 0)) {
-      uVar4 = 0;
+    if (((int)scaledIndex <= (int)tableLastIndexThenIndex) && (tableLastIndexThenIndex = scaledIndex, (int)scaledIndex < 0)) {
+      tableLastIndexThenIndex = 0;
     }
-    green = *(float *)(uVar4 * 4 + *(int *)(glContext + 0x3260));
+    green = *(float *)(tableLastIndexThenIndex * 4 + *(int *)(glContext + 0x3260));
   }
   *(float *)(pixel + 8) = green;
   return;

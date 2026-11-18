@@ -309,28 +309,28 @@ void _gleTextureMatTransPtrDivW_body(int glContext,uint vertexCursor,int vertexB
 }
 
 /* _gleMultiTextureMatTrans @ 0x103a68 (120 bytes) */
-void _gleMultiTextureMatTrans(glContext, param_2, param_3)
+void _gleMultiTextureMatTrans(glContext, forwardedArg2, forwardedArg3)
   int glContext;
-  undefined4 param_2;
-  undefined4 param_3;
+  undefined4 forwardedArg2;
+  undefined4 forwardedArg3;
 {
-  uint uVar1;
-  uint uVar2;
-  uint uVar3;
+  uint remainingEnableBits;
+  uint texEnableBits;
+  uint texUnit;
   
-  uVar2 = ((int (*)())_gleTexEnableBits)(glContext);
-  uVar3 = 0;
+  texEnableBits = ((int (*)())_gleTexEnableBits)(glContext);
+  texUnit = 0;
   do {
-    uVar1 = uVar2 >> (uVar3 & 0x3f);
-    if ((uVar1 & 1) == 0) {
-      if (uVar1 == 0) {
+    remainingEnableBits = texEnableBits >> (texUnit & 0x3f);
+    if ((remainingEnableBits & 1) == 0) {
+      if (remainingEnableBits == 0) {
         return;
       }
     }
     else {
-      (**(code **)(glContext + 0x5070))(glContext,param_2,param_3,uVar3);
+      (**(code **)(glContext + 0x5070))(glContext,forwardedArg2,forwardedArg3,texUnit);
     }
-    uVar3 = uVar3 + 1;
+    texUnit = texUnit + 1;
   } while( true );
 }
 

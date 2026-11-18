@@ -4547,34 +4547,34 @@ void _glRotateX_Exec(int glContext,float sinAngle,float cosAngle,double unusedFl
 }
 
 /* _gleAddListItemWithFree @ 0x43ca8 (140 bytes) */
-int _gleAddListItemWithFree(glContext, forwardedArg2, forwardedArg3, param_4, param_5)
+int _gleAddListItemWithFree(glContext, forwardedArg2, forwardedArg3, freeFunction, recordSize)
   int glContext;
   undefined4 forwardedArg2;
   undefined4 forwardedArg3;
-  undefined4 param_4;
-  int param_5;
+  undefined4 freeFunction;
+  int recordSize;
 {
   int iVar1;
   int iVar2;
   int listRecord;
-  int iVar4;
+  int trailer;
   int glContextWord53e8;
   
   listRecord = _gleAddListItem(glContext,forwardedArg2,forwardedArg3);
   iVar1 = 0;
   if (listRecord != 0) {
     glContextWord53e8 = *(int *)(glContext + 0x53e8);
-    iVar4 = listRecord + param_5;
-    *(undefined4 *)(listRecord + param_5) = param_4;
-    *(undefined4 *)(iVar4 + 8) = 0;
-    *(int *)(iVar4 + 4) = listRecord - glContextWord53e8;
+    trailer = listRecord + recordSize;
+    *(undefined4 *)(listRecord + recordSize) = freeFunction;
+    *(undefined4 *)(trailer + 8) = 0;
+    *(int *)(trailer + 4) = listRecord - glContextWord53e8;
     iVar1 = *(int *)(*(int *)(glContext + 0x53e8) + 0x28);
     iVar2 = *(int *)(glContext + 0x53e8) + 0x1c;
     if (iVar1 != 0) {
       iVar2 = glContextWord53e8 + iVar1;
     }
-    *(int *)(iVar2 + 8) = iVar4 - glContextWord53e8;
-    *(int *)(*(int *)(glContext + 0x53e8) + 0x28) = iVar4 - glContextWord53e8;
+    *(int *)(iVar2 + 8) = trailer - glContextWord53e8;
+    *(int *)(*(int *)(glContext + 0x53e8) + 0x28) = trailer - glContextWord53e8;
     iVar1 = listRecord;
   }
   return iVar1;

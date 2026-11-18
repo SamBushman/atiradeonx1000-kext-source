@@ -2441,21 +2441,21 @@ int _gleRevertSwapToPrimary(glContext)
 }
 
 /* _gleGetMapData @ 0xc8830 (88 bytes) */
-int _gleGetMapData(param_1)
-  int param_1;
+int _gleGetMapData(glContext)
+  int glContext;
 {
-  int iVar1;
-  undefined4 uVar2;
+  int mapData;
+  undefined4 newMapData;
   
-  iVar1 = *(int *)(param_1 + 0x7450);
-  if (iVar1 == 0) {
-    uVar2 = _malloc(0x9dcc);
-    *(undefined4 *)(param_1 + 0x7450) = uVar2;
-    _gleInitMap1Data(param_1);
-    _gleInitMap2Data(param_1);
-    iVar1 = *(int *)(param_1 + 0x7450);
+  mapData = *(int *)(glContext + 0x7450);
+  if (mapData == 0) {
+    newMapData = _malloc(0x9dcc);
+    *(undefined4 *)(glContext + 0x7450) = newMapData;
+    _gleInitMap1Data(glContext);
+    _gleInitMap2Data(glContext);
+    mapData = *(int *)(glContext + 0x7450);
   }
-  return iVar1;
+  return mapData;
 }
 
 /* _gleReclaimContextResources @ 0xc8888 (276 bytes) */

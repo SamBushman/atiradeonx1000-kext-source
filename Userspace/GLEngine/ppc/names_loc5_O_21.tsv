@@ -1,0 +1,23 @@
+local	_glMultiDrawArrays_Exec	iVar1	arrayByteOffset	CONFIRMED	loopIndex * 4: byte offset of first[i] and count[i]
+local	_glMultiDrawArrays_Exec	fparam_1	forwardedF1	CONFIRMED	FPR argument f1 forwarded to the callee; reloaded from the f1 result of the call it follows
+local	_glMultiDrawArrays_Exec	extraout_f1	f1AfterCall	CONFIRMED	f1 left behind by the _glDrawArrays_STD_Exec call (Ghidra extraout), forwarded unchanged
+local	_glMultiDrawElementArrayAPPLE_Exec	iVar1	arrayByteOffset	CONFIRMED	loopIndex * 4: byte offset of first[i] and count[i]
+local	_glMultiDrawElementArrayAPPLE_Exec	iVar2	elementDataPointer	INFERRED	client state word +0xd8 (element data), plus the bound buffer offset (+0x30 of the buffer at clientState+0x35c): stored at ctx+0x48d8 and ctx+0x4978
+local	_glMultiDrawElementArrayAPPLE_Exec	fparam_1	forwardedF1	CONFIRMED	FPR argument f1 forwarded to the callee; reloaded from the f1 result of the call it follows
+local	_glMultiDrawElementArrayAPPLE_Exec	extraout_f1	f1AfterCall	CONFIRMED	f1 left behind by the _gleDrawArraysOrElements_Exec call (Ghidra extraout), forwarded unchanged
+use	_glClear_Exec	bVar1	rendererInfoByte79IsZero	CONFIRMED	rendererInfoByte79 == 0, selects the 0x17000000 / 0x17ffffff change-word mask and the all-clean test	^\s*bVar1\ =\ cVar2\ ==\ '\\0';$	+2
+use	_glClear_Exec	bVar1	rendererInfoByte79IsZero	CONFIRMED	rendererInfoByte79 == 0, selects the 0x17000000 / 0x17ffffff change-word mask and the all-clean test	^\s*if\ \(bVar1\)\ \{$@2	+1
+use	_glClear_Exec	iVar5	dirtyBitArrayWord	CONFIRMED	word *srcCursor of the dirty bit array at ctx+0x324 (9 words), nonzero sets 0x800000 in change word 3	^\s*iVar5\ =\ \*piVar4;$	+1
+use	_glClear_Exec	iVar5	dirtyBitArrayWord	CONFIRMED	word *srcCursor of the dirty bit array at ctx+0x324 (9 words), nonzero sets 0x800000 in change word 3	^\s*if\ \(iVar5\ !=\ 0\)\ \{$	+1
+local	_glClear_Exec	fparam_1	forwardedF1	CONFIRMED	FPR argument f1 forwarded to the callees; reloaded from the f1 result of the calls it follows
+local	_glClear_Exec	extraout_f1	f1AfterCall	CONFIRMED	f1 left behind by a call (Ghidra extraout), forwarded unchanged
+local	_gleMultiTextureMatTrans	param_2	forwardedArg2	INFERRED	second argument forwarded unchanged to the per-unit texture matrix transform callback ctx+0x5070
+local	_gleMultiTextureMatTrans	param_3	forwardedArg3	INFERRED	third argument forwarded unchanged to the per-unit texture matrix transform callback ctx+0x5070
+local	_gleMultiTextureMatTrans	uVar2	texEnableBits	INFERRED	result of _gleTexEnableBits(ctx): bit i set when texture unit i is enabled
+local	_gleMultiTextureMatTrans	uVar3	texUnit	CONFIRMED	texture unit index counting up from 0: the shift of texEnableBits and the unit argument of the callback
+local	_gleMultiTextureMatTrans	uVar1	remainingEnableBits	CONFIRMED	texEnableBits >> texUnit: the enable bits of this and the higher units (loop ends when it becomes zero)
+local	_gleMultiVtxTextureCoordGenWrapObject	uVar1	texUnit	CONFIRMED	texture unit index 0..7, passed to the per-unit callback
+local	_gleMultiVtxTextureCoordGenWrapObject	iVar2	unitRecordCursor	INFERRED	ctx + 0x5300 + 0xc * texUnit: the per-unit record whose byte +0x1c is the enabled flag and word +0x14 the callback
+local	_gleModifyPixelG	fVar3	clampBound	CONFIRMED	FLOAT_00108e50 (0.0) or FLOAT_00108e54 (1.0): the value green is clamped to when outside [0,1]
+local	_gleModifyPixelG	uVar1	scaledIndex	CONFIRMED	(int)(green * (tableLastIndex)): the unclamped table index
+local	_gleModifyPixelG	uVar4	tableLastIndexThenIndex	CONFIRMED	ctx+0x328c - 1 (last index of the map table), then replaced by the clamped table index used to read the table at ctx+0x3260

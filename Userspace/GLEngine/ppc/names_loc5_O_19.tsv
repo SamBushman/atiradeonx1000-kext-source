@@ -1,0 +1,22 @@
+local	_gleShrinkFuncCacheElem	piVar1	newElem	CONFIRMED	block returned by _gleDCBRealloc for the element: its (next, previous) links are fixed up in the circular list (or point at itself when it was alone)
+local	_gleShrinkFuncCacheElem	param_2	payloadWords	INFERRED	size in words: the block is reallocated to payloadWords * 4 + 0x20 bytes
+local	_gleMoveFuncCacheElem	param_1	listHead	INFERRED	head element of the circular doubly linked list (next at +0, previous at +4): the moved element is relinked in front of it, at the tail
+local	_gleMoveFuncCacheElem	param_2	elem	CONFIRMED	the element unlinked from its place and relinked at the tail
+local	_gleMoveFuncCacheElem	puVar1	tailElem	CONFIRMED	listHead->previous (+4): the old tail, whose next link now points at elem
+local	_gleMoveFuncCacheElem	piVar2	previousElem	CONFIRMED	elem->previous (+4): the neighbour that takes over elem->next when elem is unlinked
+local	_gleFreeFuncCache	param_1	firstElem	CONFIRMED	first element of the circular list: the walk stops when it comes back to it
+local	_gleFreeFuncCache	piVar1	elem	CONFIRMED	element being released with _gleDCBFree
+local	_gleFreeFuncCache	piVar2	nextElem	CONFIRMED	*elem: the next element, read before the current one is freed
+use	_gleSetFunctionIDToList	uVar5	typeCode	CONFIRMED	4-bit code of the GL type at ctx+0x48dc (glType - 0x1400, 7 for 0x140a, glType - 0x93f8 for 0x93f8..0x93fd, else 0xe), stored in bits 16..19 of the function id	^\s*uVar5\ =\ iVar12\ \-\ 0x1400;$	+4
+use	_gleSetFunctionIDToList	uVar5	typeCode	CONFIRMED	4-bit code of the GL type at ctx+0x48dc (glType - 0x1400, 7 for 0x140a, glType - 0x93f8 for 0x93f8..0x93fd, else 0xe), stored in bits 16..19 of the function id	^\s*\*param_3\ =\ \*param_3\ \|\ \(uVar5\ \&\ 0xf\)\ <<\ 0x10;$	+1
+use	_gleSetFunctionIDToList	uVar5	dataByteOffset	CONFIRMED	running byte offset of the current array's data inside the vertex (sum of componentCount * 4 of the enabled arrays so far); >> 2 gives the word offset stored in the layout word	^\s*uVar5\ =\ 0;$	+1
+use	_gleSetFunctionIDToList	uVar5	dataByteOffset	CONFIRMED	running byte offset of the current array's data inside the vertex (sum of componentCount * 4 of the enabled arrays so far); >> 2 gives the word offset stored in the layout word	^\s*uVar2\ =\ \(ushort\)\(\(int\)uVar5\ >>\ 2\);$	+1
+use	_gleSetFunctionIDToList	uVar5	dataByteOffset	CONFIRMED	running byte offset of the current array's data inside the vertex (sum of componentCount * 4 of the enabled arrays so far); >> 2 gives the word offset stored in the layout word	^\s*uVar5\ =\ uVar5\ \+\ sVar1\ \*\ 4;$	+1
+use	_gleSetFunctionIDToList	uVar5	dataByteOffset	CONFIRMED	running byte offset of the current array's data inside the vertex (sum of componentCount * 4 of the enabled arrays so far); >> 2 gives the word offset stored in the layout word	^\s*\*param_3\ =\ \*param_3\ \|\ \(uVar5\ \&\ 0x3fc\)\ <<\ 6;$	+1
+use	_gleSetFunctionIDToList	iVar12	glTypeAt48dc	INFERRED	the GL type word at ctx+0x48dc, converted to typeCode	^\s*iVar12\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x48dc\);$	+4
+use	_gleSetFunctionIDToList	iVar12	arrayRecord	CONFIRMED	arrayState + loopIndex * 0x18: the 0x18-byte record of the array being encoded (+4 field, +8 GL type, +10 component count)	^\s*iVar12\ =\ iVar10\ \*\ 0x18\ \+\ param_2;$	+2
+use	_gleSetFunctionIDToList	iVar12	arrayRecord	CONFIRMED	arrayState + loopIndex * 0x18: the 0x18-byte record of the array being encoded (+4 field, +8 GL type, +10 component count)	^\s*sVar1\ =\ \*\(short\ \*\)\(iVar12\ \+\ 10\);$	+1
+use	_gleSetFunctionIDToList	iVar12	arrayRecord	CONFIRMED	arrayState + loopIndex * 0x18: the 0x18-byte record of the array being encoded (+4 field, +8 GL type, +10 component count)	^\s*\*puVar9\ =\ sVar3\ \*\ 0x4000\ \|\ \(ushort\)\(uVar6\ <<\ 10\)\ \|\ \(ushort\)\*\(undefined4\ \*\)\(iVar12\ \+\ 4\);$	+1
+local	_gleAddListItemWithFree	param_4	freeFunction	INFERRED	word stored in the trailer at listRecord + param_5 (first word of the 12-byte list item trailer, preceding the offset links); the function that releases the item
+local	_gleAddListItemWithFree	param_5	recordSize	INFERRED	size of the list record: the trailer (free function, offset to the previous record, offset to the next) is placed at listRecord + recordSize
+local	_gleAddListItemWithFree	iVar4	trailer	CONFIRMED	listRecord + recordSize: the 12-byte trailer written after the record (+0 free function, +4 offset back to the previous item, +8 next offset)

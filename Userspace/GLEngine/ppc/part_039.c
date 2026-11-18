@@ -499,36 +499,36 @@ LAB_000b4c00:
 }
 
 /* _glePPSetFuncNeeds @ 0xb4c54 (160 bytes) */
-int _glePPSetFuncNeeds(param_1, param_2)
-  int param_1;
-  uint param_2;
+int _glePPSetFuncNeeds(instructions, instructionCount)
+  int instructions;
+  uint instructionCount;
 {
-  uint uVar1;
-  uint uVar2;
+  uint neededBits;
+  uint instructionWord;
   uint loopIndex;
   
-  uVar1 = 0;
+  neededBits = 0;
   loopIndex = 0;
-  if (param_2 != 0) {
+  if (instructionCount != 0) {
     do {
-      uVar2 = *(uint *)(loopIndex * 8 + param_1);
-      switch(uVar2 >> 0x10 & 0xf) {
+      instructionWord = *(uint *)(loopIndex * 8 + instructions);
+      switch(instructionWord >> 0x10 & 0xf) {
       case 2:
-        uVar1 = uVar1 | 0x100;
+        neededBits = neededBits | 0x100;
         break;
       case 3:
-        uVar1 = uVar1 | 0x200;
+        neededBits = neededBits | 0x200;
         break;
       case 5:
-        uVar1 = uVar1 | 0x400;
+        neededBits = neededBits | 0x400;
         break;
       case 7:
-        uVar1 = uVar1 | 1 << (uVar2 & 0x1f);
+        neededBits = neededBits | 1 << (instructionWord & 0x1f);
       }
       loopIndex = loopIndex + 1;
-    } while (loopIndex < param_2);
+    } while (loopIndex < instructionCount);
   }
-  return uVar1;
+  return neededBits;
 }
 
 /* _gleSetFunctionIDFromList @ 0xb4d14 (408 bytes) */
@@ -639,14 +639,16 @@ void _gleSetFunctionIDToList(glContext, arrayState, functionIdOut)
   ushort wordOffset;
   short componentCountMinusOne;
   uint enabledMaskLow;
-  uint uVar5;
+  uint typeCode;
+  uint dataByteOffset;
   uint elementTypeCode;
   uint enabledMaskHigh;
   uint glType;
   ushort *dstCursor;
   int loopIndex;
   uint *layoutWordCursor;
-  int iVar12;
+  int glTypeAt48dc;
+  int arrayRecord;
   int loopIndex2;
   longlong attributeBit;
   
@@ -666,31 +668,31 @@ void _gleSetFunctionIDToList(glContext, arrayState, functionIdOut)
     loopIndex2 = loopIndex2 + 1;
   } while (loopIndex2 < 0x20);
   *functionIdOut = *functionIdOut | loopIndex << 0x18;
-  iVar12 = *(int *)(glContext + 0x48dc);
-  uVar5 = iVar12 - 0x1400;
-  if (((6 < uVar5) && (uVar5 = 7, iVar12 != 0x140a)) &&
-     (uVar5 = iVar12 - 0x93f8, 5 < iVar12 - 0x9400U)) {
-    uVar5 = 0xe;
+  glTypeAt48dc = *(int *)(glContext + 0x48dc);
+  typeCode = glTypeAt48dc - 0x1400;
+  if (((6 < typeCode) && (typeCode = 7, glTypeAt48dc != 0x140a)) &&
+     (typeCode = glTypeAt48dc - 0x93f8, 5 < glTypeAt48dc - 0x9400U)) {
+    typeCode = 0xe;
   }
   dstCursor = (ushort *)((int)functionIdOut + loopIndex * 2 + 4);
-  *functionIdOut = *functionIdOut | (uVar5 & 0xf) << 0x10;
-  uVar5 = 0;
+  *functionIdOut = *functionIdOut | (typeCode & 0xf) << 0x10;
+  dataByteOffset = 0;
   loopIndex = 1;
   layoutWordCursor = functionIdOut + 1;
   while( true ) {
     attributeBit = ___ashldi3(0,1,loopIndex + 0x10);
     if ((enabledMaskHigh & (uint)((ulonglong)attributeBit >> 0x20)) != 0 || (enabledMaskLow & (uint)attributeBit) != 0) {
-      iVar12 = loopIndex * 0x18 + arrayState;
-      glType = (uint)*(ushort *)(iVar12 + 8);
+      arrayRecord = loopIndex * 0x18 + arrayState;
+      glType = (uint)*(ushort *)(arrayRecord + 8);
       elementTypeCode = glType - 0x1400;
-      componentCount = *(short *)(iVar12 + 10);
+      componentCount = *(short *)(arrayRecord + 10);
       if (((6 < elementTypeCode) && (elementTypeCode = 7, glType != 0x140a)) &&
          (elementTypeCode = glType - 0x93f8, 5 < glType - 0x9400)) {
         elementTypeCode = 0xe;
       }
       componentCountMinusOne = (short)(componentCount + -1);
-      *dstCursor = componentCountMinusOne * 0x4000 | (ushort)(elementTypeCode << 10) | (ushort)*(undefined4 *)(iVar12 + 4);
-      wordOffset = (ushort)((int)uVar5 >> 2);
+      *dstCursor = componentCountMinusOne * 0x4000 | (ushort)(elementTypeCode << 10) | (ushort)*(undefined4 *)(arrayRecord + 4);
+      wordOffset = (ushort)((int)dataByteOffset >> 2);
       if (loopIndex == 6) {
         *(ushort *)layoutWordCursor = componentCountMinusOne * 0x100 | 0x1800U | wordOffset | 0xc0;
       }
@@ -698,7 +700,7 @@ void _gleSetFunctionIDToList(glContext, arrayState, functionIdOut)
         *(ushort *)layoutWordCursor = (ushort)(loopIndex << 10) | componentCountMinusOne * 0x100 | wordOffset;
       }
       dstCursor = dstCursor + 1;
-      uVar5 = uVar5 + componentCount * 4;
+      dataByteOffset = dataByteOffset + componentCount * 4;
       layoutWordCursor = (uint *)((int)layoutWordCursor + 2);
     }
     if (loopIndex == 0) break;
@@ -709,7 +711,7 @@ void _gleSetFunctionIDToList(glContext, arrayState, functionIdOut)
       loopIndex = 0;
     }
   }
-  *functionIdOut = *functionIdOut | (uVar5 & 0x3fc) << 6;
+  *functionIdOut = *functionIdOut | (dataByteOffset & 0x3fc) << 6;
   return;
 }
 

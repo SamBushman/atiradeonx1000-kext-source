@@ -1131,7 +1131,7 @@ void _glMap1d_Exec(int glContext,int target,undefined4 u1ShadowHi,undefined4 u1S
 {
   undefined4 glErrorCode;
   int mapData;
-  int iVar3;
+  int map1Index;
   double incomingFpr3;
   double incomingFpr4;
   double incomingFpr5;
@@ -1147,11 +1147,11 @@ void _glMap1d_Exec(int glContext,int target,undefined4 u1ShadowHi,undefined4 u1S
   mapData = _gleGetMapData(glContext);
   if (*(short *)(glContext + 0x4a10) < 0) {
     if ((u1 != u2) && (order - 1U < 10)) {
-      iVar3 = target + -0xd90;
-      switch(iVar3) {
+      map1Index = target + -0xd90;
+      switch(map1Index) {
       case 0:
         if (3 < stride) {
-          ((void (*)())_gleMap1ColordLoad)(glContext,iVar3,u1ShadowHi,u1ShadowLo,u2ShadowHi,stride,order,points,
+          ((void (*)())_gleMap1ColordLoad)(glContext,map1Index,u1ShadowHi,u1ShadowLo,u2ShadowHi,stride,order,points,
                              mapData + 0x1c0,u1,u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
                              incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
           return;
@@ -1159,7 +1159,7 @@ void _glMap1d_Exec(int glContext,int target,undefined4 u1ShadowHi,undefined4 u1S
         break;
       case 1:
         if (0 < stride) {
-          ((void (*)())_gleMap1IndexdLoad)(glContext,iVar3,u1ShadowHi,u1ShadowLo,u2ShadowHi,stride,order,points,
+          ((void (*)())_gleMap1IndexdLoad)(glContext,map1Index,u1ShadowHi,u1ShadowLo,u2ShadowHi,stride,order,points,
                              mapData + 0x270,u1,u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
                              incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
           return;
@@ -1167,7 +1167,7 @@ void _glMap1d_Exec(int glContext,int target,undefined4 u1ShadowHi,undefined4 u1S
         break;
       case 2:
         if (2 < stride) {
-          ((void (*)())_gleMap1NormaldLoad)(glContext,iVar3,u1ShadowHi,u1ShadowLo,u2ShadowHi,stride,order,points,
+          ((void (*)())_gleMap1NormaldLoad)(glContext,map1Index,u1ShadowHi,u1ShadowLo,u2ShadowHi,stride,order,points,
                               mapData + 0x138,u1,u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
                               incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
           return;
@@ -1175,7 +1175,7 @@ void _glMap1d_Exec(int glContext,int target,undefined4 u1ShadowHi,undefined4 u1S
         break;
       case 3:
         if (0 < stride) {
-          ((void (*)())_gleMap1Texture1dLoad)(glContext,iVar3,u1ShadowHi,u1ShadowLo,u2ShadowHi,stride,order,points,mapData + 0x2a8,
+          ((void (*)())_gleMap1Texture1dLoad)(glContext,map1Index,u1ShadowHi,u1ShadowLo,u2ShadowHi,stride,order,points,mapData + 0x2a8,
                      u1,u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,
                      incomingFpr12,incomingFpr13);
           return;
@@ -1183,7 +1183,7 @@ void _glMap1d_Exec(int glContext,int target,undefined4 u1ShadowHi,undefined4 u1S
         break;
       case 4:
         if (1 < stride) {
-          ((void (*)())_gleMap1Texture2dLoad)(glContext,iVar3,u1ShadowHi,u1ShadowLo,u2ShadowHi,stride,order,points,mapData + 0x2e0,
+          ((void (*)())_gleMap1Texture2dLoad)(glContext,map1Index,u1ShadowHi,u1ShadowLo,u2ShadowHi,stride,order,points,mapData + 0x2e0,
                      u1,u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,
                      incomingFpr12,incomingFpr13);
           return;
@@ -1191,7 +1191,7 @@ void _glMap1d_Exec(int glContext,int target,undefined4 u1ShadowHi,undefined4 u1S
         break;
       case 5:
         if (2 < stride) {
-          ((void (*)())_gleMap1Texture3dLoad)(glContext,iVar3,u1ShadowHi,u1ShadowLo,u2ShadowHi,stride,order,points,mapData + 0x340,
+          ((void (*)())_gleMap1Texture3dLoad)(glContext,map1Index,u1ShadowHi,u1ShadowLo,u2ShadowHi,stride,order,points,mapData + 0x340,
                      u1,u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,
                      incomingFpr12,incomingFpr13);
           return;
@@ -1199,7 +1199,7 @@ void _glMap1d_Exec(int glContext,int target,undefined4 u1ShadowHi,undefined4 u1S
         break;
       case 6:
         if (3 < stride) {
-          ((void (*)())_gleMap1Texture4dLoad)(glContext,iVar3,u1ShadowHi,u1ShadowLo,u2ShadowHi,stride,order,points,mapData + 0x3c8,
+          ((void (*)())_gleMap1Texture4dLoad)(glContext,map1Index,u1ShadowHi,u1ShadowLo,u2ShadowHi,stride,order,points,mapData + 0x3c8,
                      u1,u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,
                      incomingFpr12,incomingFpr13);
           return;
@@ -1207,7 +1207,7 @@ void _glMap1d_Exec(int glContext,int target,undefined4 u1ShadowHi,undefined4 u1S
         break;
       case 7:
         if (2 < stride) {
-          ((void (*)())_gleMap1Vertex3dLoad)(glContext,iVar3,u1ShadowHi,u1ShadowLo,u2ShadowHi,stride,order,points,mapData,u1,
+          ((void (*)())_gleMap1Vertex3dLoad)(glContext,map1Index,u1ShadowHi,u1ShadowLo,u2ShadowHi,stride,order,points,mapData,u1,
                      u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13)
           ;
           return;
@@ -1215,7 +1215,7 @@ void _glMap1d_Exec(int glContext,int target,undefined4 u1ShadowHi,undefined4 u1S
         break;
       case 8:
         if (3 < stride) {
-          ((void (*)())_gleMap1Vertex4dLoad)(glContext,iVar3,u1ShadowHi,u1ShadowLo,u2ShadowHi,stride,order,points,mapData + 0x88,
+          ((void (*)())_gleMap1Vertex4dLoad)(glContext,map1Index,u1ShadowHi,u1ShadowLo,u2ShadowHi,stride,order,points,mapData + 0x88,
                      u1,u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,
                      incomingFpr12,incomingFpr13);
           return;

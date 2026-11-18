@@ -2408,18 +2408,18 @@ void _gleMultiVtxTextureCoordGenWrapObject(glContext, vertices, vertexCount)
   undefined4 vertices;
   undefined4 vertexCount;
 {
-  uint uVar1;
-  int iVar2;
+  uint texUnit;
+  int unitRecordCursor;
   
-  uVar1 = 0;
-  iVar2 = glContext + 0x5300;
+  texUnit = 0;
+  unitRecordCursor = glContext + 0x5300;
   do {
-    if (*(char *)(iVar2 + 0x1c) != '\0') {
-      (**(code **)(iVar2 + 0x14))(glContext,vertices,vertexCount,uVar1);
+    if (*(char *)(unitRecordCursor + 0x1c) != '\0') {
+      (**(code **)(unitRecordCursor + 0x14))(glContext,vertices,vertexCount,texUnit);
     }
-    uVar1 = uVar1 + 1;
-    iVar2 = iVar2 + 0xc;
-  } while (uVar1 < 8);
+    texUnit = texUnit + 1;
+    unitRecordCursor = unitRecordCursor + 0xc;
+  } while (texUnit < 8);
   return;
 }
 

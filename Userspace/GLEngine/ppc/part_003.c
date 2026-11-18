@@ -1,22 +1,22 @@
 #include "decls.h"
 
 /* _gleShrinkFuncCacheElem @ 0x1ecb8 (88 bytes) */
-int _gleShrinkFuncCacheElem(glContext, param_2)
+int _gleShrinkFuncCacheElem(glContext, payloadWords)
   int glContext;
-  int param_2;
+  int payloadWords;
 {
-  int *piVar1;
+  int *newElem;
   
-  piVar1 = (int *)_gleDCBRealloc(glContext,param_2 * 4 + 0x20);
-  if (*piVar1 == glContext) {
-    piVar1[1] = (int)piVar1;
-    *piVar1 = (int)piVar1;
+  newElem = (int *)_gleDCBRealloc(glContext,payloadWords * 4 + 0x20);
+  if (*newElem == glContext) {
+    newElem[1] = (int)newElem;
+    *newElem = (int)newElem;
   }
   else {
-    *(int **)(*piVar1 + 4) = piVar1;
-    *(int **)piVar1[1] = piVar1;
+    *(int **)(*newElem + 4) = newElem;
+    *(int **)newElem[1] = newElem;
   }
-  return (int)piVar1;
+  return (int)newElem;
 }
 
 /* _glEndNoMat_Exec @ 0x1ed10 (64 bytes) */
@@ -404,17 +404,17 @@ int _gleLookUpNonProxyTexture2D(glContext, target)
   uint target;
 {
   uint uVar1;
-  int iVar2;
+  int textureUnitThenTextureObject;
   
-  iVar2 = *(int *)(glContext + 0x53d4);
+  textureUnitThenTextureObject = *(int *)(glContext + 0x53d4);
   if (target == 0x8513) {
 LAB_0001f860:
-    iVar2 = *(int *)(iVar2 * 0x14 + glContext + 0x5154);
+    textureUnitThenTextureObject = *(int *)(textureUnitThenTextureObject * 0x14 + glContext + 0x5154);
   }
   else {
     if (target < 0x8514) {
       if (target == 0xde1) {
-        iVar2 = *(int *)(iVar2 * 0x14 + glContext + 0x5160);
+        textureUnitThenTextureObject = *(int *)(textureUnitThenTextureObject * 0x14 + glContext + 0x5160);
         goto LAB_0001f86c;
       }
       uVar1 = 0x84f5;
@@ -429,10 +429,10 @@ LAB_0001f860:
     if (target != uVar1) {
       return 0;
     }
-    iVar2 = *(int *)(iVar2 * 0x14 + glContext + 0x515c);
+    textureUnitThenTextureObject = *(int *)(textureUnitThenTextureObject * 0x14 + glContext + 0x515c);
   }
 LAB_0001f86c:
-  return iVar2 + 0x10;
+  return textureUnitThenTextureObject + 0x10;
 }
 
 /* _gleCheckTexSubImageRange @ 0x1f88c (76 bytes) */
@@ -1095,21 +1095,21 @@ void _glScissor_Exec(int glContext,undefined4 x,undefined4 y,int width,int heigh
 }
 
 /* _gleMoveFuncCacheElem @ 0x205f0 (44 bytes) */
-void _gleMoveFuncCacheElem(param_1, param_2)
-  int param_1;
-  int *param_2;
+void _gleMoveFuncCacheElem(listHead, elem)
+  int listHead;
+  int *elem;
 {
-  undefined4 *puVar1;
-  int *piVar2;
+  undefined4 *tailElem;
+  int *previousElem;
   
-  piVar2 = (int *)param_2[1];
-  *piVar2 = *param_2;
-  *(int **)(*param_2 + 4) = piVar2;
-  puVar1 = *(undefined4 **)(param_1 + 4);
-  *puVar1 = param_2;
-  param_2[1] = (int)puVar1;
-  *param_2 = param_1;
-  *(int **)(param_1 + 4) = param_2;
+  previousElem = (int *)elem[1];
+  *previousElem = *elem;
+  *(int **)(*elem + 4) = previousElem;
+  tailElem = *(undefined4 **)(listHead + 4);
+  *tailElem = elem;
+  elem[1] = (int)tailElem;
+  *elem = listHead;
+  *(int **)(listHead + 4) = elem;
   return;
 }
 
@@ -2643,9 +2643,9 @@ void _glBindProgramARB_Exec(glContext, target, program)
   undefined4 program;
 {
   undefined4 glErrorCode;
-  undefined4 uVar1;
+  undefined4 pipelineStageIndex;
   uint uVar2;
-  int iVar3;
+  int sharedStateMutex;
   
   if (-1 < *(short *)(glContext + 0x4a10)) {
     if (*(int *)(glContext + 0x7574) != 0) {
@@ -2657,7 +2657,7 @@ LAB_0002279c:
     return;
   }
   if (target == 0x8620) {
-    uVar1 = 0;
+    pipelineStageIndex = 0;
   }
   else {
     if (target < 0x8621) {
@@ -2673,16 +2673,16 @@ LAB_0002279c:
       glErrorCode = 0x500;
       goto LAB_0002279c;
     }
-    uVar1 = 1;
+    pipelineStageIndex = 1;
   }
   if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
-    iVar3 = *(int *)(glContext + 0x5148) + 0x8028;
-    _pthread_mutex_lock(iVar3);
-    ((int (*)())_gleBindPipelineProgram)(glContext,uVar1,program);
-    _pthread_mutex_unlock(iVar3);
+    sharedStateMutex = *(int *)(glContext + 0x5148) + 0x8028;
+    _pthread_mutex_lock(sharedStateMutex);
+    ((int (*)())_gleBindPipelineProgram)(glContext,pipelineStageIndex,program);
+    _pthread_mutex_unlock(sharedStateMutex);
     return;
   }
-  ((int (*)())_gleBindPipelineProgram)(glContext,uVar1,program);
+  ((int (*)())_gleBindPipelineProgram)(glContext,pipelineStageIndex,program);
   return;
 }
 
