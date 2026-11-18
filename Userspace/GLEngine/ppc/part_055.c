@@ -1298,7 +1298,7 @@ void _gleVPRenderTriangleStrip_body(glContext)
   byte vertexProgramTwoSide;
   char faceTestNeeded;
   ushort facePolygonMode;
-  bool bVar4;
+  bool facingChanged;
   bool windingFlip;
   uint runStart;
   uint *puVar6;
@@ -1312,6 +1312,7 @@ void _gleVPRenderTriangleStrip_body(glContext)
   uint uVar12;
   uint *spareList;
   uint *puVar14;
+  uint *flipCursor;
   int *triangleVertexList;
   uint newRunStart;
   uint *polygonVertexList;
@@ -1359,7 +1360,7 @@ void _gleVPRenderTriangleStrip_body(glContext)
         uVar8 = 0;
         vertexCountThenLastTriangle = (vertexCursor + vertexCountThenLastTriangle * 0x100) - 0x300;
         do {
-          bVar4 = false;
+          facingChanged = false;
           iVar7 = 0;
           uVar10 = uVar8;
           runStart = vertexCursor;
@@ -1371,9 +1372,9 @@ void _gleVPRenderTriangleStrip_body(glContext)
             dVar21 = f1AfterCall1;
             if (iVar9 == 0) {
               if (iVar11 != backFacing) {
-                bVar4 = true;
+                facingChanged = true;
               }
-              if ((bVar4) && (0 < iVar7)) break;
+              if ((facingChanged) && (0 < iVar7)) break;
               if (iVar7 == 0) {
                 uVar12 = uVar10;
               }
@@ -1472,11 +1473,11 @@ LAB_001051b4: ;
                (iVar7 = _gleCullPolygonPtrStack(glContext,polygonVertexList,polygonVertexCount,&backFacing),
                dVar21 = f1AfterCall2, iVar7 == 0)) {
               iVar7 = backFacing;
-              if (((int)-(uint)vertexProgramTwoSide < 0) && (puVar14 = polygonVertexList, iVar9 = polygonVertexCount, 0 < polygonVertexCount)) {
+              if (((int)-(uint)vertexProgramTwoSide < 0) && (flipCursor = polygonVertexList, iVar9 = polygonVertexCount, 0 < polygonVertexCount)) {
                 do {
-                  ((double (*)())_gleVPFlipColors)(glContext,*puVar14,1,iVar7);
+                  ((double (*)())_gleVPFlipColors)(glContext,*flipCursor,1,iVar7);
                   iVar9 = iVar9 + -1;
-                  puVar14 = puVar14 + 1;
+                  flipCursor = flipCursor + 1;
                 } while (iVar9 != 0);
               }
               if (iVar7 == 0) {
@@ -1512,6 +1513,7 @@ void _gleVPRenderTriangleFan_body(glContext)
   int iVar8;
   int *spareList;
   int *piVar10;
+  int *flipCursor;
   int iVar11;
   int polygonVertexCount;
   uint uVar12;
@@ -1639,11 +1641,11 @@ LAB_00105508:
                (iVar6 = _gleCullPolygonPtrStack(glContext,polygonList,polygonVertexCount,&backFacing),
                dVar17 = f1AfterCall2, iVar6 == 0)) {
               iVar6 = backFacing;
-              if (((int)-(uint)vertexProgramTwoSide < 0) && (piVar10 = polygonList, iVar8 = polygonVertexCount, 0 < polygonVertexCount)) {
+              if (((int)-(uint)vertexProgramTwoSide < 0) && (flipCursor = polygonList, iVar8 = polygonVertexCount, 0 < polygonVertexCount)) {
                 do {
-                  ((double (*)())_gleVPFlipColors)(glContext,*piVar10,1,iVar6);
+                  ((double (*)())_gleVPFlipColors)(glContext,*flipCursor,1,iVar6);
                   iVar8 = iVar8 + -1;
-                  piVar10 = piVar10 + 1;
+                  flipCursor = flipCursor + 1;
                 } while (iVar8 != 0);
               }
               if (iVar6 == 0) {

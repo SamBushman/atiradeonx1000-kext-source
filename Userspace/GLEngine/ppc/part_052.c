@@ -2187,7 +2187,7 @@ void _gleRenderFlatTrianglesFunc_body(glContext)
   int glContext;
 {
   bool lightingEnabled;
-  bool bVar2;
+  bool facingChanged;
   bool texturingEnabled;
   char faceTestNeeded;
   ushort facePolygonMode;
@@ -2280,7 +2280,7 @@ void _gleRenderFlatTrianglesFunc_body(glContext)
         uVar8 = (triangleCursor + iVar17 * 0x100) - 0x300;
         do {
           iVar7 = 0;
-          bVar2 = false;
+          facingChanged = false;
           runStart = triangleCursor;
           uVar19 = triangleCursor;
           if (triangleCursor <= uVar8) {
@@ -2291,9 +2291,9 @@ void _gleRenderFlatTrianglesFunc_body(glContext)
               dVar20 = dVar20;
               if (iVar17 == 0) {
                 if (iVar10 != backFacing) {
-                  bVar2 = true;
+                  facingChanged = true;
                 }
-                if ((bVar2) && (uVar19 = triangleCursor, 0 < iVar7)) break;
+                if ((facingChanged) && (uVar19 = triangleCursor, 0 < iVar7)) break;
                 iVar7 = iVar7 + 3;
                 iVar10 = backFacing;
                 uVar19 = runStart;
@@ -4566,7 +4566,7 @@ void _gleSelectTriangleStripFunc_body(glContext)
 {
   char cullFaceEnabled;
   bool noVertexProgram;
-  bool bVar3;
+  bool facingChanged;
   bool windingFlip;
   bool vertexProgramTwoSide;
   uint runStart;
@@ -4580,6 +4580,7 @@ void _gleSelectTriangleStripFunc_body(glContext)
   uint uVar11;
   uint *spareList;
   uint *puVar13;
+  uint *flipCursor;
   int *triangleVertexList;
   uint newRunStart;
   uint uVar16;
@@ -4640,7 +4641,7 @@ void _gleSelectTriangleStripFunc_body(glContext)
         uVar8 = (vertexCursor + vertexCount * 0x100) - 0x300;
         uVar16 = 0;
         do {
-          bVar3 = false;
+          facingChanged = false;
           iVar17 = 0;
           uVar20 = uVar16;
           runStart = vertexCursor;
@@ -4652,9 +4653,9 @@ void _gleSelectTriangleStripFunc_body(glContext)
             dVar22 = f1AfterCall1;
             if (iVar9 == 0) {
               if (iVar10 != backFacing) {
-                bVar3 = true;
+                facingChanged = true;
               }
-              if ((bVar3) && (0 < iVar17)) break;
+              if ((facingChanged) && (0 < iVar17)) break;
               if (iVar17 == 0) {
                 uVar11 = uVar20;
               }
@@ -4741,11 +4742,11 @@ LAB_000f1c00: ;
                (iVar17 = ((int (*)())_gleCullPolygonPtrStack)(glContext,polygonVertexList,polygonVertexCount,&backFacing),
                dVar22 = f1AfterCall2, iVar17 == 0)) {
               iVar17 = backFacing;
-              if ((!noVertexProgram) && ((vertexProgramTwoSide && (iVar9 = polygonVertexCount, puVar13 = polygonVertexList, 0 < polygonVertexCount)))) {
+              if ((!noVertexProgram) && ((vertexProgramTwoSide && (iVar9 = polygonVertexCount, flipCursor = polygonVertexList, 0 < polygonVertexCount)))) {
                 do {
-                  _gleVPFlipColors(glContext,*puVar13,1,iVar17);
+                  _gleVPFlipColors(glContext,*flipCursor,1,iVar17);
                   iVar9 = iVar9 + -1;
-                  puVar13 = puVar13 + 1;
+                  flipCursor = flipCursor + 1;
                 } while (iVar9 != 0);
               }
               dVar22 = (double)_gleSelectPolygonPtr(glContext,polygonVertexList,polygonVertexCount);

@@ -1,0 +1,18 @@
+use	_gleVPRenderTriangleStrip_body	bVar4	facingChanged	CONFIRMED	set when the triangle's backFacing differs from runFacing	^\s*bVar4\ =\ false;$	+1
+use	_gleVPRenderTriangleStrip_body	bVar4	facingChanged	CONFIRMED	set when the triangle's backFacing differs from runFacing	^\s*bVar4\ =\ true;$	+1
+use	_gleVPRenderTriangleStrip_body	bVar4	facingChanged	CONFIRMED	set when the triangle's backFacing differs from runFacing	^\s*if\ \(\(bVar4\)\ \&\&\ \(0\ <\ iVar7\)\)\ break;$	+1
+use	_gleVPRenderTriangleStrip_body	puVar14	flipCursor	CONFIRMED	walks polygonVertexList in the colour-flip loop	^\s*if\ \(\(\(int\)\-\(uint\)bVar1\ <\ 0\)\ \&\&\ \(puVar14\ =\ puVar17,\ iVar9\ =\ iVar11,\ 0\ <\ iVar11\)\)\ \{$	+1
+use	_gleVPRenderTriangleStrip_body	puVar14	flipCursor	CONFIRMED	walks polygonVertexList in the colour-flip loop	^\s*\(\(double\ \(\*\)\(\)\)_gleVPFlipColors\)\(param_1,\*puVar14,1,iVar7\);$	+1
+use	_gleVPRenderTriangleStrip_body	puVar14	flipCursor	CONFIRMED	walks polygonVertexList in the colour-flip loop	^\s*puVar14\ =\ puVar14\ \+\ 1;$	+1
+use	_gleVPRenderTriangleFan_body	piVar10	flipCursor	CONFIRMED	walks polygonList in the colour-flip loop	^\s*if\ \(\(\(int\)\-\(uint\)bVar1\ <\ 0\)\ \&\&\ \(piVar10\ =\ piVar14,\ iVar8\ =\ iVar11,\ 0\ <\ iVar11\)\)\ \{$	+1
+use	_gleVPRenderTriangleFan_body	piVar10	flipCursor	CONFIRMED	walks polygonList in the colour-flip loop	^\s*\(\(double\ \(\*\)\(\)\)_gleVPFlipColors\)\(param_1,\*piVar10,1,iVar6\);$	+1
+use	_gleVPRenderTriangleFan_body	piVar10	flipCursor	CONFIRMED	walks polygonList in the colour-flip loop	^\s*piVar10\ =\ piVar10\ \+\ 1;$	+1
+use	_gleSelectTriangleStripFunc_body	bVar3	facingChanged	CONFIRMED	set when the triangle's backFacing differs from runFacing	^\s*bVar3\ =\ false;$	+1
+use	_gleSelectTriangleStripFunc_body	bVar3	facingChanged	CONFIRMED	set when the triangle's backFacing differs from runFacing	^\s*bVar3\ =\ true;$	+1
+use	_gleSelectTriangleStripFunc_body	bVar3	facingChanged	CONFIRMED	set when the triangle's backFacing differs from runFacing	^\s*if\ \(\(bVar3\)\ \&\&\ \(0\ <\ iVar17\)\)\ break;$	+1
+use	_gleSelectTriangleStripFunc_body	puVar13	flipCursor	CONFIRMED	walks polygonVertexList in the colour-flip loop	^\s*if\ \(\(!bVar2\)\ \&\&\ \(\(bVar4\ \&\&\ \(iVar9\ =\ iVar10,\ puVar13\ =\ puVar18,\ 0\ <\ iVar10\)\)\)\)\ \{$	+1
+use	_gleSelectTriangleStripFunc_body	puVar13	flipCursor	CONFIRMED	walks polygonVertexList in the colour-flip loop	^\s*_gleVPFlipColors\(param_1,\*puVar13,1,iVar17\);$	+1
+use	_gleSelectTriangleStripFunc_body	puVar13	flipCursor	CONFIRMED	walks polygonVertexList in the colour-flip loop	^\s*puVar13\ =\ puVar13\ \+\ 1;$	+1
+use	_gleRenderFlatTrianglesFunc_body	bVar2	facingChanged	CONFIRMED	set when the triangle's backFacing differs from runFacing	^\s*bVar2\ =\ false;$	+1
+use	_gleRenderFlatTrianglesFunc_body	bVar2	facingChanged	CONFIRMED	set when the triangle's backFacing differs from runFacing	^\s*bVar2\ =\ true;$	+1
+use	_gleRenderFlatTrianglesFunc_body	bVar2	facingChanged	CONFIRMED	set when the triangle's backFacing differs from runFacing	^\s*if\ \(\(bVar2\)\ \&\&\ \(uVar19\ =\ uVar18,\ 0\ <\ iVar7\)\)\ break;$	+1
