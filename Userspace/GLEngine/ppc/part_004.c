@@ -1475,6 +1475,7 @@ int _gleRemoveHashName(param_1, param_2)
   undefined4 uVar1;
   uint uVar2;
   undefined4 *puVar3;
+  undefined4 *allocatedBlock;
   uint uVar4;
   uint uVar5;
   undefined4 *puVar6;
@@ -1494,12 +1495,12 @@ int _gleRemoveHashName(param_1, param_2)
         if (uVar4 < param_2) {
           puVar6[2] = param_2 - uVar4;
           if (uVar2 < uVar5) {
-            puVar3 = (undefined4 *)_malloc(0xc);
+            allocatedBlock = (undefined4 *)_malloc(0xc);
             uVar1 = *puVar6;
-            puVar3[1] = uVar2;
-            *puVar3 = uVar1;
-            puVar3[2] = (uVar5 - param_2) + -1;
-            *puVar6 = puVar3;
+            allocatedBlock[1] = uVar2;
+            *allocatedBlock = uVar1;
+            allocatedBlock[2] = (uVar5 - param_2) + -1;
+            *puVar6 = allocatedBlock;
           }
         }
         else if (uVar2 < uVar5) {
@@ -2093,7 +2094,8 @@ void _glClear_Exec(int glContext,uint mask,double fparam_1,double forwardedFloat
   int remaining;
   int loopIndex;
   bool bVar1;
-  char cVar2;
+  bool noStateChangePending;
+  char rendererInfoByte79;
   undefined4 glErrorCode;
   int *srcCursor;
   int iVar5;
@@ -2104,7 +2106,8 @@ void _glClear_Exec(int glContext,uint mask,double fparam_1,double forwardedFloat
   undefined4 incomingR8;
   int matrixChangeBits;
   uint uVar7;
-  int *piVar8;
+  uint changeWord3;
+  int *changeWordCursor;
   double extraout_f1;
   
   if (-1 < *(short *)(glContext + 0x4a10)) {
@@ -2131,8 +2134,8 @@ void _glClear_Exec(int glContext,uint mask,double fparam_1,double forwardedFloat
   }
   if (*(char *)(glContext + 0x4691) == '\0') goto LAB_00032054;
   framebufferObject = *(int *)(glContext + 0x744c);
-  piVar8 = (int *)(glContext + 0x310);
-  cVar2 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
+  changeWordCursor = (int *)(glContext + 0x310);
+  rendererInfoByte79 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
   if ((framebufferObject != 0) && (*(int *)(framebufferObject + 0xec) != 0)) {
     ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,incomingR5,incomingR6,incomingR7,incomingR8,matrixChangeBits,fparam_1,forwardedFloatArg2,forwardedFloatArg3,
                forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
@@ -2140,7 +2143,7 @@ void _glClear_Exec(int glContext,uint mask,double fparam_1,double forwardedFloat
   }
   if ((*(char *)(glContext + 0x4664) == '\0') && (*(int *)(glContext + 0x5430) == 0)) {
 LAB_00031f2c:
-    uVar7 = *(uint *)(glContext + 0x31c);
+    changeWord3 = *(uint *)(glContext + 0x31c);
   }
   else {
     loopIndex = 0;
@@ -2154,8 +2157,8 @@ LAB_00031f2c:
       }
       loopIndex = loopIndex + 1;
     } while (loopIndex < 9);
-    uVar7 = *(uint *)(glContext + 0x31c);
-    if ((uVar7 & 0x15555) != 0) {
+    changeWord3 = *(uint *)(glContext + 0x31c);
+    if ((changeWord3 & 0x15555) != 0) {
       if (*(char *)(glContext + 0x2e54) != '\0') {
         ((double (*)())_gleUpdateLightRGBASums)(glContext,glContext + 0x2c20,0);
       }
@@ -2165,26 +2168,26 @@ LAB_00031f2c:
       goto LAB_00031f2c;
     }
   }
-  bVar1 = cVar2 == '\0';
+  bVar1 = rendererInfoByte79 == '\0';
   if (bVar1) {
-    uVar7 = uVar7 & 0x17000000;
+    changeWord3 = changeWord3 & 0x17000000;
   }
   else {
-    uVar7 = uVar7 & 0x17ffffff;
+    changeWord3 = changeWord3 & 0x17ffffff;
   }
   if (bVar1) {
-    bVar1 = ((*piVar8 == 0 && *(int *)(glContext + 0x314) == 0) && uVar7 == 0) &&
+    noStateChangePending = ((*changeWordCursor == 0 && *(int *)(glContext + 0x314) == 0) && changeWord3 == 0) &&
             *(int *)(glContext + 800) == 0;
   }
   else {
-    bVar1 = (((*piVar8 == 0 && *(int *)(glContext + 0x314) == 0) &&
-             (*(uint *)(glContext + 0x318) & 0xfffffffd) == 0) && uVar7 == 0) &&
+    noStateChangePending = (((*changeWordCursor == 0 && *(int *)(glContext + 0x314) == 0) &&
+             (*(uint *)(glContext + 0x318) & 0xfffffffd) == 0) && changeWord3 == 0) &&
             *(int *)(glContext + 800) == 0;
   }
-  if (!bVar1) {
+  if (!noStateChangePending) {
     if (*(char *)(glContext + 0x85a8) == *(char *)(glContext + 0x85a6)) {
       uVar7 = (**(code **)(glContext + 0x4788))
-                        (*(undefined4 *)(glContext + 0x4688),glContext + 0x4698,piVar8);
+                        (*(undefined4 *)(glContext + 0x4688),glContext + 0x4698,changeWordCursor);
       if ((((uVar7 & 3) != (uint)*(byte *)(glContext + 0x7580)) ||
           ((uVar7 & 4) != (uint)*(byte *)(glContext + 0x7581))) ||
          ((uVar7 & 8) != (uint)(*(char *)(glContext + 0x759d) == '\0'))) {
@@ -2209,8 +2212,8 @@ LAB_00032028:
     }
     remaining = 0x13;
     do {
-      *piVar8 = 0;
-      piVar8 = piVar8 + 1;
+      *changeWordCursor = 0;
+      changeWordCursor = changeWordCursor + 1;
       remaining = remaining + -1;
     } while (remaining != 0);
   }

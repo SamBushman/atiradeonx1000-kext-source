@@ -1953,6 +1953,7 @@ void _glGenerateMipmapEXT_Exec(glContext, target)
   ushort *srcCursor;
   uint uVar4;
   int iVar5;
+  int textureObject;
   
   if (target != 0x806f) {
     if (target < 0x8070) {
@@ -1968,12 +1969,12 @@ LAB_00067554:
     }
     else {
       if (target != 0x8513) goto LAB_000674d0;
-      iVar5 = _gleLookUpTexture2D(glContext,0x8513);
-      uVar4 = (int)*(short *)(iVar5 + 0x60);
-      if ((int)(uint)*(byte *)(iVar5 + 0x87) < (int)*(short *)(iVar5 + 0x60)) {
-        uVar4 = (uint)*(byte *)(iVar5 + 0x87);
+      textureObject = _gleLookUpTexture2D(glContext,0x8513);
+      uVar4 = (int)*(short *)(textureObject + 0x60);
+      if ((int)(uint)*(byte *)(textureObject + 0x87) < (int)*(short *)(textureObject + 0x60)) {
+        uVar4 = (uint)*(byte *)(textureObject + 0x87);
       }
-      srcCursor = (ushort *)(iVar5 + 0x94);
+      srcCursor = (ushort *)(textureObject + 0x94);
       loopIndex = 0;
       uVar4 = 1 << (uVar4 & 0x3f) | 1;
       do {

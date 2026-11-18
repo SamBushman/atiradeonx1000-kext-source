@@ -39,17 +39,17 @@ void _glConvolutionFilter1D_Exec(glContext, target, internalformat, width, forma
   int image;
 {
   undefined4 glErrorCode;
-  int iVar2;
+  int internalFormat;
   int iVar3;
   int pixelUnpackBuffer;
-  int iVar4;
+  int imageEndOffset;
   int iVar5;
   int iVar6;
-  double dVar7;
+  double bytesPerElement;
   
-  iVar2 = _gleImagingTexFormatToInternal(internalformat);
+  internalFormat = _gleImagingTexFormatToInternal(internalformat);
   if (*(short *)(glContext + 0x4a10) < 0) {
-    if ((target != 0x8010) || (iVar2 == 0)) {
+    if ((target != 0x8010) || (internalFormat == 0)) {
       if (*(int *)(glContext + 0x7574) != 0) {
         return;
       }
@@ -68,14 +68,14 @@ void _glConvolutionFilter1D_Exec(glContext, target, internalformat, width, forma
       pixelUnpackBuffer = *(int *)(glContext + 0x4a6c);
       if (pixelUnpackBuffer == 0) {
 LAB_000692cc:
-        _gleConvolutionFilter1D(glContext,0x8010,iVar2,width,format,type,image);
+        _gleConvolutionFilter1D(glContext,0x8010,internalFormat,width,format,type,image);
         return;
       }
-      iVar4 = _gleOffsetLimitImage(glContext + 0x31cc,width,1,format,type,image);
+      imageEndOffset = _gleOffsetLimitImage(glContext + 0x31cc,width,1,format,type,image);
       iVar6 = *(int *)(pixelUnpackBuffer + 0x38);
-      dVar7 = (double)((double (*)())_gleBytesPerElement)(type);
-      iVar5 = (int)dVar7;
-      if (iVar4 <= iVar6) {
+      bytesPerElement = (double)((double (*)())_gleBytesPerElement)(type);
+      iVar5 = (int)bytesPerElement;
+      if (imageEndOffset <= iVar6) {
         if (iVar5 == 0) {
           iVar5 = _glePixelBytes(format,type);
         }
@@ -110,17 +110,17 @@ void _glConvolutionFilter2D_Exec(glContext, target, internalformat, width, heigh
   int image;
 {
   undefined4 glErrorCode;
-  int iVar2;
+  int internalFormat;
   int iVar3;
   int pixelUnpackBuffer;
-  int iVar4;
+  int imageEndOffset;
   int iVar5;
   int iVar6;
-  double dVar7;
+  double bytesPerElement;
   
-  iVar2 = _gleImagingTexFormatToInternal(internalformat);
+  internalFormat = _gleImagingTexFormatToInternal(internalformat);
   if (*(short *)(glContext + 0x4a10) < 0) {
-    if ((target != 0x8011) || (iVar2 == 0)) {
+    if ((target != 0x8011) || (internalFormat == 0)) {
       if (*(int *)(glContext + 0x7574) != 0) {
         return;
       }
@@ -139,14 +139,14 @@ void _glConvolutionFilter2D_Exec(glContext, target, internalformat, width, heigh
       pixelUnpackBuffer = *(int *)(glContext + 0x4a6c);
       if (pixelUnpackBuffer == 0) {
 LAB_00069460:
-        _gleConvolutionFilter2D(glContext,0x8011,iVar2,width,height,format,type,image);
+        _gleConvolutionFilter2D(glContext,0x8011,internalFormat,width,height,format,type,image);
         return;
       }
-      iVar4 = _gleOffsetLimitImage(glContext + 0x31cc,width,height,format,type,image);
+      imageEndOffset = _gleOffsetLimitImage(glContext + 0x31cc,width,height,format,type,image);
       iVar6 = *(int *)(pixelUnpackBuffer + 0x38);
-      dVar7 = (double)((double (*)())_gleBytesPerElement)(type);
-      iVar5 = (int)dVar7;
-      if (iVar4 <= iVar6) {
+      bytesPerElement = (double)((double (*)())_gleBytesPerElement)(type);
+      iVar5 = (int)bytesPerElement;
+      if (imageEndOffset <= iVar6) {
         if (iVar5 == 0) {
           iVar5 = _glePixelBytes(format,type);
         }
@@ -362,16 +362,18 @@ void _glCopyConvolutionFilter1D_Exec(glContext, target, internalformat, x, y, wi
   int loopIndex;
   undefined4 glErrorCode;
   bool bVar1;
-  char cVar2;
+  bool noStateChangePending;
+  char rendererInfoByte79;
   undefined4 uVar3;
   int *srcCursor;
-  int iVar5;
+  int internalFormat;
   int iVar6;
   int framebufferObject;
   undefined4 uVar7;
   int matrixChangeBits;
   uint uVar9;
-  int *piVar10;
+  uint changeWord3;
+  int *changeWordCursor;
   double extraout_f1;
   double extraout_f1_00;
   double extraout_f1_01;
@@ -389,7 +391,7 @@ void _glCopyConvolutionFilter1D_Exec(glContext, target, internalformat, x, y, wi
   uVar3 = x;
   uVar7 = y;
   uVar9 = width;
-  iVar5 = _gleImagingTexFormatToInternal(internalformat);
+  internalFormat = _gleImagingTexFormatToInternal(internalformat);
   dVar11 = extraout_f1;
   if ((*(int *)(glContext + 0x744c) != 0) || (*(int *)(glContext + 0x310) < 0)) {
     matrixChangeBits = *(int *)(glContext + 0x50ac);
@@ -399,8 +401,8 @@ void _glCopyConvolutionFilter1D_Exec(glContext, target, internalformat, x, y, wi
     }
     if (*(char *)(glContext + 0x4691) != '\0') {
       framebufferObject = *(int *)(glContext + 0x744c);
-      piVar10 = (int *)(glContext + 0x310);
-      cVar2 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
+      changeWordCursor = (int *)(glContext + 0x310);
+      rendererInfoByte79 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
       if ((framebufferObject != 0) && (*(int *)(framebufferObject + 0xec) != 0)) {
         ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,internalformat,uVar3,uVar7,uVar9,matrixChangeBits,dVar11,incomingFpr2,incomingFpr3,incomingFpr4,
                    incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
@@ -409,7 +411,7 @@ void _glCopyConvolutionFilter1D_Exec(glContext, target, internalformat, x, y, wi
       }
       if ((*(char *)(glContext + 0x4664) == '\0') && (*(int *)(glContext + 0x5430) == 0)) {
 LAB_00069ab8:
-        uVar9 = *(uint *)(glContext + 0x31c);
+        changeWord3 = *(uint *)(glContext + 0x31c);
       }
       else {
         loopIndex = 0;
@@ -423,8 +425,8 @@ LAB_00069ab8:
           }
           loopIndex = loopIndex + 1;
         } while (loopIndex < 9);
-        uVar9 = *(uint *)(glContext + 0x31c);
-        if ((uVar9 & 0x15555) != 0) {
+        changeWord3 = *(uint *)(glContext + 0x31c);
+        if ((changeWord3 & 0x15555) != 0) {
           if (*(char *)(glContext + 0x2e54) != '\0') {
             dVar11 = (double)_gleUpdateLightRGBASums(glContext,glContext + 0x2c20,0);
           }
@@ -434,26 +436,26 @@ LAB_00069ab8:
           goto LAB_00069ab8;
         }
       }
-      bVar1 = cVar2 == '\0';
+      bVar1 = rendererInfoByte79 == '\0';
       if (bVar1) {
-        uVar9 = uVar9 & 0x17000000;
+        changeWord3 = changeWord3 & 0x17000000;
       }
       else {
-        uVar9 = uVar9 & 0x17ffffff;
+        changeWord3 = changeWord3 & 0x17ffffff;
       }
       if (bVar1) {
-        bVar1 = ((*piVar10 == 0 && *(int *)(glContext + 0x314) == 0) && uVar9 == 0) &&
+        noStateChangePending = ((*changeWordCursor == 0 && *(int *)(glContext + 0x314) == 0) && changeWord3 == 0) &&
                 *(int *)(glContext + 800) == 0;
       }
       else {
-        bVar1 = (((*piVar10 == 0 && *(int *)(glContext + 0x314) == 0) &&
-                 (*(uint *)(glContext + 0x318) & 0xfffffffd) == 0) && uVar9 == 0) &&
+        noStateChangePending = (((*changeWordCursor == 0 && *(int *)(glContext + 0x314) == 0) &&
+                 (*(uint *)(glContext + 0x318) & 0xfffffffd) == 0) && changeWord3 == 0) &&
                 *(int *)(glContext + 800) == 0;
       }
-      if (!bVar1) {
+      if (!noStateChangePending) {
         if (*(char *)(glContext + 0x85a8) == *(char *)(glContext + 0x85a6)) {
           uVar9 = (**(code **)(glContext + 0x4788))
-                            (*(undefined4 *)(glContext + 0x4688),glContext + 0x4698,piVar10);
+                            (*(undefined4 *)(glContext + 0x4688),glContext + 0x4698,changeWordCursor);
           if ((((uVar9 & 3) != (uint)*(byte *)(glContext + 0x7580)) ||
               ((uVar9 & 4) != (uint)*(byte *)(glContext + 0x7581))) ||
              (dVar11 = extraout_f1_02, (uVar9 & 8) != (uint)(*(char *)(glContext + 0x759d) == '\0')))
@@ -477,19 +479,19 @@ LAB_00069ab8:
         }
         remaining = 0x13;
         do {
-          *piVar10 = 0;
-          piVar10 = piVar10 + 1;
+          *changeWordCursor = 0;
+          changeWordCursor = changeWordCursor + 1;
           remaining = remaining + -1;
         } while (remaining != 0);
       }
     }
   }
   if (*(short *)(glContext + 0x4a10) < 0) {
-    if ((target == 0x8010) && (iVar5 != 0)) {
+    if ((target == 0x8010) && (internalFormat != 0)) {
       if (width < 0xc) {
-        ((void (*)())_glReadPixels_Exec)(glContext,x,y,width,1,iVar5,0x1406,auStack_e0,dVar11,incomingFpr2,
+        ((void (*)())_glReadPixels_Exec)(glContext,x,y,width,1,internalFormat,0x1406,auStack_e0,dVar11,incomingFpr2,
                            incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
-        ((void (*)())_glConvolutionFilter1D_Exec)(glContext,0x8010,iVar5,width,iVar5,0x1406,auStack_e0);
+        ((void (*)())_glConvolutionFilter1D_Exec)(glContext,0x8010,internalFormat,width,internalFormat,0x1406,auStack_e0);
         return;
       }
       if (*(int *)(glContext + 0x7574) != 0) {
@@ -529,17 +531,19 @@ void _glCopyConvolutionFilter2D_Exec(glContext, target, internalformat, x, y, wi
   int loopIndex;
   undefined4 glErrorCode;
   bool bVar1;
-  char cVar2;
+  bool noStateChangePending;
+  char rendererInfoByte79;
   undefined4 uVar3;
   int *srcCursor;
-  int iVar5;
+  int internalFormat;
   int framebufferObject;
   undefined4 uVar7;
   int iVar8;
   int matrixChangeBits;
   int iVar9;
   uint uVar10;
-  int *piVar11;
+  uint changeWord3;
+  int *changeWordCursor;
   double extraout_f1;
   double extraout_f1_00;
   double extraout_f1_01;
@@ -557,7 +561,7 @@ void _glCopyConvolutionFilter2D_Exec(glContext, target, internalformat, x, y, wi
   uVar3 = x;
   uVar7 = y;
   iVar9 = width;
-  iVar5 = _gleImagingTexFormatToInternal(internalformat);
+  internalFormat = _gleImagingTexFormatToInternal(internalformat);
   dVar12 = extraout_f1;
   if ((*(int *)(glContext + 0x744c) != 0) || (*(int *)(glContext + 0x310) < 0)) {
     matrixChangeBits = *(int *)(glContext + 0x50ac);
@@ -567,8 +571,8 @@ void _glCopyConvolutionFilter2D_Exec(glContext, target, internalformat, x, y, wi
     }
     if (*(char *)(glContext + 0x4691) != '\0') {
       framebufferObject = *(int *)(glContext + 0x744c);
-      piVar11 = (int *)(glContext + 0x310);
-      cVar2 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
+      changeWordCursor = (int *)(glContext + 0x310);
+      rendererInfoByte79 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
       if ((framebufferObject != 0) && (*(int *)(framebufferObject + 0xec) != 0)) {
         ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,internalformat,uVar3,uVar7,iVar9,matrixChangeBits,dVar12,incomingFpr2,incomingFpr3,incomingFpr4,
                    incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
@@ -577,7 +581,7 @@ void _glCopyConvolutionFilter2D_Exec(glContext, target, internalformat, x, y, wi
       }
       if ((*(char *)(glContext + 0x4664) == '\0') && (*(int *)(glContext + 0x5430) == 0)) {
 LAB_00069df4:
-        uVar10 = *(uint *)(glContext + 0x31c);
+        changeWord3 = *(uint *)(glContext + 0x31c);
       }
       else {
         loopIndex = 0;
@@ -591,8 +595,8 @@ LAB_00069df4:
           }
           loopIndex = loopIndex + 1;
         } while (loopIndex < 9);
-        uVar10 = *(uint *)(glContext + 0x31c);
-        if ((uVar10 & 0x15555) != 0) {
+        changeWord3 = *(uint *)(glContext + 0x31c);
+        if ((changeWord3 & 0x15555) != 0) {
           if (*(char *)(glContext + 0x2e54) != '\0') {
             dVar12 = (double)_gleUpdateLightRGBASums(glContext,glContext + 0x2c20,0);
           }
@@ -602,26 +606,26 @@ LAB_00069df4:
           goto LAB_00069df4;
         }
       }
-      bVar1 = cVar2 == '\0';
+      bVar1 = rendererInfoByte79 == '\0';
       if (bVar1) {
-        uVar10 = uVar10 & 0x17000000;
+        changeWord3 = changeWord3 & 0x17000000;
       }
       else {
-        uVar10 = uVar10 & 0x17ffffff;
+        changeWord3 = changeWord3 & 0x17ffffff;
       }
       if (bVar1) {
-        bVar1 = ((*piVar11 == 0 && *(int *)(glContext + 0x314) == 0) && uVar10 == 0) &&
+        noStateChangePending = ((*changeWordCursor == 0 && *(int *)(glContext + 0x314) == 0) && changeWord3 == 0) &&
                 *(int *)(glContext + 800) == 0;
       }
       else {
-        bVar1 = (((*piVar11 == 0 && *(int *)(glContext + 0x314) == 0) &&
-                 (*(uint *)(glContext + 0x318) & 0xfffffffd) == 0) && uVar10 == 0) &&
+        noStateChangePending = (((*changeWordCursor == 0 && *(int *)(glContext + 0x314) == 0) &&
+                 (*(uint *)(glContext + 0x318) & 0xfffffffd) == 0) && changeWord3 == 0) &&
                 *(int *)(glContext + 800) == 0;
       }
-      if (!bVar1) {
+      if (!noStateChangePending) {
         if (*(char *)(glContext + 0x85a8) == *(char *)(glContext + 0x85a6)) {
           uVar10 = (**(code **)(glContext + 0x4788))
-                             (*(undefined4 *)(glContext + 0x4688),glContext + 0x4698,piVar11);
+                             (*(undefined4 *)(glContext + 0x4688),glContext + 0x4698,changeWordCursor);
           if ((((uVar10 & 3) != (uint)*(byte *)(glContext + 0x7580)) ||
               ((uVar10 & 4) != (uint)*(byte *)(glContext + 0x7581))) ||
              (dVar12 = extraout_f1_02, (uVar10 & 8) != (uint)(*(char *)(glContext + 0x759d) == '\0')))
@@ -645,19 +649,19 @@ LAB_00069df4:
         }
         remaining = 0x13;
         do {
-          *piVar11 = 0;
-          piVar11 = piVar11 + 1;
+          *changeWordCursor = 0;
+          changeWordCursor = changeWordCursor + 1;
           remaining = remaining + -1;
         } while (remaining != 0);
       }
     }
   }
   if (*(short *)(glContext + 0x4a10) < 0) {
-    if ((target == 0x8011) && (iVar5 != 0)) {
+    if ((target == 0x8011) && (internalFormat != 0)) {
       if (((width < 0xc) && (height < 0xc)) && ((-1 < width && (-1 < height)))) {
-        ((void (*)())_glReadPixels_Exec)(glContext,x,y,width,height,iVar5,0x1406,auStack_7c0,dVar12,
+        ((void (*)())_glReadPixels_Exec)(glContext,x,y,width,height,internalFormat,0x1406,auStack_7c0,dVar12,
                            incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
-        ((void (*)())_glConvolutionFilter2D_Exec)(glContext,0x8011,iVar5,width,height,iVar5,0x1406,auStack_7c0);
+        ((void (*)())_glConvolutionFilter2D_Exec)(glContext,0x8011,internalFormat,width,height,internalFormat,0x1406,auStack_7c0);
         return;
       }
       if (*(int *)(glContext + 0x7574) != 0) {
@@ -696,7 +700,7 @@ void _glGetConvolutionFilter_Exec(glContext, target, format, type, image)
   int iVar3;
   int pixelPackBuffer;
   int iVar4;
-  double dVar5;
+  double bytesPerElement;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
     if (1 < target - 0x8010U) {
@@ -714,9 +718,9 @@ LAB_0006a124:
         _gleGetConvolutionFilter(glContext,target,format,type,image);
         return;
       }
-      dVar5 = (double)((double (*)())_gleBytesPerElement)(type);
+      bytesPerElement = (double)((double (*)())_gleBytesPerElement)(type);
       iVar2 = glContext + 0x3298;
-      iVar4 = (int)dVar5;
+      iVar4 = (int)bytesPerElement;
       if (target != 0x8010) {
         iVar2 = glContext + 0x32d8;
       }
@@ -929,7 +933,7 @@ void _glGetSeparableFilter_Exec(glContext, target, format, type, row, column, sp
   int iVar4;
   int iVar5;
   int iVar6;
-  double dVar7;
+  double bytesPerElement;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
     if (target != 0x8012) {
@@ -954,8 +958,8 @@ LAB_0006a678:
                         (glContext + 0x31b0,*(undefined4 *)(glContext + 0x3354),1,format,type,
                          column);
       iVar6 = *(int *)(pixelPackBuffer + 0x38);
-      dVar7 = (double)((double (*)())_gleBytesPerElement)(type);
-      iVar5 = (int)dVar7;
+      bytesPerElement = (double)((double (*)())_gleBytesPerElement)(type);
+      iVar5 = (int)bytesPerElement;
       if ((iVar3 <= iVar6) && (iVar4 <= iVar6)) {
         if (iVar5 == 0) {
           iVar5 = _glePixelBytes(format,type);
@@ -993,18 +997,18 @@ void _glSeparableFilter2D_Exec(glContext, target, internalformat, width, height,
   int column;
 {
   undefined4 glErrorCode;
-  int iVar2;
+  int internalFormat;
   int iVar3;
   int pixelUnpackBuffer;
-  int iVar4;
-  int iVar5;
+  int imageEndOffset;
+  int imageEndOffset2;
   int iVar6;
   int iVar7;
-  double dVar8;
+  double bytesPerElement;
   
-  iVar2 = _gleImagingTexFormatToInternal(internalformat);
+  internalFormat = _gleImagingTexFormatToInternal(internalformat);
   if (*(short *)(glContext + 0x4a10) < 0) {
-    if ((target != 0x8012) || (iVar2 == 0)) {
+    if ((target != 0x8012) || (internalFormat == 0)) {
       if (*(int *)(glContext + 0x7574) != 0) {
         return;
       }
@@ -1023,15 +1027,15 @@ void _glSeparableFilter2D_Exec(glContext, target, internalformat, width, height,
       pixelUnpackBuffer = *(int *)(glContext + 0x4a6c);
       if (pixelUnpackBuffer == 0) {
 LAB_0006a850:
-        _gleSeparableFilter2D(glContext,0x8012,iVar2,width,height,format,type,row,column);
+        _gleSeparableFilter2D(glContext,0x8012,internalFormat,width,height,format,type,row,column);
         return;
       }
-      iVar4 = _gleOffsetLimitImage(glContext + 0x31cc,width,1,format,type,row);
-      iVar5 = _gleOffsetLimitImage(glContext + 0x31cc,height,1,format,type,column);
+      imageEndOffset = _gleOffsetLimitImage(glContext + 0x31cc,width,1,format,type,row);
+      imageEndOffset2 = _gleOffsetLimitImage(glContext + 0x31cc,height,1,format,type,column);
       iVar7 = *(int *)(pixelUnpackBuffer + 0x38);
-      dVar8 = (double)((double (*)())_gleBytesPerElement)(type);
-      iVar6 = (int)dVar8;
-      if ((iVar4 <= iVar7) && (iVar5 <= iVar7)) {
+      bytesPerElement = (double)((double (*)())_gleBytesPerElement)(type);
+      iVar6 = (int)bytesPerElement;
+      if ((imageEndOffset <= iVar7) && (imageEndOffset2 <= iVar7)) {
         if (iVar6 == 0) {
           iVar6 = _glePixelBytes(format,type);
         }
@@ -1070,7 +1074,7 @@ void _glGetHistogram_Exec(glContext, target, reset, format, type, values)
   int iVar3;
   int iVar4;
   int iVar5;
-  double dVar6;
+  double bytesPerElement;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
     if (target != 0x8024) {
@@ -1094,8 +1098,8 @@ LAB_0006a9a8:
       iVar3 = _gleOffsetLimitImage
                         (glContext + 0x31b0,*(int *)(glContext + 0x3388),1,format,type,values);
       iVar5 = *(int *)(pixelPackBuffer + 0x38);
-      dVar6 = (double)((double (*)())_gleBytesPerElement)(type);
-      iVar4 = (int)dVar6;
+      bytesPerElement = (double)((double (*)())_gleBytesPerElement)(type);
+      iVar4 = (int)bytesPerElement;
       if (iVar3 <= iVar5) {
         if (iVar4 == 0) {
           iVar4 = _glePixelBytes(format,type);
@@ -1194,11 +1198,11 @@ void _glGetMinmax_Exec(glContext, target, reset, format, type, values)
   int values;
 {
   undefined4 glErrorCode;
-  int iVar2;
+  int imageEndOffset;
   int iVar3;
   int pixelPackBuffer;
   int iVar5;
-  double dVar6;
+  double bytesPerElement;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
     if (target != 0x802e) {
@@ -1214,11 +1218,11 @@ LAB_0006abf8:
       _gleGetMinmax(glContext,0x802e,reset,format,type,values);
       return;
     }
-    iVar2 = _gleOffsetLimitImage(glContext + 0x31b0,2,1,format,type,values);
+    imageEndOffset = _gleOffsetLimitImage(glContext + 0x31b0,2,1,format,type,values);
     iVar5 = *(int *)(pixelPackBuffer + 0x38);
-    dVar6 = (double)((double (*)())_gleBytesPerElement)(type);
-    iVar3 = (int)dVar6;
-    if (iVar2 <= iVar5) {
+    bytesPerElement = (double)((double (*)())_gleBytesPerElement)(type);
+    iVar3 = (int)bytesPerElement;
+    if (imageEndOffset <= iVar5) {
       if (iVar3 == 0) {
         iVar3 = _glePixelBytes(format,type);
       }

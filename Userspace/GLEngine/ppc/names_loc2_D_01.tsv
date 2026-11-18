@@ -843,7 +843,7 @@ local	_glDrawBuffer_CompExec	in_r6	incomingR6	INFERRED	Ghidra pseudo-register in
 local	_glDrawBuffer_CompExec	in_r7	incomingR7	INFERRED	Ghidra pseudo-register in_r7: the value r7 held on entry (read without being written in this function)
 local	_glDrawBuffer_CompExec	in_r8	incomingR8	INFERRED	Ghidra pseudo-register in_r8: the value r8 held on entry (read without being written in this function)
 local	_glDrawBuffer_CompExec	in_r9	incomingR9	INFERRED	Ghidra pseudo-register in_r9: the value r9 held on entry (read without being written in this function)
-local	_glDrawBuffersARB_CompExec	param_3	forwardedArg3	CONFIRMED	only used as an unchanged argument of calls (2 occurrences): never otherwise read by this function
+local	_glDrawBuffersARB_CompExec	param_3	bufs	CONFIRMED	GL prototype glDrawBuffersARB(n, bufs): bufs is the 2-nd argument, forwarded unchanged to _glDrawBuffersARB_Comp/_Exec
 local	_glDrawPixels_ListExec	in_r5	incomingR5	INFERRED	Ghidra pseudo-register in_r5: the value r5 held on entry (read without being written in this function)
 local	_glDrawPixels_ListExec	in_r6	incomingR6	INFERRED	Ghidra pseudo-register in_r6: the value r6 held on entry (read without being written in this function)
 local	_glDrawPixels_ListExec	in_r7	incomingR7	INFERRED	Ghidra pseudo-register in_r7: the value r7 held on entry (read without being written in this function)

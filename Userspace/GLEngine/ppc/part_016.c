@@ -812,11 +812,11 @@ int _glConvolutionFilter1D_Comp(glContext, target, internalformat, width, format
   int image;
 {
   int iVar1;
-  int iVar2;
+  int imageEndOffset;
   undefined4 *puVar3;
   int pixelUnpackBuffer;
   int iVar5;
-  double dVar6;
+  double bytesPerElement;
   
   iVar1 = _gleRowBytes(format,type,width);
   if (iVar1 < 1) {
@@ -842,11 +842,11 @@ LAB_0006897c:
     }
   }
   else {
-    iVar2 = _gleOffsetLimitImage(glContext + 0x31cc,width,1,format,type,image);
+    imageEndOffset = _gleOffsetLimitImage(glContext + 0x31cc,width,1,format,type,image);
     iVar5 = *(int *)(pixelUnpackBuffer + 0x38);
-    dVar6 = (double)((double (*)())_gleBytesPerElement)(type);
-    puVar3 = (undefined4 *)(int)dVar6;
-    if (iVar2 <= iVar5) {
+    bytesPerElement = (double)((double (*)())_gleBytesPerElement)(type);
+    puVar3 = (undefined4 *)(int)bytesPerElement;
+    if (imageEndOffset <= iVar5) {
       if (puVar3 == (undefined4 *)0x0) {
         puVar3 = (undefined4 *)_glePixelBytes(format,type);
       }
@@ -877,11 +877,11 @@ int _glConvolutionFilter2D_Comp(glContext, target, internalformat, width, height
   int image;
 {
   int iVar1;
-  int iVar2;
+  int imageEndOffset;
   undefined4 *puVar3;
   int pixelUnpackBuffer;
   int iVar5;
-  double dVar6;
+  double bytesPerElement;
   
   iVar1 = _gleImageSize(format,type,width,height);
   if (iVar1 < 1) {
@@ -908,11 +908,11 @@ LAB_00068af8:
     }
   }
   else {
-    iVar2 = _gleOffsetLimitImage(glContext + 0x31cc,width,height,format,type,image);
+    imageEndOffset = _gleOffsetLimitImage(glContext + 0x31cc,width,height,format,type,image);
     iVar5 = *(int *)(pixelUnpackBuffer + 0x38);
-    dVar6 = (double)((double (*)())_gleBytesPerElement)(type);
-    puVar3 = (undefined4 *)(int)dVar6;
-    if (iVar2 <= iVar5) {
+    bytesPerElement = (double)((double (*)())_gleBytesPerElement)(type);
+    puVar3 = (undefined4 *)(int)bytesPerElement;
+    if (imageEndOffset <= iVar5) {
       if (puVar3 == (undefined4 *)0x0) {
         puVar3 = (undefined4 *)_glePixelBytes(format,type);
       }
@@ -944,15 +944,15 @@ int _glSeparableFilter2D_Comp(glContext, target, internalformat, width, height, 
   int column;
 {
   uint uVar1;
-  int iVar2;
+  int imageEndOffset;
   int recordSize;
   int rowBytes;
   int rowBytes2;
-  int iVar4;
+  int imageEndOffset2;
   undefined4 *puVar5;
   int pixelUnpackBuffer;
   int iVar7;
-  double dVar8;
+  double bytesPerElement;
   
   rowBytes = _gleRowBytes(format,type,width);
   rowBytes2 = _gleRowBytes(format,type,height);
@@ -986,12 +986,12 @@ LAB_00068cdc:
     }
   }
   else {
-    iVar2 = _gleOffsetLimitImage(glContext + 0x31cc,width,1,format,type,row);
-    iVar4 = _gleOffsetLimitImage(glContext + 0x31cc,height,1,format,type,column);
+    imageEndOffset = _gleOffsetLimitImage(glContext + 0x31cc,width,1,format,type,row);
+    imageEndOffset2 = _gleOffsetLimitImage(glContext + 0x31cc,height,1,format,type,column);
     iVar7 = *(int *)(pixelUnpackBuffer + 0x38);
-    dVar8 = (double)((double (*)())_gleBytesPerElement)(type);
-    puVar5 = (undefined4 *)(int)dVar8;
-    if ((iVar2 <= iVar7) && (iVar4 <= iVar7)) {
+    bytesPerElement = (double)((double (*)())_gleBytesPerElement)(type);
+    puVar5 = (undefined4 *)(int)bytesPerElement;
+    if ((imageEndOffset <= iVar7) && (imageEndOffset2 <= iVar7)) {
       if (puVar5 == (undefined4 *)0x0) {
         puVar5 = (undefined4 *)_glePixelBytes(format,type);
       }
@@ -1013,11 +1013,11 @@ LAB_00068cdc:
 }
 
 /* _glConvolutionParameterF_Comp @ 0x68d8c (188 bytes) */
-int _glConvolutionParameterF_Comp(glContext, target, pname, param_4)
+int _glConvolutionParameterF_Comp(glContext, target, pname, params)
   undefined4 glContext;
   undefined4 target;
   uint pname;
-  undefined4 *param_4;
+  undefined4 *params;
 {
   undefined4 *puVar1;
   
@@ -1031,17 +1031,17 @@ int _glConvolutionParameterF_Comp(glContext, target, pname, param_4)
         if (pname != 0x8013) {
           return puVar1;
         }
-        puVar1[2] = *param_4;
+        puVar1[2] = *params;
         return puVar1;
       }
     }
     else if (pname != 0x8154) {
       return puVar1;
     }
-    puVar1[2] = *param_4;
-    puVar1[3] = param_4[1];
-    puVar1[4] = param_4[2];
-    puVar1[5] = param_4[3];
+    puVar1[2] = *params;
+    puVar1[3] = params[1];
+    puVar1[4] = params[2];
+    puVar1[5] = params[3];
   }
   return puVar1;
 }
@@ -1058,11 +1058,11 @@ undefined4 _glConvolutionParameterf_Comp(undefined4 glContext,undefined4 target,
 }
 
 /* _glConvolutionParameterI_Comp @ 0x68e74 (168 bytes) */
-int _glConvolutionParameterI_Comp(glContext, target, pname, param_4)
+int _glConvolutionParameterI_Comp(glContext, target, pname, params)
   undefined4 glContext;
   undefined4 target;
   uint pname;
-  undefined4 *param_4;
+  undefined4 *params;
 {
   undefined4 *puVar1;
   
@@ -1073,13 +1073,13 @@ int _glConvolutionParameterI_Comp(glContext, target, pname, param_4)
     puVar1[1] = pname;
     if (0x8012 < pname) {
       if (pname < 0x8016) {
-        puVar1[2] = *param_4;
+        puVar1[2] = *params;
       }
       else if (pname == 0x8154) {
-        puVar1[2] = *param_4;
-        puVar1[3] = param_4[1];
-        puVar1[4] = param_4[2];
-        puVar1[5] = param_4[3];
+        puVar1[2] = *params;
+        puVar1[3] = params[1];
+        puVar1[4] = params[2];
+        puVar1[5] = params[3];
       }
     }
   }

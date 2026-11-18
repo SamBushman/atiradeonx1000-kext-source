@@ -869,7 +869,8 @@ void _glClear_NoopExec(int glContext,undefined4 mask,double fparam_1,double forw
   int remaining;
   int loopIndex;
   bool bVar1;
-  char cVar2;
+  bool noStateChangePending;
+  char rendererInfoByte79;
   int *srcCursor;
   int iVar4;
   int framebufferObject;
@@ -879,7 +880,8 @@ void _glClear_NoopExec(int glContext,undefined4 mask,double fparam_1,double forw
   undefined4 incomingR8;
   int matrixChangeBits;
   uint uVar6;
-  int *piVar7;
+  uint changeWord3;
+  int *changeWordCursor;
   double extraout_f1;
   double extraout_f1_00;
   double extraout_f1_01;
@@ -891,8 +893,8 @@ void _glClear_NoopExec(int glContext,undefined4 mask,double fparam_1,double forw
   }
   if (*(char *)(glContext + 0x4691) != '\0') {
     framebufferObject = *(int *)(glContext + 0x744c);
-    piVar7 = (int *)(glContext + 0x310);
-    cVar2 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
+    changeWordCursor = (int *)(glContext + 0x310);
+    rendererInfoByte79 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
     if ((framebufferObject != 0) && (*(int *)(framebufferObject + 0xec) != 0)) {
       ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,incomingR5,incomingR6,incomingR7,incomingR8,matrixChangeBits,fparam_1,forwardedFloatArg2,forwardedFloatArg3,
                  forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
@@ -901,7 +903,7 @@ void _glClear_NoopExec(int glContext,undefined4 mask,double fparam_1,double forw
     }
     if ((*(char *)(glContext + 0x4664) == '\0') && (*(int *)(glContext + 0x5430) == 0)) {
 LAB_000598fc:
-      uVar6 = *(uint *)(glContext + 0x31c);
+      changeWord3 = *(uint *)(glContext + 0x31c);
     }
     else {
       loopIndex = 0;
@@ -915,8 +917,8 @@ LAB_000598fc:
         }
         loopIndex = loopIndex + 1;
       } while (loopIndex < 9);
-      uVar6 = *(uint *)(glContext + 0x31c);
-      if ((uVar6 & 0x15555) != 0) {
+      changeWord3 = *(uint *)(glContext + 0x31c);
+      if ((changeWord3 & 0x15555) != 0) {
         if (*(char *)(glContext + 0x2e54) != '\0') {
           fparam_1 = (double)_gleUpdateLightRGBASums(glContext,glContext + 0x2c20,0);
         }
@@ -926,26 +928,26 @@ LAB_000598fc:
         goto LAB_000598fc;
       }
     }
-    bVar1 = cVar2 == '\0';
+    bVar1 = rendererInfoByte79 == '\0';
     if (bVar1) {
-      uVar6 = uVar6 & 0x17000000;
+      changeWord3 = changeWord3 & 0x17000000;
     }
     else {
-      uVar6 = uVar6 & 0x17ffffff;
+      changeWord3 = changeWord3 & 0x17ffffff;
     }
     if (bVar1) {
-      bVar1 = ((*piVar7 == 0 && *(int *)(glContext + 0x314) == 0) && uVar6 == 0) &&
+      noStateChangePending = ((*changeWordCursor == 0 && *(int *)(glContext + 0x314) == 0) && changeWord3 == 0) &&
               *(int *)(glContext + 800) == 0;
     }
     else {
-      bVar1 = (((*piVar7 == 0 && *(int *)(glContext + 0x314) == 0) &&
-               (*(uint *)(glContext + 0x318) & 0xfffffffd) == 0) && uVar6 == 0) &&
+      noStateChangePending = (((*changeWordCursor == 0 && *(int *)(glContext + 0x314) == 0) &&
+               (*(uint *)(glContext + 0x318) & 0xfffffffd) == 0) && changeWord3 == 0) &&
               *(int *)(glContext + 800) == 0;
     }
-    if (!bVar1) {
+    if (!noStateChangePending) {
       if (*(char *)(glContext + 0x85a8) == *(char *)(glContext + 0x85a6)) {
         uVar6 = (**(code **)(glContext + 0x4788))
-                          (*(undefined4 *)(glContext + 0x4688),glContext + 0x4698,piVar7);
+                          (*(undefined4 *)(glContext + 0x4688),glContext + 0x4698,changeWordCursor);
         if ((((uVar6 & 3) != (uint)*(byte *)(glContext + 0x7580)) ||
             ((uVar6 & 4) != (uint)*(byte *)(glContext + 0x7581))) ||
            (fparam_1 = extraout_f1_01, (uVar6 & 8) != (uint)(*(char *)(glContext + 0x759d) == '\0')))
@@ -963,8 +965,8 @@ LAB_000598fc:
       }
       remaining = 0x13;
       do {
-        *piVar7 = 0;
-        piVar7 = piVar7 + 1;
+        *changeWordCursor = 0;
+        changeWordCursor = changeWordCursor + 1;
         remaining = remaining + -1;
       } while (remaining != 0);
     }

@@ -5560,29 +5560,31 @@ int _gleGenHashNames(param_1, listRange)
   int iVar2;
   uint uVar3;
   undefined4 *puVar4;
+  undefined4 *allocatedBlock;
   int iVar5;
   uint uVar6;
   undefined4 *puVar7;
+  undefined4 *allocatedBlock2;
   
   uVar1 = 0;
   puVar7 = *(undefined4 **)(param_1 + 0x1000);
   if (listRange != 0) {
     if (puVar7 == (undefined4 *)0x0) {
-      puVar7 = (undefined4 *)_malloc(0xc);
-      *puVar7 = 0;
-      puVar7[1] = 1;
-      puVar7[2] = listRange;
-      *(undefined4 **)(param_1 + 0x1000) = puVar7;
+      allocatedBlock2 = (undefined4 *)_malloc(0xc);
+      *allocatedBlock2 = 0;
+      allocatedBlock2[1] = 1;
+      allocatedBlock2[2] = listRange;
+      *(undefined4 **)(param_1 + 0x1000) = allocatedBlock2;
     }
     else {
       uVar1 = puVar7[1];
       if (uVar1 != listRange + 1) {
         if (listRange < uVar1) {
-          puVar4 = (undefined4 *)_malloc(0xc);
-          *(undefined4 **)(param_1 + 0x1000) = puVar4;
-          *puVar4 = puVar7;
-          puVar4[1] = 1;
-          puVar4[2] = listRange;
+          allocatedBlock = (undefined4 *)_malloc(0xc);
+          *(undefined4 **)(param_1 + 0x1000) = allocatedBlock;
+          *allocatedBlock = puVar7;
+          allocatedBlock[1] = 1;
+          allocatedBlock[2] = listRange;
           return 1;
         }
         while( true ) {

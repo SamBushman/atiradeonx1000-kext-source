@@ -443,7 +443,7 @@ int _glColorTable_ListExec(glContext, recordedArgs)
   ushort uVar2;
   uint uVar3;
   uint uVar4;
-  int iVar5;
+  int colorTable;
   int iVar6;
   int iVar7;
   uint *pixels;
@@ -451,12 +451,12 @@ int _glColorTable_ListExec(glContext, recordedArgs)
   int textureLevel;
   
   iVar7 = recordedArgs[5] + 0x18;
-  iVar5 = _gleCheckColorTableArgs(glContext,*recordedArgs,recordedArgs[1],recordedArgs[2],recordedArgs[3],recordedArgs[4]);
-  if (iVar5 != 0) {
-    uVar2 = *(ushort *)(iVar5 + 0x24);
+  colorTable = _gleCheckColorTableArgs(glContext,*recordedArgs,recordedArgs[1],recordedArgs[2],recordedArgs[3],recordedArgs[4]);
+  if (colorTable != 0) {
+    uVar2 = *(ushort *)(colorTable + 0x24);
     if ((uVar2 & 0x3c00) != 0x1000) {
       if ((uVar2 & 0x3c00) == 0) {
-        *(ushort *)(iVar5 + 0x24) = uVar2 | 0x1000;
+        *(ushort *)(colorTable + 0x24) = uVar2 | 0x1000;
       }
       else if ((uVar2 & 0xc00) != 0) {
         if (*(int *)(glContext + 0x7574) != 0) {
@@ -466,21 +466,21 @@ int _glColorTable_ListExec(glContext, recordedArgs)
         return iVar7;
       }
     }
-    textureLevel = iVar5 + 0xac;
-    if ((*(byte *)(iVar5 + 0xb7) & 0x20) != 0) {
-      _gleDeletePluginTextureLevel(glContext,iVar5,textureLevel,0,0xffffffff);
-      if (*(int *)(iVar5 + 0xc0) != 0) {
-        bVar1 = *(byte *)(iVar5 + 0xb7);
+    textureLevel = colorTable + 0xac;
+    if ((*(byte *)(colorTable + 0xb7) & 0x20) != 0) {
+      _gleDeletePluginTextureLevel(glContext,colorTable,textureLevel,0,0xffffffff);
+      if (*(int *)(colorTable + 0xc0) != 0) {
+        bVar1 = *(byte *)(colorTable + 0xb7);
         if ((bVar1 & 1) == 0) {
-          _gleFreeTextureLevel(glContext,iVar5,textureLevel);
-          bVar1 = *(byte *)(iVar5 + 0xb7);
+          _gleFreeTextureLevel(glContext,colorTable,textureLevel);
+          bVar1 = *(byte *)(colorTable + 0xb7);
         }
         else {
-          *(undefined4 *)(iVar5 + 0xc0) = 0;
+          *(undefined4 *)(colorTable + 0xc0) = 0;
         }
-        *(byte *)(iVar5 + 0xb7) = bVar1 & 0xef;
+        *(byte *)(colorTable + 0xb7) = bVar1 & 0xef;
       }
-      *(byte *)(iVar5 + 0xb7) = *(byte *)(iVar5 + 0xb7) & 0xdf;
+      *(byte *)(colorTable + 0xb7) = *(byte *)(colorTable + 0xb7) & 0xdf;
     }
     uVar4 = *recordedArgs;
     iVar9 = glContext + 0x33d0;
@@ -500,7 +500,7 @@ int _glColorTable_ListExec(glContext, recordedArgs)
     pixels = recordedArgs + 6;
     if (iVar9 == 0) {
       iVar9 = _gleCreateTextureLevel
-                        (glContext,iVar5,textureLevel,recordedArgs[1],recordedArgs[2],1,1,0,recordedArgs[3],recordedArgs[4],0,
+                        (glContext,colorTable,textureLevel,recordedArgs[1],recordedArgs[2],1,1,0,recordedArgs[3],recordedArgs[4],0,
                          pixels);
       if (iVar9 != 0) {
         _gleTextureImagePut(glContext,textureLevel,0,0,0,recordedArgs[2],1,1,recordedArgs[3],recordedArgs[4],0,0,pixels);
@@ -510,13 +510,13 @@ int _glColorTable_ListExec(glContext, recordedArgs)
     }
     else {
       iVar6 = _gleCreateColorTableLevel
-                        (glContext,iVar5,textureLevel,recordedArgs[1],recordedArgs[2],recordedArgs[3],recordedArgs[4],pixels);
+                        (glContext,colorTable,textureLevel,recordedArgs[1],recordedArgs[2],recordedArgs[3],recordedArgs[4],pixels);
       if ((iVar6 != 0) && (pixels != (uint *)0x0)) {
         _gleColorTable(glContext,iVar9,textureLevel,recordedArgs[2],recordedArgs[3],recordedArgs[4],pixels);
       }
       *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x40000000;
     }
-    _gleCreatePluginTextureLevel(glContext,iVar5,textureLevel,0,0xffffffff,recordedArgs[1]);
+    _gleCreatePluginTextureLevel(glContext,colorTable,textureLevel,0,0xffffffff,recordedArgs[1]);
   }
   return iVar7;
 }
@@ -535,13 +535,13 @@ int _glColorTable_Comp(glContext, target, internalformat, width, format, type, t
   bool bVar1;
   uint uVar2;
   undefined4 uVar3;
-  int iVar4;
+  int imageEndOffset;
   int iVar5;
   int pixelBytes;
   uint *listRecord;
   int iVar7;
   int pixelUnpackBuffer;
-  double dVar9;
+  double bytesPerElement;
   
   pixelUnpackBuffer = *(int *)(glContext + 0x4a6c);
   iVar5 = glContext;
@@ -655,11 +655,11 @@ LAB_0005fb20:
     glErrorCode = 0x500;
   }
   else {
-    iVar4 = _gleOffsetLimitImage(glContext + 0x31cc,width,1,format,type,table);
+    imageEndOffset = _gleOffsetLimitImage(glContext + 0x31cc,width,1,format,type,table);
     iVar7 = *(int *)(pixelUnpackBuffer + 0x38);
-    dVar9 = (double)((double (*)())_gleBytesPerElement)(type);
-    iVar5 = (int)dVar9;
-    if (iVar4 <= iVar7) {
+    bytesPerElement = (double)((double (*)())_gleBytesPerElement)(type);
+    iVar5 = (int)bytesPerElement;
+    if (imageEndOffset <= iVar7) {
       if (iVar5 == 0) {
         iVar5 = _glePixelBytes(format,type);
       }
@@ -698,11 +698,12 @@ int _glColorTable_Exec(glContext, target, internalformat, width, format, type, t
   undefined4 glErrorCode;
   uint uVar5;
   int iVar6;
+  int imageEndOffset;
   int iVar7;
   int iVar8;
-  int iVar9;
+  int colorTable;
   int pixelUnpackBuffer;
-  double dVar10;
+  double bytesPerElement;
   
   pixelUnpackBuffer = *(int *)(glContext + 0x4a6c);
   if (pixelUnpackBuffer == 0) {
@@ -716,28 +717,28 @@ LAB_0005fc94:
         glErrorCode = 0x501;
         goto LAB_0005fd2c;
       }
-      iVar9 = _gleCheckColorTableArgs(glContext,target,internalformat,width,format,type);
-      if (iVar9 == 0) {
+      colorTable = _gleCheckColorTableArgs(glContext,target,internalformat,width,format,type);
+      if (colorTable == 0) {
         return;
       }
-      uVar3 = *(ushort *)(iVar9 + 0x24);
+      uVar3 = *(ushort *)(colorTable + 0x24);
       if ((uVar3 & 0x3c00) == 0x1000) {
 LAB_0005fd34:
-        iVar7 = iVar9 + 0xac;
-        if ((*(byte *)(iVar9 + 0xb7) & 0x20) != 0) {
-          _gleDeletePluginTextureLevel(glContext,iVar9,iVar7,0,0xffffffff);
-          if (*(int *)(iVar9 + 0xc0) != 0) {
-            bVar2 = *(byte *)(iVar9 + 0xb7);
+        iVar7 = colorTable + 0xac;
+        if ((*(byte *)(colorTable + 0xb7) & 0x20) != 0) {
+          _gleDeletePluginTextureLevel(glContext,colorTable,iVar7,0,0xffffffff);
+          if (*(int *)(colorTable + 0xc0) != 0) {
+            bVar2 = *(byte *)(colorTable + 0xb7);
             if ((bVar2 & 1) == 0) {
-              _gleFreeTextureLevel(glContext,iVar9,iVar7);
-              bVar2 = *(byte *)(iVar9 + 0xb7);
+              _gleFreeTextureLevel(glContext,colorTable,iVar7);
+              bVar2 = *(byte *)(colorTable + 0xb7);
             }
             else {
-              *(undefined4 *)(iVar9 + 0xc0) = 0;
+              *(undefined4 *)(colorTable + 0xc0) = 0;
             }
-            *(byte *)(iVar9 + 0xb7) = bVar2 & 0xef;
+            *(byte *)(colorTable + 0xb7) = bVar2 & 0xef;
           }
-          *(byte *)(iVar9 + 0xb7) = *(byte *)(iVar9 + 0xb7) & 0xdf;
+          *(byte *)(colorTable + 0xb7) = *(byte *)(colorTable + 0xb7) & 0xdf;
         }
         iVar6 = glContext + 0x33d0;
         if (target != 0x80d1) {
@@ -755,7 +756,7 @@ LAB_0005fd34:
         }
         if (iVar6 == 0) {
           iVar6 = _gleCreateTextureLevel
-                            (glContext,iVar9,iVar7,internalformat,width,1,1,0,format,type,1,table);
+                            (glContext,colorTable,iVar7,internalformat,width,1,1,0,format,type,1,table);
           if ((iVar6 != 0) && (bVar1)) {
             _gleTextureImagePut(glContext,iVar7,0,0,0,width,1,1,format,type,0,glContext + 0x31cc,
                                 table);
@@ -765,7 +766,7 @@ LAB_0005fd34:
         }
         else {
           iVar8 = _gleCreateColorTableLevel
-                            (glContext,iVar9,iVar7,internalformat,width,format,type,table);
+                            (glContext,colorTable,iVar7,internalformat,width,format,type,table);
           if ((iVar8 != 0) && (bVar1)) {
             _gleColorTable(glContext,iVar6,iVar7,width,format,type,table);
           }
@@ -774,22 +775,22 @@ LAB_0005fd34:
         if (width == 0) {
           return;
         }
-        _gleCreatePluginTextureLevel(glContext,iVar9,iVar7,0,0xffffffff,internalformat);
+        _gleCreatePluginTextureLevel(glContext,colorTable,iVar7,0,0xffffffff,internalformat);
         return;
       }
       if ((uVar3 & 0x3c00) == 0) {
-        *(ushort *)(iVar9 + 0x24) = uVar3 | 0x1000;
+        *(ushort *)(colorTable + 0x24) = uVar3 | 0x1000;
         goto LAB_0005fd34;
       }
       if ((uVar3 & 0xc00) == 0) goto LAB_0005fd34;
     }
   }
   else {
-    iVar6 = _gleOffsetLimitImage(glContext + 0x31cc,width,1,format,type,table);
+    imageEndOffset = _gleOffsetLimitImage(glContext + 0x31cc,width,1,format,type,table);
     iVar8 = *(int *)(pixelUnpackBuffer + 0x38);
-    dVar10 = (double)((double (*)())_gleBytesPerElement)(type);
-    iVar7 = (int)dVar10;
-    if (iVar6 <= iVar8) {
+    bytesPerElement = (double)((double (*)())_gleBytesPerElement)(type);
+    iVar7 = (int)bytesPerElement;
+    if (imageEndOffset <= iVar8) {
       if (iVar7 == 0) {
         iVar7 = _glePixelBytes(format,type);
       }
@@ -836,29 +837,30 @@ int _glColorSubTable_ListExec(glContext, recordedArgs)
   byte bVar4;
   uint uVar3;
   int iVar5;
+  int colorTable;
   int textureLevel;
   
   uVar2 = recordedArgs[5];
   if (*(short *)(glContext + 0x4a10) < 0) {
-    iVar5 = _gleCheckColorSubTableArgs(glContext,*recordedArgs,recordedArgs[1],recordedArgs[2],recordedArgs[3],recordedArgs[4])
+    colorTable = _gleCheckColorSubTableArgs(glContext,*recordedArgs,recordedArgs[1],recordedArgs[2],recordedArgs[3],recordedArgs[4])
     ;
-    if (iVar5 != 0) {
-      textureLevel = iVar5 + 0xac;
-      bVar4 = *(byte *)(iVar5 + 0xb7);
+    if (colorTable != 0) {
+      textureLevel = colorTable + 0xac;
+      bVar4 = *(byte *)(colorTable + 0xb7);
       if ((bVar4 & 0x10) == 0) {
         if ((bVar4 & 0x40) == 0) {
-          if (*(int *)(iVar5 + 0xc0) == 0) {
-            _gleAllocateTextureLevel(glContext,iVar5,textureLevel);
-            bVar4 = *(byte *)(iVar5 + 0xb7);
+          if (*(int *)(colorTable + 0xc0) == 0) {
+            _gleAllocateTextureLevel(glContext,colorTable,textureLevel);
+            bVar4 = *(byte *)(colorTable + 0xb7);
           }
-          *(byte *)(iVar5 + 0xb7) = bVar4 | 0x10;
+          *(byte *)(colorTable + 0xb7) = bVar4 | 0x10;
         }
         else {
           _gleUploadPluginTextureLevel
-                    (glContext,iVar5,textureLevel,0,0xffffffff,(uint)*(byte *)(glContext + 0x85a8));
+                    (glContext,colorTable,textureLevel,0,0xffffffff,(uint)*(byte *)(glContext + 0x85a8));
         }
       }
-      _gleModifyPluginTextureLevel(glContext,iVar5,textureLevel,0,0xffffffff,recordedArgs[1],0,0,recordedArgs[2],1,1);
+      _gleModifyPluginTextureLevel(glContext,colorTable,textureLevel,0,0xffffffff,recordedArgs[1],0,0,recordedArgs[2],1,1);
       uVar3 = *recordedArgs;
       iVar5 = glContext + 0x33d0;
       if (uVar3 != 0x80d1) {
@@ -907,13 +909,13 @@ int _glColorSubTable_Comp(glContext, target, start, count, format, type, data)
   bool bVar1;
   uint uVar2;
   undefined4 uVar3;
-  int iVar4;
+  int imageEndOffset;
   int iVar5;
   int pixelBytes;
   uint *listRecord;
   int iVar7;
   int pixelUnpackBuffer;
-  double dVar9;
+  double bytesPerElement;
   
   pixelUnpackBuffer = *(int *)(glContext + 0x4a6c);
   iVar5 = glContext;
@@ -1004,11 +1006,11 @@ LAB_00060374:
     glErrorCode = 0x500;
   }
   else {
-    iVar4 = _gleOffsetLimitImage(glContext + 0x31cc,count,1,format,type,data);
+    imageEndOffset = _gleOffsetLimitImage(glContext + 0x31cc,count,1,format,type,data);
     iVar7 = *(int *)(pixelUnpackBuffer + 0x38);
-    dVar9 = (double)((double (*)())_gleBytesPerElement)(type);
-    iVar5 = (int)dVar9;
-    if (iVar4 <= iVar7) {
+    bytesPerElement = (double)((double (*)())_gleBytesPerElement)(type);
+    iVar5 = (int)bytesPerElement;
+    if (imageEndOffset <= iVar7) {
       if (iVar5 == 0) {
         iVar5 = _glePixelBytes(format,type);
       }
@@ -1043,12 +1045,13 @@ void _glColorSubTable_Exec(glContext, target, start, count, format, type, data)
 {
   uint uVar1;
   byte bVar2;
-  int iVar3;
+  int imageEndOffset;
   int iVar4;
   int iVar5;
+  int colorTable;
   int pixelUnpackBuffer;
   int iVar6;
-  double dVar7;
+  double bytesPerElement;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
     pixelUnpackBuffer = *(int *)(glContext + 0x4a6c);
@@ -1057,26 +1060,26 @@ LAB_000604f4:
       if (count == 0) {
         return;
       }
-      iVar5 = _gleCheckColorSubTableArgs(glContext,target,start,count,format,type);
-      if (iVar5 == 0) {
+      colorTable = _gleCheckColorSubTableArgs(glContext,target,start,count,format,type);
+      if (colorTable == 0) {
         return;
       }
-      iVar4 = iVar5 + 0xac;
-      bVar2 = *(byte *)(iVar5 + 0xb7);
+      iVar4 = colorTable + 0xac;
+      bVar2 = *(byte *)(colorTable + 0xb7);
       if ((bVar2 & 0x10) == 0) {
         if ((bVar2 & 0x40) == 0) {
-          if (*(int *)(iVar5 + 0xc0) == 0) {
-            _gleAllocateTextureLevel(glContext,iVar5,iVar4);
-            bVar2 = *(byte *)(iVar5 + 0xb7);
+          if (*(int *)(colorTable + 0xc0) == 0) {
+            _gleAllocateTextureLevel(glContext,colorTable,iVar4);
+            bVar2 = *(byte *)(colorTable + 0xb7);
           }
-          *(byte *)(iVar5 + 0xb7) = bVar2 | 0x10;
+          *(byte *)(colorTable + 0xb7) = bVar2 | 0x10;
         }
         else {
           _gleUploadPluginTextureLevel
-                    (glContext,iVar5,iVar4,0,0xffffffff,(uint)*(byte *)(glContext + 0x85a8));
+                    (glContext,colorTable,iVar4,0,0xffffffff,(uint)*(byte *)(glContext + 0x85a8));
         }
       }
-      _gleModifyPluginTextureLevel(glContext,iVar5,iVar4,0,0xffffffff,start,0,0,count,1,1);
+      _gleModifyPluginTextureLevel(glContext,colorTable,iVar4,0,0xffffffff,start,0,0,count,1,1);
       iVar5 = glContext + 0x33d0;
       if (target != 0x80d1) {
         if (target < 0x80d2) {
@@ -1102,11 +1105,11 @@ LAB_000604f4:
            *(uint *)(glContext + 0x314) | 1 << (*(uint *)(glContext + 0x53d4) & 0x3f);
       return;
     }
-    iVar3 = _gleOffsetLimitImage(glContext + 0x31cc,count,1,format,type,data);
+    imageEndOffset = _gleOffsetLimitImage(glContext + 0x31cc,count,1,format,type,data);
     iVar6 = *(int *)(pixelUnpackBuffer + 0x38);
-    dVar7 = (double)((double (*)())_gleBytesPerElement)(type);
-    iVar4 = (int)dVar7;
-    if (iVar3 <= iVar6) {
+    bytesPerElement = (double)((double (*)())_gleBytesPerElement)(type);
+    iVar4 = (int)bytesPerElement;
+    if (imageEndOffset <= iVar6) {
       if (iVar4 == 0) {
         iVar4 = _glePixelBytes(format,type);
       }
@@ -1177,7 +1180,8 @@ void _glCopyColorTable_Exec(int glContext,uint target,undefined4 internalformat,
   int loopIndex;
   undefined4 glErrorCode;
   bool bVar1;
-  char cVar2;
+  bool noStateChangePending;
+  char rendererInfoByte79;
   byte bVar3;
   ushort uVar4;
   undefined4 uVar5;
@@ -1191,8 +1195,9 @@ void _glCopyColorTable_Exec(int glContext,uint target,undefined4 internalformat,
   int iVar12;
   int matrixChangeBits;
   uint uVar13;
+  uint changeWord3;
   int iVar14;
-  int *piVar15;
+  int *changeWordCursor;
   double extraout_f1;
   
   if ((*(int *)(glContext + 0x744c) != 0) || (*(int *)(glContext + 0x310) < 0)) {
@@ -1207,8 +1212,8 @@ void _glCopyColorTable_Exec(int glContext,uint target,undefined4 internalformat,
     }
     if (*(char *)(glContext + 0x4691) != '\0') {
       framebufferObject = *(int *)(glContext + 0x744c);
-      piVar15 = (int *)(glContext + 0x310);
-      cVar2 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
+      changeWordCursor = (int *)(glContext + 0x310);
+      rendererInfoByte79 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
       if ((framebufferObject != 0) && (*(int *)(framebufferObject + 0xec) != 0)) {
         ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,uVar5,uVar9,uVar10,uVar11,matrixChangeBits,fparam_1,forwardedFloatArg2,forwardedFloatArg3,
                    forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
@@ -1216,7 +1221,7 @@ void _glCopyColorTable_Exec(int glContext,uint target,undefined4 internalformat,
       }
       if ((*(char *)(glContext + 0x4664) == '\0') && (*(int *)(glContext + 0x5430) == 0)) {
 LAB_000608e8:
-        uVar13 = *(uint *)(glContext + 0x31c);
+        changeWord3 = *(uint *)(glContext + 0x31c);
       }
       else {
         loopIndex = 0;
@@ -1230,8 +1235,8 @@ LAB_000608e8:
           }
           loopIndex = loopIndex + 1;
         } while (loopIndex < 9);
-        uVar13 = *(uint *)(glContext + 0x31c);
-        if ((uVar13 & 0x15555) != 0) {
+        changeWord3 = *(uint *)(glContext + 0x31c);
+        if ((changeWord3 & 0x15555) != 0) {
           if (*(char *)(glContext + 0x2e54) != '\0') {
             _gleUpdateLightRGBASums(glContext,glContext + 0x2c20,0);
           }
@@ -1241,26 +1246,26 @@ LAB_000608e8:
           goto LAB_000608e8;
         }
       }
-      bVar1 = cVar2 == '\0';
+      bVar1 = rendererInfoByte79 == '\0';
       if (bVar1) {
-        uVar13 = uVar13 & 0x17000000;
+        changeWord3 = changeWord3 & 0x17000000;
       }
       else {
-        uVar13 = uVar13 & 0x17ffffff;
+        changeWord3 = changeWord3 & 0x17ffffff;
       }
       if (bVar1) {
-        bVar1 = ((*piVar15 == 0 && *(int *)(glContext + 0x314) == 0) && uVar13 == 0) &&
+        noStateChangePending = ((*changeWordCursor == 0 && *(int *)(glContext + 0x314) == 0) && changeWord3 == 0) &&
                 *(int *)(glContext + 800) == 0;
       }
       else {
-        bVar1 = (((*piVar15 == 0 && *(int *)(glContext + 0x314) == 0) &&
-                 (*(uint *)(glContext + 0x318) & 0xfffffffd) == 0) && uVar13 == 0) &&
+        noStateChangePending = (((*changeWordCursor == 0 && *(int *)(glContext + 0x314) == 0) &&
+                 (*(uint *)(glContext + 0x318) & 0xfffffffd) == 0) && changeWord3 == 0) &&
                 *(int *)(glContext + 800) == 0;
       }
-      if (!bVar1) {
+      if (!noStateChangePending) {
         if (*(char *)(glContext + 0x85a8) == *(char *)(glContext + 0x85a6)) {
           uVar13 = (**(code **)(glContext + 0x4788))
-                             (*(undefined4 *)(glContext + 0x4688),glContext + 0x4698,piVar15);
+                             (*(undefined4 *)(glContext + 0x4688),glContext + 0x4698,changeWordCursor);
           if ((((uVar13 & 3) != (uint)*(byte *)(glContext + 0x7580)) ||
               ((uVar13 & 4) != (uint)*(byte *)(glContext + 0x7581))) ||
              ((uVar13 & 8) != (uint)(*(char *)(glContext + 0x759d) == '\0'))) {
@@ -1283,8 +1288,8 @@ LAB_000608e8:
         }
         remaining = 0x13;
         do {
-          *piVar15 = 0;
-          piVar15 = piVar15 + 1;
+          *changeWordCursor = 0;
+          changeWordCursor = changeWordCursor + 1;
           remaining = remaining + -1;
         } while (remaining != 0);
       }
@@ -1427,7 +1432,8 @@ void _glCopyColorSubTable_Exec(int glContext,uint target,undefined4 start,undefi
   int loopIndex;
   undefined4 glErrorCode;
   bool bVar1;
-  char cVar2;
+  bool noStateChangePending;
+  char rendererInfoByte79;
   undefined4 uVar3;
   int *srcCursor;
   byte bVar5;
@@ -1439,7 +1445,8 @@ void _glCopyColorSubTable_Exec(int glContext,uint target,undefined4 start,undefi
   int matrixChangeBits;
   int iVar10;
   uint uVar11;
-  int *piVar12;
+  uint changeWord3;
+  int *changeWordCursor;
   double extraout_f1;
   
   if ((*(int *)(glContext + 0x744c) != 0) || (*(int *)(glContext + 0x310) < 0)) {
@@ -1454,8 +1461,8 @@ void _glCopyColorSubTable_Exec(int glContext,uint target,undefined4 start,undefi
     }
     if (*(char *)(glContext + 0x4691) != '\0') {
       framebufferObject = *(int *)(glContext + 0x744c);
-      piVar12 = (int *)(glContext + 0x310);
-      cVar2 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
+      changeWordCursor = (int *)(glContext + 0x310);
+      rendererInfoByte79 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
       if ((framebufferObject != 0) && (*(int *)(framebufferObject + 0xec) != 0)) {
         ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,uVar3,uVar7,uVar8,iVar10,matrixChangeBits,fparam_1,forwardedFloatArg2,forwardedFloatArg3,
                    forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
@@ -1463,7 +1470,7 @@ void _glCopyColorSubTable_Exec(int glContext,uint target,undefined4 start,undefi
       }
       if ((*(char *)(glContext + 0x4664) == '\0') && (*(int *)(glContext + 0x5430) == 0)) {
 LAB_00060eb8:
-        uVar11 = *(uint *)(glContext + 0x31c);
+        changeWord3 = *(uint *)(glContext + 0x31c);
       }
       else {
         loopIndex = 0;
@@ -1477,8 +1484,8 @@ LAB_00060eb8:
           }
           loopIndex = loopIndex + 1;
         } while (loopIndex < 9);
-        uVar11 = *(uint *)(glContext + 0x31c);
-        if ((uVar11 & 0x15555) != 0) {
+        changeWord3 = *(uint *)(glContext + 0x31c);
+        if ((changeWord3 & 0x15555) != 0) {
           if (*(char *)(glContext + 0x2e54) != '\0') {
             _gleUpdateLightRGBASums(glContext,glContext + 0x2c20,0);
           }
@@ -1488,26 +1495,26 @@ LAB_00060eb8:
           goto LAB_00060eb8;
         }
       }
-      bVar1 = cVar2 == '\0';
+      bVar1 = rendererInfoByte79 == '\0';
       if (bVar1) {
-        uVar11 = uVar11 & 0x17000000;
+        changeWord3 = changeWord3 & 0x17000000;
       }
       else {
-        uVar11 = uVar11 & 0x17ffffff;
+        changeWord3 = changeWord3 & 0x17ffffff;
       }
       if (bVar1) {
-        bVar1 = ((*piVar12 == 0 && *(int *)(glContext + 0x314) == 0) && uVar11 == 0) &&
+        noStateChangePending = ((*changeWordCursor == 0 && *(int *)(glContext + 0x314) == 0) && changeWord3 == 0) &&
                 *(int *)(glContext + 800) == 0;
       }
       else {
-        bVar1 = (((*piVar12 == 0 && *(int *)(glContext + 0x314) == 0) &&
-                 (*(uint *)(glContext + 0x318) & 0xfffffffd) == 0) && uVar11 == 0) &&
+        noStateChangePending = (((*changeWordCursor == 0 && *(int *)(glContext + 0x314) == 0) &&
+                 (*(uint *)(glContext + 0x318) & 0xfffffffd) == 0) && changeWord3 == 0) &&
                 *(int *)(glContext + 800) == 0;
       }
-      if (!bVar1) {
+      if (!noStateChangePending) {
         if (*(char *)(glContext + 0x85a8) == *(char *)(glContext + 0x85a6)) {
           uVar11 = (**(code **)(glContext + 0x4788))
-                             (*(undefined4 *)(glContext + 0x4688),glContext + 0x4698,piVar12);
+                             (*(undefined4 *)(glContext + 0x4688),glContext + 0x4698,changeWordCursor);
           if ((((uVar11 & 3) != (uint)*(byte *)(glContext + 0x7580)) ||
               ((uVar11 & 4) != (uint)*(byte *)(glContext + 0x7581))) ||
              ((uVar11 & 8) != (uint)(*(char *)(glContext + 0x759d) == '\0'))) {
@@ -1530,8 +1537,8 @@ LAB_00060eb8:
         }
         remaining = 0x13;
         do {
-          *piVar12 = 0;
-          piVar12 = piVar12 + 1;
+          *changeWordCursor = 0;
+          changeWordCursor = changeWordCursor + 1;
           remaining = remaining + -1;
         } while (remaining != 0);
       }
@@ -1632,7 +1639,7 @@ void _glGetColorTable_Exec(glContext, target, format, type, table)
   bool bVar1;
   byte bVar2;
   undefined4 rowBytes;
-  int iVar4;
+  int colorTable;
   int iVar5;
   int iVar6;
   undefined4 *puVar7;
@@ -1643,7 +1650,7 @@ void _glGetColorTable_Exec(glContext, target, format, type, table)
   int *piVar12;
   int pixelPackBuffer;
   int iVar14;
-  double dVar15;
+  double bytesPerElement;
   undefined4 local_d0;
   undefined4 local_cc;
   undefined4 local_c8;
@@ -1669,9 +1676,9 @@ void _glGetColorTable_Exec(glContext, target, format, type, table)
   undefined4 local_40;
   undefined4 local_3c [5];
   
-  iVar4 = _gleLookUpNonProxyColorTable(glContext,target);
+  colorTable = _gleLookUpNonProxyColorTable(glContext,target);
   if (*(short *)(glContext + 0x4a10) < 0) {
-    if (iVar4 != 0) {
+    if (colorTable != 0) {
       if (type < 0x8037) {
         if (0x8032 < type) {
 LAB_000612b0:
@@ -1684,7 +1691,7 @@ LAB_000612e0:
           pixelPackBuffer = *(int *)(glContext + 0x4a68);
           if (pixelPackBuffer == 0) {
 LAB_0006138c:
-            bVar2 = *(byte *)(iVar4 + 0xb7);
+            bVar2 = *(byte *)(colorTable + 0xb7);
             if ((bVar2 & 0x20) == 0) {
               return;
             }
@@ -1695,17 +1702,17 @@ LAB_0006138c:
             }
             else {
               _gleUploadPluginTextureLevel
-                        (glContext,iVar4,iVar4 + 0xac,0,0xffffffff,(uint)*(byte *)(glContext + 0x85a8));
+                        (glContext,colorTable,colorTable + 0xac,0,0xffffffff,(uint)*(byte *)(glContext + 0x85a8));
             }
-            uVar9 = (uint)*(ushort *)(iVar4 + 0xb2);
+            uVar9 = (uint)*(ushort *)(colorTable + 0xb2);
             puVar11 = auStack_50;
             piVar12 = &local_4c;
             _glePixelPackSettings
-                      (glContext,format,type,(uint)*(ushort *)(iVar4 + 0xb0),uVar9,
+                      (glContext,format,type,(uint)*(ushort *)(colorTable + 0xb0),uVar9,
                        glContext + 0x31b0,puVar11,piVar12,&local_60,auStack_5c,auStack_58,auStack_54);
-            if (((((*(byte *)(iVar4 + 0xb7) & 1) == 0) ||
-                 (table + local_4c != *(int *)(iVar4 + 0xc0))) ||
-                (format != *(ushort *)(iVar4 + 0xbc))) || (type != *(ushort *)(iVar4 + 0xbe))) {
+            if (((((*(byte *)(colorTable + 0xb7) & 1) == 0) ||
+                 (table + local_4c != *(int *)(colorTable + 0xc0))) ||
+                (format != *(ushort *)(colorTable + 0xbc))) || (type != *(ushort *)(colorTable + 0xbe))) {
               glContextByte31c8 = (uint)*(byte *)(glContext + 0x31c8);
             }
             else {
@@ -1715,9 +1722,9 @@ LAB_0006138c:
               }
             }
             local_ac = (uint)(glContextByte31c8 != 0);
-            rowBytes = _gleRowBytes((uint)*(ushort *)(iVar4 + 0xbc),(uint)*(ushort *)(iVar4 + 0xbe),
-                                 (uint)*(ushort *)(iVar4 + 0xb8));
-            _glgConvertType((uint)*(ushort *)(iVar4 + 0xbc),(uint)*(ushort *)(iVar4 + 0xbe),
+            rowBytes = _gleRowBytes((uint)*(ushort *)(colorTable + 0xbc),(uint)*(ushort *)(colorTable + 0xbe),
+                                 (uint)*(ushort *)(colorTable + 0xb8));
+            _glgConvertType((uint)*(ushort *)(colorTable + 0xbc),(uint)*(ushort *)(colorTable + 0xbe),
                             &local_48,&local_44,uVar9,glContextByte31c8,puVar11,piVar12);
             puVar7 = &local_40;
             puVar8 = local_3c;
@@ -1729,10 +1736,10 @@ LAB_0006138c:
             local_b4 = local_3c[0];
             local_a8 = 1;
             local_b0 = 2;
-            local_a4 = (uint)*(ushort *)(iVar4 + 0xb0);
-            local_a0 = (uint)*(ushort *)(iVar4 + 0xb2);
+            local_a4 = (uint)*(ushort *)(colorTable + 0xb0);
+            local_a0 = (uint)*(ushort *)(colorTable + 0xb2);
             local_c0 = table + local_4c;
-            local_d0 = *(undefined4 *)(iVar4 + 0xc0);
+            local_d0 = *(undefined4 *)(colorTable + 0xc0);
             local_64 = 0;
             local_cc = rowBytes;
             _glgProcessPixels(glContext + 0x31a8,&local_d0,puVar7,puVar8,uVar9,glContextByte31c8,local_a0,piVar12
@@ -1740,11 +1747,11 @@ LAB_0006138c:
             return;
           }
           iVar5 = _gleOffsetLimitImage
-                            (glContext + 0x31b0,(uint)*(ushort *)(iVar4 + 0xb0),
-                             (uint)*(ushort *)(iVar4 + 0xb2),format,type,table);
+                            (glContext + 0x31b0,(uint)*(ushort *)(colorTable + 0xb0),
+                             (uint)*(ushort *)(colorTable + 0xb2),format,type,table);
           iVar14 = *(int *)(pixelPackBuffer + 0x38);
-          dVar15 = (double)((double (*)())_gleBytesPerElement)(type);
-          iVar6 = (int)dVar15;
+          bytesPerElement = (double)((double (*)())_gleBytesPerElement)(type);
+          iVar6 = (int)bytesPerElement;
           if (iVar5 <= iVar14) {
             if (iVar6 == 0) {
               iVar6 = _glePixelBytes(format,type);
@@ -2020,10 +2027,10 @@ void _glGetColorTableParameterfv_Exec(glContext, target, pname, params)
   float fVar1;
   ushort uVar2;
   undefined4 glErrorCode;
-  int iVar4;
+  int colorTable;
   float *pfVar5;
   
-  iVar4 = _gleLookUpColorTable(glContext,target);
+  colorTable = _gleLookUpColorTable(glContext,target);
   if (-1 < *(short *)(glContext + 0x4a10)) {
     if (*(int *)(glContext + 0x7574) != 0) {
       return;
@@ -2031,7 +2038,7 @@ void _glGetColorTableParameterfv_Exec(glContext, target, pname, params)
     glErrorCode = 0x502;
     goto LAB_00061be8;
   }
-  if (iVar4 == 0) {
+  if (colorTable == 0) {
 switchD_00061acc_default:
     if (*(int *)(glContext + 0x7574) != 0) {
       return;
@@ -2071,10 +2078,10 @@ LAB_00061be8:
     fVar1 = pfVar5[7];
     break;
   case 0x80d8:
-    uVar2 = *(ushort *)(iVar4 + 0xbc);
+    uVar2 = *(ushort *)(colorTable + 0xbc);
     goto LAB_00061ba4;
   case 0x80d9:
-    uVar2 = *(ushort *)(iVar4 + 0xb0);
+    uVar2 = *(ushort *)(colorTable + 0xb0);
 LAB_00061ba4:
     *params = GH_U2F((unsigned int)((uVar2 | 0x4b000000))) - 8388608.0;
     return;
@@ -2103,10 +2110,10 @@ void _glGetColorTableParameteriv_Exec(glContext, target, pname, params)
   float fVar1;
   undefined4 glErrorCode;
   uint uVar3;
-  int iVar4;
+  int colorTable;
   float *pfVar5;
   
-  iVar4 = _gleLookUpColorTable(glContext,target);
+  colorTable = _gleLookUpColorTable(glContext,target);
   if (-1 < *(short *)(glContext + 0x4a10)) {
     if (*(int *)(glContext + 0x7574) != 0) {
       return;
@@ -2114,7 +2121,7 @@ void _glGetColorTableParameteriv_Exec(glContext, target, pname, params)
     glErrorCode = 0x502;
     goto LAB_00061dc8;
   }
-  if (iVar4 == 0) {
+  if (colorTable == 0) {
 switchD_00061c7c_default:
     if (*(int *)(glContext + 0x7574) != 0) {
       return;
@@ -2156,10 +2163,10 @@ LAB_00061d88:
     params[3] = (int)fVar1;
     return;
   case 0x80d8:
-    uVar3 = (uint)*(ushort *)(iVar4 + 0xbc);
+    uVar3 = (uint)*(ushort *)(colorTable + 0xbc);
     break;
   case 0x80d9:
-    uVar3 = (uint)*(ushort *)(iVar4 + 0xb0);
+    uVar3 = (uint)*(ushort *)(colorTable + 0xb0);
     break;
   case 0x80da:
   case 0x80db:
@@ -2182,8 +2189,10 @@ undefined4 _glCopyPixels_ListExec(int glContext,undefined4 *recordedArgs,double 
   int remaining;
   int loopIndex;
   bool bVar1;
-  char cVar2;
+  bool noStateChangePending;
+  char rendererInfoByte79;
   uint uVar3;
+  uint changeWord3;
   uint glContextWord4e1c;
   undefined4 glErrorCode;
   int glContextPtr4854;
@@ -2195,7 +2204,7 @@ undefined4 _glCopyPixels_ListExec(int glContext,undefined4 *recordedArgs,double 
   undefined4 incomingR7;
   undefined4 incomingR8;
   int matrixChangeBits;
-  int *piVar9;
+  int *changeWordCursor;
   float *pfVar10;
   double extraout_f1;
   
@@ -2233,8 +2242,8 @@ undefined4 _glCopyPixels_ListExec(int glContext,undefined4 *recordedArgs,double 
       }
       if (*(char *)(glContext + 0x4691) == '\0') goto LAB_00062098;
       framebufferObject = *(int *)(glContext + 0x744c);
-      piVar9 = (int *)(glContext + 0x310);
-      cVar2 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
+      changeWordCursor = (int *)(glContext + 0x310);
+      rendererInfoByte79 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
       if ((framebufferObject != 0) && (*(int *)(framebufferObject + 0xec) != 0)) {
         ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,incomingR5,incomingR6,incomingR7,incomingR8,matrixChangeBits,fparam_1,forwardedFloatArg2,forwardedFloatArg3,
                    forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
@@ -2242,7 +2251,7 @@ undefined4 _glCopyPixels_ListExec(int glContext,undefined4 *recordedArgs,double 
       }
       if ((*(char *)(glContext + 0x4664) == '\0') && (*(int *)(glContext + 0x5430) == 0)) {
 LAB_00061f74:
-        uVar3 = *(uint *)(glContext + 0x31c);
+        changeWord3 = *(uint *)(glContext + 0x31c);
       }
       else {
         loopIndex = 0;
@@ -2256,8 +2265,8 @@ LAB_00061f74:
           }
           loopIndex = loopIndex + 1;
         } while (loopIndex < 9);
-        uVar3 = *(uint *)(glContext + 0x31c);
-        if ((uVar3 & 0x15555) != 0) {
+        changeWord3 = *(uint *)(glContext + 0x31c);
+        if ((changeWord3 & 0x15555) != 0) {
           if (*(char *)(glContext + 0x2e54) != '\0') {
             _gleUpdateLightRGBASums(glContext,glContext + 0x2c20,0);
           }
@@ -2267,26 +2276,26 @@ LAB_00061f74:
           goto LAB_00061f74;
         }
       }
-      bVar1 = cVar2 == '\0';
+      bVar1 = rendererInfoByte79 == '\0';
       if (bVar1) {
-        uVar3 = uVar3 & 0x17000000;
+        changeWord3 = changeWord3 & 0x17000000;
       }
       else {
-        uVar3 = uVar3 & 0x17ffffff;
+        changeWord3 = changeWord3 & 0x17ffffff;
       }
       if (bVar1) {
-        bVar1 = ((*piVar9 == 0 && *(int *)(glContext + 0x314) == 0) && uVar3 == 0) &&
+        noStateChangePending = ((*changeWordCursor == 0 && *(int *)(glContext + 0x314) == 0) && changeWord3 == 0) &&
                 *(int *)(glContext + 800) == 0;
       }
       else {
-        bVar1 = (((*piVar9 == 0 && *(int *)(glContext + 0x314) == 0) &&
-                 (*(uint *)(glContext + 0x318) & 0xfffffffd) == 0) && uVar3 == 0) &&
+        noStateChangePending = (((*changeWordCursor == 0 && *(int *)(glContext + 0x314) == 0) &&
+                 (*(uint *)(glContext + 0x318) & 0xfffffffd) == 0) && changeWord3 == 0) &&
                 *(int *)(glContext + 800) == 0;
       }
-      if (!bVar1) {
+      if (!noStateChangePending) {
         if (*(char *)(glContext + 0x85a8) == *(char *)(glContext + 0x85a6)) {
           uVar3 = (**(code **)(glContext + 0x4788))
-                            (*(undefined4 *)(glContext + 0x4688),glContext + 0x4698,piVar9);
+                            (*(undefined4 *)(glContext + 0x4688),glContext + 0x4698,changeWordCursor);
           if ((((uVar3 & 3) != (uint)*(byte *)(glContext + 0x7580)) ||
               ((uVar3 & 4) != (uint)*(byte *)(glContext + 0x7581))) ||
              ((uVar3 & 8) != (uint)(*(char *)(glContext + 0x759d) == '\0'))) {
@@ -2309,8 +2318,8 @@ LAB_00061f74:
         }
         remaining = 0x13;
         do {
-          *piVar9 = 0;
-          piVar9 = piVar9 + 1;
+          *changeWordCursor = 0;
+          changeWordCursor = changeWordCursor + 1;
           remaining = remaining + -1;
         } while (remaining != 0);
       }

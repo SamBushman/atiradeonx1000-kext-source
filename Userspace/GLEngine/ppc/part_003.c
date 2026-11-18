@@ -44,7 +44,8 @@ void _glFlush_Exec(int glContext,double fparam_1,double forwardedFloatArg2,doubl
   int remaining;
   int loopIndex;
   bool bVar1;
-  char cVar2;
+  bool noStateChangePending;
+  char rendererInfoByte79;
   undefined4 glErrorCode;
   int *srcCursor;
   int iVar5;
@@ -55,7 +56,8 @@ void _glFlush_Exec(int glContext,double fparam_1,double forwardedFloatArg2,doubl
   undefined4 incomingR8;
   int matrixChangeBits;
   uint uVar7;
-  int *piVar8;
+  uint changeWord3;
+  int *changeWordCursor;
   double extraout_f1;
   
   if (-1 < *(short *)(glContext + 0x4a10)) {
@@ -72,8 +74,8 @@ void _glFlush_Exec(int glContext,double fparam_1,double forwardedFloatArg2,doubl
   }
   if (*(char *)(glContext + 0x4691) == '\0') goto LAB_0001f090;
   framebufferObject = *(int *)(glContext + 0x744c);
-  piVar8 = (int *)(glContext + 0x310);
-  cVar2 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
+  changeWordCursor = (int *)(glContext + 0x310);
+  rendererInfoByte79 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
   if ((framebufferObject != 0) && (*(int *)(framebufferObject + 0xec) != 0)) {
     ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,incomingR5,incomingR6,incomingR7,incomingR8,matrixChangeBits,fparam_1,forwardedFloatArg2,forwardedFloatArg3,
                forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
@@ -81,7 +83,7 @@ void _glFlush_Exec(int glContext,double fparam_1,double forwardedFloatArg2,doubl
   }
   if ((*(char *)(glContext + 0x4664) == '\0') && (*(int *)(glContext + 0x5430) == 0)) {
 LAB_0001ef68:
-    uVar7 = *(uint *)(glContext + 0x31c);
+    changeWord3 = *(uint *)(glContext + 0x31c);
   }
   else {
     loopIndex = 0;
@@ -95,8 +97,8 @@ LAB_0001ef68:
       }
       loopIndex = loopIndex + 1;
     } while (loopIndex < 9);
-    uVar7 = *(uint *)(glContext + 0x31c);
-    if ((uVar7 & 0x15555) != 0) {
+    changeWord3 = *(uint *)(glContext + 0x31c);
+    if ((changeWord3 & 0x15555) != 0) {
       if (*(char *)(glContext + 0x2e54) != '\0') {
         _gleUpdateLightRGBASums(glContext,glContext + 0x2c20,0);
       }
@@ -106,26 +108,26 @@ LAB_0001ef68:
       goto LAB_0001ef68;
     }
   }
-  bVar1 = cVar2 == '\0';
+  bVar1 = rendererInfoByte79 == '\0';
   if (bVar1) {
-    uVar7 = uVar7 & 0x17000000;
+    changeWord3 = changeWord3 & 0x17000000;
   }
   else {
-    uVar7 = uVar7 & 0x17ffffff;
+    changeWord3 = changeWord3 & 0x17ffffff;
   }
   if (bVar1) {
-    bVar1 = ((*piVar8 == 0 && *(int *)(glContext + 0x314) == 0) && uVar7 == 0) &&
+    noStateChangePending = ((*changeWordCursor == 0 && *(int *)(glContext + 0x314) == 0) && changeWord3 == 0) &&
             *(int *)(glContext + 800) == 0;
   }
   else {
-    bVar1 = (((*piVar8 == 0 && *(int *)(glContext + 0x314) == 0) &&
-             (*(uint *)(glContext + 0x318) & 0xfffffffd) == 0) && uVar7 == 0) &&
+    noStateChangePending = (((*changeWordCursor == 0 && *(int *)(glContext + 0x314) == 0) &&
+             (*(uint *)(glContext + 0x318) & 0xfffffffd) == 0) && changeWord3 == 0) &&
             *(int *)(glContext + 800) == 0;
   }
-  if (!bVar1) {
+  if (!noStateChangePending) {
     if (*(char *)(glContext + 0x85a8) == *(char *)(glContext + 0x85a6)) {
       uVar7 = (**(code **)(glContext + 0x4788))
-                        (*(undefined4 *)(glContext + 0x4688),glContext + 0x4698,piVar8);
+                        (*(undefined4 *)(glContext + 0x4688),glContext + 0x4698,changeWordCursor);
       if ((((uVar7 & 3) != (uint)*(byte *)(glContext + 0x7580)) ||
           ((uVar7 & 4) != (uint)*(byte *)(glContext + 0x7581))) ||
          ((uVar7 & 8) != (uint)(*(char *)(glContext + 0x759d) == '\0'))) {
@@ -150,8 +152,8 @@ LAB_0001f064:
     }
     remaining = 0x13;
     do {
-      *piVar8 = 0;
-      piVar8 = piVar8 + 1;
+      *changeWordCursor = 0;
+      changeWordCursor = changeWordCursor + 1;
       remaining = remaining + -1;
     } while (remaining != 0);
   }
@@ -177,6 +179,7 @@ int _glTexSubImage2D_Exec(glContext, target, level, xoffset, yoffset, width, hei
 {
   uint uVar1;
   int iVar2;
+  int imageEndOffset;
   int iVar3;
   int iVar4;
   undefined4 uVar5;
@@ -188,17 +191,17 @@ int _glTexSubImage2D_Exec(glContext, target, level, xoffset, yoffset, width, hei
   int pixelUnpackBuffer;
   int textureLevel;
   int iVar11;
-  double dVar12;
+  double bytesPerElement;
   
   iVar3 = glContext;
   if (-1 < *(short *)(glContext + 0x4a10)) goto LAB_0001f180;
   pixelUnpackBuffer = *(int *)(glContext + 0x4a6c);
   if (pixelUnpackBuffer != 0) {
-    iVar2 = _gleOffsetLimitImage(glContext + 0x31cc,width,height,format,type,pixels);
+    imageEndOffset = _gleOffsetLimitImage(glContext + 0x31cc,width,height,format,type,pixels);
     iVar11 = *(int *)(pixelUnpackBuffer + 0x38);
-    dVar12 = (double)((double (*)())_gleBytesPerElement)(type);
-    iVar3 = (int)dVar12;
-    if (iVar11 < iVar2) {
+    bytesPerElement = (double)((double (*)())_gleBytesPerElement)(type);
+    iVar3 = (int)bytesPerElement;
+    if (iVar11 < imageEndOffset) {
 LAB_0001f180:
       if (*(int *)(glContext + 0x7574) == 0) {
         *(undefined4 *)(glContext + 0x7574) = 0x502;
@@ -334,26 +337,26 @@ int _gleCheckTexSubImage2DArgs(glContext, target, level, xoffset, yoffset, width
 {
   undefined4 glErrorCode;
   int iVar2;
-  int iVar3;
+  int textureObject;
   int iVar4;
   int iVar5;
   
-  iVar3 = ((int (*)())_gleLookUpNonProxyTexture2D)(glContext,target);
-  if (iVar3 == 0) {
+  textureObject = ((int (*)())_gleLookUpNonProxyTexture2D)(glContext,target);
+  if (textureObject == 0) {
     if (*(int *)(glContext + 0x7574) != 0) {
       return 0;
     }
     glErrorCode = 0x500;
   }
   else {
-    if ((format != 0x1902) || (*(short *)(iVar3 + 0x26) == 0x1902)) {
+    if ((format != 0x1902) || (*(short *)(textureObject + 0x26) == 0x1902)) {
       iVar4 = _gleCheckTexSubImageArgs(glContext,level,format,type);
       if (iVar4 == 0) {
         return 0;
       }
-      iVar4 = iVar3 + 0xc4 + level * 0x18;
+      iVar4 = textureObject + 0xc4 + level * 0x18;
       if (target - 0x8515U < 6) {
-        iVar4 = iVar3 + 0xc4 + target * 0x168 + level * 0x18 + -0xbb2588;
+        iVar4 = textureObject + 0xc4 + target * 0x168 + level * 0x18 + -0xbb2588;
       }
       if (((*(byte *)(iVar4 + 0xb) & 0x20) != 0) &&
          ((*(short *)(iVar4 + 0x12) != 0 ||
@@ -380,7 +383,7 @@ LAB_0001f79c:
         }
         iVar4 = ((int (*)())_gleCheckTexSubImageRange)(glContext,iVar4,yoffset,height,(uint)*(ushort *)(iVar4 + 6));
         if (iVar4 != 0) {
-          return iVar3;
+          return textureObject;
         }
         return 0;
       }
@@ -870,6 +873,7 @@ void _gleDeleteHashNamesAndObjects(glContext, param_2, list, listRange)
   int iVar3;
   int iVar4;
   int *piVar5;
+  int *allocatedBlock;
   uint uVar6;
   uint uVar7;
   uint uVar8;
@@ -915,13 +919,13 @@ LAB_00020304:
     if (uVar9 < uVar7) {
       piVar11[2] = uVar7 - uVar9;
       if (uVar10 < uVar8) {
-        piVar5 = (int *)_malloc(0xc);
+        allocatedBlock = (int *)_malloc(0xc);
         iVar4 = *piVar11;
-        piVar5[1] = uVar10;
-        *piVar5 = iVar4;
-        piVar5[2] = uVar8 - uVar10;
-        *piVar11 = (int)piVar5;
-        piVar11 = piVar5;
+        allocatedBlock[1] = uVar10;
+        *allocatedBlock = iVar4;
+        allocatedBlock[2] = uVar8 - uVar10;
+        *piVar11 = (int)allocatedBlock;
+        piVar11 = allocatedBlock;
       }
       goto LAB_00020304;
     }
@@ -5248,7 +5252,7 @@ int _glTexImage3D_Exec(glContext, target, level, internalformat, width, height, 
   int iVar6;
   int pixelUnpackBuffer;
   int iVar7;
-  double dVar8;
+  double bytesPerElement;
   
   if (-1 < *(short *)(glContext + 0x4a10)) goto LAB_000270fc;
   if ((pixels == 0) && (*(char *)(glContext + 0x31e6) != '\0')) {
@@ -5313,8 +5317,8 @@ LAB_00027114:
     iVar4 = _gleOffsetLimitImage3D
                       (glContext + 0x31cc,width,height,depth,format,type,pixels);
     iVar7 = *(int *)(pixelUnpackBuffer + 0x38);
-    dVar8 = (double)((double (*)())_gleBytesPerElement)(type);
-    iVar5 = (int)dVar8;
+    bytesPerElement = (double)((double (*)())_gleBytesPerElement)(type);
+    iVar5 = (int)bytesPerElement;
     if (iVar4 <= iVar7) {
       if (iVar5 == 0) {
         iVar5 = _glePixelBytes(format,type);
@@ -5354,14 +5358,14 @@ int _gleCheckTexImage3DArgs(glContext, target, level, internalformat, width, hei
   undefined4 glErrorCode;
   int iVar2;
   int glContextPtr468c;
-  int iVar3;
+  int textureObject;
   uint uVar4;
   uint uVar5;
   uint uVar6;
   uint uVar7;
   
-  iVar3 = ((int (*)())_gleLookUpTexture3D)(glContext,target);
-  if (iVar3 == 0) {
+  textureObject = ((int (*)())_gleLookUpTexture3D)(glContext,target);
+  if (textureObject == 0) {
     if (*(int *)(glContext + 0x7574) != 0) {
       return 0;
     }
@@ -5387,7 +5391,7 @@ int _gleCheckTexImage3DArgs(glContext, target, level, internalformat, width, hei
        ((int)uVar5 <= (int)uVar4)) {
       iVar2 = _gleCheckTexImageArgs(glContext,level,format,type,internalformat,border,0,1);
       if (iVar2 != 0) {
-        return iVar3;
+        return textureObject;
       }
       return 0;
     }
@@ -5464,12 +5468,14 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
   uint uVar13;
   undefined2 componentShort;
   int iVar17;
+  int componentCount;
   int imageSize;
   uint uVar18;
   uint loopIndex;
   code *extractPixelFunc;
   code *modifyPixelFunc;
   int iVar21;
+  int colorTable;
   int rowBytes;
   int pixelBytes;
   uint uVar22;
@@ -5589,27 +5595,27 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
     if ((char)param_11 != '\0') {
       uVar23 = *(uint *)(glContext + 0x3410);
       if ((uVar23 & 0x20) != 0) {
-        iVar21 = _gleLookUpNonProxyColorTable(glContext,0x80d0);
+        colorTable = _gleLookUpNonProxyColorTable(glContext,0x80d0);
         uVar23 = *(uint *)(glContext + 0x3410);
-        local_128 = *(undefined4 *)(iVar21 + 0xc0);
-        local_134 = (uint)*(ushort *)(iVar21 + 0xbc);
-        local_130 = (uint)*(ushort *)(iVar21 + 0xbe);
-        local_12c = (uint)*(ushort *)(iVar21 + 0xb0);
+        local_128 = *(undefined4 *)(colorTable + 0xc0);
+        local_134 = (uint)*(ushort *)(colorTable + 0xbc);
+        local_130 = (uint)*(ushort *)(colorTable + 0xbe);
+        local_12c = (uint)*(ushort *)(colorTable + 0xb0);
       }
       if ((uVar23 & 0x80) != 0) {
-        iVar21 = _gleLookUpNonProxyColorTable(glContext,0x80d2);
+        colorTable = _gleLookUpNonProxyColorTable(glContext,0x80d2);
         uVar23 = *(uint *)(glContext + 0x3410);
-        local_118 = *(undefined4 *)(iVar21 + 0xc0);
-        local_124 = (uint)*(ushort *)(iVar21 + 0xbc);
-        local_120 = (uint)*(ushort *)(iVar21 + 0xbe);
-        local_11c = (uint)*(ushort *)(iVar21 + 0xb0);
+        local_118 = *(undefined4 *)(colorTable + 0xc0);
+        local_124 = (uint)*(ushort *)(colorTable + 0xbc);
+        local_120 = (uint)*(ushort *)(colorTable + 0xbe);
+        local_11c = (uint)*(ushort *)(colorTable + 0xb0);
       }
       if ((uVar23 & 0x40) != 0) {
-        iVar21 = _gleLookUpNonProxyColorTable(glContext,0x80d1);
-        local_108 = *(undefined4 *)(iVar21 + 0xc0);
-        local_114 = (uint)*(ushort *)(iVar21 + 0xbc);
-        local_110 = (uint)*(ushort *)(iVar21 + 0xbe);
-        local_10c = (uint)*(ushort *)(iVar21 + 0xb0);
+        colorTable = _gleLookUpNonProxyColorTable(glContext,0x80d1);
+        local_108 = *(undefined4 *)(colorTable + 0xc0);
+        local_114 = (uint)*(ushort *)(colorTable + 0xbc);
+        local_110 = (uint)*(ushort *)(colorTable + 0xbe);
+        local_10c = (uint)*(ushort *)(colorTable + 0xb0);
       }
     }
     if (param_12 == 0) {
@@ -5666,7 +5672,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
     }
     goto LAB_0002e240;
   }
-  iVar17 = _gleComponents((uint)*(ushort *)(textureLevel + 0x10));
+  componentCount = _gleComponents((uint)*(ushort *)(textureLevel + 0x10));
   pixelBytes = _glePixelBytes((uint)*(ushort *)(textureLevel + 0x10),(uint)*(ushort *)(textureLevel + 0x12));
   dstSlice = (uint *)(*(int *)(textureLevel + 0x14) +
                     pixelBytes * ((uint)*(ushort *)(textureLevel + 4) *
@@ -5736,7 +5742,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                     columnsLeft = columnsLeft + -1;
                     *(undefined1 *)((int)dstPixel + 1) = componentByte;
                     srcPixel = srcPixel + srcPixelStride;
-                    dstPixel = (uint *)((int)dstPixel + iVar17);
+                    dstPixel = (uint *)((int)dstPixel + componentCount);
                   } while (columnsLeft != 0);
                 }
                 rowsLeft = rowsLeft - 1;
@@ -5795,7 +5801,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                   columnsLeft = columnsLeft + -1;
                   *(undefined1 *)((int)dstPixel + 1) = componentByte;
                   srcPixel = srcPixel + srcPixelStride;
-                  dstPixel = (uint *)((int)dstPixel + iVar17);
+                  dstPixel = (uint *)((int)dstPixel + componentCount);
                 } while (columnsLeft != 0);
               }
               rowsLeft = rowsLeft - 1;
@@ -5907,7 +5913,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                         *(undefined1 *)((int)dstPixel + 2) = componentByte;
                         *(undefined1 *)((int)dstPixel + 3) = 0;
                         srcPixel = srcPixel + srcPixelStride;
-                        dstPixel = (uint *)((int)dstPixel + iVar17);
+                        dstPixel = (uint *)((int)dstPixel + componentCount);
                       } while (columnsLeft != 0);
                     }
                     rowsLeft = rowsLeft - 1;
@@ -6095,7 +6101,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                     columnsLeft = columnsLeft + -1;
                     *(undefined1 *)((int)dstPixel + 2) = componentByte;
                     srcPixel = srcPixel + srcPixelStride;
-                    dstPixel = (uint *)((int)dstPixel + iVar17);
+                    dstPixel = (uint *)((int)dstPixel + componentCount);
                   } while (columnsLeft != 0);
                 }
                 rowsLeft = rowsLeft - 1;
@@ -6142,7 +6148,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                         columnsLeft = columnsLeft + -1;
                         *(undefined1 *)dstPixel = componentByte;
                         srcPixel = srcPixel + srcPixelStride;
-                        dstPixel = (uint *)((int)dstPixel + iVar17);
+                        dstPixel = (uint *)((int)dstPixel + componentCount);
                       } while (columnsLeft != 0);
                     }
                     rowsLeft = rowsLeft - 1;
@@ -6186,7 +6192,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                       columnsLeft = columnsLeft + -1;
                       *(undefined1 *)dstPixel = componentByte;
                       srcPixel = srcPixel + srcPixelStride;
-                      dstPixel = (uint *)((int)dstPixel + iVar17);
+                      dstPixel = (uint *)((int)dstPixel + componentCount);
                     } while (columnsLeft != 0);
                   }
                   rowsLeft = rowsLeft - 1;
@@ -6383,7 +6389,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                             columnsLeft = columnsLeft + -1;
                             *(undefined1 *)((int)dstPixel + 3) = componentByte;
                             srcPixel = srcPixel + srcPixelStride;
-                            dstPixel = (uint *)((int)dstPixel + iVar17);
+                            dstPixel = (uint *)((int)dstPixel + componentCount);
                           } while (columnsLeft != 0);
                         }
                         rowsLeft = rowsLeft - 1;
@@ -6807,7 +6813,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                       columnsLeft = columnsLeft + -1;
                       *(undefined1 *)((int)dstPixel + 3) = componentByte;
                       srcPixel = srcPixel + srcPixelStride;
-                      dstPixel = (uint *)((int)dstPixel + iVar17);
+                      dstPixel = (uint *)((int)dstPixel + componentCount);
                     } while (columnsLeft != 0);
                   }
                   rowsLeft = rowsLeft - 1;
@@ -6853,7 +6859,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                         columnsLeft = columnsLeft + -1;
                         *(undefined1 *)dstPixel = componentByte;
                         srcPixel = srcPixel + srcPixelStride;
-                        dstPixel = (uint *)((int)dstPixel + iVar17);
+                        dstPixel = (uint *)((int)dstPixel + componentCount);
                       } while (columnsLeft != 0);
                     }
                     rowsLeft = rowsLeft - 1;
@@ -6897,7 +6903,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                       columnsLeft = columnsLeft + -1;
                       *(undefined1 *)dstPixel = componentByte;
                       srcPixel = srcPixel + srcPixelStride;
-                      dstPixel = (uint *)((int)dstPixel + iVar17);
+                      dstPixel = (uint *)((int)dstPixel + componentCount);
                     } while (columnsLeft != 0);
                   }
                   rowsLeft = rowsLeft - 1;
@@ -6919,7 +6925,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
         uVar3 = *(ushort *)(textureLevel + 0x12);
         if (uVar3 == 6) {
           if (0 < (int)depth) {
-            local_9c = iVar17 << 1;
+            local_9c = componentCount << 1;
             do {
               iVar17 = local_9c;
               if (0 < (int)height) {
@@ -6980,7 +6986,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
         }
         else if (uVar3 < 7) {
           if ((uVar3 == 5) && (0 < (int)depth)) {
-            local_a0 = iVar17 << 1;
+            local_a0 = componentCount << 1;
             do {
               iVar17 = local_a0;
               if (0 < (int)height) {
@@ -7083,7 +7089,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                       columnsLeft = columnsLeft + -1;
                       *(undefined1 *)((int)dstPixel + 1) = componentByte;
                       srcPixel = srcPixel + srcPixelStride;
-                      dstPixel = (uint *)((int)dstPixel + iVar17);
+                      dstPixel = (uint *)((int)dstPixel + componentCount);
                     } while (columnsLeft != 0);
                   }
                   rowsLeft = rowsLeft - 1;
@@ -7140,7 +7146,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                     columnsLeft = columnsLeft + -1;
                     *(undefined1 *)((int)dstPixel + 1) = componentByte;
                     srcPixel = srcPixel + srcPixelStride;
-                    dstPixel = (uint *)((int)dstPixel + iVar17);
+                    dstPixel = (uint *)((int)dstPixel + componentCount);
                   } while (columnsLeft != 0);
                 }
                 rowsLeft = rowsLeft - 1;
@@ -7338,8 +7344,8 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                             }
                             columnsLeft = columnsLeft + -1;
                             *puVar30 = componentByte;
-                            puVar30 = puVar30 + iVar17;
-                            dstPixel = (uint *)((int)dstPixel + iVar17);
+                            puVar30 = puVar30 + componentCount;
+                            dstPixel = (uint *)((int)dstPixel + componentCount);
                             srcPixel = srcPixel + srcPixelStride;
                           } while (columnsLeft != 0);
                         }
@@ -7764,7 +7770,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                       columnsLeft = columnsLeft + -1;
                       *(undefined1 *)((int)dstPixel + 3) = componentByte;
                       srcPixel = srcPixel + srcPixelStride;
-                      dstPixel = (uint *)((int)dstPixel + iVar17);
+                      dstPixel = (uint *)((int)dstPixel + componentCount);
                     } while (columnsLeft != 0);
                   }
                   rowsLeft = rowsLeft - 1;
@@ -7826,7 +7832,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                       columnsLeft = columnsLeft + -1;
                       *(undefined1 *)((int)dstPixel + 1) = componentByte;
                       srcPixel = srcPixel + srcPixelStride;
-                      dstPixel = (uint *)((int)dstPixel + iVar17);
+                      dstPixel = (uint *)((int)dstPixel + componentCount);
                     } while (columnsLeft != 0);
                   }
                   rowsLeft = rowsLeft - 1;
@@ -7915,8 +7921,8 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                     }
                     columnsLeft = columnsLeft + -1;
                     *puVar30 = componentByte;
-                    puVar30 = puVar30 + iVar17;
-                    dstPixel = (uint *)((int)dstPixel + iVar17);
+                    puVar30 = puVar30 + componentCount;
+                    dstPixel = (uint *)((int)dstPixel + componentCount);
                     srcPixel = srcPixel + srcPixelStride;
                   } while (columnsLeft != 0);
                 }
@@ -7963,7 +7969,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                   columnsLeft = columnsLeft + -1;
                   *(undefined1 *)dstPixel = componentByte;
                   srcPixel = srcPixel + srcPixelStride;
-                  dstPixel = (uint *)((int)dstPixel + iVar17);
+                  dstPixel = (uint *)((int)dstPixel + componentCount);
                 } while (columnsLeft != 0);
               }
               rowsLeft = rowsLeft - 1;
@@ -8007,7 +8013,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                 columnsLeft = columnsLeft + -1;
                 *(undefined1 *)dstPixel = componentByte;
                 srcPixel = srcPixel + srcPixelStride;
-                dstPixel = (uint *)((int)dstPixel + iVar17);
+                dstPixel = (uint *)((int)dstPixel + componentCount);
               } while (columnsLeft != 0);
             }
             rowsLeft = rowsLeft - 1;
@@ -8067,7 +8073,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                   columnsLeft = columnsLeft + -1;
                   *(undefined1 *)((int)dstPixel + 1) = componentByte;
                   srcPixel = srcPixel + srcPixelStride;
-                  dstPixel = (uint *)((int)dstPixel + iVar17);
+                  dstPixel = (uint *)((int)dstPixel + componentCount);
                 } while (columnsLeft != 0);
               }
               rowsLeft = rowsLeft - 1;
@@ -8123,7 +8129,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                 columnsLeft = columnsLeft + -1;
                 *(undefined1 *)((int)dstPixel + 1) = componentByte;
                 srcPixel = srcPixel + srcPixelStride;
-                dstPixel = (uint *)((int)dstPixel + iVar17);
+                dstPixel = (uint *)((int)dstPixel + componentCount);
               } while (columnsLeft != 0);
             }
             rowsLeft = rowsLeft - 1;
@@ -8233,7 +8239,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                       columnsLeft = columnsLeft + -1;
                       *(undefined1 *)((int)dstPixel + 3) = componentByte;
                       srcPixel = srcPixel + srcPixelStride;
-                      dstPixel = (uint *)((int)dstPixel + iVar17);
+                      dstPixel = (uint *)((int)dstPixel + componentCount);
                     } while (columnsLeft != 0);
                   }
                   rowsLeft = rowsLeft - 1;
@@ -8414,7 +8420,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                   columnsLeft = columnsLeft + -1;
                   *(undefined1 *)((int)dstPixel + 2) = componentByte;
                   srcPixel = srcPixel + srcPixelStride;
-                  dstPixel = (uint *)((int)dstPixel + iVar17);
+                  dstPixel = (uint *)((int)dstPixel + componentCount);
                 } while (columnsLeft != 0);
               }
               rowsLeft = rowsLeft - 1;
@@ -8457,7 +8463,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                       columnsLeft = columnsLeft + -1;
                       *dstPixel = componentUint;
                       srcPixel = srcPixel + srcPixelStride;
-                      dstPixel = dstPixel + iVar17;
+                      dstPixel = dstPixel + componentCount;
                     } while (columnsLeft != 0);
                   }
                   rowsLeft = rowsLeft - 1;
@@ -8488,7 +8494,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                     scaledInt = (int)(local_19c * float65535);
                     local_c8 = (longlong)scaledInt;
                     *(short *)dstPixel = (short)scaledInt;
-                    dstPixel = (uint *)((int)dstPixel + iVar17 * 2);
+                    dstPixel = (uint *)((int)dstPixel + componentCount * 2);
                     srcPixel = srcPixel + srcPixelStride;
                   } while (columnsLeft != 0);
                 }
@@ -8534,7 +8540,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                       columnsLeft = columnsLeft + -1;
                       *(undefined1 *)dstPixel = componentByte;
                       srcPixel = srcPixel + srcPixelStride;
-                      dstPixel = (uint *)((int)dstPixel + iVar17);
+                      dstPixel = (uint *)((int)dstPixel + componentCount);
                     } while (columnsLeft != 0);
                   }
                   rowsLeft = rowsLeft - 1;
@@ -8576,7 +8582,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                     columnsLeft = columnsLeft + -1;
                     *(undefined1 *)dstPixel = componentByte;
                     srcPixel = srcPixel + srcPixelStride;
-                    dstPixel = (uint *)((int)dstPixel + iVar17);
+                    dstPixel = (uint *)((int)dstPixel + componentCount);
                   } while (columnsLeft != 0);
                 }
                 rowsLeft = rowsLeft - 1;
@@ -8730,7 +8736,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                         columnsLeft = columnsLeft + -1;
                         *(undefined1 *)((int)dstPixel + 3) = componentByte;
                         srcPixel = srcPixel + srcPixelStride;
-                        dstPixel = (uint *)((int)dstPixel + iVar17);
+                        dstPixel = (uint *)((int)dstPixel + componentCount);
                       } while (columnsLeft != 0);
                     }
                     rowsLeft = rowsLeft - 1;
@@ -8813,8 +8819,8 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                           }
                           columnsLeft = columnsLeft + -1;
                           *puVar30 = componentByte;
-                          puVar30 = puVar30 + iVar17;
-                          dstPixel = (uint *)((int)dstPixel + iVar17);
+                          puVar30 = puVar30 + componentCount;
+                          dstPixel = (uint *)((int)dstPixel + componentCount);
                           srcPixel = srcPixel + srcPixelStride;
                         } while (columnsLeft != 0);
                       }
@@ -9267,7 +9273,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                     columnsLeft = columnsLeft + -1;
                     *(undefined1 *)((int)dstPixel + 3) = componentByte;
                     srcPixel = srcPixel + srcPixelStride;
-                    dstPixel = (uint *)((int)dstPixel + iVar17);
+                    dstPixel = (uint *)((int)dstPixel + componentCount);
                   } while (columnsLeft != 0);
                 }
                 rowsLeft = rowsLeft - 1;
@@ -9312,7 +9318,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                       columnsLeft = columnsLeft + -1;
                       *(undefined1 *)dstPixel = componentByte;
                       srcPixel = srcPixel + srcPixelStride;
-                      dstPixel = (uint *)((int)dstPixel + iVar17);
+                      dstPixel = (uint *)((int)dstPixel + componentCount);
                     } while (columnsLeft != 0);
                   }
                   rowsLeft = rowsLeft - 1;
@@ -9354,7 +9360,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                     columnsLeft = columnsLeft + -1;
                     *(undefined1 *)dstPixel = componentByte;
                     srcPixel = srcPixel + srcPixelStride;
-                    dstPixel = (uint *)((int)dstPixel + iVar17);
+                    dstPixel = (uint *)((int)dstPixel + componentCount);
                   } while (columnsLeft != 0);
                 }
                 rowsLeft = rowsLeft - 1;
@@ -9415,7 +9421,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                     }
                     columnsLeft = columnsLeft + -1;
                     *(undefined2 *)((int)dstPixel + 2) = componentShort;
-                    dstPixel = (uint *)((int)dstPixel + iVar17 * 2);
+                    dstPixel = (uint *)((int)dstPixel + componentCount * 2);
                     srcPixel = srcPixel + srcPixelStride;
                   } while (columnsLeft != 0);
                 }
@@ -9471,7 +9477,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                     }
                     columnsLeft = columnsLeft + -1;
                     *(undefined2 *)((int)dstPixel + 2) = componentShort;
-                    dstPixel = (uint *)((int)dstPixel + iVar17 * 2);
+                    dstPixel = (uint *)((int)dstPixel + componentCount * 2);
                     srcPixel = srcPixel + srcPixelStride;
                   } while (columnsLeft != 0);
                 }
@@ -9529,7 +9535,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                     columnsLeft = columnsLeft + -1;
                     *(undefined1 *)((int)dstPixel + 1) = componentByte;
                     srcPixel = srcPixel + srcPixelStride;
-                    dstPixel = (uint *)((int)dstPixel + iVar17);
+                    dstPixel = (uint *)((int)dstPixel + componentCount);
                   } while (columnsLeft != 0);
                 }
                 rowsLeft = rowsLeft - 1;
@@ -9585,7 +9591,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                   columnsLeft = columnsLeft + -1;
                   *(undefined1 *)((int)dstPixel + 1) = componentByte;
                   srcPixel = srcPixel + srcPixelStride;
-                  dstPixel = (uint *)((int)dstPixel + iVar17);
+                  dstPixel = (uint *)((int)dstPixel + componentCount);
                 } while (columnsLeft != 0);
               }
               rowsLeft = rowsLeft - 1;
@@ -10107,7 +10113,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                     columnsLeft = columnsLeft + -1;
                     *(undefined1 *)((int)dstPixel + 3) = componentByte;
                     srcPixel = srcPixel + srcPixelStride;
-                    dstPixel = (uint *)((int)dstPixel + iVar17);
+                    dstPixel = (uint *)((int)dstPixel + componentCount);
                   } while (columnsLeft != 0);
                 }
                 rowsLeft = rowsLeft - 1;
@@ -10168,7 +10174,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                     columnsLeft = columnsLeft + -1;
                     *(undefined1 *)dstPixel = componentByte;
                     srcPixel = srcPixel + srcPixelStride;
-                    dstPixel = (uint *)((int)dstPixel + iVar17);
+                    dstPixel = (uint *)((int)dstPixel + componentCount);
                   } while (columnsLeft != 0);
                 }
                 rowsLeft = rowsLeft - 1;
@@ -10256,8 +10262,8 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                   }
                   columnsLeft = columnsLeft + -1;
                   *(undefined1 *)dstPixel = componentByte;
-                  puVar30 = puVar30 + iVar17;
-                  dstPixel = (uint *)((int)dstPixel + iVar17);
+                  puVar30 = puVar30 + componentCount;
+                  dstPixel = (uint *)((int)dstPixel + componentCount);
                   srcPixel = srcPixel + srcPixelStride;
                 } while (columnsLeft != 0);
               }
@@ -10303,7 +10309,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                 columnsLeft = columnsLeft + -1;
                 *(undefined1 *)dstPixel = componentByte;
                 srcPixel = srcPixel + srcPixelStride;
-                dstPixel = (uint *)((int)dstPixel + iVar17);
+                dstPixel = (uint *)((int)dstPixel + componentCount);
               } while (columnsLeft != 0);
             }
             rowsLeft = rowsLeft - 1;
@@ -10345,7 +10351,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
               columnsLeft = columnsLeft + -1;
               *(undefined1 *)dstPixel = componentByte;
               srcPixel = srcPixel + srcPixelStride;
-              dstPixel = (uint *)((int)dstPixel + iVar17);
+              dstPixel = (uint *)((int)dstPixel + componentCount);
             } while (columnsLeft != 0);
           }
           rowsLeft = rowsLeft - 1;
