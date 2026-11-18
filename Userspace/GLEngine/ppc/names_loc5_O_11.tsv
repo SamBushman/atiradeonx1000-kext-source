@@ -1,0 +1,38 @@
+local	_glVertexAttrib1sARB_Exec	fVar1	defaultZero	CONFIRMED	ctx+0x20 = 0.0f (stored 0 by the context initialisation): value of the components the call does not supply
+local	_glVertexAttrib1sARB_Exec	iVar2	attribSlotBase	INFERRED	glContext + index * 0x10: the current value of generic vertex attribute index lives at +0x1a0..+0x1ac of this address
+local	_glVertexAttrib1sARB_Exec	pcVar3	vertexFunc	INFERRED	vertex submit callback glContext+0x4884 (or the full-buffer replacement: _gleFlushAndSubmit / the callback at ctx+0x28), called with the vertex components
+local	_glVertexAttrib1sARB_Exec	dVar4	xAsDouble	CONFIRMED	component x converted to double before the (float) store into the attribute slot
+local	_glVertexAttrib2fvARB_Exec	fVar1	defaultZero	CONFIRMED	ctx+0x20 = 0.0f (stored 0 by the context initialisation): value of the components the call does not supply
+local	_glVertexAttrib2fvARB_Exec	fVar2	defaultOne	CONFIRMED	ctx+0x24 = 1.0f (0x3f800000 stored by the context initialisation): value of the w component the call does not supply
+local	_glVertexAttrib2fvARB_Exec	fVar3	yValue	CONFIRMED	component y loaded from the argument array, stored into the attribute slot
+local	_glVertexAttrib2fvARB_Exec	iVar4	attribSlotBase	INFERRED	glContext + index * 0x10: the current value of generic vertex attribute index lives at +0x1a0..+0x1ac of this address
+local	_glVertexAttrib1fvARB_Exec	fVar1	defaultZero	CONFIRMED	ctx+0x20 = 0.0f (stored 0 by the context initialisation): value of the components the call does not supply
+local	_glVertexAttrib1fvARB_Exec	fVar2	defaultOne	CONFIRMED	ctx+0x24 = 1.0f (0x3f800000 stored by the context initialisation): value of the w component the call does not supply
+local	_glVertexAttrib1fvARB_Exec	iVar3	attribSlotBase	INFERRED	glContext + index * 0x10: the current value of generic vertex attribute index lives at +0x1a0..+0x1ac of this address
+local	_glVertexAttrib4NsvARB_Exec	iVar4	attribSlotBase	INFERRED	glContext + index * 0x10: the current value of generic vertex attribute index lives at +0x1a0..+0x1ac of this address
+local	_glVertexAttrib4NsvARB_Exec	pcVar5	vertexFunc	INFERRED	vertex submit callback glContext+0x4884 (or the full-buffer replacement: _gleFlushAndSubmit / the callback at ctx+0x28), called with the vertex components
+local	_glVertexAttrib4NsvARB_Exec	fVar3	channelBias	INFERRED	holds FLOAT_00108e74: the offset added after scaling
+local	_glVertexAttrib1dvARB_Exec	fVar1	defaultZero	CONFIRMED	ctx+0x20 = 0.0f (stored 0 by the context initialisation): value of the components the call does not supply
+local	_glVertexAttrib1dvARB_Exec	iVar2	attribSlotBase	INFERRED	glContext + index * 0x10: the current value of generic vertex attribute index lives at +0x1a0..+0x1ac of this address
+local	_glVertexAttrib1dvARB_Exec	dVar3	xDouble	CONFIRMED	component x loaded as a double from the argument array, converted with (float) into the attribute slot
+local	_glVertexAttrib4NusvARB_Exec	pcVar3	vertexFunc	INFERRED	vertex submit callback glContext+0x4884 (or the full-buffer replacement: _gleFlushAndSubmit / the callback at ctx+0x28), called with the vertex components
+local	_glVertexAttrib3fvARB_Exec	fVar1	defaultOne	CONFIRMED	ctx+0x24 = 1.0f (0x3f800000 stored by the context initialisation): value of the w component the call does not supply
+local	_glVertexAttrib3fvARB_Exec	fVar2	zValue	CONFIRMED	component z loaded from the argument array, stored into the attribute slot
+local	_glVertexAttrib3fvARB_Exec	iVar3	attribSlotBase	INFERRED	glContext + index * 0x10: the current value of generic vertex attribute index lives at +0x1a0..+0x1ac of this address
+local	_glVertexAttrib4uivARB_Exec	iVar2	attribSlotBase	INFERRED	glContext + index * 0x10: the current value of generic vertex attribute index lives at +0x1a0..+0x1ac of this address
+local	_glVertexAttrib4uivARB_Exec	pcVar3	vertexFunc	INFERRED	vertex submit callback glContext+0x4884 (or the full-buffer replacement: _gleFlushAndSubmit / the callback at ctx+0x28), called with the vertex components
+local	_glVertexAttrib4ivARB_Exec	iVar2	attribSlotBase	INFERRED	glContext + index * 0x10: the current value of generic vertex attribute index lives at +0x1a0..+0x1ac of this address
+local	_glVertexAttrib4ivARB_Exec	pcVar3	vertexFunc	INFERRED	vertex submit callback glContext+0x4884 (or the full-buffer replacement: _gleFlushAndSubmit / the callback at ctx+0x28), called with the vertex components
+local	_glVertexAttrib4NubARB_Exec	iVar2	attribSlotBase	INFERRED	glContext + index * 0x10: the current value of generic vertex attribute index lives at +0x1a0..+0x1ac of this address
+local	_glVertexAttrib4NubARB_Exec	pcVar3	vertexFunc	INFERRED	vertex submit callback glContext+0x4884 (or the full-buffer replacement: _gleFlushAndSubmit / the callback at ctx+0x28), called with the vertex components
+local	_glVertexAttrib4fARB_Exec	iVar1	attribSlotBase	INFERRED	glContext + index * 0x10: the current value of generic vertex attribute index lives at +0x1a0..+0x1ac of this address
+local	_glVertex4iv_Exec	pcVar1	vertexFunc	INFERRED	vertex submit callback glContext+0x4884 (or the full-buffer replacement: _gleFlushAndSubmit / the callback at ctx+0x28), called with the vertex components
+local	_glVertex3sv_Exec	pcVar1	vertexFunc	INFERRED	vertex submit callback glContext+0x4884 (or the full-buffer replacement: _gleFlushAndSubmit / the callback at ctx+0x28), called with the vertex components
+local	_glVertex3i_Exec	pcVar1	vertexFunc	INFERRED	vertex submit callback glContext+0x4884 (or the full-buffer replacement: _gleFlushAndSubmit / the callback at ctx+0x28), called with the vertex components
+local	_glVertex2s_Exec	pcVar1	vertexFunc	INFERRED	vertex submit callback glContext+0x4884 (or the full-buffer replacement: _gleFlushAndSubmit / the callback at ctx+0x28), called with the vertex components
+local	_glVertex2_ListExec	pcVar1	vertexFunc	INFERRED	vertex submit callback glContext+0x4884 (or the full-buffer replacement: _gleFlushAndSubmit / the callback at ctx+0x28), called with the vertex components
+use	_glVertexAttrib4NusvARB_Exec	iVar2	vertexWriteCursor	INFERRED	ctx+0x4858, the end of the filled vertex records (compared against the buffer limit ctx+0x485c and passed on to the submit callback)	^\s*iVar2\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x4858\);$	+1
+use	_glVertexAttrib4NusvARB_Exec	iVar2	vertexWriteCursor	INFERRED	ctx+0x4858, the end of the filled vertex records (compared against the buffer limit ctx+0x485c and passed on to the submit callback)	^\s*if\ \(iVar2\ ==\ \*\(int\ \*\)\(param_1\ \+\ 0x485c\)\)\ \{$	+1
+use	_glVertexAttrib4NusvARB_Exec	iVar2	vertexWriteCursor	INFERRED	ctx+0x4858, the end of the filled vertex records (compared against the buffer limit ctx+0x485c and passed on to the submit callback)	^\s*\(\*pcVar3\)\(param_1,0,param_3,in_r6,iVar2,iVar2,\(uint\)param_3\[2\],param_3\[1\]\ \|\ 0x4b000000,$	+5
+use	_glVertexAttrib4NusvARB_Exec	iVar2	attribSlotBase	INFERRED	glContext + index * 0x10: the current value of generic vertex attribute index lives at +0x1a0..+0x1ac of this address	^\s*iVar2\ =\ param_1\ \+\ param_2\ \*\ 0x10;$	+5
+local	_glTexCoord2fv_Exec	uVar1	tCoordWord	CONFIRMED	v[1], the t coordinate word, stored at ctx+0x124 after the s word (the stored words are not converted)

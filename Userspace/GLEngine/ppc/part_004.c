@@ -1321,12 +1321,12 @@ void _glTexCoord2fv_Exec(glContext, v)
   int glContext;
   undefined4 *v;
 {
-  undefined4 uVar1;
+  undefined4 tCoordWord;
   
-  uVar1 = v[1];
+  tCoordWord = v[1];
   *(undefined4 *)(glContext + 0x120) = *v;
   *(undefined4 *)(glContext + 300) = *(undefined4 *)(glContext + 0x24);
-  *(undefined4 *)(glContext + 0x124) = uVar1;
+  *(undefined4 *)(glContext + 0x124) = tCoordWord;
   *(undefined4 *)(glContext + 0x128) = *(undefined4 *)(glContext + 0x20);
   return;
 }
