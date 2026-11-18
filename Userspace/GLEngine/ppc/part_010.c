@@ -879,7 +879,7 @@ void _glClear_NoopExec(int glContext,undefined4 mask,double fparam_1,double forw
   undefined4 incomingR7;
   undefined4 incomingR8;
   int matrixChangeBits;
-  uint uVar6;
+  uint dispatchFlags;
   uint changeWord3;
   int *changeWordCursor;
   double extraout_f1;
@@ -946,17 +946,17 @@ LAB_000598fc:
     }
     if (!noStateChangePending) {
       if (*(char *)(glContext + 0x85a8) == *(char *)(glContext + 0x85a6)) {
-        uVar6 = (**(code **)(glContext + 0x4788))
+        dispatchFlags = (**(code **)(glContext + 0x4788))
                           (*(undefined4 *)(glContext + 0x4688),glContext + 0x4698,changeWordCursor);
-        if ((((uVar6 & 3) != (uint)*(byte *)(glContext + 0x7580)) ||
-            ((uVar6 & 4) != (uint)*(byte *)(glContext + 0x7581))) ||
-           (fparam_1 = extraout_f1_01, (uVar6 & 8) != (uint)(*(char *)(glContext + 0x759d) == '\0')))
+        if ((((dispatchFlags & 3) != (uint)*(byte *)(glContext + 0x7580)) ||
+            ((dispatchFlags & 4) != (uint)*(byte *)(glContext + 0x7581))) ||
+           (fparam_1 = extraout_f1_01, (dispatchFlags & 8) != (uint)(*(char *)(glContext + 0x759d) == '\0')))
         {
-          if ((uVar6 & 4) == 0) {
-            uVar6 = uVar6 & 0xfffffffe;
+          if ((dispatchFlags & 4) == 0) {
+            dispatchFlags = dispatchFlags & 0xfffffffe;
             *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x10000000;
           }
-          fparam_1 = (double)_gleUpdateDispatchCodeChange(glContext,uVar6);
+          fparam_1 = (double)_gleUpdateDispatchCodeChange(glContext,dispatchFlags);
           if (*(char *)(glContext + 0x759d) == '\0') goto LAB_00059a1c;
         }
       }

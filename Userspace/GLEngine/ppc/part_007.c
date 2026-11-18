@@ -155,6 +155,7 @@ void _glReadPixels_Exec(int glContext,undefined4 x,undefined4 y,uint width,int h
   int imageEndOffset;
   int matrixChangeBits;
   uint uVar9;
+  uint dispatchFlags;
   uint changeWord3;
   int *changeWordCursor;
   int iVar11;
@@ -262,16 +263,16 @@ LAB_00045e20:
         }
         if (!noStateChangePending) {
           if (*(char *)(glContext + 0x85a8) == *(char *)(glContext + 0x85a6)) {
-            uVar9 = (**(code **)(glContext + 0x4788))
+            dispatchFlags = (**(code **)(glContext + 0x4788))
                               (*(undefined4 *)(glContext + 0x4688),glContext + 0x4698,changeWordCursor);
-            if ((((uVar9 & 3) != (uint)*(byte *)(glContext + 0x7580)) ||
-                ((uVar9 & 4) != (uint)*(byte *)(glContext + 0x7581))) ||
-               ((uVar9 & 8) != (uint)(*(char *)(glContext + 0x759d) == '\0'))) {
-              if ((uVar9 & 4) == 0) {
-                uVar9 = uVar9 & 0xfffffffe;
+            if ((((dispatchFlags & 3) != (uint)*(byte *)(glContext + 0x7580)) ||
+                ((dispatchFlags & 4) != (uint)*(byte *)(glContext + 0x7581))) ||
+               ((dispatchFlags & 8) != (uint)(*(char *)(glContext + 0x759d) == '\0'))) {
+              if ((dispatchFlags & 4) == 0) {
+                dispatchFlags = dispatchFlags & 0xfffffffe;
                 *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x10000000;
               }
-              _gleUpdateDispatchCodeChange(glContext,uVar9);
+              _gleUpdateDispatchCodeChange(glContext,dispatchFlags);
               if (*(char *)(glContext + 0x759d) == '\0') {
                 if (*(int *)(glContext + 0x7574) != 0) {
                   return;
@@ -411,6 +412,7 @@ void _glGetTexLevelParameteriv_Exec_body(glContext, target, level, pname, params
   uint *puVar10;
   undefined4 incomingR8;
   uint uVar11;
+  uint dispatchFlags;
   uint changeWord3;
   int *changeWordCursor;
   double extraout_f1;
@@ -550,16 +552,16 @@ LAB_00046418:
   }
   if (!noStateChangePending) {
     if (*(char *)(glContext + 0x85a8) == *(char *)(glContext + 0x85a6)) {
-      uVar11 = (**(code **)(glContext + 0x4788))
+      dispatchFlags = (**(code **)(glContext + 0x4788))
                          (*(undefined4 *)(glContext + 0x4688),glContext + 0x4698,changeWordCursor);
-      if ((((uVar11 & 3) != (uint)*(byte *)(glContext + 0x7580)) ||
-          ((uVar11 & 4) != (uint)*(byte *)(glContext + 0x7581))) ||
-         ((uVar11 & 8) != (uint)(*(char *)(glContext + 0x759d) == '\0'))) {
-        if ((uVar11 & 4) == 0) {
-          uVar11 = uVar11 & 0xfffffffe;
+      if ((((dispatchFlags & 3) != (uint)*(byte *)(glContext + 0x7580)) ||
+          ((dispatchFlags & 4) != (uint)*(byte *)(glContext + 0x7581))) ||
+         ((dispatchFlags & 8) != (uint)(*(char *)(glContext + 0x759d) == '\0'))) {
+        if ((dispatchFlags & 4) == 0) {
+          dispatchFlags = dispatchFlags & 0xfffffffe;
           *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x10000000;
         }
-        _gleUpdateDispatchCodeChange(glContext,uVar11);
+        _gleUpdateDispatchCodeChange(glContext,dispatchFlags);
       }
     }
     else {
@@ -5911,6 +5913,7 @@ void _gleDrawArraysOrElements_IMM_Exec(int glContext,uint mode,undefined4 first,
   int matrixChangeBits;
   int iVar9;
   uint uVar10;
+  uint dispatchFlags;
   uint changeWord3;
   uint glContextWord514c;
   uint loopIndex2;
@@ -6011,16 +6014,16 @@ LAB_0004da50:
   }
   if (!noStateChangePending) {
     if (*(char *)(glContext + 0x85a8) == *(char *)(glContext + 0x85a6)) {
-      uVar10 = (**(code **)(glContext + 0x4788))
+      dispatchFlags = (**(code **)(glContext + 0x4788))
                          (*(undefined4 *)(glContext + 0x4688),glContext + 0x4698,changeWordCursor);
-      if ((((uVar10 & 3) != (uint)*(byte *)(glContext + 0x7580)) ||
-          ((uVar10 & 4) != (uint)*(byte *)(glContext + 0x7581))) ||
-         ((uVar10 & 8) != (uint)(*(char *)(glContext + 0x759d) == '\0'))) {
-        if ((uVar10 & 4) == 0) {
-          uVar10 = uVar10 & 0xfffffffe;
+      if ((((dispatchFlags & 3) != (uint)*(byte *)(glContext + 0x7580)) ||
+          ((dispatchFlags & 4) != (uint)*(byte *)(glContext + 0x7581))) ||
+         ((dispatchFlags & 8) != (uint)(*(char *)(glContext + 0x759d) == '\0'))) {
+        if ((dispatchFlags & 4) == 0) {
+          dispatchFlags = dispatchFlags & 0xfffffffe;
           *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x10000000;
         }
-        _gleUpdateDispatchCodeChange(glContext,uVar10);
+        _gleUpdateDispatchCodeChange(glContext,dispatchFlags);
         if (*(char *)(glContext + 0x759d) == '\0') {
           if (*(int *)(glContext + 0x7574) != 0) {
             return;

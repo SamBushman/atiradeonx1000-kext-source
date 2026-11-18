@@ -2496,13 +2496,13 @@ int _glCullFace_Comp(glContext, mode)
   undefined4 glContext;
   undefined4 mode;
 {
-  undefined4 *puVar1;
+  undefined4 *listRecord;
   
-  puVar1 = (undefined4 *)((int (*)())_gleAddListItem)(glContext,PTR__glCullFace_ListExec_00110084,4);
-  if (puVar1 != (undefined4 *)0x0) {
-    *puVar1 = mode;
+  listRecord = (undefined4 *)((int (*)())_gleAddListItem)(glContext,PTR__glCullFace_ListExec_00110084,4);
+  if (listRecord != (undefined4 *)0x0) {
+    *listRecord = mode;
   }
-  return puVar1;
+  return listRecord;
 }
 
 /* _gleAddListItem @ 0x392ec (292 bytes) */
@@ -2600,13 +2600,13 @@ int _glEnable_Comp(glContext, cap)
   undefined4 glContext;
   undefined4 cap;
 {
-  undefined4 *puVar1;
+  undefined4 *listRecord;
   
-  puVar1 = (undefined4 *)((int (*)())_gleAddListItem)(glContext,PTR__glEnable_ListExec_001100b4,4);
-  if (puVar1 != (undefined4 *)0x0) {
-    *puVar1 = cap;
+  listRecord = (undefined4 *)((int (*)())_gleAddListItem)(glContext,PTR__glEnable_ListExec_001100b4,4);
+  if (listRecord != (undefined4 *)0x0) {
+    *listRecord = cap;
   }
-  return puVar1;
+  return listRecord;
 }
 
 /* _glLoadName_CompExec @ 0x39530 (56 bytes) */
@@ -2624,13 +2624,13 @@ int _glLoadName_Comp(glContext, name)
   undefined4 glContext;
   undefined4 name;
 {
-  undefined4 *puVar1;
+  undefined4 *listRecord;
   
-  puVar1 = (undefined4 *)((int (*)())_gleAddListItem)(glContext,PTR__glLoadName_ListExec_001102ac,4);
-  if (puVar1 != (undefined4 *)0x0) {
-    *puVar1 = name;
+  listRecord = (undefined4 *)((int (*)())_gleAddListItem)(glContext,PTR__glLoadName_ListExec_001102ac,4);
+  if (listRecord != (undefined4 *)0x0) {
+    *listRecord = name;
   }
-  return puVar1;
+  return listRecord;
 }
 
 /* _glLoadName_Exec @ 0x395b4 (80 bytes) */
@@ -2685,11 +2685,11 @@ int _glMaterialfv_Comp(glContext, face, pname, params)
   undefined4 *params;
 {
   undefined *puVar1;
-  undefined4 *puVar2;
+  undefined4 *listRecord;
   
-  puVar2 = (undefined4 *)((int (*)())_gleAddListItem)(glContext,PTR__glMaterialfv_ListExec_001101ec,0x18);
-  if (puVar2 == (undefined4 *)0x0) {
-    return puVar2;
+  listRecord = (undefined4 *)((int (*)())_gleAddListItem)(glContext,PTR__glMaterialfv_ListExec_001101ec,0x18);
+  if (listRecord == (undefined4 *)0x0) {
+    return listRecord;
   }
   if (pname != (undefined *)0x1600) {
     if (pname < (undefined *)0x1601) {
@@ -2705,34 +2705,34 @@ int _glMaterialfv_Comp(glContext, face, pname, params)
     }
     else if (pname != (undefined *)0x1602) {
       if (pname < (undefined *)0x1602) {
-        *puVar2 = face;
-        puVar2[1] = pname;
-        puVar2[2] = *params;
-        return puVar2;
+        *listRecord = face;
+        listRecord[1] = pname;
+        listRecord[2] = *params;
+        return listRecord;
       }
       if (pname == (undefined *)0x1603) {
-        *puVar2 = face;
-        puVar2[1] = 0x1603;
-        puVar2[2] = *params;
-        puVar2[3] = params[1];
-        puVar2[4] = params[2];
-        return puVar2;
+        *listRecord = face;
+        listRecord[1] = 0x1603;
+        listRecord[2] = *params;
+        listRecord[3] = params[1];
+        listRecord[4] = params[2];
+        return listRecord;
       }
 LAB_00039740:
       if (*(int *)(glContext + 0x7574) != 0) {
-        return puVar2;
+        return listRecord;
       }
       *(undefined4 *)(glContext + 0x7574) = 0x500;
-      return puVar2;
+      return listRecord;
     }
   }
-  *puVar2 = face;
-  puVar2[1] = pname;
-  puVar2[2] = *params;
-  puVar2[3] = params[1];
-  puVar2[4] = params[2];
-  puVar2[5] = params[3];
-  return puVar2;
+  *listRecord = face;
+  listRecord[1] = pname;
+  listRecord[2] = *params;
+  listRecord[3] = params[1];
+  listRecord[4] = params[2];
+  listRecord[5] = params[3];
+  return listRecord;
 }
 
 /* _glDisable_CompExec @ 0x39768 (56 bytes) */
@@ -2750,13 +2750,13 @@ int _glDisable_Comp(glContext, cap)
   undefined4 glContext;
   undefined4 cap;
 {
-  undefined4 *puVar1;
+  undefined4 *listRecord;
   
-  puVar1 = (undefined4 *)((int (*)())_gleAddListItem)(glContext,PTR__glDisable_ListExec_001100b0,4);
-  if (puVar1 != (undefined4 *)0x0) {
-    *puVar1 = cap;
+  listRecord = (undefined4 *)((int (*)())_gleAddListItem)(glContext,PTR__glDisable_ListExec_001100b0,4);
+  if (listRecord != (undefined4 *)0x0) {
+    *listRecord = cap;
   }
-  return puVar1;
+  return listRecord;
 }
 
 /* _glColor4f_CompExec @ 0x397ec (164 bytes) */
@@ -2774,14 +2774,14 @@ void _glColor4f_CompExec(int glContext,float red,float green,float blue,float al
 /* _glColor4f_Comp @ 0x39890 (92 bytes) */
 void _glColor4f_Comp(undefined4 glContext,float red,float green,float blue,float alpha)
 {
-  float *pfVar1;
+  float *listRecord;
   
-  pfVar1 = (float *)((int (*)())_gleAddListItem)(glContext,PTR__glColor4_ListExec_00110058,0x10);
-  if (pfVar1 != (float *)0x0) {
-    pfVar1[3] = (float)alpha;
-    *pfVar1 = (float)red;
-    pfVar1[1] = (float)green;
-    pfVar1[2] = (float)blue;
+  listRecord = (float *)((int (*)())_gleAddListItem)(glContext,PTR__glColor4_ListExec_00110058,0x10);
+  if (listRecord != (float *)0x0) {
+    listRecord[3] = (float)alpha;
+    *listRecord = (float)red;
+    listRecord[1] = (float)green;
+    listRecord[2] = (float)blue;
   }
   return;
 }
@@ -2826,13 +2826,13 @@ int _glBegin_Comp(glContext, mode)
   undefined4 glContext;
   undefined4 mode;
 {
-  undefined4 *puVar1;
+  undefined4 *listRecord;
   
-  puVar1 = (undefined4 *)((int (*)())_gleAddListItem)(glContext,PTR__glBegin_ListExec_0011001c,4);
-  if (puVar1 != (undefined4 *)0x0) {
-    *puVar1 = mode;
+  listRecord = (undefined4 *)((int (*)())_gleAddListItem)(glContext,PTR__glBegin_ListExec_0011001c,4);
+  if (listRecord != (undefined4 *)0x0) {
+    *listRecord = mode;
   }
-  return puVar1;
+  return listRecord;
 }
 
 /* _gleBeginLineStripRenderTCL @ 0x399bc (60 bytes) */
@@ -2862,15 +2862,15 @@ void _glVertex3d_CompExec(undefined4 glContext,double x,double y,double z)
 /* _glVertex3d_Comp @ 0x39a58 (128 bytes) */
 float * _glVertex3d_Comp(undefined4 glContext,double x,double y,double z)
 {
-  float *pfVar1;
+  float *listRecord;
   
-  pfVar1 = (float *)((int (*)())_gleAddListItem)(glContext,PTR__glVertex3_ListExec_00110414,0xc);
-  if (pfVar1 != (float *)0x0) {
-    *pfVar1 = (float)x;
-    pfVar1[1] = (float)y;
-    pfVar1[2] = (float)z;
+  listRecord = (float *)((int (*)())_gleAddListItem)(glContext,PTR__glVertex3_ListExec_00110414,0xc);
+  if (listRecord != (float *)0x0) {
+    *listRecord = (float)x;
+    listRecord[1] = (float)y;
+    listRecord[2] = (float)z;
   }
-  return pfVar1;
+  return listRecord;
 }
 
 /* _glVertex3d_Exec @ 0x39ad8 (52 bytes) */
@@ -3161,10 +3161,10 @@ void _glEnd_CompExec(glContext)
 int _glEnd_Comp(glContext)
   undefined4 glContext;
 {
-  undefined4 uVar1;
+  undefined4 listRecord;
   
-  uVar1 = ((int (*)())_gleAddListItem)(glContext,PTR__glEnd_ListExec_001100b8,0);
-  return uVar1;
+  listRecord = ((int (*)())_gleAddListItem)(glContext,PTR__glEnd_ListExec_001100b8,0);
+  return listRecord;
 }
 
 /* _glEnd_Exec @ 0x3a100 (128 bytes) */
@@ -3231,13 +3231,13 @@ void _glLineWidth_CompExec(undefined4 glContext,float width)
 /* _glLineWidth_Comp @ 0x3a288 (84 bytes) */
 float * _glLineWidth_Comp(undefined4 glContext,float width)
 {
-  float *pfVar1;
+  float *listRecord;
   
-  pfVar1 = (float *)((int (*)())_gleAddListItem)(glContext,PTR__glLineWidth_ListExec_00110158,4);
-  if (pfVar1 != (float *)0x0) {
-    *pfVar1 = (float)width;
+  listRecord = (float *)((int (*)())_gleAddListItem)(glContext,PTR__glLineWidth_ListExec_00110158,4);
+  if (listRecord != (float *)0x0) {
+    *listRecord = (float)width;
   }
-  return pfVar1;
+  return listRecord;
 }
 
 /* _glLineWidth_Exec @ 0x3a2dc (112 bytes) */
@@ -3290,13 +3290,13 @@ int _glClear_Comp(glContext, mask)
   undefined4 glContext;
   undefined4 mask;
 {
-  undefined4 *puVar1;
+  undefined4 *listRecord;
   
-  puVar1 = (undefined4 *)((int (*)())_gleAddListItem)(glContext,PTR__glClear_ListExec_00110038,4);
-  if (puVar1 != (undefined4 *)0x0) {
-    *puVar1 = mask;
+  listRecord = (undefined4 *)((int (*)())_gleAddListItem)(glContext,PTR__glClear_ListExec_00110038,4);
+  if (listRecord != (undefined4 *)0x0) {
+    *listRecord = mask;
   }
-  return puVar1;
+  return listRecord;
 }
 
 /* _gleSetEnable_STENCIL_TEST @ 0x3a3d0 (56 bytes) */
@@ -3337,15 +3337,15 @@ int _glStencilFunc_Comp(glContext, func, ref, mask)
   undefined4 ref;
   undefined4 mask;
 {
-  undefined4 *puVar1;
+  undefined4 *listRecord;
   
-  puVar1 = (undefined4 *)((int (*)())_gleAddListItem)(glContext,PTR__glStencilFunc_ListExec_0011031c,0xc);
-  if (puVar1 != (undefined4 *)0x0) {
-    puVar1[2] = mask;
-    *puVar1 = func;
-    puVar1[1] = ref;
+  listRecord = (undefined4 *)((int (*)())_gleAddListItem)(glContext,PTR__glStencilFunc_ListExec_0011031c,0xc);
+  if (listRecord != (undefined4 *)0x0) {
+    listRecord[2] = mask;
+    *listRecord = func;
+    listRecord[1] = ref;
   }
-  return puVar1;
+  return listRecord;
 }
 
 /* _glStencilFunc_Exec @ 0x3a4ac (164 bytes) */
@@ -3412,15 +3412,15 @@ int _glStencilOp_Comp(glContext, fail, zfail, zpass)
   undefined4 zfail;
   undefined4 zpass;
 {
-  undefined4 *puVar1;
+  undefined4 *listRecord;
   
-  puVar1 = (undefined4 *)((int (*)())_gleAddListItem)(glContext,PTR__glStencilOp_ListExec_00110318,0xc);
-  if (puVar1 != (undefined4 *)0x0) {
-    puVar1[2] = zpass;
-    *puVar1 = fail;
-    puVar1[1] = zfail;
+  listRecord = (undefined4 *)((int (*)())_gleAddListItem)(glContext,PTR__glStencilOp_ListExec_00110318,0xc);
+  if (listRecord != (undefined4 *)0x0) {
+    listRecord[2] = zpass;
+    *listRecord = fail;
+    listRecord[1] = zfail;
   }
-  return puVar1;
+  return listRecord;
 }
 
 /* _glStencilOp_Exec @ 0x3a5f4 (268 bytes) */
@@ -3497,16 +3497,16 @@ int _glColorMask_Comp(glContext, red, green, blue, alpha)
   undefined4 blue;
   undefined4 alpha;
 {
-  undefined1 *puVar1;
+  undefined1 *listRecord;
   
-  puVar1 = (undefined1 *)((int (*)())_gleAddListItem)(glContext,PTR__glColorMask_ListExec_001101dc,4);
-  if (puVar1 != (undefined1 *)0x0) {
-    puVar1[3] = (undefined1)alpha;
-    *puVar1 = (undefined1)red;
-    puVar1[1] = (undefined1)green;
-    puVar1[2] = (undefined1)blue;
+  listRecord = (undefined1 *)((int (*)())_gleAddListItem)(glContext,PTR__glColorMask_ListExec_001101dc,4);
+  if (listRecord != (undefined1 *)0x0) {
+    listRecord[3] = (undefined1)alpha;
+    *listRecord = (undefined1)red;
+    listRecord[1] = (undefined1)green;
+    listRecord[2] = (undefined1)blue;
   }
-  return puVar1;
+  return listRecord;
 }
 
 /* _glDepthMask_CompExec @ 0x3a7b4 (56 bytes) */
@@ -3524,13 +3524,13 @@ int _glDepthMask_Comp(glContext, flag)
   undefined4 glContext;
   undefined4 flag;
 {
-  undefined1 *puVar1;
+  undefined1 *listRecord;
   
-  puVar1 = (undefined1 *)((int (*)())_gleAddListItem)(glContext,PTR__glDepthMask_ListExec_001101d8,4);
-  if (puVar1 != (undefined1 *)0x0) {
-    *puVar1 = (undefined1)flag;
+  listRecord = (undefined1 *)((int (*)())_gleAddListItem)(glContext,PTR__glDepthMask_ListExec_001101d8,4);
+  if (listRecord != (undefined1 *)0x0) {
+    *listRecord = (undefined1)flag;
   }
-  return puVar1;
+  return listRecord;
 }
 
 /* _gleBeginQuadsRenderTCL @ 0x3a838 (52 bytes) */

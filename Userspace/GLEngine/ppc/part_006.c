@@ -4167,7 +4167,7 @@ void _glSwap_Exec(int glContext,double fparam_1,double forwardedFloatArg2,double
   undefined4 incomingR7;
   undefined4 incomingR8;
   int matrixChangeBits;
-  uint uVar7;
+  uint dispatchFlags;
   uint changeWord3;
   int *changeWordCursor;
   double extraout_f1;
@@ -4238,16 +4238,16 @@ LAB_0004348c:
   }
   if (!noStateChangePending) {
     if (*(char *)(glContext + 0x85a8) == *(char *)(glContext + 0x85a6)) {
-      uVar7 = (**(code **)(glContext + 0x4788))
+      dispatchFlags = (**(code **)(glContext + 0x4788))
                         (*(undefined4 *)(glContext + 0x4688),glContext + 0x4698,changeWordCursor);
-      if ((((uVar7 & 3) != (uint)*(byte *)(glContext + 0x7580)) ||
-          ((uVar7 & 4) != (uint)*(byte *)(glContext + 0x7581))) ||
-         ((uVar7 & 8) != (uint)(*(char *)(glContext + 0x759d) == '\0'))) {
-        if ((uVar7 & 4) == 0) {
-          uVar7 = uVar7 & 0xfffffffe;
+      if ((((dispatchFlags & 3) != (uint)*(byte *)(glContext + 0x7580)) ||
+          ((dispatchFlags & 4) != (uint)*(byte *)(glContext + 0x7581))) ||
+         ((dispatchFlags & 8) != (uint)(*(char *)(glContext + 0x759d) == '\0'))) {
+        if ((dispatchFlags & 4) == 0) {
+          dispatchFlags = dispatchFlags & 0xfffffffe;
           *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x10000000;
         }
-        _gleUpdateDispatchCodeChange(glContext,uVar7);
+        _gleUpdateDispatchCodeChange(glContext,dispatchFlags);
         if (*(char *)(glContext + 0x759d) == '\0') {
           if (*(int *)(glContext + 0x7574) != 0) {
             return;
@@ -4820,6 +4820,7 @@ int _gleSetupAndDrawArraysOrElementsOutOfLine_ListExec(glContext, recordedArgs)
   int iVar9;
   int matrixChangeBits;
   uint uVar10;
+  uint dispatchFlags;
   uint changeWord3;
   uint loopIndex3;
   uint uVar12;
@@ -4938,17 +4939,17 @@ LAB_000444d4:
       } while (remaining != 0);
       goto LAB_000444f0;
     }
-    uVar10 = (**(code **)(glContext + 0x4788))
+    dispatchFlags = (**(code **)(glContext + 0x4788))
                        (*(undefined4 *)(glContext + 0x4688),glContext + 0x4698,pendingChangeWords);
-    if ((((uVar10 & 3) == (uint)*(byte *)(glContext + 0x7580)) &&
-        ((uVar10 & 4) == (uint)*(byte *)(glContext + 0x7581))) &&
-       (fparam_1 = extraout_f1_01, (uVar10 & 8) == (uint)(*(char *)(glContext + 0x759d) == '\0')))
+    if ((((dispatchFlags & 3) == (uint)*(byte *)(glContext + 0x7580)) &&
+        ((dispatchFlags & 4) == (uint)*(byte *)(glContext + 0x7581))) &&
+       (fparam_1 = extraout_f1_01, (dispatchFlags & 8) == (uint)(*(char *)(glContext + 0x759d) == '\0')))
     goto LAB_000444d4;
-    if ((uVar10 & 4) == 0) {
-      uVar10 = uVar10 & 0xfffffffe;
+    if ((dispatchFlags & 4) == 0) {
+      dispatchFlags = dispatchFlags & 0xfffffffe;
       *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x10000000;
     }
-    fparam_1 = (double)_gleUpdateDispatchCodeChange(glContext,uVar10);
+    fparam_1 = (double)_gleUpdateDispatchCodeChange(glContext,dispatchFlags);
     if (*(char *)(glContext + 0x759d) != '\0') goto LAB_000444d4;
 LAB_0004471c:
     if (*(int *)(glContext + 0x7574) != 0) {
@@ -5031,16 +5032,16 @@ LAB_00044630:
     }
     if (!noStateChangePending) {
       if (*(char *)(glContext + 0x85a8) == *(char *)(glContext + 0x85a6)) {
-        uVar10 = (**(code **)(glContext + 0x4788))
+        dispatchFlags = (**(code **)(glContext + 0x4788))
                            (*(undefined4 *)(glContext + 0x4688),glContext + 0x4698,changeWordCursor);
-        if ((((uVar10 & 3) != (uint)*(byte *)(glContext + 0x7580)) ||
-            ((uVar10 & 4) != (uint)*(byte *)(glContext + 0x7581))) ||
-           ((uVar10 & 8) != (uint)(*(char *)(glContext + 0x759d) == '\0'))) {
-          if ((uVar10 & 4) == 0) {
-            uVar10 = uVar10 & 0xfffffffe;
+        if ((((dispatchFlags & 3) != (uint)*(byte *)(glContext + 0x7580)) ||
+            ((dispatchFlags & 4) != (uint)*(byte *)(glContext + 0x7581))) ||
+           ((dispatchFlags & 8) != (uint)(*(char *)(glContext + 0x759d) == '\0'))) {
+          if ((dispatchFlags & 4) == 0) {
+            dispatchFlags = dispatchFlags & 0xfffffffe;
             *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x10000000;
           }
-          _gleUpdateDispatchCodeChange(glContext,uVar10);
+          _gleUpdateDispatchCodeChange(glContext,dispatchFlags);
           if (*(char *)(glContext + 0x759d) == '\0') goto LAB_0004471c;
         }
       }
@@ -5703,6 +5704,7 @@ int _gleDrawArraysOrElementsOutOfLine_ListExec(glContext, recordedArgs)
   int iVar8;
   int matrixChangeBits;
   uint uVar9;
+  uint dispatchFlags;
   uint changeWord3;
   uint loopIndex3;
   undefined4 uVar11;
@@ -5812,17 +5814,17 @@ LAB_00045600:
       } while (remaining != 0);
       goto LAB_0004561c;
     }
-    uVar9 = (**(code **)(glContext + 0x4788))
+    dispatchFlags = (**(code **)(glContext + 0x4788))
                       (*(undefined4 *)(glContext + 0x4688),glContext + 0x4698,pendingChangeWords);
-    if ((((uVar9 & 3) == (uint)*(byte *)(glContext + 0x7580)) &&
-        ((uVar9 & 4) == (uint)*(byte *)(glContext + 0x7581))) &&
-       (fparam_1 = extraout_f1_01, (uVar9 & 8) == (uint)(*(char *)(glContext + 0x759d) == '\0')))
+    if ((((dispatchFlags & 3) == (uint)*(byte *)(glContext + 0x7580)) &&
+        ((dispatchFlags & 4) == (uint)*(byte *)(glContext + 0x7581))) &&
+       (fparam_1 = extraout_f1_01, (dispatchFlags & 8) == (uint)(*(char *)(glContext + 0x759d) == '\0')))
     goto LAB_00045600;
-    if ((uVar9 & 4) == 0) {
-      uVar9 = uVar9 & 0xfffffffe;
+    if ((dispatchFlags & 4) == 0) {
+      dispatchFlags = dispatchFlags & 0xfffffffe;
       *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x10000000;
     }
-    fparam_1 = (double)_gleUpdateDispatchCodeChange(glContext,uVar9);
+    fparam_1 = (double)_gleUpdateDispatchCodeChange(glContext,dispatchFlags);
     if (*(char *)(glContext + 0x759d) != '\0') goto LAB_00045600;
 LAB_00045848:
     if (*(int *)(glContext + 0x7574) != 0) {
@@ -5905,16 +5907,16 @@ LAB_0004575c:
     }
     if (!noStateChangePending) {
       if (*(char *)(glContext + 0x85a8) == *(char *)(glContext + 0x85a6)) {
-        uVar9 = (**(code **)(glContext + 0x4788))
+        dispatchFlags = (**(code **)(glContext + 0x4788))
                           (*(undefined4 *)(glContext + 0x4688),glContext + 0x4698,changeWordCursor);
-        if ((((uVar9 & 3) != (uint)*(byte *)(glContext + 0x7580)) ||
-            ((uVar9 & 4) != (uint)*(byte *)(glContext + 0x7581))) ||
-           ((uVar9 & 8) != (uint)(*(char *)(glContext + 0x759d) == '\0'))) {
-          if ((uVar9 & 4) == 0) {
-            uVar9 = uVar9 & 0xfffffffe;
+        if ((((dispatchFlags & 3) != (uint)*(byte *)(glContext + 0x7580)) ||
+            ((dispatchFlags & 4) != (uint)*(byte *)(glContext + 0x7581))) ||
+           ((dispatchFlags & 8) != (uint)(*(char *)(glContext + 0x759d) == '\0'))) {
+          if ((dispatchFlags & 4) == 0) {
+            dispatchFlags = dispatchFlags & 0xfffffffe;
             *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x10000000;
           }
-          _gleUpdateDispatchCodeChange(glContext,uVar9);
+          _gleUpdateDispatchCodeChange(glContext,dispatchFlags);
           if (*(char *)(glContext + 0x759d) == '\0') goto LAB_00045848;
         }
       }
