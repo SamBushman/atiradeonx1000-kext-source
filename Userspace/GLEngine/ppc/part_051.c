@@ -415,14 +415,14 @@ void _gleBeginPointsRenderTCLRDirty(glContext)
 void _gleBeginPointsSelectFeedback(glContext)
   int glContext;
 {
-  undefined *puVar1;
+  undefined *pointsFunc;
   
   *(undefined **)(glContext + 0x4a0c) = PTR__gleFlushAtomicFunc_00112224;
-  puVar1 = PTR__gleFeedbackPointsFunc_00112234;
+  pointsFunc = PTR__gleFeedbackPointsFunc_00112234;
   if (*(int *)(glContext + 0x4e1c) == 0x1c02) {
-    puVar1 = PTR__gleSelectPointsFunc_00112238;
+    pointsFunc = PTR__gleSelectPointsFunc_00112238;
   }
-  *(undefined **)(glContext + 0x4a08) = puVar1;
+  *(undefined **)(glContext + 0x4a08) = pointsFunc;
   *(undefined4 *)(glContext + 0x4858) = *(undefined4 *)(glContext + 0x4854);
   return;
 }
@@ -838,14 +838,14 @@ void _gleBeginTrianglesRenderTCLRDirty(glContext)
 void _gleBeginTrianglesSelectFeedback(glContext)
   int glContext;
 {
-  undefined *puVar1;
+  undefined *trianglesFunc;
   
   *(undefined **)(glContext + 0x4a0c) = PTR__gleFlushAtomicFunc_00112224;
-  puVar1 = PTR__gleFeedbackTrianglesFunc_001122cc;
+  trianglesFunc = PTR__gleFeedbackTrianglesFunc_001122cc;
   if (*(int *)(glContext + 0x4e1c) == 0x1c02) {
-    puVar1 = PTR__gleSelectTrianglesFunc_001122d0;
+    trianglesFunc = PTR__gleSelectTrianglesFunc_001122d0;
   }
-  *(undefined **)(glContext + 0x4a08) = puVar1;
+  *(undefined **)(glContext + 0x4a08) = trianglesFunc;
   *(undefined4 *)(glContext + 0x4858) = *(undefined4 *)(glContext + 0x4854);
   return;
 }

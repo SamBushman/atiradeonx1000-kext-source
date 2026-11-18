@@ -1,0 +1,23 @@
+local	_glColor4iv_Comp	fVar2	channelScale	INFERRED	holds FLOAT_00108e68 = 2/4294967295, the multiplier applied to the converted integer components of the recorded colour
+local	_glColor4iv_Comp	fVar3	channelBias	INFERRED	holds FLOAT_00108e6c = 1/4294967295, the offset added after scaling (mapping 2c+1 over the maximum channel value)
+local	_glSecondaryColor3i_Comp	fVar2	channelScale	INFERRED	holds FLOAT_00108e68 = 2/4294967295, the multiplier applied to the converted integer components of the recorded secondary colour
+local	_glSecondaryColor3i_Comp	fVar3	channelBias	INFERRED	holds FLOAT_00108e6c = 1/4294967295, the offset added after scaling (mapping 2c+1 over the maximum channel value)
+local	_glColor3i_Comp	fVar2	channelScale	INFERRED	holds FLOAT_00108e68 = 2/4294967295, the multiplier applied to the converted integer components of the recorded colour
+local	_glColor3i_Comp	fVar3	channelBias	INFERRED	holds FLOAT_00108e6c = 1/4294967295, the offset added after scaling (mapping 2c+1 over the maximum channel value)
+local	_glSecondaryColor3sv_Comp	fVar2	channelScale	INFERRED	holds FLOAT_00108e70 = 2/65535, the multiplier applied to the converted integer components of the recorded secondary colour
+local	_glSecondaryColor3sv_Comp	fVar3	channelBias	INFERRED	holds FLOAT_00108e74 = 1/65535, the offset added after scaling (mapping 2c+1 over the maximum channel value)
+local	_glColor3sv_Comp	fVar2	channelScale	INFERRED	holds FLOAT_00108e70 = 2/65535, the multiplier applied to the converted integer components of the recorded colour
+local	_glColor3sv_Comp	fVar3	channelBias	INFERRED	holds FLOAT_00108e74 = 1/65535, the offset added after scaling (mapping 2c+1 over the maximum channel value)
+local	_glColor4b_Comp	fVar2	channelScale	INFERRED	holds FLOAT_00108e60 = 2/255, the multiplier applied to the converted integer components of the recorded colour
+local	_glColor4b_Comp	fVar3	channelBias	INFERRED	holds FLOAT_00108e64 = 1/255, the offset added after scaling (mapping 2c+1 over the maximum channel value)
+local	_glSecondaryColor3us_Comp	fVar1	channelScale	INFERRED	holds FLOAT_00108e74 = 1/65535, the multiplier applied to the converted integer components of the recorded secondary colour
+local	_glColor3usv_Comp	fVar1	channelScale	INFERRED	holds FLOAT_00108e74 = 1/65535, the multiplier applied to the converted integer components of the recorded colour
+local	_glColor4us_Comp	fVar1	channelScale	INFERRED	holds FLOAT_00108e74 = 1/65535, the multiplier applied to the converted integer components of the recorded colour
+local	_glColor4ui_Comp	dVar1	intToDoubleBias	CONFIRMED	holds DOUBLE_00108d70 = 4503599627370496.0 (the 0x43300000xxxxxxxx magic) subtracted after CONCAT44(0x43300000,x) to convert an unsigned integer to double
+local	_glColor4ui_Comp	fVar2	channelScale	INFERRED	holds FLOAT_00108e6c = 1/4294967295, the multiplier applied to the converted unsigned integer components of the recorded colour
+local	_glNormal3i_Comp	dVar2	channelScale	INFERRED	holds DOUBLE_00108d88 = 4.65661287e-10 (1/2147483647), the multiplier applied to the converted integer normal components
+local	_glDepthRange_Exec	bVar1	dirtyBitIndex	CONFIRMED	bit number read from the record at ctx+0x5420 / ctx+0x5424 (+0x327) and set in the dirty bit arrays at ctx+0x324 / ctx+0x348
+use	_glDepthRange_Exec	iVar3	dirtyWordAddress324	CONFIRMED	ctx + ((dirtyBitIndex >> 3) & 0x1c): the dirty array word at ctx+0x324 that receives 1 << (dirtyBitIndex & 0x1f)	^\s*iVar3\ =\ \(bVar1\ >>\ 3\ \&\ 0x1c\)\ \+\ param_1;$	+1
+use	_glDepthRange_Exec	iVar3	dirtyWordAddress324	CONFIRMED	ctx + ((dirtyBitIndex >> 3) & 0x1c): the dirty array word at ctx+0x324 that receives 1 << (dirtyBitIndex & 0x1f)	^\s*\*\(uint\ \*\)\(iVar3\ \+\ 0x324\)\ =\ \*\(uint\ \*\)\(iVar3\ \+\ 0x324\)\ \|\ 1\ <<\ \(bVar1\ \&\ 0x1f\);$	+1
+use	_glDepthRange_Exec	iVar3	dirtyWordAddress348	CONFIRMED	ctx + ((dirtyBitIndex >> 3) & 0x1c): the dirty array word at ctx+0x348 that receives 1 << (dirtyBitIndex & 0x1f)	^\s*iVar3\ =\ \(bVar1\ >>\ 3\ \&\ 0x1c\)\ \+\ param_1;$@2	+2
+local	_glDepthRange_Exec	uVar2	clampedZNearHighWord	CONFIRMED	high word of the clamped zNear when it was clamped: 0 for 0.0 or 0x3ff00000 for 1.0

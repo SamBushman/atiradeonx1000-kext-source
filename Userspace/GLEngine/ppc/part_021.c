@@ -184,57 +184,61 @@ int _glIsProgramARB_Exec(glContext, program)
 /* _glProgramEnvParameter4dARB_Exec @ 0x798a4 (324 bytes) */
 void _glProgramEnvParameter4dARB_Exec(int glContext,uint target,uint index,double x,double y,double z,double w,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  byte bVar1;
-  uint uVar2;
+  byte dirtyBitNumber;
+  uint changeWord3;
+  uint expectedTarget;
   undefined4 glErrorCode;
-  int iVar4;
-  int iVar5;
-  int iVar6;
+  int glContextPtr5424;
+  int envParameterArray;
+  int dirtyWordAddress348;
+  int programTypeIndex;
+  int envParameter;
+  int dirtyWordAddress324;
   
   if (target == 0x8620) {
-    iVar5 = 0;
+    programTypeIndex = 0;
     if (index < 0x100) {
-      uVar2 = *(uint *)(glContext + 0x31c) | 0x800000;
+      changeWord3 = *(uint *)(glContext + 0x31c) | 0x800000;
 LAB_00079938:
-      *(uint *)(glContext + 0x31c) = uVar2;
+      *(uint *)(glContext + 0x31c) = changeWord3;
       if (*(int *)(glContext + 0x5434) == 0) {
-        bVar1 = *(byte *)(index + *(int *)(glContext + 0x5420) + 0x158);
+        dirtyBitNumber = *(byte *)(index + *(int *)(glContext + 0x5420) + 0x158);
       }
       else {
-        bVar1 = *(byte *)(index + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x18c);
+        dirtyBitNumber = *(byte *)(index + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x18c);
       }
-      iVar6 = (bVar1 >> 3 & 0x1c) + glContext;
-      iVar4 = *(int *)(glContext + 0x5424);
-      *(uint *)(iVar6 + 0x324) = *(uint *)(iVar6 + 0x324) | 1 << (bVar1 & 0x1f);
-      bVar1 = *(byte *)(index + iVar4 + 0x158);
-      iVar4 = (bVar1 >> 3 & 0x1c) + glContext;
-      *(uint *)(iVar4 + 0x348) = *(uint *)(iVar4 + 0x348) | 1 << (bVar1 & 0x1f);
-      iVar4 = *(int *)(iVar5 * 8 + glContext + 0x4668);
-      iVar5 = iVar4 + index * 0x10;
-      *(float *)(iVar4 + index * 0x10) = (float)x;
-      *(float *)(iVar5 + 0xc) = (float)w;
-      *(float *)(iVar5 + 4) = (float)y;
-      *(float *)(iVar5 + 8) = (float)z;
+      dirtyWordAddress324 = (dirtyBitNumber >> 3 & 0x1c) + glContext;
+      glContextPtr5424 = *(int *)(glContext + 0x5424);
+      *(uint *)(dirtyWordAddress324 + 0x324) = *(uint *)(dirtyWordAddress324 + 0x324) | 1 << (dirtyBitNumber & 0x1f);
+      dirtyBitNumber = *(byte *)(index + glContextPtr5424 + 0x158);
+      dirtyWordAddress348 = (dirtyBitNumber >> 3 & 0x1c) + glContext;
+      *(uint *)(dirtyWordAddress348 + 0x348) = *(uint *)(dirtyWordAddress348 + 0x348) | 1 << (dirtyBitNumber & 0x1f);
+      envParameterArray = *(int *)(programTypeIndex * 8 + glContext + 0x4668);
+      envParameter = envParameterArray + index * 0x10;
+      *(float *)(envParameterArray + index * 0x10) = (float)x;
+      *(float *)(envParameter + 0xc) = (float)w;
+      *(float *)(envParameter + 4) = (float)y;
+      *(float *)(envParameter + 8) = (float)z;
       return;
     }
   }
   else {
     if (target < 0x8621) {
-      uVar2 = 0x8200;
+      expectedTarget = 0x8200;
     }
     else {
-      uVar2 = 0x8804;
+      expectedTarget = 0x8804;
     }
-    if (target != uVar2) {
+    if (target != expectedTarget) {
       if (*(int *)(glContext + 0x7574) != 0) {
         return;
       }
       glErrorCode = 0x500;
       goto LAB_00079930;
     }
-    iVar5 = 1;
+    programTypeIndex = 1;
     if (index < 0x80) {
-      uVar2 = *(uint *)(glContext + 0x31c) | 0x2000000;
+      changeWord3 = *(uint *)(glContext + 0x31c) | 0x2000000;
       goto LAB_00079938;
     }
   }
@@ -818,23 +822,23 @@ int _glProgramStringARB_Comp(glContext, target, format, len, string)
   int len;
   undefined4 string;
 {
-  uint uVar1;
+  uint paddedLength;
   int remaining;
   undefined1 *dstCursor;
   undefined4 *listRecord;
-  undefined4 uVar5;
+  undefined4 copyResult;
   
-  uVar1 = len + 3U & 0xfffffffc;
+  paddedLength = len + 3U & 0xfffffffc;
   listRecord = (undefined4 *)
-           _gleAddListItem(glContext,PTR__glProgramStringARB_ListExec_00110234,uVar1 + 0xc);
-  uVar5 = 0;
+           _gleAddListItem(glContext,PTR__glProgramStringARB_ListExec_00110234,paddedLength + 0xc);
+  copyResult = 0;
   if (listRecord != (undefined4 *)0x0) {
     *listRecord = target;
     listRecord[1] = format;
-    listRecord[2] = uVar1;
-    uVar5 = _memcpy(listRecord + 3,string,len);
-    if (len <= (int)uVar1) {
-      remaining = (uVar1 + 1) - len;
+    listRecord[2] = paddedLength;
+    copyResult = _memcpy(listRecord + 3,string,len);
+    if (len <= (int)paddedLength) {
+      remaining = (paddedLength + 1) - len;
       dstCursor = (undefined1 *)((int)listRecord + len + 0xc);
       do {
         *dstCursor = 0x20;
@@ -843,7 +847,7 @@ int _glProgramStringARB_Comp(glContext, target, format, len, string)
       } while (remaining != 0);
     }
   }
-  return uVar5;
+  return copyResult;
 }
 
 /* _glProgramStringARB_CompExec @ 0x7a730 (80 bytes) */
@@ -867,25 +871,25 @@ void _glGetProgramStringARB_Exec(glContext, target, pname, string)
   int string;
 {
   undefined4 glErrorCode;
-  uint uVar2;
-  int iVar3;
+  uint acceptedFragmentTarget;
+  int programSlot;
   int remaining;
-  int iVar4;
-  int iVar5;
+  int programThenSourceText;
+  int charIndex;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
     if (pname == 0x8628) {
       if (target == 0x8620) {
-        iVar3 = 0;
+        programSlot = 0;
 LAB_0007a80c:
-        iVar5 = 0;
-        iVar4 = *(int *)(iVar3 * 4 + glContext + 0x5420);
-        remaining = *(int *)(iVar4 + 0x18);
-        iVar4 = *(int *)(iVar4 + 0x14);
+        charIndex = 0;
+        programThenSourceText = *(int *)(programSlot * 4 + glContext + 0x5420);
+        remaining = *(int *)(programThenSourceText + 0x18);
+        programThenSourceText = *(int *)(programThenSourceText + 0x14);
         if (remaining != 0) {
           do {
-            *(undefined1 *)(string + iVar5) = *(undefined1 *)(iVar4 + iVar5);
-            iVar5 = iVar5 + 1;
+            *(undefined1 *)(string + charIndex) = *(undefined1 *)(programThenSourceText + charIndex);
+            charIndex = charIndex + 1;
             remaining = remaining + -1;
           } while (remaining != 0);
           return;
@@ -893,13 +897,13 @@ LAB_0007a80c:
         return;
       }
       if (target < 0x8621) {
-        uVar2 = 0x8200;
+        acceptedFragmentTarget = 0x8200;
       }
       else {
-        uVar2 = 0x8804;
+        acceptedFragmentTarget = 0x8804;
       }
-      if (target == uVar2) {
-        iVar3 = 1;
+      if (target == acceptedFragmentTarget) {
+        programSlot = 1;
         goto LAB_0007a80c;
       }
     }
@@ -985,41 +989,41 @@ void _glGetProgramEnvParameterfvARB_Exec(glContext, target, index, params)
   uint index;
   undefined4 *params;
 {
-  bool bVar1;
+  bool indexOutOfRange;
   undefined4 glErrorCode;
-  uint uVar3;
-  int iVar4;
-  int iVar5;
+  uint acceptedFragmentTarget;
+  int targetSlotThenEnvParamArray;
+  int envParamAddress;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
     if (target == 0x8620) {
-      bVar1 = 0xff < index;
-      iVar4 = 0;
+      indexOutOfRange = 0xff < index;
+      targetSlotThenEnvParamArray = 0;
     }
     else {
       if (target < 0x8621) {
-        uVar3 = 0x8200;
+        acceptedFragmentTarget = 0x8200;
       }
       else {
-        uVar3 = 0x8804;
+        acceptedFragmentTarget = 0x8804;
       }
-      if (target != uVar3) {
+      if (target != acceptedFragmentTarget) {
         if (*(int *)(glContext + 0x7574) != 0) {
           return;
         }
         glErrorCode = 0x500;
         goto LAB_0007a98c;
       }
-      bVar1 = 0x7f < index;
-      iVar4 = 1;
+      indexOutOfRange = 0x7f < index;
+      targetSlotThenEnvParamArray = 1;
     }
-    if (!bVar1) {
-      iVar4 = *(int *)(iVar4 * 8 + glContext + 0x4668);
-      iVar5 = iVar4 + index * 0x10;
-      *params = *(undefined4 *)(iVar4 + index * 0x10);
-      params[1] = *(undefined4 *)(iVar5 + 4);
-      params[2] = *(undefined4 *)(iVar5 + 8);
-      params[3] = *(undefined4 *)(iVar5 + 0xc);
+    if (!indexOutOfRange) {
+      targetSlotThenEnvParamArray = *(int *)(targetSlotThenEnvParamArray * 8 + glContext + 0x4668);
+      envParamAddress = targetSlotThenEnvParamArray + index * 0x10;
+      *params = *(undefined4 *)(targetSlotThenEnvParamArray + index * 0x10);
+      params[1] = *(undefined4 *)(envParamAddress + 4);
+      params[2] = *(undefined4 *)(envParamAddress + 8);
+      params[3] = *(undefined4 *)(envParamAddress + 0xc);
       return;
     }
     if (*(int *)(glContext + 0x7574) != 0) {
@@ -1174,43 +1178,44 @@ int _glPixelMapfv_Comp(glContext, map, mapsize, values)
   int mapsize;
   uint values;
 {
-  undefined4 *puVar1;
-  int iVar2;
-  int iVar3;
+  undefined4 *listRecordThenValuesDestination;
+  int valuesByteCount;
+  int pixelUnpackBuffer;
+  int valueIndex;
   
-  iVar3 = *(int *)(glContext + 0x4a6c);
-  if (iVar3 == 0) {
-    iVar2 = mapsize << 2;
+  pixelUnpackBuffer = *(int *)(glContext + 0x4a6c);
+  if (pixelUnpackBuffer == 0) {
+    valuesByteCount = mapsize << 2;
   }
   else {
-    iVar2 = mapsize * 4;
-    if ((*(int *)(iVar3 + 0x38) < (int)(iVar2 + values)) || ((values & 3) != 0)) {
+    valuesByteCount = mapsize * 4;
+    if ((*(int *)(pixelUnpackBuffer + 0x38) < (int)(valuesByteCount + values)) || ((values & 3) != 0)) {
       if (*(int *)(glContext + 0x7574) != 0) {
         return (undefined4 *)glContext;
       }
       *(undefined4 *)(glContext + 0x7574) = 0x502;
       return (undefined4 *)glContext;
     }
-    if (*(int *)(iVar3 + 0x40) != 0) {
-      _gleSynchronizePluginBuffer(glContext,iVar3 + 0x10);
+    if (*(int *)(pixelUnpackBuffer + 0x40) != 0) {
+      _gleSynchronizePluginBuffer(glContext,pixelUnpackBuffer + 0x10);
     }
-    values = values + *(int *)(iVar3 + 0x30);
+    values = values + *(int *)(pixelUnpackBuffer + 0x30);
   }
-  puVar1 = (undefined4 *)_gleAddListItem(glContext,PTR__glPixelMapfv_ListExec_0011024c,iVar2 + 8);
-  if (puVar1 != (undefined4 *)0x0) {
-    iVar3 = 0;
-    *puVar1 = map;
-    puVar1[1] = mapsize;
-    puVar1 = puVar1 + 2;
+  listRecordThenValuesDestination = (undefined4 *)_gleAddListItem(glContext,PTR__glPixelMapfv_ListExec_0011024c,valuesByteCount + 8);
+  if (listRecordThenValuesDestination != (undefined4 *)0x0) {
+    valueIndex = 0;
+    *listRecordThenValuesDestination = map;
+    listRecordThenValuesDestination[1] = mapsize;
+    listRecordThenValuesDestination = listRecordThenValuesDestination + 2;
     if (0 < mapsize) {
       do {
-        puVar1[iVar3] = *(undefined4 *)(values + iVar3 * 4);
+        listRecordThenValuesDestination[valueIndex] = *(undefined4 *)(values + valueIndex * 4);
         mapsize = mapsize + -1;
-        iVar3 = iVar3 + 1;
+        valueIndex = valueIndex + 1;
       } while (mapsize != 0);
     }
   }
-  return puVar1;
+  return listRecordThenValuesDestination;
 }
 
 /* _glPixelMapfv_Exec @ 0x7accc (1760 bytes) */
@@ -1947,42 +1952,43 @@ int _glPixelMapusv_Comp(glContext, map, mapsize, values)
   uint mapsize;
   uint values;
 {
-  int iVar1;
-  undefined4 *puVar2;
-  int iVar3;
+  int byteOffset;
+  undefined4 *listRecordThenValuesDestination;
+  int pixelUnpackBuffer;
+  int valueIndex;
   
-  iVar3 = *(int *)(glContext + 0x4a6c);
-  if (iVar3 != 0) {
-    if ((*(int *)(iVar3 + 0x38) < (int)(mapsize * 2 + values)) || ((values & 1) != 0)) {
+  pixelUnpackBuffer = *(int *)(glContext + 0x4a6c);
+  if (pixelUnpackBuffer != 0) {
+    if ((*(int *)(pixelUnpackBuffer + 0x38) < (int)(mapsize * 2 + values)) || ((values & 1) != 0)) {
       if (*(int *)(glContext + 0x7574) != 0) {
         return (undefined4 *)glContext;
       }
       *(undefined4 *)(glContext + 0x7574) = 0x502;
       return (undefined4 *)glContext;
     }
-    if (*(int *)(iVar3 + 0x40) != 0) {
-      _gleSynchronizePluginBuffer(glContext,iVar3 + 0x10);
+    if (*(int *)(pixelUnpackBuffer + 0x40) != 0) {
+      _gleSynchronizePluginBuffer(glContext,pixelUnpackBuffer + 0x10);
     }
-    values = values + *(int *)(iVar3 + 0x30);
+    values = values + *(int *)(pixelUnpackBuffer + 0x30);
   }
-  puVar2 = (undefined4 *)
+  listRecordThenValuesDestination = (undefined4 *)
            _gleAddListItem(glContext,PTR__glPixelMapusv_ListExec_00110244,
                            (mapsize + (mapsize & 1)) * 2 + 8);
-  if (puVar2 != (undefined4 *)0x0) {
-    iVar3 = 0;
-    *puVar2 = map;
-    puVar2[1] = mapsize;
-    puVar2 = puVar2 + 2;
+  if (listRecordThenValuesDestination != (undefined4 *)0x0) {
+    valueIndex = 0;
+    *listRecordThenValuesDestination = map;
+    listRecordThenValuesDestination[1] = mapsize;
+    listRecordThenValuesDestination = listRecordThenValuesDestination + 2;
     if (0 < (int)mapsize) {
       do {
-        iVar1 = iVar3 * 2;
-        iVar3 = iVar3 + 1;
-        *(undefined2 *)((int)puVar2 + iVar1) = *(undefined2 *)(values + iVar1);
+        byteOffset = valueIndex * 2;
+        valueIndex = valueIndex + 1;
+        *(undefined2 *)((int)listRecordThenValuesDestination + byteOffset) = *(undefined2 *)(values + byteOffset);
         mapsize = mapsize - 1;
       } while (mapsize != 0);
     }
   }
-  return puVar2;
+  return listRecordThenValuesDestination;
 }
 
 /* _glPixelMapusv_Exec @ 0x7bd60 (1688 bytes) */

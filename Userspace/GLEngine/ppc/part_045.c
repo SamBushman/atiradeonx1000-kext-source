@@ -3081,19 +3081,19 @@ switchD_000db0a0_default:
 }
 
 /* _gleExecuteVertexArray @ 0xdc08c (20 bytes) */
-void _gleExecuteVertexArray(glContext, param_2, param_3, param_4, param_5, param_6)
+void _gleExecuteVertexArray(glContext, mode, first, count, indexType, indices)
   int glContext;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
+  undefined4 mode;
+  undefined4 first;
+  undefined4 count;
+  undefined4 indexType;
+  undefined4 indices;
 {
   if (*(char *)(glContext + 0x7580) != '\0') {
-    ((void (*)())_gleExecuteTCLVertexArray)(glContext,param_2,param_3,param_4,param_5,param_6);
+    ((void (*)())_gleExecuteTCLVertexArray)(glContext,mode,first,count,indexType,indices);
     return;
   }
-  ((int (*)())_gleExecuteClippedVertexArray)(glContext,param_2,param_3,param_4,param_5,param_6);
+  ((int (*)())_gleExecuteClippedVertexArray)(glContext,mode,first,count,indexType,indices);
   return;
 }
 
@@ -3277,32 +3277,34 @@ void _gleLightMaterialRGBAChange_B_D(glContext, rgba)
 }
 
 /* _gleLightMaterialRGBAChange_B_S @ 0xdc4ec (184 bytes) */
-void _gleLightMaterialRGBAChange_B_S(glContext, param_2)
+void _gleLightMaterialRGBAChange_B_S(glContext, rgba)
   int glContext;
-  undefined8 *param_2;
+  undefined8 *rgba;
 {
-  byte bVar1;
-  int iVar2;
-  int iVar3;
-  undefined8 uVar4;
+  byte dirtyBitIndex;
+  int material;
+  int dirtyWordAddress348;
+  int glContextPtr5424;
+  int dirtyWordAddress324;
+  undefined8 rgbaBlueAlpha;
   
-  iVar2 = _glePushMaterial(glContext,1);
-  *(undefined8 *)(iVar2 + 0x20) = *param_2;
-  uVar4 = param_2[1];
-  *(ushort *)(iVar2 + 0x234) = *(ushort *)(iVar2 + 0x234) | 0x1010;
-  *(undefined8 *)(iVar2 + 0x28) = uVar4;
+  material = _glePushMaterial(glContext,1);
+  *(undefined8 *)(material + 0x20) = *rgba;
+  rgbaBlueAlpha = rgba[1];
+  *(ushort *)(material + 0x234) = *(ushort *)(material + 0x234) | 0x1010;
+  *(undefined8 *)(material + 0x28) = rgbaBlueAlpha;
   if (*(int *)(glContext + 0x5434) == 0) {
-    bVar1 = *(byte *)(*(int *)(glContext + 0x5420) + 0x2c8);
+    dirtyBitIndex = *(byte *)(*(int *)(glContext + 0x5420) + 0x2c8);
   }
   else {
-    bVar1 = *(byte *)(*(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x2fc);
+    dirtyBitIndex = *(byte *)(*(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x2fc);
   }
-  iVar3 = (bVar1 >> 3 & 0x1c) + glContext;
-  iVar2 = *(int *)(glContext + 0x5424);
-  *(uint *)(iVar3 + 0x324) = *(uint *)(iVar3 + 0x324) | 1 << (bVar1 & 0x1f);
-  bVar1 = *(byte *)(iVar2 + 0x2c8);
-  iVar2 = (bVar1 >> 3 & 0x1c) + glContext;
-  *(uint *)(iVar2 + 0x348) = *(uint *)(iVar2 + 0x348) | 1 << (bVar1 & 0x1f);
+  dirtyWordAddress324 = (dirtyBitIndex >> 3 & 0x1c) + glContext;
+  glContextPtr5424 = *(int *)(glContext + 0x5424);
+  *(uint *)(dirtyWordAddress324 + 0x324) = *(uint *)(dirtyWordAddress324 + 0x324) | 1 << (dirtyBitIndex & 0x1f);
+  dirtyBitIndex = *(byte *)(glContextPtr5424 + 0x2c8);
+  dirtyWordAddress348 = (dirtyBitIndex >> 3 & 0x1c) + glContext;
+  *(uint *)(dirtyWordAddress348 + 0x348) = *(uint *)(dirtyWordAddress348 + 0x348) | 1 << (dirtyBitIndex & 0x1f);
   return;
 }
 
@@ -3854,43 +3856,44 @@ void _gleMultTransposeMatrix(leftMatrix, rightMatrix, productMatrix)
 void _glePreEvaluate(undefined4 unusedArg1,int order,undefined4 unusedArg3,float *coeffs,float u,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
   double newCoeff;
-  int iVar2;
-  int iVar3;
-  int iVar4;
-  int iVar5;
-  float dVar6;
+  int remaining;
+  int newCoeffIndex;
+  int coeffIndex;
+  int currentDegree;
+  float one;
+  float carry;
   float oneMinusU;
   
   if (order == 1) {
     *coeffs = 1.0;
     return;
   }
-  dVar6 = (double)FLOAT_00108e54;
+  one = (double)FLOAT_00108e54;
   coeffs[1] = (float)u;
-  oneMinusU = (double)(dVar6 - u);
-  *coeffs = (dVar6 - u);
+  oneMinusU = (double)(one - u);
+  *coeffs = (one - u);
   if (order != 2) {
-    iVar5 = 2;
+    currentDegree = 2;
     if (2 < order) {
       do {
-        iVar3 = 1;
-        dVar6 = (double)(*coeffs * u);
+        newCoeffIndex = 1;
+        carry = (double)(*coeffs * u);
         *coeffs = (oneMinusU * *coeffs);
-        if (1 < iVar5) {
-          iVar2 = iVar5 + -1;
-          iVar4 = iVar3;
+        if (1 < currentDegree) {
+          remaining = currentDegree + -1;
+          coeffIndex = newCoeffIndex;
           do {
-            iVar3 = iVar4 + 1;
-            newCoeff = (double)oneMinusU * (double)coeffs[iVar4] + (double)dVar6;
-            dVar6 = (double)(coeffs[iVar4] * u);
-            coeffs[iVar4] = (float)newCoeff;
-            iVar2 = iVar2 + -1;
-            iVar4 = iVar3;
-          } while (iVar2 != 0);
+            newCoeffIndex = coeffIndex + 1;
+            newCoeff = (double)oneMinusU * (double)coeffs[coeffIndex] + (double)carry;
+            carry = (double)(coeffs[coeffIndex] * u);
+            coeffs[coeffIndex] = (float)newCoeff;
+            remaining = remaining + -1;
+            coeffIndex = newCoeffIndex;
+          } while (remaining != 0);
         }
-        iVar5 = iVar5 + 1;
-        coeffs[iVar3] = (float)(double)dVar6;
-      } while (iVar5 < order);
+        currentDegree = currentDegree + 1;
+        coeffs[newCoeffIndex] = (float)(double)carry;
+      } while (currentDegree < order);
       return;
     }
     return;
@@ -4093,19 +4096,20 @@ void _gleEvalDomain2Color(undefined4 glContext,int points,int uorder,int vorder,
   int componentByteOffset;
   int uRemaining;
   float *vCoeffPtr;
-  int iVar6;
+  int savedUOrder;
+  int componentIndex;
   float *uCoeffPtr;
   float *pointPtr;
   int vRemaining;
-  float dVar10;
+  float savedV;
   double incomingStack_ffffff88;
   double incomingStack_ffffff90;
   double incomingStack_ffffff98;
   double incomingStack_ffffffa0;
   double incomingStack_ffffffa8;
   
-  iVar6 = uorder;
-  dVar10 = v;
+  savedUOrder = uorder;
+  savedV = v;
   if (((double)GH_U2F((unsigned int)_uvalue_c) != u) || (_uorder_c != uorder)) {
     ((void (*)())_glePreEvaluate)(glContext,uorder,uorder,&_ucoeff_c,u,v,floatArg3,floatArg4,floatArg5,
                     floatArg6,floatArg7,floatArg8,incomingStack_ffffff88,incomingStack_ffffff90,incomingStack_ffffff98
@@ -4115,17 +4119,17 @@ void _gleEvalDomain2Color(undefined4 glContext,int points,int uorder,int vorder,
     _uorder_c = uorder;
   }
   if (((double)GH_U2F((unsigned int)_vvalue_c) != v) || (_vorder_c != vorder)) {
-    ((void (*)())_glePreEvaluate)(glContext,vorder,iVar6,&_vcoeff_c,v,(double)dVar10,floatArg3,floatArg4,floatArg5,
+    ((void (*)())_glePreEvaluate)(glContext,vorder,savedUOrder,&_vcoeff_c,v,(double)savedV,floatArg3,floatArg4,floatArg5,
                     floatArg6,floatArg7,floatArg8,incomingStack_ffffff88,incomingStack_ffffff90,incomingStack_ffffff98
                     ,incomingStack_ffffffa0,incomingStack_ffffffa8);
     _vvalue_c = GH_F2U((float)v);
     _vtype_c = 2;
     _vorder_c = vorder;
   }
-  iVar6 = 0;
+  componentIndex = 0;
   if (0 < components) {
     do {
-      componentByteOffset = iVar6 * 4;
+      componentByteOffset = componentIndex * 4;
       *(undefined4 *)(componentByteOffset + out) = 0;
       pointPtr = (float *)(points + componentByteOffset);
       if (0 < uorder) {
@@ -4152,8 +4156,8 @@ void _gleEvalDomain2Color(undefined4 glContext,int points,int uorder,int vorder,
           *(float *)(componentByteOffset + out) = controlValue * vSum + *(float *)(componentByteOffset + out);
         } while (uRemaining != 0);
       }
-      iVar6 = iVar6 + 1;
-    } while (iVar6 < components);
+      componentIndex = componentIndex + 1;
+    } while (componentIndex < components);
   }
   return;
 }
@@ -4234,7 +4238,8 @@ void _gleEvalDomain2Coord(undefined4 glContext,int points,int uorder,int vorder,
 /* _gleEvalDomainDeriv2Coord @ 0xde104 (572 bytes) */
 void _gleEvalDomainDeriv2Coord(undefined4 glContext,int controlPoints,int uOrder,int vOrder,undefined4 unusedArg5,undefined4 unusedArg6,int componentCount,int outDerivU,int outDerivV,int outValue,float floatArg1,float floatArg2,double floatArg3,double floatArg4,float floatArg5,float floatArg6,float floatArg7,float floatArg8,float unusedFloatArg9,float unusedFloatArg10,float unusedFloatArg11,float unusedFloatArg12,float unusedFloatArg13)
 {
-  float fVar1;
+  float firstControlPoint;
+  float valueRowSum;
   float controlPointValue;
   int componentByteOffset;
   float derivVSum;
@@ -4246,17 +4251,17 @@ void _gleEvalDomainDeriv2Coord(undefined4 glContext,int controlPoints,int uOrder
   int vIndex;
   int nextUIndex;
   int nextVIndex;
-  int iVar12;
+  int savedUOrder;
   int componentIndex;
-  float dVar13;
+  float savedFloatArg2;
   double incomingStack_ffffff78;
   double incomingStack_ffffff80;
   double incomingStack_ffffff88;
   double incomingStack_ffffff90;
   double incomingStack_ffffff98;
   
-  iVar12 = uOrder;
-  dVar13 = floatArg2;
+  savedUOrder = uOrder;
+  savedFloatArg2 = floatArg2;
   if ((((double)GH_U2F((unsigned int)_uvalue_c) != floatArg1) || (_utype_c != 1)) || (_uorder_c != uOrder)) {
     ((void (*)())_glePreEvaluateWithDeriv)(glContext,uOrder,uOrder,&_ucoeff_c,&_ucoeffDeriv_c,floatArg1,floatArg2,floatArg3,
                floatArg4,floatArg5,floatArg6,floatArg7,floatArg8,incomingStack_ffffff78,incomingStack_ffffff80,
@@ -4266,7 +4271,7 @@ void _gleEvalDomainDeriv2Coord(undefined4 glContext,int controlPoints,int uOrder
     _uorder_c = uOrder;
   }
   if ((((double)GH_U2F((unsigned int)_vvalue_c) != floatArg2) || (_vtype_c != 1)) || (_vorder_c != vOrder)) {
-    ((void (*)())_glePreEvaluateWithDeriv)(glContext,vOrder,iVar12,&_vcoeff_c,&_vcoeffDeriv_c,floatArg2,(double)dVar13,floatArg3,floatArg4,
+    ((void (*)())_glePreEvaluateWithDeriv)(glContext,vOrder,savedUOrder,&_vcoeff_c,&_vcoeffDeriv_c,floatArg2,(double)savedFloatArg2,floatArg3,floatArg4,
                floatArg5,floatArg6,floatArg7,floatArg8,incomingStack_ffffff78,incomingStack_ffffff80,
                incomingStack_ffffff88,incomingStack_ffffff90,incomingStack_ffffff98);
     _vtype_c = 1;
@@ -4285,24 +4290,24 @@ void _gleEvalDomainDeriv2Coord(undefined4 glContext,int controlPoints,int uOrder
       if (0 < uOrder) {
         do {
           vIndex = 1;
-          fVar1 = *controlPointCursor;
+          firstControlPoint = *controlPointCursor;
           controlPointCursor = controlPointCursor + componentCount;
-          vDerivRowSum = GH_U2F((unsigned int)_vcoeffDeriv_c) * fVar1;
-          fVar1 = GH_U2F((unsigned int)_vcoeff_c) * fVar1;
+          vDerivRowSum = GH_U2F((unsigned int)_vcoeffDeriv_c) * firstControlPoint;
+          valueRowSum = GH_U2F((unsigned int)_vcoeff_c) * firstControlPoint;
           if (1 < vOrder) {
             do {
               nextVIndex = vIndex + 1;
               controlPointValue = *controlPointCursor;
               controlPointCursor = controlPointCursor + componentCount;
               vDerivRowSum = GH_U2F((unsigned int)((&_vcoeffDeriv_c)[vIndex])) * controlPointValue + vDerivRowSum;
-              fVar1 = GH_U2F((unsigned int)((&_vcoeff_c)[vIndex])) * controlPointValue + fVar1;
+              valueRowSum = GH_U2F((unsigned int)((&_vcoeff_c)[vIndex])) * controlPointValue + valueRowSum;
               vIndex = nextVIndex;
             } while (nextVIndex < vOrder);
           }
           nextUIndex = uIndex + 1;
           derivVSum = GH_U2F((unsigned int)((&_ucoeff_c)[uIndex])) * vDerivRowSum + derivVSum;
-          derivUSum = GH_U2F((unsigned int)((&_ucoeffDeriv_c)[uIndex])) * fVar1 + derivUSum;
-          valueSum = GH_U2F((unsigned int)((&_ucoeff_c)[uIndex])) * fVar1 + valueSum;
+          derivUSum = GH_U2F((unsigned int)((&_ucoeffDeriv_c)[uIndex])) * valueRowSum + derivUSum;
+          valueSum = GH_U2F((unsigned int)((&_ucoeff_c)[uIndex])) * valueRowSum + valueSum;
           uIndex = nextUIndex;
         } while (nextUIndex < uOrder);
       }

@@ -51,11 +51,11 @@ double _glWeightusvARB_Exec(glContext, size, weights)
   int size;
   ushort *weights;
 {
-  ushort uVar1;
-  int iVar2;
+  ushort weightValue;
+  int slotByteOffset;
   float channelScale;
   float *dstCursor;
-  int iVar5;
+  int slotIndex;
   int remaining;
   
   channelScale = FLOAT_00108e74;
@@ -66,27 +66,27 @@ double _glWeightusvARB_Exec(glContext, size, weights)
     }
     return;
   }
-  iVar5 = 0;
+  slotIndex = 0;
   if (0 < size) {
     dstCursor = (float *)(glContext + 0x2d0);
     remaining = size;
     do {
-      uVar1 = *weights;
+      weightValue = *weights;
       weights = weights + 1;
-      *dstCursor = (GH_U2F((unsigned int)((uVar1 | 0x4b000000))) - 8388608.0) * channelScale;
+      *dstCursor = (GH_U2F((unsigned int)((weightValue | 0x4b000000))) - 8388608.0) * channelScale;
       dstCursor = dstCursor + 1;
       remaining = remaining + -1;
     } while (remaining != 0);
-    iVar5 = size;
+    slotIndex = size;
     if (3 < size) {
       return;
     }
   }
   do {
-    iVar2 = iVar5 * 4;
-    iVar5 = iVar5 + 1;
-    *(undefined4 *)(iVar2 + glContext + 0x2d0) = 0;
-  } while (iVar5 < 4);
+    slotByteOffset = slotIndex * 4;
+    slotIndex = slotIndex + 1;
+    *(undefined4 *)(slotByteOffset + glContext + 0x2d0) = 0;
+  } while (slotIndex < 4);
   return;
 }
 
@@ -272,7 +272,7 @@ void _glBindVertexArrayEXT_Exec(glContext, id)
   int glContext;
   undefined4 id;
 {
-  int iVar1;
+  int sharedStateMutex;
   
   if (-1 < *(short *)(glContext + 0x4a10)) {
     if (*(int *)(glContext + 0x7574) == 0) {
@@ -284,10 +284,10 @@ void _glBindVertexArrayEXT_Exec(glContext, id)
     _gleBindVertexArray(glContext,id);
     return;
   }
-  iVar1 = *(int *)(glContext + 0x5148) + 0x8028;
-  _pthread_mutex_lock(iVar1);
+  sharedStateMutex = *(int *)(glContext + 0x5148) + 0x8028;
+  _pthread_mutex_lock(sharedStateMutex);
   _gleBindVertexArray(glContext,id);
-  _pthread_mutex_unlock(iVar1);
+  _pthread_mutex_unlock(sharedStateMutex);
   return;
 }
 
@@ -460,29 +460,29 @@ void _glVertexAttrib1sARB_Exec(glContext, index, x)
   uint index;
   uint x;
 {
-  float fVar1;
-  int iVar2;
-  code *pcVar3;
-  double dVar4;
+  float defaultZero;
+  int attribSlotBase;
+  code *vertexFunc;
+  double xAsDouble;
   
   if (index < 0x10) {
-    fVar1 = *(float *)(glContext + 0x20);
+    defaultZero = *(float *)(glContext + 0x20);
     if (index == 0) {
-      pcVar3 = *(code **)(glContext + 0x4884);
+      vertexFunc = *(code **)(glContext + 0x4884);
       if (*(int *)(glContext + 0x4858) == *(int *)(glContext + 0x485c)) {
-        pcVar3 = (code *)PTR__gleFlushAndSubmit_00112050;
+        vertexFunc = (code *)PTR__gleFlushAndSubmit_00112050;
       }
-      (*pcVar3)(glContext,(double)(float)((double)CONCAT44(0x43300000,x ^ 0x80000000) -
-                                       DOUBLE_00108d58),(double)fVar1,(double)fVar1,
+      (*vertexFunc)(glContext,(double)(float)((double)CONCAT44(0x43300000,x ^ 0x80000000) -
+                                       DOUBLE_00108d58),(double)defaultZero,(double)defaultZero,
                 (double)*(float *)(glContext + 0x24));
     }
     else {
-      iVar2 = glContext + index * 0x10;
-      dVar4 = (double)CONCAT44(0x43300000,x ^ 0x80000000) - DOUBLE_00108d58;
-      *(float *)(iVar2 + 0x1ac) = *(float *)(glContext + 0x24);
-      *(float *)(iVar2 + 0x1a8) = fVar1;
-      *(float *)(iVar2 + 0x1a4) = fVar1;
-      *(float *)(iVar2 + 0x1a0) = (float)dVar4;
+      attribSlotBase = glContext + index * 0x10;
+      xAsDouble = (double)CONCAT44(0x43300000,x ^ 0x80000000) - DOUBLE_00108d58;
+      *(float *)(attribSlotBase + 0x1ac) = *(float *)(glContext + 0x24);
+      *(float *)(attribSlotBase + 0x1a8) = defaultZero;
+      *(float *)(attribSlotBase + 0x1a4) = defaultZero;
+      *(float *)(attribSlotBase + 0x1a0) = (float)xAsDouble;
     }
   }
   else if (*(int *)(glContext + 0x7574) == 0) {
@@ -1116,16 +1116,16 @@ void _glVertexAttrib4sARB_CompExec(glContext, index, x, y, z, w)
 /* _glVertexAttrib4fARB_Exec @ 0xad018 (124 bytes) */
 void _glVertexAttrib4fARB_Exec(int glContext,uint index,float x,float y,float z,float w)
 {
-  int iVar1;
+  int attribSlotBase;
   code *UNRECOVERED_JUMPTABLE;
   
   if (index < 0x10) {
     if (index != 0) {
-      iVar1 = glContext + index * 0x10;
-      *(float *)(iVar1 + 0x1a0) = (float)x;
-      *(float *)(iVar1 + 0x1ac) = (float)w;
-      *(float *)(iVar1 + 0x1a4) = (float)y;
-      *(float *)(iVar1 + 0x1a8) = (float)z;
+      attribSlotBase = glContext + index * 0x10;
+      *(float *)(attribSlotBase + 0x1a0) = (float)x;
+      *(float *)(attribSlotBase + 0x1ac) = (float)w;
+      *(float *)(attribSlotBase + 0x1a4) = (float)y;
+      *(float *)(attribSlotBase + 0x1a8) = (float)z;
       return;
     }
     UNRECOVERED_JUMPTABLE = *(code **)(glContext + 0x4884);
@@ -1235,28 +1235,28 @@ void _glVertexAttrib4dARB_CompExec(undefined4 glContext,undefined4 index,double 
 void _glVertexAttrib4NubARB_Exec(int glContext,uint index,uint x,uint y,uint z,uint w,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4)
 {
   float channelScale;
-  int iVar2;
-  code *pcVar3;
+  int attribSlotBase;
+  code *vertexFunc;
   
   channelScale = FLOAT_00108e78;
   if (index < 0x10) {
     if (index == 0) {
-      pcVar3 = *(code **)(glContext + 0x4884);
+      vertexFunc = *(code **)(glContext + 0x4884);
       if (*(int *)(glContext + 0x4858) == *(int *)(glContext + 0x485c)) {
-        pcVar3 = (code *)PTR__gleFlushAndSubmit_00112050;
+        vertexFunc = (code *)PTR__gleFlushAndSubmit_00112050;
       }
-      (*pcVar3)(glContext,0,x,y,z,*(int *)(glContext + 0x4858),z | 0x4b000000,
+      (*vertexFunc)(glContext,0,x,y,z,*(int *)(glContext + 0x4858),z | 0x4b000000,
                 (double)((GH_U2F((unsigned int)((x | 0x4b000000))) - 8388608.0) * FLOAT_00108e78),
                 (double)((GH_U2F((unsigned int)((y | 0x4b000000))) - 8388608.0) * FLOAT_00108e78),
                 (double)((GH_U2F((unsigned int)((z | 0x4b000000))) - 8388608.0) * FLOAT_00108e78),
                 (double)((GH_U2F((unsigned int)((w | 0x4b000000))) - 8388608.0) * FLOAT_00108e78));
     }
     else {
-      iVar2 = glContext + index * 0x10;
-      *(float *)(iVar2 + 0x1a0) = (GH_U2F((unsigned int)((x | 0x4b000000))) - 8388608.0) * FLOAT_00108e78;
-      *(float *)(iVar2 + 0x1a4) = (GH_U2F((unsigned int)((y | 0x4b000000))) - 8388608.0) * channelScale;
-      *(float *)(iVar2 + 0x1a8) = (GH_U2F((unsigned int)((z | 0x4b000000))) - 8388608.0) * channelScale;
-      *(float *)(iVar2 + 0x1ac) = (GH_U2F((unsigned int)((w | 0x4b000000))) - 8388608.0) * channelScale;
+      attribSlotBase = glContext + index * 0x10;
+      *(float *)(attribSlotBase + 0x1a0) = (GH_U2F((unsigned int)((x | 0x4b000000))) - 8388608.0) * FLOAT_00108e78;
+      *(float *)(attribSlotBase + 0x1a4) = (GH_U2F((unsigned int)((y | 0x4b000000))) - 8388608.0) * channelScale;
+      *(float *)(attribSlotBase + 0x1a8) = (GH_U2F((unsigned int)((z | 0x4b000000))) - 8388608.0) * channelScale;
+      *(float *)(attribSlotBase + 0x1ac) = (GH_U2F((unsigned int)((w | 0x4b000000))) - 8388608.0) * channelScale;
     }
   }
   else if (*(int *)(glContext + 0x7574) == 0) {

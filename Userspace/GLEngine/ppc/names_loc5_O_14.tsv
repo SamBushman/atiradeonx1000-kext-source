@@ -1,0 +1,16 @@
+local	_glGetProgramInfoLog_Exec	iVar2	sharedStateThenProgramObject	CONFIRMED	ctx+0x5148 shared state (mutex +0x8028, GLSL object hash +0x6018), replaced by the object found by _gleLookupHashObject for the program name (type word +0x10 checked against 0x8b40)
+local	_glGetProgramInfoLog_Exec	uVar3	copyLength	CONFIRMED	number of info log characters copied: the log length (+0x1c) limited to bufSize - 1, also stored through length
+local	_glGetShaderiv_Exec	iVar2	sharedStateThenShaderObjectThenError	CONFIRMED	ctx+0x5148 shared state, replaced by the shader object found in the GLSL object hash (+0x6018; type word +0x10 checked against 0x8b48), then by the error code returned by _gleGetObjectParameter
+local	_glGetShaderiv_Exec	local_30	paramValues	INFERRED	7-word buffer filled by _gleGetObjectParameter; word 0 is copied to *params
+local	_glGetObjectParameterivARB_Exec	iVar1	sharedStateThenObjectThenError	CONFIRMED	ctx+0x5148 shared state, replaced by the object found in the GLSL object hash (+0x6018), then by the error code returned by _gleGetObjectParameter
+local	_glGetObjectParameterivARB_Exec	local_30	paramValues	INFERRED	7-word buffer filled by _gleGetObjectParameter; word 0 is copied to *params
+local	_glGetActiveUniformARB_Exec	iVar2	sharedStateThenProgramObjectThenQueryResult	CONFIRMED	ctx+0x5148 shared state, replaced by the program object found in the GLSL object hash (+0x6018; type word +0x10 checked against 0x8b40), then by the result of _ShGetActiveUniform (nonzero ends the call without error)
+local	_glGetIntegerv_Exec	local_a0	stateValueBuffer	CONFIRMED	16-double buffer passed to _gleGetState (cursor walks it) that receives the state values converted into params
+local	_glGetIntegerv_Exec	local_b0	stateFlagBytes	INFERRED	16-byte buffer filled by _gleGetState (5th argument); byte 0 selects the double-to-integer conversion path
+local	_glGetIntegerv_Exec	local_20	doubleToIntScratch	INFERRED	stack slot receiving the (longlong)(int) double-to-integer conversion result (fctiwz store); only written
+local	_glGetFloatv_Exec	local_a0	stateValueBuffer	CONFIRMED	16-double buffer passed to _gleGetState (cursor walks it) that receives the state values converted into params
+local	_glGetFloatv_Exec	auStack_b0	stateFlagBytes	INFERRED	16-byte buffer filled by _gleGetState (5th argument)
+local	_glGetFloatv_Exec	local_20	intToDoubleHighWord	CONFIRMED	0x43300000: high word of the stack double built by CONCAT44(0x43300000, value ^ 0x80000000) for the int-to-double conversion
+local	_glGetFloatv_Exec	uStack_1c	intToDoubleLowWord	CONFIRMED	value ^ 0x80000000: low word of the stack double of the int-to-double conversion
+local	_glGetBufferParameteriv_Exec	iVar3	bufferObject	INFERRED	the buffer object bound for the target (array / element array bindings via ctx+0x4a60, pixel pack ctx+0x4a68, pixel unpack ctx+0x4a6c) whose fields (+0x38 size, +0x3c / +0x3e / +0x44 state) are returned
+local	_glGetBufferParameteriv_Exec	uVar2	parameterValue	CONFIRMED	the queried value (usage, access, size ...) read from bufferObject and stored through params

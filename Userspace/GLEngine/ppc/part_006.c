@@ -146,15 +146,15 @@ float * _glTranslatef_Comp(undefined4 glContext,float x,float y,float z)
 void _gleBeginLineLoopRenderTCL(glContext)
   int glContext;
 {
-  undefined *puVar1;
-  undefined *puVar2;
+  undefined *renderLineLoopFunc;
+  undefined *flushLineLoopFunc;
   
   *(undefined1 *)(glContext + 0x4a18) = 0;
-  puVar2 = PTR__gleFlushLineLoopTCLFunc_001121d8;
-  puVar1 = PTR__gleRenderLineLoopTCLFunc_001121d4;
+  flushLineLoopFunc = PTR__gleFlushLineLoopTCLFunc_001121d8;
+  renderLineLoopFunc = PTR__gleRenderLineLoopTCLFunc_001121d4;
   *(undefined4 *)(glContext + 0x4858) = *(undefined4 *)(glContext + 0x4854);
-  *(undefined **)(glContext + 0x4a0c) = puVar2;
-  *(undefined **)(glContext + 0x4a08) = puVar1;
+  *(undefined **)(glContext + 0x4a0c) = flushLineLoopFunc;
+  *(undefined **)(glContext + 0x4a08) = renderLineLoopFunc;
   return;
 }
 
@@ -4341,31 +4341,31 @@ void _glDeleteLists_Exec(glContext, list, listRange)
 }
 
 /* _gleFreeDisplayListObject @ 0x436cc (164 bytes) */
-void _gleFreeDisplayListObject(glContext, param_2)
+void _gleFreeDisplayListObject(glContext, displayList)
   undefined4 glContext;
-  int param_2;
+  int displayList;
 {
-  undefined4 *puVar1;
-  int iVar2;
-  undefined4 *puVar3;
+  undefined4 *listItem;
+  int nextItemOffset;
+  undefined4 *nextListItem;
   
-  iVar2 = *(int *)(param_2 + 0x24);
-  puVar1 = (undefined4 *)(param_2 + 0x1c);
-  while (iVar2 != 0) {
-    puVar3 = (undefined4 *)(param_2 + iVar2);
-    if ((code *)*puVar1 != (code *)0x0) {
-      (*(code *)*puVar1)(glContext,param_2 + puVar1[1]);
+  nextItemOffset = *(int *)(displayList + 0x24);
+  listItem = (undefined4 *)(displayList + 0x1c);
+  while (nextItemOffset != 0) {
+    nextListItem = (undefined4 *)(displayList + nextItemOffset);
+    if ((code *)*listItem != (code *)0x0) {
+      (*(code *)*listItem)(glContext,displayList + listItem[1]);
     }
-    puVar1 = puVar3;
-    iVar2 = puVar3[2];
+    listItem = nextListItem;
+    nextItemOffset = nextListItem[2];
   }
-  if ((code *)*puVar1 != (code *)0x0) {
-    (*(code *)*puVar1)(glContext,param_2 + puVar1[1]);
+  if ((code *)*listItem != (code *)0x0) {
+    (*(code *)*listItem)(glContext,displayList + listItem[1]);
   }
-  if (*(int *)(param_2 + 0x14) != 0) {
-    _free(*(int *)(param_2 + 0x14));
+  if (*(int *)(displayList + 0x14) != 0) {
+    _free(*(int *)(displayList + 0x14));
   }
-  _free(param_2);
+  _free(displayList);
   return;
 }
 
@@ -4553,37 +4553,37 @@ void _glRotateX_Exec(int glContext,float sinAngle,float cosAngle,double unusedFl
 }
 
 /* _gleAddListItemWithFree @ 0x43ca8 (140 bytes) */
-int _gleAddListItemWithFree(glContext, forwardedArg2, forwardedArg3, param_4, param_5)
+int _gleAddListItemWithFree(glContext, forwardedArg2, forwardedArg3, freeFunction, recordSize)
   int glContext;
   undefined4 forwardedArg2;
   undefined4 forwardedArg3;
-  undefined4 param_4;
-  int param_5;
+  undefined4 freeFunction;
+  int recordSize;
 {
-  int iVar1;
-  int iVar2;
+  int resultThenTrailerOffset;
+  int previousTrailer;
   int listRecord;
-  int iVar4;
+  int trailer;
   int glContextWord53e8;
   
   listRecord = _gleAddListItem(glContext,forwardedArg2,forwardedArg3);
-  iVar1 = 0;
+  resultThenTrailerOffset = 0;
   if (listRecord != 0) {
     glContextWord53e8 = *(int *)(glContext + 0x53e8);
-    iVar4 = listRecord + param_5;
-    *(undefined4 *)(listRecord + param_5) = param_4;
-    *(undefined4 *)(iVar4 + 8) = 0;
-    *(int *)(iVar4 + 4) = listRecord - glContextWord53e8;
-    iVar1 = *(int *)(*(int *)(glContext + 0x53e8) + 0x28);
-    iVar2 = *(int *)(glContext + 0x53e8) + 0x1c;
-    if (iVar1 != 0) {
-      iVar2 = glContextWord53e8 + iVar1;
+    trailer = listRecord + recordSize;
+    *(undefined4 *)(listRecord + recordSize) = freeFunction;
+    *(undefined4 *)(trailer + 8) = 0;
+    *(int *)(trailer + 4) = listRecord - glContextWord53e8;
+    resultThenTrailerOffset = *(int *)(*(int *)(glContext + 0x53e8) + 0x28);
+    previousTrailer = *(int *)(glContext + 0x53e8) + 0x1c;
+    if (resultThenTrailerOffset != 0) {
+      previousTrailer = glContextWord53e8 + resultThenTrailerOffset;
     }
-    *(int *)(iVar2 + 8) = iVar4 - glContextWord53e8;
-    *(int *)(*(int *)(glContext + 0x53e8) + 0x28) = iVar4 - glContextWord53e8;
-    iVar1 = listRecord;
+    *(int *)(previousTrailer + 8) = trailer - glContextWord53e8;
+    *(int *)(*(int *)(glContext + 0x53e8) + 0x28) = trailer - glContextWord53e8;
+    resultThenTrailerOffset = listRecord;
   }
-  return iVar1;
+  return resultThenTrailerOffset;
 }
 
 /* _CloseCurrentVAR @ 0x43d34 (228 bytes) */
@@ -4630,13 +4630,13 @@ void _gleCallList(glContext, forwardedArg2)
   int glContext;
   undefined4 forwardedArg2;
 {
-  int iVar1;
+  int payloadBytes;
   int hashObject;
   undefined4 pixelPackBuffer;
   undefined4 pixelUnpackBuffer;
-  uint uVar4;
+  uint commandCount;
   uint loopIndex;
-  undefined4 *puVar6;
+  undefined4 *commandCursor;
   
   if (*(int *)(glContext + 0x540c) < 0x40) {
     *(int *)(glContext + 0x540c) = *(int *)(glContext + 0x540c) + 1;
@@ -4646,15 +4646,15 @@ void _gleCallList(glContext, forwardedArg2)
       pixelUnpackBuffer = *(undefined4 *)(glContext + 0x4a6c);
       loopIndex = 0;
       *(undefined4 *)(glContext + 0x4a68) = 0;
-      puVar6 = (undefined4 *)(hashObject + 0x2c);
+      commandCursor = (undefined4 *)(hashObject + 0x2c);
       *(undefined4 *)(glContext + 0x4a6c) = 0;
-      uVar4 = *(uint *)(hashObject + 0x10);
-      if (uVar4 != 0) {
+      commandCount = *(uint *)(hashObject + 0x10);
+      if (commandCount != 0) {
         do {
           loopIndex = loopIndex + 1;
-          iVar1 = (*(code *)*puVar6)(glContext,puVar6 + 1);
-          puVar6 = (undefined4 *)((int)(puVar6 + 1) + iVar1);
-        } while (loopIndex < uVar4);
+          payloadBytes = (*(code *)*commandCursor)(glContext,commandCursor + 1);
+          commandCursor = (undefined4 *)((int)(commandCursor + 1) + payloadBytes);
+        } while (loopIndex < commandCount);
       }
       *(undefined4 *)(glContext + 0x4a68) = pixelPackBuffer;
       *(undefined4 *)(glContext + 0x4a6c) = pixelUnpackBuffer;
@@ -4713,17 +4713,17 @@ int _glColor4_ListExec(glContext, recordedArgs)
   int glContext;
   undefined4 *recordedArgs;
 {
-  undefined4 uVar1;
-  undefined4 uVar2;
-  undefined4 uVar3;
+  undefined4 alpha;
+  undefined4 green;
+  undefined4 blue;
   
-  uVar1 = recordedArgs[3];
-  uVar2 = recordedArgs[1];
-  uVar3 = recordedArgs[2];
+  alpha = recordedArgs[3];
+  green = recordedArgs[1];
+  blue = recordedArgs[2];
   *(undefined4 *)(glContext + 0x2a0) = *recordedArgs;
-  *(undefined4 *)(glContext + 0x2a4) = uVar2;
-  *(undefined4 *)(glContext + 0x2a8) = uVar3;
-  *(undefined4 *)(glContext + 0x2ac) = uVar1;
+  *(undefined4 *)(glContext + 0x2a4) = green;
+  *(undefined4 *)(glContext + 0x2a8) = blue;
+  *(undefined4 *)(glContext + 0x2ac) = alpha;
   if (*(char *)(glContext + 0x4df8) != '\0') {
     (**(code **)(glContext + 0x4de0))(glContext,glContext + 0x2a0);
   }
@@ -5265,8 +5265,8 @@ void _gleResetVACachePointers(glContext)
 {
   int *srcCursor;
   int *dstCursor;
-  int iVar3;
-  int iVar4;
+  int arrayPointer;
+  int bufferObject;
   int *srcCursor2;
   int remaining;
   
@@ -5275,14 +5275,14 @@ void _gleResetVACachePointers(glContext)
   srcCursor2 = (int *)(*(int *)(glContext + 0x4a60) + 0x30);
   srcCursor = (int *)(*(int *)(glContext + 0x4a60) + 0x360);
   do {
-    iVar4 = *srcCursor;
+    bufferObject = *srcCursor;
     srcCursor = srcCursor + 1;
-    iVar3 = *srcCursor2;
+    arrayPointer = *srcCursor2;
     srcCursor2 = srcCursor2 + 6;
-    if (iVar4 != 0) {
-      iVar3 = iVar3 + *(int *)(iVar4 + 0x30);
+    if (bufferObject != 0) {
+      arrayPointer = arrayPointer + *(int *)(bufferObject + 0x30);
     }
-    *dstCursor = iVar3;
+    *dstCursor = arrayPointer;
     dstCursor = dstCursor + 1;
     remaining = remaining + -1;
   } while (remaining != 0);

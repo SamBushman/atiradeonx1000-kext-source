@@ -120,13 +120,13 @@ void _glVertex3i_Exec(glContext, x, y, z)
   uint z;
 {
   undefined4 incomingR7;
-  code *pcVar1;
+  code *vertexFunc;
   
-  pcVar1 = *(code **)(glContext + 0x4884);
+  vertexFunc = *(code **)(glContext + 0x4884);
   if (*(int *)(glContext + 0x4858) == *(int *)(glContext + 0x485c)) {
-    pcVar1 = *(code **)(glContext + 0x28);
+    vertexFunc = *(code **)(glContext + 0x28);
   }
-  (*pcVar1)(glContext,x,y,z,incomingR7,*(int *)(glContext + 0x4858),z ^ 0x80000000,
+  (*vertexFunc)(glContext,x,y,z,incomingR7,*(int *)(glContext + 0x4858),z ^ 0x80000000,
             (double)(float)((double)CONCAT44(0x43300000,x ^ 0x80000000) - DOUBLE_00108d58),
             (double)(float)((double)CONCAT44(0x43300000,y ^ 0x80000000) - DOUBLE_00108d58),
             (double)(float)((double)CONCAT44(0x43300000,z ^ 0x80000000) - DOUBLE_00108d58),
@@ -281,13 +281,13 @@ void _glVertex4iv_Exec(glContext, v)
   undefined4 incomingR5;
   undefined4 incomingR6;
   undefined4 incomingR7;
-  code *pcVar1;
+  code *vertexFunc;
   
-  pcVar1 = *(code **)(glContext + 0x4884);
+  vertexFunc = *(code **)(glContext + 0x4884);
   if (*(int *)(glContext + 0x4858) == *(int *)(glContext + 0x485c)) {
-    pcVar1 = *(code **)(glContext + 0x28);
+    vertexFunc = *(code **)(glContext + 0x28);
   }
-  (*pcVar1)(glContext,v,incomingR5,incomingR6,incomingR7,*(int *)(glContext + 0x4858),v[2] ^ 0x80000000,
+  (*vertexFunc)(glContext,v,incomingR5,incomingR6,incomingR7,*(int *)(glContext + 0x4858),v[2] ^ 0x80000000,
             (double)(float)((double)CONCAT44(0x43300000,*v ^ 0x80000000) - DOUBLE_00108d58),
             (double)(float)((double)CONCAT44(0x43300000,v[1] ^ 0x80000000) - DOUBLE_00108d58),
             (double)(float)((double)CONCAT44(0x43300000,v[2] ^ 0x80000000) - DOUBLE_00108d58),
@@ -331,13 +331,13 @@ void _glVertex2s_Exec(glContext, x, y)
   uint x;
   uint y;
 {
-  code *pcVar1;
+  code *vertexFunc;
   
-  pcVar1 = *(code **)(glContext + 0x4884);
+  vertexFunc = *(code **)(glContext + 0x4884);
   if (*(int *)(glContext + 0x4858) == *(int *)(glContext + 0x485c)) {
-    pcVar1 = *(code **)(glContext + 0x28);
+    vertexFunc = *(code **)(glContext + 0x28);
   }
-  (*pcVar1)(glContext,(double)(float)((double)CONCAT44(0x43300000,x ^ 0x80000000) -
+  (*vertexFunc)(glContext,(double)(float)((double)CONCAT44(0x43300000,x ^ 0x80000000) -
                                    DOUBLE_00108d58),
             (double)(float)((double)CONCAT44(0x43300000,y ^ 0x80000000) - DOUBLE_00108d58),
             (double)*(float *)(glContext + 0x20),(double)*(float *)(glContext + 0x24));
@@ -485,13 +485,13 @@ void _glVertex3sv_Exec(glContext, v)
   undefined4 incomingR5;
   undefined4 incomingR6;
   undefined4 incomingR7;
-  code *pcVar1;
+  code *vertexFunc;
   
-  pcVar1 = *(code **)(glContext + 0x4884);
+  vertexFunc = *(code **)(glContext + 0x4884);
   if (*(int *)(glContext + 0x4858) == *(int *)(glContext + 0x485c)) {
-    pcVar1 = *(code **)(glContext + 0x28);
+    vertexFunc = *(code **)(glContext + 0x28);
   }
-  (*pcVar1)(glContext,v,incomingR5,incomingR6,incomingR7,*(int *)(glContext + 0x4858),
+  (*vertexFunc)(glContext,v,incomingR5,incomingR6,incomingR7,*(int *)(glContext + 0x4858),
             (int)v[1] ^ 0x80000000U,
             (double)(float)((double)CONCAT44(0x43300000,(int)*v ^ 0x80000000) -
                            DOUBLE_00108d58),
@@ -1035,20 +1035,22 @@ void _glFogCoordPointer_Exec(glContext, type, stride, pointer)
   int stride;
   int pointer;
 {
-  undefined4 uVar1;
+  undefined4 pluginBufferHandle;
   undefined4 glErrorCode;
-  int iVar2;
-  int iVar3;
+  int bufferRefCount;
+  int previousBuffer;
+  int elementSize;
   int loopIndex;
   undefined4 *dstCursor;
   undefined4 *srcCursor;
   int clientState;
   undefined4 *dstCursor2;
-  uint uVar7;
-  int iVar8;
+  uint strideTypeKey;
+  uint dispatchSlotMask;
+  int boundBuffer;
   
   clientState = *(int *)(glContext + 0x4a60);
-  uVar7 = stride << 7 | type & 0xf;
+  strideTypeKey = stride << 7 | type & 0xf;
   if (*(short *)(glContext + 0x4a10) < 0) {
     *(undefined4 *)(clientState + 0x350) = *(undefined4 *)(clientState + 0x350);
     *(uint *)(clientState + 0x354) = *(uint *)(clientState + 0x354) | 0x80000;
@@ -1056,14 +1058,14 @@ void _glFogCoordPointer_Exec(glContext, type, stride, pointer)
       *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x100000;
     }
     *(int *)(clientState + 0x78) = pointer;
-    iVar8 = *(int *)(clientState + 0x358);
-    iVar3 = *(int *)(clientState + 0x36c);
-    if (iVar8 != iVar3) {
-      if ((iVar3 != 0) &&
-         (iVar2 = *(int *)(iVar3 + 8) + -1, *(int *)(iVar3 + 8) = iVar2, iVar2 == 0)) {
-        _gleFreeBufferObject(glContext,iVar3);
+    boundBuffer = *(int *)(clientState + 0x358);
+    previousBuffer = *(int *)(clientState + 0x36c);
+    if (boundBuffer != previousBuffer) {
+      if ((previousBuffer != 0) &&
+         (bufferRefCount = *(int *)(previousBuffer + 8) + -1, *(int *)(previousBuffer + 8) = bufferRefCount, bufferRefCount == 0)) {
+        _gleFreeBufferObject(glContext,previousBuffer);
       }
-      if (iVar8 == 0) {
+      if (boundBuffer == 0) {
         loopIndex = 0;
         *(undefined4 *)(clientState + 0x338) = *(undefined4 *)(clientState + 0x338);
         *(uint *)(clientState + 0x33c) = *(uint *)(clientState + 0x33c) & 0xfff7ffff;
@@ -1077,36 +1079,36 @@ void _glFogCoordPointer_Exec(glContext, type, stride, pointer)
         }
       }
       else {
-        *(int *)(iVar8 + 8) = *(int *)(iVar8 + 8) + 1;
+        *(int *)(boundBuffer + 8) = *(int *)(boundBuffer + 8) + 1;
         *(undefined4 *)(clientState + 0x338) = *(undefined4 *)(clientState + 0x338);
         *(uint *)(clientState + 0x33c) = *(uint *)(clientState + 0x33c) | 0x80000;
         loopIndex = 0;
         if (*(char *)(glContext + 0x85a4) != '\0') {
           dstCursor2 = (undefined4 *)(clientState + 0x3ec);
-          srcCursor = (undefined4 *)(iVar8 + 0x10);
+          srcCursor = (undefined4 *)(boundBuffer + 0x10);
           do {
-            uVar1 = *srcCursor;
+            pluginBufferHandle = *srcCursor;
             loopIndex = loopIndex + 1;
             srcCursor = srcCursor + 1;
-            *dstCursor2 = uVar1;
+            *dstCursor2 = pluginBufferHandle;
             dstCursor2 = dstCursor2 + 0x23;
           } while (loopIndex < (int)(uint)*(byte *)(glContext + 0x85a4));
         }
       }
-      *(int *)(clientState + 0x36c) = iVar8;
+      *(int *)(clientState + 0x36c) = boundBuffer;
       *(undefined4 *)(clientState + 0x350) = *(undefined4 *)(clientState + 0x350);
       *(uint *)(clientState + 0x354) = *(uint *)(clientState + 0x354) | 0x10;
     }
-    if (iVar8 != 0) {
-      pointer = pointer + *(int *)(iVar8 + 0x30);
+    if (boundBuffer != 0) {
+      pointer = pointer + *(int *)(boundBuffer + 0x30);
     }
     *(int *)(glContext + 0x4904) = pointer;
-    if (*(uint *)(clientState + 0x8c) == uVar7) {
+    if (*(uint *)(clientState + 0x8c) == strideTypeKey) {
       return;
     }
     if (-1 < stride) {
       if (type == 0x1406) {
-        iVar3 = 4;
+        elementSize = 4;
       }
       else {
         if (type != 0x140a) {
@@ -1116,14 +1118,14 @@ void _glFogCoordPointer_Exec(glContext, type, stride, pointer)
           glErrorCode = 0x500;
           goto LAB_000a40e8;
         }
-        iVar3 = 8;
+        elementSize = 8;
       }
       *(short *)(clientState + 0x80) = (short)type;
-      *(char *)(clientState + 0x84) = (char)iVar3;
+      *(char *)(clientState + 0x84) = (char)elementSize;
       if (stride < 1) {
-        stride = iVar3;
+        stride = elementSize;
       }
-      *(uint *)(clientState + 0x8c) = uVar7;
+      *(uint *)(clientState + 0x8c) = strideTypeKey;
       *(int *)(clientState + 0x7c) = stride;
       *(undefined4 *)(glContext + 0x488c) = 0;
       *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x100000;
@@ -1132,9 +1134,9 @@ void _glFogCoordPointer_Exec(glContext, type, stride, pointer)
       if (*(int *)(glContext + 0x5408) != 0) {
         return;
       }
-      uVar7 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0xc) == 0);
+      dispatchSlotMask = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0xc) == 0);
       *(undefined **)
-       ((*(uint *)(glContext + 0x4680) & uVar7 | *(uint *)(glContext + 0x4684) & ~uVar7) + 0xc) =
+       ((*(uint *)(glContext + 0x4680) & dispatchSlotMask | *(uint *)(glContext + 0x4684) & ~dispatchSlotMask) + 0xc) =
            PTR__glArrayElement_Exec_00110454;
       return;
     }
@@ -2808,7 +2810,7 @@ void _glArrayElement_CompExec(glContext, i)
 {
   unsigned int ghidra_home[8] = { glContext, i, 0, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   undefined4 in_LR;
-  double fparam_1;
+  double forwardedFloatArg1;
   double incomingFpr2;
   double incomingFpr3;
   double incomingFpr4;
@@ -2818,7 +2820,7 @@ void _glArrayElement_CompExec(glContext, i)
   double incomingFpr8;
   
   ((int (*)())_glArrayElement_Comp)(glContext,i);
-  ((void (*)())_glArrayElement_Exec)(glContext,i,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
+  ((void (*)())_glArrayElement_Exec)(glContext,i,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
              (double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),(*(double *)((unsigned char *)ghidra_home + 0)),
              (*(double *)((unsigned char *)ghidra_home + 8)),(*(double *)((unsigned char *)ghidra_home + 16)));
   return;
@@ -4216,7 +4218,7 @@ int _glDrawArrays_Comp(glContext, mode, first, count)
   undefined4 first;
   undefined4 count;
 {
-  undefined4 uVar1;
+  undefined4 drawArraysOrElementsResult;
   
   if (*(int *)(glContext + 0x48dc) != 0x14ff) {
     *(undefined4 *)(glContext + 0x488c) = 0;
@@ -4225,8 +4227,8 @@ int _glDrawArrays_Comp(glContext, mode, first, count)
     *(undefined4 *)(glContext + 0x4978) = 0;
     *(undefined4 *)(glContext + 0x4890) = 0;
   }
-  uVar1 = ((int (*)())_gleDrawArraysOrElements_Comp)(glContext,mode,first,count);
-  return uVar1;
+  drawArraysOrElementsResult = ((int (*)())_gleDrawArraysOrElements_Comp)(glContext,mode,first,count);
+  return drawArraysOrElementsResult;
 }
 
 /* _glDrawArrays_STD_Exec @ 0xa85ec (56 bytes) */

@@ -3,40 +3,40 @@
 /* _LFSStreamChunkListCreate @ 0xd1854 (12 bytes) */
 int _LFSStreamChunkListCreate()
 {
-  undefined4 uVar1;
+  undefined4 chunkList;
   
-  uVar1 = _calloc(0xc,1);
-  return uVar1;
+  chunkList = _calloc(0xc,1);
+  return chunkList;
 }
 
 /* _LFSStreamChunkListCreateFromChunkList @ 0xd1860 (96 bytes) */
-int _LFSStreamChunkListCreateFromChunkList(param_1)
-  int *param_1;
+int _LFSStreamChunkListCreateFromChunkList(sourceList)
+  int *sourceList;
 {
-  undefined4 uVar1;
-  undefined4 uVar2;
-  int iVar3;
+  undefined4 newList;
+  undefined4 newChunk;
+  int chunk;
   
-  uVar1 = ((int (*)())_LFSStreamChunkListCreate)();
-  for (iVar3 = *param_1; iVar3 != 0; iVar3 = *(int *)(iVar3 + 0x4c)) {
-    uVar2 = _LFSStreamChunkCreateFromChunk(iVar3);
-    ((void (*)())_LFSStreamChunkListAddChunk)(uVar1,uVar2);
+  newList = ((int (*)())_LFSStreamChunkListCreate)();
+  for (chunk = *sourceList; chunk != 0; chunk = *(int *)(chunk + 0x4c)) {
+    newChunk = _LFSStreamChunkCreateFromChunk(chunk);
+    ((void (*)())_LFSStreamChunkListAddChunk)(newList,newChunk);
   }
-  return uVar1;
+  return newList;
 }
 
 /* _LFSStreamChunkListFree @ 0xd18c0 (80 bytes) */
-void _LFSStreamChunkListFree(param_1)
-  int *param_1;
+void _LFSStreamChunkListFree(chunkList)
+  int *chunkList;
 {
-  int iVar1;
+  int chunk;
   
-  iVar1 = *param_1;
-  while (iVar1 != 0) {
-    ((void (*)())_LFSStreamChunkListRemoveChunk)(param_1,iVar1);
-    iVar1 = *param_1;
+  chunk = *chunkList;
+  while (chunk != 0) {
+    ((void (*)())_LFSStreamChunkListRemoveChunk)(chunkList,chunk);
+    chunk = *chunkList;
   }
-  _free(param_1);
+  _free(chunkList);
   return;
 }
 
@@ -62,28 +62,28 @@ void _LFSStreamChunkListAddChunk(chunkList, chunk)
 }
 
 /* _LFSStreamChunkListRemoveChunk @ 0xd1950 (120 bytes) */
-void _LFSStreamChunkListRemoveChunk(param_1, param_2)
-  undefined4 *param_1;
-  int param_2;
+void _LFSStreamChunkListRemoveChunk(chunkList, chunk)
+  undefined4 *chunkList;
+  int chunk;
 {
-  int iVar1;
+  int previousChunk;
   
-  iVar1 = *(int *)(param_2 + 0x48);
-  if (iVar1 == 0) {
-    *param_1 = *(undefined4 *)(param_2 + 0x4c);
-    iVar1 = *(int *)(param_2 + 0x48);
+  previousChunk = *(int *)(chunk + 0x48);
+  if (previousChunk == 0) {
+    *chunkList = *(undefined4 *)(chunk + 0x4c);
+    previousChunk = *(int *)(chunk + 0x48);
   }
   else {
-    *(undefined4 *)(iVar1 + 0x4c) = *(undefined4 *)(param_2 + 0x4c);
+    *(undefined4 *)(previousChunk + 0x4c) = *(undefined4 *)(chunk + 0x4c);
   }
-  if (*(int *)(param_2 + 0x4c) == 0) {
-    param_1[1] = iVar1;
+  if (*(int *)(chunk + 0x4c) == 0) {
+    chunkList[1] = previousChunk;
   }
   else {
-    *(int *)(*(int *)(param_2 + 0x4c) + 0x48) = iVar1;
+    *(int *)(*(int *)(chunk + 0x4c) + 0x48) = previousChunk;
   }
-  _LFSStreamChunkFree(param_2);
-  param_1[2] = param_1[2] + -1;
+  _LFSStreamChunkFree(chunk);
+  chunkList[2] = chunkList[2] + -1;
   return;
 }
 
@@ -274,26 +274,26 @@ void _LFSStreamAddPreliminaryPassOperation(stream, operation)
 }
 
 /* _LFSStreamAddOutputPassRegisterInit @ 0xd1dbc (104 bytes) */
-void _LFSStreamAddOutputPassRegisterInit(param_1, param_2)
-  int param_1;
-  undefined4 *param_2;
+void _LFSStreamAddOutputPassRegisterInit(stream, registerInit)
+  int stream;
+  undefined4 *registerInit;
 {
-  undefined4 uVar1;
-  undefined1 *puVar2;
-  undefined4 uVar3;
-  undefined4 uVar4;
+  undefined4 registerInitWord1;
+  undefined1 *chunk;
+  undefined4 registerInitWord2;
+  undefined4 registerInitWord3;
   
-  puVar2 = (undefined1 *)_LFSStreamChunkCreate();
-  *puVar2 = 1;
-  uVar1 = param_2[1];
-  uVar3 = param_2[2];
-  uVar4 = param_2[3];
-  *(undefined4 *)(puVar2 + 4) = *param_2;
-  *(undefined4 *)(puVar2 + 8) = uVar1;
-  *(undefined4 *)(puVar2 + 0xc) = uVar3;
-  *(undefined4 *)(puVar2 + 0x10) = uVar4;
-  *(undefined4 *)(puVar2 + 0x14) = param_2[4];
-  ((void (*)())_LFSStreamChunkListAddChunk)(*(undefined4 *)(param_1 + 0xc),puVar2);
+  chunk = (undefined1 *)_LFSStreamChunkCreate();
+  *chunk = 1;
+  registerInitWord1 = registerInit[1];
+  registerInitWord2 = registerInit[2];
+  registerInitWord3 = registerInit[3];
+  *(undefined4 *)(chunk + 4) = *registerInit;
+  *(undefined4 *)(chunk + 8) = registerInitWord1;
+  *(undefined4 *)(chunk + 0xc) = registerInitWord2;
+  *(undefined4 *)(chunk + 0x10) = registerInitWord3;
+  *(undefined4 *)(chunk + 0x14) = registerInit[4];
+  ((void (*)())_LFSStreamChunkListAddChunk)(*(undefined4 *)(stream + 0xc),chunk);
   return;
 }
 
@@ -312,16 +312,16 @@ void _LFSStreamAddOutputPassOperation(stream, operation)
 }
 
 /* _LFSStreamAddConstant @ 0xd1e78 (84 bytes) */
-void _LFSStreamAddConstant(param_1, param_2)
-  int param_1;
-  undefined4 param_2;
+void _LFSStreamAddConstant(stream, constantValues)
+  int stream;
+  undefined4 constantValues;
 {
-  undefined1 *puVar1;
+  undefined1 *chunk;
   
-  puVar1 = (undefined1 *)_LFSStreamChunkCreate();
-  *puVar1 = 4;
-  _memmove(puVar1 + 4,param_2,0x10);
-  ((void (*)())_LFSStreamChunkListAddChunk)(*(undefined4 *)(param_1 + 0x14),puVar1);
+  chunk = (undefined1 *)_LFSStreamChunkCreate();
+  *chunk = 4;
+  _memmove(chunk + 4,constantValues,0x10);
+  ((void (*)())_LFSStreamChunkListAddChunk)(*(undefined4 *)(stream + 0x14),chunk);
   return;
 }
 
@@ -411,20 +411,20 @@ int _LFSStreamCompare(streamA, streamB)
 }
 
 /* _LFSStreamOutputDebugInfo @ 0xd21ec (164 bytes) */
-void _LFSStreamOutputDebugInfo(param_1)
-  undefined4 *param_1;
+void _LFSStreamOutputDebugInfo(stream)
+  undefined4 *stream;
 {
   _puts("LFSStream {");
-  ((void (*)())_LFSStreamChunkListOutputDebugInfo)(*param_1);
+  ((void (*)())_LFSStreamChunkListOutputDebugInfo)(*stream);
   _puts("   preliminarypass {");
-  ((void (*)())_LFSStreamChunkListOutputDebugInfo)(param_1[1]);
-  ((void (*)())_LFSStreamChunkListOutputDebugInfo)(param_1[2]);
+  ((void (*)())_LFSStreamChunkListOutputDebugInfo)(stream[1]);
+  ((void (*)())_LFSStreamChunkListOutputDebugInfo)(stream[2]);
   _puts("   };");
   _puts("   outputpass {");
-  ((void (*)())_LFSStreamChunkListOutputDebugInfo)(param_1[3]);
-  ((void (*)())_LFSStreamChunkListOutputDebugInfo)(param_1[4]);
+  ((void (*)())_LFSStreamChunkListOutputDebugInfo)(stream[3]);
+  ((void (*)())_LFSStreamChunkListOutputDebugInfo)(stream[4]);
   _puts("   };");
-  ((void (*)())_LFSStreamChunkListOutputDebugInfo)(param_1[5]);
+  ((void (*)())_LFSStreamChunkListOutputDebugInfo)(stream[5]);
   _puts("};");
   return;
 }
@@ -476,7 +476,8 @@ void _gleGetHashMachineObjectNameTargetPairs(glContext, hashBuckets, objectType,
   int *valuePtr;
 {
   undefined *zeroTargetExtractor;
-  int *piVar2;
+  int *bucketSlotThenEntry;
+  int *resultArray;
   undefined4 objectTarget;
   int a2;
   int *a3;
@@ -485,50 +486,51 @@ void _gleGetHashMachineObjectNameTargetPairs(glContext, hashBuckets, objectType,
   int *nextBucket;
   int a6;
   code *targetExtractor;
-  int iVar6;
+  int entryCount;
+  int pairWordIndex;
   
   zeroTargetExtractor = PTR__zeroTargetExtractor_00110e30;
-  iVar6 = 0;
+  entryCount = 0;
   a2 = objectType;
   a3 = valuePtr;
   if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
     _pthread_mutex_lock(*(int *)(glContext + 0x5148) + 0x8028);
   }
-  piVar2 = hashBuckets;
+  bucketSlotThenEntry = hashBuckets;
   do {
-    nextBucket = piVar2 + 1;
-    for (piVar2 = (int *)*piVar2; piVar2 != (int *)0x0; piVar2 = (int *)*piVar2) {
-      iVar6 = iVar6 + 1;
+    nextBucket = bucketSlotThenEntry + 1;
+    for (bucketSlotThenEntry = (int *)*bucketSlotThenEntry; bucketSlotThenEntry != (int *)0x0; bucketSlotThenEntry = (int *)*bucketSlotThenEntry) {
+      entryCount = entryCount + 1;
     }
-    piVar2 = nextBucket;
+    bucketSlotThenEntry = nextBucket;
   } while (nextBucket <= hashBuckets + 0x3ff);
-  if (iVar6 == 0) {
+  if (entryCount == 0) {
     if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
       _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);
     }
     *valuePtr = 0;
   }
   else {
-    piVar2 = (int *)_malloc(iVar6 * 8 + 4);
-    *piVar2 = iVar6;
-    *valuePtr = (int)piVar2;
+    resultArray = (int *)_malloc(entryCount * 8 + 4);
+    *resultArray = entryCount;
+    *valuePtr = (int)resultArray;
     targetExtractor = (code *)PTR__gleTextureTargetExtractor_0011215c;
     if ((objectType != 2) &&
        (targetExtractor = (code *)PTR__glePipelineProgramTargetExtactor_00112158, objectType != 4)) {
       targetExtractor = (code *)zeroTargetExtractor;
     }
-    iVar6 = 0;
-    piVar2 = hashBuckets;
+    pairWordIndex = 0;
+    bucketSlotThenEntry = hashBuckets;
     do {
-      nextBucket = piVar2 + 1;
-      for (piVar2 = (int *)*piVar2; piVar2 != (int *)0x0; piVar2 = (int *)*piVar2) {
+      nextBucket = bucketSlotThenEntry + 1;
+      for (bucketSlotThenEntry = (int *)*bucketSlotThenEntry; bucketSlotThenEntry != (int *)0x0; bucketSlotThenEntry = (int *)*bucketSlotThenEntry) {
         a6 = *valuePtr;
-        *(int *)((iVar6 + 1) * 4 + a6) = piVar2[1];
-        iVar6 = iVar6 + 2;
-        objectTarget = (*targetExtractor)(glContext,piVar2,a2,a3,incomingR7,incomingR8,a6);
-        *(undefined4 *)(iVar6 * 4 + *valuePtr) = objectTarget;
+        *(int *)((pairWordIndex + 1) * 4 + a6) = bucketSlotThenEntry[1];
+        pairWordIndex = pairWordIndex + 2;
+        objectTarget = (*targetExtractor)(glContext,bucketSlotThenEntry,a2,a3,incomingR7,incomingR8,a6);
+        *(undefined4 *)(pairWordIndex * 4 + *valuePtr) = objectTarget;
       }
-      piVar2 = nextBucket;
+      bucketSlotThenEntry = nextBucket;
     } while (nextBucket <= hashBuckets + 0x3ff);
     if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
       _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);
@@ -740,14 +742,14 @@ void _gleImagingUnpackData(glContext, width, height, format, sourceType, interna
 }
 
 /* _gleImagingPackData @ 0xd2860 (312 bytes) */
-void _gleImagingPackData(glContext, rowWidth, height, format, type, param_6, param_7, filterData, dest)
+void _gleImagingPackData(glContext, rowWidth, height, format, type, dstFormat, dstType, filterData, dest)
   int glContext;
   int rowWidth;
   undefined4 height;
   undefined4 format;
   undefined4 type;
-  undefined4 param_6;
-  undefined4 param_7;
+  undefined4 dstFormat;
+  undefined4 dstType;
   undefined4 filterData;
   int dest;
 {
@@ -755,7 +757,7 @@ void _gleImagingPackData(glContext, rowWidth, height, format, type, param_6, par
   undefined1 *dstConvertBPtr;
   undefined4 heightArg;
   int packState;
-  undefined1 *puVar5;
+  undefined1 *pixelBytesOutPtr;
   int *packOffsets;
   undefined4 procSrcAddress;
   int procSrcRowBytes;
@@ -772,27 +774,27 @@ void _gleImagingPackData(glContext, rowWidth, height, format, type, param_6, par
   undefined4 procHeight;
   undefined1 procEnd;
   undefined4 packRowBytes;
-  undefined1 auStack_4c [4];
-  undefined1 auStack_48 [4];
-  undefined1 auStack_44 [4];
-  undefined1 auStack_40 [4];
-  int local_3c [6];
+  undefined1 rowPaddingOut [4];
+  undefined1 imageBytesOut [4];
+  undefined1 imagePaddingOut [4];
+  undefined1 pixelBytesOut [4];
+  int packOffsetStorage [6];
   
   packState = glContext + 0x31b0;
-  puVar5 = auStack_40;
-  packOffsets = local_3c;
+  pixelBytesOutPtr = pixelBytesOut;
+  packOffsets = packOffsetStorage;
   heightArg = height;
   _glePixelPackSettings
-            (glContext,format,type,rowWidth,height,packState,puVar5,packOffsets,&packRowBytes,auStack_4c,
-             auStack_48,auStack_44);
-  _glgConvertType(format,type,procSrcConvertA,procSrcConvertB,heightArg,packState,puVar5,packOffsets);
+            (glContext,format,type,rowWidth,height,packState,pixelBytesOutPtr,packOffsets,&packRowBytes,rowPaddingOut,
+             imageBytesOut,imagePaddingOut);
+  _glgConvertType(format,type,procSrcConvertA,procSrcConvertB,heightArg,packState,pixelBytesOutPtr,packOffsets);
   dstConvertAPtr = procDstConvertA;
   dstConvertBPtr = procDstConvertB;
-  _glgConvertType(param_6,param_7,dstConvertAPtr,dstConvertBPtr,heightArg,packState,puVar5,packOffsets);
+  _glgConvertType(dstFormat,dstType,dstConvertAPtr,dstConvertBPtr,heightArg,packState,pixelBytesOutPtr,packOffsets);
   procSrcAddress = filterData;
   procSrcRowBytes = _glePixelBytes(format,type);
   procSrcRowBytes = rowWidth * procSrcRowBytes;
-  procDstAddress = dest + local_3c[0];
+  procDstAddress = dest + packOffsetStorage[0];
   procMask = 5;
   procMode = 2;
   procDstRowBytes = packRowBytes;
@@ -1942,28 +1944,28 @@ void _glePopMaterials(glContext)
 }
 
 /* _gleMaterialShinePow @ 0xd4488 (176 bytes) */
-double _gleMaterialShinePow(undefined4 unusedArg1,int param_2,float floatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
+double _gleMaterialShinePow(undefined4 unusedArg1,int powerTable,float floatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  uint uVar1;
-  float fVar2;
-  int iVar3;
-  float dVar4;
-  float dVar5;
+  uint tableIndex;
+  float tablePosition;
+  int tableEntry;
+  float one;
+  float fraction;
   
-  dVar4 = (double)FLOAT_00108e54;
-  if ((double)dVar4 < floatArg1) {
-    return (double)((floatArg1 - dVar4) * *(float *)(param_2 + 0x1c) + dVar4);
+  one = (double)FLOAT_00108e54;
+  if ((double)one < floatArg1) {
+    return (double)((floatArg1 - one) * *(float *)(powerTable + 0x1c) + one);
   }
-  if (floatArg1 <= (double)*(float *)(param_2 + 0x10)) {
-    return (double)(floatArg1 * *(float *)(param_2 + 0x18));
+  if (floatArg1 <= (double)*(float *)(powerTable + 0x10)) {
+    return (double)(floatArg1 * *(float *)(powerTable + 0x18));
   }
-  fVar2 = (floatArg1 - *(float *)(param_2 + 0x10)) * *(float *)(param_2 + 0x14);
-  uVar1 = (uint)(int)fVar2;
-  iVar3 = uVar1 * 4 + param_2;
-  dVar5 = (double)(fVar2 - (float)((double)CONCAT44(0x43300000,uVar1 ^ 0x80000000) - DOUBLE_00108d58
+  tablePosition = (floatArg1 - *(float *)(powerTable + 0x10)) * *(float *)(powerTable + 0x14);
+  tableIndex = (uint)(int)tablePosition;
+  tableEntry = tableIndex * 4 + powerTable;
+  fraction = (double)(tablePosition - (float)((double)CONCAT44(0x43300000,tableIndex ^ 0x80000000) - DOUBLE_00108d58
                                   ));
-  return (double)((dVar4 - dVar5) * *(float *)(iVar3 + 0x20) +
-                 (dVar5 * *(float *)(iVar3 + 0x24)));
+  return (double)((one - fraction) * *(float *)(tableEntry + 0x20) +
+                 (fraction * *(float *)(tableEntry + 0x24)));
 }
 
 /* _gleLightExponentPow @ 0xd4538 (176 bytes) */
@@ -3211,8 +3213,8 @@ LAB_000d5d50:
 void _gleVtxLightFastRGBABack(int glContext,int vertex,int vertexCount,double unusedFloatArg1,double floatArg2,double floatArg3,double floatArg4,double floatArg5,double floatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9)
 {
   undefined4 colorAlpha;
-  int iVar2;
-  int extraout_r3;
+  int glContextCopy;
+  int r3AfterCall;
   int vertexIndex;
   uint enabledLightMask;
   uint lightIndex;
@@ -3221,7 +3223,7 @@ void _gleVtxLightFastRGBABack(int glContext,int vertex,int vertexCount,double un
   int material;
   int lightRecord;
   double fparam_1_00;
-  double dVar10;
+  double zeroThenShineFactor;
   double fparam_8_00;
   float normalDotLight;
   float colorB;
@@ -3235,7 +3237,7 @@ void _gleVtxLightFastRGBABack(int glContext,int vertex,int vertexCount,double un
   
   vertexIndex = 0;
   enabledLightMask = *(uint *)(glContext + 0x30a0);
-  iVar2 = glContext;
+  glContextCopy = glContext;
   if (vertexCount < 1) {
 LAB_000d5ed8:
     return;
@@ -3261,11 +3263,11 @@ LAB_000d5da0:
       }
       else {
         fparam_8_00 = (double)*(float *)(vertex + 0x48);
-        dVar10 = (double)FLOAT_00108e50;
+        zeroThenShineFactor = (double)FLOAT_00108e50;
         normalDotLight = (double)(float)(fparam_8_00 * (double)*(float *)(lightRecord + 0x14) +
                                 (double)(*(float *)(vertex + 0x40) * *(float *)(lightRecord + 0xc) +
                                         *(float *)(vertex + 0x44) * *(float *)(lightRecord + 0x10)));
-        if (dVar10 < -(double)normalDotLight) {
+        if (zeroThenShineFactor < -(double)normalDotLight) {
           colorR = -(double)(normalDotLight * *(float *)(lightProducts + 0x10) - colorR);
           colorG = -(double)(normalDotLight * *(float *)(lightProducts + 0x14) - colorG);
           fparam_1_00 = -(double)(float)(fparam_8_00 * (double)*(float *)(lightParams + 0x68) +
@@ -3274,14 +3276,14 @@ LAB_000d5da0:
                                                 *(float *)(vertex + 0x44) * *(float *)(lightParams + 100)
                                                 ));
           colorB = -(double)(normalDotLight * *(float *)(lightProducts + 0x18) - colorB);
-          if (dVar10 < fparam_1_00) {
-            dVar10 = ((double (*)())_gleMaterialShinePow)(iVar2,material + 0x1e8,fparam_1_00,floatArg2,floatArg3,floatArg4,floatArg5,
-                                floatArg6,dVar10,fparam_8_00,incomingStack_ffffff78,incomingStack_ffffff80,
+          if (zeroThenShineFactor < fparam_1_00) {
+            zeroThenShineFactor = ((double (*)())_gleMaterialShinePow)(glContextCopy,material + 0x1e8,fparam_1_00,floatArg2,floatArg3,floatArg4,floatArg5,
+                                floatArg6,zeroThenShineFactor,fparam_8_00,incomingStack_ffffff78,incomingStack_ffffff80,
                                 incomingStack_ffffff88,incomingStack_ffffff90,incomingStack_ffffff98);
-            colorR = (double)(float)(dVar10 * (double)*(float *)(lightProducts + 0x20) + (double)colorR);
-            colorG = (double)(float)(dVar10 * (double)*(float *)(lightProducts + 0x24) + (double)colorG);
-            colorB = (double)(float)(dVar10 * (double)*(float *)(lightProducts + 0x28) + (double)colorB);
-            iVar2 = iVar2;
+            colorR = (double)(float)(zeroThenShineFactor * (double)*(float *)(lightProducts + 0x20) + (double)colorR);
+            colorG = (double)(float)(zeroThenShineFactor * (double)*(float *)(lightProducts + 0x24) + (double)colorG);
+            colorB = (double)(float)(zeroThenShineFactor * (double)*(float *)(lightProducts + 0x28) + (double)colorB);
+            glContextCopy = glContextCopy;
           }
         }
       }
@@ -3548,7 +3550,7 @@ void _gleVtxLightRGBABackPtr(int glContext,int *vertexPtrCursor,int vertexCount,
   undefined4 colorAlpha;
   undefined *vectorNormalize;
   int glContextForCalls;
-  int extraout_r3;
+  int r3AfterCall;
   int r3AfterCall1;
   uint enabledLightMask;
   int vertexIndex;
@@ -3560,7 +3562,7 @@ void _gleVtxLightRGBABackPtr(int glContext,int *vertexPtrCursor,int vertexCount,
   int lightProducts;
   int lightRecord;
   int vertex;
-  double extraout_f1;
+  double f1AfterCall;
   double f1AfterCall1;
   double spotFactor;
   double specularPow;

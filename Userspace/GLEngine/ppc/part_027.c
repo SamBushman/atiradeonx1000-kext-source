@@ -38,8 +38,8 @@ void _glStencilFuncSeparate_Exec(glContext, face, func, ref, mask)
   undefined4 mask;
 {
   undefined4 glErrorCode;
-  uint uVar2;
-  undefined2 uVar3;
+  uint maxStencilRef;
+  undefined2 funcWord16;
   
   if (-1 < *(short *)(glContext + 0x4a10)) {
     if (*(int *)(glContext + 0x7574) != 0) {
@@ -53,14 +53,14 @@ void _glStencilFuncSeparate_Exec(glContext, face, func, ref, mask)
     ref = 0;
   }
   else {
-    uVar2 = 0xffffffff >> (0x20U - *(int *)(*(int *)(glContext + 0x468c) + 0x40) & 0x3f);
-    if (uVar2 < ref) {
-      ref = uVar2;
+    maxStencilRef = 0xffffffff >> (0x20U - *(int *)(*(int *)(glContext + 0x468c) + 0x40) & 0x3f);
+    if (maxStencilRef < ref) {
+      ref = maxStencilRef;
     }
   }
-  uVar3 = (undefined2)func;
+  funcWord16 = (undefined2)func;
   if (face == 0x405) {
-    *(undefined2 *)(glContext + 0x3510) = uVar3;
+    *(undefined2 *)(glContext + 0x3510) = funcWord16;
     *(uint *)(glContext + 0x350c) = ref;
     *(undefined4 *)(glContext + 0x3508) = mask;
     goto LAB_00090958;
@@ -68,7 +68,7 @@ void _glStencilFuncSeparate_Exec(glContext, face, func, ref, mask)
   if (face < 0x406) {
     if (face == 0x404) {
 LAB_0009094c:
-      *(undefined2 *)(glContext + 0x3500) = uVar3;
+      *(undefined2 *)(glContext + 0x3500) = funcWord16;
       *(uint *)(glContext + 0x34fc) = ref;
       *(undefined4 *)(glContext + 0x34f8) = mask;
 LAB_00090958:
@@ -77,7 +77,7 @@ LAB_00090958:
     }
   }
   else if (face == 0x408) {
-    *(undefined2 *)(glContext + 0x3510) = uVar3;
+    *(undefined2 *)(glContext + 0x3510) = funcWord16;
     *(uint *)(glContext + 0x350c) = ref;
     *(undefined4 *)(glContext + 0x3508) = mask;
     goto LAB_0009094c;
@@ -237,29 +237,30 @@ void _glPolygonStipple_Exec(glContext, mask)
   int glContext;
   int mask;
 {
-  uint uVar1;
+  uint skipPixels;
   int byteOffset;
-  int iVar3;
+  int skipRows;
+  int pixelUnpackBuffer;
   int remaining;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
-    iVar3 = *(int *)(glContext + 0x4a6c);
-    if (iVar3 != 0) {
-      if (*(int *)(iVar3 + 0x38) < mask + 0x20) goto LAB_00090c68;
-      if (*(int *)(iVar3 + 0x40) != 0) {
-        _gleSynchronizePluginBuffer(glContext,iVar3 + 0x10);
+    pixelUnpackBuffer = *(int *)(glContext + 0x4a6c);
+    if (pixelUnpackBuffer != 0) {
+      if (*(int *)(pixelUnpackBuffer + 0x38) < mask + 0x20) goto LAB_00090c68;
+      if (*(int *)(pixelUnpackBuffer + 0x40) != 0) {
+        _gleSynchronizePluginBuffer(glContext,pixelUnpackBuffer + 0x10);
       }
-      mask = mask + *(int *)(iVar3 + 0x30);
+      mask = mask + *(int *)(pixelUnpackBuffer + 0x30);
     }
-    uVar1 = *(uint *)(glContext + 0x31d8);
-    iVar3 = *(int *)(glContext + 0x31d4);
+    skipPixels = *(uint *)(glContext + 0x31d8);
+    skipRows = *(int *)(glContext + 0x31d4);
     if ((((*(char *)(glContext + 0x31e5) == '\0') && (*(int *)(glContext + 0x31cc) == 0)) &&
-        (*(int *)(glContext + 0x31e0) < 5)) && ((uVar1 & 7) == 0)) {
+        (*(int *)(glContext + 0x31e0) < 5)) && ((skipPixels & 7) == 0)) {
       remaining = 0x10;
       byteOffset = 0;
       do {
         *(undefined8 *)(byteOffset + glContext + 0x3448) =
-             *(undefined8 *)(byteOffset + mask + iVar3 * 4 + ((int)uVar1 >> 3));
+             *(undefined8 *)(byteOffset + mask + skipRows * 4 + ((int)skipPixels >> 3));
         byteOffset = byteOffset + 8;
         remaining = remaining + -1;
       } while (remaining != 0);
@@ -293,31 +294,32 @@ void _glGetPolygonStipple_Exec(glContext, mask)
   int glContext;
   int mask;
 {
-  uint uVar1;
+  uint skipPixels;
   int byteOffset;
-  int iVar3;
+  int skipRows;
+  int pixelPackBuffer;
   int remaining;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
-    iVar3 = *(int *)(glContext + 0x4a68);
-    if (iVar3 != 0) {
-      if (*(int *)(iVar3 + 0x38) < mask + 0x20) goto LAB_00090dc0;
-      if (*(int *)(iVar3 + 0x40) != 0) {
-        _gleSynchronizePluginBuffer(glContext,iVar3 + 0x10);
+    pixelPackBuffer = *(int *)(glContext + 0x4a68);
+    if (pixelPackBuffer != 0) {
+      if (*(int *)(pixelPackBuffer + 0x38) < mask + 0x20) goto LAB_00090dc0;
+      if (*(int *)(pixelPackBuffer + 0x40) != 0) {
+        _gleSynchronizePluginBuffer(glContext,pixelPackBuffer + 0x10);
       }
-      mask = mask + *(int *)(iVar3 + 0x30);
+      mask = mask + *(int *)(pixelPackBuffer + 0x30);
     }
-    uVar1 = *(uint *)(glContext + 0x31bc);
-    iVar3 = *(int *)(0x31b4 + glContext + 4);
+    skipPixels = *(uint *)(glContext + 0x31bc);
+    skipRows = *(int *)(0x31b4 + glContext + 4);
     if ((((*(char *)(glContext + 0x31c9) != '\0') || (*(int *)(glContext + 0x31b0) != 0)) ||
-        (4 < *(int *)(glContext + 0x31c4))) || ((uVar1 & 7) != 0)) {
+        (4 < *(int *)(glContext + 0x31c4))) || ((skipPixels & 7) != 0)) {
       _gleEmptyImage(glContext,0x20,0x20,0x1900,0x1a00,glContext + 0x3448,mask);
       return;
     }
     remaining = 0x10;
     byteOffset = 0;
     do {
-      *(undefined8 *)(byteOffset + mask + iVar3 * 4 + ((int)uVar1 >> 3)) =
+      *(undefined8 *)(byteOffset + mask + skipRows * 4 + ((int)skipPixels >> 3)) =
            *(undefined8 *)(byteOffset + glContext + 0x3448);
       byteOffset = byteOffset + 8;
       remaining = remaining + -1;
@@ -472,28 +474,28 @@ int _glIsTexture_Exec(glContext, texture)
   int glContext;
   undefined4 texture;
 {
-  int iVar1;
-  bool bVar2;
+  int sharedStateThenTextureObject;
+  bool objectExists;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
-    iVar1 = *(int *)(glContext + 0x5148);
-    if (*(char *)(iVar1 + 0x8024) != '\0') {
-      _pthread_mutex_lock(iVar1 + 0x8028);
-      iVar1 = *(int *)(glContext + 0x5148);
+    sharedStateThenTextureObject = *(int *)(glContext + 0x5148);
+    if (*(char *)(sharedStateThenTextureObject + 0x8024) != '\0') {
+      _pthread_mutex_lock(sharedStateThenTextureObject + 0x8028);
+      sharedStateThenTextureObject = *(int *)(glContext + 0x5148);
     }
-    iVar1 = _gleLookupHashObject(iVar1 + 0x2008,texture);
+    sharedStateThenTextureObject = _gleLookupHashObject(sharedStateThenTextureObject + 0x2008,texture);
     if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
       _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);
     }
-    bVar2 = iVar1 != 0;
+    objectExists = sharedStateThenTextureObject != 0;
   }
   else {
     if (*(int *)(glContext + 0x7574) == 0) {
       *(undefined4 *)(glContext + 0x7574) = 0x502;
     }
-    bVar2 = false;
+    objectExists = false;
   }
-  return bVar2;
+  return objectExists;
 }
 
 /* _glBindTexture_ListExec @ 0x911c4 (44 bytes) */
@@ -552,21 +554,21 @@ int _glPrioritizeTextures_Comp(glContext, n, textures, priorities)
   int priorities;
 {
   int *listRecord;
-  int iVar2;
+  int elementIndex;
   int remaining;
   
   listRecord = (int *)_gleAddListItem(glContext,PTR__glPrioritizeTextures_ListExec_0011038c,
                                   n * 8 + 4);
   if (listRecord != (int *)0x0) {
-    iVar2 = 0;
+    elementIndex = 0;
     *listRecord = n;
     remaining = n;
     if (0 < n) {
       do {
-        listRecord[iVar2 + 1] = *(int *)(textures + iVar2 * 4);
-        listRecord[n + iVar2 + 1] = *(int *)(priorities + iVar2 * 4);
+        listRecord[elementIndex + 1] = *(int *)(textures + elementIndex * 4);
+        listRecord[n + elementIndex + 1] = *(int *)(priorities + elementIndex * 4);
         remaining = remaining + -1;
-        iVar2 = iVar2 + 1;
+        elementIndex = elementIndex + 1;
       } while (remaining != 0);
     }
   }
@@ -693,12 +695,12 @@ int _glCompressedTexImage2D_Comp(glContext, target, level, internalformat, width
   int imageSize;
   int data;
 {
-  undefined4 uVar1;
-  int iVar2;
+  undefined4 calleeResult;
+  int pixelUnpackBuffer;
   
   if (((target == 0x8064) || (target == 0x851b)) || (target == 0x84f7)) {
-    uVar1 = ((int (*)())_glCompressedTexImage2D_Exec)(glContext,target,level,internalformat,width,height,border,imageSize,data);
-    return uVar1;
+    calleeResult = ((int (*)())_glCompressedTexImage2D_Exec)(glContext,target,level,internalformat,width,height,border,imageSize,data);
+    return calleeResult;
   }
   if (((internalformat < 0x83f0) || ((0x83f3 < internalformat && (internalformat != 0x8837)))) || (imageSize < 1)) {
 LAB_0009177c:
@@ -707,13 +709,13 @@ LAB_0009177c:
     }
   }
   else {
-    iVar2 = glContext[0x129b];
-    if (iVar2 != 0) {
-      if (*(int *)(iVar2 + 0x38) < imageSize + data) goto LAB_0009177c;
-      if (*(int *)(iVar2 + 0x40) != 0) {
-        _gleSynchronizePluginBuffer(glContext,iVar2 + 0x10);
+    pixelUnpackBuffer = glContext[0x129b];
+    if (pixelUnpackBuffer != 0) {
+      if (*(int *)(pixelUnpackBuffer + 0x38) < imageSize + data) goto LAB_0009177c;
+      if (*(int *)(pixelUnpackBuffer + 0x40) != 0) {
+        _gleSynchronizePluginBuffer(glContext,pixelUnpackBuffer + 0x10);
       }
-      data = data + *(int *)(iVar2 + 0x30);
+      data = data + *(int *)(pixelUnpackBuffer + 0x30);
     }
     glContext = (int *)_gleAddListItem(glContext,PTR__glCompressedTexImage2D_ListExec_0011039c,
                                      imageSize + 0x1c);
@@ -726,8 +728,8 @@ LAB_0009177c:
       glContext[4] = height;
       glContext[6] = imageSize;
       if (data != 0) {
-        uVar1 = _memcpy(glContext + 7,data,imageSize);
-        return uVar1;
+        calleeResult = _memcpy(glContext + 7,data,imageSize);
+        return calleeResult;
       }
     }
   }
@@ -774,13 +776,13 @@ int _glCompressedTexSubImage3D_Comp(glContext, target, level, xoffset, yoffset, 
   int imageSize;
   int data;
 {
-  undefined4 uVar1;
-  int iVar2;
+  undefined4 calleeResult;
+  int pixelUnpackBuffer;
   
   if (target == 0x8070) {
-    uVar1 = ((int (*)())_glCompressedTexSubImage3D_Exec)(glContext,0x8070,level,xoffset,yoffset,zoffset,width,height,depth,
+    calleeResult = ((int (*)())_glCompressedTexSubImage3D_Exec)(glContext,0x8070,level,xoffset,yoffset,zoffset,width,height,depth,
                        format,imageSize,data);
-    return uVar1;
+    return calleeResult;
   }
   if ((format < 0x83f0) || (((0x83f3 < format && (format != 0x8837)) || (imageSize < 1)))) {
 LAB_00091924:
@@ -789,13 +791,13 @@ LAB_00091924:
     }
   }
   else {
-    iVar2 = glContext[0x129b];
-    if (iVar2 != 0) {
-      if (*(int *)(iVar2 + 0x38) < imageSize + data) goto LAB_00091924;
-      if (*(int *)(iVar2 + 0x40) != 0) {
-        _gleSynchronizePluginBuffer(glContext,iVar2 + 0x10);
+    pixelUnpackBuffer = glContext[0x129b];
+    if (pixelUnpackBuffer != 0) {
+      if (*(int *)(pixelUnpackBuffer + 0x38) < imageSize + data) goto LAB_00091924;
+      if (*(int *)(pixelUnpackBuffer + 0x40) != 0) {
+        _gleSynchronizePluginBuffer(glContext,pixelUnpackBuffer + 0x10);
       }
-      data = data + *(int *)(iVar2 + 0x30);
+      data = data + *(int *)(pixelUnpackBuffer + 0x30);
     }
     glContext = (int *)_gleAddListItem(glContext,PTR__glCompressedTexSubImage3D_ListExec_00110398,
                                      imageSize + 0x28);
@@ -811,8 +813,8 @@ LAB_00091924:
       glContext[7] = depth;
       glContext[9] = imageSize;
       if (data != 0) {
-        uVar1 = _memcpy(glContext + 10,data,imageSize);
-        return uVar1;
+        calleeResult = _memcpy(glContext + 10,data,imageSize);
+        return calleeResult;
       }
     }
   }
@@ -1020,7 +1022,7 @@ int _glCompressedTexImage2D_Exec(glContext, target, level, internalformat, width
   ushort textureTargetBits;
   undefined4 glErrorCode;
   uint faceIndex;
-  int iVar5;
+  int levelCreated;
   int levelSlot;
   int unpackBuffer;
   int textureObject;
@@ -1071,9 +1073,9 @@ LAB_00091f9c:
         }
         *(byte *)(levelSlot + 0xcf) = *(byte *)(levelSlot + 0xcf) & 0xdf;
       }
-      iVar5 = _gleCreateTextureLevel
+      levelCreated = _gleCreateTextureLevel
                         (glContext,textureObject,textureLevel,internalformat,width,height,1,border,internalformat,0,1,data);
-      if ((iVar5 != 0) && (data != 0)) {
+      if ((levelCreated != 0) && (data != 0)) {
         _gleCompressedTextureImagePut(glContext,textureLevel,0,0,0,width,height,1,internalformat,imageSize,data)
         ;
       }

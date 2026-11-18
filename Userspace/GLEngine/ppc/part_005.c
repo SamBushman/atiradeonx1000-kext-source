@@ -157,39 +157,40 @@ void _gleLightMaterialShineChange_FB(int glContext,float shininess)
 }
 
 /* _gleLightMaterialRGBAChange_FB_S @ 0x3329c (224 bytes) */
-void _gleLightMaterialRGBAChange_FB_S(glContext, param_2)
+void _gleLightMaterialRGBAChange_FB_S(glContext, rgba)
   int glContext;
-  undefined8 *param_2;
+  undefined8 *rgba;
 {
-  byte bVar1;
-  int iVar2;
+  byte dirtyBitIndex;
+  int material;
+  int dirtyWordAddress348;
   int glContextWord5424;
-  int iVar3;
-  int iVar4;
+  int dirtyBitTableOffset;
+  int dirtyWordAddress324;
   int loopIndex;
-  undefined8 uVar6;
+  undefined8 rgbaBlueAlpha;
   
   loopIndex = 0;
   do {
-    iVar2 = ((int (*)())_glePushMaterial)(glContext,loopIndex);
-    *(undefined8 *)(iVar2 + 0x20) = *param_2;
-    uVar6 = param_2[1];
-    *(ushort *)(iVar2 + 0x234) = *(ushort *)(iVar2 + 0x234) | 0x1010;
-    *(undefined8 *)(iVar2 + 0x28) = uVar6;
+    material = ((int (*)())_glePushMaterial)(glContext,loopIndex);
+    *(undefined8 *)(material + 0x20) = *rgba;
+    rgbaBlueAlpha = rgba[1];
+    *(ushort *)(material + 0x234) = *(ushort *)(material + 0x234) | 0x1010;
+    *(undefined8 *)(material + 0x28) = rgbaBlueAlpha;
     if (*(int *)(glContext + 0x5434) == 0) {
-      bVar1 = *(byte *)(loopIndex * 6 + *(int *)(glContext + 0x5420) + 0x2c2);
+      dirtyBitIndex = *(byte *)(loopIndex * 6 + *(int *)(glContext + 0x5420) + 0x2c2);
     }
     else {
-      bVar1 = *(byte *)(loopIndex * 6 + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x2f6);
+      dirtyBitIndex = *(byte *)(loopIndex * 6 + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x2f6);
     }
-    iVar3 = loopIndex * 6;
-    iVar4 = (bVar1 >> 3 & 0x1c) + glContext;
+    dirtyBitTableOffset = loopIndex * 6;
+    dirtyWordAddress324 = (dirtyBitIndex >> 3 & 0x1c) + glContext;
     loopIndex = loopIndex + 1;
     glContextWord5424 = *(int *)(glContext + 0x5424);
-    *(uint *)(iVar4 + 0x324) = *(uint *)(iVar4 + 0x324) | 1 << (bVar1 & 0x1f);
-    bVar1 = *(byte *)(iVar3 + glContextWord5424 + 0x2c2);
-    iVar2 = (bVar1 >> 3 & 0x1c) + glContext;
-    *(uint *)(iVar2 + 0x348) = *(uint *)(iVar2 + 0x348) | 1 << (bVar1 & 0x1f);
+    *(uint *)(dirtyWordAddress324 + 0x324) = *(uint *)(dirtyWordAddress324 + 0x324) | 1 << (dirtyBitIndex & 0x1f);
+    dirtyBitIndex = *(byte *)(dirtyBitTableOffset + glContextWord5424 + 0x2c2);
+    dirtyWordAddress348 = (dirtyBitIndex >> 3 & 0x1c) + glContext;
+    *(uint *)(dirtyWordAddress348 + 0x348) = *(uint *)(dirtyWordAddress348 + 0x348) | 1 << (dirtyBitIndex & 0x1f);
   } while (loopIndex < 2);
   return;
 }
@@ -258,31 +259,31 @@ double _gleModelMatInvert(int glContext)
 {
   int loopIndex;
   int remaining;
-  double dVar3;
-  double dVar4;
+  double invertResultOrRescaleFactor;
+  double normalLengthThenRescaleFactor;
   
   *(uint *)(glContext + 0x50b0) = *(uint *)(glContext + 0x50b0) & 0xffffffef;
-  dVar3 = (double)(*(double ( *)(int,int))_gleInvertMatrix)(glContext, 4);
+  invertResultOrRescaleFactor = (double)(*(double ( *)(int,int))_gleInvertMatrix)(glContext, 4);
   if (*(char *)(glContext + 0x280e) == '\0') {
     *(undefined4 *)(glContext + 0x2804) = 0x3f800000;
   }
   else {
-    dVar4 = _sqrt((double)(*(float *)(glContext + 0x22e8) * *(float *)(glContext + 0x22e8) +
+    normalLengthThenRescaleFactor = _sqrt((double)(*(float *)(glContext + 0x22e8) * *(float *)(glContext + 0x22e8) +
                           (*(float *)(glContext + 0x22d8) * *(float *)(glContext + 0x22d8) +
                           *(float *)(glContext + 0x22c8) * *(float *)(glContext + 0x22c8))));
     remaining = 0x10;
     loopIndex = 0;
-    dVar4 = DOUBLE_00108d68 / dVar4;
-    dVar3 = (double)(float)dVar4;
+    normalLengthThenRescaleFactor = DOUBLE_00108d68 / normalLengthThenRescaleFactor;
+    invertResultOrRescaleFactor = (double)(float)normalLengthThenRescaleFactor;
     do {
       *(float *)(loopIndex + glContext + 0x22c0) =
-           (float)((double)*(float *)(loopIndex + glContext + 0x22c0) * dVar3);
+           (float)((double)*(float *)(loopIndex + glContext + 0x22c0) * invertResultOrRescaleFactor);
       loopIndex = loopIndex + 4;
       remaining = remaining + -1;
     } while (remaining != 0);
-    *(float *)(glContext + 0x2804) = (float)dVar4;
+    *(float *)(glContext + 0x2804) = (float)normalLengthThenRescaleFactor;
   }
-  return dVar3;
+  return invertResultOrRescaleFactor;
 }
 
 /* _gleSetupInvertMatrix @ 0x33570 (80 bytes) */
@@ -354,7 +355,7 @@ int _glGenLists_Exec(glContext, listRange)
   int listRange;
 {
   undefined4 glErrorCode;
-  undefined4 uVar1;
+  undefined4 firstListName;
   int sharedState;
   
   if (listRange < 0) {
@@ -370,12 +371,12 @@ int _glGenLists_Exec(glContext, listRange)
         _pthread_mutex_lock(sharedState + 0x8028);
         sharedState = *(int *)(glContext + 0x5148);
       }
-      uVar1 = _gleGenHashNames(sharedState + 0x300c,listRange);
+      firstListName = _gleGenHashNames(sharedState + 0x300c,listRange);
       if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
         _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);
-        return uVar1;
+        return firstListName;
       }
-      return uVar1;
+      return firstListName;
     }
     if (*(int *)(glContext + 0x7574) != 0) {
       return 0;
@@ -3133,27 +3134,27 @@ LAB_00039cc0:
 }
 
 /* ___ashldi3 @ 0x3a050 (96 bytes) */
-longlong ___ashldi3(param_1, param_2, param_3)
-  int param_1;
-  uint param_2;
-  uint param_3;
+longlong ___ashldi3(valueHigh, valueLow, shiftCount)
+  int valueHigh;
+  uint valueLow;
+  uint shiftCount;
 {
-  uint uVar1;
-  undefined4 local_2c;
+  uint complementShiftThenResultHigh;
+  undefined4 resultLow;
   
-  if (param_3 == 0) {
-    return CONCAT44(param_1,param_2);
+  if (shiftCount == 0) {
+    return CONCAT44(valueHigh,valueLow);
   }
-  uVar1 = 0x20 - param_3;
-  if ((int)uVar1 < 1) {
-    uVar1 = param_2 << (-uVar1 & 0x3f);
-    local_2c = 0;
+  complementShiftThenResultHigh = 0x20 - shiftCount;
+  if ((int)complementShiftThenResultHigh < 1) {
+    complementShiftThenResultHigh = valueLow << (-complementShiftThenResultHigh & 0x3f);
+    resultLow = 0;
   }
   else {
-    local_2c = param_2 << (param_3 & 0x3f);
-    uVar1 = param_1 << (param_3 & 0x3f) | param_2 >> (uVar1 & 0x3f);
+    resultLow = valueLow << (shiftCount & 0x3f);
+    complementShiftThenResultHigh = valueHigh << (shiftCount & 0x3f) | valueLow >> (complementShiftThenResultHigh & 0x3f);
   }
-  return CONCAT44(uVar1,local_2c);
+  return CONCAT44(complementShiftThenResultHigh,resultLow);
 }
 
 /* _glEnd_CompExec @ 0x3a0b0 (48 bytes) */
@@ -3308,21 +3309,22 @@ int _glClear_Comp(glContext, mask)
 }
 
 /* _gleSetEnable_STENCIL_TEST @ 0x3a3d0 (56 bytes) */
-void _gleSetEnable_STENCIL_TEST(param_1, unusedArg2, param_3)
-  int param_1;
+void _gleSetEnable_STENCIL_TEST(glContext, unusedArg2, enable)
+  int glContext;
   undefined4 unusedArg2;
-  int param_3;
+  int enable;
 {
-  uint uVar1;
+  uint faceShift;
+  uint newEnableBits;
   
-  uVar1 = *(byte *)(param_1 + 0x7583) & 0x1f;
-  uVar1 = *(uint *)(param_1 + 0x3520) & (-2 << uVar1 | 0xfffffffeU >> 0x20 - uVar1) |
-          param_3 << (*(byte *)(param_1 + 0x7583) & 0x3f);
-  if (*(uint *)(param_1 + 0x3520) == uVar1) {
+  faceShift = *(byte *)(glContext + 0x7583) & 0x1f;
+  newEnableBits = *(uint *)(glContext + 0x3520) & (-2 << faceShift | 0xfffffffeU >> 0x20 - faceShift) |
+          enable << (*(byte *)(glContext + 0x7583) & 0x3f);
+  if (*(uint *)(glContext + 0x3520) == newEnableBits) {
     return;
   }
-  *(uint *)(param_1 + 0x3520) = uVar1;
-  *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x10000000;
+  *(uint *)(glContext + 0x3520) = newEnableBits;
+  *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x10000000;
   return;
 }
 

@@ -1104,39 +1104,39 @@ LAB_00046c3c:
 }
 
 /* _gleAllocateTextureLevel @ 0x46fe8 (196 bytes) */
-int _gleAllocateTextureLevel(glContext, param_2, param_3)
+int _gleAllocateTextureLevel(glContext, textureObject, levelRecord)
   int glContext;
-  int param_2;
-  int param_3;
+  int textureObject;
+  int levelRecord;
 {
-  undefined *puVar1;
-  undefined4 uVar2;
+  undefined *machTaskSelfRef;
+  undefined4 allocated;
   vm_size_t size;
-  vm_address_t local_20 [4];
+  vm_address_t allocation [4];
   
-  size = ((int (*)())_gleTextureLevelBytes)(glContext,param_3);
-  puVar1 = PTR_00112034;
-  uVar2 = 0;
+  size = ((int (*)())_gleTextureLevelBytes)(glContext,levelRecord);
+  machTaskSelfRef = PTR_00112034;
+  allocated = 0;
   if (size != 0) {
-    if (*(short *)(param_2 + 0x3e) == -0x7a43) {
-      local_20[0] = _malloc(size);
+    if (*(short *)(textureObject + 0x3e) == -0x7a43) {
+      allocation[0] = _malloc(size);
     }
     else {
-      *(byte *)(param_3 + 0xb) = *(byte *)(param_3 + 0xb) | 8;
-      _vm_allocate(*(vm_map_t *)puVar1,local_20,size,1);
+      *(byte *)(levelRecord + 0xb) = *(byte *)(levelRecord + 0xb) | 8;
+      _vm_allocate(*(vm_map_t *)machTaskSelfRef,allocation,size,1);
     }
-    if (local_20[0] == 0) {
+    if (allocation[0] == 0) {
       if (*(int *)(glContext + 0x7574) == 0) {
         *(undefined4 *)(glContext + 0x7574) = 0x505;
       }
-      uVar2 = 0;
+      allocated = 0;
     }
     else {
-      *(vm_address_t *)(param_3 + 0x14) = local_20[0];
-      uVar2 = 1;
+      *(vm_address_t *)(levelRecord + 0x14) = allocation[0];
+      allocated = 1;
     }
   }
-  return uVar2;
+  return allocated;
 }
 
 /* _gleTextureLevelBytes @ 0x470ac (140 bytes) */
@@ -2354,9 +2354,9 @@ LAB_00048458:
 }
 
 /* _gleDeletePluginTextureLevel @ 0x48478 (348 bytes) */
-int _gleDeletePluginTextureLevel(glContext, param_2, unusedArg3, faceIndex, level)
+int _gleDeletePluginTextureLevel(glContext, textureRecordThenHandleCursor, unusedArg3, faceIndex, level)
   int glContext;
-  undefined4 *param_2;
+  undefined4 *textureRecordThenHandleCursor;
   undefined4 unusedArg3;
   int faceIndex;
   uint level;
@@ -2372,14 +2372,14 @@ int _gleDeletePluginTextureLevel(glContext, param_2, unusedArg3, faceIndex, leve
   int rendererBase;
   int loopIndex;
   
-  bVar3 = *(byte *)((int)param_2 + 0x82);
+  bVar3 = *(byte *)((int)textureRecordThenHandleCursor + 0x82);
   levelBit = 1 << (level & 0x3f);
-  uVar8 = 0x1f - *(byte *)((int)param_2 + 0x83);
-  *(ushort *)((int)param_2 + faceIndex * 2 + 0xa0) =
-       *(ushort *)((int)param_2 + faceIndex * 2 + 0xa0) & ~(ushort)levelBit;
-  *(ushort *)((int)param_2 + faceIndex * 2 + 0x94) =
-       *(ushort *)((int)param_2 + faceIndex * 2 + 0x94) & ~(ushort)levelBit;
-  minFilter = *(ushort *)(param_2 + 0x20);
+  uVar8 = 0x1f - *(byte *)((int)textureRecordThenHandleCursor + 0x83);
+  *(ushort *)((int)textureRecordThenHandleCursor + faceIndex * 2 + 0xa0) =
+       *(ushort *)((int)textureRecordThenHandleCursor + faceIndex * 2 + 0xa0) & ~(ushort)levelBit;
+  *(ushort *)((int)textureRecordThenHandleCursor + faceIndex * 2 + 0x94) =
+       *(ushort *)((int)textureRecordThenHandleCursor + faceIndex * 2 + 0x94) & ~(ushort)levelBit;
+  minFilter = *(ushort *)(textureRecordThenHandleCursor + 0x20);
   if (((levelBit & (1 << (bVar3 & 0x3f) | 1U)) == 0) || (minFilter == 0)) {
     if (((levelBit & ((uint)(-1 << (uVar8 + bVar3 & 0x3f)) >> (uVar8 & 0x3f) | 1)) == 0) ||
        (minFilter < 0x2602)) goto LAB_0004856c;
@@ -2407,19 +2407,19 @@ LAB_00048558:
   else {
     newMinFilter = 0;
   }
-  *(ushort *)(param_2 + 0x20) = newMinFilter;
-  *(byte *)((int)param_2 + 0x83) = bVar3;
+  *(ushort *)(textureRecordThenHandleCursor + 0x20) = newMinFilter;
+  *(byte *)((int)textureRecordThenHandleCursor + 0x83) = bVar3;
 LAB_0004856c:
   rendererBase = glContext + 0x10000;
   loopIndex = 0;
   if (*(char *)(glContext + 0x85a4) != '\0') {
     do {
       rendererFuncs = (int *)(rendererBase + -0x777c);
-      rendererHandle = *param_2;
+      rendererHandle = *textureRecordThenHandleCursor;
       loopIndex = loopIndex + 1;
       rendererContext = (undefined4 *)(rendererBase + -0x7a54);
       rendererBase = rendererBase + 0x2e0;
-      param_2 = param_2 + 1;
+      textureRecordThenHandleCursor = textureRecordThenHandleCursor + 1;
       (**(code **)(*rendererFuncs + 0x164))(*rendererContext,rendererHandle,faceIndex,level);
     } while (loopIndex < (int)(uint)*(byte *)(glContext + 0x85a4));
   }
@@ -2497,25 +2497,25 @@ float * _glTexCoord2f_Comp(undefined4 glContext,float sCoord,float tCoord)
 }
 
 /* _gleSetEnable_TEXTURE_2D @ 0x48818 (80 bytes) */
-void _gleSetEnable_TEXTURE_2D(glContext, unusedArg2, param_3)
+void _gleSetEnable_TEXTURE_2D(glContext, unusedArg2, enable)
   int glContext;
   undefined4 unusedArg2;
-  int param_3;
+  int enable;
 {
-  uint uVar1;
-  int iVar2;
+  uint newUnitEnableBits;
+  int texUnitRecord;
   uint texUnit;
-  uint uVar4;
+  uint oldUnitEnableBits;
   
   texUnit = *(uint *)(glContext + 0x53d4);
   if (texUnit < 8) {
-    iVar2 = texUnit * 0x7c + glContext;
-    uVar4 = *(uint *)(iVar2 + 0x3534);
-    uVar1 = uVar4 & 0xfffffff7 | param_3 << 3;
-    if (uVar4 == uVar1) {
+    texUnitRecord = texUnit * 0x7c + glContext;
+    oldUnitEnableBits = *(uint *)(texUnitRecord + 0x3534);
+    newUnitEnableBits = oldUnitEnableBits & 0xfffffff7 | enable << 3;
+    if (oldUnitEnableBits == newUnitEnableBits) {
       return;
     }
-    *(uint *)(iVar2 + 0x3534) = uVar1;
+    *(uint *)(texUnitRecord + 0x3534) = newUnitEnableBits;
     _gleUpdateTextureParams(glContext,texUnit);
     return;
   }
@@ -2619,22 +2619,22 @@ int _glMultMatrixd_Exec(glContext, m)
   int glContext;
   undefined4 m;
 {
-  int iVar1;
-  undefined1 auStack_50 [72];
+  int copyResultOrContext;
+  undefined1 productMatrix [72];
   
   if ((*(short *)(glContext + 0x4a10) < 0) && (*(int *)(glContext + 0x4ff4) < 0x18)) {
-    ((void (*)())_gleMultMatrixd)(*(undefined4 *)(glContext + 0x4fec),m,auStack_50);
-    iVar1 = _gleCopyMatrix(auStack_50,*(undefined4 *)(glContext + 0x4fec));
+    ((void (*)())_gleMultMatrixd)(*(undefined4 *)(glContext + 0x4fec),m,productMatrix);
+    copyResultOrContext = _gleCopyMatrix(productMatrix,*(undefined4 *)(glContext + 0x4fec));
     *(uint *)(glContext + 0x50ac) = *(uint *)(glContext + 0x50ac) | *(uint *)(glContext + 0x50a8);
     *(uint *)(glContext + 0x50b0) = *(uint *)(glContext + 0x50b0) | *(uint *)(glContext + 0x50a8);
   }
   else {
-    iVar1 = glContext;
+    copyResultOrContext = glContext;
     if (*(int *)(glContext + 0x7574) == 0) {
       *(undefined4 *)(glContext + 0x7574) = 0x502;
     }
   }
-  return iVar1;
+  return copyResultOrContext;
 }
 
 /* _gleMultMatrixd @ 0x48ae4 (900 bytes) */
@@ -3866,33 +3866,34 @@ void _gleLightMaterialRGBAChange_F_AD(glContext, param_2)
 }
 
 /* _gleLightMaterialRGBAChange_F_E @ 0x4a8e8 (184 bytes) */
-void _gleLightMaterialRGBAChange_F_E(glContext, param_2)
+void _gleLightMaterialRGBAChange_F_E(glContext, rgba)
   int glContext;
-  undefined8 *param_2;
+  undefined8 *rgba;
 {
-  byte bVar1;
-  int iVar2;
+  byte dirtyBitIndex;
+  int material;
+  int dirtyWordAddress348;
   int glContextPtr5424;
-  int iVar3;
-  undefined8 uVar4;
+  int dirtyWordAddress324;
+  undefined8 rgbaBlueAlpha;
   
-  iVar2 = _glePushMaterial(glContext,0);
-  *(undefined8 *)(iVar2 + 0x30) = *param_2;
-  uVar4 = param_2[1];
-  *(ushort *)(iVar2 + 0x234) = *(ushort *)(iVar2 + 0x234) | 0x202;
-  *(undefined8 *)(iVar2 + 0x38) = uVar4;
+  material = _glePushMaterial(glContext,0);
+  *(undefined8 *)(material + 0x30) = *rgba;
+  rgbaBlueAlpha = rgba[1];
+  *(ushort *)(material + 0x234) = *(ushort *)(material + 0x234) | 0x202;
+  *(undefined8 *)(material + 0x38) = rgbaBlueAlpha;
   if (*(int *)(glContext + 0x5434) == 0) {
-    bVar1 = *(byte *)(*(int *)(glContext + 0x5420) + 0x2c3);
+    dirtyBitIndex = *(byte *)(*(int *)(glContext + 0x5420) + 0x2c3);
   }
   else {
-    bVar1 = *(byte *)(*(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x2f7);
+    dirtyBitIndex = *(byte *)(*(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x2f7);
   }
-  iVar3 = (bVar1 >> 3 & 0x1c) + glContext;
+  dirtyWordAddress324 = (dirtyBitIndex >> 3 & 0x1c) + glContext;
   glContextPtr5424 = *(int *)(glContext + 0x5424);
-  *(uint *)(iVar3 + 0x324) = *(uint *)(iVar3 + 0x324) | 1 << (bVar1 & 0x1f);
-  bVar1 = *(byte *)(glContextPtr5424 + 0x2c3);
-  iVar2 = (bVar1 >> 3 & 0x1c) + glContext;
-  *(uint *)(iVar2 + 0x348) = *(uint *)(iVar2 + 0x348) | 1 << (bVar1 & 0x1f);
+  *(uint *)(dirtyWordAddress324 + 0x324) = *(uint *)(dirtyWordAddress324 + 0x324) | 1 << (dirtyBitIndex & 0x1f);
+  dirtyBitIndex = *(byte *)(glContextPtr5424 + 0x2c3);
+  dirtyWordAddress348 = (dirtyBitIndex >> 3 & 0x1c) + glContext;
+  *(uint *)(dirtyWordAddress348 + 0x348) = *(uint *)(dirtyWordAddress348 + 0x348) | 1 << (dirtyBitIndex & 0x1f);
   return;
 }
 
@@ -5306,15 +5307,15 @@ void _glRectd_Exec(int glContext,double x1,double y1,double x2,double y2,double 
 void _gleBeginPolygonRenderTCL(glContext)
   int glContext;
 {
-  undefined *puVar1;
-  undefined *puVar2;
+  undefined *renderPolygonFunc;
+  undefined *flushPolygonFunc;
   
   *(undefined1 *)(glContext + 0x4a18) = 0;
-  puVar2 = PTR__gleFlushPolygonTCLFunc_00112254;
-  puVar1 = PTR__gleRenderPolygonTCLFunc_00112250;
+  flushPolygonFunc = PTR__gleFlushPolygonTCLFunc_00112254;
+  renderPolygonFunc = PTR__gleRenderPolygonTCLFunc_00112250;
   *(undefined4 *)(glContext + 0x4858) = *(undefined4 *)(glContext + 0x4854);
-  *(undefined **)(glContext + 0x4a0c) = puVar2;
-  *(undefined **)(glContext + 0x4a08) = puVar1;
+  *(undefined **)(glContext + 0x4a0c) = flushPolygonFunc;
+  *(undefined **)(glContext + 0x4a08) = renderPolygonFunc;
   return;
 }
 
@@ -6131,10 +6132,10 @@ LAB_0004dc00:
 int _gleGetVertexArrayFunc(glContext)
   undefined4 glContext;
 {
-  undefined4 *puVar1;
+  undefined4 *vertexFuncSlot;
   
-  puVar1 = (undefined4 *)(*_gleBuildVertexFunc)(glContext,1);
-  return *puVar1;
+  vertexFuncSlot = (undefined4 *)(*_gleBuildVertexFunc)(glContext,1);
+  return *vertexFuncSlot;
 }
 
 /* _gleSetFunctionIDFromArray @ 0x4dd18 (532 bytes) */

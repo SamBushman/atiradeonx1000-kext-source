@@ -1,0 +1,33 @@
+local	_glIsQuery_Exec	uVar1	isQuery	CONFIRMED	result of _gleIsHashName on the query name hash (ctx+0x6440), or 0 on error; returned
+local	_glIsEnabled_Exec	uVar1	enabled	CONFIRMED	result of _gleGetEnabled for cap, or 0 on error; returned
+local	_glGenLists_Exec	uVar1	firstListName	CONFIRMED	first name of the generated range returned by _gleGenHashNames on the display list hash (shared state +0x300c); returned
+local	_glGetQueryiv_Exec	uVar1	queryValue	INFERRED	value stored to *params: query counter bits (renderer info +0xa8) or the id of the active query (ctx+0x7444 record +4), 0 when none
+local	_glGetProgramStringARB_Exec	uVar2	acceptedFragmentTarget	INFERRED	second accepted program target: 0x8804 (GL_FRAGMENT_PROGRAM_ARB) when target >= 0x8621, shown by the decompiler as 0x8200 below it; target == this value selects program stage 1 (the first stage is 0x8620 vertex program)
+local	_glGetProgramEnvParameterfvARB_Exec	uVar3	acceptedFragmentTarget	INFERRED	second accepted program target: 0x8804 (GL_FRAGMENT_PROGRAM_ARB) when target >= 0x8621, shown by the decompiler as 0x8200 below it; target == this value selects program stage 1 (the first stage is 0x8620 vertex program)
+local	_glBindProgramARB_Exec	uVar2	acceptedFragmentTarget	INFERRED	second accepted program target: 0x8804 (GL_FRAGMENT_PROGRAM_ARB) when target >= 0x8621, shown by the decompiler as 0x8200 below it; target == this value selects program stage 1 (the first stage is 0x8620 vertex program)
+local	_glBindBuffer_Exec	iVar2	sharedStateMutex	CONFIRMED	shared state (ctx+0x5148) + 0x8028: mutex locked around _gleBindBufferObject when the shared flag at +0x8024 is set
+local	_glBindVertexArrayEXT_Exec	iVar1	sharedStateMutex	CONFIRMED	shared state (ctx+0x5148) + 0x8028: mutex locked around _gleBindVertexArray when the shared flag at +0x8024 is set
+local	_glGenBuffers_Exec	iVar2	bufferName	CONFIRMED	firstBufferName + index: the buffer name stored to buffers[index]
+local	_glGenBuffers_Exec	iVar4	firstBufferName	CONFIRMED	first name of the generated range returned by _gleGenHashNames on the buffer hash (shared state +0x701c); 0 means failure
+local	_glPolygonStipple_Exec	uVar1	skipPixels	INFERRED	ctx+0x31d8: pixel-store skipPixels (word 3 of the pixelStore block that starts at ctx+0x31cc, as in _OffsetLimitImage3D); the byte offset is skipPixels >> 3 and must be a multiple of 8 for the fast copy
+local	_glPolygonStipple_Exec	iVar3	skipRows	INFERRED	ctx+0x31d4: pixel-store skipRows (word 2 of the pixelStore block that starts at ctx+0x31cc, as in _OffsetLimitImage3D); each 32-pixel row is 4 bytes
+local	_glGetPolygonStipple_Exec	uVar1	skipPixels	INFERRED	ctx+0x31bc: pixel-store skipPixels (word 3 of the pixelStore block that starts at ctx+0x31b0, as in _OffsetLimitImage3D); the byte offset is skipPixels >> 3 and must be a multiple of 8 for the fast copy
+local	_glGetPolygonStipple_Exec	iVar3	skipRows	INFERRED	ctx+0x31b8: pixel-store skipRows (word 2 of the pixelStore block that starts at ctx+0x31b0, as in _OffsetLimitImage3D); each 32-pixel row is 4 bytes
+local	_glPixelZoom_Exec	uVar1	transferFlags	INFERRED	ctx+0x3414 with bit 0x4000 (x zoom != 1.0) or bit 0x8000 (y zoom != 1.0) set or cleared, stored back
+local	_glAlphaFunc_Exec	dVar2	clampBound	CONFIRMED	upper bound ctx+0x24 (1.0) then lower bound ctx+0x20 (0.0) used to clamp ref to [0,1]; the clamped ref is assigned from it
+local	_glResetHistogram_Exec	iVar2	binByteOffset	CONFIRMED	loopIndex * 0x10: byte offset of the four-int histogram bin being reset
+local	_glGetHistogramParameteriv_Exec	uVar2	parameterValue	CONFIRMED	value for pname (width ctx+0x3388, format ctx+0x338c, 0x20 for channel sizes, sink ctx+0x338e) stored to *params
+local	_glViewport_Exec	iVar1	maxViewportWidth	INFERRED	renderer info +0xc: width is clamped to it before being stored at ctx+0x1ba8
+local	_glViewport_Exec	iVar3	maxViewportHeight	INFERRED	renderer info +0x10: height is clamped to it before being stored at ctx+0x1bac
+local	_glAccum_Exec	bVar1	rendererInfoByte79IsZero	CONFIRMED	renderer info byte +0x79 compared with zero (same flag as in _glBitmap_NoopExec)
+local	_glAccum_Exec	iVar5	dirtyBitArrayWord	CONFIRMED	word read from the dirty bit array at ctx+0x324 by the scan loop (same as in _glBitmap_NoopExec)
+local	_glGetMinmax_Exec	iVar3	elementBytes	CONFIRMED	_gleBytesPerElement(type) result, replaced by _glePixelBytes(format,type) when zero; values must be a multiple of it
+local	_glGetMinmax_Exec	iVar5	packBufferSize	CONFIRMED	size at pixel pack buffer record +0x38, compared with the image end offset
+local	_glUniform2iARB_Exec	iVar5	uniformValues	CONFIRMED	*(currentProgram+0x4c): array of 0x10-byte uniform value records indexed by location
+local	_gleUpdateScissorData	param_1	glContext	INFERRED	param_1 is dereferenced at ctx+0x3188/+0x318c, scissor width/height clamped at zero; first argument of every such GLEngine function is the GL context
+local	_gleTextureTargetExtractor	param_2	textureObject	INFERRED	low nibble of the ushort at +0x34 selects the GL texture target returned (cube map 0x8513, 3D 0x806f, rect 0x84f5, 2D 0xde1, 1D 0xde0)
+local	_gleImageSize	iVar1	rowBytes	CONFIRMED	result of _gleRowBytes(format,type,width), multiplied by height
+local	_gleDeleteFuncCacheElem	piVar1	previousElem	CONFIRMED	glContext[1], the previous element of the circular list: its next link is set to the removed element's next, and the next's previous link to it
+local	_gleResetVACachePointers	iVar3	arrayPointer	CONFIRMED	client array pointer (clientState+0x30 + 6*k words) plus the bound buffer's +0x30 data offset when a buffer exists; stored to ctx+0x48f8+4k
+local	_gleResetVACachePointers	iVar4	bufferObject	CONFIRMED	per-array buffer object word read from clientState+0x360+4k; zero when the array is not buffer-backed
+local	_gleFreeCopyContextData	param_1	copyContextData	CONFIRMED	5-word copy context data block (see _gleSwitchRenderersReadBuffers): +8, +0xc, +0x10 are the malloc'd buffers freed here

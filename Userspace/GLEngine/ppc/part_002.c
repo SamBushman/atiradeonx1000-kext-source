@@ -4,13 +4,13 @@
 void _glAlphaFunc_Exec(int glContext,int func,float ref)
 {
   undefined4 glErrorCode;
-  double dVar2;
+  double clampBound;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
     if (func - 0x200U < 8) {
-      dVar2 = (double)*(float *)(glContext + 0x24);
-      if ((dVar2 < ref) || (dVar2 = (double)*(float *)(glContext + 0x20), ref < dVar2)) {
-        ref = dVar2;
+      clampBound = (double)*(float *)(glContext + 0x24);
+      if ((clampBound < ref) || (clampBound = (double)*(float *)(glContext + 0x20), ref < clampBound)) {
+        ref = clampBound;
       }
       *(float *)(glContext + 0x30c0) = (float)ref;
       *(short *)(glContext + 0x30c4) = (short)func;
@@ -81,16 +81,16 @@ void _gleSetEnable_BLEND(glContext, unusedArg2, enable)
 }
 
 /* _gleSetEnable_DEPTH_TEST @ 0x16588 (32 bytes) */
-void _gleSetEnable_DEPTH_TEST(param_1, unusedArg2, param_3)
-  int param_1;
+void _gleSetEnable_DEPTH_TEST(glContext, unusedArg2, enable)
+  int glContext;
   undefined4 unusedArg2;
-  uint param_3;
+  uint enable;
 {
-  if (*(byte *)(param_1 + 0x3128) == param_3) {
+  if (*(byte *)(glContext + 0x3128) == enable) {
     return;
   }
-  *(char *)(param_1 + 0x3128) = (char)param_3;
-  *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x200;
+  *(char *)(glContext + 0x3128) = (char)enable;
+  *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x200;
   return;
 }
 
@@ -112,13 +112,13 @@ void _glDepthMask_Exec(glContext, flag)
 }
 
 /* _gleSetEnable_CULL_FACE @ 0x165e8 (84 bytes) */
-void _gleSetEnable_CULL_FACE(glContext, unusedArg2, param_3)
+void _gleSetEnable_CULL_FACE(glContext, unusedArg2, enable)
   int glContext;
   undefined4 unusedArg2;
-  uint param_3;
+  uint enable;
 {
-  if (*(byte *)(glContext + 0x34da) != param_3) {
-    *(char *)(glContext + 0x34da) = (char)param_3;
+  if (*(byte *)(glContext + 0x34da) != enable) {
+    *(char *)(glContext + 0x34da) = (char)enable;
     _gleUpdatePolyMode(glContext);
     _gleUpdatePrimitiveData(glContext);
     return;
@@ -615,13 +615,13 @@ void _glHint_Exec(glContext, target, mode)
   uint target;
   int mode;
 {
-  undefined *puVar1;
-  undefined *puVar2;
+  undefined *setClipInterpFunc;
+  undefined *setEyeInterpFunc;
   undefined4 glErrorCode;
-  undefined2 uVar4;
+  undefined2 modeShort;
   
-  puVar2 = PTR__gleSetEyeInterpFunc_0011203c;
-  puVar1 = PTR__gleSetClipInterpFunc_00112038;
+  setEyeInterpFunc = PTR__gleSetEyeInterpFunc_0011203c;
+  setClipInterpFunc = PTR__gleSetClipInterpFunc_00112038;
   if (*(short *)(glContext + 0x4a10) < 0) {
     if (2 < mode - 0x1100U) goto LAB_00017508;
     if (target == 0x80f0) {
@@ -630,14 +630,14 @@ void _glHint_Exec(glContext, target, mode)
       *(uint *)(glContext + 0x497c) = *(uint *)(glContext + 0x497c) | 1;
     }
     else {
-      uVar4 = (undefined2)mode;
+      modeShort = (undefined2)mode;
       if (target < 0x80f1) {
         if (target == 0xc52) {
-          *(undefined2 *)(0x3170 + glContext) = uVar4;
+          *(undefined2 *)(0x3170 + glContext) = modeShort;
         }
         else if (target < 0xc53) {
           if (target == 0xc50) {
-            *(undefined2 *)(glContext + 0x316c) = uVar4;
+            *(undefined2 *)(glContext + 0x316c) = modeShort;
           }
           else {
             if (target != 0xc51) {
@@ -648,30 +648,30 @@ LAB_00017508:
               glErrorCode = 0x500;
               goto LAB_00017518;
             }
-            *(undefined2 *)(glContext + 0x316e) = uVar4;
+            *(undefined2 *)(glContext + 0x316e) = modeShort;
           }
         }
         else if (target == 0xc53) {
-          *(undefined2 *)(glContext + 0x3172) = uVar4;
+          *(undefined2 *)(glContext + 0x3172) = modeShort;
         }
         else {
           if (target != 0xc54) goto LAB_00017508;
-          *(undefined2 *)(glContext + 0x3174) = uVar4;
-          *(undefined **)(glContext + 0x49c8) = puVar2;
-          *(undefined **)(glContext + 0x49cc) = puVar1;
+          *(undefined2 *)(glContext + 0x3174) = modeShort;
+          *(undefined **)(glContext + 0x49c8) = setEyeInterpFunc;
+          *(undefined **)(glContext + 0x49cc) = setClipInterpFunc;
           ((double (*)())_gleUpdateFogData)(glContext);
         }
       }
       else if (target == 0x8534) {
-        *(undefined2 *)(glContext + 0x317a) = uVar4;
+        *(undefined2 *)(glContext + 0x317a) = modeShort;
       }
       else if (target < 0x8535) {
         if (target == 0x8192) {
-          *(undefined2 *)(glContext + 0x3178) = uVar4;
+          *(undefined2 *)(glContext + 0x3178) = modeShort;
         }
         else {
           if (target != 0x84ef) goto LAB_00017508;
-          *(undefined2 *)(glContext + 0x3176) = uVar4;
+          *(undefined2 *)(glContext + 0x3176) = modeShort;
         }
       }
       else if (target == 0x85b1) {
@@ -679,7 +679,7 @@ LAB_00017508:
       }
       else {
         if (target != 0x8b8b) goto LAB_00017508;
-        *(undefined2 *)(glContext + 0x317c) = uVar4;
+        *(undefined2 *)(glContext + 0x317c) = modeShort;
       }
     }
     *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x2000;
@@ -702,22 +702,22 @@ void _glGenTextures_Exec(glContext, n, textures)
   int *textures;
 {
   undefined4 glErrorCode;
-  int iVar2;
+  int textureName;
   int loopIndex;
-  int iVar4;
+  int sharedStateThenFirstName;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
     if (-1 < n) {
-      iVar4 = *(int *)(glContext + 0x5148);
-      if (*(char *)(iVar4 + 0x8024) != '\0') {
-        _pthread_mutex_lock(iVar4 + 0x8028);
-        iVar4 = *(int *)(glContext + 0x5148);
+      sharedStateThenFirstName = *(int *)(glContext + 0x5148);
+      if (*(char *)(sharedStateThenFirstName + 0x8024) != '\0') {
+        _pthread_mutex_lock(sharedStateThenFirstName + 0x8028);
+        sharedStateThenFirstName = *(int *)(glContext + 0x5148);
       }
-      iVar4 = _gleGenHashNames(iVar4 + 0x2008,n);
+      sharedStateThenFirstName = _gleGenHashNames(sharedStateThenFirstName + 0x2008,n);
       if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
         _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);
       }
-      if (iVar4 == 0) {
+      if (sharedStateThenFirstName == 0) {
         return;
       }
       loopIndex = 0;
@@ -725,9 +725,9 @@ void _glGenTextures_Exec(glContext, n, textures)
         return;
       }
       do {
-        iVar2 = iVar4 + loopIndex;
+        textureName = sharedStateThenFirstName + loopIndex;
         loopIndex = loopIndex + 1;
-        *textures = iVar2;
+        *textures = textureName;
         textures = textures + 1;
         n = n + -1;
       } while (n != 0);
@@ -912,8 +912,8 @@ void _glBindTexture_Exec(glContext, target, texture)
   undefined4 texture;
 {
   undefined4 glErrorCode;
-  undefined4 uVar1;
-  int iVar2;
+  undefined4 textureTargetIndex;
+  int sharedStateMutex;
   
   if (-1 < *(short *)(glContext + 0x4a10)) {
     if (*(int *)(glContext + 0x7574) != 0) {
@@ -925,17 +925,17 @@ void _glBindTexture_Exec(glContext, target, texture)
   if (target != 0x84f5) {
     if (target < 0x84f6) {
       if (target == 0xde1) {
-        uVar1 = 3;
+        textureTargetIndex = 3;
         goto LAB_000179b4;
       }
       if (target < 0xde2) {
         if (target == 0xde0) {
-          uVar1 = 4;
+          textureTargetIndex = 4;
           goto LAB_000179b4;
         }
       }
       else if (target == 0x806f) {
-        uVar1 = 1;
+        textureTargetIndex = 1;
         goto LAB_000179b4;
       }
     }
@@ -943,7 +943,7 @@ void _glBindTexture_Exec(glContext, target, texture)
       if (target == 0x85b3) goto LAB_00017994;
       if (target < 0x85b4) {
         if (target == 0x8513) {
-          uVar1 = 0;
+          textureTargetIndex = 0;
           goto LAB_000179b4;
         }
       }
@@ -958,16 +958,16 @@ LAB_000179ac:
     return;
   }
 LAB_00017994:
-  uVar1 = 2;
+  textureTargetIndex = 2;
 LAB_000179b4:
   if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) == '\0') {
-    ((void (*)())_gleBindTexture)(glContext,uVar1,texture,*(undefined4 *)(glContext + 0x53d4));
+    ((void (*)())_gleBindTexture)(glContext,textureTargetIndex,texture,*(undefined4 *)(glContext + 0x53d4));
     return;
   }
-  iVar2 = *(int *)(glContext + 0x5148) + 0x8028;
-  _pthread_mutex_lock(iVar2);
-  ((void (*)())_gleBindTexture)(glContext,uVar1,texture,*(undefined4 *)(glContext + 0x53d4));
-  _pthread_mutex_unlock(iVar2);
+  sharedStateMutex = *(int *)(glContext + 0x5148) + 0x8028;
+  _pthread_mutex_lock(sharedStateMutex);
+  ((void (*)())_gleBindTexture)(glContext,textureTargetIndex,texture,*(undefined4 *)(glContext + 0x53d4));
+  _pthread_mutex_unlock(sharedStateMutex);
   return;
 }
 
@@ -2050,20 +2050,20 @@ int _gleCheckTexSubImageArgs(glContext, level, format, type)
   uint format;
   uint type;
 {
-  bool bVar1;
-  uint uVar2;
+  bool formatTypeTestResult;
+  uint requiredFormat;
   undefined4 glErrorCode;
   
   if (type < 0x8365) {
     if (0x8361 < type) {
 LAB_00019314:
-      bVar1 = format == 0x1907;
+      formatTypeTestResult = format == 0x1907;
       goto LAB_0001933c;
     }
     if (type == 0x1a00) {
-      bVar1 = format == 0x1900;
+      formatTypeTestResult = format == 0x1900;
 LAB_00019368:
-      if (bVar1) goto LAB_00019380;
+      if (formatTypeTestResult) goto LAB_00019380;
 LAB_0001936c:
       if (*(int *)(glContext + 0x7574) != 0) {
         return 0;
@@ -2074,7 +2074,7 @@ LAB_0001936c:
     if (0x1a00 < type) {
       if (type == 0x8032) goto LAB_00019314;
       if (0x8031 < type) {
-        bVar1 = 0x8036 < type;
+        formatTypeTestResult = 0x8036 < type;
         goto LAB_000192a0;
       }
       goto LAB_0001936c;
@@ -2084,9 +2084,9 @@ LAB_0001936c:
       if (format < 0x8001) {
         if (format != 0x1900) {
           if (0x18ff < format) {
-            bVar1 = 8 < format - 0x1902;
+            formatTypeTestResult = 8 < format - 0x1902;
 LAB_0001930c:
-            if (!bVar1) goto LAB_00019380;
+            if (!formatTypeTestResult) goto LAB_00019380;
           }
           goto LAB_0001936c;
         }
@@ -2094,7 +2094,7 @@ LAB_0001930c:
       else {
         if (format < 0x80e0) goto LAB_0001936c;
         if (0x80e1 < format) {
-          bVar1 = 3 < format - 0x86f4;
+          formatTypeTestResult = 3 < format - 0x86f4;
           goto LAB_0001930c;
         }
       }
@@ -2103,24 +2103,24 @@ LAB_0001930c:
   else {
     if (0x85bb < type) {
       if (type - 0x86da < 2) {
-        bVar1 = format == 0x86f7;
+        formatTypeTestResult = format == 0x86f7;
         goto LAB_00019368;
       }
       goto LAB_0001936c;
     }
     if (type < 0x85ba) {
-      bVar1 = 0x8368 < type;
+      formatTypeTestResult = 0x8368 < type;
 LAB_000192a0:
-      if (bVar1) goto LAB_0001936c;
+      if (formatTypeTestResult) goto LAB_0001936c;
       if (format == 0x1908) goto LAB_00019380;
-      uVar2 = 0x80e1;
+      requiredFormat = 0x80e1;
     }
     else {
-      uVar2 = 0x85b9;
+      requiredFormat = 0x85b9;
     }
-    bVar1 = format == uVar2;
+    formatTypeTestResult = format == requiredFormat;
 LAB_0001933c:
-    if (!bVar1) {
+    if (!formatTypeTestResult) {
       if (*(int *)(glContext + 0x7574) != 0) {
         return 0;
       }
@@ -2428,26 +2428,26 @@ int _glePixelBytes(format, type)
 }
 
 /* _gleRowBytes @ 0x199bc (108 bytes) */
-int _gleRowBytes(format, type, param_3)
+int _gleRowBytes(format, type, width)
   undefined4 format;
   int type;
-  int param_3;
+  int width;
 {
-  int iVar1;
+  int unitBytesThenRowBytes;
   
   if (type == 0) {
-    iVar1 = ((int (*)())_glePixelBytes)(format,0);
-    iVar1 = iVar1 * (param_3 + 3 >> 2) >> 2;
+    unitBytesThenRowBytes = ((int (*)())_glePixelBytes)(format,0);
+    unitBytesThenRowBytes = unitBytesThenRowBytes * (width + 3 >> 2) >> 2;
   }
   else if (type == 0x1a00) {
-    iVar1 = ((int (*)())_gleComponents)(format);
-    iVar1 = param_3 * iVar1 + 7 >> 3;
+    unitBytesThenRowBytes = ((int (*)())_gleComponents)(format);
+    unitBytesThenRowBytes = width * unitBytesThenRowBytes + 7 >> 3;
   }
   else {
-    iVar1 = ((int (*)())_glePixelBytes)(format,type);
-    iVar1 = iVar1 * param_3;
+    unitBytesThenRowBytes = ((int (*)())_glePixelBytes)(format,type);
+    unitBytesThenRowBytes = unitBytesThenRowBytes * width;
   }
-  return iVar1;
+  return unitBytesThenRowBytes;
 }
 
 /* _gleTextureImagePut @ 0x19a28 (300 bytes) */
@@ -3353,17 +3353,17 @@ int _glTexParameterF_Exec(glContext, target, pname, params)
   undefined4 glErrorCode;
   bool isLegalEnum;
   float borderColorComponent;
-  float fVar3;
+  float clampUpperOrClampedShadowAmbient;
   uint legalEnum;
   int textureObject;
   undefined4 modifyFlag;
-  float fVar7;
+  float clampLowerOrParamValue;
   uint paramInt;
   float paramDouble;
   
   textureObject = ((int (*)())_gleLookUpNonProxyTexture)(glContext,target);
-  fVar3 = FLOAT_00108e54;
-  fVar7 = FLOAT_00108e50;
+  clampUpperOrClampedShadowAmbient = FLOAT_00108e54;
+  clampLowerOrParamValue = FLOAT_00108e50;
   modifyFlag = 0;
   if (*(short *)(glContext + 0x4a10) < 0) {
     if (textureObject == 0) goto LAB_0001b4fc;
@@ -3377,25 +3377,25 @@ LAB_0001b280:
       if (pname != (undefined *)0x2803) {
         if ((undefined *)0x2803 < pname) {
           if (pname == (undefined *)0x80bf) {
-            fVar7 = *params;
-            fVar3 = FLOAT_00108e50;
-            if ((fVar7 <= FLOAT_00108e50) || (fVar3 = FLOAT_00108e54, FLOAT_00108e54 <= fVar7)) {
-              *(float *)(textureObject + 0x68) = fVar3;
+            clampLowerOrParamValue = *params;
+            clampUpperOrClampedShadowAmbient = FLOAT_00108e50;
+            if ((clampLowerOrParamValue <= FLOAT_00108e50) || (clampUpperOrClampedShadowAmbient = FLOAT_00108e54, FLOAT_00108e54 <= clampLowerOrParamValue)) {
+              *(float *)(textureObject + 0x68) = clampUpperOrClampedShadowAmbient;
             }
             else {
-              *(float *)(textureObject + 0x68) = fVar7;
+              *(float *)(textureObject + 0x68) = clampLowerOrParamValue;
             }
           }
           else if (pname < (undefined *)0x80c0) {
             if (pname == (undefined *)0x8066) {
-              fVar7 = *params;
-              if (fVar7 < FLOAT_00108e50) {
-                fVar7 = 0.0;
+              clampLowerOrParamValue = *params;
+              if (clampLowerOrParamValue < FLOAT_00108e50) {
+                clampLowerOrParamValue = 0.0;
               }
-              else if (FLOAT_00108e54 < fVar7) {
-                fVar7 = 1.0;
+              else if (FLOAT_00108e54 < clampLowerOrParamValue) {
+                clampLowerOrParamValue = 1.0;
               }
-              *(float *)(textureObject + 0x28) = fVar7;
+              *(float *)(textureObject + 0x28) = clampLowerOrParamValue;
             }
             else {
               if (pname != (undefined *)0x8072) goto LAB_0001b4fc;
@@ -3468,29 +3468,29 @@ LAB_0001b228:
               *(float *)(textureObject + 0x40) = borderColorComponent;
             }
             borderColorComponent = params[1];
-            if (borderColorComponent < fVar7) {
-              *(float *)(textureObject + 0x44) = fVar7;
+            if (borderColorComponent < clampLowerOrParamValue) {
+              *(float *)(textureObject + 0x44) = clampLowerOrParamValue;
             }
-            else if (fVar3 < borderColorComponent) {
-              *(float *)(textureObject + 0x44) = fVar3;
+            else if (clampUpperOrClampedShadowAmbient < borderColorComponent) {
+              *(float *)(textureObject + 0x44) = clampUpperOrClampedShadowAmbient;
             }
             else {
               *(float *)(textureObject + 0x44) = borderColorComponent;
             }
             borderColorComponent = params[2];
-            if (borderColorComponent < fVar7) {
-              *(float *)(textureObject + 0x48) = fVar7;
+            if (borderColorComponent < clampLowerOrParamValue) {
+              *(float *)(textureObject + 0x48) = clampLowerOrParamValue;
             }
-            else if (fVar3 < borderColorComponent) {
-              *(float *)(textureObject + 0x48) = fVar3;
+            else if (clampUpperOrClampedShadowAmbient < borderColorComponent) {
+              *(float *)(textureObject + 0x48) = clampUpperOrClampedShadowAmbient;
             }
             else {
               *(float *)(textureObject + 0x48) = borderColorComponent;
             }
             borderColorComponent = params[3];
-            if (borderColorComponent < fVar7) goto LAB_0001af8c;
-            if (fVar3 < borderColorComponent) {
-              *(float *)(textureObject + 0x4c) = fVar3;
+            if (borderColorComponent < clampLowerOrParamValue) goto LAB_0001af8c;
+            if (clampUpperOrClampedShadowAmbient < borderColorComponent) {
+              *(float *)(textureObject + 0x4c) = clampUpperOrClampedShadowAmbient;
             }
             else {
               *(float *)(textureObject + 0x4c) = borderColorComponent;
@@ -3608,9 +3608,9 @@ LAB_0001b184:
             *(float *)(textureObject + 0x40) = *params;
             *(float *)(textureObject + 0x44) = params[1];
             *(float *)(textureObject + 0x48) = params[2];
-            fVar7 = params[3];
+            clampLowerOrParamValue = params[3];
 LAB_0001af8c:
-            *(float *)(textureObject + 0x4c) = fVar7;
+            *(float *)(textureObject + 0x4c) = clampLowerOrParamValue;
             goto LAB_0001b514;
           }
           if (pname == (undefined *)0x884b) {
@@ -4731,31 +4731,31 @@ void _gleUpdateDrawArraysFuncs(glContext)
 void _gleBeginPrimitiveTCLFunc(glContext)
   int glContext;
 {
-  short sVar1;
-  undefined *puVar2;
-  undefined *puVar3;
-  int iVar4;
-  int local_20 [5];
+  short vertexStride;
+  undefined *renderPrimitiveFunc;
+  undefined *flushPrimitiveFunc;
+  int vertexBuffer;
+  int vertexCapacity [5];
   
-  local_20[0] = *(int *)(glContext + 0x4a14);
+  vertexCapacity[0] = *(int *)(glContext + 0x4a14);
   *(undefined1 *)(glContext + 0x4a18) = 0;
-  if (local_20[0] == 0) {
-    sVar1 = *(short *)(glContext + 0x4880);
+  if (vertexCapacity[0] == 0) {
+    vertexStride = *(short *)(glContext + 0x4880);
   }
   else {
-    sVar1 = *(short *)(glContext + 0x4882);
+    vertexStride = *(short *)(glContext + 0x4882);
   }
-  iVar4 = (**(code **)(glContext + 0x46e8))
-                    (*(undefined4 *)(glContext + 0x4688),(int)*(short *)(glContext + 0x4a10),local_20);
-  puVar2 = PTR__gleRenderPrimitiveTCLFunc_001113cc;
+  vertexBuffer = (**(code **)(glContext + 0x46e8))
+                    (*(undefined4 *)(glContext + 0x4688),(int)*(short *)(glContext + 0x4a10),vertexCapacity);
+  renderPrimitiveFunc = PTR__gleRenderPrimitiveTCLFunc_001113cc;
   *(undefined2 *)(glContext + 0x4a12) = *(undefined2 *)(glContext + 0x4a10);
-  puVar3 = PTR__gleFlushPrimitiveTCLFunc_001113d0;
-  *(undefined **)(glContext + 0x4a08) = puVar2;
-  *(undefined **)(glContext + 0x4a0c) = puVar3;
-  *(int *)(glContext + 0x485c) = iVar4 + sVar1 * local_20[0];
-  *(short *)(glContext + 0x487c) = sVar1;
-  *(int *)(glContext + 0x4868) = iVar4;
-  *(int *)(glContext + 0x4858) = iVar4;
+  flushPrimitiveFunc = PTR__gleFlushPrimitiveTCLFunc_001113d0;
+  *(undefined **)(glContext + 0x4a08) = renderPrimitiveFunc;
+  *(undefined **)(glContext + 0x4a0c) = flushPrimitiveFunc;
+  *(int *)(glContext + 0x485c) = vertexBuffer + vertexStride * vertexCapacity[0];
+  *(short *)(glContext + 0x487c) = vertexStride;
+  *(int *)(glContext + 0x4868) = vertexBuffer;
+  *(int *)(glContext + 0x4858) = vertexBuffer;
   return;
 }
 

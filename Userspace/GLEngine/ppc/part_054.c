@@ -1,60 +1,60 @@
 #include "decls.h"
 
 /* _gleMultiVtxTextureCoordGenNormalSTR @ 0xf73b4 (88 bytes) */
-void _gleMultiVtxTextureCoordGenNormalSTR(param_1, vertexCursor, vertexCount, param_4)
-  int param_1;
+void _gleMultiVtxTextureCoordGenNormalSTR(glContext, vertexCursor, vertexCount, texUnit)
+  int glContext;
   uint vertexCursor;
   int vertexCount;
-  int param_4;
+  int texUnit;
 {
-  undefined4 *puVar1;
-  uint uVar2;
+  undefined4 *normalZPtr;
+  uint vertexEndThenRemaining;
   int texCoordSlot;
   
-  uVar2 = vertexCursor + vertexCount * 0x100;
-  if (vertexCursor < uVar2) {
-    uVar2 = (uVar2 - vertexCursor) + 0xff >> 8;
+  vertexEndThenRemaining = vertexCursor + vertexCount * 0x100;
+  if (vertexCursor < vertexEndThenRemaining) {
+    vertexEndThenRemaining = (vertexEndThenRemaining - vertexCursor) + 0xff >> 8;
     do {
-      texCoordSlot = param_4 * 0x10 + vertexCursor;
+      texCoordSlot = texUnit * 0x10 + vertexCursor;
       *(undefined4 *)(texCoordSlot + 0x80) = *(undefined4 *)(vertexCursor + 0x40);
       *(undefined4 *)(texCoordSlot + 0x84) = *(undefined4 *)(vertexCursor + 0x44);
-      puVar1 = (undefined4 *)(vertexCursor + 0x48);
+      normalZPtr = (undefined4 *)(vertexCursor + 0x48);
       vertexCursor = vertexCursor + 0x100;
-      *(undefined4 *)(texCoordSlot + 0x88) = *puVar1;
-      uVar2 = uVar2 - 1;
-    } while (uVar2 != 0);
+      *(undefined4 *)(texCoordSlot + 0x88) = *normalZPtr;
+      vertexEndThenRemaining = vertexEndThenRemaining - 1;
+    } while (vertexEndThenRemaining != 0);
   }
-  *(uint *)(param_1 + 0x486c) = *(uint *)(param_1 + 0x486c) | 1;
+  *(uint *)(glContext + 0x486c) = *(uint *)(glContext + 0x486c) | 1;
   return;
 }
 
 /* _gleTextureImageCopy @ 0xf7410 (260 bytes) */
-void _gleTextureImageCopy(glContext, param_2, unusedArg3, param_4, y, width, height)
+void _gleTextureImageCopy(glContext, levelRecord, unusedArg3, x, y, width, height)
   int glContext;
-  int param_2;
+  int levelRecord;
   undefined4 unusedArg3;
-  undefined4 param_4;
+  undefined4 x;
   undefined4 y;
   undefined4 width;
   undefined4 height;
 {
-  undefined4 uVar1;
-  undefined4 uVar2;
-  undefined4 uVar3;
-  undefined4 uVar4;
-  undefined4 uVar5;
-  undefined4 uVar6;
-  undefined4 uVar7;
+  undefined4 savedWord31c4;
+  undefined4 savedWord31bc;
+  undefined4 savedWord31c0;
+  undefined4 savedWord31c8;
+  undefined4 savedWord31b0;
+  undefined4 savedWord31b4;
+  undefined4 savedWord31b8;
   
-  uVar5 = *(undefined4 *)(glContext + 0x31b0);
-  *(uint *)(glContext + 0x31b0) = (uint)*(ushort *)(param_2 + 0xc);
-  uVar4 = *(undefined4 *)(glContext + 0x31c8);
-  uVar3 = *(undefined4 *)(glContext + 0x31c0);
-  uVar6 = *(undefined4 *)(0x31b4 + glContext);
-  uVar7 = *(undefined4 *)(glContext + 0x31b8);
-  *(uint *)(0x31b4 + glContext) = (uint)*(ushort *)(param_2 + 0xe);
-  uVar2 = *(undefined4 *)(glContext + 0x31bc);
-  uVar1 = *(undefined4 *)(glContext + 0x31c4);
+  savedWord31b0 = *(undefined4 *)(glContext + 0x31b0);
+  *(uint *)(glContext + 0x31b0) = (uint)*(ushort *)(levelRecord + 0xc);
+  savedWord31c8 = *(undefined4 *)(glContext + 0x31c8);
+  savedWord31c0 = *(undefined4 *)(glContext + 0x31c0);
+  savedWord31b4 = *(undefined4 *)(0x31b4 + glContext);
+  savedWord31b8 = *(undefined4 *)(glContext + 0x31b8);
+  *(uint *)(0x31b4 + glContext) = (uint)*(ushort *)(levelRecord + 0xe);
+  savedWord31bc = *(undefined4 *)(glContext + 0x31bc);
+  savedWord31c4 = *(undefined4 *)(glContext + 0x31c4);
   *(undefined1 *)(glContext + 0x31c8) = 0;
   *(undefined1 *)(glContext + 0x31c9) = 0;
   *(undefined4 *)(glContext + 0x31b8) = 0;
@@ -62,16 +62,16 @@ void _gleTextureImageCopy(glContext, param_2, unusedArg3, param_4, y, width, hei
   *(undefined4 *)(glContext + 0x31c0) = 0;
   *(undefined4 *)(glContext + 0x31c4) = 1;
   (**(code **)(glContext + 0x46a0))
-            (*(undefined4 *)(glContext + 0x4688),param_4,y,width,height,
-             *(undefined2 *)(param_2 + 0x10),*(undefined2 *)(param_2 + 0x12),
-             *(undefined4 *)(param_2 + 0x14));
-  *(undefined4 *)(glContext + 0x31b0) = uVar5;
-  *(undefined4 *)(glContext + 0x31c8) = uVar4;
-  *(undefined4 *)(0x31b4 + glContext) = uVar6;
-  *(undefined4 *)(glContext + 0x31b8) = uVar7;
-  *(undefined4 *)(glContext + 0x31bc) = uVar2;
-  *(undefined4 *)(glContext + 0x31c0) = uVar3;
-  *(undefined4 *)(glContext + 0x31c4) = uVar1;
+            (*(undefined4 *)(glContext + 0x4688),x,y,width,height,
+             *(undefined2 *)(levelRecord + 0x10),*(undefined2 *)(levelRecord + 0x12),
+             *(undefined4 *)(levelRecord + 0x14));
+  *(undefined4 *)(glContext + 0x31b0) = savedWord31b0;
+  *(undefined4 *)(glContext + 0x31c8) = savedWord31c8;
+  *(undefined4 *)(0x31b4 + glContext) = savedWord31b4;
+  *(undefined4 *)(glContext + 0x31b8) = savedWord31b8;
+  *(undefined4 *)(glContext + 0x31bc) = savedWord31bc;
+  *(undefined4 *)(glContext + 0x31c0) = savedWord31c0;
+  *(undefined4 *)(glContext + 0x31c4) = savedWord31c4;
   return;
 }
 
@@ -188,21 +188,21 @@ void _gleByteFilter2(dst, src, count, offsetA, offsetB)
   int offsetA;
   int offsetB;
 {
-  char cVar1;
+  char texelAB;
   int byteOffset;
-  char *pcVar3;
+  char *texelABCursor;
   
   byteOffset = 0;
   if (count < 1) {
     return;
   }
-  pcVar3 = (char *)(src + offsetA + offsetB);
+  texelABCursor = (char *)(src + offsetA + offsetB);
   do {
-    cVar1 = *pcVar3;
-    pcVar3 = pcVar3 + 1;
+    texelAB = *texelABCursor;
+    texelABCursor = texelABCursor + 1;
     *(char *)(dst + byteOffset) =
          (char)((int)*(char *)(src + byteOffset) + (int)*(char *)(src + byteOffset + offsetA) +
-                (int)*(char *)(src + byteOffset + offsetB) + (int)cVar1 >> 2);
+                (int)*(char *)(src + byteOffset + offsetB) + (int)texelAB >> 2);
     byteOffset = byteOffset + 1;
     count = count + -1;
   } while (count != 0);
@@ -218,25 +218,25 @@ void _gleByteFilter3(dst, src, count, offsetA, offsetB, offsetC)
   int offsetB;
   int offsetC;
 {
-  char cVar1;
-  char *pcVar2;
+  char texelBC;
+  char *texelABCAddress;
   int byteOffset;
-  int iVar4;
-  char *pcVar5;
+  int sourceAddress;
+  char *texelBCCursor;
   
   byteOffset = 0;
   if (0 < count) {
-    pcVar5 = (char *)(src + offsetB + offsetC);
+    texelBCCursor = (char *)(src + offsetB + offsetC);
     do {
-      iVar4 = src + byteOffset;
-      cVar1 = *pcVar5;
-      pcVar2 = pcVar5 + offsetA;
-      pcVar5 = pcVar5 + 1;
+      sourceAddress = src + byteOffset;
+      texelBC = *texelBCCursor;
+      texelABCAddress = texelBCCursor + offsetA;
+      texelBCCursor = texelBCCursor + 1;
       *(char *)(dst + byteOffset) =
-           (char)((int)*(char *)(src + byteOffset) + (int)*(char *)(iVar4 + offsetA) +
-                  (int)*(char *)(iVar4 + offsetB) + (int)*(char *)(iVar4 + offsetA + offsetB) +
-                  (int)*(char *)(iVar4 + offsetC) + (int)*(char *)(iVar4 + offsetA + offsetC) +
-                  (int)cVar1 + (int)*pcVar2 >> 3);
+           (char)((int)*(char *)(src + byteOffset) + (int)*(char *)(sourceAddress + offsetA) +
+                  (int)*(char *)(sourceAddress + offsetB) + (int)*(char *)(sourceAddress + offsetA + offsetB) +
+                  (int)*(char *)(sourceAddress + offsetC) + (int)*(char *)(sourceAddress + offsetA + offsetC) +
+                  (int)texelBC + (int)*texelABCAddress >> 3);
       byteOffset = byteOffset + 1;
       count = count + -1;
     } while (count != 0);
@@ -535,40 +535,40 @@ void _gleHalfFloatFilter1(dst, src, count, offsetA)
   int count;
   int offsetA;
 {
-  float fVar1;
-  uint uVar2;
+  float average;
+  uint floatExponentBits;
   float weight;
-  ushort uVar4;
+  ushort halfBits;
   int byteOffset;
-  double dVar6;
-  double dVar7;
+  double firstSample;
+  double secondSample;
   
   weight = FLOAT_00108e90;
   byteOffset = 0;
   if (0 < count << 1) {
     do {
-      dVar6 = (double)((double (*)())_gleHalfFloatToFloat)((uint)*(ushort *)(src + byteOffset));
-      dVar7 = (double)((double (*)())_gleHalfFloatToFloat)((uint)*(ushort *)(src + byteOffset + offsetA));
-      fVar1 = (float)(dVar6 + dVar7) * weight;
-      uVar2 = (uint)GH_F2U(fVar1) & 0x7f800000;
-      uVar4 = (ushort)((uint)GH_F2U(fVar1) >> 0x10) & 0x8000;
-      if (uVar2 < 0x47800000) {
-        if (uVar2 < 0x38000001) {
-          uVar4 = uVar4 | (ushort)(((uint)GH_F2U(fVar1) & 0x7fffff | 0x800000) >>
-                                  ((0x38000000 - uVar2 >> 0x17) + 0xe & 0x3f));
+      firstSample = (double)((double (*)())_gleHalfFloatToFloat)((uint)*(ushort *)(src + byteOffset));
+      secondSample = (double)((double (*)())_gleHalfFloatToFloat)((uint)*(ushort *)(src + byteOffset + offsetA));
+      average = (float)(firstSample + secondSample) * weight;
+      floatExponentBits = (uint)GH_F2U(average) & 0x7f800000;
+      halfBits = (ushort)((uint)GH_F2U(average) >> 0x10) & 0x8000;
+      if (floatExponentBits < 0x47800000) {
+        if (floatExponentBits < 0x38000001) {
+          halfBits = halfBits | (ushort)(((uint)GH_F2U(average) & 0x7fffff | 0x800000) >>
+                                  ((0x38000000 - floatExponentBits >> 0x17) + 0xe & 0x3f));
         }
         else {
-          uVar4 = uVar4 | (ushort)(uVar2 + 0xc8000000 >> 0xd) |
-                  (ushort)(((uint)GH_F2U(fVar1) & 0x7fffff) >> 0xd);
+          halfBits = halfBits | (ushort)(floatExponentBits + 0xc8000000 >> 0xd) |
+                  (ushort)(((uint)GH_F2U(average) & 0x7fffff) >> 0xd);
         }
       }
-      else if ((uVar2 == 0x7f800000) && (((uint)GH_F2U(fVar1) & 1) != 0)) {
-        uVar4 = uVar4 | 0x7fff;
+      else if ((floatExponentBits == 0x7f800000) && (((uint)GH_F2U(average) & 1) != 0)) {
+        halfBits = halfBits | 0x7fff;
       }
       else {
-        uVar4 = uVar4 | 0x7c00;
+        halfBits = halfBits | 0x7c00;
       }
-      *(ushort *)(dst + byteOffset) = uVar4;
+      *(ushort *)(dst + byteOffset) = halfBits;
       byteOffset = byteOffset + 2;
     } while (byteOffset < count << 1);
   }
@@ -857,14 +857,14 @@ void _gle565Filter1(dst, src, unusedArg3, offsetA)
   undefined4 unusedArg3;
   int offsetA;
 {
-  ushort uVar1;
-  ushort uVar2;
+  ushort texel0;
+  ushort texelA;
   
-  uVar1 = *src;
-  uVar2 = *(ushort *)((int)src + offsetA);
-  *dst = (ushort)((uVar1 & 0xf800) + (uVar2 & 0xf800) >> 1) & 0xf800 |
-             (ushort)((uVar1 & 0x7e0) + (uVar2 & 0x7e0) >> 1) & 0x7e0 |
-             (ushort)((uVar1 & 0x1f) + (uVar2 & 0x1f) >> 1);
+  texel0 = *src;
+  texelA = *(ushort *)((int)src + offsetA);
+  *dst = (ushort)((texel0 & 0xf800) + (texelA & 0xf800) >> 1) & 0xf800 |
+             (ushort)((texel0 & 0x7e0) + (texelA & 0x7e0) >> 1) & 0x7e0 |
+             (ushort)((texel0 & 0x1f) + (texelA & 0x1f) >> 1);
   return;
 }
 
@@ -876,19 +876,19 @@ void _gle565Filter2(dst, src, unusedArg3, offsetA, offsetB)
   int offsetA;
   int offsetB;
 {
-  ushort uVar1;
-  ushort uVar2;
-  ushort uVar3;
-  ushort uVar4;
+  ushort texel0;
+  ushort texelA;
+  ushort texelB;
+  ushort texelAB;
   
-  uVar1 = *src;
-  uVar2 = *(ushort *)((int)src + offsetA);
-  uVar3 = *(ushort *)((int)src + offsetB);
-  uVar4 = *(ushort *)((int)src + offsetB + offsetA);
-  *dst = (ushort)((uVar1 & 0xf800) + (uVar2 & 0xf800) + (uVar3 & 0xf800) + (uVar4 & 0xf800) >> 2
+  texel0 = *src;
+  texelA = *(ushort *)((int)src + offsetA);
+  texelB = *(ushort *)((int)src + offsetB);
+  texelAB = *(ushort *)((int)src + offsetB + offsetA);
+  *dst = (ushort)((texel0 & 0xf800) + (texelA & 0xf800) + (texelB & 0xf800) + (texelAB & 0xf800) >> 2
                      ) & 0xf800 |
-             (ushort)((uVar1 & 0x7e0) + (uVar2 & 0x7e0) + (uVar3 & 0x7e0) + (uVar4 & 0x7e0) >> 2) &
-             0x7e0 | (ushort)((uVar1 & 0x1f) + (uVar2 & 0x1f) + (uVar3 & 0x1f) + (uVar4 & 0x1f) >> 2
+             (ushort)((texel0 & 0x7e0) + (texelA & 0x7e0) + (texelB & 0x7e0) + (texelAB & 0x7e0) >> 2) &
+             0x7e0 | (ushort)((texel0 & 0x1f) + (texelA & 0x1f) + (texelB & 0x1f) + (texelAB & 0x1f) >> 2
                              ) & 0x1f;
   return;
 }
@@ -1059,27 +1059,27 @@ void _gles8s8Filter3(dst, src, unusedArg3, offsetA, offsetB, offsetC)
   int offsetB;
   int offsetC;
 {
-  undefined2 uVar1;
-  undefined2 uVar2;
-  undefined2 uVar3;
-  undefined2 uVar4;
+  undefined2 texelAB;
+  undefined2 texelAC;
+  undefined2 texelBC;
+  undefined2 texelABC;
   
-  uVar1 = *(undefined2 *)((int)src + offsetB + offsetA);
-  uVar2 = *(undefined2 *)((int)src + offsetC + offsetA);
-  uVar3 = *(undefined2 *)((int)src + offsetC + offsetB);
-  uVar4 = *(undefined2 *)((int)src + offsetC + offsetB + offsetA);
+  texelAB = *(undefined2 *)((int)src + offsetB + offsetA);
+  texelAC = *(undefined2 *)((int)src + offsetC + offsetA);
+  texelBC = *(undefined2 *)((int)src + offsetC + offsetB);
+  texelABC = *(undefined2 *)((int)src + offsetC + offsetB + offsetA);
   *dst = ((short)(char)((ushort)*src >> 8) +
               (short)(char)((ushort)*(undefined2 *)((int)src + offsetA) >> 8) +
               (short)(char)((ushort)*(undefined2 *)((int)src + offsetB) >> 8) +
-              (short)(char)((ushort)uVar1 >> 8) +
+              (short)(char)((ushort)texelAB >> 8) +
               (short)(char)((ushort)*(undefined2 *)((int)src + offsetC) >> 8) +
-              (short)(char)((ushort)uVar2 >> 8) + (short)(char)((ushort)uVar3 >> 8) +
-             (short)(char)((ushort)uVar4 >> 8)) * 0x80 & 0xff00U |
+              (short)(char)((ushort)texelAC >> 8) + (short)(char)((ushort)texelBC >> 8) +
+             (short)(char)((ushort)texelABC >> 8)) * 0x80 & 0xff00U |
              (ushort)((uint)((int)(char)*src +
                              (int)(char)*(undefined2 *)((int)src + offsetA) +
-                             (int)(char)*(undefined2 *)((int)src + offsetB) + (int)(char)uVar1 +
-                             (int)(char)*(undefined2 *)((int)src + offsetC) + (int)(char)uVar2 +
-                             (int)(char)uVar3 + (int)(char)uVar4) >> 1) & 0xff;
+                             (int)(char)*(undefined2 *)((int)src + offsetB) + (int)(char)texelAB +
+                             (int)(char)*(undefined2 *)((int)src + offsetC) + (int)(char)texelAC +
+                             (int)(char)texelBC + (int)(char)texelABC) >> 1) & 0xff;
   return;
 }
 
@@ -1164,13 +1164,13 @@ void _gle1616Filter2(dst, src, unusedArg3, offsetA, offsetB)
   int offsetA;
   int offsetB;
 {
-  uint uVar1;
+  uint texelAB;
   
-  uVar1 = *(uint *)((int)src + offsetB + offsetA);
+  texelAB = *(uint *)((int)src + offsetB + offsetA);
   *dst = ((*src >> 0x10) + (*(uint *)((int)src + offsetA) >> 0x10) +
-              (*(uint *)((int)src + offsetB) >> 0x10) + (uVar1 >> 0x10)) * 0x8000 & 0xffff0000 |
+              (*(uint *)((int)src + offsetB) >> 0x10) + (texelAB >> 0x10)) * 0x8000 & 0xffff0000 |
              (*src & 0xffff) + (*(uint *)((int)src + offsetA) & 0xffff) +
-             (*(uint *)((int)src + offsetB) & 0xffff) + (uVar1 & 0xffff) >> 1 & 0xffff;
+             (*(uint *)((int)src + offsetB) & 0xffff) + (texelAB & 0xffff) >> 1 & 0xffff;
   return;
 }
 
@@ -1183,23 +1183,23 @@ void _gle1616Filter3(dst, src, unusedArg3, offsetA, offsetB, offsetC)
   int offsetB;
   int offsetC;
 {
-  uint uVar1;
-  uint uVar2;
-  uint uVar3;
-  uint uVar4;
+  uint texelAB;
+  uint texelAC;
+  uint texelBC;
+  uint texelABC;
   
-  uVar1 = *(uint *)((int)src + offsetB + offsetA);
-  uVar2 = *(uint *)((int)src + offsetC + offsetA);
-  uVar3 = *(uint *)((int)src + offsetC + offsetB);
-  uVar4 = *(uint *)((int)src + offsetC + offsetB + offsetA);
+  texelAB = *(uint *)((int)src + offsetB + offsetA);
+  texelAC = *(uint *)((int)src + offsetC + offsetA);
+  texelBC = *(uint *)((int)src + offsetC + offsetB);
+  texelABC = *(uint *)((int)src + offsetC + offsetB + offsetA);
   *dst = ((*src >> 0x10) + (*(uint *)((int)src + offsetA) >> 0x10) +
-              (*(uint *)((int)src + offsetB) >> 0x10) + (uVar1 >> 0x10) +
-              (*(uint *)((int)src + offsetC) >> 0x10) + (uVar2 >> 0x10) + (uVar3 >> 0x10) +
-             (uVar4 >> 0x10)) * 0x8000 & 0xffff0000 |
+              (*(uint *)((int)src + offsetB) >> 0x10) + (texelAB >> 0x10) +
+              (*(uint *)((int)src + offsetC) >> 0x10) + (texelAC >> 0x10) + (texelBC >> 0x10) +
+             (texelABC >> 0x10)) * 0x8000 & 0xffff0000 |
              (*src & 0xffff) + (*(uint *)((int)src + offsetA) & 0xffff) +
-             (*(uint *)((int)src + offsetB) & 0xffff) + (uVar1 & 0xffff) +
-             (*(uint *)((int)src + offsetC) & 0xffff) + (uVar2 & 0xffff) + (uVar3 & 0xffff) +
-             (uVar4 & 0xffff) >> 1 & 0xffff;
+             (*(uint *)((int)src + offsetB) & 0xffff) + (texelAB & 0xffff) +
+             (*(uint *)((int)src + offsetC) & 0xffff) + (texelAC & 0xffff) + (texelBC & 0xffff) +
+             (texelABC & 0xffff) >> 1 & 0xffff;
   return;
 }
 
@@ -2347,29 +2347,29 @@ int _gleGenMipmapsToLevel(glContext, textureObject, faceIndex, level, maxLevelLi
 }
 
 /* _gleGenSurfaceMipmaps @ 0xfbfe4 (160 bytes) */
-int _gleGenSurfaceMipmaps(glContext, param_2, param_3, param_4, param_5)
+int _gleGenSurfaceMipmaps(glContext, textureObject, face, lastLevel, generateOnRenderer)
   int glContext;
-  int param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  int param_5;
+  int textureObject;
+  undefined4 face;
+  undefined4 lastLevel;
+  int generateOnRenderer;
 {
-  undefined4 uVar1;
+  undefined4 mipmapsGenerated;
   
-  uVar1 = 0;
-  if ((*(ushort *)(param_2 + 0x24) & 0xf) != 2) {
-    ((int (*)())_gleGenerateEmptyMipmaps)(glContext,param_2,param_3,0,param_4,0,0x12);
-    uVar1 = 0;
-    if (*(int *)(param_2 + 0x2c) != 0) {
-      if (param_5 != 0) {
+  mipmapsGenerated = 0;
+  if ((*(ushort *)(textureObject + 0x24) & 0xf) != 2) {
+    ((int (*)())_gleGenerateEmptyMipmaps)(glContext,textureObject,face,0,lastLevel,0,0x12);
+    mipmapsGenerated = 0;
+    if (*(int *)(textureObject + 0x2c) != 0) {
+      if (generateOnRenderer != 0) {
         (**(code **)(glContext + 0x4714))
                   (*(undefined4 *)(glContext + 0x4688),
-                   *(undefined4 *)(param_2 + (uint)*(byte *)(glContext + 0x85a8) * 4),param_3);
+                   *(undefined4 *)(textureObject + (uint)*(byte *)(glContext + 0x85a8) * 4),face);
       }
-      uVar1 = 1;
+      mipmapsGenerated = 1;
     }
   }
-  return uVar1;
+  return mipmapsGenerated;
 }
 
 /* _gleHalfFloatToFloat @ 0xfc084 (136 bytes) */
@@ -2552,59 +2552,59 @@ int _gleLookUpNonProxyColorTable(glContext, target)
   int glContext;
   uint target;
 {
-  int iVar1;
+  int textureUnitThenTableObject;
   
-  iVar1 = *(int *)(glContext + 0x53d4);
+  textureUnitThenTableObject = *(int *)(glContext + 0x53d4);
   if (target == 0x80d1) {
-    iVar1 = *(int *)(glContext + 0x52c0);
+    textureUnitThenTableObject = *(int *)(glContext + 0x52c0);
 LAB_000fc4f8:
-    return iVar1 + 0x10;
+    return textureUnitThenTableObject + 0x10;
   }
   if (target < 0x80d2) {
     if (target == 0xde1) {
-      iVar1 = *(int *)(iVar1 * 0x14 + glContext + 0x5160);
+      textureUnitThenTableObject = *(int *)(textureUnitThenTableObject * 0x14 + glContext + 0x5160);
     }
     else if (target < 0xde2) {
       if (target != 0xde0) {
         return 0;
       }
-      iVar1 = *(int *)(iVar1 * 0x14 + glContext + 0x5164);
+      textureUnitThenTableObject = *(int *)(textureUnitThenTableObject * 0x14 + glContext + 0x5164);
     }
     else {
       if (target != 0x806f) {
         if (target != 0x80d0) {
           return 0;
         }
-        iVar1 = *(int *)(glContext + 0x52bc);
+        textureUnitThenTableObject = *(int *)(glContext + 0x52bc);
         goto LAB_000fc4f8;
       }
-      iVar1 = *(int *)(iVar1 * 0x14 + glContext + 0x5158);
+      textureUnitThenTableObject = *(int *)(textureUnitThenTableObject * 0x14 + glContext + 0x5158);
     }
     goto LAB_000fc4a4;
   }
   if (target != 0x84f5) {
     if (target < 0x84f6) {
       if (target == 0x80d2) {
-        iVar1 = *(int *)(glContext + 0x52c4);
+        textureUnitThenTableObject = *(int *)(glContext + 0x52c4);
         goto LAB_000fc4f8;
       }
       if (target != 0x81fb) {
         return 0;
       }
-      iVar1 = *(int *)(iVar1 * 4 + glContext + 0x52d4);
+      textureUnitThenTableObject = *(int *)(textureUnitThenTableObject * 4 + glContext + 0x52d4);
       goto LAB_000fc4a4;
     }
     if (target == 0x8513) {
-      iVar1 = *(int *)(iVar1 * 0x14 + glContext + 0x5154);
+      textureUnitThenTableObject = *(int *)(textureUnitThenTableObject * 0x14 + glContext + 0x5154);
       goto LAB_000fc4a4;
     }
     if (target != 0x85b3) {
       return 0;
     }
   }
-  iVar1 = *(int *)(iVar1 * 0x14 + glContext + 0x515c);
+  textureUnitThenTableObject = *(int *)(textureUnitThenTableObject * 0x14 + glContext + 0x515c);
 LAB_000fc4a4:
-  return iVar1 + 0x10;
+  return textureUnitThenTableObject + 0x10;
 }
 
 /* _gleReclaimTextureObjectResources @ 0xfc510 (344 bytes) */

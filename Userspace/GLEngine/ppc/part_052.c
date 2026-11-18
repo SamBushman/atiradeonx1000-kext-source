@@ -214,7 +214,7 @@ void _glePolyCentroid(undefined4 unusedArg1,float *vertices,int vertexCount,floa
 }
 
 /* _gleClipPolyPlane @ 0xeba10 (496 bytes) */
-double _gleClipPolyPlane(int glContext,int *polygonList,int vertexCount,int *outputList,int *outVertexCount,double fparam_1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10)
+double _gleClipPolyPlane(int glContext,int *polygonList,int vertexCount,int *outputList,int *outVertexCount,double forwardedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10)
 {
   float startWord09ThenDistance;
   float planeB;
@@ -275,7 +275,7 @@ double _gleClipPolyPlane(int glContext,int *polygonList,int vertexCount,int *out
                 (*(float *)(nextVertex + 0x20) * planeA + *(float *)(nextVertex + 0x24) * planeB));
         if (startWord09ThenDistance < floatZero) {
           if (floatZero <= distanceEnd) {
-            fparam_1 = (double)(**(double ( **)(int,int,int,int,double))(glContext + 0x49c8))
+            forwardedFloatArg1 = (double)(**(double ( **)(int,int,int,int,double))(glContext + 0x49c8))
                                          (glContext, *edgeStart, nextVertex, newVertexCursor, (double)(startWord09ThenDistance / (startWord09ThenDistance - distanceEnd)));
 LAB_000ebb68:
             *outputCursor = newVertexCursor;
@@ -287,7 +287,7 @@ LAB_000ebb68:
           *outputCursor = *edgeStart;
           outputCursor = outputCursor + 1;
           if (distanceEnd < floatZero) {
-            fparam_1 = (double)(**(double ( **)(int,int,int,int,double))(glContext + 0x49c8))
+            forwardedFloatArg1 = (double)(**(double ( **)(int,int,int,int,double))(glContext + 0x49c8))
                                          (glContext, edgeStart[1], *edgeStart, newVertexCursor, (double)(distanceEnd / (distanceEnd - startWord09ThenDistance)));
             *(undefined1 *)(newVertexCursor + 0x7c) = 0;
             goto LAB_000ebb68;
@@ -298,7 +298,7 @@ LAB_000ebb68:
       resultCount = (int)outputCursor - (int)polygonList >> 2;
       if (resultCount < 3) {
         *outVertexCount = 0;
-        return fparam_1;
+        return forwardedFloatArg1;
       }
       planePass = planePass + 1;
       passInputEnd = polygonList + resultCount;
@@ -315,7 +315,7 @@ LAB_000ebb68:
   }
   *outVertexCount = resultCount;
   *(int *)(glContext + 0x4858) = newVertexCursor;
-  return fparam_1;
+  return forwardedFloatArg1;
 }
 
 /* _gleCullPolygonStack @ 0xebc00 (192 bytes) */
@@ -462,7 +462,7 @@ void _gleFeedbackPolygonFunc_body(glContext)
   uint vertexCountThenClippedCount;
   int firstVertexThenCursorThenCullResultThenPolygonMode;
   uint remainingVertices;
-  double fparam_1;
+  double forwardedFloatArg1;
   double incomingFpr2;
   double incomingFpr3;
   double incomingFpr4;
@@ -555,7 +555,7 @@ LAB_000ec290:
     _gleFeedbackPolygon(glContext,firstVertexThenCursorThenCullResultThenPolygonMode,vertexCountThenClippedCount,cullResultThenPolygonModeThenVertexPtr);
     return;
   }
-  fparam_1 = (double)(**(double ( **)(int,int,int,int))(glContext + 0x5074))(glContext, firstVertexThenCursorThenCullResultThenPolygonMode, vertexCountThenClippedCount, 0);
+  forwardedFloatArg1 = (double)(**(double ( **)(int,int,int,int))(glContext + 0x5074))(glContext, firstVertexThenCursorThenCullResultThenPolygonMode, vertexCountThenClippedCount, 0);
   polygonList = *(int **)(glContext + 0x4870);
   spareList = *(int **)(glContext + 0x4874);
   listCursorThenClipDestThenFlipCursor = polygonList;
@@ -574,7 +574,7 @@ LAB_000ec290:
   planeClippedFlag = 0;
   listCursorThenClipDestThenFlipCursor = spareList;
   if (*(char *)(glContext + 0x4e18) != '\0') {
-    ((double (*)())_gleClipPolyPlane)(glContext,polygonList,vertexCountThenClippedCount,spareList,&clippedCount,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,
+    ((double (*)())_gleClipPolyPlane)(glContext,polygonList,vertexCountThenClippedCount,spareList,&clippedCount,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,
                       incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffff88,incomingStack_ffffff90);
     if (clippedCount == 0) {
       return;
@@ -5748,11 +5748,11 @@ void _gleFlushTriangleFanTCLFunc(glContext)
 /* _gleFlushTriangleFanTCLRDirtyFunc @ 0xf30c4 (232 bytes) */
 void _gleFlushTriangleFanTCLRDirtyFunc(int glContext,double floatArg1,double floatArg2,double floatArg3,double floatArg4,double floatArg5,double floatArg6,double floatArg7,double floatArg8)
 {
-  int iVar1;
-  int iVar2;
-  int iVar3;
-  int iVar4;
-  uint uVar5;
+  int copyDestination;
+  int copyByteOffset;
+  int copyByteCount;
+  int vertexWriteCursor;
+  uint copyUnitCount;
   
   if ((((*(char *)(glContext + 0x7580) != '\0') && ((*(uint *)(glContext + 0x486c) & 1) != 0)) &&
       (*(char *)(*(int *)(glContext + 0x468c) + 0x7a) == '\0')) &&
@@ -5764,20 +5764,20 @@ void _gleFlushTriangleFanTCLRDirtyFunc(int glContext,double floatArg1,double flo
     return;
   }
   (**(code **)(glContext + 0x4a08))(glContext);
-  iVar3 = (int)*(short *)(glContext + 0x487c);
-  iVar2 = 0;
-  iVar4 = *(int *)(glContext + 0x4858);
-  iVar1 = *(int *)(glContext + 0x4854) + iVar3;
-  if (0 < iVar3) {
-    uVar5 = iVar3 + 7U >> 3;
+  copyByteCount = (int)*(short *)(glContext + 0x487c);
+  copyByteOffset = 0;
+  vertexWriteCursor = *(int *)(glContext + 0x4858);
+  copyDestination = *(int *)(glContext + 0x4854) + copyByteCount;
+  if (0 < copyByteCount) {
+    copyUnitCount = copyByteCount + 7U >> 3;
     do {
-      *(undefined8 *)(iVar1 + iVar2) = *(undefined8 *)((iVar4 - iVar3) + iVar2);
-      iVar2 = iVar2 + 8;
-      uVar5 = uVar5 - 1;
-    } while (uVar5 != 0);
+      *(undefined8 *)(copyDestination + copyByteOffset) = *(undefined8 *)((vertexWriteCursor - copyByteCount) + copyByteOffset);
+      copyByteOffset = copyByteOffset + 8;
+      copyUnitCount = copyUnitCount - 1;
+    } while (copyUnitCount != 0);
   }
   *(undefined4 *)(glContext + 0x486c) = 0;
-  *(int *)(glContext + 0x4858) = iVar1 + iVar3;
+  *(int *)(glContext + 0x4858) = copyDestination + copyByteCount;
   return;
 }
 
@@ -5877,14 +5877,14 @@ void _gleFlushPolygonTCLFunc(glContext)
 /* _gleFlushPolygonTCLRDirtyFunc @ 0xf3378 (328 bytes) */
 void _gleFlushPolygonTCLRDirtyFunc(int glContext,double floatArg1,double floatArg2,double floatArg3,double floatArg4,double floatArg5,double floatArg6,double floatArg7,double floatArg8)
 {
-  int iVar1;
-  int iVar2;
-  undefined1 uVar3;
-  int iVar4;
-  int iVar5;
-  uint uVar6;
+  int copyOffset;
+  int bufferStartThenCopyDest;
+  undefined1 savedRecordByte;
+  int carriedByteCount;
+  int carriedStart;
+  uint copyChunksRemaining;
   
-  uVar3 = 0;
+  savedRecordByte = 0;
   if ((((*(char *)(glContext + 0x7580) != '\0') && ((*(uint *)(glContext + 0x486c) & 1) != 0)) &&
       (*(char *)(*(int *)(glContext + 0x468c) + 0x7a) == '\0')) &&
      ((*(char *)(glContext + 0x4664) == '\0' && (*(int *)(glContext + 0x5434) == 0)))) {
@@ -5894,31 +5894,31 @@ void _gleFlushPolygonTCLRDirtyFunc(int glContext,double floatArg1,double floatAr
     (**(code **)(glContext + 0x4a0c))(glContext);
     return;
   }
-  iVar4 = (int)*(short *)(glContext + 0x487c);
-  iVar5 = *(int *)(glContext + 0x4858) - iVar4;
+  carriedByteCount = (int)*(short *)(glContext + 0x487c);
+  carriedStart = *(int *)(glContext + 0x4858) - carriedByteCount;
   if ((*(short *)(glContext + 0x34d2) == 0x1b01) || (*(short *)(glContext + 0x34d0) == 0x1b01)) {
-    uVar3 = *(undefined1 *)(iVar5 + *(short *)(glContext + 0x487e));
-    *(undefined1 *)(iVar5 + *(short *)(glContext + 0x487e)) = 0;
+    savedRecordByte = *(undefined1 *)(carriedStart + *(short *)(glContext + 0x487e));
+    *(undefined1 *)(carriedStart + *(short *)(glContext + 0x487e)) = 0;
   }
   (**(code **)(glContext + 0x4a08))(glContext);
-  iVar2 = *(int *)(glContext + 0x4854);
+  bufferStartThenCopyDest = *(int *)(glContext + 0x4854);
   *(undefined1 *)(glContext + 0x4a18) = 1;
   if ((*(short *)(glContext + 0x34d2) == 0x1b01) || (*(short *)(glContext + 0x34d0) == 0x1b01)) {
-    *(undefined1 *)(iVar5 + *(short *)(glContext + 0x487e)) = uVar3;
-    *(undefined1 *)(iVar2 + *(short *)(glContext + 0x487e)) = 0;
+    *(undefined1 *)(carriedStart + *(short *)(glContext + 0x487e)) = savedRecordByte;
+    *(undefined1 *)(bufferStartThenCopyDest + *(short *)(glContext + 0x487e)) = 0;
   }
-  iVar1 = 0;
-  iVar2 = iVar2 + iVar4;
-  if (0 < iVar4) {
-    uVar6 = iVar4 + 7U >> 3;
+  copyOffset = 0;
+  bufferStartThenCopyDest = bufferStartThenCopyDest + carriedByteCount;
+  if (0 < carriedByteCount) {
+    copyChunksRemaining = carriedByteCount + 7U >> 3;
     do {
-      *(undefined8 *)(iVar2 + iVar1) = *(undefined8 *)(iVar5 + iVar1);
-      iVar1 = iVar1 + 8;
-      uVar6 = uVar6 - 1;
-    } while (uVar6 != 0);
+      *(undefined8 *)(bufferStartThenCopyDest + copyOffset) = *(undefined8 *)(carriedStart + copyOffset);
+      copyOffset = copyOffset + 8;
+      copyChunksRemaining = copyChunksRemaining - 1;
+    } while (copyChunksRemaining != 0);
   }
   *(undefined4 *)(glContext + 0x486c) = 0;
-  *(int *)(glContext + 0x4858) = iVar2 + iVar4;
+  *(int *)(glContext + 0x4858) = bufferStartThenCopyDest + carriedByteCount;
   return;
 }
 

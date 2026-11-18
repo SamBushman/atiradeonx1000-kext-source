@@ -1,0 +1,49 @@
+local	_glGenTextures_Exec	iVar4	sharedStateThenFirstName	CONFIRMED	ctx+0x5148 shared state (mutex +0x8028, texture hash +0x2008), then replaced by the first of the n consecutive names returned by _gleGenHashNames (0 on failure)
+local	_glGenTextures_Exec	iVar2	textureName	CONFIRMED	firstName + loopIndex: the name written to textures[i]
+local	_glGenProgramsARB_Exec	iVar4	sharedStateThenFirstName	CONFIRMED	ctx+0x5148 shared state (mutex +0x8028, program hash +0x4010), then replaced by the first of the n consecutive names returned by _gleGenHashNames (0 on failure)
+local	_glGenProgramsARB_Exec	iVar2	programName	CONFIRMED	loopIndex + firstName: the name written to programs[i]
+local	_glIsTexture_Exec	iVar1	sharedStateThenTextureObject	CONFIRMED	ctx+0x5148 shared state (texture hash +0x2008), then replaced by the texture object found by _gleLookupHashObject
+local	_glIsTexture_Exec	bVar2	objectExists	CONFIRMED	texture object found: the value returned (false outside the begin/end state)
+local	_glIsFramebufferEXT_Exec	iVar1	sharedStateThenFramebufferObject	CONFIRMED	ctx+0x5148 shared state (framebuffer hash at +0), then replaced by the framebuffer object found by _gleLookupHashObject
+local	_glIsFramebufferEXT_Exec	bVar2	objectExists	CONFIRMED	framebuffer object found: the value returned (false outside the begin/end state)
+local	_glLoadIdentity_Exec	uVar3	matrixDirtyBits	INFERRED	ctx+0x50a8 (matrix dirty bits of the current matrix mode, see _gleUpdateMatrixMode), ORed into ctx+0x50ac; later masked with 0xff000003 and ORed into ctx+0x50b0, still the matrix dirty bits
+local	_glLoadIdentity_Exec	uVar1	inverseSlotBits	INFERRED	matrixDirtyBits & 0xfffffc: the bits cleared from ctx+0x50b0 when the inverse matrix is rebuilt from the identity (copied by _gleCopyMatrix)
+local	_glHint_Exec	puVar1	setClipInterpFunc	CONFIRMED	PTR__gleSetClipInterpFunc literal-pool pointer stored at ctx+0x49cc (paired with _gleSetEyeInterpFunc at +0x49c8)
+local	_glHint_Exec	puVar2	setEyeInterpFunc	CONFIRMED	PTR__gleSetEyeInterpFunc literal-pool pointer stored at ctx+0x49c8 (paired with _gleSetClipInterpFunc at +0x49cc)
+local	_glHint_Exec	uVar4	modeShort	CONFIRMED	(short)mode stored into the per-target hint words at ctx+0x316c..0x317c
+local	_glBindTexture_Exec	uVar1	textureTargetIndex	CONFIRMED	internal target index passed to _gleBindTexture: 0 cube map (0x8513), 1 3D (0x806f), 2 rectangle (0x84f5), 3 2D (0xde1), 4 1D (0xde0)
+local	_glBindTexture_Exec	iVar2	sharedStateMutex	INFERRED	ctx+0x5148 shared state + 0x8028: the mutex locked around _gleBindTexture
+local	_glPopClientAttrib_Exec	iVar2	attribStackPointerThenElem	CONFIRMED	ctx+0x5140 client attribute stack pointer (decremented by 4), then the top entry *(sp - 4) (head of the element chain), then each next element (+700) removed with _gleRemoveClientAttribElem
+local	_glPopClientAttrib_Exec	iVar3	nextElem	CONFIRMED	element + 700: the next element of the chain, read before _gleRemoveClientAttribElem frees the current one
+use	_glPolygonStipple_Exec	iVar3	pixelUnpackBuffer	INFERRED	ctx+0x4a6c: the bound pixel unpack buffer object (size +0x38, offset +0x30, pending flag +0x40); null when mask is a client pointer	^\s*iVar3\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x4a6c\);$	+5
+use	_glPolygonStipple_Exec	iVar3	pixelUnpackBuffer	INFERRED	ctx+0x4a6c: the bound pixel unpack buffer object (size +0x38, offset +0x30, pending flag +0x40); null when mask is a client pointer	^\s*param_2\ =\ param_2\ \+\ \*\(int\ \*\)\(iVar3\ \+\ 0x30\);$	+1
+use	_glGetPolygonStipple_Exec	iVar3	pixelPackBuffer	INFERRED	ctx+0x4a68: the bound pixel pack buffer object (size +0x38, offset +0x30, pending flag +0x40); null when mask is a client pointer	^\s*iVar3\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x4a68\);$	+5
+use	_glGetPolygonStipple_Exec	iVar3	pixelPackBuffer	INFERRED	ctx+0x4a68: the bound pixel pack buffer object (size +0x38, offset +0x30, pending flag +0x40); null when mask is a client pointer	^\s*param_2\ =\ param_2\ \+\ \*\(int\ \*\)\(iVar3\ \+\ 0x30\);$	+1
+local	_glRotatef_Exec	fVar1	angleScale	INFERRED	FLOAT_00108e84 = pi/180 (degrees to radians), or FLOAT_00108eb0 when the single non-zero axis component is negative: multiplied with angle before _sin/_cos
+local	_gleLoadMatrixf	param_2	destination	INFERRED	the 16-float matrix that receives the copy of m
+local	_gleRowBytes	param_3	width	INFERRED	pixels per row: multiplied by the bytes (or components) per pixel to give the row size
+local	_gleRowBytes	iVar1	unitBytesThenRowBytes	CONFIRMED	bytes per pixel (_glePixelBytes) or component count (_gleComponents), then the resulting row size in bytes that is returned
+local	_gle565Filter2	uVar1	texel0	CONFIRMED	sample read from src at the byte offsets named in the suffix (0 = src itself, A/B/C = offsetA/offsetB/offsetC)
+local	_gle565Filter2	uVar2	texelA	CONFIRMED	sample read from src at the byte offsets named in the suffix (0 = src itself, A/B/C = offsetA/offsetB/offsetC)
+local	_gle565Filter2	uVar3	texelB	CONFIRMED	sample read from src at the byte offsets named in the suffix (0 = src itself, A/B/C = offsetA/offsetB/offsetC)
+local	_gle565Filter2	uVar4	texelAB	CONFIRMED	sample read from src at the byte offsets named in the suffix (0 = src itself, A/B/C = offsetA/offsetB/offsetC)
+local	_gles8s8Filter3	uVar1	texelAB	CONFIRMED	sample read from src at the byte offsets named in the suffix (0 = src itself, A/B/C = offsetA/offsetB/offsetC)
+local	_gles8s8Filter3	uVar2	texelAC	CONFIRMED	sample read from src at the byte offsets named in the suffix (0 = src itself, A/B/C = offsetA/offsetB/offsetC)
+local	_gles8s8Filter3	uVar3	texelBC	CONFIRMED	sample read from src at the byte offsets named in the suffix (0 = src itself, A/B/C = offsetA/offsetB/offsetC)
+local	_gles8s8Filter3	uVar4	texelABC	CONFIRMED	sample read from src at the byte offsets named in the suffix (0 = src itself, A/B/C = offsetA/offsetB/offsetC)
+local	_gle1616Filter3	uVar1	texelAB	CONFIRMED	sample read from src at the byte offsets named in the suffix (0 = src itself, A/B/C = offsetA/offsetB/offsetC)
+local	_gle1616Filter3	uVar2	texelAC	CONFIRMED	sample read from src at the byte offsets named in the suffix (0 = src itself, A/B/C = offsetA/offsetB/offsetC)
+local	_gle1616Filter3	uVar3	texelBC	CONFIRMED	sample read from src at the byte offsets named in the suffix (0 = src itself, A/B/C = offsetA/offsetB/offsetC)
+local	_gle1616Filter3	uVar4	texelABC	CONFIRMED	sample read from src at the byte offsets named in the suffix (0 = src itself, A/B/C = offsetA/offsetB/offsetC)
+local	_gle565Filter1	uVar1	texel0	CONFIRMED	sample read from src at the byte offsets named in the suffix (0 = src itself, A/B/C = offsetA/offsetB/offsetC)
+local	_gle565Filter1	uVar2	texelA	CONFIRMED	sample read from src at the byte offsets named in the suffix (0 = src itself, A/B/C = offsetA/offsetB/offsetC)
+local	_gle1616Filter2	uVar1	texelAB	CONFIRMED	sample read from src at the byte offsets named in the suffix (0 = src itself, A/B/C = offsetA/offsetB/offsetC)
+local	_gleByteFilter2	cVar1	texelAB	CONFIRMED	byte read at src + offsetA + offsetB + byteOffset (the fourth sample of the box filter)
+local	_gleByteFilter2	pcVar3	texelABCursor	CONFIRMED	pointer to the sample at src + offsetA + offsetB + byteOffset, advanced by one byte per iteration
+local	_gleByteFilter3	cVar1	texelBC	CONFIRMED	byte read at src + offsetB + offsetC + byteOffset
+local	_gleByteFilter3	pcVar5	texelBCCursor	CONFIRMED	pointer to the sample at src + offsetB + offsetC + byteOffset, advanced by one byte per iteration
+local	_gleByteFilter3	pcVar2	texelABCAddress	CONFIRMED	texelBCCursor + offsetA: the sample at src + offsetA + offsetB + offsetC + byteOffset
+local	_gleByteFilter3	iVar4	sourceAddress	CONFIRMED	src + byteOffset: the first sample of the current output byte
+use	_gleCheckTexSubImage1DArgs	iVar3	argsCheckResultThenLevelRecordThenRangeResult	CONFIRMED	result of _gleCheckTexSubImageArgs (zero rejects), then the level record texture + level * 0x18 (flags byte +0xcf, size fields from +0xc4), then the result of _gleCheckTexSubImageRange for xoffset / width; one name because splitting the three webs changes register allocation	^\s*iVar3\ =\ _gleCheckTexSubImageArgs\(param_1,param_3,param_6,param_7\);$	+2
+use	_gleCheckTexSubImage1DArgs	iVar3	argsCheckResultThenLevelRecordThenRangeResult	CONFIRMED	result of _gleCheckTexSubImageArgs (zero rejects), then the level record texture + level * 0x18 (flags byte +0xcf, size fields from +0xc4), then the result of _gleCheckTexSubImageRange for xoffset / width; one name because splitting the three webs changes register allocation	^\s*iVar3\ =\ iVar2\ \+\ param_3\ \*\ 0x18;$	+2
+use	_gleCheckTexSubImage1DArgs	iVar3	argsCheckResultThenLevelRecordThenRangeResult	CONFIRMED	result of _gleCheckTexSubImageArgs (zero rejects), then the level record texture + level * 0x18 (flags byte +0xcf, size fields from +0xc4), then the result of _gleCheckTexSubImageRange for xoffset / width; one name because splitting the three webs changes register allocation	^\s*iVar3\ =\ _gleCheckTexSubImageRange$	+3

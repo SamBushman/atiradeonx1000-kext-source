@@ -838,20 +838,20 @@ void _glCombinerInputNV_Exec(glContext, stage, portion, variable, input, mapping
   int mapping;
   uint componentUsage;
 {
-  bool bVar1;
+  bool combinerTestResult;
   undefined4 glErrorCode;
-  int iVar3;
-  int iVar4;
+  int portionIndex;
+  int stageIndexThenInputRecord;
   
-  iVar4 = stage + -0x8550;
+  stageIndexThenInputRecord = stage + -0x8550;
   if (*(short *)(glContext + 0x4a10) < 0) {
-    if ((-1 < iVar4) && (iVar4 < *(int *)(*(int *)(glContext + 0x468c) + 0x98))) {
-      bVar1 = portion == 0x1906;
-      if (bVar1) {
-        iVar3 = 0;
+    if ((-1 < stageIndexThenInputRecord) && (stageIndexThenInputRecord < *(int *)(*(int *)(glContext + 0x468c) + 0x98))) {
+      combinerTestResult = portion == 0x1906;
+      if (combinerTestResult) {
+        portionIndex = 0;
       }
       else {
-        iVar3 = 1;
+        portionIndex = 1;
         if (portion != 0x1907) goto LAB_000b3378;
       }
       if (variable - 0x8523U < 4) {
@@ -867,13 +867,13 @@ void _glCombinerInputNV_Exec(glContext, stage, portion, variable, input, mapping
 LAB_000b33fc:
           if (mapping - 0x8536U < 8) {
             if (componentUsage == 0x1906) {
-              bVar1 = input == 0xb60;
+              combinerTestResult = input == 0xb60;
 joined_r0x000b3430:
-              if (!bVar1) {
-                iVar4 = (iVar4 * 0x10 + iVar3 * 6 + (variable - 0x8523U)) * 8 + glContext;
-                *(short *)(iVar4 + 0x4222) = (short)componentUsage;
-                *(short *)(iVar4 + 0x4220) = (short)input;
-                *(short *)(iVar4 + 0x4224) = (short)mapping;
+              if (!combinerTestResult) {
+                stageIndexThenInputRecord = (stageIndexThenInputRecord * 0x10 + portionIndex * 6 + (variable - 0x8523U)) * 8 + glContext;
+                *(short *)(stageIndexThenInputRecord + 0x4222) = (short)componentUsage;
+                *(short *)(stageIndexThenInputRecord + 0x4220) = (short)input;
+                *(short *)(stageIndexThenInputRecord + 0x4224) = (short)mapping;
                 *(uint *)(glContext + 0x314) = *(uint *)(glContext + 0x314) | 0x1000000;
                 return;
               }
@@ -881,7 +881,7 @@ joined_r0x000b3430:
             }
             if (componentUsage < 0x1907) {
               if (componentUsage == 0x1905) {
-                bVar1 = portion == 0x1907;
+                combinerTestResult = portion == 0x1907;
                 goto joined_r0x000b3430;
               }
             }
@@ -922,42 +922,42 @@ void _glCombinerOutputNV_Exec(glContext, stage, portion, abOutput, cdOutput, sum
   undefined4 muxSum;
 {
   undefined4 glErrorCode;
-  int iVar2;
-  int iVar3;
-  int iVar4;
+  int stageIndexThenOutputRecord;
+  int portionIndex;
+  int rendererInfo;
   
-  iVar2 = stage + -0x8550;
+  stageIndexThenOutputRecord = stage + -0x8550;
   if (*(short *)(glContext + 0x4a10) < 0) {
-    if ((-1 < iVar2) && (iVar4 = *(int *)(glContext + 0x468c), iVar2 < *(int *)(iVar4 + 0x98))) {
+    if ((-1 < stageIndexThenOutputRecord) && (rendererInfo = *(int *)(glContext + 0x468c), stageIndexThenOutputRecord < *(int *)(rendererInfo + 0x98))) {
       if (portion == 0x1906) {
-        iVar3 = 0;
+        portionIndex = 0;
         if (((char)abDotProduct != '\0') || ((char)cdDotProduct != '\0')) goto LAB_000b362c;
       }
       else {
-        iVar3 = 1;
+        portionIndex = 1;
         if (portion != 0x1907) goto LAB_000b35d0;
       }
       if ((bias == 0) || (bias == 0x8541)) {
         if (scale == 0x853e) {
 LAB_000b354c:
-          if (((((0x84bf < abOutput) && (abOutput < *(ushort *)(iVar4 + 0xb4) + 0x84c0)) ||
+          if (((((0x84bf < abOutput) && (abOutput < *(ushort *)(rendererInfo + 0xb4) + 0x84c0)) ||
                (abOutput - 0x852c < 5)) &&
-              (((0x84bf < cdOutput && (cdOutput < *(ushort *)(iVar4 + 0xb4) + 0x84c0)) ||
+              (((0x84bf < cdOutput && (cdOutput < *(ushort *)(rendererInfo + 0xb4) + 0x84c0)) ||
                (cdOutput - 0x852c < 5)))) &&
-             (((0x84bf < sumOutput && (sumOutput < *(ushort *)(iVar4 + 0xb4) + 0x84c0)) ||
+             (((0x84bf < sumOutput && (sumOutput < *(ushort *)(rendererInfo + 0xb4) + 0x84c0)) ||
               (sumOutput - 0x852c < 5)))) {
             if (((sumOutput != abOutput) || (sumOutput == 0x8530)) &&
                (((sumOutput != cdOutput || (sumOutput == 0x8530)) &&
                 ((abOutput != cdOutput || (cdOutput == 0x8530)))))) {
-              iVar2 = iVar2 * 0x80 + iVar3 * 0x30 + glContext;
-              *(undefined1 *)(iVar2 + 0x4242) = (undefined1)muxSum;
-              *(short *)(iVar2 + 0x4248) = (short)abOutput;
-              *(short *)(iVar2 + 0x424a) = (short)cdOutput;
-              *(short *)(iVar2 + 0x424c) = (short)sumOutput;
-              *(short *)(iVar2 + 0x4244) = (short)scale;
-              *(short *)(iVar2 + 0x4246) = (short)bias;
-              *(char *)(iVar2 + 0x4240) = (char)abDotProduct;
-              *(char *)(iVar2 + 0x4241) = (char)cdDotProduct;
+              stageIndexThenOutputRecord = stageIndexThenOutputRecord * 0x80 + portionIndex * 0x30 + glContext;
+              *(undefined1 *)(stageIndexThenOutputRecord + 0x4242) = (undefined1)muxSum;
+              *(short *)(stageIndexThenOutputRecord + 0x4248) = (short)abOutput;
+              *(short *)(stageIndexThenOutputRecord + 0x424a) = (short)cdOutput;
+              *(short *)(stageIndexThenOutputRecord + 0x424c) = (short)sumOutput;
+              *(short *)(stageIndexThenOutputRecord + 0x4244) = (short)scale;
+              *(short *)(stageIndexThenOutputRecord + 0x4246) = (short)bias;
+              *(char *)(stageIndexThenOutputRecord + 0x4240) = (char)abDotProduct;
+              *(char *)(stageIndexThenOutputRecord + 0x4241) = (char)cdDotProduct;
               *(uint *)(glContext + 0x314) = *(uint *)(glContext + 0x314) | 0x1000000;
               return;
             }
@@ -999,12 +999,12 @@ void _glFinalCombinerInputNV_Exec(glContext, variable, input, mapping, component
   uint componentUsage;
 {
   undefined4 glErrorCode;
-  int iVar2;
-  uint uVar3;
+  int inputRecord;
+  uint variableIndex;
   
-  uVar3 = variable - 0x8523;
+  variableIndex = variable - 0x8523;
   if (-1 < *(short *)(glContext + 0x4a10)) goto LAB_000b37a0;
-  if (6 < uVar3) goto LAB_000b36a8;
+  if (6 < variableIndex) goto LAB_000b36a8;
   if ((input < 0x84c0) || (*(ushort *)(*(int *)(glContext + 0x468c) + 0xb4) + 0x84c0 <= input)) {
     if (input < 0x8530) {
       if (((0x8529 < input) || (input == 0)) || (input == 0xb60)) goto LAB_000b3714;
@@ -1013,7 +1013,7 @@ void _glFinalCombinerInputNV_Exec(glContext, variable, input, mapping, component
   }
   else {
 LAB_000b3714:
-    if (((3 < (int)uVar3) && (input - 0x8531 < 2)) || ((uVar3 == 0 && (input == 0x8532)))) {
+    if (((3 < (int)variableIndex) && (input - 0x8531 < 2)) || ((variableIndex == 0 && (input == 0x8532)))) {
 LAB_000b37a0:
       if (*(int *)(glContext + 0x7574) != 0) {
         return;
@@ -1025,10 +1025,10 @@ LAB_000b37a0:
       if (componentUsage == 0x1906) {
         if (1 < input - 0x8531) {
 LAB_000b37b4:
-          iVar2 = uVar3 * 8 + glContext;
-          *(short *)(iVar2 + 0x4626) = (short)componentUsage;
-          *(short *)(iVar2 + 0x4624) = (short)input;
-          *(short *)(iVar2 + 0x4628) = (short)mapping;
+          inputRecord = variableIndex * 8 + glContext;
+          *(short *)(inputRecord + 0x4626) = (short)componentUsage;
+          *(short *)(inputRecord + 0x4624) = (short)input;
+          *(short *)(inputRecord + 0x4628) = (short)mapping;
           *(uint *)(glContext + 0x314) = *(uint *)(glContext + 0x314) | 0x1000000;
           return;
         }
@@ -1036,12 +1036,12 @@ LAB_000b37b4:
       }
       if (componentUsage < 0x1907) {
         if (componentUsage == 0x1905) {
-          if (uVar3 == 6) goto LAB_000b37b4;
+          if (variableIndex == 6) goto LAB_000b37b4;
           goto LAB_000b37a0;
         }
       }
       else if (componentUsage == 0x1907) {
-        if (uVar3 != 6) goto LAB_000b37b4;
+        if (variableIndex != 6) goto LAB_000b37b4;
         goto LAB_000b37a0;
       }
     }
@@ -1297,12 +1297,12 @@ switchD_000b3c80_default:
 /* _glGetFinalCombinerInputParameterfvNV_Exec @ 0xb3d80 (188 bytes) */
 void _glGetFinalCombinerInputParameterfvNV_Exec(int glContext,int variable,uint pname,float *params,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  uint uVar1;
+  uint variableIndexThenParamValue;
   
-  uVar1 = variable - 0x8523;
-  if (6 < uVar1) goto LAB_000b3e24;
+  variableIndexThenParamValue = variable - 0x8523;
+  if (6 < variableIndexThenParamValue) goto LAB_000b3e24;
   if (pname == 0x8543) {
-    uVar1 = (uint)*(ushort *)(uVar1 * 8 + glContext + 0x4628);
+    variableIndexThenParamValue = (uint)*(ushort *)(variableIndexThenParamValue * 8 + glContext + 0x4628);
   }
   else if (pname < 0x8544) {
     if (pname != 0x8542) {
@@ -1313,13 +1313,13 @@ LAB_000b3e24:
       }
       return;
     }
-    uVar1 = (uint)*(ushort *)(uVar1 * 8 + glContext + 0x4624);
+    variableIndexThenParamValue = (uint)*(ushort *)(variableIndexThenParamValue * 8 + glContext + 0x4624);
   }
   else {
     if (pname != 0x8544) goto LAB_000b3e24;
-    uVar1 = (uint)*(ushort *)(uVar1 * 8 + glContext + 0x4626);
+    variableIndexThenParamValue = (uint)*(ushort *)(variableIndexThenParamValue * 8 + glContext + 0x4626);
   }
-  *params = GH_U2F((unsigned int)((uVar1 | 0x4b000000))) - 8388608.0;
+  *params = GH_U2F((unsigned int)((variableIndexThenParamValue | 0x4b000000))) - 8388608.0;
   return;
 }
 

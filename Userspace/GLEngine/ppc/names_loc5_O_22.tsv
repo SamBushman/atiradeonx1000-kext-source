@@ -1,0 +1,8 @@
+local	_gleMultiVtxTextureCoordGenObjectSlow	uVar10	vertexEndThenRemaining	CONFIRMED	vertexStart + vertexCount * 0x100: the end address of the vertex records, later reused (final Q path) as the remaining vertex count (end - cursor + 0xff) >> 8
+local	_gleMultiVtxTextureCoordGenObjectSlow	iVar12	unitByteOffsetThenStateAddress	CONFIRMED	texUnit * 0x94: byte offset of the per-unit texgen state, later replaced by ctx + offset (fields at +0x3d54 mode, +0x3d68..+0x3d74 object plane Q, +0x3d7b enable)
+local	_gleVtxTextureCoordGenEyeST	param_1	glContext	INFERRED	first argument, dereferenced at the per-unit eye plane state (+0x3cec..+0x3d1c)
+local	_gleVtxTextureCoordGenEyeST	uVar9	vertexEndThenRemaining	CONFIRMED	vertexCursor + vertexCount * 0x100: the end address of the vertex records, then reused as the remaining vertex count (end - cursor + 0xff) >> 8
+local	_gleMultiVtxTextureCoordGenNormalSTR	param_1	glContext	INFERRED	first argument; ctx+0x486c receives bit 1 after the texture coordinates are generated
+local	_gleMultiVtxTextureCoordGenNormalSTR	param_4	texUnit	INFERRED	texture unit whose 0x10-byte texture coordinate slot (+0x80..+0x88 of the vertex record) receives the normal
+local	_gleMultiVtxTextureCoordGenNormalSTR	uVar2	vertexEndThenRemaining	CONFIRMED	vertexCursor + vertexCount * 0x100: the end address of the vertex records, then reused as the remaining vertex count (end - cursor + 0xff) >> 8
+local	_gleMultiVtxTextureCoordGenNormalSTR	puVar1	normalZPtr	INFERRED	vertexCursor + 0x48: the third component of the vertex normal (+0x40..+0x48), copied into the texture coordinate slot

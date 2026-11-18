@@ -219,34 +219,34 @@ void _glConvolutionParameteriv_Exec(glContext, target, pname, params)
 {
   double intToDoubleMagic;
   undefined4 glErrorCode;
-  float *pfVar3;
+  float *convolutionState;
   
   intToDoubleMagic = DOUBLE_00108d58;
   if (*(short *)(glContext + 0x4a10) < 0) {
     if (target == 0x8011) {
-      pfVar3 = (float *)(glContext + 0x32d8);
+      convolutionState = (float *)(glContext + 0x32d8);
 LAB_000695f0:
       if (pname == 0x8015) {
-        pfVar3[5] = (float)((double)CONCAT44(0x43300000,*params ^ 0x80000000) - DOUBLE_00108d58);
-        pfVar3[7] = (float)((double)CONCAT44(0x43300000,params[1] ^ 0x80000000) - intToDoubleMagic);
-        pfVar3[9] = (float)((double)CONCAT44(0x43300000,params[2] ^ 0x80000000) - intToDoubleMagic);
-        pfVar3[0xb] = (float)((double)CONCAT44(0x43300000,params[3] ^ 0x80000000) - intToDoubleMagic);
+        convolutionState[5] = (float)((double)CONCAT44(0x43300000,*params ^ 0x80000000) - DOUBLE_00108d58);
+        convolutionState[7] = (float)((double)CONCAT44(0x43300000,params[1] ^ 0x80000000) - intToDoubleMagic);
+        convolutionState[9] = (float)((double)CONCAT44(0x43300000,params[2] ^ 0x80000000) - intToDoubleMagic);
+        convolutionState[0xb] = (float)((double)CONCAT44(0x43300000,params[3] ^ 0x80000000) - intToDoubleMagic);
         return;
       }
       if (pname < 0x8016) {
         if (pname == 0x8014) {
-          pfVar3[4] = (float)((double)CONCAT44(0x43300000,*params ^ 0x80000000) - DOUBLE_00108d58);
-          pfVar3[6] = (float)((double)CONCAT44(0x43300000,params[1] ^ 0x80000000) - intToDoubleMagic);
-          pfVar3[8] = (float)((double)CONCAT44(0x43300000,params[2] ^ 0x80000000) - intToDoubleMagic);
-          pfVar3[10] = (float)((double)CONCAT44(0x43300000,params[3] ^ 0x80000000) - intToDoubleMagic);
+          convolutionState[4] = (float)((double)CONCAT44(0x43300000,*params ^ 0x80000000) - DOUBLE_00108d58);
+          convolutionState[6] = (float)((double)CONCAT44(0x43300000,params[1] ^ 0x80000000) - intToDoubleMagic);
+          convolutionState[8] = (float)((double)CONCAT44(0x43300000,params[2] ^ 0x80000000) - intToDoubleMagic);
+          convolutionState[10] = (float)((double)CONCAT44(0x43300000,params[3] ^ 0x80000000) - intToDoubleMagic);
           return;
         }
       }
       else if (pname == 0x8154) {
-        *pfVar3 = (float)((double)CONCAT44(0x43300000,*params ^ 0x80000000) - DOUBLE_00108d58);
-        pfVar3[1] = (float)((double)CONCAT44(0x43300000,params[1] ^ 0x80000000) - intToDoubleMagic);
-        pfVar3[2] = (float)((double)CONCAT44(0x43300000,params[2] ^ 0x80000000) - intToDoubleMagic);
-        pfVar3[3] = (float)((double)CONCAT44(0x43300000,params[3] ^ 0x80000000) - intToDoubleMagic);
+        *convolutionState = (float)((double)CONCAT44(0x43300000,*params ^ 0x80000000) - DOUBLE_00108d58);
+        convolutionState[1] = (float)((double)CONCAT44(0x43300000,params[1] ^ 0x80000000) - intToDoubleMagic);
+        convolutionState[2] = (float)((double)CONCAT44(0x43300000,params[2] ^ 0x80000000) - intToDoubleMagic);
+        convolutionState[3] = (float)((double)CONCAT44(0x43300000,params[3] ^ 0x80000000) - intToDoubleMagic);
         return;
       }
       ((void (*)())_glConvolutionParameteri_Exec)(glContext,target,pname,*params);
@@ -254,12 +254,12 @@ LAB_000695f0:
     }
     if (target < 0x8012) {
       if (target == 0x8010) {
-        pfVar3 = (float *)(glContext + 0x3298);
+        convolutionState = (float *)(glContext + 0x3298);
         goto LAB_000695f0;
       }
     }
     else if (target == 0x8012) {
-      pfVar3 = (float *)(glContext + 0x3318);
+      convolutionState = (float *)(glContext + 0x3318);
       goto LAB_000695f0;
     }
     if (*(int *)(glContext + 0x7574) != 0) {
@@ -1147,7 +1147,7 @@ void _glGetHistogramParameteriv_Exec(glContext, target, pname, params)
   uint *params;
 {
   undefined4 glErrorCode;
-  uint uVar2;
+  uint parameterValue;
   
   if (-1 < *(short *)(glContext + 0x4a10)) {
     if (*(int *)(glContext + 0x7574) != 0) {
@@ -1168,25 +1168,25 @@ LAB_0006aa8c:
   }
   switch(pname) {
   case 0x8026:
-    uVar2 = *(uint *)(glContext + 0x3388);
+    parameterValue = *(uint *)(glContext + 0x3388);
     break;
   case 0x8027:
-    uVar2 = (uint)*(ushort *)(glContext + 0x338c);
+    parameterValue = (uint)*(ushort *)(glContext + 0x338c);
     break;
   case 0x8028:
   case 0x8029:
   case 0x802a:
   case 0x802b:
   case 0x802c:
-    uVar2 = 0x20;
+    parameterValue = 0x20;
     break;
   case 0x802d:
-    uVar2 = (uint)*(byte *)(glContext + 0x338e);
+    parameterValue = (uint)*(byte *)(glContext + 0x338e);
     break;
   default:
     goto switchD_0006aabc_default;
   }
-  *params = uVar2;
+  *params = parameterValue;
   return;
 }
 
@@ -1201,9 +1201,9 @@ void _glGetMinmax_Exec(glContext, target, reset, format, type, values)
 {
   undefined4 glErrorCode;
   int imageEndOffset;
-  int iVar3;
+  int elementBytes;
   int pixelPackBuffer;
-  int iVar5;
+  int packBufferSize;
   double bytesPerElement;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
@@ -1221,14 +1221,14 @@ LAB_0006abf8:
       return;
     }
     imageEndOffset = _gleOffsetLimitImage(glContext + 0x31b0,2,1,format,type,values);
-    iVar5 = *(int *)(pixelPackBuffer + 0x38);
+    packBufferSize = *(int *)(pixelPackBuffer + 0x38);
     bytesPerElement = (double)((double (*)())_gleBytesPerElement)(type);
-    iVar3 = (int)bytesPerElement;
-    if (imageEndOffset <= iVar5) {
-      if (iVar3 == 0) {
-        iVar3 = _glePixelBytes(format,type);
+    elementBytes = (int)bytesPerElement;
+    if (imageEndOffset <= packBufferSize) {
+      if (elementBytes == 0) {
+        elementBytes = _glePixelBytes(format,type);
       }
-      if (values == (values / iVar3) * iVar3) {
+      if (values == (values / elementBytes) * elementBytes) {
         if (*(int *)(pixelPackBuffer + 0x40) != 0) {
           _gleSynchronizePluginBuffer(glContext,pixelPackBuffer + 0x10);
         }
@@ -1291,10 +1291,10 @@ void _glGetMinmaxParameterfv_Exec(glContext, target, pname, params)
   undefined4 pname;
   float *params;
 {
-  uint local_18 [3];
+  uint intParams [3];
   
-  ((void (*)())_glGetMinmaxParameteriv_Exec)(glContext,target,pname,local_18);
-  *params = (float)((double)CONCAT44(0x43300000,local_18[0] ^ 0x80000000) - DOUBLE_00108d58);
+  ((void (*)())_glGetMinmaxParameteriv_Exec)(glContext,target,pname,intParams);
+  *params = (float)((double)CONCAT44(0x43300000,intParams[0] ^ 0x80000000) - DOUBLE_00108d58);
   return;
 }
 
@@ -1382,7 +1382,7 @@ void _glResetHistogram_Exec(glContext, target)
   int target;
 {
   int glContextFloat20;
-  int iVar2;
+  int binByteOffset;
   undefined4 glErrorCode;
   int loopIndex;
   
@@ -1392,12 +1392,12 @@ void _glResetHistogram_Exec(glContext, target)
       if (0 < *(int *)(glContext + 0x3388)) {
         glContextFloat20 = (int)*(float *)(glContext + 0x20);
         do {
-          iVar2 = loopIndex * 0x10;
+          binByteOffset = loopIndex * 0x10;
           loopIndex = loopIndex + 1;
-          *(int *)(iVar2 + *(int *)(glContext + 0x3384)) = glContextFloat20;
-          *(int *)(iVar2 + *(int *)(glContext + 0x3384) + 4) = glContextFloat20;
-          *(int *)(iVar2 + *(int *)(glContext + 0x3384) + 8) = glContextFloat20;
-          *(int *)(iVar2 + *(int *)(glContext + 0x3384) + 0xc) = glContextFloat20;
+          *(int *)(binByteOffset + *(int *)(glContext + 0x3384)) = glContextFloat20;
+          *(int *)(binByteOffset + *(int *)(glContext + 0x3384) + 4) = glContextFloat20;
+          *(int *)(binByteOffset + *(int *)(glContext + 0x3384) + 8) = glContextFloat20;
+          *(int *)(binByteOffset + *(int *)(glContext + 0x3384) + 0xc) = glContextFloat20;
         } while (loopIndex < *(int *)(glContext + 0x3388));
         return;
       }

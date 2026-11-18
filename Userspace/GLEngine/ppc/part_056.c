@@ -311,44 +311,44 @@ double _gleSetWindowPos(int glContext,float floatArg1,float floatArg2,double flo
 }
 
 /* _glepDeletePlugin @ 0x107740 (164 bytes) */
-int _glepDeletePlugin(param_1)
-  int *param_1;
+int _glepDeletePlugin(plugin)
+  int *plugin;
 {
-  bool bVar1;
-  int *piVar2;
-  int *piVar3;
-  int *piVar4;
+  bool listEmpty;
+  int *node;
+  int *previousNode;
+  int *nextNode;
   
-  if (param_1 == (int *)0x0) {
+  if (plugin == (int *)0x0) {
     return (int *)0x0;
   }
-  if (param_1 == _glep_plugin_head) {
-    piVar4 = (int *)*_glep_plugin_head;
-    _glep_plugin_head = piVar4;
+  if (plugin == _glep_plugin_head) {
+    nextNode = (int *)*_glep_plugin_head;
+    _glep_plugin_head = nextNode;
 LAB_001077c4:
-    _free(param_1);
+    _free(plugin);
   }
   else {
-    bVar1 = _glep_plugin_head == (int *)0x0;
-    if (!bVar1) {
-      piVar4 = (int *)*_glep_plugin_head;
-      piVar3 = _glep_plugin_head;
-      while (piVar2 = piVar4, param_1 != piVar2) {
-        if (piVar2 == (int *)0x0) goto LAB_001077b0;
-        bVar1 = false;
-        piVar3 = piVar2;
-        piVar4 = (int *)*piVar2;
+    listEmpty = _glep_plugin_head == (int *)0x0;
+    if (!listEmpty) {
+      nextNode = (int *)*_glep_plugin_head;
+      previousNode = _glep_plugin_head;
+      while (node = nextNode, plugin != node) {
+        if (node == (int *)0x0) goto LAB_001077b0;
+        listEmpty = false;
+        previousNode = node;
+        nextNode = (int *)*node;
       }
-      if (!bVar1) {
-        piVar4 = (int *)*param_1;
-        *piVar3 = (int)piVar4;
+      if (!listEmpty) {
+        nextNode = (int *)*plugin;
+        *previousNode = (int)nextNode;
         goto LAB_001077c4;
       }
     }
 LAB_001077b0:
-    piVar4 = (int *)0x0;
+    nextNode = (int *)0x0;
   }
-  return piVar4;
+  return nextNode;
 }
 
 /* _gliGetAttribute @ 0x1077e4 (12 bytes) */
@@ -464,33 +464,34 @@ double _gliSwitchPlugin(glContext, rendererIndex)
 void _gliDetachRevert(glContext)
   int glContext;
 {
-  uint uVar1;
-  uint uVar2;
-  int iVar3;
+  uint dispatchSlotMask;
+  uint finishSlotMask;
+  uint alternateRendererIndex;
+  int rendererSlot;
   
-  uVar2 = (uint)*(byte *)(glContext + 0x85a5);
-  if (uVar2 == *(byte *)(glContext + 0x85a8)) {
+  alternateRendererIndex = (uint)*(byte *)(glContext + 0x85a5);
+  if (alternateRendererIndex == *(byte *)(glContext + 0x85a8)) {
     return;
   }
-  if (uVar2 == 0xff) {
+  if (alternateRendererIndex == 0xff) {
     return;
   }
-  uVar1 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x938) == 0);
+  dispatchSlotMask = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x938) == 0);
   *(undefined **)
-   ((*(uint *)(glContext + 0x4680) & uVar1 | *(uint *)(glContext + 0x4684) & ~uVar1) + 0x938) =
+   ((*(uint *)(glContext + 0x4680) & dispatchSlotMask | *(uint *)(glContext + 0x4684) & ~dispatchSlotMask) + 0x938) =
        PTR__glSwap_Exec_0011211c;
-  uVar1 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x168) == 0);
+  dispatchSlotMask = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x168) == 0);
   *(undefined **)
-   ((*(uint *)(glContext + 0x4680) & uVar1 | *(uint *)(glContext + 0x4684) & ~uVar1) + 0x168) =
+   ((*(uint *)(glContext + 0x4680) & dispatchSlotMask | *(uint *)(glContext + 0x4684) & ~dispatchSlotMask) + 0x168) =
        PTR__glFlush_Exec_00112118;
-  iVar3 = uVar2 * 0x2e0 + glContext;
-  uVar2 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x164) == 0);
+  rendererSlot = alternateRendererIndex * 0x2e0 + glContext;
+  finishSlotMask = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x164) == 0);
   *(undefined **)
-   ((*(uint *)(glContext + 0x4680) & uVar2 | *(uint *)(glContext + 0x4684) & ~uVar2) + 0x164) =
+   ((*(uint *)(glContext + 0x4680) & finishSlotMask | *(uint *)(glContext + 0x4684) & ~finishSlotMask) + 0x164) =
        PTR__glFinish_Exec_00112114;
                     
                     
-  (**(code **)(*(int *)(iVar3 + 0x8884) + 0x138))(*(undefined4 *)(iVar3 + 0x85ac),0,0,0);
+  (**(code **)(*(int *)(rendererSlot + 0x8884) + 0x138))(*(undefined4 *)(rendererSlot + 0x85ac),0,0,0);
   return;
 }
 

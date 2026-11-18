@@ -224,40 +224,40 @@ void _glLightModeliv_Exec(glContext, pname, params)
   uint pname;
   uint *params;
 {
-  byte bVar1;
-  double dVar2;
+  byte dirtyBitIndex;
+  double intToDoubleBias;
   undefined4 glErrorCode;
-  int iVar4;
+  int dirtyWordAddress348;
   int glContextPtr5424;
-  int iVar5;
+  int dirtyWordAddress324;
   
-  dVar2 = DOUBLE_00108d58;
+  intToDoubleBias = DOUBLE_00108d58;
   if (*(short *)(glContext + 0x4a10) < 0) {
     if (pname == 0xb53) {
       *(float *)(glContext + 0x2810) =
            (float)((double)CONCAT44(0x43300000,*params ^ 0x80000000) - DOUBLE_00108d58);
       *(float *)(glContext + 0x2814) =
-           (float)((double)CONCAT44(0x43300000,params[1] ^ 0x80000000) - dVar2);
+           (float)((double)CONCAT44(0x43300000,params[1] ^ 0x80000000) - intToDoubleBias);
       *(float *)(glContext + 0x2818) =
-           (float)((double)CONCAT44(0x43300000,params[2] ^ 0x80000000) - dVar2);
+           (float)((double)CONCAT44(0x43300000,params[2] ^ 0x80000000) - intToDoubleBias);
       *(float *)(glContext + 0x281c) =
-           (float)((double)CONCAT44(0x43300000,params[3] ^ 0x80000000) - dVar2);
+           (float)((double)CONCAT44(0x43300000,params[3] ^ 0x80000000) - intToDoubleBias);
       *(byte *)(*(int *)(glContext + 0x4dd0) + 0x234) =
            *(byte *)(*(int *)(glContext + 0x4dd0) + 0x234) | 0x1e;
       *(byte *)(*(int *)(glContext + 0x4dd4) + 0x234) =
            *(byte *)(*(int *)(glContext + 0x4dd4) + 0x234) | 0x1e;
       if (*(int *)(glContext + 0x5434) == 0) {
-        bVar1 = *(byte *)(*(int *)(glContext + 0x5420) + 0x324);
+        dirtyBitIndex = *(byte *)(*(int *)(glContext + 0x5420) + 0x324);
       }
       else {
-        bVar1 = *(byte *)(*(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x358);
+        dirtyBitIndex = *(byte *)(*(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x358);
       }
-      iVar5 = (bVar1 >> 3 & 0x1c) + glContext;
+      dirtyWordAddress324 = (dirtyBitIndex >> 3 & 0x1c) + glContext;
       glContextPtr5424 = *(int *)(glContext + 0x5424);
-      *(uint *)(iVar5 + 0x324) = *(uint *)(iVar5 + 0x324) | 1 << (bVar1 & 0x1f);
-      bVar1 = *(byte *)(glContextPtr5424 + 0x324);
-      iVar4 = (bVar1 >> 3 & 0x1c) + glContext;
-      *(uint *)(iVar4 + 0x348) = *(uint *)(iVar4 + 0x348) | 1 << (bVar1 & 0x1f);
+      *(uint *)(dirtyWordAddress324 + 0x324) = *(uint *)(dirtyWordAddress324 + 0x324) | 1 << (dirtyBitIndex & 0x1f);
+      dirtyBitIndex = *(byte *)(glContextPtr5424 + 0x324);
+      dirtyWordAddress348 = (dirtyBitIndex >> 3 & 0x1c) + glContext;
+      *(uint *)(dirtyWordAddress348 + 0x348) = *(uint *)(dirtyWordAddress348 + 0x348) | 1 << (dirtyBitIndex & 0x1f);
     }
     else if (pname < 0xb54) {
       if (pname == 0xb51) {
@@ -321,30 +321,30 @@ void _glLockArraysEXT_Exec(glContext, first, count)
   int first;
   int count;
 {
-  bool bVar1;
+  bool lockBufferIsNull;
   undefined4 glErrorCode;
-  int iVar3;
-  int iVar4;
+  int lockBuffer;
+  int lockedArrayCapacity;
   
   if ((*(short *)(glContext + 0x4a10) < 0) && (*(int *)(glContext + 0x4988) == 0)) {
     if ((-1 < first) && (0 < count)) {
-      iVar4 = *(int *)(*(int *)(glContext + 0x468c) + 0x88);
-      if (count < iVar4 + -0x12) {
-        iVar3 = *(int *)(glContext + 0x49ac);
-        bVar1 = iVar3 == 0;
-        if (bVar1) {
-          iVar3 = _malloc(iVar4 * 5 + 0x48);
-          *(int *)(glContext + 0x49ac) = iVar3;
-          *(int *)(glContext + 0x49a0) = iVar3 + iVar4;
-          *(int *)(glContext + 0x499c) = iVar3 + iVar4 + iVar4 * 4;
-          bVar1 = iVar3 == 0;
+      lockedArrayCapacity = *(int *)(*(int *)(glContext + 0x468c) + 0x88);
+      if (count < lockedArrayCapacity + -0x12) {
+        lockBuffer = *(int *)(glContext + 0x49ac);
+        lockBufferIsNull = lockBuffer == 0;
+        if (lockBufferIsNull) {
+          lockBuffer = _malloc(lockedArrayCapacity * 5 + 0x48);
+          *(int *)(glContext + 0x49ac) = lockBuffer;
+          *(int *)(glContext + 0x49a0) = lockBuffer + lockedArrayCapacity;
+          *(int *)(glContext + 0x499c) = lockBuffer + lockedArrayCapacity + lockedArrayCapacity * 4;
+          lockBufferIsNull = lockBuffer == 0;
         }
         else if (first != *(int *)(glContext + 0x4984)) {
-          *(int *)(glContext + 0x499c) = *(int *)(glContext + 0x49a0) + iVar4 * 4;
+          *(int *)(glContext + 0x499c) = *(int *)(glContext + 0x49a0) + lockedArrayCapacity * 4;
         }
-        if (bVar1) {
-          *(int *)(glContext + 0x499c) = iVar3;
-          *(int *)(glContext + 0x49a0) = iVar3;
+        if (lockBufferIsNull) {
+          *(int *)(glContext + 0x499c) = lockBuffer;
+          *(int *)(glContext + 0x49a0) = lockBuffer;
         }
         else {
           *(undefined4 *)(glContext + 0x497c) = 0x1f;
@@ -535,14 +535,14 @@ int _glMap1Color_ListExec(glContext, listRecord)
   undefined4 glContext;
   int *listRecord;
 {
-  int iVar1;
+  int pointIndex;
   int invUDeltaBits;
   int pointComponent0;
   int pointComponent1;
   int pointComponent2;
   int order;
   int mapData;
-  int iVar7;
+  int pointRecord;
   int u2Bits;
   int remaining;
   
@@ -554,17 +554,17 @@ int _glMap1Color_ListExec(glContext, listRecord)
   *(int *)(mapData + 0x1c8) = u2Bits;
   *(int *)(mapData + 0x1cc) = invUDeltaBits;
   *(int *)(mapData + 0x1c0) = order;
-  iVar1 = 0;
+  pointIndex = 0;
   for (remaining = order; remaining != 0; remaining = remaining + -1) {
-    iVar7 = iVar1 * 0x10 + mapData;
-    pointComponent0 = listRecord[iVar1 * 4 + 4];
-    pointComponent1 = listRecord[iVar1 * 4 + 5];
-    pointComponent2 = listRecord[iVar1 * 4 + 6];
-    *(int *)(iVar7 + 0x1dc) = listRecord[iVar1 * 4 + 7];
-    *(int *)(iVar7 + 0x1d0) = pointComponent0;
-    *(int *)(iVar7 + 0x1d4) = pointComponent1;
-    *(int *)(iVar7 + 0x1d8) = pointComponent2;
-    iVar1 = iVar1 + 1;
+    pointRecord = pointIndex * 0x10 + mapData;
+    pointComponent0 = listRecord[pointIndex * 4 + 4];
+    pointComponent1 = listRecord[pointIndex * 4 + 5];
+    pointComponent2 = listRecord[pointIndex * 4 + 6];
+    *(int *)(pointRecord + 0x1dc) = listRecord[pointIndex * 4 + 7];
+    *(int *)(pointRecord + 0x1d0) = pointComponent0;
+    *(int *)(pointRecord + 0x1d4) = pointComponent1;
+    *(int *)(pointRecord + 0x1d8) = pointComponent2;
+    pointIndex = pointIndex + 1;
   }
   return (10 - order) * -0x10 + 0xb0;
 }
@@ -683,11 +683,11 @@ int _glMap1Texture2_ListExec(glContext, listRecord)
   undefined4 glContext;
   int *listRecord;
 {
-  int iVar1;
+  int pointIndex;
   int invUDeltaBits;
   int pointComponent0;
   int order;
-  int iVar4;
+  int pointRecord;
   int mapData;
   int u2Bits;
   int remaining;
@@ -700,13 +700,13 @@ int _glMap1Texture2_ListExec(glContext, listRecord)
   *(int *)(mapData + 0x2e8) = u2Bits;
   *(int *)(mapData + 0x2ec) = invUDeltaBits;
   *(int *)(mapData + 0x2e0) = order;
-  iVar1 = 0;
+  pointIndex = 0;
   for (remaining = order; remaining != 0; remaining = remaining + -1) {
-    iVar4 = iVar1 * 8 + mapData;
-    pointComponent0 = listRecord[iVar1 * 2 + 4];
-    *(int *)(iVar4 + 0x2f4) = listRecord[iVar1 * 2 + 5];
-    *(int *)(iVar4 + 0x2f0) = pointComponent0;
-    iVar1 = iVar1 + 1;
+    pointRecord = pointIndex * 8 + mapData;
+    pointComponent0 = listRecord[pointIndex * 2 + 4];
+    *(int *)(pointRecord + 0x2f4) = listRecord[pointIndex * 2 + 5];
+    *(int *)(pointRecord + 0x2f0) = pointComponent0;
+    pointIndex = pointIndex + 1;
   }
   return (10 - order) * -8 + 0x60;
 }
@@ -716,32 +716,32 @@ int _glMap1Texture3_ListExec(glContext, listRecord)
   undefined4 glContext;
   int *listRecord;
 {
-  int *piVar1;
+  int *pointSource;
   int invUDeltaBits;
   int pointComponent1;
   int pointComponent2;
   int order;
-  int iVar5;
+  int mapDataThenPointDestination;
   int u2Bits;
   int remaining;
   
-  iVar5 = _gleGetMapData(glContext);
+  mapDataThenPointDestination = _gleGetMapData(glContext);
   order = *listRecord;
   u2Bits = listRecord[2];
   invUDeltaBits = listRecord[3];
-  *(int *)(iVar5 + 0x344) = listRecord[1];
-  *(int *)(iVar5 + 0x348) = u2Bits;
-  *(int *)(iVar5 + 0x34c) = invUDeltaBits;
-  *(int *)(iVar5 + 0x340) = order;
+  *(int *)(mapDataThenPointDestination + 0x344) = listRecord[1];
+  *(int *)(mapDataThenPointDestination + 0x348) = u2Bits;
+  *(int *)(mapDataThenPointDestination + 0x34c) = invUDeltaBits;
+  *(int *)(mapDataThenPointDestination + 0x340) = order;
   for (remaining = order; remaining != 0; remaining = remaining + -1) {
-    piVar1 = listRecord + 4;
+    pointSource = listRecord + 4;
     pointComponent1 = listRecord[5];
     pointComponent2 = listRecord[6];
     listRecord = listRecord + 3;
-    *(int *)(iVar5 + 0x350) = *piVar1;
-    *(int *)(iVar5 + 0x354) = pointComponent1;
-    *(int *)(iVar5 + 0x358) = pointComponent2;
-    iVar5 = iVar5 + 0xc;
+    *(int *)(mapDataThenPointDestination + 0x350) = *pointSource;
+    *(int *)(mapDataThenPointDestination + 0x354) = pointComponent1;
+    *(int *)(mapDataThenPointDestination + 0x358) = pointComponent2;
+    mapDataThenPointDestination = mapDataThenPointDestination + 0xc;
   }
   return (10 - order) * -0xc + 0x88;
 }
@@ -960,15 +960,15 @@ void _glMap1d_Comp(int glContext,undefined4 target,undefined4 u1ShadowHi,undefin
 {
   undefined4 glErrorCode;
   int listRecord;
-  undefined4 extraout_r4;
-  undefined4 extraout_r4_00;
-  undefined4 extraout_r4_01;
-  undefined4 extraout_r4_02;
-  undefined4 extraout_r4_03;
-  undefined4 extraout_r4_04;
-  undefined4 extraout_r4_05;
-  undefined4 extraout_r4_06;
-  undefined4 extraout_r4_07;
+  undefined4 r4AfterCall;
+  undefined4 r4AfterCall1;
+  undefined4 r4AfterCall2;
+  undefined4 r4AfterCall3;
+  undefined4 r4AfterCall4;
+  undefined4 r4AfterCall5;
+  undefined4 r4AfterCall6;
+  undefined4 r4AfterCall7;
+  undefined4 r4AfterCall8;
   int recordSize;
   double incomingFpr3;
   double incomingFpr4;
@@ -992,7 +992,7 @@ void _glMap1d_Comp(int glContext,undefined4 target,undefined4 u1ShadowHi,undefin
           if (listRecord == 0) {
             return;
           }
-          ((void (*)())_gleMap1ColordLoad)(glContext,extraout_r4_01,recordSize,u1ShadowLo,u2ShadowHi,stride,order,points,
+          ((void (*)())_gleMap1ColordLoad)(glContext,r4AfterCall2,recordSize,u1ShadowLo,u2ShadowHi,stride,order,points,
                              listRecord,u1,u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,
                              incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
           return;
@@ -1005,7 +1005,7 @@ void _glMap1d_Comp(int glContext,undefined4 target,undefined4 u1ShadowHi,undefin
           if (listRecord == 0) {
             return;
           }
-          ((void (*)())_gleMap1IndexdLoad)(glContext,extraout_r4_02,recordSize,u1ShadowLo,u2ShadowHi,stride,order,points,
+          ((void (*)())_gleMap1IndexdLoad)(glContext,r4AfterCall3,recordSize,u1ShadowLo,u2ShadowHi,stride,order,points,
                              listRecord,u1,u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,
                              incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
           return;
@@ -1018,7 +1018,7 @@ void _glMap1d_Comp(int glContext,undefined4 target,undefined4 u1ShadowHi,undefin
           if (listRecord == 0) {
             return;
           }
-          ((void (*)())_gleMap1NormaldLoad)(glContext,extraout_r4_03,recordSize,u1ShadowLo,u2ShadowHi,stride,order,points,
+          ((void (*)())_gleMap1NormaldLoad)(glContext,r4AfterCall4,recordSize,u1ShadowLo,u2ShadowHi,stride,order,points,
                               listRecord,u1,u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,
                               incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
           return;
@@ -1031,7 +1031,7 @@ void _glMap1d_Comp(int glContext,undefined4 target,undefined4 u1ShadowHi,undefin
           if (listRecord == 0) {
             return;
           }
-          ((void (*)())_gleMap1Texture1dLoad)(glContext,extraout_r4_04,recordSize,u1ShadowLo,u2ShadowHi,stride,order,points,listRecord,
+          ((void (*)())_gleMap1Texture1dLoad)(glContext,r4AfterCall5,recordSize,u1ShadowLo,u2ShadowHi,stride,order,points,listRecord,
                      u1,u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,
                      incomingFpr12,incomingFpr13);
           return;
@@ -1044,7 +1044,7 @@ void _glMap1d_Comp(int glContext,undefined4 target,undefined4 u1ShadowHi,undefin
           if (listRecord == 0) {
             return;
           }
-          ((void (*)())_gleMap1Texture2dLoad)(glContext,extraout_r4_05,recordSize,u1ShadowLo,u2ShadowHi,stride,order,points,listRecord,
+          ((void (*)())_gleMap1Texture2dLoad)(glContext,r4AfterCall6,recordSize,u1ShadowLo,u2ShadowHi,stride,order,points,listRecord,
                      u1,u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,
                      incomingFpr12,incomingFpr13);
           return;
@@ -1057,7 +1057,7 @@ void _glMap1d_Comp(int glContext,undefined4 target,undefined4 u1ShadowHi,undefin
           if (listRecord == 0) {
             return;
           }
-          ((void (*)())_gleMap1Texture3dLoad)(glContext,extraout_r4_06,recordSize,u1ShadowLo,u2ShadowHi,stride,order,points,listRecord,
+          ((void (*)())_gleMap1Texture3dLoad)(glContext,r4AfterCall7,recordSize,u1ShadowLo,u2ShadowHi,stride,order,points,listRecord,
                      u1,u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,
                      incomingFpr12,incomingFpr13);
           return;
@@ -1070,7 +1070,7 @@ void _glMap1d_Comp(int glContext,undefined4 target,undefined4 u1ShadowHi,undefin
           if (listRecord == 0) {
             return;
           }
-          ((void (*)())_gleMap1Texture4dLoad)(glContext,extraout_r4_07,recordSize,u1ShadowLo,u2ShadowHi,stride,order,points,listRecord,
+          ((void (*)())_gleMap1Texture4dLoad)(glContext,r4AfterCall8,recordSize,u1ShadowLo,u2ShadowHi,stride,order,points,listRecord,
                      u1,u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,
                      incomingFpr12,incomingFpr13);
           return;
@@ -1083,7 +1083,7 @@ void _glMap1d_Comp(int glContext,undefined4 target,undefined4 u1ShadowHi,undefin
           if (listRecord == 0) {
             return;
           }
-          ((void (*)())_gleMap1Vertex3dLoad)(glContext,extraout_r4,recordSize,u1ShadowLo,u2ShadowHi,stride,order,points,listRecord,
+          ((void (*)())_gleMap1Vertex3dLoad)(glContext,r4AfterCall,recordSize,u1ShadowLo,u2ShadowHi,stride,order,points,listRecord,
                      u1,u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,
                      incomingFpr12,incomingFpr13);
           return;
@@ -1096,7 +1096,7 @@ void _glMap1d_Comp(int glContext,undefined4 target,undefined4 u1ShadowHi,undefin
           if (listRecord == 0) {
             return;
           }
-          ((void (*)())_gleMap1Vertex4dLoad)(glContext,extraout_r4_00,recordSize,u1ShadowLo,u2ShadowHi,stride,order,points,listRecord,
+          ((void (*)())_gleMap1Vertex4dLoad)(glContext,r4AfterCall1,recordSize,u1ShadowLo,u2ShadowHi,stride,order,points,listRecord,
                      u1,u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,
                      incomingFpr12,incomingFpr13);
           return;
@@ -1131,7 +1131,7 @@ void _glMap1d_Exec(int glContext,int target,undefined4 u1ShadowHi,undefined4 u1S
 {
   undefined4 glErrorCode;
   int mapData;
-  int iVar3;
+  int map1Index;
   double incomingFpr3;
   double incomingFpr4;
   double incomingFpr5;
@@ -1147,11 +1147,11 @@ void _glMap1d_Exec(int glContext,int target,undefined4 u1ShadowHi,undefined4 u1S
   mapData = _gleGetMapData(glContext);
   if (*(short *)(glContext + 0x4a10) < 0) {
     if ((u1 != u2) && (order - 1U < 10)) {
-      iVar3 = target + -0xd90;
-      switch(iVar3) {
+      map1Index = target + -0xd90;
+      switch(map1Index) {
       case 0:
         if (3 < stride) {
-          ((void (*)())_gleMap1ColordLoad)(glContext,iVar3,u1ShadowHi,u1ShadowLo,u2ShadowHi,stride,order,points,
+          ((void (*)())_gleMap1ColordLoad)(glContext,map1Index,u1ShadowHi,u1ShadowLo,u2ShadowHi,stride,order,points,
                              mapData + 0x1c0,u1,u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
                              incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
           return;
@@ -1159,7 +1159,7 @@ void _glMap1d_Exec(int glContext,int target,undefined4 u1ShadowHi,undefined4 u1S
         break;
       case 1:
         if (0 < stride) {
-          ((void (*)())_gleMap1IndexdLoad)(glContext,iVar3,u1ShadowHi,u1ShadowLo,u2ShadowHi,stride,order,points,
+          ((void (*)())_gleMap1IndexdLoad)(glContext,map1Index,u1ShadowHi,u1ShadowLo,u2ShadowHi,stride,order,points,
                              mapData + 0x270,u1,u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
                              incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
           return;
@@ -1167,7 +1167,7 @@ void _glMap1d_Exec(int glContext,int target,undefined4 u1ShadowHi,undefined4 u1S
         break;
       case 2:
         if (2 < stride) {
-          ((void (*)())_gleMap1NormaldLoad)(glContext,iVar3,u1ShadowHi,u1ShadowLo,u2ShadowHi,stride,order,points,
+          ((void (*)())_gleMap1NormaldLoad)(glContext,map1Index,u1ShadowHi,u1ShadowLo,u2ShadowHi,stride,order,points,
                               mapData + 0x138,u1,u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
                               incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
           return;
@@ -1175,7 +1175,7 @@ void _glMap1d_Exec(int glContext,int target,undefined4 u1ShadowHi,undefined4 u1S
         break;
       case 3:
         if (0 < stride) {
-          ((void (*)())_gleMap1Texture1dLoad)(glContext,iVar3,u1ShadowHi,u1ShadowLo,u2ShadowHi,stride,order,points,mapData + 0x2a8,
+          ((void (*)())_gleMap1Texture1dLoad)(glContext,map1Index,u1ShadowHi,u1ShadowLo,u2ShadowHi,stride,order,points,mapData + 0x2a8,
                      u1,u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,
                      incomingFpr12,incomingFpr13);
           return;
@@ -1183,7 +1183,7 @@ void _glMap1d_Exec(int glContext,int target,undefined4 u1ShadowHi,undefined4 u1S
         break;
       case 4:
         if (1 < stride) {
-          ((void (*)())_gleMap1Texture2dLoad)(glContext,iVar3,u1ShadowHi,u1ShadowLo,u2ShadowHi,stride,order,points,mapData + 0x2e0,
+          ((void (*)())_gleMap1Texture2dLoad)(glContext,map1Index,u1ShadowHi,u1ShadowLo,u2ShadowHi,stride,order,points,mapData + 0x2e0,
                      u1,u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,
                      incomingFpr12,incomingFpr13);
           return;
@@ -1191,7 +1191,7 @@ void _glMap1d_Exec(int glContext,int target,undefined4 u1ShadowHi,undefined4 u1S
         break;
       case 5:
         if (2 < stride) {
-          ((void (*)())_gleMap1Texture3dLoad)(glContext,iVar3,u1ShadowHi,u1ShadowLo,u2ShadowHi,stride,order,points,mapData + 0x340,
+          ((void (*)())_gleMap1Texture3dLoad)(glContext,map1Index,u1ShadowHi,u1ShadowLo,u2ShadowHi,stride,order,points,mapData + 0x340,
                      u1,u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,
                      incomingFpr12,incomingFpr13);
           return;
@@ -1199,7 +1199,7 @@ void _glMap1d_Exec(int glContext,int target,undefined4 u1ShadowHi,undefined4 u1S
         break;
       case 6:
         if (3 < stride) {
-          ((void (*)())_gleMap1Texture4dLoad)(glContext,iVar3,u1ShadowHi,u1ShadowLo,u2ShadowHi,stride,order,points,mapData + 0x3c8,
+          ((void (*)())_gleMap1Texture4dLoad)(glContext,map1Index,u1ShadowHi,u1ShadowLo,u2ShadowHi,stride,order,points,mapData + 0x3c8,
                      u1,u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,
                      incomingFpr12,incomingFpr13);
           return;
@@ -1207,7 +1207,7 @@ void _glMap1d_Exec(int glContext,int target,undefined4 u1ShadowHi,undefined4 u1S
         break;
       case 7:
         if (2 < stride) {
-          ((void (*)())_gleMap1Vertex3dLoad)(glContext,iVar3,u1ShadowHi,u1ShadowLo,u2ShadowHi,stride,order,points,mapData,u1,
+          ((void (*)())_gleMap1Vertex3dLoad)(glContext,map1Index,u1ShadowHi,u1ShadowLo,u2ShadowHi,stride,order,points,mapData,u1,
                      u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13)
           ;
           return;
@@ -1215,7 +1215,7 @@ void _glMap1d_Exec(int glContext,int target,undefined4 u1ShadowHi,undefined4 u1S
         break;
       case 8:
         if (3 < stride) {
-          ((void (*)())_gleMap1Vertex4dLoad)(glContext,iVar3,u1ShadowHi,u1ShadowLo,u2ShadowHi,stride,order,points,mapData + 0x88,
+          ((void (*)())_gleMap1Vertex4dLoad)(glContext,map1Index,u1ShadowHi,u1ShadowLo,u2ShadowHi,stride,order,points,mapData + 0x88,
                      u1,u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,
                      incomingFpr12,incomingFpr13);
           return;
@@ -1882,7 +1882,7 @@ int _glMap2Vertex3_ListExec(glContext, listRecord)
   undefined4 glContext;
   int *listRecord;
 {
-  int *piVar1;
+  int *pointSource;
   int invUDeltaBits;
   int pointComponent1;
   int v1Bits;
@@ -1893,13 +1893,13 @@ int _glMap2Vertex3_ListExec(glContext, listRecord)
   int vorder2;
   int u2Bits;
   int remaining;
-  int iVar8;
+  int mapDataThenPointDestination;
   int uorder;
   
-  iVar8 = _gleGetMapData(glContext);
+  mapDataThenPointDestination = _gleGetMapData(glContext);
   vorder2 = listRecord[1];
-  *(int *)(iVar8 + 0x478) = *listRecord;
-  *(int *)(iVar8 + 0x47c) = vorder2;
+  *(int *)(mapDataThenPointDestination + 0x478) = *listRecord;
+  *(int *)(mapDataThenPointDestination + 0x47c) = vorder2;
   uorder = *listRecord;
   vorder = listRecord[1];
   u2Bits = listRecord[3];
@@ -1907,21 +1907,21 @@ int _glMap2Vertex3_ListExec(glContext, listRecord)
   v1Bits = listRecord[4];
   v2Bits = listRecord[5];
   invVDeltaBits = listRecord[7];
-  *(int *)(iVar8 + 0x480) = listRecord[2];
-  *(int *)(iVar8 + 0x484) = u2Bits;
-  *(int *)(iVar8 + 0x490) = invUDeltaBits;
-  *(int *)(iVar8 + 0x488) = v1Bits;
-  *(int *)(iVar8 + 0x48c) = v2Bits;
-  *(int *)(iVar8 + 0x494) = invVDeltaBits;
+  *(int *)(mapDataThenPointDestination + 0x480) = listRecord[2];
+  *(int *)(mapDataThenPointDestination + 0x484) = u2Bits;
+  *(int *)(mapDataThenPointDestination + 0x490) = invUDeltaBits;
+  *(int *)(mapDataThenPointDestination + 0x488) = v1Bits;
+  *(int *)(mapDataThenPointDestination + 0x48c) = v2Bits;
+  *(int *)(mapDataThenPointDestination + 0x494) = invVDeltaBits;
   for (remaining = uorder * vorder; remaining != 0; remaining = remaining + -1) {
-    piVar1 = listRecord + 8;
+    pointSource = listRecord + 8;
     pointComponent1 = listRecord[9];
     pointComponent2 = listRecord[10];
     listRecord = listRecord + 3;
-    *(int *)(iVar8 + 0x498) = *piVar1;
-    *(int *)(iVar8 + 0x49c) = pointComponent1;
-    *(int *)(iVar8 + 0x4a0) = pointComponent2;
-    iVar8 = iVar8 + 0xc;
+    *(int *)(mapDataThenPointDestination + 0x498) = *pointSource;
+    *(int *)(mapDataThenPointDestination + 0x49c) = pointComponent1;
+    *(int *)(mapDataThenPointDestination + 0x4a0) = pointComponent2;
+    mapDataThenPointDestination = mapDataThenPointDestination + 0xc;
   }
   return (100 - uorder * vorder) * -0xc + 0x4d0;
 }
@@ -1991,12 +1991,12 @@ int _glMap2Color_ListExec(glContext, listRecord)
   int invVDeltaBits;
   int pointComponent2;
   int vorder;
-  int iVar5;
+  int pointIndex;
   int u2Bits;
   int vorder2;
   int mapData;
   int uorder;
-  int iVar8;
+  int pointRecord;
   int invUDeltaBits;
   int remaining;
   
@@ -2017,17 +2017,17 @@ int _glMap2Color_ListExec(glContext, listRecord)
   *(int *)(mapData + 0x1488) = v1Bits;
   *(int *)(mapData + 0x148c) = v2Bits;
   *(int *)(mapData + 0x1494) = invVDeltaBits;
-  iVar5 = 0;
+  pointIndex = 0;
   for (remaining = uorder * vorder; remaining != 0; remaining = remaining + -1) {
-    iVar8 = iVar5 * 0x10 + mapData;
-    pointComponent0 = listRecord[iVar5 * 4 + 8];
-    pointComponent1 = listRecord[iVar5 * 4 + 9];
-    pointComponent2 = listRecord[iVar5 * 4 + 10];
-    *(int *)(iVar8 + 0x14a4) = listRecord[iVar5 * 4 + 0xb];
-    *(int *)(iVar8 + 0x1498) = pointComponent0;
-    *(int *)(iVar8 + 0x149c) = pointComponent1;
-    *(int *)(iVar8 + 0x14a0) = pointComponent2;
-    iVar5 = iVar5 + 1;
+    pointRecord = pointIndex * 0x10 + mapData;
+    pointComponent0 = listRecord[pointIndex * 4 + 8];
+    pointComponent1 = listRecord[pointIndex * 4 + 9];
+    pointComponent2 = listRecord[pointIndex * 4 + 10];
+    *(int *)(pointRecord + 0x14a4) = listRecord[pointIndex * 4 + 0xb];
+    *(int *)(pointRecord + 0x1498) = pointComponent0;
+    *(int *)(pointRecord + 0x149c) = pointComponent1;
+    *(int *)(pointRecord + 0x14a0) = pointComponent2;
+    pointIndex = pointIndex + 1;
   }
   return (100 - uorder * vorder) * -0x10 + 0x660;
 }
@@ -2340,9 +2340,10 @@ int _glMap2VertexAttrib1ARB_ListExec(glContext, listRecord)
   int remaining;
   int mapData;
   int *dstCursor;
-  int iVar6;
-  int iVar7;
-  int iVar8;
+  int attribMap;
+  int vorder;
+  int pointCount;
+  int copiedWord;
   int u2Bits;
   int uorder;
   int attribIndex;
@@ -2351,36 +2352,36 @@ int _glMap2VertexAttrib1ARB_ListExec(glContext, listRecord)
   mapData = _gleGetMapData(glContext);
   attribIndex = *listRecord;
   uorder = listRecord[1];
-  iVar7 = listRecord[2];
-  iVar6 = mapData + attribIndex * 0x660;
-  *(int *)(iVar6 + 0x37a8) = uorder;
-  *(int *)(iVar6 + 0x37ac) = iVar7;
-  iVar7 = iVar7 * uorder;
+  vorder = listRecord[2];
+  attribMap = mapData + attribIndex * 0x660;
+  *(int *)(attribMap + 0x37a8) = uorder;
+  *(int *)(attribMap + 0x37ac) = vorder;
+  pointCount = vorder * uorder;
   *(undefined1 *)(attribIndex + mapData + 0x9db8) = 1;
   u1Bits = listRecord[3];
   u2Bits = listRecord[4];
   invUDeltaBits = listRecord[7];
   v1Bits = listRecord[5];
   v2Bits = listRecord[6];
-  *(int *)(iVar6 + 0x37c4) = listRecord[8];
-  *(int *)(iVar6 + 0x37b0) = u1Bits;
-  *(int *)(iVar6 + 0x37b4) = u2Bits;
-  *(int *)(iVar6 + 0x37c0) = invUDeltaBits;
-  *(int *)(iVar6 + 0x37b8) = v1Bits;
-  *(int *)(iVar6 + 0x37bc) = v2Bits;
-  if (iVar7 != 0) {
-    dstCursor = (int *)(iVar6 + 0x37c8);
+  *(int *)(attribMap + 0x37c4) = listRecord[8];
+  *(int *)(attribMap + 0x37b0) = u1Bits;
+  *(int *)(attribMap + 0x37b4) = u2Bits;
+  *(int *)(attribMap + 0x37c0) = invUDeltaBits;
+  *(int *)(attribMap + 0x37b8) = v1Bits;
+  *(int *)(attribMap + 0x37bc) = v2Bits;
+  if (pointCount != 0) {
+    dstCursor = (int *)(attribMap + 0x37c8);
     srcCursor = listRecord + 9;
-    remaining = iVar7;
+    remaining = pointCount;
     do {
-      iVar8 = *srcCursor;
+      copiedWord = *srcCursor;
       srcCursor = srcCursor + 1;
-      *dstCursor = iVar8;
+      *dstCursor = copiedWord;
       dstCursor = dstCursor + 1;
       remaining = remaining + -1;
     } while (remaining != 0);
   }
-  return (100 - iVar7) * -4 + 0x1b4;
+  return (100 - pointCount) * -4 + 0x1b4;
 }
 
 /* _glMap2VertexAttrib2ARB_ListExec @ 0x700d0 (208 bytes) */
@@ -2388,53 +2389,54 @@ int _glMap2VertexAttrib2ARB_ListExec(glContext, listRecord)
   undefined4 glContext;
   int *listRecord;
 {
-  int *piVar1;
+  int *pointComponent0Ptr;
   int v1Bits;
   int v2Bits;
   int invVDeltaBits;
   int attribIndex;
   int u2Bits;
   int remaining;
-  int iVar6;
+  int pointComponent1;
   int invUDeltaBits;
   int mapData;
-  int iVar7;
+  int vorder;
+  int pointCount;
   int *srcCursor;
-  int iVar9;
-  int iVar10;
+  int attribMap;
+  int controlPointDst;
   int uorder;
   
   mapData = _gleGetMapData(glContext);
   attribIndex = *listRecord;
   srcCursor = listRecord + 1;
   uorder = listRecord[1];
-  iVar7 = listRecord[2];
-  iVar9 = mapData + attribIndex * 0x660;
-  iVar10 = iVar9 + 0x37a8;
-  *(int *)(iVar9 + 0x37a8) = uorder;
-  *(int *)(iVar9 + 0x37ac) = iVar7;
+  vorder = listRecord[2];
+  attribMap = mapData + attribIndex * 0x660;
+  controlPointDst = attribMap + 0x37a8;
+  *(int *)(attribMap + 0x37a8) = uorder;
+  *(int *)(attribMap + 0x37ac) = vorder;
   *(undefined1 *)(attribIndex + mapData + 0x9db8) = 2;
   u2Bits = listRecord[4];
   invUDeltaBits = listRecord[7];
   v1Bits = listRecord[5];
   v2Bits = listRecord[6];
   invVDeltaBits = listRecord[8];
-  *(int *)(iVar9 + 0x37b0) = listRecord[3];
-  *(int *)(iVar9 + 0x37b4) = u2Bits;
-  *(int *)(iVar9 + 0x37c0) = invUDeltaBits;
-  *(int *)(iVar9 + 0x37b8) = v1Bits;
-  *(int *)(iVar9 + 0x37bc) = v2Bits;
-  *(int *)(iVar9 + 0x37c4) = invVDeltaBits;
-  iVar7 = iVar7 * uorder;
-  for (remaining = iVar7; remaining != 0; remaining = remaining + -1) {
-    piVar1 = srcCursor + 8;
-    iVar6 = srcCursor[9];
+  *(int *)(attribMap + 0x37b0) = listRecord[3];
+  *(int *)(attribMap + 0x37b4) = u2Bits;
+  *(int *)(attribMap + 0x37c0) = invUDeltaBits;
+  *(int *)(attribMap + 0x37b8) = v1Bits;
+  *(int *)(attribMap + 0x37bc) = v2Bits;
+  *(int *)(attribMap + 0x37c4) = invVDeltaBits;
+  pointCount = vorder * uorder;
+  for (remaining = pointCount; remaining != 0; remaining = remaining + -1) {
+    pointComponent0Ptr = srcCursor + 8;
+    pointComponent1 = srcCursor[9];
     srcCursor = srcCursor + 2;
-    *(int *)(iVar10 + 0x20) = *piVar1;
-    *(int *)(iVar10 + 0x24) = iVar6;
-    iVar10 = iVar10 + 8;
+    *(int *)(controlPointDst + 0x20) = *pointComponent0Ptr;
+    *(int *)(controlPointDst + 0x24) = pointComponent1;
+    controlPointDst = controlPointDst + 8;
   }
-  return (100 - iVar7) * -8 + 0x344;
+  return (100 - pointCount) * -8 + 0x344;
 }
 
 /* _glMap2VertexAttrib3ARB_ListExec @ 0x701a0 (216 bytes) */
@@ -2499,16 +2501,17 @@ int _glMap2VertexAttrib4ARB_ListExec(glContext, listRecord)
   undefined4 glContext;
   int *listRecord;
 {
-  int iVar1;
+  int attribMap;
   int u2Bits;
   int remaining;
   int mapData;
-  int iVar3;
-  int iVar4;
+  int vorder;
+  int pointCount;
+  int controlPointDst;
   int uorder;
   int v1Bits;
   int pointComponent2;
-  int iVar6;
+  int pointIndex;
   int invUDeltaBits;
   int attribIndex;
   int v2Bits;
@@ -2519,36 +2522,36 @@ int _glMap2VertexAttrib4ARB_ListExec(glContext, listRecord)
   mapData = _gleGetMapData(glContext);
   attribIndex = *listRecord;
   uorder = listRecord[1];
-  iVar3 = listRecord[2];
-  iVar1 = mapData + attribIndex * 0x660;
-  *(int *)(iVar1 + 0x37a8) = uorder;
-  *(int *)(iVar1 + 0x37ac) = iVar3;
+  vorder = listRecord[2];
+  attribMap = mapData + attribIndex * 0x660;
+  *(int *)(attribMap + 0x37a8) = uorder;
+  *(int *)(attribMap + 0x37ac) = vorder;
   *(undefined1 *)(attribIndex + mapData + 0x9db8) = 4;
   u2Bits = listRecord[4];
   invUDeltaBits = listRecord[7];
   v1Bits = listRecord[5];
   v2Bits = listRecord[6];
   invVDeltaBits = listRecord[8];
-  *(int *)(iVar1 + 0x37b0) = listRecord[3];
-  *(int *)(iVar1 + 0x37b4) = u2Bits;
-  *(int *)(iVar1 + 0x37c0) = invUDeltaBits;
-  *(int *)(iVar1 + 0x37b8) = v1Bits;
-  *(int *)(iVar1 + 0x37bc) = v2Bits;
-  *(int *)(iVar1 + 0x37c4) = invVDeltaBits;
-  iVar3 = iVar3 * uorder;
-  iVar6 = 0;
-  for (remaining = iVar3; remaining != 0; remaining = remaining + -1) {
-    iVar4 = iVar6 * 0x10 + iVar1 + 0x37a8;
-    pointComponent3 = listRecord[iVar6 * 4 + 0xc];
-    pointComponent1 = listRecord[iVar6 * 4 + 10];
-    pointComponent2 = listRecord[iVar6 * 4 + 0xb];
-    *(int *)(iVar4 + 0x20) = listRecord[iVar6 * 4 + 9];
-    *(int *)(iVar4 + 0x2c) = pointComponent3;
-    *(int *)(iVar4 + 0x24) = pointComponent1;
-    *(int *)(iVar4 + 0x28) = pointComponent2;
-    iVar6 = iVar6 + 1;
+  *(int *)(attribMap + 0x37b0) = listRecord[3];
+  *(int *)(attribMap + 0x37b4) = u2Bits;
+  *(int *)(attribMap + 0x37c0) = invUDeltaBits;
+  *(int *)(attribMap + 0x37b8) = v1Bits;
+  *(int *)(attribMap + 0x37bc) = v2Bits;
+  *(int *)(attribMap + 0x37c4) = invVDeltaBits;
+  pointCount = vorder * uorder;
+  pointIndex = 0;
+  for (remaining = pointCount; remaining != 0; remaining = remaining + -1) {
+    controlPointDst = pointIndex * 0x10 + attribMap + 0x37a8;
+    pointComponent3 = listRecord[pointIndex * 4 + 0xc];
+    pointComponent1 = listRecord[pointIndex * 4 + 10];
+    pointComponent2 = listRecord[pointIndex * 4 + 0xb];
+    *(int *)(controlPointDst + 0x20) = listRecord[pointIndex * 4 + 9];
+    *(int *)(controlPointDst + 0x2c) = pointComponent3;
+    *(int *)(controlPointDst + 0x24) = pointComponent1;
+    *(int *)(controlPointDst + 0x28) = pointComponent2;
+    pointIndex = pointIndex + 1;
   }
-  return (100 - iVar3) * -0x10 + 0x664;
+  return (100 - pointCount) * -0x10 + 0x664;
 }
 
 /* _glMap2d_Comp @ 0x70364 (1420 bytes) */

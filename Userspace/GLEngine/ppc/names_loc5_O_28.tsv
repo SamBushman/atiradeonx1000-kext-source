@@ -1,0 +1,36 @@
+local	___ashldi3	param_1	valueHigh	CONFIRMED	high word of the 64-bit value: returned as CONCAT44(param_1,param_2) when the shift is zero
+local	___ashldi3	param_2	valueLow	CONFIRMED	low word of the 64-bit value: returned as CONCAT44(param_1,param_2) when the shift is zero
+local	___ashldi3	param_3	shiftCount	CONFIRMED	shift amount: zero returns the value unchanged, 0x20 - count selects the straddling case
+local	___ashldi3	uVar1	complementShiftThenResultHigh	CONFIRMED	0x20 - shiftCount, later replaced by the high word of the result (returned in the upper half)
+local	___ashldi3	local_2c	resultLow	CONFIRMED	low word of the shifted result (returned in the lower half)
+local	_glePreInitGlobals	puVar3	globalsStruct	CONFIRMED	PTR__gle_globals_struct: base of the global constant structure initialised by this function
+local	_glePreInitGlobals	fVar2	ubyteToFloatScale	INFERRED	FLOAT_00108e78 (the per-channel ubyte scale), multiplied with the converted index to fill the 256-entry float table at the start of the structure
+local	_glePreInitGlobals	uVar4	flippedIndex	CONFIRMED	loopIndex ^ 0x80000000: low word of the int-to-double magic-number conversion (0x43300000 high word)
+use	_gleInitGLIState	iVar4	matrixByteOffset	CONFIRMED	loopIndex * 0x40: byte offset of the 4x4 matrix being set to identity in the array at ctx+0x4678	^\s*iVar4\ =\ iVar5\ \*\ 0x40;$	+1
+use	_gleInitGLIState	iVar4	matrixByteOffset	CONFIRMED	loopIndex * 0x40: byte offset of the 4x4 matrix being set to identity in the array at ctx+0x4678	^\s*\(\(int\ \(\*\)\(\)\)_gleMakeIdentityMatrix\)\(\*\(int\ \*\)\(param_1\ \+\ 0x4678\)\ \+\ iVar4\);$	+1
+use	_gleInitGLIState	iVar4	vertexTexCoordCursor	INFERRED	0x10-byte stride cursor over 8 slots of the current-vertex record at ctx+0x4854 (starting at record-0x180), each reset to (0,0,0,1)	^\s*iVar4\ =\ iVar5\ \+\ \-0x200;$	+1
+use	_gleInitGLIState	iVar4	vertexTexCoordCursor	INFERRED	0x10-byte stride cursor over 8 slots of the current-vertex record at ctx+0x4854 (starting at record-0x180), each reset to (0,0,0,1)	^\s*\*\(undefined4\ \*\)\(iVar4\ \+\ 0x80\)\ =\ 0;$	+5
+local	_gleInitGLIState	iVar5	stateSlotCursor	INFERRED	cursor over two 0x10-byte slots at ctx+0x2f0 (word 0 = 0, words 1-2 = float257)
+local	_gleUpdateTextureTransform	puVar2	multiMatTransPtrThenMatTransFunc	CONFIRMED	PTR__gleMultiTextureMatTransPtr, later reassigned to PTR__gleTextureMatTrans; stored into the transform function slots ctx+0x506c..0x5078
+local	_gleUpdateTextureTransform	puVar3	matTransPtrDivWFunc	CONFIRMED	PTR__gleTextureMatTransPtrDivW: stored into the transform function slot ctx+0x5074/+0x5078
+local	_gleUpdateTextureTransform	puVar4	identityThenMatTransFunc	CONFIRMED	PTR__gleTextureMatTrans_Identity, reassigned to PTR__gleTextureMatTrans when a single texture unit is enabled; stored into ctx+0x506c/+0x5074
+local	_glColor4_ListExec	uVar1	alpha	CONFIRMED	recordedArgs[3], stored to ctx+0x2ac (fourth word of the current colour)
+local	_glColor4_ListExec	uVar2	green	CONFIRMED	recordedArgs[1], stored to ctx+0x2a4 (second word of the current colour)
+local	_glColor4_ListExec	uVar3	blue	CONFIRMED	recordedArgs[2], stored to ctx+0x2a8 (third word of the current colour)
+local	_glStencilFuncSeparate_Exec	uVar2	maxStencilRef	CONFIRMED	0xffffffff >> (32 - stencil bits from the renderer info): upper clamp of ref
+local	_glStencilFuncSeparate_Exec	uVar3	funcWord16	CONFIRMED	func truncated to 16 bits, stored at ctx+0x3500 / +0x3510
+local	_glDisableVertexAttribArrayARB_Exec	lVar4	slotBit	CONFIRMED	1 << index built by ___ashldi3 as a 64-bit mask (high word is the bit for index < 32)
+local	_glDisableVertexAttribArrayARB_Exec	uVar3	slotBitHigh	CONFIRMED	high word of slotBit, cleared from the enabled mask at clientState+0x330 and set in the disabled mask at +0x350
+local	_gleSwitchRenderersWriteBuffers	local_1a0	scaledVertexX	INFERRED	first float of the zero-filled 0x100-byte vertex record, scaled by ctx+0x4a44 and offset by ctx+0x4a48 (scaledVertexY/Z follow)
+local	_gleSwitchRenderersWriteBuffers	auStack_a0	recoveryStateBuffer	CONFIRMED	80-byte buffer filled by _gleRecoverySaveState (same use as recoveryStateBuffer in _gleSwitchRenderersReadBuffers)
+local	_gliDestroyRendererInfo	param_1	rendererInfo	CONFIRMED	record freed by this function (function name; 0 means invalid)
+local	_gliDestroyRendererInfo	uVar1	cglError	CONFIRMED	0x271e (10014, kCGLBadRendererInfo) when rendererInfo is null, else 0
+local	_gleSetNormalFunc	param_2	forwardedArg2	CONFIRMED	forwarded unchanged to the normal-transform function built and called here
+local	_gleSetNormalFunc	param_3	forwardedArg3	CONFIRMED	forwarded to _gleBuildNormalTransformFunc and the function it returns
+local	_gleInsertPixel_ABGR_EXT_Int	param_1	pixel	INFERRED	source float RGBA at +4..+0x10 (same role as pixel in the other _gleInsertPixel_* functions)
+local	_gleInsertPixel_ABGR_EXT_Int	param_2	dst	INFERRED	destination int words written in ABGR order (same role as dst in the other _gleInsertPixel_* functions)
+local	_gleMap2IndexdLoad	dVar7	unitThenPointValue	CONFIRMED	DOUBLE_00108d68 (1.0) as numerator of 1/(v2-v1), then the double control point read from the points array
+local	_gleMap2IndexdLoad	pfVar1	destPtr	CONFIRMED	float cursor writing the control values at mapData+8 (as in _gleMap2Texture2dLoad)
+local	_gleMap1Texture1dLoad	dVar2	invDeltaThenPointValue	CONFIRMED	DOUBLE_00108d68 / (u2-u1) stored to mapData[3], then reused for each control point read from points
+local	_gleMap2IndexfLoad	iVar1	pointValue	CONFIRMED	raw word of the float control point copied to the map data
+local	_gleMap2IndexfLoad	piVar4	destPtr	CONFIRMED	cursor writing the control values at mapData+8 (as in _gleMap2IndexdLoad)

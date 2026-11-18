@@ -1,0 +1,6 @@
+local	_glFlush_RevertExec	iVar3	rendererSlot	CONFIRMED	glContext + renderer index * 0x2e0: per-renderer slot (+0x8884 dispatch table, +0x85ac handle)
+local	_glFlush_RevertExec	puVar2	setClipInterpFunc	CONFIRMED	only assigned PTR__gleSetClipInterpFunc: holds that function's address, stored to ctx+0x49cc
+local	_gleVtxLightFastRGBABack	iVar2	glContextCopy	CONFIRMED	assigned only from glContext and passed as the context argument of _gleMaterialShinePow
+local	_gleVtxLightFastRGBABack	dVar10	zeroThenShineFactor	CONFIRMED	FLOAT_00108e50 (0.0, compared with the dot products), then the result of _gleMaterialShinePow multiplied with the specular light products
+local	_glMapVertexAttrib2dARB_Exec	uVar3	sizeCopy	CONFIRMED	assigned only from size and forwarded as the size argument of the Map2VertexAttrib*Load callees
+local	_glMapVertexAttrib2dARB_Exec	iVar4	ustrideCopy	CONFIRMED	assigned only from ustride and forwarded to the Map2VertexAttrib*Load callees

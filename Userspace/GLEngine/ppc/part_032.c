@@ -328,13 +328,13 @@ int _glTexParameteri_ListExec(glContext, listRecord)
 }
 
 /* _glTexParameterI_Comp @ 0x9e2d8 (388 bytes) */
-int _glTexParameterI_Comp(glContext, target, pname, param_4)
+int _glTexParameterI_Comp(glContext, target, pname, params)
   undefined4 glContext;
   undefined4 target;
   undefined *pname;
-  undefined4 *param_4;
+  undefined4 *params;
 {
-  undefined *puVar1;
+  undefined *pnameCheckValue;
   undefined4 *listRecord;
   
   listRecord = (undefined4 *)_gleAddListItem(glContext,PTR__glTexParameteri_ListExec_001103ec,0x18);
@@ -349,26 +349,26 @@ int _glTexParameterI_Comp(glContext, target, pname, param_4)
     if (pname < (undefined *)0x8067) {
       if (pname == ((unsigned char *)0x00001004)) {
 LAB_0009e428:
-        listRecord[2] = *param_4;
-        listRecord[3] = param_4[1];
-        listRecord[4] = param_4[2];
-        listRecord[5] = param_4[3];
+        listRecord[2] = *params;
+        listRecord[3] = params[1];
+        listRecord[4] = params[2];
+        listRecord[5] = params[3];
         return listRecord;
       }
       if (pname < ((unsigned char *)0x00001004)) {
         return listRecord;
       }
-      puVar1 = pname + -0x2800;
+      pnameCheckValue = pname + -0x2800;
     }
     else {
       if (pname == (undefined *)0x80bf) goto LAB_0009e41c;
       if (pname < (undefined *)0x80c0) {
-        puVar1 = (undefined *)0x8072;
+        pnameCheckValue = (undefined *)0x8072;
         goto LAB_0009e414;
       }
-      puVar1 = pname + -0x813a;
+      pnameCheckValue = pname + -0x813a;
     }
-    if ((undefined *)0x3 < puVar1) {
+    if ((undefined *)0x3 < pnameCheckValue) {
       return listRecord;
     }
   }
@@ -377,10 +377,10 @@ LAB_0009e428:
     if (pname < (undefined *)0x85bd) {
       if (pname == (undefined *)0x8501) goto LAB_0009e41c;
       if (pname < (undefined *)0x8502) {
-        puVar1 = (undefined *)0x84fe;
+        pnameCheckValue = (undefined *)0x84fe;
       }
       else {
-        puVar1 = (undefined *)0x85b6;
+        pnameCheckValue = (undefined *)0x85b6;
       }
     }
     else {
@@ -393,15 +393,15 @@ LAB_0009e428:
         }
         goto LAB_0009e41c;
       }
-      puVar1 = (undefined *)0x8a7f;
+      pnameCheckValue = (undefined *)0x8a7f;
     }
 LAB_0009e414:
-    if (pname != puVar1) {
+    if (pname != pnameCheckValue) {
       return listRecord;
     }
   }
 LAB_0009e41c:
-  listRecord[2] = *param_4;
+  listRecord[2] = *params;
   return listRecord;
 }
 
@@ -413,11 +413,11 @@ int _glTexParameteri_Comp(glContext, target, pname, param)
   undefined4 param;
 {
   unsigned int ghidra_home[8] = { glContext, target, pname, param, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
-  undefined4 uVar1;
+  undefined4 texParameterResult;
   
   (*(unsigned int *)((unsigned char *)ghidra_home + 12)) = param;
-  uVar1 = ((int (*)())_glTexParameterI_Comp)(glContext,target,pname,&(*(unsigned int *)((unsigned char *)ghidra_home + 12)));
-  return uVar1;
+  texParameterResult = ((int (*)())_glTexParameterI_Comp)(glContext,target,pname,&(*(unsigned int *)((unsigned char *)ghidra_home + 12)));
+  return texParameterResult;
 }
 
 /* _glTexParameteri_CompExec @ 0x9e484 (72 bytes) */
@@ -1956,7 +1956,7 @@ void _glTexSubImage2D_FlushExec(forwardedArg1, forwardedArg2, forwardedArg3, for
   undefined4 forwardedArg9;
   undefined4 forwardedArg10;
 {
-  double fparam_1;
+  double forwardedFloatArg1;
   double incomingFpr2;
   double incomingFpr3;
   double incomingFpr4;
@@ -1967,7 +1967,7 @@ void _glTexSubImage2D_FlushExec(forwardedArg1, forwardedArg2, forwardedArg3, for
   
   _glTexSubImage2D_Exec
             (forwardedArg1,forwardedArg2,forwardedArg3,forwardedArg4,forwardedArg5,forwardedArg6,forwardedArg7,forwardedArg8,forwardedArg9,forwardedArg10);
-  ((void (*)())_glFlush_Exec)(forwardedArg1,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
+  ((void (*)())_glFlush_Exec)(forwardedArg1,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
   return;
 }
 
@@ -2248,7 +2248,7 @@ void _glTexSubImage3D_Exec(glContext, target, level, xoffset, yoffset, zoffset, 
   int bytesPerElement;
   int pluginResult;
   byte levelFlags;
-  int iVar5;
+  int pixelUnpackBufferThenResult;
   int levelImageCursor;
   uint nextLevel;
   uint levelBorder;
@@ -2258,8 +2258,8 @@ void _glTexSubImage3D_Exec(glContext, target, level, xoffset, yoffset, zoffset, 
   double bytesPerElementValue;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
-    iVar5 = *(int *)(glContext + 0x4a6c);
-    if (iVar5 == 0) {
+    pixelUnpackBufferThenResult = *(int *)(glContext + 0x4a6c);
+    if (pixelUnpackBufferThenResult == 0) {
 LAB_000a15b0:
       if (width == 0) {
         return;
@@ -2280,7 +2280,7 @@ LAB_000a15b0:
       textureLevel = levelRecord + 0xc4;
       fastPathResult = _checkFastPath(glContext,textureLevel,xoffset,yoffset,zoffset,width,height,format,type
                              ,pixels);
-      if (iVar5 != 0) {
+      if (pixelUnpackBufferThenResult != 0) {
         if ((((fastPathResult != 0) && ((int)(uint)*(byte *)(textureObject + 0x8d) <= (int)level)) &&
             ((int)level <= (int)(uint)*(byte *)(textureObject + 0x8f))) &&
            (((*(ushort *)(textureObject + 0x94) >> (level & 0x3f) & 1) != 0 &&
@@ -2330,17 +2330,17 @@ LAB_000a15b0:
           } while ((int)nextLevel <= (int)(uint)*(byte *)(textureObject + 0x83));
           return;
         }
-        if (*(int *)(iVar5 + 0x40) != 0) {
-          _gleSynchronizePluginBuffer(glContext,iVar5 + 0x10);
+        if (*(int *)(pixelUnpackBufferThenResult + 0x40) != 0) {
+          _gleSynchronizePluginBuffer(glContext,pixelUnpackBufferThenResult + 0x10);
         }
       }
       if ((((fastPathResult == 0) || ((int)level < (int)(uint)*(byte *)(textureObject + 0x8d))) ||
           ((int)(uint)*(byte *)(textureObject + 0x8f) < (int)level)) ||
          (((*(ushort *)(textureObject + 0x94) >> (level & 0x3f) & 1) == 0 ||
-          (iVar5 = (**(code **)(glContext + 0x4710))
+          (pixelUnpackBufferThenResult = (**(code **)(glContext + 0x4710))
                              (*(undefined4 *)(glContext + 0x4688),
                               *(undefined4 *)(textureObject + (uint)*(byte *)(glContext + 0x85a8) * 4),0,
-                              level,xoffset,yoffset,zoffset,width), iVar5 == 0)))) {
+                              level,xoffset,yoffset,zoffset,width), pixelUnpackBufferThenResult == 0)))) {
         levelFlags = *(byte *)(levelRecord + 0xcf);
         if ((levelFlags & 0x10) == 0) {
           if ((levelFlags & 0x40) == 0) {
@@ -2361,7 +2361,7 @@ LAB_000a15b0:
         _gleTextureImagePut(glContext,textureLevel,xoffset + levelBorder,yoffset + levelBorder,zoffset + levelBorder,width,
                             height,depth,format,type,0,glContext + 0x31cc,pixels);
         if ((((*(uint *)(textureObject + 0x6c) & 0x8000) != 0) && ((int)*(short *)(textureObject + 0x60) == level)
-            ) && (iVar5 = _gleGenMipmapsToLevel(glContext,textureObject,0,level,0xf,1), iVar5 != 0)) {
+            ) && (pixelUnpackBufferThenResult = _gleGenMipmapsToLevel(glContext,textureObject,0,level,0xf,1), pixelUnpackBufferThenResult != 0)) {
           return;
         }
         *(uint *)(glContext + 0x314) =
@@ -2410,7 +2410,7 @@ LAB_000a15b0:
     }
     requiredBytes = _gleOffsetLimitImage3D
                       (glContext + 0x31cc,width,height,depth,format,type,pixels);
-    bufferSize = *(int *)(iVar5 + 0x38);
+    bufferSize = *(int *)(pixelUnpackBufferThenResult + 0x38);
     bytesPerElementValue = (double)((double (*)())_gleBytesPerElement)(type);
     bytesPerElement = (int)bytesPerElementValue;
     if (requiredBytes <= bufferSize) {
@@ -2418,7 +2418,7 @@ LAB_000a15b0:
         bytesPerElement = _glePixelBytes(format,type);
       }
       if (pixels == (pixels / bytesPerElement) * bytesPerElement) {
-        pixels = pixels + *(int *)(iVar5 + 0x30);
+        pixels = pixels + *(int *)(pixelUnpackBufferThenResult + 0x30);
         goto LAB_000a15b0;
       }
     }
@@ -2456,13 +2456,13 @@ int _glVertex2_ListExec(glContext, listRecord)
   int glContext;
   float *listRecord;
 {
-  code *pcVar1;
+  code *vertexFunc;
   
-  pcVar1 = *(code **)(glContext + 0x4884);
+  vertexFunc = *(code **)(glContext + 0x4884);
   if (*(int *)(glContext + 0x4858) == *(int *)(glContext + 0x485c)) {
-    pcVar1 = *(code **)(glContext + 0x28);
+    vertexFunc = *(code **)(glContext + 0x28);
   }
-  (*pcVar1)(glContext,(double)*listRecord,(double)listRecord[1],(double)*(float *)(glContext + 0x20),
+  (*vertexFunc)(glContext,(double)*listRecord,(double)listRecord[1],(double)*(float *)(glContext + 0x20),
             (double)*(float *)(glContext + 0x24));
   return 8;
 }

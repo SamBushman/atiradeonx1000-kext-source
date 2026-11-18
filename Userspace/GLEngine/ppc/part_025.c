@@ -64,21 +64,23 @@ void _glAttachObjectARB_Exec(glContext, containerObj, obj)
   undefined4 obj;
 {
   undefined4 glErrorCode;
-  int iVar2;
+  int attachedObject;
+  int byteOffset;
   int *srcCursor;
-  int iVar4;
+  int sharedStateThenContainerObject;
   int hashObject;
-  int iVar6;
+  int attachedCount;
+  int newAttachedObjects;
   int loopIndex;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
-    iVar4 = *(int *)(glContext + 0x5148);
-    if (*(char *)(iVar4 + 0x8024) != '\0') {
-      _pthread_mutex_lock(iVar4 + 0x8028);
-      iVar4 = *(int *)(glContext + 0x5148);
+    sharedStateThenContainerObject = *(int *)(glContext + 0x5148);
+    if (*(char *)(sharedStateThenContainerObject + 0x8024) != '\0') {
+      _pthread_mutex_lock(sharedStateThenContainerObject + 0x8028);
+      sharedStateThenContainerObject = *(int *)(glContext + 0x5148);
     }
-    iVar4 = _gleLookupHashObject(iVar4 + 0x6018,containerObj);
-    if (iVar4 == 0) {
+    sharedStateThenContainerObject = _gleLookupHashObject(sharedStateThenContainerObject + 0x6018,containerObj);
+    if (sharedStateThenContainerObject == 0) {
 LAB_00087368:
       if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
         _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);
@@ -89,36 +91,36 @@ LAB_00087368:
       glErrorCode = 0x501;
       goto LAB_000873fc;
     }
-    if (*(int *)(iVar4 + 0x10) == 0x8b40) {
+    if (*(int *)(sharedStateThenContainerObject + 0x10) == 0x8b40) {
       hashObject = _gleLookupHashObject(*(int *)(glContext + 0x5148) + 0x6018,obj);
       if (hashObject == 0) goto LAB_00087368;
       if (*(int *)(hashObject + 0x10) == 0x8b48) {
-        iVar6 = *(int *)(iVar4 + 0x48);
+        attachedCount = *(int *)(sharedStateThenContainerObject + 0x48);
         loopIndex = 0;
-        if (0 < iVar6) {
-          srcCursor = *(int **)(iVar4 + 0x44);
+        if (0 < attachedCount) {
+          srcCursor = *(int **)(sharedStateThenContainerObject + 0x44);
           do {
-            iVar2 = *srcCursor;
+            attachedObject = *srcCursor;
             srcCursor = srcCursor + 1;
-            if (iVar2 == hashObject) goto LAB_000873d0;
+            if (attachedObject == hashObject) goto LAB_000873d0;
             loopIndex = loopIndex + 1;
-          } while (loopIndex < iVar6);
+          } while (loopIndex < attachedCount);
         }
-        iVar6 = _malloc(iVar6 * 4 + 4);
+        newAttachedObjects = _malloc(attachedCount * 4 + 4);
         loopIndex = 0;
-        if (0 < *(int *)(iVar4 + 0x48)) {
+        if (0 < *(int *)(sharedStateThenContainerObject + 0x48)) {
           do {
-            iVar2 = loopIndex * 4;
+            byteOffset = loopIndex * 4;
             loopIndex = loopIndex + 1;
-            *(undefined4 *)(iVar2 + iVar6) = *(undefined4 *)(iVar2 + *(int *)(iVar4 + 0x44));
-          } while (loopIndex < *(int *)(iVar4 + 0x48));
+            *(undefined4 *)(byteOffset + newAttachedObjects) = *(undefined4 *)(byteOffset + *(int *)(sharedStateThenContainerObject + 0x44));
+          } while (loopIndex < *(int *)(sharedStateThenContainerObject + 0x48));
         }
-        *(int *)(iVar6 + loopIndex * 4) = hashObject;
-        *(int *)(iVar4 + 0x48) = *(int *)(iVar4 + 0x48) + 1;
-        if (*(int *)(iVar4 + 0x44) != 0) {
-          _free(*(int *)(iVar4 + 0x44));
+        *(int *)(newAttachedObjects + loopIndex * 4) = hashObject;
+        *(int *)(sharedStateThenContainerObject + 0x48) = *(int *)(sharedStateThenContainerObject + 0x48) + 1;
+        if (*(int *)(sharedStateThenContainerObject + 0x44) != 0) {
+          _free(*(int *)(sharedStateThenContainerObject + 0x44));
         }
-        *(int *)(iVar4 + 0x44) = iVar6;
+        *(int *)(sharedStateThenContainerObject + 0x44) = newAttachedObjects;
         *(int *)(hashObject + 8) = *(int *)(hashObject + 8) + 1;
         if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) == '\0') {
           return;
@@ -2787,7 +2789,7 @@ void _glUniform2iARB_Exec(glContext, location, v0, v1)
   undefined4 *rendererHandlePtr;
   undefined4 uniformWord1;
   int currentProgram;
-  int iVar5;
+  int uniformValues;
   int rendererSlotOffset;
   int registerIndexThenOffset;
   int typeInfoFound;
@@ -2825,23 +2827,23 @@ void _glUniform2iARB_Exec(glContext, location, v0, v1)
     return;
   }
   locationValueOffset = location * 0x10;
-  iVar5 = *(int *)(currentProgram + 0x4c);
+  uniformValues = *(int *)(currentProgram + 0x4c);
   if (uniformType == 0x8b53) {
-    *(int *)(iVar5 + locationValueOffset) = v0;
+    *(int *)(uniformValues + locationValueOffset) = v0;
   }
   else {
     if (v0 == 0) {
-      *(undefined4 *)(iVar5 + locationValueOffset) = 0;
+      *(undefined4 *)(uniformValues + locationValueOffset) = 0;
     }
     else {
-      *(undefined4 *)(iVar5 + locationValueOffset) = 1;
+      *(undefined4 *)(uniformValues + locationValueOffset) = 1;
     }
     if (v1 != 0) {
-      *(undefined4 *)(iVar5 + locationValueOffset + 4) = 1;
+      *(undefined4 *)(uniformValues + locationValueOffset + 4) = 1;
       goto LAB_0008ac38;
     }
   }
-  *(int *)(iVar5 + locationValueOffset + 4) = v1;
+  *(int *)(uniformValues + locationValueOffset + 4) = v1;
 LAB_0008ac38:
   *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x4000000;
   stage0Record = *(int *)(currentProgram + 0x20);
@@ -3905,20 +3907,20 @@ int _glUniform1fvARB_Comp(glContext, location, count, value)
   undefined4 *value;
 {
   int loopIndex;
-  undefined4 *puVar2;
+  undefined4 *listRecordThenDestination;
   
-  puVar2 = (undefined4 *)
+  listRecordThenDestination = (undefined4 *)
            _gleAddListItem(glContext,PTR__glUniform1fvARB_ListExec_001102e4,count * 4 + 8);
-  if (puVar2 != (undefined4 *)0x0) {
-    puVar2[1] = count;
-    *puVar2 = location;
-    puVar2 = puVar2 + 2;
-    for (loopIndex = 0; *puVar2 = *value, loopIndex != count + -1; loopIndex = loopIndex + 1) {
-      puVar2 = puVar2 + 1;
+  if (listRecordThenDestination != (undefined4 *)0x0) {
+    listRecordThenDestination[1] = count;
+    *listRecordThenDestination = location;
+    listRecordThenDestination = listRecordThenDestination + 2;
+    for (loopIndex = 0; *listRecordThenDestination = *value, loopIndex != count + -1; loopIndex = loopIndex + 1) {
+      listRecordThenDestination = listRecordThenDestination + 1;
       value = value + 1;
     }
   }
-  return puVar2;
+  return listRecordThenDestination;
 }
 
 /* _glUniform4iARB_Comp @ 0x8c23c (108 bytes) */
@@ -4004,28 +4006,28 @@ int _glUniform4ivARB_Comp(glContext, location, count, value)
   int count;
   undefined4 *value;
 {
-  undefined4 *puVar1;
+  undefined4 *listRecordThenDestination;
   int loopIndex;
   
-  puVar1 = (undefined4 *)
+  listRecordThenDestination = (undefined4 *)
            _gleAddListItem(glContext,PTR__glUniform4ivARB_ListExec_001102d0,count * 0x10 + 8);
-  if (puVar1 != (undefined4 *)0x0) {
-    puVar1[1] = count;
+  if (listRecordThenDestination != (undefined4 *)0x0) {
+    listRecordThenDestination[1] = count;
     loopIndex = 0;
-    *puVar1 = location;
-    puVar1 = puVar1 + 2;
+    *listRecordThenDestination = location;
+    listRecordThenDestination = listRecordThenDestination + 2;
     while( true ) {
-      *puVar1 = *value;
-      puVar1[1] = value[1];
-      puVar1[2] = value[2];
-      puVar1[3] = value[3];
+      *listRecordThenDestination = *value;
+      listRecordThenDestination[1] = value[1];
+      listRecordThenDestination[2] = value[2];
+      listRecordThenDestination[3] = value[3];
       if (loopIndex == count + -1) break;
-      puVar1 = puVar1 + 4;
+      listRecordThenDestination = listRecordThenDestination + 4;
       value = value + 4;
       loopIndex = loopIndex + 1;
     }
   }
-  return puVar1;
+  return listRecordThenDestination;
 }
 
 /* _glUniform3ivARB_Comp @ 0x8c45c (152 bytes) */
@@ -4065,28 +4067,28 @@ int _glUniform2ivARB_Comp(glContext, location, count, value)
   int count;
   undefined4 *value;
 {
-  undefined4 *puVar1;
-  undefined4 *puVar2;
+  undefined4 *recordCursor;
+  undefined4 *pairDestOrNull;
   int loopIndex;
   
-  puVar1 = (undefined4 *)
+  recordCursor = (undefined4 *)
            _gleAddListItem(glContext,PTR__glUniform2ivARB_ListExec_001102c8,count * 8 + 8);
-  puVar2 = (undefined4 *)0x0;
-  if (puVar1 != (undefined4 *)0x0) {
-    puVar1[1] = count;
+  pairDestOrNull = (undefined4 *)0x0;
+  if (recordCursor != (undefined4 *)0x0) {
+    recordCursor[1] = count;
     loopIndex = 0;
-    *puVar1 = location;
+    *recordCursor = location;
     while( true ) {
-      puVar2 = puVar1 + 2;
-      *puVar2 = *value;
-      puVar1[3] = value[1];
+      pairDestOrNull = recordCursor + 2;
+      *pairDestOrNull = *value;
+      recordCursor[3] = value[1];
       if (loopIndex == count + -1) break;
       value = value + 2;
       loopIndex = loopIndex + 1;
-      puVar1 = puVar2;
+      recordCursor = pairDestOrNull;
     }
   }
-  return puVar2;
+  return pairDestOrNull;
 }
 
 /* _glUniform1ivARB_Comp @ 0x8c584 (136 bytes) */

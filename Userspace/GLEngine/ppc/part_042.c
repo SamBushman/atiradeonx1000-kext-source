@@ -404,13 +404,13 @@ void _gleSetEnable_COLOR_MATERIAL(glContext, cap, enable)
   undefined4 cap;
   uint enable;
 {
-  char cVar1;
+  char colorCallbackFlagBefore;
   
   if (*(byte *)(glContext + 0x30ab) != enable) {
     *(char *)(glContext + 0x30ab) = (char)enable;
-    cVar1 = *(char *)(glContext + 0x4df8);
+    colorCallbackFlagBefore = *(char *)(glContext + 0x4df8);
     _gleSetColorMaterialEnable(glContext);
-    if (((enable == 0) && (cVar1 == '\0')) && (*(char *)(glContext + 0x4df8) == '\0')) {
+    if (((enable == 0) && (colorCallbackFlagBefore == '\0')) && (*(char *)(glContext + 0x4df8) == '\0')) {
       (**(code **)(glContext + 0x4de0))(glContext,glContext + 0x2a0);
     }
     _gleSelectVertexSubmitFunc(glContext);
@@ -965,17 +965,17 @@ void _gleFeedbackBitmap(glContext, param_2)
 }
 
 /* _gleFeedbackPoints @ 0xcc118 (112 bytes) */
-void _gleFeedbackPoints(glContext, param_2, param_3)
+void _gleFeedbackPoints(glContext, vertexCursor, vertexCount)
   undefined4 glContext;
-  uint param_2;
-  int param_3;
+  uint vertexCursor;
+  int vertexCount;
 {
-  uint uVar1;
+  uint vertexEnd;
   
-  uVar1 = param_2 + param_3 * 0x100;
-  for (; param_2 < uVar1; param_2 = param_2 + 0x100) {
+  vertexEnd = vertexCursor + vertexCount * 0x100;
+  for (; vertexCursor < vertexEnd; vertexCursor = vertexCursor + 0x100) {
     ((void (*)())_gleFeedbackToken)(glContext,(double)FLOAT_00108f28);
-    _gleFeedbackHitRecord(glContext,param_2);
+    _gleFeedbackHitRecord(glContext,vertexCursor);
   }
   return;
 }

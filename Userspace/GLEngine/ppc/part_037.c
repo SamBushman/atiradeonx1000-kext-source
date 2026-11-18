@@ -196,22 +196,22 @@ double _glVertexAttrib4NsvARB_Exec(glContext, index, v)
 {
   double intToDoubleBias;
   float channelScale;
-  float fVar3;
-  int iVar4;
+  float channelBias;
+  int attribSlotBase;
   undefined4 incomingR6;
   undefined4 incomingR7;
-  code *pcVar5;
+  code *vertexFunc;
   
-  fVar3 = FLOAT_00108e74;
+  channelBias = FLOAT_00108e74;
   channelScale = FLOAT_00108e70;
   intToDoubleBias = DOUBLE_00108d58;
   if (index < 0x10) {
     if (index == 0) {
-      pcVar5 = *(code **)(glContext + 0x4884);
+      vertexFunc = *(code **)(glContext + 0x4884);
       if (*(int *)(glContext + 0x4858) == *(int *)(glContext + 0x485c)) {
-        pcVar5 = (code *)PTR__gleFlushAndSubmit_00112050;
+        vertexFunc = (code *)PTR__gleFlushAndSubmit_00112050;
       }
-      (*pcVar5)(glContext,0,v,incomingR6,incomingR7,*(int *)(glContext + 0x4858),&DAT_0010f7f4,
+      (*vertexFunc)(glContext,0,v,incomingR6,incomingR7,*(int *)(glContext + 0x4858),&DAT_0010f7f4,
                 (double)((float)((double)CONCAT44(0x43300000,(int)*v ^ 0x80000000) -
                                 DOUBLE_00108d58) * FLOAT_00108e70 + FLOAT_00108e74),
                 (double)((float)((double)CONCAT44(0x43300000,(int)v[1] ^ 0x80000000) -
@@ -222,19 +222,19 @@ double _glVertexAttrib4NsvARB_Exec(glContext, index, v)
                                 DOUBLE_00108d58) * FLOAT_00108e70 + FLOAT_00108e74));
     }
     else {
-      iVar4 = glContext + index * 0x10;
-      *(float *)(iVar4 + 0x1a0) =
+      attribSlotBase = glContext + index * 0x10;
+      *(float *)(attribSlotBase + 0x1a0) =
            (float)((double)CONCAT44(0x43300000,(int)*v ^ 0x80000000) - DOUBLE_00108d58) *
            FLOAT_00108e70 + FLOAT_00108e74;
-      *(float *)(iVar4 + 0x1a4) =
+      *(float *)(attribSlotBase + 0x1a4) =
            (float)((double)CONCAT44(0x43300000,(int)v[1] ^ 0x80000000) - intToDoubleBias) * channelScale +
-           fVar3;
-      *(float *)(iVar4 + 0x1a8) =
+           channelBias;
+      *(float *)(attribSlotBase + 0x1a8) =
            (float)((double)CONCAT44(0x43300000,(int)v[2] ^ 0x80000000) - intToDoubleBias) * channelScale +
-           fVar3;
-      *(float *)(iVar4 + 0x1ac) =
+           channelBias;
+      *(float *)(attribSlotBase + 0x1ac) =
            (float)((double)CONCAT44(0x43300000,(int)v[3] ^ 0x80000000) - intToDoubleBias) * channelScale +
-           fVar3;
+           channelBias;
     }
   }
   else if (*(int *)(glContext + 0x7574) == 0) {
@@ -435,13 +435,13 @@ void _glVertexAttrib4NubvARB_CompExec(glContext, index, v)
   undefined4 index;
   undefined4 v;
 {
-  double fparam_1;
+  double forwardedFloatArg1;
   double incomingFpr2;
   double incomingFpr3;
   double incomingFpr4;
   
   ((int (*)())_glVertexAttrib4NubvARB_Comp)(glContext,index,v);
-  ((double (*)())_glVertexAttrib4NubvARB_Exec)(glContext,index,v,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4);
+  ((double (*)())_glVertexAttrib4NubvARB_Exec)(glContext,index,v,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4);
   return;
 }
 
@@ -457,29 +457,30 @@ double _glVertexAttrib4NusvARB_Exec(int glContext,uint index,ushort *v,double un
 {
   float channelScale;
   undefined4 incomingR6;
-  int iVar2;
-  code *pcVar3;
+  int vertexWriteCursor;
+  int attribSlotBase;
+  code *vertexFunc;
   
   channelScale = FLOAT_00108e74;
   if (index < 0x10) {
     if (index == 0) {
-      iVar2 = *(int *)(glContext + 0x4858);
-      pcVar3 = *(code **)(glContext + 0x4884);
-      if (iVar2 == *(int *)(glContext + 0x485c)) {
-        pcVar3 = (code *)PTR__gleFlushAndSubmit_00112050;
+      vertexWriteCursor = *(int *)(glContext + 0x4858);
+      vertexFunc = *(code **)(glContext + 0x4884);
+      if (vertexWriteCursor == *(int *)(glContext + 0x485c)) {
+        vertexFunc = (code *)PTR__gleFlushAndSubmit_00112050;
       }
-      (*pcVar3)(glContext,0,v,incomingR6,iVar2,iVar2,(uint)v[2],v[1] | 0x4b000000,
+      (*vertexFunc)(glContext,0,v,incomingR6,vertexWriteCursor,vertexWriteCursor,(uint)v[2],v[1] | 0x4b000000,
                 (double)((GH_U2F((unsigned int)((*v | 0x4b000000))) - 8388608.0) * FLOAT_00108e74),
                 (double)((GH_U2F((unsigned int)((v[1] | 0x4b000000))) - 8388608.0) * FLOAT_00108e74),
                 (double)((GH_U2F((unsigned int)((v[2] | 0x4b000000))) - 8388608.0) * FLOAT_00108e74),
                 (double)((GH_U2F((unsigned int)((v[3] | 0x4b000000))) - 8388608.0) * FLOAT_00108e74));
     }
     else {
-      iVar2 = glContext + index * 0x10;
-      *(float *)(iVar2 + 0x1a0) = (GH_U2F((unsigned int)((*v | 0x4b000000))) - 8388608.0) * FLOAT_00108e74;
-      *(float *)(iVar2 + 0x1a4) = (GH_U2F((unsigned int)((v[1] | 0x4b000000))) - 8388608.0) * channelScale;
-      *(float *)(iVar2 + 0x1a8) = (GH_U2F((unsigned int)((v[2] | 0x4b000000))) - 8388608.0) * channelScale;
-      *(float *)(iVar2 + 0x1ac) = (GH_U2F((unsigned int)((v[3] | 0x4b000000))) - 8388608.0) * channelScale;
+      attribSlotBase = glContext + index * 0x10;
+      *(float *)(attribSlotBase + 0x1a0) = (GH_U2F((unsigned int)((*v | 0x4b000000))) - 8388608.0) * FLOAT_00108e74;
+      *(float *)(attribSlotBase + 0x1a4) = (GH_U2F((unsigned int)((v[1] | 0x4b000000))) - 8388608.0) * channelScale;
+      *(float *)(attribSlotBase + 0x1a8) = (GH_U2F((unsigned int)((v[2] | 0x4b000000))) - 8388608.0) * channelScale;
+      *(float *)(attribSlotBase + 0x1ac) = (GH_U2F((unsigned int)((v[3] | 0x4b000000))) - 8388608.0) * channelScale;
     }
   }
   else if (*(int *)(glContext + 0x7574) == 0) {
@@ -666,20 +667,20 @@ void _glDisableVertexAttribArrayARB_Exec(glContext, index)
 {
   undefined4 glErrorCode;
   int clientState;
-  uint uVar3;
-  longlong lVar4;
+  uint slotBitHigh;
+  longlong slotBit;
   
   clientState = *(int *)(glContext + 0x4a60);
   if (*(short *)(glContext + 0x4a10) < 0) {
     if (index < 0x10) {
-      lVar4 = ___ashldi3(1,0,index);
-      uVar3 = (uint)((ulonglong)lVar4 >> 0x20);
-      *(uint *)(clientState + 0x330) = *(uint *)(clientState + 0x330) & ~uVar3;
-      *(uint *)(clientState + 0x334) = *(uint *)(clientState + 0x334) & ~(uint)lVar4;
+      slotBit = ___ashldi3(1,0,index);
+      slotBitHigh = (uint)((ulonglong)slotBit >> 0x20);
+      *(uint *)(clientState + 0x330) = *(uint *)(clientState + 0x330) & ~slotBitHigh;
+      *(uint *)(clientState + 0x334) = *(uint *)(clientState + 0x334) & ~(uint)slotBit;
       *(undefined4 *)(glContext + 0x488c) = 0;
       *(undefined4 *)(glContext + 0x4890) = 0;
-      *(uint *)(clientState + 0x350) = *(uint *)(clientState + 0x350) | uVar3;
-      *(uint *)(clientState + 0x354) = *(uint *)(clientState + 0x354) | (uint)lVar4;
+      *(uint *)(clientState + 0x350) = *(uint *)(clientState + 0x350) | slotBitHigh;
+      *(uint *)(clientState + 0x354) = *(uint *)(clientState + 0x354) | (uint)slotBit;
       if (((*(int *)(clientState + 0x344) == 0) && (*(int *)(clientState + 0x358) == 0)) &&
          (*(int *)(glContext + 0x49a0) == 0)) {
         return;
@@ -785,28 +786,28 @@ int _glEnableVertexAttribARB_ListExec(glContext, listRecord)
 }
 
 /* _glDisableVertexAttribARB_Exec @ 0xb0880 (192 bytes) */
-void _glDisableVertexAttribARB_Exec(glContext, param_2, param_3)
+void _glDisableVertexAttribARB_Exec(glContext, attribIndex, attribSet)
   int glContext;
-  uint param_2;
-  int param_3;
+  uint attribIndex;
+  int attribSet;
 {
   undefined4 glErrorCode;
-  uint uVar2;
+  uint attribMask;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
-    if (param_2 < 0x10) {
-      if (param_3 == 0x8a00) {
-        uVar2 = *(uint *)(glContext + 0x74d8);
-        *(undefined1 *)(param_2 + glContext + 0x7524) = 0;
+    if (attribIndex < 0x10) {
+      if (attribSet == 0x8a00) {
+        attribMask = *(uint *)(glContext + 0x74d8);
+        *(undefined1 *)(attribIndex + glContext + 0x7524) = 0;
         *(uint *)(glContext + 0x74d8) =
-             uVar2 & (-2 << (param_2 & 0x1f) | 0xfffffffeU >> 0x20 - (param_2 & 0x1f));
+             attribMask & (-2 << (attribIndex & 0x1f) | 0xfffffffeU >> 0x20 - (attribIndex & 0x1f));
         return;
       }
-      if (param_3 == 0x8a01) {
-        uVar2 = *(uint *)(glContext + 0x74dc);
-        *(undefined1 *)(param_2 + glContext + 0x7564) = 0;
+      if (attribSet == 0x8a01) {
+        attribMask = *(uint *)(glContext + 0x74dc);
+        *(undefined1 *)(attribIndex + glContext + 0x7564) = 0;
         *(uint *)(glContext + 0x74dc) =
-             uVar2 & (-2 << (param_2 & 0x1f) | 0xfffffffeU >> 0x20 - (param_2 & 0x1f));
+             attribMask & (-2 << (attribIndex & 0x1f) | 0xfffffffeU >> 0x20 - (attribIndex & 0x1f));
         return;
       }
       if (*(int *)(glContext + 0x7574) != 0) {

@@ -99,17 +99,17 @@ void _glEvalCoord2fv_CompExec(glContext, u)
 {
   unsigned int ghidra_home[8] = { glContext, u, 0, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   undefined4 in_LR;
-  double fparam_1;
-  double in_f2;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
+  double forwardedFloatArg1;
+  double incomingFpr2;
+  double incomingFpr3;
+  double incomingFpr4;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
   
   ((int (*)())_glEvalCoord2fv_Comp)(glContext,u);
-  ((void (*)())_glEvalCoord2fv_Exec)(glContext,u,fparam_1,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
+  ((void (*)())_glEvalCoord2fv_Exec)(glContext,u,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
              (double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),(*(double *)((unsigned char *)ghidra_home + 0)),
              (*(double *)((unsigned char *)ghidra_home + 8)));
   return;
@@ -915,9 +915,9 @@ void _glFlush_RevertExec(glContext)
   int glContext;
 {
   byte glContextByte85a5;
-  undefined *puVar2;
-  int iVar3;
-  double fparam_1;
+  undefined *setClipInterpFunc;
+  int rendererSlot;
+  double forwardedFloatArg1;
   double fparam_1_00;
   double incomingFpr2;
   double incomingFpr3;
@@ -936,19 +936,19 @@ void _glFlush_RevertExec(glContext)
   if (*(short *)(glContext + 0x4a10) < 0) {
     _gleRevertSwapToPrimary(glContext);
     (**(code **)(glContext + 0x46f4))(*(undefined4 *)(glContext + 0x4688));
-    iVar3 = (uint)glContextByte85a5 * 0x2e0 + glContext;
-    (**(code **)(*(int *)(iVar3 + 0x8884) + 0x138))
-              (*(undefined4 *)(iVar3 + 0x85ac),*(undefined4 *)(glContext + 0x484c),
+    rendererSlot = (uint)glContextByte85a5 * 0x2e0 + glContext;
+    (**(code **)(*(int *)(rendererSlot + 0x8884) + 0x138))
+              (*(undefined4 *)(rendererSlot + 0x85ac),*(undefined4 *)(glContext + 0x484c),
                *(undefined4 *)(glContext + 0x4848),0);
-    fparam_1 = (double)_gleSwitchToRenderer(glContext,(uint)glContextByte85a5);
-    ((void (*)())_gleUpdateDepthRangeData)(glContext,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffffb8,
+    forwardedFloatArg1 = (double)_gleSwitchToRenderer(glContext,(uint)glContextByte85a5);
+    ((void (*)())_gleUpdateDepthRangeData)(glContext,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffffb8,
                incomingStack_ffffffc0,incomingStack_ffffffc8,incomingStack_ffffffd0,incomingStack_ffffffd8);
     _gleUpdatePolyMode(glContext);
     ((void (*)())_gleUpdateViewScissorData)(glContext,fparam_1_00,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
     _gleUpdateTextureTransform(glContext);
-    puVar2 = PTR__gleSetClipInterpFunc_00112038;
+    setClipInterpFunc = PTR__gleSetClipInterpFunc_00112038;
     *(undefined **)(glContext + 0x49c8) = PTR__gleSetEyeInterpFunc_0011203c;
-    *(undefined **)(glContext + 0x49cc) = puVar2;
+    *(undefined **)(glContext + 0x49cc) = setClipInterpFunc;
   }
   else if (*(int *)(glContext + 0x7574) == 0) {
     *(undefined4 *)(glContext + 0x7574) = 0x502;
@@ -1016,53 +1016,53 @@ void _glDeleteRenderbuffersEXT_Exec_body(glContext, n, renderbuffers)
   int *renderbuffers;
 {
   undefined4 glErrorCode;
-  int iVar2;
+  int attachedObject;
   int hashObject;
   int framebufferObject;
-  int *piVar5;
-  undefined *puVar6;
-  int iVar7;
+  int *attachmentObjects;
+  undefined *renderbufferHashTable;
+  int boundRenderbufferName;
   uint loopIndex;
-  int iVar9;
+  int renderbufferName;
   int *cursor;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
     if (-1 < n) {
-      puVar6 = (undefined *)0x0;
-      piVar5 = (int *)0x0;
+      renderbufferHashTable = (undefined *)0x0;
+      attachmentObjects = (int *)0x0;
       if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
         _pthread_mutex_lock(*(int *)(glContext + 0x5148) + 0x8028);
       }
       framebufferObject = *(int *)(glContext + 0x744c);
       if (framebufferObject != 0) {
-        piVar5 = (int *)(framebufferObject + 0xd4);
-        puVar6 = ((unsigned char *)0x00001004) + *(int *)(glContext + 0x5148);
+        attachmentObjects = (int *)(framebufferObject + 0xd4);
+        renderbufferHashTable = ((unsigned char *)0x00001004) + *(int *)(glContext + 0x5148);
       }
-      iVar7 = 0;
+      boundRenderbufferName = 0;
       if (*(int *)(glContext + 0x7448) != 0) {
-        iVar7 = *(int *)(*(int *)(glContext + 0x7448) + 4);
+        boundRenderbufferName = *(int *)(*(int *)(glContext + 0x7448) + 4);
       }
       if (0 < n) {
         do {
-          iVar9 = *renderbuffers;
+          renderbufferName = *renderbuffers;
           renderbuffers = renderbuffers + 1;
-          if (iVar9 != 0) {
-            if (iVar9 == iVar7) {
+          if (renderbufferName != 0) {
+            if (renderbufferName == boundRenderbufferName) {
               _gleBindRenderbuffer(glContext,0);
             }
-            if ((framebufferObject != 0) && (hashObject = _gleLookupHashObject(puVar6,iVar9), hashObject != 0)) {
+            if ((framebufferObject != 0) && (hashObject = _gleLookupHashObject(renderbufferHashTable,renderbufferName), hashObject != 0)) {
               loopIndex = 0;
-              cursor = piVar5;
+              cursor = attachmentObjects;
               do {
-                iVar2 = *cursor;
+                attachedObject = *cursor;
                 cursor = cursor + 1;
-                if (hashObject == iVar2) {
+                if (hashObject == attachedObject) {
                   _gleFramebufferTexture(glContext,loopIndex,0,0,0,0,0);
                 }
                 loopIndex = loopIndex + 1;
               } while (loopIndex < 6);
             }
-            _gleDeleteHashNameAndObject(glContext,((unsigned char *)0x00001004) + *(int *)(glContext + 0x5148),iVar9);
+            _gleDeleteHashNameAndObject(glContext,((unsigned char *)0x00001004) + *(int *)(glContext + 0x5148),renderbufferName);
           }
           n = n + -1;
         } while (n != 0);
@@ -1790,28 +1790,28 @@ int _glIsFramebufferEXT_Exec(glContext, framebuffer)
   int glContext;
   undefined4 framebuffer;
 {
-  int iVar1;
-  bool bVar2;
+  int sharedStateThenFramebufferObject;
+  bool objectExists;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
-    iVar1 = *(int *)(glContext + 0x5148);
-    if (*(char *)(iVar1 + 0x8024) != '\0') {
-      _pthread_mutex_lock(iVar1 + 0x8028);
-      iVar1 = *(int *)(glContext + 0x5148);
+    sharedStateThenFramebufferObject = *(int *)(glContext + 0x5148);
+    if (*(char *)(sharedStateThenFramebufferObject + 0x8024) != '\0') {
+      _pthread_mutex_lock(sharedStateThenFramebufferObject + 0x8028);
+      sharedStateThenFramebufferObject = *(int *)(glContext + 0x5148);
     }
-    iVar1 = _gleLookupHashObject(iVar1,framebuffer);
+    sharedStateThenFramebufferObject = _gleLookupHashObject(sharedStateThenFramebufferObject,framebuffer);
     if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
       _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);
     }
-    bVar2 = iVar1 != 0;
+    objectExists = sharedStateThenFramebufferObject != 0;
   }
   else {
     if (*(int *)(glContext + 0x7574) == 0) {
       *(undefined4 *)(glContext + 0x7574) = 0x502;
     }
-    bVar2 = false;
+    objectExists = false;
   }
-  return bVar2;
+  return objectExists;
 }
 
 /* _glCheckFramebufferStatusEXT_Exec @ 0x67194 (216 bytes) */

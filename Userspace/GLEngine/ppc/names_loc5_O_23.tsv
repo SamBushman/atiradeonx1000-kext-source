@@ -1,0 +1,45 @@
+local	_glAccum_Exec	extraout_f1	f1AfterCall	CONFIRMED	Ghidra pseudo-register extraout_f1: the value f1 holds after the call it follows, forwarded unchanged; no source-level role
+local	_glArrayElement_CompExec	fparam_1	forwardedFloatArg1	CONFIRMED	first floating-point argument register (f1), unchanged on entry and forwarded to callees / reloaded from the f1 left by calls
+local	_glColor3usv_Exec	fparam_1	forwardedFloatArg1	CONFIRMED	first floating-point argument register (f1), unchanged on entry and forwarded to callees / reloaded from the f1 left by calls
+local	_glColor4us_CompExec	fparam_1	forwardedFloatArg1	CONFIRMED	first floating-point argument register (f1), unchanged on entry and forwarded to callees / reloaded from the f1 left by calls
+local	_glColor4us_CompExec	in_f2	incomingFpr2	CONFIRMED	Ghidra pseudo-register in_f2: the value f2 held on entry (read without being written in this function)
+local	_glColor4us_CompExec	in_f3	incomingFpr3	CONFIRMED	Ghidra pseudo-register in_f3: the value f3 held on entry (read without being written in this function)
+local	_glColor4us_CompExec	in_f4	incomingFpr4	CONFIRMED	Ghidra pseudo-register in_f4: the value f4 held on entry (read without being written in this function)
+local	_glColor4us_CompExec	in_f5	incomingFpr5	CONFIRMED	Ghidra pseudo-register in_f5: the value f5 held on entry (read without being written in this function)
+local	_glColor4us_CompExec	in_f6	incomingFpr6	CONFIRMED	Ghidra pseudo-register in_f6: the value f6 held on entry (read without being written in this function)
+local	_glColor4us_CompExec	in_f7	incomingFpr7	CONFIRMED	Ghidra pseudo-register in_f7: the value f7 held on entry (read without being written in this function)
+local	_glColor4us_CompExec	in_f8	incomingFpr8	CONFIRMED	Ghidra pseudo-register in_f8: the value f8 held on entry (read without being written in this function)
+local	_glColor4usv_Exec	fparam_1	forwardedFloatArg1	CONFIRMED	first floating-point argument register (f1), unchanged on entry and forwarded to callees / reloaded from the f1 left by calls
+local	_glCopyColorSubTable_Exec	fparam_1	forwardedFloatArg1	CONFIRMED	first floating-point argument register (f1), unchanged on entry and forwarded to callees / reloaded from the f1 left by calls
+local	_glCopyTexImage1D_CompExec	fparam_1	forwardedFloatArg1	CONFIRMED	first floating-point argument register (f1), unchanged on entry and forwarded to callees / reloaded from the f1 left by calls
+local	_glCopyTexSubImage2D_CompExec	fparam_1	forwardedFloatArg1	CONFIRMED	first floating-point argument register (f1), unchanged on entry and forwarded to callees / reloaded from the f1 left by calls
+local	_glCopyTexSubImage2D_Exec	extraout_f1	f1AfterCall	CONFIRMED	Ghidra pseudo-register extraout_f1: the value f1 holds after the call it follows, forwarded unchanged; no source-level role
+local	_glCopyTexSubImage2D_Exec	fparam_1	forwardedFloatArg1	CONFIRMED	first floating-point argument register (f1), unchanged on entry and forwarded to callees / reloaded from the f1 left by calls
+local	_glDrawElementArrayAPPLE_CompExec	fparam_1	forwardedFloatArg1	CONFIRMED	first floating-point argument register (f1), unchanged on entry and forwarded to callees / reloaded from the f1 left by calls
+local	_glDrawPixels_ListExec	extraout_f1	f1AfterCall	CONFIRMED	Ghidra pseudo-register extraout_f1: the value f1 holds after the call it follows, forwarded unchanged; no source-level role
+local	_glDrawPixels_ListExec	fparam_1	forwardedFloatArg1	CONFIRMED	first floating-point argument register (f1), unchanged on entry and forwarded to callees / reloaded from the f1 left by calls
+local	_glDrawRangeElements_CompExec	fparam_1	forwardedFloatArg1	CONFIRMED	first floating-point argument register (f1), unchanged on entry and forwarded to callees / reloaded from the f1 left by calls
+local	_glEvalCoord2fv_CompExec	fparam_1	forwardedFloatArg1	CONFIRMED	first floating-point argument register (f1), unchanged on entry and forwarded to callees / reloaded from the f1 left by calls
+local	_glEvalCoord2fv_CompExec	in_f2	incomingFpr2	CONFIRMED	Ghidra pseudo-register in_f2: the value f2 held on entry (read without being written in this function)
+local	_glEvalCoord2fv_CompExec	in_f3	incomingFpr3	CONFIRMED	Ghidra pseudo-register in_f3: the value f3 held on entry (read without being written in this function)
+local	_glEvalCoord2fv_CompExec	in_f4	incomingFpr4	CONFIRMED	Ghidra pseudo-register in_f4: the value f4 held on entry (read without being written in this function)
+local	_glEvalCoord2fv_CompExec	in_f5	incomingFpr5	CONFIRMED	Ghidra pseudo-register in_f5: the value f5 held on entry (read without being written in this function)
+local	_glEvalCoord2fv_CompExec	in_f6	incomingFpr6	CONFIRMED	Ghidra pseudo-register in_f6: the value f6 held on entry (read without being written in this function)
+local	_glEvalCoord2fv_CompExec	in_f7	incomingFpr7	CONFIRMED	Ghidra pseudo-register in_f7: the value f7 held on entry (read without being written in this function)
+local	_glEvalCoord2fv_CompExec	in_f8	incomingFpr8	CONFIRMED	Ghidra pseudo-register in_f8: the value f8 held on entry (read without being written in this function)
+local	_glMap1d_Comp	extraout_r4	r4AfterCall	CONFIRMED	Ghidra pseudo-register extraout_r4: the value r4 holds after the call it follows (a register the function reads without having written it); no source-level role
+local	_glMap1d_Comp	extraout_r4_00	r4AfterCall1	CONFIRMED	Ghidra pseudo-register extraout_r4_00: the value r4 holds after the call it follows (a register the function reads without having written it); no source-level role
+local	_glMap1d_Comp	extraout_r4_01	r4AfterCall2	CONFIRMED	Ghidra pseudo-register extraout_r4_01: the value r4 holds after the call it follows (a register the function reads without having written it); no source-level role
+local	_glMap1d_Comp	extraout_r4_02	r4AfterCall3	CONFIRMED	Ghidra pseudo-register extraout_r4_02: the value r4 holds after the call it follows (a register the function reads without having written it); no source-level role
+local	_glMap1d_Comp	extraout_r4_03	r4AfterCall4	CONFIRMED	Ghidra pseudo-register extraout_r4_03: the value r4 holds after the call it follows (a register the function reads without having written it); no source-level role
+local	_glMap1d_Comp	extraout_r4_04	r4AfterCall5	CONFIRMED	Ghidra pseudo-register extraout_r4_04: the value r4 holds after the call it follows (a register the function reads without having written it); no source-level role
+local	_glMap1d_Comp	extraout_r4_05	r4AfterCall6	CONFIRMED	Ghidra pseudo-register extraout_r4_05: the value r4 holds after the call it follows (a register the function reads without having written it); no source-level role
+local	_glMap1d_Comp	extraout_r4_06	r4AfterCall7	CONFIRMED	Ghidra pseudo-register extraout_r4_06: the value r4 holds after the call it follows (a register the function reads without having written it); no source-level role
+local	_glMap1d_Comp	extraout_r4_07	r4AfterCall8	CONFIRMED	Ghidra pseudo-register extraout_r4_07: the value r4 holds after the call it follows (a register the function reads without having written it); no source-level role
+local	_glMateriali_CompExec	fparam_1	forwardedFloatArg1	CONFIRMED	first floating-point argument register (f1), unchanged on entry and forwarded to callees / reloaded from the f1 left by calls
+local	_glMultiDrawElements_CompExec	fparam_1	forwardedFloatArg1	CONFIRMED	first floating-point argument register (f1), unchanged on entry and forwarded to callees / reloaded from the f1 left by calls
+local	_glRasterPos2dv_CompExec	fparam_1	forwardedFloatArg1	CONFIRMED	first floating-point argument register (f1), unchanged on entry and forwarded to callees / reloaded from the f1 left by calls
+local	_glRasterPos2iv_CompExec	fparam_1	forwardedFloatArg1	CONFIRMED	first floating-point argument register (f1), unchanged on entry and forwarded to callees / reloaded from the f1 left by calls
+local	_glRasterPos3dv_CompExec	fparam_1	forwardedFloatArg1	CONFIRMED	first floating-point argument register (f1), unchanged on entry and forwarded to callees / reloaded from the f1 left by calls
+local	_glRasterPos3iv_CompExec	fparam_1	forwardedFloatArg1	CONFIRMED	first floating-point argument register (f1), unchanged on entry and forwarded to callees / reloaded from the f1 left by calls
+local	_glRasterPos4dv_CompExec	fparam_1	forwardedFloatArg1	CONFIRMED	first floating-point argument register (f1), unchanged on entry and forwarded to callees / reloaded from the f1 left by calls

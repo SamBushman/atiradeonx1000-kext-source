@@ -1,0 +1,29 @@
+local	_glMap1Color_ListExec	iVar1	pointIndex	CONFIRMED	index of the control point being copied (4 words per point), counts up
+local	_glMap1Color_ListExec	iVar7	pointRecord	CONFIRMED	mapData + pointIndex * 0x10: destination of the control point (+0x1d0..+0x1dc)
+local	_glMap1Texture2_ListExec	iVar1	pointIndex	CONFIRMED	index of the control point being copied (2 words per point), counts up
+local	_glMap1Texture2_ListExec	iVar4	pointRecord	CONFIRMED	mapData + pointIndex * 8: destination of the control point (+0x2f0, +0x2f4)
+local	_glMap2Color_ListExec	iVar5	pointIndex	CONFIRMED	index of the control point being copied (4 words per point), counts up
+local	_glMap2Color_ListExec	iVar8	pointRecord	CONFIRMED	mapData + pointIndex * 0x10: destination of the control point (+0x1498..+0x14a4)
+local	_glMap1Texture3_ListExec	iVar5	mapDataThenPointDestination	CONFIRMED	map data record from _gleGetMapData, then advanced by 0xc per control point so +0x350..+0x358 is the destination of the point
+local	_glMap1Texture3_ListExec	piVar1	pointSource	CONFIRMED	listRecord + 4: first word of the recorded control point (the others are read at +5, +6)
+local	_glMap2Vertex3_ListExec	iVar8	mapDataThenPointDestination	CONFIRMED	map data record from _gleGetMapData, then advanced by 0xc per control point so +0x498..+0x4a0 is the destination of the point
+local	_glMap2Vertex3_ListExec	piVar1	pointSource	CONFIRMED	listRecord + 8: first word of the recorded control point (the others are read at +9, +10)
+local	_glMap2VertexAttrib1ARB_ListExec	iVar6	attribMap	INFERRED	mapData + attribIndex * 0x660: the per-attribute Map2 record whose fields are at +0x37a8..+0x37c8
+local	_glMap2VertexAttrib1ARB_ListExec	iVar8	copiedWord	CONFIRMED	control point word read through srcCursor and stored through dstCursor
+local	_glCombinerInputNV_Exec	iVar4	stageIndexThenInputRecord	CONFIRMED	stage - 0x8550 (GL_COMBINER0_NV based index, bounds-checked against renderer info +0x98), then replaced by the input record address (stageIndex * 0x10 + portionIndex * 6 + (variable - 0x8523)) * 8 + ctx (+0x4220 input, +0x4222 componentUsage, +0x4224 mapping)
+local	_glCombinerInputNV_Exec	iVar3	portionIndex	CONFIRMED	0 for portion GL_ALPHA (0x1906), 1 for GL_RGB (0x1907): selects the half of the stage record
+local	_glFinalCombinerInputNV_Exec	uVar3	variableIndex	CONFIRMED	variable - 0x8523 (GL_VARIABLE_A_NV based index, at most 6), selects the 8-byte final combiner input record
+local	_glFinalCombinerInputNV_Exec	iVar2	inputRecord	CONFIRMED	ctx + variableIndex * 8: the final combiner input record (+0x4624 input, +0x4626 componentUsage, +0x4628 mapping)
+local	_gleLookUpNonProxyColorTable	iVar1	textureUnitThenTableObject	INFERRED	ctx+0x53d4 active texture unit, then replaced by the table / texture object pointer selected for the target (returned + 0x10)
+local	_gleFreeFenceMachine	piVar3	fenceEntry	INFERRED	entry of a chain of the 0x400-bucket table at ctx+0x543c; its callback at +0xc (called with ctx and the entry) releases it
+local	_gleFreeFenceMachine	iVar4	nextFenceEntry	CONFIRMED	*fenceEntry: the next entry of the chain, read before the callback may free the current one
+local	_gleFreeFenceMachine	piVar2	freeListNode	INFERRED	node of the singly linked list at ctx+0x643c, released with _free
+local	_gleFreeFenceMachine	iVar1	nextFreeListNode	CONFIRMED	*freeListNode: next node, read before the current one is freed
+use	_gleCheckCompressedTexSubImage2DArgs	iVar3	argsCheckResult	CONFIRMED	result of _gleCheckCompressedTexImageArgs(ctx, level, format, 0, width, height, 1, imageSize): zero rejects the call	^\s*iVar3\ =\ \(\(int\ \(\*\)\(\)\)_gleCheckCompressedTexImageArgs\)\(param_1,param_3,param_8,0,param_6,param_7,1,param_9\);$	+2
+use	_gleCheckCompressedTexSubImage2DArgs	iVar3	levelRecordThenRangeResult	CONFIRMED	level record (texture + 0xc4 + level * 0x18 or the face record for the cube map targets), then the result of the y-range _gleCheckCompressedTexSubImageRange	^\s*iVar3\ =\ iVar2\ \+\ 0xc4\ \+\ param_3\ \*\ 0x18;$	+1
+use	_gleCheckCompressedTexSubImage2DArgs	iVar3	levelRecordThenRangeResult	CONFIRMED	level record (texture + 0xc4 + level * 0x18 or the face record for the cube map targets), then the result of the y-range _gleCheckCompressedTexSubImageRange	^\s*iVar3\ =\ iVar2\ \+\ 0xc4\ \+\ param_2\ \*\ 0x168\ \+\ param_3\ \*\ 0x18\ \+\ \-0xbb2588;$	+1
+use	_gleCheckCompressedTexSubImage2DArgs	iVar3	levelRecordThenRangeResult	CONFIRMED	level record (texture + 0xc4 + level * 0x18 or the face record for the cube map targets), then the result of the y-range _gleCheckCompressedTexSubImageRange	^\s*if\ \(\*\(int\ \*\)\(iVar3\ \+\ 0x14\)\ !=\ 0\)\ \{$	+2
+use	_gleCheckCompressedTexSubImage2DArgs	iVar3	levelRecordThenRangeResult	CONFIRMED	level record (texture + 0xc4 + level * 0x18 or the face record for the cube map targets), then the result of the y-range _gleCheckCompressedTexSubImageRange	^\s*iVar3\ =\ \(\(int\ \(\*\)\(\)\)_gleCheckCompressedTexSubImageRange\)\(param_1,iVar3,param_5,param_7,\(uint\)\*\(ushort\ \*\)\(iVar3\ \+\ 6\),3\);$	+2
+local	_gleCheckCompressedTexSubImage2DArgs	iVar4	xRangeCheckResult	CONFIRMED	result of _gleCheckCompressedTexSubImageRange for xoffset / width against the level width
+use	_glMap2VertexAttrib1ARB_ListExec	iVar7	vorder	INFERRED	listRecord[2]: Map2 list record header order uorder,vorder,u1Bits,u2Bits,v1Bits,v2Bits,... (see _glMap2Vertex3_ListExec), stored at attribMap+0x37ac	^\s*iVar7\ =\ param_2\[2\];$	^\s*iVar7\ =\ iVar7\ \*\ iVar8;$	all	rhs
+use	_glMap2VertexAttrib1ARB_ListExec	iVar7	pointCount	CONFIRMED	vorder * uorder: number of control points copied by the loop (remaining counts down from it) and subtracted from 100 for the returned record size	^\s*iVar7\ =\ iVar7\ \*\ iVar8;$		lhs	none

@@ -1,0 +1,35 @@
+local	_glePPSetFuncNeeds	param_1	instructions	INFERRED	array of 8-byte instruction records; the first word of each carries a class in bits 16..19 and a register bit number in the low bits
+local	_glePPSetFuncNeeds	param_2	instructionCount	INFERRED	number of records scanned
+local	_glePPSetFuncNeeds	uVar1	neededBits	CONFIRMED	accumulated result: 0x100 / 0x200 / 0x400 for classes 2 / 3 / 5, plus 1 << register number for class 7
+local	_glePPSetFuncNeeds	uVar2	instructionWord	CONFIRMED	first word of the current instruction record: class (bits 16..19) selects the case, low 5 bits the register number
+local	_gleGetMapData	param_1	glContext	INFERRED	first argument, dereferenced at ctx+0x7450 (the map data block pointer)
+local	_gleGetMapData	iVar1	mapData	CONFIRMED	ctx+0x7450: the map data block, allocated (0x9dcc bytes) and initialised by _gleInitMap1Data / _gleInitMap2Data on first use, returned
+local	_gleGetMapData	uVar2	newMapData	CONFIRMED	the freshly _malloc'ed 0x9dcc-byte block stored at ctx+0x7450
+local	_glConvolutionParameteriv_Exec	pfVar3	convolutionState	INFERRED	per-target convolution filter state in the context (ctx+0x3298 for 0x8010, +0x32d8 for 0x8011, +0x3318 for 0x8012): floats 0..3 border colour, 4/6/8/10 scale and 5/7/9/0xb bias of the four channels
+local	_glTexParameterI_Comp	param_4	params	INFERRED	pointer to the integer parameter values copied into the display list record (one word, or four for the colour parameters such as GL_TEXTURE_BORDER_COLOR 0x1004)
+local	_glBindProgramARB_Exec	uVar1	pipelineStageIndex	CONFIRMED	0 for the vertex program target, 1 for the fragment program target: the pipelineStageIndex argument of _gleBindPipelineProgram
+local	_glBindProgramARB_Exec	iVar3	sharedStateMutex	INFERRED	ctx+0x5148 shared state + 0x8028: the mutex locked around _gleBindPipelineProgram
+local	_glUniformMatrix3fvARB_Exec	iVar10	matrixOffset	INFERRED	location * 16 + 0x30 * matrixIndex: byte offset of the current matrix's first uniform slot in the program's value array (currentProgram+0x4c)
+local	_glUniformMatrix3fvARB_Exec	iVar11	rowOffset	INFERRED	matrixOffset + 0x10 * rowIndex: byte offset of the matrix row slot being copied
+local	_glWeightusvARB_Exec	uVar1	weightValue	CONFIRMED	weights[i]: the raw unsigned short weight before the conversion to float
+local	_glWeightusvARB_Exec	iVar2	slotByteOffset	CONFIRMED	slotIndex * 4: byte offset of the weight slot at ctx+0x2d0 being cleared
+use	_glWeightusvARB_Exec	iVar5	slotIndex	CONFIRMED	index of the remaining weight slot (up to 4) cleared to zero	^\s*iVar5\ =\ 0;$	+1
+use	_glWeightusvARB_Exec	iVar5	slotIndex	CONFIRMED	index of the remaining weight slot (up to 4) cleared to zero	^\s*iVar5\ =\ param_2;$@2	+1
+use	_glWeightusvARB_Exec	iVar5	slotIndex	CONFIRMED	index of the remaining weight slot (up to 4) cleared to zero	^\s*iVar2\ =\ iVar5\ \*\ 4;$	+2
+use	_glWeightusvARB_Exec	iVar5	slotIndex	CONFIRMED	index of the remaining weight slot (up to 4) cleared to zero	^\s*\}\ while\ \(iVar5\ <\ 4\);$	+1
+local	_glWeightbvARB_Exec	pcVar1	weightPtr	CONFIRMED	weights + loopIndex: the byte weight being converted
+local	_glWeightbvARB_Exec	iVar2	slotByteOffset	CONFIRMED	loopIndex * 4: byte offset of the weight slot at ctx+0x2d0 being cleared
+local	_glWeightbvARB_Exec	fVar5	channelBias	INFERRED	holds FLOAT_00108e64 = 1/255, the offset added after scaling the converted byte weight (mapping 2c+1 over 255)
+local	_glWeightsvARB_Comp	sVar1	weightValue	CONFIRMED	weights[i]: the short weight converted to float and recorded
+local	_glWeightsvARB_Comp	dVar2	intToDoubleBias	CONFIRMED	DOUBLE_00108d58 = 2^52 + 2^31 magic subtracted in the int-to-double conversion
+local	_glWeightsvARB_Comp	fVar3	channelScale	INFERRED	holds FLOAT_00108e70 = 2/65535, the multiplier applied to the converted short weights
+local	_glWeightsvARB_Comp	fVar4	channelBias	INFERRED	holds FLOAT_00108e74 = 1/65535, the offset added after scaling (mapping 2c+1 over 65535)
+local	_gleLookUpNonProxyTexture2D	iVar2	textureUnitThenTextureObject	INFERRED	ctx+0x53d4 active texture unit, then replaced by the texture object pointer selected for the target (returned + 0x10)
+local	_glMap1d_Exec	iVar3	map1Index	CONFIRMED	target - 0xd90 (GL_MAP1_COLOR_4 based index): selects the _gleMap1*dLoad case
+use	_glTexSubImage3D_Exec	iVar5	pixelUnpackBufferThenResult	INFERRED	ctx+0x4a6c bound pixel unpack buffer object (size +0x38, offset +0x30, pending flag +0x40), also reused for the result of the renderer fast-path callback (ctx+0x4710) and _gleGenMipmapsToLevel	^\s*iVar5\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x4a6c\);$	+2
+use	_glTexSubImage3D_Exec	iVar5	pixelUnpackBufferThenResult	INFERRED	ctx+0x4a6c bound pixel unpack buffer object (size +0x38, offset +0x30, pending flag +0x40), also reused for the result of the renderer fast-path callback (ctx+0x4710) and _gleGenMipmapsToLevel	^\s*if\ \(iVar5\ !=\ 0\)\ \{$	+1
+use	_glTexSubImage3D_Exec	iVar5	pixelUnpackBufferThenResult	INFERRED	ctx+0x4a6c bound pixel unpack buffer object (size +0x38, offset +0x30, pending flag +0x40), also reused for the result of the renderer fast-path callback (ctx+0x4710) and _gleGenMipmapsToLevel	^\s*if\ \(\*\(int\ \*\)\(iVar5\ \+\ 0x40\)\ !=\ 0\)\ \{$	+2
+use	_glTexSubImage3D_Exec	iVar5	pixelUnpackBufferThenResult	INFERRED	ctx+0x4a6c bound pixel unpack buffer object (size +0x38, offset +0x30, pending flag +0x40), also reused for the result of the renderer fast-path callback (ctx+0x4710) and _gleGenMipmapsToLevel	^\s*if\ \(\(\(\(iVar8\ ==\ 0\)\ \|\|\ \(\(int\)param_3\ <\ \(int\)\(uint\)\*\(byte\ \*\)\(iVar2\ \+\ 0x8d\)\)\)\ \|\|$	+7
+use	_glTexSubImage3D_Exec	iVar5	pixelUnpackBufferThenResult	INFERRED	ctx+0x4a6c bound pixel unpack buffer object (size +0x38, offset +0x30, pending flag +0x40), also reused for the result of the renderer fast-path callback (ctx+0x4710) and _gleGenMipmapsToLevel	^\s*if\ \(\(\(\(\*\(uint\ \*\)\(iVar2\ \+\ 0x6c\)\ \&\ 0x8000\)\ !=\ 0\)\ \&\&\ \(\(int\)\*\(short\ \*\)\(iVar2\ \+\ 0x60\)\ ==\ param_3\)$	+2
+use	_glTexSubImage3D_Exec	iVar5	pixelUnpackBufferThenResult	INFERRED	ctx+0x4a6c bound pixel unpack buffer object (size +0x38, offset +0x30, pending flag +0x40), also reused for the result of the renderer fast-path callback (ctx+0x4710) and _gleGenMipmapsToLevel	^\s*iVar8\ =\ \*\(int\ \*\)\(iVar5\ \+\ 0x38\);$	+1
+use	_glTexSubImage3D_Exec	iVar5	pixelUnpackBufferThenResult	INFERRED	ctx+0x4a6c bound pixel unpack buffer object (size +0x38, offset +0x30, pending flag +0x40), also reused for the result of the renderer fast-path callback (ctx+0x4710) and _gleGenMipmapsToLevel	^\s*param_12\ =\ param_12\ \+\ \*\(int\ \*\)\(iVar5\ \+\ 0x30\);$	+1

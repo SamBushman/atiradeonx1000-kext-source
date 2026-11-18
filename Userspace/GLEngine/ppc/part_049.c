@@ -463,10 +463,10 @@ int _gleImageSize(format, type, width, height)
   undefined4 width;
   int height;
 {
-  int iVar1;
+  int rowBytes;
   
-  iVar1 = _gleRowBytes(format,type,width);
-  return iVar1 * height;
+  rowBytes = _gleRowBytes(format,type,width);
+  return rowBytes * height;
 }
 
 /* _gleFillImage @ 0xe5e24 (732 bytes) */
@@ -813,37 +813,38 @@ void _gleModifyPixelStencil(glContext, pixel, unusedArg3, unusedArg4, unusedArg5
   undefined4 unusedArg7;
   undefined4 unusedArg8;
 {
-  uint uVar1;
-  uint uVar2;
+  uint rightShiftCount;
+  uint fractionCarryBits;
+  uint indexShiftThenCarryBits;
   uint indexInteger;
   int stencilValue;
   uint indexFraction;
   
-  uVar2 = *(uint *)(glContext + 0x3214);
+  indexShiftThenCarryBits = *(uint *)(glContext + 0x3214);
   indexFraction = *(uint *)(pixel + 0x1c);
   indexInteger = *(uint *)(pixel + 0x18);
-  if ((int)uVar2 < 1) {
-    if ((int)uVar2 < 0) {
-      uVar1 = -uVar2;
-      if ((int)uVar1 < 0xf) {
-        uVar2 = indexInteger << (uVar2 + 0xf & 0x3f);
+  if ((int)indexShiftThenCarryBits < 1) {
+    if ((int)indexShiftThenCarryBits < 0) {
+      rightShiftCount = -indexShiftThenCarryBits;
+      if ((int)rightShiftCount < 0xf) {
+        indexShiftThenCarryBits = indexInteger << (indexShiftThenCarryBits + 0xf & 0x3f);
       }
       else {
-        uVar2 = (int)indexInteger >> (uVar1 - 0xf & 0x3f);
+        indexShiftThenCarryBits = (int)indexInteger >> (rightShiftCount - 0xf & 0x3f);
       }
-      indexInteger = (int)indexInteger >> (uVar1 & 0x3f);
-      indexFraction = ((int)indexFraction >> (uVar1 & 0x3f) | uVar2) & 0x7fff;
+      indexInteger = (int)indexInteger >> (rightShiftCount & 0x3f);
+      indexFraction = ((int)indexFraction >> (rightShiftCount & 0x3f) | indexShiftThenCarryBits) & 0x7fff;
     }
   }
   else {
-    if ((int)uVar2 < 0xf) {
-      uVar1 = (int)indexFraction >> (0xf - uVar2 & 0x3f);
+    if ((int)indexShiftThenCarryBits < 0xf) {
+      fractionCarryBits = (int)indexFraction >> (0xf - indexShiftThenCarryBits & 0x3f);
     }
     else {
-      uVar1 = indexFraction << (uVar2 - 0xf & 0x3f);
+      fractionCarryBits = indexFraction << (indexShiftThenCarryBits - 0xf & 0x3f);
     }
-    indexInteger = indexInteger << (uVar2 & 0x3f) | uVar1;
-    indexFraction = indexFraction << (uVar2 & 0x3f);
+    indexInteger = indexInteger << (indexShiftThenCarryBits & 0x3f) | fractionCarryBits;
+    indexFraction = indexFraction << (indexShiftThenCarryBits & 0x3f);
   }
   stencilValue = indexInteger + *(int *)(glContext + 0x3210);
   if ((*(uint *)(glContext + 0x3414) & 2) != 0) {
@@ -864,15 +865,15 @@ void _gleModifyPixelDepth(glContext, pixel)
   int glContext;
   int pixel;
 {
-  float fVar1;
-  float fVar2;
+  float scaledDepth;
+  float clampedDepth;
   
-  fVar1 = *(float *)(pixel + 0x14) * *(float *)(glContext + 0x320c) + *(float *)(glContext + 0x3208);
-  fVar2 = FLOAT_00108e50;
-  if ((!(fVar1 < FLOAT_00108e50)) && (fVar2 = fVar1, FLOAT_00108e54 < fVar1)) {
-    fVar2 = FLOAT_00108e54;
+  scaledDepth = *(float *)(pixel + 0x14) * *(float *)(glContext + 0x320c) + *(float *)(glContext + 0x3208);
+  clampedDepth = FLOAT_00108e50;
+  if ((!(scaledDepth < FLOAT_00108e50)) && (clampedDepth = scaledDepth, FLOAT_00108e54 < scaledDepth)) {
+    clampedDepth = FLOAT_00108e54;
   }
-  *(float *)(pixel + 0x14) = fVar2;
+  *(float *)(pixel + 0x14) = clampedDepth;
   return;
 }
 
@@ -907,26 +908,26 @@ void _gleModifyPixelR(int glContext,int pixel,double unusedFloatArg1,double unus
 /* _gleModifyPixelG @ 0xe6628 (200 bytes) */
 void _gleModifyPixelG(int glContext,int pixel,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11)
 {
-  uint uVar1;
+  uint scaledIndex;
   float green;
-  float fVar3;
-  uint uVar4;
+  float clampBound;
+  uint tableLastIndexThenIndex;
   
   green = *(float *)(pixel + 8) * *(float *)(glContext + 0x31f4) + *(float *)(glContext + 0x31f0);
   if ((*(uint *)(glContext + 0x3414) & 1) == 0) {
-    fVar3 = FLOAT_00108e50;
-    if ((green < FLOAT_00108e50) || (fVar3 = FLOAT_00108e54, FLOAT_00108e54 < green)) {
-      green = fVar3;
+    clampBound = FLOAT_00108e50;
+    if ((green < FLOAT_00108e50) || (clampBound = FLOAT_00108e54, FLOAT_00108e54 < green)) {
+      green = clampBound;
     }
   }
   else {
-    uVar4 = *(int *)(glContext + 0x328c) - 1;
-    uVar1 = (uint)(int)(green * (float)((double)CONCAT44(0x43300000,uVar4 ^ 0x80000000) - DOUBLE_00108d58
+    tableLastIndexThenIndex = *(int *)(glContext + 0x328c) - 1;
+    scaledIndex = (uint)(int)(green * (float)((double)CONCAT44(0x43300000,tableLastIndexThenIndex ^ 0x80000000) - DOUBLE_00108d58
                                   ) + FLOAT_00108e90);
-    if (((int)uVar1 <= (int)uVar4) && (uVar4 = uVar1, (int)uVar1 < 0)) {
-      uVar4 = 0;
+    if (((int)scaledIndex <= (int)tableLastIndexThenIndex) && (tableLastIndexThenIndex = scaledIndex, (int)scaledIndex < 0)) {
+      tableLastIndexThenIndex = 0;
     }
-    green = *(float *)(uVar4 * 4 + *(int *)(glContext + 0x3260));
+    green = *(float *)(tableLastIndexThenIndex * 4 + *(int *)(glContext + 0x3260));
   }
   *(float *)(pixel + 8) = green;
   return;
@@ -1252,7 +1253,7 @@ void _gleModifyPixelSignedRGBA(glContext, pixel)
   float green;
   float blue;
   float alpha;
-  float fVar9;
+  float clampedChannel;
   uint alphaMapIndex;
   uint blueMapIndex;
   uint greenMapIndex;
@@ -1263,21 +1264,21 @@ void _gleModifyPixelSignedRGBA(glContext, pixel)
   blue = *(float *)(pixel + 0xc) * *(float *)(glContext + 0x31fc) + *(float *)(glContext + 0x31f8);
   alpha = *(float *)(pixel + 0x10) * *(float *)(glContext + 0x3204) + *(float *)(glContext + 0x3200);
   if ((*(uint *)(glContext + 0x3414) & 1) == 0) {
-    fVar9 = FLOAT_00108e58;
-    if ((red < FLOAT_00108e58) || (fVar9 = FLOAT_00108e54, FLOAT_00108e54 < red)) {
-      red = fVar9;
+    clampedChannel = FLOAT_00108e58;
+    if ((red < FLOAT_00108e58) || (clampedChannel = FLOAT_00108e54, FLOAT_00108e54 < red)) {
+      red = clampedChannel;
     }
-    fVar9 = FLOAT_00108e58;
-    if ((green < FLOAT_00108e58) || (fVar9 = FLOAT_00108e54, FLOAT_00108e54 < green)) {
-      green = fVar9;
+    clampedChannel = FLOAT_00108e58;
+    if ((green < FLOAT_00108e58) || (clampedChannel = FLOAT_00108e54, FLOAT_00108e54 < green)) {
+      green = clampedChannel;
     }
-    fVar9 = FLOAT_00108e58;
-    if ((blue < FLOAT_00108e58) || (fVar9 = FLOAT_00108e54, FLOAT_00108e54 < blue)) {
-      blue = fVar9;
+    clampedChannel = FLOAT_00108e58;
+    if ((blue < FLOAT_00108e58) || (clampedChannel = FLOAT_00108e54, FLOAT_00108e54 < blue)) {
+      blue = clampedChannel;
     }
-    fVar9 = FLOAT_00108e58;
-    if ((alpha < FLOAT_00108e58) || (fVar9 = FLOAT_00108e54, FLOAT_00108e54 < alpha)) {
-      alpha = fVar9;
+    clampedChannel = FLOAT_00108e58;
+    if ((alpha < FLOAT_00108e58) || (clampedChannel = FLOAT_00108e54, FLOAT_00108e54 < alpha)) {
+      alpha = clampedChannel;
     }
   }
   else {

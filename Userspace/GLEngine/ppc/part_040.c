@@ -6946,11 +6946,11 @@ void _gleShrinkFuncCache(funcCache, deleteCount)
 void _gleDeleteFuncCacheElem(glContext)
   int *glContext;
 {
-  int *piVar1;
+  int *previousElem;
   
-  piVar1 = (int *)glContext[1];
-  *piVar1 = *glContext;
-  *(int **)(*glContext + 4) = piVar1;
+  previousElem = (int *)glContext[1];
+  *previousElem = *glContext;
+  *(int **)(*glContext + 4) = previousElem;
   _gleDCBFree(glContext);
   return;
 }
@@ -8679,7 +8679,7 @@ int _gleBuildModelviewTransformFuncAV_body(glContext, inputFlags)
   int funcCacheElem;
   int codeWordCount;
   int chunkWordCount;
-  undefined *puVar5;
+  undefined *pushInstructionsSlot;
   undefined *codeChunk;
   int chunkWordCount2;
   undefined4 branchInstruction;
@@ -8849,9 +8849,9 @@ LAB_000c4ac0:
   *codeEnd = 0x4e800020;
   if (codeWordCount < 0x71) {
     funcCacheElem = _gleShrinkFuncCacheElem(funcCacheElem,codeWordCount);
-    puVar5 = PTR__glePushInstructions_00112054;
+    pushInstructionsSlot = PTR__glePushInstructions_00112054;
     *(int *)(glContext + 0x5094) = funcCacheElem;
-    (**(code **)puVar5)(codeWordCount,(int *)(funcCacheElem + 0x20));
+    (**(code **)pushInstructionsSlot)(codeWordCount,(int *)(funcCacheElem + 0x20));
     return (int *)(funcCacheElem + 0x20);
   }
                     

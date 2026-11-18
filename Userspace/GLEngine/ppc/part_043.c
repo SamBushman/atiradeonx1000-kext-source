@@ -204,17 +204,17 @@ void _gleFeedbackPolygon(glContext, firstVertex, vertexCount, polygonModeIndex)
 }
 
 /* _gleFeedbackTriangles @ 0xcc7e0 (612 bytes) */
-double _gleFeedbackTriangles(undefined4 glContext,int vertexCursor,int vertexCount,uint polygonModeIndex,double fparam_1)
+double _gleFeedbackTriangles(undefined4 glContext,int vertexCursor,int vertexCount,uint polygonModeIndex,double forwardedFloatArg1)
 {
   uint polygonModeBits;
-  double dVar2;
-  double dVar3;
+  double intToDoubleBias;
+  double lineResetTokenValue;
   undefined4 lineToken;
   int lastTriangleStart;
   int triangleStart;
   
-  dVar3 = DOUBLE_00108dd0;
-  dVar2 = DOUBLE_00108d70;
+  lineResetTokenValue = DOUBLE_00108dd0;
+  intToDoubleBias = DOUBLE_00108d70;
   polygonModeBits = polygonModeIndex & 3;
   lastTriangleStart = vertexCount + -3;
   triangleStart = 0;
@@ -223,21 +223,21 @@ double _gleFeedbackTriangles(undefined4 glContext,int vertexCursor,int vertexCou
       do {
         lineToken = 0x707;
         if (*(char *)(vertexCursor + 0x7c) != '\0') {
-          ((void (*)())_gleFeedbackToken)(glContext,(double)(float)dVar3);
+          ((void (*)())_gleFeedbackToken)(glContext,(double)(float)lineResetTokenValue);
           _gleFeedbackHitRecord(glContext,vertexCursor);
-          fparam_1 = (double)_gleFeedbackHitRecord(glContext,vertexCursor + 0x100);
+          forwardedFloatArg1 = (double)_gleFeedbackHitRecord(glContext,vertexCursor + 0x100);
           lineToken = 0x702;
         }
         if (*(char *)(vertexCursor + 0x17c) != '\0') {
-          ((void (*)())_gleFeedbackToken)(glContext,(double)(float)((double)CONCAT44(0x43300000,lineToken) - dVar2));
+          ((void (*)())_gleFeedbackToken)(glContext,(double)(float)((double)CONCAT44(0x43300000,lineToken) - intToDoubleBias));
           _gleFeedbackHitRecord(glContext,vertexCursor + 0x100);
-          fparam_1 = (double)_gleFeedbackHitRecord(glContext,vertexCursor + 0x200);
+          forwardedFloatArg1 = (double)_gleFeedbackHitRecord(glContext,vertexCursor + 0x200);
           lineToken = 0x702;
         }
         if (*(char *)(vertexCursor + 0x27c) != '\0') {
-          ((void (*)())_gleFeedbackToken)(glContext,(double)(float)((double)CONCAT44(0x43300000,lineToken) - dVar2));
+          ((void (*)())_gleFeedbackToken)(glContext,(double)(float)((double)CONCAT44(0x43300000,lineToken) - intToDoubleBias));
           _gleFeedbackHitRecord(glContext,vertexCursor + 0x200);
-          fparam_1 = (double)_gleFeedbackHitRecord(glContext,vertexCursor);
+          forwardedFloatArg1 = (double)_gleFeedbackHitRecord(glContext,vertexCursor);
         }
         triangleStart = triangleStart + 3;
         vertexCursor = vertexCursor + 0x300;
@@ -249,15 +249,15 @@ double _gleFeedbackTriangles(undefined4 glContext,int vertexCursor,int vertexCou
       do {
         if (*(char *)(vertexCursor + 0x7c) != '\0') {
           ((void (*)())_gleFeedbackToken)(glContext,(double)FLOAT_00108f28);
-          fparam_1 = (double)_gleFeedbackHitRecord(glContext,vertexCursor);
+          forwardedFloatArg1 = (double)_gleFeedbackHitRecord(glContext,vertexCursor);
         }
         if (*(char *)(vertexCursor + 0x17c) != '\0') {
           ((void (*)())_gleFeedbackToken)(glContext,(double)FLOAT_00108f28);
-          fparam_1 = (double)_gleFeedbackHitRecord(glContext,vertexCursor + 0x100);
+          forwardedFloatArg1 = (double)_gleFeedbackHitRecord(glContext,vertexCursor + 0x100);
         }
         if (*(char *)(vertexCursor + 0x27c) != '\0') {
           ((void (*)())_gleFeedbackToken)(glContext,(double)FLOAT_00108f28);
-          fparam_1 = (double)_gleFeedbackHitRecord(glContext,vertexCursor + 0x200);
+          forwardedFloatArg1 = (double)_gleFeedbackHitRecord(glContext,vertexCursor + 0x200);
         }
         triangleStart = triangleStart + 3;
         vertexCursor = vertexCursor + 0x300;
@@ -271,11 +271,11 @@ double _gleFeedbackTriangles(undefined4 glContext,int vertexCursor,int vertexCou
       ((void (*)())_gleFeedbackToken)(glContext,(double)FLOAT_00108f38);
       _gleFeedbackHitRecord(glContext,vertexCursor);
       _gleFeedbackHitRecord(glContext,vertexCursor + 0x100);
-      fparam_1 = (double)_gleFeedbackHitRecord(glContext,vertexCursor + 0x200);
+      forwardedFloatArg1 = (double)_gleFeedbackHitRecord(glContext,vertexCursor + 0x200);
       vertexCursor = vertexCursor + 0x300;
     } while (triangleStart <= lastTriangleStart);
   }
-  return fparam_1;
+  return forwardedFloatArg1;
 }
 
 /* _gleFeedbackTriangleFan @ 0xcca44 (472 bytes) */
@@ -287,16 +287,17 @@ double _gleFeedbackTriangleFan(glContext, centerVertex, vertexCursor, vertexCoun
   uint polygonModeIndex;
 {
   uint polygonModeBits;
-  int iVar2;
+  int lastTriangleIndex;
+  int trianglesRemaining;
   int triangleIndex;
   int nextVertex;
   float tokenValue;
   
   polygonModeBits = polygonModeIndex & 3;
-  iVar2 = vertexCount + -2;
+  lastTriangleIndex = vertexCount + -2;
   triangleIndex = 0;
   if (polygonModeBits == 1) {
-    if (-1 < iVar2) {
+    if (-1 < lastTriangleIndex) {
       tokenValue = (double)FLOAT_00108f34;
       do {
         nextVertex = vertexCursor + 0x100;
@@ -311,11 +312,11 @@ double _gleFeedbackTriangleFan(glContext, centerVertex, vertexCursor, vertexCoun
         _gleFeedbackHitRecord(glContext,nextVertex);
         _gleFeedbackHitRecord(glContext,centerVertex);
         vertexCursor = nextVertex;
-      } while (triangleIndex <= iVar2);
+      } while (triangleIndex <= lastTriangleIndex);
     }
   }
   else if (polygonModeBits == 0) {
-    if (-1 < iVar2) {
+    if (-1 < lastTriangleIndex) {
       tokenValue = (double)FLOAT_00108f28;
       do {
         triangleIndex = triangleIndex + 1;
@@ -326,20 +327,20 @@ double _gleFeedbackTriangleFan(glContext, centerVertex, vertexCursor, vertexCoun
         ((void (*)())_gleFeedbackToken)(glContext,(double)tokenValue);
         _gleFeedbackHitRecord(glContext,vertexCursor + 0x100);
         vertexCursor = vertexCursor + 0x100;
-      } while (triangleIndex <= iVar2);
+      } while (triangleIndex <= lastTriangleIndex);
     }
   }
-  else if ((polygonModeBits == 2) && (-1 < iVar2)) {
-    iVar2 = vertexCount + -1;
+  else if ((polygonModeBits == 2) && (-1 < lastTriangleIndex)) {
+    trianglesRemaining = vertexCount + -1;
     do {
       ((void (*)())_gleFeedbackToken)(glContext,(double)FLOAT_00108f30);
       ((void (*)())_gleFeedbackToken)(glContext,(double)FLOAT_00108f38);
       _gleFeedbackHitRecord(glContext,centerVertex);
       _gleFeedbackHitRecord(glContext,vertexCursor);
       _gleFeedbackHitRecord(glContext,vertexCursor + 0x100);
-      iVar2 = iVar2 + -1;
+      trianglesRemaining = trianglesRemaining + -1;
       vertexCursor = vertexCursor + 0x100;
-    } while (iVar2 != 0);
+    } while (trianglesRemaining != 0);
   }
   return;
 }
@@ -647,35 +648,35 @@ void _gleFinishFence(glContext, param_2, fence)
   int param_2;
   undefined4 fence;
 {
-  int *piVar1;
-  undefined4 *puVar2;
-  int iVar3;
-  undefined4 uVar4;
-  int iVar5;
-  uint uVar6;
-  undefined4 *puVar7;
+  int *rendererCallbacks;
+  undefined4 *rendererHandlePtr;
+  int fenceObject;
+  undefined4 rendererFenceHandle;
+  int rendererRecordCursor;
+  uint loopIndex;
+  undefined4 *fenceHandleCursor;
   
   if (param_2 == 0) {
-    iVar3 = _gleLookupHashObject(glContext + 0x543c,fence);
-    if (iVar3 == 0) {
+    fenceObject = _gleLookupHashObject(glContext + 0x543c,fence);
+    if (fenceObject == 0) {
       if (*(int *)(glContext + 0x7574) == 0) {
         *(undefined4 *)(glContext + 0x7574) = 0x502;
       }
     }
     else {
-      iVar5 = glContext + 0x10000;
-      uVar6 = 0;
+      rendererRecordCursor = glContext + 0x10000;
+      loopIndex = 0;
       if (*(char *)(glContext + 0x85a4) != '\0') {
-        puVar7 = (undefined4 *)(iVar3 + 0x10);
+        fenceHandleCursor = (undefined4 *)(fenceObject + 0x10);
         do {
-          piVar1 = (int *)(iVar5 + -0x777c);
-          uVar4 = *puVar7;
-          uVar6 = uVar6 + 1;
-          puVar7 = puVar7 + 1;
-          puVar2 = (undefined4 *)(iVar5 + -0x7a54);
-          iVar5 = iVar5 + 0x2e0;
-          (**(code **)(*piVar1 + 0x1c4))(*puVar2,0,uVar4);
-        } while (uVar6 < *(byte *)(glContext + 0x85a4));
+          rendererCallbacks = (int *)(rendererRecordCursor + -0x777c);
+          rendererFenceHandle = *fenceHandleCursor;
+          loopIndex = loopIndex + 1;
+          fenceHandleCursor = fenceHandleCursor + 1;
+          rendererHandlePtr = (undefined4 *)(rendererRecordCursor + -0x7a54);
+          rendererRecordCursor = rendererRecordCursor + 0x2e0;
+          (**(code **)(*rendererCallbacks + 0x1c4))(*rendererHandlePtr,0,rendererFenceHandle);
+        } while (loopIndex < *(byte *)(glContext + 0x85a4));
       }
     }
   }
@@ -1344,42 +1345,42 @@ void _gleFramebufferTexture(glContext, attachmentIndex, targetIndex, textureObje
 }
 
 /* _gleCheckFramebufferAttachmentCompleteness @ 0xce354 (196 bytes) */
-double _gleCheckFramebufferAttachmentCompleteness(unusedArg1, param_2, param_3, param_4)
+double _gleCheckFramebufferAttachmentCompleteness(unusedArg1, textureObject, attachmentRecord, attachmentSlot)
   undefined4 unusedArg1;
-  int param_2;
-  int *param_3;
-  int param_4;
+  int textureObject;
+  int *attachmentRecord;
+  int attachmentSlot;
 {
-  int iVar1;
+  int levelRecord;
   
-  param_3[5] = 1;
-  iVar1 = param_2 + param_3[1] * 0x168 + param_3[2] * 0x18;
-  param_3[4] = *(int *)(iVar1 + 0xc4);
-  if (*(short *)(iVar1 + 200) == 0) {
+  attachmentRecord[5] = 1;
+  levelRecord = textureObject + attachmentRecord[1] * 0x168 + attachmentRecord[2] * 0x18;
+  attachmentRecord[4] = *(int *)(levelRecord + 0xc4);
+  if (*(short *)(levelRecord + 200) == 0) {
     return;
   }
-  if (*(short *)(iVar1 + 0xca) == 0) {
+  if (*(short *)(levelRecord + 0xca) == 0) {
     return;
   }
-  if (*param_3 == 1) {
-    if ((int)((uint)*(ushort *)(iVar1 + 0xcc) + (uint)*(byte *)(iVar1 + 0xce)) <= param_3[3]) {
+  if (*attachmentRecord == 1) {
+    if ((int)((uint)*(ushort *)(levelRecord + 0xcc) + (uint)*(byte *)(levelRecord + 0xce)) <= attachmentRecord[3]) {
       return;
     }
-    if (param_3[3] < (int)-(uint)*(byte *)(iVar1 + 0xce)) {
+    if (attachmentRecord[3] < (int)-(uint)*(byte *)(levelRecord + 0xce)) {
       return;
     }
   }
-  if (((param_4 < 4) && (*(short *)(param_2 + 0x26) != 0x1907)) &&
-     (*(short *)(param_2 + 0x26) != 0x1908)) {
+  if (((attachmentSlot < 4) && (*(short *)(textureObject + 0x26) != 0x1907)) &&
+     (*(short *)(textureObject + 0x26) != 0x1908)) {
     return;
   }
-  if ((param_4 == 4) && (*(short *)(param_2 + 0x26) != 0x1902)) {
+  if ((attachmentSlot == 4) && (*(short *)(textureObject + 0x26) != 0x1902)) {
     return;
   }
-  if ((param_4 == 5) && (*(short *)(param_2 + 0x26) != 0x1901)) {
+  if ((attachmentSlot == 5) && (*(short *)(textureObject + 0x26) != 0x1901)) {
     return;
   }
-  param_3[5] = 0;
+  attachmentRecord[5] = 0;
   return;
 }
 
@@ -1490,7 +1491,7 @@ LAB_000ce630:
 }
 
 /* _gleCheckFramebufferStatus @ 0xce664 (1200 bytes) */
-int _gleCheckFramebufferStatus(int glContext,int framebufferRecord,int *param_3,undefined4 forwardedArg4,undefined4 forwardedArg5,undefined4 forwardedArg6,undefined4 forwardedArg7,double fparam_1,double floatArg2,double floatArg3,double floatArg4,double floatArg5,double floatArg6,double floatArg7,double floatArg8)
+int _gleCheckFramebufferStatus(int glContext,int framebufferRecord,int *forwardedArg3ThenClearCursor,undefined4 forwardedArg4,undefined4 forwardedArg5,undefined4 forwardedArg6,undefined4 forwardedArg7,double forwardedFloatArg1,double floatArg2,double floatArg3,double floatArg4,double floatArg5,double floatArg6,double floatArg7,double floatArg8)
 {
   bool rendererInfoByte79Clear;
   bool stateClean;
@@ -1506,16 +1507,16 @@ int _gleCheckFramebufferStatus(int glContext,int framebufferRecord,int *param_3,
   uint dirtyWord3ThenMasked;
   uint dispatchFlags;
   int *dirtyFlagWords;
-  double extraout_f1;
+  double f1AfterCall;
   double f1AfterCall1;
-  double extraout_f1_01;
+  double f1AfterCall2;
   double f1AfterCall3;
   double f1AfterCall4;
   
   if (*(int *)(framebufferRecord + 0xdc) != 0) {
-    ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferRecord,param_3,forwardedArg4,forwardedArg5,forwardedArg6,forwardedArg7,fparam_1,floatArg2,floatArg3,
+    ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferRecord,forwardedArg3ThenClearCursor,forwardedArg4,forwardedArg5,forwardedArg6,forwardedArg7,forwardedFloatArg1,floatArg2,floatArg3,
                floatArg4,floatArg5,floatArg6,floatArg7,floatArg8);
-    fparam_1 = fparam_1;
+    forwardedFloatArg1 = forwardedFloatArg1;
   }
   if (*(int *)(framebufferRecord + 0xc0) != 0) {
     return *(int *)(framebufferRecord + 0xc0);
@@ -1523,17 +1524,17 @@ int _gleCheckFramebufferStatus(int glContext,int framebufferRecord,int *param_3,
   matrixFuncDirty = *(int *)(glContext + 0x50ac);
   if (matrixFuncDirty != 0 || (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
     _gleUpdateMatrixFunc(glContext);
-    fparam_1 = f1AfterCall1;
+    forwardedFloatArg1 = f1AfterCall1;
   }
   if (*(char *)(glContext + 0x4691) != '\0') {
     framebufferObject = *(int *)(glContext + 0x744c);
     dirtyFlagWords = (int *)(glContext + 0x310);
     rendererInfoByte79 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
     if ((framebufferObject != 0) && (*(int *)(framebufferObject + 0xec) != 0)) {
-      ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,param_3,forwardedArg4,forwardedArg5,forwardedArg6,matrixFuncDirty,fparam_1,floatArg2,
+      ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,forwardedArg3ThenClearCursor,forwardedArg4,forwardedArg5,forwardedArg6,matrixFuncDirty,forwardedFloatArg1,floatArg2,
                  floatArg3,floatArg4,floatArg5,floatArg6,floatArg7,floatArg8);
       *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000000;
-      fparam_1 = fparam_1;
+      forwardedFloatArg1 = forwardedFloatArg1;
     }
     if ((*(char *)(glContext + 0x4664) == '\0') && (*(int *)(glContext + 0x5430) == 0)) {
 LAB_000ce7a4:
@@ -1554,10 +1555,10 @@ LAB_000ce7a4:
       dirtyWord3ThenMasked = *(uint *)(glContext + 0x31c);
       if ((dirtyWord3ThenMasked & 0x15555) != 0) {
         if (*(char *)(glContext + 0x2e54) != '\0') {
-          fparam_1 = (double)_gleUpdateLightRGBASums(glContext,glContext + 0x2c20,0);
+          forwardedFloatArg1 = (double)_gleUpdateLightRGBASums(glContext,glContext + 0x2c20,0);
         }
         if (*(char *)(glContext + 0x3094) != '\0') {
-          fparam_1 = (double)_gleUpdateLightRGBASums(glContext,glContext + 0x2e60,1);
+          forwardedFloatArg1 = (double)_gleUpdateLightRGBASums(glContext,glContext + 0x2e60,1);
         }
         goto LAB_000ce7a4;
       }
@@ -1584,39 +1585,39 @@ LAB_000ce7a4:
                           (*(undefined4 *)(glContext + 0x4688),glContext + 0x4698,dirtyFlagWords);
         if ((((dispatchFlags & 3) != (uint)*(byte *)(glContext + 0x7580)) ||
             ((dispatchFlags & 4) != (uint)*(byte *)(glContext + 0x7581))) ||
-           (fparam_1 = f1AfterCall3, (dispatchFlags & 8) != (uint)(*(char *)(glContext + 0x759d) == '\0')))
+           (forwardedFloatArg1 = f1AfterCall3, (dispatchFlags & 8) != (uint)(*(char *)(glContext + 0x759d) == '\0')))
         {
           if ((dispatchFlags & 4) == 0) {
             dispatchFlags = dispatchFlags & 0xfffffffe;
             *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x10000000;
           }
-          fparam_1 = (double)_gleUpdateDispatchCodeChange(glContext,dispatchFlags);
+          forwardedFloatArg1 = (double)_gleUpdateDispatchCodeChange(glContext,dispatchFlags);
         }
       }
       else {
-        fparam_1 = (double)_gleSwitchToNonRevertRenderer(glContext);
+        forwardedFloatArg1 = (double)_gleSwitchToNonRevertRenderer(glContext);
       }
     }
     clearIndex = 0;
-    param_3 = dirtyFlagWords;
+    forwardedArg3ThenClearCursor = dirtyFlagWords;
     do {
       clearIndex = clearIndex + 1;
-      *param_3 = 0;
-      param_3 = param_3 + 1;
+      *forwardedArg3ThenClearCursor = 0;
+      forwardedArg3ThenClearCursor = forwardedArg3ThenClearCursor + 1;
     } while (clearIndex < 0x13);
   }
   if (-1 < *(int *)((uint)*(byte *)(glContext + 0x85a8) * 0x20 + framebufferRecord + 0xfc)) goto LAB_000cead8;
   matrixFuncDirty = *(int *)(glContext + 0x50ac);
   if (matrixFuncDirty != 0 || (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
     _gleUpdateMatrixFunc(glContext);
-    fparam_1 = f1AfterCall4;
+    forwardedFloatArg1 = f1AfterCall4;
   }
   if (*(char *)(glContext + 0x4691) == '\0') goto LAB_000cead8;
   framebufferObject = *(int *)(glContext + 0x744c);
   dirtyFlagWords = (int *)(glContext + 0x310);
   rendererInfoByte79 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
   if ((framebufferObject != 0) && (*(int *)(framebufferObject + 0xec) != 0)) {
-    ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,param_3,forwardedArg4,forwardedArg5,forwardedArg6,matrixFuncDirty,fparam_1,floatArg2,floatArg3
+    ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,forwardedArg3ThenClearCursor,forwardedArg4,forwardedArg5,forwardedArg6,matrixFuncDirty,forwardedFloatArg1,floatArg2,floatArg3
                ,floatArg4,floatArg5,floatArg6,floatArg7,floatArg8);
     *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000000;
   }
@@ -1949,21 +1950,21 @@ LAB_000cefac:
 /* _LFSParserCreate @ 0xcf04c (60 bytes) */
 int _LFSParserCreate()
 {
-  undefined4 uVar1;
+  undefined4 parser;
   
-  uVar1 = _calloc(0x46c,1);
-  ((int (*)())_LFSParserInit)(uVar1);
-  return uVar1;
+  parser = _calloc(0x46c,1);
+  ((int (*)())_LFSParserInit)(parser);
+  return parser;
 }
 
 /* _LFSParserInit @ 0xcf088 (12 bytes) */
-int _LFSParserInit(param_1)
-  undefined4 param_1;
+int _LFSParserInit(parser)
+  undefined4 parser;
 {
-  undefined4 uVar1;
+  undefined4 memsetResult;
   
-  uVar1 = _memset(param_1,0,0x46c);
-  return uVar1;
+  memsetResult = _memset(parser,0,0x46c);
+  return memsetResult;
 }
 
 /* _LFSParserShutdown @ 0xcf094 (12 bytes) */
@@ -1998,29 +1999,29 @@ void _LFSParserAttachStream(parser, stream)
 }
 
 /* _LFSParserCheckForNewline @ 0xcf110 (96 bytes) */
-int _LFSParserCheckForNewline(unusedArg1, param_2, param_3, param_4, param_5)
+int _LFSParserCheckForNewline(unusedArg1, text, position, textLength, newlineLengthOut)
   undefined4 unusedArg1;
-  int param_2;
-  int param_3;
-  uint param_4;
-  undefined4 *param_5;
+  int text;
+  int position;
+  uint textLength;
+  undefined4 *newlineLengthOut;
 {
-  char cVar1;
+  char currentChar;
   
-  if (param_3 + 1U < param_4) {
-    cVar1 = *(char *)(param_2 + param_3);
-    if ((cVar1 == '\r') && (*(char *)(param_2 + param_3 + 1) == '\n')) {
-      *param_5 = 2;
+  if (position + 1U < textLength) {
+    currentChar = *(char *)(text + position);
+    if ((currentChar == '\r') && (*(char *)(text + position + 1) == '\n')) {
+      *newlineLengthOut = 2;
       return true;
     }
   }
   else {
-    cVar1 = *(char *)(param_2 + param_3);
+    currentChar = *(char *)(text + position);
   }
-  if (cVar1 == '\n') {
+  if (currentChar == '\n') {
     return true;
   }
-  return cVar1 == '\r';
+  return currentChar == '\r';
 }
 
 /* _LFSParserPreprocessString @ 0xcf170 (568 bytes) */
@@ -3271,61 +3272,63 @@ int _LFSParserParseConstantBinding(parser)
 int _LFSParserParseInstruction(parser)
   int parser;
 {
-  int iVar1;
+  int getPartResult;
+  int parseResult;
+  int memcmpResult;
   char partText [256];
   undefined4 savedPosition0;
   undefined4 savedPosition1;
   
   savedPosition0 = *(undefined4 *)(parser + 0xc);
   savedPosition1 = *(undefined4 *)(parser + 0x10);
-  iVar1 = ((int (*)())_LFSParserGetPart)(parser,partText);
-  if (iVar1 == 0) {
+  getPartResult = ((int (*)())_LFSParserGetPart)(parser,partText);
+  if (getPartResult == 0) {
     return 1;
   }
-  iVar1 = _memcmp(partText,"StartConstants",0xf);
-  if (iVar1 == 0) {
+  memcmpResult = _memcmp(partText,"StartConstants",0xf);
+  if (memcmpResult == 0) {
     *(undefined1 *)(parser + 0x3a) = 1;
     *(undefined1 *)(parser + 0x19) = 1;
     goto LAB_000d0f14;
   }
-  iVar1 = _memcmp(partText,"EndConstants",0xd);
-  if (iVar1 != 0) {
-    iVar1 = _memcmp(partText,"StartPrelimPass",0x10);
-    if (iVar1 == 0) {
+  memcmpResult = _memcmp(partText,"EndConstants",0xd);
+  if (memcmpResult != 0) {
+    memcmpResult = _memcmp(partText,"StartPrelimPass",0x10);
+    if (memcmpResult == 0) {
       *(undefined1 *)(parser + 0x19) = 2;
       *(undefined1 *)(parser + 0x4a) = 1;
       goto LAB_000d0f14;
     }
-    iVar1 = _memcmp(partText,"EndPass",8);
-    if (iVar1 != 0) {
-      iVar1 = _memcmp(partText,"StartOutputPass",0x10);
-      if (iVar1 == 0) {
+    memcmpResult = _memcmp(partText,"EndPass",8);
+    if (memcmpResult != 0) {
+      memcmpResult = _memcmp(partText,"StartOutputPass",0x10);
+      if (memcmpResult == 0) {
         *(undefined1 *)(parser + 0x19) = 3;
         *(undefined1 *)(parser + 0x5a) = 1;
       }
       else {
-        iVar1 = _memcmp(partText,"CONSTANT",9);
-        if (iVar1 == 0) {
+        memcmpResult = _memcmp(partText,"CONSTANT",9);
+        if (memcmpResult == 0) {
           if (*(char *)(parser + 0x19) != '\x01') {
             return 0xd;
           }
-          iVar1 = ((int (*)())_LFSParserParseConstantBinding)(parser);
+          parseResult = ((int (*)())_LFSParserParseConstantBinding)(parser);
         }
         else {
-          iVar1 = _memcmp(partText,"PassTexCoord",0xd);
-          if ((iVar1 == 0) || (iVar1 = _memcmp(partText,"SampleMap",10), iVar1 == 0)) {
+          memcmpResult = _memcmp(partText,"PassTexCoord",0xd);
+          if ((memcmpResult == 0) || (memcmpResult = _memcmp(partText,"SampleMap",10), memcmpResult == 0)) {
             *(undefined4 *)(parser + 0x10) = savedPosition1;
             *(undefined4 *)(parser + 0xc) = savedPosition0;
-            iVar1 = ((int (*)())_LFSParserParseRegisterInit)(parser);
+            parseResult = ((int (*)())_LFSParserParseRegisterInit)(parser);
           }
           else {
             *(undefined4 *)(parser + 0x10) = savedPosition1;
             *(undefined4 *)(parser + 0xc) = savedPosition0;
-            iVar1 = ((int (*)())_LFSParserParseOperation)(parser);
+            parseResult = ((int (*)())_LFSParserParseOperation)(parser);
           }
         }
-        if (iVar1 != 0) {
-          return iVar1;
+        if (parseResult != 0) {
+          return parseResult;
         }
       }
       goto LAB_000d0f14;
@@ -3333,8 +3336,8 @@ int _LFSParserParseInstruction(parser)
   }
   *(undefined1 *)(parser + 0x19) = 0;
 LAB_000d0f14:
-  iVar1 = ((int (*)())_LFSParserGetPart)(parser,partText);
-  if (iVar1 == 0) {
+  getPartResult = ((int (*)())_LFSParserGetPart)(parser,partText);
+  if (getPartResult == 0) {
     return 8;
   }
   if (partText[0] == ';') {
@@ -3344,35 +3347,35 @@ LAB_000d0f14:
 }
 
 /* _LFSParserParseVersion @ 0xd0f58 (160 bytes) */
-int _LFSParserParseVersion(param_1)
-  undefined4 param_1;
+int _LFSParserParseVersion(parser)
+  undefined4 parser;
 {
-  int iVar1;
-  undefined4 uVar2;
-  char *pcVar3;
-  uint uVar4;
-  char local_120 [16];
-  char local_110 [256];
+  int getCharacterResult;
+  undefined4 parseResult;
+  char *versionWriteCursor;
+  uint charsRead;
+  char charBuffer [16];
+  char versionText [256];
   
-  uVar4 = 0;
-  pcVar3 = local_110;
+  charsRead = 0;
+  versionWriteCursor = versionText;
   do {
-    iVar1 = ((int (*)())_LFSParserGetCharacter)(param_1,local_120,0);
-    if (iVar1 != 0) {
+    getCharacterResult = ((int (*)())_LFSParserGetCharacter)(parser,charBuffer,0);
+    if (getCharacterResult != 0) {
       return 8;
     }
-    *pcVar3 = local_120[0];
-    if (local_120[0] != ' ') {
-      pcVar3 = pcVar3 + 1;
+    *versionWriteCursor = charBuffer[0];
+    if (charBuffer[0] != ' ') {
+      versionWriteCursor = versionWriteCursor + 1;
     }
-    uVar4 = uVar4 + 1;
-  } while (uVar4 < 0xc);
-  iVar1 = _memcmp(local_110,"!!ATIfs1.0",10);
-  uVar2 = 0x1f;
-  if (iVar1 == 0) {
-    uVar2 = 0;
+    charsRead = charsRead + 1;
+  } while (charsRead < 0xc);
+  getCharacterResult = _memcmp(versionText,"!!ATIfs1.0",10);
+  parseResult = 0x1f;
+  if (getCharacterResult == 0) {
+    parseResult = 0;
   }
-  return uVar2;
+  return parseResult;
 }
 
 /* _LFSParserParse @ 0xd0ff8 (136 bytes) */
@@ -3530,14 +3533,14 @@ int _LFSStreamChunkCreate()
 }
 
 /* _LFSStreamChunkCreateFromChunk @ 0xd1350 (64 bytes) */
-int _LFSStreamChunkCreateFromChunk(param_1)
-  undefined4 param_1;
+int _LFSStreamChunkCreateFromChunk(sourceChunk)
+  undefined4 sourceChunk;
 {
-  undefined4 uVar1;
+  undefined4 newChunk;
   
-  uVar1 = ((int (*)())_LFSStreamChunkCreate)();
-  _memcpy(uVar1,param_1,0x50);
-  return uVar1;
+  newChunk = ((int (*)())_LFSStreamChunkCreate)();
+  _memcpy(newChunk,sourceChunk,0x50);
+  return newChunk;
 }
 
 /* _LFSStreamChunkGetStream @ 0xd1394 (408 bytes) */

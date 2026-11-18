@@ -1,0 +1,35 @@
+local	_glCombinerOutputNV_Exec	iVar2	stageIndexThenOutputRecord	CONFIRMED	stage - 0x8550 (GL_COMBINER0_NV based index, bounds-checked against renderer info +0x98), then replaced by the output record address ctx + stageIndex * 0x80 + portionIndex * 0x30 (+0x4240..+0x424c) that receives the arguments
+local	_glCombinerOutputNV_Exec	iVar3	portionIndex	CONFIRMED	0 for portion GL_ALPHA (0x1906), 1 for GL_RGB (0x1907): selects the 0x30-byte half of the stage record
+local	_glCombinerOutputNV_Exec	iVar4	rendererInfo	INFERRED	ctx+0x468c renderer information record (+0x98 number of combiner stages, +0xb4 number of general combiner registers)
+use	_glGetProgramStringARB_Exec	iVar3	programSlot	INFERRED	0 for the vertex program target, 1 for the fragment program target: selects the bound program pointer at ctx+0x5420 + slot * 4	^\s*iVar3\ =\ 0;$	+1
+use	_glGetProgramStringARB_Exec	iVar3	programSlot	INFERRED	0 for the vertex program target, 1 for the fragment program target: selects the bound program pointer at ctx+0x5420 + slot * 4	^\s*iVar4\ =\ \*\(int\ \*\)\(iVar3\ \*\ 4\ \+\ param_1\ \+\ 0x5420\);$	+1
+use	_glGetProgramStringARB_Exec	iVar3	programSlot	INFERRED	0 for the vertex program target, 1 for the fragment program target: selects the bound program pointer at ctx+0x5420 + slot * 4	^\s*iVar3\ =\ 1;$	+1
+local	_glGetProgramStringARB_Exec	iVar4	programThenSourceText	CONFIRMED	bound program object ctx[0x5420 + slot], then replaced by its source text pointer (+0x14); the length is at program+0x18
+local	_glGetProgramStringARB_Exec	iVar5	charIndex	CONFIRMED	index of the byte copied from the program source text to string, counts up
+local	_glGetProgramEnvParameterfvARB_Exec	bVar1	indexOutOfRange	CONFIRMED	index > 0xff for the vertex program target, index > 0x7f for the fragment program target (the number of env parameters), selects the GL_INVALID_VALUE path
+local	_glGetProgramEnvParameterfvARB_Exec	iVar4	targetSlotThenEnvParamArray	CONFIRMED	0 for the vertex program target and 1 for the fragment program target, then replaced by the environment parameter array pointer ctx[0x4668 + slot * 8]
+local	_glGetProgramEnvParameterfvARB_Exec	iVar5	envParamAddress	CONFIRMED	envParamArray + index * 0x10: the 4-float environment parameter copied to params
+local	_glDeleteRenderbuffersEXT_Exec_body	iVar7	boundRenderbufferName	CONFIRMED	name (+4) of the renderbuffer object bound at ctx+0x7448, 0 when none: a deleted renderbuffer that is bound gets unbound first
+local	_glDeleteRenderbuffersEXT_Exec_body	iVar9	renderbufferName	CONFIRMED	renderbuffers[i]: the name being deleted
+local	_glDeleteRenderbuffersEXT_Exec_body	piVar5	attachmentObjects	INFERRED	framebufferObject + 0xd4: the six attachment object pointers scanned for the deleted renderbuffer (loop of 6)
+local	_glDeleteRenderbuffersEXT_Exec_body	puVar6	renderbufferHashTable	INFERRED	ctx+0x5148 shared state + 0x1004: the hash table passed to _gleLookupHashObject for the renderbuffer name (also used by _gleDeleteHashNameAndObject)
+local	_glDeleteRenderbuffersEXT_Exec_body	iVar2	attachedObject	CONFIRMED	*cursor: the attachment object compared with the renderbuffer object found in the hash table
+local	_gleSetEnable_STENCIL_TEST	param_1	glContext	INFERRED	first argument of the _gleSetEnable_* callbacks; dereferenced at context offsets (0x3520, 0x7583, 0x310)
+local	_gleSetEnable_STENCIL_TEST	param_3	enable	INFERRED	enable flag (0 or 1) shifted into the stencil enable word at ctx+0x3520; same role as the enable parameter of _gleSetEnable_COLOR_MATERIAL
+local	_gleSetEnable_LIGHT	param_2	cap	INFERRED	the GL_LIGHTi capability token (0x4000 + light index); same role as the cap parameter of _gleSetEnable_COLOR_MATERIAL
+local	_gleSetEnable_LIGHT	param_3	enable	INFERRED	enable flag shifted into the light enable bitmask at ctx+0x30a0
+local	_gleSetEnable_LIGHT	uVar2	lightIndex	CONFIRMED	cap - 0x4000 (GL_LIGHT0 = 0x4000): the light whose bit is changed and which is passed to _gleUpdateLightFast
+local	_gleSetEnable_LIGHT	uVar1	newLightEnableBits	CONFIRMED	ctx+0x30a0 with the bit of lightIndex replaced by enable; stored back when it changed
+local	_gleSetEnable_TEXTURE_2D	param_3	enable	INFERRED	enable flag shifted into bit 3 of the texture unit enable word at +0x3534 of the unit record
+local	_gleSetEnable_TEXTURE_2D	iVar2	texUnitRecord	CONFIRMED	ctx + texUnit * 0x7c: the 0x7c-byte texture unit record (enable word at +0x3534)
+local	_gleSetEnable_TEXTURE_2D	uVar4	oldUnitEnableBits	CONFIRMED	word at +0x3534 of the unit record before the change
+local	_gleSetEnable_TEXTURE_2D	uVar1	newUnitEnableBits	CONFIRMED	oldUnitEnableBits with bit 3 replaced by enable; stored back when it changed
+local	_gleSetEnable_LIGHTING	param_3	enable	INFERRED	enable flag stored at ctx+0x30aa
+local	_gleSetEnable_LIGHTING	puVar1	setClipInterpFunc	CONFIRMED	PTR__gleSetClipInterpFunc literal-pool pointer stored at ctx+0x49cc (paired with _gleSetEyeInterpFunc at +0x49c8)
+local	_gleSetEnable_LIGHTING	uVar2	newByte316b	INFERRED	value stored at ctx+0x316b: the byte at ctx+0x4fea when lighting is disabled, else whether the short at ctx+0x30a8 equals -0x7e06
+local	_gleSetEnable_DEPTH_TEST	param_1	glContext	INFERRED	first argument of the _gleSetEnable_* callbacks; dereferenced at context offsets (0x3128, 0x310)
+local	_gleSetEnable_DEPTH_TEST	param_3	enable	INFERRED	enable flag stored at ctx+0x3128
+local	_gleSetEnable_CULL_FACE	param_3	enable	INFERRED	enable flag stored at ctx+0x34da
+local	_gleSetEnable_COLOR_MATERIAL	cVar1	colorCallbackFlagBefore	INFERRED	byte ctx+0x4df8 read before _gleSetColorMaterialEnable: the flag that guards the per-colour callback ctx+0x4de0 in the Color* functions
+use	_gleSetEnable_STENCIL_TEST	uVar1	faceShift	CONFIRMED	(byte at ctx+0x7583) & 0x1f: bit position of the current stencil face in the enable word at ctx+0x3520	^\s*uVar1\ =\ \*\(byte\ \*\)\(param_1\ \+\ 0x7583\)\ \&\ 0x1f;$	^\s*uVar1\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x3520\)\ \&\ \(\-2\ <<\ uVar1\ \|\ 0xfffffffeU\ >>\ 0x20\ \-\ uVar1\)\ \|$	all	rhs
+use	_gleSetEnable_STENCIL_TEST	uVar1	newEnableBits	CONFIRMED	ctx+0x3520 with the face bit replaced by enable; stored back and flagged in ctx+0x310 bit 0x10000000 when it changed	^\s*uVar1\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x3520\)\ \&\ \(\-2\ <<\ uVar1\ \|\ 0xfffffffeU\ >>\ 0x20\ \-\ uVar1\)\ \|$		lhs	none

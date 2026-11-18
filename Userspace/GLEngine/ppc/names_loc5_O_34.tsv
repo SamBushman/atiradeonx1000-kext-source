@@ -1,0 +1,8 @@
+local	_gleBindPipelineProgram	iVar12	programHashThenStageOffsetThenCountThenRefCount	CONFIRMED	four consecutive roles of one register: the program hash (shared state +0x4010), the stage slot byte offset (pipelineStageIndex*4), the loop count 5, and the previous program's reference count minus one
+local	_gleModifyPixelStencil	uVar2	indexShiftThenCarryBits	CONFIRMED	ctx+0x3214 (index shift) used as the shift count, then overwritten in the negative-shift branch with the bits carried from the index integer into the fraction
+local	_gleCheckTexSubImageArgs	bVar1	formatTypeTestResult	CONFIRMED	boolean result of the format/type comparison of the current branch (format == 0x1907, 0x1900, 0x86f7, format-range tests, type > 0x8036 / 0x8368, format == requiredFormat)
+local	_glDepthRange_Exec	dVar5	clampedDepthOrUpperBound	CONFIRMED	zNear after clamping to [0,1] (stored at ctx+0x1b90), then DOUBLE_00108d68 (1.0) as the upper clamp assigned to zFar
+local	_gleCheckFramebufferStatus	param_3	forwardedArg3ThenClearCursor	CONFIRMED	third argument forwarded to _gleUpdateFramebufferCompleteness, later reassigned to the cursor that zeroes the dirty flag words
+local	_glDrawBuffer_Exec	bVar1	drawBufferTestResult	CONFIRMED	boolean result of the comparison of the current branch (mode == 0x400 / 0x406, flag byte == 0, framebufferObject == 0)
+local	_glDrawBuffer_Exec	cVar2	bufferFlagByte	INFERRED	flag byte read from renderer info +0x26 or from ctx+0x7582 and tested against zero to accept the buffer mode
+local	_glCombinerInputNV_Exec	bVar1	combinerTestResult	CONFIRMED	boolean result of the comparison of the current branch (portion == 0x1906 / 0x1907, input == 0xb60)

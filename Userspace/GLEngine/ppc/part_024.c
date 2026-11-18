@@ -8,15 +8,15 @@ int _glRects_Comp(glContext, x1, y1, x2, y2)
   undefined4 x2;
   undefined4 y2;
 {
-  undefined4 uVar1;
+  undefined4 endResult;
   
   _glBegin_Comp(glContext,9);
   _glVertex2s_Comp(glContext,x1,y1);
   _glVertex2s_Comp(glContext,x2,y1);
   _glVertex2s_Comp(glContext,x2,y2);
   _glVertex2s_Comp(glContext,x1,y2);
-  uVar1 = _glEnd_Comp(glContext);
-  return uVar1;
+  endResult = _glEnd_Comp(glContext);
+  return endResult;
 }
 
 /* _glRects_Exec @ 0x84a60 (188 bytes) */
@@ -101,7 +101,7 @@ void _glRectdv_CompExec(glContext, v1, v2)
   undefined4 v1;
   undefined4 v2;
 {
-  double fparam_1;
+  double forwardedFloatArg1;
   double incomingFpr2;
   double incomingFpr3;
   double incomingFpr4;
@@ -111,7 +111,7 @@ void _glRectdv_CompExec(glContext, v1, v2)
   double incomingFpr8;
   
   ((int (*)())_glRectdv_Comp)(glContext,v1,v2);
-  ((void (*)())_glRectdv_Exec)(glContext,v1,v2,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
+  ((void (*)())_glRectdv_Exec)(glContext,v1,v2,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
   return;
 }
 
@@ -121,15 +121,15 @@ int _glRectfv_Comp(glContext, v1, v2)
   float *v1;
   float *v2;
 {
-  undefined4 uVar1;
+  undefined4 endResult;
   
   _glBegin_Comp(glContext,9);
   ((float * (*)())_glVertex2f_Comp)(glContext,(double)*v1,(double)v1[1]);
   ((float * (*)())_glVertex2f_Comp)(glContext,(double)*v2,(double)v1[1]);
   ((float * (*)())_glVertex2f_Comp)(glContext,(double)*v2,(double)v2[1]);
   ((float * (*)())_glVertex2f_Comp)(glContext,(double)*v1,(double)v2[1]);
-  uVar1 = _glEnd_Comp(glContext);
-  return uVar1;
+  endResult = _glEnd_Comp(glContext);
+  return endResult;
 }
 
 /* _glRectfv_Exec @ 0x84d58 (180 bytes) */
@@ -211,7 +211,7 @@ void _glRectiv_CompExec(glContext, v1, v2)
   undefined4 v1;
   undefined4 v2;
 {
-  double fparam_1;
+  double forwardedFloatArg1;
   double incomingFpr2;
   double incomingFpr3;
   double incomingFpr4;
@@ -221,7 +221,7 @@ void _glRectiv_CompExec(glContext, v1, v2)
   double incomingFpr8;
   
   ((int (*)())_glRectiv_Comp)(glContext,v1,v2);
-  ((void (*)())_glRectiv_Exec)(glContext,v1,v2,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
+  ((void (*)())_glRectiv_Exec)(glContext,v1,v2,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
   return;
 }
 
@@ -412,14 +412,14 @@ undefined4 _glRotateXYZ_ListExec(int glContext,float *listRecord,double unusedFl
 }
 
 /* _glRotateZ_Comp @ 0x853dc (100 bytes) */
-void _glRotateZ_Comp(undefined4 glContext,float fparam_1,float fparam_2)
+void _glRotateZ_Comp(undefined4 glContext,float sinValue,float cosValue)
 {
   float *listRecord;
   
   listRecord = (float *)_gleAddListItem(glContext,PTR__glRotateZ_ListExec_00110288,8);
   if (listRecord != (float *)0x0) {
-    listRecord[1] = (float)fparam_2;
-    *listRecord = (float)fparam_1;
+    listRecord[1] = (float)cosValue;
+    *listRecord = (float)sinValue;
   }
   return;
 }
@@ -827,10 +827,10 @@ void _glSamplePass_Exec()
 /* _glSampleCoverage_CompExec @ 0x85f14 (72 bytes) */
 void _glSampleCoverage_CompExec(undefined4 glContext,undefined4 valueShadow,undefined4 invert,float value)
 {
-  undefined4 extraout_r4;
+  undefined4 r4AfterCall;
   
   ((float * (*)())_glSampleCoverage_Comp)(glContext,valueShadow,invert,value);
-  ((void (*)())_glSampleCoverage_Exec)(glContext,extraout_r4,invert,value);
+  ((void (*)())_glSampleCoverage_Exec)(glContext,r4AfterCall,invert,value);
   return;
 }
 
@@ -1023,17 +1023,17 @@ void _glPushName_Exec(glContext, name)
   undefined4 name;
 {
   undefined4 glErrorCode;
-  undefined4 *puVar2;
+  undefined4 *nameStackPointer;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
     if (*(int *)(glContext + 0x4e1c) != 0x1c02) {
       return;
     }
-    puVar2 = *(undefined4 **)(glContext + 0x4fbc);
-    if (puVar2 < (undefined4 *)(glContext + 0x4fbcU)) {
-      *puVar2 = name;
+    nameStackPointer = *(undefined4 **)(glContext + 0x4fbc);
+    if (nameStackPointer < (undefined4 *)(glContext + 0x4fbcU)) {
+      *nameStackPointer = name;
       *(undefined1 *)(glContext + 0x4fc8) = 0;
-      *(undefined4 **)(glContext + 0x4fbc) = puVar2 + 1;
+      *(undefined4 **)(glContext + 0x4fbc) = nameStackPointer + 1;
       return;
     }
     if (*(int *)(glContext + 0x7574) != 0) {

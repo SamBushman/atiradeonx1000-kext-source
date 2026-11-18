@@ -1,0 +1,74 @@
+use	_glColorSubTable_Comp	bVar1	formatAccepted	CONFIRMED	format == 0x80e1 (GL_BGRA) / == 0x1907 (GL_RGB) result: true lets the packed-type case continue	^\s*bVar1\ =\ param_5\ ==\ 0x80e1;$	+1
+use	_glColorSubTable_Comp	bVar1	formatAccepted	CONFIRMED	format == 0x80e1 (GL_BGRA) / == 0x1907 (GL_RGB) result: true lets the packed-type case continue	^\s*if\ \(bVar1\)\ \{$	+1
+use	_glColorSubTable_Comp	bVar1	formatAccepted	CONFIRMED	format == 0x80e1 (GL_BGRA) / == 0x1907 (GL_RGB) result: true lets the packed-type case continue	^\s*bVar1\ =\ param_5\ ==\ 0x1907;$	+1
+use	_glColorSubTable_Comp	bVar1	formatRejected	CONFIRMED	7 < format - 0x1903: true when format is outside GL_RED..GL_LUMINANCE_ALPHA (0x1903..0x190a), the case is then an error	^\s*bVar1\ =\ 7\ <\ param_5\ \-\ 0x1903;$	+1
+use	_glColorSubTable_Comp	bVar1	formatRejected	CONFIRMED	7 < format - 0x1903: true when format is outside GL_RED..GL_LUMINANCE_ALPHA (0x1903..0x190a), the case is then an error	^\s*bVar1\ =\ 1\ <\ param_5\ \-\ 0x80e0;$	+1
+use	_glColorSubTable_Comp	bVar1	formatRejected	CONFIRMED	7 < format - 0x1903: true when format is outside GL_RED..GL_LUMINANCE_ALPHA (0x1903..0x190a), the case is then an error	^\s*if\ \(!bVar1\)\ goto\ LAB_0006038c;$	+1
+use	_glColorSubTable_Comp	uVar2	candidateTarget	CONFIRMED	0x806f or 0x8513 (valid targets GL_TEXTURE_3D / GL_TEXTURE_CUBE_MAP) compared with target	^\s*uVar2\ =\ 0x806f;$	+1
+use	_glColorSubTable_Comp	uVar2	candidateTarget	CONFIRMED	0x806f or 0x8513 (valid targets GL_TEXTURE_3D / GL_TEXTURE_CUBE_MAP) compared with target	^\s*uVar2\ =\ 0x8513;$	+1
+use	_glColorSubTable_Comp	uVar2	candidateTarget	CONFIRMED	0x806f or 0x8513 (valid targets GL_TEXTURE_3D / GL_TEXTURE_CUBE_MAP) compared with target	^\s*if\ \(param_2\ ==\ uVar2\)\ goto\ LAB_0006029c;$	+1
+use	_glColorSubTable_Comp	uVar2	alignedDataSize	CONFIRMED	pixelBytes * count rounded up to a multiple of 4: size of the pixel data stored after the 0x18-byte list record header	^\s*uVar2\ =\ iVar5\ \*\ param_4\ \+\ 3\ \&\ 0xfffffffc;$	+3
+use	_glColorSubTable_Comp	uVar2	alignedDataSize	CONFIRMED	pixelBytes * count rounded up to a multiple of 4: size of the pixel data stored after the 0x18-byte list record header	^\s*puVar6\[5\]\ =\ uVar2;$	+1
+use	_glColorSubTable_Comp	uVar3	fillResult	CONFIRMED	result of _gleFillImage(ctx, count, 1, 1, format, type, data, dst), returned by the function	^\s*uVar3\ =\ _gleFillImage\(param_1,param_4,1,1,param_5,param_6,param_7,puVar6\ \+\ 6\);$	+2
+use	_glColorSubTable_Comp	iVar5	glContextCopyThenElementBytes	CONFIRMED	glContext (returned unchanged on the early exits), then the bytes per element of type (_gleBytesPerElement, or _glePixelBytes when zero) used to check data alignment	^\s*iVar5\ =\ param_1;$	+1
+use	_glColorSubTable_Comp	iVar5	glContextCopyThenElementBytes	CONFIRMED	glContext (returned unchanged on the early exits), then the bytes per element of type (_gleBytesPerElement, or _glePixelBytes when zero) used to check data alignment	^\s*return\ iVar5;$	+1
+use	_glColorSubTable_Comp	iVar5	glContextCopyThenElementBytes	CONFIRMED	glContext (returned unchanged on the early exits), then the bytes per element of type (_gleBytesPerElement, or _glePixelBytes when zero) used to check data alignment	^\s*return\ iVar5;$@2	+1
+use	_glColorSubTable_Comp	iVar5	glContextCopyThenElementBytes	CONFIRMED	glContext (returned unchanged on the early exits), then the bytes per element of type (_gleBytesPerElement, or _glePixelBytes when zero) used to check data alignment	^\s*return\ iVar5;$@4	+1
+use	_glColorSubTable_Comp	iVar5	glContextCopyThenElementBytes	CONFIRMED	glContext (returned unchanged on the early exits), then the bytes per element of type (_gleBytesPerElement, or _glePixelBytes when zero) used to check data alignment	^\s*iVar5\ =\ \(int\)dVar9;$	+1
+use	_glColorSubTable_Comp	iVar5	glContextCopyThenElementBytes	CONFIRMED	glContext (returned unchanged on the early exits), then the bytes per element of type (_gleBytesPerElement, or _glePixelBytes when zero) used to check data alignment	^\s*if\ \(iVar5\ ==\ 0\)\ \{$	+2
+use	_glColorSubTable_Comp	iVar5	glContextCopyThenElementBytes	CONFIRMED	glContext (returned unchanged on the early exits), then the bytes per element of type (_gleBytesPerElement, or _glePixelBytes when zero) used to check data alignment	^\s*if\ \(param_7\ ==\ \(param_7\ /\ iVar5\)\ \*\ iVar5\)\ \{$	+1
+use	_glColorSubTable_Comp	iVar5	glContextCopyThenElementBytes	CONFIRMED	glContext (returned unchanged on the early exits), then the bytes per element of type (_gleBytesPerElement, or _glePixelBytes when zero) used to check data alignment	^\s*return\ iVar5;$@5	+1
+use	_glColorSubTable_Comp	iVar5	glContextCopyThenElementBytes	CONFIRMED	glContext (returned unchanged on the early exits), then the bytes per element of type (_gleBytesPerElement, or _glePixelBytes when zero) used to check data alignment	^\s*return\ iVar5;$@6	+1
+local	_glColorSubTable_Comp	iVar7	bufferSize	CONFIRMED	pixel unpack buffer object +0x38: its size, compared with the image end offset from _gleOffsetLimitImage
+local	_gleFinishFence	piVar1	rendererCallbacks	CONFIRMED	pointer at rendererRecordCursor - 0x777c: object whose slot +0x1c4 is called with (renderer handle, 0, per-renderer fence handle) for each renderer
+local	_gleFinishFence	puVar2	rendererHandlePtr	CONFIRMED	pointer at rendererRecordCursor - 0x7a54: the renderer handle passed as the first argument of the callback
+local	_gleFinishFence	iVar3	fenceObject	CONFIRMED	_gleLookupHashObject(ctx+0x543c, fence): the fence object; its per-renderer handles start at +0x10
+local	_gleFinishFence	uVar4	rendererFenceHandle	CONFIRMED	per-renderer fence handle read from fenceObject+0x10+4*i and passed to the callback
+local	_gleFinishFence	iVar5	rendererRecordCursor	CONFIRMED	cursor over the per-renderer records that follow glContext+0x10000: advanced by 0x2e0 per iteration of the loop bounded by the byte at glContext+0x85a4; the callbacks are read at -0x777c and -0x7a54 from it
+local	_gleFinishFence	uVar6	loopIndex	CONFIRMED	counter incremented per renderer and compared with the renderer count byte at ctx+0x85a4
+local	_gleFinishFence	puVar7	fenceHandleCursor	CONFIRMED	walks the per-renderer handle array of fenceObject (+0x10) one word per iteration
+local	_gleHalfFloatFilter1	fVar1	average	CONFIRMED	(sample0 + sample1) * weight with weight = FLOAT_00108e90 = 0.5, converted back to half float
+local	_gleHalfFloatFilter1	uVar2	floatExponentBits	CONFIRMED	float bits & 0x7f800000: the exponent field, selects overflow / normal / denormal half conversion
+local	_gleHalfFloatFilter1	uVar4	halfBits	CONFIRMED	assembled half float: sign (bit 15 of the float) | exponent and mantissa, stored to dst
+local	_gleHalfFloatFilter1	dVar6	firstSample	CONFIRMED	_gleHalfFloatToFloat of the half float at src + byteOffset
+local	_gleHalfFloatFilter1	dVar7	secondSample	CONFIRMED	_gleHalfFloatToFloat of the half float at src + byteOffset + offsetA
+use	_glePPPruneLocals	iVar2	chunkCursor	CONFIRMED	walks the remaining local chunks (+8 = next) in the renumbering loop, starting at *localList	^\s*iVar2\ =\ 0;$	+1
+use	_glePPPruneLocals	iVar2	chunkCursor	CONFIRMED	walks the remaining local chunks (+8 = next) in the renumbering loop, starting at *localList	^\s*iVar2\ =\ \*piVar4;$	+1
+use	_glePPPruneLocals	iVar2	chunkCursor	CONFIRMED	walks the remaining local chunks (+8 = next) in the renumbering loop, starting at *localList	^\s*for\ \(;\ iVar2\ !=\ 0;\ iVar2\ =\ \*\(int\ \*\)\(iVar2\ \+\ 8\)\)\ \{$	+4
+use	_glePPPruneLocals	iVar2	instruction	CONFIRMED	instruction list node (next at +8) searched for a use of the local chunk's index (+0x12)	^\s*for\ \(iVar2\ =\ \*piVar3;\ iVar2\ !=\ 0;\ iVar2\ =\ \*\(int\ \*\)\(iVar2\ \+\ 8\)\)\ \{$	+13
+use	_glePPPruneLocals	iVar2	nextChunk	CONFIRMED	*(localChunk + 8): the chunk after the one being tested or removed	^\s*iVar2\ =\ \*\(int\ \*\)\(iVar5\ \+\ 8\);$	+1
+use	_glePPPruneLocals	iVar2	nextChunk	CONFIRMED	*(localChunk + 8): the chunk after the one being tested or removed	^\s*iVar2\ =\ \*\(int\ \*\)\(iVar5\ \+\ 8\);$@2	+1
+use	_glePPPruneLocals	iVar2	nextChunk	CONFIRMED	*(localChunk + 8): the chunk after the one being tested or removed	^\s*iVar5\ =\ iVar2;$	+2
+local	_gleLightMaterialRGBAChange_FB_S	param_2	rgba	CONFIRMED	caller passes the 4 colour floats (see _gleLightMaterialRGBAChange_B_AD): copied into the +0x20 specular field of both materials
+local	_gleLightMaterialRGBAChange_FB_S	bVar1	dirtyBitIndex	CONFIRMED	bit number read from the program/material record (+0x2c2 + face*6) and set in the dirty bit arrays at ctx+0x324 / ctx+0x348
+use	_gleLightMaterialRGBAChange_FB_S	iVar2	material	CONFIRMED	record returned by _glePushMaterial(glContext, face): the material that receives the colour; +0x234 gets the update-sums bits 0x1010	^\s*iVar2\ =\ \(\(int\ \(\*\)\(\)\)_glePushMaterial\)\(param_1,iVar5\);$	+2
+use	_gleLightMaterialRGBAChange_FB_S	iVar2	material	CONFIRMED	record returned by _glePushMaterial(glContext, face): the material that receives the colour; +0x234 gets the update-sums bits 0x1010	^\s*\*\(ushort\ \*\)\(iVar2\ \+\ 0x234\)\ =\ \*\(ushort\ \*\)\(iVar2\ \+\ 0x234\)\ \|\ 0x1010;$	+2
+use	_gleLightMaterialRGBAChange_FB_S	iVar2	dirtyWordAddress348	CONFIRMED	ctx + ((dirtyBitIndex >> 3) & 0x1c): the dirty array word at ctx+0x348 that receives 1 << (dirtyBitIndex & 0x1f)	^\s*iVar2\ =\ \(bVar1\ >>\ 3\ \&\ 0x1c\)\ \+\ param_1;$	+2
+local	_gleLightMaterialRGBAChange_FB_S	iVar3	dirtyBitTableOffset	CONFIRMED	face * 6: byte offset of the face's entry in the table of dirty bit numbers
+local	_gleLightMaterialRGBAChange_FB_S	iVar4	dirtyWordAddress324	CONFIRMED	ctx + ((dirtyBitIndex >> 3) & 0x1c): the dirty array word at ctx+0x324 that receives 1 << (dirtyBitIndex & 0x1f)
+local	_gleLightMaterialRGBAChange_FB_S	uVar6	rgbaBlueAlpha	CONFIRMED	rgba[1]: the second 8 bytes (blue and alpha floats) of the colour
+local	_gleLightMaterialRGBAChange_B_S	param_2	rgba	CONFIRMED	caller passes the 4 colour floats (see _gleLightMaterialRGBAChange_B_AD): copied into the +0x20 specular field of the back material
+local	_gleLightMaterialRGBAChange_B_S	bVar1	dirtyBitIndex	CONFIRMED	bit number read from the program/material record (+0x2c8 / +0x2fc) and set in the dirty bit arrays at ctx+0x324 / ctx+0x348
+use	_gleLightMaterialRGBAChange_B_S	iVar2	material	CONFIRMED	record returned by _glePushMaterial(glContext, 1): the back material that receives the colour; +0x234 gets the update-sums bits 0x1010	^\s*iVar2\ =\ _glePushMaterial\(param_1,1\);$	+2
+use	_gleLightMaterialRGBAChange_B_S	iVar2	material	CONFIRMED	record returned by _glePushMaterial(glContext, 1): the back material that receives the colour; +0x234 gets the update-sums bits 0x1010	^\s*\*\(ushort\ \*\)\(iVar2\ \+\ 0x234\)\ =\ \*\(ushort\ \*\)\(iVar2\ \+\ 0x234\)\ \|\ 0x1010;$	+2
+use	_gleLightMaterialRGBAChange_B_S	iVar2	glContextPtr5424	INFERRED	every definition of this web is a load from glContext+0x5424 (positional name; no field row)	^\s*iVar2\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x5424\);$	+1
+use	_gleLightMaterialRGBAChange_B_S	iVar2	glContextPtr5424	INFERRED	every definition of this web is a load from glContext+0x5424 (positional name; no field row)	^\s*bVar1\ =\ \*\(byte\ \*\)\(iVar2\ \+\ 0x2c8\);$	+1
+use	_gleLightMaterialRGBAChange_B_S	iVar2	dirtyWordAddress348	CONFIRMED	ctx + ((dirtyBitIndex >> 3) & 0x1c): the dirty array word at ctx+0x348 that receives 1 << (dirtyBitIndex & 0x1f)	^\s*iVar2\ =\ \(bVar1\ >>\ 3\ \&\ 0x1c\)\ \+\ param_1;$	+2
+local	_gleLightMaterialRGBAChange_B_S	iVar3	dirtyWordAddress324	CONFIRMED	ctx + ((dirtyBitIndex >> 3) & 0x1c): the dirty array word at ctx+0x324 that receives 1 << (dirtyBitIndex & 0x1f)
+local	_gleLightMaterialRGBAChange_B_S	uVar4	rgbaBlueAlpha	CONFIRMED	rgba[1]: the second 8 bytes (blue and alpha floats) of the colour
+local	_gleLightMaterialRGBAChange_F_E	param_2	rgba	CONFIRMED	caller passes the 4 colour floats (see _gleLightMaterialRGBAChange_B_AD): copied into the +0x30 emission field of the front material
+local	_gleLightMaterialRGBAChange_F_E	bVar1	dirtyBitIndex	CONFIRMED	bit number read from the program/material record (+0x2c3 / +0x2f7) and set in the dirty bit arrays at ctx+0x324 / ctx+0x348
+use	_gleLightMaterialRGBAChange_F_E	iVar2	material	CONFIRMED	record returned by _glePushMaterial(glContext, 0): the front material that receives the colour; +0x234 gets the update-sums bits 0x202	^\s*iVar2\ =\ _glePushMaterial\(param_1,0\);$	+2
+use	_gleLightMaterialRGBAChange_F_E	iVar2	material	CONFIRMED	record returned by _glePushMaterial(glContext, 0): the front material that receives the colour; +0x234 gets the update-sums bits 0x202	^\s*\*\(ushort\ \*\)\(iVar2\ \+\ 0x234\)\ =\ \*\(ushort\ \*\)\(iVar2\ \+\ 0x234\)\ \|\ 0x202;$	+2
+use	_gleLightMaterialRGBAChange_F_E	iVar2	dirtyWordAddress348	CONFIRMED	ctx + ((dirtyBitIndex >> 3) & 0x1c): the dirty array word at ctx+0x348 that receives 1 << (dirtyBitIndex & 0x1f)	^\s*iVar2\ =\ \(bVar1\ >>\ 3\ \&\ 0x1c\)\ \+\ param_1;$	+2
+local	_gleLightMaterialRGBAChange_F_E	iVar3	dirtyWordAddress324	CONFIRMED	ctx + ((dirtyBitIndex >> 3) & 0x1c): the dirty array word at ctx+0x324 that receives 1 << (dirtyBitIndex & 0x1f)
+local	_gleLightMaterialRGBAChange_F_E	uVar4	rgbaBlueAlpha	CONFIRMED	rgba[1]: the second 8 bytes (blue and alpha floats) of the colour
+local	_gleTextureImageCopy	param_4	x	CONFIRMED	first of the four consecutive region arguments x, y, width, height forwarded to the renderer copy callback (ctx+0x46a0)
+local	_gleTextureImageCopy	param_2	levelRecord	INFERRED	texture level record: +0xc/+0xe are loaded into the unpack words at ctx+0x31b0/0x31b4, +0x10/+0x12/+0x14 are passed to the copy callback
+local	_gleTextureImageCopy	uVar5	savedWord31b0	CONFIRMED	ctx+0x31b0 saved before the callback and restored afterwards
+local	_gleTextureImageCopy	uVar6	savedWord31b4	CONFIRMED	ctx+0x31b4 saved before the callback and restored afterwards
+local	_gleTextureImageCopy	uVar7	savedWord31b8	CONFIRMED	ctx+0x31b8 saved before the callback (then cleared) and restored afterwards
+local	_gleTextureImageCopy	uVar2	savedWord31bc	CONFIRMED	ctx+0x31bc saved before the callback (then cleared) and restored afterwards
+local	_gleTextureImageCopy	uVar3	savedWord31c0	CONFIRMED	ctx+0x31c0 saved before the callback (then cleared) and restored afterwards
+local	_gleTextureImageCopy	uVar1	savedWord31c4	CONFIRMED	ctx+0x31c4 saved before the callback (then set to 1) and restored afterwards
+local	_gleTextureImageCopy	uVar4	savedWord31c8	CONFIRMED	ctx+0x31c8 saved before the callback (then cleared) and restored afterwards

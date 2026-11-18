@@ -1,0 +1,17 @@
+local	_gleBeginPolygonRenderTCL	puVar1	renderPolygonFunc	CONFIRMED	only assigned PTR__gleRenderPolygonTCLFunc: holds that function's address, stored to ctx+0x4a08
+local	_gleBeginPolygonRenderTCL	puVar2	flushPolygonFunc	CONFIRMED	only assigned PTR__gleFlushPolygonTCLFunc: holds that function's address, stored to ctx+0x4a0c
+local	_gleBeginLineLoopRenderTCL	puVar1	renderLineLoopFunc	CONFIRMED	only assigned PTR__gleRenderLineLoopTCLFunc: holds that function's address, stored to ctx+0x4a08
+local	_gleBeginLineLoopRenderTCL	puVar2	flushLineLoopFunc	CONFIRMED	only assigned PTR__gleFlushLineLoopTCLFunc: holds that function's address, stored to ctx+0x4a0c
+local	_gleBeginPointsSelectFeedback	puVar1	pointsFunc	CONFIRMED	_gleFeedbackPointsFunc, or _gleSelectPointsFunc when the render mode ctx+0x4e1c is GL_SELECT (0x1c02); stored to ctx+0x4a08
+local	_gleBeginTrianglesSelectFeedback	puVar1	trianglesFunc	CONFIRMED	_gleFeedbackTrianglesFunc, or _gleSelectTrianglesFunc when the render mode ctx+0x4e1c is GL_SELECT (0x1c02); stored to ctx+0x4a08
+local	_gleBeginQuadsSelectFeedback	puVar1	quadsFunc	CONFIRMED	_gleFeedbackQuadsFunc, or _gleSelectQuadsFunc when the render mode ctx+0x4e1c is GL_SELECT (0x1c02); stored to ctx+0x4a08
+local	_gleSetVertexEval2Func	puVar1	vertexFuncSlot	CONFIRMED	slot returned by _gleBuildVertexFunc for mode 2; its first word is the vertex function stored to ctx+0x489c and called
+local	_gleGetVertexArrayFunc	puVar1	vertexFuncSlot	CONFIRMED	slot returned by _gleBuildVertexFunc for mode 1; its first word is returned
+local	_gleMultiTextureMatTransPtr	uVar2	texEnableBits	CONFIRMED	result of _gleTexEnableBits: bit i set when texture unit i is enabled
+local	_gleMultiTextureMatTransPtr	uVar1	shiftedEnableBits	CONFIRMED	texEnableBits >> unit: bit 0 tells whether the unit is enabled, zero ends the loop
+local	_gleDestroySharedState	iVar1	rendererDispatchTable	INFERRED	dispatch table at renderer slot +0x8884 (cursor advances 0x2e0 bytes per renderer); its function at +0x128 is called with the renderer's shared state handle
+local	_gleDestroySharedState	uVar2	rendererSharedHandle	INFERRED	per-renderer handle read from sharedState+0x8054+4*i and passed to the dispatch function at +0x128
+local	_glePPEmulatorInitialize	uVar1	emulator	CONFIRMED	object returned by _PPEmulatorCreate, stored to ctx+0x4a5c
+local	_gleFreePipelineProgramObject	param_2	programObject	CONFIRMED	pipeline program object (function name): +0x10 is the program cleared and destroyed, the object itself is released with _gleVecFree
+local	_glGetMinmaxParameterfv_Exec	local_18	intParams	CONFIRMED	receives the int result of _glGetMinmaxParameteriv_Exec, converted to float through the magic number
+local	_glMapGrid2d_Exec	dVar3	unAsDouble	CONFIRMED	un converted to double with the 0x43300000 magic number: divisor of (u2-u1)
