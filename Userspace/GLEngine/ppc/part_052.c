@@ -4580,7 +4580,7 @@ void _gleSelectTriangleStripFunc_body(glContext)
   undefined4 batchEndReset;
   uint uVar8;
   uint batchClipCodes;
-  int iVar9;
+  int runVertexCount;
   int remaining;
   int cullResult;
   int iVar10;
@@ -4682,22 +4682,22 @@ void _gleSelectTriangleStripFunc_body(glContext)
             vertexCursor = nextVertex;
             runStart = newRunStart;
           }
-          iVar9 = runTriangleCount + 2;
-          if (2 < iVar9) {
+          runVertexCount = runTriangleCount + 2;
+          if (2 < runVertexCount) {
             if ((!noVertexProgram) && (vertexProgramTwoSide)) {
-              _gleVPFlipColors(glContext,runStart,iVar9,iVar10);
+              _gleVPFlipColors(glContext,runStart,runVertexCount,iVar10);
             }
             uVar20 = runStart;
             if (uVar11 != 0) {
               uVar20 = runStart + 0x100;
               triangleVertexList[2] = runStart;
-              iVar9 = runTriangleCount + 1;
+              runVertexCount = runTriangleCount + 1;
               *triangleVertexList = runStart + 0x200;
               triangleVertexList[1] = uVar20;
               dVar22 = (double)_gleSelectPolygonPtr(glContext,triangleVertexList,3);
-              if (iVar9 < 3) goto LAB_000f1c00;
+              if (runVertexCount < 3) goto LAB_000f1c00;
             }
-            dVar22 = (double)_gleSelectTriangleStrip(glContext,uVar20,iVar9);
+            dVar22 = (double)_gleSelectTriangleStrip(glContext,uVar20,runVertexCount);
           }
 LAB_000f1c00: ;
         } while (vertexCursor <= uVar8);
